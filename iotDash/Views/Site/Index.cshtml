@@ -1,0 +1,91 @@
+﻿@model iotDash.Models.ShowSitesViewModel
+
+@{
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<script>
+    $(function () {
+
+        var CurrentSelectionId = -1;
+
+        $(".BtnShowSiteView").click(function () {
+            //  alert($(this).val());
+           // window.location.href = "/"  /Site/View?SiteId=" + $(this).val();
+        });
+
+        $(".panel").click(function () {
+
+            //remove current selection
+            $(".panel").removeClass("panel-primary");
+            $(".panel").addClass("panel-info");
+
+            //set selected site
+            $(this).removeClass("panel-info");
+            $(this).addClass("panel-primary");
+            CurrentSelectionId = $(this).attr("id");
+
+        });
+
+        $("#ShowSiteEditView").click(function () {
+            //alert("loading edit");
+            //var id = $(".panel-primary").first().attr("id");
+            var fullurl = '@Url.Action("Edit","Site")' + "?SiteId=" + CurrentSelectionId;
+            //alert("loading " + fullurl);
+            window.location.href = fullurl;
+        });
+
+
+    });
+</script>
+
+<div id="content">
+
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-md-1">
+                <a class="btn btn-default" href="@Url.Action("Add", "Site")" role="button">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </a>
+            </div>
+
+            <div class="col-md-1">
+                <a class="btn btn-default" href="#" role="button">
+                    <span id="ShowSiteEditView" class="glyphicon glyphicon-wrench"></span>
+                </a>
+            </div>
+
+            <div class="col-md-1">
+                <a class="btn btn-default" href="#" role="button">
+                    <span class="glyphicon glyphicon-trash"></span>
+                </a>
+            </div>
+        </div>
+
+        <div class="row">
+            @if (Model.Sites != null)
+            {
+                foreach (var item in Model.Sites)
+                {
+                    <div class="col-md-3">
+                        <div id="@item.SiteId" class="panel panel-info">
+                            <div class="panel-heading">@item.SiteName</div>
+                            <div class="panel-body">
+                                <h4>@item.siteLocation.LocationName</h4>
+                                <a href="@Url.Action("View", "Site", new { SiteId = item.SiteId })" class="btn">Show</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+
+    </div>
+
+
+</div>

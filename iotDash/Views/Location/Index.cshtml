@@ -1,0 +1,154 @@
+﻿@model iotDash.Models.LocationListViewModel
+
+@{
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<script>
+
+    $(function () {
+
+        var CurrentSelectionId = -1;
+
+        $(".BtnShowSiteView").click(function () {
+
+        });
+
+        $(".panel").click(function () {
+
+            //remove current selection
+            $(".panel").removeClass("panel-primary");
+            $(".panel").addClass("panel-info");
+
+            //set selected site
+            $(this).removeClass("panel-info");
+            $(this).addClass("panel-primary");
+            CurrentSelectionId = $(this).attr("id");
+
+        });
+
+        $("#ShowLocationEditView").click(function () {
+            var fullurl = '@Url.Action("Edit","Location")' + "?LocationId=" + CurrentSelectionId;
+            window.location.href = fullurl;
+        });
+
+
+
+        function VerifySelection() {
+            var selectedNodesNo = $(".panel-primary").length;
+            if (selectedNodesNo > 0 && CurrentSelectionId >= 0) {
+                $("#StatusCont").html("");  //clear error
+                return true;
+            }
+            else {
+                //display error
+                $("#StatusCont").html(
+                    '<div class="alert alert-danger" role="alert"> \
+                      <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> \
+                      <span class="sr-only">Error:</span> \
+                          Select device. \
+                    </div>'
+                    );
+                return false;
+            }
+
+        }
+
+        $("#ShowLocationEditView").click(function () {
+            if (VerifySelection()) {
+                var fullurl = '@Url.Action("Edit","Location")' + "?DeviceId=" + CurrentSelectionId;
+                window.location.href = fullurl;
+            }
+        });
+
+        $("#ShowAddLocationView").click(function () {
+            var fullurl = '@Url.Action("Add","Location")';
+            window.location.href = fullurl;
+        });
+
+        $("#ActionRemoveLocation").click(function () {
+            if (VerifySelection()) {
+                $.ajax({
+                    url: '@Url.Action("Remove","Location")',
+                    type: this.method,
+                    data: { DeviceId: CurrentSelectionId },
+                    success: function (result) {
+                        if (result == "True") {
+
+                            $("#StatusCont").html('<div class="alert alert-success" role="alert"> \
+                              <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> \
+                              <span class="sr-only">Success:</span> \
+                                 Location removed. \
+                                </div>' );
+
+                        }
+                        else {
+                            //display error
+                            $("#StatusCont").html('<div class="alert alert-danger" role="alert"> \
+                              <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> \
+                              <span class="sr-only">Error:</span> \
+                                 Remove failed. \
+                                </div>'
+                                 );
+                        }
+                    }
+                });
+            }
+        });
+
+
+    });
+</script>
+
+<div id="content">
+
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="btn-toolbar" style="margin-bottom:20px;">
+                <div class="btn-group">
+
+                    <a id="ShowAddLocationView" class="btn btn-default" href="#" role="button">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </a>
+                </div>
+
+                <div class="btn-group">
+                    <a id="ShowLocationEditView" class="btn btn-default" href="#" role="button">
+                        <span class="glyphicon glyphicon-wrench"></span>
+                    </a>
+
+                    <a id="ActionRemoveLocation" class="btn btn-default" href="#" role="button">
+                        <span class="glyphicon glyphicon-trash"></span>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row">
+            @if (Model.Locations != null)
+            {
+                foreach (var item in Model.Locations)
+                {
+                    <div class="col-md-3">
+                        <div id="@item.LocationId" class="panel panel-info">
+                            <div class="panel-heading">@item.LocationName</div>
+                            <div class="panel-body">
+                                <h4>@item.Lat</h4>
+                                <h4>@item.Lng</h4>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+
+    </div>
+
+
+</div>

@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E94B0A02-089E-483A-AAEF-3BFA49039598}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>iotData</RootNamespace>
+    <AssemblyName>iotData</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Runtime.Remoting" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="POCO\Auth\AuthDB.cs" />
+    <Compile Include="POCO\Auth\authDbConnector.cs" />
+    <Compile Include="POCO\Auth\AuthenticationManager.cs" />
+    <Compile Include="POCO\Auth\Credential\AppAuthLevel.cs" />
+    <Compile Include="POCO\Auth\Credential\AppUserCredentials.cs" />
+    <Compile Include="POCO\Auth\Credential\AuthDatabaseContext.cs" />
+    <Compile Include="POCO\Auth\Credential\DeviceCredentials.cs" />
+    <Compile Include="POCO\Auth\Credential\IAuthCredentials.cs" />
+    <Compile Include="POCO\Device\ActionParameter.cs" />
+    <Compile Include="POCO\Device\Device.cs" />
+    <Compile Include="POCO\Device\DeviceAction.cs" />
+    <Compile Include="POCO\Device\DeviceParameter.cs" />
+    <Compile Include="POCO\Device\DeviceProperty.cs" />
+    <Compile Include="POCO\Device\DeviceType.cs" />
+    <Compile Include="POCO\Device\EndpointInfo.cs" />
+    <Compile Include="POCO\Device\Location.cs" />
+    <Compile Include="POCO\Device\Notify\ParameterChangeHistory.cs" />
+    <Compile Include="POCO\Device\ParameterType.cs" />
+    <Compile Include="POCO\Device\Proprietary\sconnConfigMapper.cs" />
+    <Compile Include="POCO\Device\Site.cs" />
+    <Compile Include="POCO\Domain\iotDomain.cs" />
+    <Compile Include="POCO\Domain\iotDomainSettings.cs" />
+    <Compile Include="POCO\User\IUserPermission.cs" />
+    <Compile Include="POCO\User\User.cs" />
+    <Compile Include="POCO\User\UserDatabaseAdminPermission.cs" />
+    <Compile Include="POCO\User\UserDevicePermission.cs" />
+    <Compile Include="POCO\User\UserPermission.cs" />
+    <Compile Include="POCO\User\UserSiteAdminPermission.cs" />
+    <Compile Include="POCO\User\UserSitePermission.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,205 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E9D5D1C5-DB38-405B-AEE8-7614E41CC9B8}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>iotDomainControllerHost</RootNamespace>
+    <AssemblyName>iotDomainControllerHost</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;BROKER, SSL</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DomainService\DomainService.cs" />
+    <Compile Include="DomainService\IoT\DomainEventService.cs" />
+    <Compile Include="DomainService\IoT\DomainUpdateService.cs" />
+    <Compile Include="DomainService\IoT\Providers\AllJoynDomainProvider.cs" />
+    <Compile Include="DomainService\IoT\Providers\IDomainProvider.cs" />
+    <Compile Include="DomainService\IoT\Providers\MqttDomainProvider.cs" />
+    <Compile Include="DomainService\LogicInterop\DomainLogicService.cs" />
+    <Compile Include="DomainService\Surveillance\Detection\ObjectDetector.cs" />
+    <Compile Include="DomainService\Surveillance\DomainSurveillanceService.cs" />
+    <Compile Include="DomainService\Surveillance\Playback\PlaybackController.cs" />
+    <Compile Include="iotDomainControllerProcess.cs" />
+    <Compile Include="Logic\Constraints\ConstraintSolver.cs" />
+    <Compile Include="Logic\Constraints\IConstraint.cs" />
+    <Compile Include="Logic\Constraints\LogicalConstraint.cs" />
+    <Compile Include="Logic\Operands\IComparisionOperand.cs" />
+    <Compile Include="Logic\Operands\IEventOperand.cs" />
+    <Compile Include="Logic\Operands\ILogicalOperand.cs" />
+    <Compile Include="Logic\Operands\ITimeDomainOperand.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Protocol\Mqtt\Communication\IMqttCommunicationLayer.cs" />
+    <Compile Include="Protocol\Mqtt\Communication\MqttClientConnectedEventArgs.cs" />
+    <Compile Include="Protocol\Mqtt\Exceptions\MqttClientException.cs" />
+    <Compile Include="Protocol\Mqtt\Exceptions\MqttCommunicationException.cs" />
+    <Compile Include="Protocol\Mqtt\Exceptions\MqttConnectionException.cs" />
+    <Compile Include="Protocol\Mqtt\Exceptions\MqttTimeoutException.cs" />
+    <Compile Include="Protocol\Mqtt\IMqttNetworkChannel.cs" />
+    <Compile Include="Protocol\Mqtt\Managers\MqttPublisherManager.cs" />
+    <Compile Include="Protocol\Mqtt\Managers\MqttSessionManager.cs" />
+    <Compile Include="Protocol\Mqtt\Managers\MqttSubscriberManager.cs" />
+    <Compile Include="Protocol\Mqtt\Managers\MqttUacManager.cs" />
+    <Compile Include="Protocol\Mqtt\Messages\MqttMsgBase.cs" />
+    <Compile Include="Protocol\Mqtt\Messages\MqttMsgConnack.cs" />
+    <Compile Include="Protocol\Mqtt\Messages\MqttMsgConnect.cs" />
+    <Compile Include="Protocol\Mqtt\Messages\MqttMsgConnectEventArgs.cs" />
+    <Compile Include="Protocol\Mqtt\Messages\MqttMsgContext.cs" />
+    <Compile Include="Protocol\Mqtt\Messages\MqttMsgDisconnect.cs" />
+    <Compile Include="Protocol\Mqtt\Messages\MqttMsgPingReq.cs" />
+    <Compile Include="Protocol\Mqtt\Messages\MqttMsgPingResp.cs" />
+    <Compile Include="Protocol\Mqtt\Messages\MqttMsgPuback.cs" />
+    <Compile Include="Protocol\Mqtt\Messages\MqttMsgPubcomp.cs" />
+    <Compile Include="Protocol\Mqtt\Messages\MqttMsgPublish.cs" />
+    <Compile Include="Protocol\Mqtt\Messages\MqttMsgPublishedEventArgs.cs" />
+    <Compile Include="Protocol\Mqtt\Messages\MqttMsgPublishEventArgs.cs" />
+    <Compile Include="Protocol\Mqtt\Messages\MqttMsgPubrec.cs" />
+    <Compile Include="Protocol\Mqtt\Messages\MqttMsgPubrel.cs" />
+    <Compile Include="Protocol\Mqtt\Messages\MqttMsgSuback.cs" />
+    <Compile Include="Protocol\Mqtt\Messages\MqttMsgSubscribe.cs" />
+    <Compile Include="Protocol\Mqtt\Messages\MqttMsgSubscribedEventArgs.cs" />
+    <Compile Include="Protocol\Mqtt\Messages\MqttMsgSubscribeEventArgs.cs" />
+    <Compile Include="Protocol\Mqtt\Messages\MqttMsgUnsuback.cs" />
+    <Compile Include="Protocol\Mqtt\Messages\MqttMsgUnsubscribe.cs" />
+    <Compile Include="Protocol\Mqtt\Messages\MqttMsgUnsubscribedEventArgs.cs" />
+    <Compile Include="Protocol\Mqtt\Messages\MqttMsgUnsubscribeEventArgs.cs" />
+    <Compile Include="Protocol\Mqtt\MqttBroker.cs" />
+    <Compile Include="Protocol\Mqtt\MqttClient.cs" />
+    <Compile Include="Protocol\Mqtt\MqttClientCollection.cs" />
+    <Compile Include="Protocol\Mqtt\MqttSettings.cs" />
+    <Compile Include="Protocol\Mqtt\Net\Fx.cs" />
+    <Compile Include="Protocol\Mqtt\Net\MqttNetworkChannel.cs" />
+    <Compile Include="Protocol\Mqtt\Net\MqttTcpCommunicationLayer.cs" />
+    <Compile Include="Protocol\Mqtt\Session\MqttBrokerSession.cs" />
+    <Compile Include="Protocol\Mqtt\Session\MqttClientSession.cs" />
+    <Compile Include="Protocol\Mqtt\Session\MqttSession.cs" />
+    <Compile Include="Protocol\Mqtt\System\MqttSystemManager.cs" />
+    <Compile Include="Protocol\Mqtt\Utility\QueueExtension.cs" />
+    <Compile Include="Protocol\Mqtt\Utility\Trace.cs" />
+    <Compile Include="Service References\iotDbService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="Service References\iotDbService\iotDatabaseConnector.DAL.POCO.Device.Notify.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\iotDbService\iotDbConnector.DAL.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\iotDbService\iotDomainControllerHost.iotDbService.ActionParameter.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\iotDbService\iotDomainControllerHost.iotDbService.Device.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\iotDbService\iotDomainControllerHost.iotDbService.DeviceAction.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\iotDbService\iotDomainControllerHost.iotDbService.DeviceCredentials.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\iotDbService\iotDomainControllerHost.iotDbService.DeviceParameter.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\iotDbService\iotDomainControllerHost.iotDbService.DeviceProperty.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\iotDbService\iotDomainControllerHost.iotDbService.DeviceType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\iotDbService\iotDomainControllerHost.iotDbService.EndpointInfo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\iotDbService\iotDomainControllerHost.iotDbService.iotDomain.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\iotDbService\iotDomainControllerHost.iotDbService.Location.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\iotDbService\iotDomainControllerHost.iotDbService.Site.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\iotDbService\service.wsdl" />
+    <None Include="Service References\iotDbService\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\iotDbService\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DomainService\Surveillance\Recording\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\iotDbService\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\iotDbService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\iotDbService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\iotDbService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

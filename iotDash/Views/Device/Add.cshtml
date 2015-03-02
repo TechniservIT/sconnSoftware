@@ -1,0 +1,135 @@
+﻿@model iotDash.Models.DeviceAddModel
+
+@{
+    ViewBag.Title = "Add";
+}
+
+@{
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<script>
+
+    $(function () {
+
+        $('#AddDeviceForm').submit(function () {
+            $.ajax({
+                url: '@Url.Action("New", "Device")',
+                type: this.method,
+                data: {
+                    SiteId: '@Model.DeviceSite.SiteId.ToString()',
+                    Name: $('#DeviceName').val(),
+                    Host: $('#DeviceEpHostname').val(),
+                    Port: $('#DeviceEpPort').val(),
+                    Login: $('#DeviceEpLogin').val(),
+                    Pass: $('#DeviceEpPassword').val(),
+                    Type: $('#DeviceType').val(),
+                    Loc: $('#DeviceLocation').val(),
+                    Prot: $('#DeviceProtocol').val()
+                },
+                success: function (result) {
+                    $('#resultview').html(result);
+                }
+            });
+            return false;
+        });
+
+    });
+
+
+
+</script>
+
+
+
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-md-12">
+
+            <h3>Add device to @Model.DeviceSite.SiteName<small></small></h3>
+            <br /><br />
+
+            <form role="form" action="" method="post" id="AddDeviceForm">
+
+                @* Display name *@
+                <div class="form-group">
+                    <label for="DeviceName">Name</label>
+                    <input class="form-control" id="DeviceName" type="text" />
+                </div>
+
+                @* Endpoint data *@
+                <div class="form-group">
+                    <label for="DeviceEpHostname">Hostname</label>
+                    <input class="form-control" id="DeviceEpHostname" type="text" />
+                </div>
+
+                <div class="form-group">
+                    <label for="DeviceEpPort">Port</label>
+                    <input class="form-control" id="DeviceEpPort" type="number" />
+                </div>
+
+                <div class="form-group">
+                    <label for="DeviceEpLogin">Login</label>
+                    <input class="form-control" id="DeviceEpLogin" type="text" />
+                </div>
+
+                <div class="form-group">
+                    <label for="DeviceEpPassword">Password</label>
+                    <input class="form-control" id="DeviceEpPassword" type="password" />
+                </div>
+
+                @* Type *@
+                <div class="form-group">
+                    <label for="DeviceType">Type</label>
+                    <select id="DeviceType" class="form-control">
+                        @if (Model != null)
+                        {
+                            foreach (var item in Model.Types)
+                            {
+                                <option value="@item.DeviceTypeId">@item.TypeName</option>
+                            }
+                        }
+                    </select>
+                </div>
+
+                @* Location *@
+                <div class="form-group">
+                    <label for="DeviceLocation">Location</label>
+                    <select id="DeviceLocation" class="form-control">
+                        @if (Model != null)
+                        {
+                            foreach (var item in Model.Locations)
+                            {
+                                <option value="@item.LocationId">@item.LocationName</option>
+                            }
+                        }
+                    </select>
+                </div>
+
+                @* Protocols *@
+                <div class="form-group">
+                    <label for="DeviceProtocol">Protocol</label>
+                    <select id="DeviceProtocol" class="form-control">
+                        <option value="Sconn">Sconn</option>
+                        <option value="MQTT">MQTT</option>
+                        <option value="AllJoyn">AllJoyn</option>
+                        <option value="CoAP">CoAP</option>
+                        <option value="RESTful">RESTful</option>
+                    </select>
+                </div>
+
+                <button class="btn btn-primary" type="submit">Add</button>
+
+            </form>
+</div>
+    </div>
+
+    <div class="row">
+        <div id="resultview">
+
+        </div>
+    </div>
+
+
+</div>

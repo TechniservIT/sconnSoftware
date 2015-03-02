@@ -1,0 +1,1103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="iotDomainService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import namespace="http://tempuri.org/" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/iotDbConnector.DAL" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IiotDomainService_DomainAdd_InputMessage">
+    <wsdl:part name="parameters" element="tns:DomainAdd" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_DomainAdd_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DomainAddResponse" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_DeviceAdd_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeviceAdd" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_DeviceAdd_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeviceAddResponse" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_SiteAdd_InputMessage">
+    <wsdl:part name="parameters" element="tns:SiteAdd" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_SiteAdd_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SiteAddResponse" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_ActionAdd_InputMessage">
+    <wsdl:part name="parameters" element="tns:ActionAdd" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_ActionAdd_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ActionAddResponse" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_PropertyAdd_InputMessage">
+    <wsdl:part name="parameters" element="tns:PropertyAdd" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_PropertyAdd_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PropertyAddResponse" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_LocationAdd_InputMessage">
+    <wsdl:part name="parameters" element="tns:LocationAdd" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_LocationAdd_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LocationAddResponse" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_ResParamAdd_InputMessage">
+    <wsdl:part name="parameters" element="tns:ResParamAdd" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_ResParamAdd_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ResParamAddResponse" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_ReqParamAdd_InputMessage">
+    <wsdl:part name="parameters" element="tns:ReqParamAdd" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_ReqParamAdd_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ReqParamAddResponse" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_DeviceTypeAdd_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeviceTypeAdd" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_DeviceTypeAdd_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeviceTypeAddResponse" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_DeviceCredentialsAdd_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeviceCredentialsAdd" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_DeviceCredentialsAdd_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeviceCredentialsAddResponse" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_EndpointAdd_InputMessage">
+    <wsdl:part name="parameters" element="tns:EndpointAdd" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_EndpointAdd_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EndpointAddResponse" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_Sites_InputMessage">
+    <wsdl:part name="parameters" element="tns:Sites" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_Sites_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SitesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_Devices_InputMessage">
+    <wsdl:part name="parameters" element="tns:Devices" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_Devices_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DevicesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_DeviceActions_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeviceActions" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_DeviceActions_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeviceActionsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_DeviceProperties_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeviceProperties" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_DeviceProperties_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DevicePropertiesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_DeviceParameters_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeviceParameters" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_DeviceParameters_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeviceParametersResponse" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_Domains_InputMessage">
+    <wsdl:part name="parameters" element="tns:Domains" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_Domains_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DomainsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_GetDomainWithName_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDomainWithName" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_GetDomainWithName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDomainWithNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_Locations_InputMessage">
+    <wsdl:part name="parameters" element="tns:Locations" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_Locations_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LocationsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_DeviceTypes_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeviceTypes" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_DeviceTypes_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeviceTypesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_ActionParams_InputMessage">
+    <wsdl:part name="parameters" element="tns:ActionParams" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_ActionParams_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ActionParamsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_DeviceCredentials_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeviceCredentials" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_DeviceCredentials_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeviceCredentialsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_Endpoints_InputMessage">
+    <wsdl:part name="parameters" element="tns:Endpoints" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_Endpoints_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EndpointsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_GetDomainWithId_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDomainWithId" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_GetDomainWithId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDomainWithIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_SiteWithId_InputMessage">
+    <wsdl:part name="parameters" element="tns:SiteWithId" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_SiteWithId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SiteWithIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_DeviceWithId_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeviceWithId" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_DeviceWithId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeviceWithIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_DeviceActionWithId_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeviceActionWithId" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_DeviceActionWithId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeviceActionWithIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_DevicePropertieWithId_InputMessage">
+    <wsdl:part name="parameters" element="tns:DevicePropertieWithId" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_DevicePropertieWithId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DevicePropertieWithIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_DeviceParameterWithId_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeviceParameterWithId" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_DeviceParameterWithId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeviceParameterWithIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_DomainWithId_InputMessage">
+    <wsdl:part name="parameters" element="tns:DomainWithId" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_DomainWithId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DomainWithIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_LocationWithId_InputMessage">
+    <wsdl:part name="parameters" element="tns:LocationWithId" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_LocationWithId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LocationWithIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_DeviceTypeWithId_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeviceTypeWithId" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_DeviceTypeWithId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeviceTypeWithIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_ActionParamWithId_InputMessage">
+    <wsdl:part name="parameters" element="tns:ActionParamWithId" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_ActionParamWithId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ActionParamWithIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_DeviceCredentialWithId_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeviceCredentialWithId" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_DeviceCredentialWithId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeviceCredentialWithIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_EndpointWithId_InputMessage">
+    <wsdl:part name="parameters" element="tns:EndpointWithId" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_EndpointWithId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EndpointWithIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_DomainUpdate_InputMessage">
+    <wsdl:part name="parameters" element="tns:DomainUpdate" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_DomainUpdate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DomainUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_DeviceUpdate_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeviceUpdate" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_DeviceUpdate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeviceUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_SiteUpdate_InputMessage">
+    <wsdl:part name="parameters" element="tns:SiteUpdate" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_SiteUpdate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SiteUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_ActionUpdate_InputMessage">
+    <wsdl:part name="parameters" element="tns:ActionUpdate" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_ActionUpdate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ActionUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_PropertyUpdate_InputMessage">
+    <wsdl:part name="parameters" element="tns:PropertyUpdate" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_PropertyUpdate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PropertyUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_LocationUpdate_InputMessage">
+    <wsdl:part name="parameters" element="tns:LocationUpdate" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_LocationUpdate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LocationUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_ResParamUpdate_InputMessage">
+    <wsdl:part name="parameters" element="tns:ResParamUpdate" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_ResParamUpdate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ResParamUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_ReqParamUpdate_InputMessage">
+    <wsdl:part name="parameters" element="tns:ReqParamUpdate" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_ReqParamUpdate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ReqParamUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_DeviceTypeUpdate_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeviceTypeUpdate" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_DeviceTypeUpdate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeviceTypeUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_DeviceCredentialsUpdate_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeviceCredentialsUpdate" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_DeviceCredentialsUpdate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeviceCredentialsUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_EndpointUpdate_InputMessage">
+    <wsdl:part name="parameters" element="tns:EndpointUpdate" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_EndpointUpdate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EndpointUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_DomainRemove_InputMessage">
+    <wsdl:part name="parameters" element="tns:DomainRemove" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_DomainRemove_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DomainRemoveResponse" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_DeviceRemove_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeviceRemove" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_DeviceRemove_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeviceRemoveResponse" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_SiteRemove_InputMessage">
+    <wsdl:part name="parameters" element="tns:SiteRemove" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_SiteRemove_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SiteRemoveResponse" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_ActionRemove_InputMessage">
+    <wsdl:part name="parameters" element="tns:ActionRemove" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_ActionRemove_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ActionRemoveResponse" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_PropertyRemove_InputMessage">
+    <wsdl:part name="parameters" element="tns:PropertyRemove" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_PropertyRemove_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PropertyRemoveResponse" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_LocationRemove_InputMessage">
+    <wsdl:part name="parameters" element="tns:LocationRemove" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_LocationRemove_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LocationRemoveResponse" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_ResParamRemove_InputMessage">
+    <wsdl:part name="parameters" element="tns:ResParamRemove" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_ResParamRemove_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ResParamRemoveResponse" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_ReqParamRemove_InputMessage">
+    <wsdl:part name="parameters" element="tns:ReqParamRemove" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_ReqParamRemove_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ReqParamRemoveResponse" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_DeviceTypeRemove_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeviceTypeRemove" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_DeviceTypeRemove_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeviceTypeRemoveResponse" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_DeviceCredentialsRemove_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeviceCredentialsRemove" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_DeviceCredentialsRemove_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeviceCredentialsRemoveResponse" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_EndpointRemove_InputMessage">
+    <wsdl:part name="parameters" element="tns:EndpointRemove" />
+  </wsdl:message>
+  <wsdl:message name="IiotDomainService_EndpointRemove_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EndpointRemoveResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IiotDomainService">
+    <wsdl:operation name="DomainAdd">
+      <wsdl:input wsaw:Action="http://tempuri.org/IiotDomainService/DomainAdd" message="tns:IiotDomainService_DomainAdd_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IiotDomainService/DomainAddResponse" message="tns:IiotDomainService_DomainAdd_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeviceAdd">
+      <wsdl:input wsaw:Action="http://tempuri.org/IiotDomainService/DeviceAdd" message="tns:IiotDomainService_DeviceAdd_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IiotDomainService/DeviceAddResponse" message="tns:IiotDomainService_DeviceAdd_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SiteAdd">
+      <wsdl:input wsaw:Action="http://tempuri.org/IiotDomainService/SiteAdd" message="tns:IiotDomainService_SiteAdd_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IiotDomainService/SiteAddResponse" message="tns:IiotDomainService_SiteAdd_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ActionAdd">
+      <wsdl:input wsaw:Action="http://tempuri.org/IiotDomainService/ActionAdd" message="tns:IiotDomainService_ActionAdd_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IiotDomainService/ActionAddResponse" message="tns:IiotDomainService_ActionAdd_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PropertyAdd">
+      <wsdl:input wsaw:Action="http://tempuri.org/IiotDomainService/PropertyAdd" message="tns:IiotDomainService_PropertyAdd_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IiotDomainService/PropertyAddResponse" message="tns:IiotDomainService_PropertyAdd_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="LocationAdd">
+      <wsdl:input wsaw:Action="http://tempuri.org/IiotDomainService/LocationAdd" message="tns:IiotDomainService_LocationAdd_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IiotDomainService/LocationAddResponse" message="tns:IiotDomainService_LocationAdd_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ResParamAdd">
+      <wsdl:input wsaw:Action="http://tempuri.org/IiotDomainService/ResParamAdd" message="tns:IiotDomainService_ResParamAdd_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IiotDomainService/ResParamAddResponse" message="tns:IiotDomainService_ResParamAdd_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ReqParamAdd">
+      <wsdl:input wsaw:Action="http://tempuri.org/IiotDomainService/ReqParamAdd" message="tns:IiotDomainService_ReqParamAdd_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IiotDomainService/ReqParamAddResponse" message="tns:IiotDomainService_ReqParamAdd_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeviceTypeAdd">
+      <wsdl:input wsaw:Action="http://tempuri.org/IiotDomainService/DeviceTypeAdd" message="tns:IiotDomainService_DeviceTypeAdd_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IiotDomainService/DeviceTypeAddResponse" message="tns:IiotDomainService_DeviceTypeAdd_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeviceCredentialsAdd">
+      <wsdl:input wsaw:Action="http://tempuri.org/IiotDomainService/DeviceCredentialsAdd" message="tns:IiotDomainService_DeviceCredentialsAdd_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IiotDomainService/DeviceCredentialsAddResponse" message="tns:IiotDomainService_DeviceCredentialsAdd_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EndpointAdd">
+      <wsdl:input wsaw:Action="http://tempuri.org/IiotDomainService/EndpointAdd" message="tns:IiotDomainService_EndpointAdd_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IiotDomainService/EndpointAddResponse" message="tns:IiotDomainService_EndpointAdd_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Sites">
+      <wsdl:input wsaw:Action="http://tempuri.org/IiotDomainService/Sites" message="tns:IiotDomainService_Sites_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IiotDomainService/SitesResponse" message="tns:IiotDomainService_Sites_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Devices">
+      <wsdl:input wsaw:Action="http://tempuri.org/IiotDomainService/Devices" message="tns:IiotDomainService_Devices_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IiotDomainService/DevicesResponse" message="tns:IiotDomainService_Devices_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeviceActions">
+      <wsdl:input wsaw:Action="http://tempuri.org/IiotDomainService/DeviceActions" message="tns:IiotDomainService_DeviceActions_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IiotDomainService/DeviceActionsResponse" message="tns:IiotDomainService_DeviceActions_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeviceProperties">
+      <wsdl:input wsaw:Action="http://tempuri.org/IiotDomainService/DeviceProperties" message="tns:IiotDomainService_DeviceProperties_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IiotDomainService/DevicePropertiesResponse" message="tns:IiotDomainService_DeviceProperties_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeviceParameters">
+      <wsdl:input wsaw:Action="http://tempuri.org/IiotDomainService/DeviceParameters" message="tns:IiotDomainService_DeviceParameters_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IiotDomainService/DeviceParametersResponse" message="tns:IiotDomainService_DeviceParameters_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Domains">
+      <wsdl:input wsaw:Action="http://tempuri.org/IiotDomainService/Domains" message="tns:IiotDomainService_Domains_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IiotDomainService/DomainsResponse" message="tns:IiotDomainService_Domains_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDomainWithName">
+      <wsdl:input wsaw:Action="http://tempuri.org/IiotDomainService/GetDomainWithName" message="tns:IiotDomainService_GetDomainWithName_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IiotDomainService/GetDomainWithNameResponse" message="tns:IiotDomainService_GetDomainWithName_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Locations">
+      <wsdl:input wsaw:Action="http://tempuri.org/IiotDomainService/Locations" message="tns:IiotDomainService_Locations_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IiotDomainService/LocationsResponse" message="tns:IiotDomainService_Locations_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeviceTypes">
+      <wsdl:input wsaw:Action="http://tempuri.org/IiotDomainService/DeviceTypes" message="tns:IiotDomainService_DeviceTypes_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IiotDomainService/DeviceTypesResponse" message="tns:IiotDomainService_DeviceTypes_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ActionParams">
+      <wsdl:input wsaw:Action="http://tempuri.org/IiotDomainService/ActionParams" message="tns:IiotDomainService_ActionParams_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IiotDomainService/ActionParamsResponse" message="tns:IiotDomainService_ActionParams_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeviceCredentials">
+      <wsdl:input wsaw:Action="http://tempuri.org/IiotDomainService/DeviceCredentials" message="tns:IiotDomainService_DeviceCredentials_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IiotDomainService/DeviceCredentialsResponse" message="tns:IiotDomainService_DeviceCredentials_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Endpoints">
+      <wsdl:input wsaw:Action="http://tempuri.org/IiotDomainService/Endpoints" message="tns:IiotDomainService_Endpoints_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IiotDomainService/EndpointsResponse" message="tns:IiotDomainService_Endpoints_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDomainWithId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IiotDomainService/GetDomainWithId" message="tns:IiotDomainService_GetDomainWithId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IiotDomainService/GetDomainWithIdResponse" message="tns:IiotDomainService_GetDomainWithId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SiteWithId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IiotDomainService/SiteWithId" message="tns:IiotDomainService_SiteWithId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IiotDomainService/SiteWithIdResponse" message="tns:IiotDomainService_SiteWithId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeviceWithId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IiotDomainService/DeviceWithId" message="tns:IiotDomainService_DeviceWithId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IiotDomainService/DeviceWithIdResponse" message="tns:IiotDomainService_DeviceWithId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeviceActionWithId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IiotDomainService/DeviceActionWithId" message="tns:IiotDomainService_DeviceActionWithId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IiotDomainService/DeviceActionWithIdResponse" message="tns:IiotDomainService_DeviceActionWithId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DevicePropertieWithId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IiotDomainService/DevicePropertieWithId" message="tns:IiotDomainService_DevicePropertieWithId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IiotDomainService/DevicePropertieWithIdResponse" message="tns:IiotDomainService_DevicePropertieWithId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeviceParameterWithId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IiotDomainService/DeviceParameterWithId" message="tns:IiotDomainService_DeviceParameterWithId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IiotDomainService/DeviceParameterWithIdResponse" message="tns:IiotDomainService_DeviceParameterWithId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DomainWithId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IiotDomainService/DomainWithId" message="tns:IiotDomainService_DomainWithId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IiotDomainService/DomainWithIdResponse" message="tns:IiotDomainService_DomainWithId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="LocationWithId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IiotDomainService/LocationWithId" message="tns:IiotDomainService_LocationWithId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IiotDomainService/LocationWithIdResponse" message="tns:IiotDomainService_LocationWithId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeviceTypeWithId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IiotDomainService/DeviceTypeWithId" message="tns:IiotDomainService_DeviceTypeWithId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IiotDomainService/DeviceTypeWithIdResponse" message="tns:IiotDomainService_DeviceTypeWithId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ActionParamWithId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IiotDomainService/ActionParamWithId" message="tns:IiotDomainService_ActionParamWithId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IiotDomainService/ActionParamWithIdResponse" message="tns:IiotDomainService_ActionParamWithId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeviceCredentialWithId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IiotDomainService/DeviceCredentialWithId" message="tns:IiotDomainService_DeviceCredentialWithId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IiotDomainService/DeviceCredentialWithIdResponse" message="tns:IiotDomainService_DeviceCredentialWithId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EndpointWithId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IiotDomainService/EndpointWithId" message="tns:IiotDomainService_EndpointWithId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IiotDomainService/EndpointWithIdResponse" message="tns:IiotDomainService_EndpointWithId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DomainUpdate">
+      <wsdl:input wsaw:Action="http://tempuri.org/IiotDomainService/DomainUpdate" message="tns:IiotDomainService_DomainUpdate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IiotDomainService/DomainUpdateResponse" message="tns:IiotDomainService_DomainUpdate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeviceUpdate">
+      <wsdl:input wsaw:Action="http://tempuri.org/IiotDomainService/DeviceUpdate" message="tns:IiotDomainService_DeviceUpdate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IiotDomainService/DeviceUpdateResponse" message="tns:IiotDomainService_DeviceUpdate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SiteUpdate">
+      <wsdl:input wsaw:Action="http://tempuri.org/IiotDomainService/SiteUpdate" message="tns:IiotDomainService_SiteUpdate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IiotDomainService/SiteUpdateResponse" message="tns:IiotDomainService_SiteUpdate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ActionUpdate">
+      <wsdl:input wsaw:Action="http://tempuri.org/IiotDomainService/ActionUpdate" message="tns:IiotDomainService_ActionUpdate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IiotDomainService/ActionUpdateResponse" message="tns:IiotDomainService_ActionUpdate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PropertyUpdate">
+      <wsdl:input wsaw:Action="http://tempuri.org/IiotDomainService/PropertyUpdate" message="tns:IiotDomainService_PropertyUpdate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IiotDomainService/PropertyUpdateResponse" message="tns:IiotDomainService_PropertyUpdate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="LocationUpdate">
+      <wsdl:input wsaw:Action="http://tempuri.org/IiotDomainService/LocationUpdate" message="tns:IiotDomainService_LocationUpdate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IiotDomainService/LocationUpdateResponse" message="tns:IiotDomainService_LocationUpdate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ResParamUpdate">
+      <wsdl:input wsaw:Action="http://tempuri.org/IiotDomainService/ResParamUpdate" message="tns:IiotDomainService_ResParamUpdate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IiotDomainService/ResParamUpdateResponse" message="tns:IiotDomainService_ResParamUpdate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ReqParamUpdate">
+      <wsdl:input wsaw:Action="http://tempuri.org/IiotDomainService/ReqParamUpdate" message="tns:IiotDomainService_ReqParamUpdate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IiotDomainService/ReqParamUpdateResponse" message="tns:IiotDomainService_ReqParamUpdate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeviceTypeUpdate">
+      <wsdl:input wsaw:Action="http://tempuri.org/IiotDomainService/DeviceTypeUpdate" message="tns:IiotDomainService_DeviceTypeUpdate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IiotDomainService/DeviceTypeUpdateResponse" message="tns:IiotDomainService_DeviceTypeUpdate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeviceCredentialsUpdate">
+      <wsdl:input wsaw:Action="http://tempuri.org/IiotDomainService/DeviceCredentialsUpdate" message="tns:IiotDomainService_DeviceCredentialsUpdate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IiotDomainService/DeviceCredentialsUpdateResponse" message="tns:IiotDomainService_DeviceCredentialsUpdate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EndpointUpdate">
+      <wsdl:input wsaw:Action="http://tempuri.org/IiotDomainService/EndpointUpdate" message="tns:IiotDomainService_EndpointUpdate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IiotDomainService/EndpointUpdateResponse" message="tns:IiotDomainService_EndpointUpdate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DomainRemove">
+      <wsdl:input wsaw:Action="http://tempuri.org/IiotDomainService/DomainRemove" message="tns:IiotDomainService_DomainRemove_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IiotDomainService/DomainRemoveResponse" message="tns:IiotDomainService_DomainRemove_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeviceRemove">
+      <wsdl:input wsaw:Action="http://tempuri.org/IiotDomainService/DeviceRemove" message="tns:IiotDomainService_DeviceRemove_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IiotDomainService/DeviceRemoveResponse" message="tns:IiotDomainService_DeviceRemove_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SiteRemove">
+      <wsdl:input wsaw:Action="http://tempuri.org/IiotDomainService/SiteRemove" message="tns:IiotDomainService_SiteRemove_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IiotDomainService/SiteRemoveResponse" message="tns:IiotDomainService_SiteRemove_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ActionRemove">
+      <wsdl:input wsaw:Action="http://tempuri.org/IiotDomainService/ActionRemove" message="tns:IiotDomainService_ActionRemove_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IiotDomainService/ActionRemoveResponse" message="tns:IiotDomainService_ActionRemove_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PropertyRemove">
+      <wsdl:input wsaw:Action="http://tempuri.org/IiotDomainService/PropertyRemove" message="tns:IiotDomainService_PropertyRemove_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IiotDomainService/PropertyRemoveResponse" message="tns:IiotDomainService_PropertyRemove_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="LocationRemove">
+      <wsdl:input wsaw:Action="http://tempuri.org/IiotDomainService/LocationRemove" message="tns:IiotDomainService_LocationRemove_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IiotDomainService/LocationRemoveResponse" message="tns:IiotDomainService_LocationRemove_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ResParamRemove">
+      <wsdl:input wsaw:Action="http://tempuri.org/IiotDomainService/ResParamRemove" message="tns:IiotDomainService_ResParamRemove_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IiotDomainService/ResParamRemoveResponse" message="tns:IiotDomainService_ResParamRemove_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ReqParamRemove">
+      <wsdl:input wsaw:Action="http://tempuri.org/IiotDomainService/ReqParamRemove" message="tns:IiotDomainService_ReqParamRemove_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IiotDomainService/ReqParamRemoveResponse" message="tns:IiotDomainService_ReqParamRemove_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeviceTypeRemove">
+      <wsdl:input wsaw:Action="http://tempuri.org/IiotDomainService/DeviceTypeRemove" message="tns:IiotDomainService_DeviceTypeRemove_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IiotDomainService/DeviceTypeRemoveResponse" message="tns:IiotDomainService_DeviceTypeRemove_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeviceCredentialsRemove">
+      <wsdl:input wsaw:Action="http://tempuri.org/IiotDomainService/DeviceCredentialsRemove" message="tns:IiotDomainService_DeviceCredentialsRemove_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IiotDomainService/DeviceCredentialsRemoveResponse" message="tns:IiotDomainService_DeviceCredentialsRemove_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EndpointRemove">
+      <wsdl:input wsaw:Action="http://tempuri.org/IiotDomainService/EndpointRemove" message="tns:IiotDomainService_EndpointRemove_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IiotDomainService/EndpointRemoveResponse" message="tns:IiotDomainService_EndpointRemove_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IiotDomainService" type="tns:IiotDomainService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="DomainAdd">
+      <soap:operation soapAction="http://tempuri.org/IiotDomainService/DomainAdd" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeviceAdd">
+      <soap:operation soapAction="http://tempuri.org/IiotDomainService/DeviceAdd" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SiteAdd">
+      <soap:operation soapAction="http://tempuri.org/IiotDomainService/SiteAdd" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ActionAdd">
+      <soap:operation soapAction="http://tempuri.org/IiotDomainService/ActionAdd" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PropertyAdd">
+      <soap:operation soapAction="http://tempuri.org/IiotDomainService/PropertyAdd" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LocationAdd">
+      <soap:operation soapAction="http://tempuri.org/IiotDomainService/LocationAdd" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResParamAdd">
+      <soap:operation soapAction="http://tempuri.org/IiotDomainService/ResParamAdd" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReqParamAdd">
+      <soap:operation soapAction="http://tempuri.org/IiotDomainService/ReqParamAdd" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeviceTypeAdd">
+      <soap:operation soapAction="http://tempuri.org/IiotDomainService/DeviceTypeAdd" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeviceCredentialsAdd">
+      <soap:operation soapAction="http://tempuri.org/IiotDomainService/DeviceCredentialsAdd" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EndpointAdd">
+      <soap:operation soapAction="http://tempuri.org/IiotDomainService/EndpointAdd" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Sites">
+      <soap:operation soapAction="http://tempuri.org/IiotDomainService/Sites" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Devices">
+      <soap:operation soapAction="http://tempuri.org/IiotDomainService/Devices" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeviceActions">
+      <soap:operation soapAction="http://tempuri.org/IiotDomainService/DeviceActions" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeviceProperties">
+      <soap:operation soapAction="http://tempuri.org/IiotDomainService/DeviceProperties" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeviceParameters">
+      <soap:operation soapAction="http://tempuri.org/IiotDomainService/DeviceParameters" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Domains">
+      <soap:operation soapAction="http://tempuri.org/IiotDomainService/Domains" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDomainWithName">
+      <soap:operation soapAction="http://tempuri.org/IiotDomainService/GetDomainWithName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Locations">
+      <soap:operation soapAction="http://tempuri.org/IiotDomainService/Locations" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeviceTypes">
+      <soap:operation soapAction="http://tempuri.org/IiotDomainService/DeviceTypes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ActionParams">
+      <soap:operation soapAction="http://tempuri.org/IiotDomainService/ActionParams" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeviceCredentials">
+      <soap:operation soapAction="http://tempuri.org/IiotDomainService/DeviceCredentials" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Endpoints">
+      <soap:operation soapAction="http://tempuri.org/IiotDomainService/Endpoints" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDomainWithId">
+      <soap:operation soapAction="http://tempuri.org/IiotDomainService/GetDomainWithId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SiteWithId">
+      <soap:operation soapAction="http://tempuri.org/IiotDomainService/SiteWithId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeviceWithId">
+      <soap:operation soapAction="http://tempuri.org/IiotDomainService/DeviceWithId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeviceActionWithId">
+      <soap:operation soapAction="http://tempuri.org/IiotDomainService/DeviceActionWithId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DevicePropertieWithId">
+      <soap:operation soapAction="http://tempuri.org/IiotDomainService/DevicePropertieWithId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeviceParameterWithId">
+      <soap:operation soapAction="http://tempuri.org/IiotDomainService/DeviceParameterWithId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DomainWithId">
+      <soap:operation soapAction="http://tempuri.org/IiotDomainService/DomainWithId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LocationWithId">
+      <soap:operation soapAction="http://tempuri.org/IiotDomainService/LocationWithId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeviceTypeWithId">
+      <soap:operation soapAction="http://tempuri.org/IiotDomainService/DeviceTypeWithId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ActionParamWithId">
+      <soap:operation soapAction="http://tempuri.org/IiotDomainService/ActionParamWithId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeviceCredentialWithId">
+      <soap:operation soapAction="http://tempuri.org/IiotDomainService/DeviceCredentialWithId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EndpointWithId">
+      <soap:operation soapAction="http://tempuri.org/IiotDomainService/EndpointWithId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DomainUpdate">
+      <soap:operation soapAction="http://tempuri.org/IiotDomainService/DomainUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeviceUpdate">
+      <soap:operation soapAction="http://tempuri.org/IiotDomainService/DeviceUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SiteUpdate">
+      <soap:operation soapAction="http://tempuri.org/IiotDomainService/SiteUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ActionUpdate">
+      <soap:operation soapAction="http://tempuri.org/IiotDomainService/ActionUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PropertyUpdate">
+      <soap:operation soapAction="http://tempuri.org/IiotDomainService/PropertyUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LocationUpdate">
+      <soap:operation soapAction="http://tempuri.org/IiotDomainService/LocationUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResParamUpdate">
+      <soap:operation soapAction="http://tempuri.org/IiotDomainService/ResParamUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReqParamUpdate">
+      <soap:operation soapAction="http://tempuri.org/IiotDomainService/ReqParamUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeviceTypeUpdate">
+      <soap:operation soapAction="http://tempuri.org/IiotDomainService/DeviceTypeUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeviceCredentialsUpdate">
+      <soap:operation soapAction="http://tempuri.org/IiotDomainService/DeviceCredentialsUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EndpointUpdate">
+      <soap:operation soapAction="http://tempuri.org/IiotDomainService/EndpointUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DomainRemove">
+      <soap:operation soapAction="http://tempuri.org/IiotDomainService/DomainRemove" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeviceRemove">
+      <soap:operation soapAction="http://tempuri.org/IiotDomainService/DeviceRemove" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SiteRemove">
+      <soap:operation soapAction="http://tempuri.org/IiotDomainService/SiteRemove" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ActionRemove">
+      <soap:operation soapAction="http://tempuri.org/IiotDomainService/ActionRemove" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PropertyRemove">
+      <soap:operation soapAction="http://tempuri.org/IiotDomainService/PropertyRemove" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LocationRemove">
+      <soap:operation soapAction="http://tempuri.org/IiotDomainService/LocationRemove" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResParamRemove">
+      <soap:operation soapAction="http://tempuri.org/IiotDomainService/ResParamRemove" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReqParamRemove">
+      <soap:operation soapAction="http://tempuri.org/IiotDomainService/ReqParamRemove" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeviceTypeRemove">
+      <soap:operation soapAction="http://tempuri.org/IiotDomainService/DeviceTypeRemove" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeviceCredentialsRemove">
+      <soap:operation soapAction="http://tempuri.org/IiotDomainService/DeviceCredentialsRemove" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EndpointRemove">
+      <soap:operation soapAction="http://tempuri.org/IiotDomainService/EndpointRemove" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="iotDomainService">
+    <wsdl:port name="BasicHttpBinding_IiotDomainService" binding="tns:BasicHttpBinding_IiotDomainService">
+      <soap:address location="http://localhost:8733/Design_Time_Addresses/iotServiceProvider/Service1/" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,68 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Runtime.Serialization;
+using System.Web;
+
+namespace iotDbConnector.DAL
+{
+    [DataContract(IsReference = true)]
+    public class EndpointInfo
+    {
+        [DataMember]
+        [Key]
+        [Required]
+        public int EndpointId { get; set; }
+
+        [DataMember]
+        [Required]
+        public string Hostname { get; set; }
+
+        [DataMember]
+        public int Port { get; set; }
+
+        [DataMember]
+        public bool RequiresAuthentication { get; set; }
+
+        [DataMember]
+        public bool SupportsAllJoynProtocol { get; set; }
+
+        [DataMember]
+        public bool SupportsCoAPProtocol { get; set; }
+
+        [DataMember]
+        public bool SupportsMQTTProtocol { get; set; }
+
+        [DataMember]
+        public bool SupportsRESTfulProtocol { get; set; }
+
+        [DataMember]
+        public bool SupportsSconnProtocol { get; set; }
+
+        [DataMember]
+        public bool SupportsOnvifProtocol { get; set; }
+
+        [DataMember]
+        public virtual Device Device { get; set; }
+
+ 
+
+        /*
+        public void EnableProtocolSupport(CommProtocolType protocol)
+        {
+            if (protocol == CommProtocolType.CommSconnProtocol)
+            {
+                SupportsSconnProtocol = true;
+            }
+        }
+
+        public EndpointInfo(    string hostname, int port)
+        {
+            this.Hostname = hostname;
+            this.Port = port;
+        }
+        */
+
+    }
+}

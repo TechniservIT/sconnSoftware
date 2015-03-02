@@ -1,0 +1,90 @@
+﻿@model iotDash.Models.AddSiteViewModel
+
+@{
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+@{
+    ViewBag.Title = "Index";
+}
+
+@{
+    if (IsPost)
+    {
+        string Name = Request.Form["Name"];
+        
+    }
+ }
+
+
+@Scripts.Render("~/bundles/jqueryui")
+
+
+<script>
+
+    $(function () {
+        $('#addsiteform').submit(function () {
+            $.ajax({
+                url: '@Url.Action("New", "Site")',
+                type: this.method,
+                data: {
+                    Name: $('#SiteName').val(),
+                    LocId: $('#locationselector').val(),
+                }, 
+                success: function (result) {
+                    $('#resultview').html(result);
+                }
+            });
+            return false;
+        });
+
+    });
+
+</script>
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div>
+                <h3>Add site. <small></small></h3>
+                <br /><br />
+
+                <form role="form" action="" method="post" id="addsiteform">
+
+                    <div class="form-group">
+                        <label for="SiteName">Name</label>
+                        <input type="text" class="form-control" name="siteinput" id="SiteName">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="locationselector">Location</label>
+                        <select class="form-control" id="locationselector">
+                            @if (Model != null)
+                            {
+                                foreach (var item in Model.Locations)
+                                {
+                                    <option value="@item.LocationId">@item.LocationName</option>
+                                }
+                            }
+
+                        </select>
+                        <br />
+                    </div>
+
+                    <button class="btn btn-primary" type="submit">Add</button>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div id="resultview">
+
+        </div>
+    </div>
+
+</div>
+
+

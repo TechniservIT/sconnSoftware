@@ -1,0 +1,92 @@
+﻿@{
+    ViewBag.Title = "AddProp";
+}
+
+@{
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+
+<script>
+
+    $(function () {
+
+        $('#adddevprop').submit(function () {
+            $.ajax({
+                url: '@Url.Action("NewProperty", "Device")',
+                type: this.method,
+                data: {
+                    Name: $('#LocationName').val(),
+                    Description: $('#DescriptionInput').val(),
+                    ImageUrl: $('#ImageUrlInput').val()
+                },
+                success: function (result) {
+                    $('#resultview').html(result);
+                }
+            });
+        });
+
+        $('#adddevpropparams').submit(function () {
+            $.ajax({
+                url: '@Url.Action("NewParameter", "Device")',
+                type: this.method,
+                data: {
+                    Name: $('#LocationName').val(),
+                    Description: $('#DescriptionInput').val(),
+                    ImageUrl: $('#ImageUrlInput').val()
+                },
+                success: function (result) {
+                    $('#resultview').html(result);
+                }
+            });
+        });
+
+
+    });
+
+
+</script>
+
+
+
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div>
+                <h3>Add device property. <small></small></h3>
+                <br /><br />
+
+                <form role="form" action="" method="post" id="adddevtype">
+
+                    <div class="form-group">
+                        <label for="LocationName">Name</label>
+                        <input type="text" class="form-control" name="locationnameinput" id="LocationName">
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="DescriptionInput">Parameters</label>
+                        <input type="text" class="form-control" name="siteinput" id="DescriptionInput">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ImageUrlInput"></label>
+                        <input type="text" class="form-control" name="siteinput" id="ImageUrlInput">
+                    </div>
+
+                    <button class="btn btn-primary" type="submit">Add</button>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div id="resultview">
+
+        </div>
+    </div>
+
+</div>

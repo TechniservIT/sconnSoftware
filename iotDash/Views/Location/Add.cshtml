@@ -1,0 +1,96 @@
+﻿@{
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+@{
+    ViewBag.Title = "Add";
+}
+
+@Scripts.Render("~/bundles/jqueryui")
+
+
+
+<script>
+
+    $(function () {
+        $('#addlocation').submit(function () {
+            $.ajax({
+                url: '@Url.Action("New", "Location")',
+                type: this.method,
+                data: {
+                    Name: $('#LocationName').val(),
+                    Lat: $('#LatVal').val(),
+                    Lng: $('#LngVal').val()
+                },
+                success: function (result) {
+                    $('#resultview').html(result);
+                }
+            });
+            return false;
+        });
+
+    });
+
+
+</script>
+
+
+
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div>
+                <h3>Add site. <small></small></h3>
+                <br /><br />
+
+                        @*
+                      public string LocationName { get; set; }
+
+                    public double Lat { get; set; }
+                    public double Lng { get; set; }
+
+                    public string LocationVisualRepresentationURL { get; set; }
+
+                        *@
+
+                <form role="form" action="" method="post" id="addlocation">
+
+                    <div class="form-group">
+                        <label for="LocationName">Name</label>
+                        <input type="text" class="form-control" name="locationnameinput" id="LocationName">
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="LatVal">Lat</label>
+                        <input type="text" class="form-control" name="siteinput" id="LatVal">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="LngVal">Lng</label>
+                        <input type="text" class="form-control" name="siteinput" id="LngVal">
+                    </div>
+
+
+                    @*  TODO Image uploader
+            <div class="form-group">
+                <label for="ImageURL">Image URL</label>
+                <input type="text" class="form-control" name="siteinput" id="ImageURL">
+            </div>
+                    *@
+
+                    <button class="btn btn-primary" type="submit">Add</button>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div id="resultview">
+
+        </div>
+    </div>
+
+ </div>

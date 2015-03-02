@@ -1,0 +1,35 @@
+﻿@model List<iodash.Models.Common.Site>
+
+
+@{
+    ViewBag.Title = "Index";
+}
+@{
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+
+    <div id="wrapper">
+
+        @* List of sites *@
+        @for (var i = 0; i < Model.Count; i++)
+        {
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            @Model[i].SiteName
+                        </div>
+                        <div class="panel-body">
+                            @Model[i].Devices.Count
+                        </div>
+                        <div class="panel-footer">
+                            <div class="btn-group">
+                                <button class="btn">Status</button>
+                                <button class="btn">Devices</button>
+                                <button class="btn">Edit</button>
+                            </div>
+                        </div>
+                    </div>
+        }
+
+    </div>
+    <!-- /#wrapper -->

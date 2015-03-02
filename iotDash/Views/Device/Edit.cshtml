@@ -1,0 +1,47 @@
+﻿@model iotDash.Models.DeviceViewModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+@{
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+    <div id="wrapper">
+
+        <form role="form">
+
+            @* Display name *@
+            <div class="form-group">
+                <label for="exampleInputEmail1">@Model.Device.DeviceName</label><input class="form-control" id="1363252" type="text" />
+            </div>
+
+            @* Endpoint data *@
+
+            <div class="form-group">
+                <label for="exampleInputEmail1">@Model.Device.EndpInfo.Hostname</label><input class="form-control" id="532522" type="text" />
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputEmail1">@Model.Device.EndpInfo.Port</label><input class="form-control" id="25642332" type="number" />
+            </div>
+
+            <div class="form-group">
+               @* <label for="exampleInputPassword1">@Model.Credentials.Username</label><input class="form-control" id="52156466" type="text" /> *@
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputPassword1"></label><input class="form-control" id="6326215" type="password" />
+            </div>
+
+            @* Type *@
+            <select class="form-control"></select>
+
+
+            @* Location *@
+
+         <button type="submit" class="btn btn-default">Save</button>
+
+        </form>
+
+    </div>
+    <!-- /#wrapper -->

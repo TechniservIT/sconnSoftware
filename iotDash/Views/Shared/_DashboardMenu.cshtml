@@ -1,0 +1,65 @@
+﻿
+@{
+    ViewBag.Title = "_DashboardMenu";
+}
+
+<div class="navbar-default sidebar" role="navigation">
+    <div class="sidebar-nav navbar-collapse">
+       
+         <ul class="nav" id="side-menu">
+
+            <li>
+                <a class="active" href="index.html"><i class="fa fa-dashboard fa-fw"></i>System</a>
+            </li>
+
+            <li>
+                <a href="#"><i class="fa  fa-dashboard fa-fw"></i> Sites <span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                     
+                    <li>
+                      @Html.ActionLink("Show", "View", "Site")
+                    </li>
+                    <li>
+                      @Html.ActionLink("Add", "Add", "Site")
+                    </li>
+
+                </ul>
+                <!-- /.nav-second-level -->
+            </li>
+
+            <li>
+                <a href="#"><i class="fa fa-location-arrow fa-fw"></i> Locations <span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+
+                    <li>
+                        @Html.ActionLink("Add", "Add", "Location")
+                    </li>
+                    <li>
+                        @Html.ActionLink("Search", "Search", "Location")
+                    </li>
+
+                </ul>
+                <!-- /.nav-second-level -->
+            </li>
+
+            <li>
+                <a href="#"><i class="fa fa-users fa-fw"></i> Users <span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        @Html.ActionLink("Add", "Add", "Users")
+                    </li>
+                    <li>
+                        @Html.ActionLink("Show", "Index", "Users")
+                    </li>
+
+                </ul>
+                <!-- /.nav-second-level -->
+            </li>
+
+        </ul>
+
+
+    </div>
+    <!-- /.sidebar-collapse -->
+</div>
+

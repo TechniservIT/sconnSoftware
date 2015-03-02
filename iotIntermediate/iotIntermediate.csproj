@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{FC88505B-181C-4692-9147-90A7B05E038B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>iotIntermediate</RootNamespace>
+    <AssemblyName>iotIntermediate</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Abstract\DAL\Auth\AuthDB.cs" />
+    <Compile Include="Abstract\DAL\Auth\authDbConnector.cs" />
+    <Compile Include="Abstract\DAL\Auth\AuthenticationManager.cs" />
+    <Compile Include="Abstract\DAL\Auth\Credential\AppAuthLevel.cs" />
+    <Compile Include="Abstract\DAL\Auth\Credential\AppUserCredentials.cs" />
+    <Compile Include="Abstract\DAL\Auth\Credential\AuthDatabaseContext.cs" />
+    <Compile Include="Abstract\DAL\Auth\Credential\DeviceCredentials.cs" />
+    <Compile Include="Abstract\DAL\Auth\Credential\IAuthCredentials.cs" />
+    <Compile Include="Abstract\DAL\Device\Device.cs" />
+    <Compile Include="Abstract\DAL\Device\DeviceAction.cs" />
+    <Compile Include="Abstract\DAL\Device\DeviceParameter.cs" />
+    <Compile Include="Abstract\DAL\Device\DeviceProperty.cs" />
+    <Compile Include="Abstract\DAL\Device\DeviceType.cs" />
+    <Compile Include="Abstract\DAL\Device\EndpointInfo.cs" />
+    <Compile Include="Abstract\DAL\Device\iotSiteDatabaseConnector.cs" />
+    <Compile Include="Abstract\DAL\Device\Location.cs" />
+    <Compile Include="Abstract\DAL\Device\ParameterType.cs" />
+    <Compile Include="Abstract\DAL\Device\Proprietary\sconnConfigMapper.cs" />
+    <Compile Include="Abstract\DAL\Device\Site.cs" />
+    <Compile Include="Abstract\DAL\Domain\iotDomain.cs" />
+    <Compile Include="Abstract\DAL\Domain\iotDomainSettings.cs" />
+    <Compile Include="Abstract\DAL\IoTDB.cs" />
+    <Compile Include="Abstract\DAL\iotDbConnector.cs" />
+    <Compile Include="Abstract\DAL\Users\Permissions\IUserPermission.cs" />
+    <Compile Include="Abstract\DAL\Users\Permissions\UserDatabaseAdminPermission.cs" />
+    <Compile Include="Abstract\DAL\Users\Permissions\UserDevicePermission.cs" />
+    <Compile Include="Abstract\DAL\Users\Permissions\UserPermission.cs" />
+    <Compile Include="Abstract\DAL\Users\Permissions\UserSiteAdminPermission.cs" />
+    <Compile Include="Abstract\DAL\Users\Permissions\UserSitePermission.cs" />
+    <Compile Include="Abstract\DAL\Users\User.cs" />
+    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\DeviceModels.cs" />
+    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\SiteModels.cs" />
+    <Compile Include="Protocols\DeviceDiscoverer.cs" />
+    <Compile Include="Protocols\iotTaskHandler.cs" />
+    <Compile Include="Protocols\CommRequest.cs" />
+    <Compile Include="Protocols\NET\CommAllJoynProtocol.cs" />
+    <Compile Include="Protocols\NET\CommCoAPProtocol.cs" />
+    <Compile Include="Protocols\NET\CommMQTTProtocol.cs" />
+    <Compile Include="Protocols\NET\CommOnvifProtocol.cs" />
+    <Compile Include="Protocols\NET\CommProtocol.cs" />
+    <Compile Include="Protocols\NET\CommRESTfulProtocol.cs" />
+    <Compile Include="Protocols\NET\CommSconnProtocol.cs" />
+    <Compile Include="Protocols\NET\ICommProtocol.cs" />
+    <Compile Include="Protocols\Translation\DeviceActionTranslator.cs" />
+    <Compile Include="Class1.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Abstract\DAL\Users\Info\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

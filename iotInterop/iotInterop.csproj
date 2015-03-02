@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0CA693B6-3024-4B2F-81E3-BFA21194D37F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>iotInterop</RootNamespace>
+    <AssemblyName>iotInterop</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CoAP.NET">
+      <HintPath>..\packages\CoAP.0.18\lib\net40\CoAP.NET.dll</HintPath>
+    </Reference>
+    <Reference Include="GnatMQ">
+      <HintPath>..\External\mqtt\GnatMQ.dll</HintPath>
+    </Reference>
+    <Reference Include="sconnConnector, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\iotServiceProvider\External\Protocols\Sconn\sconnConnector.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Intermediate\DeviceDiscoverer.cs" />
+    <Compile Include="Intermediate\iotTaskHandler.cs" />
+    <Compile Include="Intermediate\Translation\DeviceActionTranslator.cs" />
+    <Compile Include="NET\CommRequest.cs" />
+    <Compile Include="NET\Protocols\AllJoyn\CommAllJoynProtocol.cs" />
+    <Compile Include="NET\Protocols\CoAP\CommCoAPProtocol.cs" />
+    <Compile Include="NET\Protocols\CommDeviceProtocolManager.cs" />
+    <Compile Include="NET\Protocols\CommProtocol.cs" />
+    <Compile Include="NET\Protocols\ICommProtocol.cs" />
+    <Compile Include="NET\Protocols\MQTT\CommMQTTProtocol.cs" />
+    <Compile Include="NET\Protocols\MQTT\MqttServer.cs" />
+    <Compile Include="NET\Protocols\Onvif\CommOnvifProtocol.cs" />
+    <Compile Include="NET\Protocols\RESTful\CommRESTfulProtocol.cs" />
+    <Compile Include="NET\Protocols\Sconn\CommSconnProtocol.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service References\iotDbService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="External\Protocols\Sconn\sconnConnector.dll" />
+    <None Include="Service References\iotDbService\iotInterop.iotDbService.ActionParameter.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\iotDbService\iotInterop.iotDbService.Device.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\iotDbService\iotInterop.iotDbService.DeviceAction.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\iotDbService\iotInterop.iotDbService.DeviceCredentials.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\iotDbService\iotInterop.iotDbService.DeviceParameter.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\iotDbService\iotInterop.iotDbService.DeviceProperty.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\iotDbService\iotInterop.iotDbService.DeviceType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\iotDbService\iotInterop.iotDbService.EndpointInfo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\iotDbService\iotInterop.iotDbService.iotDomain.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\iotDbService\iotInterop.iotDbService.Location.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\iotDbService\iotInterop.iotDbService.Site.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\iotDbService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\iotDbService\configuration.svcinfo" />
+    <None Include="Service References\iotDbService\configuration91.svcinfo" />
+    <None Include="Properties\DataSources\iotDbConnector.DAL.ActionParameter.datasource" />
+    <None Include="Properties\DataSources\iotDbConnector.DAL.Device.datasource" />
+    <None Include="Properties\DataSources\iotDbConnector.DAL.DeviceAction.datasource" />
+    <None Include="Properties\DataSources\iotDbConnector.DAL.DeviceCredentials.datasource" />
+    <None Include="Properties\DataSources\iotDbConnector.DAL.DeviceParameter.datasource" />
+    <None Include="Properties\DataSources\iotDbConnector.DAL.DeviceProperty.datasource" />
+    <None Include="Properties\DataSources\iotDbConnector.DAL.DeviceType.datasource" />
+    <None Include="Properties\DataSources\iotDbConnector.DAL.EndpointInfo.datasource" />
+    <None Include="Properties\DataSources\iotDbConnector.DAL.iotDomain.datasource" />
+    <None Include="Properties\DataSources\iotDbConnector.DAL.Location.datasource" />
+    <None Include="Properties\DataSources\iotDbConnector.DAL.Site.datasource" />
+    <None Include="Service References\iotDbService\iotDatabaseConnector.DAL.POCO.Device.Notify.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\iotDbService\iotDbConnector.DAL.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\iotDbService\service.wsdl" />
+    <None Include="Service References\iotDbService\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\iotDbService\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\iotDbService\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
