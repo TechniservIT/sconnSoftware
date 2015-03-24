@@ -1,0 +1,129 @@
+﻿@model iotDash.Models.DeviceActionStatisticModel
+
+@{
+    ViewBag.Title = "View";
+}
+
+@{
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+
+@Scripts.Render("~/bundles/toggleswitch")
+@Styles.Render("~/bundles/css/toggleswitch")
+
+@Scripts.Render("~/bundles/signalr")
+
+<script src="~/signalr/hubs"></script>
+<script src="~/Scripts/Chart.min.js"></script>
+
+<script>
+
+    $(function () {
+        alert("loading chart");
+
+        var ctx = document.getElementById("SklepChart").getContext("2d");
+        var data = {
+            labels: ["8:00", "8:30", "9:00", "9:30", "10:00", "10:30", "11:00", "11:30"
+                        , "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30"
+                        , "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30"
+                        , "20:00", "20:30", "21:00", "21:30", "22:00", "22:30", "23:00"
+            ],
+            datasets:
+            [
+                @foreach (var param in Model.Action.ResultParameters)
+                {
+                    <text>  
+                    {
+                        label: "@param.Type.Name",
+                        fillColor: "rgba(151,187,205,0.2)",
+                        strokeColor: "rgba(151,187,205,1)",
+                        pointColor: "rgba(151,187,205,1)",
+                        pointStrokeColor: "#fff",
+                        pointHighlightFill: "#fff",
+                        pointHighlightStroke: "rgba(151,187,205,1)",
+                        data:  [@String.Join(",", param.Changes.Select(i => i.Value).ToArray())]
+
+                    }
+                    </text>
+                 }
+             ]
+        }
+
+        alert("setting chart");
+
+    var myLineChart = new Chart(ctx).Line(data);
+    legend(document.getElementById("SklepChartLegend"), data);
+
+    alert("done");
+
+
+    });
+
+
+    function dlstat() {
+
+        $.ajax({
+            url: '@Url.Action("ParameterHistory", "Statistic")',
+            type: this.method,
+            data: {
+                Date: @DateTime.Now.ToShortDateString(),
+            },
+            success: function (result) {
+            }
+        });
+
+
+
+    }
+
+
+
+
+</script>
+
+
+<h3>@Model.Action.ActionName<small></small></h3>
+
+<div role="tabpanel">
+
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist" id="actionselector">
+        <li role="presentation" class="active"><a href="#tabStatus" aria-controls="tabStatus" role="tab" data-toggle="tab">Status</a></li>
+        @*<li role="presentation"><a href="#tabActions" aria-controls="tabActions" role="tab" data-toggle="tab">Actions</a></li>
+            <li role="presentation"><a href="#tabLocation" aria-controls="tabLocation" role="tab" data-toggle="tab">Location</a></li>*@
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="tabStatus">
+            <div class="container-fluid">
+                <div class="row">
+                    @if (Model.Action != null)
+                    {
+                        foreach (var item in Model.Action.ResultParameters)
+                        {
+
+                        }
+                    }
+                </div>
+                <div class="row">
+                    <div id="statdisp">
+                        <canvas id="SklepChart" width="800" height="400"></canvas>
+                        <div id="SklepChartLegend"></div>
+                    </div>
+
+
+                </div>  
+               
+            </div>
+        </div>
+
+        @*<div role="tabpanel" class="tab-pane" id="tabActions">
+            </div>
+            <div role="tabpanel" class="tab-pane" id="tabLocation">
+            </div>*@
+
+    </div>
+</div>
+

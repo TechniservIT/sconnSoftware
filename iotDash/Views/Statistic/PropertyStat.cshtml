@@ -1,0 +1,56 @@
+﻿@model iotDash.Models.DevicePropertyStatisticModel
+
+@{
+    ViewBag.Title = "View";
+}
+
+@{
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+
+@Scripts.Render("~/bundles/toggleswitch")
+@Styles.Render("~/bundles/css/toggleswitch")
+
+@Scripts.Render("~/bundles/signalr")
+<script src="~/signalr/hubs"></script>
+
+
+
+<h3>@Model.Property.PropertyName<small></small></h3>
+
+<div role="tabpanel">
+
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist" id="actionselector">
+        <li role="presentation" class="active"><a href="#tabStatus" aria-controls="tabStatus" role="tab" data-toggle="tab">Status</a></li>
+        @*<li role="presentation"><a href="#tabActions" aria-controls="tabActions" role="tab" data-toggle="tab">Actions</a></li>
+        <li role="presentation"><a href="#tabLocation" aria-controls="tabLocation" role="tab" data-toggle="tab">Location</a></li>*@
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="tabStatus">
+            <div class="container-fluid">
+
+                <div class="row">
+                    @if (Model.Property != null)
+                    {
+                        foreach (var item in Model.Property.ResultParameters)
+                        {
+                            
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+
+        @*<div role="tabpanel" class="tab-pane" id="tabActions">
+        </div>
+
+        <div role="tabpanel" class="tab-pane" id="tabLocation">
+        </div>*@
+
+    </div>
+</div>
+

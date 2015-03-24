@@ -1,0 +1,32 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using iotDash.Models;
+
+namespace iotDash.Controllers
+{
+    public class StatisticController : Controller
+    {
+        // GET: Statistic
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        public ActionResult PropertyStat(int propertyId)
+        {
+            DevicePropertyStatisticModel model = new DevicePropertyStatisticModel(propertyId);
+            return View(model);
+        }
+
+        public ActionResult ActionStat(int actionId)
+        {
+            DeviceActionStatisticModel model = new DeviceActionStatisticModel(actionId);
+            return View(model);
+        }
+
+
+    }
+}
