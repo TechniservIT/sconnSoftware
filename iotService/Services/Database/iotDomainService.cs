@@ -1,4 +1,5 @@
-﻿using iotDbConnector.DAL;
+﻿using iotDatabaseConnector.DAL.POCO.Device.Notify;
+using iotDbConnector.DAL;
 using iotServiceProvider.NET.Protocols;
 using System;
 using System.Collections.Generic;
@@ -565,13 +566,15 @@ namespace iotServiceProvider
         }
 
         
-        public bool DeviceUpdate(Device domain)
+        public bool DeviceUpdate(Device device)
         {
             try
             {
+
+
                 iotRepository<Device> repo = new iotRepository<Device>();
-                repo.Update(domain);
-                Task updateTask = Task.Factory.StartNew(() => { DeviceUpdateEventService.SendDeviceUpdate(domain); }); //Dispatch update notify
+                repo.Update(device);
+                Task updateTask = Task.Factory.StartNew(() => { DeviceUpdateEventService.SendDeviceUpdate(device); }); //Dispatch update notify
                 return true;
             }
             catch (Exception e)

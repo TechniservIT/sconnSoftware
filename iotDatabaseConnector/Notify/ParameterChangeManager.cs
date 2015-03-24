@@ -11,6 +11,8 @@ namespace iotDatabaseConnector.DAL.POCO.Device.Notify
     {
 
 
+
+
         static public void StoreParamChange(DeviceParameter param)
         {
             try

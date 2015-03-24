@@ -190,6 +190,16 @@
             $(this).tab('show')
         })
 
+
+        $("#toolPropHistoryCont").click(function () {
+
+
+
+        });
+
+
+
+
         $("body").ready(function () {
             //remove current classes
 
@@ -217,6 +227,7 @@
         <div role="tabpanel" class="tab-pane active" id="tabStatus">
             <div class="container-fluid">
                 <div class="row">
+
                     <div class="col-md-1">
                         <a class="btn btn-default" href="#" role="button">
                             <span class="glyphicon glyphicon-plus"></span>
@@ -240,6 +251,7 @@
                             <span class="glyphicon glyphicon-refresh"></span>
                         </a>
                     </div>
+
                 </div>
 
                 <div class="row">
@@ -254,6 +266,11 @@
                                         <h4 class="noderesval" id="propvaldisp-@item.PropertyId.ToString()"  title="@item.ResultParameters.First().Value">@item.ResultParameters.First().Value</h4>
                                         <h5>@item.PropertyDescription</h5>
                                         <h5>@item.LastUpdateTime</h5>
+                                        <div id="toolPropHistoryCont" class="col-md-1">
+                                            <a class="btn btn-default" href="@Url.Action("PropertyStat", "Statistic", new { propertyId = item.PropertyId })" role="button">
+                                                <span class="glyphicon glyphicon-stats"></span>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -313,6 +330,11 @@
                                         <h4 class="noderesval" id="actvaldisp-@item.ActionId.ToString()" title="@item.ResultParameters.First().Value">@item.ResultParameters.First().Value</h4>
                                         <h5>@item.ActionDescription</h5>
                                         <h5>@item.LastActivationTime</h5>
+                                        <div id="toolPropHistoryCont" class="col-md-1">
+                                            <a class="btn btn-default" href="@Url.Action("ActionStat", "Statistic", new { actionId = item.ActionId })" role="button">
+                                                <span class="glyphicon glyphicon-stats"></span>
+                                            </a>
+                                        </div>
                                         <input class="tgsw-action" type="checkbox" value="@item.ResultParameters.First().ToString()" title="@item.ActionId.ToString()" id='tgsw-@item.ActionId.ToString()'>
                                      </div>
                                 </div>
