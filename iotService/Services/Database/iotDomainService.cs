@@ -939,6 +939,23 @@ namespace iotServiceProvider
 
 
 
+        /************************  CUSTOM CROSS QUERY ********************/
+        [OperationContract]
+        [ApplyDataContractResolver]
+        public Device DeviceWithEndpoint(EndpointInfo endp)
+        {
+            try
+            {
+                iotContext cont = new iotContext();
+                Device stored = cont.Devices.Where(d => d.EndpInfo.Hostname.Equals(endp.Hostname) && d.EndpInfo.Port == endp.Port).FirstOrDefault();
+                return stored;
+            }
+            catch (Exception e)
+            {
+                return new Device();
+            }
+        }
+
 
     }
 }

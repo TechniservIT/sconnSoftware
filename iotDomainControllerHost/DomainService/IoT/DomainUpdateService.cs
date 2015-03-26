@@ -1,4 +1,6 @@
-﻿using iotDomainControllerHost.iotDbService;
+﻿using iotDash.Service;
+using iotDbConnector.DAL;
+using iotServiceProvider;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -49,8 +51,8 @@ namespace iotDomainController.DomainService
         {
             try
             {
-                IiotDomainServiceClient service = new IiotDomainServiceClient();
-                service.UpdateDeviceProperties(dev);         
+                IiotDomainService cl = new iotServiceConnector().GetDomainClient();
+                cl.UpdateDeviceProperties(dev);         
             }
             catch (Exception e)
             {

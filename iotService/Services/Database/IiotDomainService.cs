@@ -256,6 +256,14 @@ namespace iotServiceProvider
         bool PerformDeviceAction(DeviceAction act);
 
 
+
+        /************************  CUSTOM CROSS QUERY ********************/
+        [OperationContract]
+        [ApplyDataContractResolver]
+        Device DeviceWithEndpoint(EndpointInfo endp);
+
+
+
     }
 
 

@@ -1,4 +1,6 @@
-﻿using iotDomainControllerHost.iotDbService;
+﻿using iotDash.Service;
+using iotDbConnector.DAL;
+using iotServiceProvider;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,7 +31,7 @@ namespace iotDomainController.DomainService.Providers
 
         public bool IsDeviceRegistered(Device dev)
         {
-            IiotDomainServiceClient cl = new IiotDomainServiceClient();
+            IiotDomainService cl = new iotServiceConnector().GetDomainClient();
             List<Device> devices = cl.Devices().ToList();
             return (from d in devices
                     where 
@@ -50,9 +52,41 @@ namespace iotDomainController.DomainService.Providers
 
         }
 
-        public void UpdateDeviceFromPublish(MqttMsgPublish publish)
+        public void UpdateDeviceFromPublish(Device dev, MqttMsgPublish publish)
         {
             //parse publish and update properties
+
+            try
+            {
+                //sconn Parser
+                IiotDomainService cl = new iotServiceConnector().GetDomainClient();
+                //EndpointInfo endp = cl.Endpoints().Where(e=> e.Hostname.Equals(dev.EndpInfo.Hostname) && e.Port == dev.EndpInfo.Port).FirstOrDefault();
+                Device stored = cl.DeviceWithEndpoint(dev.EndpInfo);
+                if (publish.Topic.Equals("Action"))
+                {
+                    foreach (var item in stored.Actions)
+                    {
+                        if (item.ResultParameters.FirstOrDefault().sconnMappers.Where(m => m.SeqNumber.ToString().Equals(publish.Message[0])) != null)
+                        {
+                            item.ResultParameters.FirstOrDefault().Value = publish.Message[1].ToString();
+                        }
+                    }
+                }
+                else if (publish.Topic.Equals("Property"))
+                {
+                    foreach (var item in stored.Properties)
+                    {
+                        if (item.ResultParameters.FirstOrDefault().sconnMappers.Where(m => m.SeqNumber.ToString().Equals(publish.Message[0])) != null)
+                        {
+                            item.ResultParameters.FirstOrDefault().Value = publish.Message[1].ToString();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {       
+             
+            }
 
         }
 
@@ -69,7 +103,7 @@ namespace iotDomainController.DomainService.Providers
         {
             MqttClient cl = e.Client;
             Device dev = DeviceForMqttClient(cl);
-            UpdateDeviceFromPublish(e.Message);
+            UpdateDeviceFromPublish(dev, e.Message);
         }
 
         public void OnDeviceUpdated(object sender, MqttClientEventArgs e)

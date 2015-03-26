@@ -118,60 +118,9 @@
     <Compile Include="Protocol\Mqtt\System\MqttSystemManager.cs" />
     <Compile Include="Protocol\Mqtt\Utility\QueueExtension.cs" />
     <Compile Include="Protocol\Mqtt\Utility\Trace.cs" />
-    <Compile Include="Service References\iotDbService\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Service References\iotDbService\iotDatabaseConnector.DAL.POCO.Device.Notify.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\iotDbService\iotDbConnector.DAL.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\iotDbService\iotDomainControllerHost.iotDbService.ActionParameter.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\iotDbService\iotDomainControllerHost.iotDbService.Device.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\iotDbService\iotDomainControllerHost.iotDbService.DeviceAction.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\iotDbService\iotDomainControllerHost.iotDbService.DeviceCredentials.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\iotDbService\iotDomainControllerHost.iotDbService.DeviceParameter.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\iotDbService\iotDomainControllerHost.iotDbService.DeviceProperty.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\iotDbService\iotDomainControllerHost.iotDbService.DeviceType.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\iotDbService\iotDomainControllerHost.iotDbService.EndpointInfo.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\iotDbService\iotDomainControllerHost.iotDbService.iotDomain.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\iotDbService\iotDomainControllerHost.iotDbService.Location.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\iotDbService\iotDomainControllerHost.iotDbService.Site.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\iotDbService\service.wsdl" />
-    <None Include="Service References\iotDbService\service.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\iotDbService\service1.xsd">
-      <SubType>Designer</SubType>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
@@ -180,19 +129,18 @@
     <Folder Include="DomainService\Surveillance\Recording\" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadataStorage Include="Service References\iotDbService\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\iotDbService\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\iotDbService\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\iotDbService\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
+    <ProjectReference Include="..\iotData\iotData.csproj">
+      <Project>{e94b0a02-089e-483a-aaef-3bfa49039598}</Project>
+      <Name>iotData</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\iotServiceLayer\iotServiceLayer.csproj">
+      <Project>{6640ac88-df6b-43a6-bee3-a65b4396119b}</Project>
+      <Name>iotServiceLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\iotService\iotService.csproj">
+      <Project>{8fa92296-4f77-45ce-9b85-bcb37a7f2332}</Project>
+      <Name>iotService</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
