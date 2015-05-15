@@ -68,7 +68,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iotDesktopDash", "iotDeskto
 		{8FA92296-4F77-45CE-9B85-BCB37A7F2332} = {8FA92296-4F77-45CE-9B85-BCB37A7F2332}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sconnConnector", "C:\Users\Domo\Source\Workspaces\SconnRem\sconnConnector\sconnConnector.csproj", "{09C8A8F0-F85A-4534-922E-85E14EC32725}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sconnConnector", "sconnConnector\sconnConnector.csproj", "{09C8A8F0-F85A-4534-922E-85E14EC32725}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
