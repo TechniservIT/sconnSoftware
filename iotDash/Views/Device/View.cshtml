@@ -28,12 +28,12 @@
             return "panel-info";
         }
     }
-    
-    
 
-    //TODO generate req param input lists  
-    
-    
+
+
+    //TODO generate req param input lists
+
+
 }
 
 
@@ -91,7 +91,7 @@
     }
 
     var obj = { a: 1, 'b': 'foo', c: [false, 'false', null, 'null', { d: { e: 1.3e5, f: '1.3e5' } }] };
-    
+
     //signalR
     var connection = $.hubConnection();
     var contosoChatHubProxy = connection.createHubProxy('deviceStatusUpdaterHub');
@@ -103,27 +103,27 @@
         $.each(obj, function () {
             var cnode = $(this);
             if (cnode[0]['PropertyId'] != null) {
-               // alert("parsing property");
+                // alert("parsing property");
                 var PropId = cnode[0]['PropertyId'];
                 var ResultParams = cnode[0]['ResultParameters'];
                 var ResVal = ResultParams[0]['Value'];
                 var ValDispIdHash = "#propvaldisp-" + PropId;
                 var ValDispId = "propvaldisp-" + PropId;
-               // alert("prop id :" + PropId + "\n" + "ResVal :" + ResVal + "\n" + "ValDispId :" + ValDispId + "\n");
-               // $(ValDispId).html = ResVal;
+                // alert("prop id :" + PropId + "\n" + "ResVal :" + ResVal + "\n" + "ValDispId :" + ValDispId + "\n");
+                // $(ValDispId).html = ResVal;
                 var element = document.getElementById(ValDispId);
                 element.innerHTML = ResVal.toString();
                 element.setAttribute("title", ResVal.toString());
 
             }
             else if (cnode[0]['ActionId'] != null) {
-               // alert("parsing action");
+                // alert("parsing action");
                 var ActId = cnode[0]['ActionId'];
                 var ResultParams = cnode[0]['ResultParameters'];
                 var ResVal = ResultParams[0]['Value'];
                 var ValDispIdHash = "#actvaldisp-" + ActId;
                 var ValDispId = "actvaldisp-" + ActId;
-              //  alert("Act id :" + ActId + "\n" + "ResVal :" + ResVal + "\n" + "ValDispId :" + ValDispId + "\n");
+                //  alert("Act id :" + ActId + "\n" + "ResVal :" + ResVal + "\n" + "ValDispId :" + ValDispId + "\n");
                 var element = document.getElementById(ValDispId);
                 element.innerHTML = ResVal.toString();
                 element.setAttribute("title", ResVal.toString());
@@ -131,7 +131,7 @@
                 //alert(element.innerHTML);
                 //$(ValDispIdHash).html = ResVal.toString();
                 //alert($(ValDispIdHash).html);
-                
+
             }
         });
         ReloadPanels();
@@ -149,7 +149,7 @@
         ReloadPanels();
 
         $('.tgsw-action').on('switchChange.bootstrapSwitch', function () {
-        
+
             if (!Reloading) {
 
                 //get sender id
@@ -175,11 +175,11 @@
                 });
 
             }
-            
+
 
         });
 
-        $("#ReloadModelData").click(function () {       
+        $("#ReloadModelData").click(function () {
         });
 
         $("#ApplyPropertyStyle").click(function () {
@@ -263,7 +263,7 @@
                                 <div id="property-@item.PropertyId.ToString()" class="panel @PanelClassForResultParam(item.ResultParameters.First())">
                                     <div class="panel-heading">@item.PropertyName</div>
                                     <div class="panel-body">
-                                        <h4 class="noderesval" id="propvaldisp-@item.PropertyId.ToString()"  title="@item.ResultParameters.First().Value">@item.ResultParameters.First().Value</h4>
+                                        <h4 class="noderesval" id="propvaldisp-@item.PropertyId.ToString()" title="@item.ResultParameters.First().Value">@item.ResultParameters.First().Value</h4>
                                         <h5>@item.PropertyDescription</h5>
                                         <h5>@item.LastUpdateTime</h5>
                                         <div id="toolPropHistoryCont" class="col-md-1">
@@ -330,13 +330,15 @@
                                         <h4 class="noderesval" id="actvaldisp-@item.ActionId.ToString()" title="@item.ResultParameters.First().Value">@item.ResultParameters.First().Value</h4>
                                         <h5>@item.ActionDescription</h5>
                                         <h5>@item.LastActivationTime</h5>
+                                        <br />
                                         <div id="toolPropHistoryCont" class="col-md-1">
                                             <a class="btn btn-default" href="@Url.Action("ActionStat", "Statistic", new { actionId = item.ActionId })" role="button">
                                                 <span class="glyphicon glyphicon-stats"></span>
                                             </a>
                                         </div>
+                                        <br /><br />
                                         <input class="tgsw-action" type="checkbox" value="@item.ResultParameters.First().ToString()" title="@item.ActionId.ToString()" id='tgsw-@item.ActionId.ToString()'>
-                                     </div>
+                                    </div>
                                 </div>
                             </div>
                         }
@@ -360,9 +362,7 @@
                                 height="450"
                                 frameborder="0"
                                 style="border:0"
-                                src="https://www.google.com/maps/embed/v1/view?key=AIzaSyCoh6OpbGQK7bY59n2qoMF4TvNKfTIEkWQ&center=@Model.DeviceLatCordStr(),@Model.DeviceLngCordStr()&zoom=18&maptype=satellite">
-
-                        </iframe>
+                                src="https://www.google.com/maps/embed/v1/view?key=AIzaSyCoh6OpbGQK7bY59n2qoMF4TvNKfTIEkWQ&center=@Model.DeviceLatCordStr(),@Model.DeviceLngCordStr()&zoom=18&maptype=satellite"></iframe>
 
                     </div>
                 </div>

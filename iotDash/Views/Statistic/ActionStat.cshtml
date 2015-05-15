@@ -20,7 +20,7 @@
 <script>
 
     $(function () {
-        alert("loading chart");
+       // alert("loading chart");
 
         var ctx = document.getElementById("SklepChart").getContext("2d");
         var data = {
@@ -50,7 +50,7 @@
              ]
         }
 
-        alert("setting chart");
+       // alert("setting chart");
 
     var myLineChart = new Chart(ctx).Line(data);
     legend(document.getElementById("SklepChartLegend"), data);

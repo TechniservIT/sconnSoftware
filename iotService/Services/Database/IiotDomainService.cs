@@ -258,17 +258,18 @@ namespace iotServiceProvider
 
 
         /************************  CUSTOM CROSS QUERY ********************/
-        [OperationContract]
-        [ApplyDataContractResolver]
+        [OperationContract][ApplyDataContractResolver]
         Device DeviceWithEndpoint(EndpointInfo endp);
 
+
+        /************************  ADD/REMOVE WITH PARAM ********************/
+        [OperationContract][ApplyDataContractResolver]
+        Device DeviceAddWithParams(string SiteId, string Name, string Host, string Port, string Login, string Pass, string Type, string Loc, string Prot);
+  
 
 
     }
 
-
-
-  
 
 
 

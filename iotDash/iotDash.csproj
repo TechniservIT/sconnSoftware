@@ -609,9 +609,6 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Migrations\201501091547591_identity init +domain.resx">
       <DependentUpon>201501091547591_identity init +domain.cs</DependentUpon>
     </EmbeddedResource>

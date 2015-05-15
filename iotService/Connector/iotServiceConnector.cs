@@ -1,4 +1,5 @@
 ﻿using iotServiceProvider;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,8 @@ namespace iotDash.Service
 
         private DuplexChannelFactory<IDeviceEventService> EventServiceFactory;
 
+        private Logger nlogger = LogManager.GetCurrentClassLogger();
+
 
         private bool VerifyChannel(ChannelFactory<IiotDomainService> fact)
         {
@@ -31,9 +34,9 @@ namespace iotDash.Service
             }
             catch (Exception e)
             {
+                nlogger.ErrorException(e.Message,e);
                 return null; 
             }
-  
         }
 
         public IDeviceEventService GetEventClient(InstanceContext context)
@@ -46,6 +49,7 @@ namespace iotDash.Service
             }
             catch (Exception e)
             {
+                nlogger.ErrorException(e.Message, e);
                 return null;           
             }
         }

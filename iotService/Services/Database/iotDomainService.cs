@@ -1,6 +1,7 @@
 ﻿using iotDatabaseConnector.DAL.POCO.Device.Notify;
 using iotDbConnector.DAL;
 using iotServiceProvider.NET.Protocols;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,8 @@ namespace iotServiceProvider
     public class iotDomainService : IiotDomainService
     {
 
+        private Logger nlogger = LogManager.GetCurrentClassLogger();
+
         public iotDomain GetDomainWithName(string name)
         {
             try
@@ -27,6 +30,7 @@ namespace iotServiceProvider
             }
             catch (Exception e)
             {
+                nlogger.ErrorException(e.Message, e);
                 return new iotDomain();
             }
         }
@@ -41,6 +45,7 @@ namespace iotServiceProvider
             }
             catch (Exception e)
             {
+                nlogger.ErrorException(e.Message, e);
                 return new iotDomain();
             }            
         }
@@ -57,6 +62,7 @@ namespace iotServiceProvider
             }
             catch (Exception e)
             {
+                nlogger.ErrorException(e.Message, e);
                 return false;
             }
         }
@@ -75,6 +81,7 @@ namespace iotServiceProvider
             }
             catch (Exception e)
             {
+                nlogger.ErrorException(e.Message, e);
                 return false;
             }
         
@@ -91,6 +98,7 @@ namespace iotServiceProvider
             }
             catch (Exception e)
             {
+                nlogger.ErrorException(e.Message, e);
                 return false;
             }
         }
@@ -106,6 +114,7 @@ namespace iotServiceProvider
             }
             catch (Exception e)
             {
+                nlogger.ErrorException(e.Message, e);
                 return false;
             }
         }
@@ -121,6 +130,7 @@ namespace iotServiceProvider
             }
             catch (Exception e)
             {
+                nlogger.ErrorException(e.Message, e);
                 return false;
             }
         }
@@ -136,6 +146,7 @@ namespace iotServiceProvider
             }
             catch (Exception e)
             {
+                nlogger.ErrorException(e.Message, e);
                 return false;
             }
         }
@@ -151,6 +162,7 @@ namespace iotServiceProvider
             }
             catch (Exception e)
             {
+                nlogger.ErrorException(e.Message, e);
                 return false;
             }
         }
@@ -166,6 +178,7 @@ namespace iotServiceProvider
             }
             catch (Exception e)
             {
+                nlogger.ErrorException(e.Message, e);
                 return false;
             }
         }
@@ -181,6 +194,7 @@ namespace iotServiceProvider
             }
             catch (Exception e)
             {
+                nlogger.ErrorException(e.Message, e);
                 return false;
             }
         }
@@ -196,10 +210,10 @@ namespace iotServiceProvider
             }
             catch (Exception e)
             {
+                nlogger.ErrorException(e.Message, e);
                 return false;
             }
         }
-
 
         public bool EndpointAdd(EndpointInfo endp)
         {
@@ -211,6 +225,7 @@ namespace iotServiceProvider
             }
             catch (Exception e)
             {
+                nlogger.ErrorException(e.Message, e);
                 return false;
             }
         }
@@ -230,6 +245,7 @@ namespace iotServiceProvider
             }
             catch (Exception e)
             {
+                nlogger.ErrorException(e.Message, e);
                 return new List<iotDomain>();
             }
         }
@@ -246,6 +262,7 @@ namespace iotServiceProvider
             }
             catch (Exception e)
             {
+                nlogger.ErrorException(e.Message, e);
                 return new List<Site>();
             }
         }
@@ -261,6 +278,7 @@ namespace iotServiceProvider
             }
             catch (Exception e)
             {
+                nlogger.ErrorException(e.Message, e);
                 return new List<Device>();
             }
         }
@@ -276,6 +294,7 @@ namespace iotServiceProvider
             }
             catch (Exception e)
             {
+                nlogger.ErrorException(e.Message, e);
                 return new List<DeviceAction>();
             }
         }
@@ -291,6 +310,7 @@ namespace iotServiceProvider
             }
             catch (Exception e)
             {
+                nlogger.ErrorException(e.Message, e);
                 return new List<DeviceProperty>();
             }
         }
@@ -306,6 +326,7 @@ namespace iotServiceProvider
             }
             catch (Exception e)
             {
+                nlogger.ErrorException(e.Message, e);
                 return new List<DeviceParameter>();
             }
         }
@@ -321,6 +342,7 @@ namespace iotServiceProvider
             }
             catch (Exception e)
             {
+                nlogger.ErrorException(e.Message, e);
                 return new List<Location>();
             }
         }
@@ -336,6 +358,7 @@ namespace iotServiceProvider
             }
             catch (Exception e)
             {
+                nlogger.ErrorException(e.Message, e);
                 return new List<DeviceType>();
             }
         }
@@ -351,6 +374,7 @@ namespace iotServiceProvider
             }
             catch (Exception e)
             {
+                nlogger.ErrorException(e.Message, e);
                 return new List<ActionParameter>();
             }
         }
@@ -366,6 +390,7 @@ namespace iotServiceProvider
             }
             catch (Exception e)
             {
+                nlogger.ErrorException(e.Message, e);
                 return new List<DeviceCredentials>();
             }
         }
@@ -380,6 +405,7 @@ namespace iotServiceProvider
             }
             catch (Exception e)
             {
+                nlogger.ErrorException(e.Message, e);
                 return new List<EndpointInfo>();
             }
         }
@@ -399,6 +425,7 @@ namespace iotServiceProvider
             }
             catch (Exception e)
             {
+                nlogger.ErrorException(e.Message, e);
                 return new Site();
             }
         }
@@ -417,6 +444,7 @@ namespace iotServiceProvider
             }
             catch (Exception e)
             {
+                nlogger.ErrorException(e.Message, e);
                 return new Device();
             }
         }
@@ -431,6 +459,7 @@ namespace iotServiceProvider
             }
             catch (Exception e)
             {
+                nlogger.ErrorException(e.Message, e);
                 return new DeviceAction();
             }
         }
@@ -445,6 +474,7 @@ namespace iotServiceProvider
             }
             catch (Exception e)
             {
+                nlogger.ErrorException(e.Message, e);
                 return new DeviceProperty();
             }
         }
@@ -459,6 +489,7 @@ namespace iotServiceProvider
             }
             catch (Exception e)
             {
+                nlogger.ErrorException(e.Message, e);
                 return new DeviceParameter();
             }
         }
@@ -473,6 +504,7 @@ namespace iotServiceProvider
             }
             catch (Exception e)
             {
+                nlogger.ErrorException(e.Message, e);
                 return new iotDomain();
             }
         }
@@ -489,6 +521,7 @@ namespace iotServiceProvider
             }
             catch (Exception e)
             {
+                nlogger.ErrorException(e.Message, e);
                 return new Location();
             }
         }
@@ -503,6 +536,7 @@ namespace iotServiceProvider
             }
             catch (Exception e)
             {
+                nlogger.ErrorException(e.Message, e);
                 return new DeviceType();
             }
         }
@@ -517,6 +551,7 @@ namespace iotServiceProvider
             }
             catch (Exception e)
             {
+                nlogger.ErrorException(e.Message, e);
                 return new ActionParameter();
             }
         }
@@ -530,6 +565,7 @@ namespace iotServiceProvider
             }
             catch (Exception e)
             {
+                nlogger.ErrorException(e.Message, e);
                 return new DeviceCredentials();
             }
         }
@@ -543,6 +579,7 @@ namespace iotServiceProvider
             }
             catch (Exception e)
             {
+                nlogger.ErrorException(e.Message, e);
                 return new EndpointInfo();
             }
         }
@@ -561,6 +598,7 @@ namespace iotServiceProvider
             }
             catch (Exception e)
             {
+                nlogger.ErrorException(e.Message, e);
                 return false;
             }
         }
@@ -579,6 +617,7 @@ namespace iotServiceProvider
             }
             catch (Exception e)
             {
+                nlogger.ErrorException(e.Message, e);
                 return false;
             }
         }
@@ -594,6 +633,7 @@ namespace iotServiceProvider
             }
             catch (Exception e)
             {
+                nlogger.ErrorException(e.Message, e);
                 return false;
             }
         }
@@ -609,6 +649,7 @@ namespace iotServiceProvider
             }
             catch (Exception e)
             {
+                nlogger.ErrorException(e.Message, e);
                 return false;
             }
         }
@@ -624,6 +665,7 @@ namespace iotServiceProvider
             }
             catch (Exception e)
             {
+                nlogger.ErrorException(e.Message, e);
                 return false;
             }
         }
@@ -639,6 +681,7 @@ namespace iotServiceProvider
             }
             catch (Exception e)
             {
+                nlogger.ErrorException(e.Message, e);
                 return false;
             }
         }
@@ -654,6 +697,7 @@ namespace iotServiceProvider
             }
             catch (Exception e)
             {
+                nlogger.ErrorException(e.Message, e);
                 return false;
             }
         }
@@ -669,6 +713,7 @@ namespace iotServiceProvider
             }
             catch (Exception e)
             {
+                nlogger.ErrorException(e.Message, e);
                 return false;
             }
         }
@@ -684,6 +729,7 @@ namespace iotServiceProvider
             }
             catch (Exception e)
             {
+                nlogger.ErrorException(e.Message, e);
                 return false;
             }
         }
@@ -699,6 +745,7 @@ namespace iotServiceProvider
             }
             catch (Exception e)
             {
+                nlogger.ErrorException(e.Message, e);
                 return false;
             }
         }
@@ -714,6 +761,7 @@ namespace iotServiceProvider
             }
             catch (Exception e)
             {
+                nlogger.ErrorException(e.Message, e);
                 return false;
             }
         }
@@ -734,6 +782,7 @@ namespace iotServiceProvider
             }
             catch (Exception e)
             {
+                nlogger.ErrorException(e.Message, e);
                 return false;
             }
         }
@@ -749,6 +798,7 @@ namespace iotServiceProvider
             }
             catch (Exception e)
             {
+                nlogger.ErrorException(e.Message, e);
                 return false;
             }
         }
@@ -764,6 +814,7 @@ namespace iotServiceProvider
             }
             catch (Exception e)
             {
+                nlogger.ErrorException(e.Message, e);
                 return false;
             }
         }
@@ -779,6 +830,7 @@ namespace iotServiceProvider
             }
             catch (Exception e)
             {
+                nlogger.ErrorException(e.Message, e);
                 return false;
             }
         }
@@ -794,6 +846,7 @@ namespace iotServiceProvider
             }
             catch (Exception e)
             {
+                nlogger.ErrorException(e.Message, e);
                 return false;
             }
         }
@@ -809,6 +862,7 @@ namespace iotServiceProvider
             }
             catch (Exception e)
             {
+                nlogger.ErrorException(e.Message, e);
                 return false;
             }
         }
@@ -824,6 +878,7 @@ namespace iotServiceProvider
             }
             catch (Exception e)
             {
+                nlogger.ErrorException(e.Message, e);
                 return false;
             }
         }
@@ -839,6 +894,7 @@ namespace iotServiceProvider
             }
             catch (Exception e)
             {
+                nlogger.ErrorException(e.Message, e);
                 return false;
             }
         }
@@ -854,6 +910,7 @@ namespace iotServiceProvider
             }
             catch (Exception e)
             {
+                nlogger.ErrorException(e.Message, e);
                 return false;
             }
         }
@@ -869,6 +926,7 @@ namespace iotServiceProvider
             }
             catch (Exception e)
             {
+                nlogger.ErrorException(e.Message, e);
                 return false;
             }
         }
@@ -884,6 +942,7 @@ namespace iotServiceProvider
             }
             catch (Exception e)
             {
+                nlogger.ErrorException(e.Message, e);
                 return false;
             }
         }
@@ -901,6 +960,7 @@ namespace iotServiceProvider
             }
             catch (Exception e)
             {
+                nlogger.ErrorException(e.Message, e);
                 return false;
             }
         }
@@ -915,6 +975,7 @@ namespace iotServiceProvider
             }
             catch (Exception e)
             {
+                nlogger.ErrorException(e.Message, e);
                 return false;
             }
         }
@@ -932,6 +993,7 @@ namespace iotServiceProvider
             }
             catch (Exception e)
             {
+                nlogger.ErrorException(e.Message, e);
                 return false;
             }
         }
@@ -940,8 +1002,6 @@ namespace iotServiceProvider
 
 
         /************************  CUSTOM CROSS QUERY ********************/
-        [OperationContract]
-        [ApplyDataContractResolver]
         public Device DeviceWithEndpoint(EndpointInfo endp)
         {
             try
@@ -952,9 +1012,92 @@ namespace iotServiceProvider
             }
             catch (Exception e)
             {
+                nlogger.ErrorException(e.Message, e);
                 return new Device();
             }
         }
+
+
+
+        /************************  ADD/REMOVE WITH PARAM ********************/
+
+        public Device DeviceAddWithParams(string SiteId, string Name, string Host, string Port, string Login, string Pass, string Type, string Loc, string Prot)
+        {
+            try
+            {
+                iotContext cont = new iotContext();
+                int LocId = int.Parse(Loc);
+                int DevTypeId = int.Parse(Type);
+                Device ndev = new Device();
+                ndev.DeviceName = Name;
+                List<DeviceType> types = cont.Types.ToList();
+                DeviceType type = (from t in types
+                                   where t.DeviceTypeId == DevTypeId
+                                   select t).First();
+                List<Location> locs = cont.Locations.ToList();
+                Location loc = (from l in locs
+                                where l.LocationId == LocId
+                                select l).First();
+                ndev.Type = type;
+                ndev.DeviceLocation = loc;
+                DeviceCredentials cred = new DeviceCredentials();
+                cred.PasswordExpireDate = DateTime.Now.AddYears(100);
+                cred.PermissionExpireDate = DateTime.Now.AddYears(100);
+                cred.Password = Pass;
+                cred.Username = Login;
+                cont.Credentials.Add(cred);
+
+                List<DeviceCredentials> creds = cont.Credentials.ToList();
+                DeviceCredentials storedCredentials = (from c in creds
+                                                       where c.Username.Equals(cred.Username)
+                                                       select c).First();
+
+                EndpointInfo info = new EndpointInfo();
+                info.Hostname = Host;
+                info.Port = int.Parse(Port);
+
+                //TODO
+                //CommProtocolType protocol = (CommProtocolType)Prot; //int.Parse(Prot);
+                //info.EnableProtocolSupport(protocol);
+                info.SupportsSconnProtocol = true;
+                cont.Endpoints.Add(info);
+
+                List<EndpointInfo> endps = cont.Endpoints.ToList();
+                EndpointInfo storedInfo = (from i in endps
+                                           where i.Hostname.Equals(info.Hostname) &&
+                                           i.Port == info.Port
+                                           select i).First();
+                ndev.Credentials = storedCredentials;
+                ndev.EndpInfo = storedInfo;
+
+                int siteIdNum = int.Parse(SiteId);
+
+                List<Site> sites = cont.Sites.ToList();
+                Site siteToAppend = (from s in sites
+                                     where s.SiteId == siteIdNum
+                                     select s).First();
+                ndev.Site = siteToAppend;
+                cont.Devices.Add(ndev);
+                cont.SaveChanges();
+
+                List<Device> devs = cont.Devices.ToList();
+                Device stored = (from d in devs
+                                 where d.DeviceName.Equals(ndev.DeviceName) &&
+                                 d.EndpInfo.Hostname.Equals(ndev.EndpInfo.Hostname)
+                                 select d).FirstOrDefault();
+
+                //update device
+                UpdateDeviceProperties(stored); 
+
+                return stored;
+            }
+            catch (Exception e)
+            {
+                nlogger.ErrorException(e.Message, e);
+                return null;
+            }
+        }
+
 
 
     }

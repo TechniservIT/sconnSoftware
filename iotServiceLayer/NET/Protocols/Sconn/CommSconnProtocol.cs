@@ -6,13 +6,16 @@ using sconnConnector;
 using System.Threading.Tasks;
 using iotDbConnector;
 using iotDbConnector.DAL;
+using NLog;
 
 namespace iotServiceProvider
 {
     public class CommSconnProtocol :ICommProtocol
     {
         private Device protocolDevice;
-        
+
+        private Logger nlogger = LogManager.GetCurrentClassLogger();
+
         private sconnSite site { get; set; }
 
         private sconnCfgMngr cfgMngr { get; set; }
@@ -61,7 +64,8 @@ namespace iotServiceProvider
                 }
             }
             catch (Exception e)
-            {    
+            {
+                nlogger.ErrorException(e.Message, e);
             }
             return false;
         }
@@ -79,6 +83,7 @@ namespace iotServiceProvider
             }
             catch (Exception e)
             {
+                nlogger.ErrorException(e.Message, e);
                 return false;
             }
 
@@ -124,6 +129,7 @@ namespace iotServiceProvider
             }
             catch (Exception e)
             {
+                nlogger.ErrorException(e.Message, e);
                 return false;
               
             }
@@ -152,7 +158,7 @@ namespace iotServiceProvider
             }
             catch (Exception e)
             {
-
+                nlogger.ErrorException(e.Message, e);
                 return 0;
             }
 
@@ -173,6 +179,7 @@ namespace iotServiceProvider
             }
             catch (Exception e)
             {
+                nlogger.ErrorException(e.Message, e);
                 return -1;
             }
 
@@ -226,6 +233,7 @@ namespace iotServiceProvider
             }
             catch (Exception e)
             {
+                nlogger.ErrorException(e.Message, e);
                 return 0;
             }
  
@@ -247,7 +255,7 @@ namespace iotServiceProvider
             }
             catch (Exception e)
             {
-             
+                nlogger.ErrorException(e.Message, e);
             }
         }
 
@@ -276,8 +284,7 @@ namespace iotServiceProvider
             }
             catch (Exception e)
             {
-                
-             
+                nlogger.ErrorException(e.Message, e);
             }
         }
 
@@ -304,6 +311,7 @@ namespace iotServiceProvider
             }
             catch (Exception e)
             {
+                nlogger.ErrorException(e.Message, e);
                 return "";
             
             }    
@@ -351,7 +359,7 @@ namespace iotServiceProvider
             }
             catch (Exception e)
             {
-
+                nlogger.ErrorException(e.Message, e);
                 return "";
             }
 
@@ -365,6 +373,7 @@ namespace iotServiceProvider
             }
             catch (Exception e)
             {
+                nlogger.ErrorException(e.Message, e);
                 return new ParameterType();
             }
 
@@ -401,7 +410,7 @@ namespace iotServiceProvider
             }
             catch (Exception e)
             {
-                
+                nlogger.ErrorException(e.Message, e);
             }
 
 
@@ -455,8 +464,7 @@ namespace iotServiceProvider
             }
             catch (Exception e)
             {
-                
-   
+                nlogger.ErrorException(e.Message, e);
             }
 
         }
@@ -578,6 +586,7 @@ namespace iotServiceProvider
             }
             catch (Exception e)
             {
+                nlogger.ErrorException(e.Message, e);
                 return false; 
             }
 
@@ -606,14 +615,14 @@ namespace iotServiceProvider
             }
             catch (Exception e)
             {
+                nlogger.ErrorException(e.Message, e);
                 return false;
-             
             }
         }
 
         public Task PerformActionAsync(DeviceAction action)
         {
-            try
+            try   
             {
                 Task t = Task.Factory.StartNew(() =>
                 {
@@ -627,6 +636,7 @@ namespace iotServiceProvider
             }
             catch (Exception e)
             {
+                nlogger.ErrorException(e.Message, e);
                 return null;
             }
         }
