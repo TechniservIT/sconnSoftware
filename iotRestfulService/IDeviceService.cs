@@ -18,9 +18,9 @@ namespace iotRestfulService
         [WebGet(UriTemplate = "Device/{id}")]
         String GetDevice(string id);
 
+        [WebGet(UriTemplate = "Devices")]
         [OperationContract]
-        [WebGet]
-        List<Device> GetAllDevice();
+        String GetAllDevices();
 
 
         [OperationContract]
@@ -44,6 +44,17 @@ namespace iotRestfulService
         [OperationContract]
         [WebInvoke(UriTemplate = "Device/Delete/{id}", Method = "DELETE")]
         bool DeleteDevice(string Id);
+
+
+
+        [OperationContract]
+        [WebGet(UriTemplate = "Auth/Public")]
+        string GetAuthTokenPublic();
+
+        [OperationContract]
+        [WebGet(UriTemplate = "Auth/Private/{uname}:{upass}")]
+        string GetAuthToken(string uname, string upass);
+
     }
 
 

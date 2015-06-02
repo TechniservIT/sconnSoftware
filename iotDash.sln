@@ -72,6 +72,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sconnConnector", "sconnConn
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iotRestfulService", "iotRestfulService\iotRestfulService.csproj", "{4B694828-A1A7-46AC-B220-8507D277D1BB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "restfulPerformanceTest", "restfulPerformanceTest\restfulPerformanceTest.csproj", "{84679219-862A-4B68-B36F-CA0A71600B36}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -146,6 +148,10 @@ Global
 		{4B694828-A1A7-46AC-B220-8507D277D1BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4B694828-A1A7-46AC-B220-8507D277D1BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4B694828-A1A7-46AC-B220-8507D277D1BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84679219-862A-4B68-B36F-CA0A71600B36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84679219-862A-4B68-B36F-CA0A71600B36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84679219-862A-4B68-B36F-CA0A71600B36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84679219-862A-4B68-B36F-CA0A71600B36}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -177,5 +183,6 @@ Global
 		{C35DC1DD-78C7-49FF-BE3A-CBCBBCA2335A} = {9A63916A-4F3F-4691-A287-C04BCC016927}
 		{09C8A8F0-F85A-4534-922E-85E14EC32725} = {8FA86EE5-EFDF-4129-87EE-93F5C8376B93}
 		{4B694828-A1A7-46AC-B220-8507D277D1BB} = {2051C7F5-3D2D-4462-B0FA-F2AAB905CF46}
+		{84679219-862A-4B68-B36F-CA0A71600B36} = {4AAFA6B4-0770-44C0-B525-805CAA1CA0C9}
 	EndGlobalSection
 EndGlobal

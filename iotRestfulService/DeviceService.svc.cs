@@ -9,6 +9,8 @@ using System.Text;
 using Newtonsoft.Json;
 using System.IO;
 using System.Runtime.Serialization.Json;
+using System.Collections.Specialized;
+using iotRestfulService.Security.Tokenizer;
 
 namespace iotRestfulService
 {
@@ -51,12 +53,17 @@ namespace iotRestfulService
         }
 
 
-        public List<Device> GetAllDevice()
+
+        public String GetAllDevices()
         {
             try
             {
                 iotRepository<Device> repo = new iotRepository<Device>();
-                return repo.GetAll().ToList();
+                iotContext cont = new iotContext();
+                cont.Configuration.ProxyCreationEnabled = false;
+                cont.Configuration.LazyLoadingEnabled = false;
+                List<Device> devs = cont.Devices.AsNoTracking().ToList(); //repo.GetById(DeviceId);
+                return JsonConvert.SerializeObject(devs);
 
             }
             catch (Exception ex)
@@ -114,6 +121,24 @@ namespace iotRestfulService
                 throw new FaultException(ex.Message);
             }
         }
+
+
+
+
+        /*************   AUTH ***************/
+
+        public string GetAuthTokenPublic()
+        {
+            TokenProvider provider = new TokenProvider();
+            return provider.CreateAuthenticationTokenMs();
+        }
+
+        public string GetAuthToken(string uname, string upass)
+        {
+            TokenProvider provider = new TokenProvider();
+            return provider.CreateAuthenticationTokenMs();
+        }
+
 
 
     }

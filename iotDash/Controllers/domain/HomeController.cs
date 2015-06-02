@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using iotDash.Service;
 using iotServiceProvider;
 using iotDbConnector.DAL;
+using System.Web.UI;
 
 namespace iotDash.Controllers
 {
@@ -33,13 +34,13 @@ namespace iotDash.Controllers
             this.UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(this.ApplicationDbContext));
         }
 
-
-
+        [OutputCache(Duration = 100, Location=OutputCacheLocation.ServerAndClient, VaryByParam = "none")]
         public ActionResult Index()
         {
             return View();
         }
 
+        [OutputCache(Duration = 100, Location = OutputCacheLocation.ServerAndClient, VaryByParam = "none")]
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
@@ -47,6 +48,7 @@ namespace iotDash.Controllers
             return View();
         }
 
+         [OutputCache(Duration = 100, Location = OutputCacheLocation.ServerAndClient, VaryByParam = "none")]
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
@@ -56,6 +58,7 @@ namespace iotDash.Controllers
 
 
         [Authorize]
+        [OutputCache(Duration = 100, Location = OutputCacheLocation.ServerAndClient, VaryByParam = "none")]
         public ActionResult IOT()
         {
             try

@@ -8,6 +8,7 @@ using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
 
 namespace iotDash.Controllers
 {
@@ -16,6 +17,7 @@ namespace iotDash.Controllers
 	{
 		//
 		// GET: /Location/
+		[OutputCache(Duration = 10, Location = OutputCacheLocation.Any, VaryByParam = "none")]
 		public ActionResult Index()
 		{
 			IiotDomainService cl = new iotServiceConnector().GetDomainClient();
