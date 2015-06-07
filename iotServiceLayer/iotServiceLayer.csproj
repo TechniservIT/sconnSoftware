@@ -38,8 +38,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CoAP.NET">
-      <HintPath>External\Protocols\MQTT\CoAP.NET.dll</HintPath>
+    <Reference Include="CoAP.NET, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e2c10a743037308b, processorArchitecture=MSIL">
+      <HintPath>..\packages\CoAP.1.0.0\lib\net40\CoAP.NET.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

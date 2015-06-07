@@ -16,10 +16,11 @@ namespace iotDbConnector.DAL
     
     public  class  iotContext : DbContext
     {
-        public iotContext()
+        public iotContext() :base("DefaultConnection")
         {
             this.Configuration.ProxyCreationEnabled = true;
             this.Configuration.LazyLoadingEnabled = true;
+            
         }
 
         public override int SaveChanges()

@@ -3,6 +3,7 @@ using iotRestfulService.Security.Tokenizer;
 using MongoDB.Driver;
 using Newtonsoft.Json;
 using NLog;
+using Raven.Client.Embedded;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -64,6 +65,11 @@ namespace iotDeviceService
                 var client = new MongoClient("mongodb://localhost:27017");
                 var database = client.GetDatabase("DeviceTokens");
                 var collection = database.GetCollection<string>("tokens");
+
+                var documentStore = new EmbeddableDocumentStore
+                {
+                    DataDirectory = "Data"
+                };
 
                 return "";
             }

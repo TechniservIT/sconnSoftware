@@ -60,10 +60,16 @@ namespace iotDash
 
                         IiotDomainService cl = new iotServiceConnector().GetDomainClient();
                         iotDomain domain = cl.GetDomainWithId(currentUser.DomainId);
+                    if(domain != null)
+                    {
                         Session["AppDomain"] = domain.DomainName;
-
-                    await SignInAsync(user, model.RememberMe);
-                    return RedirectToLocal(returnUrl);
+                        await SignInAsync(user, model.RememberMe);
+                        return RedirectToLocal(returnUrl);
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Invalid domain.");
+                    }
                 }
                 else
                 {

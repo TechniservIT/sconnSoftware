@@ -83,9 +83,15 @@ namespace iotDash.Controllers
 
                         IiotDomainService cl = new iotServiceConnector().GetDomainClient();
                         iotDomain domain = cl.GetDomainWithId(currentUser.DomainId);
-                        Session["AppDomain"] = domain.DomainName;
-
-                        return RedirectToAction("Index", "Dashboard", new { app = domain.DomainName });  //userDomain
+                        if (domain != null)
+                        {
+                            Session["AppDomain"] = domain.DomainName;
+                            return RedirectToAction("Index", "Dashboard", new { app = domain.DomainName });  //userDomain
+                        }
+                        else
+                        {
+                            return RedirectToAction("Login", "Account");
+                        }
                     }
                     else
                     {
