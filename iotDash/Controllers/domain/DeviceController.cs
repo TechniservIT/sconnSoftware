@@ -80,15 +80,15 @@ namespace iotDash.Controllers
 				//TODO verify param
 				IiotDomainService cl = new iotServiceConnector().GetDomainClient();
 				Device dev = cl.DeviceAddWithParams(SiteId, Name, Host, Port, Login, Pass, Type, Loc, Prot);
-                if (dev != null)
-                {
-                    return "Success";       
-                }
-                else
-                {
-                    return "Error";       
-                }
-            }
+				if (dev != null)
+				{
+					return "Success";       
+				}
+				else
+				{
+					return "Error";       
+				}
+			}
 			catch (Exception e)
 			{
 				return "Error";        

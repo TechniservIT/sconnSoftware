@@ -1046,6 +1046,7 @@ namespace iotServiceProvider
                 cred.Password = Pass;
                 cred.Username = Login;
                 cont.Credentials.Add(cred);
+                cont.SaveChanges();
 
                 List<DeviceCredentials> creds = cont.Credentials.ToList();
                 DeviceCredentials storedCredentials = (from c in creds
@@ -1061,6 +1062,7 @@ namespace iotServiceProvider
                 //info.EnableProtocolSupport(protocol);
                 info.SupportsSconnProtocol = true;
                 cont.Endpoints.Add(info);
+                cont.SaveChanges();
 
                 List<EndpointInfo> endps = cont.Endpoints.ToList();
                 EndpointInfo storedInfo = (from i in endps

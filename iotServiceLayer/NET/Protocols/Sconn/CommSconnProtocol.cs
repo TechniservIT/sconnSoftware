@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using iotDbConnector;
 using iotDbConnector.DAL;
 using NLog;
+using System.Diagnostics;
 
 namespace iotServiceProvider
 {
@@ -477,8 +478,15 @@ namespace iotServiceProvider
                 //iotConnector connt = new iotConnector();
                 //Device edited = connt.DeviceList().Where(n => n.DeviceId == dev.DeviceId).First();
                 //iotRepository<Device> devrep = new iotRepository<Device>();
+                Stopwatch watch = new Stopwatch();
+
+
+                watch.Start();
                 iotContext cont = new iotContext();
                 Device edited = cont.Devices.Where(d => d.DeviceId == dev.DeviceId).First();  // devrep.GetById(dev.DeviceId);
+                watch.Stop();
+                Debug.WriteLine("Execution time : " + watch.ElapsedMilliseconds + " ms @ device query");
+                watch.Reset();
 
                 int devAddr = 0;
                 if ( site.siteCfg.deviceNo == 0){
@@ -491,6 +499,8 @@ namespace iotServiceProvider
                 int inputs = site.siteCfg.deviceConfigs[devAddr].memCFG[ipcDefines.mAdrInputsNO];
                 if (edited.Properties.Count != inputs)
                 {
+                    watch.Start();
+
                     //clear current properies
                     foreach (var item in edited.Properties)
                     {
@@ -506,33 +516,75 @@ namespace iotServiceProvider
                         maper.SeqNumber = i;
                         AddPropertyForMapperAndDevice(maper,   edited, devAddr);
                     }
+
+                    watch.Stop();
+                    Debug.WriteLine("Execution time : " + watch.ElapsedMilliseconds + " ms @ readd prop");
+                    watch.Reset();
                 }
                 else //update
                 {
+                    watch.Reset();
+                    watch.Start();
+
                     foreach (var item in edited.Properties)
                     {
                         //get parameter
-                        DeviceParameter param = item.ResultParameters.ElementAt(0);
-                        param.Value = sconnConfigToStringVal(param.sconnMappers.ElementAt(0), site.siteCfg.deviceConfigs[devAddr]);
+                        Stopwatch watch4 = new Stopwatch();
+                        watch4.Start();
+                        DeviceParameter param = (from r in item.ResultParameters
+                                                 select r).Single();    //item.ResultParameters.FirstOrDefault();
+                        watch4.Stop();
+                        Debug.WriteLine("Execution time : " + watch4.ElapsedMilliseconds + " ms @ prop update dev param query");
+                        
+                        watch4.Restart();
+                        param.Value = sconnConfigToStringVal(param.sconnMappers.FirstOrDefault(), site.siteCfg.deviceConfigs[devAddr]);
+                        watch4.Stop();
+                        Debug.WriteLine("Execution time : " + watch4.ElapsedMilliseconds + " ms @ prop update dev param parse");
+                        watch4.Reset();
 
                         if (param != null)
                         {
                             //get input mapper
+                            Stopwatch watch2 = new Stopwatch();
+                            watch2.Start();
                             sconnConfigMapper maper = (from cm in param.sconnMappers
                                                        select cm).FirstOrDefault();
+                            watch2.Stop();
+                            Debug.WriteLine("Execution time : " + watch2.ElapsedMilliseconds + " ms @ prop update mapper query");
+                            watch2.Reset();
+
+                            Stopwatch watch3 = new Stopwatch();
+                            watch3.Start();
                             if (maper != null)
                             {
                                 param.Value = sconnConfigToStringVal(maper, site.siteCfg.deviceConfigs[devAddr]);
                             }
+                            watch3.Stop();
+                            Debug.WriteLine("Execution time : " + watch3.ElapsedMilliseconds + " ms @ prop update cfg to str");
+                            watch3.Reset();
+
+                           
                         }
                     }
+                    Stopwatch watch1 = new Stopwatch();
+                    watch1.Start();
                     cont.SaveChanges(); //apply
+                    watch1.Stop();
+                    Debug.WriteLine("Execution time : " + watch1.ElapsedMilliseconds + " ms @ prop update save");
+                    watch1.Reset();
+   
+                    watch.Stop();
+                    Debug.WriteLine("Execution time : " + watch.ElapsedMilliseconds + " ms @ prop update");
+                    watch.Reset();
+
                 }
 
                 int outputs = site.siteCfg.deviceConfigs[devAddr].memCFG[ipcDefines.mAdrOutputsNO];
                 int relays = site.siteCfg.deviceConfigs[devAddr].memCFG[ipcDefines.mAdrRelayNO];
                 if (edited.Actions.Count != outputs + relays)
                 {
+                    watch.Start();
+
                     //remove existing
                     if (edited.Actions.Count > 0)
                     {
@@ -559,10 +611,16 @@ namespace iotServiceProvider
                         maper.ConfigType = ipcDefines.mAdrRelay;
                         maper.SeqNumber = i;
                         AddActionForMapperAndDevice(maper,  edited, devAddr);
-                    } 
+                    }
+
+                    watch.Stop();
+                    Debug.WriteLine("Execution time : " + watch.ElapsedMilliseconds + " ms @ action readd");
+                    watch.Reset();
                 }
                 else
                 {
+                    watch.Start();
+
                     foreach (var item in edited.Actions)
                     {
                         //get action
@@ -581,6 +639,10 @@ namespace iotServiceProvider
                         }
                     }
                     cont.SaveChanges(); //save updates
+
+                    watch.Stop();
+                    Debug.WriteLine("Execution time : " + watch.ElapsedMilliseconds + " ms @ action update");
+                    watch.Reset();
                 }
 
             }
@@ -606,11 +668,32 @@ namespace iotServiceProvider
         {
             try
             {
+                Stopwatch watch = new Stopwatch();
+
                 LoadDevice(action.Device);
+ 
+                watch.Start();
                 UpdateSite();
+                watch.Stop();
+                Debug.WriteLine("Execution time : " + watch.ElapsedMilliseconds + " ms");
+                watch.Reset();
+
                 DeviceActionToConfig(action);
+
+
+                watch.Start();
                 WriteSiteConfig();
+                watch.Stop();
+                Debug.WriteLine("Execution time : " + watch.ElapsedMilliseconds + " ms");
+                watch.Reset();
+
+
+                watch.Start();
                 LoadDeviceActions(action.Device);     //load site config after change
+                watch.Stop();
+                Debug.WriteLine("Execution time : " + watch.ElapsedMilliseconds + " ms");
+                watch.Reset();
+
                 return true;
             }
             catch (Exception e)

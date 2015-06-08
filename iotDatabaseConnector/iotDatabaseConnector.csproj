@@ -111,6 +111,10 @@
     <Compile Include="Migrations\201502022159018_rc.Designer.cs">
       <DependentUpon>201502022159018_rc.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201506080737064_Location domain.cs" />
+    <Compile Include="Migrations\201506080737064_Location domain.Designer.cs">
+      <DependentUpon>201506080737064_Location domain.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Notify\ParameterChangeManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -136,6 +140,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201502022159018_rc.resx">
       <DependentUpon>201502022159018_rc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506080737064_Location domain.resx">
+      <DependentUpon>201506080737064_Location domain.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

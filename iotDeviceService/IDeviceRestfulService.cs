@@ -60,6 +60,16 @@ namespace iotDeviceService
         bool DeleteDevice(string Id);
 
 
+
+        /****** DEV *********/
+        [OperationContract]
+        [WebInvoke(UriTemplate = "Dbo/Clear", Method = "GET")]
+        bool ClearDatabase();
+
+
+       
+
+
     }
 
    

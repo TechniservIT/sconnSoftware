@@ -12,21 +12,10 @@ using iotDatabaseConnector.DAL.POCO.Device.Notify;
 namespace iotDbConnector.DAL
 {
     [DataContract(IsReference = true)]
-    public class DeviceParameter : INotifyPropertyChanged
+    public class DeviceParameter 
     {
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected void OnPropertyChanged(string name)
-        {
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if (handler != null)
-            {
-                handler(this, new PropertyChangedEventArgs(name));
-            }
-        }
-
-
+     
         [DataMember]
         [Key]
         [Required]
@@ -48,7 +37,6 @@ namespace iotDbConnector.DAL
                 if (value != _Value)
                 {
                     _Value = value;
-                    OnPropertyChanged("Value");
                 }
             }
         }
@@ -75,65 +63,6 @@ namespace iotDbConnector.DAL
         [DataMember]
         public virtual List<ParameterChangeHistory> Changes { get; set; }
 
-        public bool AddSconnMapper(sconnConfigMapper mapper)
-        {
-            return false;
-        }
-
-
-        /*
-        public bool ExsistsInDatabaseContext(ApplicationDbContext cont)
-        {
-           // ApplicationDbContext cont = new ApplicationDbContext();
-            try
-            {
-                DeviceParameter self;
-                if (cont.Parameters.Count() > 0)
-                {
-                    self = (from dp in cont.Parameters
-                            where dp.ParameterId == this.ParameterId
-                            select dp).FirstOrDefault();
-                    if (self != null)
-                    {
-                        return true;
-                    }
-                }
-                
-            }
-            catch (Exception e)
-            {
-
-
-            }
-
-            return false;
-        }
-
-        public DeviceParameter CreateWithContext(ApplicationDbContext cont)
-        {
-            try
-            {
-            //    ApplicationDbContext cont = new ApplicationDbContext();
-                if (!this.ExsistsInDatabaseContext(cont))
-                {
-                    cont.Parameters.Add(this);
-                    cont.SaveChanges();
-
-                }
-                DeviceParameter self = (from dp in cont.Parameters
-                                        where dp.ParameterId == this.ParameterId
-                                        select dp).FirstOrDefault();
-                return self;
-            }
-            catch (Exception e)
-            {
-                return new DeviceParameter();
-            }
-
-
-        }
-         
-         */
 
     }
 }

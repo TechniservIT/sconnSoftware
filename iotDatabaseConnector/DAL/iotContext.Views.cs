@@ -11,7 +11,7 @@ using System.Data.Entity.Infrastructure.MappingViews;
 
 [assembly: DbMappingViewCacheTypeAttribute(
     typeof(iotDbConnector.DAL.iotContext),
-    typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySets7eb128cf68ac065988a92cb53e1b3a1412e94d6a95b2acf42638d73fccc7c591))]
+    typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySetsecb847ddeeb3efd788a5e2538b045c30395aabaf70726aef791fea32e4b2b8d8))]
 
 namespace Edm_EntityMappingGeneratedViews
 {
@@ -23,14 +23,14 @@ namespace Edm_EntityMappingGeneratedViews
     /// Implements a mapping view cache.
     /// </summary>
     [GeneratedCode("Entity Framework Power Tools", "0.9.0.0")]
-    internal sealed class ViewsForBaseEntitySets7eb128cf68ac065988a92cb53e1b3a1412e94d6a95b2acf42638d73fccc7c591 : DbMappingViewCache
+    internal sealed class ViewsForBaseEntitySetsecb847ddeeb3efd788a5e2538b045c30395aabaf70726aef791fea32e4b2b8d8 : DbMappingViewCache
     {
         /// <summary>
         /// Gets a hash value computed over the mapping closure.
         /// </summary>
         public override string MappingHashValue
         {
-            get { return "7eb128cf68ac065988a92cb53e1b3a1412e94d6a95b2acf42638d73fccc7c591"; }
+            get { return "ecb847ddeeb3efd788a5e2538b045c30395aabaf70726aef791fea32e4b2b8d8"; }
         }
 
         /// <summary>
@@ -77,12 +77,12 @@ namespace Edm_EntityMappingGeneratedViews
                 return GetView5();
             }
 
-            if (extentName == "CodeFirstDatabase.Site")
+            if (extentName == "CodeFirstDatabase.iotDomain")
             {
                 return GetView6();
             }
 
-            if (extentName == "CodeFirstDatabase.iotDomain")
+            if (extentName == "CodeFirstDatabase.Site")
             {
                 return GetView7();
             }
@@ -192,94 +192,99 @@ namespace Edm_EntityMappingGeneratedViews
                 return GetView28();
             }
 
-            if (extentName == "iotContext.Sites")
+            if (extentName == "iotContext.iotDomain_Locations")
             {
                 return GetView29();
             }
 
-            if (extentName == "iotContext.Site_Domain")
+            if (extentName == "iotContext.Domains")
             {
                 return GetView30();
             }
 
-            if (extentName == "iotContext.Site_siteLocation")
+            if (extentName == "iotContext.Sites")
             {
                 return GetView31();
             }
 
-            if (extentName == "iotContext.Domains")
+            if (extentName == "iotContext.Site_Domain")
             {
                 return GetView32();
             }
 
-            if (extentName == "iotContext.Endpoints")
+            if (extentName == "iotContext.Site_siteLocation")
             {
                 return GetView33();
             }
 
-            if (extentName == "iotContext.Properties")
+            if (extentName == "iotContext.Endpoints")
             {
                 return GetView34();
             }
 
-            if (extentName == "iotContext.DeviceProperty_Device")
+            if (extentName == "iotContext.Properties")
             {
                 return GetView35();
             }
 
-            if (extentName == "iotContext.Parameters")
+            if (extentName == "iotContext.DeviceProperty_Device")
             {
                 return GetView36();
             }
 
-            if (extentName == "iotContext.DeviceParameter_Action")
+            if (extentName == "iotContext.Parameters")
             {
                 return GetView37();
             }
 
-            if (extentName == "iotContext.DeviceParameter_Property")
+            if (extentName == "iotContext.DeviceParameter_Action")
             {
                 return GetView38();
             }
 
-            if (extentName == "iotContext.DeviceParameter_Type")
+            if (extentName == "iotContext.DeviceParameter_Property")
             {
                 return GetView39();
             }
 
-            if (extentName == "iotContext.ParameterChanges")
+            if (extentName == "iotContext.DeviceParameter_Type")
             {
                 return GetView40();
             }
 
-            if (extentName == "iotContext.ParameterChangeHistory_Property")
+            if (extentName == "iotContext.ParameterChanges")
             {
                 return GetView41();
             }
 
-            if (extentName == "iotContext.SconnMappers")
+            if (extentName == "iotContext.ParameterChangeHistory_Property")
             {
                 return GetView42();
             }
 
-            if (extentName == "iotContext.sconnConfigMapper_ActionParam")
+            if (extentName == "iotContext.SconnMappers")
             {
                 return GetView43();
             }
 
-            if (extentName == "iotContext.sconnConfigMapper_Parameter")
+            if (extentName == "iotContext.sconnConfigMapper_ActionParam")
             {
                 return GetView44();
             }
 
-            if (extentName == "iotContext.ParamTypes")
+            if (extentName == "iotContext.sconnConfigMapper_Parameter")
             {
                 return GetView45();
             }
 
-            if (extentName == "iotContext.Types")
+            if (extentName == "iotContext.ParamTypes")
             {
                 return GetView46();
+            }
+
+            if (extentName == "iotContext.Types")
+            {
+                return GetView47();
             }
 
             return null;
@@ -461,16 +466,43 @@ namespace Edm_EntityMappingGeneratedViews
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing Location
-        [CodeFirstDatabaseSchema.Location](T1.Location_LocationId, T1.Location_LocationName, T1.Location_Lat, T1.Location_Lng, T1.Location_LocationVisualRepresentationURL)
+        [CodeFirstDatabaseSchema.Location](T3.Location_LocationId, T3.Location_LocationName, T3.Location_Lat, T3.Location_Lng, T3.Location_LocationVisualRepresentationURL, T3.[Location.Domain_DomainId])
+    FROM (
+        SELECT T1.Location_LocationId, T1.Location_LocationName, T1.Location_Lat, T1.Location_Lng, T1.Location_LocationVisualRepresentationURL, T2.[Location.Domain_DomainId], T1._from0, (T2._from1 AND T2._from1 IS NOT NULL) AS _from1
+        FROM  (
+            SELECT 
+                T.LocationId AS Location_LocationId, 
+                T.LocationName AS Location_LocationName, 
+                T.Lat AS Location_Lat, 
+                T.Lng AS Location_Lng, 
+                T.LocationVisualRepresentationURL AS Location_LocationVisualRepresentationURL, 
+                True AS _from0
+            FROM iotContext.Locations AS T) AS T1
+            LEFT OUTER JOIN (
+            SELECT 
+                Key(T.iotDomain_Locations_Target).LocationId AS Location_LocationId, 
+                Key(T.iotDomain_Locations_Source).DomainId AS [Location.Domain_DomainId], 
+                True AS _from1
+            FROM iotContext.iotDomain_Locations AS T) AS T2
+            ON T1.Location_LocationId = T2.Location_LocationId
+    ) AS T3");
+        }
+
+        /// <summary>
+        /// Gets the view for CodeFirstDatabase.iotDomain.
+        /// </summary>
+        /// <returns>The mapping view.</returns>
+        private static DbMappingView GetView6()
+        {
+            return new DbMappingView(@"
+    SELECT VALUE -- Constructing iotDomain
+        [CodeFirstDatabaseSchema.iotDomain](T1.iotDomain_DomainId, T1.iotDomain_DomainName)
     FROM (
         SELECT 
-            T.LocationId AS Location_LocationId, 
-            T.LocationName AS Location_LocationName, 
-            T.Lat AS Location_Lat, 
-            T.Lng AS Location_Lng, 
-            T.LocationVisualRepresentationURL AS Location_LocationVisualRepresentationURL, 
+            T.DomainId AS iotDomain_DomainId, 
+            T.DomainName AS iotDomain_DomainName, 
             True AS _from0
-        FROM iotContext.Locations AS T
+        FROM iotContext.Domains AS T
     ) AS T1");
         }
 
@@ -478,7 +510,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for CodeFirstDatabase.Site.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView6()
+        private static DbMappingView GetView7()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing Site
@@ -508,24 +540,6 @@ namespace Edm_EntityMappingGeneratedViews
             FROM iotContext.Site_siteLocation AS T) AS T4
             ON T3.Site_SiteId = T4.Site_SiteId
     ) AS T5");
-        }
-
-        /// <summary>
-        /// Gets the view for CodeFirstDatabase.iotDomain.
-        /// </summary>
-        /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView7()
-        {
-            return new DbMappingView(@"
-    SELECT VALUE -- Constructing iotDomain
-        [CodeFirstDatabaseSchema.iotDomain](T1.iotDomain_DomainId, T1.iotDomain_DomainName)
-    FROM (
-        SELECT 
-            T.DomainId AS iotDomain_DomainId, 
-            T.DomainName AS iotDomain_DomainName, 
-            True AS _from0
-        FROM iotContext.Domains AS T
-    ) AS T1");
         }
 
         /// <summary>
@@ -1084,7 +1098,8 @@ namespace Edm_EntityMappingGeneratedViews
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing Locations
-        [iotDbConnector.DAL.Location](T1.Location_LocationId, T1.Location_LocationName, T1.Location_Lat, T1.Location_Lng, T1.Location_LocationVisualRepresentationURL)
+        [iotDbConnector.DAL.Location](T1.Location_LocationId, T1.Location_LocationName, T1.Location_Lat, T1.Location_Lng, T1.Location_LocationVisualRepresentationURL) WITH 
+        RELATIONSHIP(CREATEREF(iotContext.Domains, ROW(T1.[iotDomain_Locations.iotDomain_Locations_Source.DomainId]),[iotDbConnector.DAL.iotDomain]),[iotDbConnector.DAL.iotDomain_Locations],iotDomain_Locations_Target,iotDomain_Locations_Source) 
     FROM (
         SELECT 
             T.LocationId AS Location_LocationId, 
@@ -1092,8 +1107,56 @@ namespace Edm_EntityMappingGeneratedViews
             T.Lat AS Location_Lat, 
             T.Lng AS Location_Lng, 
             T.LocationVisualRepresentationURL AS Location_LocationVisualRepresentationURL, 
-            True AS _from0
+            True AS _from0, 
+            T.Domain_DomainId AS [iotDomain_Locations.iotDomain_Locations_Source.DomainId]
         FROM CodeFirstDatabase.Location AS T
+    ) AS T1");
+        }
+
+        /// <summary>
+        /// Gets the view for iotContext.iotDomain_Locations.
+        /// </summary>
+        /// <returns>The mapping view.</returns>
+        private static DbMappingView GetView29()
+        {
+            return new DbMappingView(@"
+    SELECT VALUE -- Constructing iotDomain_Locations
+        [iotDbConnector.DAL.iotDomain_Locations](T3.[iotDomain_Locations.iotDomain_Locations_Source], T3.[iotDomain_Locations.iotDomain_Locations_Target])
+    FROM (
+        SELECT -- Constructing iotDomain_Locations_Source
+            CreateRef(iotContext.Domains, row(T2.[iotDomain_Locations.iotDomain_Locations_Source.DomainId]), [iotDbConnector.DAL.iotDomain]) AS [iotDomain_Locations.iotDomain_Locations_Source], 
+            T2.[iotDomain_Locations.iotDomain_Locations_Target]
+        FROM (
+            SELECT -- Constructing iotDomain_Locations_Target
+                T1.[iotDomain_Locations.iotDomain_Locations_Source.DomainId], 
+                CreateRef(iotContext.Locations, row(T1.[iotDomain_Locations.iotDomain_Locations_Target.LocationId]), [iotDbConnector.DAL.Location]) AS [iotDomain_Locations.iotDomain_Locations_Target]
+            FROM (
+                SELECT 
+                    T.Domain_DomainId AS [iotDomain_Locations.iotDomain_Locations_Source.DomainId], 
+                    T.LocationId AS [iotDomain_Locations.iotDomain_Locations_Target.LocationId], 
+                    True AS _from0
+                FROM CodeFirstDatabase.Location AS T
+                WHERE T.Domain_DomainId IS NOT NULL
+            ) AS T1
+        ) AS T2
+    ) AS T3");
+        }
+
+        /// <summary>
+        /// Gets the view for iotContext.Domains.
+        /// </summary>
+        /// <returns>The mapping view.</returns>
+        private static DbMappingView GetView30()
+        {
+            return new DbMappingView(@"
+    SELECT VALUE -- Constructing Domains
+        [iotDbConnector.DAL.iotDomain](T1.iotDomain_DomainId, T1.iotDomain_DomainName)
+    FROM (
+        SELECT 
+            T.DomainId AS iotDomain_DomainId, 
+            T.DomainName AS iotDomain_DomainName, 
+            True AS _from0
+        FROM CodeFirstDatabase.iotDomain AS T
     ) AS T1");
         }
 
@@ -1101,7 +1164,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for iotContext.Sites.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView29()
+        private static DbMappingView GetView31()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing Sites
@@ -1123,7 +1186,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for iotContext.Site_Domain.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView30()
+        private static DbMappingView GetView32()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing Site_Domain
@@ -1151,7 +1214,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for iotContext.Site_siteLocation.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView31()
+        private static DbMappingView GetView33()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing Site_siteLocation
@@ -1177,28 +1240,10 @@ namespace Edm_EntityMappingGeneratedViews
         }
 
         /// <summary>
-        /// Gets the view for iotContext.Domains.
-        /// </summary>
-        /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView32()
-        {
-            return new DbMappingView(@"
-    SELECT VALUE -- Constructing Domains
-        [iotDbConnector.DAL.iotDomain](T1.iotDomain_DomainId, T1.iotDomain_DomainName)
-    FROM (
-        SELECT 
-            T.DomainId AS iotDomain_DomainId, 
-            T.DomainName AS iotDomain_DomainName, 
-            True AS _from0
-        FROM CodeFirstDatabase.iotDomain AS T
-    ) AS T1");
-        }
-
-        /// <summary>
         /// Gets the view for iotContext.Endpoints.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView33()
+        private static DbMappingView GetView34()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing Endpoints
@@ -1224,7 +1269,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for iotContext.Properties.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView34()
+        private static DbMappingView GetView35()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing Properties
@@ -1247,7 +1292,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for iotContext.DeviceProperty_Device.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView35()
+        private static DbMappingView GetView36()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing DeviceProperty_Device
@@ -1275,7 +1320,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for iotContext.Parameters.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView36()
+        private static DbMappingView GetView37()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing Parameters
@@ -1301,7 +1346,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for iotContext.DeviceParameter_Action.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView37()
+        private static DbMappingView GetView38()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing DeviceParameter_Action
@@ -1330,7 +1375,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for iotContext.DeviceParameter_Property.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView38()
+        private static DbMappingView GetView39()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing DeviceParameter_Property
@@ -1359,7 +1404,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for iotContext.DeviceParameter_Type.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView39()
+        private static DbMappingView GetView40()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing DeviceParameter_Type
@@ -1387,7 +1432,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for iotContext.ParameterChanges.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView40()
+        private static DbMappingView GetView41()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing ParameterChanges
@@ -1408,7 +1453,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for iotContext.ParameterChangeHistory_Property.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView41()
+        private static DbMappingView GetView42()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing ParameterChangeHistory_Property
@@ -1436,7 +1481,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for iotContext.SconnMappers.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView42()
+        private static DbMappingView GetView43()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing SconnMappers
@@ -1459,7 +1504,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for iotContext.sconnConfigMapper_ActionParam.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView43()
+        private static DbMappingView GetView44()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing sconnConfigMapper_ActionParam
@@ -1488,7 +1533,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for iotContext.sconnConfigMapper_Parameter.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView44()
+        private static DbMappingView GetView45()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing sconnConfigMapper_Parameter
@@ -1517,7 +1562,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for iotContext.ParamTypes.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView45()
+        private static DbMappingView GetView46()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing ParamTypes
@@ -1537,7 +1582,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for iotContext.Types.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView46()
+        private static DbMappingView GetView47()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing Types

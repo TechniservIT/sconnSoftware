@@ -30,8 +30,18 @@ namespace iotDash.Controllers
 		{
 			try
 			{
+				
+				string username = User.Identity.Name;
+				ApplicationDbContext cont = new ApplicationDbContext();
+				var user = (from u in cont.Users
+							where u.UserName == username
+							select u).First();
+
 				IiotDomainService cl = new iotServiceConnector().GetDomainClient();
+				iotDomain domain = cl.GetDomainWithId(user.DomainId);
+
 				Location loc = new Location();
+				loc.Domain = domain;
 				loc.LocationName = Name;
 				loc.Lng = double.Parse(Lng, CultureInfo.InvariantCulture);
 				loc.Lat = double.Parse(Lat, CultureInfo.InvariantCulture);

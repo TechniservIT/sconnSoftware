@@ -6,6 +6,7 @@ using NLog;
 using Raven.Client.Embedded;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
@@ -203,6 +204,25 @@ namespace iotDeviceService
             {
                 throw new FaultException(ex.Message);
             }
+        }
+
+
+
+
+
+        public bool ClearDatabase()
+        {
+            try
+            {
+                iotRepository<Device>.ClearIotRepository();
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+         
+           
         }
 
 

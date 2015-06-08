@@ -47,9 +47,6 @@ namespace iotServiceTester.Service
             var service = GetDeviceClient(); //manualy invoke self hosted
             var client = new RestClient("http://localhost:8733/iot/iotDeviceService/rest/");
             var request = new RestRequest("Auth/Private", Method.GET);
-            //request.Parameters.Add(new Parameter());
-            //request.Parameters.Add(new Parameter());
-
             string token = client.Execute(request).Content;
             Assert.IsTrue(token.Length > 0);
         }
