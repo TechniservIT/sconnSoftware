@@ -25,6 +25,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Local.testsettings = Local.testsettings
 		Performance1.psess = Performance1.psess
 		Performance2.psess = Performance2.psess
+		Performance3.psess = Performance3.psess
+		Performance4.psess = Performance4.psess
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iotWebSecurityTester", "iotWebSecurityTester\iotWebSecurityTester.csproj", "{68E4F437-7040-42A6-A447-EEF1F8FF22C1}"
@@ -69,6 +71,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iotDesktopDash", "iotDeskto
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sconnConnector", "sconnConnector\sconnConnector.csproj", "{09C8A8F0-F85A-4534-922E-85E14EC32725}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iotRestfulService", "iotRestfulService\iotRestfulService.csproj", "{4B694828-A1A7-46AC-B220-8507D277D1BB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "restfulPerformanceTest", "restfulPerformanceTest\restfulPerformanceTest.csproj", "{84679219-862A-4B68-B36F-CA0A71600B36}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iotDeviceService", "iotDeviceService\iotDeviceService.csproj", "{3C2419E5-D232-4C6F-9821-D8A491459ED1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -140,6 +148,18 @@ Global
 		{09C8A8F0-F85A-4534-922E-85E14EC32725}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{09C8A8F0-F85A-4534-922E-85E14EC32725}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{09C8A8F0-F85A-4534-922E-85E14EC32725}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B694828-A1A7-46AC-B220-8507D277D1BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B694828-A1A7-46AC-B220-8507D277D1BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B694828-A1A7-46AC-B220-8507D277D1BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B694828-A1A7-46AC-B220-8507D277D1BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84679219-862A-4B68-B36F-CA0A71600B36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84679219-862A-4B68-B36F-CA0A71600B36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84679219-862A-4B68-B36F-CA0A71600B36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84679219-862A-4B68-B36F-CA0A71600B36}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C2419E5-D232-4C6F-9821-D8A491459ED1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C2419E5-D232-4C6F-9821-D8A491459ED1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C2419E5-D232-4C6F-9821-D8A491459ED1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C2419E5-D232-4C6F-9821-D8A491459ED1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -170,5 +190,11 @@ Global
 		{8FA92296-4F77-45CE-9B85-BCB37A7F2332} = {2051C7F5-3D2D-4462-B0FA-F2AAB905CF46}
 		{C35DC1DD-78C7-49FF-BE3A-CBCBBCA2335A} = {9A63916A-4F3F-4691-A287-C04BCC016927}
 		{09C8A8F0-F85A-4534-922E-85E14EC32725} = {8FA86EE5-EFDF-4129-87EE-93F5C8376B93}
+		{4B694828-A1A7-46AC-B220-8507D277D1BB} = {2051C7F5-3D2D-4462-B0FA-F2AAB905CF46}
+		{84679219-862A-4B68-B36F-CA0A71600B36} = {4AAFA6B4-0770-44C0-B525-805CAA1CA0C9}
+		{3C2419E5-D232-4C6F-9821-D8A491459ED1} = {2051C7F5-3D2D-4462-B0FA-F2AAB905CF46}
+	EndGlobalSection
+	GlobalSection(Performance) = preSolution
+		HasPerformanceSessions = true
 	EndGlobalSection
 EndGlobal

@@ -50,6 +50,10 @@
       <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1-beta3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="NLog">
       <HintPath>..\packages\NLog.3.2.1\lib\net45\NLog.dll</HintPath>
     </Reference>
@@ -68,10 +72,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\Database\IiotDomainService.cs" />
-    <Compile Include="Services\Database\iotDomainService.cs" />
-    <Compile Include="Services\Event\DeviceUpdateEventService.cs" />
-    <Compile Include="Services\Event\IDeviceEventService.cs" />
+    <Compile Include="Services\Public\Auth\IiotTokenizer.cs" />
+    <Compile Include="Services\Public\Auth\iotDomainTokenizer.cs" />
+    <Compile Include="Services\Internal\Database\IiotDomainService.cs" />
+    <Compile Include="Services\Internal\Database\iotDomainService.cs" />
+    <Compile Include="Services\Internal\Event\DeviceUpdateEventService.cs" />
+    <Compile Include="Services\Internal\Event\IDeviceEventService.cs" />
     <Compile Include="Connector\iotServiceConnector.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -99,7 +105,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Services\Shared\" />
+    <Folder Include="Services\Public\Restful\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

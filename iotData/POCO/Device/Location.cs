@@ -35,7 +35,9 @@ namespace iotDbConnector.DAL
 
         [DataMember]
         public virtual List<Site> Sites { get; set; }
-    
+
+        [DataMember]
+        public virtual iotDomain Domain { get; set; }
         
     }
 }

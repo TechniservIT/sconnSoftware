@@ -25,23 +25,10 @@ namespace iotDbConnector.DAL
         [DataMember]
         public virtual List<Site> Sites { get; set; }
 
-        /*
-        public iotDomain()
-        {
+        [DataMember]
+        public virtual List<Location> Locations { get; set; }
 
-        }
-
-        public iotDomain(string Name)
-        {
-            DomainName = Name;
-        }
-
-        public iotDomain(string Name, ApplicationUser admin) :this(Name)
-        {
-          
-        }
-         
-         */
+      
 
     }
 }

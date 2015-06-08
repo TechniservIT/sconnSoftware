@@ -25,6 +25,17 @@ namespace iotDbConnector.DAL
     
         }
 
+        static public void ClearIotRepository()
+        {
+                iotContext dbContext = new iotContext();
+                var tableNames = dbContext.Database.SqlQuery<string>("SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME NOT LIKE '%Migration%'").ToList();
+                foreach (var tableName in tableNames)
+                {
+                    dbContext.Database.ExecuteSqlCommand(string.Format("DELETE FROM {0}", tableName));
+                }
+                dbContext.SaveChanges();
+        }
+
 
         public iotRepository(DbContext dbContext)
         {

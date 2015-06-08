@@ -62,12 +62,24 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.0.0-rc\lib\net45\NLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Owin">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
+    <Reference Include="RestSharp">
+      <HintPath>..\packages\RestSharp.105.1.0\lib\net45\RestSharp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.IdentityModel.Tokens.Jwt">
+      <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.4.0.2.205111437\lib\net45\System.IdentityModel.Tokens.Jwt.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Channels" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <Choose>
@@ -86,12 +98,19 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="iotUpdatePubSubTester.cs" />
     <Compile Include="Service\iotServiceConnector.cs" />
+    <Compile Include="Service\iotRestfulTokenizerTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <Content Include="NLog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="NLog.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\iotDbConnector.DAL.ActionParameter.datasource" />
     <None Include="Properties\DataSources\iotDbConnector.DAL.Device.datasource" />
@@ -109,6 +128,10 @@
     <ProjectReference Include="..\iotData\iotData.csproj">
       <Project>{e94b0a02-089e-483a-aaef-3bfa49039598}</Project>
       <Name>iotData</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\iotDeviceService\iotDeviceService.csproj">
+      <Project>{3c2419e5-d232-4c6f-9821-d8a491459ed1}</Project>
+      <Name>iotDeviceService</Name>
     </ProjectReference>
     <ProjectReference Include="..\iotServiceLayer\iotServiceLayer.csproj">
       <Project>{6640ac88-df6b-43a6-bee3-a65b4396119b}</Project>

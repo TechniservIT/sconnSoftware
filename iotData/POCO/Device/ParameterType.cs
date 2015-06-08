@@ -28,61 +28,7 @@ namespace iotDbConnector.DAL
         [DataMember]
         public virtual List<DeviceParameter> Parameters { get; set; }
 
-        /*
-        public string ParseTypeFromString(string typeval)
-        {
-            string parsed = "";
-            return parsed;
-        }
-
-        static public bool TypeExistsForNameInContext(string Name, iotDeviceContext cont)
-        {
-           // ApplicationDbContext cont = new ApplicationDbContext();
-            if (cont.ParamTypes.Count() <= 0)
-            {
-                return false;
-            }
-            try
-            {
-                ParameterType type = (from t in cont.ParamTypes
-                                      where t.Name == Name
-                                      select t).First();
-                if (type != null)
-                {
-                    return true;
-                }
-            }
-            catch (Exception e)
-            {
-            }
-            return false;
-        }
-
-        static public ParameterType TypeForNameAtContext(string Name, ApplicationDbContext cont)
-        {
-            try
-            {
-                ParameterType type;
-                if (!TypeExistsForNameInContext(Name, cont))
-                {
-                    type = new ParameterType();
-                    type.Name = Name;
-                    cont.ParamTypes.Add(type);
-                    cont.SaveChanges();
-                }
-                type = (from t in cont.ParamTypes
-                        where t.Name == Name
-                        select t).First();
-                return type;
-            }
-            catch (Exception e)
-            {
-                
-            }
-            return new ParameterType();
-        }
-
-         */
+        
 
     }
 }

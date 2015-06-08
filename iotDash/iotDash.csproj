@@ -31,6 +31,7 @@
     </SccProvider>
     <TargetFrameworkProfile />
     <TypeScriptToolsVersion>1.4</TypeScriptToolsVersion>
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -155,6 +156,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.0.0-rc\lib\net45\NLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -242,21 +247,23 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\AppController.cs" />
-    <Compile Include="Controllers\DashboardController.cs" />
-    <Compile Include="Controllers\DeviceController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\LocationController.cs" />
-    <Compile Include="Controllers\MapController.cs" />
-    <Compile Include="Controllers\MenuController.cs" />
-    <Compile Include="Controllers\QueryBuilderController.cs" />
-    <Compile Include="Controllers\SettingsController.cs" />
-    <Compile Include="Controllers\SiteController.cs" />
-    <Compile Include="Controllers\SiteManagerController.cs" />
-    <Compile Include="Controllers\StatisticController.cs" />
-    <Compile Include="Controllers\UsersController.cs" />
-    <Compile Include="Controllers\ViewController.cs" />
+    <Compile Include="Controllers\global\AccountController.cs" />
+    <Compile Include="Controllers\global\AppController.cs" />
+    <Compile Include="Controllers\global\DashboardController.cs" />
+    <Compile Include="Controllers\domain\DeviceController.cs" />
+    <Compile Include="Controllers\domain\HomeController.cs" />
+    <Compile Include="Controllers\webapi\DeviceDataController.cs" />
+    <Compile Include="Controllers\webapi\DomainDataController.cs" />
+    <Compile Include="Controllers\domain\LocationController.cs" />
+    <Compile Include="Controllers\domain\MapController.cs" />
+    <Compile Include="Controllers\domain\MenuController.cs" />
+    <Compile Include="Controllers\domain\QueryBuilderController.cs" />
+    <Compile Include="Controllers\domain\SettingsController.cs" />
+    <Compile Include="Controllers\domain\SiteController.cs" />
+    <Compile Include="Controllers\domain\SiteManagerController.cs" />
+    <Compile Include="Controllers\domain\StatisticController.cs" />
+    <Compile Include="Controllers\global\UsersController.cs" />
+    <Compile Include="Controllers\domain\ViewController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -418,6 +425,12 @@
     <Content Include="Content\fonts\fontawesome-webfont.ttf" />
     <Content Include="Content\fonts\fontawesome-webfont.eot" />
     <Content Include="Content\fonts\FontAwesome.otf" />
+    <Content Include="NLog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="NLog.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\Chart.js" />
     <Content Include="Scripts\Chart.min.js" />

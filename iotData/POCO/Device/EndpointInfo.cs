@@ -48,21 +48,6 @@ namespace iotDbConnector.DAL
 
  
 
-        /*
-        public void EnableProtocolSupport(CommProtocolType protocol)
-        {
-            if (protocol == CommProtocolType.CommSconnProtocol)
-            {
-                SupportsSconnProtocol = true;
-            }
-        }
-
-        public EndpointInfo(    string hostname, int port)
-        {
-            this.Hostname = hostname;
-            this.Port = port;
-        }
-        */
 
     }
 }
