@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Data.Entity;
 using sconnConnector;
 using System.Threading.Tasks;
 using iotDbConnector;
@@ -483,7 +484,14 @@ namespace iotServiceProvider
 
                 watch.Start();
                 iotContext cont = new iotContext();
-                Device edited = cont.Devices.Where(d => d.DeviceId == dev.DeviceId).First();  // devrep.GetById(dev.DeviceId);
+                //cont.Configuration.LazyLoadingEnabled = false;
+                //Device edited = cont.Devices.Where(d => d.DeviceId == dev.DeviceId)
+                //    .Include(d => d.Actions.Select(a => a.ResultParameters.Select(r => r.sconnMappers)))
+                //    .Include(d => d.Properties.Select(p => p.ResultParameters.Select(r => r.sconnMappers)))
+                //    .First();  
+                Device edited = cont.Devices.Where(d => d.DeviceId == dev.DeviceId).First();
+
+                
                 watch.Stop();
                 Debug.WriteLine("Execution time : " + watch.ElapsedMilliseconds + " ms @ device query");
                 watch.Reset();

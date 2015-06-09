@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Diagnostics;
+using System.Data.Entity;
 
 namespace iotDatabaseTester
 {
@@ -26,23 +27,25 @@ namespace iotDatabaseTester
         [TestMethod]
         public void TestDeviceParamQueryTime()
         {
-            
             iotContext cont = new iotContext();
-            cont.Configuration.LazyLoadingEnabled = true;
-            cont.Configuration.ProxyCreationEnabled = false;
+            int ReadTestInterations = 50;
+            int maxQueryTimeMs = 25;
+            Stopwatch watch = new Stopwatch();
+            DeviceProperty prop = cont.Properties.FirstOrDefault();  //load initialy
+            //DeviceParameter tparam = (from r in prop.ResultParameters
+            //                         select r).Single();  //load initialy
 
-            DeviceProperty prop = cont.Properties.FirstOrDefault(); //load property
-            if (prop != null)
+            watch.Start();
+            for (int i = 0; i < ReadTestInterations; i++)
             {
-                Stopwatch watch4 = new Stopwatch();
-                watch4.Start();
-                DeviceParameter param = (from r in prop.ResultParameters
-                                         select r).Single();
-                watch4.Stop();
-                Assert.IsTrue(watch4.ElapsedMilliseconds < 10);     
-  
-            }
+                DeviceParameter param =  cont.Parameters
+                                        .Include(p=>p.sconnMappers)
+                                        .FirstOrDefault();
 
+            }
+            watch.Stop();
+            double TimePerQueryMs = watch.ElapsedMilliseconds / ReadTestInterations;
+            Assert.IsTrue(TimePerQueryMs < maxQueryTimeMs);
         }
 
 
@@ -51,11 +54,19 @@ namespace iotDatabaseTester
         {
 
             iotContext cont = new iotContext();
-            Stopwatch watch4 = new Stopwatch();
-            watch4.Start();
-            DeviceProperty prop = cont.Devices.AsNoTracking().FirstOrDefault().Properties.FirstOrDefault(); 
-            watch4.Stop();
-            Assert.IsTrue(watch4.ElapsedMilliseconds < 10);
+              int ReadTestInterations = 50;
+              int maxQueryTimeMs = 2;
+              Stopwatch watch = new Stopwatch();
+              DeviceProperty inprop = cont.Properties.AsNoTracking().FirstOrDefault();  //load initialy
+              watch.Start();
+                for (int i = 0; i < ReadTestInterations; i++)
+                {
+                    DeviceProperty prop = (from r in cont.Properties.AsNoTracking()
+                                             select r).FirstOrDefault();
+                }
+                watch.Stop();
+                double TimePerQueryMs = watch.ElapsedMilliseconds / ReadTestInterations;
+                Assert.IsTrue(TimePerQueryMs < maxQueryTimeMs);
         }
 
 
