@@ -1051,7 +1051,7 @@ namespace iotServiceProvider
                 List<DeviceCredentials> creds = cont.Credentials.ToList();
                 DeviceCredentials storedCredentials = (from c in creds
                                                        where c.Username.Equals(cred.Username)
-                                                       select c).First();
+                                                       select c).FirstOrDefault();
 
                 EndpointInfo info = new EndpointInfo();
                 info.Hostname = Host;
@@ -1068,7 +1068,13 @@ namespace iotServiceProvider
                 EndpointInfo storedInfo = (from i in endps
                                            where i.Hostname.Equals(info.Hostname) &&
                                            i.Port == info.Port
-                                           select i).First();
+                                           select i).FirstOrDefault();
+                if (storedInfo == null)
+                {
+                    //err
+                    return null;
+                }
+
                 ndev.Credentials = storedCredentials;
                 ndev.EndpInfo = storedInfo;
 
@@ -1077,7 +1083,7 @@ namespace iotServiceProvider
                 List<Site> sites = cont.Sites.ToList();
                 Site siteToAppend = (from s in sites
                                      where s.SiteId == siteIdNum
-                                     select s).First();
+                                     select s).FirstOrDefault();
                 ndev.Site = siteToAppend;
                 cont.Devices.Add(ndev);
                 cont.SaveChanges();
