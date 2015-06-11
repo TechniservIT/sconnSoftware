@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using iotDbConnector.DAL;
 using System.Linq;
 using System.Diagnostics;
+using iotNoSqlDatabase;
 
 namespace iotDatabaseTester
 {
@@ -40,6 +41,47 @@ namespace iotDatabaseTester
             double TimePerQueryMs = watch.ElapsedMilliseconds / ReadTestInterations;
             Assert.IsTrue(TimePerQueryMs < maxQueryTimeMs);
         }
+
+        [TestMethod]
+        public void TestRedisDbWriteLoad()
+        {
+            int ReadTestInterations = 250;
+            int maxQueryTimeMs = 25;
+            RedisNoSqlDataSource<Device> db = new RedisNoSqlDataSource<Device>();
+            Stopwatch watch = new Stopwatch();
+            watch.Start();
+            for (int i = 0; i < ReadTestInterations; i++)
+            {
+                var res = db.Add(new Device());
+            }
+            watch.Stop();
+            double TimePerQueryMs = watch.ElapsedMilliseconds / ReadTestInterations;
+            Assert.IsTrue(TimePerQueryMs < maxQueryTimeMs);
+        }
+
+        [TestMethod]
+        public void TestRedisDbRWLoad()
+        {
+            int ReadTestInterations = 250;
+            int maxQueryTimeMs = 25;
+            RedisNoSqlDataSource<Device> db = new RedisNoSqlDataSource<Device>();
+            Stopwatch watch = new Stopwatch();
+            watch.Start();
+            for (int i = 0; i < ReadTestInterations; i++)
+            {
+                string id = db.Add(new Device{ DeviceName = Guid.NewGuid().ToString() });
+                var stored = db.GetById(id);
+                if (stored == null)
+                {
+                    Assert.Fail();
+                }
+            }
+            watch.Stop();
+            double TimePerQueryMs = watch.ElapsedMilliseconds / ReadTestInterations;
+            Assert.IsTrue(TimePerQueryMs < maxQueryTimeMs);
+        }
+
+
 
     }
 }

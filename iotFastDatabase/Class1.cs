@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace iotDbConnector.DAL
+namespace iotFastDatabase
 {
-    public class MongoNoSqlDataSource
+    public class Class1
     {
     }
 }

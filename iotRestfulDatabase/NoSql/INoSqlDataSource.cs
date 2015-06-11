@@ -4,17 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace iotDbConnector.DAL
+namespace iotNoSqlDatabase
 {
 
     public interface INoSqlDataSource<T> where T : class
     {
         IQueryable<T> GetAll();
-        T GetById(int id);
-        void Add(T entity);
+        T GetById(string id);
+        string Add(T entity);
         void Update(T entity);
         void Delete(T entity);
-        void Delete(int id);
+        void Delete(string id);
     }
 
 }

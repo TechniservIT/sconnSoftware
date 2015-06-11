@@ -8,7 +8,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>iotDatabaseTester</RootNamespace>
     <AssemblyName>iotDatabaseTester</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -24,6 +24,7 @@
     </SccAuxPath>
     <SccProvider>
     </SccProvider>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -103,6 +104,10 @@
     <ProjectReference Include="..\iotData\iotData.csproj">
       <Project>{e94b0a02-089e-483a-aaef-3bfa49039598}</Project>
       <Name>iotData</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\iotRestfulDatabase\iotNoSqlDatabase.csproj">
+      <Project>{97b81a32-d59a-4232-998f-ac61f0fabe59}</Project>
+      <Name>iotNoSqlDatabase</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

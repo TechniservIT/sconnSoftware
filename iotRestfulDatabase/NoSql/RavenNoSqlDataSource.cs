@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using iotDbConnector.DAL;
+using Newtonsoft.Json;
 using Raven.Abstractions.Data;
 using Raven.Client;
 using Raven.Client.Connection;
@@ -12,7 +13,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace iotDbConnector.DAL
+namespace iotNoSqlDatabase
 {
 
     public class RavenNoSqlDataSource<T> : INoSqlDataSource<T> where T : class
@@ -69,19 +70,20 @@ namespace iotDbConnector.DAL
             
         }
 
-        public virtual T GetById(int id)
+        public virtual T GetById(string id)
         {
             throw new NotImplementedException();
         }
 
-        public virtual void Add(T entity)
+        public virtual string Add(T entity)
         {
             using (IDocumentStore store = new DocumentStore
             {
                 Url = "http://localhost:8080/"
             }.Initialize())
             {
-               
+                int id = Guid.NewGuid().GetHashCode();
+
                     PutResult  res =   store.DatabaseCommands
                         .Put(
                             "devices/2",
@@ -89,10 +91,13 @@ namespace iotDbConnector.DAL
                             RavenJObject.FromObject(new Device
                             {
                                 DeviceName = "sconnGKP",
-                                DeviceId = Guid.NewGuid().GetHashCode()
+                                DeviceId = id
                             }),
                             new RavenJObject());
+
+                return id.ToString();
             }
+          
             
         }
 
@@ -106,7 +111,7 @@ namespace iotDbConnector.DAL
             throw new NotImplementedException();
         }
 
-        public virtual void Delete(int id)
+        public virtual void Delete(string id)
         {
             throw new NotImplementedException();
         }
