@@ -1,4 +1,5 @@
-﻿using iotDomainController.iotDbService;
+﻿
+using iotDbConnector.DAL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -49,8 +50,7 @@ namespace iotDomainController.DomainService
         {
             try
             {
-                IiotDomainServiceClient service = new IiotDomainServiceClient();
-                service.UpdateDeviceProperties(dev);         
+               
             }
             catch (Exception e)
             {

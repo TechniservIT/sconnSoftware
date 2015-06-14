@@ -104,7 +104,7 @@ namespace iotDash.Controllers
 				IiotDomainService cl = new iotServiceConnector().GetDomainClient();
 				List<Device> devs = cl.Devices().ToList();
 				Device dev = (from d in devs
-							  where d.DeviceId == DeviceId
+							  where d.Id == DeviceId
 							  select d).First();
 
 				cl.UpdateDeviceProperties(dev); 
@@ -125,7 +125,7 @@ namespace iotDash.Controllers
 				IiotDomainService cl = new iotServiceConnector().GetDomainClient();
 				List<Device> devs = cl.Devices().ToList();
 				Device dev = (from d in devs
-							  where d.DeviceId == DeviceId
+							  where d.Id == DeviceId
 							  select d).First();
 				DeviceViewModel model = new DeviceViewModel(dev);
 				return View(model);
@@ -145,7 +145,7 @@ namespace iotDash.Controllers
 				IiotDomainService cl = new iotServiceConnector().GetDomainClient();
 				List<DeviceAction> actions = cl.DeviceActions().ToList();
 				DeviceAction action = (from ac in actions
-									   where ac.ActionId == ActionId
+									   where ac.Id == ActionId
 									   select ac).First();
 				string currValStr = action.ResultParameters.First().Value;
 				action.RequiredParameters.First().Value = currValStr.Equals("1") ? "0" : "1";   //toggle

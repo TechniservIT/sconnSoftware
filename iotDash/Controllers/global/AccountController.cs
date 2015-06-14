@@ -148,7 +148,7 @@ namespace iotDash
                             user.Roles.Add(userAdminRole);
 
                             //setup user domain
-                            user.DomainId = addedDomain.DomainId;
+                            user.DomainId = addedDomain.Id;
 
                             var result = await UserManager.CreateAsync(user, model.Password);
                             if (result.Succeeded)

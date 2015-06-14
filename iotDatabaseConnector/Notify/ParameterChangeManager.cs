@@ -19,7 +19,7 @@ namespace iotDatabaseConnector.DAL.POCO.Device.Notify
             {
                 //add history only if param already in DB
                 iotRepository<DeviceParameter> repo = new iotRepository<DeviceParameter>();
-                DeviceParameter stparam = repo.GetById(param.ParameterId);
+                DeviceParameter stparam = repo.GetById(param.Id);
                 if (stparam != null)
                 {
                     ParameterChangeHistory hist = new ParameterChangeHistory();

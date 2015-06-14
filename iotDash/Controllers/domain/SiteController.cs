@@ -122,7 +122,7 @@ namespace iotDash.Controllers
                     site.SiteName = Name;
                     site.siteLocation = loc;
                     iotDomain domain = SessionManager.AppDomainForUserContext(this.HttpContext);
-                    iotDomain targetDomain = cl.DomainWithId(domain.DomainId);
+                    iotDomain targetDomain = cl.DomainWithId(domain.Id);
                     site.Domain = targetDomain;
                     cl.SiteAdd(site);
                 }

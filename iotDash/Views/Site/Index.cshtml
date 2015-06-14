@@ -73,11 +73,11 @@
                 foreach (var item in Model.Sites)
                 {
                     <div class="col-md-3">
-                        <div id="@item.SiteId" class="panel panel-info">
+                        <div id="@item.Id" class="panel panel-info">
                             <div class="panel-heading">@item.SiteName</div>
                             <div class="panel-body">
                                 <h4>@item.siteLocation.LocationName</h4>
-                                <a href="@Url.Action("View", "Site", new { SiteId = item.SiteId })" class="btn">Show</a>
+                                <a href="@Url.Action("View", "Site", new { SiteId = item.Id })" class="btn">Show</a>
                             </div>
                         </div>
                     </div>

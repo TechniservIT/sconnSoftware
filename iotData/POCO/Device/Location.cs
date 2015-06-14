@@ -1,4 +1,5 @@
-﻿using System;
+﻿ 
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace iotDbConnector.DAL
         [DataMember]
         [Key]
         [Required]
-        public int LocationId { get; set; }
+        public int Id { get; set; }
 
         [DataMember]
         [Required]
@@ -31,10 +32,10 @@ namespace iotDbConnector.DAL
         public string LocationVisualRepresentationURL { get; set; }
 
         [DataMember]
-        public virtual List<Device> Devices { get; set; }
+        public virtual AIList<Device> Devices { get; set; }
 
         [DataMember]
-        public virtual List<Site> Sites { get; set; }
+        public virtual AIList<Site> Sites { get; set; }
 
         [DataMember]
         public virtual iotDomain Domain { get; set; }

@@ -421,7 +421,7 @@ namespace iotServiceProvider
                 //iotRepository<Site> repo = new iotRepository<Site>();
                 //return repo.GetById(id);
                 iotConnector connector = new iotConnector();
-                return connector.SiteList().Where(s => { return s.SiteId == id; }).First();
+                return connector.SiteList().Where(s => { return s.Id == id; }).First();
             }
             catch (Exception e)
             {
@@ -440,7 +440,7 @@ namespace iotServiceProvider
                 return repo.GetById(id);
                  */
                 iotConnector connector = new iotConnector();
-                return connector.DeviceList().Where(s => { return s.DeviceId == id; }).First();
+                return connector.DeviceList().Where(s => { return s.Id == id; }).First();
             }
             catch (Exception e)
             {
@@ -517,7 +517,7 @@ namespace iotServiceProvider
                 iotRepository<Location> repo = new iotRepository<Location>();
                 return repo.GetById(id);
                // iotConnector connector = new iotConnector();
-               // return connector.LocationList().Where(s => { return s.LocationId == id; }).First();
+               // return connector.LocationList().Where(s => { return s.Id == id; }).First();
             }
             catch (Exception e)
             {
@@ -1032,11 +1032,11 @@ namespace iotServiceProvider
                 ndev.DeviceName = Name;
                 List<DeviceType> types = cont.Types.ToList();
                 DeviceType type = (from t in types
-                                   where t.DeviceTypeId == DevTypeId
+                                   where t.Id == DevTypeId
                                    select t).First();
                 List<Location> locs = cont.Locations.ToList();
                 Location loc = (from l in locs
-                                where l.LocationId == LocId
+                                where l.Id == LocId
                                 select l).First();
                 ndev.Type = type;
                 ndev.DeviceLocation = loc;
@@ -1082,7 +1082,7 @@ namespace iotServiceProvider
 
                 List<Site> sites = cont.Sites.ToList();
                 Site siteToAppend = (from s in sites
-                                     where s.SiteId == siteIdNum
+                                     where s.Id == siteIdNum
                                      select s).FirstOrDefault();
                 ndev.Site = siteToAppend;
                 cont.Devices.Add(ndev);

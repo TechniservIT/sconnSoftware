@@ -17,7 +17,7 @@
                 url: '@Url.Action("New", "Device")',
                 type: this.method,
                 data: {
-                    SiteId: '@Model.DeviceSite.SiteId.ToString()',
+                    SiteId: '@Model.DeviceSite.Id.ToString()',
                     Name: $('#DeviceName').val(),
                     Host: $('#DeviceEpHostname').val(),
                     Port: $('#DeviceEpPort').val(),
@@ -87,7 +87,7 @@
                         {
                             foreach (var item in Model.Types)
                             {
-                                <option value="@item.DeviceTypeId">@item.TypeName</option>
+                                <option value="@item.Id">@item.TypeName</option>
                             }
                         }
                     </select>
@@ -101,7 +101,7 @@
                         {
                             foreach (var item in Model.Locations)
                             {
-                                <option value="@item.LocationId">@item.LocationName</option>
+                                <option value="@item.Id">@item.LocationName</option>
                             }
                         }
                     </select>

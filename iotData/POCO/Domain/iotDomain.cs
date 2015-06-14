@@ -16,17 +16,17 @@ namespace iotDbConnector.DAL
         [DataMember]
         [Key]
         [Required]
-        public int DomainId { get; set; }
+        public int Id { get; set; }
 
         [DataMember]
         [Required]
         public string DomainName { get; set; }
 
         [DataMember]
-        public virtual List<Site> Sites { get; set; }
+        public virtual AIList<Site> Sites { get; set; }
 
         [DataMember]
-        public virtual List<Location> Locations { get; set; }
+        public virtual AIList<Location> Locations { get; set; }
 
       
 

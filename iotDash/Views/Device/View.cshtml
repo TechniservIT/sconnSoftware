@@ -260,14 +260,14 @@
                         foreach (var item in Model.Device.Properties)
                         {
                             <div class="col-md-3">
-                                <div id="property-@item.PropertyId.ToString()" class="panel @PanelClassForResultParam(item.ResultParameters.First())">
+                                <div id="property-@item.Id.ToString()" class="panel @PanelClassForResultParam(item.ResultParameters.First())">
                                     <div class="panel-heading">@item.PropertyName</div>
                                     <div class="panel-body">
-                                        <h4 class="noderesval" id="propvaldisp-@item.PropertyId.ToString()" title="@item.ResultParameters.First().Value">@item.ResultParameters.First().Value</h4>
+                                        <h4 class="noderesval" id="propvaldisp-@item.Id.ToString()" title="@item.ResultParameters.First().Value">@item.ResultParameters.First().Value</h4>
                                         <h5>@item.PropertyDescription</h5>
                                         <h5>@item.LastUpdateTime</h5>
                                         <div id="toolPropHistoryCont" class="col-md-1">
-                                            <a class="btn btn-default" href="@Url.Action("PropertyStat", "Statistic", new { propertyId = item.PropertyId })" role="button">
+                                            <a class="btn btn-default" href="@Url.Action("PropertyStat", "Statistic", new { propertyId = item.Id })" role="button">
                                                 <span class="glyphicon glyphicon-stats"></span>
                                             </a>
                                         </div>
@@ -324,20 +324,20 @@
                         foreach (var item in Model.Device.Actions)
                         {
                             <div class="col-md-3">
-                                <div id='action-@item.ActionId.ToString()' class="panel @PanelClassForResultParam(item.ResultParameters.First())">
+                                <div id='action-@item.Id.ToString()' class="panel @PanelClassForResultParam(item.ResultParameters.First())">
                                     <div class="panel-heading">@item.ActionName</div>
                                     <div class="panel-body">
-                                        <h4 class="noderesval" id="actvaldisp-@item.ActionId.ToString()" title="@item.ResultParameters.First().Value">@item.ResultParameters.First().Value</h4>
+                                        <h4 class="noderesval" id="actvaldisp-@item.Id.ToString()" title="@item.ResultParameters.First().Value">@item.ResultParameters.First().Value</h4>
                                         <h5>@item.ActionDescription</h5>
                                         <h5>@item.LastActivationTime</h5>
                                         <br />
                                         <div id="toolPropHistoryCont" class="col-md-1">
-                                            <a class="btn btn-default" href="@Url.Action("ActionStat", "Statistic", new { actionId = item.ActionId })" role="button">
+                                            <a class="btn btn-default" href="@Url.Action("ActionStat", "Statistic", new { actionId = item.Id })" role="button">
                                                 <span class="glyphicon glyphicon-stats"></span>
                                             </a>
                                         </div>
                                         <br /><br />
-                                        <input class="tgsw-action" type="checkbox" value="@item.ResultParameters.First().ToString()" title="@item.ActionId.ToString()" id='tgsw-@item.ActionId.ToString()'>
+                                        <input class="tgsw-action" type="checkbox" value="@item.ResultParameters.First().ToString()" title="@item.Id.ToString()" id='tgsw-@item.Id.ToString()'>
                                     </div>
                                 </div>
                             </div>

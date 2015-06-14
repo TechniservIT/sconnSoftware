@@ -105,7 +105,7 @@ namespace iotDatabaseTester
             loc.Lat = 11.11;
             loc.Lng = 22.22;
             loc.LocationName = "Wisla";
-            domain.Locations = new System.Collections.Generic.List<Location>();
+            domain.Locations =new AIList<Location>();
             domain.Locations.Add(loc);
 
 
@@ -114,8 +114,8 @@ namespace iotDatabaseTester
             devsite.Domain = domain;
             devsite.siteLocation = loc;
             devsite.SiteName = "devSite";
-            devsite.Devices = new System.Collections.Generic.List<Device>();
-            domain.Sites = new System.Collections.Generic.List<Site>();
+            devsite.Devices = new AIList<Device>();
+            domain.Sites = new AIList<Site>();
             domain.Sites.Add(devsite);
 
 
@@ -124,8 +124,8 @@ namespace iotDatabaseTester
             for (int i = 0; i < TestDeviceNo; i++)
             {
                 Device dev = new Device();
-                dev.Properties = new System.Collections.Generic.List<DeviceProperty>();
-                dev.Actions = new System.Collections.Generic.List<DeviceAction>();
+                dev.Properties = new AIList<DeviceProperty>();
+                dev.Actions = new AIList<DeviceAction>();
 
                 //Device credentials
                 DeviceCredentials cred = new DeviceCredentials();
@@ -162,7 +162,7 @@ namespace iotDatabaseTester
                     param.Type = paramtype;
                     param.Value = "";
                     param.Action = act;
-                    act.RequiredParameters = new System.Collections.Generic.List<ActionParameter>();
+                    act.RequiredParameters = new AIList<ActionParameter>();
                     act.RequiredParameters.Add(param);
 
                     //result params
@@ -170,7 +170,7 @@ namespace iotDatabaseTester
                     param2.Type = paramtype;
                     param2.Value = "";
                     param2.Action = act;
-                    act.ResultParameters = new System.Collections.Generic.List<DeviceParameter>();
+                    act.ResultParameters = new AIList<DeviceParameter>();
                     act.ResultParameters.Add(param2);
 
                     dev.Actions.Add(act);
@@ -188,7 +188,7 @@ namespace iotDatabaseTester
                     param2.Type = paramtype;
                     param2.Value = "";
                     param2.Property = prop;
-                    prop.ResultParameters = new System.Collections.Generic.List<DeviceParameter>();
+                    prop.ResultParameters = new AIList<DeviceParameter>();
                     prop.ResultParameters.Add(param2);
 
                     dev.Properties.Add(prop);

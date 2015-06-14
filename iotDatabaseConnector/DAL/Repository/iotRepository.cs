@@ -102,13 +102,13 @@ namespace iotDbConnector.DAL
                     Device edited = (Device)(object)entity;
                     iotRepository<DeviceParameter> repo = new iotRepository<DeviceParameter>();
                     iotRepository<Device> devrepo = new iotRepository<Device>();
-                    Device devbefore = devrepo.GetById(edited.DeviceId);
+                    Device devbefore = devrepo.GetById(edited.Id);
 
                     foreach (var item in edited.Actions)
                     {
                         foreach (var param in item.ResultParameters)
                         {
-                            DeviceParameter stparam = repo.GetById(param.ParameterId);
+                            DeviceParameter stparam = repo.GetById(param.Id);
                             if (stparam != null)
                             {
                                 if (!stparam.Value.Equals(param.Value))
@@ -129,7 +129,7 @@ namespace iotDbConnector.DAL
                     {
                         foreach (var param in item.ResultParameters)
                         {
-                            DeviceParameter stparam = repo.GetById(param.ParameterId);
+                            DeviceParameter stparam = repo.GetById(param.Id);
                             if (stparam != null)
                             {
                                 if (!stparam.Value.Equals(param.Value))
@@ -151,7 +151,7 @@ namespace iotDbConnector.DAL
                     DeviceAction item = (DeviceAction)(object)entity;
                         foreach (var param in item.ResultParameters)
                         {
-                            DeviceParameter stparam = repo.GetById(param.ParameterId);
+                            DeviceParameter stparam = repo.GetById(param.Id);
                             if (stparam != null)
                             {
                                 if (!stparam.Value.Equals(param.Value))
@@ -174,7 +174,7 @@ namespace iotDbConnector.DAL
 
                         foreach (var param in item.ResultParameters)
                         {
-                            DeviceParameter stparam = repo.GetById(param.ParameterId);
+                            DeviceParameter stparam = repo.GetById(param.Id);
                             if (stparam != null)
                             {
                                 if (!stparam.Value.Equals(param.Value))

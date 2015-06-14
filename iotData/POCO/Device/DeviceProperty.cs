@@ -1,4 +1,5 @@
-﻿using System;
+﻿ 
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace iotDbConnector.DAL
         [DataMember]
         [Key]
         [Required]
-        public int PropertyId { get; set; }
+        public int Id { get; set; }
 
         [DataMember]
         [Required]
@@ -26,7 +27,7 @@ namespace iotDbConnector.DAL
         public string VisualRepresentationURL { get; set; }
 
         [DataMember]
-        public virtual List<DeviceParameter> ResultParameters { get; set; }
+        public virtual AIList<DeviceParameter> ResultParameters { get; set; }
 
         [DataMember]
         public DateTime LastUpdateTime { get; set; }

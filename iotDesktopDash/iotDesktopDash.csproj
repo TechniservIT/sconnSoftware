@@ -89,11 +89,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Service References\iotDb\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -137,73 +132,9 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
-    <None Include="Service References\iotDb\iotDatabaseConnector.DAL.POCO.Device.Notify.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\iotDb\iotDbConnector.DAL.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\iotDb\iotDesktopDash.iotDb.ActionParameter.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\iotDb\iotDesktopDash.iotDb.Device.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\iotDb\iotDesktopDash.iotDb.DeviceAction.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\iotDb\iotDesktopDash.iotDb.DeviceCredentials.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\iotDb\iotDesktopDash.iotDb.DeviceParameter.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\iotDb\iotDesktopDash.iotDb.DeviceProperty.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\iotDb\iotDesktopDash.iotDb.DeviceType.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\iotDb\iotDesktopDash.iotDb.EndpointInfo.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\iotDb\iotDesktopDash.iotDb.iotDomain.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\iotDb\iotDesktopDash.iotDb.Location.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\iotDb\iotDesktopDash.iotDb.Site.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\iotDb\service.wsdl" />
-    <None Include="Service References\iotDb\service.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\iotDb\service1.xsd">
-      <SubType>Designer</SubType>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadataStorage Include="Service References\iotDb\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\iotDb\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\iotDb\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\iotDb\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\jquery-1.6.4-vsdoc.js" />

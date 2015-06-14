@@ -92,11 +92,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Service References\iotDbService\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -107,52 +102,6 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
-    <None Include="Service References\iotDbService\iotDatabaseConnector.DAL.POCO.Device.Notify.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\iotDbService\iotDbConnector.DAL.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\iotDbService\iotDomainController.iotDbService.ActionParameter.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\iotDbService\iotDomainController.iotDbService.Device.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\iotDbService\iotDomainController.iotDbService.DeviceAction.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\iotDbService\iotDomainController.iotDbService.DeviceCredentials.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\iotDbService\iotDomainController.iotDbService.DeviceParameter.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\iotDbService\iotDomainController.iotDbService.DeviceProperty.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\iotDbService\iotDomainController.iotDbService.DeviceType.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\iotDbService\iotDomainController.iotDbService.EndpointInfo.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\iotDbService\iotDomainController.iotDbService.iotDomain.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\iotDbService\iotDomainController.iotDbService.Location.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\iotDbService\iotDomainController.iotDbService.Site.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\iotDbService\service.wsdl" />
-    <None Include="Service References\iotDbService\service.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\iotDbService\service1.xsd">
-      <SubType>Designer</SubType>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ProjectInstaller.resx">
@@ -160,27 +109,17 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadataStorage Include="Service References\iotDbService\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\iotDbService\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\iotDbService\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\iotDbService\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="DomainService\Surveillance\Recording\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\iotDatabaseConnector\iotDatabaseConnector.csproj">
+      <Project>{7df5e6fa-5839-456f-959b-af4a7a742775}</Project>
+      <Name>iotDatabaseConnector</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\iotData\iotData.csproj">
+      <Project>{e94b0a02-089e-483a-aaef-3bfa49039598}</Project>
+      <Name>iotData</Name>
+    </ProjectReference>
     <ProjectReference Include="DomainService\IoT\Providers\Mqtt\MqttBroker\MqttBroker.csproj">
       <Project>{4ebfa6e5-0636-496c-8c46-991b05df7491}</Project>
       <Name>MqttBroker</Name>

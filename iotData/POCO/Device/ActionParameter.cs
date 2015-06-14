@@ -5,6 +5,7 @@ using System.Web;
 using System.Data.Entity;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
+ 
 
 namespace iotDbConnector.DAL
 {
@@ -14,7 +15,7 @@ namespace iotDbConnector.DAL
         [DataMember]
         [Key]
         [Required]
-        public int ParameterId { get; set; }
+        public int Id { get; set; }
 
         [DataMember]
         [Required]
@@ -34,7 +35,7 @@ namespace iotDbConnector.DAL
         public virtual DeviceAction Action { get; set; }
 
         [DataMember]
-        public virtual List<sconnConfigMapper> sconnMappers { get; set; }
+        public virtual AIList<sconnConfigMapper> sconnMappers { get; set; }
 
 
         public bool AddSconnMapper(sconnConfigMapper mapper)

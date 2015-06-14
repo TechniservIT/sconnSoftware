@@ -5,6 +5,7 @@ using System.Web;
 using System.ComponentModel.DataAnnotations;
 using iotDash.DAL.Domain;
 using System.Runtime.Serialization;
+ 
 
 namespace iotDbConnector.DAL
 {
@@ -14,7 +15,7 @@ namespace iotDbConnector.DAL
         [DataMember]
         [Key]
         [Required]
-        public int SiteId { get; set; }
+        public int Id { get; set; }
 
         [DataMember]
         [Required]
@@ -24,7 +25,7 @@ namespace iotDbConnector.DAL
         public virtual Location siteLocation { get; set; }
 
         [DataMember]
-        public virtual List<Device> Devices { get; set; }
+        public virtual AIList<Device> Devices { get; set; }
 
         [DataMember]
         [Required]

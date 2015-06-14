@@ -50,7 +50,7 @@ namespace iotDbConnector.DAL
             {
                     iotContext db = new iotContext();            
                     iotDomain domain = (from d in db.Domains
-                                        where d.DomainId == domainId
+                                        where d.Id == domainId
                                         select d).First();
                     return domain;     
             }
@@ -276,10 +276,10 @@ namespace iotDbConnector.DAL
                 iotContext db = new iotContext();
 
                 iotDomain targetDomain = (from d in db.Domains
-                                          where site.Domain.DomainId == d.DomainId
+                                          where site.Domain.Id == d.Id
                                           select d).First();
                 Location siteLocation = (from l in db.Locations
-                                         where l.LocationId == site.siteLocation.LocationId
+                                         where l.Id == site.siteLocation.Id
                                          select l).First();
 
                 Site nsite = new Site();

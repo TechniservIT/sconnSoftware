@@ -93,7 +93,7 @@ namespace iotDeviceService
                 iotContext cont = new iotContext();
                 cont.Configuration.ProxyCreationEnabled = false;
                 cont.Configuration.LazyLoadingEnabled = false;
-                Device dev = cont.Devices.AsNoTracking().Where(d => d.DeviceId == DeviceId).SingleOrDefault(); //repo.GetById(DeviceId);
+                Device dev = cont.Devices.AsNoTracking().Where(d => d.Id == DeviceId).SingleOrDefault(); //repo.GetById(DeviceId);
                 return JsonConvert.SerializeObject(dev);
 
             }
@@ -164,7 +164,7 @@ namespace iotDeviceService
             {
                 iotRepository<Device> repo = new iotRepository<Device>();
                 repo.Add(Device);
-                return Device.DeviceId;
+                return Device.Id;
 
             }
             catch (Exception ex)

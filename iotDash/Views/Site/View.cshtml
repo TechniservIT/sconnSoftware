@@ -63,7 +63,7 @@
         });
 
         $("#ShowAddDeviceView").click(function () {
-            var fullurl = '@Url.Action("Add","Device", new { SiteId = @Model.Site.SiteId} )';
+            var fullurl = '@Url.Action("Add","Device", new { SiteId = @Model.Site.Id} )';
             window.location.href = fullurl;
         });
 
@@ -196,12 +196,12 @@
                     foreach (var item in Model.Site.Devices)
                     {
                         <div class="col-md-3">
-                            <div id="@item.DeviceId" class="panel panel-info">
+                            <div id="@item.Id" class="panel panel-info">
                                 <div class="panel-heading">@item.DeviceName</div>
                                 <div class="panel-body">
                                     <h4>@item.DeviceLocation.LocationName</h4>
                                     <h4>@item.Type.TypeName</h4>
-                                    <a href="@Url.Action("View", "Device", new { DeviceId = item.DeviceId})" class="btn">Show</a>
+                                    <a href="@Url.Action("View", "Device", new { DeviceId = item.Id})" class="btn">Show</a>
                                 </div>
                             </div>
 

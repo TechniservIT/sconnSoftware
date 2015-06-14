@@ -9,6 +9,7 @@ using iotDbConnector;
 using iotDbConnector.DAL;
 using NLog;
 using System.Diagnostics;
+ 
 
 namespace iotServiceProvider
 {
@@ -389,7 +390,7 @@ namespace iotServiceProvider
                 DeviceProperty prop = new DeviceProperty();
                 prop.PropertyName = "Input" + maper.SeqNumber;    //TODO read from name cfg
   
-                Device storedDevice = cont.Devices.Where( d =>  d.DeviceId == edited.DeviceId).First();     //devRepo.GetById(edited.DeviceId);
+                Device storedDevice = cont.Devices.Where( d =>  d.Id == edited.Id).First();     //devRepo.GetById(edited.Id);
                 prop.Device = storedDevice;
                 prop.LastUpdateTime = DateTime.Now;
                 cont.Properties.Add(prop);
@@ -399,7 +400,7 @@ namespace iotServiceProvider
                 DeviceParameter param = new DeviceParameter();
                 param.Value = sconnConfigToStringVal(maper, site.siteCfg.deviceConfigs[DevNo]);
                 ParameterType extType = ParamTypeForSconnMapper(maper);
-                ParameterType inType = cont.ParamTypes.Where(p => p.ParameterId == extType.ParameterId).First();
+                ParameterType inType = cont.ParamTypes.Where(p => p.Id == extType.Id).First();
                 param.Type = inType;
                 param.Property = prop;
                 cont.Parameters.Add(param);
@@ -423,10 +424,10 @@ namespace iotServiceProvider
             try
             {
                 iotContext cont = new iotContext();
-                Device storedDevice = cont.Devices.Where(d => d.DeviceId == edited.DeviceId).First(); 
+                Device storedDevice = cont.Devices.Where(d => d.Id == edited.Id).First(); 
                 DeviceAction action = new DeviceAction();
-                action.RequiredParameters = new List<ActionParameter>();
-                action.ResultParameters = new List<DeviceParameter>();
+                action.RequiredParameters = new AIList<ActionParameter>();
+                action.ResultParameters = new AIList<DeviceParameter>();
                 action.ActionName = "Output" + maper.SeqNumber;    //TODO read from name cfg  
                 action.Device = storedDevice;
                 action.LastActivationTime = DateTime.Now;
@@ -440,7 +441,7 @@ namespace iotServiceProvider
                 actionMaper.SeqNumber = maper.SeqNumber;
 
                 ParameterType extType = ParamTypeForSconnMapper(maper);
-                ParameterType inType = cont.ParamTypes.Where(p => p.ParameterId == extType.ParameterId).First();
+                ParameterType inType = cont.ParamTypes.Where(p => p.Id == extType.Id).First();
                 
                 ActionParameter inparam = new ActionParameter();
                 inparam.Value = sconnConfigToStringVal(actionMaper, site.siteCfg.deviceConfigs[DevNo]);
@@ -477,7 +478,7 @@ namespace iotServiceProvider
             try
             {
                 //iotConnector connt = new iotConnector();
-                //Device edited = connt.DeviceList().Where(n => n.DeviceId == dev.DeviceId).First();
+                //Device edited = connt.DeviceList().Where(n => n.Id == dev.Id).First();
                 //iotRepository<Device> devrep = new iotRepository<Device>();
                 Stopwatch watch = new Stopwatch();
 
@@ -485,11 +486,11 @@ namespace iotServiceProvider
                 watch.Start();
                 iotContext cont = new iotContext();
                 //cont.Configuration.LazyLoadingEnabled = false;
-                //Device edited = cont.Devices.Where(d => d.DeviceId == dev.DeviceId)
+                //Device edited = cont.Devices.Where(d => d.Id == dev.Id)
                 //    .Include(d => d.Actions.Select(a => a.ResultParameters.Select(r => r.sconnMappers)))
                 //    .Include(d => d.Properties.Select(p => p.ResultParameters.Select(r => r.sconnMappers)))
                 //    .First();  
-                Device edited = cont.Devices.Where(d => d.DeviceId == dev.DeviceId).First();
+                Device edited = cont.Devices.Where(d => d.Id == dev.Id).First();
 
                 
                 watch.Stop();

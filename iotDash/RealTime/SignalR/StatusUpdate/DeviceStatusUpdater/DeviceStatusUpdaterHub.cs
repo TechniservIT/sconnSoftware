@@ -46,7 +46,7 @@ namespace iotDash.RealTime.SignalR.DeviceStatusUpdater
              string jsonData = JsonConvert.SerializeObject(dev);
 
              //send to clients
-             //Clients.Client(dev.DeviceId.ToString()).UpdateDevice(jsonData);
+             //Clients.Client(dev.Id.ToString()).UpdateDevice(jsonData);
 
              //TODO only subscribed clients
 

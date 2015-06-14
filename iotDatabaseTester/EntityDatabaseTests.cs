@@ -96,7 +96,7 @@ namespace iotDatabaseTester
             iotRepository<iotDomain> locrepo = new iotRepository<iotDomain>();
             iotDomain dm = new iotDomain();
             dm.DomainName = Guid.NewGuid().ToString();
-            dm.Sites = new List<Site>();
+            dm.Sites = new AIList<Site>();
             locrepo.Add(dm);
 
             List<iotDomain> locs = locrepo.GetAll().ToList();
@@ -145,11 +145,11 @@ namespace iotDatabaseTester
                 //update
                 locs = repo.GetAll().ToList();
                 loc = locs.Where(l => { return l.LocationName == loc.LocationName; }).First();
-                Location StoredBefore = repo.GetById(loc.LocationId);
+                Location StoredBefore = repo.GetById(loc.Id);
                 StoredBefore.Lat = 53.325241;
                 repo.Update(StoredBefore);
                 //verify
-                Location stored = repo.GetById(loc.LocationId);
+                Location stored = repo.GetById(loc.Id);
                 Assert.IsTrue(loc.Lat == stored.Lat);
             }
         }
@@ -218,7 +218,7 @@ namespace iotDatabaseTester
                 for (int i = 0; i < ReadTestInterations; i++)
                 {
 
-                    ReadSuccess = TestRepoSingleRead(loc.DomainId);
+                    ReadSuccess = TestRepoSingleRead(loc.Id);
                     if (!ReadSuccess) { FailCount++; }
 
                 }

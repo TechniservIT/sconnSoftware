@@ -5,7 +5,7 @@ using System.Web;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.ComponentModel;
-
+ 
 
 namespace iotDbConnector.DAL
 {
@@ -16,7 +16,7 @@ namespace iotDbConnector.DAL
         [DataMember]
         [Key]
         [Required]
-        public int ActionId { get; set; }
+        public int Id { get; set; }
 
         [DataMember]
         [Required]
@@ -27,7 +27,7 @@ namespace iotDbConnector.DAL
 
         [DataMember]
         [Required]
-        public virtual List<ActionParameter> RequiredParameters { get; set; }
+        public virtual AIList<ActionParameter> RequiredParameters { get; set; }
 
         [DataMember]
         public string VisualRepresentationURL { get; set; }
@@ -36,7 +36,7 @@ namespace iotDbConnector.DAL
 
         [DataMember]
         [Required]
-        public virtual List<DeviceParameter> ResultParameters { get; set; }
+        public virtual AIList<DeviceParameter> ResultParameters { get; set; }
 
 
         [DataMember]
@@ -60,7 +60,7 @@ namespace iotDbConnector.DAL
             {
                 ApplicationDbContext cont = new ApplicationDbContext();
                 DeviceAction self = (from dp in cont.Actions
-                                       where dp.ActionId == this.ActionId
+                                       where dp.Id == this.Id
                                        select dp).First();
                 if (self != null)
                 {
@@ -72,7 +72,7 @@ namespace iotDbConnector.DAL
 
                         //verify
                         DeviceParameter storedparam = (from dp in cont.Parameters
-                                                       where param.ParameterId == dp.ParameterId
+                                                       where param.Id == dp.Id
                                                        select dp).First();
                         if (storedparam != null)
                         {
@@ -96,7 +96,7 @@ namespace iotDbConnector.DAL
             {
                 ApplicationDbContext cont = new ApplicationDbContext();
                 DeviceAction self = (from dp in cont.Actions
-                                       where dp.ActionId == this.ActionId
+                                       where dp.Id == this.Id
                                        select dp).First();
                 if (self != null)
                 {
@@ -108,7 +108,7 @@ namespace iotDbConnector.DAL
 
                         //verify
                         DeviceParameter storedparam = (from dp in cont.Parameters
-                                                       where param.ParameterId == dp.ParameterId
+                                                       where param.Id == dp.Id
                                                        select dp).First();
                         if (storedparam != null)
                         {
@@ -132,7 +132,7 @@ namespace iotDbConnector.DAL
             try
             {
                 DeviceAction self = (from dp in cont.Actions
-                                     where dp.ActionId == this.ActionId
+                                     where dp.Id == this.Id
                                        select dp).FirstOrDefault();
                 if (self != null)
                 {
@@ -156,7 +156,7 @@ namespace iotDbConnector.DAL
                     cont.SaveChanges();
                 }
                 DeviceAction self = (from dp in cont.Actions
-                                       where dp.ActionId == this.ActionId
+                                       where dp.Id == this.Id
                                        select dp).FirstOrDefault();
                 return self;
             }

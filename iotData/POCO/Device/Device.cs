@@ -4,6 +4,7 @@ using System.Linq;
 using System.ComponentModel.DataAnnotations;
 using System.Web;
 using System.Runtime.Serialization;
+ 
 
 namespace iotDbConnector.DAL
 {
@@ -13,7 +14,7 @@ namespace iotDbConnector.DAL
         [DataMember]
         [Key]
         [Required]
-        public int DeviceId { get; set; }
+        public int Id { get; set; }
 
         [DataMember]
         [Required]
@@ -27,10 +28,10 @@ namespace iotDbConnector.DAL
         public virtual DeviceCredentials Credentials { get; set; }
 
         [DataMember]
-        public virtual List<DeviceAction> Actions { get; set; }
+        public virtual AIList<DeviceAction> Actions { get; set; }
 
         [DataMember]
-        public virtual List<DeviceProperty> Properties { get; set; }
+        public virtual AIList<DeviceProperty> Properties { get; set; }
 
         [DataMember]
         [Required]

@@ -54,7 +54,7 @@ namespace iotServiceProvider
                 //get act device 
                 iotContext cont = new iotContext();
                 Device dbDevice = (from d in cont.Devices
-                                   where d.DeviceId == dev.DeviceId
+                                   where d.Id == dev.Id
                                    select d).First();
                 DeviceUpdated(dbDevice);
             }

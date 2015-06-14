@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.ComponentModel;
 using iotDatabaseConnector.DAL.POCO.Device.Notify;
-
+ 
 
 namespace iotDbConnector.DAL
 {
@@ -19,7 +19,7 @@ namespace iotDbConnector.DAL
         [DataMember]
         [Key]
         [Required]
-        public int ParameterId { get; set; }
+        public int Id { get; set; }
 
 
         private string _Value;
@@ -58,10 +58,10 @@ namespace iotDbConnector.DAL
         public virtual DeviceProperty Property { get; set; }
 
         [DataMember]
-        public virtual List<sconnConfigMapper> sconnMappers { get; set; }
+        public virtual AIList<sconnConfigMapper> sconnMappers { get; set; }
 
         [DataMember]
-        public virtual List<ParameterChangeHistory> Changes { get; set; }
+        public virtual AIList<ParameterChangeHistory> Changes { get; set; }
 
 
     }

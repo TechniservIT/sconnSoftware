@@ -91,7 +91,7 @@ namespace iotNoSqlDatabase
                             RavenJObject.FromObject(new Device
                             {
                                 DeviceName = "sconnGKP",
-                                DeviceId = id
+                                Id = id
                             }),
                             new RavenJObject());
 
