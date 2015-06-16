@@ -28,7 +28,10 @@ namespace iotDbConnector.DAL
         [DataMember]
         public virtual AIList<Location> Locations { get; set; }
 
-      
+        [DataMember]
+        public virtual AIList<DeviceType> DeviceTypes { get; set; }
+
+
 
     }
 }
