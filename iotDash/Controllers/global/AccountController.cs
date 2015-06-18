@@ -10,9 +10,11 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
 using iotDash.Models;
 using System.Web.Security;
-using iotDash.Service;
+
 using iotDbConnector.DAL;
 using iotServiceProvider;
+using iotDeviceService;
+using iotDash.Session;
 
 namespace iotDash
 {
@@ -58,8 +60,9 @@ namespace iotDash
                                     where u.UserName.Equals(  model.UserName )
                                     select u).First();
 
-                        IiotDomainService cl = new iotServiceConnector().GetDomainClient();
-                        iotDomain domain = cl.GetDomainWithId(currentUser.DomainId);
+                    DeviceRestfulService cl = new DeviceRestfulService();
+                    string domainId = DomainSession.GetContextDomain(this.HttpContext);
+                    iotDomain domain = cl.GetDomainWithId(domainId);
                     if(domain != null)
                     {
                         Session["AppDomain"] = domain.DomainName;
@@ -103,12 +106,12 @@ namespace iotDash
                     //create domain for new account then user
                     //IiotDomainServiceClient cl = iotServiceConnector.ServiceClient();
 
-                    IiotDomainService cl = new iotServiceConnector().GetDomainClient();
-                    List<iotDomain> domains = cl.Domains().ToList();
-                        //TODO query domain for name instead
-
-                    var existingDomainsForName = domains.Where(d => d.DomainName.Equals(model.DomainName));
-                    if (existingDomainsForName.Count() <= 0)    //domain does not exist
+                    DeviceRestfulService cl = new DeviceRestfulService();
+                    iotDomain existingDomain = cl.GetDomainWithId(model.DomainName);
+                    //List<iotDomain> domains = cl.Domains().ToList();
+                    
+                    //var existingDomainsForName = domains.Where(d => d.DomainName.Equals(model.DomainName));
+                    if (existingDomain == null)    //domain does not exist
                     {
                         //create domain
                         iotDomain domain = new iotDomain();

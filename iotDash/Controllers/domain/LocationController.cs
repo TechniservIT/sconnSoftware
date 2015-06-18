@@ -1,6 +1,7 @@
 ﻿using iotDash.Models;
-using iotDash.Service;
+using iotDash.Session;
 using iotDbConnector.DAL;
+using iotDeviceService;
 using iotServiceProvider;
 using System;
 using System.Collections.Generic;
@@ -20,8 +21,9 @@ namespace iotDash.Controllers
 		[OutputCache(Duration = 10, Location = OutputCacheLocation.Any, VaryByParam = "none")]
 		public ActionResult Index()
 		{
-			IiotDomainService cl = new iotServiceConnector().GetDomainClient();
-			List<Location> locs = cl.Locations().ToList();
+			DeviceRestfulService cl = new DeviceRestfulService();
+            string domainId = DomainSession.GetContextDomain(this.HttpContext);
+            List<Location> locs = cl.Locations(domainId).ToList();
 			LocationListViewModel model = new LocationListViewModel(locs);
 			return View(model);
 		}
@@ -37,15 +39,16 @@ namespace iotDash.Controllers
 							where u.UserName == username
 							select u).First();
 
-				IiotDomainService cl = new iotServiceConnector().GetDomainClient();
-				iotDomain domain = cl.GetDomainWithId(user.DomainId);
+				DeviceRestfulService cl = new DeviceRestfulService();
+                string domainId = DomainSession.GetContextDomain(this.HttpContext);
+                iotDomain domain = cl.GetDomainWithId(domainId);
 
 				Location loc = new Location();
 				loc.Domain = domain;
 				loc.LocationName = Name;
 				loc.Lng = double.Parse(Lng, CultureInfo.InvariantCulture);
 				loc.Lat = double.Parse(Lat, CultureInfo.InvariantCulture);
-				cl.LocationAdd(loc);
+				cl.LocationAdd(loc,domainId);
 				return "Location added sucessfully";
 			}
 			catch (Exception e)
@@ -64,8 +67,9 @@ namespace iotDash.Controllers
 			try
 			{
 				int LocId = int.Parse(LocationId);
-				IiotDomainService cl = new iotServiceConnector().GetDomainClient();
-				Location loc = cl.LocationWithId(LocId);
+				DeviceRestfulService cl = new DeviceRestfulService();
+                string domainId = DomainSession.GetContextDomain(this.HttpContext);
+                Location loc = cl.LocationWithId(LocId,domainId);
 				if (loc != null)
 				{
 					LocationEditViewModel model = new LocationEditViewModel(loc);
@@ -83,8 +87,9 @@ namespace iotDash.Controllers
 			try
 			{
 				int LocId = int.Parse(LocationId);
-				IiotDomainService cl = new iotServiceConnector().GetDomainClient();
-				Location loc = cl.LocationWithId(LocId);
+				DeviceRestfulService cl = new DeviceRestfulService();
+                string domainId = DomainSession.GetContextDomain(this.HttpContext);
+                Location loc = cl.LocationWithId(LocId,domainId);
 				//TODO remove
 				return true;     
 			}

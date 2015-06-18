@@ -30,11 +30,11 @@ namespace iotDeviceService
 
         [OperationContract]
         [WebGet(UriTemplate = "Device/{id}")]
-        String GetDevice(string id);
+        Device GetDevice(string id);
 
         [WebGet(UriTemplate = "Devices")]
         [OperationContract]
-        String GetAllDevices();
+        List<Device> GetAllDevices();
 
 
         [OperationContract]
@@ -70,7 +70,7 @@ namespace iotDeviceService
 
         [OperationContract]
         [WebInvoke(UriTemplate = "Domain/Get/{name}", Method = "GET")]
-        string GetDomainWithName(string name);
+        iotDomain GetDomainWithName(string name);
         
 
         //[OperationContract]

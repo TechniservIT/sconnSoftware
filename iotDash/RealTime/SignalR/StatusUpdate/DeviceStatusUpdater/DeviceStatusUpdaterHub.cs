@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using iotDbConnector.DAL;
 using iotServiceProvider;
-using iotDash.Service;
+using iotDeviceService;
+using iotDash.Session;
 
 namespace iotDash.RealTime.SignalR.DeviceStatusUpdater
 {
@@ -19,7 +20,7 @@ namespace iotDash.RealTime.SignalR.DeviceStatusUpdater
         public delegate void DeviceEventCallbackHandler(Device dev);
         public static event DeviceEventCallbackHandler DeviceCallbackEvent;
 
-        private IDeviceEventService client;
+        private DeviceRestfulService client;
 
         [CallbackBehaviorAttribute(UseSynchronizationContext = true)]
         public class DeviceEventServiceCallback : IDeviceEventCallback
@@ -33,12 +34,13 @@ namespace iotDash.RealTime.SignalR.DeviceStatusUpdater
          public DeviceStatusUpdaterHub()
          {
              InstanceContext context = new InstanceContext(new DeviceEventServiceCallback());
-             client = new iotServiceConnector().GetEventClient(context);
-             
+             client = new DeviceRestfulService();
+
              DeviceEventCallbackHandler callbackHandler = new DeviceEventCallbackHandler(PublishDeviceUpdate);
              DeviceCallbackEvent += callbackHandler;
 
-             client.Subscribe();
+            //TODO Restful subcribe
+            // client.Subscribe();
          }
 
          public void PublishDeviceUpdate(Device dev)
@@ -92,18 +94,19 @@ namespace iotDash.RealTime.SignalR.DeviceStatusUpdater
              Clients.All.updateDevice(jsonActs);
          }
 
-        public void UpdateProperty(string propertyData)
+        public void UpdateProperty(string propertyData,int SiteId, int DeviceId, string DomainId)
          {
                 DeviceProperty prop = (DeviceProperty)JsonConvert.DeserializeObject(propertyData);
-                IiotDomainService cl = new iotServiceConnector().GetDomainClient();
-                cl.PropertyUpdate(prop);
+                DeviceRestfulService cl = new DeviceRestfulService();
+                cl.PropertyUpdate(prop,DeviceId,SiteId,DomainId);
         }
 
         public void UpdateParameter(string paramData)
         {
             DeviceParameter param = (DeviceParameter)JsonConvert.DeserializeObject(paramData);
-            IiotDomainService cl = new iotServiceConnector().GetDomainClient();
-            cl.ResParamUpdate(param);
+            DeviceRestfulService cl = new DeviceRestfulService();
+            string domainId = DomainSession.GetContextDomain(null);   //TODO
+            cl.ResParamUpdate(param,domainId);
         }
 
     }

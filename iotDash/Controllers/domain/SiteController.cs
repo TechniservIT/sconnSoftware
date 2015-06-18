@@ -6,9 +6,10 @@ using System.Web;
 using System.Web.Mvc;
 using iotDash.Session;
 using System.ServiceModel;
-using iotDash.Service;
+ 
 using iotDbConnector.DAL;
 using iotServiceProvider;
+using iotDeviceService;
 
 namespace iotDash.Controllers
 {
@@ -27,8 +28,9 @@ namespace iotDash.Controllers
             List<Site> Sites = new List<Site>();
             try
             {
-                IiotDomainService cl = new iotServiceConnector().GetDomainClient();
-                Sites =   cl.Sites().ToList();
+                DeviceRestfulService cl = new DeviceRestfulService();
+                string domainId = DomainSession.GetContextDomain(this.HttpContext);
+                Sites = cl.GetSitesInDomain(domainId).ToList();
             }
             catch (Exception e)
             {
@@ -41,14 +43,16 @@ namespace iotDash.Controllers
 
 
         //Remove device and return status
-        public bool RemoveDevice(string DeviceId)
+        public bool RemoveDevice(string DeviceId, string SiteId)
         {
             int devid = int.Parse(DeviceId);
+            int sid = int.Parse(SiteId);
             try
             {
-                IiotDomainService cl = new iotServiceConnector().GetDomainClient();
-                Device dev = cl.DeviceWithId(devid);
-                cl.DeviceRemove(dev);
+                DeviceRestfulService cl = new DeviceRestfulService();
+                string domainId = DomainSession.GetContextDomain(this.HttpContext);
+                Device dev = cl.DeviceWithId(devid, sid, domainId);
+                cl.DeviceRemove(dev,sid,domainId);
                 return true;
             }
             catch (Exception e)
@@ -65,8 +69,9 @@ namespace iotDash.Controllers
             int id = int.Parse(SiteId);
             try
             {
-                IiotDomainService cl = new iotServiceConnector().GetDomainClient();
-                Site siteToView = cl.SiteWithId(id);
+                DeviceRestfulService cl = new DeviceRestfulService();
+                string domainId = DomainSession.GetContextDomain(this.HttpContext);
+                Site siteToView = cl.SiteWithId(domainId,id);
                 DeviceListViewModel model = new DeviceListViewModel(siteToView);
                 return View(model);
                 
@@ -96,8 +101,9 @@ namespace iotDash.Controllers
             List<Location> Locations = new List<Location>();
             try
             {
-                IiotDomainService cl = new iotServiceConnector().GetDomainClient();
-                Locations = cl.Locations().ToList();
+                DeviceRestfulService cl = new DeviceRestfulService();
+                string domainId = DomainSession.GetContextDomain(this.HttpContext);
+                Locations = cl.Locations(domainId).ToList();
             }
             catch (Exception e)
             {
@@ -113,18 +119,19 @@ namespace iotDash.Controllers
         {
             try
             {
-                IiotDomainService cl = new iotServiceConnector().GetDomainClient();
+                DeviceRestfulService cl = new DeviceRestfulService();
                 int LocIdnum = int.Parse(LocId);
-                Location loc = cl.LocationWithId(LocIdnum);
+                string domainId = DomainSession.GetContextDomain(this.HttpContext);
+                Location loc = cl.LocationWithId(LocIdnum,domainId);
                 if (loc != null)
                 {
                     Site site = new Site();
                     site.SiteName = Name;
                     site.siteLocation = loc;
                     iotDomain domain = SessionManager.AppDomainForUserContext(this.HttpContext);
-                    iotDomain targetDomain = cl.DomainWithId(domain.Id);
+                    iotDomain targetDomain = cl.DomainWithId(domain.DomainName);
                     site.Domain = targetDomain;
-                    cl.SiteAdd(site);
+                    cl.AddSiteToDomain(site,domain.DomainName);
                 }
                 else
                 {
@@ -162,8 +169,9 @@ namespace iotDash.Controllers
         {
             if (site != null)
             {
-                IiotDomainService cl = new iotServiceConnector().GetDomainClient();
-                cl.SiteAdd(site);
+                DeviceRestfulService cl = new DeviceRestfulService();
+                string domainId = DomainSession.GetContextDomain(this.HttpContext);
+                cl.AddSiteToDomain(site,domainId);
             }
             //show status 
             return View();

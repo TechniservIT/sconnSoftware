@@ -1,5 +1,7 @@
-﻿using iotDash.Service;
+﻿
+using iotDash.Session;
 using iotDbConnector.DAL;
+using iotDeviceService;
 using iotServiceProvider;
 using System;
 using System.Collections.Generic;
@@ -18,14 +20,14 @@ namespace iotDash.Models
         public Site DeviceSite { get; set; }
 
 
-        public DeviceAddModel()
+        public DeviceAddModel(string DomainId)
         {
-            IiotDomainService cl = new iotServiceConnector().GetDomainClient();
-            Locations = cl.Locations().ToList();
-            Types = cl.DeviceTypes().ToList();
+            DeviceRestfulService cl = new DeviceRestfulService();
+            Locations = cl.Locations(DomainId).ToList();
+            Types = cl.DeviceTypes(DomainId).ToList();
         }
-
-        public DeviceAddModel(Site site) : this()
+        
+        public DeviceAddModel(Site site, string DomainId) : this(DomainId)
         {
             DeviceSite = site;
         }

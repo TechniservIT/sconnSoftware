@@ -1,5 +1,6 @@
-﻿using iotDash.Service;
+﻿
 using iotDbConnector.DAL;
+using iotDeviceService;
 using iotServiceProvider;
 using System;
 using System.Collections.Generic;
@@ -10,16 +11,18 @@ namespace iotDash.Models
 {
     public class DevicePropertyStatisticModel
     {
-        public DeviceProperty Property { get; set; }
+        private DeviceProperty Property { get; set; }
 
-        public DevicePropertyStatisticModel(int propId)
+        public DevicePropertyStatisticModel(DeviceProperty prop)
         {
-            IiotDomainService cl = new iotServiceConnector().GetDomainClient();
-            DeviceProperty prop = cl.DevicePropertieWithId(propId);
-            if (prop != null)
-            {
-                Property = prop;
-            }
+            //DeviceRestfulService cl = new DeviceRestfulService();
+            //DeviceProperty prop = cl.DevicePropertieWithId(propId,);
+            //if (prop != null)
+            //{
+            //    Property = prop;
+            //}
+
+            this.Property = prop;
         }
 
         public DevicePropertyStatisticModel()
@@ -32,16 +35,18 @@ namespace iotDash.Models
 
     public class DeviceActionStatisticModel
     {
-        public DeviceAction Action { get; set; }
+        private DeviceAction Action { get; set; }
 
-        public DeviceActionStatisticModel(int actId)
+        public DeviceActionStatisticModel(DeviceAction action)
         {
-            IiotDomainService cl = new iotServiceConnector().GetDomainClient();
-            DeviceAction act = cl.DeviceActionWithId(actId);
-            if (act != null)
-            {
-                Action = act;
-            }
+            //DeviceRestfulService cl = new DeviceRestfulService();
+            //DeviceAction act = cl.DeviceActionWithId(actId);
+            //if (act != null)
+            //{
+            //    Action = act;
+            //}
+
+            this.Action = action;
         }
 
         public DeviceActionStatisticModel()

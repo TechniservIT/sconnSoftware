@@ -84,11 +84,8 @@ namespace iotDeviceService
             }
 
         }
-
-
-
-
-        public String GetDevice(string id)
+        
+        public Device GetDevice(string id)
         {
             try
             {
@@ -97,7 +94,8 @@ namespace iotDeviceService
                 cont.Configuration.ProxyCreationEnabled = false;
                 cont.Configuration.LazyLoadingEnabled = false;
                 Device dev = cont.Devices.AsNoTracking().Where(d => d.Id == DeviceId).SingleOrDefault(); //repo.GetById(DeviceId);
-                return JsonConvert.SerializeObject(dev);
+                return dev;
+                //return JsonConvert.SerializeObject(dev);
 
             }
             catch (Exception ex)
@@ -141,7 +139,7 @@ namespace iotDeviceService
 
 
 
-        public String GetAllDevices()
+        public List<Device> Devices()
         {
             try
             {
@@ -150,7 +148,8 @@ namespace iotDeviceService
                 cont.Configuration.ProxyCreationEnabled = false;
                 cont.Configuration.LazyLoadingEnabled = false;
                 List<Device> devs = cont.Devices.AsNoTracking().ToList(); //repo.GetById(DeviceId);
-                return JsonConvert.SerializeObject(devs);
+                return devs;
+                //return JsonConvert.SerializeObject(devs);
 
             }
             catch (Exception ex)
@@ -234,17 +233,18 @@ namespace iotDeviceService
 
         private Logger nlogger = LogManager.GetCurrentClassLogger();
         
-        public string GetDomainWithName(string name)
+        public iotDomain GetDomainWithName(string name)
         {
             try
             {
                 RedisNoSqlDataSource<iotDomain> db = new RedisNoSqlDataSource<iotDomain>();
-                return JsonConvert.SerializeObject(db.GetById(name));
+                return db.GetById(name);
+                // return JsonConvert.SerializeObject(db.GetById(name));
             }
             catch (Exception e)
             {
                 nlogger.ErrorException(e.Message, e);
-                return "";
+                return null;
             }
         }
 
@@ -259,7 +259,7 @@ namespace iotDeviceService
             catch (Exception e)
             {
                 nlogger.ErrorException(e.Message, e);
-                return new iotDomain();
+                return null;
             }
         }
 
@@ -903,6 +903,11 @@ namespace iotDeviceService
         }
 
 
+        public List<Device> GetAllDevices()
+        {
+            return null;
+        }
+
         public DeviceType DeviceTypeWithId(int id, string DomainId)
         {
             try
@@ -1109,20 +1114,34 @@ namespace iotDeviceService
         }
 
 
-        //public bool ResParamUpdate(DeviceParameter param, int DeviceId, int SiteId, string DomainId)
-        //{
-        //    try
-        //    {
-        //        iotRepository<DeviceParameter> repo = new iotRepository<DeviceParameter>();
-        //        repo.Update(domain);
-        //        return true;
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        nlogger.ErrorException(e.Message, e);
-        //        return false;
-        //    }
-        //}
+        public bool ResParamUpdate(DeviceParameter param, string DomainId)
+        {
+            try
+            {
+                RedisNoSqlDataSource<iotDomain> db = new RedisNoSqlDataSource<iotDomain>();
+                iotDomain domain = db.GetById(DomainId);
+                if (domain != null)
+                {
+                    if (param.Action != null)
+                    {
+                       // ActionParameter param =this.DeviceActionWithId(param.Action.Id);
+                      //  repo.Update(domain);
+                    }
+                    else
+                    {
+                     //   DeviceParameter param = domain..First(p => p.Id == Property.Id);
+                    //    repo.Update(domain);
+                    }
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception e)
+            {
+                nlogger.ErrorException(e.Message, e);
+                return false;
+            }
+        }
 
 
         //public bool ReqParamUpdate(ActionParameter param, int DeviceId, int SiteId, string DomainId)

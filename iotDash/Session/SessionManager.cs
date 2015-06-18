@@ -4,9 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Principal;
 using System.Web;
-using iotDash.Service;
+
 using iotDbConnector.DAL;
 using iotServiceProvider;
+using iotDeviceService;
 
 namespace iotDash.Session
 {
@@ -42,8 +43,9 @@ namespace iotDash.Session
                 ApplicationUser user = GetUserWithName(username);
                 if (user != null)
                 {
-                    IiotDomainService cl = new iotServiceConnector().GetDomainClient();
-                    iotDomain domain = cl.GetDomainWithId(user.DomainId);
+                    DeviceRestfulService cl = new DeviceRestfulService();
+                    string domainId = DomainSession.GetContextDomain(cont);
+                    iotDomain domain = cl.GetDomainWithId(domainId);
                       return domain;
                 }
                 else

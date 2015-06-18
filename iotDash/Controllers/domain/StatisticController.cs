@@ -4,6 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using iotDash.Models;
+using iotDbConnector.DAL;
+using iotDash.Session;
+using iotDeviceService;
 
 namespace iotDash.Controllers
 {
@@ -15,15 +18,21 @@ namespace iotDash.Controllers
             return View();
         }
 
-        public ActionResult PropertyStat(int propertyId)
+        public ActionResult PropertyStat(int propertyId, int DeviceId, int SiteId)
         {
-            DevicePropertyStatisticModel model = new DevicePropertyStatisticModel(propertyId);
+            string domainId = DomainSession.GetContextDomain(this.HttpContext);
+            DeviceRestfulService cl = new DeviceRestfulService();
+            DeviceProperty prop = cl.DevicePropertieWithId(propertyId,DeviceId,SiteId, domainId);
+            DevicePropertyStatisticModel model = new DevicePropertyStatisticModel(prop);
             return View(model);
         }
 
-        public ActionResult ActionStat(int actionId)
+        public ActionResult ActionStat(int actionId, int DeviceId, int SiteId)
         {
-            DeviceActionStatisticModel model = new DeviceActionStatisticModel(actionId);
+            string domainId = DomainSession.GetContextDomain(this.HttpContext);
+            DeviceRestfulService cl = new DeviceRestfulService();
+            DeviceAction prop = cl.DeviceActionWithId(actionId, DeviceId, SiteId, domainId);
+            DeviceActionStatisticModel model = new DeviceActionStatisticModel(prop);
             return View(model);
         }
 

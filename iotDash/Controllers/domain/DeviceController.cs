@@ -4,9 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using iotDash.Service;
 using iotDbConnector.DAL;
 using iotServiceProvider;
+using iotDeviceService;
+using iotDash.Session;
 
 namespace iotDash.Controllers
 {
@@ -31,9 +32,10 @@ namespace iotDash.Controllers
 			try
 			{
 				int Id = int.Parse(SiteId);
-				IiotDomainService cl = new iotServiceConnector().GetDomainClient();
-				Site toEdit = cl.SiteWithId(Id);
-				DeviceAddModel model = new DeviceAddModel(toEdit);
+                string domainId = DomainSession.GetContextDomain(this.HttpContext);
+                DeviceRestfulService cl = new DeviceRestfulService();
+                Site toEdit = cl.SiteWithId(domainId, Id);
+				DeviceAddModel model = new DeviceAddModel(toEdit,domainId);
 				return View(model);
 			}
 			catch (Exception e)
@@ -48,12 +50,13 @@ namespace iotDash.Controllers
 		{
 			try
 			{
-				IiotDomainService cl = new iotServiceConnector().GetDomainClient();
-				DeviceType type = new DeviceType();
+				DeviceRestfulService cl = new DeviceRestfulService();
+                string domainId = DomainSession.GetContextDomain(this.HttpContext);
+                DeviceType type = new DeviceType();
 				type.TypeName = Name;
 				type.TypeDescription = Description;
 				type.VisualRepresentationURL = ImageUrl;
-				cl.DeviceTypeAdd(type);
+				cl.DeviceTypeAdd(type,domainId);
 				return "Add success.";
 			}
 			catch (Exception e) 
@@ -77,9 +80,10 @@ namespace iotDash.Controllers
 			
 			try
 			{
-				//TODO verify param
-				IiotDomainService cl = new iotServiceConnector().GetDomainClient();
-				Device dev = cl.DeviceAddWithParams(SiteId, Name, Host, Port, Login, Pass, Type, Loc, Prot);
+                //TODO verify param
+                DeviceRestfulService cl = new DeviceRestfulService();
+                string domainId = DomainSession.GetContextDomain(this.HttpContext);
+                Device dev = cl.DeviceAddWithParams(SiteId, Name, Host, Port, Login, Pass, Type, Loc, Prot,domainId);
 				if (dev != null)
 				{
 					return "Success";       
@@ -97,17 +101,17 @@ namespace iotDash.Controllers
 		}
 
 		// GET: /Device/View/<number>
-		public ActionResult View(int DeviceId)
+		public ActionResult View(int DeviceId,int SiteId)
 		{
 			try
 			{
-				IiotDomainService cl = new iotServiceConnector().GetDomainClient();
-				List<Device> devs = cl.Devices().ToList();
+                DeviceRestfulService cl = new DeviceRestfulService();
+                List<Device> devs = cl.Devices().ToList();
 				Device dev = (from d in devs
 							  where d.Id == DeviceId
 							  select d).First();
-
-				cl.UpdateDeviceProperties(dev); 
+                string domainId = DomainSession.GetContextDomain(this.HttpContext);
+                cl.UpdateDeviceProperties(dev,SiteId,domainId); 
 				DeviceViewModel model = new DeviceViewModel(dev);
 				return View(model);
 			}
@@ -122,7 +126,7 @@ namespace iotDash.Controllers
 		{
 			try
 			{
-				IiotDomainService cl = new iotServiceConnector().GetDomainClient();
+				DeviceRestfulService cl = new DeviceRestfulService();
 				List<Device> devs = cl.Devices().ToList();
 				Device dev = (from d in devs
 							  where d.Id == DeviceId
@@ -138,19 +142,20 @@ namespace iotDash.Controllers
 
 
 
-		public string PerformAction(int ActionId, string[] ActionParams)
+		public string PerformAction(int SiteId, int DeviceId, int ActionId, string[] ActionParams)
 		{   
 			try
 			{
-				IiotDomainService cl = new iotServiceConnector().GetDomainClient();
-				List<DeviceAction> actions = cl.DeviceActions().ToList();
+				DeviceRestfulService cl = new DeviceRestfulService();
+                string domainId = DomainSession.GetContextDomain(this.HttpContext);
+                List<DeviceAction> actions = cl.DeviceActions(DeviceId,SiteId,domainId).ToList();
 				DeviceAction action = (from ac in actions
 									   where ac.Id == ActionId
 									   select ac).First();
 				string currValStr = action.ResultParameters.First().Value;
 				action.RequiredParameters.First().Value = currValStr.Equals("1") ? "0" : "1";   //toggle
 				action.RequiredParameters.First().Type = action.ResultParameters.First().Type;
-				bool result = cl.PerformDeviceAction(action);
+				bool result = cl.PerformDeviceAction(action,DeviceId,SiteId,domainId);
 				return result == true ? "success" : "error";
 			}
 			catch (Exception e)

@@ -7,10 +7,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using iotDash.Service;
+
 using iotServiceProvider;
 using iotDbConnector.DAL;
 using System.Web.UI;
+using iotDeviceService;
+using iotDash.Session;
 
 namespace iotDash.Controllers
 {
@@ -81,8 +83,9 @@ namespace iotDash.Controllers
                                            where u.UserName.Equals( user.UserName )
                                            select u).First();
 
-                        IiotDomainService cl = new iotServiceConnector().GetDomainClient();
-                        iotDomain domain = cl.GetDomainWithId(currentUser.DomainId);
+                        DeviceRestfulService cl = new DeviceRestfulService();
+                        string domainId = DomainSession.GetContextDomain(this.HttpContext);
+                        iotDomain domain = cl.GetDomainWithId(domainId);
                         if (domain != null)
                         {
                             Session["AppDomain"] = domain.DomainName;

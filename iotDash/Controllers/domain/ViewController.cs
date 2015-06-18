@@ -4,9 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using iotDash.Service;
+
 using iotDbConnector.DAL;
 using iotServiceProvider;
+using iotDeviceService;
 
 namespace iotDash.Controllers
 {
@@ -20,6 +21,7 @@ namespace iotDash.Controllers
         {
             _authorize = true;  //auth by default
         }
+
 
         protected override bool AuthorizeCore(HttpContextBase httpContext)
         {
@@ -43,8 +45,8 @@ namespace iotDash.Controllers
                                     where u.UserName == username
                                     select u).First();
 
-                        IiotDomainService cl = new iotServiceConnector().GetDomainClient();
-                        iotDomain domain = cl.GetDomainWithId(user.DomainId);
+                        DeviceRestfulService cl = new DeviceRestfulService();
+                        iotDomain domain = cl.GetDomainWithId(appdomain);
 
                         if (domain.DomainName == appdomain)
                         {
