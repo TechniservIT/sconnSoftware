@@ -269,7 +269,8 @@ namespace iotDeviceService
             try
             {
                 RedisNoSqlDataSource<iotDomain> db = new RedisNoSqlDataSource<iotDomain>();
-                return db.Add(domain).Length > 0;
+                domain.Id = domain.DomainName; 
+                return db.AddWithId(domain,domain.DomainName);
             }
             catch (Exception e)
             {
@@ -293,7 +294,7 @@ namespace iotDeviceService
                     //add to devices
                     Site site = domain.Sites.First(s => s.Id == SiteId);
                     site.Devices.Add(dev);
-                    db.Update(domain);  //update domain
+                    db.UpdateById(domain,domain.DomainName);  //update domain
                     return true;
                 }
                 return false;
@@ -315,8 +316,12 @@ namespace iotDeviceService
                 iotDomain domain = db.GetById(DomainId);     //fetch domain from DB
                 if (domain != null)
                 {
+                    if (domain.Sites == null)
+                    {
+                        domain.Sites = new AIList<Site>();
+                    }
                     domain.Sites.Add(site);
-                    db.Update(domain);  //update domain
+                    db.UpdateById(domain,domain.DomainName);  //update domain
                     return true;
                 }
                 return false;
@@ -340,7 +345,7 @@ namespace iotDeviceService
                     Site site = domain.Sites.First(s => s.Id == SiteId);
                     Device dev = site.Devices.First(d => d.Id == DeviceId);
                     dev.Actions.Add(action);
-                    db.Update(domain);  //update domain
+                    db.UpdateById(domain,domain.DomainName);  //update domain
                     return true;
                 }
                 return false;
@@ -364,7 +369,7 @@ namespace iotDeviceService
                     Site site = domain.Sites.First(s => s.Id == SiteId);
                     Device dev = site.Devices.First(d => d.Id == DeviceId);
                     dev.Properties.Add(prop);
-                    db.Update(domain);  //update domain
+                    db.UpdateById(domain,domain.DomainName);  //update domain
                     return true;
                 }
                 return false;
@@ -385,8 +390,12 @@ namespace iotDeviceService
                 iotDomain domain = db.GetById(DomainId);     //fetch domain from DB
                 if (domain != null)
                 {
+                    if (domain.Locations == null)
+                    {
+                        domain.Locations = new AIList<Location>();
+                    }
                     domain.Locations.Add(loc);
-                    db.Update(domain);  //update domain
+                    db.UpdateById(domain,domain.DomainName);  //update domain
                     return true;
                 }
                 return false;
@@ -411,7 +420,7 @@ namespace iotDeviceService
                     Device dev = site.Devices.First(d => d.Id == DeviceId);
                     DeviceAction act = dev.Actions.First(a => a.Id == ActionId);
                     act.ResultParameters.Add(param);
-                    db.Update(domain);  //update domain
+                    db.UpdateById(domain,domain.DomainName);  //update domain
                     return true;
                 }
                 return false;
@@ -436,7 +445,7 @@ namespace iotDeviceService
                     Device dev = site.Devices.First(d => d.Id == DeviceId);
                     DeviceProperty act = dev.Properties.First(a => a.Id == PropertyId);
                     act.ResultParameters.Add(param);
-                    db.Update(domain);  //update domain
+                    db.UpdateById(domain,domain.DomainName);  //update domain
                     return true;
                 }
                 return false;
@@ -462,7 +471,7 @@ namespace iotDeviceService
                     Device dev = site.Devices.First(d => d.Id == DeviceId);
                     DeviceAction act = dev.Actions.First(a => a.Id == ActionId);
                     act.RequiredParameters.Add(param);
-                    db.Update(domain);  //update domain
+                    db.UpdateById(domain,domain.DomainName);  //update domain
                     return true;
                 }
                 return false;
@@ -484,8 +493,12 @@ namespace iotDeviceService
                 iotDomain domain = db.GetById(DomainId);     //fetch domain from DB
                 if (domain != null)
                 {
+                    if (domain.DeviceTypes == null)
+                    {
+                        domain.DeviceTypes = new AIList<DeviceType>();
+                    }
                     domain.DeviceTypes.Add(type);
-                    db.Update(domain);  //update domain
+                    db.UpdateById(domain,domain.DomainName);  //update domain
                     return true;
                 }
                 return false;
@@ -509,7 +522,7 @@ namespace iotDeviceService
                     Site site = domain.Sites.First(s => s.Id == SiteId);
                     Device dev = site.Devices.First(d => d.Id == DeviceId);
                     dev.Credentials = creds;
-                    db.Update(domain);  //update domain
+                    db.UpdateById(domain,domain.DomainName);  //update domain
                     return true;
                 }
                 return false;
@@ -532,7 +545,7 @@ namespace iotDeviceService
                     Site site = domain.Sites.First(s => s.Id == SiteId);
                     Device dev = site.Devices.First(d => d.Id == DeviceId);
                     dev.EndpInfo = endp;
-                    db.Update(domain);  //update domain
+                    db.UpdateById(domain,domain.DomainName);  //update domain
                     return true;
                 }
                 return false;
@@ -1003,9 +1016,15 @@ namespace iotDeviceService
         {
             try
             {
-                iotRepository<iotDomain> repo = new iotRepository<iotDomain>();
-                repo.Update(domain);
-                return true;
+                RedisNoSqlDataSource<iotDomain> db = new RedisNoSqlDataSource<iotDomain>();
+                iotDomain updated = db.GetById(domain.DomainName);
+                if (domain != null)
+                {
+                    updated = domain;
+                    db.UpdateById(domain, domain.DomainName);
+                    return true;
+                }
+                return false;
             }
             catch (Exception e)
             {
@@ -1034,13 +1053,23 @@ namespace iotDeviceService
         }
 
 
-        public bool SiteUpdate(Site domain , string DomainId)
+        public bool SiteUpdate(Site site , string DomainId)
         {
             try
             {
-                iotRepository<Site> repo = new iotRepository<Site>();
-                repo.Update(domain);
-                return true;
+                RedisNoSqlDataSource<iotDomain> db = new RedisNoSqlDataSource<iotDomain>();
+                iotDomain domain = db.GetById(DomainId);
+                if (domain != null)
+                {
+                    Site nsite = domain.Sites.First(s => s.Id == site.Id);
+                    if (site != null)
+                    {
+                        nsite = site;
+                        db.UpdateById(domain, domain.DomainName);
+                        return true;
+                    }
+                }
+                return false;
             }
             catch (Exception e)
             {
@@ -1050,13 +1079,17 @@ namespace iotDeviceService
         }
 
 
-        public bool ActionUpdate(DeviceAction domain, int DeviceId, int SiteId, string DomainId)
+        public bool ActionUpdate(DeviceAction action, int DeviceId, int SiteId, string DomainId)
         {
             try
             {
-                iotRepository<DeviceAction> repo = new iotRepository<DeviceAction>();
-                repo.Update(domain);
-                return true;
+                RedisNoSqlDataSource<iotDomain> db = new RedisNoSqlDataSource<iotDomain>();
+                iotDomain domain = db.GetById(DomainId);
+                if (domain != null)
+                {
+                    
+                }
+                return false;
             }
             catch (Exception e)
             {
@@ -1078,7 +1111,7 @@ namespace iotDeviceService
                     Device dev = site.Devices.First(d => d.Id == DeviceId);
                     DeviceProperty prop = dev.Properties.First(p => p.Id == Property.Id);
                     prop = Property;
-                    db.Update(domain);
+                    db.UpdateById(domain,domain.DomainName);
                     return true;
                 }
                 return false;
@@ -1101,7 +1134,7 @@ namespace iotDeviceService
                 {
                     Location loc = domain.Locations.First(l => l.Id == Location.Id);
                     loc = Location;
-                    db.Update(domain);
+                    db.UpdateById(domain,domain.DomainName);
                     return true;
                 }
                 return false;
@@ -1125,12 +1158,12 @@ namespace iotDeviceService
                     if (param.Action != null)
                     {
                        // ActionParameter param =this.DeviceActionWithId(param.Action.Id);
-                      //  repo.Update(domain);
+                      //  repo.UpdateById(domain,domain.DomainName);
                     }
                     else
                     {
                      //   DeviceParameter param = domain..First(p => p.Id == Property.Id);
-                    //    repo.Update(domain);
+                    //    repo.UpdateById(domain,domain.DomainName);
                     }
                     return true;
                 }
@@ -1149,7 +1182,7 @@ namespace iotDeviceService
         //    try
         //    {
         //        iotRepository<ActionParameter> repo = new iotRepository<ActionParameter>();
-        //        repo.Update(domain);
+        //        repo.UpdateById(domain,domain.DomainName);
         //        return true;
         //    }
         //    catch (Exception e)
@@ -1255,7 +1288,7 @@ namespace iotDeviceService
                 {
                     Site site = domain.Sites.First(s => s.Id == Site.Id);
                     domain.Sites.Remove(site);
-                    db.Update(domain);
+                    db.UpdateById(domain,domain.DomainName);
                     return true;
                 }
                 return false;

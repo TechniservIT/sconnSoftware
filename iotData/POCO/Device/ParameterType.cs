@@ -29,6 +29,10 @@ namespace iotDbConnector.DAL
         [DataMember]
         public virtual AIList<DeviceParameter> Parameters { get; set; }
 
+        public ParameterType()
+        {
+            Parameters = new AIList<DeviceParameter>();
+        }
         
 
     }

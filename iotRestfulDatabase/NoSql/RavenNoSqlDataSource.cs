@@ -39,6 +39,11 @@ namespace iotNoSqlDatabase
             //dsrc.Initialize();
         }
 
+        public bool AddWithId(T entity, string Id)
+        {
+            return true;
+        }
+
         public Device GetDevice()
         {
             using (IDocumentStore store = new DocumentStore
@@ -102,6 +107,11 @@ namespace iotNoSqlDatabase
         }
 
         public virtual void Update(T entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public virtual bool UpdateById(T entity, string Id)
         {
             throw new NotImplementedException();
         }

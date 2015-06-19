@@ -12,7 +12,9 @@ namespace iotNoSqlDatabase
         IQueryable<T> GetAll();
         T GetById(string id);
         string Add(T entity);
+        bool AddWithId(T entity, string Id);
         void Update(T entity);
+        bool UpdateById(T entity, string Id);
         void Delete(T entity);
         void Delete(string id);
     }

@@ -44,13 +44,13 @@ namespace iotDbConnector.DAL
         }
 
 
-        public iotDomain DomainForDomainId(int domainId)
+        public iotDomain DomainForDomainId(string domainId)
         {
             try
             {
                     iotContext db = new iotContext();            
                     iotDomain domain = (from d in db.Domains
-                                        where d.Id == domainId
+                                        where d.Id.Equals( domainId)
                                         select d).First();
                     return domain;     
             }

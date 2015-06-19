@@ -31,6 +31,10 @@ namespace iotDbConnector.DAL
         [Required]
         public virtual iotDomain Domain { get; set; }
 
+        public Site()
+        {
+            Devices = new AIList<Device>();
 
+        }
     }
 }

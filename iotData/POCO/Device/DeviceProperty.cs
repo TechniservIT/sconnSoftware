@@ -36,7 +36,10 @@ namespace iotDbConnector.DAL
         [Required]
         public virtual Device Device { get; set; }
 
-       
+        public DeviceProperty()
+        {
+            ResultParameters = new AIList<DeviceParameter>();
+        }
 
     }
 

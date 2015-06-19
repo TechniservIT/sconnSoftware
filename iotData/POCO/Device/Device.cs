@@ -44,8 +44,12 @@ namespace iotDbConnector.DAL
         [DataMember]
         public virtual Site Site { get; set; }
 
-        
 
+        public Device()
+        {
+            Actions = new AIList<DeviceAction>();
+            Properties = new AIList<DeviceProperty>();
+        }
 
     }
 }

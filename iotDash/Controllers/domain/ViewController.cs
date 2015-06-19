@@ -48,7 +48,7 @@ namespace iotDash.Controllers
                         DeviceRestfulService cl = new DeviceRestfulService();
                         iotDomain domain = cl.GetDomainWithId(appdomain);
 
-                        if (domain.DomainName == appdomain)
+                        if (domain.DomainName.Equals( appdomain) )
                         {
                             return true;    //user allowed to access domain
                         }

@@ -16,7 +16,7 @@ namespace iotDbConnector.DAL
         [DataMember]
         [Key]
         [Required]
-        public int Id { get; set; }
+        public string Id { get; set; }
 
         [DataMember]
         [Required]
@@ -31,7 +31,21 @@ namespace iotDbConnector.DAL
         [DataMember]
         public virtual AIList<DeviceType> DeviceTypes { get; set; }
 
-
+        public iotDomain()
+        {
+            if (this.Locations == null)
+            {
+                this.Locations = new AIList<Location>();
+            }
+            if (this.DeviceTypes == null)
+            {
+                this.DeviceTypes = new AIList<DeviceType>();
+            }
+            if (this.Sites == null)
+            {
+                this.Sites = new AIList<Site>();
+            }
+        }
 
     }
 }

@@ -31,9 +31,7 @@ namespace iotDbConnector.DAL
 
         [DataMember]
         public string VisualRepresentationURL { get; set; }
-
-
-
+        
         [DataMember]
         [Required]
         public virtual AIList<DeviceParameter> ResultParameters { get; set; }
@@ -46,154 +44,14 @@ namespace iotDbConnector.DAL
         [Required]
         public virtual Device Device { get; set; }
 
-
-        /*
         public DeviceAction()
         {
-            RequiredParameters = new List<ActionParameter>();
-            ResultParameters = new List<DeviceParameter>();
-        }
-
-        public bool AddReqParam(DeviceParameter param)
-        {
-            try
-            {
-                ApplicationDbContext cont = new ApplicationDbContext();
-                DeviceAction self = (from dp in cont.Actions
-                                       where dp.Id == this.Id
-                                       select dp).First();
-                if (self != null)
-                {
-                    param.Action = self;
-                    if (param != null)
-                    {
-                        cont.Parameters.Add(param);
-                        cont.SaveChanges();
-
-                        //verify
-                        DeviceParameter storedparam = (from dp in cont.Parameters
-                                                       where param.Id == dp.Id
-                                                       select dp).First();
-                        if (storedparam != null)
-                        {
-                            return true;
-                        }
-                    }
-                }
-
-            }
-            catch (Exception e)
-            {
-
-            }
-
-            return false;
-        }
-
-        public bool AddResultParam(DeviceParameter param)
-        {
-            try
-            {
-                ApplicationDbContext cont = new ApplicationDbContext();
-                DeviceAction self = (from dp in cont.Actions
-                                       where dp.Id == this.Id
-                                       select dp).First();
-                if (self != null)
-                {
-                    param.Action = self;
-                    if (param != null)
-                    {
-                        cont.Parameters.Add(param);
-                        cont.SaveChanges();
-
-                        //verify
-                        DeviceParameter storedparam = (from dp in cont.Parameters
-                                                       where param.Id == dp.Id
-                                                       select dp).First();
-                        if (storedparam != null)
-                        {
-                            return true;
-                        }
-                    }
-                }
-
-            }
-            catch (Exception e)
-            {
-
-            }
-
-            return false;
-    }
-
-
-        public bool ExsistsInDatabaseContext(ApplicationDbContext cont)
-        {
-            try
-            {
-                DeviceAction self = (from dp in cont.Actions
-                                     where dp.Id == this.Id
-                                       select dp).FirstOrDefault();
-                if (self != null)
-                {
-                    return true;
-                }
-            }
-            catch (Exception e)
-            {
-
-            }
-            return false;
-        }
-
-        public DeviceAction  CreateWithContext(ApplicationDbContext cont)
-        {
-            try
-            {
-                if (!this.ExsistsInDatabaseContext(cont))
-                {
-                    cont.Actions.Add(this);
-                    cont.SaveChanges();
-                }
-                DeviceAction self = (from dp in cont.Actions
-                                       where dp.Id == this.Id
-                                       select dp).FirstOrDefault();
-                return self;
-            }
-            catch (Exception e)
-            {
-                return new DeviceAction();
-            }
-
+            RequiredParameters = new AIList<ActionParameter>();
+            ResultParameters = new AIList<DeviceParameter>();
 
         }
 
 
-        public Boolean Perform()
-        {
-            try
-            {
-                CommProtocolType protType = this.Device.GetDeviceQueryProtcol();
-                ICommProtocol protocol = this.Device.GetProtocolDelegateForType(protType);
-                if (protocol.ProtocolDeviceQueryAble())
-                {
-                    bool stat =  protocol.PerformActionAsync(this);
-                    return stat;
-
-                    if (stat)   //reload result
-                    {
-                        return this.Device.QueryDeviceActions();
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-            }
-
-            return false;
-        }
-
-        */
 
 
     }

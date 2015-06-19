@@ -275,9 +275,9 @@
     <Compile Include="Migrations\201501091547591_identity init +domain.Designer.cs">
       <DependentUpon>201501091547591_identity init +domain.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201501231307082_ParameterChangeHistory set.cs" />
-    <Compile Include="Migrations\201501231307082_ParameterChangeHistory set.Designer.cs">
-      <DependentUpon>201501231307082_ParameterChangeHistory set.cs</DependentUpon>
+    <Compile Include="Migrations\201506181340509_Identity user domain name.cs" />
+    <Compile Include="Migrations\201506181340509_Identity user domain name.Designer.cs">
+      <DependentUpon>201506181340509_Identity user domain name.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -630,8 +630,8 @@
     <EmbeddedResource Include="Migrations\201501091547591_identity init +domain.resx">
       <DependentUpon>201501091547591_identity init +domain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201501231307082_ParameterChangeHistory set.resx">
-      <DependentUpon>201501231307082_ParameterChangeHistory set.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201506181340509_Identity user domain name.resx">
+      <DependentUpon>201506181340509_Identity user domain name.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

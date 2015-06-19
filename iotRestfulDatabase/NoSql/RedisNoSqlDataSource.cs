@@ -88,7 +88,11 @@ namespace iotNoSqlDatabase
             return id;
         }
 
-
+        public bool StoreEntityWithId(T entity, string Id)
+        {
+            bool added = cacheClient.Add(Id, entity, DateTimeOffset.MaxValue);
+            return added;
+        }
 
         public Device GetDevice()
         {
@@ -127,9 +131,20 @@ namespace iotNoSqlDatabase
             return StoreEntityExt(entity);
         }
 
+        public virtual bool AddWithId(T entity, string Id)
+        {
+            return StoreEntityWithId(entity,Id);
+        }
+
         public virtual void Update(T entity)
         {
-            throw new NotImplementedException();
+           
+        }
+
+        public virtual bool UpdateById(T entity, string Id)
+        {
+            bool replaced = cacheClient.Replace(Id, entity);
+            return replaced;
         }
 
         public virtual void Delete(T entity)

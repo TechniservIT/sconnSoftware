@@ -63,6 +63,10 @@ namespace iotDbConnector.DAL
         [DataMember]
         public virtual AIList<ParameterChangeHistory> Changes { get; set; }
 
-
+        public DeviceParameter()
+        {
+            sconnMappers = new AIList<sconnConfigMapper>();
+            Changes = new AIList<ParameterChangeHistory>();
+        }
     }
 }

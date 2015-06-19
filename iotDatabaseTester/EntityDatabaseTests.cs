@@ -113,12 +113,12 @@ namespace iotDatabaseTester
         }
 
       
-        public bool TestRepoSingleRead(int id)
+        public bool TestRepoSingleRead(string id)
         {
             try
             {
                 iotRepository<Location> repo = new iotRepository<Location>();
-                Location locs = repo.GetById(id);
+                Location locs = repo.GetById(int.Parse(id));
                 return locs != null;
             }
             catch (Exception ex)
@@ -210,15 +210,15 @@ namespace iotDatabaseTester
                 Stopwatch watch = new Stopwatch();
 
                 iotRepository<iotDomain> repo = new iotRepository<iotDomain>();
-                List<iotDomain> locs = repo.GetAll().ToList();
-                iotDomain loc = locs.First();
+                List<iotDomain> domains = repo.GetAll().ToList();
+                iotDomain domain = domains.First();
 
 
                 watch.Start();
                 for (int i = 0; i < ReadTestInterations; i++)
                 {
 
-                    ReadSuccess = TestRepoSingleRead(loc.Id);
+                    ReadSuccess = TestRepoSingleRead(domain.Id);
                     if (!ReadSuccess) { FailCount++; }
 
                 }
