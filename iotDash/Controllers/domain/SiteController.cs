@@ -51,7 +51,7 @@ namespace iotDash.Controllers
             {
                 DeviceRestfulService cl = new DeviceRestfulService();
                 string domainId = DomainSession.GetContextDomain(this.HttpContext);
-                Device dev = cl.DeviceWithId(devid, sid, domainId);
+                Device dev = cl.DeviceWithId(devid, domainId);
                 cl.DeviceRemove(dev,sid,domainId);
                 return true;
             }

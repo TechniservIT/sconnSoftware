@@ -125,44 +125,47 @@ namespace iotDash
                         else
                         {
                             iotDomain addedDomain = cl.GetDomainWithName(model.DomainName);
-
-                            //create user
-                            ApplicationUser user = new ApplicationUser() { UserName = model.UserName };
-                            IdentityRole adminRoleCr;
-
-                            //verify admin roles
-                            ApplicationDbContext cont = new ApplicationDbContext();
-                            var adminRoles = cont.Roles.Where(r => r.Name.Equals("DomainAdmin"));
-                            if (adminRoles.Count() <= 0)
+                            if  (addedDomain != null)
                             {
-                                adminRoleCr = new IdentityRole("DomainAdmin");
-                                cont.Roles.Add(adminRoleCr);
-                                cont.SaveChanges();
-                            }
-                            else
-                            {
-                                adminRoleCr = adminRoles.First();
-                            }
+                                //create user
+                                ApplicationUser user = new ApplicationUser() { UserName = model.UserName };
+                                IdentityRole adminRoleCr;
 
-                            //create user role for admin
-                            IdentityUserRole userAdminRole = new IdentityUserRole();
-                            userAdminRole.RoleId = adminRoleCr.Id;
-                            userAdminRole.UserId = user.Id;
-                            user.Roles.Add(userAdminRole);
+                                //verify admin roles
+                                ApplicationDbContext cont = new ApplicationDbContext();
+                                var adminRoles = cont.Roles.Where(r => r.Name.Equals("DomainAdmin"));
+                                if (adminRoles.Count() <= 0)
+                                {
+                                    adminRoleCr = new IdentityRole("DomainAdmin");
+                                    cont.Roles.Add(adminRoleCr);
+                                    cont.SaveChanges();
+                                }
+                                else
+                                {
+                                    adminRoleCr = adminRoles.First();
+                                }
 
-                            //setup user domain
-                            user.DomainId = addedDomain.Id;
+                                //create user role for admin
+                                IdentityUserRole userAdminRole = new IdentityUserRole();
+                                userAdminRole.RoleId = adminRoleCr.Id;
+                                userAdminRole.UserId = user.Id;
+                                user.Roles.Add(userAdminRole);
 
-                            var result = await UserManager.CreateAsync(user, model.Password);
-                            if (result.Succeeded)
-                            {
-                                await SignInAsync(user, isPersistent: false);
-                                return RedirectToAction("Index", "Home");
+                                //setup user domain
+                                user.DomainId = addedDomain.Id;
+
+                                var result = await UserManager.CreateAsync(user, model.Password);
+                                if (result.Succeeded)
+                                {
+                                    await SignInAsync(user, isPersistent: false);
+                                    return RedirectToAction("Index", "Home");
+                                }
+                                else
+                                {
+                                    AddErrors(result);
+                                }
                             }
-                            else
-                            {
-                                AddErrors(result);
-                            }
+                           
                         }
                         
                     }

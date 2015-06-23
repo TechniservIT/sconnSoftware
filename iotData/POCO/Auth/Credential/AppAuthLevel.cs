@@ -10,13 +10,13 @@ namespace iotDbConnector.DAL
     {
         [Key]
         [Required]
-        public int AppAuthLevelId { get; set; }
+        public int Id { get; set; }
 
         public bool Write { get; set; }
 
         public bool Read { get; set; }
 
-        public virtual ICollection<DeviceCredentials> Credentials { get; set; }
+        public virtual AIList<DeviceCredentials> Credentials { get; set; }
 
     }
 

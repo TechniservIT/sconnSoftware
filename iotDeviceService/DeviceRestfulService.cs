@@ -337,18 +337,16 @@ namespace iotDeviceService
         }
 
 
-        public bool AddActionToDeviceAtSiteInDomain(DeviceAction action, int DeviceId, int SiteId, string DomainId)
+        public bool AddActionToDeviceAtSiteInDomain(DeviceAction action, string DomainId)
         {
             try
             {
-               iotSharedEntityContext<iotDomain> cont = new iotSharedEntityContext<iotDomain>();
-                iotDomain domain = cont.GetById(DomainId); //db.GetById(DomainId);     //fetch domain from DB
+                iotSharedEntityContext<iotDomain> cont = new iotSharedEntityContext<iotDomain>();
+                iotDomain domain = cont.GetById(DomainId);
                 if (domain != null)
                 {
-                    Site site = domain.Sites.First(s => s.Id == SiteId);
-                    Device dev = site.Devices.First(d => d.Id == DeviceId);
-                    dev.Actions.Add(action);
-                    cont.UpdateWithHistory(domain);   //db.UpdateById(domain, domain.DomainName);  //update domain
+                    iotSharedEntityContext<DeviceAction> propCont = new iotSharedEntityContext<DeviceAction>();
+                    propCont.Add(action);
                     return true;
                 }
                 return false;
@@ -361,18 +359,16 @@ namespace iotDeviceService
         }
 
 
-        public bool PropertyAdd(DeviceProperty prop, int DeviceId, int SiteId, string DomainId)
+        public bool PropertyAdd(DeviceProperty prop, string DomainId)
         {
             try
             {
                 iotSharedEntityContext<iotDomain> cont = new iotSharedEntityContext<iotDomain>();
-                iotDomain domain = cont.GetById(DomainId);  //db.GetById(DomainId);     //fetch domain from DB
+                iotDomain domain = cont.GetById(DomainId);
                 if (domain != null)
                 {
-                    Site site = domain.Sites.First(s => s.Id == SiteId);
-                    Device dev = site.Devices.First(d => d.Id == DeviceId);
-                    dev.Properties.Add(prop);
-                    cont.UpdateWithHistory(domain);   //db.UpdateById(domain, domain.DomainName);  //update domain
+                    iotSharedEntityContext<DeviceProperty> propCont = new iotSharedEntityContext<DeviceProperty>();
+                    propCont.Add(prop);
                     return true;
                 }
                 return false;
@@ -415,15 +411,14 @@ namespace iotDeviceService
         {
             try
             {
-               iotSharedEntityContext<iotDomain> cont = new iotSharedEntityContext<iotDomain>();
-                iotDomain domain = cont.GetById(DomainId);  //db.GetById(DomainId);     //fetch domain from DB
+                iotSharedEntityContext<iotDomain> cont = new iotSharedEntityContext<iotDomain>();
+                iotDomain domain = cont.GetById(DomainId);
                 if (domain != null)
                 {
-                    Site site = domain.Sites.First(s => s.Id == SiteId);
-                    Device dev = site.Devices.First(d => d.Id == DeviceId);
-                    DeviceAction act = dev.Actions.First(a => a.Id == ActionId);
-                    act.ResultParameters.Add(param);
-                    cont.UpdateWithHistory(domain);   //db.UpdateById(domain, domain.DomainName);  //update domain
+                    iotSharedEntityContext<DeviceParameter> propCont = new iotSharedEntityContext<DeviceParameter>();
+                    DeviceParameter stored = propCont.GetById(param.Id);
+                    stored = param;
+                    propCont.UpdateWithHistory(stored);
                     return true;
                 }
                 return false;
@@ -436,19 +431,18 @@ namespace iotDeviceService
         }
 
 
-        public bool PropertyResultParamAdd(DeviceParameter param, int PropertyId, int DeviceId, int SiteId, string DomainId)
+        public bool PropertyResultParamAdd(DeviceParameter param, string DomainId)
         {
             try
             {
                 iotSharedEntityContext<iotDomain> cont = new iotSharedEntityContext<iotDomain>();
-                iotDomain domain = cont.GetById(DomainId);  //db.GetById(DomainId);     //fetch domain from DB
+                iotDomain domain = cont.GetById(DomainId);
                 if (domain != null)
                 {
-                    Site site = domain.Sites.First(s => s.Id == SiteId);
-                    Device dev = site.Devices.First(d => d.Id == DeviceId);
-                    DeviceProperty act = dev.Properties.First(a => a.Id == PropertyId);
-                    act.ResultParameters.Add(param);
-                    cont.UpdateWithHistory(domain);   //db.UpdateById(domain, domain.DomainName);  //update domain
+                    iotSharedEntityContext<DeviceParameter> propCont = new iotSharedEntityContext<DeviceParameter>();
+                    DeviceParameter stored = propCont.GetById(param.Id);
+                    stored = param;
+                    propCont.UpdateWithHistory(stored);
                     return true;
                 }
                 return false;
@@ -462,19 +456,18 @@ namespace iotDeviceService
 
 
 
-        public bool ActionRequiredParamAdd(ActionParameter param, int ActionId, int DeviceId, int SiteId, string DomainId)
+        public bool ActionRequiredParamAdd(ActionParameter param, string DomainId)
         {
             try
             {
                 iotSharedEntityContext<iotDomain> cont = new iotSharedEntityContext<iotDomain>();
-                iotDomain domain = cont.GetById(DomainId);  //db.GetById(DomainId);     //fetch domain from DB
+                iotDomain domain = cont.GetById(DomainId);
                 if (domain != null)
                 {
-                    Site site = domain.Sites.First(s => s.Id == SiteId);
-                    Device dev = site.Devices.First(d => d.Id == DeviceId);
-                    DeviceAction act = dev.Actions.First(a => a.Id == ActionId);
-                    act.RequiredParameters.Add(param);
-                    cont.UpdateWithHistory(domain);   //db.UpdateById(domain, domain.DomainName);  //update domain
+                    iotSharedEntityContext<ActionParameter> propCont = new iotSharedEntityContext<ActionParameter>();
+                    ActionParameter stored = propCont.GetById(param.Id);
+                    stored = param;
+                    propCont.UpdateWithHistory(stored);
                     return true;
                 }
                 return false;
@@ -493,7 +486,7 @@ namespace iotDeviceService
             try
             {
                 iotSharedEntityContext<iotDomain> cont = new iotSharedEntityContext<iotDomain>();
-                iotDomain domain = cont.GetById(DomainId);  //db.GetById(DomainId);     //fetch domain from DB
+                iotDomain domain = cont.GetById(DomainId);  
                 if (domain != null)
                 {
                     if (domain.DeviceTypes == null)
@@ -501,7 +494,7 @@ namespace iotDeviceService
                         domain.DeviceTypes = new AIList<DeviceType>();
                     }
                     domain.DeviceTypes.Add(type);
-                    cont.UpdateWithHistory(domain);   //db.UpdateById(domain, domain.DomainName);  //update domain
+                    cont.UpdateWithHistory(domain);  
                     return true;
                 }
                 return false;
@@ -514,19 +507,22 @@ namespace iotDeviceService
         }
 
 
-        public bool SetDeviceCredentials(DeviceCredentials creds, int DeviceId, int SiteId, string DomainId)
+        public bool SetDeviceCredentials(DeviceCredentials creds, string DomainId)
         {
             try
             {
                 iotSharedEntityContext<iotDomain> cont = new iotSharedEntityContext<iotDomain>();
-                iotDomain domain = cont.GetById(DomainId);  //db.GetById(DomainId);     //fetch domain from DB
+                iotDomain domain = cont.GetById(DomainId);
                 if (domain != null)
                 {
-                    Site site = domain.Sites.First(s => s.Id == SiteId);
-                    Device dev = site.Devices.First(d => d.Id == DeviceId);
-                    dev.Credentials = creds;
-                    cont.UpdateWithHistory(domain);   //db.UpdateById(domain, domain.DomainName);  //update domain
-                    return true;
+                    iotSharedEntityContext<DeviceCredentials> propCont = new iotSharedEntityContext<DeviceCredentials>();
+                    DeviceCredentials stored = propCont.GetById(creds.Id);
+                    if (stored != null)
+                    {
+                        stored = creds;
+                        propCont.UpdateWithHistory(stored);
+                        return true;
+                    }
                 }
                 return false;
             }
@@ -537,19 +533,22 @@ namespace iotDeviceService
             }
         }
 
-        public bool SetDeviceEndpoint(EndpointInfo endp, int DeviceId, int SiteId, string DomainId)
+        public bool SetDeviceEndpoint(EndpointInfo endp, string DomainId)
         {
             try
             {
                 iotSharedEntityContext<iotDomain> cont = new iotSharedEntityContext<iotDomain>();
-                iotDomain domain = cont.GetById(DomainId);  //db.GetById(DomainId);     //fetch domain from DB
+                iotDomain domain = cont.GetById(DomainId);
                 if (domain != null)
                 {
-                    Site site = domain.Sites.First(s => s.Id == SiteId);
-                    Device dev = site.Devices.First(d => d.Id == DeviceId);
-                    dev.EndpInfo = endp;
-                    cont.UpdateWithHistory(domain);   //db.UpdateById(domain, domain.DomainName);  //update domain
-                    return true;
+                    iotSharedEntityContext<EndpointInfo> propCont = new iotSharedEntityContext<EndpointInfo>();
+                    EndpointInfo stored = propCont.GetById(endp.Id);
+                    if (stored != null)
+                    {
+                        stored = endp;
+                        propCont.UpdateWithHistory(stored);
+                        return true;
+                    }
                 }
                 return false;
             }
@@ -583,16 +582,20 @@ namespace iotDeviceService
         }
 
 
-        public List<Device> Devices( int SiteId, string DomainId)
+        public List<Device> Devices(string DomainId)
         {
             try
             {
                 iotSharedEntityContext<iotDomain> cont = new iotSharedEntityContext<iotDomain>();
-                iotDomain domain = cont.GetById(DomainId);  //db.GetById(DomainId);     //fetch domain from DB
+                iotDomain domain = cont.GetById(DomainId);
                 if (domain != null)
                 {
-                    Site site = domain.Sites.First(s => s.Id == SiteId);
-                    return site.Devices.ToList();
+                    iotSharedEntityContext<Device> propCont = new iotSharedEntityContext<Device>();
+                    List<Device> stored = propCont.GetAll().ToList();
+                    if (stored != null)
+                    {
+                        return stored;
+                    }
                 }
                 return null;
             }
@@ -604,17 +607,20 @@ namespace iotDeviceService
         }
 
 
-        public List<DeviceAction> DeviceActions(int DeviceId, int SiteId, string DomainId)
+        public List<DeviceAction> DeviceActions(string DomainId)
         {
             try
             {
                 iotSharedEntityContext<iotDomain> cont = new iotSharedEntityContext<iotDomain>();
-                iotDomain domain = cont.GetById(DomainId);  //db.GetById(DomainId);   
+                iotDomain domain = cont.GetById(DomainId);
                 if (domain != null)
                 {
-                    Site site = domain.Sites.First(s => s.Id == SiteId);
-                    Device dev = site.Devices.First(d => d.Id == DeviceId);
-                    return dev.Actions.ToList();
+                    iotSharedEntityContext<DeviceAction> propCont = new iotSharedEntityContext<DeviceAction>();
+                    List<DeviceAction> stored = propCont.GetAll().ToList();
+                    if (stored != null)
+                    {
+                        return stored;
+                    }
                 }
                 return null;
             }
@@ -626,17 +632,20 @@ namespace iotDeviceService
         }
 
 
-        public List<DeviceProperty> DeviceProperties(int DeviceId, int SiteId, string DomainId)
+        public List<DeviceProperty> DeviceProperties(string DomainId)
         {
             try
             {
                 iotSharedEntityContext<iotDomain> cont = new iotSharedEntityContext<iotDomain>();
-                iotDomain domain = cont.GetById(DomainId);  //db.GetById(DomainId); 
+                iotDomain domain = cont.GetById(DomainId);
                 if (domain != null)
                 {
-                    Site site = domain.Sites.First(s => s.Id == SiteId);
-                    Device dev = site.Devices.First(d => d.Id == DeviceId);
-                    return dev.Properties.ToList();
+                    iotSharedEntityContext<DeviceProperty> propCont = new iotSharedEntityContext<DeviceProperty>();
+                    List<DeviceProperty> stored = propCont.GetAll().ToList();
+                    if (stored != null)
+                    {
+                        return stored;
+                    }
                 }
                 return null;
             }
@@ -648,26 +657,29 @@ namespace iotDeviceService
         }
 
 
-        //public List<DeviceParameter> DeviceParameters(int DeviceId, int SiteId, string DomainId)
-        //{
-        //    try
-        //    {
-        //        RedisNoSqlDataSource<iotDomain> db = new RedisNoSqlDataSource<iotDomain>();
-        //        iotDomain domain = db.GetById(DomainId);
-        //        if (domain != null)
-        //        {
-        //            Site site = domain.Sites.First(s => s.Id == SiteId);
-        //            Device dev = site.Devices.First(d => d.Id == DeviceId);
-        //            return 
-        //        }
-        //        return null;
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        nlogger.ErrorException(e.Message, e);
-        //        return new List<DeviceParameter>();
-        //    }
-        //}
+        public List<DeviceParameter> DeviceParameters(string DomainId)
+        {
+            try
+            {
+                iotSharedEntityContext<iotDomain> cont = new iotSharedEntityContext<iotDomain>();
+                iotDomain domain = cont.GetById(DomainId);
+                if (domain != null)
+                {
+                    iotSharedEntityContext<DeviceParameter> propCont = new iotSharedEntityContext<DeviceParameter>();
+                    List<DeviceParameter> stored = propCont.GetAll().ToList();
+                    if (stored != null)
+                    {
+                        return stored;
+                    }
+                }
+                return null;
+            }
+            catch (Exception e)
+            {
+                nlogger.ErrorException(e.Message, e);
+                return new List<DeviceParameter>();
+            }
+        }
 
 
         public List<Location> Locations(string DomainId)
@@ -710,39 +722,45 @@ namespace iotDeviceService
         }
 
 
-        //public List<ActionParameter> ActionParams(int DeviceId, int SiteId, string DomainId)
-        //{
-        //    try
-        //    {
-        //        RedisNoSqlDataSource<iotDomain> db = new RedisNoSqlDataSource<iotDomain>();
-        //        iotDomain domain = db.GetById(DomainId);     //fetch domain from DB
-        //        if (domain != null)
-        //        {
-        //            Site site = domain.Sites.First(s => s.Id == SiteId);
-        //            Device dev = site.Devices.First(d => d.Id == DeviceId);
-                    
-        //        }
-        //        return null;
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        nlogger.ErrorException(e.Message, e);
-        //        return new List<ActionParameter>();
-        //    }
-        //}
-
-
-        public DeviceCredentials DeviceCredentials(int DeviceId, int SiteId, string DomainId)
+        public List<ActionParameter> ActionParams(string DomainId)
         {
             try
             {
                 iotSharedEntityContext<iotDomain> cont = new iotSharedEntityContext<iotDomain>();
-                iotDomain domain = cont.GetById(DomainId);  //db.GetById(DomainId);     //fetch domain from DB
+                iotDomain domain = cont.GetById(DomainId);
                 if (domain != null)
                 {
-                    Site site = domain.Sites.First(s => s.Id == SiteId);
-                    Device dev = site.Devices.First(d => d.Id == DeviceId);
-                    return dev.Credentials;
+                    iotSharedEntityContext<ActionParameter> propCont = new iotSharedEntityContext<ActionParameter>();
+                    List<ActionParameter> stored = propCont.GetAll().ToList();
+                    if (stored != null)
+                    {
+                        return stored;
+                    }
+                }
+                return null;
+            }
+            catch (Exception e)
+            {
+                nlogger.ErrorException(e.Message, e);
+                return new List<ActionParameter>();
+            }
+        }
+
+
+        public DeviceCredentials DeviceCredentials(int DeviceId, string DomainId)
+        {
+            try
+            {
+                iotSharedEntityContext<iotDomain> cont = new iotSharedEntityContext<iotDomain>();
+                iotDomain domain = cont.GetById(DomainId);
+                if (domain != null)
+                {
+                    iotSharedEntityContext<DeviceCredentials> propCont = new iotSharedEntityContext<DeviceCredentials>();
+                    DeviceCredentials stored = propCont.GetById(DeviceId);
+                    if (stored != null)
+                    {
+                        return stored;
+                    }
                 }
                 return null;
             }
@@ -753,17 +771,20 @@ namespace iotDeviceService
             }
         }
 
-        public EndpointInfo DeviceEndpoint(int DeviceId, int SiteId, string DomainId)
+        public EndpointInfo DeviceEndpoint(int EndpointId,  string DomainId)
         {
             try
             {
                 iotSharedEntityContext<iotDomain> cont = new iotSharedEntityContext<iotDomain>();
-                iotDomain domain = cont.GetById(DomainId);  //db.GetById(DomainId);     //fetch domain from DB
+                iotDomain domain = cont.GetById(DomainId);
                 if (domain != null)
                 {
-                    Site site = domain.Sites.First(s => s.Id == SiteId);
-                    Device dev = site.Devices.First(d => d.Id == DeviceId);
-                    return dev.EndpInfo;
+                    iotSharedEntityContext<EndpointInfo> propCont = new iotSharedEntityContext<EndpointInfo>();
+                    EndpointInfo stored = propCont.GetById(EndpointId);
+                    if (stored != null)
+                    {
+                        return stored;
+                    }
                 }
                 return null;
             }
@@ -799,17 +820,20 @@ namespace iotDeviceService
         }
 
 
-        public Device DeviceWithId(int DeviceId, int SiteId, string DomainId)
+        public Device DeviceWithId(int DeviceId, string DomainId)
         {
             try
             {
                 iotSharedEntityContext<iotDomain> cont = new iotSharedEntityContext<iotDomain>();
-                iotDomain domain = cont.GetById(DomainId);  //db.GetById(DomainId);     //fetch domain from DB
+                iotDomain domain = cont.GetById(DomainId);
                 if (domain != null)
                 {
-                    Site site = domain.Sites.First(s => s.Id == SiteId);
-                    Device dev = site.Devices.First(s => s.Id == SiteId);
-                    return dev;
+                    iotSharedEntityContext<Device> propCont = new iotSharedEntityContext<Device>();
+                    Device stored = propCont.GetById(DeviceId);
+                    if (stored != null)
+                    {
+                        return stored;
+                    }
                 }
                 return null;
             }
@@ -821,18 +845,20 @@ namespace iotDeviceService
         }
 
 
-        public DeviceAction DeviceActionWithId(int ActionId, int DeviceId, int SiteId, string DomainId)
+        public DeviceAction DeviceActionWithId(int ActionId, string DomainId)
         {
             try
             {
                 iotSharedEntityContext<iotDomain> cont = new iotSharedEntityContext<iotDomain>();
-                iotDomain domain = cont.GetById(DomainId);  //db.GetById(DomainId);     //fetch domain from DB
+                iotDomain domain = cont.GetById(DomainId);
                 if (domain != null)
                 {
-                    Site site = domain.Sites.First(s => s.Id == SiteId);
-                    Device dev = site.Devices.First(s => s.Id == SiteId);
-                    DeviceAction act = dev.Actions.First(a => a.Id == ActionId);
-                    return act;
+                    iotSharedEntityContext<DeviceAction> propCont = new iotSharedEntityContext<DeviceAction>();
+                    DeviceAction stored = propCont.GetById(ActionId);
+                    if (stored != null)
+                    {
+                        return stored;
+                    }
                 }
                 return null;
             }
@@ -844,18 +870,20 @@ namespace iotDeviceService
         }
 
 
-        public DeviceProperty DevicePropertieWithId(int PropertyId, int DeviceId, int SiteId, string DomainId)
+        public DeviceProperty DevicePropertieWithId(int PropertyId, string DomainId)
         {
             try
             {
                 iotSharedEntityContext<iotDomain> cont = new iotSharedEntityContext<iotDomain>();
-                iotDomain domain = cont.GetById(DomainId);  //db.GetById(DomainId);     //fetch domain from DB
+                iotDomain domain = cont.GetById(DomainId);
                 if (domain != null)
                 {
-                    Site site = domain.Sites.First(s => s.Id == SiteId);
-                    Device dev = site.Devices.First(s => s.Id == SiteId);
-                    DeviceProperty prop = dev.Properties.First(a => a.Id == PropertyId);
-                    return prop;
+                    iotSharedEntityContext<DeviceProperty> propCont = new iotSharedEntityContext<DeviceProperty>();
+                    DeviceProperty stored = propCont.GetById(PropertyId);
+                    if (stored != null)
+                    {
+                        return stored;
+                    }
                 }
                 return null;
             }
@@ -867,19 +895,29 @@ namespace iotDeviceService
         }
 
 
-        //public DeviceParameter DeviceParameterWithId(int DeviceId, int SiteId, string DomainId)
-        //{
-        //    try
-        //    {
-        //        iotRepository<DeviceParameter> repo = new iotRepository<DeviceParameter>();
-        //        return repo.GetById(id);
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        nlogger.ErrorException(e.Message, e);
-        //        return new DeviceParameter();
-        //    }
-        //}
+        public DeviceParameter DeviceParameterWithId(int ParamId, string DomainId)
+        {
+            try
+            {
+                iotSharedEntityContext<iotDomain> cont = new iotSharedEntityContext<iotDomain>();
+                iotDomain domain = cont.GetById(DomainId);
+                if (domain != null)
+                {
+                    iotSharedEntityContext<DeviceParameter> propCont = new iotSharedEntityContext<DeviceParameter>();
+                    DeviceParameter stored = propCont.GetById(ParamId);
+                    if (stored != null)
+                    {
+                        return stored;
+                    }
+                }
+                return null;
+            }
+            catch (Exception e)
+            {
+                nlogger.ErrorException(e.Message, e);
+                return new DeviceParameter();
+            }
+        }
 
 
         public iotDomain DomainWithId(string DomainId)
@@ -949,27 +987,29 @@ namespace iotDeviceService
         }
 
 
-        //public ActionParameter ActionParamWithId(int DeviceId, int SiteId, string DomainId)
-        //{
-        //    try
-        //    {
-        //        RedisNoSqlDataSource<iotDomain> db = new RedisNoSqlDataSource<iotDomain>();
-        //        iotDomain domain = db.GetById(DomainId);
-        //        if (domain != null)
-        //        {
-        //            Site site = domain.Sites.First(s => s.Id == SiteId);
-        //            Device dev = site.Devices.First(s => s.Id == SiteId);
-        //            DeviceProperty prop = dev.Properties.First(a => a.Id == PropertyId);
-        //            return prop;
-        //        }
-        //        return null;
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        nlogger.ErrorException(e.Message, e);
-        //        return new ActionParameter();
-        //    }
-        //}
+        public ActionParameter ActionParamWithId(int ActionId, string DomainId)
+        {
+            try
+            {
+                iotSharedEntityContext<iotDomain> cont = new iotSharedEntityContext<iotDomain>();
+                iotDomain domain = cont.GetById(DomainId);
+                if (domain != null)
+                {
+                    iotSharedEntityContext<ActionParameter> propCont = new iotSharedEntityContext<ActionParameter>();
+                    ActionParameter stored = propCont.GetById(ActionId);
+                    if (stored != null)
+                    {
+                        return stored;
+                    }
+                }
+                return null;
+            }
+            catch (Exception e)
+            {
+                nlogger.ErrorException(e.Message, e);
+                return new ActionParameter();
+            }
+        }
 
         public DeviceCredentials DeviceCredentialWithId(int DeviceId, int SiteId, string DomainId)
         {
@@ -1045,12 +1085,20 @@ namespace iotDeviceService
         {
             try
             {
-
-
-                iotRepository<Device> repo = new iotRepository<Device>();
-                repo.Update(device);
+                iotSharedEntityContext<iotDomain> cont = new iotSharedEntityContext<iotDomain>();
+                iotDomain domain = cont.GetById(DomainId);
+                if (domain != null)
+                {
+                    iotSharedEntityContext<Device> propCont = new iotSharedEntityContext<Device>();
+                    Device stored = propCont.GetById(device.Id);
+                    if (stored != null)
+                    {
+                        propCont.UpdateWithHistory(stored);
+                        return true;
+                    }
+                }
+                return false;
                // Task updateTask = Task.Factory.StartNew(() => { DeviceUpdateEventService.SendDeviceUpdate(device); }); //Dispatch update notify
-                return true;
             }
             catch (Exception e)
             {
@@ -1136,13 +1184,16 @@ namespace iotDeviceService
             try
             {
                 iotSharedEntityContext<iotDomain> cont = new iotSharedEntityContext<iotDomain>();
-                iotDomain domain = cont.GetById(DomainId);  //cont.GetById(DomainId); db.GetById(DomainId);
+                iotDomain domain = cont.GetById(DomainId);
                 if (domain != null)
                 {
-                    Location loc = domain.Locations.First(l => l.Id == Location.Id);
-                    loc = Location;
-                    cont.UpdateWithHistory(domain);   //db.UpdateById(domain, domain.DomainName);
-                    return true;
+                    iotSharedEntityContext<Location> propCont = new iotSharedEntityContext<Location>();
+                    Location stored = propCont.GetById(Location.Id);
+                    if (stored != null)
+                    {
+                        propCont.UpdateWithHistory(stored);
+                        return true;
+                    }
                 }
                 return false;
             }
@@ -1204,9 +1255,19 @@ namespace iotDeviceService
         {
             try
             {
-                iotRepository<DeviceType> repo = new iotRepository<DeviceType>();
-                repo.Update(type);
-                return true;
+                iotSharedEntityContext<iotDomain> cont = new iotSharedEntityContext<iotDomain>();
+                iotDomain domain = cont.GetById(DomainId);
+                if (domain != null)
+                {
+                    iotSharedEntityContext<DeviceType> propCont = new iotSharedEntityContext<DeviceType>();
+                    DeviceType stored = propCont.GetById(type.Id);
+                    if (stored != null)
+                    {
+                        propCont.UpdateWithHistory(stored);
+                        return true;
+                    }
+                }
+                return false;
             }
             catch (Exception e)
             {
@@ -1220,9 +1281,19 @@ namespace iotDeviceService
         {
             try
             {
-                iotRepository<DeviceCredentials> repo = new iotRepository<DeviceCredentials>();
-                repo.Update(creds);
-                return true;
+                iotSharedEntityContext<iotDomain> cont = new iotSharedEntityContext<iotDomain>();
+                iotDomain domain = cont.GetById(DomainId);
+                if (domain != null)
+                {
+                    iotSharedEntityContext<DeviceCredentials> propCont = new iotSharedEntityContext<DeviceCredentials>();
+                    DeviceCredentials stored = propCont.GetById(creds.Id);
+                    if (stored != null)
+                    {
+                        propCont.UpdateWithHistory(stored);
+                        return true;
+                    }
+                }
+                return false;
             }
             catch (Exception e)
             {
@@ -1236,9 +1307,19 @@ namespace iotDeviceService
         {
             try
             {
-                iotRepository<EndpointInfo> repo = new iotRepository<EndpointInfo>();
-                repo.Update(endp);
-                return true;
+                iotSharedEntityContext<iotDomain> cont = new iotSharedEntityContext<iotDomain>();
+                iotDomain domain = cont.GetById(DomainId);
+                if (domain != null)
+                {
+                    iotSharedEntityContext<EndpointInfo> propCont = new iotSharedEntityContext<EndpointInfo>();
+                    EndpointInfo dev = propCont.GetById(endp.Id);
+                    if (dev != null)
+                    {
+                        propCont.UpdateWithHistory(endp);
+                        return true;
+                    }
+                }
+                return false;
             }
             catch (Exception e)
             {
@@ -1257,9 +1338,13 @@ namespace iotDeviceService
         {
             try
             {
-                iotRepository<iotDomain> repo = new iotRepository<iotDomain>();
-                repo.Delete(domain);
-                return true;
+                iotSharedEntityContext<iotDomain> cont = new iotSharedEntityContext<iotDomain>();
+                iotDomain stored = cont.GetById(domain.Id);
+                if (stored != null)
+                {
+                    cont.Delete(stored);
+                }
+                return false;
             }
             catch (Exception e)
             {
@@ -1269,13 +1354,23 @@ namespace iotDeviceService
         }
 
 
-        public bool DeviceRemove(Device domain, int SiteId, string DomainId)
+        public bool DeviceRemove(Device device, int SiteId, string DomainId)
         {
             try
             {
-                iotRepository<Device> repo = new iotRepository<Device>();
-                repo.Delete(domain);
-                return true;
+                iotSharedEntityContext<iotDomain> cont = new iotSharedEntityContext<iotDomain>();
+                iotDomain domain = cont.GetById(DomainId);
+                if (domain != null)
+                {
+                    iotSharedEntityContext<Device> propCont = new iotSharedEntityContext<Device>();
+                    Device dev = propCont.GetById(device.Id);
+                    if (dev != null)
+                    {
+                        propCont.Delete(dev);
+                        return true;
+                    }
+                }
+                return false;
             }
             catch (Exception e)
             {
@@ -1473,7 +1568,7 @@ namespace iotDeviceService
                 if (domain != null)
                 {
                     iotSharedEntityContext<DeviceCredentials> locCont = new iotSharedEntityContext<DeviceCredentials>();
-                    DeviceCredentials loc = locCont.GetById(creds.CredentialId);
+                    DeviceCredentials loc = locCont.GetById(creds.Id);
                     if (loc != null)
                     {
                         locCont.Delete(loc);
@@ -1548,7 +1643,7 @@ namespace iotDeviceService
             }
         }
 
-        public bool PerformDeviceAction(DeviceAction act, int DeviceId, int SiteId, string DomainId)
+        public bool PerformDeviceAction(DeviceAction act, string DomainId)
         {
             try
             {
@@ -1649,11 +1744,13 @@ namespace iotDeviceService
                         return null;
                     }
 
+                    int siteIdNum = int.Parse(SiteId);
+                    Site siteToAppend = domain.Sites.First(s => s.Id == siteIdNum);
+
+                    ndev.Site = siteToAppend;
                     ndev.Credentials = storedCredentials;
                     ndev.EndpInfo = storedInfo;
-                    int siteIdNum = int.Parse(SiteId);
-                    Site siteToAppend = domain.Sites.First(s=>s.Id==siteIdNum);
-
+                    
                     iotSharedEntityContext<Device> devCont = new iotSharedEntityContext<Device>();
                     int devId = devCont.Add(ndev);
                     Device stored = devCont.GetById(devId);

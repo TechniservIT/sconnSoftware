@@ -45,19 +45,19 @@ namespace iotDatabaseConnector.Migrations
                     {
                         Id = c.Int(nullable: false),
                         DeviceName = c.String(nullable: false),
-                        Credentials_CredentialId = c.Int(),
+                        Credentials_Id = c.Int(),
                         Site_Id = c.Int(),
                         DeviceLocation_Id = c.Int(nullable: false),
                         Type_Id = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.DeviceCredentials", t => t.Credentials_CredentialId)
+                .ForeignKey("dbo.DeviceCredentials", t => t.Credentials_Id)
                 .ForeignKey("dbo.Sites", t => t.Site_Id)
                 .ForeignKey("dbo.Locations", t => t.DeviceLocation_Id, cascadeDelete: true)
                 .ForeignKey("dbo.EndpointInfoes", t => t.Id)
                 .ForeignKey("dbo.DeviceTypes", t => t.Type_Id, cascadeDelete: true)
                 .Index(t => t.Id)
-                .Index(t => t.Credentials_CredentialId)
+                .Index(t => t.Credentials_Id)
                 .Index(t => t.Site_Id)
                 .Index(t => t.DeviceLocation_Id)
                 .Index(t => t.Type_Id);
@@ -66,27 +66,27 @@ namespace iotDatabaseConnector.Migrations
                 "dbo.DeviceCredentials",
                 c => new
                     {
-                        CredentialId = c.Int(nullable: false, identity: true),
+                        Id = c.Int(nullable: false, identity: true),
                         Username = c.String(nullable: false),
                         Password = c.String(nullable: false),
                         HashData = c.Binary(),
                         PermissionExpireDate = c.DateTime(nullable: false),
                         PasswordExpireDate = c.DateTime(nullable: false),
-                        AuthLevel_AppAuthLevelId = c.Int(),
+                        AuthLevel_Id = c.Int(),
                     })
-                .PrimaryKey(t => t.CredentialId)
-                .ForeignKey("dbo.AppAuthLevels", t => t.AuthLevel_AppAuthLevelId)
-                .Index(t => t.AuthLevel_AppAuthLevelId);
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.AppAuthLevels", t => t.AuthLevel_Id)
+                .Index(t => t.AuthLevel_Id);
             
             CreateTable(
                 "dbo.AppAuthLevels",
                 c => new
                     {
-                        AppAuthLevelId = c.Int(nullable: false, identity: true),
+                        Id = c.Int(nullable: false, identity: true),
                         Write = c.Boolean(nullable: false),
                         Read = c.Boolean(nullable: false),
                     })
-                .PrimaryKey(t => t.AppAuthLevelId);
+                .PrimaryKey(t => t.Id);
             
             CreateTable(
                 "dbo.Locations",
@@ -255,8 +255,8 @@ namespace iotDatabaseConnector.Migrations
             DropForeignKey("dbo.Devices", "Site_Id", "dbo.Sites");
             DropForeignKey("dbo.Locations", "Domain_Id", "dbo.iotDomains");
             DropForeignKey("dbo.DeviceTypes", "Domain_Id", "dbo.iotDomains");
-            DropForeignKey("dbo.Devices", "Credentials_CredentialId", "dbo.DeviceCredentials");
-            DropForeignKey("dbo.DeviceCredentials", "AuthLevel_AppAuthLevelId", "dbo.AppAuthLevels");
+            DropForeignKey("dbo.Devices", "Credentials_Id", "dbo.DeviceCredentials");
+            DropForeignKey("dbo.DeviceCredentials", "AuthLevel_Id", "dbo.AppAuthLevels");
             DropIndex("dbo.sconnConfigMappers", new[] { "Parameter_Id" });
             DropIndex("dbo.sconnConfigMappers", new[] { "ActionParam_Id" });
             DropIndex("dbo.ParameterChangeHistories", new[] { "Property_Id" });
@@ -268,11 +268,11 @@ namespace iotDatabaseConnector.Migrations
             DropIndex("dbo.Sites", new[] { "Domain_Id" });
             DropIndex("dbo.DeviceTypes", new[] { "Domain_Id" });
             DropIndex("dbo.Locations", new[] { "Domain_Id" });
-            DropIndex("dbo.DeviceCredentials", new[] { "AuthLevel_AppAuthLevelId" });
+            DropIndex("dbo.DeviceCredentials", new[] { "AuthLevel_Id" });
             DropIndex("dbo.Devices", new[] { "Type_Id" });
             DropIndex("dbo.Devices", new[] { "DeviceLocation_Id" });
             DropIndex("dbo.Devices", new[] { "Site_Id" });
-            DropIndex("dbo.Devices", new[] { "Credentials_CredentialId" });
+            DropIndex("dbo.Devices", new[] { "Credentials_Id" });
             DropIndex("dbo.Devices", new[] { "Id" });
             DropIndex("dbo.DeviceActions", new[] { "Device_Id" });
             DropIndex("dbo.ActionParameters", new[] { "Type_Id" });

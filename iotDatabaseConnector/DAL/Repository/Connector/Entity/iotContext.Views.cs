@@ -11,7 +11,7 @@ using System.Data.Entity.Infrastructure.MappingViews;
 
 [assembly: DbMappingViewCacheTypeAttribute(
     typeof(iotDbConnector.DAL.iotContext),
-    typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySets2372b9ce34bfd99ca5cad5280ea2b78f7845dd41e1440587df8b31daf2e9456f))]
+    typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySets2eccfdf0d64598d1650ba4b21704d0003d7ea0f97c042d874185fdcdf7a7348c))]
 
 namespace Edm_EntityMappingGeneratedViews
 {
@@ -23,14 +23,14 @@ namespace Edm_EntityMappingGeneratedViews
     /// Implements a mapping view cache.
     /// </summary>
     [GeneratedCode("Entity Framework Power Tools", "0.9.0.0")]
-    internal sealed class ViewsForBaseEntitySets2372b9ce34bfd99ca5cad5280ea2b78f7845dd41e1440587df8b31daf2e9456f : DbMappingViewCache
+    internal sealed class ViewsForBaseEntitySets2eccfdf0d64598d1650ba4b21704d0003d7ea0f97c042d874185fdcdf7a7348c : DbMappingViewCache
     {
         /// <summary>
         /// Gets a hash value computed over the mapping closure.
         /// </summary>
         public override string MappingHashValue
         {
-            get { return "2372b9ce34bfd99ca5cad5280ea2b78f7845dd41e1440587df8b31daf2e9456f"; }
+            get { return "2eccfdf0d64598d1650ba4b21704d0003d7ea0f97c042d874185fdcdf7a7348c"; }
         }
 
         /// <summary>
@@ -371,9 +371,9 @@ namespace Edm_EntityMappingGeneratedViews
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing Device
-        [CodeFirstDatabaseSchema.Device](T7.Device_Id, T7.Device_DeviceName, T7.[Device.Credentials_CredentialId], T7.[Device.Site_Id], T7.[Device.DeviceLocation_Id], T7.[Device.Type_Id])
+        [CodeFirstDatabaseSchema.Device](T7.Device_Id, T7.Device_DeviceName, T7.[Device.Credentials_Id], T7.[Device.Site_Id], T7.[Device.DeviceLocation_Id], T7.[Device.Type_Id])
     FROM (
-        SELECT T4.Device_Id, T4.Device_DeviceName, T6.[Device.Credentials_CredentialId], T5.[Device.Site_Id], T4.[Device.DeviceLocation_Id], T4.[Device.Type_Id], (T6._from0 AND T6._from0 IS NOT NULL) AS _from0, (T5._from1 AND T5._from1 IS NOT NULL) AS _from1, T4._from2, T4._from3, T4._from4
+        SELECT T4.Device_Id, T4.Device_DeviceName, T6.[Device.Credentials_Id], T5.[Device.Site_Id], T4.[Device.DeviceLocation_Id], T4.[Device.Type_Id], (T6._from0 AND T6._from0 IS NOT NULL) AS _from0, (T5._from1 AND T5._from1 IS NOT NULL) AS _from1, T4._from2, T4._from3, T4._from4
         FROM  (
             SELECT T1.Device_Id, T2.Device_DeviceName, T3.[Device.DeviceLocation_Id], T1.[Device.Type_Id], T2._from2, T3._from3, T1._from4
             FROM  (
@@ -406,7 +406,7 @@ namespace Edm_EntityMappingGeneratedViews
             LEFT OUTER JOIN (
             SELECT 
                 Key(T.DeviceCredentials_Devices_Target).Id AS Device_Id, 
-                Key(T.DeviceCredentials_Devices_Source).CredentialId AS [Device.Credentials_CredentialId], 
+                Key(T.DeviceCredentials_Devices_Source).Id AS [Device.Credentials_Id], 
                 True AS _from0
             FROM iotContext.DeviceCredentials_Devices AS T) AS T6
             ON T4.Device_Id = T6.Device_Id
@@ -421,12 +421,12 @@ namespace Edm_EntityMappingGeneratedViews
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing DeviceCredentials
-        [CodeFirstDatabaseSchema.DeviceCredentials](T3.DeviceCredentials_CredentialId, T3.DeviceCredentials_Username, T3.DeviceCredentials_Password, T3.DeviceCredentials_HashData, T3.DeviceCredentials_PermissionExpireDate, T3.DeviceCredentials_PasswordExpireDate, T3.[DeviceCredentials.AuthLevel_AppAuthLevelId])
+        [CodeFirstDatabaseSchema.DeviceCredentials](T3.DeviceCredentials_Id, T3.DeviceCredentials_Username, T3.DeviceCredentials_Password, T3.DeviceCredentials_HashData, T3.DeviceCredentials_PermissionExpireDate, T3.DeviceCredentials_PasswordExpireDate, T3.[DeviceCredentials.AuthLevel_Id])
     FROM (
-        SELECT T1.DeviceCredentials_CredentialId, T1.DeviceCredentials_Username, T1.DeviceCredentials_Password, T1.DeviceCredentials_HashData, T1.DeviceCredentials_PermissionExpireDate, T1.DeviceCredentials_PasswordExpireDate, T2.[DeviceCredentials.AuthLevel_AppAuthLevelId], T1._from0, (T2._from1 AND T2._from1 IS NOT NULL) AS _from1
+        SELECT T1.DeviceCredentials_Id, T1.DeviceCredentials_Username, T1.DeviceCredentials_Password, T1.DeviceCredentials_HashData, T1.DeviceCredentials_PermissionExpireDate, T1.DeviceCredentials_PasswordExpireDate, T2.[DeviceCredentials.AuthLevel_Id], T1._from0, (T2._from1 AND T2._from1 IS NOT NULL) AS _from1
         FROM  (
             SELECT 
-                T.CredentialId AS DeviceCredentials_CredentialId, 
+                T.Id AS DeviceCredentials_Id, 
                 T.Username AS DeviceCredentials_Username, 
                 T.Password AS DeviceCredentials_Password, 
                 T.HashData AS DeviceCredentials_HashData, 
@@ -436,11 +436,11 @@ namespace Edm_EntityMappingGeneratedViews
             FROM iotContext.Credentials AS T) AS T1
             LEFT OUTER JOIN (
             SELECT 
-                Key(T.AppAuthLevel_Credentials_Target).CredentialId AS DeviceCredentials_CredentialId, 
-                Key(T.AppAuthLevel_Credentials_Source).AppAuthLevelId AS [DeviceCredentials.AuthLevel_AppAuthLevelId], 
+                Key(T.AppAuthLevel_Credentials_Target).Id AS DeviceCredentials_Id, 
+                Key(T.AppAuthLevel_Credentials_Source).Id AS [DeviceCredentials.AuthLevel_Id], 
                 True AS _from1
             FROM iotContext.AppAuthLevel_Credentials AS T) AS T2
-            ON T1.DeviceCredentials_CredentialId = T2.DeviceCredentials_CredentialId
+            ON T1.DeviceCredentials_Id = T2.DeviceCredentials_Id
     ) AS T3");
         }
 
@@ -452,10 +452,10 @@ namespace Edm_EntityMappingGeneratedViews
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing AppAuthLevel
-        [CodeFirstDatabaseSchema.AppAuthLevel](T1.AppAuthLevel_AppAuthLevelId, T1.AppAuthLevel_Write, T1.AppAuthLevel_Read)
+        [CodeFirstDatabaseSchema.AppAuthLevel](T1.AppAuthLevel_Id, T1.AppAuthLevel_Write, T1.AppAuthLevel_Read)
     FROM (
         SELECT 
-            T.AppAuthLevelId AS AppAuthLevel_AppAuthLevelId, 
+            T.Id AS AppAuthLevel_Id, 
             T.Write AS AppAuthLevel_Write, 
             T.Read AS AppAuthLevel_Read, 
             True AS _from0
@@ -901,7 +901,7 @@ namespace Edm_EntityMappingGeneratedViews
             return new DbMappingView(@"
     SELECT VALUE -- Constructing Devices
         [iotDbConnector.DAL.Device](T1.Device_Id, T1.Device_DeviceName) WITH 
-        RELATIONSHIP(CREATEREF(iotContext.Credentials, ROW(T1.[DeviceCredentials_Devices.DeviceCredentials_Devices_Source.CredentialId]),[iotDbConnector.DAL.DeviceCredentials]),[iotDbConnector.DAL.DeviceCredentials_Devices],DeviceCredentials_Devices_Target,DeviceCredentials_Devices_Source) 
+        RELATIONSHIP(CREATEREF(iotContext.Credentials, ROW(T1.[DeviceCredentials_Devices.DeviceCredentials_Devices_Source.Id]),[iotDbConnector.DAL.DeviceCredentials]),[iotDbConnector.DAL.DeviceCredentials_Devices],DeviceCredentials_Devices_Target,DeviceCredentials_Devices_Source) 
         RELATIONSHIP(CREATEREF(iotContext.Sites, ROW(T1.[Site_Devices.Site_Devices_Source.Id]),[iotDbConnector.DAL.Site]),[iotDbConnector.DAL.Site_Devices],Site_Devices_Target,Site_Devices_Source) 
         RELATIONSHIP(CREATEREF(iotContext.Locations, ROW(T1.[Device_DeviceLocation.Device_DeviceLocation_Target.Id]),[iotDbConnector.DAL.Location]),[iotDbConnector.DAL.Device_DeviceLocation],Device_DeviceLocation_Source,Device_DeviceLocation_Target) 
         RELATIONSHIP(CREATEREF(iotContext.Types, ROW(T1.[Device_Type.Device_Type_Target.Id]),[iotDbConnector.DAL.DeviceType]),[iotDbConnector.DAL.Device_Type],Device_Type_Source,Device_Type_Target) 
@@ -910,7 +910,7 @@ namespace Edm_EntityMappingGeneratedViews
             T.Id AS Device_Id, 
             T.DeviceName AS Device_DeviceName, 
             True AS _from0, 
-            T.Credentials_CredentialId AS [DeviceCredentials_Devices.DeviceCredentials_Devices_Source.CredentialId], 
+            T.Credentials_Id AS [DeviceCredentials_Devices.DeviceCredentials_Devices_Source.Id], 
             T.Site_Id AS [Site_Devices.Site_Devices_Source.Id], 
             T.DeviceLocation_Id AS [Device_DeviceLocation.Device_DeviceLocation_Target.Id], 
             T.Type_Id AS [Device_Type.Device_Type_Target.Id]
@@ -929,19 +929,19 @@ namespace Edm_EntityMappingGeneratedViews
         [iotDbConnector.DAL.DeviceCredentials_Devices](T3.[DeviceCredentials_Devices.DeviceCredentials_Devices_Source], T3.[DeviceCredentials_Devices.DeviceCredentials_Devices_Target])
     FROM (
         SELECT -- Constructing DeviceCredentials_Devices_Source
-            CreateRef(iotContext.Credentials, row(T2.[DeviceCredentials_Devices.DeviceCredentials_Devices_Source.CredentialId]), [iotDbConnector.DAL.DeviceCredentials]) AS [DeviceCredentials_Devices.DeviceCredentials_Devices_Source], 
+            CreateRef(iotContext.Credentials, row(T2.[DeviceCredentials_Devices.DeviceCredentials_Devices_Source.Id]), [iotDbConnector.DAL.DeviceCredentials]) AS [DeviceCredentials_Devices.DeviceCredentials_Devices_Source], 
             T2.[DeviceCredentials_Devices.DeviceCredentials_Devices_Target]
         FROM (
             SELECT -- Constructing DeviceCredentials_Devices_Target
-                T1.[DeviceCredentials_Devices.DeviceCredentials_Devices_Source.CredentialId], 
+                T1.[DeviceCredentials_Devices.DeviceCredentials_Devices_Source.Id], 
                 CreateRef(iotContext.Devices, row(T1.[DeviceCredentials_Devices.DeviceCredentials_Devices_Target.Id]), [iotDbConnector.DAL.Device]) AS [DeviceCredentials_Devices.DeviceCredentials_Devices_Target]
             FROM (
                 SELECT 
-                    T.Credentials_CredentialId AS [DeviceCredentials_Devices.DeviceCredentials_Devices_Source.CredentialId], 
+                    T.Credentials_Id AS [DeviceCredentials_Devices.DeviceCredentials_Devices_Source.Id], 
                     T.Id AS [DeviceCredentials_Devices.DeviceCredentials_Devices_Target.Id], 
                     True AS _from0
                 FROM CodeFirstDatabase.Device AS T
-                WHERE T.Credentials_CredentialId IS NOT NULL
+                WHERE T.Credentials_Id IS NOT NULL
             ) AS T1
         ) AS T2
     ) AS T3");
@@ -1040,18 +1040,18 @@ namespace Edm_EntityMappingGeneratedViews
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing Credentials
-        [iotDbConnector.DAL.DeviceCredentials](T1.DeviceCredentials_CredentialId, T1.DeviceCredentials_Username, T1.DeviceCredentials_Password, T1.DeviceCredentials_HashData, T1.DeviceCredentials_PermissionExpireDate, T1.DeviceCredentials_PasswordExpireDate) WITH 
-        RELATIONSHIP(CREATEREF(iotContext.AppAuthLevels, ROW(T1.[AppAuthLevel_Credentials.AppAuthLevel_Credentials_Source.AppAuthLevelId]),[iotDbConnector.DAL.AppAuthLevel]),[iotDbConnector.DAL.AppAuthLevel_Credentials],AppAuthLevel_Credentials_Target,AppAuthLevel_Credentials_Source) 
+        [iotDbConnector.DAL.DeviceCredentials](T1.DeviceCredentials_Id, T1.DeviceCredentials_Username, T1.DeviceCredentials_Password, T1.DeviceCredentials_HashData, T1.DeviceCredentials_PermissionExpireDate, T1.DeviceCredentials_PasswordExpireDate) WITH 
+        RELATIONSHIP(CREATEREF(iotContext.AppAuthLevels, ROW(T1.[AppAuthLevel_Credentials.AppAuthLevel_Credentials_Source.Id]),[iotDbConnector.DAL.AppAuthLevel]),[iotDbConnector.DAL.AppAuthLevel_Credentials],AppAuthLevel_Credentials_Target,AppAuthLevel_Credentials_Source) 
     FROM (
         SELECT 
-            T.CredentialId AS DeviceCredentials_CredentialId, 
+            T.Id AS DeviceCredentials_Id, 
             T.Username AS DeviceCredentials_Username, 
             T.Password AS DeviceCredentials_Password, 
             T.HashData AS DeviceCredentials_HashData, 
             T.PermissionExpireDate AS DeviceCredentials_PermissionExpireDate, 
             T.PasswordExpireDate AS DeviceCredentials_PasswordExpireDate, 
             True AS _from0, 
-            T.AuthLevel_AppAuthLevelId AS [AppAuthLevel_Credentials.AppAuthLevel_Credentials_Source.AppAuthLevelId]
+            T.AuthLevel_Id AS [AppAuthLevel_Credentials.AppAuthLevel_Credentials_Source.Id]
         FROM CodeFirstDatabase.DeviceCredentials AS T
     ) AS T1");
         }
@@ -1067,19 +1067,19 @@ namespace Edm_EntityMappingGeneratedViews
         [iotDbConnector.DAL.AppAuthLevel_Credentials](T3.[AppAuthLevel_Credentials.AppAuthLevel_Credentials_Source], T3.[AppAuthLevel_Credentials.AppAuthLevel_Credentials_Target])
     FROM (
         SELECT -- Constructing AppAuthLevel_Credentials_Source
-            CreateRef(iotContext.AppAuthLevels, row(T2.[AppAuthLevel_Credentials.AppAuthLevel_Credentials_Source.AppAuthLevelId]), [iotDbConnector.DAL.AppAuthLevel]) AS [AppAuthLevel_Credentials.AppAuthLevel_Credentials_Source], 
+            CreateRef(iotContext.AppAuthLevels, row(T2.[AppAuthLevel_Credentials.AppAuthLevel_Credentials_Source.Id]), [iotDbConnector.DAL.AppAuthLevel]) AS [AppAuthLevel_Credentials.AppAuthLevel_Credentials_Source], 
             T2.[AppAuthLevel_Credentials.AppAuthLevel_Credentials_Target]
         FROM (
             SELECT -- Constructing AppAuthLevel_Credentials_Target
-                T1.[AppAuthLevel_Credentials.AppAuthLevel_Credentials_Source.AppAuthLevelId], 
-                CreateRef(iotContext.Credentials, row(T1.[AppAuthLevel_Credentials.AppAuthLevel_Credentials_Target.CredentialId]), [iotDbConnector.DAL.DeviceCredentials]) AS [AppAuthLevel_Credentials.AppAuthLevel_Credentials_Target]
+                T1.[AppAuthLevel_Credentials.AppAuthLevel_Credentials_Source.Id], 
+                CreateRef(iotContext.Credentials, row(T1.[AppAuthLevel_Credentials.AppAuthLevel_Credentials_Target.Id]), [iotDbConnector.DAL.DeviceCredentials]) AS [AppAuthLevel_Credentials.AppAuthLevel_Credentials_Target]
             FROM (
                 SELECT 
-                    T.AuthLevel_AppAuthLevelId AS [AppAuthLevel_Credentials.AppAuthLevel_Credentials_Source.AppAuthLevelId], 
-                    T.CredentialId AS [AppAuthLevel_Credentials.AppAuthLevel_Credentials_Target.CredentialId], 
+                    T.AuthLevel_Id AS [AppAuthLevel_Credentials.AppAuthLevel_Credentials_Source.Id], 
+                    T.Id AS [AppAuthLevel_Credentials.AppAuthLevel_Credentials_Target.Id], 
                     True AS _from0
                 FROM CodeFirstDatabase.DeviceCredentials AS T
-                WHERE T.AuthLevel_AppAuthLevelId IS NOT NULL
+                WHERE T.AuthLevel_Id IS NOT NULL
             ) AS T1
         ) AS T2
     ) AS T3");
@@ -1093,10 +1093,10 @@ namespace Edm_EntityMappingGeneratedViews
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing AppAuthLevels
-        [iotDbConnector.DAL.AppAuthLevel](T1.AppAuthLevel_AppAuthLevelId, T1.AppAuthLevel_Write, T1.AppAuthLevel_Read)
+        [iotDbConnector.DAL.AppAuthLevel](T1.AppAuthLevel_Id, T1.AppAuthLevel_Write, T1.AppAuthLevel_Read)
     FROM (
         SELECT 
-            T.AppAuthLevelId AS AppAuthLevel_AppAuthLevelId, 
+            T.Id AS AppAuthLevel_Id, 
             T.Write AS AppAuthLevel_Write, 
             T.Read AS AppAuthLevel_Read, 
             True AS _from0

@@ -16,11 +16,12 @@ namespace iotDbConnector.DAL
     
     public  class  iotContext : DbContext
     {
-        public iotContext() :base("DefaultConnection")
+        public iotContext() :base("iotDbConn")
         {
-           // AppDomain.CurrentDomain.SetData("DataDirectory", "H:\\Inf\\PZPP\\IoT\\iotDash\\DBO");
-            //this.Configuration.ProxyCreationEnabled = true;
-            //this.Configuration.LazyLoadingEnabled = true;
+            //AppDomain.CurrentDomain.SetData("DataDirectory", "H:\\Inf\\PZPP\\IoT\\iotDash\\DBO");
+
+            this.Configuration.ProxyCreationEnabled = true;
+            this.Configuration.LazyLoadingEnabled = true;
             
         }
 

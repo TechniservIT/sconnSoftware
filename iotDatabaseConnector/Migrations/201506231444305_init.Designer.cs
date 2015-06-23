@@ -13,7 +13,7 @@ namespace iotDatabaseConnector.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201506220606260_init"; }
+            get { return "201506231444305_init"; }
         }
         
         string IMigrationMetadata.Source

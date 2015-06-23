@@ -36,7 +36,7 @@ namespace iotDash.Controllers
 				string domainId = DomainSession.GetContextDomain(this.HttpContext);
 				DeviceRestfulService cl = new DeviceRestfulService();
 				//iotDomain domain = InMemoryContext.GetDomainForName(domainId);
-                Site toEdit = cl.SiteWithId(domainId, Id);  //domain.Sites.First(s => s.Id == Id);  //cl.SiteWithId(domainId, Id);
+				Site toEdit = cl.SiteWithId(domainId, Id);  //domain.Sites.First(s => s.Id == Id);  //cl.SiteWithId(domainId, Id);
 				DeviceAddModel model = new DeviceAddModel(toEdit,domainId);
 				return View(model);
 			}
@@ -54,7 +54,7 @@ namespace iotDash.Controllers
 			{
 				DeviceRestfulService cl = new DeviceRestfulService();
 				string domainId = DomainSession.GetContextDomain(this.HttpContext);
-                iotDomain domain = cl.DomainWithId(domainId); //InMemoryContext.GetDomainForName(domainId);
+				iotDomain domain = cl.DomainWithId(domainId); //InMemoryContext.GetDomainForName(domainId);
 				DeviceType type = new DeviceType();
 				type.TypeName = Name;
 				type.TypeDescription = Description;
@@ -147,20 +147,20 @@ namespace iotDash.Controllers
 
 
 
-		public string PerformAction(int SiteId, int DeviceId, int ActionId, string[] ActionParams)
+		public string PerformAction(int ActionId, string[] ActionParams)
 		{   
 			try
 			{
 				DeviceRestfulService cl = new DeviceRestfulService();
 				string domainId = DomainSession.GetContextDomain(this.HttpContext);
-				List<DeviceAction> actions = cl.DeviceActions(DeviceId,SiteId,domainId).ToList();
+				List<DeviceAction> actions = cl.DeviceActions(domainId).ToList();
 				DeviceAction action = (from ac in actions
 									   where ac.Id == ActionId
 									   select ac).First();
 				string currValStr = action.ResultParameters.First().Value;
 				action.RequiredParameters.First().Value = currValStr.Equals("1") ? "0" : "1";   //toggle
 				action.RequiredParameters.First().Type = action.ResultParameters.First().Type;
-				bool result = cl.PerformDeviceAction(action,DeviceId,SiteId,domainId);
+				bool result = cl.PerformDeviceAction(action,domainId);
 				return result == true ? "success" : "error";
 			}
 			catch (Exception e)

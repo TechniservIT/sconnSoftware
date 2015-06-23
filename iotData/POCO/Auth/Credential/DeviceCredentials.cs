@@ -13,7 +13,7 @@ namespace iotDbConnector.DAL
         [Key]
         [Required]
         [DataMember]
-        public int CredentialId { get; set; }
+        public int Id { get; set; }
 
         [DataMember]
         public virtual AppAuthLevel AuthLevel { get; set; }
@@ -36,7 +36,7 @@ namespace iotDbConnector.DAL
         public DateTime PasswordExpireDate { get; set; }
 
         [DataMember]
-        public virtual List<Device> Devices { get; set; }
+        public virtual AIList<Device> Devices { get; set; }
 
 
     }
