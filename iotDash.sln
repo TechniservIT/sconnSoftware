@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.22823.1
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iotDash", "iotDash\iotDash.csproj", "{2835FDBA-96BA-4D5C-850D-A909BB12F4E3}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -72,10 +72,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "restfulPerformanceTest", "restfulPerformanceTest\restfulPerformanceTest.csproj", "{84679219-862A-4B68-B36F-CA0A71600B36}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iotDeviceService", "iotDeviceService\iotDeviceService.csproj", "{3C2419E5-D232-4C6F-9821-D8A491459ED1}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iotFastDatabase", "iotFastDatabase\iotFastDatabase.csproj", "{BF37DB34-9C15-48A2-A78B-2C13462F159B}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iotNoSqlDatabase", "iotRestfulDatabase\iotNoSqlDatabase.csproj", "{97B81A32-D59A-4232-998F-AC61F0FABE59}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -155,14 +151,6 @@ Global
 		{3C2419E5-D232-4C6F-9821-D8A491459ED1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3C2419E5-D232-4C6F-9821-D8A491459ED1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3C2419E5-D232-4C6F-9821-D8A491459ED1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BF37DB34-9C15-48A2-A78B-2C13462F159B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BF37DB34-9C15-48A2-A78B-2C13462F159B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BF37DB34-9C15-48A2-A78B-2C13462F159B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BF37DB34-9C15-48A2-A78B-2C13462F159B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{97B81A32-D59A-4232-998F-AC61F0FABE59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{97B81A32-D59A-4232-998F-AC61F0FABE59}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{97B81A32-D59A-4232-998F-AC61F0FABE59}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{97B81A32-D59A-4232-998F-AC61F0FABE59}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -195,7 +183,5 @@ Global
 		{4B694828-A1A7-46AC-B220-8507D277D1BB} = {2051C7F5-3D2D-4462-B0FA-F2AAB905CF46}
 		{84679219-862A-4B68-B36F-CA0A71600B36} = {4AAFA6B4-0770-44C0-B525-805CAA1CA0C9}
 		{3C2419E5-D232-4C6F-9821-D8A491459ED1} = {2051C7F5-3D2D-4462-B0FA-F2AAB905CF46}
-		{BF37DB34-9C15-48A2-A78B-2C13462F159B} = {8FA86EE5-EFDF-4129-87EE-93F5C8376B93}
-		{97B81A32-D59A-4232-998F-AC61F0FABE59} = {8FA86EE5-EFDF-4129-87EE-93F5C8376B93}
 	EndGlobalSection
 EndGlobal

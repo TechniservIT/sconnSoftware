@@ -52,9 +52,9 @@
     <Reference Include="M2Mqtt">
       <HintPath>..\packages\M2Mqtt.4.0\lib\net45\M2Mqtt.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="NLog">
       <HintPath>..\packages\NLog.3.2.1\lib\net45\NLog.dll</HintPath>
@@ -70,6 +70,15 @@
     <Reference Include="Raven.Database, Version=3.0.0.0, Culture=neutral, PublicKeyToken=37f41c7f99471593, processorArchitecture=MSIL">
       <HintPath>..\packages\RavenDB.Database.3.0.3697-Unstable\lib\net45\Raven.Database.dll</HintPath>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="StackExchange.Redis">
+      <HintPath>..\packages\StackExchange.Redis.1.0.450\lib\net45\StackExchange.Redis.dll</HintPath>
+    </Reference>
+    <Reference Include="StackExchange.Redis.Extensions.Core">
+      <HintPath>..\packages\StackExchange.Redis.Extensions.Core.1.1.11.0\lib\net45\StackExchange.Redis.Extensions.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="StackExchange.Redis.Extensions.Newtonsoft">
+      <HintPath>..\packages\StackExchange.Redis.Extensions.Newtonsoft.1.1.8.0\lib\net45\StackExchange.Redis.Extensions.Newtonsoft.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
@@ -97,13 +106,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DAL\iotContext.Views.cs" />
-    <Compile Include="DAL\IoTDB.cs" />
-    <Compile Include="DAL\iotDbConnector.cs" />
+    <Compile Include="DAL\Repository\Connector\Entity\iotContext.Views.cs" />
+    <Compile Include="DAL\Repository\Connector\Entity\IoTDB.cs" />
+    <Compile Include="DAL\Repository\Connector\iotDbConnector.cs" />
     <Compile Include="DAL\Repository\IiotRepository.cs" />
-    <Compile Include="DAL\Repository\iotRepository.cs" />
+    <Compile Include="DAL\Repository\Connector\iotRepository.cs" />
+    <Compile Include="DAL\Repository\Runtime\iotSharedContext.cs" />
+    <Compile Include="Migrations\201506220606260_init.cs" />
+    <Compile Include="Migrations\201506220606260_init.Designer.cs">
+      <DependentUpon>201506220606260_init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="DAL\Repository\NoSql\INoSqlDataSource.cs" />
+    <Compile Include="DAL\Repository\NoSql\MongoNoSqlDataSource.cs" />
+    <Compile Include="DAL\Repository\NoSql\RavenNoSqlDataSource.cs" />
+    <Compile Include="DAL\Repository\NoSql\RedisNoSqlDataSource.cs" />
     <Compile Include="Notify\ParameterChangeManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="DAL\Repository\Runtime\InMemoryContext.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\iotData\iotData.csproj">
@@ -125,8 +145,11 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Migrations\" />
+    <EmbeddedResource Include="Migrations\201506220606260_init.resx">
+      <DependentUpon>201506220606260_init.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\System.Data.SQLite.Core.1.0.97.0\build\net45\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.97.0\build\net45\System.Data.SQLite.Core.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

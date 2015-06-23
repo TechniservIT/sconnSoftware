@@ -11,7 +11,7 @@ using System.Data.Entity.Infrastructure.MappingViews;
 
 [assembly: DbMappingViewCacheTypeAttribute(
     typeof(iotDbConnector.DAL.iotContext),
-    typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySetsecb847ddeeb3efd788a5e2538b045c30395aabaf70726aef791fea32e4b2b8d8))]
+    typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySets2372b9ce34bfd99ca5cad5280ea2b78f7845dd41e1440587df8b31daf2e9456f))]
 
 namespace Edm_EntityMappingGeneratedViews
 {
@@ -23,14 +23,14 @@ namespace Edm_EntityMappingGeneratedViews
     /// Implements a mapping view cache.
     /// </summary>
     [GeneratedCode("Entity Framework Power Tools", "0.9.0.0")]
-    internal sealed class ViewsForBaseEntitySetsecb847ddeeb3efd788a5e2538b045c30395aabaf70726aef791fea32e4b2b8d8 : DbMappingViewCache
+    internal sealed class ViewsForBaseEntitySets2372b9ce34bfd99ca5cad5280ea2b78f7845dd41e1440587df8b31daf2e9456f : DbMappingViewCache
     {
         /// <summary>
         /// Gets a hash value computed over the mapping closure.
         /// </summary>
         public override string MappingHashValue
         {
-            get { return "ecb847ddeeb3efd788a5e2538b045c30395aabaf70726aef791fea32e4b2b8d8"; }
+            get { return "2372b9ce34bfd99ca5cad5280ea2b78f7845dd41e1440587df8b31daf2e9456f"; }
         }
 
         /// <summary>
@@ -82,42 +82,42 @@ namespace Edm_EntityMappingGeneratedViews
                 return GetView6();
             }
 
-            if (extentName == "CodeFirstDatabase.Site")
+            if (extentName == "CodeFirstDatabase.DeviceType")
             {
                 return GetView7();
             }
 
-            if (extentName == "CodeFirstDatabase.EndpointInfo")
+            if (extentName == "CodeFirstDatabase.Site")
             {
                 return GetView8();
             }
 
-            if (extentName == "CodeFirstDatabase.DeviceProperty")
+            if (extentName == "CodeFirstDatabase.EndpointInfo")
             {
                 return GetView9();
             }
 
-            if (extentName == "CodeFirstDatabase.DeviceParameter")
+            if (extentName == "CodeFirstDatabase.DeviceProperty")
             {
                 return GetView10();
             }
 
-            if (extentName == "CodeFirstDatabase.ParameterChangeHistory")
+            if (extentName == "CodeFirstDatabase.DeviceParameter")
             {
                 return GetView11();
             }
 
-            if (extentName == "CodeFirstDatabase.sconnConfigMapper")
+            if (extentName == "CodeFirstDatabase.ParameterChangeHistory")
             {
                 return GetView12();
             }
 
-            if (extentName == "CodeFirstDatabase.ParameterType")
+            if (extentName == "CodeFirstDatabase.sconnConfigMapper")
             {
                 return GetView13();
             }
 
-            if (extentName == "CodeFirstDatabase.DeviceType")
+            if (extentName == "CodeFirstDatabase.ParameterType")
             {
                 return GetView14();
             }
@@ -202,89 +202,94 @@ namespace Edm_EntityMappingGeneratedViews
                 return GetView30();
             }
 
-            if (extentName == "iotContext.Sites")
+            if (extentName == "iotContext.Types")
             {
                 return GetView31();
             }
 
-            if (extentName == "iotContext.Site_Domain")
+            if (extentName == "iotContext.DeviceType_Domain")
             {
                 return GetView32();
             }
 
-            if (extentName == "iotContext.Site_siteLocation")
+            if (extentName == "iotContext.Sites")
             {
                 return GetView33();
             }
 
-            if (extentName == "iotContext.Endpoints")
+            if (extentName == "iotContext.Site_Domain")
             {
                 return GetView34();
             }
 
-            if (extentName == "iotContext.Properties")
+            if (extentName == "iotContext.Site_siteLocation")
             {
                 return GetView35();
             }
 
-            if (extentName == "iotContext.DeviceProperty_Device")
+            if (extentName == "iotContext.Endpoints")
             {
                 return GetView36();
             }
 
-            if (extentName == "iotContext.Parameters")
+            if (extentName == "iotContext.Properties")
             {
                 return GetView37();
             }
 
-            if (extentName == "iotContext.DeviceParameter_Action")
+            if (extentName == "iotContext.DeviceProperty_Device")
             {
                 return GetView38();
             }
 
-            if (extentName == "iotContext.DeviceParameter_Property")
+            if (extentName == "iotContext.Parameters")
             {
                 return GetView39();
             }
 
-            if (extentName == "iotContext.DeviceParameter_Type")
+            if (extentName == "iotContext.DeviceParameter_Action")
             {
                 return GetView40();
             }
 
-            if (extentName == "iotContext.ParameterChanges")
+            if (extentName == "iotContext.DeviceParameter_Property")
             {
                 return GetView41();
             }
 
-            if (extentName == "iotContext.ParameterChangeHistory_Property")
+            if (extentName == "iotContext.DeviceParameter_Type")
             {
                 return GetView42();
             }
 
-            if (extentName == "iotContext.SconnMappers")
+            if (extentName == "iotContext.ParameterChanges")
             {
                 return GetView43();
             }
 
-            if (extentName == "iotContext.sconnConfigMapper_ActionParam")
+            if (extentName == "iotContext.ParameterChangeHistory_Property")
             {
                 return GetView44();
             }
 
-            if (extentName == "iotContext.sconnConfigMapper_Parameter")
+            if (extentName == "iotContext.SconnMappers")
             {
                 return GetView45();
             }
 
-            if (extentName == "iotContext.ParamTypes")
+            if (extentName == "iotContext.sconnConfigMapper_ActionParam")
             {
                 return GetView46();
             }
 
-            if (extentName == "iotContext.Types")
+            if (extentName == "iotContext.sconnConfigMapper_Parameter")
             {
                 return GetView47();
+            }
+
+            if (extentName == "iotContext.ParamTypes")
+            {
+                return GetView48();
             }
 
             return null;
@@ -298,33 +303,33 @@ namespace Edm_EntityMappingGeneratedViews
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing ActionParameter
-        [CodeFirstDatabaseSchema.ActionParameter](T5.ActionParameter_ParameterId, T5.ActionParameter_Value, T5.ActionParameter_ParamDescription, T5.ActionParameter_VisualRepresentationUrl, T5.[ActionParameter.Action_ActionId], T5.[ActionParameter.Type_ParameterId])
+        [CodeFirstDatabaseSchema.ActionParameter](T5.ActionParameter_Id, T5.ActionParameter_Value, T5.ActionParameter_ParamDescription, T5.ActionParameter_VisualRepresentationUrl, T5.[ActionParameter.Action_Id], T5.[ActionParameter.Type_Id])
     FROM (
-        SELECT T3.ActionParameter_ParameterId, T3.ActionParameter_Value, T3.ActionParameter_ParamDescription, T3.ActionParameter_VisualRepresentationUrl, T4.[ActionParameter.Action_ActionId], T3.[ActionParameter.Type_ParameterId], T3._from0, (T4._from1 AND T4._from1 IS NOT NULL) AS _from1, T3._from2
+        SELECT T3.ActionParameter_Id, T3.ActionParameter_Value, T3.ActionParameter_ParamDescription, T3.ActionParameter_VisualRepresentationUrl, T4.[ActionParameter.Action_Id], T3.[ActionParameter.Type_Id], T3._from0, (T4._from1 AND T4._from1 IS NOT NULL) AS _from1, T3._from2
         FROM  (
-            SELECT T1.ActionParameter_ParameterId, T2.ActionParameter_Value, T2.ActionParameter_ParamDescription, T2.ActionParameter_VisualRepresentationUrl, T1.[ActionParameter.Type_ParameterId], T2._from0, T1._from2
+            SELECT T1.ActionParameter_Id, T2.ActionParameter_Value, T2.ActionParameter_ParamDescription, T2.ActionParameter_VisualRepresentationUrl, T1.[ActionParameter.Type_Id], T2._from0, T1._from2
             FROM  (
                 SELECT 
-                    Key(T.ActionParameter_Type_Source).Id AS ActionParameter_ParameterId, 
-                    Key(T.ActionParameter_Type_Target).Id AS [ActionParameter.Type_ParameterId], 
+                    Key(T.ActionParameter_Type_Source).Id AS ActionParameter_Id, 
+                    Key(T.ActionParameter_Type_Target).Id AS [ActionParameter.Type_Id], 
                     True AS _from2
                 FROM iotContext.ActionParameter_Type AS T) AS T1
                 INNER JOIN (
                 SELECT 
-                    T.Id AS ActionParameter_ParameterId, 
+                    T.Id AS ActionParameter_Id, 
                     T.[Value] AS ActionParameter_Value, 
                     T.ParamDescription AS ActionParameter_ParamDescription, 
                     T.VisualRepresentationUrl AS ActionParameter_VisualRepresentationUrl, 
                     True AS _from0
                 FROM iotContext.ActionParameters AS T) AS T2
-                ON T1.ActionParameter_ParameterId = T2.ActionParameter_ParameterId) AS T3
+                ON T1.ActionParameter_Id = T2.ActionParameter_Id) AS T3
             LEFT OUTER JOIN (
             SELECT 
-                Key(T.DeviceAction_RequiredParameters_Target).Id AS ActionParameter_ParameterId, 
-                Key(T.DeviceAction_RequiredParameters_Source).Id AS [ActionParameter.Action_ActionId], 
+                Key(T.DeviceAction_RequiredParameters_Target).Id AS ActionParameter_Id, 
+                Key(T.DeviceAction_RequiredParameters_Source).Id AS [ActionParameter.Action_Id], 
                 True AS _from1
             FROM iotContext.DeviceAction_RequiredParameters AS T) AS T4
-            ON T3.ActionParameter_ParameterId = T4.ActionParameter_ParameterId
+            ON T3.ActionParameter_Id = T4.ActionParameter_Id
     ) AS T5");
         }
 
@@ -336,25 +341,25 @@ namespace Edm_EntityMappingGeneratedViews
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing DeviceAction
-        [CodeFirstDatabaseSchema.DeviceAction](T3.DeviceAction_ActionId, T3.DeviceAction_ActionName, T3.DeviceAction_ActionDescription, T3.DeviceAction_VisualRepresentationURL, T3.DeviceAction_LastActivationTime, T3.[DeviceAction.Device_DeviceId])
+        [CodeFirstDatabaseSchema.DeviceAction](T3.DeviceAction_Id, T3.DeviceAction_ActionName, T3.DeviceAction_ActionDescription, T3.DeviceAction_VisualRepresentationURL, T3.DeviceAction_LastActivationTime, T3.[DeviceAction.Device_Id])
     FROM (
-        SELECT T1.DeviceAction_ActionId, T2.DeviceAction_ActionName, T2.DeviceAction_ActionDescription, T2.DeviceAction_VisualRepresentationURL, T2.DeviceAction_LastActivationTime, T1.[DeviceAction.Device_DeviceId], T2._from0, T1._from1
+        SELECT T1.DeviceAction_Id, T2.DeviceAction_ActionName, T2.DeviceAction_ActionDescription, T2.DeviceAction_VisualRepresentationURL, T2.DeviceAction_LastActivationTime, T1.[DeviceAction.Device_Id], T2._from0, T1._from1
         FROM  (
             SELECT 
-                Key(T.DeviceAction_Device_Source).Id AS DeviceAction_ActionId, 
-                Key(T.DeviceAction_Device_Target).Id AS [DeviceAction.Device_DeviceId], 
+                Key(T.DeviceAction_Device_Source).Id AS DeviceAction_Id, 
+                Key(T.DeviceAction_Device_Target).Id AS [DeviceAction.Device_Id], 
                 True AS _from1
             FROM iotContext.DeviceAction_Device AS T) AS T1
             INNER JOIN (
             SELECT 
-                T.Id AS DeviceAction_ActionId, 
+                T.Id AS DeviceAction_Id, 
                 T.ActionName AS DeviceAction_ActionName, 
                 T.ActionDescription AS DeviceAction_ActionDescription, 
                 T.VisualRepresentationURL AS DeviceAction_VisualRepresentationURL, 
                 T.LastActivationTime AS DeviceAction_LastActivationTime, 
                 True AS _from0
             FROM iotContext.Actions AS T) AS T2
-            ON T1.DeviceAction_ActionId = T2.DeviceAction_ActionId
+            ON T1.DeviceAction_Id = T2.DeviceAction_Id
     ) AS T3");
         }
 
@@ -366,45 +371,45 @@ namespace Edm_EntityMappingGeneratedViews
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing Device
-        [CodeFirstDatabaseSchema.Device](T7.Device_DeviceId, T7.Device_DeviceName, T7.[Device.Credentials_CredentialId], T7.[Device.Site_SiteId], T7.[Device.DeviceLocation_LocationId], T7.[Device.Type_DeviceTypeId])
+        [CodeFirstDatabaseSchema.Device](T7.Device_Id, T7.Device_DeviceName, T7.[Device.Credentials_CredentialId], T7.[Device.Site_Id], T7.[Device.DeviceLocation_Id], T7.[Device.Type_Id])
     FROM (
-        SELECT T4.Device_DeviceId, T4.Device_DeviceName, T6.[Device.Credentials_CredentialId], T5.[Device.Site_SiteId], T4.[Device.DeviceLocation_LocationId], T4.[Device.Type_DeviceTypeId], (T6._from0 AND T6._from0 IS NOT NULL) AS _from0, (T5._from1 AND T5._from1 IS NOT NULL) AS _from1, T4._from2, T4._from3, T4._from4
+        SELECT T4.Device_Id, T4.Device_DeviceName, T6.[Device.Credentials_CredentialId], T5.[Device.Site_Id], T4.[Device.DeviceLocation_Id], T4.[Device.Type_Id], (T6._from0 AND T6._from0 IS NOT NULL) AS _from0, (T5._from1 AND T5._from1 IS NOT NULL) AS _from1, T4._from2, T4._from3, T4._from4
         FROM  (
-            SELECT T1.Device_DeviceId, T2.Device_DeviceName, T3.[Device.DeviceLocation_LocationId], T1.[Device.Type_DeviceTypeId], T2._from2, T3._from3, T1._from4
+            SELECT T1.Device_Id, T2.Device_DeviceName, T3.[Device.DeviceLocation_Id], T1.[Device.Type_Id], T2._from2, T3._from3, T1._from4
             FROM  (
                 SELECT 
-                    Key(T.Device_Type_Source).Id AS Device_DeviceId, 
-                    Key(T.Device_Type_Target).Id AS [Device.Type_DeviceTypeId], 
+                    Key(T.Device_Type_Source).Id AS Device_Id, 
+                    Key(T.Device_Type_Target).Id AS [Device.Type_Id], 
                     True AS _from4
                 FROM iotContext.Device_Type AS T) AS T1
                 INNER JOIN (
                 SELECT 
-                    T.Id AS Device_DeviceId, 
+                    T.Id AS Device_Id, 
                     T.DeviceName AS Device_DeviceName, 
                     True AS _from2
                 FROM iotContext.Devices AS T) AS T2
-                ON T1.Device_DeviceId = T2.Device_DeviceId
+                ON T1.Device_Id = T2.Device_Id
                 INNER JOIN (
                 SELECT 
-                    Key(T.Device_DeviceLocation_Source).Id AS Device_DeviceId, 
-                    Key(T.Device_DeviceLocation_Target).Id AS [Device.DeviceLocation_LocationId], 
+                    Key(T.Device_DeviceLocation_Source).Id AS Device_Id, 
+                    Key(T.Device_DeviceLocation_Target).Id AS [Device.DeviceLocation_Id], 
                     True AS _from3
                 FROM iotContext.Device_DeviceLocation AS T) AS T3
-                ON T1.Device_DeviceId = T3.Device_DeviceId) AS T4
+                ON T1.Device_Id = T3.Device_Id) AS T4
             LEFT OUTER JOIN (
             SELECT 
-                Key(T.Site_Devices_Target).Id AS Device_DeviceId, 
-                Key(T.Site_Devices_Source).Id AS [Device.Site_SiteId], 
+                Key(T.Site_Devices_Target).Id AS Device_Id, 
+                Key(T.Site_Devices_Source).Id AS [Device.Site_Id], 
                 True AS _from1
             FROM iotContext.Site_Devices AS T) AS T5
-            ON T4.Device_DeviceId = T5.Device_DeviceId
+            ON T4.Device_Id = T5.Device_Id
             LEFT OUTER JOIN (
             SELECT 
-                Key(T.DeviceCredentials_Devices_Target).Id AS Device_DeviceId, 
+                Key(T.DeviceCredentials_Devices_Target).Id AS Device_Id, 
                 Key(T.DeviceCredentials_Devices_Source).CredentialId AS [Device.Credentials_CredentialId], 
                 True AS _from0
             FROM iotContext.DeviceCredentials_Devices AS T) AS T6
-            ON T4.Device_DeviceId = T6.Device_DeviceId
+            ON T4.Device_Id = T6.Device_Id
     ) AS T7");
         }
 
@@ -466,12 +471,12 @@ namespace Edm_EntityMappingGeneratedViews
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing Location
-        [CodeFirstDatabaseSchema.Location](T3.Location_LocationId, T3.Location_LocationName, T3.Location_Lat, T3.Location_Lng, T3.Location_LocationVisualRepresentationURL, T3.[Location.Domain_DomainId])
+        [CodeFirstDatabaseSchema.Location](T3.Location_Id, T3.Location_LocationName, T3.Location_Lat, T3.Location_Lng, T3.Location_LocationVisualRepresentationURL, T3.[Location.Domain_Id])
     FROM (
-        SELECT T1.Location_LocationId, T1.Location_LocationName, T1.Location_Lat, T1.Location_Lng, T1.Location_LocationVisualRepresentationURL, T2.[Location.Domain_DomainId], T1._from0, (T2._from1 AND T2._from1 IS NOT NULL) AS _from1
+        SELECT T1.Location_Id, T1.Location_LocationName, T1.Location_Lat, T1.Location_Lng, T1.Location_LocationVisualRepresentationURL, T2.[Location.Domain_Id], T1._from0, (T2._from1 AND T2._from1 IS NOT NULL) AS _from1
         FROM  (
             SELECT 
-                T.Id AS Location_LocationId, 
+                T.Id AS Location_Id, 
                 T.LocationName AS Location_LocationName, 
                 T.Lat AS Location_Lat, 
                 T.Lng AS Location_Lng, 
@@ -480,11 +485,11 @@ namespace Edm_EntityMappingGeneratedViews
             FROM iotContext.Locations AS T) AS T1
             LEFT OUTER JOIN (
             SELECT 
-                Key(T.iotDomain_Locations_Target).Id AS Location_LocationId, 
-                Key(T.iotDomain_Locations_Source).Id AS [Location.Domain_DomainId], 
+                Key(T.iotDomain_Locations_Target).Id AS Location_Id, 
+                Key(T.iotDomain_Locations_Source).Id AS [Location.Domain_Id], 
                 True AS _from1
             FROM iotContext.iotDomain_Locations AS T) AS T2
-            ON T1.Location_LocationId = T2.Location_LocationId
+            ON T1.Location_Id = T2.Location_Id
     ) AS T3");
         }
 
@@ -496,10 +501,10 @@ namespace Edm_EntityMappingGeneratedViews
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing iotDomain
-        [CodeFirstDatabaseSchema.iotDomain](T1.iotDomain_DomainId, T1.iotDomain_DomainName)
+        [CodeFirstDatabaseSchema.iotDomain](T1.iotDomain_Id, T1.iotDomain_DomainName)
     FROM (
         SELECT 
-            T.Id AS iotDomain_DomainId, 
+            T.Id AS iotDomain_Id, 
             T.DomainName AS iotDomain_DomainName, 
             True AS _from0
         FROM iotContext.Domains AS T
@@ -507,38 +512,67 @@ namespace Edm_EntityMappingGeneratedViews
         }
 
         /// <summary>
-        /// Gets the view for CodeFirstDatabase.Site.
+        /// Gets the view for CodeFirstDatabase.DeviceType.
         /// </summary>
         /// <returns>The mapping view.</returns>
         private static DbMappingView GetView7()
         {
             return new DbMappingView(@"
-    SELECT VALUE -- Constructing Site
-        [CodeFirstDatabaseSchema.Site](T5.Site_SiteId, T5.Site_SiteName, T5.[Site.Domain_DomainId], T5.[Site.siteLocation_LocationId])
+    SELECT VALUE -- Constructing DeviceType
+        [CodeFirstDatabaseSchema.DeviceType](T3.DeviceType_Id, T3.DeviceType_TypeName, T3.DeviceType_TypeDescription, T3.DeviceType_VisualRepresentationURL, T3.[DeviceType.Domain_Id])
     FROM (
-        SELECT T3.Site_SiteId, T3.Site_SiteName, T3.[Site.Domain_DomainId], T4.[Site.siteLocation_LocationId], T3._from0, (T4._from1 AND T4._from1 IS NOT NULL) AS _from1, T3._from2
+        SELECT T1.DeviceType_Id, T2.DeviceType_TypeName, T2.DeviceType_TypeDescription, T2.DeviceType_VisualRepresentationURL, T1.[DeviceType.Domain_Id], T2._from0, T1._from1
         FROM  (
-            SELECT T1.Site_SiteId, T1.Site_SiteName, T2.[Site.Domain_DomainId], T2._from0, T1._from2
+            SELECT 
+                Key(T.DeviceType_Domain_Source).Id AS DeviceType_Id, 
+                Key(T.DeviceType_Domain_Target).Id AS [DeviceType.Domain_Id], 
+                True AS _from1
+            FROM iotContext.DeviceType_Domain AS T) AS T1
+            INNER JOIN (
+            SELECT 
+                T.Id AS DeviceType_Id, 
+                T.TypeName AS DeviceType_TypeName, 
+                T.TypeDescription AS DeviceType_TypeDescription, 
+                T.VisualRepresentationURL AS DeviceType_VisualRepresentationURL, 
+                True AS _from0
+            FROM iotContext.Types AS T) AS T2
+            ON T1.DeviceType_Id = T2.DeviceType_Id
+    ) AS T3");
+        }
+
+        /// <summary>
+        /// Gets the view for CodeFirstDatabase.Site.
+        /// </summary>
+        /// <returns>The mapping view.</returns>
+        private static DbMappingView GetView8()
+        {
+            return new DbMappingView(@"
+    SELECT VALUE -- Constructing Site
+        [CodeFirstDatabaseSchema.Site](T5.Site_Id, T5.Site_SiteName, T5.[Site.Domain_Id], T5.[Site.siteLocation_Id])
+    FROM (
+        SELECT T3.Site_Id, T3.Site_SiteName, T3.[Site.Domain_Id], T4.[Site.siteLocation_Id], T3._from0, (T4._from1 AND T4._from1 IS NOT NULL) AS _from1, T3._from2
+        FROM  (
+            SELECT T1.Site_Id, T1.Site_SiteName, T2.[Site.Domain_Id], T2._from0, T1._from2
             FROM  (
                 SELECT 
-                    T.Id AS Site_SiteId, 
+                    T.Id AS Site_Id, 
                     T.SiteName AS Site_SiteName, 
                     True AS _from2
                 FROM iotContext.Sites AS T) AS T1
                 INNER JOIN (
                 SELECT 
-                    Key(T.Site_Domain_Source).Id AS Site_SiteId, 
-                    Key(T.Site_Domain_Target).Id AS [Site.Domain_DomainId], 
+                    Key(T.Site_Domain_Source).Id AS Site_Id, 
+                    Key(T.Site_Domain_Target).Id AS [Site.Domain_Id], 
                     True AS _from0
                 FROM iotContext.Site_Domain AS T) AS T2
-                ON T1.Site_SiteId = T2.Site_SiteId) AS T3
+                ON T1.Site_Id = T2.Site_Id) AS T3
             LEFT OUTER JOIN (
             SELECT 
-                Key(T.Site_siteLocation_Source).Id AS Site_SiteId, 
-                Key(T.Site_siteLocation_Target).Id AS [Site.siteLocation_LocationId], 
+                Key(T.Site_siteLocation_Source).Id AS Site_Id, 
+                Key(T.Site_siteLocation_Target).Id AS [Site.siteLocation_Id], 
                 True AS _from1
             FROM iotContext.Site_siteLocation AS T) AS T4
-            ON T3.Site_SiteId = T4.Site_SiteId
+            ON T3.Site_Id = T4.Site_Id
     ) AS T5");
         }
 
@@ -546,14 +580,14 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for CodeFirstDatabase.EndpointInfo.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView8()
+        private static DbMappingView GetView9()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing EndpointInfo
-        [CodeFirstDatabaseSchema.EndpointInfo](T1.EndpointInfo_EndpointId, T1.EndpointInfo_Hostname, T1.EndpointInfo_Port, T1.EndpointInfo_RequiresAuthentication, T1.EndpointInfo_SupportsAllJoynProtocol, T1.EndpointInfo_SupportsCoAPProtocol, T1.EndpointInfo_SupportsMQTTProtocol, T1.EndpointInfo_SupportsRESTfulProtocol, T1.EndpointInfo_SupportsSconnProtocol, T1.EndpointInfo_SupportsOnvifProtocol)
+        [CodeFirstDatabaseSchema.EndpointInfo](T1.EndpointInfo_Id, T1.EndpointInfo_Hostname, T1.EndpointInfo_Port, T1.EndpointInfo_RequiresAuthentication, T1.EndpointInfo_SupportsAllJoynProtocol, T1.EndpointInfo_SupportsCoAPProtocol, T1.EndpointInfo_SupportsMQTTProtocol, T1.EndpointInfo_SupportsRESTfulProtocol, T1.EndpointInfo_SupportsSconnProtocol, T1.EndpointInfo_SupportsOnvifProtocol)
     FROM (
         SELECT 
-            T.EndpointId AS EndpointInfo_EndpointId, 
+            T.Id AS EndpointInfo_Id, 
             T.Hostname AS EndpointInfo_Hostname, 
             T.Port AS EndpointInfo_Port, 
             T.RequiresAuthentication AS EndpointInfo_RequiresAuthentication, 
@@ -572,29 +606,29 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for CodeFirstDatabase.DeviceProperty.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView9()
+        private static DbMappingView GetView10()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing DeviceProperty
-        [CodeFirstDatabaseSchema.DeviceProperty](T3.DeviceProperty_PropertyId, T3.DeviceProperty_PropertyName, T3.DeviceProperty_PropertyDescription, T3.DeviceProperty_VisualRepresentationURL, T3.DeviceProperty_LastUpdateTime, T3.[DeviceProperty.Device_DeviceId])
+        [CodeFirstDatabaseSchema.DeviceProperty](T3.DeviceProperty_Id, T3.DeviceProperty_PropertyName, T3.DeviceProperty_PropertyDescription, T3.DeviceProperty_VisualRepresentationURL, T3.DeviceProperty_LastUpdateTime, T3.[DeviceProperty.Device_Id])
     FROM (
-        SELECT T1.DeviceProperty_PropertyId, T2.DeviceProperty_PropertyName, T2.DeviceProperty_PropertyDescription, T2.DeviceProperty_VisualRepresentationURL, T2.DeviceProperty_LastUpdateTime, T1.[DeviceProperty.Device_DeviceId], T2._from0, T1._from1
+        SELECT T1.DeviceProperty_Id, T2.DeviceProperty_PropertyName, T2.DeviceProperty_PropertyDescription, T2.DeviceProperty_VisualRepresentationURL, T2.DeviceProperty_LastUpdateTime, T1.[DeviceProperty.Device_Id], T2._from0, T1._from1
         FROM  (
             SELECT 
-                Key(T.DeviceProperty_Device_Source).Id AS DeviceProperty_PropertyId, 
-                Key(T.DeviceProperty_Device_Target).Id AS [DeviceProperty.Device_DeviceId], 
+                Key(T.DeviceProperty_Device_Source).Id AS DeviceProperty_Id, 
+                Key(T.DeviceProperty_Device_Target).Id AS [DeviceProperty.Device_Id], 
                 True AS _from1
             FROM iotContext.DeviceProperty_Device AS T) AS T1
             INNER JOIN (
             SELECT 
-                T.Id AS DeviceProperty_PropertyId, 
+                T.Id AS DeviceProperty_Id, 
                 T.PropertyName AS DeviceProperty_PropertyName, 
                 T.PropertyDescription AS DeviceProperty_PropertyDescription, 
                 T.VisualRepresentationURL AS DeviceProperty_VisualRepresentationURL, 
                 T.LastUpdateTime AS DeviceProperty_LastUpdateTime, 
                 True AS _from0
             FROM iotContext.Properties AS T) AS T2
-            ON T1.DeviceProperty_PropertyId = T2.DeviceProperty_PropertyId
+            ON T1.DeviceProperty_Id = T2.DeviceProperty_Id
     ) AS T3");
         }
 
@@ -602,44 +636,44 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for CodeFirstDatabase.DeviceParameter.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView10()
+        private static DbMappingView GetView11()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing DeviceParameter
-        [CodeFirstDatabaseSchema.DeviceParameter](T6.DeviceParameter_ParameterId, T6.DeviceParameter_Value, T6.DeviceParameter_ParamDescription, T6.DeviceParameter_VisualRepresentationUrl, T6.[DeviceParameter.Action_ActionId], T6.[DeviceParameter.Property_PropertyId], T6.[DeviceParameter.Type_ParameterId])
+        [CodeFirstDatabaseSchema.DeviceParameter](T6.DeviceParameter_Id, T6.DeviceParameter_Value, T6.DeviceParameter_ParamDescription, T6.DeviceParameter_VisualRepresentationUrl, T6.[DeviceParameter.Action_Id], T6.[DeviceParameter.Property_Id], T6.[DeviceParameter.Type_Id])
     FROM (
-        SELECT T3.DeviceParameter_ParameterId, T3.DeviceParameter_Value, T3.DeviceParameter_ParamDescription, T3.DeviceParameter_VisualRepresentationUrl, T4.[DeviceParameter.Action_ActionId], T5.[DeviceParameter.Property_PropertyId], T3.[DeviceParameter.Type_ParameterId], T3._from0, (T4._from1 AND T4._from1 IS NOT NULL) AS _from1, (T5._from2 AND T5._from2 IS NOT NULL) AS _from2, T3._from3
+        SELECT T3.DeviceParameter_Id, T3.DeviceParameter_Value, T3.DeviceParameter_ParamDescription, T3.DeviceParameter_VisualRepresentationUrl, T4.[DeviceParameter.Action_Id], T5.[DeviceParameter.Property_Id], T3.[DeviceParameter.Type_Id], T3._from0, (T4._from1 AND T4._from1 IS NOT NULL) AS _from1, (T5._from2 AND T5._from2 IS NOT NULL) AS _from2, T3._from3
         FROM  (
-            SELECT T1.DeviceParameter_ParameterId, T2.DeviceParameter_Value, T2.DeviceParameter_ParamDescription, T2.DeviceParameter_VisualRepresentationUrl, T1.[DeviceParameter.Type_ParameterId], T2._from0, T1._from3
+            SELECT T1.DeviceParameter_Id, T2.DeviceParameter_Value, T2.DeviceParameter_ParamDescription, T2.DeviceParameter_VisualRepresentationUrl, T1.[DeviceParameter.Type_Id], T2._from0, T1._from3
             FROM  (
                 SELECT 
-                    Key(T.DeviceParameter_Type_Source).Id AS DeviceParameter_ParameterId, 
-                    Key(T.DeviceParameter_Type_Target).Id AS [DeviceParameter.Type_ParameterId], 
+                    Key(T.DeviceParameter_Type_Source).Id AS DeviceParameter_Id, 
+                    Key(T.DeviceParameter_Type_Target).Id AS [DeviceParameter.Type_Id], 
                     True AS _from3
                 FROM iotContext.DeviceParameter_Type AS T) AS T1
                 INNER JOIN (
                 SELECT 
-                    T.Id AS DeviceParameter_ParameterId, 
+                    T.Id AS DeviceParameter_Id, 
                     T.[Value] AS DeviceParameter_Value, 
                     T.ParamDescription AS DeviceParameter_ParamDescription, 
                     T.VisualRepresentationUrl AS DeviceParameter_VisualRepresentationUrl, 
                     True AS _from0
                 FROM iotContext.Parameters AS T) AS T2
-                ON T1.DeviceParameter_ParameterId = T2.DeviceParameter_ParameterId) AS T3
+                ON T1.DeviceParameter_Id = T2.DeviceParameter_Id) AS T3
             LEFT OUTER JOIN (
             SELECT 
-                Key(T.DeviceParameter_Action_Source).Id AS DeviceParameter_ParameterId, 
-                Key(T.DeviceParameter_Action_Target).Id AS [DeviceParameter.Action_ActionId], 
+                Key(T.DeviceParameter_Action_Source).Id AS DeviceParameter_Id, 
+                Key(T.DeviceParameter_Action_Target).Id AS [DeviceParameter.Action_Id], 
                 True AS _from1
             FROM iotContext.DeviceParameter_Action AS T) AS T4
-            ON T3.DeviceParameter_ParameterId = T4.DeviceParameter_ParameterId
+            ON T3.DeviceParameter_Id = T4.DeviceParameter_Id
             LEFT OUTER JOIN (
             SELECT 
-                Key(T.DeviceParameter_Property_Source).Id AS DeviceParameter_ParameterId, 
-                Key(T.DeviceParameter_Property_Target).Id AS [DeviceParameter.Property_PropertyId], 
+                Key(T.DeviceParameter_Property_Source).Id AS DeviceParameter_Id, 
+                Key(T.DeviceParameter_Property_Target).Id AS [DeviceParameter.Property_Id], 
                 True AS _from2
             FROM iotContext.DeviceParameter_Property AS T) AS T5
-            ON T3.DeviceParameter_ParameterId = T5.DeviceParameter_ParameterId
+            ON T3.DeviceParameter_Id = T5.DeviceParameter_Id
     ) AS T6");
         }
 
@@ -647,17 +681,17 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for CodeFirstDatabase.ParameterChangeHistory.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView11()
+        private static DbMappingView GetView12()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing ParameterChangeHistory
-        [CodeFirstDatabaseSchema.ParameterChangeHistory](T3.ParameterChangeHistory_ParameterChangeId, T3.ParameterChangeHistory_Date, T3.ParameterChangeHistory_Value, T3.[ParameterChangeHistory.Property_ParameterId])
+        [CodeFirstDatabaseSchema.ParameterChangeHistory](T3.ParameterChangeHistory_ParameterChangeId, T3.ParameterChangeHistory_Date, T3.ParameterChangeHistory_Value, T3.[ParameterChangeHistory.Property_Id])
     FROM (
-        SELECT T1.ParameterChangeHistory_ParameterChangeId, T2.ParameterChangeHistory_Date, T2.ParameterChangeHistory_Value, T1.[ParameterChangeHistory.Property_ParameterId], T2._from0, T1._from1
+        SELECT T1.ParameterChangeHistory_ParameterChangeId, T2.ParameterChangeHistory_Date, T2.ParameterChangeHistory_Value, T1.[ParameterChangeHistory.Property_Id], T2._from0, T1._from1
         FROM  (
             SELECT 
                 Key(T.ParameterChangeHistory_Property_Source).ParameterChangeId AS ParameterChangeHistory_ParameterChangeId, 
-                Key(T.ParameterChangeHistory_Property_Target).Id AS [ParameterChangeHistory.Property_ParameterId], 
+                Key(T.ParameterChangeHistory_Property_Target).Id AS [ParameterChangeHistory.Property_Id], 
                 True AS _from1
             FROM iotContext.ParameterChangeHistory_Property AS T) AS T1
             INNER JOIN (
@@ -675,13 +709,13 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for CodeFirstDatabase.sconnConfigMapper.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView12()
+        private static DbMappingView GetView13()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing sconnConfigMapper
-        [CodeFirstDatabaseSchema.sconnConfigMapper](T4.sconnConfigMapper_MapperId, T4.sconnConfigMapper_ConfigType, T4.sconnConfigMapper_SeqNumber, T4.[sconnConfigMapper.ActionParam_ParameterId], T4.[sconnConfigMapper.Parameter_ParameterId])
+        [CodeFirstDatabaseSchema.sconnConfigMapper](T4.sconnConfigMapper_MapperId, T4.sconnConfigMapper_ConfigType, T4.sconnConfigMapper_SeqNumber, T4.[sconnConfigMapper.ActionParam_Id], T4.[sconnConfigMapper.Parameter_Id])
     FROM (
-        SELECT T1.sconnConfigMapper_MapperId, T1.sconnConfigMapper_ConfigType, T1.sconnConfigMapper_SeqNumber, T2.[sconnConfigMapper.ActionParam_ParameterId], T3.[sconnConfigMapper.Parameter_ParameterId], T1._from0, (T2._from1 AND T2._from1 IS NOT NULL) AS _from1, (T3._from2 AND T3._from2 IS NOT NULL) AS _from2
+        SELECT T1.sconnConfigMapper_MapperId, T1.sconnConfigMapper_ConfigType, T1.sconnConfigMapper_SeqNumber, T2.[sconnConfigMapper.ActionParam_Id], T3.[sconnConfigMapper.Parameter_Id], T1._from0, (T2._from1 AND T2._from1 IS NOT NULL) AS _from1, (T3._from2 AND T3._from2 IS NOT NULL) AS _from2
         FROM  (
             SELECT 
                 T.MapperId AS sconnConfigMapper_MapperId, 
@@ -692,14 +726,14 @@ namespace Edm_EntityMappingGeneratedViews
             LEFT OUTER JOIN (
             SELECT 
                 Key(T.sconnConfigMapper_ActionParam_Source).MapperId AS sconnConfigMapper_MapperId, 
-                Key(T.sconnConfigMapper_ActionParam_Target).Id AS [sconnConfigMapper.ActionParam_ParameterId], 
+                Key(T.sconnConfigMapper_ActionParam_Target).Id AS [sconnConfigMapper.ActionParam_Id], 
                 True AS _from1
             FROM iotContext.sconnConfigMapper_ActionParam AS T) AS T2
             ON T1.sconnConfigMapper_MapperId = T2.sconnConfigMapper_MapperId
             LEFT OUTER JOIN (
             SELECT 
                 Key(T.sconnConfigMapper_Parameter_Source).MapperId AS sconnConfigMapper_MapperId, 
-                Key(T.sconnConfigMapper_Parameter_Target).Id AS [sconnConfigMapper.Parameter_ParameterId], 
+                Key(T.sconnConfigMapper_Parameter_Target).Id AS [sconnConfigMapper.Parameter_Id], 
                 True AS _from2
             FROM iotContext.sconnConfigMapper_Parameter AS T) AS T3
             ON T1.sconnConfigMapper_MapperId = T3.sconnConfigMapper_MapperId
@@ -710,39 +744,19 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for CodeFirstDatabase.ParameterType.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView13()
+        private static DbMappingView GetView14()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing ParameterType
-        [CodeFirstDatabaseSchema.ParameterType](T1.ParameterType_ParameterId, T1.ParameterType_Name, T1.ParameterType_Description, T1.ParameterType_DocumentationURL)
+        [CodeFirstDatabaseSchema.ParameterType](T1.ParameterType_Id, T1.ParameterType_Name, T1.ParameterType_Description, T1.ParameterType_DocumentationURL)
     FROM (
         SELECT 
-            T.Id AS ParameterType_ParameterId, 
+            T.Id AS ParameterType_Id, 
             T.Name AS ParameterType_Name, 
             T.Description AS ParameterType_Description, 
             T.DocumentationURL AS ParameterType_DocumentationURL, 
             True AS _from0
         FROM iotContext.ParamTypes AS T
-    ) AS T1");
-        }
-
-        /// <summary>
-        /// Gets the view for CodeFirstDatabase.DeviceType.
-        /// </summary>
-        /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView14()
-        {
-            return new DbMappingView(@"
-    SELECT VALUE -- Constructing DeviceType
-        [CodeFirstDatabaseSchema.DeviceType](T1.DeviceType_DeviceTypeId, T1.DeviceType_TypeName, T1.DeviceType_TypeDescription, T1.DeviceType_VisualRepresentationURL)
-    FROM (
-        SELECT 
-            T.Id AS DeviceType_DeviceTypeId, 
-            T.TypeName AS DeviceType_TypeName, 
-            T.TypeDescription AS DeviceType_TypeDescription, 
-            T.VisualRepresentationURL AS DeviceType_VisualRepresentationURL, 
-            True AS _from0
-        FROM iotContext.Types AS T
     ) AS T1");
         }
 
@@ -754,18 +768,18 @@ namespace Edm_EntityMappingGeneratedViews
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing ActionParameters
-        [iotDbConnector.DAL.ActionParameter](T1.ActionParameter_ParameterId, T1.ActionParameter_Value, T1.ActionParameter_ParamDescription, T1.ActionParameter_VisualRepresentationUrl) WITH 
+        [iotDbConnector.DAL.ActionParameter](T1.ActionParameter_Id, T1.ActionParameter_Value, T1.ActionParameter_ParamDescription, T1.ActionParameter_VisualRepresentationUrl) WITH 
         RELATIONSHIP(CREATEREF(iotContext.Actions, ROW(T1.[DeviceAction_RequiredParameters.DeviceAction_RequiredParameters_Source.Id]),[iotDbConnector.DAL.DeviceAction]),[iotDbConnector.DAL.DeviceAction_RequiredParameters],DeviceAction_RequiredParameters_Target,DeviceAction_RequiredParameters_Source) 
         RELATIONSHIP(CREATEREF(iotContext.ParamTypes, ROW(T1.[ActionParameter_Type.ActionParameter_Type_Target.Id]),[iotDbConnector.DAL.ParameterType]),[iotDbConnector.DAL.ActionParameter_Type],ActionParameter_Type_Source,ActionParameter_Type_Target) 
     FROM (
         SELECT 
-            T.Id AS ActionParameter_ParameterId, 
+            T.Id AS ActionParameter_Id, 
             T.[Value] AS ActionParameter_Value, 
             T.ParamDescription AS ActionParameter_ParamDescription, 
             T.VisualRepresentationUrl AS ActionParameter_VisualRepresentationUrl, 
             True AS _from0, 
-            T.Action_ActionId AS [DeviceAction_RequiredParameters.DeviceAction_RequiredParameters_Source.Id], 
-            T.Type_ParameterId AS [ActionParameter_Type.ActionParameter_Type_Target.Id]
+            T.Action_Id AS [DeviceAction_RequiredParameters.DeviceAction_RequiredParameters_Source.Id], 
+            T.Type_Id AS [ActionParameter_Type.ActionParameter_Type_Target.Id]
         FROM CodeFirstDatabase.ActionParameter AS T
     ) AS T1");
         }
@@ -789,11 +803,11 @@ namespace Edm_EntityMappingGeneratedViews
                 CreateRef(iotContext.ActionParameters, row(T1.[DeviceAction_RequiredParameters.DeviceAction_RequiredParameters_Target.Id]), [iotDbConnector.DAL.ActionParameter]) AS [DeviceAction_RequiredParameters.DeviceAction_RequiredParameters_Target]
             FROM (
                 SELECT 
-                    T.Action_ActionId AS [DeviceAction_RequiredParameters.DeviceAction_RequiredParameters_Source.Id], 
+                    T.Action_Id AS [DeviceAction_RequiredParameters.DeviceAction_RequiredParameters_Source.Id], 
                     T.Id AS [DeviceAction_RequiredParameters.DeviceAction_RequiredParameters_Target.Id], 
                     True AS _from0
                 FROM CodeFirstDatabase.ActionParameter AS T
-                WHERE T.Action_ActionId IS NOT NULL
+                WHERE T.Action_Id IS NOT NULL
             ) AS T1
         ) AS T2
     ) AS T3");
@@ -819,7 +833,7 @@ namespace Edm_EntityMappingGeneratedViews
             FROM (
                 SELECT 
                     T.Id AS [ActionParameter_Type.ActionParameter_Type_Source.Id], 
-                    T.Type_ParameterId AS [ActionParameter_Type.ActionParameter_Type_Target.Id], 
+                    T.Type_Id AS [ActionParameter_Type.ActionParameter_Type_Target.Id], 
                     True AS _from0
                 FROM CodeFirstDatabase.ActionParameter AS T
             ) AS T1
@@ -835,17 +849,17 @@ namespace Edm_EntityMappingGeneratedViews
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing Actions
-        [iotDbConnector.DAL.DeviceAction](T1.DeviceAction_ActionId, T1.DeviceAction_ActionName, T1.DeviceAction_ActionDescription, T1.DeviceAction_VisualRepresentationURL, T1.DeviceAction_LastActivationTime) WITH 
+        [iotDbConnector.DAL.DeviceAction](T1.DeviceAction_Id, T1.DeviceAction_ActionName, T1.DeviceAction_ActionDescription, T1.DeviceAction_VisualRepresentationURL, T1.DeviceAction_LastActivationTime) WITH 
         RELATIONSHIP(CREATEREF(iotContext.Devices, ROW(T1.[DeviceAction_Device.DeviceAction_Device_Target.Id]),[iotDbConnector.DAL.Device]),[iotDbConnector.DAL.DeviceAction_Device],DeviceAction_Device_Source,DeviceAction_Device_Target) 
     FROM (
         SELECT 
-            T.Id AS DeviceAction_ActionId, 
+            T.Id AS DeviceAction_Id, 
             T.ActionName AS DeviceAction_ActionName, 
             T.ActionDescription AS DeviceAction_ActionDescription, 
             T.VisualRepresentationURL AS DeviceAction_VisualRepresentationURL, 
             T.LastActivationTime AS DeviceAction_LastActivationTime, 
             True AS _from0, 
-            T.Device_DeviceId AS [DeviceAction_Device.DeviceAction_Device_Target.Id]
+            T.Device_Id AS [DeviceAction_Device.DeviceAction_Device_Target.Id]
         FROM CodeFirstDatabase.DeviceAction AS T
     ) AS T1");
         }
@@ -870,7 +884,7 @@ namespace Edm_EntityMappingGeneratedViews
             FROM (
                 SELECT 
                     T.Id AS [DeviceAction_Device.DeviceAction_Device_Source.Id], 
-                    T.Device_DeviceId AS [DeviceAction_Device.DeviceAction_Device_Target.Id], 
+                    T.Device_Id AS [DeviceAction_Device.DeviceAction_Device_Target.Id], 
                     True AS _from0
                 FROM CodeFirstDatabase.DeviceAction AS T
             ) AS T1
@@ -886,20 +900,20 @@ namespace Edm_EntityMappingGeneratedViews
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing Devices
-        [iotDbConnector.DAL.Device](T1.Device_DeviceId, T1.Device_DeviceName) WITH 
+        [iotDbConnector.DAL.Device](T1.Device_Id, T1.Device_DeviceName) WITH 
         RELATIONSHIP(CREATEREF(iotContext.Credentials, ROW(T1.[DeviceCredentials_Devices.DeviceCredentials_Devices_Source.CredentialId]),[iotDbConnector.DAL.DeviceCredentials]),[iotDbConnector.DAL.DeviceCredentials_Devices],DeviceCredentials_Devices_Target,DeviceCredentials_Devices_Source) 
         RELATIONSHIP(CREATEREF(iotContext.Sites, ROW(T1.[Site_Devices.Site_Devices_Source.Id]),[iotDbConnector.DAL.Site]),[iotDbConnector.DAL.Site_Devices],Site_Devices_Target,Site_Devices_Source) 
         RELATIONSHIP(CREATEREF(iotContext.Locations, ROW(T1.[Device_DeviceLocation.Device_DeviceLocation_Target.Id]),[iotDbConnector.DAL.Location]),[iotDbConnector.DAL.Device_DeviceLocation],Device_DeviceLocation_Source,Device_DeviceLocation_Target) 
         RELATIONSHIP(CREATEREF(iotContext.Types, ROW(T1.[Device_Type.Device_Type_Target.Id]),[iotDbConnector.DAL.DeviceType]),[iotDbConnector.DAL.Device_Type],Device_Type_Source,Device_Type_Target) 
     FROM (
         SELECT 
-            T.Id AS Device_DeviceId, 
+            T.Id AS Device_Id, 
             T.DeviceName AS Device_DeviceName, 
             True AS _from0, 
             T.Credentials_CredentialId AS [DeviceCredentials_Devices.DeviceCredentials_Devices_Source.CredentialId], 
-            T.Site_SiteId AS [Site_Devices.Site_Devices_Source.Id], 
-            T.DeviceLocation_LocationId AS [Device_DeviceLocation.Device_DeviceLocation_Target.Id], 
-            T.Type_DeviceTypeId AS [Device_Type.Device_Type_Target.Id]
+            T.Site_Id AS [Site_Devices.Site_Devices_Source.Id], 
+            T.DeviceLocation_Id AS [Device_DeviceLocation.Device_DeviceLocation_Target.Id], 
+            T.Type_Id AS [Device_Type.Device_Type_Target.Id]
         FROM CodeFirstDatabase.Device AS T
     ) AS T1");
         }
@@ -952,11 +966,11 @@ namespace Edm_EntityMappingGeneratedViews
                 CreateRef(iotContext.Devices, row(T1.[Site_Devices.Site_Devices_Target.Id]), [iotDbConnector.DAL.Device]) AS [Site_Devices.Site_Devices_Target]
             FROM (
                 SELECT 
-                    T.Site_SiteId AS [Site_Devices.Site_Devices_Source.Id], 
+                    T.Site_Id AS [Site_Devices.Site_Devices_Source.Id], 
                     T.Id AS [Site_Devices.Site_Devices_Target.Id], 
                     True AS _from0
                 FROM CodeFirstDatabase.Device AS T
-                WHERE T.Site_SiteId IS NOT NULL
+                WHERE T.Site_Id IS NOT NULL
             ) AS T1
         ) AS T2
     ) AS T3");
@@ -982,7 +996,7 @@ namespace Edm_EntityMappingGeneratedViews
             FROM (
                 SELECT 
                     T.Id AS [Device_DeviceLocation.Device_DeviceLocation_Source.Id], 
-                    T.DeviceLocation_LocationId AS [Device_DeviceLocation.Device_DeviceLocation_Target.Id], 
+                    T.DeviceLocation_Id AS [Device_DeviceLocation.Device_DeviceLocation_Target.Id], 
                     True AS _from0
                 FROM CodeFirstDatabase.Device AS T
             ) AS T1
@@ -1010,7 +1024,7 @@ namespace Edm_EntityMappingGeneratedViews
             FROM (
                 SELECT 
                     T.Id AS [Device_Type.Device_Type_Source.Id], 
-                    T.Type_DeviceTypeId AS [Device_Type.Device_Type_Target.Id], 
+                    T.Type_Id AS [Device_Type.Device_Type_Target.Id], 
                     True AS _from0
                 FROM CodeFirstDatabase.Device AS T
             ) AS T1
@@ -1098,17 +1112,17 @@ namespace Edm_EntityMappingGeneratedViews
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing Locations
-        [iotDbConnector.DAL.Location](T1.Location_LocationId, T1.Location_LocationName, T1.Location_Lat, T1.Location_Lng, T1.Location_LocationVisualRepresentationURL) WITH 
+        [iotDbConnector.DAL.Location](T1.Location_Id, T1.Location_LocationName, T1.Location_Lat, T1.Location_Lng, T1.Location_LocationVisualRepresentationURL) WITH 
         RELATIONSHIP(CREATEREF(iotContext.Domains, ROW(T1.[iotDomain_Locations.iotDomain_Locations_Source.Id]),[iotDbConnector.DAL.iotDomain]),[iotDbConnector.DAL.iotDomain_Locations],iotDomain_Locations_Target,iotDomain_Locations_Source) 
     FROM (
         SELECT 
-            T.Id AS Location_LocationId, 
+            T.Id AS Location_Id, 
             T.LocationName AS Location_LocationName, 
             T.Lat AS Location_Lat, 
             T.Lng AS Location_Lng, 
             T.LocationVisualRepresentationURL AS Location_LocationVisualRepresentationURL, 
             True AS _from0, 
-            T.Domain_DomainId AS [iotDomain_Locations.iotDomain_Locations_Source.Id]
+            T.Domain_Id AS [iotDomain_Locations.iotDomain_Locations_Source.Id]
         FROM CodeFirstDatabase.Location AS T
     ) AS T1");
         }
@@ -1132,11 +1146,11 @@ namespace Edm_EntityMappingGeneratedViews
                 CreateRef(iotContext.Locations, row(T1.[iotDomain_Locations.iotDomain_Locations_Target.Id]), [iotDbConnector.DAL.Location]) AS [iotDomain_Locations.iotDomain_Locations_Target]
             FROM (
                 SELECT 
-                    T.Domain_DomainId AS [iotDomain_Locations.iotDomain_Locations_Source.Id], 
+                    T.Domain_Id AS [iotDomain_Locations.iotDomain_Locations_Source.Id], 
                     T.Id AS [iotDomain_Locations.iotDomain_Locations_Target.Id], 
                     True AS _from0
                 FROM CodeFirstDatabase.Location AS T
-                WHERE T.Domain_DomainId IS NOT NULL
+                WHERE T.Domain_Id IS NOT NULL
             ) AS T1
         ) AS T2
     ) AS T3");
@@ -1150,10 +1164,10 @@ namespace Edm_EntityMappingGeneratedViews
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing Domains
-        [iotDbConnector.DAL.iotDomain](T1.iotDomain_DomainId, T1.iotDomain_DomainName)
+        [iotDbConnector.DAL.iotDomain](T1.iotDomain_Id, T1.iotDomain_DomainName)
     FROM (
         SELECT 
-            T.Id AS iotDomain_DomainId, 
+            T.Id AS iotDomain_Id, 
             T.DomainName AS iotDomain_DomainName, 
             True AS _from0
         FROM CodeFirstDatabase.iotDomain AS T
@@ -1161,23 +1175,73 @@ namespace Edm_EntityMappingGeneratedViews
         }
 
         /// <summary>
-        /// Gets the view for iotContext.Sites.
+        /// Gets the view for iotContext.Types.
         /// </summary>
         /// <returns>The mapping view.</returns>
         private static DbMappingView GetView31()
         {
             return new DbMappingView(@"
+    SELECT VALUE -- Constructing Types
+        [iotDbConnector.DAL.DeviceType](T1.DeviceType_Id, T1.DeviceType_TypeName, T1.DeviceType_TypeDescription, T1.DeviceType_VisualRepresentationURL) WITH 
+        RELATIONSHIP(CREATEREF(iotContext.Domains, ROW(T1.[DeviceType_Domain.DeviceType_Domain_Target.Id]),[iotDbConnector.DAL.iotDomain]),[iotDbConnector.DAL.DeviceType_Domain],DeviceType_Domain_Source,DeviceType_Domain_Target) 
+    FROM (
+        SELECT 
+            T.Id AS DeviceType_Id, 
+            T.TypeName AS DeviceType_TypeName, 
+            T.TypeDescription AS DeviceType_TypeDescription, 
+            T.VisualRepresentationURL AS DeviceType_VisualRepresentationURL, 
+            True AS _from0, 
+            T.Domain_Id AS [DeviceType_Domain.DeviceType_Domain_Target.Id]
+        FROM CodeFirstDatabase.DeviceType AS T
+    ) AS T1");
+        }
+
+        /// <summary>
+        /// Gets the view for iotContext.DeviceType_Domain.
+        /// </summary>
+        /// <returns>The mapping view.</returns>
+        private static DbMappingView GetView32()
+        {
+            return new DbMappingView(@"
+    SELECT VALUE -- Constructing DeviceType_Domain
+        [iotDbConnector.DAL.DeviceType_Domain](T3.[DeviceType_Domain.DeviceType_Domain_Source], T3.[DeviceType_Domain.DeviceType_Domain_Target])
+    FROM (
+        SELECT -- Constructing DeviceType_Domain_Source
+            CreateRef(iotContext.Types, row(T2.[DeviceType_Domain.DeviceType_Domain_Source.Id]), [iotDbConnector.DAL.DeviceType]) AS [DeviceType_Domain.DeviceType_Domain_Source], 
+            T2.[DeviceType_Domain.DeviceType_Domain_Target]
+        FROM (
+            SELECT -- Constructing DeviceType_Domain_Target
+                T1.[DeviceType_Domain.DeviceType_Domain_Source.Id], 
+                CreateRef(iotContext.Domains, row(T1.[DeviceType_Domain.DeviceType_Domain_Target.Id]), [iotDbConnector.DAL.iotDomain]) AS [DeviceType_Domain.DeviceType_Domain_Target]
+            FROM (
+                SELECT 
+                    T.Id AS [DeviceType_Domain.DeviceType_Domain_Source.Id], 
+                    T.Domain_Id AS [DeviceType_Domain.DeviceType_Domain_Target.Id], 
+                    True AS _from0
+                FROM CodeFirstDatabase.DeviceType AS T
+            ) AS T1
+        ) AS T2
+    ) AS T3");
+        }
+
+        /// <summary>
+        /// Gets the view for iotContext.Sites.
+        /// </summary>
+        /// <returns>The mapping view.</returns>
+        private static DbMappingView GetView33()
+        {
+            return new DbMappingView(@"
     SELECT VALUE -- Constructing Sites
-        [iotDbConnector.DAL.Site](T1.Site_SiteId, T1.Site_SiteName) WITH 
+        [iotDbConnector.DAL.Site](T1.Site_Id, T1.Site_SiteName) WITH 
         RELATIONSHIP(CREATEREF(iotContext.Domains, ROW(T1.[Site_Domain.Site_Domain_Target.Id]),[iotDbConnector.DAL.iotDomain]),[iotDbConnector.DAL.Site_Domain],Site_Domain_Source,Site_Domain_Target) 
         RELATIONSHIP(CREATEREF(iotContext.Locations, ROW(T1.[Site_siteLocation.Site_siteLocation_Target.Id]),[iotDbConnector.DAL.Location]),[iotDbConnector.DAL.Site_siteLocation],Site_siteLocation_Source,Site_siteLocation_Target) 
     FROM (
         SELECT 
-            T.Id AS Site_SiteId, 
+            T.Id AS Site_Id, 
             T.SiteName AS Site_SiteName, 
             True AS _from0, 
-            T.Domain_DomainId AS [Site_Domain.Site_Domain_Target.Id], 
-            T.siteLocation_LocationId AS [Site_siteLocation.Site_siteLocation_Target.Id]
+            T.Domain_Id AS [Site_Domain.Site_Domain_Target.Id], 
+            T.siteLocation_Id AS [Site_siteLocation.Site_siteLocation_Target.Id]
         FROM CodeFirstDatabase.Site AS T
     ) AS T1");
         }
@@ -1186,7 +1250,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for iotContext.Site_Domain.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView32()
+        private static DbMappingView GetView34()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing Site_Domain
@@ -1202,7 +1266,7 @@ namespace Edm_EntityMappingGeneratedViews
             FROM (
                 SELECT 
                     T.Id AS [Site_Domain.Site_Domain_Source.Id], 
-                    T.Domain_DomainId AS [Site_Domain.Site_Domain_Target.Id], 
+                    T.Domain_Id AS [Site_Domain.Site_Domain_Target.Id], 
                     True AS _from0
                 FROM CodeFirstDatabase.Site AS T
             ) AS T1
@@ -1214,7 +1278,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for iotContext.Site_siteLocation.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView33()
+        private static DbMappingView GetView35()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing Site_siteLocation
@@ -1230,10 +1294,10 @@ namespace Edm_EntityMappingGeneratedViews
             FROM (
                 SELECT 
                     T.Id AS [Site_siteLocation.Site_siteLocation_Source.Id], 
-                    T.siteLocation_LocationId AS [Site_siteLocation.Site_siteLocation_Target.Id], 
+                    T.siteLocation_Id AS [Site_siteLocation.Site_siteLocation_Target.Id], 
                     True AS _from0
                 FROM CodeFirstDatabase.Site AS T
-                WHERE T.siteLocation_LocationId IS NOT NULL
+                WHERE T.siteLocation_Id IS NOT NULL
             ) AS T1
         ) AS T2
     ) AS T3");
@@ -1243,14 +1307,14 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for iotContext.Endpoints.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView34()
+        private static DbMappingView GetView36()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing Endpoints
-        [iotDbConnector.DAL.EndpointInfo](T1.EndpointInfo_EndpointId, T1.EndpointInfo_Hostname, T1.EndpointInfo_Port, T1.EndpointInfo_RequiresAuthentication, T1.EndpointInfo_SupportsAllJoynProtocol, T1.EndpointInfo_SupportsCoAPProtocol, T1.EndpointInfo_SupportsMQTTProtocol, T1.EndpointInfo_SupportsRESTfulProtocol, T1.EndpointInfo_SupportsSconnProtocol, T1.EndpointInfo_SupportsOnvifProtocol)
+        [iotDbConnector.DAL.EndpointInfo](T1.EndpointInfo_Id, T1.EndpointInfo_Hostname, T1.EndpointInfo_Port, T1.EndpointInfo_RequiresAuthentication, T1.EndpointInfo_SupportsAllJoynProtocol, T1.EndpointInfo_SupportsCoAPProtocol, T1.EndpointInfo_SupportsMQTTProtocol, T1.EndpointInfo_SupportsRESTfulProtocol, T1.EndpointInfo_SupportsSconnProtocol, T1.EndpointInfo_SupportsOnvifProtocol)
     FROM (
         SELECT 
-            T.EndpointId AS EndpointInfo_EndpointId, 
+            T.Id AS EndpointInfo_Id, 
             T.Hostname AS EndpointInfo_Hostname, 
             T.Port AS EndpointInfo_Port, 
             T.RequiresAuthentication AS EndpointInfo_RequiresAuthentication, 
@@ -1269,21 +1333,21 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for iotContext.Properties.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView35()
+        private static DbMappingView GetView37()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing Properties
-        [iotDbConnector.DAL.DeviceProperty](T1.DeviceProperty_PropertyId, T1.DeviceProperty_PropertyName, T1.DeviceProperty_PropertyDescription, T1.DeviceProperty_VisualRepresentationURL, T1.DeviceProperty_LastUpdateTime) WITH 
+        [iotDbConnector.DAL.DeviceProperty](T1.DeviceProperty_Id, T1.DeviceProperty_PropertyName, T1.DeviceProperty_PropertyDescription, T1.DeviceProperty_VisualRepresentationURL, T1.DeviceProperty_LastUpdateTime) WITH 
         RELATIONSHIP(CREATEREF(iotContext.Devices, ROW(T1.[DeviceProperty_Device.DeviceProperty_Device_Target.Id]),[iotDbConnector.DAL.Device]),[iotDbConnector.DAL.DeviceProperty_Device],DeviceProperty_Device_Source,DeviceProperty_Device_Target) 
     FROM (
         SELECT 
-            T.Id AS DeviceProperty_PropertyId, 
+            T.Id AS DeviceProperty_Id, 
             T.PropertyName AS DeviceProperty_PropertyName, 
             T.PropertyDescription AS DeviceProperty_PropertyDescription, 
             T.VisualRepresentationURL AS DeviceProperty_VisualRepresentationURL, 
             T.LastUpdateTime AS DeviceProperty_LastUpdateTime, 
             True AS _from0, 
-            T.Device_DeviceId AS [DeviceProperty_Device.DeviceProperty_Device_Target.Id]
+            T.Device_Id AS [DeviceProperty_Device.DeviceProperty_Device_Target.Id]
         FROM CodeFirstDatabase.DeviceProperty AS T
     ) AS T1");
         }
@@ -1292,7 +1356,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for iotContext.DeviceProperty_Device.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView36()
+        private static DbMappingView GetView38()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing DeviceProperty_Device
@@ -1308,7 +1372,7 @@ namespace Edm_EntityMappingGeneratedViews
             FROM (
                 SELECT 
                     T.Id AS [DeviceProperty_Device.DeviceProperty_Device_Source.Id], 
-                    T.Device_DeviceId AS [DeviceProperty_Device.DeviceProperty_Device_Target.Id], 
+                    T.Device_Id AS [DeviceProperty_Device.DeviceProperty_Device_Target.Id], 
                     True AS _from0
                 FROM CodeFirstDatabase.DeviceProperty AS T
             ) AS T1
@@ -1320,24 +1384,24 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for iotContext.Parameters.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView37()
+        private static DbMappingView GetView39()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing Parameters
-        [iotDbConnector.DAL.DeviceParameter](T1.DeviceParameter_ParameterId, T1.DeviceParameter_Value, T1.DeviceParameter_ParamDescription, T1.DeviceParameter_VisualRepresentationUrl) WITH 
+        [iotDbConnector.DAL.DeviceParameter](T1.DeviceParameter_Id, T1.DeviceParameter_Value, T1.DeviceParameter_ParamDescription, T1.DeviceParameter_VisualRepresentationUrl) WITH 
         RELATIONSHIP(CREATEREF(iotContext.Actions, ROW(T1.[DeviceParameter_Action.DeviceParameter_Action_Target.Id]),[iotDbConnector.DAL.DeviceAction]),[iotDbConnector.DAL.DeviceParameter_Action],DeviceParameter_Action_Source,DeviceParameter_Action_Target) 
         RELATIONSHIP(CREATEREF(iotContext.Properties, ROW(T1.[DeviceParameter_Property.DeviceParameter_Property_Target.Id]),[iotDbConnector.DAL.DeviceProperty]),[iotDbConnector.DAL.DeviceParameter_Property],DeviceParameter_Property_Source,DeviceParameter_Property_Target) 
         RELATIONSHIP(CREATEREF(iotContext.ParamTypes, ROW(T1.[DeviceParameter_Type.DeviceParameter_Type_Target.Id]),[iotDbConnector.DAL.ParameterType]),[iotDbConnector.DAL.DeviceParameter_Type],DeviceParameter_Type_Source,DeviceParameter_Type_Target) 
     FROM (
         SELECT 
-            T.Id AS DeviceParameter_ParameterId, 
+            T.Id AS DeviceParameter_Id, 
             T.[Value] AS DeviceParameter_Value, 
             T.ParamDescription AS DeviceParameter_ParamDescription, 
             T.VisualRepresentationUrl AS DeviceParameter_VisualRepresentationUrl, 
             True AS _from0, 
-            T.Action_ActionId AS [DeviceParameter_Action.DeviceParameter_Action_Target.Id], 
-            T.Property_PropertyId AS [DeviceParameter_Property.DeviceParameter_Property_Target.Id], 
-            T.Type_ParameterId AS [DeviceParameter_Type.DeviceParameter_Type_Target.Id]
+            T.Action_Id AS [DeviceParameter_Action.DeviceParameter_Action_Target.Id], 
+            T.Property_Id AS [DeviceParameter_Property.DeviceParameter_Property_Target.Id], 
+            T.Type_Id AS [DeviceParameter_Type.DeviceParameter_Type_Target.Id]
         FROM CodeFirstDatabase.DeviceParameter AS T
     ) AS T1");
         }
@@ -1346,7 +1410,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for iotContext.DeviceParameter_Action.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView38()
+        private static DbMappingView GetView40()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing DeviceParameter_Action
@@ -1362,10 +1426,10 @@ namespace Edm_EntityMappingGeneratedViews
             FROM (
                 SELECT 
                     T.Id AS [DeviceParameter_Action.DeviceParameter_Action_Source.Id], 
-                    T.Action_ActionId AS [DeviceParameter_Action.DeviceParameter_Action_Target.Id], 
+                    T.Action_Id AS [DeviceParameter_Action.DeviceParameter_Action_Target.Id], 
                     True AS _from0
                 FROM CodeFirstDatabase.DeviceParameter AS T
-                WHERE T.Action_ActionId IS NOT NULL
+                WHERE T.Action_Id IS NOT NULL
             ) AS T1
         ) AS T2
     ) AS T3");
@@ -1375,7 +1439,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for iotContext.DeviceParameter_Property.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView39()
+        private static DbMappingView GetView41()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing DeviceParameter_Property
@@ -1391,10 +1455,10 @@ namespace Edm_EntityMappingGeneratedViews
             FROM (
                 SELECT 
                     T.Id AS [DeviceParameter_Property.DeviceParameter_Property_Source.Id], 
-                    T.Property_PropertyId AS [DeviceParameter_Property.DeviceParameter_Property_Target.Id], 
+                    T.Property_Id AS [DeviceParameter_Property.DeviceParameter_Property_Target.Id], 
                     True AS _from0
                 FROM CodeFirstDatabase.DeviceParameter AS T
-                WHERE T.Property_PropertyId IS NOT NULL
+                WHERE T.Property_Id IS NOT NULL
             ) AS T1
         ) AS T2
     ) AS T3");
@@ -1404,7 +1468,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for iotContext.DeviceParameter_Type.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView40()
+        private static DbMappingView GetView42()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing DeviceParameter_Type
@@ -1420,7 +1484,7 @@ namespace Edm_EntityMappingGeneratedViews
             FROM (
                 SELECT 
                     T.Id AS [DeviceParameter_Type.DeviceParameter_Type_Source.Id], 
-                    T.Type_ParameterId AS [DeviceParameter_Type.DeviceParameter_Type_Target.Id], 
+                    T.Type_Id AS [DeviceParameter_Type.DeviceParameter_Type_Target.Id], 
                     True AS _from0
                 FROM CodeFirstDatabase.DeviceParameter AS T
             ) AS T1
@@ -1432,7 +1496,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for iotContext.ParameterChanges.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView41()
+        private static DbMappingView GetView43()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing ParameterChanges
@@ -1444,7 +1508,7 @@ namespace Edm_EntityMappingGeneratedViews
             T.Date AS ParameterChangeHistory_Date, 
             T.[Value] AS ParameterChangeHistory_Value, 
             True AS _from0, 
-            T.Property_ParameterId AS [ParameterChangeHistory_Property.ParameterChangeHistory_Property_Target.Id]
+            T.Property_Id AS [ParameterChangeHistory_Property.ParameterChangeHistory_Property_Target.Id]
         FROM CodeFirstDatabase.ParameterChangeHistory AS T
     ) AS T1");
         }
@@ -1453,7 +1517,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for iotContext.ParameterChangeHistory_Property.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView42()
+        private static DbMappingView GetView44()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing ParameterChangeHistory_Property
@@ -1469,7 +1533,7 @@ namespace Edm_EntityMappingGeneratedViews
             FROM (
                 SELECT 
                     T.ParameterChangeId AS [ParameterChangeHistory_Property.ParameterChangeHistory_Property_Source.ParameterChangeId], 
-                    T.Property_ParameterId AS [ParameterChangeHistory_Property.ParameterChangeHistory_Property_Target.Id], 
+                    T.Property_Id AS [ParameterChangeHistory_Property.ParameterChangeHistory_Property_Target.Id], 
                     True AS _from0
                 FROM CodeFirstDatabase.ParameterChangeHistory AS T
             ) AS T1
@@ -1481,7 +1545,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for iotContext.SconnMappers.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView43()
+        private static DbMappingView GetView45()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing SconnMappers
@@ -1494,8 +1558,8 @@ namespace Edm_EntityMappingGeneratedViews
             T.ConfigType AS sconnConfigMapper_ConfigType, 
             T.SeqNumber AS sconnConfigMapper_SeqNumber, 
             True AS _from0, 
-            T.ActionParam_ParameterId AS [sconnConfigMapper_ActionParam.sconnConfigMapper_ActionParam_Target.Id], 
-            T.Parameter_ParameterId AS [sconnConfigMapper_Parameter.sconnConfigMapper_Parameter_Target.Id]
+            T.ActionParam_Id AS [sconnConfigMapper_ActionParam.sconnConfigMapper_ActionParam_Target.Id], 
+            T.Parameter_Id AS [sconnConfigMapper_Parameter.sconnConfigMapper_Parameter_Target.Id]
         FROM CodeFirstDatabase.sconnConfigMapper AS T
     ) AS T1");
         }
@@ -1504,7 +1568,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for iotContext.sconnConfigMapper_ActionParam.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView44()
+        private static DbMappingView GetView46()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing sconnConfigMapper_ActionParam
@@ -1520,10 +1584,10 @@ namespace Edm_EntityMappingGeneratedViews
             FROM (
                 SELECT 
                     T.MapperId AS [sconnConfigMapper_ActionParam.sconnConfigMapper_ActionParam_Source.MapperId], 
-                    T.ActionParam_ParameterId AS [sconnConfigMapper_ActionParam.sconnConfigMapper_ActionParam_Target.Id], 
+                    T.ActionParam_Id AS [sconnConfigMapper_ActionParam.sconnConfigMapper_ActionParam_Target.Id], 
                     True AS _from0
                 FROM CodeFirstDatabase.sconnConfigMapper AS T
-                WHERE T.ActionParam_ParameterId IS NOT NULL
+                WHERE T.ActionParam_Id IS NOT NULL
             ) AS T1
         ) AS T2
     ) AS T3");
@@ -1533,7 +1597,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for iotContext.sconnConfigMapper_Parameter.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView45()
+        private static DbMappingView GetView47()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing sconnConfigMapper_Parameter
@@ -1549,10 +1613,10 @@ namespace Edm_EntityMappingGeneratedViews
             FROM (
                 SELECT 
                     T.MapperId AS [sconnConfigMapper_Parameter.sconnConfigMapper_Parameter_Source.MapperId], 
-                    T.Parameter_ParameterId AS [sconnConfigMapper_Parameter.sconnConfigMapper_Parameter_Target.Id], 
+                    T.Parameter_Id AS [sconnConfigMapper_Parameter.sconnConfigMapper_Parameter_Target.Id], 
                     True AS _from0
                 FROM CodeFirstDatabase.sconnConfigMapper AS T
-                WHERE T.Parameter_ParameterId IS NOT NULL
+                WHERE T.Parameter_Id IS NOT NULL
             ) AS T1
         ) AS T2
     ) AS T3");
@@ -1562,39 +1626,19 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for iotContext.ParamTypes.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView46()
+        private static DbMappingView GetView48()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing ParamTypes
-        [iotDbConnector.DAL.ParameterType](T1.ParameterType_ParameterId, T1.ParameterType_Name, T1.ParameterType_Description, T1.ParameterType_DocumentationURL)
+        [iotDbConnector.DAL.ParameterType](T1.ParameterType_Id, T1.ParameterType_Name, T1.ParameterType_Description, T1.ParameterType_DocumentationURL)
     FROM (
         SELECT 
-            T.Id AS ParameterType_ParameterId, 
+            T.Id AS ParameterType_Id, 
             T.Name AS ParameterType_Name, 
             T.Description AS ParameterType_Description, 
             T.DocumentationURL AS ParameterType_DocumentationURL, 
             True AS _from0
         FROM CodeFirstDatabase.ParameterType AS T
-    ) AS T1");
-        }
-
-        /// <summary>
-        /// Gets the view for iotContext.Types.
-        /// </summary>
-        /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView47()
-        {
-            return new DbMappingView(@"
-    SELECT VALUE -- Constructing Types
-        [iotDbConnector.DAL.DeviceType](T1.DeviceType_DeviceTypeId, T1.DeviceType_TypeName, T1.DeviceType_TypeDescription, T1.DeviceType_VisualRepresentationURL)
-    FROM (
-        SELECT 
-            T.Id AS DeviceType_DeviceTypeId, 
-            T.TypeName AS DeviceType_TypeName, 
-            T.TypeDescription AS DeviceType_TypeDescription, 
-            T.VisualRepresentationURL AS DeviceType_VisualRepresentationURL, 
-            True AS _from0
-        FROM CodeFirstDatabase.DeviceType AS T
     ) AS T1");
         }
     }

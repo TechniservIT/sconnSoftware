@@ -105,10 +105,6 @@
       <Project>{e94b0a02-089e-483a-aaef-3bfa49039598}</Project>
       <Name>iotData</Name>
     </ProjectReference>
-    <ProjectReference Include="..\iotRestfulDatabase\iotNoSqlDatabase.csproj">
-      <Project>{97b81a32-d59a-4232-998f-ac61f0fabe59}</Project>
-      <Name>iotNoSqlDatabase</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

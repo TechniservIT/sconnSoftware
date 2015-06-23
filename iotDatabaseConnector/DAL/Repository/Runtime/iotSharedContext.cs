@@ -1,53 +1,37 @@
 ﻿using iotDatabaseConnector.DAL.POCO.Device.Notify;
+using iotDbConnector.DAL;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
-using System.Data.Entity.Core.Objects;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace iotDbConnector.DAL
+namespace iotDatabaseConnector.DAL.Repository.Runtime
 {
-    /// <summary>
-    /// The EF-dependent, generic repository for data access
-    /// </summary>
-    /// <typeparam name="T">Type of entity for this Repository.</typeparam>
-    public class iotRepository<T> : IiotRepository<T> where T : class
+    public class iotSharedEntityContext<T> : IiotRepository<T> where T : class
     {
-       
-        public iotRepository()
+
+        static private DbContext DbContext;
+
+        static private DbSet<T> DbSet;
+
+
+        static iotSharedEntityContext()
         {
-            iotContext dbContext = new iotContext();
-            DbContext = dbContext;
-            DbSet = DbContext.Set<T>();
-    
+            if (DbContext == null)
+            {
+                DbContext = new iotContext();
+                DbSet = DbContext.Set<T>();
+            }
         }
 
-        static public void ClearIotRepository()
+        public iotSharedEntityContext()
         {
-                iotContext dbContext = new iotContext();
-                var tableNames = dbContext.Database.SqlQuery<string>("SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME NOT LIKE '%Migration%'").ToList();
-                foreach (var tableName in tableNames)
-                {
-                    dbContext.Database.ExecuteSqlCommand(string.Format("DELETE FROM {0}", tableName));
-                }
-                dbContext.SaveChanges();
+
         }
 
-
-        public iotRepository(DbContext dbContext)
-        {
-            if (dbContext == null)
-                throw new ArgumentNullException("Null DbContext");
-            DbContext = dbContext;
-            DbSet = DbContext.Set<T>();
-        }
-
-        protected DbContext DbContext { get; set; }
-
-        protected DbSet<T> DbSet { get; set; }
 
         public virtual IQueryable<T> GetAll()
         {
@@ -73,7 +57,20 @@ namespace iotDbConnector.DAL
             }
         }
 
-        public virtual void Add(T entity)
+        public virtual T GetById(string id)
+        {
+            try
+            {
+                return DbSet.Find(id);
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
+
+
+        public virtual int Add(T entity)
         {
             try
             {
@@ -84,12 +81,20 @@ namespace iotDbConnector.DAL
                 }
                 else
                 {
-                    DbSet.Add(entity);
+                    var res = DbSet.Add(entity);
                     DbContext.SaveChanges();
+                    System.Reflection.PropertyInfo pi = res.GetType().GetProperty("Id");
+                    if (pi != null)
+                    {
+                        int id = (int)(pi.GetValue(res, null));
+                        return id;
+                    }
                 }
+                return -1;
             }
             catch (Exception e)
             {
+                return -1;
             }
         }
 
@@ -149,22 +154,22 @@ namespace iotDbConnector.DAL
                 {
                     iotRepository<DeviceParameter> repo = new iotRepository<DeviceParameter>();
                     DeviceAction item = (DeviceAction)(object)entity;
-                        foreach (var param in item.ResultParameters)
+                    foreach (var param in item.ResultParameters)
+                    {
+                        DeviceParameter stparam = repo.GetById(param.Id);
+                        if (stparam != null)
                         {
-                            DeviceParameter stparam = repo.GetById(param.Id);
-                            if (stparam != null)
+                            if (!stparam.Value.Equals(param.Value))
                             {
-                                if (!stparam.Value.Equals(param.Value))
-                                {
-                                    ParameterChangeHistory hist = new ParameterChangeHistory();
-                                    hist.Date = DateTime.Now;
-                                    hist.Property = param;
-                                    hist.Value = param.Value;
-                                    iotRepository<ParameterChangeHistory> histrepo = new iotRepository<ParameterChangeHistory>();
-                                    histrepo.Add(hist);
-                                }
+                                ParameterChangeHistory hist = new ParameterChangeHistory();
+                                hist.Date = DateTime.Now;
+                                hist.Property = param;
+                                hist.Value = param.Value;
+                                iotRepository<ParameterChangeHistory> histrepo = new iotRepository<ParameterChangeHistory>();
+                                histrepo.Add(hist);
                             }
                         }
+                    }
 
                 }
                 else if (entity.GetType() == typeof(DeviceProperty))
@@ -172,46 +177,46 @@ namespace iotDbConnector.DAL
                     iotRepository<DeviceParameter> repo = new iotRepository<DeviceParameter>();
                     DeviceProperty item = (DeviceProperty)(object)entity;
 
-                        foreach (var param in item.ResultParameters)
+                    foreach (var param in item.ResultParameters)
+                    {
+                        DeviceParameter stparam = repo.GetById(param.Id);
+                        if (stparam != null)
                         {
-                            DeviceParameter stparam = repo.GetById(param.Id);
-                            if (stparam != null)
+                            if (!stparam.Value.Equals(param.Value))
                             {
-                                if (!stparam.Value.Equals(param.Value))
-                                {
-                                    ParameterChangeHistory hist = new ParameterChangeHistory();
-                                    hist.Date = DateTime.Now;
-                                    hist.Property = param;
-                                    hist.Value = param.Value;
-                                    iotRepository<ParameterChangeHistory> histrepo = new iotRepository<ParameterChangeHistory>();
-                                    histrepo.Add(hist);
-                                }
+                                ParameterChangeHistory hist = new ParameterChangeHistory();
+                                hist.Date = DateTime.Now;
+                                hist.Property = param;
+                                hist.Value = param.Value;
+                                iotRepository<ParameterChangeHistory> histrepo = new iotRepository<ParameterChangeHistory>();
+                                histrepo.Add(hist);
                             }
                         }
+                    }
 
                 }
-                                    
-                    DbEntityEntry dbEntityEntry = DbContext.Entry(entity);
-                    if (dbEntityEntry.State == EntityState.Detached)
-                    {
-                        DbSet.Attach(entity);
-                    }
-                    dbEntityEntry.State = EntityState.Modified;
+
+                DbEntityEntry dbEntityEntry = DbContext.Entry(entity);
+                if (dbEntityEntry.State == EntityState.Detached)
+                {
+                    DbSet.Attach(entity);
+                }
+                dbEntityEntry.State = EntityState.Modified;
             }
             catch (Exception exc)
             {
-                
-           
+
+
             }
 
         }
-        
+
 
         public virtual void Update(T entity)
         {
             try
             {
-                if (entity.GetType() == typeof(Device) || entity.GetType() == typeof(DeviceAction) || entity.GetType() == typeof(DeviceProperty) )
+                if (entity.GetType() == typeof(Device) || entity.GetType() == typeof(DeviceAction) || entity.GetType() == typeof(DeviceProperty))
                 {
                     UpdateWithHistory(entity);
                 }
@@ -228,7 +233,7 @@ namespace iotDbConnector.DAL
             }
             catch (Exception e)
             {
-   
+
             }
         }
 
@@ -260,5 +265,6 @@ namespace iotDbConnector.DAL
             if (entity == null) return; // not found; assume already deleted.
             Delete(entity);
         }
+
     }
 }
