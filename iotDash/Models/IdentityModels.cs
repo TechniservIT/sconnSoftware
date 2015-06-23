@@ -15,9 +15,9 @@ namespace iotDash.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection")
+            : base("dashIdentity")
         {
-          //  this.Configuration.LazyLoadingEnabled = false;
+
         }
 
      

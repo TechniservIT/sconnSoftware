@@ -387,7 +387,7 @@ namespace iotDeviceService
             {
                iotSharedEntityContext<iotDomain> cont = new iotSharedEntityContext<iotDomain>();
                 iotDomain domain = cont.GetById(DomainId);  //db.GetById(DomainId);     //fetch domain from DB
-                if (domain != null)
+                if (domain != null)    
                 {
                     if (domain.Locations == null)
                     {

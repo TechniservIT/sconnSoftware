@@ -13,20 +13,6 @@ namespace iotDatabaseConnector.DAL.Repository.Runtime
     public class iotSharedEntityContext<T> : IiotRepository<T> where T : class
     {
 
-        static private DbContext DbContext;
-
-        static private DbSet<T> DbSet;
-
-
-        static iotSharedEntityContext()
-        {
-            if (DbContext == null)
-            {
-                DbContext = new iotContext();
-                DbSet = DbContext.Set<T>();
-            }
-        }
-
         public iotSharedEntityContext()
         {
 
@@ -37,11 +23,11 @@ namespace iotDatabaseConnector.DAL.Repository.Runtime
         {
             try
             {
-                return DbContext.Set<T>();
+                return iotGenericGlobalContext<T>.DbContext.Set<T>();
             }
             catch (Exception e)
             {
-                return null;
+                throw;
             }
         }
 
@@ -49,11 +35,11 @@ namespace iotDatabaseConnector.DAL.Repository.Runtime
         {
             try
             {
-                return DbSet.Find(id);
+                return iotGenericGlobalContext<T>.DbSet.Find(id);
             }
             catch (Exception e)
             {
-                return null;
+                throw;
             }
         }
 
@@ -61,11 +47,11 @@ namespace iotDatabaseConnector.DAL.Repository.Runtime
         {
             try
             {
-                return DbSet.Find(id);
+                return iotGenericGlobalContext<T>.DbSet.Find(id);
             }
             catch (Exception e)
             {
-                return null;
+                throw;
             }
         }
 
@@ -74,15 +60,15 @@ namespace iotDatabaseConnector.DAL.Repository.Runtime
         {
             try
             {
-                DbEntityEntry dbEntityEntry = DbContext.Entry(entity);
+                DbEntityEntry dbEntityEntry = iotGenericGlobalContext<T>.DbContext.Entry(entity);
                 if (dbEntityEntry.State != EntityState.Detached)
                 {
                     dbEntityEntry.State = EntityState.Added;
                 }
                 else
                 {
-                    var res = DbSet.Add(entity);
-                    DbContext.SaveChanges();
+                    var res = iotGenericGlobalContext<T>.DbSet.Add(entity);
+                    iotGenericGlobalContext<T>.DbContext.SaveChanges();
                     System.Reflection.PropertyInfo pi = res.GetType().GetProperty("Id");
                     if (pi != null)
                     {
@@ -196,17 +182,17 @@ namespace iotDatabaseConnector.DAL.Repository.Runtime
 
                 }
 
-                DbEntityEntry dbEntityEntry = DbContext.Entry(entity);
+                DbEntityEntry dbEntityEntry = iotGenericGlobalContext<T>.DbContext.Entry(entity);
                 if (dbEntityEntry.State == EntityState.Detached)
                 {
-                    DbSet.Attach(entity);
+                    iotGenericGlobalContext<T>.DbSet.Attach(entity);
                 }
                 dbEntityEntry.State = EntityState.Modified;
+                iotGenericGlobalContext<T>.DbContext.SaveChanges();
             }
             catch (Exception exc)
             {
-
-
+                throw;
             }
 
         }
@@ -222,18 +208,18 @@ namespace iotDatabaseConnector.DAL.Repository.Runtime
                 }
                 else
                 {
-                    DbEntityEntry dbEntityEntry = DbContext.Entry(entity);
+                    DbEntityEntry dbEntityEntry = iotGenericGlobalContext<T>.DbContext.Entry(entity);
                     if (dbEntityEntry.State == EntityState.Detached)
                     {
-                        DbSet.Attach(entity);
+                        iotGenericGlobalContext<T>.DbSet.Attach(entity);
                     }
                     dbEntityEntry.State = EntityState.Modified;
                 }
-
+                iotGenericGlobalContext<T>.DbContext.SaveChanges();
             }
             catch (Exception e)
             {
-
+                throw;
             }
         }
 
@@ -241,20 +227,20 @@ namespace iotDatabaseConnector.DAL.Repository.Runtime
         {
             try
             {
-                DbEntityEntry dbEntityEntry = DbContext.Entry(entity);
+                DbEntityEntry dbEntityEntry = iotGenericGlobalContext<T>.DbContext.Entry(entity);
                 if (dbEntityEntry.State != EntityState.Deleted)
                 {
                     dbEntityEntry.State = EntityState.Deleted;
                 }
                 else
                 {
-                    DbSet.Attach(entity);
-                    DbSet.Remove(entity);
+                    iotGenericGlobalContext<T>.DbSet.Attach(entity);
+                    iotGenericGlobalContext<T>.DbSet.Remove(entity);
                 }
             }
             catch (Exception e)
             {
-
+                throw;
             }
 
         }

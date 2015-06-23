@@ -298,10 +298,6 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\iotDash-identity.mdf" />
-    <Content Include="App_Data\iotDash-identity_log.ldf">
-      <DependentUpon>iotDash-identity.mdf</DependentUpon>
-    </Content>
     <Content Include="Content\css\font-awesome.css" />
     <Content Include="Content\css\font-awesome.min.css" />
     <Content Include="Content\css\jquery-ui.css" />
@@ -617,6 +613,7 @@
     <Content Include="Views\Statistic\ActionStat.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Data\" />
     <Folder Include="RealTime\SignalR\StatusUpdate\ActionHistoryUpdater\" />
     <Folder Include="RealTime\SignalR\StatusUpdate\PropertyHistoryUpdater\" />
     <Folder Include="Views\App\" />

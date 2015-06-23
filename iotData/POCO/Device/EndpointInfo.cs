@@ -44,7 +44,7 @@ namespace iotDbConnector.DAL
         public bool SupportsOnvifProtocol { get; set; }
 
         [DataMember]
-        public virtual Device Device { get; set; }
+        public virtual AIList<Device> Devices { get; set; }
 
  
 

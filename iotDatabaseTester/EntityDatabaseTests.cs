@@ -169,7 +169,7 @@ namespace iotDatabaseTester
         {
             try
             {
-                int ReadTestInterations = 250;
+                int ReadTestInterations = 5;
                 int maxQueryTimeMs = 25;
 
                 Stopwatch watch = new Stopwatch();

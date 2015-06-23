@@ -111,6 +111,7 @@
     <Compile Include="DAL\Repository\Connector\iotDbConnector.cs" />
     <Compile Include="DAL\Repository\IiotRepository.cs" />
     <Compile Include="DAL\Repository\Connector\iotRepository.cs" />
+    <Compile Include="DAL\Repository\iotDataContext.cs" />
     <Compile Include="DAL\Repository\Runtime\iotSharedContext.cs" />
     <Compile Include="Migrations\201506231444305_init.cs" />
     <Compile Include="Migrations\201506231444305_init.Designer.cs">
