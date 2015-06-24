@@ -20,14 +20,14 @@ namespace iotDash.Models
         public Site DeviceSite { get; set; }
 
 
-        public DeviceAddModel(string DomainId)
+        public DeviceAddModel()
         {
             DeviceRestfulService cl = new DeviceRestfulService();
-            Locations = cl.Locations(DomainId).ToList();
-            Types = cl.DeviceTypes(DomainId).ToList();
+            Locations = cl.Locations().ToList();
+            Types = cl.DeviceTypes().ToList();
         }
         
-        public DeviceAddModel(Site site, string DomainId) : this(DomainId)
+        public DeviceAddModel(Site site, int domainId) : this()
         {
             DeviceSite = site;
         }

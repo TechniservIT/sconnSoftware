@@ -12,8 +12,10 @@ namespace iotDash.Session
             string url = httpContext.Request.RawUrl;
             var urlcomponents = url.Split('/');
             string appdomain = urlcomponents[1];
+
             return appdomain;
         }
+
 
     }
 }

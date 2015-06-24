@@ -61,8 +61,8 @@ namespace iotDash
                                     select u).First();
 
                     DeviceRestfulService cl = new DeviceRestfulService();
-                    //string domainId = DomainSession.GetContextDomain(this.HttpContext);
-                    iotDomain domain = cl.GetDomainWithId(currentUser.DomainId);
+                    //int domainId = DomainSession.GetContextDomain(this.HttpContext);
+                    iotDomain domain = cl.GetDomainWithId(currentUser.domainId);
                     if(domain != null)
                     {
                         Session["AppDomain"] = domain.DomainName;
@@ -107,7 +107,7 @@ namespace iotDash
                     //IiotDomainServiceClient cl = iotServiceConnector.ServiceClient();
 
                     DeviceRestfulService cl = new DeviceRestfulService();
-                    iotDomain existingDomain = cl.GetDomainWithId(model.DomainName);
+                    iotDomain existingDomain = cl.GetDomainWithName(model.DomainName);
                     //List<iotDomain> domains = cl.Domains().ToList();
                     
                     //var existingDomainsForName = domains.Where(d => d.DomainName.Equals(model.DomainName));
@@ -152,7 +152,7 @@ namespace iotDash
                                 user.Roles.Add(userAdminRole);
 
                                 //setup user domain
-                                user.DomainId = addedDomain.Id;
+                                user.domainId = addedDomain.Id;
 
                                 var result = await UserManager.CreateAsync(user, model.Password);
                                 if (result.Succeeded)

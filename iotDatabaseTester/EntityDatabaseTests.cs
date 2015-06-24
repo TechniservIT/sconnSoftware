@@ -113,12 +113,12 @@ namespace iotDatabaseTester
         }
 
       
-        public bool TestRepoSingleRead(string id)
+        public bool TestRepoSingleRead(int id)
         {
             try
             {
                 iotRepository<Location> repo = new iotRepository<Location>();
-                Location locs = repo.GetById(int.Parse(id));
+                Location locs = repo.GetById(id);
                 return locs != null;
             }
             catch (Exception ex)

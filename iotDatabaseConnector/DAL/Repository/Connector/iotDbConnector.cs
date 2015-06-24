@@ -44,7 +44,7 @@ namespace iotDbConnector.DAL
         }
 
 
-        public iotDomain DomainForDomainId(string domainId)
+        public iotDomain DomainForDomainId(int domainId)
         {
             try
             {

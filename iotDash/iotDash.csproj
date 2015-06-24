@@ -271,13 +271,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201501091547591_identity init +domain.cs" />
-    <Compile Include="Migrations\201501091547591_identity init +domain.Designer.cs">
-      <DependentUpon>201501091547591_identity init +domain.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201506181340509_Identity user domain name.cs" />
-    <Compile Include="Migrations\201506181340509_Identity user domain name.Designer.cs">
-      <DependentUpon>201506181340509_Identity user domain name.cs</DependentUpon>
+    <Compile Include="Migrations\201506241419288_initial.cs" />
+    <Compile Include="Migrations\201506241419288_initial.Designer.cs">
+      <DependentUpon>201506241419288_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -624,14 +620,6 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201501091547591_identity init +domain.resx">
-      <DependentUpon>201501091547591_identity init +domain.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201506181340509_Identity user domain name.resx">
-      <DependentUpon>201506181340509_Identity user domain name.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\iotDatabaseConnector\iotDatabaseConnector.csproj">
       <Project>{7df5e6fa-5839-456f-959b-af4a7a742775}</Project>
       <Name>iotDatabaseConnector</Name>
@@ -656,6 +644,11 @@
   <ItemGroup>
     <TypeScriptCompile Include="RealTime\SignalR\StatusUpdate\DeviceStatusUpdater\DeviceStatusUpdaterClient.ts" />
     <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201506241419288_initial.resx">
+      <DependentUpon>201506241419288_initial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

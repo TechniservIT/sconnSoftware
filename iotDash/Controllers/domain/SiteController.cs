@@ -14,168 +14,164 @@ using iotDeviceService;
 namespace iotDash.Controllers
 {
 
-    [DomainAuthorize]
-    public class SiteController : Controller
-    {
-        public Site site { get; set; }
+	[DomainAuthorize]
+	public class SiteController : Controller
+	{
+		public Site site { get; set; }
 
-        //
-        // GET: /Site/
-        //  Display site list
+		//
+		// GET: /Site/
+		//  Display site list
 
-        public ActionResult Index()
-        {
-            List<Site> Sites = new List<Site>();
-            try
-            {
-                DeviceRestfulService cl = new DeviceRestfulService();
+		public ActionResult Index()
+		{
+			List<Site> Sites = new List<Site>();
+			try
+			{
+				DeviceRestfulService cl = new DeviceRestfulService();
                 string domainId = DomainSession.GetContextDomain(this.HttpContext);
-                Sites = cl.GetSitesInDomain(domainId).ToList();
-            }
-            catch (Exception e)
-            {
-
-            }
-            ShowSitesViewModel model = new ShowSitesViewModel(Sites);
-            return View(model);
-        }
-
-
-
-        //Remove device and return status
-        public bool RemoveDevice(string DeviceId, string SiteId)
-        {
-            int devid = int.Parse(DeviceId);
-            int sid = int.Parse(SiteId);
-            try
-            {
-                DeviceRestfulService cl = new DeviceRestfulService();
-                string domainId = DomainSession.GetContextDomain(this.HttpContext);
-                Device dev = cl.DeviceWithId(devid, domainId);
-                cl.DeviceRemove(dev,sid,domainId);
-                return true;
-            }
-            catch (Exception e)
-            {
-                return false;
-            }
-        }
-
-
-        //
-        // GET: /Site/View/<number>
-        public ActionResult View(string SiteId)
-        {
-            int id = int.Parse(SiteId);
-            try
-            {
-                DeviceRestfulService cl = new DeviceRestfulService();
-                string domainId = DomainSession.GetContextDomain(this.HttpContext);
-                Site siteToView = cl.SiteWithId(domainId,id);
-                DeviceListViewModel model = new DeviceListViewModel(siteToView);
+                iotDomain d = cl.GetDomainWithName(domainId);
+				Sites = cl.GetSitesInDomain(d.Id).ToList();
+                ShowSitesViewModel model = new ShowSitesViewModel(Sites);
                 return View(model);
-                
-            }
-            catch (Exception e)
-            {
+			}
+			catch (Exception e)
+			{
+                return View();
+			}
+
+		}
+
+
+
+		//Remove device and return status
+		public bool RemoveDevice(string DeviceId, string SiteId)
+		{
+			int devid = int.Parse(DeviceId);
+			int sid = int.Parse(SiteId);
+			try
+			{
+				DeviceRestfulService cl = new DeviceRestfulService();
+				Device dev = cl.DeviceWithId(devid);
+				cl.DeviceRemove(dev);
+				return true;
+			}
+			catch (Exception e)
+			{
+				return false;
+			}
+		}
+
+
+		//
+		// GET: /Site/View/<number>
+		public ActionResult View(int SiteId)
+		{
+			try
+			{
+				DeviceRestfulService cl = new DeviceRestfulService();
+                Site siteToView = cl.SiteWithId(SiteId);
+				DeviceListViewModel model = new DeviceListViewModel(siteToView);
+				return View(model);
+				
+			}
+			catch (Exception e)
+			{
   
-            }
-            return View();
-        }
+			}
+			return View();
+		}
 
-        //
-        // GET: /Site/Edit/<number>
-        public ActionResult Edit(int SiteId)
-        {
-            return View();
-        }
-
-
-
-
-
-        //
-        // GET: /Site/Add
-        public ActionResult Add()
-        {          
-            List<Location> Locations = new List<Location>();
-            try
-            {
-                DeviceRestfulService cl = new DeviceRestfulService();
-                string domainId = DomainSession.GetContextDomain(this.HttpContext);
-                Locations = cl.Locations(domainId).ToList();
-            }
-            catch (Exception e)
-            {
-
-            }
-            AddSiteViewModel model = new AddSiteViewModel(Locations);
-            return View(model);
-        }
-
-        //
-        // GET: /Site/New
-        public string New(string Name, string LocId)
-        {
-            try
-            {
-                DeviceRestfulService cl = new DeviceRestfulService();
-                int LocIdnum = int.Parse(LocId);
-                string domainId = DomainSession.GetContextDomain(this.HttpContext);
-                Location loc = cl.LocationWithId(LocIdnum,domainId);
-                if (loc != null)
-                {
-                    Site site = new Site();
-                    site.SiteName = Name;
-                    site.siteLocation = loc;
-                    iotDomain domain = SessionManager.AppDomainForUserContext(this.HttpContext);
-                    iotDomain targetDomain = cl.DomainWithId(domain.DomainName);
-                    site.Domain = targetDomain;
-                    cl.AddSiteToDomain(site,domain.DomainName);
-                }
-                else
-                {
-                    return "Location not found";
-                }
-                 
-
-            }
-            catch (Exception e)
-            {
-                return "Add error.";
-            }
-
-            return "Add success.";
-        }
+		//
+		// GET: /Site/Edit/<number>
+		public ActionResult Edit(int SiteId)
+		{
+			return View();
+		}
 
 
 
 
-        //
-        // GET: /Site/Locate/<number>
-        public ActionResult Locate(int number)
-        {
-            return View();
-        }
+
+		//
+		// GET: /Site/Add
+		public ActionResult Add()
+		{          
+			List<Location> Locations = new List<Location>();
+			try
+			{
+				DeviceRestfulService cl = new DeviceRestfulService();
+				Locations = cl.Locations().ToList();
+			}
+			catch (Exception e)
+			{
+
+			}
+			AddSiteViewModel model = new AddSiteViewModel(Locations);
+			return View(model);
+		}
+
+		//
+		// GET: /Site/New
+		public string New(string Name, string LocId)
+		{
+			try
+			{
+				DeviceRestfulService cl = new DeviceRestfulService();
+				int LocIdnum = int.Parse(LocId);
+				Location loc = cl.LocationWithId(LocIdnum);
+				if (loc != null)
+				{
+					Site site = new Site();
+					site.SiteName = Name;
+					site.siteLocation = loc;
+					iotDomain domain = SessionManager.AppDomainForUserContext(this.HttpContext);
+					iotDomain targetDomain = cl.DomainWithName(domain.DomainName);
+					site.Domain = targetDomain;
+					cl.AddSiteToDomain(site);
+				}
+				else
+				{
+					return "Location not found";
+				}
+				 
+
+			}
+			catch (Exception e)
+			{
+				return "Add error.";
+			}
+
+			return "Add success.";
+		}
 
 
-        //
-        // GET: /Site/Status/<number>
-        public ActionResult Status(int number)
-        {
-            return View();
-        }
-        public ActionResult AddSite(Site site)
-        {
-            if (site != null)
-            {
-                DeviceRestfulService cl = new DeviceRestfulService();
-                string domainId = DomainSession.GetContextDomain(this.HttpContext);
-                cl.AddSiteToDomain(site,domainId);
-            }
-            //show status 
-            return View();
-        }
+
+
+		//
+		// GET: /Site/Locate/<number>
+		public ActionResult Locate(int number)
+		{
+			return View();
+		}
+
+
+		//
+		// GET: /Site/Status/<number>
+		public ActionResult Status(int number)
+		{
+			return View();
+		}
+		public ActionResult AddSite(Site site)
+		{
+			if (site != null)
+			{
+				DeviceRestfulService cl = new DeviceRestfulService();
+				cl.AddSiteToDomain(site);
+			}
+			//show status 
+			return View();
+		}
 
 	}
 }

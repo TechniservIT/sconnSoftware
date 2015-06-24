@@ -94,19 +94,18 @@ namespace iotDash.RealTime.SignalR.DeviceStatusUpdater
              Clients.All.updateDevice(jsonActs);
          }
 
-        public void UpdateProperty(string propertyData,int SiteId, int DeviceId, string DomainId)
+        public void UpdateProperty(string propertyData, int domainId)
          {
                 DeviceProperty prop = (DeviceProperty)JsonConvert.DeserializeObject(propertyData);
                 DeviceRestfulService cl = new DeviceRestfulService();
-                cl.PropertyUpdate(prop,DeviceId,SiteId,DomainId);
+                cl.PropertyUpdate(prop);
         }
 
         public void UpdateParameter(string paramData)
         {
             DeviceParameter param = (DeviceParameter)JsonConvert.DeserializeObject(paramData);
             DeviceRestfulService cl = new DeviceRestfulService();
-            string domainId = DomainSession.GetContextDomain(null);   //TODO
-            cl.ResParamUpdate(param,domainId);
+            cl.ResParamUpdate(param);
         }
 
     }

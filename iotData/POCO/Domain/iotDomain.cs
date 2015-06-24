@@ -16,7 +16,7 @@ namespace iotDbConnector.DAL
         [DataMember]
         [Key]
         [Required]
-        public string Id { get; set; }
+        public int Id { get; set; }
 
         [DataMember]
         [Required]

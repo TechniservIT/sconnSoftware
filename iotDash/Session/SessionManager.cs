@@ -45,8 +45,8 @@ namespace iotDash.Session
                 {
                     DeviceRestfulService cl = new DeviceRestfulService();
                     string domainId = DomainSession.GetContextDomain(cont);
-                    iotDomain domain = cl.GetDomainWithId(domainId);
-                      return domain;
+                    iotDomain domain = cl.GetDomainWithName(domainId);
+                    return domain;
                 }
                 else
                 {

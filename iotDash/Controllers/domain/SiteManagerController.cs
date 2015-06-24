@@ -23,8 +23,9 @@ namespace iotDash.Controllers
         {
             //load sites
             DeviceRestfulService serv = new DeviceRestfulService();
-            string domainId = DomainSession.GetContextDomain(this.HttpContext);
-            var sites = serv.GetSitesInDomain(domainId).ToList();
+            string domainName = DomainSession.GetContextDomain(this.HttpContext);
+            iotDomain domain = serv.GetDomainWithName(domainName);
+            var sites = serv.GetSitesInDomain(domain.Id).ToList();
             foreach (Site site in sites)
             {
                 Sites.Add(site); 

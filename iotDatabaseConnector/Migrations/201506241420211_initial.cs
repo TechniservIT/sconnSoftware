@@ -3,7 +3,7 @@ namespace iotDatabaseConnector.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class init : DbMigration
+    public partial class initial : DbMigration
     {
         public override void Up()
         {
@@ -98,7 +98,7 @@ namespace iotDatabaseConnector.Migrations
                         Lat = c.Double(nullable: false),
                         Lng = c.Double(nullable: false),
                         LocationVisualRepresentationURL = c.String(),
-                        Domain_Id = c.String(maxLength: 128),
+                        Domain_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.iotDomains", t => t.Domain_Id)
@@ -108,7 +108,7 @@ namespace iotDatabaseConnector.Migrations
                 "dbo.iotDomains",
                 c => new
                     {
-                        Id = c.String(nullable: false, maxLength: 128),
+                        Id = c.Int(nullable: false, identity: true),
                         DomainName = c.String(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
@@ -121,7 +121,7 @@ namespace iotDatabaseConnector.Migrations
                         TypeName = c.String(nullable: false),
                         TypeDescription = c.String(),
                         VisualRepresentationURL = c.String(),
-                        Domain_Id = c.String(nullable: false, maxLength: 128),
+                        Domain_Id = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.iotDomains", t => t.Domain_Id, cascadeDelete: true)
@@ -141,7 +141,7 @@ namespace iotDatabaseConnector.Migrations
                         SupportsRESTfulProtocol = c.Boolean(nullable: false),
                         SupportsSconnProtocol = c.Boolean(nullable: false),
                         SupportsOnvifProtocol = c.Boolean(nullable: false),
-                        Domain_Id = c.String(maxLength: 128),
+                        Domain_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.iotDomains", t => t.Domain_Id)
@@ -153,7 +153,7 @@ namespace iotDatabaseConnector.Migrations
                     {
                         Id = c.Int(nullable: false, identity: true),
                         SiteName = c.String(nullable: false),
-                        Domain_Id = c.String(nullable: false, maxLength: 128),
+                        Domain_Id = c.Int(nullable: false),
                         siteLocation_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)

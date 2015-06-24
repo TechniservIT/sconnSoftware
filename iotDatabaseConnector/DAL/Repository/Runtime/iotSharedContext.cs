@@ -43,17 +43,17 @@ namespace iotDatabaseConnector.DAL.Repository.Runtime
             }
         }
 
-        public virtual T GetById(string id)
-        {
-            try
-            {
-                return iotGenericGlobalContext<T>.DbSet.Find(id);
-            }
-            catch (Exception e)
-            {
-                throw;
-            }
-        }
+        //public virtual T GetById(string id)
+        //{
+        //    try
+        //    {
+        //        return iotGenericGlobalContext<T>.DbSet.Find(id);
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        throw;
+        //    }
+        //}
 
 
         public virtual int Add(T entity)

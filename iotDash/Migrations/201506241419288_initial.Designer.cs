@@ -7,13 +7,13 @@ namespace iotDash.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.2-beta2-31111")]
-    public sealed partial class Identityuserdomainname : IMigrationMetadata
+    public sealed partial class initial : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Identityuserdomainname));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(initial));
         
         string IMigrationMetadata.Id
         {
-            get { return "201506181340509_Identity user domain name"; }
+            get { return "201506241419288_initial"; }
         }
         
         string IMigrationMetadata.Source

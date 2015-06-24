@@ -8,7 +8,7 @@ namespace iotDash.Models
     public class ApplicationUser : IdentityUser
     {
         [Required]
-        public virtual string DomainId { get; set; }
+        public virtual int domainId { get; set; }
 
     }
 

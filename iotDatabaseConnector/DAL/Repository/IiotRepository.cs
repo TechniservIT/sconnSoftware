@@ -10,7 +10,6 @@ namespace iotDbConnector.DAL
     {
         IQueryable<T> GetAll();
         T GetById(int id);
-        T GetById(string id);
         int Add(T entity);
         void Update(T entity);
         void Delete(T entity);

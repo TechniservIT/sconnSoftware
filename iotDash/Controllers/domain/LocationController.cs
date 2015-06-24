@@ -22,8 +22,7 @@ namespace iotDash.Controllers
 		public ActionResult Index()
 		{
 			DeviceRestfulService cl = new DeviceRestfulService();
-            string domainId = DomainSession.GetContextDomain(this.HttpContext);
-            List<Location> locs = cl.Locations(domainId).ToList();
+            List<Location> locs = cl.Locations().ToList();
 			LocationListViewModel model = new LocationListViewModel(locs);
 			return View(model);
 		}
@@ -41,14 +40,14 @@ namespace iotDash.Controllers
 
 				DeviceRestfulService cl = new DeviceRestfulService();
                 string domainId = DomainSession.GetContextDomain(this.HttpContext);
-                iotDomain domain = cl.GetDomainWithId(domainId);
+                iotDomain domain = cl.GetDomainWithName(domainId);
 
 				Location loc = new Location();
 				loc.Domain = domain;
 				loc.LocationName = Name;
 				loc.Lng = double.Parse(Lng, CultureInfo.InvariantCulture);
 				loc.Lat = double.Parse(Lat, CultureInfo.InvariantCulture);
-				cl.LocationAdd(loc,domainId);
+				cl.LocationAdd(loc);
 				return "Location added sucessfully";
 			}
 			catch (Exception e)
@@ -68,8 +67,7 @@ namespace iotDash.Controllers
 			{
 				int LocId = int.Parse(LocationId);
 				DeviceRestfulService cl = new DeviceRestfulService();
-                string domainId = DomainSession.GetContextDomain(this.HttpContext);
-                Location loc = cl.LocationWithId(LocId,domainId);
+                Location loc = cl.LocationWithId(LocId);
 				if (loc != null)
 				{
 					LocationEditViewModel model = new LocationEditViewModel(loc);
@@ -88,8 +86,7 @@ namespace iotDash.Controllers
 			{
 				int LocId = int.Parse(LocationId);
 				DeviceRestfulService cl = new DeviceRestfulService();
-                string domainId = DomainSession.GetContextDomain(this.HttpContext);
-                Location loc = cl.LocationWithId(LocId,domainId);
+                Location loc = cl.LocationWithId(LocId);
 				//TODO remove
 				return true;     
 			}
