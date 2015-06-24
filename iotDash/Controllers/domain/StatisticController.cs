@@ -20,16 +20,20 @@ namespace iotDash.Controllers
 
         public ActionResult PropertyStat(int propertyId)
         {
-            DeviceRestfulService cl = new DeviceRestfulService();
-            DeviceProperty prop = cl.DevicePropertieWithId(propertyId);
+            iotContext icont = new iotContext();
+            string domainId = DomainSession.GetContextDomain(this.HttpContext);
+            iotDomain d = icont.Domains.First(dm => dm.DomainName.Equals(domainId));
+            DeviceProperty prop = icont.Properties.First(p => p.Id == propertyId);
             DevicePropertyStatisticModel model = new DevicePropertyStatisticModel(prop);
             return View(model);
         }
 
         public ActionResult ActionStat(int actionId)
         {
-            DeviceRestfulService cl = new DeviceRestfulService();
-            DeviceAction prop = cl.DeviceActionWithId(actionId);
+            iotContext icont = new iotContext();
+            string domainId = DomainSession.GetContextDomain(this.HttpContext);
+            iotDomain d = icont.Domains.First(dm => dm.DomainName.Equals(domainId));
+            DeviceAction prop = icont.Actions.First(a => a.Id == actionId);
             DeviceActionStatisticModel model = new DeviceActionStatisticModel(prop);
             return View(model);
         }

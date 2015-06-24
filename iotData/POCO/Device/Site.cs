@@ -25,7 +25,7 @@ namespace iotDbConnector.DAL
         public virtual Location siteLocation { get; set; }
 
         [DataMember]
-        public virtual AIList<Device> Devices { get; set; }
+        public virtual List<Device> Devices { get; set; }
 
         [DataMember]
         [Required]
@@ -33,7 +33,7 @@ namespace iotDbConnector.DAL
 
         public Site()
         {
-            Devices = new AIList<Device>();
+            Devices = new List<Device>();
 
         }
     }

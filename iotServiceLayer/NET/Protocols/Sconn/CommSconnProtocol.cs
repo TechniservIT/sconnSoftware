@@ -426,8 +426,8 @@ namespace iotServiceProvider
                 iotContext cont = new iotContext();
                 Device storedDevice = cont.Devices.Where(d => d.Id == edited.Id).First(); 
                 DeviceAction action = new DeviceAction();
-                action.RequiredParameters = new AIList<ActionParameter>();
-                action.ResultParameters = new AIList<DeviceParameter>();
+                action.RequiredParameters = new List<ActionParameter>();
+                action.ResultParameters = new List<DeviceParameter>();
                 action.ActionName = "Output" + maper.SeqNumber;    //TODO read from name cfg  
                 action.Device = storedDevice;
                 action.LastActivationTime = DateTime.Now;

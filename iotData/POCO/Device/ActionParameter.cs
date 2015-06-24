@@ -35,7 +35,7 @@ namespace iotDbConnector.DAL
         public virtual DeviceAction Action { get; set; }
 
         [DataMember]
-        public virtual AIList<sconnConfigMapper> sconnMappers { get; set; }
+        public virtual List<sconnConfigMapper> sconnMappers { get; set; }
 
 
         public bool AddSconnMapper(sconnConfigMapper mapper)

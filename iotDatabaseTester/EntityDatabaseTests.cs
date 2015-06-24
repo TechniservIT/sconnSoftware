@@ -96,7 +96,7 @@ namespace iotDatabaseTester
             iotRepository<iotDomain> locrepo = new iotRepository<iotDomain>();
             iotDomain dm = new iotDomain();
             dm.DomainName = Guid.NewGuid().ToString();
-            dm.Sites = new AIList<Site>();
+            dm.Sites = new List<Site>();
             locrepo.Add(dm);
 
             List<iotDomain> locs = locrepo.GetAll().ToList();

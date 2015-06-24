@@ -27,14 +27,14 @@ namespace iotDbConnector.DAL
 
         [DataMember]
         [Required]
-        public virtual AIList<ActionParameter> RequiredParameters { get; set; }
+        public virtual List<ActionParameter> RequiredParameters { get; set; }
 
         [DataMember]
         public string VisualRepresentationURL { get; set; }
         
         [DataMember]
         [Required]
-        public virtual AIList<DeviceParameter> ResultParameters { get; set; }
+        public virtual List<DeviceParameter> ResultParameters { get; set; }
 
 
         [DataMember]
@@ -46,8 +46,8 @@ namespace iotDbConnector.DAL
 
         public DeviceAction()
         {
-            RequiredParameters = new AIList<ActionParameter>();
-            ResultParameters = new AIList<DeviceParameter>();
+            RequiredParameters = new List<ActionParameter>();
+            ResultParameters = new List<DeviceParameter>();
 
         }
 

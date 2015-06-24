@@ -106,7 +106,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DAL\Repository\Connector\Entity\IoTDB.cs" />
+    <Compile Include="DAL\Repository\Connector\Entity\iotContext.cs" />
     <Compile Include="DAL\Repository\Connector\iotDbConnector.cs" />
     <Compile Include="DAL\Repository\IiotRepository.cs" />
     <Compile Include="DAL\Repository\Connector\iotRepository.cs" />

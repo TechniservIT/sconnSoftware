@@ -58,15 +58,15 @@ namespace iotDbConnector.DAL
         public virtual DeviceProperty Property { get; set; }
 
         [DataMember]
-        public virtual AIList<sconnConfigMapper> sconnMappers { get; set; }
+        public virtual List<sconnConfigMapper> sconnMappers { get; set; }
 
         [DataMember]
-        public virtual AIList<ParameterChangeHistory> Changes { get; set; }
+        public virtual List<ParameterChangeHistory> Changes { get; set; }
 
         public DeviceParameter()
         {
-            sconnMappers = new AIList<sconnConfigMapper>();
-            Changes = new AIList<ParameterChangeHistory>();
+            sconnMappers = new List<sconnConfigMapper>();
+            Changes = new List<ParameterChangeHistory>();
         }
     }
 }

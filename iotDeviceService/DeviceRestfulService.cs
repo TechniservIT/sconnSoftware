@@ -1427,6 +1427,84 @@ namespace iotDeviceService
         }
 
 
+        public Device DeviceAddWithParamsEntity(string SiteId, string Name, string Host, string Port, string Login, string Pass, string Type, string Loc, string Prot, int DomainId)
+        {
+            try
+            {
+                iotContext context = new iotContext();
+                iotDomain domain = context.Domains.First(d => d.Id == DomainId);
+                if (domain != null)
+                {
+                    int LocId = int.Parse(Loc);
+                    int DevTypeId = int.Parse(Type);
+                    Device ndev = new Device();
+                    ndev.DeviceName = Name;
+                    List<DeviceType> types = domain.DeviceTypes.ToList();
+                    DeviceType type = (from t in types
+                                       where t.Id == DevTypeId
+                                       select t).First();
+                    List<Location> locs = domain.Locations.ToList();
+                    Location loc = (from l in locs
+                                    where l.Id == LocId
+                                    select l).First();
+                    ndev.Type = type;
+                    ndev.DeviceLocation = loc;
+                    DeviceCredentials cred = new DeviceCredentials();
+                    cred.PasswordExpireDate = DateTime.Now.AddYears(100);
+                    cred.PermissionExpireDate = DateTime.Now.AddYears(100);
+                    cred.Password = Pass;
+                    cred.Username = Login;
+
+                    context.Credentials.Add(cred);
+                    context.SaveChanges();
+                    DeviceCredentials storedCredentials = context.Credentials.First(c => c.Username.Equals(cred.Username) && c.Password.Equals(cred.Password));
+
+                    EndpointInfo info = new EndpointInfo();
+                    info.Hostname = Host;
+                    info.Port = int.Parse(Port);
+                    info.Domain = domain;
+
+                    //TODO
+                    //CommProtocolType protocol = (CommProtocolType)Prot; //int.Parse(Prot);
+                    //info.EnableProtocolSupport(protocol);
+                    info.SupportsSconnProtocol = true;
+                    context.Endpoints.Add(info);
+                    context.SaveChanges();
+
+                    EndpointInfo storedInfo = context.Endpoints.First(e => e.Hostname.Equals(info.Hostname) && e.Port == info.Port);
+                    if (storedInfo == null)
+                    {
+                        return null;
+                    }
+
+                    int siteIdNum = int.Parse(SiteId);
+                    Site siteToAppend = domain.Sites.First(s => s.Id == siteIdNum);
+
+                    ndev.Site = siteToAppend;
+                    ndev.Credentials = storedCredentials;
+                    ndev.EndpInfo = storedInfo;
+
+                    context.Devices.Add(ndev);
+                    context.SaveChanges();
+                    Device stored = context.Devices.First(d => d.DeviceName.Equals(ndev.DeviceName) && d.EndpInfo.Hostname.Equals(ndev.EndpInfo.Hostname));
+
+                    //update device
+                    UpdateDeviceProperties(stored);
+
+                    return stored;
+
+                }
+                return null;
+
+            }
+            catch (Exception e)
+            {
+                nlogger.ErrorException(e.Message, e);
+                return null;
+            }
+        }
+
+
 
     }
 }

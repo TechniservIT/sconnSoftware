@@ -27,7 +27,7 @@ namespace iotDbConnector.DAL
         public string VisualRepresentationURL { get; set; }
 
         [DataMember]
-        public virtual AIList<DeviceParameter> ResultParameters { get; set; }
+        public virtual List<DeviceParameter> ResultParameters { get; set; }
 
         [DataMember]
         public DateTime LastUpdateTime { get; set; }
@@ -38,7 +38,7 @@ namespace iotDbConnector.DAL
 
         public DeviceProperty()
         {
-            ResultParameters = new AIList<DeviceParameter>();
+            ResultParameters = new List<DeviceParameter>();
         }
 
     }

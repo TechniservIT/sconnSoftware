@@ -32,10 +32,10 @@ namespace iotDbConnector.DAL
         public string LocationVisualRepresentationURL { get; set; }
 
         [DataMember]
-        public virtual AIList<Device> Devices { get; set; }
+        public virtual List<Device> Devices { get; set; }
 
         [DataMember]
-        public virtual AIList<Site> Sites { get; set; }
+        public virtual List<Site> Sites { get; set; }
 
         [DataMember]
         public virtual iotDomain Domain { get; set; }

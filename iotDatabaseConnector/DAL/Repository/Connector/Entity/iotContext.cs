@@ -118,6 +118,11 @@ namespace iotDbConnector.DAL
 
         public DbSet<ParameterChangeHistory> ParameterChanges { get; set; }
 
+
+
+        
+
+
     }
 
 }

@@ -44,9 +44,9 @@ namespace iotDash.Controllers
                         var user = (from u in cont.Users
                                     where u.UserName == username
                                     select u).First();
-
-                        DeviceRestfulService cl = new DeviceRestfulService();
-                        iotDomain domain = cl.GetDomainWithName(appdomain);
+                        
+                        iotContext icont = new iotContext();
+                        iotDomain domain = icont.Domains.First(dm => dm.DomainName.Equals(appdomain));
                         if (domain != null)
                         {
                             if (domain.DomainName.Equals(appdomain))

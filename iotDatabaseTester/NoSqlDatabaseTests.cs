@@ -4,6 +4,7 @@ using iotDbConnector.DAL;
 using System.Linq;
 using System.Diagnostics;
 using iotNoSqlDatabase;
+using System.Collections.Generic;
 
 namespace iotDatabaseTester
 {
@@ -105,7 +106,7 @@ namespace iotDatabaseTester
 			loc.Lat = 11.11;
 			loc.Lng = 22.22;
 			loc.LocationName = "Wisla";
-			domain.Locations =new AIList<Location>();
+			domain.Locations =new List<Location>();
 			domain.Locations.Add(loc);
 
 
@@ -114,8 +115,8 @@ namespace iotDatabaseTester
 			devsite.Domain = domain;
 			devsite.siteLocation = loc;
 			devsite.SiteName = "devSite";
-			devsite.Devices = new AIList<Device>();
-			domain.Sites = new AIList<Site>();
+			devsite.Devices = new List<Device>();
+			domain.Sites = new List<Site>();
 			domain.Sites.Add(devsite);
 
 
@@ -124,8 +125,8 @@ namespace iotDatabaseTester
 			for (int i = 0; i < TestDeviceNo; i++)
 			{
 				Device dev = new Device();
-				dev.Properties = new AIList<DeviceProperty>();
-				dev.Actions = new AIList<DeviceAction>();
+				dev.Properties = new List<DeviceProperty>();
+				dev.Actions = new List<DeviceAction>();
 
 				//Device credentials
 				DeviceCredentials cred = new DeviceCredentials();
@@ -162,7 +163,7 @@ namespace iotDatabaseTester
 					param.Type = paramtype;
 					param.Value = "";
 					param.Action = act;
-					act.RequiredParameters = new AIList<ActionParameter>();
+					act.RequiredParameters = new List<ActionParameter>();
 					act.RequiredParameters.Add(param);
 
 					//result params
@@ -170,7 +171,7 @@ namespace iotDatabaseTester
 					param2.Type = paramtype;
 					param2.Value = "";
 					param2.Action = act;
-					act.ResultParameters = new AIList<DeviceParameter>();
+					act.ResultParameters = new List<DeviceParameter>();
 					act.ResultParameters.Add(param2);
 
 					dev.Actions.Add(act);
@@ -188,7 +189,7 @@ namespace iotDatabaseTester
 					param2.Type = paramtype;
 					param2.Value = "";
 					param2.Property = prop;
-					prop.ResultParameters = new AIList<DeviceParameter>();
+					prop.ResultParameters = new List<DeviceParameter>();
 					prop.ResultParameters.Add(param2);
 
 					dev.Properties.Add(prop);

@@ -27,7 +27,7 @@ namespace iotDbConnector.DAL
         public string VisualRepresentationURL { get; set; }
 
         [DataMember]
-        public virtual AIList<Device> Devices { get; set; }
+        public virtual List<Device> Devices { get; set; }
 
         [Required]
         [DataMember]
@@ -35,7 +35,7 @@ namespace iotDbConnector.DAL
 
         public DeviceType()
         {
-            Devices = new AIList<Device>();
+            Devices = new List<Device>();
         }
     }
 }

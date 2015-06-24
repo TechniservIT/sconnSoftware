@@ -23,36 +23,36 @@ namespace iotDbConnector.DAL
         public string DomainName { get; set; }
 
         [DataMember]
-        public virtual AIList<Site> Sites { get; set; }
+        public virtual List<Site> Sites { get; set; }
 
         [DataMember]
-        public virtual AIList<Location> Locations { get; set; }
+        public virtual List<Location> Locations { get; set; }
 
         [DataMember]
-        public virtual AIList<DeviceType> DeviceTypes { get; set; }
+        public virtual List<DeviceType> DeviceTypes { get; set; }
 
 
         [DataMember]
-        public virtual AIList<EndpointInfo> Endpoints { get; set; }
+        public virtual List<EndpointInfo> Endpoints { get; set; }
 
 
         public iotDomain()
         {
             if (this.Locations == null)
             {
-                this.Locations = new AIList<Location>();
+                this.Locations = new List<Location>();
             }
             if (this.DeviceTypes == null)
             {
-                this.DeviceTypes = new AIList<DeviceType>();
+                this.DeviceTypes = new List<DeviceType>();
             }
             if (this.Sites == null)
             {
-                this.Sites = new AIList<Site>();
+                this.Sites = new List<Site>();
             }
             if (this.Endpoints == null)
             {
-                this.Endpoints = new AIList<EndpointInfo>();
+                this.Endpoints = new List<EndpointInfo>();
             }
         }
 

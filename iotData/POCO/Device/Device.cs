@@ -28,10 +28,10 @@ namespace iotDbConnector.DAL
         public virtual DeviceCredentials Credentials { get; set; }
 
         [DataMember]
-        public virtual AIList<DeviceAction> Actions { get; set; }
+        public virtual List<DeviceAction> Actions { get; set; }
 
         [DataMember]
-        public virtual AIList<DeviceProperty> Properties { get; set; }
+        public virtual List<DeviceProperty> Properties { get; set; }
 
         [DataMember]
         [Required]
@@ -48,9 +48,12 @@ namespace iotDbConnector.DAL
 
         public Device()
         {
-            Actions = new AIList<DeviceAction>();
-            Properties = new AIList<DeviceProperty>();
+            Actions = new List<DeviceAction>();
+            Properties = new List<DeviceProperty>();
         }
+
+       
+
 
     }
 }

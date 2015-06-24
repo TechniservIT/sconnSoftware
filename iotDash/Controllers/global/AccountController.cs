@@ -60,9 +60,8 @@ namespace iotDash
                                     where u.UserName.Equals(  model.UserName )
                                     select u).First();
 
-                    DeviceRestfulService cl = new DeviceRestfulService();
-                    //int domainId = DomainSession.GetContextDomain(this.HttpContext);
-                    iotDomain domain = cl.GetDomainWithId(currentUser.domainId);
+                    iotContext icont = new iotContext();
+                    iotDomain domain = icont.Domains.First(dm => dm.DomainName.Equals(currentUser.domainId));
                     if(domain != null)
                     {
                         Session["AppDomain"] = domain.DomainName;
@@ -106,26 +105,25 @@ namespace iotDash
                     //create domain for new account then user
                     //IiotDomainServiceClient cl = iotServiceConnector.ServiceClient();
 
-                    DeviceRestfulService cl = new DeviceRestfulService();
-                    iotDomain existingDomain = cl.GetDomainWithName(model.DomainName);
-                    //List<iotDomain> domains = cl.Domains().ToList();
-                    
-                    //var existingDomainsForName = domains.Where(d => d.DomainName.Equals(model.DomainName));
+                    iotContext icont = new iotContext();
+                    iotDomain existingDomain = null;
+                    try
+                    {
+                        existingDomain = icont.Domains.First(dm => dm.DomainName.Equals(model.DomainName));
+                    }
+                    catch (Exception)
+                    {
+                    }
                     if (existingDomain == null)    //domain does not exist
                     {
                         //create domain
                         iotDomain domain = new iotDomain();
                         domain.DomainName = model.DomainName;
-                        bool added = cl.DomainAdd(domain);
+                        icont.Domains.Add(domain);
+                        icont.SaveChanges();
 
-                        if (!added)
-                        {
-                            //err
-                        }
-                        else
-                        {
-                            iotDomain addedDomain = cl.GetDomainWithName(model.DomainName);
-                            if  (addedDomain != null)
+                        iotDomain addedDomain = icont.Domains.First(d => d.DomainName.Equals(domain.DomainName));
+                        if  (addedDomain != null)
                             {
                                 //create user
                                 ApplicationUser user = new ApplicationUser() { UserName = model.UserName };
@@ -164,8 +162,6 @@ namespace iotDash
                                 {
                                     AddErrors(result);
                                 }
-                            }
-                           
                         }
                         
                     }
@@ -178,11 +174,8 @@ namespace iotDash
                 {
                     //return error
                 }
-
-
             }
 
-            // If we got this far, something failed, redisplay form
             return View(model);
         }
 
