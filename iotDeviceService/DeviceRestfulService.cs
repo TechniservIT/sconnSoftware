@@ -1727,20 +1727,20 @@ namespace iotDeviceService
                     int credId = credCont.Add(cred);
                     DeviceCredentials storedCredentials = credCont.GetById(credId);
 
+
+                    iotSharedEntityContext<EndpointInfo> endpCont = new iotSharedEntityContext<EndpointInfo>();
                     EndpointInfo info = new EndpointInfo();
                     info.Hostname = Host;
                     info.Port = int.Parse(Port);
-
+                    info.Domain = domain;
                     //TODO
                     //CommProtocolType protocol = (CommProtocolType)Prot; //int.Parse(Prot);
                     //info.EnableProtocolSupport(protocol);
                     info.SupportsSconnProtocol = true;
-                    iotSharedEntityContext<EndpointInfo> endpCont = new iotSharedEntityContext<EndpointInfo>();
                     int endpId = endpCont.Add(info);
                     EndpointInfo storedInfo = endpCont.GetById(endpId);
                     if (storedInfo == null)
                     {
-                        //err
                         return null;
                     }
 

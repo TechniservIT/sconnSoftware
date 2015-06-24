@@ -12,8 +12,8 @@ namespace iotDbConnector.DAL
     public class Device
     {
         [DataMember]
-        [Key]
         [Required]
+        [Key]
         public int Id { get; set; }
 
         [DataMember]
@@ -42,6 +42,7 @@ namespace iotDbConnector.DAL
         public virtual DeviceType Type { get; set; }
 
         [DataMember]
+        [Required]
         public virtual Site Site { get; set; }
 
 

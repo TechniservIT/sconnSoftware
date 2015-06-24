@@ -43,23 +43,24 @@ namespace iotDatabaseConnector.Migrations
                 "dbo.Devices",
                 c => new
                     {
-                        Id = c.Int(nullable: false),
+                        Id = c.Int(nullable: false, identity: true),
                         DeviceName = c.String(nullable: false),
                         Credentials_Id = c.Int(),
-                        Site_Id = c.Int(),
                         DeviceLocation_Id = c.Int(nullable: false),
+                        EndpInfo_Id = c.Int(nullable: false),
+                        Site_Id = c.Int(nullable: false),
                         Type_Id = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.DeviceCredentials", t => t.Credentials_Id)
-                .ForeignKey("dbo.Sites", t => t.Site_Id)
-                .ForeignKey("dbo.Locations", t => t.DeviceLocation_Id, cascadeDelete: true)
-                .ForeignKey("dbo.EndpointInfoes", t => t.Id)
-                .ForeignKey("dbo.DeviceTypes", t => t.Type_Id, cascadeDelete: true)
-                .Index(t => t.Id)
+                .ForeignKey("dbo.Locations", t => t.DeviceLocation_Id, cascadeDelete: false)
+                .ForeignKey("dbo.EndpointInfoes", t => t.EndpInfo_Id, cascadeDelete: false)
+                .ForeignKey("dbo.Sites", t => t.Site_Id, cascadeDelete: true)
+                .ForeignKey("dbo.DeviceTypes", t => t.Type_Id, cascadeDelete: false)
                 .Index(t => t.Credentials_Id)
-                .Index(t => t.Site_Id)
                 .Index(t => t.DeviceLocation_Id)
+                .Index(t => t.EndpInfo_Id)
+                .Index(t => t.Site_Id)
                 .Index(t => t.Type_Id);
             
             CreateTable(
@@ -127,21 +128,6 @@ namespace iotDatabaseConnector.Migrations
                 .Index(t => t.Domain_Id);
             
             CreateTable(
-                "dbo.Sites",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        SiteName = c.String(nullable: false),
-                        Domain_Id = c.String(nullable: false, maxLength: 128),
-                        siteLocation_Id = c.Int(),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.iotDomains", t => t.Domain_Id, cascadeDelete: true)
-                .ForeignKey("dbo.Locations", t => t.siteLocation_Id)
-                .Index(t => t.Domain_Id)
-                .Index(t => t.siteLocation_Id);
-            
-            CreateTable(
                 "dbo.EndpointInfoes",
                 c => new
                     {
@@ -155,8 +141,26 @@ namespace iotDatabaseConnector.Migrations
                         SupportsRESTfulProtocol = c.Boolean(nullable: false),
                         SupportsSconnProtocol = c.Boolean(nullable: false),
                         SupportsOnvifProtocol = c.Boolean(nullable: false),
+                        Domain_Id = c.String(maxLength: 128),
                     })
-                .PrimaryKey(t => t.Id);
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.iotDomains", t => t.Domain_Id)
+                .Index(t => t.Domain_Id);
+            
+            CreateTable(
+                "dbo.Sites",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        SiteName = c.String(nullable: false),
+                        Domain_Id = c.String(nullable: false, maxLength: 128),
+                        siteLocation_Id = c.Int(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.iotDomains", t => t.Domain_Id, cascadeDelete: true)
+                .ForeignKey("dbo.Locations", t => t.siteLocation_Id)
+                .Index(t => t.Domain_Id)
+                .Index(t => t.siteLocation_Id);
             
             CreateTable(
                 "dbo.DeviceProperties",
@@ -241,6 +245,7 @@ namespace iotDatabaseConnector.Migrations
             DropForeignKey("dbo.ActionParameters", "Action_Id", "dbo.DeviceActions");
             DropForeignKey("dbo.DeviceActions", "Device_Id", "dbo.Devices");
             DropForeignKey("dbo.Devices", "Type_Id", "dbo.DeviceTypes");
+            DropForeignKey("dbo.Devices", "Site_Id", "dbo.Sites");
             DropForeignKey("dbo.DeviceParameters", "Type_Id", "dbo.ParameterTypes");
             DropForeignKey("dbo.sconnConfigMappers", "Parameter_Id", "dbo.DeviceParameters");
             DropForeignKey("dbo.sconnConfigMappers", "ActionParam_Id", "dbo.ActionParameters");
@@ -248,12 +253,12 @@ namespace iotDatabaseConnector.Migrations
             DropForeignKey("dbo.ParameterChangeHistories", "Property_Id", "dbo.DeviceParameters");
             DropForeignKey("dbo.DeviceParameters", "Action_Id", "dbo.DeviceActions");
             DropForeignKey("dbo.DeviceProperties", "Device_Id", "dbo.Devices");
-            DropForeignKey("dbo.Devices", "Id", "dbo.EndpointInfoes");
+            DropForeignKey("dbo.Devices", "EndpInfo_Id", "dbo.EndpointInfoes");
             DropForeignKey("dbo.Devices", "DeviceLocation_Id", "dbo.Locations");
             DropForeignKey("dbo.Sites", "siteLocation_Id", "dbo.Locations");
             DropForeignKey("dbo.Sites", "Domain_Id", "dbo.iotDomains");
-            DropForeignKey("dbo.Devices", "Site_Id", "dbo.Sites");
             DropForeignKey("dbo.Locations", "Domain_Id", "dbo.iotDomains");
+            DropForeignKey("dbo.EndpointInfoes", "Domain_Id", "dbo.iotDomains");
             DropForeignKey("dbo.DeviceTypes", "Domain_Id", "dbo.iotDomains");
             DropForeignKey("dbo.Devices", "Credentials_Id", "dbo.DeviceCredentials");
             DropForeignKey("dbo.DeviceCredentials", "AuthLevel_Id", "dbo.AppAuthLevels");
@@ -266,14 +271,15 @@ namespace iotDatabaseConnector.Migrations
             DropIndex("dbo.DeviceProperties", new[] { "Device_Id" });
             DropIndex("dbo.Sites", new[] { "siteLocation_Id" });
             DropIndex("dbo.Sites", new[] { "Domain_Id" });
+            DropIndex("dbo.EndpointInfoes", new[] { "Domain_Id" });
             DropIndex("dbo.DeviceTypes", new[] { "Domain_Id" });
             DropIndex("dbo.Locations", new[] { "Domain_Id" });
             DropIndex("dbo.DeviceCredentials", new[] { "AuthLevel_Id" });
             DropIndex("dbo.Devices", new[] { "Type_Id" });
-            DropIndex("dbo.Devices", new[] { "DeviceLocation_Id" });
             DropIndex("dbo.Devices", new[] { "Site_Id" });
+            DropIndex("dbo.Devices", new[] { "EndpInfo_Id" });
+            DropIndex("dbo.Devices", new[] { "DeviceLocation_Id" });
             DropIndex("dbo.Devices", new[] { "Credentials_Id" });
-            DropIndex("dbo.Devices", new[] { "Id" });
             DropIndex("dbo.DeviceActions", new[] { "Device_Id" });
             DropIndex("dbo.ActionParameters", new[] { "Type_Id" });
             DropIndex("dbo.ActionParameters", new[] { "Action_Id" });
@@ -282,8 +288,8 @@ namespace iotDatabaseConnector.Migrations
             DropTable("dbo.ParameterChangeHistories");
             DropTable("dbo.DeviceParameters");
             DropTable("dbo.DeviceProperties");
-            DropTable("dbo.EndpointInfoes");
             DropTable("dbo.Sites");
+            DropTable("dbo.EndpointInfoes");
             DropTable("dbo.DeviceTypes");
             DropTable("dbo.iotDomains");
             DropTable("dbo.Locations");

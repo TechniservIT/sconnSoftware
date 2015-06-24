@@ -31,6 +31,11 @@ namespace iotDbConnector.DAL
         [DataMember]
         public virtual AIList<DeviceType> DeviceTypes { get; set; }
 
+
+        [DataMember]
+        public virtual AIList<EndpointInfo> Endpoints { get; set; }
+
+
         public iotDomain()
         {
             if (this.Locations == null)
@@ -44,6 +49,10 @@ namespace iotDbConnector.DAL
             if (this.Sites == null)
             {
                 this.Sites = new AIList<Site>();
+            }
+            if (this.Endpoints == null)
+            {
+                this.Endpoints = new AIList<EndpointInfo>();
             }
         }
 

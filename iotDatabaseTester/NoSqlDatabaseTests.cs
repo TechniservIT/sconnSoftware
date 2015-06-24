@@ -138,7 +138,7 @@ namespace iotDatabaseTester
 				info.Port = 9898;
 				info.Hostname = "192.168.1.1";
 				info.SupportsSconnProtocol = true;
-				info.Device = dev;
+				info.Devices.Add(dev);
 				
 
 				//Device endpoint

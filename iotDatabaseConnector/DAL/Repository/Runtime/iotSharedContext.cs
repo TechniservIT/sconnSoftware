@@ -188,7 +188,7 @@ namespace iotDatabaseConnector.DAL.Repository.Runtime
                     iotGenericGlobalContext<T>.DbSet.Attach(entity);
                 }
                 dbEntityEntry.State = EntityState.Modified;
-                iotGenericGlobalContext<T>.DbContext.SaveChanges();
+                //iotGenericGlobalContext<T>.DbContext.SaveChanges();
             }
             catch (Exception exc)
             {
@@ -215,7 +215,7 @@ namespace iotDatabaseConnector.DAL.Repository.Runtime
                     }
                     dbEntityEntry.State = EntityState.Modified;
                 }
-                iotGenericGlobalContext<T>.DbContext.SaveChanges();
+                //iotGenericGlobalContext<T>.DbContext.SaveChanges();
             }
             catch (Exception e)
             {

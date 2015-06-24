@@ -106,16 +106,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DAL\Repository\Connector\Entity\iotContext.Views.cs" />
     <Compile Include="DAL\Repository\Connector\Entity\IoTDB.cs" />
     <Compile Include="DAL\Repository\Connector\iotDbConnector.cs" />
     <Compile Include="DAL\Repository\IiotRepository.cs" />
     <Compile Include="DAL\Repository\Connector\iotRepository.cs" />
     <Compile Include="DAL\Repository\iotDataContext.cs" />
     <Compile Include="DAL\Repository\Runtime\iotSharedContext.cs" />
-    <Compile Include="Migrations\201506231444305_init.cs" />
-    <Compile Include="Migrations\201506231444305_init.Designer.cs">
-      <DependentUpon>201506231444305_init.cs</DependentUpon>
+    <Compile Include="Migrations\201506240602524_init.cs" />
+    <Compile Include="Migrations\201506240602524_init.Designer.cs">
+      <DependentUpon>201506240602524_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="DAL\Repository\NoSql\INoSqlDataSource.cs" />
@@ -146,8 +145,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201506231444305_init.resx">
-      <DependentUpon>201506231444305_init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201506240602524_init.resx">
+      <DependentUpon>201506240602524_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

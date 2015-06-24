@@ -46,7 +46,16 @@ namespace iotDbConnector.DAL
         [DataMember]
         public virtual AIList<Device> Devices { get; set; }
 
- 
+
+        [DataMember]
+        public virtual iotDomain Domain { get; set; }
+
+
+
+        public EndpointInfo()
+        {
+            Devices = new AIList<Device>();
+        }
 
 
     }

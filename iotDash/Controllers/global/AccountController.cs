@@ -61,8 +61,8 @@ namespace iotDash
                                     select u).First();
 
                     DeviceRestfulService cl = new DeviceRestfulService();
-                    string domainId = DomainSession.GetContextDomain(this.HttpContext);
-                    iotDomain domain = cl.GetDomainWithId(domainId);
+                    //string domainId = DomainSession.GetContextDomain(this.HttpContext);
+                    iotDomain domain = cl.GetDomainWithId(currentUser.DomainId);
                     if(domain != null)
                     {
                         Session["AppDomain"] = domain.DomainName;
