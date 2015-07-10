@@ -58,6 +58,11 @@ namespace iotDash.Controllers
             return View();
         }
 
+        public ActionResult Front()
+         {
+             return View();
+         }
+
 
         [Authorize]
         [OutputCache(Duration = 100, Location = OutputCacheLocation.ServerAndClient, VaryByParam = "none")]

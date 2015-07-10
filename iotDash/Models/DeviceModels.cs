@@ -5,6 +5,7 @@ using iotDeviceService;
 using iotServiceProvider;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 using System.Web;
@@ -17,7 +18,44 @@ namespace iotDash.Models
 
         public List<DeviceType> Types { get; set; }
 
+
         public Site DeviceSite { get; set; }
+
+        public int DeviceSiteId { get; set; }
+
+
+        [DisplayName("Location")]
+        public Location DeviceLocation { get; set; }
+
+        public int LocationId { get; set; }
+
+        public int DeviceTypeId { get; set; }
+
+        [DisplayName("Type")]
+        public DeviceType DeviceType { get; set; }
+
+        [DisplayName("Name")]
+        public string DeviceName { get; set; }
+
+        [DisplayName("Hostname")]
+        public string DeviceIpAddr { get; set; }
+
+        [DisplayName("Port")]
+        public int DeviceNetPort { get; set; }
+
+        [DisplayName("Login")]
+        public string DeviceLogin { get; set; }
+
+        [DisplayName("Password")]
+        public string DevicePassword { get; set; }
+
+        [DisplayName("Virtual")]
+        public bool  DeviceIsVirtual { get; set; }
+
+        //TODO protocol list
+        //public CommSconnProtocol DeviceProtocol { get; set; }
+        [DisplayName("Protocol")]
+        public string DeviceProtocolName { get; set; }
 
 
         public DeviceAddModel()
@@ -29,6 +67,7 @@ namespace iotDash.Models
             Locations = site.Domain.Locations.ToList();
             Types = site.Domain.DeviceTypes.ToList();
             DeviceSite = site;
+            DeviceSiteId = site.Id;
         }
     }
 

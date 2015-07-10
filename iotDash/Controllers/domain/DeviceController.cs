@@ -76,6 +76,40 @@ namespace iotDash.Controllers
 			return View();
 		}
 		
+        //
+        // POST: /Device/Create
+        
+        public void Create(DeviceAddModel model)
+        {
+            try
+            {
+                if (model != null)
+                {
+                    iotContext cont = new iotContext();
+                    DeviceRestfulService cl = new DeviceRestfulService();
+                    string domainId = DomainSession.GetContextDomain(this.HttpContext);
+                    iotDomain d = cont.Domains.First(dm => dm.DomainName.Equals(domainId));
+                    Device dev = cl.DeviceAddWithParamsEntity(
+                        model.DeviceSiteId.ToString(), 
+                        model.DeviceName, 
+                        model.DeviceIpAddr, 
+                        model.DeviceNetPort.ToString(), 
+                        model.DeviceLogin, 
+                        model.DevicePassword, 
+                        model.DeviceTypeId.ToString(), 
+                        model.LocationId.ToString(),
+                        model.DeviceProtocolName, 
+                        d.Id,
+                        model.DeviceIsVirtual
+                        );
+				
+                }
+            }
+            catch (Exception e)
+            {
+                
+            }
+        }
 
 		//
 		// POST: /Device/New
@@ -89,7 +123,7 @@ namespace iotDash.Controllers
                 DeviceRestfulService cl = new DeviceRestfulService();
 				string domainId = DomainSession.GetContextDomain(this.HttpContext);
                 iotDomain d = cont.Domains.First(dm => dm.DomainName.Equals(domainId));
-				Device dev = cl.DeviceAddWithParamsEntity(SiteId, Name, Host, Port, Login, Pass, Type, Loc, Prot,d.Id);
+				Device dev = cl.DeviceAddWithParamsEntity(SiteId, Name, Host, Port, Login, Pass, Type, Loc, Prot,d.Id,false);
 				if (dev != null)
 				{
 					return "Success";       

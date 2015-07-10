@@ -116,6 +116,10 @@
     <Compile Include="Migrations\201506241420211_initial.Designer.cs">
       <DependentUpon>201506241420211_initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201507101525417_Device - virtual opt.cs" />
+    <Compile Include="Migrations\201507101525417_Device - virtual opt.Designer.cs">
+      <DependentUpon>201507101525417_Device - virtual opt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="DAL\Repository\NoSql\INoSqlDataSource.cs" />
     <Compile Include="DAL\Repository\NoSql\MongoNoSqlDataSource.cs" />
@@ -147,6 +151,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201506241420211_initial.resx">
       <DependentUpon>201506241420211_initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507101525417_Device - virtual opt.resx">
+      <DependentUpon>201507101525417_Device - virtual opt.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

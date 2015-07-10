@@ -126,6 +126,98 @@
     </div>
 
     <div class="row">
+        <div id="addraz">
+            @using (Html.BeginForm("Create", "Device"))
+            {
+                <fieldset>
+
+                    <legend>Device</legend>
+
+                    <div class="form-group">
+                        @Html.HiddenFor(model => model.DeviceSiteId)
+                    </div>
+
+                    <div class="form-group">
+                        @*@Html.LabelFor(model => model.DeviceName, new { @class = "form-control" })*@
+                        <label for="devname">Name</label>
+                        @Html.TextBoxFor(model => model.DeviceName, new { @class = "form-control", @id = "devname" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DeviceIpAddr, new { @class = "form-control" })
+                        @Html.TextBoxFor(model => model.DeviceIpAddr, new { @class = "form-control" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DeviceNetPort, new { @class = "form-control" })
+                        @Html.TextBoxFor(model => model.DeviceNetPort, new { @class = "form-control" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DeviceLogin, new { @class = "form-control" })
+                        @Html.TextBoxFor(model => model.DeviceLogin, new { @class = "form-control" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DevicePassword, new { @class = "form-control" })
+                        @Html.TextBoxFor(model => model.DevicePassword, new { @class = "form-control" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DeviceLocation, new { @class = "form-control" })
+                        @Html.DropDownListFor(
+                     model => model.LocationId,
+                         new SelectList(
+                           Model.Locations,
+                           "Id",
+                            "LocationName",
+                            Model.DeviceLocation
+                            ),
+                          new { @class = "form-control" }
+                        )
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DeviceType, new { @class = "form-control" })
+                        @Html.DropDownListFor(
+                        model => model.DeviceTypeId,
+                         new SelectList(
+                           Model.Types,
+                            "Id",
+                            "TypeName",
+                            Model.DeviceType
+                            ),
+                          new { @class = "form-control" }
+                        )
+                    </div>
+
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DeviceIsVirtual, new { @class = "form-control" })
+                        @Html.EditorFor(model => model.DeviceIsVirtual)
+                        @*@Html.DropDownListFor(
+                        model => model.DeviceIsVirtual,
+                          new[] {
+                              new SelectListItem { Text = "True", Value = "1" },
+                              new SelectListItem { Text = "False", Value = "0" }
+                                }
+                        )*@
+                    </div>
+
+
+                    <div class="form-group">
+                        <input type="submit" value="Send" />
+                    </div>
+
+
+
+                </fieldset>
+            }
+        </div>
+
+    </div>
+
+    <div class="row">
         <div id="resultview">
 
         </div>

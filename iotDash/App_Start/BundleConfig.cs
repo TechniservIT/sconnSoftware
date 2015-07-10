@@ -39,6 +39,26 @@ namespace iotDash
            ));
 
 
+            /*  Frontpage */
+
+            bundles.Add(new ScriptBundle("~/bundles/gray").Include(
+              "~/Scripts/grayscale.js"
+           ));
+
+            bundles.Add(new ScriptBundle("~/bundles/easing").Include(
+              "~/Scripts/jquery.easing.min.js"
+           ));
+
+            bundles.Add(new StyleBundle("~/bundles/css/grayscale").Include(
+                 "~/Content/css/grayscale.css"
+             ));
+
+            bundles.Add(new StyleBundle("~/bundles/css/sidebar").Include(
+                 "~/Content/css/sidebar.css"
+             ));
+
+
+
             /* Tools */
 
             bundles.Add(new ScriptBundle("~/bundles/querybuilder").Include(
@@ -49,14 +69,15 @@ namespace iotDash
 
 
 
+
             /* Style */
 
             bundles.Add(new StyleBundle("~/bundles/css").Include(
                 "~/Content/Site.less", 
                 "~/Content/bootstrap/bootstrap.less",
                 "~/Content/css/sb-admin-2.css",
-                "~/Content/fonts/font-awesome-4.1.0/css/font-awesome.min.css",
-                "~/Content/css/plugins/metisMenu/metisMenu.min.css",
+                "~/Content/fonts/font-awesome-4.1.0/css/font-awesome.css",
+                "~/Content/css/plugins/metisMenu/metisMenu.css",
                  "~/Content/css/jquery-ui.css"
                        ));
 
@@ -71,6 +92,11 @@ namespace iotDash
             bundles.Add(new StyleBundle("~/bundles/css/toggleswitch").Include(
              "~/Content/switch/bootstrap-switch.css"
       ));
+
+
+            /* LESS Bundles */
+            bundles.Add(new LessBundle("~/Content/less").Include("~/Content/less/*.less"));
+
 
         }
     }

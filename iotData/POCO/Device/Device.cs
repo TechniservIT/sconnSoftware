@@ -45,6 +45,9 @@ namespace iotDbConnector.DAL
         [Required]
         public virtual Site Site { get; set; }
 
+        [DataMember]
+        public bool IsVirtual { get; set; }
+
 
         public Device()
         {

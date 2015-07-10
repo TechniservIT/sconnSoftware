@@ -1427,7 +1427,7 @@ namespace iotDeviceService
         }
 
 
-        public Device DeviceAddWithParamsEntity(string SiteId, string Name, string Host, string Port, string Login, string Pass, string Type, string Loc, string Prot, int DomainId)
+        public Device DeviceAddWithParamsEntity(string SiteId, string Name, string Host, string Port, string Login, string Pass, string Type, string Loc, string Prot, int DomainId, bool IsVirtual)
         {
             try
             {
@@ -1484,12 +1484,21 @@ namespace iotDeviceService
                     ndev.Credentials = storedCredentials;
                     ndev.EndpInfo = storedInfo;
 
+                    ndev.IsVirtual = IsVirtual;
+
                     context.Devices.Add(ndev);
                     context.SaveChanges();
                     Device stored = context.Devices.First(d => d.DeviceName.Equals(ndev.DeviceName) && d.EndpInfo.Hostname.Equals(ndev.EndpInfo.Hostname));
 
                     //update device
-                    UpdateDeviceProperties(stored);
+                    if (!ndev.IsVirtual)
+                    {
+                        UpdateDeviceProperties(stored);
+                    }
+                    else
+                    {
+                        DeviceFillWithSampleProperties(ndev);
+                    }
 
                     return stored;
 
@@ -1504,6 +1513,74 @@ namespace iotDeviceService
             }
         }
 
+
+
+        public void DeviceFillWithSampleProperties(Device updated)
+        {
+
+            try
+            {
+                iotContext cont = new iotContext();
+                Device dev = cont.Devices.First(d => d.Id == updated.Id);
+
+                dev.Properties = new List<DeviceProperty>();
+                dev.Actions = new List<DeviceAction>();
+
+
+                //add sample Actions
+                ParameterType paramtype = new ParameterType();
+                paramtype.Name = "ActionParam";
+                for (int a = 0; a < 4; a++)
+                {
+                    DeviceAction act = new DeviceAction();
+                    act.ActionName = "Act" + a.ToString();
+                    act.Device = dev;
+
+                    //required params
+                    ActionParameter param = new ActionParameter();
+                    param.Type = paramtype;
+                    param.Value = "0";
+                    param.Action = act;
+                    act.RequiredParameters = new List<ActionParameter>();
+                    act.RequiredParameters.Add(param);
+
+                    //result params
+                    DeviceParameter param2 = new DeviceParameter();
+                    param2.Type = paramtype;
+                    param2.Value = "0";
+                    param2.Action = act;
+                    act.ResultParameters = new List<DeviceParameter>();
+                    act.ResultParameters.Add(param2);
+
+                    dev.Actions.Add(act);
+                }
+
+                //add Sample Proprties
+                for (int p = 0; p < 8; p++)
+                {
+                    DeviceProperty prop = new DeviceProperty();
+                    prop.PropertyName = "Prop" + p.ToString();
+                    prop.Device = dev;
+
+                    //result params
+                    DeviceParameter param2 = new DeviceParameter();
+                    param2.Type = paramtype;
+                    param2.Value = "0";
+                    param2.Property = prop;
+                    prop.ResultParameters = new List<DeviceParameter>();
+                    prop.ResultParameters.Add(param2);
+
+                    dev.Properties.Add(prop);
+                }
+
+                cont.SaveChanges();
+                
+            }
+            catch (Exception e)
+            {
+                nlogger.ErrorException(e.Message, e);
+            }
+        }
 
 
     }
