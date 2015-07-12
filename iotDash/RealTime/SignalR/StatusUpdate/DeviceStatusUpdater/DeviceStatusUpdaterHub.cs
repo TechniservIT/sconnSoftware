@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using iotDbConnector.DAL;
 using iotServiceProvider;
-using iotDeviceService;
 using iotDash.Session;
+using iotDeviceService;
 
 namespace iotDash.RealTime.SignalR.DeviceStatusUpdater
 {

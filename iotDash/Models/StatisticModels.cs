@@ -1,6 +1,5 @@
 ﻿
 using iotDbConnector.DAL;
-using iotDeviceService;
 using iotServiceProvider;
 using System;
 using System.Collections.Generic;
@@ -35,7 +34,7 @@ namespace iotDash.Models
 
     public class DeviceActionStatisticModel
     {
-        private DeviceAction Action { get; set; }
+        public DeviceAction DeviceAction { get; set; }
 
         public DeviceActionStatisticModel(DeviceAction action)
         {
@@ -46,7 +45,7 @@ namespace iotDash.Models
             //    Action = act;
             //}
 
-            this.Action = action;
+            DeviceAction = action;
         }
 
         public DeviceActionStatisticModel()

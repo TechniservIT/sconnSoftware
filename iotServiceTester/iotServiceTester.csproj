@@ -125,6 +125,10 @@
     <None Include="Properties\DataSources\iotDbConnector.DAL.Site.datasource" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DeviceRestfulService\DeviceRestfulService.csproj">
+      <Project>{685a47d8-1e7a-488d-9218-d8cbee2f1649}</Project>
+      <Name>DeviceRestfulService</Name>
+    </ProjectReference>
     <ProjectReference Include="..\iotData\iotData.csproj">
       <Project>{e94b0a02-089e-483a-aaef-3bfa49039598}</Project>
       <Name>iotData</Name>

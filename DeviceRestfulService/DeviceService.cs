@@ -48,7 +48,7 @@ namespace DeviceRestfulService
             {
                 iotRepository<Device> repo = new iotRepository<Device>();
                 repo.Add(Device);
-                return Device.DeviceId;
+                return Device.Id;
 
             }
             catch (Exception ex)

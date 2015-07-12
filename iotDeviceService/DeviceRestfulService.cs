@@ -1,7 +1,5 @@
 ﻿using iotDatabaseConnector.DAL.Repository.Runtime;
-using iotDatabaseConnector.Runtime;
 using iotDbConnector.DAL;
-using iotNoSqlDatabase;
 using iotRestfulService.Security.Tokenizer;
 using iotServiceProvider.NET.Protocols;
 using MongoDB.Driver;
@@ -1526,51 +1524,65 @@ namespace iotDeviceService
                 dev.Properties = new List<DeviceProperty>();
                 dev.Actions = new List<DeviceAction>();
 
+                cont.SaveChanges();
 
                 //add sample Actions
                 ParameterType paramtype = new ParameterType();
                 paramtype.Name = "ActionParam";
+                ParameterType storedptype = cont.ParamTypes.Add(paramtype);
+                cont.SaveChanges();
+
                 for (int a = 0; a < 4; a++)
                 {
                     DeviceAction act = new DeviceAction();
                     act.ActionName = "Act" + a.ToString();
                     act.Device = dev;
 
+                    DeviceAction storedact = cont.Actions.Add(act);
+                    cont.SaveChanges();
+                    
+
                     //required params
                     ActionParameter param = new ActionParameter();
-                    param.Type = paramtype;
+                    param.Type = storedptype;
                     param.Value = "0";
                     param.Action = act;
-                    act.RequiredParameters = new List<ActionParameter>();
-                    act.RequiredParameters.Add(param);
+                    storedact.RequiredParameters = new List<ActionParameter>();
+                    ActionParameter storedreqparam = cont.ActionParameters.Add(param); 
+                    storedact.RequiredParameters.Add(storedreqparam);
+
+                    cont.SaveChanges();
 
                     //result params
                     DeviceParameter param2 = new DeviceParameter();
-                    param2.Type = paramtype;
+                    param2.Type = storedptype;
                     param2.Value = "0";
                     param2.Action = act;
                     act.ResultParameters = new List<DeviceParameter>();
-                    act.ResultParameters.Add(param2);
+                    DeviceParameter storedresparam = cont.Parameters.Add(param2);
+                    act.ResultParameters.Add(storedresparam);
+                    cont.SaveChanges();
 
                     dev.Actions.Add(act);
+                    cont.SaveChanges();
                 }
 
                 //add Sample Proprties
                 for (int p = 0; p < 8; p++)
                 {
-                    DeviceProperty prop = new DeviceProperty();
-                    prop.PropertyName = "Prop" + p.ToString();
-                    prop.Device = dev;
+                    //DeviceProperty prop = new DeviceProperty();
+                    //prop.PropertyName = "Prop" + p.ToString();
+                    //prop.Device = dev;
 
-                    //result params
-                    DeviceParameter param2 = new DeviceParameter();
-                    param2.Type = paramtype;
-                    param2.Value = "0";
-                    param2.Property = prop;
-                    prop.ResultParameters = new List<DeviceParameter>();
-                    prop.ResultParameters.Add(param2);
+                    ////result params
+                    //DeviceParameter param2 = new DeviceParameter();
+                    //param2.Type = storedptype;
+                    //param2.Value = "0";
+                    //param2.Property = prop;
+                    //prop.ResultParameters = new List<DeviceParameter>();
+                    //prop.ResultParameters.Add(param2);
 
-                    dev.Properties.Add(prop);
+                    //dev.Properties.Add(prop);
                 }
 
                 cont.SaveChanges();

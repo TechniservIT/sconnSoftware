@@ -7,7 +7,6 @@ using System.Web.Mvc;
 
 using iotDbConnector.DAL;
 using iotServiceProvider;
-using iotDeviceService;
 using iotDash.Session;
 
 namespace iotDash.Controllers

@@ -48,11 +48,8 @@ namespace iotDbConnector.DAL
         {
             RequiredParameters = new List<ActionParameter>();
             ResultParameters = new List<DeviceParameter>();
-
+            LastActivationTime = DateTime.Now;
         }
-
-
-
 
     }
 

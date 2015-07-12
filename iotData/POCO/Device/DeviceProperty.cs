@@ -39,6 +39,7 @@ namespace iotDbConnector.DAL
         public DeviceProperty()
         {
             ResultParameters = new List<DeviceParameter>();
+            LastUpdateTime = DateTime.Now;
         }
 
     }

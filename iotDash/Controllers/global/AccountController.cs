@@ -13,7 +13,6 @@ using System.Web.Security;
 
 using iotDbConnector.DAL;
 using iotServiceProvider;
-using iotDeviceService;
 using iotDash.Session;
 
 namespace iotDash

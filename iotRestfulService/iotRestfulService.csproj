@@ -122,10 +122,6 @@
       <Project>{e94b0a02-089e-483a-aaef-3bfa49039598}</Project>
       <Name>iotData</Name>
     </ProjectReference>
-    <ProjectReference Include="..\iotDeviceService\iotDeviceService.csproj">
-      <Project>{3c2419e5-d232-4c6f-9821-d8a491459ed1}</Project>
-      <Name>iotDeviceService</Name>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

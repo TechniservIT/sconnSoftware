@@ -9,7 +9,6 @@ using System.ServiceModel;
  
 using iotDbConnector.DAL;
 using iotServiceProvider;
-using iotDeviceService;
 
 namespace iotDash.Controllers
 {

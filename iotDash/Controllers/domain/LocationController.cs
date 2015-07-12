@@ -1,7 +1,6 @@
 ﻿using iotDash.Models;
 using iotDash.Session;
 using iotDbConnector.DAL;
-using iotDeviceService;
 using iotServiceProvider;
 using System;
 using System.Collections.Generic;
