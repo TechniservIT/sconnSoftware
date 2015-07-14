@@ -257,23 +257,34 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\domain\managment\routing\RoutingRulesController.cs" />
+    <Compile Include="Controllers\domain\managment\security\DeviceSecurityController.cs" />
+    <Compile Include="Controllers\domain\managment\security\UserSecurityController.cs" />
+    <Compile Include="Controllers\domain\signaling\SignalingRulesController.cs" />
+    <Compile Include="Controllers\domain\supervisor\SecuritySupervisorSetupController.cs" />
+    <Compile Include="Controllers\domain\surveillance\CameraViewController.cs" />
+    <Compile Include="Controllers\domain\surveillance\RecordingSettingsController.cs" />
+    <Compile Include="Controllers\domain\surveillance\SurveillanceSiteController.cs" />
+    <Compile Include="Controllers\domain\surveillance\VideoPlaybackController.cs" />
+    <Compile Include="Controllers\domain\tracking\RouteTrackingLiveViewController.cs" />
+    <Compile Include="Controllers\domain\tracking\RouteTrackingSetupController.cs" />
     <Compile Include="Controllers\global\AccountController.cs" />
     <Compile Include="Controllers\global\AppController.cs" />
     <Compile Include="Controllers\global\DashboardController.cs" />
-    <Compile Include="Controllers\domain\DeviceController.cs" />
-    <Compile Include="Controllers\domain\HomeController.cs" />
+    <Compile Include="Controllers\domain\site\devices\DeviceController.cs" />
+    <Compile Include="Controllers\domain\navigation\HomeController.cs" />
     <Compile Include="Controllers\webapi\DeviceDataController.cs" />
     <Compile Include="Controllers\webapi\DomainDataController.cs" />
-    <Compile Include="Controllers\domain\LocationController.cs" />
-    <Compile Include="Controllers\domain\MapController.cs" />
-    <Compile Include="Controllers\domain\MenuController.cs" />
-    <Compile Include="Controllers\domain\QueryBuilderController.cs" />
-    <Compile Include="Controllers\domain\SettingsController.cs" />
-    <Compile Include="Controllers\domain\SiteController.cs" />
-    <Compile Include="Controllers\domain\SiteManagerController.cs" />
-    <Compile Include="Controllers\domain\StatisticController.cs" />
+    <Compile Include="Controllers\domain\site\LocationController.cs" />
+    <Compile Include="Controllers\domain\site\MapController.cs" />
+    <Compile Include="Controllers\domain\navigation\MenuController.cs" />
+    <Compile Include="Controllers\domain\site\QueryBuilderController.cs" />
+    <Compile Include="Controllers\domain\managment\SettingsController.cs" />
+    <Compile Include="Controllers\domain\site\SiteController.cs" />
+    <Compile Include="Controllers\domain\site\SiteManagerController.cs" />
+    <Compile Include="Controllers\domain\site\devices\StatisticController.cs" />
     <Compile Include="Controllers\global\UsersController.cs" />
-    <Compile Include="Controllers\domain\ViewController.cs" />
+    <Compile Include="Controllers\domain\navigation\ViewController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -669,10 +680,22 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Controllers\domain\managment\automation\" />
     <Folder Include="RealTime\SignalR\StatusUpdate\ActionHistoryUpdater\" />
     <Folder Include="RealTime\SignalR\StatusUpdate\PropertyHistoryUpdater\" />
     <Folder Include="Views\App\" />
+    <Folder Include="Views\CameraView\" />
+    <Folder Include="Views\DeviceSecurity\" />
+    <Folder Include="Views\RecordingSettings\" />
+    <Folder Include="Views\RouteTrackingLiveView\" />
+    <Folder Include="Views\RouteTrackingSetup\" />
+    <Folder Include="Views\RoutingRules\" />
+    <Folder Include="Views\SecuritySupervisorSetup\" />
+    <Folder Include="Views\SignalingRules\" />
+    <Folder Include="Views\SurveillanceSite\" />
     <Folder Include="Views\TopBar\" />
+    <Folder Include="Views\UserSecurity\" />
+    <Folder Include="Views\VideoPlayback\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
