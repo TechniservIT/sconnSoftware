@@ -81,6 +81,7 @@
     <Compile Include="POCO\Domain\iotDomain.cs" />
     <Compile Include="POCO\Domain\iotDomainSettings.cs" />
     <Compile Include="POCO\Generics\AIList.cs" />
+    <Compile Include="POCO\Surveillance\IpCamera.cs" />
     <Compile Include="POCO\User\IUserPermission.cs" />
     <Compile Include="POCO\User\User.cs" />
     <Compile Include="POCO\User\UserDatabaseAdminPermission.cs" />

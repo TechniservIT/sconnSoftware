@@ -548,6 +548,7 @@
     <Content Include="Content\fonts\font-awesome-4.1.0\css\font-awesome.css" />
     <Content Include="Content\fonts\font-awesome-4.1.0\css\font-awesome.min.css" />
     <Content Include="Content\fonts\font-awesome-4.1.0\fonts\fontawesome-webfont.svg" />
+    <Content Include="Views\CameraView\Index.cshtml" />
     <None Include="Views\Dashboard\Index.cshtml" />
     <Content Include="SignalR.Sample\jquery.color-2.1.2.min.js" />
     <Content Include="SignalR.Sample\SignalR.StockTicker.js" />
@@ -684,7 +685,6 @@
     <Folder Include="RealTime\SignalR\StatusUpdate\ActionHistoryUpdater\" />
     <Folder Include="RealTime\SignalR\StatusUpdate\PropertyHistoryUpdater\" />
     <Folder Include="Views\App\" />
-    <Folder Include="Views\CameraView\" />
     <Folder Include="Views\DeviceSecurity\" />
     <Folder Include="Views\RecordingSettings\" />
     <Folder Include="Views\RouteTrackingLiveView\" />

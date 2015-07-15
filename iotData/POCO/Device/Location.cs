@@ -1,4 +1,5 @@
 ﻿ 
+using iotData.POCO.Surveillance;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -36,6 +37,11 @@ namespace iotDbConnector.DAL
 
         [DataMember]
         public virtual List<Site> Sites { get; set; }
+
+        [DataMember]
+        public virtual List<IpCamera> Cameras { get; set; }
+
+
 
         [DataMember]
         public virtual iotDomain Domain { get; set; }

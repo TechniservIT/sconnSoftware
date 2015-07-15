@@ -32,11 +32,11 @@ namespace iotDash.Controllers
 		{
 			try
 			{
-                iotContext cont = new iotContext();
-                int Id = int.Parse(SiteId);
+				iotContext cont = new iotContext();
+				int Id = int.Parse(SiteId);
 				string domainId = DomainSession.GetContextDomain(this.HttpContext);
-                iotDomain d = cont.Domains.First(dm => dm.DomainName.Equals(domainId));
-                Site toEdit = d.Sites.First(s => s.Id == Id);
+				iotDomain d = cont.Domains.First(dm => dm.DomainName.Equals(domainId));
+				Site toEdit = d.Sites.First(s => s.Id == Id);
 				DeviceAddModel model = new DeviceAddModel(toEdit);
 				return View(model);
 			}
@@ -52,16 +52,16 @@ namespace iotDash.Controllers
 		{
 			try
 			{
-                iotContext cont = new iotContext();
+				iotContext cont = new iotContext();
 				string domainId = DomainSession.GetContextDomain(this.HttpContext);
-                iotDomain domain = cont.Domains.First(d => d.DomainName.Equals(domainId));
+				iotDomain domain = cont.Domains.First(d => d.DomainName.Equals(domainId));
 				DeviceType type = new DeviceType();
 				type.TypeName = Name;
 				type.TypeDescription = Description;
 				type.VisualRepresentationURL = ImageUrl;
 				domain.DeviceTypes.Add(type);
-                cont.SaveChanges();
-                return "Add success.";
+				cont.SaveChanges();
+				return "Add success.";
 			}
 			catch (Exception e) 
 			{
@@ -76,40 +76,40 @@ namespace iotDash.Controllers
 			return View();
 		}
 		
-        //
-        // POST: /Device/Create
-        
-        public void Create(DeviceAddModel model)
-        {
-            try
-            {
-                if (model != null)
-                {
-                    iotContext cont = new iotContext();
-                    DeviceRestfulService cl = new DeviceRestfulService();
-                    string domainId = DomainSession.GetContextDomain(this.HttpContext);
-                    iotDomain d = cont.Domains.First(dm => dm.DomainName.Equals(domainId));
-                    Device dev = cl.DeviceAddWithParamsEntity(
-                        model.DeviceSiteId.ToString(), 
-                        model.DeviceName, 
-                        model.DeviceIpAddr, 
-                        model.DeviceNetPort.ToString(), 
-                        model.DeviceLogin, 
-                        model.DevicePassword, 
-                        model.DeviceTypeId.ToString(), 
-                        model.LocationId.ToString(),
-                        model.DeviceProtocolName, 
-                        d.Id,
-                        model.DeviceIsVirtual
-                        );
+		//
+		// POST: /Device/Create
+		
+		public void Create(DeviceAddModel model)
+		{
+			try
+			{
+				if (model != null)
+				{
+					iotContext cont = new iotContext();
+					DeviceRestfulService cl = new DeviceRestfulService();
+					string domainId = DomainSession.GetContextDomain(this.HttpContext);
+					iotDomain d = cont.Domains.First(dm => dm.DomainName.Equals(domainId));
+					Device dev = cl.DeviceAddWithParamsEntity(
+						model.DeviceSiteId.ToString(), 
+						model.DeviceName, 
+						model.DeviceIpAddr, 
+						model.DeviceNetPort.ToString(), 
+						model.DeviceLogin, 
+						model.DevicePassword, 
+						model.DeviceTypeId.ToString(), 
+						model.LocationId.ToString(),
+						model.DeviceProtocolName, 
+						d.Id,
+						model.DeviceIsVirtual
+						);
 				
-                }
-            }
-            catch (Exception e)
-            {
-                
-            }
-        }
+				}
+			}
+			catch (Exception e)
+			{
+				
+			}
+		}
 
 		//
 		// POST: /Device/New
@@ -118,11 +118,11 @@ namespace iotDash.Controllers
 			
 			try
 			{
-                //TODO verify param
-                iotContext cont = new iotContext();
-                DeviceRestfulService cl = new DeviceRestfulService();
+				//TODO verify param
+				iotContext cont = new iotContext();
+				DeviceRestfulService cl = new DeviceRestfulService();
 				string domainId = DomainSession.GetContextDomain(this.HttpContext);
-                iotDomain d = cont.Domains.First(dm => dm.DomainName.Equals(domainId));
+				iotDomain d = cont.Domains.First(dm => dm.DomainName.Equals(domainId));
 				Device dev = cl.DeviceAddWithParamsEntity(SiteId, Name, Host, Port, Login, Pass, Type, Loc, Prot,d.Id,false);
 				if (dev != null)
 				{
@@ -145,16 +145,16 @@ namespace iotDash.Controllers
 		{
 			try
 			{
-                iotContext cont = new iotContext();
-                DeviceRestfulService cl = new DeviceRestfulService();
-                Device dev = cont.Devices.First(d => d.Id == DeviceId);
-                if ( dev != null)
-                {
-                    cl.UpdateDeviceProperties(dev);
-                    DeviceViewModel model = new DeviceViewModel(dev);
-                    return View(model);
-                }
-                return View();
+				iotContext cont = new iotContext();
+				DeviceRestfulService cl = new DeviceRestfulService();
+				Device dev = cont.Devices.First(d => d.Id == DeviceId);
+				if ( dev != null)
+				{
+					cl.UpdateDeviceProperties(dev);
+					DeviceViewModel model = new DeviceViewModel(dev);
+					return View(model);
+				}
+				return View();
 			}
 			catch (Exception e)
 			{
@@ -162,13 +162,38 @@ namespace iotDash.Controllers
 			}
 		}
 
+
+		// GET: /Device/Live/<number>
+		public ActionResult Live(int DeviceId)
+		{
+			try
+			{
+				iotContext cont = new iotContext();
+				DeviceRestfulService cl = new DeviceRestfulService();
+				Device dev = cont.Devices.First(d => d.Id == DeviceId);
+				if (dev != null)
+				{
+					cl.UpdateDeviceProperties(dev);
+					DeviceViewModel model = new DeviceViewModel(dev);
+					return View(model);
+				}
+				return View();
+			}
+			catch (Exception e)
+			{
+				return View();
+			}
+		}
+
+
+
 		// GET: /Device/Edit/<number>
 		public ActionResult Edit(int DeviceId)
 		{
 			try
 			{
-                iotContext cont = new iotContext();
-                Device dev = cont.Devices.First(d => d.Id == DeviceId);
+				iotContext cont = new iotContext();
+				Device dev = cont.Devices.First(d => d.Id == DeviceId);
 				DeviceViewModel model = new DeviceViewModel(dev);
 				return View(model);
 			}
@@ -184,9 +209,9 @@ namespace iotDash.Controllers
 		{   
 			try
 			{
-                iotContext cont = new iotContext();
-                DeviceAction action = cont.Actions.First(a => a.Id == ActionId);
-                DeviceRestfulService cl = new DeviceRestfulService();
+				iotContext cont = new iotContext();
+				DeviceAction action = cont.Actions.First(a => a.Id == ActionId);
+				DeviceRestfulService cl = new DeviceRestfulService();
 				string currValStr = action.ResultParameters.First().Value;
 				action.RequiredParameters.First().Value = currValStr.Equals("1") ? "0" : "1";   //toggle
 				action.RequiredParameters.First().Type = action.ResultParameters.First().Type;
