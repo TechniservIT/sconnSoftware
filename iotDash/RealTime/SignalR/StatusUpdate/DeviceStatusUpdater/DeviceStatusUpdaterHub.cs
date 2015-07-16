@@ -22,6 +22,9 @@ namespace iotDash.RealTime.SignalR.DeviceStatusUpdater
 
         private DeviceRestfulService client;
 
+
+
+        /*************  WCF callback ************/
         [CallbackBehaviorAttribute(UseSynchronizationContext = true)]
         public class DeviceEventServiceCallback : IDeviceEventCallback
         {
@@ -33,7 +36,9 @@ namespace iotDash.RealTime.SignalR.DeviceStatusUpdater
 
          public DeviceStatusUpdaterHub()
          {
-             InstanceContext context = new InstanceContext(new DeviceEventServiceCallback());
+             iotContext.DeviceUpdateEvent += iotContext_DeviceUpdateEvent;
+             iotContext.ParamUpdateEvent += iotContext_ParamUpdateEvent;
+             //InstanceContext context = new InstanceContext(new DeviceEventServiceCallback());
              client = new DeviceRestfulService();
 
              DeviceEventCallbackHandler callbackHandler = new DeviceEventCallbackHandler(PublishDeviceUpdate);
@@ -43,12 +48,51 @@ namespace iotDash.RealTime.SignalR.DeviceStatusUpdater
             // client.Subscribe();
          }
 
+         void iotContext_ParamUpdateEvent(DeviceParameter param)
+         {
+             PublishParamUpdate(param);
+         }
+
+         void iotContext_DeviceUpdateEvent(Device dev)
+         {
+             DeviceCallbackEvent(dev);
+         }
+
+
+        public void PublishParamUpdate(DeviceParameter param)
+         {
+             iotContext cont = new iotContext();
+             cont.Configuration.ProxyCreationEnabled = false;
+             cont.Configuration.LazyLoadingEnabled = false;
+
+             DeviceParameter toUpdate = cont.Parameters.Include("Action").Include("Property").FirstOrDefault(e => e.Id == param.Id);
+            
+            //unbind after parent
+             if (toUpdate.Action != null)
+             {
+                 toUpdate.Action.Device = null;
+                 toUpdate.Action.RequiredParameters = null;
+                 toUpdate.Action.ResultParameters = null;
+             }
+             else if (toUpdate.Property != null)
+             {
+                 toUpdate.Property.Device = null;
+                 toUpdate.Property.ResultParameters = null;
+             }
+
+
+             string jsonParam = JsonConvert.SerializeObject(toUpdate);
+             Clients.All.updateParam(jsonParam);     
+ 
+         }
+
+
          public void PublishDeviceUpdate(Device dev)
          {
              string jsonData = JsonConvert.SerializeObject(dev);
 
              //send to clients
-             //Clients.Client(dev.Id.ToString()).UpdateDevice(jsonData);
+            //Clients.Client(dev.Id.ToString()).UpdateDevice(jsonData);
 
              //TODO only subscribed clients
 

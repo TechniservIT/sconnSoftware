@@ -36,7 +36,7 @@ namespace iotDbConnector.DAL
         public DateTime PasswordExpireDate { get; set; }
 
         [DataMember]
-        public virtual AIList<Device> Devices { get; set; }
+        public virtual List<Device> Devices { get; set; }
 
 
     }

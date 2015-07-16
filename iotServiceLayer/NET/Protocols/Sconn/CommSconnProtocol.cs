@@ -23,15 +23,10 @@ namespace iotServiceProvider
 
         private sconnCfgMngr cfgMngr { get; set; }
 
-        private iotConnector connector;
-
         int devices = 0;
-
-        //private int HostDeviceId = 0;
 
         public CommSconnProtocol()
         {
-            connector = new iotConnector();
             site = new sconnSite();
             cfgMngr = new sconnCfgMngr();
         }
@@ -51,7 +46,7 @@ namespace iotServiceProvider
         {
            // Task t = Task.Factory.StartNew(() =>
            // {
-                LoadConfigToDevice(device);
+            LoadConfigToDevice(device.Id);
            // });        
         }
 
@@ -80,7 +75,7 @@ namespace iotServiceProvider
                 LoadDevice(device);
                 if (UpdateSite())
                 {
-                    return LoadConfigToDevice(device);
+                    return LoadConfigToDevice(device.Id);
                 }
                 return false;
             }
@@ -372,6 +367,7 @@ namespace iotServiceProvider
         {
             try
             {
+                iotConnector connector = new iotConnector();
                 return connector.TypeForName(ParameterNameForMapper(mapper)); //ParameterType.TypeForName(ParameterNameForMapper(mapper), cont);
             }
             catch (Exception e)
@@ -473,7 +469,7 @@ namespace iotServiceProvider
         }
 
 
-        private bool LoadConfigToDevice(Device dev)
+        private bool LoadConfigToDevice(int devId)
         {
             try
             {
@@ -490,7 +486,7 @@ namespace iotServiceProvider
                 //    .Include(d => d.Actions.Select(a => a.ResultParameters.Select(r => r.sconnMappers)))
                 //    .Include(d => d.Properties.Select(p => p.ResultParameters.Select(r => r.sconnMappers)))
                 //    .First();  
-                Device edited = cont.Devices.Where(d => d.Id == dev.Id).First();
+                Device edited = cont.Devices.First(d => d.Id == devId);
 
                 
                 watch.Stop();
@@ -540,8 +536,8 @@ namespace iotServiceProvider
                         //get parameter
                         Stopwatch watch4 = new Stopwatch();
                         watch4.Start();
-                        DeviceParameter param = (from r in item.ResultParameters
-                                                 select r).Single();    //item.ResultParameters.FirstOrDefault();
+                        DeviceParameter param = item.ResultParameters.FirstOrDefault();
+
                         watch4.Stop();
                         Debug.WriteLine("Execution time : " + watch4.ElapsedMilliseconds + " ms @ prop update dev param query");
                         
@@ -556,8 +552,7 @@ namespace iotServiceProvider
                             //get input mapper
                             Stopwatch watch2 = new Stopwatch();
                             watch2.Start();
-                            sconnConfigMapper maper = (from cm in param.sconnMappers
-                                                       select cm).FirstOrDefault();
+                            sconnConfigMapper maper = param.sconnMappers.FirstOrDefault();
                             watch2.Stop();
                             Debug.WriteLine("Execution time : " + watch2.ElapsedMilliseconds + " ms @ prop update mapper query");
                             watch2.Reset();
@@ -575,6 +570,7 @@ namespace iotServiceProvider
                            
                         }
                     }
+
                     Stopwatch watch1 = new Stopwatch();
                     watch1.Start();
                     cont.SaveChanges(); //apply

@@ -11,10 +11,23 @@ namespace iotDbConnector.DAL
     [DataContract(IsReference = true)]
     public class Device
     {
+        private int _Id;
+
+
         [DataMember]
         [Required]
         [Key]
-        public int Id { get; set; }
+        public int Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                _Id = value;
+            }
+        }
 
         [DataMember]
         [Required]

@@ -16,7 +16,7 @@ namespace iotDbConnector.DAL
 
         public bool Read { get; set; }
 
-        public virtual AIList<DeviceCredentials> Credentials { get; set; }
+        public virtual List<DeviceCredentials> Credentials { get; set; }
 
     }
 

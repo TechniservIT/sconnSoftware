@@ -170,10 +170,8 @@ namespace iotDbConnector.DAL
                     //add type
                     ParameterType type = new ParameterType();
                     type.Name = name;
-                    db.ParamTypes.Add(type);
+                    ParameterType storedType =  db.ParamTypes.Add(type);
                     db.SaveChanges();
-
-                    ParameterType storedType = db.ParamTypes.Where(p =>  p.Name.Equals(type.Name) ).First();
                     return storedType;
                 }
                 else

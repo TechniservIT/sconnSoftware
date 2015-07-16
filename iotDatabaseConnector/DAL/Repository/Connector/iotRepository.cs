@@ -95,18 +95,18 @@ namespace iotDbConnector.DAL
                 {
                     dbEntityEntry.State = EntityState.Added;
                 }
-                else
-                {
-                    var res = DbSet.Add(entity);
-                    DbContext.SaveChanges();
-                    System.Reflection.PropertyInfo pi = res.GetType().GetProperty("Id");
-                    if (pi != null)
-                    {
-                        int id =  (int)(pi.GetValue(res, null));
-                        return id;
-                    }
-                }
-                return -1;
+                //else
+                //{
+                //    var res = DbSet.Add(entity);
+                //    DbContext.SaveChanges();
+                //    System.Reflection.PropertyInfo pi = res.GetType().GetProperty("Id");
+                //    if (pi != null)
+                //    {
+                //        int id =  (int)(pi.GetValue(res, null));
+                //        return id;
+                //    }
+                //}
+                return 0;
             }
             catch (Exception e)
             {

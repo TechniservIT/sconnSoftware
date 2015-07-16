@@ -10,18 +10,28 @@ using System.Data.Entity.Core.Objects;
 using System.Data.Entity.Infrastructure;
 using System.Data.Common;
 using System.Data.Entity.Core.Metadata.Edm;
+using System.Threading.Tasks;
 
 namespace iotDbConnector.DAL
 {
     
     public  class  iotContext : DbContext
     {
+
+        public delegate void DeviceUpdateEventCallbackHandler(Device dev);
+        public static event DeviceUpdateEventCallbackHandler DeviceUpdateEvent;
+
+        public delegate void ParamUpdateEventCallbackHandler(DeviceParameter param);
+        public static event ParamUpdateEventCallbackHandler ParamUpdateEvent; 
+
+
         public iotContext() :base("iotDbConn")
         {
             //AppDomain.CurrentDomain.SetData("DataDirectory", "H:\\Inf\\PZPP\\IoT\\iotDash\\DBO");
 
             this.Configuration.ProxyCreationEnabled = true;
             this.Configuration.LazyLoadingEnabled = true;
+
             
         }
 
@@ -77,8 +87,14 @@ namespace iotDbConnector.DAL
                                         this.ParameterChanges.Add(hist);
                                     }
 
-                                }
+                                    Task.Factory.StartNew( () => iotContext.ParamUpdateEvent((DeviceParameter)entry.Entity));
+                                    
 
+                                }
+                                else if (ObjectContext.GetObjectType(entry.Entity.GetType()) == typeof(Device))
+                                {
+                                    Task.Factory.StartNew(() => iotContext.DeviceUpdateEvent((Device)entry.Entity));
+                                }
                                 break;
                             }
                     }

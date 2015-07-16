@@ -216,8 +216,9 @@ namespace iotDeviceService
         {
             try
             {
-                iotSharedEntityContext<iotDomain> cont = new iotSharedEntityContext<iotDomain>();
-                return cont.GetAll().First(d => d.DomainName.Equals(name)); 
+               // iotSharedEntityContext<iotDomain> cont = new iotSharedEntityContext<iotDomain>();
+                iotContext cont = new iotContext();
+                return cont.Domains.First(d => d.DomainName.Equals(name)); 
             }
             catch (Exception e)
             {
@@ -231,8 +232,9 @@ namespace iotDeviceService
         {
             try
             {
-                iotSharedEntityContext<iotDomain> cont = new iotSharedEntityContext<iotDomain>();
-                return cont.GetAll().First(d=>d.DomainName.Equals(name));  //InMemoryContext.GetDomainForName(name); 
+                //iotSharedEntityContext<iotDomain> cont = new iotSharedEntityContext<iotDomain>();
+                iotContext cont = new iotContext();
+                return cont.Domains.First(d=>d.DomainName.Equals(name));  //InMemoryContext.GetDomainForName(name); 
                 // return JsonConvert.SerializeObject(db.GetById(name));
             }
             catch (Exception e)
@@ -247,8 +249,9 @@ namespace iotDeviceService
         {
             try
             {
-                iotSharedEntityContext<iotDomain> cont = new iotSharedEntityContext<iotDomain>();
-                return cont.GetById(id);
+                //iotSharedEntityContext<iotDomain> cont = new iotSharedEntityContext<iotDomain>();
+                iotContext cont = new iotContext();
+                return cont.Domains.First(d=> d.Id==id);
             }
             catch (Exception e)
             {
@@ -262,8 +265,10 @@ namespace iotDeviceService
         {
             try
             {
-                iotSharedEntityContext<iotDomain> cont = new iotSharedEntityContext<iotDomain>();
-                cont.Add(domain);
+                //iotSharedEntityContext<iotDomain> cont = new iotSharedEntityContext<iotDomain>();
+                iotContext cont = new iotContext();
+                cont.Domains.Add(domain);
+                cont.SaveChanges();
                 return true;
             }
             catch (Exception e)
@@ -281,14 +286,15 @@ namespace iotDeviceService
         {
             try
             {
-                iotSharedEntityContext<iotDomain> cont = new iotSharedEntityContext<iotDomain>();
-                iotDomain domain = cont.GetById(DomainId);   //db.GetById(DomainId);     //fetch domain from DB
+                //iotSharedEntityContext<iotDomain> cont = new iotSharedEntityContext<iotDomain>();
+                iotContext cont = new iotContext();
+                iotDomain domain = cont.Domains.First(d => d.Id == DomainId);   //db.GetById(DomainId);     //fetch domain from DB
                 if (domain != null)
                 {
                     //add to devices
                     Site site = domain.Sites.First(s => s.Id == SiteId);
                     site.Devices.Add(dev);
-                    cont.UpdateWithHistory(domain);  //update domain
+                    //cont.UpdateWithHistory(domain);  //update domain
                     return true;
                 }
                 return false;
@@ -1333,8 +1339,9 @@ namespace iotDeviceService
         {
             try
             {
-                iotSharedEntityContext<Device> devCont = new iotSharedEntityContext<Device>();
-                Device dev = devCont.GetAll().First(d => d.EndpInfo.Id == endp.Id);
+               // iotSharedEntityContext<Device> devCont = new iotSharedEntityContext<Device>();
+                iotContext cont = new iotContext();
+                Device dev = cont.Devices.First(d => d.EndpInfo.Id == endp.Id);
                 return dev;
             }
             catch (Exception e)
@@ -1352,8 +1359,10 @@ namespace iotDeviceService
         {
             try
             {
-                iotSharedEntityContext<iotDomain> cont = new iotSharedEntityContext<iotDomain>();
-                iotDomain domain = cont.GetById(DomainId);
+               // iotSharedEntityContext<iotDomain> cont = new iotSharedEntityContext<iotDomain>();
+                iotContext cont = new iotContext();
+
+                iotDomain domain = cont.Domains.First(d=>d.Id == DomainId);
                 if (domain != null)
                 {
                     int LocId = int.Parse(Loc);
@@ -1376,12 +1385,9 @@ namespace iotDeviceService
                     cred.Password = Pass;
                     cred.Username = Login;
 
-                    iotSharedEntityContext<DeviceCredentials> credCont = new iotSharedEntityContext<DeviceCredentials>();
-                    int credId = credCont.Add(cred);
-                    DeviceCredentials storedCredentials = credCont.GetById(credId);
+                    DeviceCredentials storedCredentials = cont.Credentials.Add(cred);
+                    cont.SaveChanges();
 
-
-                    iotSharedEntityContext<EndpointInfo> endpCont = new iotSharedEntityContext<EndpointInfo>();
                     EndpointInfo info = new EndpointInfo();
                     info.Hostname = Host;
                     info.Port = int.Parse(Port);
@@ -1390,8 +1396,7 @@ namespace iotDeviceService
                     //CommProtocolType protocol = (CommProtocolType)Prot; //int.Parse(Prot);
                     //info.EnableProtocolSupport(protocol);
                     info.SupportsSconnProtocol = true;
-                    int endpId = endpCont.Add(info);
-                    EndpointInfo storedInfo = endpCont.GetById(endpId);
+                    EndpointInfo storedInfo = cont.Endpoints.Add(info);
                     if (storedInfo == null)
                     {
                         return null;
@@ -1404,9 +1409,9 @@ namespace iotDeviceService
                     ndev.Credentials = storedCredentials;
                     ndev.EndpInfo = storedInfo;
                     
-                    iotSharedEntityContext<Device> devCont = new iotSharedEntityContext<Device>();
-                    int devId = devCont.Add(ndev);
-                    Device stored = devCont.GetById(devId);
+                    Device stored = cont.Devices.Add(ndev);
+
+                    cont.SaveChanges();
 
                     //update device
                     UpdateDeviceProperties(stored);

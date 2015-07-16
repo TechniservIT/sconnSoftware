@@ -102,35 +102,28 @@
 
         $.each(obj, function () {
             var cnode = $(this);
-            if (cnode[0]['PropertyId'] != null) {
-                // alert("parsing property");
+            if (cnode[0]['PropertyId'] === null) {
                 var PropId = cnode[0]['PropertyId'];
                 var ResultParams = cnode[0]['ResultParameters'];
                 var ResVal = ResultParams[0]['Value'];
                 var ValDispIdHash = "#propvaldisp-" + PropId;
                 var ValDispId = "propvaldisp-" + PropId;
-                // alert("prop id :" + PropId + "\n" + "ResVal :" + ResVal + "\n" + "ValDispId :" + ValDispId + "\n");
-                // $(ValDispId).html = ResVal;
+
                 var element = document.getElementById(ValDispId);
                 element.innerHTML = ResVal.toString();
                 element.setAttribute("title", ResVal.toString());
 
             }
             else if (cnode[0]['ActionId'] != null) {
-                // alert("parsing action");
                 var ActId = cnode[0]['ActionId'];
                 var ResultParams = cnode[0]['ResultParameters'];
                 var ResVal = ResultParams[0]['Value'];
                 var ValDispIdHash = "#actvaldisp-" + ActId;
                 var ValDispId = "actvaldisp-" + ActId;
-                //  alert("Act id :" + ActId + "\n" + "ResVal :" + ResVal + "\n" + "ValDispId :" + ValDispId + "\n");
+
                 var element = document.getElementById(ValDispId);
                 element.innerHTML = ResVal.toString();
                 element.setAttribute("title", ResVal.toString());
-
-                //alert(element.innerHTML);
-                //$(ValDispIdHash).html = ResVal.toString();
-                //alert($(ValDispIdHash).html);
 
             }
         });
@@ -138,6 +131,46 @@
 
 
     });
+
+
+    contosoChatHubProxy.on('updateParam', function (deviceData) {
+        var obj = jQuery.parseJSON(deviceData);
+        var str = JSON.stringify(obj, undefined, 4);
+        console.log("Recieved : " + str);
+
+        var cnode = obj;
+
+            if (cnode['Property'] !== null) {
+
+                var PropId = cnode['Property']['Id'];
+                var ResVal = cnode['Value'];
+                var ValDispIdHash = "#propvaldisp-" + PropId;
+                var ValDispId = "propvaldisp-" + PropId;
+
+
+                var element = document.getElementById(ValDispId);
+                element.innerHTML = ResVal.toString();
+                element.setAttribute("title", ResVal.toString());
+
+            }
+
+            if (cnode['Action'] !== null) {
+                var ActId = cnode['Action']['Id'];
+                var ResVal = cnode['Value'];
+                var ValDispIdHash = "#actvaldisp-" + ActId;
+                var ValDispId = "actvaldisp-" + ActId;
+
+                var element = document.getElementById(ValDispId);
+                element.innerHTML = ResVal.toString();
+                element.setAttribute("title", ResVal.toString());
+            }
+    
+
+        ReloadPanels();
+
+
+    });
+
 
     connection.start()
     .done(function () { console.log('SignalR Now connected, connection ID=' + connection.id); })
