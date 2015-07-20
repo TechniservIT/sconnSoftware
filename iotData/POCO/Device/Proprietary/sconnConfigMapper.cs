@@ -8,28 +8,21 @@ using System.Web;
 namespace iotDbConnector.DAL
 {
 
-    [DataContract(IsReference = true)]
-    public class sconnConfigMapper
+    public interface sconnConfigMapper
     {
         [Key]
         [Required]
         [DataMember]
-        public int MapperId { get; set; }
+         int MapperId { get; set; }
 
         [DataMember]
         [Required]
-        public int ConfigType { get; set; }
+         int ConfigType { get; set; }
 
 
         [DataMember]
         [Required]
-        public int SeqNumber { get; set; }
-
-        [DataMember]
-        public virtual DeviceParameter Parameter { get; set; }
-
-        [DataMember]
-        public virtual ActionParameter ActionParam { get; set; }
+         int SeqNumber { get; set; }
 
 
 

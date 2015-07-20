@@ -112,17 +112,9 @@
     <Compile Include="DAL\Repository\Connector\iotRepository.cs" />
     <Compile Include="DAL\Repository\iotDataContext.cs" />
     <Compile Include="DAL\Repository\Runtime\iotSharedContext.cs" />
-    <Compile Include="Migrations\201506241420211_initial.cs" />
-    <Compile Include="Migrations\201506241420211_initial.Designer.cs">
-      <DependentUpon>201506241420211_initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201507101525417_Device - virtual opt.cs" />
-    <Compile Include="Migrations\201507101525417_Device - virtual opt.Designer.cs">
-      <DependentUpon>201507101525417_Device - virtual opt.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201507151354479_Camera.cs" />
-    <Compile Include="Migrations\201507151354479_Camera.Designer.cs">
-      <DependentUpon>201507151354479_Camera.cs</DependentUpon>
+    <Compile Include="Migrations\201507201602094_initial.cs" />
+    <Compile Include="Migrations\201507201602094_initial.Designer.cs">
+      <DependentUpon>201507201602094_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="DAL\Repository\NoSql\INoSqlDataSource.cs" />
@@ -153,14 +145,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201506241420211_initial.resx">
-      <DependentUpon>201506241420211_initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201507101525417_Device - virtual opt.resx">
-      <DependentUpon>201507101525417_Device - virtual opt.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201507151354479_Camera.resx">
-      <DependentUpon>201507151354479_Camera.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201507201602094_initial.resx">
+      <DependentUpon>201507201602094_initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

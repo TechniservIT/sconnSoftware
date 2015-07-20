@@ -200,11 +200,11 @@ namespace iotDbConnector.DAL
 
 
         /************** Mapper ************/
-        public   List<sconnConfigMapper> MappersList()
+        public List<sconnActionResultMapper> MappersList()
         {
             iotContext db = new iotContext();
-            
-                List<sconnConfigMapper> mappers =   (from d in db.SconnMappers
+
+            List<sconnActionResultMapper> mappers = (from d in db.ActionResultMappers
                                                    select d).ToList();
                 return mappers;
             
@@ -457,7 +457,7 @@ namespace iotDbConnector.DAL
 
 
         /************** Mapper ************/
-        public  bool MapperAdd(sconnConfigMapper param)
+        public bool MapperAdd(sconnActionResultMapper param)
         {
             try
             {
@@ -465,7 +465,7 @@ namespace iotDbConnector.DAL
                 {
                     iotContext db = new iotContext();
                     
-                        db.SconnMappers.Add(param);
+                        db.ActionResultMappers.Add(param);
                           db.SaveChanges();
                         //TODO verify save
                     

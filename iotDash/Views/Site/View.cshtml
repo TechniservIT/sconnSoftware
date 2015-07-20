@@ -75,10 +75,8 @@
                     type: this.method,
                     data: { DeviceId: CurrentSelectionId },
                     success: function (result) {
-                        //alert("result : " + result);
                         if (result == "True") {
                             //display success and update view
-                            //  $("#"+CurrentSelectionId)
 
                             $("#StatusCont").html('<div class="alert alert-success" role="alert"> \
                               <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> \
@@ -102,10 +100,8 @@
             }
         });
 
-
-
-
     });
+
 </script>
 
 <h3> @Model.Site.SiteName</h3>
@@ -117,6 +113,8 @@
         <li role="presentation" class="active"><a href="#tabStatus" aria-controls="tabStatus" role="tab" data-toggle="tab">Summary</a></li>
         <li role="presentation"><a href="#tabDevices" aria-controls="tabDevices" role="tab" data-toggle="tab">Devices</a></li>
         <li role="presentation"><a href="#tabLocation" aria-controls="tabLocation" role="tab" data-toggle="tab">Location</a></li>
+        <li role="presentation"><a href="#tabAlarmSystem" aria-controls="tabAlarmSystem" role="tab" data-toggle="tab">Alarm system</a></li>
+        <li role="presentation"><a href="#tabCCTV" aria-controls="tabCCTV" role="tab" data-toggle="tab">CCTV</a></li>
     </ul>
 
     <!-- Tab panes -->
@@ -176,8 +174,8 @@
                                     </div>
                                 </li>
 
-                                </ul>
-</div>
+                            </ul>
+                        </div>
                     </div>
 
 
@@ -218,7 +216,37 @@
         </div>
 
 
+        <div role="tabpanel" class="tab-pane" id="tabAlarmSystem">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        @*@{ Html.RenderAction("Index", "AlarmSystemSummaryController", new { area = "", siteId = Model.Site.Id });  }*@
+                        @{ Html.RenderAction("AlarmSystemSummary", new { siteId = Model.Site.Id });  }
+                        @*@Html.Partial("~/Views/AlarmSystemSummary/Index.cshtml")*@
+                    </div>
+                </div>
 
+                <div class="row">
+                    <div id="resultview">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div role="tabpanel" class="tab-pane" id="tabCCTV">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        CCTV
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div id="resultview">
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
         <div role="tabpanel" class="tab-pane" id="tabLocation">

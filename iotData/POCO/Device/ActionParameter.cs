@@ -22,7 +22,6 @@ namespace iotDbConnector.DAL
         public string Value { get; set; }
 
         [DataMember]
-        [Required]
         public virtual ParameterType Type { get; set; }
 
         [DataMember]
@@ -32,20 +31,21 @@ namespace iotDbConnector.DAL
         public string VisualRepresentationUrl { get; set; }
 
         [DataMember]
+        [Required]
         public virtual DeviceAction Action { get; set; }
 
         [DataMember]
-        public virtual List<sconnConfigMapper> sconnMappers { get; set; }
+        public virtual List<sconnActionMapper> sconnMappers { get; set; }
 
 
-        public bool AddSconnMapper(sconnConfigMapper mapper)
+        public bool AddSconnMapper(sconnActionMapper mapper)
         {
             return false;
         }
 
-        public List<sconnConfigMapper> GetSconnMappers()
+        public List<sconnActionMapper> GetSconnMappers()
         {
-            List<sconnConfigMapper> mappers = new List<sconnConfigMapper>();
+            List<sconnActionMapper> mappers = new List<sconnActionMapper>();
             return mappers;
         }
 

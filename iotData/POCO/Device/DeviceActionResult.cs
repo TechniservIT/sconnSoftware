@@ -1,21 +1,20 @@
-﻿using System;
+﻿using iotDatabaseConnector.DAL.POCO.Device.Notify;
+using iotDbConnector.DAL;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Data.Entity;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Runtime.Serialization;
-using System.ComponentModel;
-using iotDatabaseConnector.DAL.POCO.Device.Notify;
- 
+using System.Text;
+using System.Threading.Tasks;
 
 namespace iotDbConnector.DAL
 {
     [DataContract(IsReference = true)]
-    public class DeviceParameter 
+    public class DeviceActionResult
     {
 
-     
+
         [DataMember]
         [Key]
         [Required]
@@ -50,21 +49,21 @@ namespace iotDbConnector.DAL
         [DataMember]
         public string VisualRepresentationUrl { get; set; }
 
-
         [DataMember]
         [Required]
-        public virtual DeviceProperty Property { get; set; }
+        public virtual DeviceAction Action { get; set; }
 
         [DataMember]
-        public virtual List<sconnConfigMapper> sconnMappers { get; set; }
+        public virtual List<sconnActionResultMapper> sconnMappers { get; set; }
 
         [DataMember]
-        public virtual List<ParameterChangeHistory> Changes { get; set; }
+        public virtual List<ActionChangeHistory> Changes { get; set; }
 
-        public DeviceParameter()
+        public DeviceActionResult()
         {
-            sconnMappers = new List<sconnConfigMapper>();
-            Changes = new List<ParameterChangeHistory>();
+            sconnMappers = new List<sconnActionResultMapper>();
+            Changes = new List<ActionChangeHistory>();
         }
     }
+   
 }

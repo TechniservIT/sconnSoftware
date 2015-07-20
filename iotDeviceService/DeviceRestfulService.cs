@@ -1559,12 +1559,12 @@ namespace iotDeviceService
                     cont.SaveChanges();
 
                     //result params
-                    DeviceParameter param2 = new DeviceParameter();
+                    DeviceActionResult param2 = new DeviceActionResult();
                     param2.Type = storedptype;
                     param2.Value = "0";
                     param2.Action = act;
-                    act.ResultParameters = new List<DeviceParameter>();
-                    DeviceParameter storedresparam = cont.Parameters.Add(param2);
+                    act.ResultParameters = new List<DeviceActionResult>();
+                    DeviceActionResult storedresparam = cont.ActionResultParameters.Add(param2);
                     act.ResultParameters.Add(storedresparam);
                     cont.SaveChanges();
 

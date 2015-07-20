@@ -22,13 +22,15 @@ namespace iotDbConnector.DAL
         public static event DeviceUpdateEventCallbackHandler DeviceUpdateEvent;
 
         public delegate void ParamUpdateEventCallbackHandler(DeviceParameter param);
-        public static event ParamUpdateEventCallbackHandler ParamUpdateEvent; 
+        public static event ParamUpdateEventCallbackHandler ParamUpdateEvent = delegate { };
+
+        public delegate void ActionResultUpdateEventCallbackHandler(DeviceActionResult param);
+        public static event ActionResultUpdateEventCallbackHandler ActionUpdateEvent = delegate { };
 
 
         public iotContext() :base("iotDbConn")
         {
-            //AppDomain.CurrentDomain.SetData("DataDirectory", "H:\\Inf\\PZPP\\IoT\\iotDash\\DBO");
-
+            
             this.Configuration.ProxyCreationEnabled = true;
             this.Configuration.LazyLoadingEnabled = true;
 
@@ -87,8 +89,43 @@ namespace iotDbConnector.DAL
                                         this.ParameterChanges.Add(hist);
                                     }
 
-                                    Task.Factory.StartNew( () => iotContext.ParamUpdateEvent((DeviceParameter)entry.Entity));
+                                    if (ParamUpdateEvent != null)
+                                    {
+                                        Task.Factory.StartNew(() => iotContext.ParamUpdateEvent((DeviceParameter)entry.Entity));
+                                    }
                                     
+                                    
+
+                                
+                                }
+                                else if (ObjectContext.GetObjectType(entry.Entity.GetType()) == typeof(DeviceActionResult))
+                                {
+
+                                    DbDataRecord original = entry.OriginalValues;
+                                    string oldValue = original.GetValue(
+                                        original.GetOrdinal("Value"))
+                                        .ToString();
+
+                                    CurrentValueRecord current = entry.CurrentValues;
+                                    string newValue = current.GetValue(
+                                        current.GetOrdinal("Value"))
+                                        .ToString();
+
+                                    if (oldValue != newValue) // probably not necessary
+                                    {
+                                        ActionChangeHistory hist = new ActionChangeHistory();
+                                        hist.Date = DateTime.Now;
+                                        hist.Property = (DeviceActionResult)(object)entry.Entity;
+                                        hist.Value = newValue;
+                                        this.ActionChangeHistory.Add(hist);
+                                    }
+
+                                    if (ActionUpdateEvent != null)
+                                    {
+                                        Task.Factory.StartNew(() => iotContext.ActionUpdateEvent((DeviceActionResult)entry.Entity));
+                                    }
+                                    
+
 
                                 }
                                 else if (ObjectContext.GetObjectType(entry.Entity.GetType()) == typeof(Device))
@@ -114,6 +151,17 @@ namespace iotDbConnector.DAL
 
         public DbSet<ActionParameter> ActionParameters { get; set; }
 
+        public DbSet<DeviceActionResult> ActionResultParameters { get; set; }
+
+        public DbSet<ActionChangeHistory> ActionChangeHistory { get; set; }
+
+        public DbSet<sconnActionMapper> ActionParamMappers { get; set; }
+
+        public DbSet<sconnActionResultMapper> ActionResultMappers { get; set; }
+
+        public DbSet<sconnPropertyMapper> PropertyResultMappers { get; set; }
+
+
         public DbSet<DeviceProperty> Properties { get; set; }
 
         public DbSet<DeviceAction> Actions { get; set; }
@@ -128,9 +176,6 @@ namespace iotDbConnector.DAL
 
         public DbSet<iotDomain> Domains { get; set; }
 
-        //public DbSet<UserPermission> Permissions { get; set; }
-
-        public DbSet<sconnConfigMapper> SconnMappers { get; set; }
 
         public DbSet<ParameterChangeHistory> ParameterChanges { get; set; }
 

@@ -257,10 +257,15 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Administration\AdministrationAreaRegistration.cs" />
+    <Compile Include="Areas\AlarmSystem\AlarmSystemAreaRegistration.cs" />
+    <Compile Include="Areas\Site\SiteAreaRegistration.cs" />
     <Compile Include="Controllers\domain\managment\routing\RoutingRulesController.cs" />
     <Compile Include="Controllers\domain\managment\security\DeviceSecurityController.cs" />
     <Compile Include="Controllers\domain\managment\security\UserSecurityController.cs" />
     <Compile Include="Controllers\domain\signaling\SignalingRulesController.cs" />
+    <Compile Include="Areas\AlarmSystem\Controllers\AlarmSystemSummaryController.cs" />
+    <Compile Include="Controllers\domain\site\CCTV\CctvSystemViewController.cs" />
     <Compile Include="Controllers\domain\supervisor\SecuritySupervisorSetupController.cs" />
     <Compile Include="Controllers\domain\surveillance\CameraViewController.cs" />
     <Compile Include="Controllers\domain\surveillance\RecordingSettingsController.cs" />
@@ -271,7 +276,7 @@
     <Compile Include="Controllers\global\AccountController.cs" />
     <Compile Include="Controllers\global\AppController.cs" />
     <Compile Include="Controllers\global\DashboardController.cs" />
-    <Compile Include="Controllers\domain\site\devices\DeviceController.cs" />
+    <Compile Include="Controllers\domain\site\IoT\DeviceController.cs" />
     <Compile Include="Controllers\domain\navigation\HomeController.cs" />
     <Compile Include="Controllers\webapi\DeviceDataController.cs" />
     <Compile Include="Controllers\webapi\DomainDataController.cs" />
@@ -282,7 +287,7 @@
     <Compile Include="Controllers\domain\managment\SettingsController.cs" />
     <Compile Include="Controllers\domain\site\SiteController.cs" />
     <Compile Include="Controllers\domain\site\SiteManagerController.cs" />
-    <Compile Include="Controllers\domain\site\devices\StatisticController.cs" />
+    <Compile Include="Controllers\domain\site\IoT\StatisticController.cs" />
     <Compile Include="Controllers\global\UsersController.cs" />
     <Compile Include="Controllers\domain\navigation\ViewController.cs" />
     <Compile Include="Global.asax.cs">
@@ -294,6 +299,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Areas\AlarmSystem\Models\AlarmSystemModels.cs" />
     <Compile Include="Models\DeviceModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\LocationModels.cs" />
@@ -445,6 +451,9 @@
     <Content Include="RealTime\SignalR\StatusUpdate\DeviceStatusUpdater\DeviceStatusUpdater.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Areas\Site\Views\web.config" />
+    <Content Include="Areas\AlarmSystem\Views\web.config" />
+    <Content Include="Areas\Administration\Views\web.config" />
     <None Include="BundleTransformer.Configuration.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -549,6 +558,8 @@
     <Content Include="Content\fonts\font-awesome-4.1.0\css\font-awesome.min.css" />
     <Content Include="Content\fonts\font-awesome-4.1.0\fonts\fontawesome-webfont.svg" />
     <Content Include="Views\CameraView\Index.cshtml" />
+    <Content Include="Views\CctvSystemView\Index.cshtml" />
+    <Content Include="Views\Site\AlarmSystemSummary.cshtml" />
     <None Include="Views\Dashboard\Index.cshtml" />
     <Content Include="SignalR.Sample\jquery.color-2.1.2.min.js" />
     <Content Include="SignalR.Sample\SignalR.StockTicker.js" />
@@ -681,7 +692,15 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Administration\Controllers\" />
+    <Folder Include="Areas\Administration\Models\" />
+    <Folder Include="Areas\Administration\Views\Shared\" />
+    <Folder Include="Areas\AlarmSystem\Views\Shared\" />
+    <Folder Include="Areas\Site\Controllers\" />
+    <Folder Include="Areas\Site\Models\" />
+    <Folder Include="Areas\Site\Views\Shared\" />
     <Folder Include="Controllers\domain\managment\automation\" />
+    <Folder Include="Controllers\domain\site\AlarmSystem\" />
     <Folder Include="RealTime\SignalR\StatusUpdate\ActionHistoryUpdater\" />
     <Folder Include="RealTime\SignalR\StatusUpdate\PropertyHistoryUpdater\" />
     <Folder Include="Views\App\" />
@@ -721,6 +740,10 @@
     <ProjectReference Include="..\iotService\iotService.csproj">
       <Project>{8fa92296-4f77-45ce-9b85-bcb37a7f2332}</Project>
       <Name>iotService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\sconnConnector\sconnConnector.csproj">
+      <Project>{09c8a8f0-f85a-4534-922e-85e14ec32725}</Project>
+      <Name>sconnConnector</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

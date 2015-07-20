@@ -378,7 +378,7 @@ namespace iotServiceProvider
 
         }
 
-        private void AddPropertyForMapperAndDevice(sconnConfigMapper maper,  Device edited, int DevNo)
+        private void AddPropertyForMapperAndDevice(sconnPropertyMapper maper,  Device edited, int DevNo)
         {
             try
             {
@@ -403,7 +403,7 @@ namespace iotServiceProvider
                 cont.SaveChanges();
 
                 maper.Parameter = param;
-                cont.SconnMappers.Add(maper);
+                cont.PropertyResultMappers.Add(maper);
                 cont.SaveChanges();
 
             }
@@ -415,7 +415,7 @@ namespace iotServiceProvider
 
         }
 
-        private void AddActionForMapperAndDevice(sconnConfigMapper maper,  Device edited, int DevNo)
+        private void AddActionForMapperAndDevice(sconnActionResultMapper maper, Device edited, int DevNo)
         {
             try
             {
@@ -423,7 +423,7 @@ namespace iotServiceProvider
                 Device storedDevice = cont.Devices.Where(d => d.Id == edited.Id).First(); 
                 DeviceAction action = new DeviceAction();
                 action.RequiredParameters = new List<ActionParameter>();
-                action.ResultParameters = new List<DeviceParameter>();
+                action.ResultParameters = new List<DeviceActionResult>();
                 action.ActionName = "Output" + maper.SeqNumber;    //TODO read from name cfg  
                 action.Device = storedDevice;
                 action.LastActivationTime = DateTime.Now;
@@ -432,32 +432,37 @@ namespace iotServiceProvider
                 cont.SaveChanges();
 
                 //copy maper for action
-                sconnConfigMapper actionMaper = new sconnConfigMapper();
-                actionMaper.ConfigType = maper.ConfigType;
-                actionMaper.SeqNumber = maper.SeqNumber;
+                sconnActionResultMapper actionResultMaper = new sconnActionResultMapper();
+                actionResultMaper.ConfigType = maper.ConfigType;
+                actionResultMaper.SeqNumber = maper.SeqNumber;
+
+                sconnActionMapper actionInputMaper = new sconnActionMapper();
+                actionInputMaper.ConfigType = maper.ConfigType;
+                actionInputMaper.SeqNumber = maper.SeqNumber;
+
 
                 ParameterType extType = ParamTypeForSconnMapper(maper);
                 ParameterType inType = cont.ParamTypes.Where(p => p.Id == extType.Id).First();
                 
                 ActionParameter inparam = new ActionParameter();
-                inparam.Value = sconnConfigToStringVal(actionMaper, site.siteCfg.deviceConfigs[DevNo]);
+                inparam.Value = sconnConfigToStringVal(actionInputMaper, site.siteCfg.deviceConfigs[DevNo]);
                 inparam.Type = inType;
                 inparam.Action = action;
                 cont.ActionParameters.Add(inparam);
+                actionInputMaper.ActionParam = inparam;
+                cont.ActionParamMappers.Add(actionInputMaper);
                 cont.SaveChanges();
-                actionMaper.ActionParam = inparam;
 
                 //create result parameter and bind mapper to it
-                DeviceParameter param = new DeviceParameter();
+                DeviceActionResult param = new DeviceActionResult();
                 param.Value = sconnConfigToStringVal(maper, site.siteCfg.deviceConfigs[DevNo]);
                 param.Type = inType;
                 param.Action = action;
-                cont.Parameters.Add(param);
+                cont.ActionResultParameters.Add(param);
                 cont.SaveChanges();
-                actionMaper.Parameter = param;
-                    
-                //maper.Parameter = param;
-                cont.SconnMappers.Add(actionMaper);
+                actionResultMaper.ActionParam = param;
+
+                cont.ActionResultMappers.Add(actionResultMaper);
                 cont.SaveChanges();
 
             }
@@ -516,7 +521,7 @@ namespace iotServiceProvider
                     //load
                     for (int i = 0; i < inputs; i++)
                     {
-                        sconnConfigMapper maper = new sconnConfigMapper();
+                        sconnPropertyMapper maper = new sconnPropertyMapper();
                         maper.ConfigType = ipcDefines.mAdrInput;
                         maper.SeqNumber = i;
                         AddPropertyForMapperAndDevice(maper,   edited, devAddr);
@@ -604,7 +609,7 @@ namespace iotServiceProvider
 
                     for (int i = 0; i < outputs; i++)
                     {
-                        sconnConfigMapper maper = new sconnConfigMapper();
+                        sconnActionResultMapper maper = new sconnActionResultMapper();
                         maper.ConfigType = ipcDefines.mAdrOutput;
                         maper.SeqNumber = i;
                         AddActionForMapperAndDevice(maper,   edited, devAddr);
@@ -612,7 +617,7 @@ namespace iotServiceProvider
 
                     for (int i = 0; i < relays; i++)
                     {
-                        sconnConfigMapper maper = new sconnConfigMapper();
+                        sconnActionResultMapper maper = new sconnActionResultMapper();
                         maper.ConfigType = ipcDefines.mAdrRelay;
                         maper.SeqNumber = i;
                         AddActionForMapperAndDevice(maper,  edited, devAddr);
@@ -629,7 +634,7 @@ namespace iotServiceProvider
                     foreach (var item in edited.Actions)
                     {
                         //get action
-                        DeviceParameter param = (from par in item.ResultParameters
+                        DeviceActionResult param = (from par in item.ResultParameters
                                                  select par).FirstOrDefault();
                         if (param != null)
                         {

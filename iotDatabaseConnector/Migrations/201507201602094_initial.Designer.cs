@@ -7,13 +7,13 @@ namespace iotDatabaseConnector.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.2-31219")]
-    public sealed partial class Devicevirtualopt : IMigrationMetadata
+    public sealed partial class initial : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Devicevirtualopt));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(initial));
         
         string IMigrationMetadata.Id
         {
-            get { return "201507101525417_Device - virtual opt"; }
+            get { return "201507201602094_initial"; }
         }
         
         string IMigrationMetadata.Source

@@ -30,7 +30,18 @@
     }
 
 
-
+    public string PanelClassForActionResult(iotDbConnector.DAL.DeviceActionResult param)
+    {
+        if (int.Parse(param.Value) == 1)
+        {
+            return "panel-primary";
+        }
+        else
+        {
+            return "panel-info";
+        }
+    }
+    
     //TODO generate req param input lists
 
 
@@ -357,7 +368,7 @@
                         foreach (var item in Model.Device.Actions)
                         {
                             <div class="col-md-3">
-                                <div id='action-@item.Id.ToString()' class="panel @PanelClassForResultParam(item.ResultParameters.First())">
+                                <div id='action-@item.Id.ToString()' class="panel @PanelClassForActionResult(item.ResultParameters.First())">
                                     <div class="panel-heading">@item.ActionName</div>
                                     <div class="panel-body">
                                         <h4 class="noderesval" id="actvaldisp-@item.Id.ToString()" title="@item.ResultParameters.First().Value">@item.ResultParameters.First().Value</h4>

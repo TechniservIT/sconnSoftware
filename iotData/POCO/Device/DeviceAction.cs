@@ -34,7 +34,7 @@ namespace iotDbConnector.DAL
         
         [DataMember]
         [Required]
-        public virtual List<DeviceParameter> ResultParameters { get; set; }
+        public virtual List<DeviceActionResult> ResultParameters { get; set; }
 
 
         [DataMember]
@@ -47,7 +47,7 @@ namespace iotDbConnector.DAL
         public DeviceAction()
         {
             RequiredParameters = new List<ActionParameter>();
-            ResultParameters = new List<DeviceParameter>();
+            ResultParameters = new List<DeviceActionResult>();
             LastActivationTime = DateTime.Now;
         }
 

@@ -167,11 +167,11 @@ namespace iotDatabaseTester
 					act.RequiredParameters.Add(param);
 
 					//result params
-					DeviceParameter param2 = new DeviceParameter();
+                    DeviceActionResult param2 = new DeviceActionResult();
 					param2.Type = paramtype;
 					param2.Value = "";
 					param2.Action = act;
-					act.ResultParameters = new List<DeviceParameter>();
+                    act.ResultParameters = new List<DeviceActionResult>();
 					act.ResultParameters.Add(param2);
 
 					dev.Actions.Add(act);

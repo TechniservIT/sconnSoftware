@@ -59,6 +59,31 @@ namespace iotDash.RealTime.SignalR.DeviceStatusUpdater
          }
 
 
+
+         public void PublishActionUpdate(DeviceActionResult param)
+         {
+             iotContext cont = new iotContext();
+             cont.Configuration.ProxyCreationEnabled = false;
+             cont.Configuration.LazyLoadingEnabled = false;
+
+             DeviceActionResult toUpdate = cont.ActionResultParameters.Include("Action").Include("Property").FirstOrDefault(e => e.Id == param.Id);
+
+             //unbind after parent
+             if (toUpdate.Action != null)
+             {
+                 toUpdate.Action.Device = null;
+                 toUpdate.Action.RequiredParameters = null;
+                 toUpdate.Action.ResultParameters = null;
+             }
+            
+
+
+             string jsonParam = JsonConvert.SerializeObject(toUpdate);
+             Clients.All.updateParam(jsonParam);
+
+         }
+
+
         public void PublishParamUpdate(DeviceParameter param)
          {
              iotContext cont = new iotContext();
@@ -68,13 +93,7 @@ namespace iotDash.RealTime.SignalR.DeviceStatusUpdater
              DeviceParameter toUpdate = cont.Parameters.Include("Action").Include("Property").FirstOrDefault(e => e.Id == param.Id);
             
             //unbind after parent
-             if (toUpdate.Action != null)
-             {
-                 toUpdate.Action.Device = null;
-                 toUpdate.Action.RequiredParameters = null;
-                 toUpdate.Action.ResultParameters = null;
-             }
-             else if (toUpdate.Property != null)
+              if (toUpdate.Property != null)
              {
                  toUpdate.Property.Device = null;
                  toUpdate.Property.ResultParameters = null;
@@ -104,7 +123,6 @@ namespace iotDash.RealTime.SignalR.DeviceStatusUpdater
                  foreach (var resp  in item.ResultParameters)
                  {
                      resp.Type.Parameters = null;
-                     resp.Action = null;
                      resp.Property = null;
                      resp.sconnMappers = null;
                  }
@@ -118,7 +136,6 @@ namespace iotDash.RealTime.SignalR.DeviceStatusUpdater
                  {
                      resp.Type.Parameters = null;
                      resp.Action = null;
-                     resp.Property = null;
                      resp.sconnMappers = null;
                  }
                  foreach (var resp in item.RequiredParameters)

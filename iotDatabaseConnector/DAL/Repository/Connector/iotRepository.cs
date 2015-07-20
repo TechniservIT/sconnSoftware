@@ -134,11 +134,11 @@ namespace iotDbConnector.DAL
                             {
                                 if (!stparam.Value.Equals(param.Value))
                                 {
-                                    ParameterChangeHistory hist = new ParameterChangeHistory();
+                                    ActionChangeHistory hist = new ActionChangeHistory();
                                     hist.Date = DateTime.Now;
                                     hist.Property = param;
                                     hist.Value = param.Value;
-                                    iotRepository<ParameterChangeHistory> histrepo = new iotRepository<ParameterChangeHistory>();
+                                    iotRepository<ActionChangeHistory> histrepo = new iotRepository<ActionChangeHistory>();
                                     histrepo.Add(hist);
                                 }
                             }
@@ -177,11 +177,11 @@ namespace iotDbConnector.DAL
                             {
                                 if (!stparam.Value.Equals(param.Value))
                                 {
-                                    ParameterChangeHistory hist = new ParameterChangeHistory();
+                                    ActionChangeHistory hist = new ActionChangeHistory();
                                     hist.Date = DateTime.Now;
                                     hist.Property = param;
                                     hist.Value = param.Value;
-                                    iotRepository<ParameterChangeHistory> histrepo = new iotRepository<ParameterChangeHistory>();
+                                    iotRepository<ActionChangeHistory> histrepo = new iotRepository<ActionChangeHistory>();
                                     histrepo.Add(hist);
                                 }
                             }

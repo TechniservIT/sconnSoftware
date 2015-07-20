@@ -67,6 +67,7 @@
     <Compile Include="POCO\Auth\Credential\DeviceCredentials.cs" />
     <Compile Include="POCO\Auth\Credential\IAuthCredentials.cs" />
     <Compile Include="POCO\Device\ActionParameter.cs" />
+    <Compile Include="POCO\Device\DeviceActionResult.cs" />
     <Compile Include="POCO\Device\Device.cs" />
     <Compile Include="POCO\Device\DeviceAction.cs" />
     <Compile Include="POCO\Device\DeviceParameter.cs" />
@@ -74,9 +75,13 @@
     <Compile Include="POCO\Device\DeviceType.cs" />
     <Compile Include="POCO\Device\EndpointInfo.cs" />
     <Compile Include="POCO\Device\Location.cs" />
+    <Compile Include="POCO\Device\Notify\ActionChangeHistory.cs" />
     <Compile Include="POCO\Device\Notify\ParameterChangeHistory.cs" />
     <Compile Include="POCO\Device\ParameterType.cs" />
+    <Compile Include="POCO\Device\Proprietary\sconnActionMapper.cs" />
+    <Compile Include="POCO\Device\Proprietary\sconnActionResultMapper.cs" />
     <Compile Include="POCO\Device\Proprietary\sconnConfigMapper.cs" />
+    <Compile Include="POCO\Device\Proprietary\sconnPropertyMapper.cs" />
     <Compile Include="POCO\Device\Site.cs" />
     <Compile Include="POCO\Domain\iotDomain.cs" />
     <Compile Include="POCO\Domain\iotDomainSettings.cs" />
