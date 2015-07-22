@@ -197,7 +197,7 @@ namespace iotDash.Controllers
                         {
                             AlarmSystemConfigManager mngr = new AlarmSystemConfigManager(alrmSysDev.EndpInfo, alrmSysDev.Credentials);
                             int devs = mngr.GetDeviceNumber();
-                            AlarmSystemSummaryModel model = new AlarmSystemSummaryModel(devs);
+                            AlarmSystemSummaryModel model = new AlarmSystemSummaryModel(devs, alrmSysDev);
                             return View(model);
                         }
 

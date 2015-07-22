@@ -14,7 +14,7 @@ namespace sconnConnector.Config
 
         private sconnCfgMngr mngr;
 
-        private sconnSite site;
+        public sconnSite site;
 
         private DeviceCredentials creds;
 
@@ -25,6 +25,11 @@ namespace sconnConnector.Config
             creds = cred;
             site = new sconnSite("", 500, endp.Hostname, endp.Port, creds.Password);
             
+        }
+
+        public void LoadSiteConfig()
+        {
+            mngr.ReadSiteRunningConfig(site);
         }
 
 

@@ -1,0 +1,18 @@
+﻿@model iotDash.Models.AlarmSystemDetailModel 
+
+
+@{
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+@Scripts.Render("~/bundles/jqueryui")
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>@Model.Config.site.siteName</h2>
+
+<h3>@Model.Config.site.siteCfg.deviceNo</h3>
+
+<h3>@Model.Config.site.siteCfg.globalConfig.memCFG[sconnConnector.ipcDefines.mAdrArmed]</h3>

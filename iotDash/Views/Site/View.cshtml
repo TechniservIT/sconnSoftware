@@ -220,9 +220,8 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-12">
-                        @*@{ Html.RenderAction("Index", "AlarmSystemSummaryController", new { area = "", siteId = Model.Site.Id });  }*@
                         @{ Html.RenderAction("AlarmSystemSummary", new { siteId = Model.Site.Id });  }
-                        @*@Html.Partial("~/Views/AlarmSystemSummary/Index.cshtml")*@
+
                     </div>
                 </div>
 

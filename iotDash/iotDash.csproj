@@ -265,6 +265,8 @@
     <Compile Include="Controllers\domain\managment\security\UserSecurityController.cs" />
     <Compile Include="Controllers\domain\signaling\SignalingRulesController.cs" />
     <Compile Include="Areas\AlarmSystem\Controllers\AlarmSystemSummaryController.cs" />
+    <Compile Include="Controllers\domain\site\AlarmSystem\AlarmSystemConfigurationController.cs" />
+    <Compile Include="Controllers\domain\site\AlarmSystem\AlarmSystemViewController.cs" />
     <Compile Include="Controllers\domain\site\CCTV\CctvSystemViewController.cs" />
     <Compile Include="Controllers\domain\supervisor\SecuritySupervisorSetupController.cs" />
     <Compile Include="Controllers\domain\surveillance\CameraViewController.cs" />
@@ -560,6 +562,10 @@
     <Content Include="Views\CameraView\Index.cshtml" />
     <Content Include="Views\CctvSystemView\Index.cshtml" />
     <Content Include="Views\Site\AlarmSystemSummary.cshtml" />
+    <Content Include="Views\AlarmSystemView\Index.cshtml" />
+    <Content Include="Views\AlarmSystemView\Device.cshtml" />
+    <Content Include="Views\AlarmSystemView\Summary.cshtml" />
+    <Content Include="Views\AlarmSystemConfiguration\Index.cshtml" />
     <None Include="Views\Dashboard\Index.cshtml" />
     <Content Include="SignalR.Sample\jquery.color-2.1.2.min.js" />
     <Content Include="SignalR.Sample\SignalR.StockTicker.js" />
@@ -700,7 +706,6 @@
     <Folder Include="Areas\Site\Models\" />
     <Folder Include="Areas\Site\Views\Shared\" />
     <Folder Include="Controllers\domain\managment\automation\" />
-    <Folder Include="Controllers\domain\site\AlarmSystem\" />
     <Folder Include="RealTime\SignalR\StatusUpdate\ActionHistoryUpdater\" />
     <Folder Include="RealTime\SignalR\StatusUpdate\PropertyHistoryUpdater\" />
     <Folder Include="Views\App\" />
