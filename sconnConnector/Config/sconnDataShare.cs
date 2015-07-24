@@ -997,36 +997,38 @@ namespace sconnConnector
 
 
         /********  Input state  ********/
-        public static byte mAdrInput = 0x80;  //128 - start address of input states, format : <input type> <value1> <value2-Analog>
-            public static byte mAdrInputMemSize = 0x04;
-            public static byte mAdrInputType =0x00;
-            public static byte mAdrInputAG   =0x01;
-            public static byte mAdrInputVal  =0x02;
-            public static byte mAdrInputNameAddr =0x03;
+        public static byte mAdrInput = 0x20;  //128 - start address of input states, format : <input type> <value1> <value2-Analog>
+        public static byte mAdrInputMemSize = 0x04;
+        public static byte mAdrInputType = 0x00;
+        public static byte mAdrInputAG = 0x01;
+        public static byte mAdrInputVal = 0x02;
+        public static byte mAdrInputNameAddr = 0x03;
 
         /********  Output state  ********/
-        public static byte mAdrOutput =0x40;  //40 - start address of output states, format : <output type> <value1>
-            public static byte mAdrOutputType =0x00;
-            public static byte mAdrOutputVal  =0x01;
-            public static byte mAdrOutputNameAddr =0x02;
-            public static byte mAdrOutputMemSize   =0x03;
+        public static byte mAdrOutput = 0x60;  //40 - start address of output states, format : <output type> <value1>
+        public static byte mAdrOutputType = 0x00;
+        public static byte mAdrOutputVal = 0x01;
+        public static byte mAdrOutputNameAddr = 0x02;
+        public static byte mAdrOutputPar4 = 0x03;
+        public static byte mAdrOutputMemSize = 0x04;
 
-            public static byte outputON =0x01;  //Output active
-            public static byte outputOFF =0x00;  //Output inactive
+        public static byte outputON = 0x01;  //Output active
+        public static byte outputOFF = 0x00;  //Output inactive
 
-            public static byte OutputNA =0x01;
-            public static byte OutputNIA =0x00; // normaly inactive
+        public static byte OutputNA = 0x01;
+        public static byte OutputNIA = 0x00; // normaly inactive
 
-            public static byte Output1Addr =0x40;
-            public static byte Output2Addr =0x43;
+        public static byte Output1Addr = 0x40;
+        public static byte Output2Addr = 0x43;
 
 
         /******   Relay state ********/
-        public static byte  mAdrRelay = 0x6C;
-            public static byte  mAdrRelayType = 0x00;
-            public static byte  mAdrRelayVal    =    0x01;
-            public static byte  mAdrRelayNameAddr =  0x02;
-            public static byte RelayMemSize = 0x03;
+        public static byte mAdrRelay = 0x80;
+        public static byte mAdrRelayType = 0x00;
+        public static byte mAdrRelayVal = 0x01;
+        public static byte mAdrRelayNameAddr = 0x02;
+        public static byte mAdrRelayPar4 = 0x03;
+        public static byte RelayMemSize = 0x04;
 
   
         /******  DEAMON  *******/
