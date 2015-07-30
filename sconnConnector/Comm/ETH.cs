@@ -58,7 +58,7 @@ namespace sconnConnector
 			Hostname = hostname;
 			Port = port;
 			AuthenticationPassword = password;
-			ConnectionTimeoutMs = 1000;
+			ConnectionTimeoutMs = 400;
 		}
 
 		private void InitializeConnection()

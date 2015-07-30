@@ -151,7 +151,7 @@
 
         var cnode = obj;
 
-            if (cnode['Property'] !== null) {
+        if (cnode.hasOwnProperty("Property")) { //cnode['Property'] !== null
 
                 var PropId = cnode['Property']['Id'];
                 var ResVal = cnode['Value'];
@@ -165,7 +165,7 @@
 
             }
 
-            if (cnode['Action'] !== null) {
+        if (cnode.hasOwnProperty("Action")) {    //cnode['Action'] !== null
                 var ActId = cnode['Action']['Id'];
                 var ResVal = cnode['Value'];
                 var ValDispIdHash = "#actvaldisp-" + ActId;

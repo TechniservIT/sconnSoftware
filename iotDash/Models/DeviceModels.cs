@@ -5,6 +5,7 @@ using iotServiceProvider;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using System.Linq;
 using System.Web;
@@ -92,9 +93,59 @@ namespace iotDash.Models
     public class DeviceViewModel
     {
         public Device Device { get; set; }
+
+
         public DeviceViewModel(Device device)
         {
             Device = device;
+        }
+
+        public string DeviceLatCordStr()
+        {
+            return Device.DeviceLocation.Lat.ToString(CultureInfo.InvariantCulture);
+        }
+
+        public string DeviceLngCordStr()
+        {
+            return Device.DeviceLocation.Lng.ToString(CultureInfo.InvariantCulture);
+        }
+
+    }
+
+
+    public class DeviceEditModel
+    {
+
+        [Required]
+        public Device Device { get; set; }
+
+
+        [Required]
+        public int LocationId { get; set; }
+
+
+        [DisplayName("Location")]
+        public Location Location { get; set; }
+
+
+        public List<Location> Locations { get; set; }
+
+
+        [Required]
+        public int TypeId { get; set; }
+
+        [DisplayName("Type")]
+        public DeviceType DeviceType { get; set; }
+
+
+        public List<DeviceType> Types { get; set; }
+
+
+        public DeviceEditModel(Device device, List<Location> locs, List<DeviceType> types)
+        {
+            Device = device;
+            Locations = locs;
+            Types = types;
         }
 
         public string DeviceLatCordStr()

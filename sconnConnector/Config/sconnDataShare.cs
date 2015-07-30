@@ -1096,7 +1096,7 @@ namespace sconnConnector
         public static int mAddr_NAMES_Outputs_Pos = 0x11;
         public static int mAddr_NAMES_Relays_Pos = 0x1A;
 
-
+         
         /*****  *****/
         public static int Names_StartAddr= 0x0000;
         public static int Names_No       = 0x200;

@@ -36,7 +36,10 @@ namespace iotDbConnector.DAL
             {
                 if (value != _Value)
                 {
-                    _Value = value;
+                    if (value.Length > 0)
+                    {
+                        _Value = value;
+                    }
                 }
             }
         }
@@ -65,6 +68,7 @@ namespace iotDbConnector.DAL
         {
             sconnMappers = new List<sconnConfigMapper>();
             Changes = new List<ParameterChangeHistory>();
+            Value = "0";    //TODO get default value for mappers
         }
     }
 }

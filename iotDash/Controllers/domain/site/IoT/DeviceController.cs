@@ -111,6 +111,41 @@ namespace iotDash.Controllers
 			}
 		}
 
+
+		 [HttpPost]
+        public void Edit(Device Device, int LocationId, int TypeId)    //DeviceEditModel model
+		{
+			try
+			{
+                if (Device != null)
+				{
+					iotContext cont = new iotContext();
+					DeviceRestfulService cl = new DeviceRestfulService();
+                    Device stored = cont.Devices.First(d => d.Id == Device.Id);
+					if (stored != null)
+					{
+                        Location loc = cont.Locations.First(l => l.Id == LocationId);
+                        DeviceType type = cont.Types.First(t => t.Id == TypeId);
+                        //copy editable objects
+                        stored.DeviceName = Device.DeviceName;
+                        stored.Type = type;
+                        stored.DeviceLocation = loc;
+                        stored.Credentials.Username = Device.Credentials.Username;
+                        stored.Credentials.Password = Device.Credentials.Password;
+                        stored.EndpInfo.Hostname = Device.EndpInfo.Hostname;
+                        stored.EndpInfo.Port = Device.EndpInfo.Port;
+						cont.SaveChanges();
+					}
+
+				}
+			}
+			catch (Exception e)
+			{
+
+			}
+		}
+
+
 		//
 		// POST: /Device/New
 		public string New(string SiteId, string Name, string Host, string Port, string Login, string Pass, string Type, string Loc, string Prot)
@@ -188,13 +223,14 @@ namespace iotDash.Controllers
 
 
 		// GET: /Device/Edit/<number>
+        [HttpGet]
 		public ActionResult Edit(int DeviceId)
 		{
 			try
 			{
 				iotContext cont = new iotContext();
 				Device dev = cont.Devices.First(d => d.Id == DeviceId);
-				DeviceViewModel model = new DeviceViewModel(dev);
+				DeviceEditModel model = new DeviceEditModel(dev, cont.Locations.ToList(), cont.Types.ToList() );
 				return View(model);
 			}
 			catch (Exception e)

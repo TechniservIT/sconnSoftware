@@ -38,7 +38,7 @@ namespace iotDash.RealTime.SignalR.DeviceStatusUpdater
          {
              iotContext.DeviceUpdateEvent += iotContext_DeviceUpdateEvent;
              iotContext.ParamUpdateEvent += iotContext_ParamUpdateEvent;
-             //InstanceContext context = new InstanceContext(new DeviceEventServiceCallback());
+             iotContext.ActionUpdateEvent += iotContext_ActionUpdateEvent;
              client = new DeviceRestfulService();
 
              DeviceEventCallbackHandler callbackHandler = new DeviceEventCallbackHandler(PublishDeviceUpdate);
@@ -46,6 +46,11 @@ namespace iotDash.RealTime.SignalR.DeviceStatusUpdater
 
             //TODO Restful subcribe
             // client.Subscribe();
+         }
+
+         void iotContext_ActionUpdateEvent(DeviceActionResult param)
+         {
+             PublishActionUpdate(param);
          }
 
          void iotContext_ParamUpdateEvent(DeviceParameter param)
@@ -66,7 +71,7 @@ namespace iotDash.RealTime.SignalR.DeviceStatusUpdater
              cont.Configuration.ProxyCreationEnabled = false;
              cont.Configuration.LazyLoadingEnabled = false;
 
-             DeviceActionResult toUpdate = cont.ActionResultParameters.Include("Action").Include("Property").FirstOrDefault(e => e.Id == param.Id);
+             DeviceActionResult toUpdate = cont.ActionResultParameters.Include("Action").FirstOrDefault(e => e.Id == param.Id);
 
              //unbind after parent
              if (toUpdate.Action != null)
@@ -90,7 +95,7 @@ namespace iotDash.RealTime.SignalR.DeviceStatusUpdater
              cont.Configuration.ProxyCreationEnabled = false;
              cont.Configuration.LazyLoadingEnabled = false;
 
-             DeviceParameter toUpdate = cont.Parameters.Include("Action").Include("Property").FirstOrDefault(e => e.Id == param.Id);
+             DeviceParameter toUpdate = cont.Parameters.Include("Property").FirstOrDefault(e => e.Id == param.Id);
             
             //unbind after parent
               if (toUpdate.Property != null)
