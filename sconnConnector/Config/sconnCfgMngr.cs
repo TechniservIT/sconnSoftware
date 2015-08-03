@@ -701,6 +701,8 @@ namespace sconnConnector
                         {
                             deviceUploadStat = false;
                         }
+
+                        site.siteCfg.deviceConfigs[i].LoadPropertiesFromConfig();   //load to props
                     }
                     site.siteStat.StopConnectionTimer();
                     return (bool)(deviceUploadStat & globalUploadStat);
@@ -734,15 +736,16 @@ namespace sconnConnector
            byte[] cmd = new byte[32];
            SconnClient client = new SconnClient(site.serverIP, site.serverPort, "testpass",true);
 
-               if (site.siteCfg != null)
-               {
-                   devices = getSiteDeviceNo(site);
-               }
-               else
-               {
-                   devices = getSiteDeviceNo(  site);
+
+           devices = getSiteDeviceNo(site);
+           if (site.siteCfg == null)
+           {
+               site.siteCfg = new ipcSiteConfig(devices); //init device configs 
+           }
+           else if (devices != site.siteCfg.deviceNo)
+           {
                    site.siteCfg = new ipcSiteConfig(devices); //init device configs 
-               }
+           }
 
                /**********  Read global config  ***********/
 
@@ -833,6 +836,8 @@ namespace sconnConnector
                        {
                            deviceUploadStat = false;
                        }
+
+                       site.siteCfg.deviceConfigs[i].LoadPropertiesFromConfig();   //load to props
                    }
 
                    //get events
@@ -845,6 +850,8 @@ namespace sconnConnector
                    rxBF = client.berkeleySendMsg(cmd);
 
                    site.siteStat.StopConnectionTimer();
+
+                
                    
                }
                catch (Exception e)

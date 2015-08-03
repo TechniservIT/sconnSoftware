@@ -33,7 +33,7 @@ namespace iotDash
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"
                    ));
-
+            
             bundles.Add(new ScriptBundle("~/bundles/sb-admin").Include(
               "~/Scripts/sb-admin.js"
            ));
@@ -67,8 +67,9 @@ namespace iotDash
             bundles.Add(new ScriptBundle("~/bundles/toggleswitch").Include(
             "~/Scripts/switch/bootstrap-switch.js"));
 
-
-
+            bundles.Add(new ScriptBundle("~/bundles/numspin").Include(
+            "~/Scripts/bootstrap-spinedit.js"
+             ));
 
             /* Style */
 
@@ -91,7 +92,12 @@ namespace iotDash
 
             bundles.Add(new StyleBundle("~/bundles/css/toggleswitch").Include(
              "~/Content/switch/bootstrap-switch.css"
-      ));
+                 ));
+
+
+            bundles.Add(new StyleBundle("~/bundles/css/numspin").Include(
+            "~/Content/css/spinedit.css"
+                ));
 
 
             /* LESS Bundles */

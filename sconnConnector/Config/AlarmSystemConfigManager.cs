@@ -18,13 +18,15 @@ namespace sconnConnector.Config
 
         private DeviceCredentials creds;
 
+
+
         public AlarmSystemConfigManager(EndpointInfo endp, DeviceCredentials cred)
         {
             info = endp;
             mngr = new sconnCfgMngr();
             creds = cred;
             site = new sconnSite("", 500, endp.Hostname, endp.Port, creds.Password);
-            
+
         }
 
         public void LoadSiteConfig()
@@ -32,6 +34,42 @@ namespace sconnConnector.Config
             mngr.ReadSiteRunningConfig(site);
         }
 
+        public void StoreDeviceConfig(int DevNo)
+        {
+            mngr.WriteDeviceCfgSingle(site, DevNo);
+        }
+
+        public bool ToogleArmStatus()
+        {
+            try
+            {
+                if (site.siteCfg.globalConfig.memCFG[ipcDefines.mAdrArmed] == 1)
+                {
+                    site.siteCfg.globalConfig.memCFG[ipcDefines.mAdrArmed] = (byte)0;
+                }
+                else
+                {
+                    site.siteCfg.globalConfig.memCFG[ipcDefines.mAdrArmed] = (byte)1;
+                }
+                return UploadSiteConfig();
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
+
+        public bool UploadSiteConfig()
+        {
+            try
+            {
+                return mngr.WriteGlobalCfg(site);
+            }
+            catch (Exception e)
+            {   
+                return false;
+            }
+        }
 
 
         public int GetDeviceNumber()

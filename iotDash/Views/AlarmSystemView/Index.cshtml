@@ -6,6 +6,12 @@
 }
 
 @Scripts.Render("~/bundles/jqueryui")
+@Scripts.Render("~/bundles/toggleswitch")
+@Scripts.Render("~/bundles/signalr")
+@Scripts.Render("~/bundles/numspin")
+
+@Styles.Render("~/bundles/css/toggleswitch")
+@Styles.Render("~/bundles/css/numspin")
 
 @{
     ViewBag.Title = "Index";
@@ -13,6 +19,374 @@
 
 <h2>@Model.Config.site.siteName</h2>
 
-<h3>@Model.Config.site.siteCfg.deviceNo</h3>
 
-<h3>@Model.Config.site.siteCfg.globalConfig.memCFG[sconnConnector.ipcDefines.mAdrArmed]</h3>
+
+<script src="~/signalr/hubs"></script>
+
+@functions{
+
+    public string PanelClassForResultParam(iotDbConnector.DAL.DeviceParameter param)
+    {
+        if (int.Parse(param.Value) == 1)
+        {
+            return "panel-primary";
+        }
+        else
+        {
+            return "panel-info";
+        }
+    }
+
+
+    public string PanelClassForActionResult(iotDbConnector.DAL.DeviceActionResult param)
+    {
+        if (int.Parse(param.Value) == 1)
+        {
+            return "panel-primary";
+        }
+        else
+        {
+            return "panel-info";
+        }
+    }
+
+    public string SpanClassForArmStatusDisplay()
+    {
+        int val = Model.Config.site.siteCfg.globalConfig.memCFG[sconnConnector.ipcDefines.mAdrArmed];
+        if (val > 0)
+        {
+            return "label label-success";
+        }
+        else
+        {
+            return "label label-danger";
+        }
+    }
+
+    public string DescForArmStatusDisplay()
+    {
+        int val = Model.Config.site.siteCfg.globalConfig.memCFG[sconnConnector.ipcDefines.mAdrArmed];
+        if (val > 0)
+        {
+            return "Armed";
+        }
+        else
+        {
+            return "Disarmed";
+        }
+    }
+
+
+
+    public string SpanClassForViolationStatusDisplay()
+    {
+        int val = Model.Config.site.siteCfg.globalConfig.memCFG[sconnConnector.ipcDefines.mAdrViolation];
+        if (val > 0)
+        {
+            return "label label-danger";
+            
+        }
+        else
+        {
+            return "label label-success";
+        }
+    }
+
+    public string DescForViolationStatusDisplay()
+    {
+        int val = Model.Config.site.siteCfg.globalConfig.memCFG[sconnConnector.ipcDefines.mAdrViolation];
+        if (val > 0)
+        {
+            return "Yes";
+        }
+        else
+        {
+            return "No";
+        }
+    }
+
+
+    public string DescForArmAction()
+    {
+        int val = Model.Config.site.siteCfg.globalConfig.memCFG[sconnConnector.ipcDefines.mAdrArmed];
+        if (val > 0)
+        {
+            return "Disarm";
+        }
+        else
+        {
+            return "Arm";
+        }
+    }  
+    
+    
+    //TODO generate req param input lists
+
+
+}
+
+
+<script>
+
+    var Reloading = false;
+
+
+
+    function ReloadPanels() {
+
+        Reloading = true;
+
+        $(".panel").removeClass("panel-info");
+        $(".panel").removeClass("panel-primary");
+
+        $(".panel").each(function () {
+            //apply class based on value
+            var contval = $(this).find(".noderesval").first().attr("title");
+            var pval = parseInt(contval);
+            if (pval == 1) {
+                $(this).addClass("panel-primary");
+            } else {
+                $(this).addClass("panel-info");
+            }
+
+            //set all result params
+            $(this).find(".tgsw-action").each(function () {
+                var IsSet = (pval == 1 ? true : false);
+                var sw = $(this).bootstrapSwitch('state', IsSet);
+
+            });
+
+        });
+
+        Reloading = false;
+    }
+
+
+    function syntaxHighlight(json) {
+        json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
+            var cls = 'number';
+            if (/^"/.test(match)) {
+                if (/:$/.test(match)) {
+                    cls = 'key';
+                } else {
+                    cls = 'string';
+                }
+            } else if (/true|false/.test(match)) {
+                cls = 'boolean';
+            } else if (/null/.test(match)) {
+                cls = 'null';
+            }
+            return '<span class="' + cls + '">' + match + '</span>';
+        });
+    }
+
+    var obj = { a: 1, 'b': 'foo', c: [false, 'false', null, 'null', { d: { e: 1.3e5, f: '1.3e5' } }] };
+
+    $(function () {
+
+        ReloadPanels();
+
+        $('.spinEdit').spinedit({
+            minimum: 50,
+            maximum: 12500,
+            step: 50,
+            value: 150,
+            numberOfDecimals: 0
+        });
+
+      
+
+        $('.tgsw-action').on('switchChange.bootstrapSwitch', function () {
+
+            if (!Reloading) {
+
+                //get sender id
+                var ElementId = $(this).attr("id");
+                var AccessorId = "#".concat(ElementId);
+
+                //TODO load req param input lists
+                var StateToSet = $(this).bootstrapSwitch('state');
+                //alert("req param :" + StateToSet);
+                var ParamList = [StateToSet];
+
+                //perform action
+                $.ajax({
+                    url: '@Url.Action("PerformAction", "Device")',
+                    type: this.method,
+                    data: {
+                        ActionId: $(AccessorId).attr("title"),
+                        ActionParams: ParamList
+                    },
+                    success: function (result) {
+                        $('#resultview').html(result);
+                    }
+                });
+
+            }
+
+
+        });
+
+
+        $('#actionselector a').click(function (e) {
+            e.preventDefault()
+            $(this).tab('show')
+        })
+
+
+    });
+
+</script>
+
+
+<div role="tabpanel">
+
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist" id="actionselector">
+        <li role="presentation" class="active"><a href="#tabStatus" aria-controls="tabStatus" role="tab" data-toggle="tab">Status</a></li>
+        <li role="presentation"><a href="#tabConfigure" aria-controls="tabConfigure" role="tab" data-toggle="tab">Configure</a></li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+
+        <div role="tabpanel" class="tab-pane active" id="tabStatus">
+            <div class="container-fluid">
+                <div class="row">
+
+                    <div id="ReloadModelData" class="col-md-1">
+                        @Html.ActionLink("Refresh", "Index", new { DeviceId = Model.AlarmDevice.Id }, new { @class = "glyphicon glyphicon-refresh" })
+                    </div>
+
+                </div>
+
+                <div class="row">
+                 
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Site</div>
+                        <div class="panel-body">
+                            <p></p>
+                        </div>
+
+
+                        <table class="table">
+                            <tr>
+                                <td>Device Number</td>
+                                <td>@Model.Config.site.siteCfg.deviceNo</td>
+                            </tr>
+
+                            <tr>
+                                <td>Armed</td>
+                                <td><span class='@SpanClassForArmStatusDisplay()'>@DescForArmStatusDisplay()</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>Violation</td>
+                                <td><span class='@SpanClassForViolationStatusDisplay()'>@DescForViolationStatusDisplay()</span></td>
+                            </tr>
+
+                        </table>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    @Html.ActionLink(@DescForArmAction(), "ToggleArm", new { DeviceId = Model.AlarmDevice.Id }, new { @class = "btn btn-primary" })
+                </div>
+            </div>
+        </div>
+
+        <div role="tabpanel" class="tab-pane" id="tabConfigure">
+
+            <div class="container-fluid">
+
+                <div class="row">
+                    <div class="col-md-2"></div>
+
+                    <div class="col-md-1">
+                        @Html.ActionLink("Refresh", "Index", new { DeviceId = Model.AlarmDevice.Id }, new { @class = "glyphicon glyphicon-refresh" })
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">Input setting</div>
+                        <div class="panel-body">
+
+                        @using (Html.BeginForm("SaveDevice", "AlarmSystemView", FormMethod.Post))
+                        {
+                            <div class="form-group">
+                                @Html.HiddenFor(model => model.DeviceId)
+                            </div>
+                            
+                            <div class="form-group">
+                                <table class="table">
+                                    <tr>
+                                        <th>Input </th>
+                                        <th>Enabled</th>
+                                        <th>Sensitivity</th>
+                                        <th>Type</th>
+                                        <th>Activation group<th>
+                                        
+                                    </tr>
+
+                                    @for (int i = 0; i < Model.Inputs.Count; i++)
+                                    {
+                                        <tr>
+                                            <td>Input @i.ToString()</td>
+
+                                            @Html.HiddenFor(model => model.Inputs[i].Id)
+                                            @Html.HiddenFor(model => model.Inputs[i].NameId)
+
+                                            <td>
+                                                @Html.CheckBoxFor(model => model.Inputs[i].Enabled)
+                                            </td>
+
+                                            <td>
+                                                @Html.TextBoxFor(model => model.Inputs[i].Sensitivity)
+
+                                            </td>
+
+                                            <td>
+                                                @Html.TextBoxFor(model => model.Inputs[i].Type)
+
+                                            </td>
+
+                                            <td>
+                                                @Html.TextBoxFor(model => model.Inputs[i].ActivationGroup)
+                                                
+                                            </td>
+
+                                        </tr>
+                                    }
+                                </table>
+                            </div>
+                            
+                            <div class="form-group">
+                                    <input type="submit" value="Send" />
+                            </div>
+
+                         }
+
+                       </div>
+                    </div>
+              
+                </div>
+
+                <div class="row">
+                    @Html.ActionLink("Save", "Save", new { DeviceId = Model.AlarmDevice.Id }, new { @class = "btn btn-primary" })
+                </div>
+   
+
+                <div class="row">
+                    <div id="resultview">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
