@@ -295,96 +295,45 @@
                 <div class="row">
                     @Html.ActionLink(@DescForArmAction(), "ToggleArm", new { DeviceId = Model.AlarmDevice.Id }, new { @class = "btn btn-primary" })
                 </div>
+
             </div>
         </div>
 
         <div role="tabpanel" class="tab-pane" id="tabConfigure">
 
-            <div class="container-fluid">
+            <div role="tabpanel">
 
-                <div class="row">
-                    <div class="col-md-2"></div>
+                <ul class="nav nav-tabs" role="tablist" id="cfgtypeselector">
+                    <li role="presentation" class="active"><a href="#tabInputs" aria-controls="tabInputs" role="tab" data-toggle="tab">Inputs</a></li>
+                    <li role="presentation"><a href="#tabOutputs" aria-controls="tabOutputs" role="tab" data-toggle="tab">Outputs</a></li>
+                    <li role="presentation"><a href="#tabRelays" aria-controls="tabRelays" role="tab" data-toggle="tab">Relays</a></li>
+                    <li role="presentation"><a href="#tabNames" aria-controls="tabNames" role="tab" data-toggle="tab">Names</a></li>
+                </ul>
 
-                    <div class="col-md-1">
-                        @Html.ActionLink("Refresh", "Index", new { DeviceId = Model.AlarmDevice.Id }, new { @class = "glyphicon glyphicon-refresh" })
+                <div class="tab-content">
+
+                    <div role="tabpanel" class="tab-pane" id="tabInputs">
+                        @Html.Action("InputsConfigure", new { AlarmDeviceId = 0, ServerId = Model.AlarmDevice.Id })
                     </div>
-                </div>
 
-                <div class="row">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">Input setting</div>
-                        <div class="panel-body">
-
-                        @using (Html.BeginForm("SaveDevice", "AlarmSystemView", FormMethod.Post))
-                        {
-                            <div class="form-group">
-                                @Html.HiddenFor(model => model.DeviceId)
-                            </div>
-                            
-                            <div class="form-group">
-                                <table class="table">
-                                    <tr>
-                                        <th>Input </th>
-                                        <th>Enabled</th>
-                                        <th>Sensitivity</th>
-                                        <th>Type</th>
-                                        <th>Activation group<th>
-                                        
-                                    </tr>
-
-                                    @for (int i = 0; i < Model.Inputs.Count; i++)
-                                    {
-                                        <tr>
-                                            <td>Input @i.ToString()</td>
-
-                                            @Html.HiddenFor(model => model.Inputs[i].Id)
-                                            @Html.HiddenFor(model => model.Inputs[i].NameId)
-
-                                            <td>
-                                                @Html.CheckBoxFor(model => model.Inputs[i].Enabled)
-                                            </td>
-
-                                            <td>
-                                                @Html.TextBoxFor(model => model.Inputs[i].Sensitivity)
-
-                                            </td>
-
-                                            <td>
-                                                @Html.TextBoxFor(model => model.Inputs[i].Type)
-
-                                            </td>
-
-                                            <td>
-                                                @Html.TextBoxFor(model => model.Inputs[i].ActivationGroup)
-                                                
-                                            </td>
-
-                                        </tr>
-                                    }
-                                </table>
-                            </div>
-                            
-                            <div class="form-group">
-                                    <input type="submit" value="Send" />
-                            </div>
-
-                         }
-
-                       </div>
+                    <div role="tabpanel" class="tab-pane" id="tabOutputs">
+                        @Html.Action("OutputsConfigure", new { AlarmDeviceId = 0, ServerId = Model.AlarmDevice.Id })
                     </div>
-              
-                </div>
 
-                <div class="row">
-                    @Html.ActionLink("Save", "Save", new { DeviceId = Model.AlarmDevice.Id }, new { @class = "btn btn-primary" })
-                </div>
-   
-
-                <div class="row">
-                    <div id="resultview">
+                    <div role="tabpanel" class="tab-pane" id="tabRelays">
+                        @Html.Action("RelaysConfigure", new { AlarmDeviceId = 0, ServerId = Model.AlarmDevice.Id })
                     </div>
+
+                    <div role="tabpanel" class="tab-pane" id="tabNames">
+                    </div>
+
                 </div>
+
+
+
             </div>
+            
+
         </div>
 
     </div>

@@ -1,0 +1,91 @@
+﻿@model iotDash.Models.AlarmSystemInputsConfigureModel
+
+@Scripts.Render("~/bundles/jqueryui")
+@Scripts.Render("~/bundles/numspin")
+
+@Styles.Render("~/bundles/css/toggleswitch")
+@Styles.Render("~/bundles/css/numspin")
+
+
+<div class="container-fluid">
+
+    <div class="row">
+
+    </div>
+
+    <div class="row">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Input setting</div>
+            <div class="panel-body">
+
+                @using (Html.BeginForm("SaveDeviceInputs", "AlarmSystemView", FormMethod.Post))
+                {
+                    <div class="form-group">
+                        @Html.HiddenFor(model => model.DeviceId)
+                        @Html.HiddenFor(model => model.ServerId)
+                    </div>
+
+                    <div class="form-group">
+                        <table class="table">
+                            <tr>
+                                <th>Input </th>
+                                <th>Enabled</th>
+                                <th>Sensitivity</th>
+                                <th>Type</th>
+                                <th>Activation group </th>
+
+                            </tr>
+
+                            @for (int i = 0; i < Model.Inputs.Count; i++)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.TextBoxFor(model => model.Inputs[i].Name)
+                                    </td>
+
+                                    @Html.HiddenFor(model => model.Inputs[i].Id)
+                                    @Html.HiddenFor(model => model.Inputs[i].NameId)
+
+                                    <td>
+                                        @Html.CheckBoxFor(model => model.Inputs[i].Enabled)
+                                    </td>
+
+                                    <td>
+                                        @Html.TextBoxFor(model => model.Inputs[i].Sensitivity)
+
+                                    </td>
+
+                                    <td>
+                                        @Html.TextBoxFor(model => model.Inputs[i].Type)
+
+                                    </td>
+
+                                    <td>
+                                        @Html.TextBoxFor(model => model.Inputs[i].ActivationGroup)
+
+                                    </td>
+
+                                </tr>
+                            }
+                        </table>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-primary" value="Save" />
+                    </div>
+
+                }
+
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="row">
+        <div id="resultview">
+        </div>
+    </div>
+
+
+</div>

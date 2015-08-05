@@ -40,10 +40,11 @@ namespace iotDash.Models
     {
 
         [Required]
-        public int DeviceId { get; set; }
+        public int ServerId { get; set; }
 
         [Required]
         public List<sconnInput> Inputs { get; set; }
+
 
         public AlarmSystemConfigManager Config { get; set; }
 
@@ -56,7 +57,7 @@ namespace iotDash.Models
         {
             //get config from DB
             AlarmDevice = dev;
-            DeviceId = dev.Id;
+            ServerId = dev.Id;
             Config = new AlarmSystemConfigManager(AlarmDevice.EndpInfo, AlarmDevice.Credentials);
             Config.LoadSiteConfig();
             EditedDevice = Config.site.siteCfg.deviceConfigs[0];

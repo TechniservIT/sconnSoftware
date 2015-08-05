@@ -1,0 +1,81 @@
+﻿@model iotDash.Models.AlarmSystemRelaysConfigureModel
+
+@Scripts.Render("~/bundles/jqueryui")
+@Scripts.Render("~/bundles/numspin")
+
+@Styles.Render("~/bundles/css/toggleswitch")
+@Styles.Render("~/bundles/css/numspin")
+
+
+
+
+<div class="container-fluid">
+
+    <div class="row">
+
+    </div>
+
+    <div class="row">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Relay setting</div>
+            <div class="panel-body">
+
+                @using (Html.BeginForm("SaveDeviceRelays", "AlarmSystemView", FormMethod.Post))
+                {
+                    <div class="form-group">
+                        @Html.HiddenFor(model => model.DeviceId)
+                        @Html.HiddenFor(model => model.ServerId)
+                    </div>
+
+                    <div class="form-group">
+                        <table class="table">
+                            <tr>
+                                <th>Output </th>
+                                <th>Enabled</th>
+                                <th>Type</th>
+                            </tr>
+
+                            @for (int i = 0; i < Model.Relays.Count; i++)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.TextBoxFor(model => model.Relays[i].Name)
+                                    </td>
+
+                                    @Html.HiddenFor(model => model.Relays[i].Id)
+                                    @Html.HiddenFor(model => model.Relays[i].NameId)
+
+                                    <td>
+                                        @Html.CheckBoxFor(model => model.Relays[i].Enabled)
+                                    </td>
+
+
+                                    <td>
+                                        @Html.TextBoxFor(model => model.Relays[i].Type)
+
+                                    </td>
+
+                                </tr>
+                            }
+                        </table>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-primary" value="Send" />
+                    </div>
+
+                }
+
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="row">
+        <div id="resultview">
+        </div>
+    </div>
+
+
+</div>

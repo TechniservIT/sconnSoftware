@@ -37,6 +37,7 @@ namespace sconnConnector.Config
         public void StoreDeviceConfig(int DevNo)
         {
             mngr.WriteDeviceCfgSingle(site, DevNo);
+            mngr.WriteDeviceNamesCfgSingle(site, DevNo);
         }
 
         public bool ToogleArmStatus()

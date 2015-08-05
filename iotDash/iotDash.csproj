@@ -302,6 +302,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Areas\AlarmSystem\Models\AlarmSystemModels.cs" />
+    <Compile Include="Models\AlarmSystemModels.cs" />
     <Compile Include="Models\DeviceModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\LocationModels.cs" />
@@ -568,6 +569,11 @@
     <Content Include="Views\AlarmSystemView\Device.cshtml" />
     <Content Include="Views\AlarmSystemView\Summary.cshtml" />
     <Content Include="Views\AlarmSystemConfiguration\Index.cshtml" />
+    <Content Include="Views\AlarmSystemView\InputsConfigure.cshtml" />
+    <Content Include="Views\AlarmSystemView\OutputsConfigure.cshtml" />
+    <Content Include="Views\AlarmSystemView\RelaysConfigure.cshtml" />
+    <Content Include="Views\AlarmSystemView\NamesConfigure.cshtml" />
+    <Content Include="Views\AlarmSystemView\SchedulesConfigure.cshtml" />
     <None Include="Views\Dashboard\Index.cshtml" />
     <Content Include="SignalR.Sample\jquery.color-2.1.2.min.js" />
     <Content Include="SignalR.Sample\SignalR.StockTicker.js" />
