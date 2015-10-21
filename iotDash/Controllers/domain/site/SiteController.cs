@@ -181,7 +181,8 @@ namespace iotDash.Controllers
 			return View();
 		}
 
-        // GET: AlarmSystemSummary
+        // GET: 
+
         public ActionResult AlarmSystemSummary(int siteId)
         {
             try

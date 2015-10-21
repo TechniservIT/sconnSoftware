@@ -1,20 +1,65 @@
 ﻿@model iotDash.Models.AlarmSystemSummaryModel 
 
-@{
+@*@{
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
-}
+}*@
 
 @Scripts.Render("~/bundles/jqueryui")
 
 
 
-
-<h2>Devices : </h2>
-
 @if (Model != null)
 {
-  <h3>@Model.DeviceNo.ToString()</h3>
 
+    <ul class="list-group">
+
+        <li class="list-group-item">
+            <div class="container-fluid">
+                <div class="row">
+
+                    <div class="col-md-2">
+                        <span class="glyphicon glyphicon-text-size" aria-hidden="true"></span>
+                    </div>
+                    <div class="col-md-6">
+                        @Model.AlarmDevice.DeviceName
+                    </div>
+                </div>
+            </div>
+        </li>
+
+
+        <li class="list-group-item">
+
+            <div class="container-fluid">
+                <div class="row">
+
+                    <div class="col-md-2">
+                        <span class="glyphicon glyphicon-stats" aria-hidden="true"></span>
+                    </div>
+                    <div class="col-md-6">
+                        @Model.DeviceNo.ToString() devices
+                    </div>
+                </div>
+            </div>
+
+        </li>
+
+        <li class="list-group-item">
+            <div class="container-fluid">
+                <div class="row">
+
+                    <div class="col-md-2">
+                        <span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
+                    </div>
+                    <div class="col-md-6">
+                        Disarmed
+                    </div>
+                </div>
+            </div>
+        </li>
+
+    </ul>
+    
     <a class="btn btn-info" role="button"  href="@Url.Action("Index", "AlarmSystemView", new { ServerId = Model.AlarmDevice.Id })">Details</a>
 
 }

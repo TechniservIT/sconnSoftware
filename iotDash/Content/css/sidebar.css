@@ -13,7 +13,7 @@
     margin-left: -150px;
     left: 70px;
     width: 150px;
-    background: #222;
+   background-color: #08375F;
     position: fixed;
     height: 100%;
     z-index: 10000;
@@ -46,14 +46,14 @@
 }
 
 #sidebar_menu li a, .sidebar-nav li a {
-    color: #999;
+    color: #22B8FF;
     display: block;
     float: left;
     text-decoration: none;
     width: 150px;
-    background: #252525;
-    border-top: 1px solid #373737;
-    border-bottom: 1px solid #1A1A1A;
+    background: #20436F;
+    border-top: 1px solid #0E0F11;
+    border-bottom: 1px solid #1DACFF;
     -webkit-transition: background .5s;
     -moz-transition: background .5s;
     -o-transition: background .5s;
@@ -72,13 +72,13 @@
 }
 
 .sidebar-nav li a {
-  color: #999999;
+    color: #00ADFF;
   display: block;
   text-decoration: none;
 }
 
 .sidebar-nav li a:hover {
-  color: #fff;
+ color: #22B8FF;
   background: rgba(255,255,255,0.2);
   text-decoration: none;
 }

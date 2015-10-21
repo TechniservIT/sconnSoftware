@@ -338,9 +338,29 @@
     <Content Include="Content\font-awesome\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\img\config1.png" />
+    <Content Include="Content\img\config2.png" />
     <Content Include="Content\img\downloads-bg.jpg" />
+    <Content Include="Content\img\electro.png" />
+    <Content Include="Content\img\eye.png" />
     <Content Include="Content\img\intro-bg.jpg" />
     <Content Include="Content\img\map-marker.png" />
+    <Content Include="Content\img\patchcord.png" />
+    <Content Include="Content\img\przekaznik.png" />
+    <Content Include="Content\img\sensorin.png" />
+    <Content Include="Content\img\sensorout.png" />
+    <Content Include="Content\img\strefa.png" />
+    <Content Include="Content\img\tel.png" />
+    <Content Include="Content\img\tmp.png" />
+    <Content Include="Content\img\water.png" />
+    <Content Include="Content\img\waves.png" />
+    <Content Include="Content\less\Site.css">
+      <DependentUpon>Site.less</DependentUpon>
+    </Content>
+    <Content Include="Content\less\Site.min.css">
+      <DependentUpon>Site.css</DependentUpon>
+    </Content>
+    <Content Include="Content\Site.css" />
     <Content Include="Content\switch\bootstrap-switch.css" />
     <Content Include="Content\switch\bootstrap-switch.min.css" />
     <Content Include="Content\themes\base\accordion.css" />
@@ -380,7 +400,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\bootstrap\variables.less" />
     <Content Include="Content\bootstrap\navbar.less" />
-    <Content Include="Content\Site.less" />
+    <Content Include="Content\less\Site.less" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
@@ -500,9 +520,11 @@
     <Content Include="Content\font-awesome\scss\_spinning.scss" />
     <Content Include="Content\font-awesome\scss\_stacked.scss" />
     <Content Include="Content\font-awesome\scss\_variables.scss" />
-    <Content Include="Content\less\grayscale.less" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\less\Site.css.map">
+      <DependentUpon>Site.css</DependentUpon>
+    </Content>
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -658,7 +680,6 @@
     <Content Include="Content\fonts\font-awesome-4.1.0\scss\_stacked.scss" />
     <Content Include="Content\fonts\font-awesome-4.1.0\scss\_variables.scss" />
     <Content Include="Content\less\mixins.less" />
-    <Content Include="Content\less\sb-admin-2.less" />
     <Content Include="Content\less\variables.less" />
     <Content Include="Views\Map\Index.cshtml" />
     <Content Include="Views\Shared\_DashboardLayout.cshtml" />

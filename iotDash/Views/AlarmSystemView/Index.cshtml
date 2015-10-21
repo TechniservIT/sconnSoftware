@@ -1,4 +1,4 @@
-﻿@model iotDash.Models.AlarmSystemDetailModel 
+﻿@model iotDash.Models.AlarmSystemDetailModel
 
 
 @{
@@ -84,7 +84,7 @@
         if (val > 0)
         {
             return "label label-danger";
-            
+
         }
         else
         {
@@ -117,9 +117,9 @@
         {
             return "Arm";
         }
-    }  
-    
-    
+    }
+
+
     //TODO generate req param input lists
 
 
@@ -195,7 +195,7 @@
             numberOfDecimals: 0
         });
 
-      
+
 
         $('.tgsw-action').on('switchChange.bootstrapSwitch', function () {
 
@@ -262,7 +262,7 @@
                 </div>
 
                 <div class="row">
-                 
+
 
                     <div class="panel panel-default">
                         <div class="panel-heading">Site</div>
@@ -295,6 +295,102 @@
                 <div class="row">
                     @Html.ActionLink(@DescForArmAction(), "ToggleArm", new { DeviceId = Model.AlarmDevice.Id }, new { @class = "btn btn-primary" })
                 </div>
+
+
+                <div class="row">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div  class="col-md-2">
+                                        <img src="~/Content/img/sensorin.png" alt="563te" class="img-circle img-section-icon">
+                                    </div>
+                                    <div class="col-md-10">
+                                        <center>Inputs</center>
+                                    </div>
+                                </div>
+                             </div>
+                            </div>
+                        <div class="panel-body"></div>
+                        <table class="table">
+                            <tr>
+                                <th>Input </th>
+                                <th>Type</th>
+                                <th>State </th>
+
+                            </tr>
+
+                            @for (int i = 0; i < Model.Inputs.Count; i++)
+                            {
+                                <tr>
+                                    <td>
+                                        @Model.Inputs[i].Name.ToString()
+                                    </td>
+
+                                    @Html.HiddenFor(model => model.Inputs[i].Id)
+                                    @Html.HiddenFor(model => model.Inputs[i].NameId)
+
+                                    <td>
+                                        @Model.Inputs[i].Type.ToString()
+
+                                    </td>
+
+                                    <td>
+                                        @Model.Inputs[i].Value.ToString()
+
+                                    </td>
+
+                                </tr>
+                            }
+
+                        </table>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <img src="~/Content/img/sensorout.png" alt="124das" class="img-circle img-section-icon">
+                            <center>Outputs</center>
+                        </div>
+                        <div class="panel-body"></div>
+                        <table class="table">
+                            <tr>
+                                <th>Output </th>
+                                <th>Type</th>
+                                <th>State </th>
+
+                            </tr>
+
+                            @for (int i = 0; i < Model.Inputs.Count; i++)
+                            {
+                                <tr>
+                                    <td>
+                                        @Model.Inputs[i].Name.ToString()
+                                    </td>
+
+                                    @Html.HiddenFor(model => model.Inputs[i].Id)
+                                    @Html.HiddenFor(model => model.Inputs[i].NameId)
+
+                                    <td>
+                                        @Model.Inputs[i].Type.ToString()
+
+                                    </td>
+
+                                    <td>
+                                        @Model.Inputs[i].Value.ToString()
+
+                                    </td>
+
+                                </tr>
+                            }
+
+                        </table>
+                    </div>
+
+                </div>
+
 
             </div>
         </div>
@@ -332,7 +428,7 @@
 
 
             </div>
-            
+
 
         </div>
 

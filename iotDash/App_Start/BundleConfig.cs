@@ -74,8 +74,8 @@ namespace iotDash
             /* Style */
 
             bundles.Add(new StyleBundle("~/bundles/css").Include(
-                "~/Content/Site.less", 
-                "~/Content/bootstrap/bootstrap.less",
+                "~/Content/Site.css", 
+                "~/Content/bootstrap.css",
                 "~/Content/css/sb-admin-2.css",
                 "~/Content/fonts/font-awesome-4.1.0/css/font-awesome.css",
                 "~/Content/css/plugins/metisMenu/metisMenu.css",
@@ -101,7 +101,7 @@ namespace iotDash
 
 
             /* LESS Bundles */
-            bundles.Add(new LessBundle("~/Content/less").Include("~/Content/less/*.less"));
+            bundles.Add(new LessBundle("~/bundles/less").Include("~/Content/less/*.less"));
 
 
         }
