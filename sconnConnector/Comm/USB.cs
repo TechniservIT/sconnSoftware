@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.IO.Ports;
 using System.Threading.Tasks;
 using Microsoft.Win32;
 
+#if WIN32_ENC
+using System.IO.Ports;
+#endif
 
 namespace sconnConnector
 {
@@ -17,6 +19,7 @@ namespace sconnConnector
      * 
      * */
 
+    #if WIN32_ENC
 
     public class USB
     {
@@ -283,4 +286,7 @@ namespace sconnConnector
         }
 
     }
+#endif
+
+
 }

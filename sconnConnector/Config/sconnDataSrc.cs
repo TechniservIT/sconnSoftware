@@ -1,17 +1,24 @@
 ﻿using System;
-using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
+using System.Xml.Linq;
+
+
+#if WIN32_ENC
+
+using Microsoft.Win32;
 using System.Windows;
 using System.Windows.Input;
-using System.Xml;
 using System.Security.Cryptography;
 using System.Security.Cryptography.Xml;
-using System.Xml.Linq;
-using Microsoft.Win32;
+
+using System.IO;
+#endif
+
 
 namespace sconnConnector
 {
@@ -35,19 +42,25 @@ namespace sconnConnector
 
         private void CreateRegistryData()
         {
-            RegistryKey appKey = Registry.CurrentUser.CreateSubKey("sconnRem");
-            GlobalSettings defsettings = new GlobalSettings();
-            if ( appKey != null )
-            {
-                appKey.SetValue("ConfigFilePath", defsettings.ConfigFilePath);
-                appKey.SetValue("CultureName", defsettings.CultureName);
-                appKey.SetValue("DefaultReloadInterval", defsettings.DefaultReloadInterval);
-            }
+            #if WIN32_ENC
+
+                        RegistryKey appKey = Registry.CurrentUser.CreateSubKey("sconnRem");
+                        GlobalSettings defsettings = new GlobalSettings();
+                        if ( appKey != null )
+                        {
+                            appKey.SetValue("ConfigFilePath", defsettings.ConfigFilePath);
+                            appKey.SetValue("CultureName", defsettings.CultureName);
+                            appKey.SetValue("DefaultReloadInterval", defsettings.DefaultReloadInterval);
+                        }
+            #endif
+
+
 
         }
 
         public GlobalSettings LoadRegistryData()
         {
+            #if WIN32_ENC
             GlobalSettings settings = new GlobalSettings();
             RegistryKey appKey = Registry.CurrentUser.OpenSubKey("sconnRem");
             if ( appKey == null)
@@ -58,10 +71,14 @@ namespace sconnConnector
             settings.CultureName = (string)appKey.GetValue("CultureName");
             settings.DefaultReloadInterval = (int)appKey.GetValue("DefaultReloadInterval");
             return settings;
+            #else
+            return null;
+            #endif
         }
 
         public void SaveSettingsToRegistry(GlobalSettings settings)
         {
+            #if WIN32_ENC
             RegistryKey appKey = Registry.CurrentUser.CreateSubKey("sconnRem");
             if (appKey == null)
             {
@@ -70,6 +87,7 @@ namespace sconnConnector
             appKey.SetValue("ConfigFilePath", settings.ConfigFilePath);
             appKey.SetValue("CultureName", settings.CultureName);
             appKey.SetValue("DefaultReloadInterval", settings.DefaultReloadInterval );
+            #endif
 
         }
 
@@ -164,6 +182,8 @@ namespace sconnConnector
             static private byte[] cryptoVector = { 0x02, 0x06, 0x03, 0x09, 0x01, 0x14, 0x41, 0x12, 0x2F, 0x1C, 0x01, 0x02, 0x03, 0x09, 0x03, 0x09 };
 
 
+            #if WIN32_ENC
+
             private void encryptXmlConfig(XmlDocument doc)
             {
                 RijndaelManaged crypto = new RijndaelManaged();
@@ -187,6 +207,9 @@ namespace sconnConnector
                 crypto.IV = cryptoVector;
                 DecryptXmlElement(doc, crypto); 
             }
+
+            #endif
+
 
             private string ToBase64(byte[] data)
             {
@@ -419,8 +442,8 @@ namespace sconnConnector
                 }
                 catch (Exception)
                 {
-                    
-                    throw;
+
+                    return new sconnSite[0];
                 }
 
             }
@@ -432,7 +455,9 @@ namespace sconnConnector
                         XmlDocument doc = new XmlDocument();
                         XmlNode configData = configToXML(ref doc);
                         doc.AppendChild(configData);
+                    #if WIN32_ENC
                         encryptXmlConfig(doc);
+                    #endif
                         doc.Save(configFilePath);
                         return true;
                 }
@@ -480,7 +505,9 @@ namespace sconnConnector
                      XmlDocument doc = new XmlDocument();
                      XmlNode configData = configToXML(ref doc);
                      doc.AppendChild(configData);
+                     #if WIN32_ENC   
                      encryptXmlConfig(doc);
+                    #endif
                      doc.Save(configFilePath);
                      return doc;
                  }
@@ -492,11 +519,21 @@ namespace sconnConnector
 
             public bool loadConfig()
             {
-                if (File.Exists(configFilePath))
-                {
+
+                
+                    #if WIN32_ENC
+                    if (File.Exists(configFilePath))
+                    {
+                    #else
+                    if(true)
+                    {
+                    #endif
+
                     XmlDocument doc = new XmlDocument();
                     doc.Load(configFilePath);
+                    #if WIN32_ENC
                     decryptXmlConfig(doc);
+                    #endif
                     if (validateConfigFile(doc))
                     {
                         sconnDataShare.removeSites();
@@ -514,7 +551,7 @@ namespace sconnConnector
                 }
             }
 
-
+            #if WIN32_ENC
 
 
             private static void EncryptXmlElement(XmlDocument Doc, string ElementName, SymmetricAlgorithm Key)
@@ -589,6 +626,8 @@ namespace sconnConnector
                 exml.ReplaceData(encryptedElement, rgbOutput);
 
             }
+
+            #endif
 
        }
 
