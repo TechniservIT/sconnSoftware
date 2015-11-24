@@ -260,6 +260,7 @@
     <Compile Include="Areas\Administration\AdministrationAreaRegistration.cs" />
     <Compile Include="Areas\AlarmSystem\AlarmSystemAreaRegistration.cs" />
     <Compile Include="Areas\Site\SiteAreaRegistration.cs" />
+    <Compile Include="Content\Dynamic\Status\StatusResponseGenerator.cs" />
     <Compile Include="Controllers\domain\managment\routing\RoutingRulesController.cs" />
     <Compile Include="Controllers\domain\managment\security\DeviceSecurityController.cs" />
     <Compile Include="Controllers\domain\managment\security\UserSecurityController.cs" />

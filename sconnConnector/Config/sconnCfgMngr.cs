@@ -1073,6 +1073,81 @@ namespace sconnConnector
 
 		}
 
+
+       public bool ReadSiteRunningDeviceConfigs(sconnSite site)
+       {
+           /**********  Get device configs **********/
+           site.siteStat.StartConnectionTimer();
+           bool globalUploadStat = false;
+           bool deviceUploadStat = false;
+           int devices = 0;
+           byte[] cmd = new byte[32];
+           ushort siteMemAddr = (ushort)(ipcDefines.mAdrGlobalConfig);
+           byte[] rxBF = new byte[ipcDefines.ipcGlobalConfigSize + 2];
+
+           SconnClient client = new SconnClient(site.serverIP, site.serverPort, site.authPasswd, true);
+
+           cmd = new byte[32];
+           rxBF = new byte[ipcDefines.deviceConfigSize + 2];
+           byte[,] narrNamesBF = new byte[ipcDefines.RAM_DEV_NAMES_NO, ipcDefines.RAM_NAME_SIZE];
+           byte[] SchedBF = new byte[ipcDefines.RAM_DEV_SCHED_SIZE];
+           byte[] gsmRcpBF = new byte[ipcDefines.RAM_SMS_RECP_MEM_SIZE];
+           byte[] devAuthBF = new byte[ipcDefines.SYS_ALARM_DEV_AUTH_MEM_SIZE];
+           siteMemAddr = (ushort)(ipcDefines.mAdrDevStart);
+           int MsgByteOffset = 1;
+
+           try
+           {
+               for (int i = 0; i < devices; i++)
+               {
+                   /*******  Get Device Config  ****/
+                   cmd[0] = ipcCMD.GET;
+                   cmd[1] = ipcCMD.getRunDevCfg;
+                   cmd[2] = (byte)i; //devi ce number
+                   rxBF = client.berkeleySendMsg(cmd);
+
+                   if (rxBF[0] == ipcCMD.SVAL)
+                   {
+                       deviceUploadStat = true;
+
+                       //read device config
+                       for (int j = 0; j < ipcDefines.deviceConfigSize; j++)
+                       {
+                           site.siteCfg.deviceConfigs[i].memCFG[j] = rxBF[j + MsgByteOffset];
+                       }
+
+                   }
+                   else
+                   {
+                       deviceUploadStat = false;
+                   }
+               }
+
+               //get events
+               cmd[0] = ipcCMD.GET;
+               cmd[1] = ipcCMD.getEventNo;
+               rxBF = client.berkeleySendMsg(cmd);
+
+               cmd[1] = ipcCMD.getEvent;
+               cmd[2] = (byte)1; //test event id 1
+               rxBF = client.berkeleySendMsg(cmd);
+
+               site.siteStat.StopConnectionTimer();
+
+           }
+           catch (Exception e)
+           {
+               site.siteStat.StopConnectionTimer();
+               site.siteStat.FailedConnections++;
+               client.CloseConnection();
+               return (bool)(deviceUploadStat & globalUploadStat);
+               throw;
+           }
+           client.CloseConnection();
+           return (bool)(deviceUploadStat & globalUploadStat);
+
+       }
+
 	   public bool ReadSiteRunningConfig(sconnSite site)
 	   {
 		   site.siteStat.StartConnectionTimer();

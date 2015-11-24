@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Settings";
 }
 
@@ -7,7 +6,33 @@
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 }
 
-<a class="ui-button" href="@Url.Action("Index", "Site")"><h3>Protocols</h3></a>
+@*<a class="ui-button" href="@Url.Action("Index", "Site")"><h3>Protocols</h3></a>*@
 
-<a class="ui-button"  href="@Url.Action("AddType", "Device")"><h3>Device Types</h3></a>
+<div class="panel panel-default">
+    <!-- Default panel contents -->
+    <div class="panel-heading">Settings</div>
+
+    <!-- Table -->
+    <table class="table-responsive">
+        <tr>
+            <td>
+                <div class="row">
+                    <div class="col-xs-4 col-md-2">
+                        <img src="~/Content/img/config1.png" class="img-responsive" alt="typeimg">
+                        @*<span class="  glyphicon glyphicon-wrench" aria-hidden="true"></span>*@
+                    </div>
+                    <div class="col-xs-12 col-md-10">
+                        <a class="ui-button" href="@Url.Action("AddType", "Device")"><h3>Device Types</h3></a>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        
+
+    </table>
+
+</div>
+
+
+
 

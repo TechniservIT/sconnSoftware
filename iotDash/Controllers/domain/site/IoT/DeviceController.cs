@@ -9,6 +9,7 @@ using iotServiceProvider;
 using iotDeviceService;
 using iotDash.Session;
 using iotDatabaseConnector.Runtime;
+using iotDash.Content.Dynamic.Status;
 
 namespace iotDash.Controllers
 {
@@ -61,11 +62,11 @@ namespace iotDash.Controllers
 				type.VisualRepresentationURL = ImageUrl;
 				domain.DeviceTypes.Add(type);
 				cont.SaveChanges();
-				return "Add success.";
+                return StatusResponseGenerator.GetSuccessPanelWithMsgAndStat("Success.", RequestStatus.Success);
 			}
 			catch (Exception e) 
 			{
-				return "Add error.";
+                return StatusResponseGenerator.GetSuccessPanelWithMsgAndStat("Error.", RequestStatus.Failure);
 			}          
 		}
 

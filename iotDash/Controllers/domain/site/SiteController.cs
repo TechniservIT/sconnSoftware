@@ -10,6 +10,7 @@ using System.ServiceModel;
 using iotDbConnector.DAL;
 using iotServiceProvider;
 using sconnConnector.Config;
+using iotDash.Content.Dynamic.Status;
 
 namespace iotDash.Controllers
 {
@@ -137,17 +138,17 @@ namespace iotDash.Controllers
 				}
 				else
 				{
-					return "Location not found";
+                    return StatusResponseGenerator.GetSuccessPanelWithMsgAndStat("Location not found.", RequestStatus.Warning);
 				}
 				 
 
 			}
 			catch (Exception e)
 			{
-				return "Add error.";
+                return StatusResponseGenerator.GetSuccessPanelWithMsgAndStat("Add error.", RequestStatus.Failure);
 			}
 
-			return "Add success.";
+            return StatusResponseGenerator.GetSuccessPanelWithMsgAndStat("Add success.", RequestStatus.Success);
 		}
 
 

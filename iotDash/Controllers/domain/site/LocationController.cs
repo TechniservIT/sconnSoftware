@@ -1,4 +1,5 @@
-﻿using iotDash.Models;
+﻿using iotDash.Content.Dynamic.Status;
+using iotDash.Models;
 using iotDash.Session;
 using iotDbConnector.DAL;
 using iotServiceProvider;
@@ -51,11 +52,11 @@ namespace iotDash.Controllers
 				loc.Lat = double.Parse(Lat, CultureInfo.InvariantCulture);
 				d.Locations.Add(loc);
                 icont.SaveChanges();
-				return "Location added sucessfully";
+                return StatusResponseGenerator.GetSuccessPanelWithMsgAndStat("Location added sucessfully.", RequestStatus.Success);
 			}
 			catch (Exception e)
 			{
-				return "Location add failed";
+                return StatusResponseGenerator.GetSuccessPanelWithMsgAndStat("Location add failed.", RequestStatus.Failure);
 			}
 		}
 
