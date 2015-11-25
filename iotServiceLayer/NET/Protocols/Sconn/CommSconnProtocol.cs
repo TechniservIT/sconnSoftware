@@ -105,6 +105,7 @@ namespace iotServiceProvider
             try
             {
                 int currDevs = cfgMngr.getSiteDeviceNo(site);
+                //TODO - cache site configs  for hash min rx
                 if (site.siteCfg != null)
                 {
                     if (site.siteCfg.deviceNo != currDevs)

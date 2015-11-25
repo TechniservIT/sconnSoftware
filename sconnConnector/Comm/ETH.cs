@@ -165,7 +165,7 @@ namespace sconnConnector
                 {
                     
                     #if WIN32_ENC
-                        EncStream.AuthenticateAsClient(Hostname, null, SslProtocols.Tls12, false);
+                        EncStream.AuthenticateAsClient(Hostname, null, SslProtocols.Ssl3, false);
                     #else
                         EncStream.AuthenticateAsClient(Hostname, null, (System.Security.Authentication.SslProtocols)48, false);   //, null, (SslProtocols)48, false
                     #endif

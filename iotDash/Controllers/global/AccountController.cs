@@ -65,7 +65,13 @@ namespace iotDash
                     {
                         Session["AppDomain"] = domain.DomainName;
                         await SignInAsync(user, model.RememberMe);
-                        return RedirectToLocal(returnUrl);
+
+                        string userDomain = domain.DomainName;
+                        if ((userDomain != null) && !userDomain.Equals(String.Empty))
+                        {
+                            return RedirectToAction("Index", "Dashboard", new { app = userDomain });
+                        } 
+                        //return RedirectToLocal(returnUrl);
                     }
                     else
                     {

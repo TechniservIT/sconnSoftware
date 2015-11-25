@@ -542,7 +542,10 @@ namespace sconnConnector
         private ipcDataType.ipcEvent[] events;
         private ipcDataType.ipcRcpt[] _gsmRcpts;
 
+        public byte[] Hash;
+
         public byte[] GlobalNameConfig;
+        public byte[] NamesHash;
 
 
         public ipcDataType.ipcRcpt[] gsmRcpts
@@ -610,6 +613,8 @@ namespace sconnConnector
             _deviceConfigs = new ipcDataType.ipcDeviceConfig[deviceNo];
             _globalConfig = new ipcDataType.ipcGlobalConfig();
             GlobalNameConfig = new byte[ipcDefines.RAM_NAMES_Global_Total_Size];
+            Hash = new byte[ipcDefines.SHA256_DIGEST_SIZE];
+            NamesHash = new byte[ipcDefines.SHA256_DIGEST_SIZE];
         }
 
         public ipcSiteConfig(int devices)
@@ -621,36 +626,38 @@ namespace sconnConnector
                 _deviceConfigs[i] = new ipcDataType.ipcDeviceConfig();
             }
             _globalConfig = new ipcDataType.ipcGlobalConfig();
-            GlobalNameConfig = new byte[ipcDefines.RAM_NAMES_Global_Total_Size];        
+            GlobalNameConfig = new byte[ipcDefines.RAM_NAMES_Global_Total_Size];
+            Hash = new byte[ipcDefines.SHA256_DIGEST_SIZE];
+            NamesHash = new byte[ipcDefines.SHA256_DIGEST_SIZE];
         }
 
         public void fillSampleCfg()
         {
-            _deviceNo = 1;
-            _globalConfig = new ipcDataType.ipcGlobalConfig();
-            _deviceConfigs = new ipcDataType.ipcDeviceConfig[deviceNo];
-            for (int i = 0; i < deviceNo; i++)
-            {
-                _deviceConfigs[i] = new ipcDataType.ipcDeviceConfig();
-            }
+            //_deviceNo = 1;
+            //_globalConfig = new ipcDataType.ipcGlobalConfig();
+            //_deviceConfigs = new ipcDataType.ipcDeviceConfig[deviceNo];
+            //for (int i = 0; i < deviceNo; i++)
+            //{
+            //    _deviceConfigs[i] = new ipcDataType.ipcDeviceConfig();
+            //}
             
-            //fill device config
-            for (int i = 0; i < ipcDefines.deviceConfigSize; i++)
-            {
-                _deviceConfigs[0].memCFG[i] = (byte)i;
+            ////fill device config
+            //for (int i = 0; i < ipcDefines.deviceConfigSize; i++)
+            //{
+            //    _deviceConfigs[0].memCFG[i] = (byte)i;
 
-            }
-            //set output Number
-            _deviceConfigs[0].memCFG[ipcDefines.mAdrOutputsNO] = 10;
+            //}
+            ////set output Number
+            //_deviceConfigs[0].memCFG[ipcDefines.mAdrOutputsNO] = 10;
 
-            //fill  gconfig
-            for (int i = 0; i < 250; i++)
-            {
-                _globalConfig.memCFG[i] = (byte)i;
-            }
+            ////fill  gconfig
+            //for (int i = 0; i < 250; i++)
+            //{
+            //    _globalConfig.memCFG[i] = (byte)i;
+            //}
 
 
-            _globalConfig.memCFG[ipcDefines.mAdrDevNO] = (byte)deviceNo;
+            //_globalConfig.memCFG[ipcDefines.mAdrDevNO] = (byte)deviceNo;
 
         }
 
@@ -771,6 +778,7 @@ namespace sconnConnector
 			private byte[][] _NamesCFG;
 			private byte[][] _ScheduleCFG;
 			private byte[] _NetworkConfig;
+            public byte[] Hash;
 
             public byte[] AuthDevicesCFG { get; set; }
 
@@ -905,6 +913,8 @@ namespace sconnConnector
 				{
 					_ScheduleCFG[i] = new byte[ipcDefines.RAM_DEV_SCHED_MEM_SIZE];
 				}
+
+                Hash = new byte[ipcDefines.SHA256_DIGEST_SIZE];
 
 				Inputs = new List<sconnInput>();
 				Outputs = new List<sconnOutput>();
@@ -1209,7 +1219,7 @@ namespace sconnConnector
         public static byte getGsmModemResponse = 0x74;
         public static byte getDeviceName = 0x75;
         public static byte getGlobalNames = 0x76;
-
+         public static byte getConfigHash = 0x77;
 
         public static byte CFG = 0x11; //register to set, followed by value SVAL <value bytes > EVAL
 
@@ -1250,6 +1260,8 @@ namespace sconnConnector
     public struct ipcDefines
     {
 
+        public static int SHA256_DIGEST_SIZE = 32;
+
         public static byte comI2C = 0x01;
         public static byte comSPI = 0x02;
         public static byte comMiWi = 0x03;
@@ -1257,7 +1269,7 @@ namespace sconnConnector
         public static byte comETH = 0x05;
 
         //public static int deviceConfigSize = 256;  //256 bytes
-        public static int ipcMaxDevices = 32;
+        public static int ipcMaxDevices = 8;
 
         /*
          256 Bytes for each devies ( 1024 devies @ 256Kb mem)
@@ -1273,6 +1285,11 @@ namespace sconnConnector
          *
          * 
          */
+        public static int ipcAbsMaxDevices = 16;
+        public static int RAM_DEVCFG_NO = 16;
+        public static int RAM_DEVCFG_SIZE = 512;
+        public static int RAM_GCFG_SIZE = 1024;
+
 
 
         public static int mAdrDevID_LEN = 0x0002;
@@ -1301,6 +1318,64 @@ namespace sconnConnector
 
         public static int mAdrHostDeviceIsSystemConnected= (mAdrHostDeviceSystemId+mAdrHostDeviceSystemId_LEN);
         public static int mAdrHostDeviceIsSystemConnected_LEN =0x01;
+
+        public static int mAdrHostDeviceServerId = (mAdrHostDeviceIsSystemConnected+mAdrHostDeviceIsSystemConnected_LEN);
+        public static int mAdrHostDeviceServerId_LEN = 0x02;
+
+
+        public static int mAdrHostDeviceServerIpAddr = (mAdrHostDeviceServerId+mAdrHostDeviceServerId_LEN);
+        public static int mAdrHostDeviceServerIpAddr_LEN =  30;
+
+        public static int mAdrHostDeviceServerPasswd = (mAdrHostDeviceServerId+mAdrHostDeviceServerId_LEN);
+        public static int mAdrHostDeviceServerPasswd_LEN = 30;
+
+        public static int mAdrSysFail = (mAdrHostDeviceServerPasswd+mAdrHostDeviceServerPasswd_LEN);
+        public static int mAdrSysFail_LEN  = 0x01;
+
+        public static int mAdrZoneNo   =   (mAdrSysFail+mAdrSysFail_LEN);
+        public static int mAdrZoneNo_LEN = 0x01;
+            
+        public static int mAdrZoneCfgStartAddr  =  (mAdrZoneNo+mAdrZoneNo_LEN);
+
+        public static int ZONE_CFG_ID_POS = 0x00;
+        public static int ZONE_CFG_ID_LEN  = 0x01;
+
+        public static int ZONE_CFG_NAME_ID_POS = (ZONE_CFG_ID_POS+ZONE_CFG_ID_LEN);
+        public static int ZONE_CFG_NAME_ID_LEN = 0x01;
+
+        public static int ZONE_CFG_LEN = (ZONE_CFG_NAME_ID_POS+ZONE_CFG_NAME_ID_LEN);
+
+        public static int ZONE_CFG_MAX_ZONES = 32;
+
+        public static int GSM_GCFG_LOG_LVL_START_ADDR = (mAdrZoneCfgStartAddr+ZONE_CFG_MAX_ZONES*ZONE_CFG_LEN);
+        public static int GSM_GCFG_LOG_LVL_LEN = 0x04;
+
+        public static int GSM_GCFG_LOG_LVL_EN_ARM_CHANGE_MASK   =   0x01;
+        public static int GSM_GCFG_LOG_LVL_EN_VIO_MASK         =    0x02;
+        public static int GSM_GCFG_LOG_LVL_EN_PWR_STAT_MASK    =    0x04;
+        public static int GSM_GCFG_LOG_LVL_EN_ENTRENCE_MASK    =    0x08;
+
+        public static int mAdrGeo_Pos     =   (GSM_GCFG_LOG_LVL_START_ADDR+GSM_GCFG_LOG_LVL_LEN);
+        public static int mAdrLATd_Pos    =       0x00; //degrees
+        public static int mAdrLATm_Pos     =      0x01; //minutes
+        public static int mAdrLATs_Pos     =      0x02; //seconds
+        public static int mAdrLNGd_Pos      =     0x03; //degrees
+        public static int mAdrLNGm_Pos      =     0x04; //minutes
+        public static int mAdrLNGs_Pos      =     0x05; //seconds
+        public static int mAdrGeo_Pos_LEN =  0x06;
+
+
+        public static int GCFG_HASH_POS  =  (mAdrGeo_Pos+mAdrGeo_Pos_LEN);
+        public static int GCFG_HASH_LEN  =  SHA256_DIGEST_SIZE;
+
+        public static int GCFG_DEV_MOD_CTR_START_POS = (GCFG_HASH_POS+GCFG_HASH_LEN);
+        public static int GCFG_DEV_MOD_CTR_LEN = SHA256_DIGEST_SIZE;
+        public static int GCFG_DEV_MOD_CTR_TOTAL_LEN = (GCFG_DEV_MOD_CTR_LEN * ipcAbsMaxDevices);
+
+        public static int GCFG_NAMES_MOD_CTR_POS  =    (GCFG_DEV_MOD_CTR_START_POS+GCFG_DEV_MOD_CTR_TOTAL_LEN);
+        public static int GCFG_NAMES_MOD_CTR_LEN = SHA256_DIGEST_SIZE;
+
+        public static int GCFG_END_REG            =    (GCFG_NAMES_MOD_CTR_POS+GCFG_NAMES_MOD_CTR_LEN);
 
 
         public static int mAdrDevStart = 0x400; //1024- start address in memory of device configs
@@ -1463,10 +1538,7 @@ namespace sconnConnector
         public static byte OUT_STATE_INACTIVE  = 0x00;
 
 
-
-        public static int RAM_DEVCFG_NO = 16;
-        public static int RAM_DEVCFG_SIZE = 512;
-        public static int RAM_GCFG_SIZE = 1024;
+ 
 
 
         /************  NAMES *****************/
@@ -1688,6 +1760,14 @@ namespace sconnConnector
         static public byte NET_UPLOAD_DATA_OFFSET= 0x03;
         static public byte NET_UPLOAD_DATA_END_OFFSET =0x01;
         static public byte NET_CFG_SIZE   = 52;
+
+
+
+
+
+        /*************** OTHER *****************/
+
+
 
 
     }
