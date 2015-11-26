@@ -88,7 +88,8 @@ namespace iotDash.Controllers
                                            where u.UserName.Equals( user.UserName )
                                            select u).First();
 
-                        iotContext dcont = new iotContext();
+
+                        iotContext dcont = (iotContext)System.Web.HttpContext.Current.Session["iotcontext"];    //new iotContext();
                         iotDomain domain = dcont.Domains.First(d => d.Id == currentUser.domainId);
                         if (domain != null)
                         {

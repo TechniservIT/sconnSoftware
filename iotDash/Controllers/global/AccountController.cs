@@ -60,6 +60,9 @@ namespace iotDash
                                     select u).First();
 
                     iotContext icont = new iotContext();
+                   // System.Web.HttpContext.Current.Session.Contents.
+                    System.Web.HttpContext.Current.Session["iotcontext"] = icont; 
+
                     iotDomain domain = icont.Domains.First(dm => dm.Id == currentUser.domainId);        //dm.DomainName.Equals(currentUser.domainId)
                     if(domain != null)
                     {
