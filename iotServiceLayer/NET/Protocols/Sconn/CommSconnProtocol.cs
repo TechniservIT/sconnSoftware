@@ -124,7 +124,7 @@ namespace iotServiceProvider
                     site.siteCfg = new ipcSiteConfig(devices); //init device configs    
                 }
 
-                return cfgMngr.ReadSiteRunningConfig(site);
+                return cfgMngr.ReadSiteRunningConfigIO(site);
             }
             catch (Exception e)
             {

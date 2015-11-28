@@ -9,6 +9,7 @@ using iotDash.Session;
 
 namespace iotDash.Controllers
 {
+    [DomainAuthorize]
     public class StatisticController : Controller
     {
         // GET: Statistic
@@ -19,7 +20,7 @@ namespace iotDash.Controllers
 
         public ActionResult PropertyStat(int propertyId)
         {
-            iotContext icont = new iotContext();
+            var icont = (iotContext)System.Web.HttpContext.Current.Session["iotcontext"];
             string domainId = DomainSession.GetContextDomain(this.HttpContext);
             iotDomain d = icont.Domains.First(dm => dm.DomainName.Equals(domainId));
             DeviceProperty prop = icont.Properties.First(p => p.Id == propertyId);
@@ -29,7 +30,7 @@ namespace iotDash.Controllers
 
         public ActionResult ActionStat(int actionId)
         {
-            iotContext icont = new iotContext();
+            var icont = (iotContext)System.Web.HttpContext.Current.Session["iotcontext"];
             string domainId = DomainSession.GetContextDomain(this.HttpContext);
             iotDomain d = icont.Domains.First(dm => dm.DomainName.Equals(domainId));
             DeviceAction prop = icont.Actions.First(a => a.Id == actionId);

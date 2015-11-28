@@ -33,7 +33,7 @@ namespace iotDash.Controllers
 		{
 			try
 			{
-				iotContext cont = new iotContext();
+                var cont = (iotContext)System.Web.HttpContext.Current.Session["iotcontext"];
 				int Id = int.Parse(SiteId);
 				string domainId = DomainSession.GetContextDomain(this.HttpContext);
 				iotDomain d = cont.Domains.First(dm => dm.DomainName.Equals(domainId));
@@ -53,7 +53,7 @@ namespace iotDash.Controllers
 		{
 			try
 			{
-				iotContext cont = new iotContext();
+                var cont = (iotContext)System.Web.HttpContext.Current.Session["iotcontext"];
 				string domainId = DomainSession.GetContextDomain(this.HttpContext);
 				iotDomain domain = cont.Domains.First(d => d.DomainName.Equals(domainId));
 				DeviceType type = new DeviceType();
@@ -86,7 +86,7 @@ namespace iotDash.Controllers
 			{
 				if (model != null)
 				{
-					iotContext cont = new iotContext();
+                    var cont = (iotContext)System.Web.HttpContext.Current.Session["iotcontext"];
 					DeviceRestfulService cl = new DeviceRestfulService();
 					string domainId = DomainSession.GetContextDomain(this.HttpContext);
 					iotDomain d = cont.Domains.First(dm => dm.DomainName.Equals(domainId));
@@ -120,7 +120,7 @@ namespace iotDash.Controllers
 			{
                 if (Device != null)
 				{
-					iotContext cont = new iotContext();
+                    var cont = (iotContext)System.Web.HttpContext.Current.Session["iotcontext"];
 					DeviceRestfulService cl = new DeviceRestfulService();
                     Device stored = cont.Devices.First(d => d.Id == Device.Id);
 					if (stored != null)
@@ -155,7 +155,7 @@ namespace iotDash.Controllers
 			try
 			{
 				//TODO verify param
-				iotContext cont = new iotContext();
+                var cont = (iotContext)System.Web.HttpContext.Current.Session["iotcontext"];
 				DeviceRestfulService cl = new DeviceRestfulService();
 				string domainId = DomainSession.GetContextDomain(this.HttpContext);
 				iotDomain d = cont.Domains.First(dm => dm.DomainName.Equals(domainId));
@@ -181,7 +181,7 @@ namespace iotDash.Controllers
 		{
 			try
 			{
-				iotContext cont = new iotContext();
+                var cont = (iotContext)System.Web.HttpContext.Current.Session["iotcontext"];
 				DeviceRestfulService cl = new DeviceRestfulService();
 				Device dev = cont.Devices.First(d => d.Id == DeviceId);
 				if ( dev != null)
@@ -204,7 +204,7 @@ namespace iotDash.Controllers
 		{
 			try
 			{
-				iotContext cont = new iotContext();
+                var cont = (iotContext)System.Web.HttpContext.Current.Session["iotcontext"];
 				DeviceRestfulService cl = new DeviceRestfulService();
 				Device dev = cont.Devices.First(d => d.Id == DeviceId);
 				if (dev != null)
@@ -229,7 +229,7 @@ namespace iotDash.Controllers
 		{
 			try
 			{
-				iotContext cont = new iotContext();
+                var cont = (iotContext)System.Web.HttpContext.Current.Session["iotcontext"];
 				Device dev = cont.Devices.First(d => d.Id == DeviceId);
 				DeviceEditModel model = new DeviceEditModel(dev, cont.Locations.ToList(), cont.Types.ToList() );
 				return View(model);
@@ -246,7 +246,7 @@ namespace iotDash.Controllers
 		{   
 			try
 			{
-				iotContext cont = new iotContext();
+                var cont = (iotContext)System.Web.HttpContext.Current.Session["iotcontext"];
 				DeviceAction action = cont.Actions.First(a => a.Id == ActionId);
 				DeviceRestfulService cl = new DeviceRestfulService();
 				string currValStr = action.ResultParameters.First().Value;

@@ -274,6 +274,9 @@
     <Compile Include="Content\Dynamic\Status\StatusResponseGenerator.cs" />
     <Compile Include="Controllers\domain\managment\routing\RoutingRulesController.cs" />
     <Compile Include="Controllers\domain\managment\security\DeviceSecurityController.cs" />
+    <Compile Include="Controllers\domain\managment\security\ApplicationRoleManager.cs" />
+    <Compile Include="Controllers\domain\managment\security\RoleManagmentController.cs" />
+    <Compile Include="Controllers\domain\managment\security\UserManagmentController.cs" />
     <Compile Include="Controllers\domain\managment\security\UserSecurityController.cs" />
     <Compile Include="Controllers\domain\signaling\SignalingRulesController.cs" />
     <Compile Include="Areas\AlarmSystem\Controllers\AlarmSystemSummaryController.cs" />
@@ -307,6 +310,14 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Identity\Roles\IotUserRole.cs" />
+    <Compile Include="Identity\Roles\IotAlarmSystemAdminRole.cs" />
+    <Compile Include="Identity\Roles\IotCctvAdminRole.cs" />
+    <Compile Include="Identity\Roles\IotDeviceManagerRole.cs" />
+    <Compile Include="Identity\Roles\IotGlobalStatusViewerRole.cs" />
+    <Compile Include="Identity\Roles\IotMapAndTrackingAdminRole.cs" />
+    <Compile Include="Identity\Roles\IotScheduledSiteAdminRole.cs" />
+    <Compile Include="Identity\Roles\IotSiteManagerRole.cs" />
     <Compile Include="Migrations\201506241419288_initial.cs" />
     <Compile Include="Migrations\201506241419288_initial.Designer.cs">
       <DependentUpon>201506241419288_initial.cs</DependentUpon>
@@ -318,6 +329,7 @@
     <Compile Include="Models\DeviceModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\LocationModels.cs" />
+    <Compile Include="Models\RoleBindingModels.cs" />
     <Compile Include="Models\SiteModels.cs" />
     <Compile Include="Models\StatisticModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -1531,9 +1543,9 @@
     <Folder Include="Controllers\domain\managment\automation\" />
     <Folder Include="RealTime\SignalR\StatusUpdate\ActionHistoryUpdater\" />
     <Folder Include="RealTime\SignalR\StatusUpdate\PropertyHistoryUpdater\" />
-    <Folder Include="Views\App\" />
     <Folder Include="Views\DeviceSecurity\" />
     <Folder Include="Views\RecordingSettings\" />
+    <Folder Include="Views\RoleManagment\" />
     <Folder Include="Views\RouteTrackingLiveView\" />
     <Folder Include="Views\RouteTrackingSetup\" />
     <Folder Include="Views\RoutingRules\" />
@@ -1541,6 +1553,7 @@
     <Folder Include="Views\SignalingRules\" />
     <Folder Include="Views\SurveillanceSite\" />
     <Folder Include="Views\TopBar\" />
+    <Folder Include="Views\UserManagment\" />
     <Folder Include="Views\UserSecurity\" />
     <Folder Include="Views\VideoPlayback\" />
   </ItemGroup>

@@ -1154,8 +1154,19 @@ namespace sconnConnector
            return false;
        }
 
-		/***********  Minimum config update **********/
-	   public bool ReadSiteRunningConfigMin(sconnSite site)
+
+
+        /*********** Device config update only **************/
+
+	    public bool ReadSiteRunningConfigIO(sconnSite site)
+	    {
+            return ReadSiteRunningConfigMin(site, false);
+	    }
+
+
+
+	    /***********  Minimum config update **********/
+	   public bool ReadSiteRunningConfigMin(sconnSite site, bool ReadSpecialRegs)
 	   {
            SconnClient client = new SconnClient(site.serverIP, site.serverPort, site.authPasswd, true);
            bool globalUploadStat = false;
@@ -1263,57 +1274,62 @@ namespace sconnConnector
                                    site.siteCfg.deviceConfigs[i].memCFG[j] = rxBF[j + MsgByteOffset];
                                }
 
-                               /*****  Get Device AUTH CFG ******/
-
-                               cmd[1] = ipcCMD.getAuthDevices;
-                               devAuthBF = client.berkeleySendMsg(cmd);
-
-
-                               /*****  Get GSM RCPT ******/
-
-                               cmd[1] = ipcCMD.getGsmRecpCfg;
-                               gsmRcpBF = client.berkeleySendMsg(cmd);
-
-                               deviceUploadStat = true;
-
-
-                               //read  schedule config
-                               if (SchedBF[0] == ipcCMD.SVAL)
+                               if (ReadSpecialRegs)
                                {
-                                   for (int schedule = 0; schedule < ipcDefines.RAM_DEV_SCHED_NO; schedule++)
-                                   {
-                                       for (int schedbyte = 0; schedbyte < ipcDefines.RAM_DEV_SCHED_MEM_SIZE; schedbyte++)
-                                       {
-                                           site.siteCfg.deviceConfigs[i].ScheduleCFG[schedule][schedbyte] = SchedBF[(schedule * ipcDefines.RAM_DEV_SCHED_MEM_SIZE) + schedbyte + MsgByteOffset]; //1 byte buffer offset
-                                       }
-                                   }
-                               }
+                                   /*****  Get Device AUTH CFG ******/
 
-                               //read GSM config
-                               if (gsmRcpBF[0] == ipcCMD.SVAL)
-                               {
-                                   try
+                                   cmd[1] = ipcCMD.getAuthDevices;
+                                   devAuthBF = client.berkeleySendMsg(cmd);
+
+
+                                   /*****  Get GSM RCPT ******/
+
+                                   cmd[1] = ipcCMD.getGsmRecpCfg;
+                                   gsmRcpBF = client.berkeleySendMsg(cmd);
+
+                                   deviceUploadStat = true;
+
+
+                                   //read  schedule config
+                                   if (SchedBF[0] == ipcCMD.SVAL)
                                    {
-                                       int bufferOffset = 1;
-                                       ipcDataType.ipcRcpt[] rcpts = new ipcDataType.ipcRcpt[ipcDefines.RAM_SMS_RECP_SIZE];
-                                       for (int r = 0; r < ipcDefines.RAM_SMS_RECP_SIZE; r++)
+                                       for (int schedule = 0; schedule < ipcDefines.RAM_DEV_SCHED_NO; schedule++)
                                        {
-                                           byte[] record = new byte[ipcDefines.RAM_SMS_RECP_SIZE];
-                                           for (int btc = 0; btc < ipcDefines.RAM_SMS_RECP_SIZE; btc++)
+                                           for (int schedbyte = 0; schedbyte < ipcDefines.RAM_DEV_SCHED_MEM_SIZE; schedbyte++)
                                            {
-                                               record[btc] = gsmRcpBF[bufferOffset + (r * ipcDefines.RAM_SMS_RECP_SIZE) + btc];
+                                               site.siteCfg.deviceConfigs[i].ScheduleCFG[schedule][schedbyte] = SchedBF[(schedule * ipcDefines.RAM_DEV_SCHED_MEM_SIZE) + schedbyte + MsgByteOffset]; //1 byte buffer offset
                                            }
-                                           ipcDataType.ipcRcpt rcpt = new ipcDataType.ipcRcpt(record);
-                                           rcpts[r] = rcpt;
                                        }
-                                       site.siteCfg.gsmRcpts = rcpts;
-                                   }
-                                   catch (Exception e)
-                                   {
-                                       //TODO - buffer overflow
                                    }
 
+                                   //read GSM config
+                                   if (gsmRcpBF[0] == ipcCMD.SVAL)
+                                   {
+                                       try
+                                       {
+                                           int bufferOffset = 1;
+                                           ipcDataType.ipcRcpt[] rcpts = new ipcDataType.ipcRcpt[ipcDefines.RAM_SMS_RECP_SIZE];
+                                           for (int r = 0; r < ipcDefines.RAM_SMS_RECP_SIZE; r++)
+                                           {
+                                               byte[] record = new byte[ipcDefines.RAM_SMS_RECP_SIZE];
+                                               for (int btc = 0; btc < ipcDefines.RAM_SMS_RECP_SIZE; btc++)
+                                               {
+                                                   record[btc] = gsmRcpBF[bufferOffset + (r * ipcDefines.RAM_SMS_RECP_SIZE) + btc];
+                                               }
+                                               ipcDataType.ipcRcpt rcpt = new ipcDataType.ipcRcpt(record);
+                                               rcpts[r] = rcpt;
+                                           }
+                                           site.siteCfg.gsmRcpts = rcpts;
+                                       }
+                                       catch (Exception e)
+                                       {
+                                           //TODO - buffer overflow
+                                       }
+
+                                   }                
                                }
+
+
 
                            }    //dev rx ok
                        }
@@ -1322,13 +1338,16 @@ namespace sconnConnector
                         //cfgIncBefore = CfgOper.GetLongFromBufferAtPos(site.siteCfg.globalConfig.memCFG,ipcDefines.GCFG_NAMES_MOD_CTR_POS);
                         //cfgIncNow = CfgOper.GetLongFromBufferAtPos(gcfgRx, ipcDefines.GCFG_NAMES_MOD_CTR_POS + rxOffset);
                         //NamesChanged = cfgIncBefore < cfgIncNow;
+
+                       if (ReadSpecialRegs)
+                       {
                            byte[] nameshashrx = new byte[ipcDefines.SHA256_DIGEST_SIZE];
                            for (int j = 0; j < ipcDefines.SHA256_DIGEST_SIZE; j++)
                            {
                                nameshashrx[j] = gcfgRx[ipcDefines.GCFG_NAMES_MOD_CTR_POS + j + rxOffset];
                            }
                            NamesChanged = !(nameshashrx.SequenceEqual(site.siteCfg.NamesHash));
-                       
+
 
                            if (NamesChanged)
                            {
@@ -1364,16 +1383,22 @@ namespace sconnConnector
                                    }
                                }
                            }
-                        }
 
-                       //get events
-                       cmd[0] = ipcCMD.GET;
-                       cmd[1] = ipcCMD.getEventNo;
-                       rxBF = client.berkeleySendMsg(cmd);
+                           //get events
+                           cmd[0] = ipcCMD.GET;
+                           cmd[1] = ipcCMD.getEventNo;
+                           rxBF = client.berkeleySendMsg(cmd);
 
-                       //cmd[1] = ipcCMD.getEvent;
-                       //cmd[2] = (byte)1; //test event id 1
-                       //rxBF = client.berkeleySendMsg(cmd);
+                           //cmd[1] = ipcCMD.getEvent;
+                           //cmd[2] = (byte)1; //test event id 1
+                           //rxBF = client.berkeleySendMsg(cmd);
+
+                       }
+
+                        
+                   }
+
+
                        deviceUploadStat = true;
                        globalUploadStat = true;
 
@@ -1406,7 +1431,7 @@ namespace sconnConnector
 
 	   public bool ReadSiteRunningConfig(sconnSite site)
 	   {
-           return ReadSiteRunningConfigMin(site);
+           return ReadSiteRunningConfigMin(site, true);
 
 
 		   site.siteStat.StartConnectionTimer();
@@ -1592,8 +1617,7 @@ namespace sconnConnector
 
 		public bool  updateSiteConfig( sconnSite site) //read entire running config
 			{
-				  // return ReadSiteRunningConfig( site);  
-                return ReadSiteRunningConfigMin(site);
+                return ReadSiteRunningConfigMin(site,true);
 			}    
 	}
 }

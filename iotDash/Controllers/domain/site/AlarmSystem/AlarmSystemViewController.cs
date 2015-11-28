@@ -10,31 +10,43 @@ using System.Web.Mvc;
 
 namespace iotDash.Controllers
 {
+    [DomainAuthorize]
     public class AlarmSystemViewController : Controller
     {
         // GET: AlarmSystemView
         public ActionResult Index(int ServerId)
         {
-            iotContext cont = new iotContext();
-            Device alrmSysDev = cont.Devices.First(d => d.Id == ServerId);
-            if (alrmSysDev != null)
+            try
             {
-                AlarmSystemDetailModel model = new AlarmSystemDetailModel(alrmSysDev);
-                return View(model);
+                var cont = (iotContext)System.Web.HttpContext.Current.Session["iotcontext"];
+                Device alrmSysDev = cont.Devices.First(d => d.Id == ServerId);
+                if (alrmSysDev != null)
+                {
+                    AlarmSystemDetailModel model = new AlarmSystemDetailModel(alrmSysDev);
+                    return View(model);
+                }
             }
-
+            catch (Exception)
+            {
+            }
             return View();
-         
         }
 
         public ActionResult ToggleArm(int ServerId)
         {
-            iotContext cont = new iotContext();
-            Device alrmSysDev = cont.Devices.First(d => d.Id == ServerId);
-            if (alrmSysDev != null)
+            try
             {
-                AlarmSystemDetailModel model = new AlarmSystemDetailModel(alrmSysDev);
-                model.Config.ToogleArmStatus();
+                var cont = (iotContext)System.Web.HttpContext.Current.Session["iotcontext"];
+                Device alrmSysDev = cont.Devices.First(d => d.Id == ServerId);
+                if (alrmSysDev != null)
+                {
+                    AlarmSystemDetailModel model = new AlarmSystemDetailModel(alrmSysDev);
+                    model.Config.ToogleArmStatus();
+                }
+            }
+            catch (Exception)
+            {
+                //err msg
             }
             return RedirectToAction("Index", new { DeviceId = ServerId });
         }
@@ -59,26 +71,26 @@ namespace iotDash.Controllers
         {
             try
             {
-                iotContext cont = new iotContext();
+                var cont = (iotContext)System.Web.HttpContext.Current.Session["iotcontext"];
                 Device alrmSysDev = cont.Devices.First(d => d.Id == ServerId);
                 if (alrmSysDev != null)
                 {
                     AlarmSystemOutputsConfigureModel model = new AlarmSystemOutputsConfigureModel(alrmSysDev, AlarmDeviceId);
                     return View(model);
                 }
-                return View();
             }
             catch (Exception e)
             {
-                return View();
+               
             }
+            return View();
         }
 
         public ActionResult SaveDeviceOutputs(List<sconnOutput> Outputs, int ServerId, int DeviceId)        //List<sconnInput> Inputs, int DeviceId
         {
             try
             {
-                iotContext cont = new iotContext();
+                var cont = (iotContext)System.Web.HttpContext.Current.Session["iotcontext"];
                 Device alrmSysDev = cont.Devices.First(d => d.Id == ServerId);
                 if (alrmSysDev != null)
                 {
@@ -91,13 +103,12 @@ namespace iotDash.Controllers
                     }
 
                 }
-                return RedirectToAction("Index", new { ServerId = ServerId });
             }
             catch (Exception e)
             {
-                return RedirectToAction("Index", new { ServerId = ServerId });
+                //err msg
             }
-
+            return RedirectToAction("Index", new { ServerId = ServerId });
         }
 
 
@@ -105,7 +116,7 @@ namespace iotDash.Controllers
         {
             try
             {
-                iotContext cont = new iotContext();
+                var cont = (iotContext)System.Web.HttpContext.Current.Session["iotcontext"];
                 Device alrmSysDev = cont.Devices.First(d => d.Id == ServerId);
                 if (alrmSysDev != null)
                 {
@@ -124,7 +135,7 @@ namespace iotDash.Controllers
         {
             try
             {
-                iotContext cont = new iotContext();
+                var cont = (iotContext)System.Web.HttpContext.Current.Session["iotcontext"];
                 Device alrmSysDev = cont.Devices.First(d => d.Id == ServerId);
                 if (alrmSysDev != null)
                 {
@@ -151,7 +162,7 @@ namespace iotDash.Controllers
         {
             try
             {
-                iotContext cont = new iotContext();
+                var cont = (iotContext)System.Web.HttpContext.Current.Session["iotcontext"];
                 Device alrmSysDev = cont.Devices.First(d => d.Id == ServerId);
                 if (alrmSysDev != null)
                 {
@@ -170,7 +181,7 @@ namespace iotDash.Controllers
         {
             try
             {
-                iotContext cont = new iotContext();
+                var cont = (iotContext)System.Web.HttpContext.Current.Session["iotcontext"];
                 Device alrmSysDev = cont.Devices.First(d => d.Id == ServerId);
                 if (alrmSysDev != null)
                 {

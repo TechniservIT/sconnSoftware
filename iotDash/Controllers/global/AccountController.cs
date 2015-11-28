@@ -48,43 +48,44 @@ namespace iotDash
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid) return View(model);
+            var user = await UserManager.FindAsync(model.UserName, model.Password);
+            if (user != null)
             {
-                var user = await UserManager.FindAsync(model.UserName, model.Password);
-                if (user != null)
+                //store user domain session 
+                var cont = new ApplicationDbContext();
+                var currentUser = (from u in cont.Users
+                    where u.UserName.Equals(  model.UserName )
+                    select u).First();
+
+                var icont = (iotContext)System.Web.HttpContext.Current.Session["iotcontext"];
+                if (icont == null)
                 {
-                        //store user domain session 
-                        ApplicationDbContext cont = new ApplicationDbContext();
-                        var currentUser = (from u in cont.Users
-                                    where u.UserName.Equals(  model.UserName )
-                                    select u).First();
+                    icont = new iotContext();
+                    System.Web.HttpContext.Current.Session["iotcontext"] = icont;
+                }
 
-                    iotContext icont = new iotContext();
-                   // System.Web.HttpContext.Current.Session.Contents.
-                    System.Web.HttpContext.Current.Session["iotcontext"] = icont; 
+                var domain = icont.Domains.First(dm => dm.Id == currentUser.domainId);        //dm.DomainName.Equals(currentUser.domainId)
+                if(domain != null)
+                {
+                    Session["AppDomain"] = domain.DomainName;
+                    await SignInAsync(user, model.RememberMe);
 
-                    iotDomain domain = icont.Domains.First(dm => dm.Id == currentUser.domainId);        //dm.DomainName.Equals(currentUser.domainId)
-                    if(domain != null)
+                    string userDomain = domain.DomainName;
+                    if ((userDomain != null) && !userDomain.Equals(String.Empty))
                     {
-                        Session["AppDomain"] = domain.DomainName;
-                        await SignInAsync(user, model.RememberMe);
-
-                        string userDomain = domain.DomainName;
-                        if ((userDomain != null) && !userDomain.Equals(String.Empty))
-                        {
-                            return RedirectToAction("Index", "Dashboard", new { app = userDomain });
-                        } 
-                        //return RedirectToLocal(returnUrl);
-                    }
-                    else
-                    {
-                        ModelState.AddModelError("", "Invalid domain.");
-                    }
+                        return RedirectToAction("Index", "Dashboard", new { app = userDomain });
+                    } 
+                    //return RedirectToLocal(returnUrl);
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Invalid username or password.");
+                    ModelState.AddModelError("", "Invalid domain.");
                 }
+            }
+            else
+            {
+                ModelState.AddModelError("", "Invalid username or password.");
             }
 
             // If we got this far, something failed, redisplay form
@@ -321,7 +322,7 @@ namespace iotDash
         }
 
         //
-        // GET: /Account/LinkLoginCallback
+        // GET: /Account/LinkLoginCallback 
         public async Task<ActionResult> LinkLoginCallback()
         {
             var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync(XsrfKey, User.Identity.GetUserId());
