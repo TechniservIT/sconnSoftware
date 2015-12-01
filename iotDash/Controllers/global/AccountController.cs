@@ -65,7 +65,7 @@ namespace iotDash
                     System.Web.HttpContext.Current.Session["iotcontext"] = icont;
                 }
 
-                var domain = icont.Domains.First(dm => dm.Id == currentUser.domainId);        //dm.DomainName.Equals(currentUser.domainId)
+                var domain = icont.Domains.First(dm => dm.Id == currentUser.DomainId);        //dm.DomainName.Equals(currentUser.domainId)
                 if(domain != null)
                 {
                     Session["AppDomain"] = domain.DomainName;
@@ -159,7 +159,7 @@ namespace iotDash
                                 user.Roles.Add(userAdminRole);
 
                                 //setup user domain
-                                user.domainId = addedDomain.Id;
+                                user.DomainId = addedDomain.Id;
 
                                 var result = await UserManager.CreateAsync(user, model.Password);
                                 if (result.Succeeded)

@@ -90,7 +90,7 @@ namespace iotDash.Controllers
 
 
                         iotContext dcont = (iotContext)System.Web.HttpContext.Current.Session["iotcontext"];    //new iotContext();
-                        iotDomain domain = dcont.Domains.First(d => d.Id == currentUser.domainId);
+                        iotDomain domain = dcont.Domains.First(d => d.Id == currentUser.DomainId);
                         if (domain != null)
                         {
                             Session["AppDomain"] = domain.DomainName;

@@ -1,0 +1,41 @@
+﻿@using iotDash.Identity.Roles
+@model iotDash.Models.RoleListModel
+
+@{
+    ViewBag.Title = "View";
+}
+
+<h2>View</h2>
+<div class="table-responsive">
+
+    <table class="table">
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Active</th>
+            <th>ValidFrom</th>
+            <th>ValidUntil</th>
+        </tr>
+
+
+        @foreach (IotUserRole d in Model.Roles)
+        {
+            <tr>
+
+                <td> @d.Name </td>
+
+                <td> @d.Type</td>
+
+                <td> @d.Active</td>
+
+                <td> @d.ValidFrom</td>
+
+                <td> @d.ValidUntil</td>
+
+            </tr>
+        }
+
+
+    </table>
+
+</div>

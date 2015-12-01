@@ -60,6 +60,7 @@ namespace iotDash.Models
 
         public DeviceAddModel()
         {
+
         }
         
         public DeviceAddModel(Site site) : this()

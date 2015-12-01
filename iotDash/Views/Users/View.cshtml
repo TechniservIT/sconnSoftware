@@ -1,14 +1,43 @@
-﻿@{
+﻿@using iotDash.Identity.Roles
+@using iotDash.Models
+@model iotDash.Models.UserListModel
+
+@{
     ViewBag.Title = "View";
 }
 @{
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 }
 
-    <div id="wrapper">
+<h2>View</h2>
+<div class="table-responsive">
 
-    </div>
-    <!-- /#wrapper -->
+    <table class="table">
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone  Number</th>
+            <th>Roles</th>
+        </tr>
 
 
+        @foreach (ApplicationUser d in Model.Users)
+        {
+            <tr>
 
+                <td> @d.UserName </td>
+
+                <td> @d.Email</td>
+
+                <td> @d.PhoneNumber</td>
+
+                <td> @d.Roles</td>
+
+
+            </tr>
+        }
+
+
+    </table>
+
+</div>

@@ -305,7 +305,7 @@
     <Compile Include="Controllers\domain\site\SiteController.cs" />
     <Compile Include="Controllers\domain\site\SiteManagerController.cs" />
     <Compile Include="Controllers\domain\site\IoT\StatisticController.cs" />
-    <Compile Include="Controllers\global\UsersController.cs" />
+    <Compile Include="Controllers\domain\managment\security\UsersController.cs" />
     <Compile Include="Controllers\domain\navigation\ViewController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -322,6 +322,10 @@
     <Compile Include="Migrations\201506241419288_initial.Designer.cs">
       <DependentUpon>201506241419288_initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201512011200480_Custom configurable roles.cs" />
+    <Compile Include="Migrations\201512011200480_Custom configurable roles.Designer.cs">
+      <DependentUpon>201512011200480_Custom configurable roles.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Areas\AlarmSystem\Models\AlarmSystemModels.cs" />
@@ -332,6 +336,7 @@
     <Compile Include="Models\RoleBindingModels.cs" />
     <Compile Include="Models\SiteModels.cs" />
     <Compile Include="Models\StatisticModels.cs" />
+    <Compile Include="Models\UserManagmentModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RealTime\SignalR\StatusUpdate\DeviceStatusUpdater\DeviceStatusUpdaterHub.cs" />
     <Compile Include="Serialization\iotSerializationFactory.cs" />
@@ -1530,6 +1535,8 @@
     <Content Include="Views\Home\Front.cshtml" />
     <Content Include="Views\Shared\_LayoutFullPage.cshtml" />
     <Content Include="Views\Shared\_TopMenuLayout.cshtml" />
+    <Content Include="Views\RoleManagment\Add.cshtml" />
+    <Content Include="Views\RoleManagment\View.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1545,7 +1552,6 @@
     <Folder Include="RealTime\SignalR\StatusUpdate\PropertyHistoryUpdater\" />
     <Folder Include="Views\DeviceSecurity\" />
     <Folder Include="Views\RecordingSettings\" />
-    <Folder Include="Views\RoleManagment\" />
     <Folder Include="Views\RouteTrackingLiveView\" />
     <Folder Include="Views\RouteTrackingSetup\" />
     <Folder Include="Views\RoutingRules\" />
@@ -1594,6 +1600,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201506241419288_initial.resx">
       <DependentUpon>201506241419288_initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512011200480_Custom configurable roles.resx">
+      <DependentUpon>201512011200480_Custom configurable roles.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
