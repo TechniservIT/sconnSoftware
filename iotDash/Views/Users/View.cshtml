@@ -9,7 +9,7 @@
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 }
 
-<h2>View</h2>
+<h2>Users</h2>
 <div class="table-responsive">
 
     <table class="table">
@@ -18,6 +18,7 @@
             <th>Email</th>
             <th>Phone  Number</th>
             <th>Roles</th>
+            <th>Action</th>
         </tr>
 
 
@@ -31,11 +32,35 @@
 
                 <td> @d.PhoneNumber</td>
 
-                <td> @d.Roles</td>
+                <td> @d.Roles.Count.ToString()</td>
+
+                <td>
+
+                    <ul class="sidebar-nav" id="sidebar">
+
+                        <li role="presentation">
+                            <a href="@Url.Action("Edit", "Users")"><span class=" glyphicon glyphicon-wrench"></span></a>
+                        </li>
+
+                        <li role="presentation">
+                            <a href="@Url.Action("Remove", "Users")"><span class=" glyphicon glyphicon-trash"></span></a>
+                        </li>
+
+                    </ul>
+
+                </td>
 
 
             </tr>
+
         }
+
+        <tr>
+            <td>
+                <a href="@Url.Action("Add", "Users")"><span class=" glyphicon glyphicon-plus"></span></a>
+            </td>
+
+        </tr>
 
 
     </table>

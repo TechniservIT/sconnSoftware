@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using iotDash.Identity.Roles;
 using iotDbConnector.DAL;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -52,6 +53,8 @@ namespace iotDash.Models
         public string Result { get; set; }
 
 
+        public List<IotUserRole> Roles { get; set; } 
+
         public UserCreateModel()
         {
                 
@@ -60,6 +63,9 @@ namespace iotDash.Models
         public UserCreateModel(iotDomain domain)
         {
             User = new ApplicationUser();
+            ApplicationDbContext ucont = new ApplicationDbContext();
+            var roleManager = new RoleManager<IotUserRole>(new RoleStore<IotUserRole>(ucont));
+            Roles = roleManager.Roles.Where(r => r.DomainId == domain.Id).ToList();
             User.DomainId = domain.Id;
         }
     }

@@ -60,9 +60,17 @@ namespace iotDash.Controllers.domain.managment.security
                  {
                      ApplicationDbContext ucont = new ApplicationDbContext();
                      var userMan = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+
                      var result = await userMan.CreateAsync(model.User, model.Password);
                      if (result.Succeeded)
                      {
+                         if (model.Roles != null)
+                         {
+                             foreach (var role in model.Roles)
+                             {
+                                 userMan.AddToRole(model.User.Id, role.Name);
+                             }
+                         }
                          nmod.Result = (StatusResponseGenerator.GetPanelWithMsgAndStat("Success.", RequestStatus.Success));
                      }
                      else
