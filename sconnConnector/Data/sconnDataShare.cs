@@ -1,14 +1,4 @@
 ﻿using System;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Timers;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +7,18 @@ using System.Threading.Tasks;
 using System.Diagnostics;
 using System.Xml;
 
-namespace sconnRem
+#if WIN32_ENC
+
+using System.Windows;
+using System.Windows.Input;
+using System.Timers;
+using sconnConnector.Config;
+
+#endif
+
+
+
+namespace sconnConnector
 {
 
     static public class sconnDataShare
@@ -255,14 +256,146 @@ namespace sconnRem
 
     }
 
+	public class sconnRelay
+	{
+		public int Id { get; set; }
+
+		public int Type { get; set; }
+
+		public int Value { get; set; }
+
+		public int NameId { get; set; }
+
+		public bool Enabled { get; set; }
+
+		public string Name { get; set; }
+
+		public sconnRelay()
+		{
+			
+		}
+
+		public sconnRelay(byte[] config, int seqno)
+		{
+			int baseaddr = ipcDefines.mAdrRelay + ipcDefines.RelayMemSize * seqno;
+			Id = seqno;
+			Type = config[baseaddr + ipcDefines.mAdrRelayType];
+			Value = config[baseaddr + ipcDefines.mAdrRelayVal];
+			NameId = config[baseaddr + ipcDefines.mAdrRelayNameAddr];
+		}
+
+		public sconnRelay(byte[] config, byte[] namecfg, int seqno)
+			: this(config, seqno)
+		{
+			if (namecfg != null)
+			{
+				Name = System.Text.Encoding.Unicode.GetString(namecfg, 0, namecfg.GetLength(0));
+			}
+
+
+		}
+
+	}
+
+	public class sconnInput
+	{
+		public int Id { get; set; }
+
+		public int Type { get; set; }
+
+		public int Value { get; set; }
+
+		public int NameId { get; set; }
+
+		public int ActivationGroup { get; set; }
+
+		public int Sensitivity { get; set; }
+
+		public bool Enabled { get; set; }
+
+		public string Name { get; set; }
+
+
+		public sconnInput()
+		{
+				
+		}
+
+
+		public sconnInput(byte[] config, int seqno)
+		{
+			int baseaddr = ipcDefines.mAdrInput + ipcDefines.mAdrInputMemSize * seqno;
+			Id = seqno;
+			Type = config[baseaddr + ipcDefines.mAdrInputType];
+			Value = config[baseaddr + ipcDefines.mAdrInputVal];
+			NameId = config[baseaddr + ipcDefines.mAdrInputNameAddr];
+			Sensitivity = config[baseaddr + ipcDefines.mAdrInputSensitivity] * ipcDefines.InputSensitivityStep;
+			ActivationGroup = config[baseaddr + ipcDefines.mAdrInputAG];
+
+		}
+
+		public sconnInput(byte[] config, byte[] namecfg, int seqno)
+			: this(config, seqno)
+		{
+			if (namecfg != null)
+			{
+				Name = System.Text.Encoding.Unicode.GetString(namecfg, 0, namecfg.GetLength(0));
+			}
+
+
+		}
+
+	}
+
+	public class sconnOutput
+	{
+
+		public int Id { get; set; }
+
+		public int Type { get; set; }
+
+		public int Value { get; set; }
+
+		public int NameId { get; set; }
+
+		public bool Enabled { get; set; }
+
+		public string Name { get; set; }
+
+		public sconnOutput()
+		{
+
+		}
+
+		public sconnOutput(byte[] config, int seqno)
+		{
+			int baseaddr = ipcDefines.mAdrOutput + ipcDefines.mAdrOutputMemSize*seqno;
+			Id = seqno;
+			Type = config[baseaddr + ipcDefines.mAdrOutputType];
+			Value = config[baseaddr + ipcDefines.mAdrOutputVal];
+			NameId = config[baseaddr + ipcDefines.mAdrOutputNameAddr];
+		}
+
+		public sconnOutput(byte[] config, byte[] namecfg, int seqno)
+			: this(config, seqno)
+		{
+			if (namecfg != null)
+			{
+				Name = System.Text.Encoding.Unicode.GetString(namecfg, 0, namecfg.GetLength(0));
+			}
+
+
+		}
+
+	}
+
+
     public class sconnSite
     {
         private int _statusCheckInterval;
         private string _authPasswd;
         private string _serverIP;
         private int _serverPort;
-        private StackPanel siteViewPanel;
-        private StackPanel siteEditPanel;
         private bool _ViewEnabled;
         private int _siteID;
         private string _siteName;
@@ -363,8 +496,6 @@ namespace sconnRem
             serverPort = 37222;
             _siteID = sconnDataShare.GetLastItemID()+1;
             _siteName = "DefaultSite";
-            siteViewPanel = new StackPanel();
-            siteEditPanel = new StackPanel();
             siteCfg = new ipcSiteConfig();
             siteStat = new SiteConnectionStat();
         }
@@ -377,8 +508,6 @@ namespace sconnRem
             _siteName = siteName;
             lastUpdate = DateTime.Now;
             serverPort = 37222;
-            siteViewPanel = new StackPanel();
-            siteEditPanel = new StackPanel();
             siteCfg = new ipcSiteConfig();
             siteStat = new SiteConnectionStat();
         }
@@ -392,8 +521,6 @@ namespace sconnRem
             _siteID = sconnDataShare.GetLastItemID() + 1;
             _siteName = siteName;
             lastUpdate = DateTime.Now;
-            siteViewPanel = new StackPanel();
-            siteEditPanel = new StackPanel();
             siteCfg = new ipcSiteConfig();
             siteStat = new SiteConnectionStat();
         }
@@ -413,6 +540,26 @@ namespace sconnRem
         private ipcDataType.ipcDeviceConfig[] _deviceConfigs;
         private ipcDataType.ipcGlobalConfig _globalConfig;
         private ipcDataType.ipcEvent[] events;
+        private ipcDataType.ipcRcpt[] _gsmRcpts;
+
+        public byte[] Hash;
+
+        public byte[] GlobalNameConfig;
+        public byte[] NamesHash;
+
+
+        public ipcDataType.ipcRcpt[] gsmRcpts
+        {
+            get
+            {
+                return _gsmRcpts;
+            }
+            set
+            {
+                _gsmRcpts = value;
+            }
+
+        }
 
 
         public void AddEvent(ipcDataType.ipcEvent ipcEv)
@@ -465,6 +612,9 @@ namespace sconnRem
             _deviceNo = 0;
             _deviceConfigs = new ipcDataType.ipcDeviceConfig[deviceNo];
             _globalConfig = new ipcDataType.ipcGlobalConfig();
+            GlobalNameConfig = new byte[ipcDefines.RAM_NAMES_Global_Total_Size];
+            Hash = new byte[ipcDefines.SHA256_DIGEST_SIZE];
+            NamesHash = new byte[ipcDefines.SHA256_DIGEST_SIZE];
         }
 
         public ipcSiteConfig(int devices)
@@ -476,35 +626,38 @@ namespace sconnRem
                 _deviceConfigs[i] = new ipcDataType.ipcDeviceConfig();
             }
             _globalConfig = new ipcDataType.ipcGlobalConfig();
+            GlobalNameConfig = new byte[ipcDefines.RAM_NAMES_Global_Total_Size];
+            Hash = new byte[ipcDefines.SHA256_DIGEST_SIZE];
+            NamesHash = new byte[ipcDefines.SHA256_DIGEST_SIZE];
         }
 
         public void fillSampleCfg()
         {
-            _deviceNo = 1;
-            _globalConfig = new ipcDataType.ipcGlobalConfig();
-            _deviceConfigs = new ipcDataType.ipcDeviceConfig[deviceNo];
-            for (int i = 0; i < deviceNo; i++)
-            {
-                _deviceConfigs[i] = new ipcDataType.ipcDeviceConfig();
-            }
+            //_deviceNo = 1;
+            //_globalConfig = new ipcDataType.ipcGlobalConfig();
+            //_deviceConfigs = new ipcDataType.ipcDeviceConfig[deviceNo];
+            //for (int i = 0; i < deviceNo; i++)
+            //{
+            //    _deviceConfigs[i] = new ipcDataType.ipcDeviceConfig();
+            //}
             
-            //fill device config
-            for (int i = 0; i < ipcDefines.deviceConfigSize; i++)
-            {
-                _deviceConfigs[0].memCFG[i] = (byte)i;
+            ////fill device config
+            //for (int i = 0; i < ipcDefines.deviceConfigSize; i++)
+            //{
+            //    _deviceConfigs[0].memCFG[i] = (byte)i;
 
-            }
-            //set output Number
-            _deviceConfigs[0].memCFG[ipcDefines.mAdrOutputsNO] = 10;
+            //}
+            ////set output Number
+            //_deviceConfigs[0].memCFG[ipcDefines.mAdrOutputsNO] = 10;
 
-            //fill  gconfig
-            for (int i = 0; i < 250; i++)
-            {
-                _globalConfig.memCFG[i] = (byte)i;
-            }
+            ////fill  gconfig
+            //for (int i = 0; i < 250; i++)
+            //{
+            //    _globalConfig.memCFG[i] = (byte)i;
+            //}
 
 
-            _globalConfig.memCFG[ipcDefines.mAdrDevNO] = (byte)deviceNo;
+            //_globalConfig.memCFG[ipcDefines.mAdrDevNO] = (byte)deviceNo;
 
         }
 
@@ -558,93 +711,265 @@ namespace sconnRem
         }
 
 
-        public class ipcDeviceConfig
+        public class ipcRcpt
         {
-            private byte[] _memCFG;
-            private byte[][] _NamesCFG;
-            private byte[][] _ScheduleCFG;
-            private byte[] _NetworkConfig;
+            public int CountryCode { get; set; }
 
-            public byte[] NetworkConfig
+            public string NumberE164 { get; set; }
+
+            public bool Enabled { get; set; }
+
+            public byte[] Serialized
             {
-                get { return _NetworkConfig; }
-                set { if (value != null) { _NetworkConfig = value; } }
-            }
-
-            public byte[] memCFG
-            {
-                get { return _memCFG; }
-                set { if (value != null) { _memCFG = value; } }
-            }
-
-            public byte[][] NamesCFG
-            {
-                get { return _NamesCFG; }
-               // set { if (value != null) { _NamesCFG = value; } }
-            
-            }
-
-            public byte[][] ScheduleCFG
-            {
-                get { return _ScheduleCFG; }
-            }
-
-
-
-            public string GetDeviceNameAt(int NameNo)
-            {
-                if (NameNo < ipcDefines.RAM_DEV_NAMES_NO)
+                get
                 {
-                    return System.Text.Encoding.Unicode.GetString(_NamesCFG[NameNo], 0, _NamesCFG[NameNo].GetLength(0));
-                }
-                else { return new string('E',1); }
-            }
+                    //serialize
+                    byte[] Bytes = new byte[ipcDefines.RAM_SMS_RECP_SIZE];
 
-            public void SetDeviceNameAt(int NameNo, string Name)
-            {
-               byte[] namebuff = System.Text.Encoding.Unicode.GetBytes(Name);
-               SetDeviceNameAt(NameNo, namebuff);
-            }
+                    Bytes[ipcDefines.RAM_SMS_RECP_COUNTRY_CODE_POS] = (byte)(CountryCode << 8);
+                    Bytes[ipcDefines.RAM_SMS_RECP_COUNTRY_CODE_POS + 1] = (byte)CountryCode;
 
-            public void SetDeviceNameAt(int NameNo, byte[] Name)
-            {
-                if (Name.GetLength(0) < 32)
-                {
-                    byte[] resized = new byte[32];
-                    Name.CopyTo(resized, 0);
-                    _NamesCFG[NameNo] = resized;
-                }
-                else
-                {
-                    _NamesCFG[NameNo] = Name;
-                }
-
-                //replaces nulls by spaces
-                for (int i = 0; i < _NamesCFG[NameNo].GetLength(0); i+=2)
-                {
-                    if ( (_NamesCFG[NameNo][i] == (byte)0x00) &&  ( _NamesCFG[NameNo][i + 1] == (byte)0x00 ))
+                    byte[] numbytes = (System.Text.Encoding.ASCII.GetBytes(NumberE164));
+                    for (int i = 0; i < numbytes.Length; i++)
                     {
-                        _NamesCFG[NameNo][i] = (byte)0x20; //space
+                        Bytes[ipcDefines.RAM_SMS_RECP_ADDR_POS+i] = numbytes[i];
                     }
+
+                    Bytes[ipcDefines.RAM_SMS_RECP_ENABLED_POS] = (byte)(Enabled == true ? 1 : 0);
+
+                    return Bytes;
+                }
+                set
+                {
+
                 }
             }
 
-            public ipcDeviceConfig()
+            public ipcRcpt()
             {
-                _memCFG = new byte[ipcDefines.deviceConfigSize];
-                _NamesCFG = new byte[ipcDefines.RAM_DEV_NAMES_NO][];
-                _NetworkConfig = new byte[ipcDefines.NET_CFG_SIZE];
-                for (int i = 0; i < ipcDefines.RAM_DEV_NAMES_NO; i++)
-                {
-                    _NamesCFG[i] = new byte[ipcDefines.RAM_NAME_SIZE];
-                }
-                _ScheduleCFG = new byte[ipcDefines.RAM_DEV_SCHED_NO][];
-                for (int i = 0; i < ipcDefines.RAM_DEV_SCHED_NO; i++)
-                {
-                    _ScheduleCFG[i] = new byte[ipcDefines.RAM_DEV_SCHED_MEM_SIZE];
-                }
+
             }
+
+            public ipcRcpt(byte[] Bytes)
+                : this()
+            {
+                //decode
+
+                CountryCode = Bytes[ipcDefines.RAM_SMS_RECP_COUNTRY_CODE_POS]<<8;
+                CountryCode |= Bytes[ipcDefines.RAM_SMS_RECP_COUNTRY_CODE_POS+1];
+
+                byte[] NumberBytes = new byte[ipcDefines.RAM_SMS_RECP_ADDR_LEN];
+                for (int i = 0; i < ipcDefines.RAM_SMS_RECP_ADDR_LEN; i++)
+                {
+                    NumberBytes[i] = Bytes[ipcDefines.RAM_SMS_RECP_ADDR_POS+i];
+                }
+                NumberE164 = (System.Text.Encoding.ASCII.GetString(NumberBytes));
+
+                Enabled = Bytes[ipcDefines.RAM_SMS_RECP_ENABLED_POS] == 1 ? true : false;
+
+            }
+
         }
+
+
+     	public class ipcDeviceConfig
+		{
+			private byte[] _memCFG;
+			private byte[][] _NamesCFG;
+			private byte[][] _ScheduleCFG;
+			private byte[] _NetworkConfig;
+            public byte[] Hash;
+
+            public byte[] AuthDevicesCFG { get; set; }
+
+
+			public int DeviceId { get; set; }
+
+			public int InputNo { get; set; }
+
+			public int OutputNo { get; set; }
+
+			public int RelayNo { get; set; }
+
+			public List<sconnOutput> Outputs { get; set; }
+
+			public List<sconnInput> Inputs { get; set; }
+
+			public List<sconnRelay> Relays { get; set; }
+
+
+			private void LoadInputsFromConfig()
+			{
+				InputNo = _memCFG[ipcDefines.mAdrInputsNO];
+				for (int i = 0; i < InputNo; i++)
+				{
+					sconnInput input = new sconnInput(_memCFG,  _NamesCFG[ipcDefines.mAddr_NAMES_Inputs_Pos], i);
+					Inputs.Add(input);
+				}
+			}
+
+			private void LoadOutputsFromConfig()
+			{
+				OutputNo = _memCFG[ipcDefines.mAdrOutputsNO];
+				for (int i = 0; i < OutputNo; i++)
+				{
+					sconnOutput output = new sconnOutput(_memCFG, _NamesCFG[ipcDefines.mAddr_NAMES_Outputs_Pos],  i);
+					Outputs.Add(output);
+				}
+			}
+
+			private void LoadRelayFromConfig()
+			{
+				RelayNo = _memCFG[ipcDefines.mAdrRelayNO];
+				for (int i = 0; i < RelayNo; i++)
+				{
+					sconnRelay relay = new sconnRelay(_memCFG, _NamesCFG[ipcDefines.mAddr_NAMES_Relays_Pos],  i);
+					Relays.Add(relay);
+				}
+			}
+
+			public void LoadPropertiesFromConfig()
+			{
+				LoadInputsFromConfig();
+				LoadOutputsFromConfig();
+				LoadRelayFromConfig();
+			}
+
+			public byte[] NetworkConfig
+			{
+				get { return _NetworkConfig; }
+				set { if (value != null) { _NetworkConfig = value; } }
+			}
+
+			public byte[] memCFG
+			{
+				get { return _memCFG; }
+				set { if (value != null) { _memCFG = value; LoadPropertiesFromConfig(); } }
+			}
+
+			public byte[][] NamesCFG
+			{
+				get { return _NamesCFG; }
+			   // set { if (value != null) { _NamesCFG = value; } }
+			
+			}
+
+			public byte[][] ScheduleCFG
+			{
+				get { return _ScheduleCFG; }
+			}
+
+
+
+			public string GetDeviceNameAt(int NameNo)
+			{
+				if (NameNo < ipcDefines.RAM_DEV_NAMES_NO)
+				{
+					return System.Text.Encoding.Unicode.GetString(_NamesCFG[NameNo], 0, _NamesCFG[NameNo].GetLength(0));
+				}
+				else { return new string('E',1); }
+			}
+
+			public void SetDeviceNameAt(int NameNo, string Name)
+			{
+			   byte[] namebuff = System.Text.Encoding.Unicode.GetBytes(Name);
+			   SetDeviceNameAt(NameNo, namebuff);
+			}
+
+			public void SetDeviceNameAt(int NameNo, byte[] Name)
+			{
+				if (Name.GetLength(0) < 32)
+				{
+					byte[] resized = new byte[32];
+					Name.CopyTo(resized, 0);
+					_NamesCFG[NameNo] = resized;
+				}
+				else
+				{
+					_NamesCFG[NameNo] = Name;
+				}
+
+				//replaces nulls by spaces
+				for (int i = 0; i < _NamesCFG[NameNo].GetLength(0); i+=2)
+				{
+					if ( (_NamesCFG[NameNo][i] == (byte)0x00) &&  ( _NamesCFG[NameNo][i + 1] == (byte)0x00 ))
+					{
+						_NamesCFG[NameNo][i] = (byte)0x20; //space
+					}
+				}
+			}
+
+			public ipcDeviceConfig()
+			{
+				_memCFG = new byte[ipcDefines.deviceConfigSize];
+				_NamesCFG = new byte[ipcDefines.RAM_DEV_NAMES_NO][];
+				_NetworkConfig = new byte[ipcDefines.NET_CFG_SIZE];
+				for (int i = 0; i < ipcDefines.RAM_DEV_NAMES_NO; i++)
+				{
+					_NamesCFG[i] = new byte[ipcDefines.RAM_NAME_SIZE];
+				}
+				_ScheduleCFG = new byte[ipcDefines.RAM_DEV_SCHED_NO][];
+				for (int i = 0; i < ipcDefines.RAM_DEV_SCHED_NO; i++)
+				{
+					_ScheduleCFG[i] = new byte[ipcDefines.RAM_DEV_SCHED_MEM_SIZE];
+				}
+
+                Hash = new byte[ipcDefines.SHA256_DIGEST_SIZE];
+
+				Inputs = new List<sconnInput>();
+				Outputs = new List<sconnOutput>();
+				Relays = new List<sconnRelay>();
+			}
+
+			public void SavePropertiesToRawConfig()
+			{
+				foreach (var item in Inputs)
+				{
+					int baseaddr = ipcDefines.mAdrInput + ipcDefines.mAdrInputMemSize*item.Id;
+					_memCFG[baseaddr + ipcDefines.mAdrInputType] = (byte)item.Type;
+					_memCFG[baseaddr + ipcDefines.mAdrInputVal] = (byte)item.Value;
+					_memCFG[baseaddr + ipcDefines.mAdrInputNameAddr] = (byte)item.NameId;
+					_memCFG[baseaddr + ipcDefines.mAdrInputAG] = (byte)item.ActivationGroup;
+					_memCFG[baseaddr + ipcDefines.mAdrInputSensitivity] = (byte) (item.Sensitivity / ipcDefines.InputSensitivityStep);
+					_memCFG[baseaddr + ipcDefines.mAdrInputEnabled] = (byte)(item.Enabled == false ? 0 : 1);
+
+					SetDeviceNameAt(ipcDefines.mAddr_NAMES_Inputs_Pos + item.Id,item.Name);
+					//_NamesCFG[] = System.Text.Encoding.Unicode.GetBytes(item.Name);
+				}
+
+				foreach (var item in Outputs)
+				{
+					int baseaddr = ipcDefines.mAdrOutput + ipcDefines.mAdrOutputMemSize * item.Id;
+					_memCFG[baseaddr + ipcDefines.mAdrOutputType] = (byte)item.Type;
+					_memCFG[baseaddr + ipcDefines.mAdrOutputVal] = (byte)item.Value;
+					_memCFG[baseaddr + ipcDefines.mAdrOutputNameAddr] = (byte)item.NameId;
+					_memCFG[baseaddr + ipcDefines.mAdrOutputEnabled] = (byte)(item.Enabled == false ? 0 : 1);
+
+					SetDeviceNameAt(ipcDefines.mAddr_NAMES_Outputs_Pos + item.Id, item.Name);
+					//_NamesCFG[ipcDefines.mAddr_NAMES_Outputs_Pos + item.Id] = System.Text.Encoding.Unicode.GetBytes(item.Name);
+				}
+
+				foreach (var item in Relays)
+				{
+					int baseaddr = ipcDefines.mAdrRelay + ipcDefines.RelayMemSize * item.Id;
+					_memCFG[baseaddr + ipcDefines.mAdrRelayType] = (byte)item.Type;
+					_memCFG[baseaddr + ipcDefines.mAdrRelayVal] = (byte)item.Value;
+					_memCFG[baseaddr + ipcDefines.mAdrRelayNameAddr] = (byte)item.NameId;
+					_memCFG[baseaddr + ipcDefines.mAdrRelayEnabled] = (byte)(item.Enabled == false ? 0 : 1);
+
+					SetDeviceNameAt(ipcDefines.mAddr_NAMES_Relays_Pos + item.Id, item.Name);
+					//_NamesCFG[ipcDefines.mAddr_NAMES_Relays_Pos + item.Id] = System.Text.Encoding.Unicode.GetBytes(item.Name);
+				}
+			}
+
+
+		public byte[] GetConfigBytes()
+		{
+			return new byte[0];
+		}
+
+
+		}
 
         public class ipcGlobalConfig
         {
@@ -867,6 +1192,10 @@ namespace sconnRem
         public static byte setDeviceSchedulesCfg = 0x57;
         public static byte setPasswdCfg = 0x58;
         public static byte setDeviceNetworkCfg = 0x59;
+        public static byte setGsmRcptCfg = 0x60;
+        public static byte setAuthDevCfg = 0x61;
+        public static byte setGlobalNames = 0x62;
+
 
         public static byte GET = 0x06; // get following register group value
         public static byte getRegVal = 0x61; //retrieve single register byte value    Param :   Register Address (2b)
@@ -885,6 +1214,12 @@ namespace sconnRem
         public static byte getEventNo =  0x6F;
         public static byte getEvent  = 0x70;
         public static byte getDevNetCfg = 0x71;
+        public static byte getGsmRecpCfg = 0x72;
+        public static byte getAuthDevices = 0x73;
+        public static byte getGsmModemResponse = 0x74;
+        public static byte getDeviceName = 0x75;
+        public static byte getGlobalNames = 0x76;
+         public static byte getConfigHash = 0x77;
 
         public static byte CFG = 0x11; //register to set, followed by value SVAL <value bytes > EVAL
 
@@ -925,14 +1260,16 @@ namespace sconnRem
     public struct ipcDefines
     {
 
+        public static int SHA256_DIGEST_SIZE = 32;
+
         public static byte comI2C = 0x01;
         public static byte comSPI = 0x02;
         public static byte comMiWi = 0x03;
         public static byte comUSB = 0x04;
         public static byte comETH = 0x05;
 
-        public static int deviceConfigSize = 256;  //256 bytes
-        public static int ipcMaxDevices = 256;
+        //public static int deviceConfigSize = 256;  //256 bytes
+        public static int ipcMaxDevices = 8;
 
         /*
          256 Bytes for each devies ( 1024 devies @ 256Kb mem)
@@ -948,6 +1285,11 @@ namespace sconnRem
          *
          * 
          */
+        public static int ipcAbsMaxDevices = 16;
+        public static int RAM_DEVCFG_NO = 16;
+        public static int RAM_DEVCFG_SIZE = 512;
+        public static int RAM_GCFG_SIZE = 1024;
+
 
 
         public static int mAdrDevID_LEN = 0x0002;
@@ -976,6 +1318,64 @@ namespace sconnRem
 
         public static int mAdrHostDeviceIsSystemConnected= (mAdrHostDeviceSystemId+mAdrHostDeviceSystemId_LEN);
         public static int mAdrHostDeviceIsSystemConnected_LEN =0x01;
+
+        public static int mAdrHostDeviceServerId = (mAdrHostDeviceIsSystemConnected+mAdrHostDeviceIsSystemConnected_LEN);
+        public static int mAdrHostDeviceServerId_LEN = 0x02;
+
+
+        public static int mAdrHostDeviceServerIpAddr = (mAdrHostDeviceServerId+mAdrHostDeviceServerId_LEN);
+        public static int mAdrHostDeviceServerIpAddr_LEN =  30;
+
+        public static int mAdrHostDeviceServerPasswd = (mAdrHostDeviceServerId+mAdrHostDeviceServerId_LEN);
+        public static int mAdrHostDeviceServerPasswd_LEN = 30;
+
+        public static int mAdrSysFail = (mAdrHostDeviceServerPasswd+mAdrHostDeviceServerPasswd_LEN);
+        public static int mAdrSysFail_LEN  = 0x01;
+
+        public static int mAdrZoneNo   =   (mAdrSysFail+mAdrSysFail_LEN);
+        public static int mAdrZoneNo_LEN = 0x01;
+            
+        public static int mAdrZoneCfgStartAddr  =  (mAdrZoneNo+mAdrZoneNo_LEN);
+
+        public static int ZONE_CFG_ID_POS = 0x00;
+        public static int ZONE_CFG_ID_LEN  = 0x01;
+
+        public static int ZONE_CFG_NAME_ID_POS = (ZONE_CFG_ID_POS+ZONE_CFG_ID_LEN);
+        public static int ZONE_CFG_NAME_ID_LEN = 0x01;
+
+        public static int ZONE_CFG_LEN = (ZONE_CFG_NAME_ID_POS+ZONE_CFG_NAME_ID_LEN);
+
+        public static int ZONE_CFG_MAX_ZONES = 32;
+
+        public static int GSM_GCFG_LOG_LVL_START_ADDR = (mAdrZoneCfgStartAddr+ZONE_CFG_MAX_ZONES*ZONE_CFG_LEN);
+        public static int GSM_GCFG_LOG_LVL_LEN = 0x04;
+
+        public static int GSM_GCFG_LOG_LVL_EN_ARM_CHANGE_MASK   =   0x01;
+        public static int GSM_GCFG_LOG_LVL_EN_VIO_MASK         =    0x02;
+        public static int GSM_GCFG_LOG_LVL_EN_PWR_STAT_MASK    =    0x04;
+        public static int GSM_GCFG_LOG_LVL_EN_ENTRENCE_MASK    =    0x08;
+
+        public static int mAdrGeo_Pos     =   (GSM_GCFG_LOG_LVL_START_ADDR+GSM_GCFG_LOG_LVL_LEN);
+        public static int mAdrLATd_Pos    =       0x00; //degrees
+        public static int mAdrLATm_Pos     =      0x01; //minutes
+        public static int mAdrLATs_Pos     =      0x02; //seconds
+        public static int mAdrLNGd_Pos      =     0x03; //degrees
+        public static int mAdrLNGm_Pos      =     0x04; //minutes
+        public static int mAdrLNGs_Pos      =     0x05; //seconds
+        public static int mAdrGeo_Pos_LEN =  0x06;
+
+
+        public static int GCFG_HASH_POS  =  (mAdrGeo_Pos+mAdrGeo_Pos_LEN);
+        public static int GCFG_HASH_LEN  =  SHA256_DIGEST_SIZE;
+
+        public static int GCFG_DEV_MOD_CTR_START_POS = (GCFG_HASH_POS+GCFG_HASH_LEN);
+        public static int GCFG_DEV_MOD_CTR_LEN = SHA256_DIGEST_SIZE;
+        public static int GCFG_DEV_MOD_CTR_TOTAL_LEN = (GCFG_DEV_MOD_CTR_LEN * ipcAbsMaxDevices);
+
+        public static int GCFG_NAMES_MOD_CTR_POS  =    (GCFG_DEV_MOD_CTR_START_POS+GCFG_DEV_MOD_CTR_TOTAL_LEN);
+        public static int GCFG_NAMES_MOD_CTR_LEN = SHA256_DIGEST_SIZE;
+
+        public static int GCFG_END_REG            =    (GCFG_NAMES_MOD_CTR_POS+GCFG_NAMES_MOD_CTR_LEN);
 
 
         public static int mAdrDevStart = 0x400; //1024- start address in memory of device configs
@@ -1009,41 +1409,92 @@ namespace sconnRem
         public static byte mAdrCOMeth = 0xD;  //device has ETH COM
         public static byte mAdrCOMmiwi = 0xE;  //device has MiWi COM
         public static byte mAdrI2CAddr = 0xF; //i2c bus address
-
+        public static byte mAdrSensorBattLvl = 0xF;
 
         /********  Input state  ********/
-        public static byte mAdrInput = 0x80;  //128 - start address of input states, format : <input type> <value1> <value2-Analog>
-            public static byte mAdrInputMemSize = 0x04;
-            public static byte mAdrInputType =0x00;
-            public static byte mAdrInputAG   =0x01;
-            public static byte mAdrInputVal  =0x02;
-            public static byte mAdrInputNameAddr =0x03;
+        public static int mAdrInput = 0x20;  //128 - start address of input states, format : <input type> <value1> <value2-Analog>
+        public static byte mAdrInputMemSize = 0x08;
+        public static byte mAdrInputType = 0x00;
+        public static byte mAdrInputAG = 0x01;
+        public static byte mAdrInputVal = 0x02;
+        public static byte mAdrInputSensitivity = 0x03;
+        public static byte mAdrInputEnabled = 0x04;
+        public static byte mAdrInputNameAddr = 0x05;
+        public static byte mAdrInputZoneId = 0x06;
+        public static byte mAdrInputTypeParam = 0x07;
+
+
+        public static byte DeviceMaxInputs = 24;
+        public static byte InputSensitivityStep = 50;
+
 
         /********  Output state  ********/
-        public static byte mAdrOutput =0x40;  //40 - start address of output states, format : <output type> <value1>
-            public static byte mAdrOutputType =0x00;
-            public static byte mAdrOutputVal  =0x01;
-            public static byte mAdrOutputNameAddr =0x02;
-            public static byte mAdrOutputMemSize   =0x03;
+        public static int mAdrOutput = (mAdrInput + mAdrInputMemSize * DeviceMaxInputs);  //40 - start address of output states, format : <output type> <value1>
+        public static byte mAdrOutputType = 0x00;
+        public static byte mAdrOutputVal = 0x01;
+        public static byte mAdrOutputEnabled = 0x02;
+        public static byte mAdrOutputNameAddr = 0x03;
+        public static byte mAdrOutputPar1 = 0x04;
 
-            public static byte outputON =0x01;  //Output active
-            public static byte outputOFF =0x00;  //Output inactive
+        public static byte mAdrOutputMemSize = 0x05;
 
-            public static byte OutputNA =0x01;
-            public static byte OutputNIA =0x00; // normaly inactive
+        public static byte outputON = 0x01;  //Output active
+        public static byte outputOFF = 0x00;  //Output inactive
 
-            public static byte Output1Addr =0x40;
-            public static byte Output2Addr =0x43;
+        public static byte OutputNA = 0x01;
+        public static byte OutputNIA = 0x00; // normaly inactive
 
+        public static byte Output1Addr = 0x40;
+        public static byte Output2Addr = 0x43;
+
+        public static byte DeviceMaxOutputs = 16;
 
         /******   Relay state ********/
-        public static byte  mAdrRelay = 0x6C;
-            public static byte  mAdrRelayType = 0x00;
-            public static byte  mAdrRelayVal    =    0x01;
-            public static byte  mAdrRelayNameAddr =  0x02;
-            public static byte RelayMemSize = 0x03;
+        public static int mAdrRelay = (mAdrOutput + mAdrOutputMemSize * DeviceMaxOutputs);
+        public static byte mAdrRelayType = 0x00;
+        public static byte mAdrRelayVal = 0x01;
+        public static byte mAdrRelayEnabled = 0x02;
+        public static byte mAdrRelayNameAddr = 0x03;
+        public static byte mAdrRelayPar1 = 0x04;
+        public static byte DeviceMaxRelays = 8;
+        public static byte RelayMemSize = 0x05;
+
+        public static int RelayTotalMemSize = (RelayMemSize*DeviceMaxRelays);
+
+        public static int mAdrSuppVolt_Start_Pos = (mAdrRelay + RelayTotalMemSize);
+        public static int mAdrSuppVolt_Start_Len = (4);
+        public static int mAdrBackupVolt_Start_Pos = (mAdrSuppVolt_Start_Pos + mAdrSuppVolt_Start_Len);
+        public static int mAdrBackupVolt_Start_Len = (4);
+
+        public static int deviceConfigSize = 512;   //  mAdrRelay + (RelayMemSize * DeviceMaxRelays);
 
   
+
+        /******* Device types ***********/
+
+        public static int IPC_DEV_TYPE_GKP =   0x01;
+        public static int REV_HW_CFG_GKP_32MX_ETH   =  0x01;
+        public static int REV_HW_CFG_GKPNG_32MX      = 0x02;
+        public static int REV_HW_CFG_GKP_32MZ_WIFI    =0x11;
+        public static int IPC_DEV_TYPE_MB     =0x02;
+        public static int REV_HW_CFG_MB_32MX_ETH =     0x01;
+        public static int REV_HW_CFG_MB_32MX_ETH_GSM = 0x02;
+        public static int REV_HW_CFG_MB_32MZ         = 0x03;
+        public static int REV_HW_CFG_MB_32MX_NG      = 0x04;
+        public static int IPC_DEV_TYPE_GSM    = 0x03;
+        public static int REV_HW_CFG_GSM_32MX250_ETH =     0x01;
+        public static int REV_HW_CFG_GSM_32MX270_ETH =     0x02;
+        public static int IPC_DEV_TYPE_PIR_SENSOR   =  0x04;
+        public static int REV_HW_CFG_SENS_18F46K20   =   0x01;
+        public static int IPC_DEV_TYPE_RM   =  0x05;
+        public static int REV_HW_CFG_RM_32M795_ETH = 0x01;
+
+
+
+
+
+
+
         /******  DEAMON  *******/
 
         /***** DEAMON TYPES  *****/
@@ -1090,31 +1541,55 @@ namespace sconnRem
         /*  OUTPUT STATE */
         public static byte OUT_STATE_ACTIVE    =0x01;
         public static byte OUT_STATE_INACTIVE  = 0x00;
-    
-        /************  NAMES *****************/
-        public static int mAddr_NAMES_StartAddr= 0x0000;
-        public static int mAddr_NAMES_Board =0x0000;    //first name is device name
-        public static int mAddr_NAMES_Inputs = 0x20; // 16 inputs
-        public static int mAddr_NAMES_Outputs = 0x220;  // 9 outputs
-        public static int mAddr_NAMES_Relays = 0x340;  // 2 relays
 
-        public static int RAM_NAMES_SIZE  =16384;
-        public static int RAM_DEVICE_NAMES_SIZE= 1024;
-        public static int RAM_NAME_SIZE=  32;       //  16x 2byte unicode
-        public static int RAM_TOTAL_NAMES_NO  = 512;
-        public static int RAM_DEV_NAMES_NO=   32;
+
+ 
+
+
+        /************  NAMES *****************/
+
+    public static int mAddr_NAMES_StartAddr = (RAM_GCFG_SIZE+(RAM_DEVCFG_SIZE*RAM_DEVCFG_NO));
+    public static int mAddr_NAMES_Board = (RAM_GCFG_SIZE+(RAM_DEVCFG_SIZE*RAM_DEVCFG_NO));
+
+    public static int RAM_NAME_SIZE =  32;  //  16x 2byte unicode
+
+    public static int RAM_DEV_NAMES_NO = (DeviceMaxRelays + DeviceMaxOutputs + DeviceMaxInputs + 1); //device name + IOs
+
+
+    public static int mAddr_NAMES_Global_StartAddr =mAddr_NAMES_StartAddr+(RAM_DEV_NAMES_NO*RAM_NAME_SIZE);
+    public static int mAddr_NAMES_Global_SystemName_Pos=   0;
+    public static int mAddr_NAMES_Global_Zone_1_Pos   =    1;
+    public static int mAddr_NAMES_Global_Zone_2_Pos   =    2;
+    public static int mAddr_NAMES_Global_Zone_3_Pos   =    3;
+    public static int mAddr_NAMES_Global_Zone_4_Pos   =    4;
+    public static int mAddr_NAMES_Global_Zone_5_Pos    =   5;
+    public static int mAddr_NAMES_Global_Zone_6_Pos     =  6;
+    public static int mAddr_NAMES_Global_Zone_7_Pos     =  7;
+    public static int mAddr_NAMES_Global_Zone_8_Pos     =  8;
+    public static int mAddr_NAMES_Global_Zone_9_Pos     =  9;
+    public static int mAddr_NAMES_Global_Zone_10_Pos    =  10;
+    public static int mAddr_NAMES_Global_Zone_11_Pos    =  11;
+    public static int mAddr_NAMES_Global_Zone_12_Pos    =  12;
+    public static int mAddr_NAMES_Global_Zone_13_Pos    =  13;
+    public static int mAddr_NAMES_Global_Zone_14_Pos    =  14;
+    public static int mAddr_NAMES_Global_Zone_15_Pos    =  15;
+    public static int mAddr_NAMES_Global_Zone_16_Pos    =  16;
+
+    public static int mAddr_NAMES_Global_Reserved_Pos   =  17;
+    public static int mAddr_NAMES_Global_Reserved_Len   =  15;
+        
+    public static int RAM_NAMES_Global_Total_Records   = (mAddr_NAMES_Global_Reserved_Pos+mAddr_NAMES_Global_Reserved_Len);
+    public static int RAM_NAMES_Global_Total_Size   =    (RAM_NAMES_Global_Total_Records*RAM_NAME_SIZE);
+
+    public static int RAM_NAMES_SIZE = ( (RAM_DEV_NAMES_NO*RAM_NAME_SIZE) + (RAM_NAMES_Global_Total_Size ) ) ;
+    public static int RAM_DEVICE_NAMES_SIZE = (RAM_DEV_NAMES_NO*RAM_NAME_SIZE);
 
         public static int mAddr_NAMES_Board_Pos = 0x00;
         public static int mAddr_NAMES_Inputs_Pos = 0x01;
-        public static int mAddr_NAMES_Outputs_Pos = 0x11;
-        public static int mAddr_NAMES_Relays_Pos = 0x1A;
+        public static int mAddr_NAMES_Outputs_Pos = (DeviceMaxInputs+mAddr_NAMES_Inputs_Pos);
+        public static int mAddr_NAMES_Relays_Pos = (mAddr_NAMES_Outputs_Pos+DeviceMaxOutputs);
 
 
-        /*****  *****/
-        public static int Names_StartAddr= 0x0000;
-        public static int Names_No       = 0x200;
-        public static int Name_Size     =  0x10;
-        public static int Name_Char_Size = 0x02;//4byte unicode char
 
 
 
@@ -1122,6 +1597,7 @@ namespace sconnRem
         public static int mAddr_SCHED_StartAddr =0x4000; //16384 - after Names CFG
         public static int RAM_SCHED_SIZE  = 8192;         //32 devices * 8sched/dev *  32B sched size
         public static int RAM_DEV_SCHED_SIZE = 256;
+        public static int RAM_SMS_RECP_MEM_SIZE = 256;
         public static int RAM_DEV_SCHED_NO    =0x08;     //32 schedules
         public static int RAM_DEV_SCHED_MEM_SIZE  =0x20;  //32B  
         public static int RAM_DEV_SCHED_DATETIME_SIZE = 0x08;
@@ -1198,12 +1674,22 @@ namespace sconnRem
         static public int mAddr_SMS_StartAddr     =0x6000;  //24576 - after Schedule
         static public int mAddr_RECP_StartAddr =0x6000;
         static public int mAddr_SMS_MSG_StartAddr =0x6100;
-        static public int RAM_RECP_SIZE     = 0x100; //256B RECPs
-        static public int RAM_SMS_RECP_SIZE = 16; // ITU-T max 15 digit
-        static public int RAM_SMS_RECP_NO   = 16;
+
+        static public byte RAM_SMS_RECP_ADDR_POS = (byte)0x0000;
+        static public byte RAM_SMS_RECP_ADDR_LEN = 15;
+        static public byte RAM_SMS_RECP_COUNTRY_CODE_POS = (byte)(RAM_SMS_RECP_ADDR_POS + RAM_SMS_RECP_ADDR_LEN);
+        static public byte RAM_SMS_RECP_COUNTRY_CODE_LEN = 0x02;
+        static public byte RAM_SMS_RECP_MESSAGE_LEVEL_POS = (byte)(RAM_SMS_RECP_COUNTRY_CODE_POS + RAM_SMS_RECP_COUNTRY_CODE_LEN);
+        static public byte RAM_SMS_RECP_MESSAGE_LEVEL_LEN = 0x01;
+        static public byte RAM_SMS_RECP_ENABLED_POS = (byte)(RAM_SMS_RECP_MESSAGE_LEVEL_POS + RAM_SMS_RECP_MESSAGE_LEVEL_LEN);
+        static public byte RAM_SMS_RECP_ENABLED_LEN = 0x01;
+
+        static public byte RAM_SMS_RECP_SIZE = 32;    // E.164 ITU-T max 15 digit 
+        static public byte RAM_SMS_RECP_NO = 16;    //16 recpients
+
         static public int RAM_SMS_MSG_SIZE  = 64;    //64 ASCII chars
         static public int RAM_SMS_MSG_NO    = 16;
-        static public int RAM_SMS_SIZE      = 0x400; //1024B MSGs
+
 
 
         /**********************  AUTH *********************/
@@ -1216,7 +1702,7 @@ namespace sconnRem
 
         /******************   SCONN BERKELEY  *************/
         static public int NET_MAX_TX_SIZE = 280;
-        static public int NET_MAX_RX_SIZE = 1100;
+        static public int NET_MAX_RX_SIZE = 2048;
         static public int NET_MAX_SESSION_IDLE_SEC = 100;
         static public int NET_DATA_PACKET_CONTROL_BYTES = 2;
         static public int NET_CMD_PACKET_LEN = 3;
@@ -1230,7 +1716,15 @@ namespace sconnRem
         static public byte NET_PACKET_TYPE_PASSWDCFG = 0x0005;
         static public byte NET_PACKET_TYPE_AUTH = 0x0006;
         static public byte NET_PACKET_TYPE_NETCFG = 0x0007;
+        static public byte NET_PACKET_TYPE_GSMRCPTCFG = 0x0008;
+        static public byte NET_PACKET_TYPE_DEVAUTHCFG = 0x0009;
+        static public byte NET_PACKET_TYPE_GLOBNAMECFG = 0x000A;
 
+        static public byte  SYS_ALRM_UUID_LEN =  16;
+        static public int   SYS_ALARM_DEV_AUTH_MAX_RECORDS = 64;
+        static public int   SYS_ALARM_DEV_AUTH_MEM_SIZE = SYS_ALARM_DEV_AUTH_MAX_RECORDS * SYS_ALRM_UUID_LEN;
+
+        
 
         /***************    EVENTS      *****************/
 
@@ -1264,10 +1758,21 @@ namespace sconnRem
 
 
 
+
+
+
         /**************  NETWORK **************/
         static public byte NET_UPLOAD_DATA_OFFSET= 0x03;
         static public byte NET_UPLOAD_DATA_END_OFFSET =0x01;
         static public byte NET_CFG_SIZE   = 52;
+
+
+
+
+
+        /*************** OTHER *****************/
+
+
 
 
     }

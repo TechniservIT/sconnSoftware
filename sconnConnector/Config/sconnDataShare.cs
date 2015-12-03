@@ -1412,7 +1412,7 @@ namespace sconnConnector
         public static byte mAdrSensorBattLvl = 0xF;
 
         /********  Input state  ********/
-        public static byte mAdrInput = 0x20;  //128 - start address of input states, format : <input type> <value1> <value2-Analog>
+        public static int mAdrInput = 0x20;  //128 - start address of input states, format : <input type> <value1> <value2-Analog>
         public static byte mAdrInputMemSize = 0x08;
         public static byte mAdrInputType = 0x00;
         public static byte mAdrInputAG = 0x01;
@@ -1429,7 +1429,7 @@ namespace sconnConnector
 
 
         /********  Output state  ********/
-        public static byte mAdrOutput = (byte)(mAdrInput + mAdrInputMemSize * DeviceMaxInputs);  //40 - start address of output states, format : <output type> <value1>
+        public static int mAdrOutput = (mAdrInput + mAdrInputMemSize * DeviceMaxInputs);  //40 - start address of output states, format : <output type> <value1>
         public static byte mAdrOutputType = 0x00;
         public static byte mAdrOutputVal = 0x01;
         public static byte mAdrOutputEnabled = 0x02;
@@ -1450,16 +1450,21 @@ namespace sconnConnector
         public static byte DeviceMaxOutputs = 16;
 
         /******   Relay state ********/
-        public static byte mAdrRelay = (byte)(mAdrOutput + mAdrOutputMemSize * DeviceMaxOutputs);
+        public static int mAdrRelay = (mAdrOutput + mAdrOutputMemSize * DeviceMaxOutputs);
         public static byte mAdrRelayType = 0x00;
         public static byte mAdrRelayVal = 0x01;
         public static byte mAdrRelayEnabled = 0x02;
         public static byte mAdrRelayNameAddr = 0x03;
         public static byte mAdrRelayPar1 = 0x04;
-
+        public static byte DeviceMaxRelays = 8;
         public static byte RelayMemSize = 0x05;
 
-        public static byte DeviceMaxRelays = 8;
+        public static int RelayTotalMemSize = (RelayMemSize*DeviceMaxRelays);
+
+        public static int mAdrSuppVolt_Start_Pos = (mAdrRelay + RelayTotalMemSize);
+        public static int mAdrSuppVolt_Start_Len = (4);
+        public static int mAdrBackupVolt_Start_Pos = (mAdrSuppVolt_Start_Pos + mAdrSuppVolt_Start_Len);
+        public static int mAdrBackupVolt_Start_Len = (4);
 
         public static int deviceConfigSize = 512;   //  mAdrRelay + (RelayMemSize * DeviceMaxRelays);
 
