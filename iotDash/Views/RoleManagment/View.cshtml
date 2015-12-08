@@ -4,8 +4,11 @@
 @{
     ViewBag.Title = "View";
 }
+@{
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
 
-<h2>View</h2>
+<h2>Roles</h2>
 <div class="table-responsive">
 
     <table class="table">
@@ -35,7 +38,15 @@
             </tr>
         }
 
+        <tr>
+            <td>
+                <a href="@Url.Action("Add", "RoleManagment")"><span class=" glyphicon glyphicon-plus"></span></a>
+            </td>
+
+        </tr>
+
 
     </table>
 
 </div>
+

@@ -32,6 +32,7 @@ namespace sconnConnector.Config
         public void LoadSiteConfig()
         {
             mngr.ReadSiteRunningConfig(site);
+            site.siteCfg.ReloadConfig();
         }
 
         public void StoreDeviceConfig(int DevNo)

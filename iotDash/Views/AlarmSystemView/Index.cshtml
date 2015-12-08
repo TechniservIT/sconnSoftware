@@ -119,6 +119,31 @@
         }
     }
 
+        
+    public string ContentForDigitalIoValue(int value)
+    {
+        if (value == 0)
+        {
+            return "<button type='button' class='btn btn-danger'>"+value.ToString() + "</button>";
+        }
+        else
+        {
+            return "<button type='button' class='btn btn-success'>" + value.ToString() + "</button>";
+        }
+    }
+    
+    public string ImageUrlForDigitalIoValue(int value)
+    {
+        if (value == 0)
+        {
+            return "";
+        }
+        else
+        {
+            return "";
+        }
+    }
+
 
     //TODO generate req param input lists
 
@@ -254,22 +279,22 @@
         <div role="tabpanel" class="tab-pane active" id="tabStatus">
             <div class="container-fluid">
                 <div class="row">
-
                     <div id="ReloadModelData" class="col-md-1">
                         @Html.ActionLink("Refresh", "Index", new { DeviceId = Model.AlarmDevice.Id }, new { @class = "glyphicon glyphicon-refresh" })
                     </div>
-
                 </div>
 
                 <div class="row">
 
-
                     <div class="panel panel-default">
-                        <div class="panel-heading">Site</div>
+                        <div class="panel-heading">
+                            <center>
+                                <h2>Status</h2>
+                            </center>
+                        </div>
                         <div class="panel-body">
                             <p></p>
                         </div>
-
 
                         <table class="table">
                             <tr>
@@ -288,6 +313,7 @@
                             </tr>
 
                         </table>
+
                     </div>
 
                 </div>
@@ -302,15 +328,15 @@
                         <div class="panel-heading">
                             <div class="container-fluid">
                                 <div class="row">
-                                    <div  class="col-md-2">
+                                    <div class="col-md-2">
                                         <img src="~/Content/img/sensorin.png" alt="563te" class="img-circle img-section-icon">
                                     </div>
                                     <div class="col-md-10">
-                                        <center>Inputs</center>
+                                      <h2>Inputs</h2>
                                     </div>
                                 </div>
-                             </div>
                             </div>
+                        </div>
                         <div class="panel-body"></div>
                         <table class="table">
                             <tr>
@@ -320,23 +346,22 @@
 
                             </tr>
 
-                            @for (int i = 0; i < Model.Inputs.Count; i++)
+                            @for (int i = 0; i < Model.EditedDevice.Inputs.Count; i++)
                             {
                                 <tr>
                                     <td>
-                                        @Model.Inputs[i].Name.ToString()
+                                        @Model.EditedDevice.Inputs[i].Name.ToString()
                                     </td>
 
-                                    @Html.HiddenFor(model => model.Inputs[i].Id)
-                                    @Html.HiddenFor(model => model.Inputs[i].NameId)
+                                    @Html.HiddenFor(model => model.EditedDevice.Inputs[i].Id)
+                                    @Html.HiddenFor(model => model.EditedDevice.Inputs[i].NameId)
 
                                     <td>
-                                        @Model.Inputs[i].Type.ToString()
-                                    </td>  
+                                        @Model.EditedDevice.Inputs[i].Type.ToString()
+                                    </td>
 
                                     <td>
-                                        @Model.Inputs[i].Value.ToString()
-
+                                        @Html.Raw(HttpUtility.HtmlDecode(ContentForDigitalIoValue(Model.EditedDevice.Inputs[i].Value)))
                                     </td>
 
                                 </tr>
@@ -350,8 +375,18 @@
                 <div class="row">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <img src="~/Content/img/sensorout.png" alt="124das" class="img-circle img-section-icon">
-                            <center>Outputs</center>
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <img src="~/Content/img/sensorout.png" alt="124das" class="img-circle img-section-icon">
+                                    </div>
+                                    <div class="col-md-10">
+
+                                        <h2>Outputs</h2>
+
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="panel-body"></div>
                         <table class="table">
@@ -362,24 +397,23 @@
 
                             </tr>
 
-                            @for (int i = 0; i < Model.Inputs.Count; i++)
+                            @for (int i = 0; i < Model.EditedDevice.Outputs.Count; i++)
                             {
                                 <tr>
                                     <td>
-                                        @Model.Inputs[i].Name.ToString()
+                                        @Model.EditedDevice.Inputs[i].Name.ToString()
                                     </td>
 
-                                    @Html.HiddenFor(model => model.Inputs[i].Id)
-                                    @Html.HiddenFor(model => model.Inputs[i].NameId)
+                                    @Html.HiddenFor(model => model.EditedDevice.Outputs[i].Id)
+                                    @Html.HiddenFor(model => model.EditedDevice.Outputs[i].NameId)
 
                                     <td>
-                                        @Model.Inputs[i].Type.ToString()
+                                        @Model.EditedDevice.Outputs[i].Type.ToString()
 
                                     </td>
 
                                     <td>
-                                        @Model.Inputs[i].Value.ToString()
-
+                                        @Html.Raw(HttpUtility.HtmlDecode(ContentForDigitalIoValue(Model.EditedDevice.Outputs[i].Value)))
                                     </td>
 
                                 </tr>

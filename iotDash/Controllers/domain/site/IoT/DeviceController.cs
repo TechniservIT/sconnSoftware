@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using iotDbConnector.DAL;
@@ -47,6 +48,42 @@ namespace iotDash.Controllers
 			}
 		}
 
+	    [HttpGet]
+	    public ActionResult AddType()
+	    {
+            DeviceAddTypeModel model = new DeviceAddTypeModel();
+	        return View(model);
+	    }
+
+	    [HttpPost]
+	    public async Task<ActionResult> AddType(DeviceAddTypeModel model)
+	    {
+            try
+            {
+                if (model.Type != null)
+                {
+                    var cont = (iotContext) System.Web.HttpContext.Current.Session["iotcontext"];
+                    string domainId = DomainSession.GetContextDomain(this.HttpContext);
+                    iotDomain domain = cont.Domains.First(d => d.DomainName.Equals(domainId));
+                    domain.DeviceTypes.Add(model.Type);
+                    await cont.SaveChangesAsync();
+                    model.Result = StatusResponseGenerator.GetSuccessPanelWithMsgAndStat("Success.",
+                        RequestStatus.Success);
+                }
+                else
+                {
+                    model.Result = StatusResponseGenerator.GetSuccessPanelWithMsgAndStat("Error.", RequestStatus.Failure);
+                }
+
+            }
+            catch (Exception e)
+            {
+                model.Result = StatusResponseGenerator.GetSuccessPanelWithMsgAndStat("Error.", RequestStatus.Failure);
+            }
+            return View(model);
+	    }
+
+
 
 		// GET: /Device/NewType/
 		public string NewType(string Name, string Description, string ImageUrl)
@@ -67,15 +104,10 @@ namespace iotDash.Controllers
 			catch (Exception e) 
 			{
                 return StatusResponseGenerator.GetSuccessPanelWithMsgAndStat("Error.", RequestStatus.Failure);
-			}          
+			}
+		  
 		}
 
-
-		 // GET: /Device/AddType/
-		public ActionResult AddType()
-		{
-			return View();
-		}
 		
 		//
 		// POST: /Device/Create
@@ -113,37 +145,44 @@ namespace iotDash.Controllers
 		}
 
 
-		 [HttpPost]
-        public void Edit(Device Device, int LocationId, int TypeId)    //DeviceEditModel model
+		 
+        [HttpPost]
+        public async Task<ActionResult> Edit(DeviceEditModel model)
 		{
 			try
 			{
-                if (Device != null)
-				{
-                    var cont = (iotContext)System.Web.HttpContext.Current.Session["iotcontext"];
-					DeviceRestfulService cl = new DeviceRestfulService();
-                    Device stored = cont.Devices.First(d => d.Id == Device.Id);
-					if (stored != null)
-					{
-                        Location loc = cont.Locations.First(l => l.Id == LocationId);
-                        DeviceType type = cont.Types.First(t => t.Id == TypeId);
-                        //copy editable objects
-                        stored.DeviceName = Device.DeviceName;
-                        stored.Type = type;
-                        stored.DeviceLocation = loc;
-                        stored.Credentials.Username = Device.Credentials.Username;
-                        stored.Credentials.Password = Device.Credentials.Password;
-                        stored.EndpInfo.Hostname = Device.EndpInfo.Hostname;
-                        stored.EndpInfo.Port = Device.EndpInfo.Port;
-						cont.SaveChanges();
-					}
-
-				}
+			    if (model.Device != null)
+			    {
+			        var cont = (iotContext) System.Web.HttpContext.Current.Session["iotcontext"];
+			        DeviceRestfulService cl = new DeviceRestfulService();
+			        Device stored = cont.Devices.First(d => d.Id == model.Device.Id);
+			        if (stored != null)
+			        {
+			            Location loc = cont.Locations.First(l => l.Id == model.Device.DeviceLocation.Id);
+			            DeviceType type = cont.Types.First(t => t.Id == model.Device.Type.Id);
+			            //copy editable objects
+			            stored.DeviceName = model.Device.DeviceName;
+			            stored.Type = type;
+			            stored.DeviceLocation = loc;
+			            stored.Credentials.Username = model.Device.Credentials.Username;
+			            stored.Credentials.Password = model.Device.Credentials.Password;
+			            stored.EndpInfo.Hostname = model.Device.EndpInfo.Hostname;
+			            stored.EndpInfo.Port = model.Device.EndpInfo.Port;
+			            await cont.SaveChangesAsync();
+                        model = new DeviceEditModel(model.Device, cont.Locations.ToList(), cont.Types.ToList());
+                        model.Result = StatusResponseGenerator.GetSuccessPanelWithMsgAndStat("Success.",RequestStatus.Success);
+			        }
+			    }
+			    else
+			    {
+                    model.Result = StatusResponseGenerator.GetSuccessPanelWithMsgAndStat("Error.", RequestStatus.Failure);
+			    }
 			}
 			catch (Exception e)
 			{
-
+                model.Result = StatusResponseGenerator.GetSuccessPanelWithMsgAndStat("Error.", RequestStatus.Failure);
 			}
+            return View(model);
 		}
 
 

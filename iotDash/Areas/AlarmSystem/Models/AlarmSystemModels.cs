@@ -10,6 +10,21 @@ using System.ComponentModel.DataAnnotations;
 
 namespace iotDash.Models
 {
+
+    public class AlarmSystemListModel
+    {
+        public int DeviceNo { get; set; }
+
+        public List<Device> AlarmDevices { get; set; }
+
+        public AlarmSystemListModel(List<Device> devices)
+        {
+            AlarmDevices = devices;
+        }
+    }
+
+
+
     public class AlarmSystemSummaryModel
     {
         public int DeviceNo { get; set; }
@@ -29,6 +44,8 @@ namespace iotDash.Models
 
         [Required]
         public int DeviceId { get; set; }
+
+        public ipcDataType.ipcDeviceConfig DevCfg { get; set; }
 
         [Required]
         public List<sconnInput> Inputs { get; set; }
@@ -61,7 +78,6 @@ namespace iotDash.Models
             Config = new AlarmSystemConfigManager(AlarmDevice.EndpInfo, AlarmDevice.Credentials);
             Config.LoadSiteConfig();
             EditedDevice = Config.site.siteCfg.deviceConfigs[0];
-            Inputs = Config.site.siteCfg.deviceConfigs[0].Inputs;
         }
     }
 

@@ -1,4 +1,6 @@
-﻿@{
+﻿@model iotDash.Models.DeviceAddTypeModel
+
+@{
     ViewBag.Title = "AddType";
 }
 
@@ -9,7 +11,7 @@
 
 <script>
 
-    $(function () {
+    @*$(function () {
         $('#adddevtype').submit(function () {
             $.ajax({
                 url: '@Url.Action("NewType", "Device")',
@@ -25,7 +27,7 @@
             });
         });
 
-    });
+    });*@
 
 
 </script>
@@ -35,40 +37,51 @@
 <div class="container-fluid">
 
     <div class="row">
-        <div class="col-md-12">
-            <div>
-                <h3>Add device type. <small></small></h3>
-                <br /><br />
+    </div>
 
-                <form role="form" action="" method="post" id="adddevtype">
-
-                    <div class="form-group">
-                        <label for="LocationName">Name</label>
-                        <input type="text" class="form-control" name="locationnameinput" id="LocationName">
-                    </div>
-
+    <div class="row">
+        <div id="addraz">
+            @using (Html.BeginForm("AddType", "Device"))
+            {
+                <fieldset>
 
                     <div class="form-group">
-                        <label for="DescriptionInput">Description</label>
-                        <input type="text" class="form-control" name="siteinput" id="DescriptionInput">
+                        @Html.LabelFor(model => model.Type.TypeName)
+                        @Html.TextBoxFor(model => model.Type.TypeName, new { @class = "form-control" })
                     </div>
 
                     <div class="form-group">
-                        <label for="ImageUrlInput">Image URL</label>
-                        <input type="text" class="form-control" name="siteinput" id="ImageUrlInput">
+                        @Html.LabelFor(model => model.Type.TypeDescription)
+                        @Html.TextBoxFor(model => model.Type.TypeDescription, new { @class = "form-control" })
                     </div>
 
-                    <button class="btn btn-primary" type="submit">Add</button>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Type.VisualRepresentationURL)
+                        @Html.TextBoxFor(model => model.Type.VisualRepresentationURL, new { @class = "form-control" })
+                    </div>
 
-                </form>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Type.Category)
+                        @Html.EnumDropDownListFor(model => model.Type.Category, new { @class = "form-control" })
+                    </div>
 
-            </div>
+                    <div class="form-group">
+                        <input type="submit" value="Send"/>
+                    </div>
+
+                </fieldset>
+            }
         </div>
+
     </div>
 
     <div class="row">
         <div id="resultview">
-
+            @if (Model.Result != null)
+            {
+                @Html.Raw(HttpUtility.HtmlDecode(Model.Result))
+            }
+           
         </div>
     </div>
 

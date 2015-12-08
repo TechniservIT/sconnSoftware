@@ -188,24 +188,19 @@ namespace iotDash.Controllers
         {
             try
             {
-                if (siteId != null)
-                {
                     iotContext cont = (iotContext)System.Web.HttpContext.Current.Session["iotcontext"]; 
                     Site site = cont.Sites.First(s => s.Id == siteId);
                     if (site != null)
                     {
-                        Device alrmSysDev = site.Devices.First(d => d.Type.TypeName.Contains("sconnMB"));
-                        if (alrmSysDev != null)
+                        List<Device> alrmSysDevs = site.Devices.Where(d => d.Type.Category == DeviceCategory.AlarmSystem).ToList();
+                        if (alrmSysDevs != null)
                         {
-                            AlarmSystemConfigManager mngr = new AlarmSystemConfigManager(alrmSysDev.EndpInfo, alrmSysDev.Credentials);
-                            int devs = mngr.GetDeviceNumber();
-                            AlarmSystemSummaryModel model = new AlarmSystemSummaryModel(devs, alrmSysDev);
+                            //AlarmSystemConfigManager mngr = new AlarmSystemConfigManager(alrmSysDev.EndpInfo, alrmSysDev.Credentials);
+                            //int devs = mngr.GetDeviceNumber();
+                            AlarmSystemListModel model = new AlarmSystemListModel(alrmSysDevs);
                             return View(model);
                         }
-
                     }
-                }
-
                 return View();
             }
             catch (Exception e)

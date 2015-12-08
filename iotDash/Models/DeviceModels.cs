@@ -12,6 +12,19 @@ using System.Web;
 
 namespace iotDash.Models
 {
+    public class DeviceAddTypeModel
+    {
+        public DeviceType Type { get; set; }
+
+        public string Result { get; set; }
+
+        public DeviceAddTypeModel()
+        {
+                
+        }
+
+    }
+
     public class DeviceAddModel
     {
         public List<Location> Locations { get; set; }
@@ -121,22 +134,9 @@ namespace iotDash.Models
         public Device Device { get; set; }
 
 
-        [Required]
-        public int LocationId { get; set; }
-
-
-        [DisplayName("Location")]
-        public Location Location { get; set; }
-
-
         public List<Location> Locations { get; set; }
 
-
-        [Required]
-        public int TypeId { get; set; }
-
-        [DisplayName("Type")]
-        public DeviceType DeviceType { get; set; }
+        public string Result { get; set; }
 
 
         public List<DeviceType> Types { get; set; }
@@ -147,6 +147,11 @@ namespace iotDash.Models
             Device = device;
             Locations = locs;
             Types = types;
+        }
+
+        public DeviceEditModel()
+        {
+                
         }
 
         public string DeviceLatCordStr()

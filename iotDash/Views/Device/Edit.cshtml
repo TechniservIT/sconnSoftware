@@ -9,8 +9,8 @@
     <div id="wrapper">
         <div class="row">
             <div id="addraz">
-                @using (Html.BeginForm(FormMethod.Post))
-                {
+               @using (Html.BeginForm("Edit", "Device"))
+               {
                     <fieldset>
 
                         <legend>Device</legend>
@@ -44,33 +44,39 @@
                             @Html.TextBoxFor(model => model.Device.Credentials.Password, new { @class = "form-control" })
                         </div>
 
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.Location)
-                            @Html.DropDownListFor(
-                            model => model.LocationId,
-                         new SelectList(
-                           Model.Locations,
-                           "Id",
-                            "LocationName",
-                            Model.Location
-                            ),
-                          new { @class = "form-control" }
-                        )
-                        </div>
-
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.DeviceType, new { @class = "form-control" })
-                            @Html.DropDownListFor(
-                            model => model.TypeId,
-                         new SelectList(
-                           Model.Types,
-                            "Id",
-                            "TypeName",
-                             Model.DeviceType
-                            ),
-                          new { @class = "form-control" }
-                        )
-                        </div>
+                        @if (Model.Locations != null)
+                        {
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Device.DeviceLocation)
+                                @Html.DropDownListFor(
+                                model => model.Device.DeviceLocation.Id,
+                                 new SelectList(
+                                   Model.Locations,
+                                   "Id",
+                                    "LocationName",
+                                    Model.Device.DeviceLocation
+                                    ),
+                                  new { @class = "form-control" }
+                                )
+                            </div>
+                        }
+                        
+                        @if (Model.Types != null)
+                        {
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Device.Type, new { @class = "form-control" })
+                                @Html.DropDownListFor(
+                                    model => model.Device.Type.Id,
+                                     new SelectList(
+                                       Model.Types,
+                                        "Id",
+                                        "TypeName",
+                                         Model.Device.Type
+                                        ),
+                                      new { @class = "form-control" }
+                                    )
+                                </div>
+                        }
 
 
                         <div class="form-group">
@@ -83,15 +89,21 @@
                             <input type="submit" value="Send" />
                         </div>
 
-
-
                     </fieldset>
                 }
             </div>
 
         </div>
 
+        <div class="row">
+            <div id="resultview">
+                @if (Model.Result != null)
+                {
+                    @Html.Raw(HttpUtility.HtmlDecode(Model.Result))
+                }
 
+            </div>
+        </div>
 
     </div>
     <!-- /#wrapper -->
