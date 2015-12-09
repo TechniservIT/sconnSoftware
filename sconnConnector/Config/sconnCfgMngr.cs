@@ -2,6 +2,7 @@ using sconnConnector.Config;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -971,8 +972,9 @@ namespace sconnConnector
 						}
 					}
 				}
-				catch (Exception)
+				catch (Exception e)
 				{
+                    Debug.WriteLine(e.Message + " | " + e.InnerException.Message);
 					return false;
 				}
 
@@ -1054,7 +1056,7 @@ namespace sconnConnector
 					return (bool)(deviceUploadStat & globalUploadStat);
 
 				}
-				catch (Exception)
+				catch (Exception e)
 				{
 					site.siteStat.StopConnectionTimer();
 					site.siteStat.FailedConnections++;

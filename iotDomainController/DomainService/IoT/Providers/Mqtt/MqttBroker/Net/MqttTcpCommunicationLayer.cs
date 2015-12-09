@@ -118,7 +118,7 @@ namespace uPLibrary.Networking.M2Mqtt.Communication
                         this.OnClientConnected(client);
                     }
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
                     if (!this.isRunning)
                         return;

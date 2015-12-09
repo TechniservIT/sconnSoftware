@@ -599,14 +599,13 @@ namespace iotServiceProvider
                     //remove existing
                     if (edited.Actions.Count > 0)
                     {
-                        iotRepository<DeviceAction> actrep = new iotRepository<DeviceAction>();
-                        List<DeviceAction> acts = actrep.GetAll().ToList();
-                        for (int i = 0; i < acts.Count; i++)
+                        for (int i = 0; i < edited.Actions.Count; i++)
                         {
-                            actrep.Delete(acts.ElementAt(i));
+                            cont.Actions.Remove(edited.Actions[i]);
+                            //edited.Actions.RemoveAt(0);
                         }
+                        cont.SaveChanges();
                     }
-                    cont.SaveChanges();
 
                     for (int i = 0; i < outputs; i++)
                     {

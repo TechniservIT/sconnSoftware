@@ -34,7 +34,7 @@ namespace iotDash.Models
                 var roleManager = new RoleManager<IotUserRole>(new RoleStore<IotUserRole>(ucont));
                 Roles = roleManager.Roles.Where(r => r.DomainId == domain.Id).ToList();
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return;
             }

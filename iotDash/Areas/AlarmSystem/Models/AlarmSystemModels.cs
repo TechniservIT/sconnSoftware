@@ -79,6 +79,16 @@ namespace iotDash.Models
             Config.LoadSiteConfig();
             EditedDevice = Config.site.siteCfg.deviceConfigs[0];
         }
+
+        public AlarmSystemDetailModel(Device dev,AlarmSystemConfigManager man)
+        {
+            AlarmDevice = dev;
+            ServerId = dev.Id;
+            Config = man;
+            Config.LoadSiteConfig();
+            EditedDevice = Config.site.siteCfg.deviceConfigs[0];               
+        }
+
     }
 
 

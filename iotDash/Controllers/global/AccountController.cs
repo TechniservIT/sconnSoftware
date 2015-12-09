@@ -120,7 +120,7 @@ namespace iotDash
                     {
                         existingDomain = icont.Domains.First(dm => dm.DomainName.Equals(model.DomainName));
                     }
-                    catch (Exception)
+                    catch (Exception e)
                     {
                     }
                     if (existingDomain == null)    //domain does not exist

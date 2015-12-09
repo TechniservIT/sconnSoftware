@@ -70,6 +70,122 @@ namespace iotDash.Controllers
         }
     }
 
+    static public class DomainAuthHelper
+    {
+        static public bool IsUserContextDomainAuthorized(HttpContextBase httpContext)
+        {
+            //check domain access
+            string url = httpContext.Request.RawUrl;
+            var urlcomponents = url.Split('/');
+            string appdomain = urlcomponents[1];    //first component after slash
+            if (appdomain != null)
+            {
+                string username = httpContext.User.Identity.Name;
+                ApplicationDbContext cont = new ApplicationDbContext();
+                var user = (from u in cont.Users
+                            where u.UserName == username
+                            select u).First();
+
+                var icont = (iotContext)System.Web.HttpContext.Current.Session["iotcontext"];
+                if (icont == null)
+                {
+                    icont = new iotContext();
+                    System.Web.HttpContext.Current.Session["iotcontext"] = icont;
+                }
+
+                iotDomain domain = icont.Domains.First(dm => dm.DomainName.Equals(appdomain));
+                if (domain != null)
+                {
+                    if (domain.DomainName.Equals(appdomain))
+                    {
+                        return true;    //user allowed to access domain
+                    }
+                }
+            }
+        }
+
+
+    }
+
+
+    public class SiteAuthorizeAttribute : DomainAuthorizeAttribute
+    {
+        public string AppDomain { get; set; }
+
+        private readonly bool _authorize;
+
+        public SiteAuthorizeAttribute()
+        {
+            _authorize = true;  //auth by default
+        }
+
+
+        protected override bool AuthorizeCore(HttpContextBase httpContext)
+        {
+            if (!_authorize)
+                return true;
+
+            try
+            {
+                bool basicAuthed = base.AuthorizeCore(httpContext);
+                if (basicAuthed)
+                {
+                    if (DomainAuthHelper.IsUserContextDomainAuthorized(httpContext))
+                    {
+                        //verify site role
+
+                        return true;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            return false;
+        }
+    }
+
+
+    public class DeviceAuthorizeAttribute : DomainAuthorizeAttribute
+    {
+        public string AppDomain { get; set; }
+
+        private readonly bool _authorize;
+
+        public DeviceAuthorizeAttribute()
+        {
+            _authorize = true;  //auth by default
+        }
+
+
+        protected override bool AuthorizeCore(HttpContextBase httpContext)
+        {
+            if (!_authorize)
+                return true;
+
+            try
+            {
+                bool basicAuthed = base.AuthorizeCore(httpContext);
+                if (basicAuthed)
+                {
+                    if (DomainAuthHelper.IsUserContextDomainAuthorized(httpContext))
+                    {
+                        //verify site role
+
+                        return true;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            return false;
+        }
+    }
+
+
 
     [DomainAuthorize]
     public class ViewController : Controller

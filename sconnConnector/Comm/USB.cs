@@ -68,7 +68,7 @@ namespace sconnConnector
                 }
 
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 
                 throw;
@@ -115,7 +115,7 @@ namespace sconnConnector
                 port1.Close();
                 return resp.Length > 0 ? true : false;
             }
-            catch (Exception)
+            catch (Exception e)
             {        
                 throw;
             }
@@ -135,7 +135,7 @@ namespace sconnConnector
                         port1.Write("test");
                         System.Threading.Thread.Sleep(100);
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
                     
                     throw;
@@ -155,7 +155,7 @@ namespace sconnConnector
                 }
                 else return false;
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 
                 throw;
@@ -181,7 +181,7 @@ namespace sconnConnector
                         bufferdata = port1.ReadExisting();
                         bytes = bufferdata.Length;
                     }
-                    catch (Exception)
+                    catch (Exception e)
                     {
                         throw;
                     }
@@ -203,7 +203,7 @@ namespace sconnConnector
                     string bufferdata = port1.ReadExisting();
                     return bufferdata;
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
                     throw;
                 }

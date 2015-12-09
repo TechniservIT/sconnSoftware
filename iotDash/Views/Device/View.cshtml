@@ -113,8 +113,8 @@
 
         $.each(obj, function () {
             var cnode = $(this);
-            if (cnode[0]['PropertyId'] === null) {
-                var PropId = cnode[0]['PropertyId'];
+            if (cnode[0]['Id'] === null) {
+                var PropId = cnode[0]['Id'];
                 var ResultParams = cnode[0]['ResultParameters'];
                 var ResVal = ResultParams[0]['Value'];
                 var ValDispIdHash = "#propvaldisp-" + PropId;
@@ -125,8 +125,8 @@
                 element.setAttribute("title", ResVal.toString());
 
             }
-            else if (cnode[0]['ActionId'] != null) {
-                var ActId = cnode[0]['ActionId'];
+            else if (cnode[0]['Id'] != null) {
+                var ActId = cnode[0]['Id'];
                 var ResultParams = cnode[0]['ResultParameters'];
                 var ResVal = ResultParams[0]['Value'];
                 var ValDispIdHash = "#actvaldisp-" + ActId;
@@ -147,7 +147,7 @@
     contosoChatHubProxy.on('updateParam', function (deviceData) {
         var obj = jQuery.parseJSON(deviceData);
         var str = JSON.stringify(obj, undefined, 4);
-        console.log("Recieved : " + str);
+        console.log("Recieved updateParam : " + str);
 
         var cnode = obj;
 

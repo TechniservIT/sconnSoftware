@@ -10,6 +10,7 @@ using iotDbConnector.DAL;
 using iotServiceProvider;
 using iotDash.Session;
 using iotDeviceService;
+using Microsoft.AspNet.SignalR.Hubs;
 
 namespace iotDash.RealTime.SignalR.DeviceStatusUpdater
 {
@@ -18,21 +19,21 @@ namespace iotDash.RealTime.SignalR.DeviceStatusUpdater
     {
 
         public delegate void DeviceEventCallbackHandler(Device dev);
-        public static event DeviceEventCallbackHandler DeviceCallbackEvent;
+        public event DeviceEventCallbackHandler DeviceCallbackEvent;
 
         private DeviceRestfulService client;
-
+      
 
 
         /*************  WCF callback ************/
-        [CallbackBehaviorAttribute(UseSynchronizationContext = true)]
-        public class DeviceEventServiceCallback : IDeviceEventCallback
-        {
-            public void OnDeviceUpdated(Device dev)
-            {
-                DeviceCallbackEvent(dev);
-            }
-        }
+        //[CallbackBehaviorAttribute(UseSynchronizationContext = true)]
+        //public class DeviceEventServiceCallback : IDeviceEventCallback
+        //{
+        //    public void OnDeviceUpdated(Device dev)
+        //    {
+        //        DeviceCallbackEvent(dev);
+        //    }
+        //}
 
          public DeviceStatusUpdaterHub()
          {
@@ -60,12 +61,11 @@ namespace iotDash.RealTime.SignalR.DeviceStatusUpdater
 
          void iotContext_DeviceUpdateEvent(Device dev)
          {
-             DeviceCallbackEvent(dev);
+             if (DeviceCallbackEvent != null) DeviceCallbackEvent(dev);
          }
 
 
-
-         public void PublishActionUpdate(DeviceActionResult param)
+        public void PublishActionUpdate(DeviceActionResult param)
          {
              iotContext cont = new iotContext();
              cont.Configuration.ProxyCreationEnabled = false;

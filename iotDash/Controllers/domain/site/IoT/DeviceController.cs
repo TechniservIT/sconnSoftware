@@ -15,7 +15,7 @@ using iotDash.Content.Dynamic.Status;
 namespace iotDash.Controllers
 {
 
-	[DomainAuthorize]
+	[DeviceAuthorize]
 	public class DeviceController : Controller
 	{
 

@@ -833,7 +833,7 @@ namespace iotDeviceService
                 }
                 return null;
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return null;
             }

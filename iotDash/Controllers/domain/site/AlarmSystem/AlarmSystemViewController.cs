@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using iotDash.Session;
 
 namespace iotDash.Controllers
 {
@@ -18,15 +19,16 @@ namespace iotDash.Controllers
         {
             try
             {
-                var cont = (iotContext)System.Web.HttpContext.Current.Session["iotcontext"];
+                var cont = (iotContext)System.Web.HttpContext.Current.Session["iotcontext"];        
                 Device alrmSysDev = cont.Devices.First(d => d.Id == ServerId);
                 if (alrmSysDev != null)
                 {
-                    AlarmSystemDetailModel model = new AlarmSystemDetailModel(alrmSysDev);
+                    var man = DomainSession.GetAlarmConfigForContextWithDevice(this.HttpContext, alrmSysDev);
+                    AlarmSystemDetailModel model = new AlarmSystemDetailModel(alrmSysDev, man);
                     return View(model);
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
             }
             return View();
@@ -40,11 +42,12 @@ namespace iotDash.Controllers
                 Device alrmSysDev = cont.Devices.First(d => d.Id == ServerId);
                 if (alrmSysDev != null)
                 {
-                    AlarmSystemDetailModel model = new AlarmSystemDetailModel(alrmSysDev);
+                    var man = DomainSession.GetAlarmConfigForContextWithDevice(this.HttpContext, alrmSysDev);
+                    AlarmSystemDetailModel model = new AlarmSystemDetailModel(alrmSysDev, man);
                     model.Config.ToogleArmStatus();
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 //err msg
             }
@@ -75,7 +78,8 @@ namespace iotDash.Controllers
                 Device alrmSysDev = cont.Devices.First(d => d.Id == ServerId);
                 if (alrmSysDev != null)
                 {
-                    AlarmSystemOutputsConfigureModel model = new AlarmSystemOutputsConfigureModel(alrmSysDev, AlarmDeviceId);
+                    var man = DomainSession.GetAlarmConfigForContextWithDevice(this.HttpContext, alrmSysDev);
+                    AlarmSystemOutputsConfigureModel model = new AlarmSystemOutputsConfigureModel(alrmSysDev, AlarmDeviceId, man);
                     return View(model);
                 }
             }
@@ -94,7 +98,8 @@ namespace iotDash.Controllers
                 Device alrmSysDev = cont.Devices.First(d => d.Id == ServerId);
                 if (alrmSysDev != null)
                 {
-                    AlarmSystemDetailModel nm = new AlarmSystemDetailModel(alrmSysDev);
+                    var man = DomainSession.GetAlarmConfigForContextWithDevice(this.HttpContext, alrmSysDev);
+                    AlarmSystemDetailModel nm = new AlarmSystemDetailModel(alrmSysDev, man);
                     if (DeviceId < nm.Config.site.siteCfg.deviceConfigs.Length)
                     {
                         nm.Config.site.siteCfg.deviceConfigs[DeviceId].Outputs = Outputs;
@@ -120,7 +125,8 @@ namespace iotDash.Controllers
                 Device alrmSysDev = cont.Devices.First(d => d.Id == ServerId);
                 if (alrmSysDev != null)
                 {
-                    AlarmSystemInputsConfigureModel model = new AlarmSystemInputsConfigureModel(alrmSysDev, AlarmDeviceId);
+                    var man = DomainSession.GetAlarmConfigForContextWithDevice(this.HttpContext, alrmSysDev);
+                    AlarmSystemInputsConfigureModel model = new AlarmSystemInputsConfigureModel(alrmSysDev, AlarmDeviceId, man);
                      return View(model);
                 }
                 return View();
@@ -139,7 +145,8 @@ namespace iotDash.Controllers
                 Device alrmSysDev = cont.Devices.First(d => d.Id == ServerId);
                 if (alrmSysDev != null)
                 {
-                    AlarmSystemDetailModel nm = new AlarmSystemDetailModel(alrmSysDev);
+                    var man = DomainSession.GetAlarmConfigForContextWithDevice(this.HttpContext, alrmSysDev);
+                    AlarmSystemDetailModel nm = new AlarmSystemDetailModel(alrmSysDev, man);
                     if (DeviceId < nm.Config.site.siteCfg.deviceConfigs.Length)
                     {
                         nm.Config.site.siteCfg.deviceConfigs[DeviceId].Inputs = Inputs;
@@ -166,7 +173,8 @@ namespace iotDash.Controllers
                 Device alrmSysDev = cont.Devices.First(d => d.Id == ServerId);
                 if (alrmSysDev != null)
                 {
-                    AlarmSystemRelaysConfigureModel model = new AlarmSystemRelaysConfigureModel(alrmSysDev, AlarmDeviceId);
+                    var man = DomainSession.GetAlarmConfigForContextWithDevice(this.HttpContext, alrmSysDev);
+                    AlarmSystemRelaysConfigureModel model = new AlarmSystemRelaysConfigureModel(alrmSysDev, AlarmDeviceId, man);
                     return View(model);
                 }
                 return View();
@@ -185,7 +193,8 @@ namespace iotDash.Controllers
                 Device alrmSysDev = cont.Devices.First(d => d.Id == ServerId);
                 if (alrmSysDev != null)
                 {
-                    AlarmSystemDetailModel nm = new AlarmSystemDetailModel(alrmSysDev);
+                    var man = DomainSession.GetAlarmConfigForContextWithDevice(this.HttpContext, alrmSysDev);
+                    AlarmSystemDetailModel nm = new AlarmSystemDetailModel(alrmSysDev, man);
                     if (DeviceId < nm.Config.site.siteCfg.deviceConfigs.Length)
                     {
 

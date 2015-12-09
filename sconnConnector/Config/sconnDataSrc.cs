@@ -400,7 +400,7 @@ namespace sconnConnector
                     }
                     return config;
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
                     
                     throw;
@@ -420,7 +420,7 @@ namespace sconnConnector
                     }
                     return config;
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
 
                     throw;
@@ -440,7 +440,7 @@ namespace sconnConnector
                     }
                     return sites;
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
 
                     return new sconnSite[0];
@@ -461,7 +461,7 @@ namespace sconnConnector
                         doc.Save(configFilePath);
                         return true;
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
                     return false;
                 }
@@ -492,7 +492,7 @@ namespace sconnConnector
                      doc.Add(configData);
                      return doc;
                  }
-                 catch (Exception)
+                 catch (Exception e)
                  {
                      return new XDocument();
                  }
@@ -511,7 +511,7 @@ namespace sconnConnector
                      doc.Save(configFilePath);
                      return doc;
                  }
-                 catch (Exception)
+                 catch (Exception e)
                  {
                      return new XmlDocument();
                  }

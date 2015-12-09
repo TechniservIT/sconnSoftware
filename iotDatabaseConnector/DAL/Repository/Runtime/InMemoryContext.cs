@@ -24,7 +24,7 @@ namespace iotDatabaseConnector.Runtime
                 cont.SaveChanges();
                 return true;
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return false;
             }
@@ -40,7 +40,7 @@ namespace iotDatabaseConnector.Runtime
                 cont.SaveChanges();
                 return true;
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return false;
             }
@@ -55,7 +55,7 @@ namespace iotDatabaseConnector.Runtime
                 cont.SaveChanges();
                 return true;
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return false;
             }

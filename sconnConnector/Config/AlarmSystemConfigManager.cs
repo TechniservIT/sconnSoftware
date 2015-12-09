@@ -18,6 +18,10 @@ namespace sconnConnector.Config
 
         private DeviceCredentials creds;
 
+        public DateTime LastUpDateTime { get; set; }
+
+        public int MinUpdatePeriod { get; set; }
+
 
 
         public AlarmSystemConfigManager(EndpointInfo endp, DeviceCredentials cred)
@@ -25,14 +29,25 @@ namespace sconnConnector.Config
             info = endp;
             mngr = new sconnCfgMngr();
             creds = cred;
+            MinUpdatePeriod = 500;
             site = new sconnSite("", 500, endp.Hostname, endp.Port, creds.Password);
 
         }
 
+
+        private bool CanUpdateDueToTimingContraints()
+        {
+            return (DateTime.Now - LastUpDateTime).Milliseconds > MinUpdatePeriod;
+        }
+
         public void LoadSiteConfig()
         {
-            mngr.ReadSiteRunningConfig(site);
-            site.siteCfg.ReloadConfig();
+            if (CanUpdateDueToTimingContraints())
+            {
+                mngr.ReadSiteRunningConfig(site);
+                LastUpDateTime = DateTime.Now;
+                site.siteCfg.ReloadConfig();
+            }
         }
 
         public void StoreDeviceConfig(int DevNo)

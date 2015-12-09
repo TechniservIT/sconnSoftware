@@ -23,7 +23,7 @@ namespace iotDash.Models
                 var userMan = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
                 Users = userMan.Users.Where(u => u.DomainId == domain.Id).ToList();
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return;
             }  

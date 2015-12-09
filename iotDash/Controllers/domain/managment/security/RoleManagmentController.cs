@@ -31,7 +31,7 @@ namespace iotDash.Controllers.domain.managment.security
                 var model = new IotRoleModel(d);
                 return View(model);
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
             }

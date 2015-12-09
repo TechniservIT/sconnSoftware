@@ -14,6 +14,7 @@ using System.Web.UI;
 namespace iotDash.Controllers
 {
 	[DomainAuthorize]
+
 	public class LocationController : Controller
 	{
 		//

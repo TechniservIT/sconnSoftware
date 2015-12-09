@@ -26,6 +26,13 @@ namespace iotDash.Models
             DeviceId = DevId;
             ServerId = dev.Id;
         }
+        public AlarmSystemInputsConfigureModel(Device dev, int DevId, AlarmSystemConfigManager man)
+        {
+            man.LoadSiteConfig();
+            Inputs = man.site.siteCfg.deviceConfigs[DevId].Inputs;
+            DeviceId = DevId;
+            ServerId = dev.Id;
+        }
     }
 
     public class AlarmSystemOutputsConfigureModel
@@ -44,6 +51,14 @@ namespace iotDash.Models
             DeviceId = DevId;
             ServerId = dev.Id;
         }
+
+        public AlarmSystemOutputsConfigureModel(Device dev, int DevId, AlarmSystemConfigManager man)
+        {
+            man.LoadSiteConfig();
+            Outputs = man.site.siteCfg.deviceConfigs[DevId].Outputs;
+            DeviceId = DevId;
+            ServerId = dev.Id;
+        }
     }
 
 
@@ -59,6 +74,14 @@ namespace iotDash.Models
             AlarmSystemConfigManager Config = new AlarmSystemConfigManager(dev.EndpInfo, dev.Credentials);
             Config.LoadSiteConfig();
             Relays = Config.site.siteCfg.deviceConfigs[DevId].Relays;
+            DeviceId = DevId;
+            ServerId = dev.Id;
+        }
+
+        public AlarmSystemRelaysConfigureModel(Device dev, int DevId, AlarmSystemConfigManager man)
+        {
+            man.LoadSiteConfig();
+            Relays = man.site.siteCfg.deviceConfigs[DevId].Relays;
             DeviceId = DevId;
             ServerId = dev.Id;
         }
