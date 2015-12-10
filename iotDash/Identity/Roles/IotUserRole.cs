@@ -18,7 +18,8 @@ namespace iotDash.Identity.Roles
         GlobalStatusViewer,
         MapAndTrackingAdmin,
         ScheduledSiteAdmin,
-        SiteManager
+        SiteManager,
+        DomainAdmin
 
     }
 
@@ -48,6 +49,13 @@ namespace iotDash.Identity.Roles
         {
             this.ValidFrom = DateTime.Now;
             this.ValidUntil = DateTime.MaxValue;
+        }
+
+        public IotUserRole(int domainId, bool active, IotUserRoleType type) : this()
+        {
+            this.DomainId = domainId;
+            this.Active = active;
+            this.Type = type;
         }
 
     }

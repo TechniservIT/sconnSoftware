@@ -4,9 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
+using System.Web.Security;
+using iotDash.Identity.Roles;
+using iotDash.Session;
 using iotDbConnector.DAL;
 using iotServiceProvider;
+using Microsoft.Ajax.Utilities;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace iotDash.Controllers
 {
@@ -102,7 +107,42 @@ namespace iotDash.Controllers
                     }
                 }
             }
+
+            return false;
         }
+
+
+
+        static public bool UserHasAdminAccess(HttpContextBase cont)
+        {
+            ApplicationDbContext ucont = new ApplicationDbContext();
+            iotDomain d = DomainSession.GetDomainForHttpContext(cont);
+            var roleManager = new RoleManager<IotUserRole>(new RoleStore<IotUserRole>(ucont));
+            IotUserRole DomainAdminRole = roleManager.Roles.Where(r => r.DomainId == d.Id && r.Type == IotUserRoleType.DomainAdmin).FirstOrDefault();
+            return cont.User.IsInRole(DomainAdminRole.Name);
+        }
+
+        static public bool UserHasSiteAccess(HttpContextBase cont)
+        {
+            if (UserHasAdminAccess(cont))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        static public bool UserHasDeviceAccess(HttpContextBase cont)
+        {
+            if (UserHasAdminAccess(cont))
+            {
+                return true;
+            }
+
+
+            return false;
+        }
+
 
 
     }
@@ -130,11 +170,10 @@ namespace iotDash.Controllers
                 bool basicAuthed = base.AuthorizeCore(httpContext);
                 if (basicAuthed)
                 {
+                    
                     if (DomainAuthHelper.IsUserContextDomainAuthorized(httpContext))
                     {
-                        //verify site role
-
-                        return true;
+                        return DomainAuthHelper.UserHasSiteAccess(httpContext);
                     }
                 }
             }
@@ -171,9 +210,7 @@ namespace iotDash.Controllers
                 {
                     if (DomainAuthHelper.IsUserContextDomainAuthorized(httpContext))
                     {
-                        //verify site role
-
-                        return true;
+                        return DomainAuthHelper.UserHasDeviceAccess(httpContext);
                     }
                 }
             }

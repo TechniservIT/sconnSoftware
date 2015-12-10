@@ -10,7 +10,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
 using iotDash.Models;
 using System.Web.Security;
-
+using iotDash.Identity.Roles;
 using iotDbConnector.DAL;
 using iotServiceProvider;
 using iotDash.Session;
@@ -136,41 +136,37 @@ namespace iotDash
                             {
                                 //create user
                                 ApplicationUser user = new ApplicationUser() { UserName = model.UserName };
-                                IdentityRole adminRoleCr;
+                                ApplicationDbContext ucont = new ApplicationDbContext();
+                                var userMan = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+                                var roleManager = new RoleManager<IotUserRole>(new RoleStore<IotUserRole>(ucont));
 
-                                //verify admin roles
-                                ApplicationDbContext cont = new ApplicationDbContext();
-                                var adminRoles = cont.Roles.Where(r => r.Name.Equals("DomainAdmin"));
-                                if (adminRoles.Count() <= 0)
+                                string DomainRoleFullName = domain.DomainName + "_" + "DomainAdmin";
+                                if (!roleManager.RoleExists(DomainRoleFullName))
                                 {
-                                    adminRoleCr = new IdentityRole("DomainAdmin");
-                                    cont.Roles.Add(adminRoleCr);
-                                    cont.SaveChanges();
+                                    IotUserRole admRole = new IotUserRole(domain.Id, true, IotUserRoleType.DomainAdmin);
+                                    admRole.Name = DomainRoleFullName;
+                                    await roleManager.CreateAsync(admRole);
                                 }
-                                else
+                                IotUserRole adminRole = roleManager.FindByName(DomainRoleFullName);
+                                if (adminRole != null)
                                 {
-                                    adminRoleCr = adminRoles.First();
+                                    //setup user domain
+                                    user.DomainId = addedDomain.Id;
+
+                                    var result = await UserManager.CreateAsync(user, model.Password);
+                                    if (result.Succeeded)
+                                    {
+                                        await userMan.AddToRoleAsync(user.Id, adminRole.Name);
+                                        await SignInAsync(user, isPersistent: false);
+                                        return RedirectToAction("Index", "Home");
+                                    }
+                                    else
+                                    {
+                                        AddErrors(result);
+                                    }                          
                                 }
 
-                                //create user role for admin
-                                IdentityUserRole userAdminRole = new IdentityUserRole();
-                                userAdminRole.RoleId = adminRoleCr.Id;
-                                userAdminRole.UserId = user.Id;
-                                user.Roles.Add(userAdminRole);
 
-                                //setup user domain
-                                user.DomainId = addedDomain.Id;
-
-                                var result = await UserManager.CreateAsync(user, model.Password);
-                                if (result.Succeeded)
-                                {
-                                    await SignInAsync(user, isPersistent: false);
-                                    return RedirectToAction("Index", "Home");
-                                }
-                                else
-                                {
-                                    AddErrors(result);
-                                }
                         }
                         
                     }

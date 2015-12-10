@@ -15,7 +15,7 @@ using iotDash.Content.Dynamic.Status;
 namespace iotDash.Controllers
 {
 
-	[DomainAuthorize]
+    [SiteAuthorize]
 	public class SiteController : Controller
 	{
 		public Site site { get; set; }
