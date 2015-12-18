@@ -42,7 +42,7 @@ namespace iotDash.Controllers
 							select u).First();
 
 
-                iotContext icont = new iotContext();
+                iotContext icont = (iotContext)System.Web.HttpContext.Current.Session["iotcontext"]; 
                 string domainId = DomainSession.GetContextDomain(this.HttpContext);
                 iotDomain d = icont.Domains.First(dm => dm.DomainName.Equals(domainId));
 
@@ -71,7 +71,7 @@ namespace iotDash.Controllers
 			try
 			{
 				int LocId = int.Parse(LocationId);
-                iotContext icont = new iotContext();
+                iotContext icont = (iotContext)System.Web.HttpContext.Current.Session["iotcontext"]; 
                 string domainId = DomainSession.GetContextDomain(this.HttpContext);
                 iotDomain d = icont.Domains.First(dm => dm.DomainName.Equals(domainId));
                 Location loc = d.Locations.First(l => l.Id == LocId);
@@ -92,7 +92,7 @@ namespace iotDash.Controllers
 			try
 			{
 				int LocId = int.Parse(LocationId);
-                iotContext icont = new iotContext();
+                iotContext icont = (iotContext)System.Web.HttpContext.Current.Session["iotcontext"]; 
                 string domainId = DomainSession.GetContextDomain(this.HttpContext);
                 iotDomain d = icont.Domains.First(dm => dm.DomainName.Equals(domainId));
                 Location loc = d.Locations.First(l => l.Id == LocId);

@@ -119,6 +119,7 @@ namespace iotDash.Controllers
 		//
 		// GET: /Site/New
 		public string New(string Name, string LocId)
+
 		{
 			try
 			{
