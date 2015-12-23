@@ -6,11 +6,12 @@ using System.Web;
 using System.Web.Mvc;
 using iotDash.Session;
 using System.ServiceModel;
- 
+
 using iotDbConnector.DAL;
 using iotServiceProvider;
 using sconnConnector.Config;
 using iotDash.Content.Dynamic.Status;
+using SiteManagmentService;
 
 namespace iotDash.Controllers
 {
@@ -18,6 +19,21 @@ namespace iotDash.Controllers
     [SiteAuthorize]
 	public class SiteController : Controller
 	{
+        private iotContext icont;
+        private SiteProvider provider;
+
+        public SiteController(HttpContextBase contBase)
+        {
+            iotContext cont = (iotContext)contBase.Session["iotcontext"];
+            if(cont!= null)
+            {
+                this.icont = cont;
+                string domainId = DomainSession.GetContextDomain(contBase);
+                iotDomain d = icont.Domains.First(dm => dm.DomainName.Equals(domainId));
+                this.provider = new SiteProvider(this.icont, d);
+            }
+        }
+
 		public Site site { get; set; }
 
 		//
@@ -29,10 +45,7 @@ namespace iotDash.Controllers
 			List<Site> Sites = new List<Site>();
 			try
 			{
-                iotContext icont = (iotContext)System.Web.HttpContext.Current.Session["iotcontext"]; //new iotContext();
-                string domainId = DomainSession.GetContextDomain(this.HttpContext);
-                iotDomain d = icont.Domains.First(dm => dm.DomainName.Equals(domainId));
-                Sites = d.Sites.ToList();
+                Sites = this.provider.GetSites();
                 ShowSitesViewModel model = new ShowSitesViewModel(Sites);
                 return View(model);
 			}
@@ -51,7 +64,6 @@ namespace iotDash.Controllers
 			int devid = int.Parse(DeviceId);    
 			try
 			{
-                iotContext icont = (iotContext)System.Web.HttpContext.Current.Session["iotcontext"]; 
                 string domainId = DomainSession.GetContextDomain(this.HttpContext);
                 iotDomain d = icont.Domains.First(dm => dm.DomainName.Equals(domainId));
                 Device dev = icont.Devices.First(s => s.Id == devid);
@@ -72,7 +84,6 @@ namespace iotDash.Controllers
 		{
 			try
 			{
-                iotContext icont = (iotContext)System.Web.HttpContext.Current.Session["iotcontext"]; 
                 string domainId = DomainSession.GetContextDomain(this.HttpContext);
                 iotDomain d = icont.Domains.First(dm => dm.DomainName.Equals(domainId));
                 DeviceListViewModel model = new DeviceListViewModel(d.Sites.First(s=>s.Id==SiteId));
@@ -103,7 +114,6 @@ namespace iotDash.Controllers
 		{          
 			try
 			{
-                iotContext icont = (iotContext)System.Web.HttpContext.Current.Session["iotcontext"]; 
                 string domainId = DomainSession.GetContextDomain(this.HttpContext);
                 iotDomain d = icont.Domains.First(dm => dm.DomainName.Equals(domainId));
                 List<Location> Locations = d.Locations.ToList();
@@ -122,7 +132,6 @@ namespace iotDash.Controllers
 		{
 			try
 			{
-                iotContext icont = (iotContext)System.Web.HttpContext.Current.Session["iotcontext"]; 
                 string domainId = DomainSession.GetContextDomain(this.HttpContext);
                 iotDomain d = icont.Domains.First(dm => dm.DomainName.Equals(domainId));
                 int LocIdnum = int.Parse(LocId);
@@ -172,7 +181,6 @@ namespace iotDash.Controllers
 		{
 			if (site != null)
 			{
-                iotContext icont = (iotContext)System.Web.HttpContext.Current.Session["iotcontext"]; 
                 string domainId = DomainSession.GetContextDomain(this.HttpContext);
                 iotDomain d = icont.Domains.First(dm => dm.DomainName.Equals(domainId));
                 d.Sites.Add(site);
@@ -188,15 +196,12 @@ namespace iotDash.Controllers
         {
             try
             {
-                    iotContext cont = (iotContext)System.Web.HttpContext.Current.Session["iotcontext"]; 
-                    Site site = cont.Sites.First(s => s.Id == siteId);
+                    Site site = icont.Sites.First(s => s.Id == siteId);
                     if (site != null)
                     {
                         List<Device> alrmSysDevs = site.Devices.Where(d => d.Type.Category == DeviceCategory.AlarmSystem).ToList();
                         if (alrmSysDevs != null)
                         {
-                            //AlarmSystemConfigManager mngr = new AlarmSystemConfigManager(alrmSysDev.EndpInfo, alrmSysDev.Credentials);
-                            //int devs = mngr.GetDeviceNumber();
                             AlarmSystemListModel model = new AlarmSystemListModel(alrmSysDevs);
                             return View(model);
                         }

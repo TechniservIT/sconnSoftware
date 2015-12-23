@@ -30,7 +30,7 @@
     <SccProvider>
     </SccProvider>
     <TargetFrameworkProfile />
-    <TypeScriptToolsVersion>1.4</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>1.7</TypeScriptToolsVersion>
     <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -1568,6 +1568,18 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AlarmSystemManagmentService\AlarmSystemManagmentService.csproj">
+      <Project>{3d463251-18d3-451b-b06c-c4d655dd8a37}</Project>
+      <Name>AlarmSystemManagmentService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AuthenticationManagmentLayer\AuthenticationManagmentService.csproj">
+      <Project>{1bd6abd5-2433-4aa1-884b-b8cebaf7e282}</Project>
+      <Name>AuthenticationManagmentService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DeviceManagmentService\DeviceManagmentService.csproj">
+      <Project>{10b956be-068f-4fbb-9b1e-63c080b24019}</Project>
+      <Name>DeviceManagmentService</Name>
+    </ProjectReference>
     <ProjectReference Include="..\iotDatabaseConnector\iotDatabaseConnector.csproj">
       <Project>{7df5e6fa-5839-456f-959b-af4a7a742775}</Project>
       <Name>iotDatabaseConnector</Name>
@@ -1580,6 +1592,10 @@
       <Project>{3c2419e5-d232-4c6f-9821-d8a491459ed1}</Project>
       <Name>iotDeviceService</Name>
     </ProjectReference>
+    <ProjectReference Include="..\iotDomainDataAccessService\iotDomainDataAccessService.csproj">
+      <Project>{a73e1e91-a18c-48bd-bda8-931d429b7966}</Project>
+      <Name>iotDomainDataAccessService</Name>
+    </ProjectReference>
     <ProjectReference Include="..\iotServiceLayer\iotServiceLayer.csproj">
       <Project>{6640ac88-df6b-43a6-bee3-a65b4396119b}</Project>
       <Name>iotServiceLayer</Name>
@@ -1588,9 +1604,29 @@
       <Project>{8fa92296-4f77-45ce-9b85-bcb37a7f2332}</Project>
       <Name>iotService</Name>
     </ProjectReference>
+    <ProjectReference Include="..\LogicDefinitionManagmentService\LogicDefinitionManagmentService.csproj">
+      <Project>{b35bdc73-a57f-429f-92fc-3f6cc2c401df}</Project>
+      <Name>LogicDefinitionManagmentService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MessagingConfigLayer\MessagingConfigService.csproj">
+      <Project>{d39bde11-c403-408f-91b7-264e6bdb073b}</Project>
+      <Name>MessagingConfigService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RoutingConfigLayer\RoutingConfigService.csproj">
+      <Project>{1a9f2342-1c64-4333-a80f-8d3d0a400459}</Project>
+      <Name>RoutingConfigService</Name>
+    </ProjectReference>
     <ProjectReference Include="..\sconnConnector\sconnConnector.csproj">
       <Project>{09c8a8f0-f85a-4534-922e-85e14ec32725}</Project>
       <Name>sconnConnector</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SiteManagmentService\SiteManagmentService.csproj">
+      <Project>{cc9fb92a-c1d9-400a-bd9b-d814280a118e}</Project>
+      <Name>SiteManagmentService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UserManagmentService\UserManagmentService.csproj">
+      <Project>{2267b33b-6499-41d7-aad2-2d24d76faefa}</Project>
+      <Name>UserManagmentService</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
