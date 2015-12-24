@@ -1,19 +1,15 @@
-﻿using iotDash.Models;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.Security;
 using iotDash.Identity.Roles;
+using iotDash.Models;
 using iotDash.Session;
 using iotDbConnector.DAL;
-using iotServiceProvider;
-using Microsoft.Ajax.Utilities;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
-namespace iotDash.Controllers
+namespace iotDash.Controllers.domain.navigation
 {
     public class DomainAuthorizeAttribute : AuthorizeAttribute
     {

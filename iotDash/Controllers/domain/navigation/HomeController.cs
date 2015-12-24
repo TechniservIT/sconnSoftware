@@ -1,20 +1,14 @@
-﻿using iotDash.Models;
-using iotDash.Controllers;
+﻿using System;
+using System.Linq;
+using System.Web.Mvc;
+using System.Web.UI;
+using iotDash.Models;
+using iotDatabaseConnector.DAL.Repository.Connector.Entity;
+using iotDbConnector.DAL;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
 
-using iotServiceProvider;
-using iotDbConnector.DAL;
-using System.Web.UI;
-using iotDeviceService;
-using iotDash.Session;
-
-namespace iotDash.Controllers
+namespace iotDash.Controllers.domain.navigation
 {
 
     public class HomeController : Controller
@@ -89,7 +83,7 @@ namespace iotDash.Controllers
                                            select u).First();
 
 
-                        iotContext dcont = (iotContext)System.Web.HttpContext.Current.Session["iotcontext"];    //new iotContext();
+                        IIotContextBase dcont = (iotContext)System.Web.HttpContext.Current.Session["iotcontext"];    //new iotContext();
                         iotDomain domain = dcont.Domains.First(d => d.Id == currentUser.DomainId);
                         if (domain != null)
                         {

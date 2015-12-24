@@ -10,7 +10,7 @@ namespace iotDash.Models
 {
     public class DevicePropertyStatisticModel
     {
-        private DeviceProperty Property { get; set; }
+        public DeviceProperty Property { get; set; }
 
         public DevicePropertyStatisticModel(DeviceProperty prop)
         {

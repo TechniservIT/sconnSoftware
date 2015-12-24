@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 using System.Web.Mvc;
-using iotDbConnector.DAL;
 using System.Web.UI;
+using iotDash.Controllers.domain.navigation;
+using iotDbConnector.DAL;
 
-namespace iotDash.Controllers
+namespace iotDash.Controllers.domain.site
 {
     [DomainAuthorize]
     public class MapController : Controller

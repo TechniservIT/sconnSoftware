@@ -121,6 +121,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserManagmentService", "Use
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogicDefinitionManagmentService", "LogicDefinitionManagmentService\LogicDefinitionManagmentService.csproj", "{B35BDC73-A57F-429F-92FC-3F6CC2C401DF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sconnRem", "sconnRem\sconnRem.csproj", "{9F7BCC3B-DC29-4BFE-8152-F74E1ED1F687}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -271,6 +273,10 @@ Global
 		{B35BDC73-A57F-429F-92FC-3F6CC2C401DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B35BDC73-A57F-429F-92FC-3F6CC2C401DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B35BDC73-A57F-429F-92FC-3F6CC2C401DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F7BCC3B-DC29-4BFE-8152-F74E1ED1F687}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F7BCC3B-DC29-4BFE-8152-F74E1ED1F687}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F7BCC3B-DC29-4BFE-8152-F74E1ED1F687}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F7BCC3B-DC29-4BFE-8152-F74E1ED1F687}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -326,5 +332,6 @@ Global
 		{3D463251-18D3-451B-B06C-C4D655DD8A37} = {E838E3B0-E8EE-4239-B2AC-9D286330BF8A}
 		{2267B33B-6499-41D7-AAD2-2D24D76FAEFA} = {E838E3B0-E8EE-4239-B2AC-9D286330BF8A}
 		{B35BDC73-A57F-429F-92FC-3F6CC2C401DF} = {E838E3B0-E8EE-4239-B2AC-9D286330BF8A}
+		{9F7BCC3B-DC29-4BFE-8152-F74E1ED1F687} = {9A63916A-4F3F-4691-A287-C04BCC016927}
 	EndGlobalSection
 EndGlobal

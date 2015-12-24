@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using iotDash.Content.Dynamic.Status;
+using iotDash.Controllers.domain.navigation;
 using iotDash.Identity.Roles;
 using iotDash.Models;
 using iotDash.Session;
@@ -101,7 +102,14 @@ namespace iotDash.Controllers.domain.managment.security
         }
 
 
+        public ActionResult Index()
+        {
+            throw new NotImplementedException();
+        }
 
-
-	}
+        public ActionResult Remove()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

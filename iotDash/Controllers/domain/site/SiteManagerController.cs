@@ -1,15 +1,7 @@
-﻿using iotDash.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
+using iotDash.Controllers.domain.navigation;
 
-using iotDbConnector.DAL;
-using iotServiceProvider;
-using iotDash.Session;
-
-namespace iotDash.Controllers
+namespace iotDash.Controllers.domain.site
 {
     [DomainAuthorize]
     public class SiteManagerController : Controller

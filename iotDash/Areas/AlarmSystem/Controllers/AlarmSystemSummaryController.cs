@@ -1,13 +1,12 @@
-﻿using iotDash.Models;
+﻿using System;
+using System.Linq;
+using System.Web.Mvc;
+using iotDash.Areas.AlarmSystem.Models;
+using iotDatabaseConnector.DAL.Repository.Connector.Entity;
 using iotDbConnector.DAL;
 using sconnConnector.Config;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
 
-namespace iotDash.Controllers
+namespace iotDash.Areas.AlarmSystem.Controllers
 {
     public class AlarmSystemSummaryController : Controller
     {
@@ -19,8 +18,8 @@ namespace iotDash.Controllers
             {
                 if (siteId != null)
                 {
-                    iotContext cont = new iotContext();
-                    Site site = cont.Sites.First(s => s.Id == siteId);
+                    IIotContextBase cont = new iotContext();
+                    iotDbConnector.DAL.Site site = cont.Sites.First(s => s.Id == siteId);
                     if (site != null)
                     {
                         Device alrmSysDev = site.Devices.First(d => d.Type.TypeName.Contains("sconnMB"));

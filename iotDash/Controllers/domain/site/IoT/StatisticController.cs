@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
+using iotDash.Controllers.domain.navigation;
 using iotDash.Models;
-using iotDbConnector.DAL;
 using iotDash.Session;
+using iotDbConnector.DAL;
 
-namespace iotDash.Controllers
+namespace iotDash.Controllers.domain.site.IoT
 {
     [DomainAuthorize]
     public class StatisticController : Controller
@@ -39,5 +38,9 @@ namespace iotDash.Controllers
         }
 
 
+        public ActionResult ParameterHistory()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

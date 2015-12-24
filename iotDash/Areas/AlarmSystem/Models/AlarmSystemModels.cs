@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using iotDbConnector.DAL;
-using sconnConnector.Config;
-using sconnConnector;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using iotDbConnector.DAL;
+using sconnConnector;
+using sconnConnector.Config;
 
-namespace iotDash.Models
+namespace iotDash.Areas.AlarmSystem.Models
 {
 
     public class AlarmSystemListModel

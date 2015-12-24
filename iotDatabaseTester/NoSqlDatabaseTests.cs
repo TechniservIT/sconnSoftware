@@ -11,11 +11,7 @@ namespace iotDatabaseTester
 	[TestClass]
 	public class NoSqlDboUnitTest
 	{
-		[TestMethod]
-		public void TestMethod1()
-		{
-		}
-
+		
 
 		[TestMethod]
 		public void TestRavenDbCRUD()

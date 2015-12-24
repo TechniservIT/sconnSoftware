@@ -4,17 +4,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using iotDatabaseConnector.DAL.Repository.Connector.Entity;
 
 namespace iotDatabaseConnector.DAL.Repository
 {
     public class IotRepositoryUnit : IDisposable
     {
-        private iotContext context;
+        private iotContextBase context;
         private iotRepository<iotDomain> domainRepository;
         private iotRepository<Site> siteRepository;
         private iotRepository<Device> deviceRepository;
 
-        public IotRepositoryUnit(iotContext cont)
+        public IotRepositoryUnit(iotContextBase cont)
         {
             this.context = cont;
         }
@@ -71,7 +72,7 @@ namespace iotDatabaseConnector.DAL.Repository
             {
                 if (disposing)
                 {
-                    context.Dispose();
+                 //   context.Dispose();
                 }
             }
             this.disposed = true;

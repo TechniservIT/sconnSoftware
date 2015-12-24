@@ -51,6 +51,7 @@
     <Compile Include="Comm\ETH.cs" />
     <Compile Include="Comm\USB.cs" />
     <Compile Include="Config\AlarmSystemConfigManager.cs" />
+    <Compile Include="Config\CfgOper.cs" />
     <Compile Include="Config\GlobalSettings.cs" />
     <Compile Include="Config\sconnCfgMngr.cs" />
     <Compile Include="Config\sconnDataShare.cs" />

@@ -1,15 +1,15 @@
-﻿using iotDash.Models;
-using iotDbConnector.DAL;
-using sconnConnector;
-using sconnConnector.Config;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
+using iotDash.Areas.AlarmSystem.Models;
+using iotDash.Controllers.domain.navigation;
+using iotDash.Models;
 using iotDash.Session;
+using iotDbConnector.DAL;
+using sconnConnector;
 
-namespace iotDash.Controllers
+namespace iotDash.Controllers.domain.site.AlarmSystem
 {
     [DomainAuthorize]
     public class AlarmSystemViewController : Controller

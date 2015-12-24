@@ -90,7 +90,9 @@
     </When>
     <Otherwise>
       <ItemGroup>
-        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework">
+          <Private>False</Private>
+        </Reference>
       </ItemGroup>
     </Otherwise>
   </Choose>
@@ -99,6 +101,7 @@
     <Compile Include="iotUpdatePubSubTester.cs" />
     <Compile Include="Service\iotServiceConnector.cs" />
     <Compile Include="Service\iotRestfulTokenizerTest.cs" />
+    <Compile Include="SiteServiceTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

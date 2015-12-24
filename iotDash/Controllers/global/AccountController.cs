@@ -1,21 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using iotDash.Identity.Roles;
+using iotDash.Models;
+using iotDatabaseConnector.DAL.Repository.Connector.Entity;
+using iotDbConnector.DAL;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
-using iotDash.Models;
-using System.Web.Security;
-using iotDash.Identity.Roles;
-using iotDbConnector.DAL;
-using iotServiceProvider;
-using iotDash.Session;
 
-namespace iotDash
+namespace iotDash.Controllers.global
 {
     [Authorize]
     public class AccountController : Controller
@@ -114,7 +110,7 @@ namespace iotDash
                     //create domain for new account then user
                     //IiotDomainServiceClient cl = iotServiceConnector.ServiceClient();
 
-                    iotContext icont = new iotContext();
+                    IIotContextBase icont = new iotContext();
                     iotDomain existingDomain = null;
                     try
                     {

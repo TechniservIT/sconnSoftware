@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using iotDatabaseConnector.DAL.Repository.Connector.Entity;
 
 namespace iotDatabaseConnector.DAL.Repository
 {
@@ -15,14 +16,14 @@ namespace iotDatabaseConnector.DAL.Repository
 
         static iotGenericGlobalContext()
         {
-                DbContext = iotGlobalContext.context;
+                DbContext = (DbContext) iotGlobalContext.context;
                 DbSet = DbContext.Set<T>();
         }
     }
 
     static public class iotGlobalContext
     {
-        static public iotContext context;
+        static public IIotContextBase context;
 
         static iotGlobalContext()
         {

@@ -1,0 +1,304 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9F7BCC3B-DC29-4BFE-8152-F74E1ED1F687}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>sconnRem</RootNamespace>
+    <AssemblyName>sconnRem</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>
+    </ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="NLog">
+      <HintPath>packages\NLog.4.1.2\lib\net45\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Controls\DateTimePickerPanel.cs" />
+    <Compile Include="Controls\SiteConfig\DeviceConfigGroups\GbxConfigureDeviceAuth.cs" />
+    <Compile Include="Controls\SiteConfig\DeviceConfigGroups\GbxConfigureSchedulesGroup.cs" />
+    <Compile Include="Controls\SiteConfig\Buttons\OutputButton.cs" />
+    <Compile Include="Controls\SiteConfig\NetworkSetup\DeviceNetworkConfig.xaml.cs">
+      <DependentUpon>DeviceNetworkConfig.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SiteConfig\ScheduleAction\StckPanConfigureArmChangeActivation.xaml.cs">
+      <DependentUpon>StckPanConfigureArmChangeActivation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SiteConfig\ScheduleAction\StckPanConfigureMailActivation.xaml.cs">
+      <DependentUpon>StckPanConfigureMailActivation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SiteConfig\ScheduleAction\StckPanConfigureSmsActivation.xaml.cs">
+      <DependentUpon>StckPanConfigureSmsActivation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SiteConfig\ScheduleAction\StkPnConfigureIoActivation.xaml.cs">
+      <DependentUpon>StkPnConfigureIoActivation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SiteConfig\SiteConfigGroups\GbxConfigureSiteNames.cs" />
+    <Compile Include="Controls\SiteConfig\SiteConfigGroups\GbxConfigureSiteZones.cs" />
+    <Compile Include="Properties\Resources.de-DE.Designer.cs">
+      <DependentUpon>Resources.de-DE.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Properties\Resources.en-US.Designer.cs">
+      <DependentUpon>Resources.en-US.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Properties\Resources.pl-PL.Designer.cs">
+      <DependentUpon>Resources.pl-PL.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Controls\SiteConfig\SitePanel\SamplePanel.cs" />
+    <Compile Include="Controls\MainView\SiteEditView.cs" />
+    <Compile Include="Controls\SiteConfig\SitePanel\SitePanel.cs" />
+    <Compile Include="Controls\SiteConfig\SitePanel\SitePanelItem.cs" />
+    <Compile Include="Controls\MainView\SiteView.cs" />
+    <Compile Include="Controls\SiteConfig\SitePanel\statusViewPanel.cs" />
+    <Compile Include="Controls\MainView\ViewSiteLoading.cs" />
+    <Compile Include="Wnd\changePasswordWnd.xaml.cs">
+      <DependentUpon>changePasswordWnd.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ControlsTest.xaml.cs">
+      <DependentUpon>ControlsTest.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SiteConfig\DeviceConfigGroups\GbxConfigureInputsGroup.cs" />
+    <Compile Include="Controls\SiteConfig\DeviceConfigGroups\GbxConfigureOutputsGroup.cs" />
+    <Compile Include="Controls\SiteConfig\DeviceConfigGroups\GbxConfigureRelaysGroup.cs" />
+    <Compile Include="Wnd\HelpWnd.xaml.cs">
+      <DependentUpon>HelpWnd.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Wnd\MapWindow.xaml.cs">
+      <DependentUpon>MapWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Wnd\Page1.xaml.cs">
+      <DependentUpon>Page1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Wnd\sconnSecurityDialog.xaml.cs">
+      <DependentUpon>sconnSecurityDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Wnd\sconnSiteManagerWindow.xaml.cs">
+      <DependentUpon>sconnSiteManagerWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Wnd\userManager.xaml.cs">
+      <DependentUpon>userManager.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Wnd\WndEditScheduleAction.xaml.cs">
+      <DependentUpon>WndEditScheduleAction.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Controls\SiteConfig\NetworkSetup\DeviceNetworkConfig.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\SiteConfig\ScheduleAction\StckPanConfigureArmChangeActivation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\SiteConfig\ScheduleAction\StckPanConfigureMailActivation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\SiteConfig\ScheduleAction\StckPanConfigureSmsActivation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\SiteConfig\ScheduleAction\StkPnConfigureIoActivation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Wnd\changePasswordWnd.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ControlsTest.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Wnd\HelpWnd.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Wnd\MapWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Wnd\Page1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Wnd\sconnSecurityDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Wnd\sconnSiteManagerWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="sconnView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="sconnView.xaml.cs">
+      <DependentUpon>sconnView.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Wnd\userManager.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Wnd\WndEditScheduleAction.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.de-DE.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.de-DE.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.en-US.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.en-US.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.pl-PL.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.pl-PL.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <Resource Include="images\config1.png" />
+    <Resource Include="images\config2.png" />
+    <Resource Include="images\electro.png" />
+    <Resource Include="images\eye.png" />
+    <Resource Include="images\patchcord.png" />
+    <Resource Include="images\przekaznik.png" />
+    <Resource Include="images\sensorin.png" />
+    <Resource Include="images\sensorout.png" />
+    <Resource Include="images\strefa.png" />
+    <Resource Include="images\tel.png" />
+    <Resource Include="images\tmp.png" />
+    <Resource Include="images\water.png" />
+    <Resource Include="images\waves.png" />
+    <Content Include="NLog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="NLog.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\worldLock.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\ask1.jpg" />
+    <Resource Include="images\cog2.jpg" />
+    <Resource Include="images\cog3.jpg" />
+    <Resource Include="images\key1.jpg" />
+    <Resource Include="images\ok1.jpg" />
+    <Resource Include="images\stat1.jpg" />
+    <Resource Include="images\tools1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\worldlock2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\sconnConnector\sconnConnector.csproj">
+      <Project>{09c8a8f0-f85a-4534-922e-85e14ec32725}</Project>
+      <Name>sconnConnector</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

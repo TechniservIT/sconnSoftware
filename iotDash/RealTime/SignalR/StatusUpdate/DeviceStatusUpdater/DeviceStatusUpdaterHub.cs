@@ -1,22 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using Microsoft.AspNet.SignalR;
-using System.ServiceModel;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
+using iotDatabaseConnector.DAL.Repository.Connector.Entity;
 using iotDbConnector.DAL;
-using iotServiceProvider;
-using iotDash.Session;
 using iotDeviceService;
-using Microsoft.AspNet.SignalR.Hubs;
+using Microsoft.AspNet.SignalR;
+using Newtonsoft.Json;
 
-namespace iotDash.RealTime.SignalR.DeviceStatusUpdater
+namespace iotDash.RealTime.SignalR.StatusUpdate.DeviceStatusUpdater
 {
 
     public class DeviceStatusUpdaterHub : Hub
     {
+        private IIotContextBase cont;
 
         public delegate void DeviceEventCallbackHandler(Device dev);
         public event DeviceEventCallbackHandler DeviceCallbackEvent;
@@ -37,9 +32,9 @@ namespace iotDash.RealTime.SignalR.DeviceStatusUpdater
 
          public DeviceStatusUpdaterHub()
          {
-             iotContext.DeviceUpdateEvent += iotContext_DeviceUpdateEvent;
-             iotContext.ParamUpdateEvent += iotContext_ParamUpdateEvent;
-             iotContext.ActionUpdateEvent += iotContext_ActionUpdateEvent;
+            cont.DeviceUpdateEvent += iotContext_DeviceUpdateEvent;
+            cont.ParamUpdateEvent += iotContext_ParamUpdateEvent;
+            cont.ActionUpdateEvent += iotContext_ActionUpdateEvent;
              client = new DeviceRestfulService();
 
              DeviceEventCallbackHandler callbackHandler = new DeviceEventCallbackHandler(PublishDeviceUpdate);
@@ -48,6 +43,11 @@ namespace iotDash.RealTime.SignalR.DeviceStatusUpdater
             //TODO Restful subcribe
             // client.Subscribe();
          }
+
+        public DeviceStatusUpdaterHub(IIotContextBase cont) :this()
+        {
+            this.cont = cont;
+        }
 
          void iotContext_ActionUpdateEvent(DeviceActionResult param)
          {
@@ -67,9 +67,9 @@ namespace iotDash.RealTime.SignalR.DeviceStatusUpdater
 
         public void PublishActionUpdate(DeviceActionResult param)
          {
-             iotContext cont = new iotContext();
-             cont.Configuration.ProxyCreationEnabled = false;
-             cont.Configuration.LazyLoadingEnabled = false;
+             IIotContextBase cont = new iotContext();
+             //cont.Configuration.ProxyCreationEnabled = false;
+             //cont.Configuration.LazyLoadingEnabled = false;
 
              DeviceActionResult toUpdate = cont.ActionResultParameters.Include("Action").FirstOrDefault(e => e.Id == param.Id);
 
@@ -91,9 +91,7 @@ namespace iotDash.RealTime.SignalR.DeviceStatusUpdater
 
         public void PublishParamUpdate(DeviceParameter param)
          {
-             iotContext cont = new iotContext();
-             cont.Configuration.ProxyCreationEnabled = false;
-             cont.Configuration.LazyLoadingEnabled = false;
+             IIotContextBase cont = new iotContext();
 
              DeviceParameter toUpdate = cont.Parameters.Include("Property").FirstOrDefault(e => e.Id == param.Id);
             

@@ -533,6 +533,7 @@
     <Content Include="Areas\Site\Views\web.config" />
     <Content Include="Areas\AlarmSystem\Views\web.config" />
     <Content Include="Areas\Administration\Views\web.config" />
+    <None Include="Areas\AlarmSystem\Views\AlarmSystemSummary\Index.cshtml" />
     <None Include="BundleTransformer.Configuration.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -1537,6 +1538,11 @@
     <Content Include="Views\Shared\_TopMenuLayout.cshtml" />
     <Content Include="Views\RoleManagment\Add.cshtml" />
     <Content Include="Views\RoleManagment\View.cshtml" />
+    <None Include="Views\DeviceSecurity\Index.cshtml" />
+    <None Include="Views\RoutingRules\Index.cshtml" />
+    <None Include="Views\SecuritySupervisorSetup\Index.cshtml" />
+    <None Include="Views\Site\AddSite.cshtml" />
+    <None Include="Views\UserSecurity\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1550,17 +1556,13 @@
     <Folder Include="Controllers\domain\managment\automation\" />
     <Folder Include="RealTime\SignalR\StatusUpdate\ActionHistoryUpdater\" />
     <Folder Include="RealTime\SignalR\StatusUpdate\PropertyHistoryUpdater\" />
-    <Folder Include="Views\DeviceSecurity\" />
     <Folder Include="Views\RecordingSettings\" />
     <Folder Include="Views\RouteTrackingLiveView\" />
     <Folder Include="Views\RouteTrackingSetup\" />
-    <Folder Include="Views\RoutingRules\" />
-    <Folder Include="Views\SecuritySupervisorSetup\" />
     <Folder Include="Views\SignalingRules\" />
     <Folder Include="Views\SurveillanceSite\" />
     <Folder Include="Views\TopBar\" />
     <Folder Include="Views\UserManagment\" />
-    <Folder Include="Views\UserSecurity\" />
     <Folder Include="Views\VideoPlayback\" />
   </ItemGroup>
   <ItemGroup>

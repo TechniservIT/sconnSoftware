@@ -1,18 +1,15 @@
-﻿using iotDash.Models;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
-using iotDbConnector.DAL;
-using iotServiceProvider;
-using iotDeviceService;
-using iotDash.Session;
-using iotDatabaseConnector.Runtime;
 using iotDash.Content.Dynamic.Status;
+using iotDash.Controllers.domain.navigation;
+using iotDash.Models;
+using iotDash.Session;
+using iotDbConnector.DAL;
+using iotDeviceService;
 
-namespace iotDash.Controllers
+namespace iotDash.Controllers.domain.site.IoT
 {
 
 	[DeviceAuthorize]

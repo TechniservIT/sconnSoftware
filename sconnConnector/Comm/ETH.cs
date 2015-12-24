@@ -120,18 +120,9 @@ namespace sconnConnector
                     return true;
                 }
         #else
-
-
+        
 
         #endif
-
-
-
-        //static X509Certificate CertVer(object sender, string targetHost, X509CertificateCollection localCertificates, X509Certificate remoteCertificate, string[] acceptableIssuers)
-        //{
-        //    return new X509Certificate();
-        //}
-
 
         public SconnClient(string hostname, int port, string password) 
         {
@@ -159,13 +150,11 @@ namespace sconnConnector
                     #endif
                     null
                     );
-                //EncStream.KeyExchangeAlgorithm = ExchangeAlgorithmType.DiffieHellman;
-
                 try
                 {
                     
                     #if WIN32_ENC
-                        EncStream.AuthenticateAsClient(Hostname, null, SslProtocols.Ssl3, false);
+                        EncStream.AuthenticateAsClient(Hostname, null, SslProtocols.Tls12, false);
                     #else
                         EncStream.AuthenticateAsClient(Hostname, null, (System.Security.Authentication.SslProtocols)48, false);   //, null, (SslProtocols)48, false
                     #endif

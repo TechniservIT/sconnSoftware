@@ -11,31 +11,59 @@ using System.Data.Entity.Infrastructure;
 using System.Data.Common;
 using System.Data.Entity.Core.Metadata.Edm;
 using System.Threading.Tasks;
+using iotDatabaseConnector.DAL.Repository.Connector.Entity;
 
 namespace iotDbConnector.DAL
 {
-    
-    public  class  iotContext : DbContext
+    public abstract class iotContextBase : DbContext, IIotContextBase
     {
-
-        public delegate void DeviceUpdateEventCallbackHandler(Device dev);
-        public static event DeviceUpdateEventCallbackHandler DeviceUpdateEvent;
-
-        public delegate void ParamUpdateEventCallbackHandler(DeviceParameter param);
-        public static event ParamUpdateEventCallbackHandler ParamUpdateEvent = delegate { };
-
-        public delegate void ActionResultUpdateEventCallbackHandler(DeviceActionResult param);
-        public static event ActionResultUpdateEventCallbackHandler ActionUpdateEvent = delegate { };
-
-
-        public iotContext() :base("iotDbConn")
+        public iotContextBase() :base("iotDbConn")
         {
             
             this.Configuration.ProxyCreationEnabled = true;
             this.Configuration.LazyLoadingEnabled = true;
-
-            
         }
+
+        public iotContextBase(int DomainId)
+        {
+            this.IotDomain = Queryable.First<iotDomain>(this.Domains, d=>d.Id == DomainId);
+        }
+
+        public iotContextBase(iotDomain domain)
+        {
+            this.IotDomain = domain;
+        }
+
+        public delegate void DeviceUpdateEventCallbackHandler(Device dev);
+
+        public virtual  event DeviceUpdateEventCallbackHandler DeviceUpdateEvent;
+
+        public delegate void ParamUpdateEventCallbackHandler(DeviceParameter param);
+
+        public virtual  event ParamUpdateEventCallbackHandler ParamUpdateEvent;
+
+        public delegate void ActionResultUpdateEventCallbackHandler(DeviceActionResult param);
+
+        public virtual  event ActionResultUpdateEventCallbackHandler ActionUpdateEvent;
+        public iotDomain IotDomain { get; set; }
+        public DbSet<Location> Locations { get; set; }
+        public DbSet<EndpointInfo> Endpoints { get; set; }
+        public DbSet<DeviceParameter> Parameters { get; set; }
+        public DbSet<ParameterType> ParamTypes { get; set; }
+        public DbSet<ActionParameter> ActionParameters { get; set; }
+        public DbSet<DeviceActionResult> ActionResultParameters { get; set; }
+        public DbSet<ActionChangeHistory> ActionChangeHistory { get; set; }
+        public DbSet<sconnActionMapper> ActionParamMappers { get; set; }
+        public DbSet<sconnActionResultMapper> ActionResultMappers { get; set; }
+        public DbSet<sconnPropertyMapper> PropertyResultMappers { get; set; }
+        public DbSet<DeviceProperty> Properties { get; set; }
+        public DbSet<DeviceAction> Actions { get; set; }
+        public DbSet<DeviceType> Types { get; set; }
+        public DbSet<DeviceCredentials> Credentials { get; set; }
+        public DbSet<Device> Devices { get; set; }
+        public DbSet<Site> Sites { get; set; }
+        public DbSet<iotDomain> Domains { get; set; }
+        public DbSet<ParameterChangeHistory> ParameterChanges { get; set; }
 
         public override int SaveChanges()
         {
@@ -45,9 +73,9 @@ namespace iotDbConnector.DAL
 
             List<ObjectStateEntry> objectStateEntryList =
                 ctx.ObjectStateManager.GetObjectStateEntries(EntityState.Added
-                                                           | EntityState.Modified
-                                                           | EntityState.Deleted)
-                .ToList();
+                                                             | EntityState.Modified
+                                                             | EntityState.Deleted)
+                    .ToList();
 
             foreach (ObjectStateEntry entry in objectStateEntryList)
             {
@@ -62,128 +90,100 @@ namespace iotDbConnector.DAL
                             // write log...
                             break;
                         case EntityState.Modified:
+                        {
+                            if (ObjectContext.GetObjectType(entry.Entity.GetType()) == typeof(DeviceParameter))  
                             {
-                                //var mdw = ctx.MetadataWorkspace;
-                                //var items = mdw.GetItems<EntityType>(DataSpace.CSpace);
-                                //EntityType devparamType = items.Where(i => i.Name.Equals("DeviceParameter")).FirstOrDefault();
 
-                                if (ObjectContext.GetObjectType(entry.Entity.GetType()) == typeof(DeviceParameter))  
+                                DbDataRecord original = entry.OriginalValues;
+                                string oldValue = original.GetValue(
+                                    original.GetOrdinal("Value"))
+                                    .ToString();
+
+                                CurrentValueRecord current = entry.CurrentValues;
+                                string newValue = current.GetValue(
+                                    current.GetOrdinal("Value"))
+                                    .ToString();
+
+                                if (oldValue != newValue) // probably not necessary
                                 {
+                                    ParameterChangeHistory hist = new ParameterChangeHistory();
+                                    hist.Date = DateTime.Now;
+                                    hist.Property = (DeviceParameter)(object)entry.Entity;
+                                    hist.Value = newValue;
+                                    this.ParameterChanges.Add(hist);
+                                }
 
-                                    DbDataRecord original = entry.OriginalValues;
-                                    string oldValue = original.GetValue(
-                                        original.GetOrdinal("Value"))
-                                        .ToString();
-
-                                    CurrentValueRecord current = entry.CurrentValues;
-                                    string newValue = current.GetValue(
-                                        current.GetOrdinal("Value"))
-                                        .ToString();
-
-                                    if (oldValue != newValue) // probably not necessary
-                                    {
-                                        ParameterChangeHistory hist = new ParameterChangeHistory();
-                                        hist.Date = DateTime.Now;
-                                        hist.Property = (DeviceParameter)(object)entry.Entity;
-                                        hist.Value = newValue;
-                                        this.ParameterChanges.Add(hist);
-                                    }
-
-                                    if (ParamUpdateEvent != null)
-                                    {
-                                        Task.Factory.StartNew(() => iotContext.ParamUpdateEvent((DeviceParameter)entry.Entity));
-                                    }
+                                if (this.ParamUpdateEvent != null)
+                                {
+                                    Task.Factory.StartNew(() => this.ParamUpdateEvent((DeviceParameter)entry.Entity));
+                                }
                                     
                                     
 
                                 
-                                }
-                                else if (ObjectContext.GetObjectType(entry.Entity.GetType()) == typeof(DeviceActionResult))
+                            }
+                            else if (ObjectContext.GetObjectType(entry.Entity.GetType()) == typeof(DeviceActionResult))
+                            {
+
+                                DbDataRecord original = entry.OriginalValues;
+                                string oldValue = original.GetValue(
+                                    original.GetOrdinal("Value"))
+                                    .ToString();
+
+                                CurrentValueRecord current = entry.CurrentValues;
+                                string newValue = current.GetValue(
+                                    current.GetOrdinal("Value"))
+                                    .ToString();
+
+                                if (oldValue != newValue) // probably not necessary
                                 {
+                                    ActionChangeHistory hist = new ActionChangeHistory();
+                                    hist.Date = DateTime.Now;
+                                    hist.Property = (DeviceActionResult)(object)entry.Entity;
+                                    hist.Value = newValue;
+                                    this.ActionChangeHistory.Add(hist);
+                                }
 
-                                    DbDataRecord original = entry.OriginalValues;
-                                    string oldValue = original.GetValue(
-                                        original.GetOrdinal("Value"))
-                                        .ToString();
-
-                                    CurrentValueRecord current = entry.CurrentValues;
-                                    string newValue = current.GetValue(
-                                        current.GetOrdinal("Value"))
-                                        .ToString();
-
-                                    if (oldValue != newValue) // probably not necessary
-                                    {
-                                        ActionChangeHistory hist = new ActionChangeHistory();
-                                        hist.Date = DateTime.Now;
-                                        hist.Property = (DeviceActionResult)(object)entry.Entity;
-                                        hist.Value = newValue;
-                                        this.ActionChangeHistory.Add(hist);
-                                    }
-
-                                    if (ActionUpdateEvent != null)
-                                    {
-                                        Task.Factory.StartNew(() => iotContext.ActionUpdateEvent((DeviceActionResult)entry.Entity));
-                                    }
+                                if (this.ActionUpdateEvent != null)
+                                {
+                                    Task.Factory.StartNew(() => this.ActionUpdateEvent((DeviceActionResult)entry.Entity));
+                                }
                                     
 
 
-                                }
-                                else if (ObjectContext.GetObjectType(entry.Entity.GetType()) == typeof(Device))
-                                {
-                                    Task.Factory.StartNew(() => iotContext.DeviceUpdateEvent((Device)entry.Entity));
-                                }
-                                break;
                             }
+                            else if (ObjectContext.GetObjectType(entry.Entity.GetType()) == typeof(Device))
+                            {
+                                Task.Factory.StartNew(() => this.DeviceUpdateEvent((Device)entry.Entity));
+                            }
+                            break;
+                        }
                     }
                 }
             }
             return base.SaveChanges();
         }
+    }
 
+    public  class  iotContext : iotContextBase
+    {
+        public override  event DeviceUpdateEventCallbackHandler DeviceUpdateEvent;
 
-        public DbSet<Location> Locations { get; set; }
+        public override  event ParamUpdateEventCallbackHandler ParamUpdateEvent = delegate { };
 
-        public DbSet<EndpointInfo> Endpoints { get; set; }
+        public override  event ActionResultUpdateEventCallbackHandler ActionUpdateEvent = delegate { };
 
-        public DbSet<DeviceParameter> Parameters { get; set; }
+        public iotContext() : base()
+        {
+        }
 
-        public DbSet<ParameterType> ParamTypes { get; set; }
+        public iotContext(int DomainId) : base(DomainId)
+        {
+        }
 
-        public DbSet<ActionParameter> ActionParameters { get; set; }
-
-        public DbSet<DeviceActionResult> ActionResultParameters { get; set; }
-
-        public DbSet<ActionChangeHistory> ActionChangeHistory { get; set; }
-
-        public DbSet<sconnActionMapper> ActionParamMappers { get; set; }
-
-        public DbSet<sconnActionResultMapper> ActionResultMappers { get; set; }
-
-        public DbSet<sconnPropertyMapper> PropertyResultMappers { get; set; }
-
-
-        public DbSet<DeviceProperty> Properties { get; set; }
-
-        public DbSet<DeviceAction> Actions { get; set; }
-
-        public DbSet<DeviceType> Types { get; set; }
-
-        public DbSet<DeviceCredentials> Credentials { get; set; }
-
-        public DbSet<Device> Devices { get; set; }
-
-        public DbSet<Site> Sites { get; set; }
-
-        public DbSet<iotDomain> Domains { get; set; }
-
-
-        public DbSet<ParameterChangeHistory> ParameterChanges { get; set; }
-
-
-
-        
-
-
+        public iotContext(iotDomain domain) : base(domain)
+        {
+        }
     }
 
 }

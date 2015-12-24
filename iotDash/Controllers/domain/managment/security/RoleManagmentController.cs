@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using iotDash.Content.Dynamic.Status;
+using iotDash.Controllers.domain.navigation;
 using iotDash.Identity.Roles;
 using iotDash.Models;
 using iotDash.Session;
