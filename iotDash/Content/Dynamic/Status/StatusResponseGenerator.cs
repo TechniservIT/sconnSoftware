@@ -14,17 +14,16 @@ namespace iotDash.Content.Dynamic.Status
     }
 
 
-    static public class StatusResponseGenerator
+    public static class StatusResponseGenerator
     {
-
-
-        static public string GetSuccessPanelWithMsgAndStat(string msg, RequestStatus stat)
+       
+        public static string GetSuccessPanelWithMsgAndStat(string msg, RequestStatus stat)
         {
             string panel = String.Format(" <p class='bg-success'>{0}</p> ", msg);
             return panel;
         }
 
-        static public string GetPanelWithMsgAndStat(string msg, RequestStatus stat)
+        public static string GetPanelWithMsgAndStat(string msg, RequestStatus stat)
         {
             string cclass = "";
             if (stat == RequestStatus.Success)
@@ -37,6 +36,38 @@ namespace iotDash.Content.Dynamic.Status
             }
 
             string panel = String.Format(" <p class='" + cclass + "'>{0}</p> ", msg);
+            return panel;
+        }
+
+        public static string GetAlertPanelWithMsgAndStat(string msg, RequestStatus stat)
+        {
+            string cclass = "";
+            if (stat == RequestStatus.Success)
+            {
+                cclass = "alert-success";
+            }
+            else if (stat == RequestStatus.Failure)
+            {
+                cclass = "alert-danger";
+            }
+
+            string panel = String.Format(" <p class='alert " + cclass + "'>{0}</p> ", msg);
+            return panel;
+        }
+
+        static public string GetDismissablePanelWithMsgAndStat(string msg, RequestStatus stat)
+        {
+            string cclass = "";
+            if (stat == RequestStatus.Success)
+            {
+                cclass = "alert-success";
+            }
+            else if (stat == RequestStatus.Failure)
+            {
+                cclass = "alert-danger";
+            }
+
+            string panel = String.Format(" <p class='alert " + cclass + " alert-dismissible'>{0}</p> ", msg);
             return panel;
         }
 

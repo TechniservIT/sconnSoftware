@@ -63,16 +63,16 @@ namespace iotDash.Controllers.domain.managment.security
                     if (!roleManager.RoleExists(model.Role.Name))
                     {
                         await roleManager.CreateAsync(model.Role);
-                        nmod.Result = (StatusResponseGenerator.GetPanelWithMsgAndStat("Success.", RequestStatus.Success));
+                        nmod.Result = (StatusResponseGenerator.GetAlertPanelWithMsgAndStat("Success.", RequestStatus.Success));
                     }
                     else
                     {
-                        nmod.Result = (StatusResponseGenerator.GetPanelWithMsgAndStat("Failure.", RequestStatus.Failure));
+                        nmod.Result = (StatusResponseGenerator.GetAlertPanelWithMsgAndStat("Failure.", RequestStatus.Failure));
                     }
                 }
                 else
                 {
-                    nmod.Result = (StatusResponseGenerator.GetPanelWithMsgAndStat("Failure.", RequestStatus.Failure));
+                    nmod.Result = (StatusResponseGenerator.GetAlertPanelWithMsgAndStat("Failure.", RequestStatus.Failure));
                 }
                 return View(nmod);
             }

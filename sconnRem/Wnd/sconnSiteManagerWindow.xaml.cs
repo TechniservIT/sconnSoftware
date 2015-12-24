@@ -15,6 +15,7 @@ using System.Net.Sockets;
 using System.Net.NetworkInformation;
 using System.Windows.Threading;
 using sconnConnector;
+using sconnConnector.POCO.Config;
 
 namespace sconnRem
 {

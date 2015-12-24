@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using iotDbConnector.DAL;
 using sconnConnector;
 using sconnConnector.Config;
+using sconnConnector.POCO.Config;
 
 namespace iotDash.Areas.AlarmSystem.Models
 {
@@ -41,7 +42,7 @@ namespace iotDash.Areas.AlarmSystem.Models
         [Required]
         public int DeviceId { get; set; }
 
-        public ipcDataType.ipcDeviceConfig DevCfg { get; set; }
+        public  ipcDeviceConfig DevCfg { get; set; }
 
         [Required]
         public List<sconnInput> Inputs { get; set; }
@@ -63,7 +64,7 @@ namespace iotDash.Areas.AlarmSystem.Models
 
         public Device AlarmDevice { get; set; }
 
-        public sconnConnector.ipcDataType.ipcDeviceConfig EditedDevice { get; set; }
+        public ipcDeviceConfig EditedDevice { get; set; }
 
 
         public AlarmSystemDetailModel(Device dev)

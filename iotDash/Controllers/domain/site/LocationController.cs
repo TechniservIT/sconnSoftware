@@ -53,11 +53,11 @@ namespace iotDash.Controllers.domain.site
 				loc.Lat = double.Parse(Lat, CultureInfo.InvariantCulture);
 				d.Locations.Add(loc);
                 icont.SaveChanges();
-                return StatusResponseGenerator.GetSuccessPanelWithMsgAndStat("Location added sucessfully.", RequestStatus.Success);
+                return StatusResponseGenerator.GetAlertPanelWithMsgAndStat("Location added sucessfully.", RequestStatus.Success);
 			}
 			catch (Exception e)
 			{
-                return StatusResponseGenerator.GetSuccessPanelWithMsgAndStat("Location add failed.", RequestStatus.Failure);
+                return StatusResponseGenerator.GetAlertPanelWithMsgAndStat("Location add failed.", RequestStatus.Failure);
 			}
 		}
 

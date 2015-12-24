@@ -8,6 +8,7 @@ using iotDash.Models;
 using iotDash.Session;
 using iotDbConnector.DAL;
 using sconnConnector;
+using sconnConnector.POCO.Config;
 
 namespace iotDash.Controllers.domain.site.AlarmSystem
 {
@@ -90,7 +91,7 @@ namespace iotDash.Controllers.domain.site.AlarmSystem
             return View();
         }
 
-        public ActionResult SaveDeviceOutputs(List<sconnOutput> Outputs, int ServerId, int DeviceId)        //List<sconnInput> Inputs, int DeviceId
+        public ActionResult SaveDeviceOutputs(List<sconnOutput> Outputs, int ServerId, int DeviceId)
         {
             try
             {

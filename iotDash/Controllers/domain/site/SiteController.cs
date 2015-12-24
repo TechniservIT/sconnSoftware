@@ -154,17 +154,17 @@ namespace iotDash.Controllers.domain.site
 				}
 				else
 				{
-                    return StatusResponseGenerator.GetSuccessPanelWithMsgAndStat("Location not found.", RequestStatus.Warning);
+                    return StatusResponseGenerator.GetAlertPanelWithMsgAndStat("Location not found.", RequestStatus.Warning);
 				}
 				 
 
 			}
 			catch (Exception e)
 			{
-                return StatusResponseGenerator.GetSuccessPanelWithMsgAndStat("Add error.", RequestStatus.Failure);
+                return StatusResponseGenerator.GetAlertPanelWithMsgAndStat("Add error.", RequestStatus.Failure);
 			}
 
-            return StatusResponseGenerator.GetSuccessPanelWithMsgAndStat("Add success.", RequestStatus.Success);
+            return StatusResponseGenerator.GetAlertPanelWithMsgAndStat("Add success.", RequestStatus.Success);
 		}
 
 

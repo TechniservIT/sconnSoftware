@@ -6,10 +6,13 @@ using System.Threading.Tasks;
 using sconnConnector;
 using sconnConnector.Config;
 using iotDbConnector.DAL;
+using sconnConnector.POCO.Config;
+using sconnConnector.POCO.Config.Abstract;
 
 namespace iotDash.Models
 {
-  
+
+    #region IoConfigure
     public class AlarmSystemInputsConfigureModel
     {
         public int DeviceId { get; set; }
@@ -87,11 +90,94 @@ namespace iotDash.Models
         }
     }
 
+    #endregion
+
+    #region AuthorizedDevices
+
+    public class AlarmSystemAuthorizedDevicesModel
+    {
+        public List<AlarmSystemDevice>  AuthorizeDevices { get; set; }
+
+        public AlarmSystemAuthorizedDevicesModel(List<AlarmSystemDevice> devices)
+        {
+            this.AuthorizeDevices = devices;
+        }
+
+    }
+
+    public class AlarmSystemAddAuthorizedDeviceModel
+    {
+        public AlarmSystemDevice AuthorizedDevice { get; set; }  
+    }
+
+    #endregion
+
+    #region GsmConfig
+
+    public class AlarmSystemGsmConfigModel
+    {
+        public AlarmSystemGsmConfig GsmConfig { get; set; }
+    }
+
+    public class AlarmSystemGsmAddRcptModel
+    {
+        public AlarmSystemGsmRcpt GsmRcpt { get; set; }
+
+        public AlarmSystemGsmAddRcptModel()
+        {
+                
+        }
+
+        public AlarmSystemGsmAddRcptModel(AlarmSystemGsmRcpt rcpt)
+        {
+            this.GsmRcpt = rcpt;
+        }
+    }
+
+    #endregion
+
+
+    #region ZoneConfig
+
+    public class AlarmSystemZoneConfigModel
+    {
+        public List<AlarmSystemZone> Zones { get; set; }
+
+        public AlarmSystemZoneConfigModel()
+        {
+                
+        }
+    }
+
+    public class AlarmSystemZoneAddModel
+    {
+        public AlarmSystemZone Zone { get; set; }
+
+        public AlarmSystemZoneAddModel()
+        {
+                
+        }
+
+        public AlarmSystemZoneAddModel(AlarmSystemZone zone)
+        {
+            this.Zone = zone;
+        }
+
+    }
+
+
+    #endregion
+
+
+
+    #region NamesConfig
 
     public class AlarmSystemNamesConfigureModel
     {
 
     }
+
+    #endregion
 
     public class AlarmSystemSchedulesConfigureModel
     {

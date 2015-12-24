@@ -72,16 +72,16 @@ namespace iotDash.Controllers.domain.managment.security
                                  userMan.AddToRole(model.User.Id, role.Name);
                              }
                          }
-                         nmod.Result = (StatusResponseGenerator.GetPanelWithMsgAndStat("Success.", RequestStatus.Success));
+                         nmod.Result = (StatusResponseGenerator.GetAlertPanelWithMsgAndStat("Success.", RequestStatus.Success));
                      }
                      else
                      {
-                         nmod.Result = (StatusResponseGenerator.GetPanelWithMsgAndStat("Failure.", RequestStatus.Failure));
+                         nmod.Result = (StatusResponseGenerator.GetAlertPanelWithMsgAndStat("Failure.", RequestStatus.Failure));
                      }
                  }
                  else
                  {
-                     nmod.Result = (StatusResponseGenerator.GetPanelWithMsgAndStat("Failure.", RequestStatus.Failure));
+                     nmod.Result = (StatusResponseGenerator.GetAlertPanelWithMsgAndStat("Failure.", RequestStatus.Failure));
                  }
                  return View(nmod);
              }

@@ -64,18 +64,18 @@ namespace iotDash.Controllers.domain.site.IoT
                     iotDomain domain = cont.Domains.First(d => d.DomainName.Equals(domainId));
                     domain.DeviceTypes.Add(model.Type);
                     await cont.SaveChangesAsync();
-                    model.Result = StatusResponseGenerator.GetSuccessPanelWithMsgAndStat("Success.",
+                    model.Result = StatusResponseGenerator.GetAlertPanelWithMsgAndStat("Success.",
                         RequestStatus.Success);
                 }
                 else
                 {
-                    model.Result = StatusResponseGenerator.GetSuccessPanelWithMsgAndStat("Error.", RequestStatus.Failure);
+                    model.Result = StatusResponseGenerator.GetAlertPanelWithMsgAndStat("Error.", RequestStatus.Failure);
                 }
 
             }
             catch (Exception e)
             {
-                model.Result = StatusResponseGenerator.GetSuccessPanelWithMsgAndStat("Error.", RequestStatus.Failure);
+                model.Result = StatusResponseGenerator.GetAlertPanelWithMsgAndStat("Error.", RequestStatus.Failure);
             }
             return View(model);
 	    }
@@ -96,11 +96,11 @@ namespace iotDash.Controllers.domain.site.IoT
 				type.VisualRepresentationURL = ImageUrl;
 				domain.DeviceTypes.Add(type);
 				cont.SaveChanges();
-                return StatusResponseGenerator.GetSuccessPanelWithMsgAndStat("Success.", RequestStatus.Success);
+                return StatusResponseGenerator.GetAlertPanelWithMsgAndStat("Success.", RequestStatus.Success);
 			}
 			catch (Exception e) 
 			{
-                return StatusResponseGenerator.GetSuccessPanelWithMsgAndStat("Error.", RequestStatus.Failure);
+                return StatusResponseGenerator.GetAlertPanelWithMsgAndStat("Error.", RequestStatus.Failure);
 			}
 		  
 		}
@@ -167,17 +167,17 @@ namespace iotDash.Controllers.domain.site.IoT
 			            stored.EndpInfo.Port = model.Device.EndpInfo.Port;
 			            await cont.SaveChangesAsync();
                         model = new DeviceEditModel(model.Device, cont.Locations.ToList(), cont.Types.ToList());
-                        model.Result = StatusResponseGenerator.GetSuccessPanelWithMsgAndStat("Success.",RequestStatus.Success);
+                        model.Result = StatusResponseGenerator.GetAlertPanelWithMsgAndStat("Success.",RequestStatus.Success);
 			        }
 			    }
 			    else
 			    {
-                    model.Result = StatusResponseGenerator.GetSuccessPanelWithMsgAndStat("Error.", RequestStatus.Failure);
+                    model.Result = StatusResponseGenerator.GetAlertPanelWithMsgAndStat("Error.", RequestStatus.Failure);
 			    }
 			}
 			catch (Exception e)
 			{
-                model.Result = StatusResponseGenerator.GetSuccessPanelWithMsgAndStat("Error.", RequestStatus.Failure);
+                model.Result = StatusResponseGenerator.GetAlertPanelWithMsgAndStat("Error.", RequestStatus.Failure);
 			}
             return View(model);
 		}

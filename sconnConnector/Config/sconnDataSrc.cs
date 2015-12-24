@@ -6,8 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
-
-
+using sconnConnector.POCO.Config;
 #if WIN32_ENC
 
 using Microsoft.Win32;

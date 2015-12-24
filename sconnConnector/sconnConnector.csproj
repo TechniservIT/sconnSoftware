@@ -54,8 +54,25 @@
     <Compile Include="Config\CfgOper.cs" />
     <Compile Include="Config\GlobalSettings.cs" />
     <Compile Include="Config\sconnCfgMngr.cs" />
-    <Compile Include="Config\sconnDataShare.cs" />
     <Compile Include="Config\sconnDataSrc.cs" />
+    <Compile Include="POCO\Config\Abstract\AlarmSystemDevice.cs" />
+    <Compile Include="POCO\Config\Abstract\AlarmSystemGsmConfig.cs" />
+    <Compile Include="POCO\Config\Abstract\AlarmSystemGsmRcpt.cs" />
+    <Compile Include="POCO\Config\Abstract\AlarmSystemZone.cs" />
+    <Compile Include="POCO\Config\AlarmSystemConfig.cs" />
+    <Compile Include="POCO\Config\ipcDataType.cs" />
+    <Compile Include="POCO\Config\ipcDeviceConfig.cs" />
+    <Compile Include="POCO\Config\ipcEvent.cs" />
+    <Compile Include="POCO\Config\ipcGlobalConfig.cs" />
+    <Compile Include="POCO\Config\ipcRcpt.cs" />
+    <Compile Include="POCO\Config\ipcSiteConfig.cs" />
+    <Compile Include="POCO\Config\sconnAuthorizedDevices.cs" />
+    <Compile Include="POCO\Config\sconnGsmConfig.cs" />
+    <Compile Include="POCO\Config\sconnInput.cs" />
+    <Compile Include="POCO\Config\sconnOutput.cs" />
+    <Compile Include="POCO\Config\sconnRelay.cs" />
+    <Compile Include="POCO\Config\sconnSite.cs" />
+    <Compile Include="POCO\sconnDataShare.cs" />
     <Compile Include="sconnConnector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -76,6 +93,7 @@
       <Name>iotData</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -22,6 +22,7 @@ using System.Xml;
 using sconnRem.Controls;
 using sconnRem.Controls.SiteConfig.NetworkSetup;
 using sconnConnector;
+using sconnConnector.POCO.Config;
 using sconnRem.Controls.SiteConfig.SiteConfigGroups;
 
 namespace sconnRem

@@ -9,7 +9,8 @@ using iotDbConnector;
 using iotDbConnector.DAL;
 using NLog;
 using System.Diagnostics;
- 
+using sconnConnector.POCO.Config;
+
 
 namespace iotServiceProvider
 {
@@ -258,7 +259,7 @@ namespace iotServiceProvider
             }
         }
 
-        private void SetConfigForActionParameterAtDevice(ActionParameter param, ipcDataType.ipcDeviceConfig config)
+        private void SetConfigForActionParameterAtDevice(ActionParameter param,  ipcDeviceConfig config)
         {
             LoadStringValueToByteMemoryAtAddr(param.Value, config.memCFG, ConfigAddrForMapperInfo(param.sconnMappers.First()));
         }
@@ -287,7 +288,7 @@ namespace iotServiceProvider
             }
         }
 
-        private string sconnConfigToStringVal(sconnConfigMapper map, ipcDataType.ipcDeviceConfig config)
+        private string sconnConfigToStringVal(sconnConfigMapper map,  ipcDeviceConfig config)
         {
             try
             {

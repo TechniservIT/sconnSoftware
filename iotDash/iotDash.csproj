@@ -280,8 +280,12 @@
     <Compile Include="Controllers\domain\managment\security\UserSecurityController.cs" />
     <Compile Include="Controllers\domain\signaling\SignalingRulesController.cs" />
     <Compile Include="Areas\AlarmSystem\Controllers\AlarmSystemSummaryController.cs" />
+    <Compile Include="Controllers\domain\site\AlarmSystem\AlarmSystemAuthorizedDevicesController.cs" />
     <Compile Include="Controllers\domain\site\AlarmSystem\AlarmSystemConfigurationController.cs" />
+    <Compile Include="Controllers\domain\site\AlarmSystem\AlarmSystemGsmConfigController.cs" />
+    <Compile Include="Controllers\domain\site\AlarmSystem\AlarmSystemUsersConfigController.cs" />
     <Compile Include="Controllers\domain\site\AlarmSystem\AlarmSystemViewController.cs" />
+    <Compile Include="Controllers\domain\site\AlarmSystem\AlarmSystemZonesConfigController.cs" />
     <Compile Include="Controllers\domain\site\CCTV\CctvSystemViewController.cs" />
     <Compile Include="Controllers\domain\supervisor\SecuritySupervisorSetupController.cs" />
     <Compile Include="Controllers\domain\surveillance\CameraViewController.cs" />
@@ -328,16 +332,16 @@
       <DependentUpon>201512011200480_Custom configurable roles.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Identity\AccountViewModels.cs" />
     <Compile Include="Areas\AlarmSystem\Models\AlarmSystemModels.cs" />
-    <Compile Include="Models\AlarmSystemModels.cs" />
-    <Compile Include="Models\DeviceModels.cs" />
+    <Compile Include="Models\AlarmSystem\AlarmSystemModels.cs" />
+    <Compile Include="Models\Global\DeviceModels.cs" />
     <Compile Include="Identity\IdentityModels.cs" />
-    <Compile Include="Models\LocationModels.cs" />
-    <Compile Include="Models\RoleBindingModels.cs" />
-    <Compile Include="Models\SiteModels.cs" />
-    <Compile Include="Models\StatisticModels.cs" />
-    <Compile Include="Models\UserManagmentModels.cs" />
+    <Compile Include="Models\Global\LocationModels.cs" />
+    <Compile Include="Models\Identity\RoleBindingModels.cs" />
+    <Compile Include="Models\Global\SiteModels.cs" />
+    <Compile Include="Models\Global\StatisticModels.cs" />
+    <Compile Include="Models\Identity\UserManagmentModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RealTime\SignalR\StatusUpdate\DeviceStatusUpdater\DeviceStatusUpdaterHub.cs" />
     <Compile Include="Serialization\iotSerializationFactory.cs" />
@@ -1409,6 +1413,12 @@
     <Content Include="Views\AlarmSystemView\NamesConfigure.cshtml" />
     <Content Include="Views\AlarmSystemView\SchedulesConfigure.cshtml" />
     <Content Include="Scripts\version.json" />
+    <Content Include="Views\AlarmSystemAuthorizedDevices\View.cshtml" />
+    <Content Include="Views\AlarmSystemAuthorizedDevices\Add.cshtml" />
+    <Content Include="Views\AlarmSystemGsmConfig\View.cshtml" />
+    <Content Include="Views\AlarmSystemZonesConfig\View.cshtml" />
+    <Content Include="Views\AlarmSystemZonesConfig\Add.cshtml" />
+    <Content Include="Views\AlarmSystemGsmConfig\Add.cshtml" />
     <None Include="Views\Dashboard\Index.cshtml" />
     <Content Include="SignalR.Sample\jquery.color-2.1.2.min.js" />
     <Content Include="SignalR.Sample\SignalR.StockTicker.js" />
@@ -1557,6 +1567,7 @@
     <Folder Include="Controllers\domain\managment\automation\" />
     <Folder Include="RealTime\SignalR\StatusUpdate\ActionHistoryUpdater\" />
     <Folder Include="RealTime\SignalR\StatusUpdate\PropertyHistoryUpdater\" />
+    <Folder Include="Views\AlarmSystemUsersConfig\" />
     <Folder Include="Views\RecordingSettings\" />
     <Folder Include="Views\RouteTrackingLiveView\" />
     <Folder Include="Views\RouteTrackingSetup\" />

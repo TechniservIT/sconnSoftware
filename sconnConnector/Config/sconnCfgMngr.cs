@@ -6,7 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using sconnConnector.POCO.Config;
 #if WIN32_ENC
 
 using System.Windows;
@@ -1310,7 +1310,7 @@ namespace sconnConnector
                                        try
                                        {
                                            int bufferOffset = 1;
-                                           ipcDataType.ipcRcpt[] rcpts = new ipcDataType.ipcRcpt[ipcDefines.RAM_SMS_RECP_SIZE];
+                                            ipcRcpt[] rcpts = new  ipcRcpt[ipcDefines.RAM_SMS_RECP_SIZE];
                                            for (int r = 0; r < ipcDefines.RAM_SMS_RECP_SIZE; r++)
                                            {
                                                byte[] record = new byte[ipcDefines.RAM_SMS_RECP_SIZE];
@@ -1318,7 +1318,7 @@ namespace sconnConnector
                                                {
                                                    record[btc] = gsmRcpBF[bufferOffset + (r * ipcDefines.RAM_SMS_RECP_SIZE) + btc];
                                                }
-                                               ipcDataType.ipcRcpt rcpt = new ipcDataType.ipcRcpt(record);
+                                                ipcRcpt rcpt = new  ipcRcpt(record);
                                                rcpts[r] = rcpt;
                                            }
                                            site.siteCfg.gsmRcpts = rcpts;
@@ -1566,7 +1566,7 @@ namespace sconnConnector
 							   try
 							   {
 								   int bufferOffset = 1;
-								   ipcDataType.ipcRcpt[] rcpts = new ipcDataType.ipcRcpt[ipcDefines.RAM_SMS_RECP_SIZE];
+								    ipcRcpt[] rcpts = new  ipcRcpt[ipcDefines.RAM_SMS_RECP_SIZE];
 								   for (int r = 0; r < ipcDefines.RAM_SMS_RECP_SIZE; r++)
 								   {
 									   byte[] record = new byte[ipcDefines.RAM_SMS_RECP_SIZE];
@@ -1574,7 +1574,7 @@ namespace sconnConnector
 									   {
 										   record[btc] = gsmRcpBF[bufferOffset + (r * ipcDefines.RAM_SMS_RECP_SIZE) + btc];
 									   }
-									   ipcDataType.ipcRcpt rcpt = new ipcDataType.ipcRcpt(record);
+									    ipcRcpt rcpt = new  ipcRcpt(record);
 									   rcpts[r] = rcpt;
 								   }
 								   site.siteCfg.gsmRcpts = rcpts;

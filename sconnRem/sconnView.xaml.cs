@@ -22,6 +22,7 @@ using System.Xml;
 using System.Globalization;
 using sconnRem.Properties;
 using sconnConnector;
+using sconnConnector.POCO.Config;
 
 namespace sconnRem
 {
