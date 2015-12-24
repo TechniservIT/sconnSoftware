@@ -2,9 +2,11 @@
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using iotDash.Identity;
 using iotDash.Identity.Roles;
 using iotDash.Models;
 using iotDash.Session;
+using iotDatabaseConnector.DAL.Repository.Connector.Entity;
 using iotDbConnector.DAL;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -45,10 +47,10 @@ namespace iotDash.Controllers.domain.navigation
                                     where u.UserName == username
                                     select u).First();
 
-                        var icont = (iotContext)System.Web.HttpContext.Current.Session["iotcontext"];
+                        var icont = (IIotContextBase)System.Web.HttpContext.Current.Session["iotcontext"];
                         if (icont == null)
                         {
-                            icont = new iotContext();
+                            icont = UserIotContextFactory.GetContextForUser(user);
                             System.Web.HttpContext.Current.Session["iotcontext"] = icont;
                         }
 
@@ -87,10 +89,10 @@ namespace iotDash.Controllers.domain.navigation
                             where u.UserName == username
                             select u).First();
 
-                var icont = (iotContext)System.Web.HttpContext.Current.Session["iotcontext"];
+                var icont = (IIotContextBase)System.Web.HttpContext.Current.Session["iotcontext"];
                 if (icont == null)
                 {
-                    icont = new iotContext();
+                    icont = UserIotContextFactory.GetContextForUser(user);
                     System.Web.HttpContext.Current.Session["iotcontext"] = icont;
                 }
 

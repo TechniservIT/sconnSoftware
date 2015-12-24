@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using iotDash.Identity;
 using iotDash.Identity.Roles;
 using iotDash.Models;
 using iotDatabaseConnector.DAL.Repository.Connector.Entity;
@@ -54,10 +55,10 @@ namespace iotDash.Controllers.global
                     where u.UserName.Equals(  model.UserName )
                     select u).First();
 
-                var icont = (iotContext)System.Web.HttpContext.Current.Session["iotcontext"];
+                var icont = (IIotContextBase)System.Web.HttpContext.Current.Session["iotcontext"];
                 if (icont == null)
                 {
-                    icont = new iotContext();
+                    icont = UserIotContextFactory.GetContextForUser(currentUser);
                     System.Web.HttpContext.Current.Session["iotcontext"] = icont;
                 }
 

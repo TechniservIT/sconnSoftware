@@ -11,13 +11,36 @@ namespace SiteManagmentService
 {
     public class SiteProvider
     {
-        private iotContext context;
+        private IIotContextBase context;
         
         public SiteProvider(IIotContextBase cont)
         {
             this.context = cont;
         }
         
+        public List<Site> GetSites()
+        {
+            return context.IotDomain.Sites.ToList();
+        }
 
+        public bool RemoveDevice(int id)
+        {
+            try
+            {
+                Device dev = context.Devices.First(s => s.Id == id);
+                if (dev != null)
+                {
+                    context.Devices.Remove(dev);
+                    context.SaveChanges();
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+        
     }
 }

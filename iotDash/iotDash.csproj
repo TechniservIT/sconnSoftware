@@ -318,6 +318,7 @@
     <Compile Include="Identity\Roles\IotMapAndTrackingAdminRole.cs" />
     <Compile Include="Identity\Roles\IotScheduledSiteAdminRole.cs" />
     <Compile Include="Identity\Roles\IotSiteManagerRole.cs" />
+    <Compile Include="Identity\UserIotContextFactory.cs" />
     <Compile Include="Migrations\201506241419288_initial.cs" />
     <Compile Include="Migrations\201506241419288_initial.Designer.cs">
       <DependentUpon>201506241419288_initial.cs</DependentUpon>
@@ -331,7 +332,7 @@
     <Compile Include="Areas\AlarmSystem\Models\AlarmSystemModels.cs" />
     <Compile Include="Models\AlarmSystemModels.cs" />
     <Compile Include="Models\DeviceModels.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Identity\IdentityModels.cs" />
     <Compile Include="Models\LocationModels.cs" />
     <Compile Include="Models\RoleBindingModels.cs" />
     <Compile Include="Models\SiteModels.cs" />

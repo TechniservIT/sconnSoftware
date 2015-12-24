@@ -37,7 +37,7 @@ namespace sconnConnector.Config
 
         private bool CanUpdateDueToTimingContraints()
         {
-            return (DateTime.Now - LastUpDateTime).Milliseconds > MinUpdatePeriod;
+            return (DateTime.Now - LastUpDateTime).TotalMilliseconds > MinUpdatePeriod;
         }
 
         public void LoadSiteConfig()

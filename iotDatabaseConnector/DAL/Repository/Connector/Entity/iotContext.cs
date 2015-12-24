@@ -24,12 +24,18 @@ namespace iotDbConnector.DAL
             this.Configuration.LazyLoadingEnabled = true;
         }
 
-        public iotContextBase(int DomainId)
+
+        public void SetContextDomain(int domainId)
+        {
+            this.IotDomain = Queryable.First<iotDomain>(this.Domains, d => d.Id == domainId);
+        }
+
+        public iotContextBase(int DomainId) :this()
         {
             this.IotDomain = Queryable.First<iotDomain>(this.Domains, d=>d.Id == DomainId);
         }
 
-        public iotContextBase(iotDomain domain)
+        public iotContextBase(iotDomain domain) :this()
         {
             this.IotDomain = domain;
         }

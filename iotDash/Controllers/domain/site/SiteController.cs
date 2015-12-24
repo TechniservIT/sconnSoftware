@@ -18,8 +18,8 @@ namespace iotDash.Controllers.domain.site
     [SiteAuthorize]
 	public class SiteController : Controller
 	{
-        private IIotContextBase icont;
-        private SiteProvider provider;
+        private IIotContextBase _icont;
+        private SiteProvider _provider;
 
         public SiteController(HttpContextBase contBase)
         {
@@ -29,22 +29,22 @@ namespace iotDash.Controllers.domain.site
                 this.Icont = cont;
                 string domainId = DomainSession.GetContextDomain(contBase);
                 iotDomain d = Icont.Domains.First(dm => dm.DomainName.Equals(domainId));
-                this.provider = new SiteProvider((iotContext) this.Icont, d);
+                this._provider = new SiteProvider(this.Icont);
             }
         }
 
-		public Site site { get; set; }
+		public Site Site { get; set; }
 
         public IIotContextBase Icont
         {
             get
             {
-                return icont;
+                return _icont;
             }
 
             set
             {
-                icont = value;
+                _icont = value;
             }
         }
 
@@ -54,11 +54,11 @@ namespace iotDash.Controllers.domain.site
 
         public ActionResult Index()
 		{
-			List<Site> Sites = new List<Site>();
+			List<Site> sites = new List<Site>();
 			try
 			{
-                Sites = this.provider.GetSites();
-                ShowSitesViewModel model = new ShowSitesViewModel(Sites);
+                sites = this._provider.GetSites();
+                ShowSitesViewModel model = new ShowSitesViewModel(sites);
                 return View(model);
 			}
 			catch (Exception e)
@@ -67,20 +67,15 @@ namespace iotDash.Controllers.domain.site
 			}
 
 		}
-
-
+        
 
 		//Remove device and return status
-		public bool RemoveDevice(string DeviceId)
+		public bool RemoveDevice(string deviceId)
 		{
-			int devid = int.Parse(DeviceId);    
+			int devid = int.Parse(deviceId);    
 			try
 			{
-                string domainId = DomainSession.GetContextDomain(this.HttpContext);
-                iotDomain d = Icont.Domains.First(dm => dm.DomainName.Equals(domainId));
-                Device dev = Icont.Devices.First(s => s.Id == devid);
-                Icont.Devices.Remove(dev);
-                Icont.SaveChanges();
+			    this._provider.RemoveDevice(devid);
 				return true;
 			}
 			catch (Exception e)
@@ -92,13 +87,13 @@ namespace iotDash.Controllers.domain.site
 
 		//
 		// GET: /Site/View/<number>
-		public ActionResult View(int SiteId)
+		public ActionResult View(int siteId)
 		{
 			try
 			{
                 string domainId = DomainSession.GetContextDomain(this.HttpContext);
                 iotDomain d = Icont.Domains.First(dm => dm.DomainName.Equals(domainId));
-                DeviceListViewModel model = new DeviceListViewModel(d.Sites.First(s=>s.Id==SiteId));
+                DeviceListViewModel model = new DeviceListViewModel(d.Sites.First(s=>s.Id==siteId));
 				return View(model);
 				
 			}
@@ -111,7 +106,7 @@ namespace iotDash.Controllers.domain.site
 
 		//
 		// GET: /Site/Edit/<number>
-		public ActionResult Edit(int SiteId)
+		public ActionResult Edit(int siteId)
 		{
 			return View();
 		}
@@ -128,8 +123,8 @@ namespace iotDash.Controllers.domain.site
 			{
                 string domainId = DomainSession.GetContextDomain(this.HttpContext);
                 iotDomain d = Icont.Domains.First(dm => dm.DomainName.Equals(domainId));
-                List<Location> Locations = d.Locations.ToList();
-                AddSiteViewModel model = new AddSiteViewModel(Locations);
+                List<Location> locations = d.Locations.ToList();
+                AddSiteViewModel model = new AddSiteViewModel(locations);
                 return View(model);
             }
 			catch (Exception e)
@@ -140,18 +135,18 @@ namespace iotDash.Controllers.domain.site
 
 		//
 		// GET: /Site/New
-		public string New(string Name, string LocId)
+		public string New(string name, string locId)
 		{
 			try
 			{
                 string domainId = DomainSession.GetContextDomain(this.HttpContext);
                 iotDomain d = Icont.Domains.First(dm => dm.DomainName.Equals(domainId));
-                int LocIdnum = int.Parse(LocId);
-                Location loc = d.Locations.First(l => l.Id == LocIdnum);
+                int locIdnum = int.Parse(locId);
+                Location loc = d.Locations.First(l => l.Id == locIdnum);
 				if (loc != null)
 				{
 					Site site = new Site();
-					site.SiteName = Name;
+					site.SiteName = name;
 					site.siteLocation = loc;
 					site.Domain = d;
                     Icont.Sites.Add(site);

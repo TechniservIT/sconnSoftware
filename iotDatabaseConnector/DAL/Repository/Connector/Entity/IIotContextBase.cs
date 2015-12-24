@@ -16,6 +16,7 @@ namespace iotDatabaseConnector.DAL.Repository.Connector.Entity
           event iotContextBase.ActionResultUpdateEventCallbackHandler ActionUpdateEvent;
 
          iotDomain IotDomain { get; set; }
+
          DbSet<Location> Locations { get; set; }
          DbSet<EndpointInfo> Endpoints { get; set; }
          DbSet<DeviceParameter> Parameters { get; set; }
@@ -34,6 +35,8 @@ namespace iotDatabaseConnector.DAL.Repository.Connector.Entity
          DbSet<Site> Sites { get; set; }
          DbSet<iotDomain> Domains { get; set; }
          DbSet<ParameterChangeHistory> ParameterChanges { get; set; }
+
+         void SetContextDomain(int domainId);
 
          int SaveChanges();
 
