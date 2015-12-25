@@ -12,7 +12,7 @@ namespace sconnConnector.POCO.Config.Abstract
 
         public string NumberE164 { get; set; }
 
-        public GsmMessagingLevel MessageLevel { get; set; }
+        public  GsmMessagingLevel MessageLevel { get; set; }
 
     }
 

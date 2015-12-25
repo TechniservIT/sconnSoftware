@@ -20,11 +20,11 @@ namespace iotDash.Controllers.domain.site.AlarmSystem
         }
 
         [HttpPost]
-        public async Task<ActionResult> Add(DeviceAddTypeModel model)
+        public async Task<ActionResult> Add(AlarmSystemAddAuthorizedDeviceModel model)
         {
             try
             {
-                if (model.Type != null)
+                if (model.AuthorizedDevice != null)
                 {
                     var cont = (iotContext)System.Web.HttpContext.Current.Session["iotcontext"];
                     string domainId = DomainSession.GetContextDomain(this.HttpContext);

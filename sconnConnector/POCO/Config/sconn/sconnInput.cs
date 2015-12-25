@@ -3,29 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using sconnConnector.POCO.Config.Abstract.IO;
 
 namespace sconnConnector.POCO.Config
 {
 
-    public class sconnInput
+    public class sconnInput 
     {
-        public int Id { get; set; }
-
-        public int Type { get; set; }
-
-        public int Value { get; set; }
-
         public int NameId { get; set; }
-
-        public int ActivationGroup { get; set; }
-
+        public int Id { get; set; }
+        public int Type { get; set; }
+        public int Value { get; set; }
         public int Sensitivity { get; set; }
-
         public bool Enabled { get; set; }
-
         public string Name { get; set; }
-
-
+        public int ActivationGroup { get; set; }
+       
         public sconnInput()
         {
 
@@ -54,6 +47,7 @@ namespace sconnConnector.POCO.Config
 
 
         }
+
 
     }
 

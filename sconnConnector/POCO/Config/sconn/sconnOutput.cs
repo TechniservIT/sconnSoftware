@@ -3,24 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using sconnConnector.POCO.Config.Abstract.IO;
 
 namespace sconnConnector.POCO.Config
 {
 
-    public class sconnOutput
+    public class sconnOutput 
     {
 
         public int Id { get; set; }
-
         public int Type { get; set; }
-
         public int Value { get; set; }
-
-        public int NameId { get; set; }
-
         public bool Enabled { get; set; }
-
         public string Name { get; set; }
+        public int NameId { get; set; }
 
         public sconnOutput()
         {
@@ -46,6 +42,7 @@ namespace sconnConnector.POCO.Config
 
 
         }
+
 
     }
 

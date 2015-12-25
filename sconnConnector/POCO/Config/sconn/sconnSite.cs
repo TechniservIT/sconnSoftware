@@ -18,6 +18,7 @@ namespace sconnConnector.POCO.Config
         private int _siteID;
         private string _siteName;
         private int SelectedTabId = 0;
+        
         public SiteConnectionStat siteStat;
 
         public ipcSiteConfig siteCfg;

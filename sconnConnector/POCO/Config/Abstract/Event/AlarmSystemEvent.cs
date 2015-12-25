@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace sconnConnector.POCO.Config
+namespace sconnConnector.POCO.Config.Abstract.Event
 {
-    class AlarmSystemConfig
+    public abstract class AlarmSystemEvent
     {
+
     }
+
 }

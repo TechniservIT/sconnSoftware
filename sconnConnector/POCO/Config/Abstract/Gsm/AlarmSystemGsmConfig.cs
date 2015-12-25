@@ -12,11 +12,11 @@ namespace sconnConnector.POCO.Config.Abstract
         
     }
 
-    public class AlarmSystemGsmConfig
+    public abstract class AlarmSystemGsmConfig
     {
-        public int RcptNo { get; set; }
+        public  int RcptNo { get; set; }
 
-        public List<AlarmSystemGsmRcpt> Rcpts { get; set; }
+        protected List<AlarmSystemGsmRcpt> Rcpts { get; set; }
         
     }
 

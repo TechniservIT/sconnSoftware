@@ -15,7 +15,7 @@ namespace sconnConnector.POCO.Config.Abstract
         Time_Guarded
     }
 
-    public class AlarmSystemZone
+    public abstract class AlarmSystemZone
     {
         public string Name { get; set; }
 

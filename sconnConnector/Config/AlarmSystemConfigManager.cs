@@ -14,14 +14,18 @@ namespace sconnConnector.Config
         private EndpointInfo info;
 
         private sconnCfgMngr mngr;
+        
+        private DeviceCredentials creds;
 
         public sconnSite site;
 
-        private DeviceCredentials creds;
-
+        
+        /****** Update interval -  cannot connect to remote device more often then specified    ******/
+        public int MinUpdatePeriod { get; set; }
         public DateTime LastUpDateTime { get; set; }
 
-        public int MinUpdatePeriod { get; set; }
+        /****** Configuration of remote alarm system  ********/
+        public AlarmSystemConfig Config { get; set; }
 
 
 

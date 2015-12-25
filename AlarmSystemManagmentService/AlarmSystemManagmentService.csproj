@@ -41,8 +41,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="AuthorizedDevicesConfigurationService.cs" />
+    <Compile Include="DeviceConfigService.cs" />
+    <Compile Include="GlobalConfigService.cs" />
+    <Compile Include="GsmConfigurationService.cs" />
+    <Compile Include="IoControlService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ZoneConfigurationService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\iotDatabaseConnector\iotDatabaseConnector.csproj">
+      <Project>{7df5e6fa-5839-456f-959b-af4a7a742775}</Project>
+      <Name>iotDatabaseConnector</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\iotData\iotData.csproj">
+      <Project>{e94b0a02-089e-483a-aaef-3bfa49039598}</Project>
+      <Name>iotData</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\sconnConnector\sconnConnector.csproj">
+      <Project>{09c8a8f0-f85a-4534-922e-85e14ec32725}</Project>
+      <Name>sconnConnector</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
