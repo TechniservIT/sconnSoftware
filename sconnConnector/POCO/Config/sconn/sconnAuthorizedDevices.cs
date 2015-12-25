@@ -10,7 +10,17 @@ namespace sconnConnector.POCO.Config
 {
     public class sconnAuthorizedDevices
     {
-        private List<sconnAuthorizedDevice> _Devices; 
+        public List<sconnAuthorizedDevice>  Devices { get; set; }
+
+        public sconnAuthorizedDevices()
+        {
+                
+        }
+
+        public sconnAuthorizedDevices(ipcSiteConfig cfg)
+        {
+                
+        }
         
     }
 }

@@ -25,6 +25,10 @@ namespace AlarmSystemManagmentService
             Manager = new AlarmSystemConfigManager(AlarmDevice.EndpInfo, AlarmDevice.Credentials);
         }
 
+        public IoControlService(IIotContextBase cont, AlarmSystemConfigManager man) : this(cont)
+        {
+            Manager = man;
+        }
 
     }
 }

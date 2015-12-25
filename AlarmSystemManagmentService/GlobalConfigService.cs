@@ -25,6 +25,11 @@ namespace AlarmSystemManagmentService
             Manager = new AlarmSystemConfigManager(AlarmDevice.EndpInfo, AlarmDevice.Credentials);
         }
 
+        public GlobalConfigService(IIotContextBase cont, AlarmSystemConfigManager man) : this(cont)
+        {
+            Manager = man;
+        }
+
 
     }
 }

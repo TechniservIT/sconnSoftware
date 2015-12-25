@@ -8,12 +8,14 @@ using sconnConnector.Config;
 using iotDbConnector.DAL;
 using sconnConnector.POCO.Config;
 using sconnConnector.POCO.Config.Abstract;
+using sconnConnector.POCO.Config.Abstract.Device;
+using sconnConnector.POCO.Config.sconn;
 
 namespace iotDash.Models
 {
 
     #region IoConfigure
-    public class AlarmSystemInputsConfigureModel
+    public class AlarmSystemInputsConfigureModel : IAsyncStatusModel
     {
         public int DeviceId { get; set; }
 
@@ -38,7 +40,7 @@ namespace iotDash.Models
         }
     }
 
-    public class AlarmSystemOutputsConfigureModel
+    public class AlarmSystemOutputsConfigureModel : IAsyncStatusModel
     {
         public int DeviceId { get; set; }
 
@@ -65,10 +67,9 @@ namespace iotDash.Models
     }
 
 
-    public class AlarmSystemRelaysConfigureModel
-    {
+    public class AlarmSystemRelaysConfigureModel : IAsyncStatusModel
+{
         public int DeviceId { get; set; }
-
         public int ServerId { get; set; }
         public List<sconnRelay> Relays { get; set; }
 
@@ -94,41 +95,42 @@ namespace iotDash.Models
 
     #region AuthorizedDevices
 
-    public class AlarmSystemAuthorizedDevicesModel
+    public class AlarmSystemAuthorizedDevicesModel : IAsyncStatusModel
     {
-        public List<AlarmSystemDevice>  AuthorizeDevices { get; set; }
-
-        public AlarmSystemAuthorizedDevicesModel(List<AlarmSystemDevice> devices)
+        public sconnAuthorizedDevices  AuthorizedDevices { get; set; }
+        
+        public AlarmSystemAuthorizedDevicesModel(sconnAuthorizedDevices authcfg)
         {
-            this.AuthorizeDevices = devices;
+            this.AuthorizedDevices = authcfg;
         }
 
     }
 
     public class AlarmSystemAddAuthorizedDeviceModel
     {
-        public AlarmSystemDevice AuthorizedDevice { get; set; }  
+        public sconnAuthorizedDevice AuthorizedDevice { get; set; }
+        public string Result { get; set; }
     }
 
     #endregion
 
     #region GsmConfig
 
-    public class AlarmSystemGsmConfigModel
+    public class AlarmSystemGsmConfigModel : IAsyncStatusModel
     {
-        public AlarmSystemGsmConfig GsmConfig { get; set; }
+        public sconnGsmConfig GsmConfig { get; set; }
     }
 
-    public class AlarmSystemGsmAddRcptModel
+    public class AlarmSystemGsmAddRcptModel : IAsyncStatusModel
     {
-        public AlarmSystemGsmRcpt GsmRcpt { get; set; }
+        public sconnGsmRcpt GsmRcpt { get; set; }
 
         public AlarmSystemGsmAddRcptModel()
         {
                 
         }
 
-        public AlarmSystemGsmAddRcptModel(AlarmSystemGsmRcpt rcpt)
+        public AlarmSystemGsmAddRcptModel(sconnGsmRcpt rcpt)
         {
             this.GsmRcpt = rcpt;
         }
@@ -139,26 +141,26 @@ namespace iotDash.Models
 
     #region ZoneConfig
 
-    public class AlarmSystemZoneConfigModel
+    public class AlarmSystemZoneConfigModel : IAsyncStatusModel
     {
-        public List<AlarmSystemZone> Zones { get; set; }
+        public sconnAlarmZoneConfig ZoneConfig { get; set; }
 
-        public AlarmSystemZoneConfigModel()
+        public AlarmSystemZoneConfigModel(sconnAlarmZoneConfig zoneCfg)
         {
                 
         }
     }
 
-    public class AlarmSystemZoneAddModel
+    public class AlarmSystemZoneAddModel : IAsyncStatusModel
     {
-        public AlarmSystemZone Zone { get; set; }
+        public sconnAlarmZone Zone { get; set; }
 
         public AlarmSystemZoneAddModel()
         {
                 
         }
 
-        public AlarmSystemZoneAddModel(AlarmSystemZone zone)
+        public AlarmSystemZoneAddModel(sconnAlarmZone zone)
         {
             this.Zone = zone;
         }
@@ -172,14 +174,14 @@ namespace iotDash.Models
 
     #region NamesConfig
 
-    public class AlarmSystemNamesConfigureModel
+    public class AlarmSystemNamesConfigureModel : IAsyncStatusModel
     {
 
     }
 
     #endregion
 
-    public class AlarmSystemSchedulesConfigureModel
+    public class AlarmSystemSchedulesConfigureModel : IAsyncStatusModel
     {
 
     }

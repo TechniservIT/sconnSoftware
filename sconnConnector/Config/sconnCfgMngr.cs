@@ -178,8 +178,13 @@ namespace sconnConnector
 			return false;
 		}
 
+	    public async Task<bool> WriteGlobalCfgAsync(sconnSite site)
+	    {
+	        return true;
+	    }
 
-		public bool WriteGlobalCfg(sconnSite site)
+
+	    public bool WriteGlobalCfg(sconnSite site)
 		{
 			if (site.siteCfg == null){ return false;}
 			SconnClient client = new SconnClient(site.serverIP, site.serverPort, site.authPasswd, true);

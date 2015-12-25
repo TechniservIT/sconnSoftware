@@ -27,10 +27,12 @@ namespace sconnConnector.POCO.Config.sconn
         
         public void ReloadConfig()
         {
-            foreach (var dev in this.DeviceConfig.Devices)
-            {
-                dev.LoadPropertiesFromConfig();
-            }
+            AuthorizedDevices = new sconnAuthorizedDevices(legacySiteConfig);
+            DeviceConfig = new sconnDeviceConfig(legacySiteConfig);
+            EventConfig = new sconnEventConfig(legacySiteConfig);
+            GlobalConfig = new sconnGlobalConfig(legacySiteConfig);
+            GsmConfig = new sconnGsmConfig(legacySiteConfig);
+            
         }
         
 

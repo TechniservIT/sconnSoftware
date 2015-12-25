@@ -96,44 +96,6 @@ namespace sconnConnector.POCO.Config.sconn
             get { return _ScheduleCFG; }
         }
 
-        List<IAlarmSystemOutput> IAlarmSystemDevice.Outputs
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        List<IAlarmSystemInput> IAlarmSystemDevice.Inputs
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        List<IAlarmSystemRelay> IAlarmSystemDevice.Relays
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
 
         public string GetDeviceNameAt(int NameNo)
         {
@@ -173,7 +135,19 @@ namespace sconnConnector.POCO.Config.sconn
             }
         }
 
-        public ipcDeviceConfig()
+        public sconnDevice(ipcDeviceConfig cfg)
+        {
+            this.Inputs = cfg.Inputs;
+            this.Outputs = cfg.Outputs;
+            this.Relays = cfg.Relays;
+            this.NetworkConfig = cfg.NetworkConfig;
+            this._ScheduleCFG = cfg.ScheduleCFG;
+            this._NamesCFG = cfg.NamesCFG;
+            this.memCFG = cfg.memCFG;
+
+        }
+
+        public sconnDevice()
         {
             _memCFG = new byte[ipcDefines.deviceConfigSize];
             _NamesCFG = new byte[ipcDefines.RAM_DEV_NAMES_NO][];

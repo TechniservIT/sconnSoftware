@@ -77,6 +77,7 @@
     <Compile Include="POCO\Config\sconn\Legacy\ipcRcpt.cs" />
     <Compile Include="POCO\Config\sconn\Legacy\ipcSiteConfig.cs" />
     <Compile Include="POCO\Config\sconn\sconnAlarmSystem.cs" />
+    <Compile Include="POCO\Config\sconn\sconnAlarmZone.cs" />
     <Compile Include="POCO\Config\sconn\sconnAuthorizedDevice.cs" />
     <Compile Include="POCO\Config\sconn\sconnAuthorizedDevices.cs" />
     <Compile Include="POCO\Config\sconn\sconnDevice.cs" />
@@ -90,6 +91,7 @@
     <Compile Include="POCO\Config\sconn\sconnOutput.cs" />
     <Compile Include="POCO\Config\sconn\sconnRelay.cs" />
     <Compile Include="POCO\Config\sconn\sconnSite.cs" />
+    <Compile Include="POCO\Config\sconn\sconnAlarmZoneConfig.cs" />
     <Compile Include="POCO\sconnDataShare.cs" />
     <Compile Include="sconnConnector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

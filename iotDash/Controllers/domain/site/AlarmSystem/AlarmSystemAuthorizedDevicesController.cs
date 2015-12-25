@@ -4,15 +4,35 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using AlarmSystemManagmentService;
 using iotDash.Content.Dynamic.Status;
 using iotDash.Models;
 using iotDash.Session;
+using iotDatabaseConnector.DAL.Repository.Connector.Entity;
 using iotDbConnector.DAL;
+using sconnConnector.Config;
+using SiteManagmentService;
 
 namespace iotDash.Controllers.domain.site.AlarmSystem
 {
     public class AlarmSystemAuthorizedDevicesController : Controller
     {
+        private IIotContextBase Icont;
+        private AuthorizedDevicesConfigurationService _provider;
+
+        public AlarmSystemAuthorizedDevicesController(HttpContextBase contBase)
+        {
+            IIotContextBase cont = (IIotContextBase)contBase.Session["iotcontext"];
+            AlarmSystemConfigManager man = (AlarmSystemConfigManager)contBase.Session["alarmSysCfg"];
+            if (cont != null)
+            {
+                this.Icont = cont;
+                string domainId = DomainSession.GetContextDomain(contBase);
+                iotDomain d = Icont.Domains.First(dm => dm.DomainName.Equals(domainId));
+                this._provider = new AuthorizedDevicesConfigurationService(this.Icont, man);
+            }
+        }
+
         // GET: AlarmSystemAuthorizedDevices
         public ActionResult Index()
         {
@@ -26,11 +46,7 @@ namespace iotDash.Controllers.domain.site.AlarmSystem
             {
                 if (model.AuthorizedDevice != null)
                 {
-                    var cont = (iotContext)System.Web.HttpContext.Current.Session["iotcontext"];
-                    string domainId = DomainSession.GetContextDomain(this.HttpContext);
-                    iotDomain domain = cont.Domains.First(d => d.DomainName.Equals(domainId));
-                    domain.DeviceTypes.Add(model.Type);
-                    await cont.SaveChangesAsync();
+                    _provider.AddAuthorizedDevice(model.AuthorizedDevice);
                     model.Result = StatusResponseGenerator.GetAlertPanelWithMsgAndStat("Success.",
                         RequestStatus.Success);
                 }

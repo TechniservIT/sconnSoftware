@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 using iotDatabaseConnector.DAL.Repository.Connector.Entity;
 using iotDbConnector.DAL;
 using sconnConnector.Config;
+using sconnConnector.POCO.Config;
 using sconnConnector.POCO.Config.Abstract;
+using sconnConnector.POCO.Config.sconn;
 
 namespace AlarmSystemManagmentService
 {
@@ -26,10 +28,33 @@ namespace AlarmSystemManagmentService
             Manager = new AlarmSystemConfigManager(AlarmDevice.EndpInfo, AlarmDevice.Credentials);
         }
 
-        public AlarmSystemAuthorizedDevicesConfig GetAuthorizedDevices()
+        public AuthorizedDevicesConfigurationService(IIotContextBase cont, AlarmSystemConfigManager man) : this(cont)
         {
-            AlarmSystemAuthorizedDevicesConfig cfg = new AlarmSystemAuthorizedDevicesConfig();
-            return cfg;
+
+
+
+        Manager = man;
+        }
+
+        public sconnAuthorizedDevices GetAuthorizedDevices()
+        {
+            return Manager.Config.AuthorizedDevices;
+        }
+
+        public sconnAuthorizedDevices GetAuthorizedDevicesAsync()
+        {
+            return Manager.Config.AuthorizedDevices;
+        }
+
+        public void AddAuthorizedDevice(sconnAuthorizedDevice device)
+        {
+            Manager.Config.AuthorizedDevices.Devices.Add(device);
+        }
+
+        public async Task AddAuthorizedDeviceAsync(sconnAuthorizedDevice device)
+        {
+            Manager.Config.AuthorizedDevices.Devices.Add(device);
+            await Manager.UploadSiteConfigAsync();
         }
 
     }

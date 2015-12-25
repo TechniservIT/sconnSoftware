@@ -11,6 +11,16 @@ namespace sconnConnector.POCO.Config
     {
         public int RcptNo { get; set; }
         public List<AlarmSystemGsmRcpt> Rcpts { get; set; }
+
+        public sconnGsmConfig()
+        {
+                
+        }
+
+        public sconnGsmConfig(ipcSiteConfig cfg) :this()
+        {
+
+        }
     }
 
 }

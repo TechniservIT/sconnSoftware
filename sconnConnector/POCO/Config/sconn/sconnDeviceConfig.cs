@@ -10,12 +10,23 @@ namespace sconnConnector.POCO.Config.sconn
 {
     public class sconnDeviceConfig
     {
-        public List<AlarmSystemDevice> Devices { get; set; }
+        public List<sconnDevice> Devices { get; set; }
 
         public sconnDeviceConfig()
         {
-                this.Devices = new List<AlarmSystemDevice>();
+                this.Devices = new List<sconnDevice>();
         }
+
+        public sconnDeviceConfig(ipcSiteConfig cfg)
+        {
+            Devices = new List<sconnDevice>();
+            for (int i = 0; i < cfg.deviceNo; i++)
+            {
+                sconnDevice dev = new sconnDevice(cfg.deviceConfigs[i]);
+                Devices.Add(dev);
+            }
+        }
+
     }
 
 }

@@ -6,14 +6,9 @@ using System.Threading.Tasks;
 
 namespace sconnConnector.POCO.Config.sconn
 {
-    public class sconnEventConfig
+    public class sconnAlarmZone
     {
-        public List<sconnEvent> Events { get; set; }
-
-        public sconnEventConfig(ipcSiteConfig cfg)
-        {
-
-        }
 
     }
+
 }

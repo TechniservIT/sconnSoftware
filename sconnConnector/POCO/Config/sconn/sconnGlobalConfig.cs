@@ -15,10 +15,18 @@ namespace sconnConnector.POCO.Config.sconn
             get { return _memCFG; }
             set { if (value != null) { _memCFG = value; } }
         }
+
         public sconnGlobalConfig()
         {
             _memCFG = new byte[ipcDefines.ipcGlobalConfigSize];
         }
+
+        public sconnGlobalConfig(ipcSiteConfig cfg) :this()
+        {
+            this.memCFG = cfg.globalConfig.memCFG;
+        }
+
+
     }
 
 }

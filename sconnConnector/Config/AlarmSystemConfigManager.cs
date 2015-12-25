@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using sconnConnector.POCO.Config;
+using sconnConnector.POCO.Config.sconn;
 
 namespace sconnConnector.Config
 {
@@ -17,17 +18,16 @@ namespace sconnConnector.Config
         
         private DeviceCredentials creds;
 
-        public sconnSite site;
+        public sconnSite site;  //allow direct access to site config
 
         
         /****** Update interval -  cannot connect to remote device more often then specified    ******/
         public int MinUpdatePeriod { get; set; }
         public DateTime LastUpDateTime { get; set; }
 
-        /****** Configuration of remote alarm system  ********/
-        public AlarmSystemConfig Config { get; set; }
-
-
+        /****** Configuration of remote alarm system after processing  ********/
+        public sconnAlarmSystem Config { get; set; }
+        
 
         public AlarmSystemConfigManager(EndpointInfo endp, DeviceCredentials cred)
         {
@@ -36,6 +36,7 @@ namespace sconnConnector.Config
             creds = cred;
             MinUpdatePeriod = 500;
             site = new sconnSite("", 500, endp.Hostname, endp.Port, creds.Password);
+            this.Config.legacySiteConfig = site.siteCfg;    //link alarm object config to low level registers
 
         }
 
@@ -52,7 +53,13 @@ namespace sconnConnector.Config
                 mngr.ReadSiteRunningConfig(site);
                 LastUpDateTime = DateTime.Now;
                 site.siteCfg.ReloadConfig();
+                LoadAlarmSystemConfig();
             }
+        }
+
+        private void LoadAlarmSystemConfig()
+        {
+            Config.ReloadConfig();
         }
 
         public void StoreDeviceConfig(int DevNo)
@@ -89,6 +96,19 @@ namespace sconnConnector.Config
             }
             catch (Exception e)
             {   
+                return false;
+            }
+        }
+
+        public async Task<bool> UploadSiteConfigAsync()
+        {
+            try
+            {
+                bool result = await mngr.WriteGlobalCfgAsync(site);
+                return result;
+            }
+            catch (Exception e)
+            {
                 return false;
             }
         }

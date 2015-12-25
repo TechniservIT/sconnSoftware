@@ -332,6 +332,7 @@
       <DependentUpon>201512011200480_Custom configurable roles.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\IAsyncStatusModel.cs" />
     <Compile Include="Models\Identity\AccountViewModels.cs" />
     <Compile Include="Areas\AlarmSystem\Models\AlarmSystemModels.cs" />
     <Compile Include="Models\AlarmSystem\AlarmSystemModels.cs" />
