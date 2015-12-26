@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using iotDatabaseConnector.DAL.Repository.Connector.Entity;
 using iotDbConnector.DAL;
 using sconnConnector.Config;
+using sconnConnector.POCO.Config;
+using sconnConnector.POCO.Config.sconn;
 
 namespace AlarmSystemManagmentService
 {
@@ -28,6 +30,17 @@ namespace AlarmSystemManagmentService
         public GsmConfigurationService(IIotContextBase cont, AlarmSystemConfigManager man) : this(cont)
         {
             Manager = man;
+        }
+
+        public bool AddRcpt(sconnGsmRcpt rcpt)
+        {
+            Manager.Config.GsmConfig.Rcpts.Add(rcpt);
+            return Manager.UploadSiteConfig();
+        }
+
+        public sconnGsmConfig GetGsmConfig()
+        {
+            return Manager.Config.GsmConfig;
         }
 
     }

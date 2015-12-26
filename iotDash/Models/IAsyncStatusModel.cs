@@ -5,8 +5,13 @@ using System.Web;
 
 namespace iotDash.Models
 {
-    public class IAsyncStatusModel
+    public interface IAsyncStatusModel
     {
         string Result { get; set; }
+    }
+
+    public abstract class AsyncResultStatusModel
+    {
+        public string Result { get; set; }
     }
 }

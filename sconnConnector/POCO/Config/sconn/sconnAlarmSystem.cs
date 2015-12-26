@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using sconnConnector.POCO.Config.Abstract;
+using sconnConnector.POCO.Config.Abstract.Auth;
 using sconnConnector.POCO.Config.Abstract.Event;
 
 namespace sconnConnector.POCO.Config.sconn
@@ -18,7 +19,8 @@ namespace sconnConnector.POCO.Config.sconn
         public sconnEventConfig EventConfig { get; set; }
         public sconnGlobalConfig GlobalConfig { get; set; }
         public sconnGsmConfig GsmConfig { get; set; }
-        
+        public sconnAlarmZoneConfig ZoneConfig { get; set; }
+        public sconnUserConfig UserConfig { get; set; }
 
         public sconnAlarmSystem()
         {

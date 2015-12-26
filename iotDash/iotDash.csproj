@@ -1420,6 +1420,9 @@
     <Content Include="Views\AlarmSystemZonesConfig\View.cshtml" />
     <Content Include="Views\AlarmSystemZonesConfig\Add.cshtml" />
     <Content Include="Views\AlarmSystemGsmConfig\Add.cshtml" />
+    <Content Include="Views\AlarmSystemUsersConfig\Add.cshtml" />
+    <None Include="Views\AlarmSystemUsersConfig\View.cshtml" />
+    <Content Include="Views\AlarmSystemView\ConfigurationSelect.cshtml" />
     <None Include="Views\Dashboard\Index.cshtml" />
     <Content Include="SignalR.Sample\jquery.color-2.1.2.min.js" />
     <Content Include="SignalR.Sample\SignalR.StockTicker.js" />
@@ -1568,7 +1571,6 @@
     <Folder Include="Controllers\domain\managment\automation\" />
     <Folder Include="RealTime\SignalR\StatusUpdate\ActionHistoryUpdater\" />
     <Folder Include="RealTime\SignalR\StatusUpdate\PropertyHistoryUpdater\" />
-    <Folder Include="Views\AlarmSystemUsersConfig\" />
     <Folder Include="Views\RecordingSettings\" />
     <Folder Include="Views\RouteTrackingLiveView\" />
     <Folder Include="Views\RouteTrackingSetup\" />

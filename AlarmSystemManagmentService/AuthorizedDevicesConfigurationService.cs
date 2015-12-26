@@ -30,10 +30,7 @@ namespace AlarmSystemManagmentService
 
         public AuthorizedDevicesConfigurationService(IIotContextBase cont, AlarmSystemConfigManager man) : this(cont)
         {
-
-
-
-        Manager = man;
+            Manager = man;
         }
 
         public sconnAuthorizedDevices GetAuthorizedDevices()
@@ -46,15 +43,16 @@ namespace AlarmSystemManagmentService
             return Manager.Config.AuthorizedDevices;
         }
 
-        public void AddAuthorizedDevice(sconnAuthorizedDevice device)
+        public bool AddAuthorizedDevice(sconnAuthorizedDevice device)
         {
             Manager.Config.AuthorizedDevices.Devices.Add(device);
+            return Manager.UploadSiteConfig();
         }
 
-        public async Task AddAuthorizedDeviceAsync(sconnAuthorizedDevice device)
+        public async Task<bool> AddAuthorizedDeviceAsync(sconnAuthorizedDevice device)
         {
             Manager.Config.AuthorizedDevices.Devices.Add(device);
-            await Manager.UploadSiteConfigAsync();
+            return await Manager.UploadSiteConfigAsync();
         }
 
     }

@@ -14,5 +14,6 @@ namespace sconnConnector.POCO.Config.sconn
         public DateTime _AllowedFrom;
         public DateTime _AllowedUntil;
 
+
     }
 }

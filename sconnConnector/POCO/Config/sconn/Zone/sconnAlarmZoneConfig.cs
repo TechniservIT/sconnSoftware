@@ -8,7 +8,12 @@ namespace sconnConnector.POCO.Config.sconn
 {
     public class sconnAlarmZoneConfig
     {
+        public List<sconnAlarmZone> Zones { get; set; }
 
+        public sconnAlarmZoneConfig()
+        {
+                Zones = new List<sconnAlarmZone>();
+        }
     }
 
 }

@@ -62,7 +62,13 @@ namespace iotDash.Controllers.domain.site.AlarmSystem
             return View();
         }
 
+        // GET: ConfigurationSelect
+        public ActionResult ConfigurationSelect()
+        {
+            return View();
+        }
 
+        
         // GET: AlarmSystemView
         public ActionResult Device(int DeviceId)
         {

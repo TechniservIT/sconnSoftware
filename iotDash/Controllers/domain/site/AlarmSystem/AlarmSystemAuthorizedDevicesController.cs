@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -33,36 +34,29 @@ namespace iotDash.Controllers.domain.site.AlarmSystem
             }
         }
 
-        // GET: AlarmSystemAuthorizedDevices
-        public ActionResult Index()
-        {
-            return View();
-        }
-
         [HttpPost]
         public async Task<ActionResult> Add(AlarmSystemAddAuthorizedDeviceModel model)
         {
             try
             {
-                if (model.AuthorizedDevice != null)
+                if (ModelState.IsValid)
                 {
-                    _provider.AddAuthorizedDevice(model.AuthorizedDevice);
-                    model.Result = StatusResponseGenerator.GetAlertPanelWithMsgAndStat("Success.",
-                        RequestStatus.Success);
+                    var res = (_provider.AddAuthorizedDevice(model.AuthorizedDevice));
+                    model.Result = StatusResponseGenerator.GetStatusResponseResultForReturnParam(res);
                 }
-                else
-                {
-                    model.Result = StatusResponseGenerator.GetAlertPanelWithMsgAndStat("Error.", RequestStatus.Failure);
-                }
-
             }
             catch (Exception e)
             {
-                model.Result = StatusResponseGenerator.GetAlertPanelWithMsgAndStat("Error.", RequestStatus.Failure);
+                model.Result = StatusResponseGenerator.GetRequestResponseCriticalError();
             }
             return View(model);
         }
 
+        public ActionResult View()
+        {
+            AlarmSystemAuthorizedDevicesModel model = new AlarmSystemAuthorizedDevicesModel(this._provider.GetAuthorizedDevices());
+            return View(model);
+        }
 
     }
 }

@@ -6,41 +6,41 @@ using System.Threading.Tasks;
 using iotDatabaseConnector.DAL.Repository.Connector.Entity;
 using iotDbConnector.DAL;
 using sconnConnector.Config;
-using sconnConnector.POCO.Config.sconn;
+using sconnConnector.POCO.Config.Abstract.Auth;
 
 namespace AlarmSystemManagmentService
 {
-    public class ZoneConfigurationService
+    public class UsersConfigurationService
     {
         private IIotContextBase context;
-        private AlarmSystemConfigManager Manager { get; set; }
 
-        public ZoneConfigurationService(IIotContextBase cont)
+        public AlarmSystemConfigManager Manager { get; set; }
+
+        public UsersConfigurationService(IIotContextBase cont)
         {
             this.context = cont;
         }
 
-        public ZoneConfigurationService(IIotContextBase cont, Device AlarmDevice) : this(cont)
+        public UsersConfigurationService(IIotContextBase cont, Device AlarmDevice) : this(cont)
         {
             Manager = new AlarmSystemConfigManager(AlarmDevice.EndpInfo, AlarmDevice.Credentials);
         }
 
-        public ZoneConfigurationService(IIotContextBase cont, AlarmSystemConfigManager man) : this(cont)
+        public UsersConfigurationService(IIotContextBase cont, AlarmSystemConfigManager man) : this(cont)
         {
             Manager = man;
         }
 
-        public sconnAlarmZoneConfig GetAlarmZoneConfig()
+        public sconnUserConfig GetUserConfig()
         {
-            return Manager.Config.ZoneConfig;
+            return Manager.Config.UserConfig;
         }
 
-        public bool AddZone(sconnAlarmZone zone)
+        public bool AddUser(sconnUser user)
         {
-            Manager.Config.ZoneConfig.Zones.Add(zone);
+            Manager.Config.UserConfig.Users.Add(user);
             return Manager.UploadSiteConfig();
         }
-
 
     }
 }

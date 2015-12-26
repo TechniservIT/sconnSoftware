@@ -8,6 +8,7 @@ using sconnConnector.Config;
 using iotDbConnector.DAL;
 using sconnConnector.POCO.Config;
 using sconnConnector.POCO.Config.Abstract;
+using sconnConnector.POCO.Config.Abstract.Auth;
 using sconnConnector.POCO.Config.Abstract.Device;
 using sconnConnector.POCO.Config.sconn;
 
@@ -15,6 +16,7 @@ namespace iotDash.Models
 {
 
     #region IoConfigure
+
     public class AlarmSystemInputsConfigureModel : IAsyncStatusModel
     {
         public int DeviceId { get; set; }
@@ -38,6 +40,8 @@ namespace iotDash.Models
             DeviceId = DevId;
             ServerId = dev.Id;
         }
+
+        public string Result { get; set; }
     }
 
     public class AlarmSystemOutputsConfigureModel : IAsyncStatusModel
@@ -47,6 +51,8 @@ namespace iotDash.Models
         public int ServerId { get; set; }
 
         public List<sconnOutput> Outputs { get; set; }
+
+        public string Result { get; set; }
 
         public AlarmSystemOutputsConfigureModel(Device dev, int DevId)
         {
@@ -72,6 +78,7 @@ namespace iotDash.Models
         public int DeviceId { get; set; }
         public int ServerId { get; set; }
         public List<sconnRelay> Relays { get; set; }
+        public string Result { get; set; }
 
         public AlarmSystemRelaysConfigureModel(Device dev, int DevId)
         {
@@ -104,6 +111,7 @@ namespace iotDash.Models
             this.AuthorizedDevices = authcfg;
         }
 
+        public string Result { get; set; }
     }
 
     public class AlarmSystemAddAuthorizedDeviceModel
@@ -119,6 +127,7 @@ namespace iotDash.Models
     public class AlarmSystemGsmConfigModel : IAsyncStatusModel
     {
         public sconnGsmConfig GsmConfig { get; set; }
+        public string Result { get; set; }
     }
 
     public class AlarmSystemGsmAddRcptModel : IAsyncStatusModel
@@ -134,6 +143,8 @@ namespace iotDash.Models
         {
             this.GsmRcpt = rcpt;
         }
+
+        public string Result { get; set; }
     }
 
     #endregion
@@ -149,6 +160,8 @@ namespace iotDash.Models
         {
                 
         }
+
+        public string Result { get; set; }
     }
 
     public class AlarmSystemZoneAddModel : IAsyncStatusModel
@@ -165,24 +178,57 @@ namespace iotDash.Models
             this.Zone = zone;
         }
 
+        public string Result { get; set; }
     }
 
 
     #endregion
 
+    #region 
+
+    public class AlarmSystemUserConfigModel : IAsyncStatusModel
+    {
+        public sconnUserConfig UserConfig { get; set; }
+
+        public AlarmSystemUserConfigModel(sconnUserConfig userCfg)
+        {
+            UserConfig = userCfg;
+        }
+
+        public string Result { get; set; }
+    }
+
+    public class AlarmSystemUserAddModel : IAsyncStatusModel
+    {
+        public sconnUser User { get; set; }
+
+        public AlarmSystemUserAddModel()
+        {
+
+        }
+
+        public AlarmSystemUserAddModel(sconnUser user)
+        {
+            this.User = user;
+        }
+
+        public string Result { get; set; }
+    }
+
+    #endregion
 
 
     #region NamesConfig
 
     public class AlarmSystemNamesConfigureModel : IAsyncStatusModel
     {
-
+        public string Result { get; set; }
     }
 
     #endregion
 
     public class AlarmSystemSchedulesConfigureModel : IAsyncStatusModel
     {
-
+        public string Result { get; set; }
     }
 }
