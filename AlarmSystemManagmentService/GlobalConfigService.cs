@@ -28,6 +28,7 @@ namespace AlarmSystemManagmentService
         public GlobalConfigService(IIotContextBase cont, AlarmSystemConfigManager man) : this(cont)
         {
             Manager = man;
+            Manager.LoadSiteConfig();
         }
 
 

@@ -14,6 +14,11 @@ namespace sconnConnector.POCO.Config.sconn
         {
                 Zones = new List<sconnAlarmZone>();
         }
+
+        public sconnAlarmZoneConfig(ipcSiteConfig cfg) :this()
+        {
+                
+        }
     }
 
 }

@@ -24,9 +24,21 @@ namespace sconnConnector.POCO.Config.sconn
 
         public sconnAlarmSystem()
         {
-                
+            AuthorizedDevices = new sconnAuthorizedDevices();
+            DeviceConfig = new sconnDeviceConfig();
+            EventConfig = new sconnEventConfig();
+            GlobalConfig = new sconnGlobalConfig();
+            GsmConfig = new sconnGsmConfig();
+            ZoneConfig = new sconnAlarmZoneConfig();
+            UserConfig = new sconnUserConfig();
         }
-        
+
+        public sconnAlarmSystem(ipcSiteConfig cfg) : this()
+        {
+            legacySiteConfig = cfg;
+            ReloadConfig();
+        }
+
         public void ReloadConfig()
         {
             AuthorizedDevices = new sconnAuthorizedDevices(legacySiteConfig);
@@ -34,7 +46,8 @@ namespace sconnConnector.POCO.Config.sconn
             EventConfig = new sconnEventConfig(legacySiteConfig);
             GlobalConfig = new sconnGlobalConfig(legacySiteConfig);
             GsmConfig = new sconnGsmConfig(legacySiteConfig);
-            
+            ZoneConfig = new sconnAlarmZoneConfig(legacySiteConfig);
+            UserConfig =  new sconnUserConfig(legacySiteConfig);
         }
         
 

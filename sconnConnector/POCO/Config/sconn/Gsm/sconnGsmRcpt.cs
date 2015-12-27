@@ -46,6 +46,14 @@ namespace sconnConnector.POCO.Config.sconn
 
         }
 
+        public sconnGsmRcpt(ipcRcpt rcpt)
+        {
+            this.MessageLevel = rcpt.MessageLevel;
+            this.CountryCode = rcpt.CountryCode;
+            this.Enabled = rcpt.Enabled;
+            this.NumberE164 = rcpt.NumberE164;
+        }
+
         public sconnGsmRcpt(byte[] Bytes): this()
         {
             //decode

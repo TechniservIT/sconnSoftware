@@ -63,7 +63,7 @@ namespace sconnConnector.Config
 
         private void LoadAlarmSystemConfig()
         {
-            Config.ReloadConfig();
+            Config = new sconnAlarmSystem(site.siteCfg);
         }
 
         public void StoreDeviceConfig(int DevNo)

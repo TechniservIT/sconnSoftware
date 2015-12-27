@@ -15,12 +15,16 @@ namespace sconnConnector.POCO.Config
 
         public sconnGsmConfig()
         {
-                
+            Rcpts = new List<sconnGsmRcpt>();
         }
 
         public sconnGsmConfig(ipcSiteConfig cfg) :this()
         {
-            Rcpts = new List<sconnGsmRcpt>();
+            foreach (ipcRcpt t in cfg.gsmRcpts)
+            {
+                sconnGsmRcpt rcpt = new sconnGsmRcpt(t);
+                Rcpts.Add((rcpt));
+            }
         }
     }
 

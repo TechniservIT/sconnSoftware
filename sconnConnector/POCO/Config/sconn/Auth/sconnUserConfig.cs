@@ -14,5 +14,11 @@ namespace sconnConnector.POCO.Config.Abstract.Auth
         {
                 Users = new List<sconnUser>();
         }
+
+        public sconnUserConfig(ipcSiteConfig cfg) :this()
+        {
+                
+        }
+
     }
 }

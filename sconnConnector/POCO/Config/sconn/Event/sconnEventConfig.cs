@@ -10,9 +10,30 @@ namespace sconnConnector.POCO.Config.sconn
     {
         public List<sconnEvent> Events { get; set; }
 
+        public sconnEventConfig()
+        {
+                
+        }
+
         public sconnEventConfig(ipcSiteConfig cfg)
         {
-            Events = new List<sconnEvent>();
+            try
+            {
+                Events = new List<sconnEvent>();
+                if (cfg.events != null)
+                {
+                    foreach (var ev in cfg.events)
+                    {
+                        sconnEvent nevent = new sconnEvent(ev.Buffer);
+                        Events.Add(nevent);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
         }
 
     }

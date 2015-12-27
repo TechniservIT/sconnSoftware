@@ -9,13 +9,14 @@ namespace sconnConnector.POCO.Config
 
     public class ipcSiteConfig
     {
-        private int _deviceNo = 0;
-        private int _evNo = 0;
-        private ipcDeviceConfig[] _deviceConfigs;
-        private ipcGlobalConfig _globalConfig;
-        private ipcEvent[] events;
-        private ipcRcpt[] _gsmRcpts;
+        public int _deviceNo = 0;
+        public int _evNo = 0;
+        public ipcDeviceConfig[] deviceConfigs;
+        public ipcGlobalConfig globalConfig;
+        public ipcEvent[] events;
+        public ipcRcpt[] gsmRcpts;
 
+        public byte[] AuthDevices;
         public byte[] Hash;
 
         public byte[] GlobalNameConfig;
@@ -28,20 +29,7 @@ namespace sconnConnector.POCO.Config
                 dev.LoadPropertiesFromConfig();
             }
         }
-
-        public  ipcRcpt[] gsmRcpts
-        {
-            get
-            {
-                return _gsmRcpts;
-            }
-            set
-            {
-                _gsmRcpts = value;
-            }
-
-        }
-
+        
 
         public void AddEvent( ipcEvent ipcEv)
         {
@@ -58,70 +46,38 @@ namespace sconnConnector.POCO.Config
             {
                 return _deviceNo;
             }
-            //set
-            //{
-            //    if (value > 0) { _deviceNo = value; }
-            //}
         }
-
-        public ipcDeviceConfig[] deviceConfigs
-        {
-            get
-            {
-                return _deviceConfigs;
-            }
-            set
-            {
-                _deviceConfigs = value;
-            }
-        }
-
-        public ipcGlobalConfig globalConfig
-        {
-            get
-            {
-                return _globalConfig;
-            }
-            set
-            {
-                _globalConfig = value;
-            }
-        }
+        
 
         public ipcSiteConfig()
         {
             _deviceNo = 0;
-            _deviceConfigs = new ipcDeviceConfig[deviceNo];
-            _globalConfig = new ipcGlobalConfig();
+            deviceConfigs = new ipcDeviceConfig[deviceNo];
+            globalConfig = new ipcGlobalConfig();
+            gsmRcpts = new ipcRcpt[0];
+            AuthDevices = new byte[0];
+            events = new ipcEvent[0];
             GlobalNameConfig = new byte[ipcDefines.RAM_NAMES_Global_Total_Size];
             Hash = new byte[ipcDefines.SHA256_DIGEST_SIZE];
             NamesHash = new byte[ipcDefines.SHA256_DIGEST_SIZE];
         }
 
-        public ipcSiteConfig(int devices)
+        public ipcSiteConfig(int devices) : this()
         {
             _deviceNo = devices;
-            _deviceConfigs = new ipcDeviceConfig[deviceNo];
+            deviceConfigs = new ipcDeviceConfig[deviceNo];
             for (int i = 0; i < deviceNo; i++)
             {
-                _deviceConfigs[i] = new  ipcDeviceConfig();
+                deviceConfigs[i] = new  ipcDeviceConfig();
             }
-            _globalConfig = new  ipcGlobalConfig();
-            GlobalNameConfig = new byte[ipcDefines.RAM_NAMES_Global_Total_Size];
-            Hash = new byte[ipcDefines.SHA256_DIGEST_SIZE];
-            NamesHash = new byte[ipcDefines.SHA256_DIGEST_SIZE];
         }
 
-        public void fillSampleCfg()
-        {
-
-        }
-
+       
         public void addDeviceCfg()
         {
             _deviceNo++;
              ipcDeviceConfig[] nDeviceConfigs = new  ipcDeviceConfig[deviceNo];
-            if (_deviceConfigs.GetLength(0) != 0) //copy only if config is not empty
+            if (deviceConfigs.GetLength(0) != 0) //copy only if config is not empty
             {
                 for (int i = 0; i < deviceNo - 1; i++)
                 {
@@ -129,7 +85,7 @@ namespace sconnConnector.POCO.Config
                 }
             }
             nDeviceConfigs[deviceNo - 1] = new  ipcDeviceConfig();
-            _deviceConfigs = nDeviceConfigs;
+            deviceConfigs = nDeviceConfigs;
             globalConfig.memCFG[ipcDefines.mAdrDevNO] = (byte)deviceNo;
         }
 

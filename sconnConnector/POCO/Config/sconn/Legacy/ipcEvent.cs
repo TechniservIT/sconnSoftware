@@ -9,7 +9,7 @@ namespace sconnConnector.POCO.Config
     public class ipcEvent
     {
         public short EventNo { get; set; }
-
+        public byte[] Buffer { get; set; }
         public ipcEvent()
         {
 
