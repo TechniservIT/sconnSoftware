@@ -1,8 +1,57 @@
-﻿@model iotDash.Models.AlarmSystemUserConfigModel
+﻿@using sconnConnector.POCO.Config.Abstract.Auth
+@model iotDash.Models.AlarmSystemUserConfigModel
 
 @{
-    ViewBag.Title = "title";
-    Layout = "_Layout";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 }
 
-<h2>title</h2>
+
+
+<div class="row">
+    <div class="table-responsive">
+
+        <table class="table">
+            <tr>
+                <th>Serial</th>
+                <th>Allowed from</th>
+                <th>Allowed until</th>
+                <th>Enabled</th>
+            </tr>
+
+
+            @foreach (sconnUser d in Model.UserConfig.Users)
+            {
+                <tr>
+
+                    <td> @d.Login </td>
+                    <td> @d.Password</td>
+                    <td> @d.AllowedFrom</td>
+                    <td> @d.AllowedUntil</td>
+                    <td> @d.AuthLevel</td>
+                    <td> @d.Type</td>
+                    <td> @d.Enabled</td>
+
+                    <td>
+
+                        <ul class="sidebar-nav" id="sidebar">
+
+                            <li role="presentation">
+                                <a href="@Url.Action("Edit", "AlarmSystemUsersConfig")"><span class=" glyphicon glyphicon-wrench"></span></a>
+                            </li>
+
+                            <li role="presentation">
+                                <a href="@Url.Action("Remove", "AlarmSystemUsersConfig")"><span class=" glyphicon glyphicon-trash"></span></a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            }
+
+            <tr>
+                <td>
+                    <a href="@Url.Action("Add", "AlarmSystemUsersConfig")"><span class=" glyphicon glyphicon-plus"></span></a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

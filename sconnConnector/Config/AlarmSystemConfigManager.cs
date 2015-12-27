@@ -27,14 +27,18 @@ namespace sconnConnector.Config
 
         /****** Configuration of remote alarm system after processing  ********/
         public sconnAlarmSystem Config { get; set; }
-        
 
-        public AlarmSystemConfigManager(EndpointInfo endp, DeviceCredentials cred)
+        public AlarmSystemConfigManager()
+        {
+            mngr = new sconnCfgMngr();
+            Config = new sconnAlarmSystem();
+            MinUpdatePeriod = 500;
+        }
+
+        public AlarmSystemConfigManager(EndpointInfo endp, DeviceCredentials cred) : this()
         {
             info = endp;
-            mngr = new sconnCfgMngr();
             creds = cred;
-            MinUpdatePeriod = 500;
             site = new sconnSite("", 500, endp.Hostname, endp.Port, creds.Password);
             this.Config.legacySiteConfig = site.siteCfg;    //link alarm object config to low level registers
 

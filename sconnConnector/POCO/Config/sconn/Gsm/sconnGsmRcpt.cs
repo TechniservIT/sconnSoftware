@@ -9,6 +9,7 @@ namespace sconnConnector.POCO.Config.sconn
 {
     public class sconnGsmRcpt 
     {
+        public string Name { get; set; }
         public bool Enabled { get; set; }
         public int CountryCode { get; set; }
         public string NumberE164 { get; set; }

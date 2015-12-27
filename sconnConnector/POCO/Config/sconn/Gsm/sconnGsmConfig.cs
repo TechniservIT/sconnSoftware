@@ -20,7 +20,7 @@ namespace sconnConnector.POCO.Config
 
         public sconnGsmConfig(ipcSiteConfig cfg) :this()
         {
-
+            Rcpts = new List<sconnGsmRcpt>();
         }
     }
 

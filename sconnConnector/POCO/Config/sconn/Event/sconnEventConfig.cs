@@ -12,7 +12,7 @@ namespace sconnConnector.POCO.Config.sconn
 
         public sconnEventConfig(ipcSiteConfig cfg)
         {
-
+            Events = new List<sconnEvent>();
         }
 
     }

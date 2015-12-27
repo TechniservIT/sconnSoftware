@@ -128,6 +128,11 @@ namespace iotDash.Models
     {
         public sconnGsmConfig GsmConfig { get; set; }
         public string Result { get; set; }
+
+        public AlarmSystemGsmConfigModel(sconnGsmConfig cfg)
+        {
+            GsmConfig = cfg;
+        }
     }
 
     public class AlarmSystemGsmAddRcptModel : IAsyncStatusModel

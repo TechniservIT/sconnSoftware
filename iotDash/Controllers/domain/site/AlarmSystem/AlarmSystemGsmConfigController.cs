@@ -21,15 +21,27 @@ namespace iotDash.Controllers.domain.site.AlarmSystem
 
         public AlarmSystemGsmConfigController(HttpContextBase contBase)
         {
+            DomainSession.LoadDataContextForUserContext(contBase);
             IIotContextBase cont = (IIotContextBase)contBase.Session["iotcontext"];
-            AlarmSystemConfigManager man = (AlarmSystemConfigManager)contBase.Session["alarmSysCfg"];
-            if (cont != null)
+            this.Icont = cont;
+        }
+
+        private void LoadAlarmSystemService(int DevId)
+        {
+            Device alrmSysDev = Icont.Devices.First(d => d.Id == DevId);
+            if (alrmSysDev != null)
             {
-                this.Icont = cont;
-                string domainId = DomainSession.GetContextDomain(contBase);
-                iotDomain d = Icont.Domains.First(dm => dm.DomainName.Equals(domainId));
+                AlarmSystemConfigManager man = DomainSession.GetAlarmConfigForContextWithDevice(this.HttpContext,
+                    alrmSysDev);
                 this._provider = new GsmConfigurationService(this.Icont, man);
             }
+        }
+
+        public ActionResult View(int DeviceId)
+        {
+            LoadAlarmSystemService(DeviceId);
+            AlarmSystemGsmConfigModel model = new AlarmSystemGsmConfigModel(this._provider.GetGsmConfig());
+            return View(model);
         }
 
         [HttpPost]

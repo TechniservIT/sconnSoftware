@@ -1,7 +1,54 @@
-﻿@model iotDash.Models.AlarmSystemGsmConfigModel
+﻿@using sconnConnector.POCO.Config.sconn
+@model iotDash.Models.AlarmSystemGsmConfigModel
+
 @{
-    ViewBag.Title = "View";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 }
 
-<h2>View</h2>
+<div class="row">
 
+        <div class="table-responsive">
+
+            <table class="table">
+                <tr>
+                    <th>Name</th>
+                    <th>Number</th>
+                    <th>Country Code</th>
+                    <th>MessageLevel</th>
+                    <th>Enabled</th>
+                </tr>
+
+
+                @foreach (sconnGsmRcpt d in Model.GsmConfig.Rcpts)
+            {
+                    <tr>
+                        <td> @d.Name </td>
+                        <td> @d.NumberE164 </td>
+                        <td> @d.CountryCode</td>
+                        <td> @d.MessageLevel</td>
+                        <td> @d.Enabled</td>
+
+                        <td>
+
+                            <ul class="sidebar-nav" id="sidebar">
+
+                                <li role="presentation">
+                                    <a href="@Url.Action("Edit", "AlarmSystemAuthorizedDevices")"><span class=" glyphicon glyphicon-wrench"></span></a>
+                                </li>
+
+                                <li role="presentation">
+                                    <a href="@Url.Action("Remove", "AlarmSystemAuthorizedDevices")"><span class=" glyphicon glyphicon-trash"></span></a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                }
+
+                <tr>
+                    <td>
+                        <a href="@Url.Action("Add", "AlarmSystemAuthorizedDevices")"><span class=" glyphicon glyphicon-plus"></span></a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>

@@ -24,6 +24,24 @@ namespace iotDash.Identity
             }
         }
 
+        public static IIotContextBase GetDataContextForUserHttpContext(HttpContextBase context)
+        {
+            try
+            {
+                var cont = new ApplicationDbContext();
+                var currentUser = (from u in cont.Users
+                                   where u.UserName.Equals(context.User.Identity.Name)
+                                   select u).First();
+                IIotContextBase icont = new iotContext(currentUser.DomainId);
+                return icont;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
     }
 
 }

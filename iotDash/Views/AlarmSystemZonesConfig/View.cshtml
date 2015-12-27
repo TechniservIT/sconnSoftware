@@ -1,8 +1,51 @@
-﻿@model iotDash.Models.AlarmSystemZoneConfigModel
+﻿@using sconnConnector.POCO.Config.sconn
+@model iotDash.Models.AlarmSystemZoneConfigModel
 
 @{
     ViewBag.Title = "View";
 }
 
-<h2>View</h2>
+<div class="row">
+    <div class="table-responsive">
+
+        <table class="table">
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Type</th>
+            </tr>
+
+
+            @foreach (sconnAlarmZone d in Model.ZoneConfig.Zones)
+            {
+                <tr>
+
+                    <td> @d.Id </td>
+                    <td> @d.Name</td>
+                    <td> @d.Type</td>
+
+                    <td>
+
+                        <ul class="sidebar-nav" id="sidebar">
+
+                            <li role="presentation">
+                                <a href="@Url.Action("Edit", "AlarmSystemZonesConfig")"><span class=" glyphicon glyphicon-wrench"></span></a>
+                            </li>
+
+                            <li role="presentation">
+                                <a href="@Url.Action("Remove", "AlarmSystemZonesConfig")"><span class=" glyphicon glyphicon-trash"></span></a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            }
+
+            <tr>
+                <td>
+                    <a href="@Url.Action("Add", "AlarmSystemZonesConfig")"><span class=" glyphicon glyphicon-plus"></span></a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
 

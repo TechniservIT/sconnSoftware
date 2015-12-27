@@ -1,7 +1,52 @@
-﻿
+﻿@using sconnConnector.POCO.Config.sconn
+@model iotDash.Models.AlarmSystemAuthorizedDevicesModel
+
 @{
-    ViewBag.Title = "View";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 }
 
-<h2>View</h2>
+<div class="row">
+    <div class="table-responsive">
 
+        <table class="table">
+            <tr>
+                <th>Serial</th>
+                <th>Allowed from</th>
+                <th>Allowed until</th>
+                <th>Enabled</th>
+            </tr>
+
+
+            @foreach (sconnAuthorizedDevice d in Model.AuthorizedDevices.Devices)
+            {
+                <tr>
+
+                    <td> @d._Serial </td>
+                    <td> @d._AllowedFrom</td>
+                    <td> @d._AllowedUntil</td>
+                    <td> @d._Enabled</td>
+
+                    <td>
+
+                        <ul class="sidebar-nav" id="sidebar">
+
+                            <li role="presentation">
+                                <a href="@Url.Action("Edit", "AlarmSystemAuthorizedDevices")"><span class=" glyphicon glyphicon-wrench"></span></a>
+                            </li>
+
+                            <li role="presentation">
+                                <a href="@Url.Action("Remove", "AlarmSystemAuthorizedDevices")"><span class=" glyphicon glyphicon-trash"></span></a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            }
+
+            <tr>
+                <td>
+                    <a href="@Url.Action("Add", "AlarmSystemAuthorizedDevices")"><span class=" glyphicon glyphicon-plus"></span></a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

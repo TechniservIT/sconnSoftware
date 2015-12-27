@@ -353,6 +353,7 @@
     <Compile Include="SignalR.Sample\StockTicker.cs" />
     <Compile Include="SignalR.Sample\StockTickerHub.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Views\Helpers\ApplicationHelpers.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -1421,8 +1422,12 @@
     <Content Include="Views\AlarmSystemZonesConfig\Add.cshtml" />
     <Content Include="Views\AlarmSystemGsmConfig\Add.cshtml" />
     <Content Include="Views\AlarmSystemUsersConfig\Add.cshtml" />
+    <Content Include="Views\AlarmSystemAuthorizedDevices\Edot.cshtml" />
+    <Content Include="Views\AlarmSystemUsersConfig\Edit.cshtml" />
+    <Content Include="Views\AlarmSystemUsersConfig\Remove.cshtml" />
     <None Include="Views\AlarmSystemUsersConfig\View.cshtml" />
     <Content Include="Views\AlarmSystemView\ConfigurationSelect.cshtml" />
+    <Content Include="Views\AlarmSystemView\CommunicationConfigure.cshtml" />
     <None Include="Views\Dashboard\Index.cshtml" />
     <Content Include="SignalR.Sample\jquery.color-2.1.2.min.js" />
     <Content Include="SignalR.Sample\SignalR.StockTicker.js" />
@@ -1556,6 +1561,7 @@
     <None Include="Views\DeviceSecurity\Index.cshtml" />
     <None Include="Views\RoutingRules\Index.cshtml" />
     <None Include="Views\SecuritySupervisorSetup\Index.cshtml" />
+    <Content Include="Views\Shared\_DashboardBreadcrumbsPartial.cshtml" />
     <None Include="Views\Site\AddSite.cshtml" />
     <None Include="Views\UserSecurity\Index.cshtml" />
   </ItemGroup>

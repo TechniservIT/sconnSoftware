@@ -1,0 +1,27 @@
+fix bus protocol gkp
+add embedded event/gsm config 
+test and verify embedded config r/w
+ioc container			V
+data service with DI		+
+redo controllers for DI		+
+automapper
+
+context interface		+
+mocks
+unit tests
+
+conn fix tls/ssl	+
+alarm views		+
+breadcrumbs
+device type view redo :
+- device type depenedent views
+- device type select / autodetect
+- common device types database and custom defs
+
+
+iot services architecture
+iot services configs 
+gui for service managment
+
+
+device simulators for testing 

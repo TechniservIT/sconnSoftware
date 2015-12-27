@@ -32,13 +32,13 @@ namespace iotDash.RealTime.SignalR.StatusUpdate.DeviceStatusUpdater
 
          public DeviceStatusUpdaterHub()
          {
-            cont.DeviceUpdateEvent += iotContext_DeviceUpdateEvent;
-            cont.ParamUpdateEvent += iotContext_ParamUpdateEvent;
-            cont.ActionUpdateEvent += iotContext_ActionUpdateEvent;
-             client = new DeviceRestfulService();
+            //cont.DeviceUpdateEvent += iotContext_DeviceUpdateEvent;
+            //cont.ParamUpdateEvent += iotContext_ParamUpdateEvent;
+            //cont.ActionUpdateEvent += iotContext_ActionUpdateEvent;
+            // client = new DeviceRestfulService();
 
-             DeviceEventCallbackHandler callbackHandler = new DeviceEventCallbackHandler(PublishDeviceUpdate);
-             DeviceCallbackEvent += callbackHandler;
+            // DeviceEventCallbackHandler callbackHandler = new DeviceEventCallbackHandler(PublishDeviceUpdate);
+            // DeviceCallbackEvent += callbackHandler;
 
             //TODO Restful subcribe
             // client.Subscribe();

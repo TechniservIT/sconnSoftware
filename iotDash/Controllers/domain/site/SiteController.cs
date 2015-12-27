@@ -23,13 +23,18 @@ namespace iotDash.Controllers.domain.site
 
         public SiteController(HttpContextBase contBase)
         {
-            IIotContextBase cont = (IIotContextBase)contBase.Session["iotcontext"];
-            if(cont!= null)
+            try
             {
+                DomainSession.LoadDataContextForUserContext(contBase);
+                IIotContextBase cont = (IIotContextBase)contBase.Session["iotcontext"];
                 this.Icont = cont;
                 string domainId = DomainSession.GetContextDomain(contBase);
                 iotDomain d = Icont.Domains.First(dm => dm.DomainName.Equals(domainId));
                 this._provider = new SiteProvider(this.Icont);
+            }
+            catch (Exception)
+            {
+                    
             }
         }
 

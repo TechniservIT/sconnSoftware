@@ -23,13 +23,18 @@ namespace iotDash.Controllers.domain.site.AlarmSystem
 
         public AlarmSystemAuthorizedDevicesController(HttpContextBase contBase)
         {
+            DomainSession.LoadDataContextForUserContext(contBase);
             IIotContextBase cont = (IIotContextBase)contBase.Session["iotcontext"];
-            AlarmSystemConfigManager man = (AlarmSystemConfigManager)contBase.Session["alarmSysCfg"];
-            if (cont != null)
+            this.Icont = cont;
+        }
+
+        private void LoadAlarmSystemService(int DevId)
+        {
+            Device alrmSysDev = Icont.Devices.First(d => d.Id == DevId);
+            if (alrmSysDev != null)
             {
-                this.Icont = cont;
-                string domainId = DomainSession.GetContextDomain(contBase);
-                iotDomain d = Icont.Domains.First(dm => dm.DomainName.Equals(domainId));
+                AlarmSystemConfigManager man = DomainSession.GetAlarmConfigForContextWithDevice(this.HttpContext,
+                    alrmSysDev);
                 this._provider = new AuthorizedDevicesConfigurationService(this.Icont, man);
             }
         }
@@ -52,8 +57,9 @@ namespace iotDash.Controllers.domain.site.AlarmSystem
             return View(model);
         }
 
-        public ActionResult View()
+        public ActionResult View(int DeviceId)
         {
+            LoadAlarmSystemService(DeviceId);
             AlarmSystemAuthorizedDevicesModel model = new AlarmSystemAuthorizedDevicesModel(this._provider.GetAuthorizedDevices());
             return View(model);
         }

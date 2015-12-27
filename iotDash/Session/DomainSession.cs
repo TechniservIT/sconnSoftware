@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using iotDash.Identity;
+using iotDatabaseConnector.DAL.Repository.Connector.Entity;
 using iotDbConnector.DAL;
 using sconnConnector.Config;
 
@@ -17,6 +19,23 @@ namespace iotDash.Session
 
             return appdomain;
         }
+
+        static public void CreateDataContextForUserContext(HttpContextBase httpContext)
+        {
+            IIotContextBase icont = UserIotContextFactory.GetDataContextForUserHttpContext(httpContext);
+            System.Web.HttpContext.Current.Session["iotcontext"] = icont;
+        }
+
+        static public void LoadDataContextForUserContext(HttpContextBase httpContext)
+        {
+            IIotContextBase cont = (IIotContextBase)httpContext.Session["iotcontext"];
+            if (cont == null)
+            {
+                IIotContextBase icont = UserIotContextFactory.GetDataContextForUserHttpContext(httpContext);
+                System.Web.HttpContext.Current.Session["iotcontext"] = icont;
+            }
+        }
+
 
         static public AlarmSystemConfigManager GetAlarmConfigForContextWithDevice(HttpContextBase cont, Device dev)
         {
