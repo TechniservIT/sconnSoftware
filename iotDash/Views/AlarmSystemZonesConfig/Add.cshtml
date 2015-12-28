@@ -8,52 +8,61 @@
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 }
 
-
-<div class="container-fluid">
-
-    <div class="row">
-
+<div class="panel panel-primary">
+    <div class="panel-heading .text-center">
+        <h2>Edit zone</h2>
     </div>
 
-    <div class="row">
-        <div id="addraz">
-            @using (Html.BeginForm("Add", "AlarmSystemZonesConfig"))
+    <div class="panel-body">
+
+        <div class="container-fluid">
+
+            <div class="row">
+
+            </div>
+
+            <div class="row">
+                <div id="addraz">
+                    @using (Html.BeginForm("Add", "AlarmSystemZonesConfig"))
             {
-                <fieldset>
+                        <fieldset>
 
-                    <legend>Add zone</legend>
+                            <legend>Add zone</legend>
 
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Zone.Id)
-                        @Html.EditorFor(model => model.Zone.Id, new { @class = "form-control", @id = "devname" })
-                    </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Zone.Enabled)
+                                @Html.EditorFor(model => model.Zone.Enabled, new { @class = "form-control", @id = "devname" })
+                            </div>
 
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Zone.Name)
-                        @Html.TextBoxFor(model => model.Zone.Name, new { @class = "form-control" })
-                    </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Zone.Name)
+                                @Html.TextBoxFor(model => model.Zone.Name, new { @class = "form-control" })
+                            </div>
 
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Zone.Type)
-                        @Html.EditorFor(model => model.Zone.Type, new { @class = "form-control" })
-                    </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Zone.Type)
+                                @Html.EnumDropDownListFor(model => model.Zone.Type, new { @class = "form-control" })
+                            </div>
+
+                            <div class="form-group">
+                                <button class="btn btn-primary" type="submit">Add</button>
+                            </div>
+
+                        </fieldset>
+                    }
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div id="resultview">
+                    @Html.Raw(HttpUtility.HtmlDecode(Model.Result))
+                </div>
+            </div>
 
 
-                    <div class="form-group">
-                        <input type="submit" value="Send" />
-                    </div>
-
-                </fieldset>
-            }
         </div>
-
     </div>
-
-    <div class="row">
-        <div id="resultview">
-
-        </div>
-    </div>
-
 
 </div>
+

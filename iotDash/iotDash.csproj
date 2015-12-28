@@ -283,6 +283,9 @@
     <Compile Include="Controllers\domain\site\AlarmSystem\AlarmSystemAuthorizedDevicesController.cs" />
     <Compile Include="Controllers\domain\site\AlarmSystem\AlarmSystemConfigurationController.cs" />
     <Compile Include="Controllers\domain\site\AlarmSystem\AlarmSystemGsmConfigController.cs" />
+    <Compile Include="Controllers\domain\site\AlarmSystem\AlarmSystemInputConfigurationController.cs" />
+    <Compile Include="Controllers\domain\site\AlarmSystem\AlarmSystemOutputConfigurationController.cs" />
+    <Compile Include="Controllers\domain\site\AlarmSystem\AlarmSystemRelayConfigurationController.cs" />
     <Compile Include="Controllers\domain\site\AlarmSystem\AlarmSystemUsersConfigController.cs" />
     <Compile Include="Controllers\domain\site\AlarmSystem\AlarmSystemViewController.cs" />
     <Compile Include="Controllers\domain\site\AlarmSystem\AlarmSystemZonesConfigController.cs" />

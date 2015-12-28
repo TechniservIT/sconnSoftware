@@ -594,21 +594,29 @@ namespace sconnConnector
 
         public static int mAdrSysFail = (mAdrHostDeviceServerPasswd+mAdrHostDeviceServerPasswd_LEN);
         public static int mAdrSysFail_LEN  = 0x01;
-
-        public static int mAdrZoneNo   =   (mAdrSysFail+mAdrSysFail_LEN);
+      
+        public static int mAdrZoneNo = (mAdrSysFail + mAdrSysFail_LEN);
         public static int mAdrZoneNo_LEN = 0x01;
-            
-        public static int mAdrZoneCfgStartAddr  =  (mAdrZoneNo+mAdrZoneNo_LEN);
 
-        public static int ZONE_CFG_ID_POS = 0x00;
-        public static int ZONE_CFG_ID_LEN  = 0x01;
+        public static int mAdrZoneNo_Pos = (0x00);
 
-        public static int ZONE_CFG_NAME_ID_POS = (ZONE_CFG_ID_POS+ZONE_CFG_ID_LEN);
-        public static int ZONE_CFG_NAME_ID_LEN = 0x01;
+        public static int mAdrZoneCfgStartAddr = (mAdrZoneNo + mAdrZoneNo_LEN);
 
-        public static int ZONE_CFG_LEN = (ZONE_CFG_NAME_ID_POS+ZONE_CFG_NAME_ID_LEN);
+        public static int ZONE_CFG_ENABLED_POS = 0x00;
+        public static int ZONE_CFG_ENABLED_LEN = 0x01;
 
-        public static int ZONE_CFG_MAX_ZONES = 32;
+        public static int ZONE_CFG_TYPE_POS = (ZONE_CFG_ENABLED_POS + ZONE_CFG_ENABLED_LEN);
+        public static int ZONE_CFG_TYPE_LEN = 0x01;
+
+        public static int ZONE_CFG_NAME_ID_POS = (ZONE_CFG_TYPE_POS + ZONE_CFG_TYPE_LEN);
+        public static int ZONE_CFG_NAME_ID_LEN = 0x02;
+
+        public static int ZONE_CFG_LEN = (ZONE_CFG_NAME_ID_POS + ZONE_CFG_NAME_ID_LEN);
+
+        public static int ZONE_CFG_MAX_ZONES = 64;
+
+        public static int ZONE_CFG_TOTAL_LEN = (ZONE_CFG_MAX_ZONES*ZONE_CFG_LEN);
+       
 
         public static int GSM_GCFG_LOG_LVL_START_ADDR = (mAdrZoneCfgStartAddr+ZONE_CFG_MAX_ZONES*ZONE_CFG_LEN);
         public static int GSM_GCFG_LOG_LVL_LEN = 0x04;
@@ -983,9 +991,20 @@ namespace sconnConnector
         static public byte NET_PACKET_TYPE_DEVAUTHCFG = 0x0009;
         static public byte NET_PACKET_TYPE_GLOBNAMECFG = 0x000A;
 
-        static public byte  SYS_ALRM_UUID_LEN =  16;
-        static public int   SYS_ALARM_DEV_AUTH_MAX_RECORDS = 64;
-        static public int   SYS_ALARM_DEV_AUTH_MEM_SIZE = SYS_ALARM_DEV_AUTH_MAX_RECORDS * SYS_ALRM_UUID_LEN;
+        static public int SYS_ALRM_DEV_UUID_POS = 0x00;
+        static public int SYS_ALRM_DEV_UUID_LEN = 16;
+        static public int SYS_ALRM_DEV_ENABLED_POS = (SYS_ALRM_DEV_UUID_POS + SYS_ALRM_DEV_UUID_LEN);
+        static public int SYS_ALRM_DEV_ENABLED_LEN = 0x01;
+        static public int SYS_ALRM_DEV_START_DATE_POS = (SYS_ALRM_DEV_ENABLED_POS + SYS_ALRM_DEV_ENABLED_LEN);
+        static public int SYS_ALRM_DEV_START_DATE_LEN = 0x04;
+        static public int SYS_ALRM_DEV_END_DATE_POS = (SYS_ALRM_DEV_START_DATE_POS + SYS_ALRM_DEV_START_DATE_LEN);
+        static public int SYS_ALRM_DEV_END_DATE_LEN = 0x04;
+
+        static public int SYS_ALRM_DEV_AUTH_LEN = (SYS_ALRM_DEV_END_DATE_POS + SYS_ALRM_DEV_END_DATE_LEN);
+        static public int SYS_ALRM_UUID_LEN = SYS_ALRM_DEV_AUTH_LEN;
+
+        static public int SYS_ALARM_DEV_AUTH_MAX_RECORDS = 32;
+        static public int SYS_ALARM_DEV_AUTH_MEM_SIZE = SYS_ALARM_DEV_AUTH_MAX_RECORDS * SYS_ALRM_UUID_LEN;
 
         
 

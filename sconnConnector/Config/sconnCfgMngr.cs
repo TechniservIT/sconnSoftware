@@ -314,6 +314,11 @@ namespace sconnConnector
 
 		}
 
+	    public bool WriteAuthorizedDevicesCfg(sconnSite site)
+	    {
+	        return WriteDeviceDevAuthCfgSingle(site, 0x00);
+	    }
+
 		public bool WriteDeviceCfg(sconnSite site)
 		{         
 			if (site.siteCfg == null)
@@ -887,7 +892,7 @@ namespace sconnConnector
 					{
 						for (int k = 0; k < packetData; k++)
 						{
-							txBF[k + ipcDefines.NET_UPLOAD_PACKET_DATA_OFFSET] = site.siteCfg.deviceConfigs[DevId].AuthDevicesCFG[j*packetData+k];
+							txBF[k + ipcDefines.NET_UPLOAD_PACKET_DATA_OFFSET] = site.siteCfg.AuthDevices[j*packetData+k];
 						}
 
 						rxBF = client.berkeleySendMsg(txBF, bfSize);
@@ -1400,14 +1405,20 @@ namespace sconnConnector
                            cmd[0] = ipcCMD.GET;
                            cmd[1] = ipcCMD.getEventNo;
                            rxBF = client.berkeleySendMsg(cmd);
-                           int events = rxBF[1];
+                           int events = ( ((int)rxBF[1]<<8) | (int)rxBF[2]);
+                           site.siteCfg.events = new ipcEvent[events];
                            //TODO events track change
                            for (int j = 0; j < events%100; j++) //get events but not more then 100
                            {
                                     cmd[1] = ipcCMD.getEvent;
                                     cmd[2] = (byte)j; 
                                     rxBF = client.berkeleySendMsg(cmd);
-                                    site.siteCfg.events[j] = new ipcEvent(rxBF);
+                                    byte[] evBF = new byte[ipcDefines.EVENT_DB_RECORD_LEN];
+                                   for (int k = 0; k < ipcDefines.EVENT_DB_RECORD_LEN; k++)
+                                   {
+                                       evBF[k] = rxBF[k + 1];
+                                   }
+                                    site.siteCfg.events[j] = new ipcEvent(evBF);
                            }
 
                        }

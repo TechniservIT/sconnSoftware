@@ -92,6 +92,48 @@ namespace sconnConnector.Config
             }
         }
 
+        public bool UploadZoneConfig()
+        {
+            byte[] serialized = this.Config.ZoneConfig.Serialize();
+            for (int i = 0; i < serialized.Length; i++)
+            {
+                this.site.siteCfg.globalConfig.memCFG[ipcDefines.mAdrZoneNo + i] = serialized[i];
+            }
+            return UploadGlobalConfig();
+        }
+
+        public bool UploadAuthorizedDevicesConfig()
+        {
+            byte[] serialized = this.Config.AuthorizedDevices.Serialize();
+            for (int i = 0; i < serialized.Length; i++)
+            {
+                this.site.siteCfg.AuthDevices[i] = serialized[i];
+            }
+            return mngr.WriteAuthorizedDevicesCfg(this.site);
+        }
+
+        public bool UploadDeviceConfig()
+        {
+            return mngr.WriteDeviceCfg(this.site);
+        }
+
+        public bool UploadUserConfig()
+        {
+            return false;
+        }
+
+        public bool UploadGlobalConfig()
+        {
+            try
+            {
+                return mngr.WriteGlobalCfg(site);
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
+
         public bool UploadSiteConfig()
         {
             try

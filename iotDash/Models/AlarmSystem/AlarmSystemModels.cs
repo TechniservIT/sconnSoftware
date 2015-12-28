@@ -129,6 +129,11 @@ namespace iotDash.Models
         public sconnGsmConfig GsmConfig { get; set; }
         public string Result { get; set; }
 
+        public AlarmSystemGsmConfigModel()
+        {
+                
+        }
+
         public AlarmSystemGsmConfigModel(sconnGsmConfig cfg)
         {
             GsmConfig = cfg;
@@ -163,7 +168,7 @@ namespace iotDash.Models
 
         public AlarmSystemZoneConfigModel(sconnAlarmZoneConfig zoneCfg)
         {
-                
+            ZoneConfig = zoneCfg;
         }
 
         public string Result { get; set; }

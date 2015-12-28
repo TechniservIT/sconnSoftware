@@ -44,6 +44,12 @@ namespace iotDash.Controllers.domain.site.AlarmSystem
             return View(model);
         }
 
+        public ActionResult Add()
+        {
+            AlarmSystemZoneAddModel model = new AlarmSystemZoneAddModel();
+            return View(model);
+        }
+
         [HttpPost]
         public async Task<ActionResult> Add(AlarmSystemZoneAddModel model)
         {

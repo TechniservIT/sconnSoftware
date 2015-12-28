@@ -1,7 +1,73 @@
-﻿
+﻿el iotDash.Models.AlarmSystemUserAddModel
+
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Add";
 }
 
-<h2>Edit</h2>
+@{
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
 
+
+<div class="container-fluid">
+
+    <div class="row">
+
+    </div>
+
+    <div class="row">
+        <div id="addraz">
+            @using (Html.BeginForm("Add", "AlarmSystemUsersConfig"))
+            {
+                <fieldset>
+
+                    <legend>Add user</legend>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.User.Login)
+                        @Html.TextBoxFor(model => model.User.Login, new { @class = "form-control", @id = "devname" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.User.Password)
+                        @Html.TextBoxFor(model => model.User.Password, new { @class = "form-control" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.User.Type)
+                        @Html.EditorFor(model => model.User.Type, new { @class = "form-control" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.User.AuthLevel)
+                        @Html.EditorFor(model => model.User.AuthLevel, new { @class = "form-control" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.User.AllowedFrom)
+                        @Html.EditorFor(model => model.User.AllowedFrom, new { @class = "form-control" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.User.AllowedUntil)
+                        @Html.EditorFor(model => model.User.AllowedUntil, new { @class = "form-control" })
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" value="Send" />
+                    </div>
+
+                </fieldset>
+            }
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div id="resultview">
+
+        </div>
+    </div>
+
+
+</div>

@@ -6,10 +6,16 @@ using System.Threading.Tasks;
 
 namespace sconnConnector.POCO.Config
 {
+
     public class ipcEvent
     {
         public short EventNo { get; set; }
         public byte[] Buffer { get; set; }
+
+        public int Id { get; set; }
+        public DateTime Time { get; set; }
+        public int Type { get; set; }
+
         public ipcEvent()
         {
 
@@ -18,6 +24,7 @@ namespace sconnConnector.POCO.Config
         public ipcEvent(byte[] EventBytes) : this()
         {
             //decode
+            this.Buffer = EventBytes;
         }
 
     }

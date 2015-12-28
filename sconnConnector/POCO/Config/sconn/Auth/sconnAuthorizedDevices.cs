@@ -26,8 +26,10 @@ namespace sconnConnector.POCO.Config
                 char[] uuidBytes = dev._Serial.ToString().ToCharArray();
                 for (int j = 0; j < uuidBytes.Length; j++)
                 {
-                    bytes[i * ipcDefines.SYS_ALRM_UUID_LEN + j] = (byte)uuidBytes[j];
+                    bytes[i * ipcDefines.SYS_ALRM_DEV_AUTH_LEN + j] = (byte)uuidBytes[j];
                 }
+                bytes[i * ipcDefines.SYS_ALARM_DEV_AUTH_MEM_SIZE + ipcDefines.SYS_ALRM_DEV_ENABLED_POS] = (byte)(dev._Enabled ?  1 : 0);
+                //TODO date range serialize/deserialize
             }
             return bytes;
         }

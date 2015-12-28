@@ -83,7 +83,10 @@ namespace iotDash.Areas.AlarmSystem.Models
             ServerId = dev.Id;
             Config = man;
             Config.LoadSiteConfig();
-            EditedDevice = Config.site.siteCfg.deviceConfigs[0];               
+            if (Config.site.siteCfg.deviceConfigs.Length >= 1)
+            {
+                EditedDevice = Config.site.siteCfg.deviceConfigs[0];
+            }           
         }
 
     }
