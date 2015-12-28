@@ -228,15 +228,15 @@ namespace sconnConnector
             
 
             //compose auth msg
-            byte[] authmsg = new byte[ipcDefines.AUTH_PASSWD_SIZE + ipcDefines.NET_DATA_PACKET_CONTROL_BYTES];
+            byte[] authmsg = new byte[ipcDefines.AUTH_RECORD_SIZE + ipcDefines.NET_DATA_PACKET_CONTROL_BYTES];
             authmsg[0] = ipcCMD.SOP;
             for (int i = 0; i < AuthenticationPassword.Length; i++)
             {
-                authmsg[i + 1] = (byte)AuthenticationPassword[i];
+                authmsg[ipcDefines.AUTH_RECORD_PASSWD_POS + i + 1] = (byte)AuthenticationPassword[i];
             }
-            authmsg[ipcDefines.AUTH_GRP_POS + ipcDefines.AUTH_CBYTE_OFFSET] = 0x01;
-            authmsg[ipcDefines.AUTH_PERM_POS + ipcDefines.AUTH_CBYTE_OFFSET] = 0x01;
-            authmsg[ipcDefines.AUTH_PASSWD_SIZE + ipcDefines.NET_DATA_PACKET_CONTROL_BYTES - 1] = ipcCMD.EOP;
+            authmsg[ipcDefines.AUTH_RECORD_PASS_LEN_POS + 1] = (byte)AuthenticationPassword.Length;
+            authmsg[ipcDefines.AUTH_RECORD_SIZE + 1] = ipcCMD.EOP;
+
             int len = authmsg.Length;
             byte[] txBF = new byte[len];
             byte[] rxBF = new byte[ipcDefines.NET_MAX_RX_SIZE];

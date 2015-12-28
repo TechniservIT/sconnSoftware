@@ -23,17 +23,35 @@ namespace iotDash.Controllers.domain.site.AlarmSystem
         {
             DomainSession.LoadDataContextForUserContext(contBase);
             IIotContextBase cont = (IIotContextBase)contBase.Session["iotcontext"];
+            Device alrmSysDev = (Device)contBase.Session["alarmDevice"];
+            if (alrmSysDev != null)
+            {
+                AlarmSystemConfigManager man = DomainSession.GetAlarmConfigForContextWithDevice(contBase,
+                    alrmSysDev);
+                this._provider = new ZoneConfigurationService(this.Icont, man);
+            }
             this.Icont = cont;
         }
 
         private void LoadAlarmSystemService(int DevId)
         {
-            Device alrmSysDev = Icont.Devices.First(d => d.Id == DevId);
+            Device alrmSysDev = (Device)this.HttpContext.Session["alarmDevice"];
             if (alrmSysDev != null)
             {
                 AlarmSystemConfigManager man = DomainSession.GetAlarmConfigForContextWithDevice(this.HttpContext,
                     alrmSysDev);
                 this._provider = new ZoneConfigurationService(this.Icont, man);
+            }
+            else
+            {
+                alrmSysDev = Icont.Devices.First(d => d.Id == DevId);
+                if (alrmSysDev != null)
+                {
+                    this.HttpContext.Session["alarmDevice"] = alrmSysDev;
+                    AlarmSystemConfigManager man = DomainSession.GetAlarmConfigForContextWithDevice(this.HttpContext,
+                        alrmSysDev);
+                    this._provider = new ZoneConfigurationService(this.Icont, man);
+                }
             }
         }
 

@@ -38,7 +38,7 @@ namespace AlarmSystemManagmentService
         public bool AddZone(sconnAlarmZone zone)
         {
             Manager.Config.ZoneConfig.Zones.Add(zone);
-            return Manager.UploadSiteConfig();
+            return Manager.UploadZoneConfig();
         }
 
 

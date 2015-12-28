@@ -86,7 +86,7 @@ namespace sconnConnector.POCO.Config
         {
             if (password != null)
             {
-                if ((password.Length <= ipcDefines.AUTH_PASSWD_SIZE) &&
+                if ((password.Length <= ipcDefines.AUTH_PASS_SIZE) &&
                         (password.Length > 0)
                     )
                 //additional password restrictions

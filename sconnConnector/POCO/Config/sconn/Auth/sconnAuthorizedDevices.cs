@@ -67,7 +67,24 @@ namespace sconnConnector.POCO.Config
 
         public sconnAuthorizedDevices(ipcSiteConfig cfg) :this()
         {
-            
+            if (cfg.AuthDevices.Length >= ipcDefines.SYS_ALARM_DEV_AUTH_MEM_SIZE)
+            {
+                for (int i = 0; i < ipcDefines.SYS_ALARM_DEV_AUTH_MAX_RECORDS; i++)
+                {
+                    sconnAuthorizedDevice dev = new sconnAuthorizedDevice();
+                    byte[] authRecord = new byte[ipcDefines.SYS_ALRM_DEV_AUTH_LEN];
+                    for (int j = 0; j < ipcDefines.SYS_ALRM_DEV_AUTH_LEN; j++)
+                    {
+                        authRecord[j] = cfg.AuthDevices[i * ipcDefines.SYS_ALRM_DEV_AUTH_LEN + j];
+                    }
+                    dev._Serial = BitConverter.ToString(authRecord);
+                    if (dev._Serial.Length > 0)
+                    {
+                        Devices.Add((dev));
+                    }
+                }
+            }
+
         }
         
     }

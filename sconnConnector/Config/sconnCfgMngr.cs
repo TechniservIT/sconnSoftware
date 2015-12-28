@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using sconnConnector.POCO.Config;
@@ -34,15 +35,14 @@ namespace sconnConnector
 
 		public bool authMCU(String server, Int32 port, String cred)
 			{
-				byte[] authmsg = new byte[ipcDefines.AUTH_PASSWD_SIZE + ipcDefines.NET_DATA_PACKET_CONTROL_BYTES];
+				byte[] authmsg = new byte[ipcDefines.AUTH_RECORD_SIZE + ipcDefines.NET_DATA_PACKET_CONTROL_BYTES];
 				authmsg[0] = ipcCMD.SOP;
 				for (int i = 0; i < cred.Length; i++)    
 				{
-					authmsg[i + 1] = (byte)cred[i];
+					authmsg[ipcDefines.AUTH_RECORD_PASSWD_POS+i + 1] = (byte)cred[i];
 				}
-				authmsg[ipcDefines.AUTH_GRP_POS + ipcDefines.AUTH_CBYTE_OFFSET] = 0x01;
-				authmsg[ipcDefines.AUTH_PERM_POS + ipcDefines.AUTH_CBYTE_OFFSET] = 0x01;
-				authmsg[ipcDefines.AUTH_PASSWD_SIZE + ipcDefines.NET_DATA_PACKET_CONTROL_BYTES - 1] = ipcCMD.EOP;
+		        authmsg[ipcDefines.AUTH_RECORD_PASS_LEN_POS + 1] = (byte)cred.Length;
+                authmsg[ipcDefines.AUTH_RECORD_SIZE + ipcDefines.NET_DATA_PACKET_CONTROL_BYTES - 1] = ipcCMD.EOP;
 				byte[] status = ethernet.berkeleySendMsg(server, authmsg, port);
 
 				if (status[0] == ipcCMD.AUTHFAIL)
@@ -1201,7 +1201,12 @@ namespace sconnConnector
 		       rxBF = client.berkeleySendMsg(cmd); 
 		       if(rxBF[0] == ipcCMD.SVAL){
 			       byte[] hashrx = new byte[ipcDefines.SHA256_DIGEST_SIZE];
-			       for (int i = 0; i < ipcDefines.SHA256_DIGEST_SIZE; i++)
+
+		            SHA256 shaHash = SHA256.Create();
+                    byte[] clientHash = shaHash.ComputeHash((site.siteCfg.globalConfig.memCFG));
+		           site.siteCfg.Hash = clientHash; //update local hash based on what we actually have
+
+                    for (int i = 0; i < ipcDefines.SHA256_DIGEST_SIZE; i++)
 				    {
 					    hashrx[i] = rxBF[i + rxOffset];
 				    }
@@ -1421,7 +1426,19 @@ namespace sconnConnector
                                     site.siteCfg.events[j] = new ipcEvent(evBF);
                            }
 
-                       }
+                                //Auth cfg
+                                cmd[0] = ipcCMD.GET;
+                                cmd[1] = ipcCMD.getPasswdCfg;
+                                rxBF = client.berkeleySendMsg(cmd);
+                                byte[] AuthBf = new byte[ipcDefines.AUTH_MAX_USERS * ipcDefines.AUTH_RECORD_SIZE];
+                                for (int j = 0; j < ipcDefines.AUTH_MAX_USERS * ipcDefines.AUTH_RECORD_SIZE; j++)
+                                {
+                                    AuthBf[j] = rxBF[j + 1];
+                                }
+                                site.siteCfg.UserConfig = AuthBf;
+
+
+                            }
 
                         
                    }

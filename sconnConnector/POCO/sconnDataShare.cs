@@ -964,12 +964,30 @@ namespace sconnConnector
 
 
         /**********************  AUTH *********************/
-        static public int AUTH_PASSWD_SIZE = 32;
-        static public int AUTH_PASSWD_LEN = 30;
-        static public int AUTH_GRP_POS = 30;
-        static public int AUTH_PERM_POS = 31; //user permission level
-        static public int AUTH_CBYTE_OFFSET = 1;
+        static public int AUTH_PASS_SIZE = 30;       // pass  15 x 2b UTF8
+        static public int AUTH_RECORD_PASS_LEN_POS = 0x00;
+        static public int AUTH_RECORD_PASS_LEN_LEN = 0x01;
+        static public int AUTH_RECORD_ENABLED_POS = (AUTH_RECORD_ENABLED_POS + AUTH_RECORD_PASS_LEN_LEN);
+        static public int AUTH_RECORD_ENABLED_LEN = 0x01;
+        static public int AUTH_RECORD_GROUP_POS = (AUTH_RECORD_ENABLED_POS + AUTH_RECORD_ENABLED_LEN);
+        static public int AUTH_RECORD_GROUP_LEN = 0x01;
+        static public int AUTH_RECORD_PERM_POS = (AUTH_RECORD_GROUP_POS + AUTH_RECORD_GROUP_LEN);
+        static public int AUTH_RECORD_PERM_LEN = 0x04;
+        static public int AUTH_RECORD_ALLOWED_FROM_POS = (AUTH_RECORD_PERM_POS + AUTH_RECORD_PERM_LEN);
+        static public int AUTH_RECORD_ALLOWED_FROM_LEN = 0x04;
+        static public int AUTH_RECORD_ALLOWED_UNTIL_POS = (AUTH_RECORD_ALLOWED_FROM_POS + AUTH_RECORD_ALLOWED_FROM_LEN);
+        static public int AUTH_RECORD_ALLOWED_UNTIL_LEN = 0x04;
+        static public int AUTH_RECORD_LOGIN_POS = (AUTH_RECORD_ALLOWED_UNTIL_POS + AUTH_RECORD_ALLOWED_UNTIL_LEN);
+        static public int AUTH_RECORD_LOGIN_LEN = AUTH_PASS_SIZE;
+        static public int AUTH_RECORD_PASSWD_POS = (AUTH_RECORD_LOGIN_POS + AUTH_RECORD_LOGIN_LEN);
+        static public int AUTH_RECORD_PASSWD_LEN = AUTH_PASS_SIZE;
+        static public int AUTH_RECORD_SIZE = (AUTH_RECORD_PASSWD_POS + AUTH_RECORD_PASSWD_LEN);
 
+        static public int AUTH_CRED_SIZE   =   AUTH_RECORD_SIZE; 
+
+
+        /**********************************   PASSWD ************************************/
+        static public int AUTH_MAX_USERS = 16;
 
         /******************   SCONN BERKELEY  *************/
         static public int NET_MAX_TX_SIZE = 280;

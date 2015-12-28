@@ -165,10 +165,21 @@ namespace iotDash.Models
     public class AlarmSystemZoneConfigModel : IAsyncStatusModel
     {
         public sconnAlarmZoneConfig ZoneConfig { get; set; }
+        public int DeviceId { get; set; }
 
         public AlarmSystemZoneConfigModel(sconnAlarmZoneConfig zoneCfg)
         {
             ZoneConfig = zoneCfg;
+        }
+
+        public AlarmSystemZoneConfigModel()
+        {
+                
+        }
+
+        public AlarmSystemZoneConfigModel(int DeviceId)
+        {
+            this.DeviceId = DeviceId;
         }
 
         public string Result { get; set; }
@@ -182,7 +193,7 @@ namespace iotDash.Models
         {
                 
         }
-
+        
         public AlarmSystemZoneAddModel(sconnAlarmZone zone)
         {
             this.Zone = zone;

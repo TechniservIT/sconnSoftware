@@ -17,7 +17,19 @@ namespace sconnConnector.POCO.Config.Abstract.Auth
 
         public sconnUserConfig(ipcSiteConfig cfg) :this()
         {
-                
+            if (cfg.UserConfig.Length >= ipcDefines.AUTH_MAX_USERS*ipcDefines.AUTH_CRED_SIZE)
+            {
+                for (int i = 0; i < ipcDefines.AUTH_MAX_USERS; i++)
+                {
+                    byte[] authrec = new byte[ipcDefines.AUTH_CRED_SIZE];
+                    for (int j = 0; j < ipcDefines.AUTH_CRED_SIZE; j++)
+                    {
+                        authrec[j] = cfg.UserConfig[i*ipcDefines.AUTH_CRED_SIZE + j];
+                    }
+                   sconnUser user = new sconnUser(authrec);
+                    Users.Add(user);
+                }
+            }
         }
 
     }

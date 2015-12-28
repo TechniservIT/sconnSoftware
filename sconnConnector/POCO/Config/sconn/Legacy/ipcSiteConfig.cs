@@ -17,6 +17,7 @@ namespace sconnConnector.POCO.Config
         public ipcRcpt[] gsmRcpts;
 
         public byte[] AuthDevices;
+        public byte[] UserConfig;
         public byte[] Hash;
 
         public byte[] GlobalNameConfig;
