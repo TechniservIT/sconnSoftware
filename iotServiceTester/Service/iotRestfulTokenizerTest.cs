@@ -50,10 +50,7 @@ namespace iotServiceTester.Service
             string token = client.Execute(request).Content;
             Assert.IsTrue(token.Length > 0);
         }
-
-
-
-
+        
         [TestMethod]
         public void TestTokenGeneration()
         {

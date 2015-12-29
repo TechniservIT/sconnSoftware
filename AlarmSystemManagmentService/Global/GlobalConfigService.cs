@@ -9,7 +9,7 @@ using sconnConnector.Config;
 
 namespace AlarmSystemManagmentService
 {
-    public class GlobalConfigService
+    public class GlobalConfigService : IGlobalConfigService
     {
         private IIotContextBase context;
 
@@ -30,7 +30,6 @@ namespace AlarmSystemManagmentService
             Manager = man;
             Manager.LoadSiteConfig();
         }
-
 
     }
 }

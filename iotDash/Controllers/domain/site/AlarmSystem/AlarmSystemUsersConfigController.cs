@@ -34,7 +34,7 @@ namespace iotDash.Controllers.domain.site.AlarmSystem
             {
                 AlarmSystemConfigManager man = DomainSession.GetAlarmConfigForContextWithDevice(this.HttpContext,
                     alrmSysDev);
-                this._provider = new UsersConfigurationService(this.Icont, man);
+                this._provider = new UsersConfigurationService(man);
             }
         }
 
@@ -51,7 +51,7 @@ namespace iotDash.Controllers.domain.site.AlarmSystem
             {
                 if (ModelState.IsValid)
                 {
-                    var res = (_provider.AddUser(model.User));
+                    var res = (_provider.Add(model.User));
                     model.Result = StatusResponseGenerator.GetStatusResponseResultForReturnParam(res);
                 }
             }
@@ -65,7 +65,7 @@ namespace iotDash.Controllers.domain.site.AlarmSystem
         public ActionResult View(int DeviceId)
         {
             LoadAlarmSystemService(DeviceId);
-            AlarmSystemUserConfigModel model = new AlarmSystemUserConfigModel(this._provider.GetUserConfig());
+            AlarmSystemUserConfigModel model = new AlarmSystemUserConfigModel(this._provider.GetAll());
             return View(model);
         }
 

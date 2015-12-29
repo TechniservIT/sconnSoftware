@@ -35,7 +35,7 @@ namespace iotDash.Controllers.domain.site.AlarmSystem
             {
                 AlarmSystemConfigManager man = DomainSession.GetAlarmConfigForContextWithDevice(this.HttpContext,
                     alrmSysDev);
-                this._provider = new AuthorizedDevicesConfigurationService(this.Icont, man);
+                this._provider = new AuthorizedDevicesConfigurationService(man);
             }
         }
 
@@ -52,7 +52,7 @@ namespace iotDash.Controllers.domain.site.AlarmSystem
             {
                 if (ModelState.IsValid)
                 {
-                    var res = (_provider.AddAuthorizedDevice(model.AuthorizedDevice));
+                    var res = (_provider.Add(model.AuthorizedDevice));
                     model.Result = StatusResponseGenerator.GetStatusResponseResultForReturnParam(res);
                 }
             }
@@ -66,7 +66,7 @@ namespace iotDash.Controllers.domain.site.AlarmSystem
         public ActionResult View(int DeviceId)
         {
             LoadAlarmSystemService(DeviceId);
-            AlarmSystemAuthorizedDevicesModel model = new AlarmSystemAuthorizedDevicesModel(this._provider.GetAuthorizedDevices());
+            AlarmSystemAuthorizedDevicesModel model = new AlarmSystemAuthorizedDevicesModel(this._provider.GetAll());
             return View(model);
         }
 

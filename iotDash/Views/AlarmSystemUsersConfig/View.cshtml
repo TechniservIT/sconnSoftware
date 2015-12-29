@@ -13,14 +13,17 @@
 
         <table class="table">
             <tr>
-                <th>Serial</th>
+                <th>Login</th>
+                <th>Password</th>
                 <th>Allowed from</th>
                 <th>Allowed until</th>
+                <th>Permissions</th>
+                <th>Group</th>
                 <th>Enabled</th>
             </tr>
 
 
-            @foreach (sconnUser d in Model.UserConfig.Users)
+            @foreach (sconnUser d in Model.Users)
             {
                 <tr>
 
@@ -28,8 +31,8 @@
                     <td> @d.Password</td>
                     <td> @d.AllowedFrom</td>
                     <td> @d.AllowedUntil</td>
-                    <td> @d.AuthLevel</td>
-                    <td> @d.Type</td>
+                    <td> @d.Permissions</td>
+                    <td> @d.Group</td>
                     <td> @d.Enabled</td>
 
                     <td>

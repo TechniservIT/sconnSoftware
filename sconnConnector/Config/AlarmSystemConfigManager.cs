@@ -117,9 +117,19 @@ namespace sconnConnector.Config
             return mngr.WriteDeviceCfg(this.site);
         }
 
+        public bool UploadDeviceConfig(ipcDeviceConfig dev)
+        {
+            return mngr.WriteDeviceCfgSingle(this.site,dev.DeviceId);
+        }
+
         public bool UploadUserConfig()
         {
-            return false;
+            return false;   //TODO
+        }
+
+        public bool UploadGsmConfig()
+        {
+            return false;   //TODO
         }
 
         public bool UploadGlobalConfig()

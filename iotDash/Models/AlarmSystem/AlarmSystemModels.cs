@@ -104,9 +104,9 @@ namespace iotDash.Models
 
     public class AlarmSystemAuthorizedDevicesModel : IAsyncStatusModel
     {
-        public sconnAuthorizedDevices  AuthorizedDevices { get; set; }
+        public List<sconnAuthorizedDevice>  AuthorizedDevices { get; set; }
         
-        public AlarmSystemAuthorizedDevicesModel(sconnAuthorizedDevices authcfg)
+        public AlarmSystemAuthorizedDevicesModel(List<sconnAuthorizedDevice> authcfg)
         {
             this.AuthorizedDevices = authcfg;
         }
@@ -126,7 +126,7 @@ namespace iotDash.Models
 
     public class AlarmSystemGsmConfigModel : IAsyncStatusModel
     {
-        public sconnGsmConfig GsmConfig { get; set; }
+        public List<sconnGsmRcpt>  GsmRcpts { get; set; }
         public string Result { get; set; }
 
         public AlarmSystemGsmConfigModel()
@@ -134,15 +134,15 @@ namespace iotDash.Models
                 
         }
 
-        public AlarmSystemGsmConfigModel(sconnGsmConfig cfg)
+        public AlarmSystemGsmConfigModel(List<sconnGsmRcpt> cfg)
         {
-            GsmConfig = cfg;
+            GsmRcpts = cfg;
         }
     }
 
     public class AlarmSystemGsmAddRcptModel : IAsyncStatusModel
     {
-        public sconnGsmRcpt GsmRcpt { get; set; }
+        public  sconnGsmRcpt GsmRcpt { get; set; }
 
         public AlarmSystemGsmAddRcptModel()
         {
@@ -164,12 +164,12 @@ namespace iotDash.Models
 
     public class AlarmSystemZoneConfigModel : IAsyncStatusModel
     {
-        public sconnAlarmZoneConfig ZoneConfig { get; set; }
+        public List<sconnAlarmZone> ZoneConfigs { get; set; }
         public int DeviceId { get; set; }
 
-        public AlarmSystemZoneConfigModel(sconnAlarmZoneConfig zoneCfg)
+        public AlarmSystemZoneConfigModel(List<sconnAlarmZone> zoneCfg)
         {
-            ZoneConfig = zoneCfg;
+            ZoneConfigs = zoneCfg;
         }
 
         public AlarmSystemZoneConfigModel()
@@ -209,11 +209,11 @@ namespace iotDash.Models
 
     public class AlarmSystemUserConfigModel : IAsyncStatusModel
     {
-        public sconnUserConfig UserConfig { get; set; }
+        public List<sconnUser> Users { get; set; }
 
-        public AlarmSystemUserConfigModel(sconnUserConfig userCfg)
+        public AlarmSystemUserConfigModel(List<sconnUser> userCfg)
         {
-            UserConfig = userCfg;
+            Users = userCfg;
         }
 
         public string Result { get; set; }

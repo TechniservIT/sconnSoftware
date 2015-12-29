@@ -33,14 +33,14 @@ namespace iotDash.Controllers.domain.site.AlarmSystem
             {
                 AlarmSystemConfigManager man = DomainSession.GetAlarmConfigForContextWithDevice(this.HttpContext,
                     alrmSysDev);
-                this._provider = new GsmConfigurationService(this.Icont, man);
+                this._provider = new GsmConfigurationService(man);
             }
         }
 
         public ActionResult View(int DeviceId)
         {
             LoadAlarmSystemService(DeviceId);
-            AlarmSystemGsmConfigModel model = new AlarmSystemGsmConfigModel(this._provider.GetGsmConfig());
+            AlarmSystemGsmConfigModel model = new AlarmSystemGsmConfigModel(this._provider.GetAll());
             return View(model);
         }
 
@@ -57,7 +57,7 @@ namespace iotDash.Controllers.domain.site.AlarmSystem
             {
                 if (ModelState.IsValid)
                 {
-                    var res = (_provider.AddRcpt(model.GsmRcpt));
+                    var res = (_provider.Add(model.GsmRcpt));
                     model.Result = StatusResponseGenerator.GetStatusResponseResultForReturnParam(res);
                 }
             }

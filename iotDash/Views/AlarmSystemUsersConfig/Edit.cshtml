@@ -1,4 +1,4 @@
-﻿el iotDash.Models.AlarmSystemUserAddModel
+﻿@model iotDash.Models.AlarmSystemUserAddModel
 
 @{
     ViewBag.Title = "Add";
@@ -34,13 +34,13 @@
                     </div>
 
                     <div class="form-group">
-                        @Html.LabelFor(model => model.User.Type)
-                        @Html.EditorFor(model => model.User.Type, new { @class = "form-control" })
+                        @Html.LabelFor(model => model.User.Permissions)
+                        @Html.EditorFor(model => model.User.Permissions, new { @class = "form-control" })
                     </div>
 
                     <div class="form-group">
-                        @Html.LabelFor(model => model.User.AuthLevel)
-                        @Html.EditorFor(model => model.User.AuthLevel, new { @class = "form-control" })
+                        @Html.LabelFor(model => model.User.Group)
+                        @Html.EditorFor(model => model.User.Group, new { @class = "form-control" })
                     </div>
 
                     <div class="form-group">

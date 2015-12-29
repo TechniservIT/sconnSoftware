@@ -41,14 +41,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AuthorizedDevicesConfigurationService.cs" />
-    <Compile Include="DeviceConfigService.cs" />
-    <Compile Include="GlobalConfigService.cs" />
-    <Compile Include="GsmConfigurationService.cs" />
-    <Compile Include="IoControlService.cs" />
+    <Compile Include="AuthorizedDevices\AuthorizedDevicesConfigurationService.cs" />
+    <Compile Include="AuthorizedDevices\IAuthorizedDevicesConfigurationService.cs" />
+    <Compile Include="Device\DeviceConfigService.cs" />
+    <Compile Include="Device\IDeviceConfigService.cs" />
+    <Compile Include="Global\GlobalConfigService.cs" />
+    <Compile Include="Global\IGlobalConfigService.cs" />
+    <Compile Include="Gsm\GsmConfigurationService.cs" />
+    <Compile Include="Gsm\IGsmConfigurationService.cs" />
+    <Compile Include="IAlarmSystemConfigurationService.cs" />
+    <Compile Include="IO\IIoControlService.cs" />
+    <Compile Include="IO\IoControlService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UsersConfigurationService.cs" />
-    <Compile Include="ZoneConfigurationService.cs" />
+    <Compile Include="Users\IUsersConfigurationService.cs" />
+    <Compile Include="Users\UsersConfigurationService.cs" />
+    <Compile Include="Zone\IZoneConfigurationService.cs" />
+    <Compile Include="Zone\ZoneConfigurationService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\iotDatabaseConnector\iotDatabaseConnector.csproj">

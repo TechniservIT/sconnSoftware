@@ -28,7 +28,7 @@ namespace iotDash.Controllers.domain.site.AlarmSystem
             {
                 AlarmSystemConfigManager man = DomainSession.GetAlarmConfigForContextWithDevice(contBase,
                     alrmSysDev);
-                this._provider = new ZoneConfigurationService(this.Icont, man);
+                this._provider = new ZoneConfigurationService(man);
             }
             this.Icont = cont;
         }
@@ -40,7 +40,7 @@ namespace iotDash.Controllers.domain.site.AlarmSystem
             {
                 AlarmSystemConfigManager man = DomainSession.GetAlarmConfigForContextWithDevice(this.HttpContext,
                     alrmSysDev);
-                this._provider = new ZoneConfigurationService(this.Icont, man);
+                this._provider = new ZoneConfigurationService(man);
             }
             else
             {
@@ -50,7 +50,7 @@ namespace iotDash.Controllers.domain.site.AlarmSystem
                     this.HttpContext.Session["alarmDevice"] = alrmSysDev;
                     AlarmSystemConfigManager man = DomainSession.GetAlarmConfigForContextWithDevice(this.HttpContext,
                         alrmSysDev);
-                    this._provider = new ZoneConfigurationService(this.Icont, man);
+                    this._provider = new ZoneConfigurationService(man);
                 }
             }
         }
@@ -58,7 +58,7 @@ namespace iotDash.Controllers.domain.site.AlarmSystem
         public ActionResult View(int DeviceId)
         {
             LoadAlarmSystemService(DeviceId);
-            AlarmSystemZoneConfigModel model = new AlarmSystemZoneConfigModel(this._provider.GetAlarmZoneConfig());
+            AlarmSystemZoneConfigModel model = new AlarmSystemZoneConfigModel(this._provider.GetAll());
             return View(model);
         }
 
@@ -75,7 +75,7 @@ namespace iotDash.Controllers.domain.site.AlarmSystem
             {
                 if (ModelState.IsValid)
                 {
-                    var res = (_provider.AddZone(model.Zone));
+                    var res = (_provider.Add(model.Zone));
                     model.Result = StatusResponseGenerator.GetStatusResponseResultForReturnParam(res);
                 }
             }
