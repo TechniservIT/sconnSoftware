@@ -602,7 +602,7 @@ namespace sconnConnector
 
         public static int mAdrZoneCfgStartAddr = (mAdrZoneNo + mAdrZoneNo_LEN);
 
-        public static int ZONE_CFG_ENABLED_POS = 0x00;
+        public static int ZONE_CFG_ENABLED_POS = (mAdrZoneNo_LEN);
         public static int ZONE_CFG_ENABLED_LEN = 0x01;
 
         public static int ZONE_CFG_TYPE_POS = (ZONE_CFG_ENABLED_POS + ZONE_CFG_ENABLED_LEN);

@@ -118,6 +118,16 @@ namespace iotDash.Models
     {
         public sconnAuthorizedDevice AuthorizedDevice { get; set; }
         public string Result { get; set; }
+
+        public AlarmSystemAddAuthorizedDeviceModel()
+        {
+
+        }
+
+        public AlarmSystemAddAuthorizedDeviceModel(sconnAuthorizedDevice Device)
+        {
+            this.AuthorizedDevice = Device;
+        }
     }
 
     #endregion

@@ -1,0 +1,60 @@
+﻿@model iotDash.Models.AlarmSystemAddAuthorizedDeviceModel
+
+@{
+    ViewBag.Title = "Add";
+}
+
+@{
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+
+<div class="container-fluid">
+
+    <div class="row">
+        <div>
+            @using (Html.BeginForm("Add", "AlarmSystemAuthorizedDevices"))
+            {
+                <fieldset>
+
+                    <legend>Add authorized device</legend>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.AuthorizedDevice._Serial)
+                        @Html.TextBoxFor(model => model.AuthorizedDevice._Serial, new { @class = "form-control", @id = "devname" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.AuthorizedDevice._Enabled)
+                        @Html.CheckBoxFor(model => model.AuthorizedDevice._Enabled, new { @class = "form-control" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.AuthorizedDevice._AllowedFrom)
+                        @Html.EditorFor(model => model.AuthorizedDevice._AllowedFrom, new { @class = "form-control" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.AuthorizedDevice._AllowedUntil)
+                        @Html.EditorFor(model => model.AuthorizedDevice._AllowedUntil, new { @class = "form-control" })
+                    </div>
+
+
+                    <div class="form-group">
+                        <input type="submit" value="Send" />
+                    </div>
+
+                </fieldset>
+            }
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div id="resultview">
+
+        </div>
+    </div>
+
+
+</div>

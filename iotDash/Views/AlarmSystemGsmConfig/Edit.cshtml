@@ -1,0 +1,58 @@
+﻿@model iotDash.Models.AlarmSystemGsmAddRcptModel
+
+@{
+    ViewBag.Title = "Add";
+}
+
+@{
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+
+<div class="container-fluid">
+
+    <div class="row">
+
+    </div>
+
+    <div class="row">
+        <div id="addraz">
+            @using (Html.BeginForm("Add", "AlarmSystemGsmConfig"))
+            {
+                <fieldset>
+
+                    <legend>Add gsm recipient</legend>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.GsmRcpt.NumberE164)
+                        @Html.TextBoxFor(model => model.GsmRcpt.NumberE164, new { @class = "form-control", @id = "devname" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.GsmRcpt.CountryCode)
+                        @Html.EditorFor(model => model.GsmRcpt.CountryCode, new { @class = "form-control" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.GsmRcpt.MessageLevel)
+                        @Html.EnumDropDownListFor(model => model.GsmRcpt.MessageLevel, new { @class = "form-control" })
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" value="Send" />
+                    </div>
+
+                </fieldset>
+            }
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div id="resultview">
+
+        </div>
+    </div>
+
+
+</div>

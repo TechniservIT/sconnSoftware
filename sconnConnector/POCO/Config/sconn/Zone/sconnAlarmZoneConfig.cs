@@ -21,7 +21,7 @@ namespace sconnConnector.POCO.Config.sconn
             Serialized[ipcDefines.mAdrZoneNo_Pos] = (byte)Zones.Count;
             for (int i = 0; i < Zones.Count; i++)
             {
-                Serialized[i*ipcDefines.ZONE_CFG_LEN + ipcDefines.ZONE_CFG_ENABLED_POS] = (byte)(Zones[i].Enabled ? 1 : 0);
+                Serialized[i * ipcDefines.ZONE_CFG_LEN + ipcDefines.ZONE_CFG_ENABLED_POS] = (byte)(Zones[i].Enabled ? 1 : 0);
                 Serialized[i * ipcDefines.ZONE_CFG_LEN + ipcDefines.ZONE_CFG_TYPE_POS] = (byte)(Zones[i].Type);
                 Serialized[i * ipcDefines.ZONE_CFG_LEN + ipcDefines.ZONE_CFG_NAME_ID_POS] = (byte)(Zones[i].NameId);
             }

@@ -13,7 +13,6 @@ ioc container			V
 data service with DI		+
 redo controllers for DI		+
 custom view base
-view engine for video rendering
 context interface		+
 mocks
 unit tests
@@ -24,6 +23,19 @@ iot services architecture
 iot services configs 
 gui for service managment
 device simulators for testing 
+web language translations and select
+emap controller and service 
+alarm IO map placement and store
+
+GUI :
+Alarm device image
+Top edit toolbox layout
+side bar responsive/redo
+account login dropdown fix		>
+breadcrumbs better style		+
+list edit/remove better style		+
+alarm config select add description	+
+list searchbar with add/refresh 
 
 Extras :
 PLC protocols TCP/IP
@@ -36,5 +48,6 @@ Dvr http streaming and service
 Video streaming config services and interfaces
 Video recording service
 Video playback service
+view engine for video rendering
 
 

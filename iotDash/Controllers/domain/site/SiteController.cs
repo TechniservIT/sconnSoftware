@@ -11,6 +11,7 @@ using iotDash.Session;
 using iotDatabaseConnector.DAL.Repository.Connector.Entity;
 using iotDbConnector.DAL;
 using SiteManagmentService;
+using iotDash.Identity.Attributes;
 
 namespace iotDash.Controllers.domain.site
 {

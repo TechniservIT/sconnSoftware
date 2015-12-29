@@ -317,6 +317,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\DomainAuthHelper.cs" />
+    <Compile Include="Helpers\DomainRoutingHelpers.cs" />
+    <Compile Include="Identity\Attributes\DeviceAuthorize.cs" />
+    <Compile Include="Identity\Attributes\DomainAuthorize.cs" />
+    <Compile Include="Identity\Attributes\SiteAuthorize.cs" />
     <Compile Include="Identity\Roles\IotUserRole.cs" />
     <Compile Include="Identity\Roles\IotAlarmSystemAdminRole.cs" />
     <Compile Include="Identity\Roles\IotCctvAdminRole.cs" />
@@ -1425,12 +1430,14 @@
     <Content Include="Views\AlarmSystemZonesConfig\Add.cshtml" />
     <Content Include="Views\AlarmSystemGsmConfig\Add.cshtml" />
     <Content Include="Views\AlarmSystemUsersConfig\Add.cshtml" />
-    <Content Include="Views\AlarmSystemAuthorizedDevices\Edot.cshtml" />
+    <Content Include="Views\AlarmSystemAuthorizedDevices\Edit.cshtml" />
     <Content Include="Views\AlarmSystemUsersConfig\Edit.cshtml" />
     <Content Include="Views\AlarmSystemUsersConfig\Remove.cshtml" />
+    <Content Include="Views\AlarmSystemGsmConfig\Edit.cshtml" />
     <None Include="Views\AlarmSystemUsersConfig\View.cshtml" />
     <Content Include="Views\AlarmSystemView\ConfigurationSelect.cshtml" />
     <Content Include="Views\AlarmSystemView\CommunicationConfigure.cshtml" />
+    <Content Include="Views\AlarmSystemZonesConfig\Edit.cshtml" />
     <None Include="Views\Dashboard\Index.cshtml" />
     <Content Include="SignalR.Sample\jquery.color-2.1.2.min.js" />
     <Content Include="SignalR.Sample\SignalR.StockTicker.js" />

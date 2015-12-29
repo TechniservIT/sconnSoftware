@@ -5,50 +5,68 @@
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 }
 
-<div class="row">
+<div class="panel panel-primary">
+    <div class="panel-heading text-center">
+        <h2>GSM Recipients</h2>
+    </div>
 
-        <div class="table-responsive">
+    <div class="panel-body">
 
-            <table class="table">
-                <tr>
-                    <th>Name</th>
-                    <th>Number</th>
-                    <th>Country Code</th>
-                    <th>MessageLevel</th>
-                    <th>Enabled</th>
-                </tr>
+        <div class="row">
 
+            <div class="table-responsive">
 
-                @foreach (sconnGsmRcpt d in Model.GsmRcpts)
-            {
+                <table class="table">
                     <tr>
-                        <td> @d.Name </td>
-                        <td> @d.NumberE164 </td>
-                        <td> @d.CountryCode</td>
-                        <td> @d.MessageLevel</td>
-                        <td> @d.Enabled</td>
+                        <th>Name</th>
+                        <th>Number</th>
+                        <th>Country Code</th>
+                        <th>MessageLevel</th>
+                        <th>Enabled</th>
+                    </tr>
 
+
+                    @foreach (sconnGsmRcpt d in Model.GsmRcpts)
+            {
+                        <tr>
+                            <td> @d.Name </td>
+                            <td> @d.NumberE164 </td>
+                            <td> @d.CountryCode</td>
+                            <td> @d.MessageLevel</td>
+                            <td> @d.Enabled</td>
+
+                            <td>
+
+
+                                <div class="btn-group-vertical" role="group" aria-label="...">
+
+                                    <button type="button" class="btn btn-default">
+                                        <a href="@Url.Action("Edit", "AlarmSystemGsmConfig", new {Rcpt = d})">
+                                            <span class="glyphicon glyphicon-wrench"></span>
+                                        </a>
+                                    </button>
+
+                                    <button type="button" class="btn btn-default">
+                                        <a href="@Url.Action("Remove", "AlarmSystemGsmConfig", new {Rcpt = d})">
+                                            <span class="glyphicon glyphicon-trash"></span>
+                                        </a>
+                                    </button>
+
+                                </div>
+
+                            </td>
+                        </tr>
+                    }
+
+                    <tr>
                         <td>
-
-                            <ul class="sidebar-nav" id="sidebar">
-
-                                <li role="presentation">
-                                    <a href="@Url.Action("Edit", "AlarmSystemAuthorizedDevices")"><span class=" glyphicon glyphicon-wrench"></span></a>
-                                </li>
-
-                                <li role="presentation">
-                                    <a href="@Url.Action("Remove", "AlarmSystemAuthorizedDevices")"><span class=" glyphicon glyphicon-trash"></span></a>
-                                </li>
-                            </ul>
+                            <a href="@Url.Action("Add", "AlarmSystemAuthorizedDevices")"><span class=" glyphicon glyphicon-plus"></span></a>
                         </td>
                     </tr>
-                }
-
-                <tr>
-                    <td>
-                        <a href="@Url.Action("Add", "AlarmSystemAuthorizedDevices")"><span class=" glyphicon glyphicon-plus"></span></a>
-                    </td>
-                </tr>
-            </table>
+                </table>
+            </div>
         </div>
+
     </div>
+
+</div>

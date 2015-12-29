@@ -5,48 +5,68 @@
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 }
 
-<div class="row">
-    <div class="table-responsive">
 
-        <table class="table">
-            <tr>
-                <th>Serial</th>
-                <th>Allowed from</th>
-                <th>Allowed until</th>
-                <th>Enabled</th>
-            </tr>
-
-
-            @foreach (sconnAuthorizedDevice d in Model.AuthorizedDevices)
-            {
-                <tr>
-
-                    <td> @d._Serial </td>
-                    <td> @d._AllowedFrom</td>
-                    <td> @d._AllowedUntil</td>
-                    <td> @d._Enabled</td>
-
-                    <td>
-
-                        <ul class="sidebar-nav" id="sidebar">
-
-                            <li role="presentation">
-                                <a href="@Url.Action("Edit", "AlarmSystemAuthorizedDevices")"><span class=" glyphicon glyphicon-wrench"></span></a>
-                            </li>
-
-                            <li role="presentation">
-                                <a href="@Url.Action("Remove", "AlarmSystemAuthorizedDevices")"><span class=" glyphicon glyphicon-trash"></span></a>
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
-            }
-
-            <tr>
-                <td>
-                    <a href="@Url.Action("Add", "AlarmSystemAuthorizedDevices")"><span class=" glyphicon glyphicon-plus"></span></a>
-                </td>
-            </tr>
-        </table>
+<div class="panel panel-primary">
+    <div class="panel-heading text-center">
+        <h2>Authorized Devices</h2>
     </div>
+
+    <div class="panel-body">
+
+        <div class="row">
+            <div class="table-responsive">
+
+                <table class="table">
+                    <tr>
+                        <th>Serial</th>
+                        <th>Allowed from</th>
+                        <th>Allowed until</th>
+                        <th>Enabled</th>
+                    </tr>
+
+
+                    @foreach (sconnAuthorizedDevice d in Model.AuthorizedDevices)
+            {
+                        <tr>
+
+                            <td> @d._Serial </td>
+                            <td> @d._AllowedFrom</td>
+                            <td> @d._AllowedUntil</td>
+                            <td> @d._Enabled</td>
+
+                            <td>
+
+
+                                <div class="btn-group-vertical" role="group" aria-label="...">
+
+                                    <button type="button" class="btn btn-default">
+                                        <a href="@Url.Action("Edit", "AlarmSystemAuthorizedDevices", new {Device = d})">
+                                            <span class="glyphicon glyphicon-wrench"></span>
+                                        </a>
+                                    </button>
+
+                                    <button type="button" class="btn btn-default">
+                                        <a href="@Url.Action("Remove", "AlarmSystemAuthorizedDevices", new {Device = d})">
+                                            <span class="glyphicon glyphicon-trash"></span>
+                                        </a>
+                                    </button>
+
+                                </div>
+
+                            </td>
+                        </tr>
+                    }
+
+                    <tr>
+                        <td>
+                            <a href="@Url.Action("Add", "AlarmSystemAuthorizedDevices")"><span class=" glyphicon glyphicon-plus"></span></a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
 </div>
+

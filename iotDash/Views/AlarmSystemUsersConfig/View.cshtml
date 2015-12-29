@@ -5,62 +5,79 @@
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 }
 
-
-
-<div class="row">
-
-    <div class="table-responsive">
-
-        <table class="table">
-            <tr>
-                <th>Login</th>
-                <th>Password</th>
-                <th>Allowed from</th>
-                <th>Allowed until</th>
-                <th>Permissions</th>
-                <th>Group</th>
-                <th>Enabled</th>
-            </tr>
-
-
-            @foreach (sconnUser d in Model.Users)
-            {
-                <tr>
-
-                    <td> @d.Login </td>
-                    <td> @d.Password</td>
-                    <td> @d.AllowedFrom</td>
-                    <td> @d.AllowedUntil</td>
-                    <td> @d.Permissions</td>
-                    <td> @d.Group</td>
-                    <td> @d.Enabled</td>
-
-                    <td>
-
-                        <ul class="sidebar-nav" id="sidebar">
-
-                            <li role="presentation">
-                                <a href="@Url.Action("Edit", "AlarmSystemUsersConfig")"><span class=" glyphicon glyphicon-wrench"></span></a>
-                            </li>
-
-                            <li role="presentation">
-                                <a href="@Url.Action("Remove", "AlarmSystemUsersConfig")"><span class=" glyphicon glyphicon-trash"></span></a>
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
-            }
-
-            <tr>
-                <td>
-                    <a href="@Url.Action("Add", "AlarmSystemUsersConfig")"><span class=" glyphicon glyphicon-plus"></span></a>
-                </td>
-            </tr>
-        </table>
+<div class="panel panel-primary">
+    <div class="panel-heading text-center">
+        <h2>Users</h2>
     </div>
-</div>
+
+    <div class="panel-body">
+
+        <div class="row">
+
+            <div class="table-responsive">
+
+                <table class="table">
+                    <tr>
+                        <th>Login</th>
+                        <th>Password</th>
+                        <th>Allowed from</th>
+                        <th>Allowed until</th>
+                        <th>Permissions</th>
+                        <th>Group</th>
+                        <th>Enabled</th>
+                    </tr>
 
 
-<div class="row">
-    
+                    @foreach (sconnUser d in Model.Users)
+            {
+                        <tr>
+
+                            <td> @d.Login </td>
+                            <td> @d.Password</td>
+                            <td> @d.AllowedFrom</td>
+                            <td> @d.AllowedUntil</td>
+                            <td> @d.Permissions</td>
+                            <td> @d.Group</td>
+                            <td> @d.Enabled</td>
+
+                            <td>
+
+
+                                <div class="btn-group-vertical" role="group" aria-label="...">
+
+                                    <button type="button" class="btn btn-default">
+                                        <a href="@Url.Action("Edit", "AlarmSystemUsersConfig", new {User = d})">
+                                            <span class="glyphicon glyphicon-wrench"></span>
+                                        </a>
+                                    </button>
+
+                                    <button type="button" class="btn btn-default">
+                                        <a href="@Url.Action("Remove", "AlarmSystemUsersConfig", new {User = d})">
+                                            <span class="glyphicon glyphicon-trash"></span>
+                                        </a>
+                                    </button>
+
+                                </div>
+
+
+                            </td>
+                        </tr>
+                    }
+
+                    <tr>
+                        <td>
+                            <a href="@Url.Action("Add", "AlarmSystemUsersConfig")"><span class=" glyphicon glyphicon-plus"></span></a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+
+        <div class="row">
+
+        </div>
+
+    </div>
+
 </div>

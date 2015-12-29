@@ -5,6 +5,7 @@ using iotDash.Controllers.domain.navigation;
 using iotDash.Models;
 using iotDash.Session;
 using iotDbConnector.DAL;
+using iotDash.Identity.Attributes;
 
 namespace iotDash.Controllers.domain.site.IoT
 {

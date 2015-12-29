@@ -11,6 +11,7 @@ using iotDash.Session;
 using iotDatabaseConnector.DAL.Repository.Connector.Entity;
 using iotDbConnector.DAL;
 using sconnConnector.Config;
+using sconnConnector.POCO.Config.sconn;
 
 namespace iotDash.Controllers.domain.site.AlarmSystem
 {
@@ -24,12 +25,28 @@ namespace iotDash.Controllers.domain.site.AlarmSystem
             Icont = DomainSession.GetDataContextForUserContext(contBase);
         }
 
-
-
+        
         public ActionResult View(int DeviceId)
         {
             this._provider = new ZoneConfigurationService(DomainSession.GetAlarmConfigForContextWithDeviceId(this.HttpContext, DeviceId));
             AlarmSystemZoneConfigModel model = new AlarmSystemZoneConfigModel(this._provider.GetAll());
+            return View(model);
+        }
+
+
+        public ActionResult Edit(sconnAlarmZone Zone)
+        {
+            AlarmSystemZoneAddModel model = new AlarmSystemZoneAddModel(Zone);
+            return View(model);
+        }
+
+
+        public ActionResult Remove(sconnAlarmZone Zone)
+        {
+            AlarmSystemZoneAddModel model = new AlarmSystemZoneAddModel();
+            this._provider = new ZoneConfigurationService(DomainSession.GetAlarmConfigForContextSession(this.HttpContext));
+            var remRes = this._provider.Remove(Zone);
+            model.Result = StatusResponseGenerator.GetStatusResponseResultForReturnParam(remRes);
             return View(model);
         }
 

@@ -10,6 +10,7 @@ using iotDash.Models;
 using iotDash.Session;
 using iotDatabaseConnector.DAL.Repository.Connector.Entity;
 using iotDbConnector.DAL;
+using iotDash.Identity.Attributes;
 
 namespace iotDash.Controllers.domain.site
 {

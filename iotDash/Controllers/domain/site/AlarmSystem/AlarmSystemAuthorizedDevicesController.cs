@@ -14,6 +14,7 @@ using iotDbConnector.DAL;
 using sconnConnector.Config;
 using SiteManagmentService;
 using AlarmSystemManagmentService.AuthorizedDevices;
+using sconnConnector.POCO.Config.sconn;
 
 namespace iotDash.Controllers.domain.site.AlarmSystem
 {
@@ -31,6 +32,22 @@ namespace iotDash.Controllers.domain.site.AlarmSystem
         public ActionResult Add()
         {
             AlarmSystemAddAuthorizedDeviceModel model = new AlarmSystemAddAuthorizedDeviceModel();
+            return View(model);
+        }
+
+        public ActionResult Edit(sconnAuthorizedDevice Device)
+        {
+            AlarmSystemAddAuthorizedDeviceModel model = new AlarmSystemAddAuthorizedDeviceModel(Device);
+            return View(model);
+        }
+
+
+        public ActionResult Remove(sconnAuthorizedDevice Device)
+        {
+            AlarmSystemAddAuthorizedDeviceModel model = new AlarmSystemAddAuthorizedDeviceModel();
+            this._provider = new AuthorizedDevicesConfigurationService(DomainSession.GetAlarmConfigForContextSession(this.HttpContext));
+            var remRes = this._provider.Remove(Device);
+            model.Result = StatusResponseGenerator.GetStatusResponseResultForReturnParam(remRes);
             return View(model);
         }
 

@@ -3,6 +3,7 @@ using System.Web.Mvc;
 using System.Web.UI;
 using iotDash.Controllers.domain.navigation;
 using iotDbConnector.DAL;
+using iotDash.Identity.Attributes;
 
 namespace iotDash.Controllers.domain.site
 {

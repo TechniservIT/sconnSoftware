@@ -10,7 +10,7 @@
 }
 
 <div class="panel panel-primary">
-    <div class="panel-heading .text-center">
+    <div class="panel-heading text-center">
             <h2>Zones</h2>
     </div>
 
@@ -35,27 +35,33 @@
                             <td> @d.Enabled </td>
                             <td> @d.Name</td>
                             <td> @d.Type</td>
-                            <td>        </td>
+                            <td>       </td>
 
                             <td>
 
-                                <ul class="sidebar-nav" id="sidebar">
+                                <div class="btn-group-vertical" role="group" aria-label="...">
 
-                                    <li role="presentation">
-                                        <a href="@Url.Action("Edit", "AlarmSystemZonesConfig")"><span class=" glyphicon glyphicon-wrench"></span></a>
-                                    </li>
+                                    <button type="button" class="btn btn-default">
+                                        <a href="@Url.Action("Edit", "AlarmSystemZonesConfig", new {Zone = d})">
+                                            <span class="glyphicon glyphicon-wrench"></span>
+                                        </a>
+                                    </button>
 
-                                    <li role="presentation">
-                                        <a href="@Url.Action("Remove", "AlarmSystemZonesConfig")"><span class=" glyphicon glyphicon-trash"></span></a>
-                                    </li>
-                                </ul>
+                                    <button type="button" class="btn btn-default">
+                                        <a href="@Url.Action("Remove", "AlarmSystemZonesConfig", new {Zone = d})">
+                                            <span class="glyphicon glyphicon-trash"></span>
+                                        </a>
+                                    </button>
+
+                                </div>
+
                             </td>
                         </tr>
                     }
 
                     <tr>
                         <td>
-                            <a href="@Url.Action("Add", "AlarmSystemZonesConfig")"><span class=" glyphicon glyphicon-plus"></span></a>
+                            <a href="@Url.Action("Add", "AlarmSystemZonesConfig")"><span class="glyphicon glyphicon-plus"></span></a>
                         </td>
                     </tr>
                 </table>

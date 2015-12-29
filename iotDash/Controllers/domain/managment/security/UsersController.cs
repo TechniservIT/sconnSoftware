@@ -13,6 +13,7 @@ using iotDash.Models;
 using iotDash.Session;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using iotDash.Identity.Attributes;
 
 namespace iotDash.Controllers.domain.managment.security
 {

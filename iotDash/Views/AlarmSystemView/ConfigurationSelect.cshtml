@@ -15,49 +15,120 @@
     <div class="panel-body">
         <div class="row">
             <div class="col-lg-4 col-sm-6 col-xs-12">
-                <a href="@Url.Action("Index", "AlarmSystemConfiguration", new {DeviceId = Model.AlarmDevice.Id})" role="button">
-                    <img src="~/Content/img/config1.png" class="thumbnail img-responsive">
-                </a>
+                <div class="thumbnail">
+                    <a href="@Url.Action("Index", "AlarmSystemConfiguration", new {DeviceId = Model.AlarmDevice.Id})" role="button">
+                        <img src="~/Content/img/config1.png" class="thumbnail img-responsive">
+                    </a>
+                    <div class="caption text-center">
+                        <h3>Global</h3>
+                    </div>
+                </div>
+
             </div>
             <div class="col-lg-4 col-sm-6 col-xs-12">
-                <a href="@Url.Action("InputsConfigure", "AlarmSystemView", new {DeviceId = Model.AlarmDevice.Id})" role="button">
-                    <img src="~/Content/img/eye.png" class="thumbnail img-responsive">
-                </a>
+                <div class="thumbnail">
+                    <a href="@Url.Action("InputsConfigure", "AlarmSystemView", new {DeviceId = Model.AlarmDevice.Id})" role="button">
+                        <img src="~/Content/img/config2.png" class="thumbnail img-responsive">
+                    </a>
+                    <div class="caption text-center">
+                        <h3>Devices</h3>
+                    </div>
+                </div>
+
             </div>
             <div class="col-lg-4 col-sm-6 col-xs-12">
-                <a href="@Url.Action("View", "AlarmSystemZonesConfig", new {DeviceId = Model.AlarmDevice.Id})" role="button">
-                    <img src="~/Content/img/strefa.png" class="thumbnail img-responsive">
-                </a>
+                <div class="thumbnail">
+                    <a href="@Url.Action("View", "AlarmSystemZonesConfig", new {DeviceId = Model.AlarmDevice.Id})" role="button">
+                        <img src="~/Content/img/strefa.png" class="thumbnail img-responsive">
+                    </a>
+                    <div class="caption text-center">
+                        <h3>Zones</h3>
+                    </div>
+                </div>
+
             </div>
             <div class="col-lg-4 col-sm-6 col-xs-12">
-                <a href="@Url.Action("View", "AlarmSystemGsmConfig", new {DeviceId = Model.AlarmDevice.Id})" role="button">
-                    <img src="~/Content/img/tel.png" class="thumbnail img-responsive">
-                </a>
+                <div class="thumbnail">
+                    <a href="@Url.Action("View", "AlarmSystemGsmConfig", new {DeviceId = Model.AlarmDevice.Id})" role="button">
+                        <img src="~/Content/img/tel.png" class="thumbnail img-responsive">
+                    </a>
+                    <div class="caption  text-center">
+                        <h3>Reporting</h3>
+                    </div>
+                </div>
+
             </div>
+
             <div class="col-lg-4 col-sm-6 col-xs-12">
-                <a href="@Url.Action("CommunicationConfigure", "AlarmSystemView", new {DeviceId = Model.AlarmDevice.Id})" role="button">
-                    <img src="~/Content/img/patchcord.png" class="thumbnail img-responsive">
-                </a>
+                <div class="thumbnail">
+                    <a href="@Url.Action("CommunicationConfigure", "AlarmSystemView", new {DeviceId = Model.AlarmDevice.Id})" role="button">
+                        <img src="~/Content/img/patchcord.png" class="thumbnail img-responsive">
+                    </a>
+                    <div class="caption  text-center">
+                        <h3>Communication</h3>
+                    </div>
+                </div>
+
             </div>
+
             <div class="col-lg-4 col-sm-6 col-xs-12">
-                <a href="@Url.Action("OutputsConfigure", "AlarmSystemView", new {DeviceId = Model.AlarmDevice.Id})" role="button">
-                    <img src="~/Content/img/electro.png" class="thumbnail img-responsive">
-                </a>
+                <div class="thumbnail">
+                    <a href="@Url.Action("View", "AlarmSystemUsersConfig", new {DeviceId = Model.AlarmDevice.Id})" role="button">
+                        <img src="~/Content/img/patchcord.png" class="thumbnail img-responsive">
+                    </a>
+                    <div class="caption  text-center">
+                        <h3>Users</h3>
+                    </div>
+                </div>
+
             </div>
+
             <div class="col-lg-4 col-sm-6 col-xs-12">
-                <a href="@Url.Action("OutputsConfigure", "AlarmSystemView", new {DeviceId = Model.AlarmDevice.Id})" role="button">
-                    <img src="~/Content/img/sensorout.png" class="thumbnail img-responsive">
-                </a>
+                <div class="thumbnail">
+                    <a href="@Url.Action("View", "AlarmSystemAuthorizedDevices", new {DeviceId = Model.AlarmDevice.Id})" role="button">
+                        <img src="~/Content/img/config2.png" class="thumbnail img-responsive">
+                    </a>
+                    <div class="caption  text-center">
+                        <h3>Authorization</h3>
+                    </div>
+                </div>
+
             </div>
+
             <div class="col-lg-4 col-sm-6 col-xs-12">
-                <a href="@Url.Action("InputsConfigure", "AlarmSystemView", new {DeviceId = Model.AlarmDevice.Id})" role="button">
-                    <img src="~/Content/img/sensorin.png" class="thumbnail img-responsive">
-                </a>
+                <div class="thumbnail">
+                    <a href="@Url.Action("OutputsConfigure", "AlarmSystemView", new {DeviceId = Model.AlarmDevice.Id})" role="button">
+                        <img src="~/Content/img/electro.png" class="thumbnail img-responsive">
+                    </a>
+                    <div class="caption  text-center">
+                        <h3>Outputs</h3>
+                    </div>
+                </div>
+
             </div>
+
             <div class="col-lg-4 col-sm-6 col-xs-12">
-                <a href="@Url.Action("RelaysConfigure", "AlarmSystemView", new {DeviceId = Model.AlarmDevice.Id})" role="button">
-                    <img src="~/Content/img/przekaznik.png" class="thumbnail img-responsive">
-                </a>
+                <div class="thumbnail">
+                    <a href="@Url.Action("InputsConfigure", "AlarmSystemView", new {DeviceId = Model.AlarmDevice.Id})" role="button">
+                        <img src="~/Content/img/sensorin.png" class="thumbnail img-responsive">
+                    </a>
+                    <div class="caption  text-center">
+                        <h3>Inputs</h3>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-lg-4 col-sm-6 col-xs-12">
+                <div class="thumbnail">
+                    <a href="@Url.Action("RelaysConfigure", "AlarmSystemView", new {DeviceId = Model.AlarmDevice.Id})" role="button">
+                        <img src="~/Content/img/przekaznik.png" class="thumbnail img-responsive">
+                    </a>
+                    <div class="caption  text-center">
+                        <h3>Relays</h3>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>

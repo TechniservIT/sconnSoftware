@@ -13,6 +13,7 @@ using iotDbConnector.DAL;
 using sconnConnector;
 using sconnConnector.Config;
 using sconnConnector.POCO.Config;
+using iotDash.Identity.Attributes;
 
 namespace iotDash.Controllers.domain.site.AlarmSystem
 {

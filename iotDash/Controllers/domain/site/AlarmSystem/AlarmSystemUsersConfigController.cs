@@ -11,6 +11,7 @@ using iotDash.Session;
 using iotDatabaseConnector.DAL.Repository.Connector.Entity;
 using iotDbConnector.DAL;
 using sconnConnector.Config;
+using sconnConnector.POCO.Config.Abstract.Auth;
 
 namespace iotDash.Controllers.domain.site.AlarmSystem
 {
@@ -32,6 +33,23 @@ namespace iotDash.Controllers.domain.site.AlarmSystem
             AlarmSystemUserAddModel model = new AlarmSystemUserAddModel();
             return View(model);
         }
+
+        public ActionResult Edit(sconnUser User)
+        {
+            AlarmSystemUserAddModel model = new AlarmSystemUserAddModel(User);
+            return View(model);
+        }
+
+       
+        public ActionResult Remove(sconnUser Rcpt)
+        {
+            AlarmSystemUserAddModel model = new AlarmSystemUserAddModel();
+            this._provider = new UsersConfigurationService(DomainSession.GetAlarmConfigForContextSession(this.HttpContext));
+            var remRes = this._provider.Remove(Rcpt);
+            model.Result = StatusResponseGenerator.GetStatusResponseResultForReturnParam(remRes);
+            return View(model);
+        }
+
 
         [HttpPost]
         public async Task<ActionResult> Add(AlarmSystemUserAddModel model)

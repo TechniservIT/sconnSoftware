@@ -8,6 +8,7 @@ using iotDash.Models;
 using iotDash.Session;
 using iotDbConnector.DAL;
 using iotDeviceService;
+using iotDash.Identity.Attributes;
 
 namespace iotDash.Controllers.domain.site.IoT
 {
