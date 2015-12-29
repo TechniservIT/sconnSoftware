@@ -21,43 +21,14 @@ namespace iotDash.Controllers.domain.site.AlarmSystem
 
         public AlarmSystemZonesConfigController(HttpContextBase contBase)
         {
-            DomainSession.LoadDataContextForUserContext(contBase);
-            IIotContextBase cont = (IIotContextBase)contBase.Session["iotcontext"];
-            Device alrmSysDev = (Device)contBase.Session["alarmDevice"];
-            if (alrmSysDev != null)
-            {
-                AlarmSystemConfigManager man = DomainSession.GetAlarmConfigForContextWithDevice(contBase,
-                    alrmSysDev);
-                this._provider = new ZoneConfigurationService(man);
-            }
-            this.Icont = cont;
+            Icont = DomainSession.GetDataContextForUserContext(contBase);
         }
 
-        private void LoadAlarmSystemService(int DevId)
-        {
-            Device alrmSysDev = (Device)this.HttpContext.Session["alarmDevice"];
-            if (alrmSysDev != null)
-            {
-                AlarmSystemConfigManager man = DomainSession.GetAlarmConfigForContextWithDevice(this.HttpContext,
-                    alrmSysDev);
-                this._provider = new ZoneConfigurationService(man);
-            }
-            else
-            {
-                alrmSysDev = Icont.Devices.First(d => d.Id == DevId);
-                if (alrmSysDev != null)
-                {
-                    this.HttpContext.Session["alarmDevice"] = alrmSysDev;
-                    AlarmSystemConfigManager man = DomainSession.GetAlarmConfigForContextWithDevice(this.HttpContext,
-                        alrmSysDev);
-                    this._provider = new ZoneConfigurationService(man);
-                }
-            }
-        }
+
 
         public ActionResult View(int DeviceId)
         {
-            LoadAlarmSystemService(DeviceId);
+            this._provider = new ZoneConfigurationService(DomainSession.GetAlarmConfigForContextWithDeviceId(this.HttpContext, DeviceId));
             AlarmSystemZoneConfigModel model = new AlarmSystemZoneConfigModel(this._provider.GetAll());
             return View(model);
         }
@@ -73,6 +44,7 @@ namespace iotDash.Controllers.domain.site.AlarmSystem
         {
             try
             {
+                this._provider = new ZoneConfigurationService(DomainSession.GetAlarmConfigForContextSession(this.HttpContext));
                 if (ModelState.IsValid)
                 {
                     var res = (_provider.Add(model.Zone));

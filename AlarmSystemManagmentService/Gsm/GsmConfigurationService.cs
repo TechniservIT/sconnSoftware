@@ -31,6 +31,7 @@ namespace AlarmSystemManagmentService
         
         public List<sconnGsmRcpt> GetAll()
         {
+            Manager.LoadSiteConfig();
             return Manager.Config.GsmConfig.Rcpts.ToList();
         }
 

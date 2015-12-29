@@ -27,6 +27,7 @@ namespace AlarmSystemManagmentService
         
         public List<sconnAuthorizedDevice> GetAll()
         {
+            Manager.LoadSiteConfig();
             return Manager.Config.AuthorizedDevices.Devices.ToList();
         }
 

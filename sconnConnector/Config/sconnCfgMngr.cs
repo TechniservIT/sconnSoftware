@@ -258,6 +258,9 @@ namespace sconnConnector
 									site.siteStat.FailedConnections++;
 									return false;
 								}
+
+                            return true;
+
 							}
 							else
 							{
@@ -272,8 +275,6 @@ namespace sconnConnector
 						site.siteStat.FailedConnections++;
 						return false;
 					}
-
-					return false;
 		}
 
 

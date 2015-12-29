@@ -57,6 +57,7 @@ namespace sconnConnector.POCO.Config
             globalConfig = new ipcGlobalConfig();
             gsmRcpts = new ipcRcpt[0];
             AuthDevices = new byte[0];
+            UserConfig = new byte[0];
             events = new ipcEvent[0];
             GlobalNameConfig = new byte[ipcDefines.RAM_NAMES_Global_Total_Size];
             Hash = new byte[ipcDefines.SHA256_DIGEST_SIZE];

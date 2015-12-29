@@ -22,21 +22,10 @@ namespace iotDash.Controllers.domain.site.AlarmSystem
 
         public AlarmSystemUsersConfigController(HttpContextBase contBase)
         {
-            DomainSession.LoadDataContextForUserContext(contBase);
-            IIotContextBase cont = (IIotContextBase)contBase.Session["iotcontext"];
-            this.Icont = cont;
+            Icont = DomainSession.GetDataContextForUserContext(contBase);
         }
 
-        private void LoadAlarmSystemService(int DevId)
-        {
-            Device alrmSysDev = Icont.Devices.First(d => d.Id == DevId);
-            if (alrmSysDev != null)
-            {
-                AlarmSystemConfigManager man = DomainSession.GetAlarmConfigForContextWithDevice(this.HttpContext,
-                    alrmSysDev);
-                this._provider = new UsersConfigurationService(man);
-            }
-        }
+      
 
         public ActionResult Add()
         {
@@ -49,6 +38,7 @@ namespace iotDash.Controllers.domain.site.AlarmSystem
         {
             try
             {
+                this._provider = new UsersConfigurationService(DomainSession.GetAlarmConfigForContextSession(this.HttpContext));
                 if (ModelState.IsValid)
                 {
                     var res = (_provider.Add(model.User));
@@ -64,7 +54,7 @@ namespace iotDash.Controllers.domain.site.AlarmSystem
 
         public ActionResult View(int DeviceId)
         {
-            LoadAlarmSystemService(DeviceId);
+            this._provider = new UsersConfigurationService(DomainSession.GetAlarmConfigForContextWithDeviceId(this.HttpContext, DeviceId));
             AlarmSystemUserConfigModel model = new AlarmSystemUserConfigModel(this._provider.GetAll());
             return View(model);
         }

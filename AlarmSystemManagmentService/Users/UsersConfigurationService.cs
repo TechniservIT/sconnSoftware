@@ -31,6 +31,7 @@ namespace AlarmSystemManagmentService
         
         public List<sconnUser> GetAll()
         {
+            Manager.LoadSiteConfig();
             return Manager.Config.UserConfig.Users.ToList();
         }
 

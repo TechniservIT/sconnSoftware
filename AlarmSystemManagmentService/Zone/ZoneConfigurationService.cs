@@ -31,6 +31,7 @@ namespace AlarmSystemManagmentService
 
         public List<sconnAlarmZone> GetAll()
         {
+            Manager.LoadSiteConfig();
             return Manager.Config.ZoneConfig.Zones.ToList();
         }
 
