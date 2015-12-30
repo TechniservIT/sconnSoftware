@@ -34,6 +34,7 @@ namespace sconnConnector.POCO.Config
 
         private void LoadInputsFromConfig()
         {
+            Inputs = new List<sconnInput>();
             InputNo = _memCFG[ipcDefines.mAdrInputsNO];
             for (int i = 0; i < InputNo; i++)
             {
@@ -44,6 +45,7 @@ namespace sconnConnector.POCO.Config
 
         private void LoadOutputsFromConfig()
         {
+            Outputs = new List<sconnOutput>();
             OutputNo = _memCFG[ipcDefines.mAdrOutputsNO];
             for (int i = 0; i < OutputNo; i++)
             {
@@ -54,6 +56,7 @@ namespace sconnConnector.POCO.Config
 
         private void LoadRelayFromConfig()
         {
+            Relays = new List<sconnRelay>();
             RelayNo = _memCFG[ipcDefines.mAdrRelayNO];
             for (int i = 0; i < RelayNo; i++)
             {

@@ -4,6 +4,8 @@ using iotDbConnector.DAL;
 using sconnConnector;
 using sconnConnector.Config;
 using sconnConnector.POCO.Config;
+using sconnConnector.POCO.Config.sconn;
+using System.Linq;
 
 namespace iotDash.Areas.AlarmSystem.Models
 {
@@ -55,38 +57,22 @@ namespace iotDash.Areas.AlarmSystem.Models
 
         [Required]
         public int ServerId { get; set; }
+       
+        public List<sconnDevice> Devices { get; set; }
 
-        [Required]
-        public List<sconnInput> Inputs { get; set; }
+        public sconnDevice Device { get; set; }
 
+        public sconnSite Config { get; set; }
 
-        public AlarmSystemConfigManager Config { get; set; }
-
-        public Device AlarmDevice { get; set; }
-
-        public ipcDeviceConfig EditedDevice { get; set; }
-
-
-        public AlarmSystemDetailModel(Device dev)
+        public AlarmSystemDetailModel(List<sconnDevice> devices, sconnSite site ) : this(devices)
         {
-            //get config from DB
-            AlarmDevice = dev;
-            ServerId = dev.Id;
-            Config = new AlarmSystemConfigManager(AlarmDevice.EndpInfo, AlarmDevice.Credentials);
-            Config.LoadSiteConfig();
-            EditedDevice = Config.site.siteCfg.deviceConfigs[0];
+            Config = site;
         }
 
-        public AlarmSystemDetailModel(Device dev,AlarmSystemConfigManager man)
+        public AlarmSystemDetailModel(List<sconnDevice> devices)
         {
-            AlarmDevice = dev;
-            ServerId = dev.Id;
-            Config = man;
-            Config.LoadSiteConfig();
-            if (Config.site.siteCfg.deviceConfigs.Length >= 1)
-            {
-                EditedDevice = Config.site.siteCfg.deviceConfigs[0];
-            }           
+            Devices = devices;
+            Device = Devices.FirstOrDefault();
         }
 
     }

@@ -21,40 +21,22 @@ namespace iotDash.Controllers.domain.site.AlarmSystem
     public class AlarmSystemViewController : Controller
     {
         private IIotContextBase Icont;
-        private GlobalConfigService _provider;
-        private AlarmSystemDetailModel _model;
+        private DeviceConfigService _provider;
 
         public AlarmSystemViewController(HttpContextBase contBase)
         {
-            DomainSession.LoadDataContextForUserContext(contBase);
-            IIotContextBase cont = (IIotContextBase)contBase.Session["iotcontext"];
-            this.Icont = cont;
+            Icont = DomainSession.GetDataContextForUserContext(contBase);
         }
 
-        private void LoadAlarmSystemService(int DevId)
-        {
-            Device alrmSysDev = Icont.Devices.First(d => d.Id == DevId);
-            if (alrmSysDev != null)
-            {
-                AlarmSystemConfigManager man = DomainSession.GetAlarmConfigForContextWithDevice(this.HttpContext,
-                    alrmSysDev);
-                this._provider = new GlobalConfigService(this.Icont, man);
-            }
-        }
 
         // GET: AlarmSystemView
         public ActionResult Index(int ServerId)
         {
             try
             {      
-                Device alrmSysDev = Icont.Devices.First(d => d.Id == ServerId);
-                if (alrmSysDev != null)
-                {
-                    var man = DomainSession.GetAlarmConfigForContextWithDevice(this.HttpContext, alrmSysDev);
-                    LoadAlarmSystemService(alrmSysDev.Id);
-                    _model = new AlarmSystemDetailModel(alrmSysDev, man);
-                    return View(_model);
-                }
+                    this._provider = new DeviceConfigService(DomainSession.GetAlarmConfigForContextWithDeviceId(this.HttpContext, ServerId));
+                    AlarmSystemDetailModel model = new AlarmSystemDetailModel(this._provider.GetAll(), _provider.Manager.site);
+                    return View(model);
             }
             catch (Exception e)
             {
@@ -62,24 +44,25 @@ namespace iotDash.Controllers.domain.site.AlarmSystem
             return View();
         }
 
-        public ActionResult ToggleArm(int ServerId)
-        {
-            try
-            {
-                Device alrmSysDev = Icont.Devices.First(d => d.Id == ServerId);
-                if (alrmSysDev != null)
-                {
-                    var man = DomainSession.GetAlarmConfigForContextWithDevice(this.HttpContext, alrmSysDev);
-                    AlarmSystemDetailModel model = new AlarmSystemDetailModel(alrmSysDev, man);
-                    model.Config.ToogleArmStatus();
-                }
-            }
-            catch (Exception e)
-            {
-                //err msg
-            }
-            return RedirectToAction("Index", new { DeviceId = ServerId });
-        }
+        //TODO
+        //public ActionResult ToggleArm(int ServerId)
+        //{
+        //    try
+        //    {
+        //        Device alrmSysDev = Icont.Devices.First(d => d.Id == ServerId);
+        //        if (alrmSysDev != null)
+        //        {
+        //            var man = DomainSession.GetAlarmConfigForContextWithDevice(this.HttpContext, alrmSysDev);
+        //            AlarmSystemDetailModel model = new AlarmSystemDetailModel(alrmSysDev, man);
+        //            model.Config.ToogleArmStatus();
+        //        }
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        //err msg
+        //    }
+        //    return RedirectToAction("Index", new { DeviceId = ServerId });
+        //}
 
 
         // GET: AlarmSystemView
@@ -91,15 +74,9 @@ namespace iotDash.Controllers.domain.site.AlarmSystem
         // GET: ConfigurationSelect
         public ActionResult ConfigurationSelect(int DeviceId)
         {
-            Device alrmSysDev = Icont.Devices.First(d => d.Id == DeviceId);
-            if (alrmSysDev != null)
-            {
-                var man = DomainSession.GetAlarmConfigForContextWithDevice(this.HttpContext, alrmSysDev);
-                LoadAlarmSystemService(alrmSysDev.Id);
-                _model = new AlarmSystemDetailModel(alrmSysDev, man);
-                return View(_model);
-            }
-            return View(_model);
+            this._provider = new DeviceConfigService(DomainSession.GetAlarmConfigForContextWithDeviceId(this.HttpContext, DeviceId));
+            AlarmSystemDetailModel model = new AlarmSystemDetailModel(this._provider.GetAll(),_provider.Manager.site);
+            return View(model);
         }
 
         
@@ -129,32 +106,7 @@ namespace iotDash.Controllers.domain.site.AlarmSystem
             }
             return View();
         }
-
-        public ActionResult SaveDeviceOutputs(List<sconnOutput> Outputs, int ServerId, int DeviceId)
-        {
-            try
-            {
-                Device alrmSysDev = Icont.Devices.First(d => d.Id == ServerId);
-                if (alrmSysDev != null)
-                {
-                    var man = DomainSession.GetAlarmConfigForContextWithDevice(this.HttpContext, alrmSysDev);
-                    AlarmSystemDetailModel nm = new AlarmSystemDetailModel(alrmSysDev, man);
-                    if (DeviceId < nm.Config.site.siteCfg.deviceConfigs.Length)
-                    {
-                        nm.Config.site.siteCfg.deviceConfigs[DeviceId].Outputs = Outputs;
-                        nm.Config.site.siteCfg.deviceConfigs[DeviceId].SavePropertiesToRawConfig();
-                        nm.Config.StoreDeviceConfig(DeviceId);
-                    }
-
-                }
-            }
-            catch (Exception e)
-            {
-                //err msg
-            }
-            return RedirectToAction("Index", new { ServerId = ServerId });
-        }
-
+        
 
         public ActionResult InputsConfigure(int ServerId, int AlarmDeviceId)
         {
@@ -174,34 +126,7 @@ namespace iotDash.Controllers.domain.site.AlarmSystem
                 return View();
             }
         }
-
-        public ActionResult SaveDeviceInputs(List<sconnInput> Inputs, int ServerId, int DeviceId)   
-        {
-            try
-            {
-                Device alrmSysDev = Icont.Devices.First(d => d.Id == ServerId);
-                if (alrmSysDev != null)
-                {
-                    var man = DomainSession.GetAlarmConfigForContextWithDevice(this.HttpContext, alrmSysDev);
-                    AlarmSystemDetailModel nm = new AlarmSystemDetailModel(alrmSysDev, man);
-                    if (DeviceId < nm.Config.site.siteCfg.deviceConfigs.Length)
-                    {
-                        nm.Config.site.siteCfg.deviceConfigs[DeviceId].Inputs = Inputs;
-                        nm.Config.site.siteCfg.deviceConfigs[DeviceId].SavePropertiesToRawConfig();
-                        nm.Config.StoreDeviceConfig(DeviceId);
-                    }
-
-                }
-                return RedirectToAction("Index", new { ServerId = ServerId });
-            }
-            catch (Exception e)
-            {
-                return RedirectToAction("Index", new { ServerId = ServerId });
-            }
-
-        }
-
-
+        
         public ActionResult RelaysConfigure(int ServerId, int AlarmDeviceId)
         {
             try
@@ -219,32 +144,6 @@ namespace iotDash.Controllers.domain.site.AlarmSystem
             {
                 return View();
             }
-        }
-
-        public ActionResult SaveDeviceRelays(List<sconnRelay> Relays, int ServerId, int DeviceId)     
-        {
-            try
-            {
-                Device alrmSysDev = Icont.Devices.First(d => d.Id == ServerId);
-                if (alrmSysDev != null)
-                {
-                    var man = DomainSession.GetAlarmConfigForContextWithDevice(this.HttpContext, alrmSysDev);
-                    AlarmSystemDetailModel nm = new AlarmSystemDetailModel(alrmSysDev, man);
-                    if (DeviceId < nm.Config.site.siteCfg.deviceConfigs.Length)
-                    {
-
-                    }
-                    nm.Config.site.siteCfg.deviceConfigs[DeviceId].Relays = Relays;
-                    nm.Config.site.siteCfg.deviceConfigs[DeviceId].SavePropertiesToRawConfig();
-                    nm.Config.StoreDeviceConfig(DeviceId);
-                }
-                return RedirectToAction("Index", new { ServerId = ServerId });
-            }
-            catch (Exception e)
-            {
-                return RedirectToAction("Index", new { ServerId = ServerId });
-            }
-
         }
 
 

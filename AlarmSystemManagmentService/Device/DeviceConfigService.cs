@@ -14,16 +14,15 @@ namespace AlarmSystemManagmentService
     public class DeviceConfigService : IDeviceConfigService
     {
         public AlarmSystemConfigManager Manager { get; set; }
-        private ipcDeviceConfig Device;
-
+        
         public DeviceConfigService()
         {
+
         }
         
-        public DeviceConfigService(AlarmSystemConfigManager man, ipcDeviceConfig AlarmDevice) : this()
+        public DeviceConfigService(AlarmSystemConfigManager man) : this()
         {
             Manager = man;
-            Device = AlarmDevice;
         }
 
         public List<sconnDevice> GetAll()
@@ -54,7 +53,7 @@ namespace AlarmSystemManagmentService
             try
             {
                 Manager.Config.DeviceConfig.Devices.Add(device);
-                return Manager.UploadDeviceConfig(Device);
+                return Manager.UploadDeviceConfig(device);
             }
             catch (Exception)
             {
@@ -71,7 +70,7 @@ namespace AlarmSystemManagmentService
                 if (odevice != null)
                 {
                     odevice = device;
-                    return Manager.UploadDeviceConfig(Device);
+                    return Manager.UploadDeviceConfig(odevice);
                 }
                 else
                 {
@@ -90,7 +89,7 @@ namespace AlarmSystemManagmentService
             try
             {
                 Manager.Config.DeviceConfig.Devices.Remove(device);
-                return Manager.UploadDeviceConfig(Device);
+                return Manager.UploadDeviceConfig(device);
             }
             catch (Exception)
             {

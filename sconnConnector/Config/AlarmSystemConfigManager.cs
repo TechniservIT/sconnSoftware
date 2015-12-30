@@ -122,6 +122,11 @@ namespace sconnConnector.Config
             return mngr.WriteDeviceCfgSingle(this.site,dev.DeviceId);
         }
 
+        public bool UploadDeviceConfig(sconnDevice dev)
+        {
+            return mngr.WriteDeviceCfgSingle(this.site, dev.DeviceId);
+        }
+
         public bool UploadUserConfig()
         {
             return false;   //TODO

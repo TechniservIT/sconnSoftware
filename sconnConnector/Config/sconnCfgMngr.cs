@@ -15,8 +15,6 @@ using System.Windows.Input;
 
 #endif
 
-
-
 namespace sconnConnector
 {
 	public class sconnCfgMngr
@@ -1265,9 +1263,6 @@ namespace sconnConnector
                     {
 
                        //find out which configs changed by gcfg registers
-                       //long cfgIncBefore = CfgOper.GetLongFromBufferAtPos(site.siteCfg.globalConfig.memCFG,ipcDefines.GCFG_DEV_MOD_CTR_START_POS + (i * ipcDefines.GCFG_DEV_MOD_CTR_LEN));
-                       //long cfgIncNow = CfgOper.GetLongFromBufferAtPos(gcfgRx, ipcDefines.GCFG_DEV_MOD_CTR_START_POS + (i * ipcDefines.GCFG_DEV_MOD_CTR_LEN) + rxOffset);
-                       //DeviceChanged = cfgIncBefore < cfgIncNow;
                        byte[] devhashrx = new byte[ipcDefines.SHA256_DIGEST_SIZE];
                        for (int j = 0; j < ipcDefines.SHA256_DIGEST_SIZE; j++)
                        {

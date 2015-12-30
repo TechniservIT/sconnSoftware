@@ -640,7 +640,7 @@ namespace sconnConnector
         public static int GCFG_HASH_LEN  =  SHA256_DIGEST_SIZE;
 
         public static int GCFG_DEV_MOD_CTR_START_POS = (GCFG_HASH_POS+GCFG_HASH_LEN);
-        public static int GCFG_DEV_MOD_CTR_LEN = SHA256_DIGEST_SIZE;
+        public static int GCFG_DEV_MOD_CTR_LEN = 4;  //integer value on config revision
         public static int GCFG_DEV_MOD_CTR_TOTAL_LEN = (GCFG_DEV_MOD_CTR_LEN * ipcAbsMaxDevices);
 
         public static int GCFG_NAMES_MOD_CTR_POS  =    (GCFG_DEV_MOD_CTR_START_POS+GCFG_DEV_MOD_CTR_TOTAL_LEN);

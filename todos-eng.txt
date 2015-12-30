@@ -28,8 +28,8 @@ emap controller and service
 alarm IO map placement and store
 
 GUI :
-Alarm device image
-Top edit toolbox layout
+Alarm device image					
+Top edit toolbox layout			V	
 side bar responsive/redo		V
 account login dropdown fix		V
 breadcrumbs better style		+

@@ -17,7 +17,7 @@
 
 @if (Model.Config != null)
 {
-    <h2>@Model.Config.site.siteName</h2>
+    <h2>@Model.Config.siteName</h2>
 }
 
 <script src="~/signalr/hubs"></script>
@@ -51,7 +51,7 @@
 
     public string SpanClassForArmStatusDisplay()
     {
-        int val = Model.Config.site.siteCfg.globalConfig.memCFG[sconnConnector.ipcDefines.mAdrArmed];
+        int val = Model.Config.siteCfg.globalConfig.memCFG[sconnConnector.ipcDefines.mAdrArmed];
         if (val > 0)
         {
             return "label label-success";
@@ -64,7 +64,7 @@
 
     public string DescForArmStatusDisplay()
     {
-        int val = Model.Config.site.siteCfg.globalConfig.memCFG[sconnConnector.ipcDefines.mAdrArmed];
+        int val = Model.Config.siteCfg.globalConfig.memCFG[sconnConnector.ipcDefines.mAdrArmed];
         if (val > 0)
         {
             return "Armed";
@@ -79,7 +79,7 @@
 
     public string SpanClassForViolationStatusDisplay()
     {
-        int val = Model.Config.site.siteCfg.globalConfig.memCFG[sconnConnector.ipcDefines.mAdrViolation];
+        int val = Model.Config.siteCfg.globalConfig.memCFG[sconnConnector.ipcDefines.mAdrViolation];
         if (val > 0)
         {
             return "label label-danger";
@@ -93,7 +93,7 @@
 
     public string DescForViolationStatusDisplay()
     {
-        int val = Model.Config.site.siteCfg.globalConfig.memCFG[sconnConnector.ipcDefines.mAdrViolation];
+        int val = Model.Config.siteCfg.globalConfig.memCFG[sconnConnector.ipcDefines.mAdrViolation];
         if (val > 0)
         {
             return "Yes";
@@ -107,7 +107,7 @@
 
     public string DescForArmAction()
     {
-        int val = Model.Config.site.siteCfg.globalConfig.memCFG[sconnConnector.ipcDefines.mAdrArmed];
+        int val = Model.Config.siteCfg.globalConfig.memCFG[sconnConnector.ipcDefines.mAdrArmed];
         if (val > 0)
         {
             return "Disarm";
@@ -118,7 +118,7 @@
         }
     }
 
-        
+
     public string ContentForDigitalIoValue(int value)
     {
         if (value == 0)
@@ -130,7 +130,7 @@
             return "<button type='button' class='btn btn-success'>" + value.ToString() + "</button>";
         }
     }
-    
+
     public string ImageUrlForDigitalIoValue(int value)
     {
         if (value == 0)
@@ -143,6 +143,38 @@
         }
     }
 
+    public string GetProgressBarClassForSupplyValue(double value)
+    {
+        if(value >= 16)
+        {
+            return "progress-bar-success";
+        }
+        else if (value >= 13.8)
+        {
+            return "progress-bar-warning";
+        }
+        else
+        {
+            return "progress-bar-danger";
+        }
+    }
+
+
+    public string GetProgressBarClassForBatteryValue(double value)
+    {
+        if (value >= 12)
+        {
+            return "progress-bar-success";
+        }
+        else if (value >= 9)
+        {
+            return "progress-bar-warning";
+        }
+        else
+        {
+            return "progress-bar-danger";
+        }
+    }
 
     //TODO generate req param input lists
 
@@ -279,7 +311,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div id="ReloadModelData" class="col-md-1">
-                        @Html.ActionLink("Refresh", "Index", new { DeviceId = Model.AlarmDevice.Id }, new { @class = "glyphicon glyphicon-refresh" })
+                        @Html.ActionLink("Refresh", "Index", new { DeviceId = Model.Device.Id }, new { @class = "glyphicon glyphicon-refresh" })
                     </div>
                 </div>
 
@@ -298,7 +330,7 @@
                         <table class="table">
                             <tr>
                                 <td>Device Number</td>
-                                <td>@Model.Config.site.siteCfg.deviceNo</td>
+                                <td>@Model.Config.siteCfg.deviceNo</td>
                             </tr>
 
                             <tr>
@@ -311,6 +343,31 @@
                                 <td><span class='@SpanClassForViolationStatusDisplay()'>@DescForViolationStatusDisplay()</span></td>
                             </tr>
 
+
+                            <tr>
+                                <td>Power supply</td>
+                                <td>
+                                    <div class="progress">
+                                        <div class="progress-bar  @(GetProgressBarClassForSupplyValue(Model.Device.MainVoltage))" role="progressbar" aria-valuenow="@Model.Device.MainVoltage.ToString()" aria-valuemin="0" aria-valuemax="24" style="width: @((@Model.Device.MainVoltage/24)*100)%;">
+                                           @Model.Device.MainVoltage.ToString() V
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                                
+
+                            <tr>
+                                <td>Battery</td>
+                                <td>
+                                    <div class="progress">
+                                        <div class="progress-bar @(GetProgressBarClassForBatteryValue(Model.Device.BatteryVoltage))" role="progressbar" aria-valuenow="@Model.Device.BatteryVoltage.ToString()" aria-valuemin="0" aria-valuemax="15" style="width: @((@Model.Device.BatteryVoltage/15)*100)%;">
+                                            @Model.Device.BatteryVoltage.ToString() V
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+
+
                         </table>
 
                     </div>
@@ -318,7 +375,7 @@
                 </div>
 
                 <div class="row">
-                    @Html.ActionLink(@DescForArmAction(), "ToggleArm", new { DeviceId = Model.AlarmDevice.Id }, new { @class = "btn btn-primary" })
+                    @Html.ActionLink(@DescForArmAction(), "ToggleArm", new { DeviceId = Model.ServerId }, new { @class = "btn btn-primary" })
                 </div>
 
 
@@ -344,24 +401,24 @@
                                 <th>State </th>
 
                             </tr>
-                        @if (Model.EditedDevice != null)
+                        @if (Model.Device != null)
                         {
-                            for (int i = 0; i < Model.EditedDevice.Inputs.Count; i++)
+                            for (int i = 0; i < Model.Device.Inputs.Count; i++)
                             {
                                 <tr>
                                     <td>
-                                        @Model.EditedDevice.Inputs[i].Name.ToString()
+                                        @Model.Device.Inputs[i].Name.ToString()
                                     </td>
 
-                                    @Html.HiddenFor(model => model.EditedDevice.Inputs[i].Id)
-                                    @Html.HiddenFor(model => model.EditedDevice.Inputs[i].NameId)
+                                    @Html.HiddenFor(model => model.Device.Inputs[i].Id)
+                                    @Html.HiddenFor(model => model.Device.Inputs[i].NameId)
 
                                     <td>
-                                        @Model.EditedDevice.Inputs[i].Type.ToString()
+                                        @Model.Device.Inputs[i].Type.ToString()
                                     </td>
 
                                     <td>
-                                        @Html.Raw(HttpUtility.HtmlDecode(ContentForDigitalIoValue(Model.EditedDevice.Inputs[i].Value)))
+                                        @Html.Raw(HttpUtility.HtmlDecode(ContentForDigitalIoValue(Model.Device.Inputs[i].Value)))
                                     </td>
 
                                 </tr>
@@ -401,25 +458,25 @@
                                 <th>State </th>
 
                             </tr>
-                            @if (Model.EditedDevice != null)
+                            @if (Model.Device != null)
                             {
-                                for (int i = 0; i < Model.EditedDevice.Outputs.Count; i++)
+                                for (int i = 0; i < Model.Device.Outputs.Count; i++)
                                 {
                                     <tr>
                                         <td>
-                                            @Model.EditedDevice.Inputs[i].Name.ToString()
+                                            @Model.Device.Inputs[i].Name.ToString()
                                         </td>
 
-                                        @Html.HiddenFor(model => model.EditedDevice.Outputs[i].Id)
-                                        @Html.HiddenFor(model => model.EditedDevice.Outputs[i].NameId)
+                                        @Html.HiddenFor(model => model.Device.Outputs[i].Id)
+                                        @Html.HiddenFor(model => model.Device.Outputs[i].NameId)
 
                                         <td>
-                                            @Model.EditedDevice.Outputs[i].Type.ToString()
+                                            @Model.Device.Outputs[i].Type.ToString()
 
                                         </td>
 
                                         <td>
-                                            @Html.Raw(HttpUtility.HtmlDecode(ContentForDigitalIoValue(Model.EditedDevice.Outputs[i].Value)))
+                                            @Html.Raw(HttpUtility.HtmlDecode(ContentForDigitalIoValue(Model.Device.Outputs[i].Value)))
                                         </td>
 
                                     </tr>
@@ -441,33 +498,6 @@
             <div role="tabpanel">
                 
                 @{Html.RenderAction("ConfigurationSelect", new { DeviceId = Model.ServerId });}
-
-                @*<ul class="nav nav-tabs" role="tablist" id="cfgtypeselector">
-                    <li role="presentation" class="active"><a href="#tabInputs" aria-controls="tabInputs" role="tab" data-toggle="tab">Inputs</a></li>
-                    <li role="presentation"><a href="#tabOutputs" aria-controls="tabOutputs" role="tab" data-toggle="tab">Outputs</a></li>
-                    <li role="presentation"><a href="#tabRelays" aria-controls="tabRelays" role="tab" data-toggle="tab">Relays</a></li>
-                    <li role="presentation"><a href="#tabNames" aria-controls="tabNames" role="tab" data-toggle="tab">Names</a></li>
-                </ul>
-
-                <div class="tab-content">
-
-                    <div role="tabpanel" class="tab-pane" id="tabInputs">
-                        @Html.Action("InputsConfigure", new { AlarmDeviceId = 0, ServerId = Model.AlarmDevice.Id })
-                    </div>
-
-                    <div role="tabpanel" class="tab-pane" id="tabOutputs">
-                        @Html.Action("OutputsConfigure", new { AlarmDeviceId = 0, ServerId = Model.AlarmDevice.Id })
-                    </div>
-
-                    <div role="tabpanel" class="tab-pane" id="tabRelays">
-                        @Html.Action("RelaysConfigure", new { AlarmDeviceId = 0, ServerId = Model.AlarmDevice.Id })
-                    </div>
-
-                    <div role="tabpanel" class="tab-pane" id="tabNames">
-                    </div>
-
-                </div>*@
-
 
             </div>
 

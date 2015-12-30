@@ -35,6 +35,17 @@ namespace sconnConnector.POCO.Config.sconn
 
         public List<sconnRelay> Relays { get; set; }
 
+        public float MainVoltage { get; set; }
+
+        public float BatteryVoltage { get; set; }
+        
+
+        private void LoadSupplyVoltageLevels()
+        {
+            MainVoltage = System.BitConverter.ToSingle(_memCFG, ipcDefines.mAdrSuppVolt_Start_Pos);
+            BatteryVoltage = System.BitConverter.ToSingle(_memCFG, ipcDefines.mAdrBackupVolt_Start_Pos);
+        }
+
 
         private void LoadInputsFromConfig()
         {
@@ -72,6 +83,7 @@ namespace sconnConnector.POCO.Config.sconn
             LoadInputsFromConfig();
             LoadOutputsFromConfig();
             LoadRelayFromConfig();
+            LoadSupplyVoltageLevels();
         }
 
         public byte[] NetworkConfig
