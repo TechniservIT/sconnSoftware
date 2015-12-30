@@ -8,7 +8,7 @@
     <meta name="description" content="iotDash" />
 
     @Styles.Render("~/bundles/css")
-    @Styles.Render("~/bundles/css/sidebar")
+    @Styles.Render("~/bundles/css/sidebarsimple")
 
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
@@ -22,8 +22,14 @@
 <body>
 
     <div class="navbar navbar-default navbar-fixed-top">
+
+        <a href="#menu-toggle" class="btn btn-primary navbar-brand" id="menu-toggle">
+            <span class="glyphicon glyphicon-menu-hamburger"></span>
+        </a>
+
         <div class="container">
             <div class="navbar-header">
+
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -34,7 +40,7 @@
                 {
                     @Html.ActionLink(DomainRoutingHelpers.GetDomainNameFromContext(this.Context), "IOT", "Home", null, new { @class = "navbar-brand" })
                 }
-               
+
             </div>
 
             <div class="navbar-collapse collapse">
@@ -48,9 +54,9 @@
                         }
                         else
                         {
-                           <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                           <li>@Html.ActionLink("About", "About", "Home")</li>
-                           <li>@Html.ActionLink("Register", "Register", "Account")</li>
+                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                            <li>@Html.ActionLink("About", "About", "Home")</li>
+                            <li>@Html.ActionLink("Register", "Register", "Account")</li>
                         }
 
                     </ul>
@@ -70,7 +76,7 @@
         </div>
     </div>
 
-   @* @{ Html.RenderAction("Top", "Menu"); }    *@
+    @* @{ Html.RenderAction("Top", "Menu"); }    *@
 
     <div class="row">
         <div class="col-md-2">
@@ -78,7 +84,7 @@
         </div>
 
         <div class="col-md-10">
-            
+
             <div class="row">
                 <div class="col-md-12">
                     @Html.Partial("_DashboardBreadcrumbsPartial")
@@ -94,18 +100,18 @@
         </div>
 
         @*<div class="row">
-            <footer>
-                <p>&copy; @DateTime.Now.Year - Dominik Guz</p>
-            </footer>
-        </div>*@
+                <footer>
+                    <p>&copy; @DateTime.Now.Year - Dominik Guz</p>
+                </footer>
+            </div>*@
 
     </div>
 
-   
 
 
 
-    
+
+
     @RenderSection("scripts", required: false)
 
 </body>

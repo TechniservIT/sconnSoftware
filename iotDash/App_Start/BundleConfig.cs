@@ -59,7 +59,9 @@ namespace iotDash
             bundles.Add(new StyleBundle("~/bundles/css/sidebar").Include(
                  "~/Content/css/sidebar.css"
              ));
-
+            bundles.Add(new StyleBundle("~/bundles/css/sidebarsimple").Include(
+               "~/Content/css/simple-sidebar.css"
+           ));
 
 
             /* Tools */
@@ -72,6 +74,10 @@ namespace iotDash
 
             bundles.Add(new ScriptBundle("~/bundles/numspin").Include(
             "~/Scripts/bootstrap-spinedit.js"
+             ));
+
+            bundles.Add(new ScriptBundle("~/bundles/html5shiv").Include(
+            "~/Scripts/html5shiv.js"
              ));
 
             /* Style */

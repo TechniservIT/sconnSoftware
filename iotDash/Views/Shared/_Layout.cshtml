@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using iotDash.Helpers
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -44,25 +45,53 @@
     <div class="row">
         <div class="navbar navbar-default navbar-fixed-top">
             <div class="container">
-                <div class="navbar-header .col-md-2">
+                <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    @Html.ActionLink("iotDash", "Index", "Home", null, new { @class = "navbar-brand" })
+
+                    @if (Request.IsAuthenticated)
+                    {
+                        @Html.ActionLink(DomainRoutingHelpers.GetDomainNameFromContext(this.Context), "IOT", "Home", null, new { @class = "navbar-brand" })
+                    }
+
                 </div>
-                <div class="navbar-collapse collapse .col-md-10">
-                    <ul class="nav navbar-nav">          
-                        <li class=".col-md-1">@Html.ActionLink("Dashboard", "IOT", "Home")</li>
-                        <li class=".col-md-1">@Html.ActionLink("About", "About", "Home")</li>
-                        <li class=".col-md-1">@Html.ActionLink("Register", "Register", "Account")</li>
-                        <li class=".col-md-4"><center><div style="width:100%;" id="menuTimer"></div></center></li>
-                    </ul>
-                    @Html.Partial("_LoginPartial")
+
+                <div class="navbar-collapse collapse">
+
+                    <div class="col-md-4">
+                        <ul class="nav navbar-nav">
+
+                            @if (Request.IsAuthenticated)
+                            {
+
+                            }
+                            else
+                            {
+                                <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                                <li>@Html.ActionLink("About", "About", "Home")</li>
+                                <li>@Html.ActionLink("Register", "Register", "Account")</li>
+                            }
+
+                        </ul>
+                    </div>
+
+                    <div class="col-md-2">
+                        <center>
+                            <div class="pull-left" style="color: #64F0FE; padding: 15px;" id="menuTimer"></div>
+                        </center>
+                    </div>
+
+                    <div class="col-md-4">
+                        @Html.Partial("_LoginPartial")
+                    </div>
+
                 </div>
             </div>
         </div>
+
         
     </div>
 

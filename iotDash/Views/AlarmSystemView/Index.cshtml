@@ -15,9 +15,10 @@
     ViewBag.Title = "Index";
 }
 
-<h2>@Model.Config.site.siteName</h2>
-
-
+@if (Model.Config != null)
+{
+    <h2>@Model.Config.site.siteName</h2>
+}
 
 <script src="~/signalr/hubs"></script>
 
@@ -343,8 +344,9 @@
                                 <th>State </th>
 
                             </tr>
-
-                            @for (int i = 0; i < Model.EditedDevice.Inputs.Count; i++)
+                        @if (Model.EditedDevice != null)
+                        {
+                            for (int i = 0; i < Model.EditedDevice.Inputs.Count; i++)
                             {
                                 <tr>
                                     <td>
@@ -364,7 +366,7 @@
 
                                 </tr>
                             }
-
+                        }
                         </table>
                     </div>
 
@@ -374,18 +376,23 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <div class="container-fluid">
+
                                 <div class="row">
+
                                     <div class="col-md-2">
                                         <img src="~/Content/img/sensorout.png" alt="124das" class="img-circle img-section-icon">
                                     </div>
+
                                     <div class="col-md-10">
 
                                         <h2>Outputs</h2>
 
                                     </div>
                                 </div>
+
                             </div>
                         </div>
+
                         <div class="panel-body"></div>
                         <table class="table">
                             <tr>
@@ -394,28 +401,31 @@
                                 <th>State </th>
 
                             </tr>
-
-                            @for (int i = 0; i < Model.EditedDevice.Outputs.Count; i++)
+                            @if (Model.EditedDevice != null)
                             {
-                                <tr>
-                                    <td>
-                                        @Model.EditedDevice.Inputs[i].Name.ToString()
-                                    </td>
+                                for (int i = 0; i < Model.EditedDevice.Outputs.Count; i++)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Model.EditedDevice.Inputs[i].Name.ToString()
+                                        </td>
 
-                                    @Html.HiddenFor(model => model.EditedDevice.Outputs[i].Id)
-                                    @Html.HiddenFor(model => model.EditedDevice.Outputs[i].NameId)
+                                        @Html.HiddenFor(model => model.EditedDevice.Outputs[i].Id)
+                                        @Html.HiddenFor(model => model.EditedDevice.Outputs[i].NameId)
 
-                                    <td>
-                                        @Model.EditedDevice.Outputs[i].Type.ToString()
+                                        <td>
+                                            @Model.EditedDevice.Outputs[i].Type.ToString()
 
-                                    </td>
+                                        </td>
 
-                                    <td>
-                                        @Html.Raw(HttpUtility.HtmlDecode(ContentForDigitalIoValue(Model.EditedDevice.Outputs[i].Value)))
-                                    </td>
+                                        <td>
+                                            @Html.Raw(HttpUtility.HtmlDecode(ContentForDigitalIoValue(Model.EditedDevice.Outputs[i].Value)))
+                                        </td>
 
-                                </tr>
+                                    </tr>
+                                }
                             }
+                          
 
                         </table>
                     </div>
@@ -429,8 +439,10 @@
         <div role="tabpanel" class="tab-pane" id="tabConfigure">
 
             <div role="tabpanel">
+                
+                @{Html.RenderAction("ConfigurationSelect", new { DeviceId = Model.ServerId });}
 
-                <ul class="nav nav-tabs" role="tablist" id="cfgtypeselector">
+                @*<ul class="nav nav-tabs" role="tablist" id="cfgtypeselector">
                     <li role="presentation" class="active"><a href="#tabInputs" aria-controls="tabInputs" role="tab" data-toggle="tab">Inputs</a></li>
                     <li role="presentation"><a href="#tabOutputs" aria-controls="tabOutputs" role="tab" data-toggle="tab">Outputs</a></li>
                     <li role="presentation"><a href="#tabRelays" aria-controls="tabRelays" role="tab" data-toggle="tab">Relays</a></li>
@@ -454,8 +466,7 @@
                     <div role="tabpanel" class="tab-pane" id="tabNames">
                     </div>
 
-                </div>
-
+                </div>*@
 
 
             </div>
