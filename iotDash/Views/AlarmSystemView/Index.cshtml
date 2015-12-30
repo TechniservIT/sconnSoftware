@@ -24,35 +24,9 @@
 
 @functions{
 
-    public string PanelClassForResultParam(iotDbConnector.DAL.DeviceParameter param)
-    {
-        if (int.Parse(param.Value) == 1)
-        {
-            return "panel-primary";
-        }
-        else
-        {
-            return "panel-info";
-        }
-    }
-
-
-    public string PanelClassForActionResult(iotDbConnector.DAL.DeviceActionResult param)
-    {
-        if (int.Parse(param.Value) == 1)
-        {
-            return "panel-primary";
-        }
-        else
-        {
-            return "panel-info";
-        }
-    }
-
     public string SpanClassForArmStatusDisplay()
     {
-        int val = Model.Config.siteCfg.globalConfig.memCFG[sconnConnector.ipcDefines.mAdrArmed];
-        if (val > 0)
+        if (Model.Config.siteCfg.Armed)
         {
             return "label label-success";
         }
@@ -64,8 +38,7 @@
 
     public string DescForArmStatusDisplay()
     {
-        int val = Model.Config.siteCfg.globalConfig.memCFG[sconnConnector.ipcDefines.mAdrArmed];
-        if (val > 0)
+        if (Model.Config.siteCfg.Armed)
         {
             return "Armed";
         }
@@ -79,8 +52,7 @@
 
     public string SpanClassForViolationStatusDisplay()
     {
-        int val = Model.Config.siteCfg.globalConfig.memCFG[sconnConnector.ipcDefines.mAdrViolation];
-        if (val > 0)
+        if (Model.Config.siteCfg.Violation)
         {
             return "label label-danger";
 
@@ -93,8 +65,7 @@
 
     public string DescForViolationStatusDisplay()
     {
-        int val = Model.Config.siteCfg.globalConfig.memCFG[sconnConnector.ipcDefines.mAdrViolation];
-        if (val > 0)
+        if (Model.Config.siteCfg.Violation)
         {
             return "Yes";
         }
@@ -107,8 +78,7 @@
 
     public string DescForArmAction()
     {
-        int val = Model.Config.siteCfg.globalConfig.memCFG[sconnConnector.ipcDefines.mAdrArmed];
-        if (val > 0)
+        if (Model.Config.siteCfg.Armed)
         {
             return "Disarm";
         }
@@ -311,7 +281,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div id="ReloadModelData" class="col-md-1">
-                        @Html.ActionLink("Refresh", "Index", new { DeviceId = Model.Device.Id }, new { @class = "glyphicon glyphicon-refresh" })
+                        @Html.ActionLink("Refresh", "Index", new { DeviceId = Model.ServerId }, new { @class = "glyphicon glyphicon-refresh" })
                     </div>
                 </div>
 
@@ -343,18 +313,19 @@
                                 <td><span class='@SpanClassForViolationStatusDisplay()'>@DescForViolationStatusDisplay()</span></td>
                             </tr>
 
-
+                        @if (Model.Device != null)
+                        {
                             <tr>
                                 <td>Power supply</td>
                                 <td>
                                     <div class="progress">
                                         <div class="progress-bar  @(GetProgressBarClassForSupplyValue(Model.Device.MainVoltage))" role="progressbar" aria-valuenow="@Model.Device.MainVoltage.ToString()" aria-valuemin="0" aria-valuemax="24" style="width: @((@Model.Device.MainVoltage/24)*100)%;">
-                                           @Model.Device.MainVoltage.ToString() V
+                                            @Model.Device.MainVoltage.ToString() V
                                         </div>
                                     </div>
                                 </td>
                             </tr>
-                                
+
 
                             <tr>
                                 <td>Battery</td>
@@ -366,6 +337,8 @@
                                     </div>
                                 </td>
                             </tr>
+                        }
+
 
 
                         </table>

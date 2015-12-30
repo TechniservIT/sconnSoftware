@@ -12,8 +12,15 @@ namespace iotDash.Helpers
         {
             string url = httpContext.Request.RawUrl;
             var urlcomponents = url.Split('/');
-            string appdomain = urlcomponents[1];    //first component after slash
-            return appdomain;
+            if(urlcomponents.Count() >= 2)
+            {
+                string appdomain = urlcomponents[1];    //first component after slash
+                return appdomain;
+            }
+            else
+            {
+                return "Public";
+            }
         }
     }
 }

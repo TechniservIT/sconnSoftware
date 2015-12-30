@@ -54,7 +54,7 @@
 
                     @if (Request.IsAuthenticated)
                     {
-                        @Html.ActionLink(DomainRoutingHelpers.GetDomainNameFromContext(this.Context), "IOT", "Home", null, new { @class = "navbar-brand" })
+                        @Html.ActionLink(DomainRoutingHelpers.GetDomainNameFromContext(this.Context).Length > 0 ? DomainRoutingHelpers.GetDomainNameFromContext(this.Context) : "Public", "IOT", "Home", null, new { @class = "navbar-brand" })
                     }
 
                 </div>

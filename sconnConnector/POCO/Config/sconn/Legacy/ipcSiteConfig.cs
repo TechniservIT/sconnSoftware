@@ -16,6 +16,10 @@ namespace sconnConnector.POCO.Config
         public ipcEvent[] events;
         public ipcRcpt[] gsmRcpts;
 
+        public bool Violation;
+        public bool Armed;
+
+
         public byte[] AuthDevices;
         public byte[] UserConfig;
         public byte[] Hash;
@@ -29,6 +33,8 @@ namespace sconnConnector.POCO.Config
             {
                 dev.LoadPropertiesFromConfig();
             }
+            this.Violation = globalConfig.memCFG[ipcDefines.mAdrViolation] > 0 ? true : false;
+            this.Armed = globalConfig.memCFG[ipcDefines.mAdrArmed] > 0 ? true : false;
         }
         
 

@@ -27,6 +27,7 @@ namespace AlarmSystemManagmentService
 
         public List<sconnDevice> GetAll()
         {
+            Manager.LoadSiteConfig();
             return Manager.Config.DeviceConfig.Devices.ToList();
         }
 

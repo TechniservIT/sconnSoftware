@@ -71,8 +71,12 @@ namespace iotDash.Areas.AlarmSystem.Models
 
         public AlarmSystemDetailModel(List<sconnDevice> devices)
         {
-            Devices = devices;
-            Device = Devices.FirstOrDefault();
+            if(devices != null)
+            {
+                Devices = devices;
+                Device = Devices.FirstOrDefault();
+            }
+          
         }
 
     }
