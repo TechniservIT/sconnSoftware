@@ -12,5 +12,7 @@ namespace AlarmSystemManagmentService
          bool Remove(T entity);
          List<T> GetAll();
          bool Update(T entity);
+         T GetById(int Id);
+         bool RemoveById(int Id);
     }
 }

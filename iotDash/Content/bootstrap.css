@@ -4500,18 +4500,18 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   border-color: #5bc0de;
 }
 .navbar-default .navbar-brand {
-  color: #777;
+  color: #5bc0de;
 }
 .navbar-default .navbar-brand:hover,
 .navbar-default .navbar-brand:focus {
-  color: #5e5e5e;
+  color: #5bc0de;
   background-color: transparent;
 }
 .navbar-default .navbar-text {
-  color: #777;
+  color: #5bc0de;
 }
 .navbar-default .navbar-nav > li > a {
-  color: #777;
+  color: #5bc0de;
 }
 .navbar-default .navbar-nav > li > a:hover,
 .navbar-default .navbar-nav > li > a:focus {
@@ -4591,6 +4591,105 @@ fieldset[disabled] .navbar-default .btn-link:hover,
 fieldset[disabled] .navbar-default .btn-link:focus {
   color: #ccc;
 }
+
+.toolbar-default {
+  background-color: #D9EDF7;
+  border-color: #5bc0de;
+}
+.toolbar-default .toolbar-brand {
+  color: #5bc0de;
+}
+.toolbar-default .toolbar-brand:hover,
+.toolbar-default .toolbar-brand:focus {
+  color: #5bc0de;
+  background-color: transparent;
+}
+.toolbar-default .toolbar-text {
+  color: #5bc0de;
+}
+.toolbar-default .toolbar-nav > li > a {
+  color: #5bc0de;
+}
+.toolbar-default .toolbar-nav > li > a:hover,
+.toolbar-default .toolbar-nav > li > a:focus {
+  color: #333;
+  background-color: transparent;
+}
+.toolbar-default .toolbar-nav > .active > a,
+.toolbar-default .toolbar-nav > .active > a:hover,
+.toolbar-default .toolbar-nav > .active > a:focus {
+  color: #555;
+  background-color: #e7e7e7;
+}
+.toolbar-default .toolbar-nav > .disabled > a,
+.toolbar-default .toolbar-nav > .disabled > a:hover,
+.toolbar-default .toolbar-nav > .disabled > a:focus {
+  color: #ccc;
+  background-color: transparent;
+}
+.toolbar-default .toolbar-toggle {
+  border-color: #ddd;
+}
+.toolbar-default .toolbar-toggle:hover,
+.toolbar-default .toolbar-toggle:focus {
+  background-color: #ddd;
+}
+.toolbar-default .toolbar-toggle .icon-bar {
+  background-color: #888;
+}
+.toolbar-default .toolbar-collapse,
+.toolbar-default .toolbar-form {
+  border-color: #e7e7e7;
+}
+.toolbar-default .toolbar-nav > .open > a,
+.toolbar-default .toolbar-nav > .open > a:hover,
+.toolbar-default .toolbar-nav > .open > a:focus {
+  color: #555;
+  background-color: #e7e7e7;
+}
+@media (max-width: 767px) {
+  .toolbar-default .toolbar-nav .open .dropdown-menu > li > a {
+    color: #777;
+  }
+  .toolbar-default .toolbar-nav .open .dropdown-menu > li > a:hover,
+  .toolbar-default .toolbar-nav .open .dropdown-menu > li > a:focus {
+    color: #333;
+    background-color: transparent;
+  }
+  .toolbar-default .toolbar-nav .open .dropdown-menu > .active > a,
+  .toolbar-default .toolbar-nav .open .dropdown-menu > .active > a:hover,
+  .toolbar-default .toolbar-nav .open .dropdown-menu > .active > a:focus {
+    color: #555;
+    background-color: #e7e7e7;
+  }
+  .toolbar-default .toolbar-nav .open .dropdown-menu > .disabled > a,
+  .toolbar-default .toolbar-nav .open .dropdown-menu > .disabled > a:hover,
+  .toolbar-default .toolbar-nav .open .dropdown-menu > .disabled > a:focus {
+    color: #ccc;
+    background-color: transparent;
+  }
+}
+.toolbar-default .toolbar-link {
+  color: #777;
+}
+.toolbar-default .toolbar-link:hover {
+  color: #333;
+}
+.toolbar-default .btn-link {
+  color: #777;
+}
+.toolbar-default .btn-link:hover,
+.toolbar-default .btn-link:focus {
+  color: #333;
+}
+.toolbar-default .btn-link[disabled]:hover,
+fieldset[disabled] .toolbar-default .btn-link:hover,
+.toolbar-default .btn-link[disabled]:focus,
+fieldset[disabled] .toolbar-default .btn-link:focus {
+  color: #ccc;
+}
+
+
 .navbar-inverse {
   background-color: #222;
   border-color: #080808;
@@ -4697,7 +4796,7 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
   padding: 8px 15px;
   margin-bottom: 20px;
   list-style: none;
-  background-color: #f5f5f5;
+  background-color: #D9EDF7;
   border-radius: 4px;
 }
 .breadcrumb > li {
@@ -5739,6 +5838,8 @@ button.list-group-item-danger.active:focus {
 .panel-success > .panel-footer + .panel-collapse > .panel-body {
   border-bottom-color: #d6e9c6;
 }
+
+
 .panel-info {
   border-color: #bce8f1;
 }
@@ -6757,4 +6858,24 @@ button.close {
     display: none !important;
   }
 }
+
+
+
+
+
+
+.row-selected{
+   background-color: #D9EDF7;
+}
+
+.row-normal{
+   background-color: #ffffff;
+}
+
+.rowRecord{
+ 
+}
+
+
+
 /*# sourceMappingURL=bootstrap.css.map */

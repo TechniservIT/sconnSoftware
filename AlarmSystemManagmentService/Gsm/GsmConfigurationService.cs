@@ -28,7 +28,26 @@ namespace AlarmSystemManagmentService
         {
             Manager = man;
         }
-        
+
+
+        public bool RemoveById(int Id)
+        {
+            sconnGsmRcpt dev = this.Manager.Config.GsmConfig.Rcpts.Where(d => d.Id == Id).FirstOrDefault();
+            if (dev != null)
+            {
+                Manager.Config.GsmConfig.Rcpts.Remove(dev);
+                return Manager.UploadAuthorizedDevicesConfig();
+            }
+            return false;
+        }
+
+        public sconnGsmRcpt GetById(int Id)
+        {
+            sconnGsmRcpt dev = this.Manager.Config.GsmConfig.Rcpts.Where(d => d.Id == Id).FirstOrDefault();
+            return dev;
+        }
+
+
         public List<sconnGsmRcpt> GetAll()
         {
             Manager.LoadSiteConfig();

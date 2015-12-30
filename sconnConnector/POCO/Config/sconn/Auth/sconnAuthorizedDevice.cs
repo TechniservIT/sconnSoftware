@@ -9,6 +9,7 @@ namespace sconnConnector.POCO.Config.sconn
 {
     public class sconnAuthorizedDevice 
     {
+        public int Id { get; set; }
         public string _Serial;
         public bool _Enabled;
         public DateTime _AllowedFrom;

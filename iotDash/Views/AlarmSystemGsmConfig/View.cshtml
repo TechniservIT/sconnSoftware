@@ -12,6 +12,13 @@
 
     <div class="panel-body">
 
+
+        <div class="row">
+            <div class="col-md-12">
+                @Html.Partial("~/Views/Shared/EditorTemplate/ToolbarMenu.cshtml")
+            </div>
+        </div>
+
         <div class="row">
 
             <div class="table-responsive">
@@ -27,42 +34,17 @@
 
 
                     @foreach (sconnGsmRcpt d in Model.GsmRcpts)
-            {
-                        <tr>
+                     {
+                        <tr id="@d.Id.ToString()" class="rowRecord row-normal" >
                             <td> @d.Name </td>
                             <td> @d.NumberE164 </td>
                             <td> @d.CountryCode</td>
                             <td> @d.MessageLevel</td>
                             <td> @d.Enabled</td>
 
-                            <td>
-
-
-                                <div class="btn-group-vertical" role="group" aria-label="...">
-
-                                    <button type="button" class="btn btn-default">
-                                        <a href="@Url.Action("Edit", "AlarmSystemGsmConfig", new {Rcpt = d})">
-                                            <span class="glyphicon glyphicon-wrench"></span>
-                                        </a>
-                                    </button>
-
-                                    <button type="button" class="btn btn-default">
-                                        <a href="@Url.Action("Remove", "AlarmSystemGsmConfig", new {Rcpt = d})">
-                                            <span class="glyphicon glyphicon-trash"></span>
-                                        </a>
-                                    </button>
-
-                                </div>
-
-                            </td>
                         </tr>
                     }
 
-                    <tr>
-                        <td>
-                            <a href="@Url.Action("Add", "AlarmSystemAuthorizedDevices")"><span class=" glyphicon glyphicon-plus"></span></a>
-                        </td>
-                    </tr>
                 </table>
             </div>
         </div>

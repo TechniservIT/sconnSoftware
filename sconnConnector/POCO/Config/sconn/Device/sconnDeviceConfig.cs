@@ -23,6 +23,7 @@ namespace sconnConnector.POCO.Config.sconn
             for (int i = 0; i < cfg.deviceNo; i++)
             {
                 sconnDevice dev = new sconnDevice(cfg.deviceConfigs[i]);
+                dev.Id = i;
                 Devices.Add(dev);
             }
         }

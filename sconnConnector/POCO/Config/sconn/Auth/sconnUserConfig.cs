@@ -27,6 +27,7 @@ namespace sconnConnector.POCO.Config.Abstract.Auth
                         authrec[j] = cfg.UserConfig[i*ipcDefines.AUTH_CRED_SIZE + j];
                     }
                    sconnUser user = new sconnUser(authrec);
+                    user.Id = i;
                     Users.Add(user);
                 }
             }

@@ -10,8 +10,15 @@
         <h2>Users</h2>
     </div>
 
+
     <div class="panel-body">
 
+
+        <div class="row">
+            <div class="col-md-12">
+                @Html.Partial("~/Views/Shared/EditorTemplate/ToolbarMenu.cshtml")
+            </div>
+        </div>
         <div class="row">
 
             <div class="table-responsive">
@@ -29,8 +36,8 @@
 
 
                     @foreach (sconnUser d in Model.Users)
-            {
-                        <tr>
+                    {
+                        <tr id="@d.Id.ToString()" class="rowRecord row-normal">
 
                             <td> @d.Login </td>
                             <td> @d.Password</td>
@@ -40,35 +47,9 @@
                             <td> @d.Group</td>
                             <td> @d.Enabled</td>
 
-                            <td>
-
-
-                                <div class="btn-group-vertical" role="group" aria-label="...">
-
-                                    <button type="button" class="btn btn-default">
-                                        <a href="@Url.Action("Edit", "AlarmSystemUsersConfig", new {User = d})">
-                                            <span class="glyphicon glyphicon-wrench"></span>
-                                        </a>
-                                    </button>
-
-                                    <button type="button" class="btn btn-default">
-                                        <a href="@Url.Action("Remove", "AlarmSystemUsersConfig", new {User = d})">
-                                            <span class="glyphicon glyphicon-trash"></span>
-                                        </a>
-                                    </button>
-
-                                </div>
-
-
-                            </td>
                         </tr>
                     }
 
-                    <tr>
-                        <td>
-                            <a href="@Url.Action("Add", "AlarmSystemUsersConfig")"><span class=" glyphicon glyphicon-plus"></span></a>
-                        </td>
-                    </tr>
                 </table>
             </div>
         </div>

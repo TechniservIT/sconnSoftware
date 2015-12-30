@@ -1,0 +1,153 @@
+﻿@{
+    Layout = null;
+}
+
+@{ 
+    var ControllerName = this.ViewContext.RouteData.Values["controller"].ToString();
+}
+
+<script>
+
+     CurrentSelectionId = -1;
+     ControllerName = '@ControllerName';
+
+    $(function () {
+
+        $(".panel-info").click(function () {
+
+            //remove current selection
+            $(".panel").removeClass("panel-primary");
+            $(".panel").addClass("panel-info");
+
+            //set selected site
+            $(this).removeClass("panel-info");
+            $(this).addClass("panel-primary");
+            CurrentSelectionId = $(this).attr('id');
+            window.SelectedIndex = $(this).attr('id');
+
+        });
+
+        $(".rowRecord").click(function () {
+
+            //remove current selection
+            $(".rowRecord").removeClass("row-selected");
+            $(".rowRecord").addClass("row-normal");
+
+            //set selected site
+            $(this).removeClass("row-normal");
+            $(this).addClass("row-selected");
+            CurrentSelectionId = $(this).attr('id');
+            window.SelectedIndex = $(this).attr('id');
+        });
+
+        function VerifySelection() {
+            var selectedNodesNo = $(".panel-primary").length + $(".row-selected").length;
+            if (selectedNodesNo > 0 && CurrentSelectionId >= 0) {
+                return true;
+            }
+            else {
+            }
+
+        }
+
+        $("#ShowEditView").click(function () {
+            if (VerifySelection()) {
+                var fullurl = '@Url.Action("Edit", ControllerName)' + "?Id=" + CurrentSelectionId;
+                window.location.href = fullurl;
+            }
+        });
+
+        $("#ShowAddView").click(function () {
+            var fullurl = '@Url.Action("Add", ControllerName)';
+            window.location.href = fullurl;
+        });
+
+        $("#SearchSubmit").click(function () {
+            var fullurl = '@Url.Action("Search", ControllerName)';
+            window.location.href = fullurl;
+        });
+
+        $("#RefreshBtn").click(function () {
+            var fullurl = '@Url.Action("View", ControllerName)';
+            window.location.href = fullurl;
+        });
+
+        $("#ActionRemove").click(function () {
+            if (VerifySelection()) {
+                $.ajax({
+                    url: '@Url.Action("Remove", ControllerName)',
+                    type: this.method,
+                    data: { Id: CurrentSelectionId },
+                    success: function (result) {
+                        if (result == "True") {
+                        }
+                        else {
+                        }
+                    }
+                });
+            }
+        });
+    });
+</script>
+
+@*@section ToolbarMenu
+{*@   
+  
+<div class="row">
+    <nav class="navbar toolbar-default">
+        <div class="container-fluid">
+
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">@ControllerName</a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+
+                    <li class="">
+                        <a id="ShowAddView" class="btn btn-default" href="#" role="button">
+                            <span class="glyphicon glyphicon-plus"></span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a id="ShowEditView" class="btn btn-default" href="#" role="button">
+                            <span class="glyphicon glyphicon-wrench"></span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a id="ActionRemove" class="btn btn-default" href="#" role="button">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </a>
+                    </li>
+
+
+                </ul>
+
+                    <div class="form-group col-xs-7">
+                        <div class="col-xs-6">
+                            <input type="text" class="form-control input-lg col-sm-10" placeholder="Search">
+                        </div>
+                        <div class="col-xs-3">
+                            <button class="form-control input-lg col-sm-10" id="SearchSubmit" type="button" class="btn btn-default">Submit</button>
+                        </div>
+                       
+                    </div>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a id="RefreshBtn" class="btn btn-default" href="#" role="button">
+                                <span class="glyphicon glyphicon-refresh"></span>
+                            </a>
+                        </li>
+                    </ul>
+
+            </div>
+        </div>
+    </nav>
+
+</div>
+
+
+@*}*@

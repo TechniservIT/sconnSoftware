@@ -13,6 +13,13 @@
 
     <div class="panel-body">
 
+
+        <div class="row">
+            <div class="col-md-12">
+                @Html.Partial("~/Views/Shared/EditorTemplate/ToolbarMenu.cshtml")
+            </div>
+        </div>
+
         <div class="row">
             <div class="table-responsive">
 
@@ -27,7 +34,7 @@
 
                     @foreach (sconnAuthorizedDevice d in Model.AuthorizedDevices)
             {
-                        <tr>
+                        <tr id="@d.Id.ToString()" class="rowRecord row-normal">
 
                             <td> @d._Serial </td>
                             <td> @d._AllowedFrom</td>

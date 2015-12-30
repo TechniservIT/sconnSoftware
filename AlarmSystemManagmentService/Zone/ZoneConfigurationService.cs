@@ -29,6 +29,23 @@ namespace AlarmSystemManagmentService
             Manager = man;
         }
 
+        public bool RemoveById(int Id)
+        {
+            sconnAlarmZone dev = this.Manager.Config.ZoneConfig.Zones.Where(d => d.Id == Id).FirstOrDefault();
+            if (dev != null)
+            {
+                Manager.Config.ZoneConfig.Zones.Remove(dev);
+                return Manager.UploadAuthorizedDevicesConfig();
+            }
+            return false;
+        }
+
+        public sconnAlarmZone GetById(int Id)
+        {
+            sconnAlarmZone dev = this.Manager.Config.ZoneConfig.Zones.Where(d => d.Id == Id).FirstOrDefault();
+            return dev;
+        }
+
         public List<sconnAlarmZone> GetAll()
         {
             Manager.LoadSiteConfig();

@@ -40,6 +40,33 @@ namespace iotDash.Controllers.domain.site.AlarmSystem
             return View(model);
         }
 
+        public ActionResult Edit(int Id)
+        {
+            AlarmSystemZoneAddModel model = new AlarmSystemZoneAddModel();
+            this._provider = new ZoneConfigurationService(DomainSession.GetAlarmConfigForContextSession(this.HttpContext));
+            model.Zone = _provider.GetById(Id);
+            return View(model);
+        }
+
+        public ActionResult Search(string key)
+        {
+            this._provider = new ZoneConfigurationService(DomainSession.GetAlarmConfigForContextSession(this.HttpContext));
+            AlarmSystemZoneConfigModel model = new AlarmSystemZoneConfigModel(_provider.GetAll());
+            if (!String.IsNullOrEmpty(key))
+            {
+                model.ZoneConfigs = model.ZoneConfigs.Where(d => d.Name.Contains(key)).ToList();
+            }
+            return View(model);
+        }
+
+        public ActionResult Remove(int Id)
+        {
+            this._provider = new ZoneConfigurationService(DomainSession.GetAlarmConfigForContextSession(this.HttpContext));
+            AlarmSystemZoneConfigModel model = new AlarmSystemZoneConfigModel(_provider.GetAll());
+            bool remRes = _provider.RemoveById(Id);
+            model.Result = StatusResponseGenerator.GetStatusResponseResultForReturnParam(remRes);
+            return View(model);
+        }
 
         public ActionResult Remove(sconnAlarmZone Zone)
         {

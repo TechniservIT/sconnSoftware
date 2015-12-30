@@ -39,6 +39,7 @@ namespace sconnConnector.POCO.Config.sconn
                     zoneCfg[j] = cfg.globalConfig.memCFG[ipcDefines.mAdrZoneCfgStartAddr + i*ipcDefines.ZONE_CFG_LEN];
                 }
                 sconnAlarmZone zone = new sconnAlarmZone(zoneCfg);
+                zone.Id = i;
                 Zones.Add(zone);
             }
         }

@@ -46,6 +46,34 @@ namespace iotDash.Controllers.domain.site.AlarmSystem
             return View(model);
         }
 
+        public ActionResult Edit(int Id)
+        {
+            AlarmSystemGsmAddRcptModel model = new AlarmSystemGsmAddRcptModel();
+            this._provider = new GsmConfigurationService(DomainSession.GetAlarmConfigForContextSession(this.HttpContext));
+            model.GsmRcpt = _provider.GetById(Id);
+            return View(model);
+        }
+        
+        public ActionResult Search(string key)
+        {
+            this._provider = new GsmConfigurationService(DomainSession.GetAlarmConfigForContextSession(this.HttpContext));
+            AlarmSystemGsmConfigModel model = new AlarmSystemGsmConfigModel(_provider.GetAll());
+            if (!String.IsNullOrEmpty(key))
+            {
+                model.GsmRcpts = model.GsmRcpts.Where(d => d.NumberE164.Contains(key) || d.Name.Contains(key)).ToList();
+            }
+            return View(model);
+        }
+
+        public ActionResult Remove(int Id)
+        {
+            this._provider = new GsmConfigurationService(DomainSession.GetAlarmConfigForContextSession(this.HttpContext));
+            AlarmSystemGsmConfigModel model = new AlarmSystemGsmConfigModel(_provider.GetAll());
+            bool remRes = _provider.RemoveById(Id);
+            model.Result = StatusResponseGenerator.GetStatusResponseResultForReturnParam(remRes);
+            return View(model);
+        }
+
 
         public ActionResult Remove(sconnGsmRcpt Rcpt)
         {
@@ -56,8 +84,7 @@ namespace iotDash.Controllers.domain.site.AlarmSystem
             return View(model);
         }
 
-
-
+        
         [HttpPost]
         public async Task<ActionResult> Add(AlarmSystemGsmAddRcptModel model)
         {

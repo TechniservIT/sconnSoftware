@@ -20,9 +20,10 @@ namespace sconnConnector.POCO.Config
 
         public sconnGsmConfig(ipcSiteConfig cfg) :this()
         {
-            foreach (ipcRcpt t in cfg.gsmRcpts)
+            for (int i = 0; i < cfg.gsmRcpts.Length; i++)
             {
-                sconnGsmRcpt rcpt = new sconnGsmRcpt(t);
+                sconnGsmRcpt rcpt = new sconnGsmRcpt(cfg.gsmRcpts[i]);
+                rcpt.Id = i;
                 Rcpts.Add((rcpt));
             }
         }

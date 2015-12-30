@@ -53,6 +53,7 @@ namespace sconnConnector.POCO.Config
                     uuid = Encoding.Unicode.GetString(uuidBytes);
                     if (uuid.Length != 0)
                     {
+                        dev.Id = i;
                         dev._Serial = uuid;
                         this.Devices.Add(dev);
                     }

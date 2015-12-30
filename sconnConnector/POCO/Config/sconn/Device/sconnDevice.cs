@@ -10,6 +10,8 @@ namespace sconnConnector.POCO.Config.sconn
 {
     public class sconnDevice
     {
+        public int Id { get; set; }
+
         private byte[] _memCFG;
         private byte[][] _NamesCFG;
         private byte[][] _ScheduleCFG;

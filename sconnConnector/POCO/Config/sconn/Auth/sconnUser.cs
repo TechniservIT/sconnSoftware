@@ -8,6 +8,8 @@ namespace sconnConnector.POCO.Config.Abstract.Auth
 {
     public class sconnUser
     {
+        public int Id { get; set; }
+
         public string Login { get; set; }
 
         public string Password { get; set; }

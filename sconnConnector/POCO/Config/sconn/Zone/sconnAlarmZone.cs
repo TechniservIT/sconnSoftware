@@ -17,6 +17,7 @@ namespace sconnConnector.POCO.Config.sconn
 
     public class sconnAlarmZone
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public AlarmZoneType Type { get; set; }
         public bool Enabled { get; set; }

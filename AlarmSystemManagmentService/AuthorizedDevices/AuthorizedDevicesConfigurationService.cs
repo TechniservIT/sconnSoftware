@@ -31,6 +31,23 @@ namespace AlarmSystemManagmentService
             return Manager.Config.AuthorizedDevices.Devices.ToList();
         }
 
+        public bool RemoveById(int Id)
+        {
+            sconnAuthorizedDevice dev = this.Manager.Config.AuthorizedDevices.Devices.Where(d => d.Id == Id).FirstOrDefault();
+            if(dev != null)
+            {
+                Manager.Config.AuthorizedDevices.Devices.Remove(dev);
+                return Manager.UploadAuthorizedDevicesConfig();
+            }
+            return false;
+        }
+
+        public sconnAuthorizedDevice GetById(int Id)
+        {
+            sconnAuthorizedDevice dev = this.Manager.Config.AuthorizedDevices.Devices.Where(d => d.Id == Id).FirstOrDefault();
+            return dev;
+        }
+
         public bool Add(sconnAuthorizedDevice device)
         {
             try

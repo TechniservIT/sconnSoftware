@@ -30,12 +30,12 @@ alarm IO map placement and store
 GUI :
 Alarm device image
 Top edit toolbox layout
-side bar responsive/redo
-account login dropdown fix		>
+side bar responsive/redo		V
+account login dropdown fix		V
 breadcrumbs better style		+
 list edit/remove better style		+
 alarm config select add description	+
-list searchbar with add/refresh 
+list searchbar with add/refresh 	V
 
 Extras :
 PLC protocols TCP/IP

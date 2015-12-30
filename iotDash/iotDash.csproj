@@ -319,6 +319,7 @@
     </Compile>
     <Compile Include="Helpers\DomainAuthHelper.cs" />
     <Compile Include="Helpers\DomainRoutingHelpers.cs" />
+    <Compile Include="Helpers\Helpers.cs" />
     <Compile Include="Identity\Attributes\DeviceAuthorize.cs" />
     <Compile Include="Identity\Attributes\DomainAuthorize.cs" />
     <Compile Include="Identity\Attributes\SiteAuthorize.cs" />
@@ -1583,6 +1584,7 @@
     <None Include="Views\RoutingRules\Index.cshtml" />
     <None Include="Views\SecuritySupervisorSetup\Index.cshtml" />
     <Content Include="Views\Shared\_DashboardBreadcrumbsPartial.cshtml" />
+    <Content Include="Views\Shared\EditorTemplate\ToolbarMenu.cshtml" />
     <None Include="Views\Site\AddSite.cshtml" />
     <None Include="Views\UserSecurity\Index.cshtml" />
   </ItemGroup>

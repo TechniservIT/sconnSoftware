@@ -33,8 +33,6 @@ namespace sconnConnector.POCO.Config.sconn
 
     public class sconnEvent
     {
-        public short EventNo { get; set; }
-
         public int Id { get; set; }
         public DateTime Time { get; set; }
         public sconnEventType Type { get; set; }
