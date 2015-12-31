@@ -1,6 +1,14 @@
+tests for repo
+tests for alarm services
 embedded HAL
 embedded RTOS
 embedded add gsm msg lvls
+views for IO config
+views for communication config
+device info template
+device info firmware / hw version in gcfg - display
+device firmware upload - firmware version database
+
 embedded add event logging		+
 fix bus protocol gkp
 add embedded event/gsm config		+ 

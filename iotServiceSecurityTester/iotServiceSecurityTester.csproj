@@ -84,7 +84,6 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="webUserAccessTests.cs" />
   </ItemGroup>
@@ -103,6 +102,20 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\iotDash\iotDash.csproj">
+      <Project>{2835fdba-96ba-4d5c-850d-a909bb12f4e3}</Project>
+      <Name>iotDash</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\iotDatabaseConnector\iotDatabaseConnector.csproj">
+      <Project>{7df5e6fa-5839-456f-959b-af4a7a742775}</Project>
+      <Name>iotDatabaseConnector</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\iotData\iotData.csproj">
+      <Project>{e94b0a02-089e-483a-aaef-3bfa49039598}</Project>
+      <Name>iotData</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

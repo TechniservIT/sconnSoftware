@@ -123,6 +123,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogicDefinitionManagmentSer
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sconnRem", "sconnRem\sconnRem.csproj", "{9F7BCC3B-DC29-4BFE-8152-F74E1ED1F687}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "webInterfaceTests", "webInterfaceTests\webInterfaceTests.csproj", "{598E82E2-10B7-4C7A-93CC-22CC6C2C47A1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -277,6 +279,10 @@ Global
 		{9F7BCC3B-DC29-4BFE-8152-F74E1ED1F687}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9F7BCC3B-DC29-4BFE-8152-F74E1ED1F687}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9F7BCC3B-DC29-4BFE-8152-F74E1ED1F687}.Release|Any CPU.Build.0 = Release|Any CPU
+		{598E82E2-10B7-4C7A-93CC-22CC6C2C47A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{598E82E2-10B7-4C7A-93CC-22CC6C2C47A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{598E82E2-10B7-4C7A-93CC-22CC6C2C47A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{598E82E2-10B7-4C7A-93CC-22CC6C2C47A1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -333,5 +339,6 @@ Global
 		{2267B33B-6499-41D7-AAD2-2D24D76FAEFA} = {E838E3B0-E8EE-4239-B2AC-9D286330BF8A}
 		{B35BDC73-A57F-429F-92FC-3F6CC2C401DF} = {E838E3B0-E8EE-4239-B2AC-9D286330BF8A}
 		{9F7BCC3B-DC29-4BFE-8152-F74E1ED1F687} = {9A63916A-4F3F-4691-A287-C04BCC016927}
+		{598E82E2-10B7-4C7A-93CC-22CC6C2C47A1} = {0F223EC1-1281-44C5-8546-0F3C3EA99EB9}
 	EndGlobalSection
 EndGlobal

@@ -1,4 +1,6 @@
 ﻿@model iotDash.Areas.AlarmSystem.Models.AlarmSystemDetailModel
+@using sconnConnector
+
 @{
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 }
@@ -143,6 +145,30 @@
         else
         {
             return "progress-bar-danger";
+        }
+    }
+
+    public string GetProgressBarValueForVoltageBattery(double value)
+    {
+        if (value >= 9)
+        {
+            return ((value / ipcDefines.SUPP_BATT_LEAD_ACID_MAX_VOLTAGE) * 100).ToString();
+        }
+        else
+        {
+            return "100";  ///error 100 full
+        }
+    }
+
+    public string GetProgressBarValueForVoltageMain(double value)
+    {
+        if (value >= 9)
+        {
+            return ((value / ipcDefines.SUPP_MAIN_AC_MAX_VOLTAGE) * 100).ToString();
+        }
+        else
+        {
+            return "100";  ///error 100 full
         }
     }
 
@@ -319,27 +345,27 @@
                                 <td>Power supply</td>
                                 <td>
                                     <div class="progress">
-                                        <div class="progress-bar  @(GetProgressBarClassForSupplyValue(Model.Device.MainVoltage))" role="progressbar" aria-valuenow="@Model.Device.MainVoltage.ToString()" aria-valuemin="0" aria-valuemax="24" style="width: @((@Model.Device.MainVoltage/24)*100)%;">
+                                        <div class="progress-bar  @(GetProgressBarClassForSupplyValue(Model.Device.MainVoltage))" role="progressbar" aria-valuenow="@Model.Device.MainVoltage.ToString()" aria-valuemin="0" aria-valuemax="24" style="width:  @(GetProgressBarValueForVoltageMain(Model.Device.MainVoltage))%;">
                                             @Model.Device.MainVoltage.ToString() V
                                         </div>
                                     </div>
                                 </td>
                             </tr>
-
-
+                            
+                            
                             <tr>
                                 <td>Battery</td>
                                 <td>
                                     <div class="progress">
-                                        <div class="progress-bar @(GetProgressBarClassForBatteryValue(Model.Device.BatteryVoltage))" role="progressbar" aria-valuenow="@Model.Device.BatteryVoltage.ToString()" aria-valuemin="0" aria-valuemax="15" style="width: @((@Model.Device.BatteryVoltage/15)*100)%;">
+                                        <div class="progress-bar @(GetProgressBarClassForBatteryValue(Model.Device.BatteryVoltage))" role="progressbar" aria-valuenow="@Model.Device.BatteryVoltage.ToString()" aria-valuemin="0" aria-valuemax="15" style="width: @(GetProgressBarValueForVoltageBattery(Model.Device.MainVoltage))%;">
                                             @Model.Device.BatteryVoltage.ToString() V
                                         </div>
                                     </div>
                                 </td>
                             </tr>
                         }
-
-
+                          
+                            
 
                         </table>
 

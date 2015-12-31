@@ -11,59 +11,83 @@
 
 <h2>Users</h2>
 
-<div class="table-responsive">
 
-    <table class="table">
-        <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Phone  Number</th>
-            <th>Roles</th>
-            <th>Action</th>
-        </tr>
+<div class="panel panel-primary">
 
+    <div class="panel-heading text-center">
+        <h2>Zones</h2>
+    </div>
 
-        @foreach (ApplicationUser d in Model.Users)
-        {
-            <tr>
+    <div class="panel-body">
 
-                <td> @d.UserName </td>
+        <div class="row">
+            <div class="col-md-12">
+                @Html.Partial("~/Views/Shared/EditorTemplate/ToolbarMenu.cshtml")
+            </div>
+        </div>
 
-                <td> @d.Email</td>
+        <div class="row">
 
-                <td> @d.PhoneNumber</td>
+            <div class="table-responsive">
 
-                <td> @d.Roles.Count.ToString()</td>
-
-                <td>
-
-                    <ul class="sidebar-nav" id="sidebar">
-
-                        <li role="presentation">
-                            <a href="@Url.Action("Edit", "Users")"><span class=" glyphicon glyphicon-wrench"></span></a>
-                        </li>
-
-                        <li role="presentation">
-                            <a href="@Url.Action("Remove", "Users")"><span class=" glyphicon glyphicon-trash"></span></a>
-                        </li>
-
-                    </ul>
-
-                </td>
+                <table class="table">
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone  Number</th>
+                        <th>Roles</th>
+                        <th>Action</th>
+                    </tr>
 
 
-            </tr>
+                    @foreach (ApplicationUser d in Model.Users)
+                    {
+                        <tr>
 
-        }
+                            <td> @d.UserName </td>
 
-        <tr>
-            <td>
-                <a href="@Url.Action("Add", "Users")"><span class=" glyphicon glyphicon-plus"></span></a>
-            </td>
+                            <td> @d.Email</td>
 
-        </tr>
+                            <td> @d.PhoneNumber</td>
+
+                            <td> @d.Roles.Count.ToString()</td>
+
+                            <td>
+
+                                <ul class="sidebar-nav" id="sidebar">
+
+                                    <li role="presentation">
+                                        <a href="@Url.Action("Edit", "Users")"><span class=" glyphicon glyphicon-wrench"></span></a>
+                                    </li>
+
+                                    <li role="presentation">
+                                        <a href="@Url.Action("Remove", "Users")"><span class=" glyphicon glyphicon-trash"></span></a>
+                                    </li>
+
+                                </ul>
+
+                            </td>
 
 
-    </table>
+                        </tr>
+
+                    }
+
+                    <tr>
+                        <td>
+                            <a href="@Url.Action("Add", "Users")"><span class=" glyphicon glyphicon-plus"></span></a>
+                        </td>
+
+                    </tr>
+
+
+                </table>
+
+            </div>
+        </div>
+
+    </div>
 
 </div>
+
+

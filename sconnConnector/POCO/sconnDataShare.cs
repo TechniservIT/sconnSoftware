@@ -1061,10 +1061,11 @@ namespace sconnConnector
         static public byte NET_UPLOAD_DATA_OFFSET= 0x03;
         static public byte NET_UPLOAD_DATA_END_OFFSET =0x01;
         static public byte NET_CFG_SIZE   = 52;
-    
+
 
         /*************** OTHER *****************/
-        
+        static public double SUPP_BATT_LEAD_ACID_MAX_VOLTAGE = 15.00;
+        static public double SUPP_MAIN_AC_MAX_VOLTAGE = 24.00;
 
     }
 

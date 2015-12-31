@@ -55,6 +55,7 @@ namespace iotServiceTester
 
         Device AddDevice()
         {
+            return new Device();
 
             try
             {

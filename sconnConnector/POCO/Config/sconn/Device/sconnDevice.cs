@@ -80,7 +80,7 @@ namespace sconnConnector.POCO.Config.sconn
             }
         }
 
-
+       
         public void LoadPropertiesFromConfig()
         {
             LoadInputsFromConfig();

@@ -9,44 +9,66 @@
 }
 
 <h2>Roles</h2>
-<div class="table-responsive">
 
-    <table class="table">
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Active</th>
-            <th>ValidFrom</th>
-            <th>ValidUntil</th>
-        </tr>
+<div class="panel panel-primary">
+    <div class="panel-heading text-center">
+        <h2>Zones</h2>
+    </div>
 
+    <div class="panel-body">
 
-        @foreach (IotUserRole d in Model.Roles)
-        {
-            <tr>
+        <div class="row">
+            <div class="col-md-12">
+                @Html.Partial("~/Views/Shared/EditorTemplate/ToolbarMenu.cshtml")
+            </div>
+        </div>
 
-                <td> @d.Name </td>
+        <div class="row">
 
-                <td> @d.Type</td>
+            <div class="table-responsive">
 
-                <td> @d.Active</td>
-
-                <td> @d.ValidFrom</td>
-
-                <td> @d.ValidUntil</td>
-
-            </tr>
-        }
-
-        <tr>
-            <td>
-                <a href="@Url.Action("Add", "RoleManagment")"><span class=" glyphicon glyphicon-plus"></span></a>
-            </td>
-
-        </tr>
+                <table class="table">
+                    <tr>
+                        <th>Name</th>
+                        <th>Type</th>
+                        <th>Active</th>
+                        <th>ValidFrom</th>
+                        <th>ValidUntil</th>
+                    </tr>
 
 
-    </table>
+                    @foreach (IotUserRole d in Model.Roles)
+                    {
+                        <tr>
+
+                            <td> @d.Name </td>
+
+                            <td> @d.Type</td>
+
+                            <td> @d.Active</td>
+
+                            <td> @d.ValidFrom</td>
+
+                            <td> @d.ValidUntil</td>
+
+                        </tr>
+                    }
+
+                    <tr>
+                        <td>
+                            <a href="@Url.Action("Add", "RoleManagment")"><span class=" glyphicon glyphicon-plus"></span></a>
+                        </td>
+
+                    </tr>
+
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
 
 </div>
 

@@ -8,37 +8,42 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Diagnostics;
 using System.Data.Entity;
+using iotDatabaseConnector.DAL.Repository.Connector.Entity;
 
 namespace iotDatabaseTester
 {
-    [TestClass]
+
     public class DatabaseContextUnitTest
     {
+
+        private IIotContextBase context;
+
+        public DatabaseContextUnitTest(IIotContextBase cont)
+        {
+            this.context = cont;
+        }
 
         [TestMethod]
         public void TestContextSelect()
         {
-            iotContext cont = new iotContext();
-            List<iotDomain> domains = (from d in cont.Domains
+            List<iotDomain> domains = (from d in context.Domains
                                        select d).ToList();
             Assert.IsTrue(domains != null);
         }
 
+
         [TestMethod]
         public void TestDeviceParamQueryTime()
         {
-            iotContext cont = new iotContext();
             int ReadTestInterations = 50;
             int maxQueryTimeMs = 25;
             Stopwatch watch = new Stopwatch();
-            DeviceProperty prop = cont.Properties.FirstOrDefault();  //load initialy
-            //DeviceParameter tparam = (from r in prop.ResultParameters
-            //                         select r).Single();  //load initialy
+            DeviceProperty prop = context.Properties.FirstOrDefault();  //load initialy
 
             watch.Start();
             for (int i = 0; i < ReadTestInterations; i++)
             {
-                DeviceParameter param =  cont.Parameters
+                DeviceParameter param = context.Parameters
                                         .Include(p=>p.sconnMappers)
                                         .FirstOrDefault();
 
@@ -52,34 +57,20 @@ namespace iotDatabaseTester
         [TestMethod]
         public void TestDevicePropQueryTime()
         {
-
-            iotContext cont = new iotContext();
               int ReadTestInterations = 50;
               int maxQueryTimeMs = 2;
               Stopwatch watch = new Stopwatch();
-              DeviceProperty inprop = cont.Properties.AsNoTracking().FirstOrDefault();  //load initialy
+              DeviceProperty inprop = context.Properties.AsNoTracking().FirstOrDefault();  //load initialy
               watch.Start();
                 for (int i = 0; i < ReadTestInterations; i++)
                 {
-                    DeviceProperty prop = (from r in cont.Properties.AsNoTracking()
+                    DeviceProperty prop = (from r in context.Properties.AsNoTracking()
                                              select r).FirstOrDefault();
                 }
                 watch.Stop();
                 double TimePerQueryMs = watch.ElapsedMilliseconds / ReadTestInterations;
                 Assert.IsTrue(TimePerQueryMs < maxQueryTimeMs);
         }
-
-
-
-        [TestMethod]
-        public void TestConnectorSelect()
-        {
-            iotConnector conn = new iotConnector();
-            List<iotDomain> domains = conn.DomainList();
-            var task = conn.DomainList();
-            Assert.IsTrue(domains != null && domains != null);
-        }
-
 
         [TestMethod]
         public void TestConnectorRepo()
@@ -98,10 +89,9 @@ namespace iotDatabaseTester
             dm.DomainName = Guid.NewGuid().ToString();
             dm.Sites = new List<Site>();
             locrepo.Add(dm);
-
             List<iotDomain> locs = locrepo.GetAll().ToList();
             Assert.IsTrue(locs.Contains(dm));
-
+            locrepo.Delete(dm);
         }
 
         [TestMethod]
@@ -158,22 +148,17 @@ namespace iotDatabaseTester
         public void TestRepoDelete()
         {
             iotRepository<iotDomain> repo = new iotRepository<iotDomain>();
-
-
         }
 
         /****  LOAD ****/
-
-        [TestMethod]
+        
         public void TestEntityDbWriteLoad()
         {
             try
             {
                 int ReadTestInterations = 5;
                 int maxQueryTimeMs = 25;
-
                 Stopwatch watch = new Stopwatch();
-
                 watch.Start();
                 for (int i = 0; i < ReadTestInterations; i++)
                 {
@@ -185,7 +170,6 @@ namespace iotDatabaseTester
                     locrepo.Add(loc);
                 }
                 watch.Stop();
-
                 double TimePerQueryMs = watch.ElapsedMilliseconds / ReadTestInterations;
                 Assert.IsTrue(TimePerQueryMs < maxQueryTimeMs);
             }
@@ -194,8 +178,7 @@ namespace iotDatabaseTester
                 Assert.Fail();
             }
         }
-
-        [TestMethod]
+        
         public void TestEntityDbReadLoad()
         {
             try
@@ -204,16 +187,11 @@ namespace iotDatabaseTester
                 int maxQueryTimeMs = 25;
                 bool ReadSuccess = false;
                 int FailCount = 0;
-
                 TestRepoCreate();
-
                 Stopwatch watch = new Stopwatch();
-
                 iotRepository<iotDomain> repo = new iotRepository<iotDomain>();
                 List<iotDomain> domains = repo.GetAll().ToList();
                 iotDomain domain = domains.First();
-
-
                 watch.Start();
                 for (int i = 0; i < ReadTestInterations; i++)
                 {
@@ -223,7 +201,6 @@ namespace iotDatabaseTester
 
                 }
                 watch.Stop();
-
                 double TimePerQueryMs = watch.ElapsedMilliseconds / ReadTestInterations;
                 Assert.IsTrue(TimePerQueryMs < maxQueryTimeMs);
             }
@@ -235,24 +212,6 @@ namespace iotDatabaseTester
         }
 
     }
-
-
-
-
-    //[TestClass]
-    //public class NoSqlDatabaseUnitTest
-    //{
-
-    //    [TestMethod]
-    //    void TestRavenDbCRUD()
-    //    {
-    //        RavenNoSqlDataSource<string> db = new RavenNoSqlDataSource<string>();
-    //        db.Add("sample");
-    //        var res = db.GetAll();
-    //        Assert.IsTrue(res.Contains("sample"));
-    //    }
-
-    //}
-
+    
 
 }
