@@ -17,7 +17,7 @@ namespace iotServiceSecurityTester
         {
             // Create controller
 
-            var controller = new HomeController();
+            //var controller = new HomeController();
             
             // Check what happens for authenticated user
 

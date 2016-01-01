@@ -8,7 +8,7 @@ using sconnConnector.POCO.Config.sconn;
 
 namespace sconnConnector.POCO.Config
 {
-    public class sconnAuthorizedDevices
+    public class sconnAuthorizedDevices : IAlarmSystemConfigurationEntity
     {
         public List<sconnAuthorizedDevice>  Devices { get; set; }
 

@@ -8,7 +8,7 @@ using sconnConnector.POCO.Config.sconn;
 
 namespace sconnConnector.POCO.Config
 {
-    public class sconnGsmConfig
+    public class sconnGsmConfig : IAlarmSystemConfigurationEntity
     {
         public int RcptNo { get; set; }
         public List<sconnGsmRcpt> Rcpts { get; set; }

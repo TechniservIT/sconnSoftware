@@ -21,31 +21,6 @@ namespace iotDatabaseTester.Entity
             this.context = cont;
         }
 
-        [TestMethod]
-        public void Test_Repository_Domain_Create()
-        {
-
-        }
-
-        [TestMethod]
-        public void Test_Repository_Domain_Delete()
-        {
-
-        }
-
-        [TestMethod]
-        public void Test_Repository_Domain_Add_Site()
-        {
-
-        }
-
-
-
-        [TestMethod]
-        public void Test_Repository_Site_Add_Device()
-        {
-
-        }
 
         /******************************** Domain ***************************/
 
@@ -69,6 +44,7 @@ namespace iotDatabaseTester.Entity
         [TestMethod]
         public void Test_Repository_Location_Create()
         {
+            Assert.IsTrue(true);
             var mockContext = new Mock<IIotContextBase>();
           //  mockContext.Setup(c =>c.HttpContext.Response.Redirect("~/Some/Other/Place"));
             var controller = new HomeController();

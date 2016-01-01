@@ -11,7 +11,7 @@ using sconnConnector.POCO.Config;
 
 namespace AlarmSystemManagmentService
 {
-    public class DeviceConfigService : IDeviceConfigService
+    public class DeviceConfigService : IAlarmSystemConfigurationService<sconnDevice>
     {
         public AlarmSystemConfigManager Manager { get; set; }
         

@@ -9,5 +9,7 @@ namespace AlarmSystemManagmentService
 {
     public interface IDeviceConfigService  : IAlarmSystemConfigurationService<sconnDevice>
     {
+
     }
+
 }

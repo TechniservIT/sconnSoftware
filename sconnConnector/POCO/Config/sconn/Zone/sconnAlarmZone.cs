@@ -15,7 +15,7 @@ namespace sconnConnector.POCO.Config.sconn
         Time_Guarded
     }
 
-    public class sconnAlarmZone
+    public class sconnAlarmZone : IAlarmSystemConfigurationEntity
     {
         public int Id { get; set; }
         public string Name { get; set; }

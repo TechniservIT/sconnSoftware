@@ -8,7 +8,13 @@ using sconnConnector.POCO.Config.Abstract.IO;
 
 namespace sconnConnector.POCO.Config.sconn
 {
-    public class sconnDevice
+    public interface IAlarmSystemConfigurationEntity
+    {
+        
+    }
+
+
+    public class sconnDevice : IAlarmSystemConfigurationEntity
     {
         public int Id { get; set; }
 
