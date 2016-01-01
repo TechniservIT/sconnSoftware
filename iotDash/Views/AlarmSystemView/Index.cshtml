@@ -9,6 +9,7 @@
 @Scripts.Render("~/bundles/toggleswitch")
 @Scripts.Render("~/bundles/signalr")
 @Scripts.Render("~/bundles/numspin")
+@Scripts.Render("~/bundles/fancybox")
 
 @Styles.Render("~/bundles/css/toggleswitch")
 @Styles.Render("~/bundles/css/numspin")
@@ -23,6 +24,13 @@
 }
 
 <script src="~/signalr/hubs"></script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".fancybox").fancybox();
+    });
+</script>
+
 
 @functions{
 
@@ -312,6 +320,41 @@
                 </div>
 
                 <div class="row">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <center>
+                                <h2>Info</h2>
+                            </center>
+                        </div>
+                        <div class="panel-body">
+                            <div class="col-md-7">
+                                <div class="col-md-12 embed-responsive embed-responsive-16by9">
+                                    <a class="fancybox" rel="group" href="http://farm2.staticflickr.com/1518/23483607324_5846f25522_b.jpg"><img src="http://farm2.staticflickr.com/1518/23483607324_5846f25522_m.jpg" alt=""/></a>
+                                    @*<img class="embed-responsive-item" src="http://farm2.staticflickr.com/1518/23483607324_5846f25522_b.jpg"/>*@
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-5">
+                                <ul>
+                                    <li>
+                                        <div class="col-md-6">
+                                            Firmware version :
+                                        </div>
+                                        <div class="col-md-6">
+                                            1.001
+                                        </div>                            
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="row">
 
                     <div class="panel panel-default">
                         <div class="panel-heading">
@@ -365,7 +408,6 @@
                             </tr>
                         }
                           
-                            
 
                         </table>
 

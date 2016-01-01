@@ -104,21 +104,12 @@
 
 </script>
 
-<h3> @Model.Site.SiteName</h3>
-
-
 <div class="panel panel-primary">
     <div class="panel-heading text-center">
-        <h2>Zones</h2>
+        <h2>@Model.Site.SiteName</h2>
     </div>
 
     <div class="panel-body">
-
-        <div class="row">
-            <div class="col-md-12">
-                @Html.Partial("~/Views/Shared/EditorTemplate/ToolbarMenu.cshtml")
-            </div>
-        </div>
 
         <div class="row">
 
@@ -153,139 +144,93 @@
                     </div>
 
                     <div role="tabpanel" class="tab-pane" id="tabDevices">
+                        <div id="content">
 
-                        <nav class="navbar navbar-default">
                             <div class="container-fluid">
 
                                 <div class="row">
-                                    <div class="collapse navbar-collapse" style="margin-bottom:20px;">
-                                        @*btn-toolbar*@
-                                        <ul class="nav navbar-nav">
-
-                                            <li>
-                                                <div class="btn-group">
-                                                    <a id="ShowAddDeviceView" class="btn btn-default navbar-btn" href="#" role="button">
-                                                        <span class="glyphicon glyphicon-plus"></span>
-                                                    </a>
-                                                </div>
-                                            </li>
-
-                                            <li>
-                                                <div class="btn-group">
-                                                    <a id="ShowDeviceEditView" class="btn btn-default navbar-btn" href="#" role="button">
-                                                        <span class="glyphicon glyphicon-wrench"></span>
-                                                    </a>
-
-                                                    <a id="ActionRemoveDevice" class="btn btn-default navbar-btn" href="#" role="button">
-                                                        <span class="glyphicon glyphicon-trash"></span>
-                                                    </a>
-                                                </div>
-                                            </li>
-
-                                            <li>
-                                                <div class="btn-group">
-                                                    <a id="ReloadDeviceStatus" class="btn btn-default navbar-btn" href="#" role="button">
-                                                        <span class="glyphicon glyphicon-refresh"></span>
-                                                    </a>
-                                                </div>
-                                            </li>
-
-                                        </ul>
+                                    <div class="col-md-12">
+                                        @Html.Partial("~/Views/Shared/EditorTemplate/ToolbarMenu.cshtml")
                                     </div>
                                 </div>
 
-
-                            </div><!-- /.container-fluid -->
-                        </nav>
-
-                        <div class="row">
-                            <div id="StatusCont" class="row">         </div>
-                        </div>
-
-
-
-                        <div class="row">
-                            @if (Model.Site != null)
-                            {
-                                foreach (var item in Model.Site.Devices)
-                                {
-                                    <div class="col-md-3">
-                                        <div id="@item.Id" class="panel panel-info">
-                                            <div class="panel-heading">@item.DeviceName</div>
-                                            <div class="panel-body">
-                                                <h4>@item.DeviceLocation.LocationName</h4>
-                                                <h4>@item.Type.TypeName</h4>
-                                                <a href="@Url.Action("View", "Device", new { DeviceId = item.Id})" class="btn">Show</a>
+                                <div class="row">
+                                    @if (Model.Site != null)
+                                    {
+                                        foreach (var item in Model.Site.Devices)
+                                        {
+                                            <div class="col-md-3">
+                                                <div id="@item.Id" class="panel panel-info">
+                                                    <div class="panel-heading">@item.DeviceName</div>
+                                                    <div class="panel-body">
+                                                        <h4>@item.DeviceLocation.LocationName</h4>
+                                                        <h4>@item.Type.TypeName</h4>
+                                                        <a href="@Url.Action("View", "Device", new {DeviceId = item.Id})" class="btn">Show</a>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
+                                        }
+                                    }
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                        <div role="tabpanel" class="tab-pane" id="tabAlarmSystem">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        @{ Html.RenderAction("AlarmSystemSummary", new {siteId = Model.Site.Id}); }
 
                                     </div>
-                                }
-                            }
+                                </div>
+
+                                <div class="row">
+                                    <div id="resultview">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="row">
-                            <div id="resultview">
+                        <div role="tabpanel" class="tab-pane" id="tabCCTV">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        CCTV
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div id="resultview">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div role="tabpanel" class="tab-pane" id="tabLocation">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-md-12 embed-responsive embed-responsive-16by9">
+                                        <h4>Location</h4>
+                                        <iframe class="embed-responsive-item"
+                                                frameborder="0"
+                                                style="border: 0"
+                                                src="https://www.google.com/maps/embed/v1/view?key=AIzaSyCoh6OpbGQK7bY59n2qoMF4TvNKfTIEkWQ&center=@Model.SiteLatCordStr(),@Model.SiteLngCordStr()&zoom=18&maptype=satellite"></iframe>
+
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div id="resultview">
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
                     </div>
-
-
-                    <div role="tabpanel" class="tab-pane" id="tabAlarmSystem">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    @{ Html.RenderAction("AlarmSystemSummary", new { siteId = Model.Site.Id });  }
-
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div id="resultview">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div role="tabpanel" class="tab-pane" id="tabCCTV">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    CCTV
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div id="resultview">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div role="tabpanel" class="tab-pane" id="tabLocation">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <h4>Location</h4>
-                                    <iframe width="600"
-                                            height="450"
-                                            frameborder="0"
-                                            style="border:0"
-                                            src="https://www.google.com/maps/embed/v1/view?key=AIzaSyCoh6OpbGQK7bY59n2qoMF4TvNKfTIEkWQ&center=@Model.SiteLatCordStr(),@Model.SiteLngCordStr()&zoom=18&maptype=satellite"></iframe>
-
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div id="resultview">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
             </div>
 
 

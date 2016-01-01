@@ -36,7 +36,10 @@ namespace iotDash
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"
                    ));
-            
+
+            bundles.Add(new ScriptBundle("~/bundles/fancybox").Include(
+              "~/Scripts/jquery.fancybox.pack.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/sb-admin").Include(
               "~/Scripts/sb-admin.js"
            ));
