@@ -15,16 +15,31 @@ namespace AlarmSystemManagmentService
     public class AuthorizedDevicesConfigurationService : IAuthorizedDevicesConfigurationService  
     {
         public AlarmSystemConfigManager Manager { get; set; }
-        
+        public bool Online { get; set; }
+
         public AuthorizedDevicesConfigurationService()
         {
+
+            Online = true; //online by default
         }
 
         public AuthorizedDevicesConfigurationService(AlarmSystemConfigManager man) : this()
         {
             Manager = man;
         }
-        
+
+        private bool SaveChanges()
+        {
+            if (Online)
+            {
+                return Manager.UploadAuthorizedDevicesConfig();
+            }
+            else
+            {
+                return true;
+            }
+        }
+
         public List<sconnAuthorizedDevice> GetAll()
         {
             Manager.LoadSiteConfig();
@@ -37,7 +52,7 @@ namespace AlarmSystemManagmentService
             if(dev != null)
             {
                 Manager.Config.AuthorizedDevices.Devices.Remove(dev);
-                return Manager.UploadAuthorizedDevicesConfig();
+                return SaveChanges();
             }
             return false;
         }
@@ -53,7 +68,8 @@ namespace AlarmSystemManagmentService
             try
             {
                 Manager.Config.AuthorizedDevices.Devices.Add(device);
-                return Manager.UploadAuthorizedDevicesConfig();
+                return SaveChanges();
+
             }
             catch (Exception)
             {
@@ -70,7 +86,8 @@ namespace AlarmSystemManagmentService
                 if (odevice != null)
                 {
                     odevice = device;
-                    return Manager.UploadAuthorizedDevicesConfig();
+                    Manager.Config.AuthorizedDevices.Devices.Add(device);
+                    return SaveChanges();
                 }
                 else
                 {
@@ -89,7 +106,7 @@ namespace AlarmSystemManagmentService
             try
             {
                 Manager.Config.AuthorizedDevices.Devices.Remove(device);
-                return Manager.UploadAuthorizedDevicesConfig();
+                return SaveChanges();
             }
             catch (Exception)
             {

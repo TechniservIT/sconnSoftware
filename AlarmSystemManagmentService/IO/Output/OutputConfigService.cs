@@ -12,9 +12,23 @@ namespace AlarmSystemManagmentService.IO.Output
     public class OutputConfigService : IAlarmSystemConfigurationService<sconnOutput>
     {
         private AlarmSystemConfigManager Manager { get; set; }
+        public bool Online { get; set; }
 
         public OutputConfigService()
         {
+            Online = true; //online by default
+        }
+
+        private bool SaveChanges()
+        {
+            if (Online)
+            {
+                return Manager.UploadOutputsConfig();
+            }
+            else
+            {
+                return true;
+            }
         }
 
         public OutputConfigService(Device AlarmDevice) : this()
@@ -33,7 +47,7 @@ namespace AlarmSystemManagmentService.IO.Output
             if (dev != null)
             {
                 Manager.Config.OutputConfig.Outputs.Remove(dev);
-                return Manager.UploadAuthorizedDevicesConfig();
+                return SaveChanges();
             }
             return false;
         }
@@ -55,7 +69,7 @@ namespace AlarmSystemManagmentService.IO.Output
             try
             {
                 Manager.Config.OutputConfig.Outputs.Add(zone);
-                return Manager.UploadZoneConfig();
+                return SaveChanges();
             }
             catch (Exception)
             {
@@ -72,7 +86,7 @@ namespace AlarmSystemManagmentService.IO.Output
                 if (ozone != null)
                 {
                     ozone = zone;
-                    return Manager.UploadZoneConfig();
+                    return SaveChanges();
                 }
                 else
                 {
@@ -91,7 +105,7 @@ namespace AlarmSystemManagmentService.IO.Output
             try
             {
                 Manager.Config.OutputConfig.Outputs.Remove(zone);
-                return Manager.UploadZoneConfig();
+                return SaveChanges();
             }
             catch (Exception)
             {

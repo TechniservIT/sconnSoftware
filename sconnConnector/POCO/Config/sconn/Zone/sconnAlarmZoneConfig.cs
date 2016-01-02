@@ -30,18 +30,13 @@ namespace sconnConnector.POCO.Config.sconn
 
         public void Deserialize(byte[] buffer)
         {
-            throw new NotImplementedException();
-        }
-
-        public sconnAlarmZoneConfig(ipcSiteConfig cfg) :this()
-        {
-            int zones = cfg.globalConfig.memCFG[ipcDefines.mAdrZoneNo];
+            int zones = buffer[ipcDefines.ZONE_CFG_MAX_ZONES];
             for (int i = 0; i < zones; i++)
             {
                 byte[] zoneCfg = new byte[ipcDefines.ZONE_CFG_LEN];
                 for (int j = 0; j < ipcDefines.ZONE_CFG_LEN; j++)
                 {
-                    zoneCfg[j] = cfg.globalConfig.memCFG[ipcDefines.mAdrZoneCfgStartAddr + i*ipcDefines.ZONE_CFG_LEN];
+                    zoneCfg[j] = buffer[ipcDefines.mAdrZoneCfgStartAddr + i * ipcDefines.ZONE_CFG_LEN];
                 }
                 sconnAlarmZone zone = new sconnAlarmZone(zoneCfg);
                 zone.Id = i;
@@ -49,9 +44,16 @@ namespace sconnConnector.POCO.Config.sconn
             }
         }
 
+        public sconnAlarmZoneConfig(ipcSiteConfig cfg) :this()
+        {
+            this.Deserialize(cfg.globalConfig.memCFG);
+        }
+
         public void Fake()
         {
-            throw new NotImplementedException();
+            sconnAlarmZone zone = new sconnAlarmZone();
+            zone.Fake();
+            Zones.Add(zone);
         }
     }
 

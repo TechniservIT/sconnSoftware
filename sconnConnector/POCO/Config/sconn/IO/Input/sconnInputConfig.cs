@@ -15,20 +15,39 @@ namespace sconnConnector.POCO.Config.sconn.IO
         {
             Inputs = new List<sconnInput>();
         }
-
         public byte[] Serialize()
         {
-            throw new NotImplementedException();
+            byte[] Serialized = new byte[ipcDefines.mAdrInputMemSize];
+            for (int i = 0; i < Inputs.Count; i++)
+            {
+                byte[] partial = Inputs[i].Serialize();
+                partial.CopyTo(Serialized, i * ipcDefines.mAdrInputMemSize);
+            }
+            return Serialized;
         }
 
         public void Deserialize(byte[] buffer)
         {
-            throw new NotImplementedException();
+            int relays = buffer[ipcDefines.DeviceMaxInputs];
+            for (int i = 0; i < relays; i++)
+            {
+                byte[] relayCfg = new byte[ipcDefines.mAdrInputMemSize];
+                for (int j = 0; j < ipcDefines.mAdrInputMemSize; j++)
+                {
+                    relayCfg[j] = buffer[ipcDefines.mAdrInput + i * ipcDefines.mAdrInputMemSize];
+                }
+                sconnInput relay = new sconnInput(relayCfg);
+                relay.Id = i;
+                Inputs.Add(relay);
+            }
         }
 
         public void Fake()
         {
-            throw new NotImplementedException();
+            sconnInput zone = new sconnInput();
+            zone.Fake();
+            Inputs.Add(zone);
         }
+
     }
 }

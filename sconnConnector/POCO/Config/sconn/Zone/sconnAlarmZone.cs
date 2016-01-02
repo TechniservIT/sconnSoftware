@@ -35,8 +35,10 @@ namespace sconnConnector.POCO.Config.sconn
 
         public byte[] Serialize()
         {
-            //TODO
-            return new byte[0];
+            byte[] buffer =new byte[ipcDefines.ZONE_CFG_LEN];
+            buffer[ipcDefines.ZONE_CFG_TYPE_POS] = (byte)Type;
+            buffer[ipcDefines.ZONE_CFG_ENABLED_POS] = (byte) (Enabled ? 1 : 0);
+            return buffer;
         }
 
         public void Deserialize(byte[] buffer)
@@ -48,7 +50,11 @@ namespace sconnConnector.POCO.Config.sconn
 
         public void Fake()
         {
-            throw new NotImplementedException();
+            this.Id = 0;
+            this.Enabled = true;
+            this.Name = Guid.NewGuid().ToString();
+            this.NameId = 0;
+            this.Type = AlarmZoneType.General;
         }
     }
 

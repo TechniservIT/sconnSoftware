@@ -14,9 +14,23 @@ namespace AlarmSystemManagmentService
     {
 
         public AlarmSystemConfigManager Manager { get; set; }
+        public bool Online { get; set; }
 
         public UsersConfigurationService()
         {
+            Online = true; //online by default
+        }
+
+        private bool SaveChanges()
+        {
+            if (Online)
+            {
+                return Manager.UploadUserConfig();
+            }
+            else
+            {
+                return true;
+            }
         }
 
         public UsersConfigurationService(Device AlarmDevice) : this()
@@ -35,7 +49,7 @@ namespace AlarmSystemManagmentService
             if (dev != null)
             {
                 Manager.Config.UserConfig.Users.Remove(dev);
-                return Manager.UploadAuthorizedDevicesConfig();
+                return SaveChanges();
             }
             return false;
         }
@@ -57,7 +71,7 @@ namespace AlarmSystemManagmentService
             try
             {
                 Manager.Config.UserConfig.Users.Add(user);
-                return Manager.UploadUserConfig();
+                return SaveChanges();
             }
             catch (Exception)
             {
@@ -74,7 +88,7 @@ namespace AlarmSystemManagmentService
                 if (oldUser != null)
                 {
                     oldUser = user;
-                    return Manager.UploadUserConfig();
+                    return SaveChanges();
                 }
                 else
                 {
@@ -93,7 +107,7 @@ namespace AlarmSystemManagmentService
             try
             {
                 Manager.Config.UserConfig.Users.Remove(user);
-                return Manager.UploadZoneConfig();
+                return SaveChanges();
             }
             catch (Exception)
             {

@@ -14,9 +14,23 @@ namespace AlarmSystemManagmentService
     public class GsmConfigurationService : IGsmConfigurationService
     {
         public AlarmSystemConfigManager Manager { get; set; }
+        public bool Online { get; set; }
 
         public GsmConfigurationService()
         {
+            Online = true; //online by default
+        }
+
+        private bool SaveChanges()
+        {
+            if (Online)
+            {
+                return Manager.UploadGsmConfig();
+            }
+            else
+            {
+                return true;
+            }
         }
 
         public GsmConfigurationService(Device AlarmDevice) : this()
@@ -36,7 +50,7 @@ namespace AlarmSystemManagmentService
             if (dev != null)
             {
                 Manager.Config.GsmConfig.Rcpts.Remove(dev);
-                return Manager.UploadAuthorizedDevicesConfig();
+                return SaveChanges();
             }
             return false;
         }
@@ -59,7 +73,7 @@ namespace AlarmSystemManagmentService
             try
             {
                 Manager.Config.GsmConfig.Rcpts.Add(rcpt);
-                return Manager.UploadGsmConfig();
+                return SaveChanges();
             }
             catch (Exception)
             {
@@ -76,7 +90,7 @@ namespace AlarmSystemManagmentService
                 if (oldrcpt != null)
                 {
                     oldrcpt = rcpt;
-                    return Manager.UploadGsmConfig();
+                    return SaveChanges();
                 }
                 else
                 {
@@ -95,7 +109,7 @@ namespace AlarmSystemManagmentService
             try
             {
                 Manager.Config.GsmConfig.Rcpts.Remove(rcpt);
-                return Manager.UploadGsmConfig();
+                return SaveChanges();
             }
             catch (Exception)
             {

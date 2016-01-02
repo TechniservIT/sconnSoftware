@@ -14,15 +14,40 @@ namespace AlarmSystemManagmentService
     public class DeviceConfigService : IAlarmSystemConfigurationService<sconnDevice>
     {
         public AlarmSystemConfigManager Manager { get; set; }
-        
+        public bool Online { get; set; }
+
         public DeviceConfigService()
         {
-
+            Online = true; //online by default
         }
         
         public DeviceConfigService(AlarmSystemConfigManager man) : this()
         {
             Manager = man;
+        }
+
+        private bool SaveChanges()
+        {
+            if (Online)
+            {
+                return Manager.UploadDeviceConfig();
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        private bool SaveChanges(sconnDevice dev)
+        {
+            if (Online)
+            {
+                return Manager.UploadDeviceConfig(dev);
+            }
+            else
+            {
+                return true;
+            }
         }
 
         public List<sconnDevice> GetAll()
@@ -37,10 +62,12 @@ namespace AlarmSystemManagmentService
             if (dev != null)
             {
                 Manager.Config.DeviceConfig.Devices.Remove(dev);
-                return Manager.UploadAuthorizedDevicesConfig();
+                return SaveChanges();
             }
             return false;
         }
+
+        
 
         public sconnDevice GetById(int Id)
         {
@@ -54,7 +81,7 @@ namespace AlarmSystemManagmentService
             try
             {
                 Manager.Config.DeviceConfig.Devices.Add(device);
-                return Manager.UploadDeviceConfig(device);
+                return SaveChanges(device);
             }
             catch (Exception)
             {
@@ -71,7 +98,7 @@ namespace AlarmSystemManagmentService
                 if (odevice != null)
                 {
                     odevice = device;
-                    return Manager.UploadDeviceConfig(odevice);
+                    return SaveChanges(odevice);
                 }
                 else
                 {
@@ -90,7 +117,7 @@ namespace AlarmSystemManagmentService
             try
             {
                 Manager.Config.DeviceConfig.Devices.Remove(device);
-                return Manager.UploadDeviceConfig(device);
+                return SaveChanges(device);
             }
             catch (Exception)
             {

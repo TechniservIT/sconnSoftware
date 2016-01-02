@@ -719,6 +719,7 @@ namespace sconnConnector
         public static byte Output2Addr = 0x43;
 
         public static byte DeviceMaxOutputs = 16;
+        public static int OutputsTotalMemSize = (mAdrOutputMemSize * DeviceMaxOutputs);
 
         /******   Relay state ********/
         public static int mAdrRelay = (mAdrOutput + mAdrOutputMemSize * DeviceMaxOutputs);

@@ -8,12 +8,17 @@ using sconnConnector.POCO.Config.sconn;
 
 namespace sconnConnector.POCO.Config
 {
+    public enum sconnOutputType
+    {
+        Normal = 1,
+        Delayed = 2
+    }
 
     public class sconnOutput : IAlarmSystemConfigurationEntity, ISerializableConfiguration, IFakeAbleConfiguration
     {
 
         public int Id { get; set; }
-        public int Type { get; set; }
+        public sconnOutputType Type { get; set; }
         public int Value { get; set; }
         public bool Enabled { get; set; }
         public string Name { get; set; }
@@ -24,41 +29,39 @@ namespace sconnConnector.POCO.Config
 
         }
 
-        public sconnOutput(byte[] config, int seqno)
+        public sconnOutput(byte[] rawCfg)
         {
-            int baseaddr = ipcDefines.mAdrOutput + ipcDefines.mAdrOutputMemSize * seqno;
-            Id = seqno;
-            Type = config[baseaddr + ipcDefines.mAdrOutputType];
-            Value = config[baseaddr + ipcDefines.mAdrOutputVal];
-            NameId = config[baseaddr + ipcDefines.mAdrOutputNameAddr];
-        }
-
-        public sconnOutput(byte[] config, byte[] namecfg, int seqno)
-            : this(config, seqno)
-        {
-            if (namecfg != null)
-            {
-                Name = System.Text.Encoding.Unicode.GetString(namecfg, 0, namecfg.GetLength(0));
-            }
-
-
+            this.Deserialize(rawCfg);
         }
 
 
         public byte[] Serialize()
         {
-            throw new NotImplementedException();
+            byte[] buffer = new byte[ipcDefines.RelayMemSize];
+            buffer[ipcDefines.mAdrOutputType] = (byte)Type;
+            buffer[ipcDefines.mAdrOutputEnabled] = (byte)(Enabled ? 1 : 0);
+            buffer[ipcDefines.mAdrOutputVal] = (byte)Value;
+            buffer[ipcDefines.mAdrOutputNameAddr] = (byte)NameId;
+            return buffer;
         }
 
         public void Deserialize(byte[] buffer)
         {
-            throw new NotImplementedException();
+            Type = (sconnOutputType)buffer[ipcDefines.mAdrRelayType];
+            Value = buffer[ipcDefines.mAdrOutputVal];
+            NameId = buffer[ipcDefines.mAdrOutputNameAddr];
+            Enabled = buffer[ipcDefines.mAdrOutputEnabled] > 0 ? true : false;
         }
 
         public void Fake()
         {
-            throw new NotImplementedException();
+            this.Id = 0;
+            this.Enabled = true;
+            this.Name = Guid.NewGuid().ToString();
+            this.NameId = 0;
+            this.Type = sconnOutputType.Normal;
         }
+
     }
 
 }

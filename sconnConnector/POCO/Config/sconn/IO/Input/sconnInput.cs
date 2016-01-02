@@ -9,61 +9,70 @@ using sconnConnector.POCO.Config.sconn;
 namespace sconnConnector.POCO.Config
 {
 
+    public enum sconnInputType
+    {
+        NO = 1
+    }
+
+    public enum sconnActivationGroup
+    {
+        ArmedViolation = 1
+    }
+
     public class sconnInput : IAlarmSystemConfigurationEntity, ISerializableConfiguration, IFakeAbleConfiguration
     {
         public int NameId { get; set; }
         public int Id { get; set; }
-        public int Type { get; set; }
+        public sconnInputType Type { get; set; }
         public int Value { get; set; }
         public int Sensitivity { get; set; }
         public bool Enabled { get; set; }
         public string Name { get; set; }
-        public int ActivationGroup { get; set; }
+        public sconnActivationGroup ActivationGroup { get; set; }
        
         public sconnInput()
         {
 
         }
 
-
-        public sconnInput(byte[] config, int seqno)
+        public sconnInput(byte[] rawBytes)
         {
-            int baseaddr = ipcDefines.mAdrInput + ipcDefines.mAdrInputMemSize * seqno;
-            Id = seqno;
-            Type = config[baseaddr + ipcDefines.mAdrInputType];
-            Value = config[baseaddr + ipcDefines.mAdrInputVal];
-            NameId = config[baseaddr + ipcDefines.mAdrInputNameAddr];
-            Sensitivity = config[baseaddr + ipcDefines.mAdrInputSensitivity] * ipcDefines.InputSensitivityStep;
-            ActivationGroup = config[baseaddr + ipcDefines.mAdrInputAG];
-
+                this.Deserialize(rawBytes);
         }
-
-        public sconnInput(byte[] config, byte[] namecfg, int seqno)
-            : this(config, seqno)
-        {
-            if (namecfg != null)
-            {
-                Name = System.Text.Encoding.Unicode.GetString(namecfg, 0, namecfg.GetLength(0));
-            }
-
-
-        }
-
 
         public byte[] Serialize()
         {
-            throw new NotImplementedException();
+            byte[] buffer = new byte[ipcDefines.RelayMemSize];
+            buffer[ipcDefines.mAdrInputType] = (byte)Type;
+            buffer[ipcDefines.mAdrInputEnabled] = (byte)(Enabled ? 1 : 0);
+            buffer[ipcDefines.mAdrInputVal] = (byte)Value;
+            buffer[ipcDefines.mAdrInputNameAddr] = (byte)NameId;
+            buffer[ipcDefines.mAdrInputSensitivity] = (byte)(Sensitivity/ ipcDefines.InputSensitivityStep);
+            buffer[ipcDefines.mAdrInputAG] = (byte)ActivationGroup;
+            return buffer;
         }
 
         public void Deserialize(byte[] buffer)
         {
-            throw new NotImplementedException();
+            Type = (sconnInputType)buffer[ipcDefines.mAdrInputType];
+            Value = buffer[ipcDefines.mAdrInputVal];
+            NameId = buffer[ipcDefines.mAdrInputNameAddr];
+            Enabled = buffer[ipcDefines.mAdrInputEnabled] > 0 ? true : false;
+            Sensitivity = buffer[ipcDefines.mAdrInputSensitivity] * ipcDefines.InputSensitivityStep;
+            ActivationGroup = (sconnActivationGroup)buffer[ipcDefines.mAdrInputAG];
         }
 
         public void Fake()
         {
-            throw new NotImplementedException();
+            this.Id = 0;
+            this.Enabled = true;
+            this.Name = Guid.NewGuid().ToString();
+            this.NameId = 0;
+            this.Value = 1;
+            this.Type = sconnInputType.NO;
+            this.ActivationGroup = sconnActivationGroup.ArmedViolation;
         }
+
     }
 
 }

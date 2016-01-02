@@ -14,5 +14,7 @@ namespace AlarmSystemManagmentService
          bool Update(T entity);
          T GetById(int Id);
          bool RemoveById(int Id);
+
+         bool Online { get; set; }
     }
 }

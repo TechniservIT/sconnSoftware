@@ -8,11 +8,13 @@ using sconnConnector.POCO.Config.sconn;
 namespace sconnConnector.POCO.Config
 {
 
+
+
     public class sconnRelay : IAlarmSystemConfigurationEntity, ISerializableConfiguration, IFakeAbleConfiguration
     {
         public int Id { get; set; }
 
-        public int Type { get; set; }
+        public sconnOutputType Type { get; set; }
 
         public int Value { get; set; }
 
@@ -27,39 +29,36 @@ namespace sconnConnector.POCO.Config
 
         }
 
-        public sconnRelay(byte[] config, int seqno)
+        public sconnRelay(byte[] rawCfg)
         {
-            int baseaddr = ipcDefines.mAdrRelay + ipcDefines.RelayMemSize * seqno;
-            Id = seqno;
-            Type = config[baseaddr + ipcDefines.mAdrRelayType];
-            Value = config[baseaddr + ipcDefines.mAdrRelayVal];
-            NameId = config[baseaddr + ipcDefines.mAdrRelayNameAddr];
-        }
-
-        public sconnRelay(byte[] config, byte[] namecfg, int seqno)
-            : this(config, seqno)
-        {
-            if (namecfg != null)
-            {
-                Name = System.Text.Encoding.Unicode.GetString(namecfg, 0, namecfg.GetLength(0));
-            }
-
-
+                this.Deserialize(rawCfg);
         }
 
         public byte[] Serialize()
         {
-            throw new NotImplementedException();
+            byte[] buffer = new byte[ipcDefines.RelayMemSize];
+            buffer[ipcDefines.mAdrRelayType] = (byte)Type;
+            buffer[ipcDefines.mAdrRelayEnabled] = (byte)(Enabled ? 1 : 0);
+            buffer[ipcDefines.mAdrRelayVal] = (byte)Value;
+            buffer[ipcDefines.mAdrRelayNameAddr] = (byte) NameId;
+            return buffer;
         }
 
         public void Deserialize(byte[] buffer)
         {
-            throw new NotImplementedException();
+            Type = (sconnOutputType)buffer[ipcDefines.mAdrRelayType];
+            Value = buffer[ipcDefines.mAdrRelayVal];
+            NameId = buffer[ipcDefines.mAdrRelayNameAddr];
+            Enabled = buffer[ipcDefines.mAdrRelayEnabled] > 0 ? true : false;
         }
 
         public void Fake()
         {
-            throw new NotImplementedException();
+            this.Id = 0;
+            this.Enabled = true;
+            this.Name = Guid.NewGuid().ToString();
+            this.NameId = 0;
+            this.Type = sconnOutputType.Normal;
         }
     }
 

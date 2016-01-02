@@ -14,7 +14,9 @@ using sconnConnector.Config;
 using sconnConnector.POCO.Config.sconn;
 using sconnConnector.POCO.Config;
 using NUnit.Framework;
+using sconnConnector.POCO;
 using sconnConnector.POCO.Config.Abstract.Auth;
+using sconnConnector.POCO.Config.sconn.IO;
 using Assert = NUnit.Framework.Assert;
 
 namespace iotServiceTester.DeviceTypes.Alarm
@@ -33,6 +35,26 @@ namespace iotServiceTester.DeviceTypes.Alarm
         public static sconnAlarmSystem GetFakeAlarmSconnAlarmSystem()
         {
             sconnAlarmSystem sys = new sconnAlarmSystem();
+                var fakeables = sys.GetType().GetProperties();
+            foreach (var prop in fakeables)
+            {
+                try
+                {
+                    Type ifaceType = typeof(IFakeAbleConfiguration);
+                    Type tempType = prop.GetType();
+                    InterfaceMapping map = tempType.GetInterfaceMap(ifaceType);
+                    for (int i = 0; i < map.InterfaceMethods.Length; i++)
+                    {
+                        MethodInfo ifaceMethod = map.InterfaceMethods[i];
+                        MethodInfo targetMethod = map.TargetMethods[i];
+                        targetMethod.Invoke(sys, null);
+                    }
+                }
+                catch (Exception)
+                {
+
+                }
+            }
             return sys;
         }
 
@@ -59,11 +81,23 @@ namespace iotServiceTester.DeviceTypes.Alarm
             {
                 return new UsersConfigurationService(man) as IAlarmSystemConfigurationService<T>;
             }
-            else if (typeof(T) == typeof(sconnGsmConfig))
+            else if (typeof(T) == typeof(sconnGsmRcpt))
             {
                 return new GsmConfigurationService(man) as IAlarmSystemConfigurationService<T>;
             }
-            else if (typeof(T) == typeof(sconnAuthorizedDevices))
+            else if (typeof(T) == typeof(sconnAuthorizedDevice))
+            {
+                return new AuthorizedDevicesConfigurationService(man) as IAlarmSystemConfigurationService<T>;
+            }
+            else if (typeof(T) == typeof(sconnInput))
+            {
+                return new AuthorizedDevicesConfigurationService(man) as IAlarmSystemConfigurationService<T>;
+            }
+            else if (typeof(T) == typeof(sconnOutput))
+            {
+                return new AuthorizedDevicesConfigurationService(man) as IAlarmSystemConfigurationService<T>;
+            }
+            else if (typeof(T) == typeof(sconnRelay))
             {
                 return new AuthorizedDevicesConfigurationService(man) as IAlarmSystemConfigurationService<T>;
             }
@@ -169,8 +203,8 @@ namespace iotServiceTester.DeviceTypes.Alarm
     public class AlarmServiceDeviceTests_Device_Tests : AlarmServiceDeviceTests<sconnDevice> { }
     public class AlarmServiceDeviceTests_Zone_Tests : AlarmServiceDeviceTests<sconnAlarmZone> { }
     public class AlarmServiceDeviceTests_User_Tests : AlarmServiceDeviceTests<sconnUser> { }
-    public class AlarmServiceDeviceTests_AuthD_Tests : AlarmServiceDeviceTests<sconnAuthorizedDevices> { }
-    public class AlarmServiceDeviceTests_GSM_Tests : AlarmServiceDeviceTests<sconnGsmConfig> { }
+    public class AlarmServiceDeviceTests_AuthD_Tests : AlarmServiceDeviceTests<sconnAuthorizedDevice> { }
+    public class AlarmServiceDeviceTests_GSM_Tests : AlarmServiceDeviceTests<sconnGsmRcpt> { }
     public class AlarmServiceDeviceTests_Input_Tests : AlarmServiceDeviceTests<sconnInput> { }
     public class AlarmServiceDeviceTests_Output_Tests : AlarmServiceDeviceTests<sconnOutput> { }
     public class AlarmServiceDeviceTests_Relay_Tests : AlarmServiceDeviceTests<sconnRelay> { }

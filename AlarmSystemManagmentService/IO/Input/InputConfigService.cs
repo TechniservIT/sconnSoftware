@@ -13,10 +13,25 @@ namespace AlarmSystemManagmentService.IO.Input
     public class InputConfigService : IAlarmSystemConfigurationService<sconnInput>
     {
         private AlarmSystemConfigManager Manager { get; set; }
+        public bool Online { get; set; }
 
         public InputConfigService()
         {
+            Online = true; //online by default
         }
+
+        private bool SaveChanges()
+        {
+            if (Online)
+            {
+                return Manager.UploadInputsConfig();
+            }
+            else
+            {
+                return true;
+            }
+        }
+
 
         public InputConfigService(Device AlarmDevice) : this()
         {
@@ -34,7 +49,7 @@ namespace AlarmSystemManagmentService.IO.Input
             if (dev != null)
             {
                 Manager.Config.InputConfig.Inputs.Remove(dev);
-                return Manager.UploadAuthorizedDevicesConfig();
+                return SaveChanges();
             }
             return false;
         }
@@ -56,7 +71,7 @@ namespace AlarmSystemManagmentService.IO.Input
             try
             {
                 Manager.Config.InputConfig.Inputs.Add(zone);
-                return Manager.UploadZoneConfig();
+                return SaveChanges();
             }
             catch (Exception)
             {
@@ -73,7 +88,7 @@ namespace AlarmSystemManagmentService.IO.Input
                 if (ozone != null)
                 {
                     ozone = zone;
-                    return Manager.UploadZoneConfig();
+                    return SaveChanges();
                 }
                 else
                 {
@@ -92,7 +107,7 @@ namespace AlarmSystemManagmentService.IO.Input
             try
             {
                 Manager.Config.InputConfig.Inputs.Remove(zone);
-                return Manager.UploadZoneConfig();
+                return SaveChanges();
             }
             catch (Exception)
             {

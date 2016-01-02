@@ -38,7 +38,7 @@ namespace sconnConnector.POCO.Config
             InputNo = _memCFG[ipcDefines.mAdrInputsNO];
             for (int i = 0; i < InputNo; i++)
             {
-                sconnInput input = new sconnInput(_memCFG, _NamesCFG[ipcDefines.mAddr_NAMES_Inputs_Pos], i);
+                sconnInput input = new sconnInput(_memCFG); //, _NamesCFG[ipcDefines.mAddr_NAMES_Inputs_Pos], i
                 Inputs.Add(input);
             }
         }
@@ -49,7 +49,7 @@ namespace sconnConnector.POCO.Config
             OutputNo = _memCFG[ipcDefines.mAdrOutputsNO];
             for (int i = 0; i < OutputNo; i++)
             {
-                sconnOutput output = new sconnOutput(_memCFG, _NamesCFG[ipcDefines.mAddr_NAMES_Outputs_Pos], i);
+                sconnOutput output = new sconnOutput(_memCFG);  //, _NamesCFG[ipcDefines.mAddr_NAMES_Outputs_Pos], i
                 Outputs.Add(output);
             }
         }
@@ -60,7 +60,7 @@ namespace sconnConnector.POCO.Config
             RelayNo = _memCFG[ipcDefines.mAdrRelayNO];
             for (int i = 0; i < RelayNo; i++)
             {
-                sconnRelay relay = new sconnRelay(_memCFG, _NamesCFG[ipcDefines.mAddr_NAMES_Relays_Pos], i);
+                sconnRelay relay = new sconnRelay(_memCFG); //, _NamesCFG[ipcDefines.mAddr_NAMES_Relays_Pos], i
                 Relays.Add(relay);
             }
         }

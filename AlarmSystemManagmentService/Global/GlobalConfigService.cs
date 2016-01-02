@@ -12,12 +12,29 @@ namespace AlarmSystemManagmentService
     public class GlobalConfigService : IGlobalConfigService
     {
         private IIotContextBase context;
-
+        public bool Online { get; set; }
         public AlarmSystemConfigManager Manager { get; set; }
+
+        public GlobalConfigService()
+        {
+            Online = true; //online by default
+        }
 
         public GlobalConfigService(IIotContextBase cont)
         {
             this.context = cont;
+        }
+
+        private bool SaveChanges()
+        {
+            if (Online)
+            {
+                return Manager.UploadGlobalConfig();
+            }
+            else
+            {
+                return true;
+            }
         }
 
         public GlobalConfigService(IIotContextBase cont, Device AlarmDevice) : this(cont)

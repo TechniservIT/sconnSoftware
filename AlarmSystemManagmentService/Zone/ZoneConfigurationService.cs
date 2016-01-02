@@ -14,10 +14,25 @@ namespace AlarmSystemManagmentService
     public class ZoneConfigurationService : IZoneConfigurationService
     {
         private AlarmSystemConfigManager Manager { get; set; }
+        public bool Online { get; set; }
 
         public ZoneConfigurationService()
         {
+            Online = true; //online by default
         }
+
+        private bool SaveChanges()
+        {
+            if (Online)
+            {
+                return Manager.UploadZoneConfig();
+            }
+            else
+            {
+                return true;
+            }
+        }
+
 
         public ZoneConfigurationService(Device AlarmDevice) : this()
         {
@@ -35,7 +50,7 @@ namespace AlarmSystemManagmentService
             if (dev != null)
             {
                 Manager.Config.ZoneConfig.Zones.Remove(dev);
-                return Manager.UploadAuthorizedDevicesConfig();
+                return SaveChanges();
             }
             return false;
         }
@@ -57,7 +72,7 @@ namespace AlarmSystemManagmentService
             try
             {
                 Manager.Config.ZoneConfig.Zones.Add(zone);
-                return Manager.UploadZoneConfig();
+                return SaveChanges();
             }
             catch (Exception)
             {
@@ -74,7 +89,7 @@ namespace AlarmSystemManagmentService
                 if(ozone != null)
                 {
                     ozone = zone;
-                    return Manager.UploadZoneConfig();
+                    return SaveChanges();
                 }
                 else
                 {
@@ -93,7 +108,7 @@ namespace AlarmSystemManagmentService
             try
             {
                 Manager.Config.ZoneConfig.Zones.Remove(zone);
-                return Manager.UploadZoneConfig();
+                return SaveChanges();
             }
             catch (Exception)
             {

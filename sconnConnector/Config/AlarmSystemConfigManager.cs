@@ -113,6 +113,21 @@ namespace sconnConnector.Config
             return UploadGlobalConfig();
         }
 
+        public bool UploadInputsConfig()
+        {
+            return UploadDeviceConfig();
+        }
+
+        public bool UploadOutputsConfig()
+        {
+            return UploadDeviceConfig();
+        }
+
+        public bool UploadRelaysConfig()
+        {
+            return UploadDeviceConfig();
+        }
+
         public bool UploadAuthorizedDevicesConfig()
         {
             byte[] serialized = this.Config.AuthorizedDevices.Serialize();

@@ -12,9 +12,23 @@ namespace AlarmSystemManagmentService.IO.Relay
     public class RelayConfigService : IAlarmSystemConfigurationService<sconnRelay>
     {
         private AlarmSystemConfigManager Manager { get; set; }
+        public bool Online { get; set; }
 
         public RelayConfigService()
         {
+            Online = true; //online by default
+        }
+
+        private bool SaveChanges()
+        {
+            if (Online)
+            {
+                return Manager.UploadRelaysConfig();
+            }
+            else
+            {
+                return true;
+            }
         }
 
         public RelayConfigService(Device AlarmDevice) : this()
@@ -33,7 +47,7 @@ namespace AlarmSystemManagmentService.IO.Relay
             if (dev != null)
             {
                 Manager.Config.RelayConfig.Relays.Remove(dev);
-                return Manager.UploadAuthorizedDevicesConfig();
+                return SaveChanges();
             }
             return false;
         }
@@ -55,7 +69,7 @@ namespace AlarmSystemManagmentService.IO.Relay
             try
             {
                 Manager.Config.RelayConfig.Relays.Add(zone);
-                return Manager.UploadZoneConfig();
+                return SaveChanges();
             }
             catch (Exception)
             {
@@ -72,7 +86,7 @@ namespace AlarmSystemManagmentService.IO.Relay
                 if (ozone != null)
                 {
                     ozone = zone;
-                    return Manager.UploadZoneConfig();
+                    return SaveChanges();
                 }
                 else
                 {
@@ -91,7 +105,7 @@ namespace AlarmSystemManagmentService.IO.Relay
             try
             {
                 Manager.Config.RelayConfig.Relays.Remove(zone);
-                return Manager.UploadZoneConfig();
+                return SaveChanges();
             }
             catch (Exception)
             {
