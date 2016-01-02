@@ -78,14 +78,14 @@ namespace AlarmSystemManagmentService.IO.Relay
 
         }
 
-        public bool Update(sconnRelay zone)
+        public bool Update(sconnRelay relay)
         {
             try
             {
-                var ozone = Manager.Config.RelayConfig.Relays.Where(z => z.Name.Equals(zone.Name)).FirstOrDefault();
+                var ozone = Manager.Config.RelayConfig.Relays.Where(z => z.Id == relay.Id).FirstOrDefault();
                 if (ozone != null)
                 {
-                    ozone = zone;
+                    ozone = relay;
                     return SaveChanges();
                 }
                 else

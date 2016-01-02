@@ -155,12 +155,19 @@ namespace sconnConnector.Config
 
         public bool UploadUserConfig()
         {
-            return false;   //TODO
+            byte[] serialized = this.Config.UserConfig.Serialize();
+            for (int i = 0; i < serialized.Length; i++)
+            {
+                this.site.siteCfg.UserConfig[i] = serialized[i];
+            }
+            return mngr.WriteUserCfg(this.site);
         }
 
         public bool UploadGsmConfig()
         {
-            return false;   //TODO
+            byte[] serialized = this.Config.GsmConfig.Serialize();
+            serialized.CopyTo(this.site.siteCfg.GsmConfig,0);
+            return mngr.WriteSiteGsmCfg(this.site);
         }
 
         public bool UploadGlobalConfig()

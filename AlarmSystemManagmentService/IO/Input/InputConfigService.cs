@@ -84,7 +84,7 @@ namespace AlarmSystemManagmentService.IO.Input
         {
             try
             {
-                var ozone = Manager.Config.InputConfig.Inputs.Where(z => z.Name.Equals(zone.Name)).FirstOrDefault();
+                var ozone = Manager.Config.InputConfig.Inputs.Where(z => z.Id == zone.Id).FirstOrDefault();
                 if (ozone != null)
                 {
                     ozone = zone;

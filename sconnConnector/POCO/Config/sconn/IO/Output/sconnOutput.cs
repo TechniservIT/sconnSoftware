@@ -24,12 +24,12 @@ namespace sconnConnector.POCO.Config
         public string Name { get; set; }
         public int NameId { get; set; }
 
-        public sconnOutput()
+        public sconnOutput() 
         {
-
+            Name = "Output";
         }
-
-        public sconnOutput(byte[] rawCfg)
+         
+        public sconnOutput(byte[] rawCfg) : this()
         {
             this.Deserialize(rawCfg);
         }
@@ -37,7 +37,7 @@ namespace sconnConnector.POCO.Config
 
         public byte[] Serialize()
         {
-            byte[] buffer = new byte[ipcDefines.RelayMemSize];
+            byte[] buffer = new byte[ipcDefines.mAdrOutputMemSize];
             buffer[ipcDefines.mAdrOutputType] = (byte)Type;
             buffer[ipcDefines.mAdrOutputEnabled] = (byte)(Enabled ? 1 : 0);
             buffer[ipcDefines.mAdrOutputVal] = (byte)Value;
@@ -47,7 +47,7 @@ namespace sconnConnector.POCO.Config
 
         public void Deserialize(byte[] buffer)
         {
-            Type = (sconnOutputType)buffer[ipcDefines.mAdrRelayType];
+            Type = (sconnOutputType)buffer[ipcDefines.mAdrOutputMemSize];
             Value = buffer[ipcDefines.mAdrOutputVal];
             NameId = buffer[ipcDefines.mAdrOutputNameAddr];
             Enabled = buffer[ipcDefines.mAdrOutputEnabled] > 0 ? true : false;

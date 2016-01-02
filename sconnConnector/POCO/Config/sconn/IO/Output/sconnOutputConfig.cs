@@ -15,6 +15,12 @@ namespace sconnConnector.POCO.Config.sconn.IO.Output
             Outputs = new List<sconnOutput>();
         }
 
+
+        public sconnOutputConfig(ipcSiteConfig cfg) : this()
+        {
+
+        }
+
         public byte[] Serialize()
         {
             byte[] Serialized = new byte[ipcDefines.OutputsTotalMemSize];
@@ -34,7 +40,7 @@ namespace sconnConnector.POCO.Config.sconn.IO.Output
                 byte[] relayCfg = new byte[ipcDefines.mAdrOutputMemSize];
                 for (int j = 0; j < ipcDefines.mAdrOutputMemSize; j++)
                 {
-                    relayCfg[j] = buffer[ipcDefines.mAdrOutput + i * ipcDefines.mAdrOutputMemSize];
+                    relayCfg[j] = buffer[ipcDefines.mAdrOutput + i * ipcDefines.mAdrOutputMemSize +j];
                 }
                 sconnOutput relay = new sconnOutput(relayCfg);
                 relay.Id = i;

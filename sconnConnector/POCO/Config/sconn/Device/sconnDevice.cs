@@ -17,6 +17,7 @@ namespace sconnConnector.POCO.Config.sconn
     public class sconnDevice : IAlarmSystemConfigurationEntity, ISerializableConfiguration, IFakeAbleConfiguration
     {
         public int Id { get; set; }
+        public int Value { get; set; }
 
         private byte[] _memCFG;
         private byte[][] _NamesCFG;
@@ -25,8 +26,7 @@ namespace sconnConnector.POCO.Config.sconn
         public byte[] Hash;
 
         public byte[] AuthDevicesCFG { get; set; }
-
-
+        
         public int DeviceId { get; set; }
 
         public int InputNo { get; set; }
@@ -241,17 +241,19 @@ namespace sconnConnector.POCO.Config.sconn
 
         public byte[] Serialize()
         {
-            throw new NotImplementedException();
+            SavePropertiesToRawConfig();
+            return this.memCFG;
         }
 
         public void Deserialize(byte[] buffer)
         {
-            throw new NotImplementedException();
+            this.memCFG = buffer;
+            LoadPropertiesFromConfig();
         }
 
         public void Fake()
         {
-            throw new NotImplementedException();
+            this.memCFG = new byte[ipcDefines.deviceConfigSize];
         }
     }
 }

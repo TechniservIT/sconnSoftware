@@ -82,7 +82,7 @@ namespace AlarmSystemManagmentService
         {
             try
             {
-                var odevice = Manager.Config.AuthorizedDevices.Devices.Where(z => z._Serial.Equals(device._Serial)).FirstOrDefault();
+                var odevice = Manager.Config.AuthorizedDevices.Devices.Where(z => z.Id == device.Id).FirstOrDefault();
                 if (odevice != null)
                 {
                     odevice = device;

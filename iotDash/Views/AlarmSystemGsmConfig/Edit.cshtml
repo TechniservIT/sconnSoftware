@@ -50,7 +50,7 @@
 
     <div class="row">
         <div id="resultview">
-
+            @Html.Raw(HttpUtility.HtmlDecode(Model.Result))
         </div>
     </div>
 

@@ -82,7 +82,7 @@ namespace AlarmSystemManagmentService.IO.Output
         {
             try
             {
-                var ozone = Manager.Config.OutputConfig.Outputs.Where(z => z.Name.Equals(zone.Name)).FirstOrDefault();
+                var ozone = Manager.Config.OutputConfig.Outputs.Where(z => z.Id == zone.Id).FirstOrDefault();
                 if (ozone != null)
                 {
                     ozone = zone;

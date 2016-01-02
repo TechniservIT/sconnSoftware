@@ -89,9 +89,10 @@ namespace sconnRem
                 for (int i = 0; i < ipcDefines.RAM_SMS_RECP_NO; i++)
                 {
                     TextBox inputname = (TextBox)EditViewControls["Recipient" + i];
-                    CheckBox chkbx = (CheckBox)EditViewControls["RecipientEn" + i];  
-                    toSave.siteCfg.gsmRcpts[i].NumberE164 = inputname.Text;
-                    toSave.siteCfg.gsmRcpts[i].Enabled = (bool)chkbx.IsChecked;   
+                    CheckBox chkbx = (CheckBox)EditViewControls["RecipientEn" + i];
+                    //TODO  
+                    //toSave.siteCfg.gsmRcpts[i].NumberE164 = inputname.Text;
+                    //toSave.siteCfg.gsmRcpts[i].Enabled = (bool)chkbx.IsChecked;   
                 }
 
                 if (ConfigManager.WriteSiteGsmCfg(toSave))  //try uploading changed device
@@ -323,8 +324,8 @@ namespace sconnRem
                     GroupBox siteGSMCfgGroup = new GroupBox();
                     siteGSMCfgGroup.Header = "GSM config";
 
-
-                    if (site.siteCfg.gsmRcpts != null)
+                    //TODO
+                    if (site.siteCfg.GsmConfig != null)
                     {
                         for (int k = 0; k < ipcDefines.RAM_SMS_RECP_NO + 1; k++)
                         {
@@ -344,12 +345,13 @@ namespace sconnRem
                             enBox.Content = "Enabled";
                             Grid.SetRow(enBox, i);
                             Grid.SetColumn(enBox, 1);
-                            enBox.IsChecked = site.siteCfg.gsmRcpts[i].Enabled;
+                            //TODO
+                            //enBox.IsChecked = site.siteCfg.gsmRcpts[i].Enabled;
                             gsmCfgGrid.Children.Add(enBox);
                             this.EditViewControls.Add("RecipientEn" + i, enBox);
 
                             TextBox GlobalTextBox = new TextBox();
-                            GlobalTextBox.Text = site.siteCfg.gsmRcpts[i].NumberE164;
+                            //GlobalTextBox.Text = site.siteCfg.gsmRcpts[i].NumberE164;
                             Grid.SetRow(GlobalTextBox, i);
                             Grid.SetColumn(GlobalTextBox, 2);
                             gsmCfgGrid.Children.Add(GlobalTextBox);
@@ -374,13 +376,9 @@ namespace sconnRem
                     GbxConfigureSiteNames namesGrp = new GbxConfigureSiteNames(site.siteCfg.GlobalNameConfig);
                     globalCfgPanel.Children.Add(namesGrp);
                     this.EditViewControls.Add("GlobalNames", namesGrp);
-
-
-                    //Grid.SetRow(namesGrp, 8);
-                    //Grid.SetColumn(namesGrp, 0);
-                    //siteCfgGrid.Children.Add(namesGrp);
-
-                    if (site.siteCfg.gsmRcpts != null)
+                    
+                    //TODO
+                    if (site.siteCfg.GsmConfig != null)
                     {
                         siteGSMCfgGroup.Content = gsmCfgGrid;
                         globalCfgPanel.Children.Add(siteGSMCfgGroup);

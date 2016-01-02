@@ -15,6 +15,11 @@ namespace sconnConnector.POCO.Config.sconn.IO.Relay
             Relays = new List<sconnRelay>();
         }
 
+        public sconnRelayConfig(ipcSiteConfig cfg) : this()
+        {
+
+        }
+
         public byte[] Serialize()
         {
             byte[] Serialized = new byte[ipcDefines.RelayTotalMemSize];

@@ -45,11 +45,7 @@ namespace iotDash.Controllers.domain.site.AlarmSystem
             return View(model);
         }
 
-        public ActionResult Edit(sconnAuthorizedDevice Device)
-        {
-            AlarmSystemAddAuthorizedDeviceModel model = new AlarmSystemAddAuthorizedDeviceModel(Device);
-            return View(model);
-        }
+
 
         public ActionResult Edit(int Id)
         {
@@ -59,7 +55,26 @@ namespace iotDash.Controllers.domain.site.AlarmSystem
             return View(model);
         }
 
-        
+
+        [HttpPost]
+        public async Task<ActionResult> Edit(AlarmSystemAddAuthorizedDeviceModel model)
+        {
+            try
+            {
+                this._provider = new AuthorizedDevicesConfigurationService(DomainSession.GetAlarmConfigForContextSession(this.HttpContext));
+                if (ModelState.IsValid)
+                {
+                    var res = (_provider.Update(model.AuthorizedDevice));
+                    model.Result = StatusResponseGenerator.GetStatusResponseResultForReturnParam(res);
+                }
+            }
+            catch (Exception e)
+            {
+                model.Result = StatusResponseGenerator.GetRequestResponseCriticalError();
+            }
+            return View(model);
+        }
+
         public ActionResult Remove(sconnAuthorizedDevice Device)
         {
             AlarmSystemAddAuthorizedDeviceModel model = new AlarmSystemAddAuthorizedDeviceModel();

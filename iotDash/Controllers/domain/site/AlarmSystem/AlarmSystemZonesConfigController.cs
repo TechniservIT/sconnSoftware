@@ -33,13 +33,6 @@ namespace iotDash.Controllers.domain.site.AlarmSystem
             return View(model);
         }
 
-
-        public ActionResult Edit(sconnAlarmZone Zone)
-        {
-            AlarmSystemZoneAddModel model = new AlarmSystemZoneAddModel(Zone);
-            return View(model);
-        }
-
         public ActionResult Edit(int Id)
         {
             AlarmSystemZoneAddModel model = new AlarmSystemZoneAddModel();
@@ -47,6 +40,26 @@ namespace iotDash.Controllers.domain.site.AlarmSystem
             model.Zone = _provider.GetById(Id);
             return View(model);
         }
+
+        [HttpPost]
+        public async Task<ActionResult> Edit(AlarmSystemZoneAddModel model)
+        {
+            try
+            {
+                this._provider = new ZoneConfigurationService(DomainSession.GetAlarmConfigForContextSession(this.HttpContext));
+                if (ModelState.IsValid)
+                {
+                    var res = (_provider.Update(model.Zone));
+                    model.Result = StatusResponseGenerator.GetStatusResponseResultForReturnParam(res);
+                }
+            }
+            catch (Exception e)
+            {
+                model.Result = StatusResponseGenerator.GetRequestResponseCriticalError();
+            }
+            return View(model);
+        }
+
 
         public ActionResult Search(string key)
         {

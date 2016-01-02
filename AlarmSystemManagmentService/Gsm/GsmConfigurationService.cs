@@ -86,7 +86,7 @@ namespace AlarmSystemManagmentService
         {
             try
             {
-                var oldrcpt = Manager.Config.GsmConfig.Rcpts.Where(z => z.NumberE164.Equals(rcpt.NumberE164)).FirstOrDefault();
+                var oldrcpt = Manager.Config.GsmConfig.Rcpts.Where(z => z.Id == rcpt.Id).FirstOrDefault();
                 if (oldrcpt != null)
                 {
                     oldrcpt = rcpt;

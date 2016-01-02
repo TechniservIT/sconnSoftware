@@ -23,33 +23,49 @@ namespace sconnConnector.POCO.Config
         public bool Enabled { get; set; }
 
         public string Name { get; set; }
+        
 
         public sconnRelay()
         {
-
+            Name = "Relay";
         }
 
-        public sconnRelay(byte[] rawCfg)
+        public sconnRelay(byte[] rawCfg) : this()
         {
                 this.Deserialize(rawCfg);
         }
 
         public byte[] Serialize()
         {
-            byte[] buffer = new byte[ipcDefines.RelayMemSize];
-            buffer[ipcDefines.mAdrRelayType] = (byte)Type;
-            buffer[ipcDefines.mAdrRelayEnabled] = (byte)(Enabled ? 1 : 0);
-            buffer[ipcDefines.mAdrRelayVal] = (byte)Value;
-            buffer[ipcDefines.mAdrRelayNameAddr] = (byte) NameId;
-            return buffer;
+            try
+            {
+                byte[] buffer = new byte[ipcDefines.RelayMemSize];
+                buffer[ipcDefines.mAdrRelayType] = (byte)Type;
+                buffer[ipcDefines.mAdrRelayEnabled] = (byte)(Enabled ? 1 : 0);
+                buffer[ipcDefines.mAdrRelayVal] = (byte)Value;
+                buffer[ipcDefines.mAdrRelayNameAddr] = (byte)NameId;
+                return buffer;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+
         }
 
         public void Deserialize(byte[] buffer)
         {
-            Type = (sconnOutputType)buffer[ipcDefines.mAdrRelayType];
-            Value = buffer[ipcDefines.mAdrRelayVal];
-            NameId = buffer[ipcDefines.mAdrRelayNameAddr];
-            Enabled = buffer[ipcDefines.mAdrRelayEnabled] > 0 ? true : false;
+            try
+            {
+                Type = (sconnOutputType)buffer[ipcDefines.mAdrRelayType];
+                Value = buffer[ipcDefines.mAdrRelayVal];
+                NameId = buffer[ipcDefines.mAdrRelayNameAddr];
+                Enabled = buffer[ipcDefines.mAdrRelayEnabled] > 0 ? true : false;
+            }
+            catch (Exception)
+            {
+            }
+
         }
 
         public void Fake()

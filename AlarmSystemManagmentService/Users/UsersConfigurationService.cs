@@ -84,7 +84,7 @@ namespace AlarmSystemManagmentService
         {
             try
             {
-                var oldUser = Manager.Config.UserConfig.Users.Where(z => z.Login.Equals(user.Login)).FirstOrDefault();
+                var oldUser = Manager.Config.UserConfig.Users.Where(d => d.Id == user.Id).FirstOrDefault();
                 if (oldUser != null)
                 {
                     oldUser = user;

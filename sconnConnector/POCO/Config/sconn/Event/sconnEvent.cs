@@ -47,33 +47,61 @@ namespace sconnConnector.POCO.Config.sconn
 
         public sconnEvent(byte[] EventBytes) : this()
         {
-            //decode
-            //TODO better buffer decode 
-            if (EventBytes.Length >= ipcDefines.EVENT_DB_RECORD_LEN)
-            {
-                Id = EventBytes[ipcDefines.EVENT_DB_ID_POS + 3];
-                Type = (sconnEventType)EventBytes[ipcDefines.EVENT_DB_CODE_POS + 1];
-                Domain = EventBytes[ipcDefines.EVENT_DB_DOMAIN_POS + 1];
-                DeviceId = EventBytes[ipcDefines.EVENT_DB_DEVICE_POS + 1];
-                UserId = EventBytes[ipcDefines.EVENT_DB_USER_ID_POS + 1];
-
-            }
+            this.Deserialize(EventBytes);
         }
 
         public byte[] Serialize()
         {
-            throw new NotImplementedException();
+            try
+            {
+
+                byte[] buffer = new byte[ipcDefines.EVENT_DB_RECORD_LEN];
+                buffer[ipcDefines.EVENT_DB_ID_POS + 3] = (byte)Id;
+                buffer[ipcDefines.EVENT_DB_CODE_POS + 1] = (byte)Type;
+                buffer[ipcDefines.EVENT_DB_DOMAIN_POS + 1] = (byte)Domain;
+                buffer[ipcDefines.EVENT_DB_DEVICE_POS + 1] = (byte)(DeviceId);
+                buffer[ipcDefines.EVENT_DB_USER_ID_POS + 1] = (byte)UserId;
+                return buffer;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
         public void Deserialize(byte[] buffer)
         {
-            throw new NotImplementedException();
+            try
+            {
+                //decode
+                //TODO better buffer decode 
+                if (buffer.Length >= ipcDefines.EVENT_DB_RECORD_LEN)
+                {
+                    Id = buffer[ipcDefines.EVENT_DB_ID_POS + 3];
+                    Type = (sconnEventType)buffer[ipcDefines.EVENT_DB_CODE_POS + 1];
+                    Domain = buffer[ipcDefines.EVENT_DB_DOMAIN_POS + 1];
+                    DeviceId = buffer[ipcDefines.EVENT_DB_DEVICE_POS + 1];
+                    UserId = buffer[ipcDefines.EVENT_DB_USER_ID_POS + 1];
+
+                }
+            }
+            catch (Exception)
+            {
+                    
+            }
+
         }
 
         public void Fake()
         {
-            throw new NotImplementedException();
+            this.Id = 0;
+            this.Time = DateTime.Now;
+            this.Domain = 0;
+            this.UserId = 1;
+            this.Type = sconnEventType.EVENT_TYPE_ACTIVATION;
         }
+
+
     }
 
 }

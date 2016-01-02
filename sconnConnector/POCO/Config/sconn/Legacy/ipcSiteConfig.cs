@@ -14,11 +14,11 @@ namespace sconnConnector.POCO.Config
         public ipcDeviceConfig[] deviceConfigs;
         public ipcGlobalConfig globalConfig;
         public ipcEvent[] events;
-        public ipcRcpt[] gsmRcpts;
-
+        
         public bool Violation;
         public bool Armed;
-        
+
+        public byte[] GsmConfig;
         public byte[] AuthDevices;
         public byte[] UserConfig;
         public byte[] Hash;
@@ -59,7 +59,7 @@ namespace sconnConnector.POCO.Config
             _deviceNo = 0;
             deviceConfigs = new ipcDeviceConfig[deviceNo];
             globalConfig = new ipcGlobalConfig();
-            gsmRcpts = new ipcRcpt[0];
+            GsmConfig = new byte[0];
             AuthDevices = new byte[0];
             UserConfig = new byte[0];
             events = new ipcEvent[0];

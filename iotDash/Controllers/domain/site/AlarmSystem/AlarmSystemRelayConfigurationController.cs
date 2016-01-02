@@ -37,11 +37,7 @@ namespace iotDash.Controllers.domain.site.AlarmSystem
             return View(model);
         }
 
-        public ActionResult Edit(sconnGsmRcpt Rcpt)
-        {
-            AlarmSystemGsmAddRcptModel model = new AlarmSystemGsmAddRcptModel(Rcpt);
-            return View(model);
-        }
+
 
         public ActionResult Edit(int Id)
         {

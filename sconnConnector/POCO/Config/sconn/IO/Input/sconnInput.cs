@@ -32,17 +32,17 @@ namespace sconnConnector.POCO.Config
        
         public sconnInput()
         {
-
+            Name = "Input";
         }
 
-        public sconnInput(byte[] rawBytes)
+        public sconnInput(byte[] rawBytes) : this()
         {
                 this.Deserialize(rawBytes);
         }
 
         public byte[] Serialize()
         {
-            byte[] buffer = new byte[ipcDefines.RelayMemSize];
+            byte[] buffer = new byte[ipcDefines.mAdrInputMemSize];
             buffer[ipcDefines.mAdrInputType] = (byte)Type;
             buffer[ipcDefines.mAdrInputEnabled] = (byte)(Enabled ? 1 : 0);
             buffer[ipcDefines.mAdrInputVal] = (byte)Value;

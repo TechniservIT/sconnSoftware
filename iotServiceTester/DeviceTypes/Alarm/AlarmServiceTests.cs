@@ -7,6 +7,9 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using AlarmSystemManagmentService.IO.Input;
+using AlarmSystemManagmentService.IO.Output;
+using AlarmSystemManagmentService.IO.Relay;
 using iotDatabaseConnector.DAL.Repository.Connector.Entity;
 using iotDbConnector.DAL;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -35,22 +38,19 @@ namespace iotServiceTester.DeviceTypes.Alarm
         public static sconnAlarmSystem GetFakeAlarmSconnAlarmSystem()
         {
             sconnAlarmSystem sys = new sconnAlarmSystem();
-                var fakeables = sys.GetType().GetProperties();
-            foreach (var prop in fakeables)
+            var fakeables = sys.GetType().GetProperties();
+            foreach (PropertyInfo prop in fakeables)
             {
                 try
                 {
-                    Type ifaceType = typeof(IFakeAbleConfiguration);
-                    Type tempType = prop.GetType();
-                    InterfaceMapping map = tempType.GetInterfaceMap(ifaceType);
-                    for (int i = 0; i < map.InterfaceMethods.Length; i++)
+                    if (prop.PropertyType.GetInterfaces().Contains(typeof(IFakeAbleConfiguration)) ) //typeof(IFakeAbleConfiguration).IsAssignableFrom(typeof(prop.)))  //fakeAblePropType
                     {
-                        MethodInfo ifaceMethod = map.InterfaceMethods[i];
-                        MethodInfo targetMethod = map.TargetMethods[i];
-                        targetMethod.Invoke(sys, null);
+                        MethodInfo minfo = prop.PropertyType.GetMethod("Fake");
+                        var imp = prop.GetValue(sys, null);
+                        minfo?.Invoke(imp, null);
                     }
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
 
                 }
@@ -60,51 +60,62 @@ namespace iotServiceTester.DeviceTypes.Alarm
 
         public static AlarmSystemConfigManager GetAlarmConfigManager()
         {
-            Device dev = FakeAlarmServiceFactory.GetAlarmDevice();
-            AlarmSystemConfigManager man = new AlarmSystemConfigManager(dev.EndpInfo, dev.Credentials);
-            man.Config = FakeAlarmServiceFactory.GetFakeAlarmSconnAlarmSystem();
-            return man;
+            try
+            {
+                Device dev = FakeAlarmServiceFactory.GetAlarmDevice();
+                AlarmSystemConfigManager man = new AlarmSystemConfigManager(dev.EndpInfo, dev.Credentials);
+                man.Config = FakeAlarmServiceFactory.GetFakeAlarmSconnAlarmSystem();
+                return man;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+
         }
 
         public static IAlarmSystemConfigurationService<T> GetAlarmService<T>()
         {
             AlarmSystemConfigManager man = FakeAlarmServiceFactory.GetAlarmConfigManager();
+            IAlarmSystemConfigurationService<T> service;
             if (typeof(T) == typeof(sconnDevice))
             {
-               return new DeviceConfigService(man) as IAlarmSystemConfigurationService<T>;
+                service = new DeviceConfigService(man) as IAlarmSystemConfigurationService<T>;
             }
             else if (typeof (T) == typeof (sconnAlarmZone))
             {
-                return new ZoneConfigurationService(man) as IAlarmSystemConfigurationService<T>;
+                service = new ZoneConfigurationService(man) as IAlarmSystemConfigurationService<T>;
             }
             else if (typeof(T) == typeof(sconnUser))
             {
-                return new UsersConfigurationService(man) as IAlarmSystemConfigurationService<T>;
+                service = new UsersConfigurationService(man) as IAlarmSystemConfigurationService<T>;
             }
             else if (typeof(T) == typeof(sconnGsmRcpt))
             {
-                return new GsmConfigurationService(man) as IAlarmSystemConfigurationService<T>;
+                service = new GsmConfigurationService(man) as IAlarmSystemConfigurationService<T>;
             }
             else if (typeof(T) == typeof(sconnAuthorizedDevice))
             {
-                return new AuthorizedDevicesConfigurationService(man) as IAlarmSystemConfigurationService<T>;
+                service = new AuthorizedDevicesConfigurationService(man) as IAlarmSystemConfigurationService<T>;
             }
             else if (typeof(T) == typeof(sconnInput))
             {
-                return new AuthorizedDevicesConfigurationService(man) as IAlarmSystemConfigurationService<T>;
+                service = new InputConfigService(man) as IAlarmSystemConfigurationService<T>;
             }
             else if (typeof(T) == typeof(sconnOutput))
             {
-                return new AuthorizedDevicesConfigurationService(man) as IAlarmSystemConfigurationService<T>;
+                service = new OutputConfigService(man) as IAlarmSystemConfigurationService<T>;
             }
             else if (typeof(T) == typeof(sconnRelay))
             {
-                return new AuthorizedDevicesConfigurationService(man) as IAlarmSystemConfigurationService<T>;
+                service = new RelayConfigService(man) as IAlarmSystemConfigurationService<T>;
             }
             else
             {
-                return null;
+                service =  null;
             }
+            service.Online = false; //Disable online config sync for testing
+            return service;
         }
 }
 
@@ -161,10 +172,10 @@ namespace iotServiceTester.DeviceTypes.Alarm
         {
             T proto = new T();
             int RandomId = 156164831;
-            FieldInfo field;
-            if ((field = proto.GetType().GetField("Id")) != null)
+            PropertyInfo prop = proto.GetType().GetProperty("Id");
+            if ((prop) != null)
             {
-                field.SetValue(proto, RandomId);
+                prop.SetValue(proto, RandomId);
                 _service.Add(proto);
                 var res = _service.RemoveById(RandomId);
                 var ResCont = _service.GetAll();
@@ -182,15 +193,20 @@ namespace iotServiceTester.DeviceTypes.Alarm
         {
             T proto = new T();
             int RandomId = 156164831;   //Test updating by Id property
-            int ChangedId = 64234123;
-            FieldInfo field;
-            if ((field = proto.GetType().GetField("Id")) != null)
+            int Val1 = 64234123;
+            int Val2 = 7512356;
+            PropertyInfo idInfo = proto.GetType().GetProperty("Id");
+            idInfo.SetValue(proto, RandomId);
+            PropertyInfo prop = proto.GetType().GetProperty("Value");
+            if ((prop) != null)
             {
-                field.SetValue(proto, RandomId);
+                prop.SetValue(proto, Val1);
                 _service.Add(proto);
-                field.SetValue(proto, ChangedId);
+                prop.SetValue(proto, Val2);
                 var res = _service.Update(proto);
-                Assert.IsTrue(res);
+                var Updated = _service.GetById(RandomId);
+                var UpdatedValue = (int)prop.GetValue(Updated);
+                Assert.IsTrue(res && (UpdatedValue==Val2));
             }
             else
             {

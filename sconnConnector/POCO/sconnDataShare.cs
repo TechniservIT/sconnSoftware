@@ -869,7 +869,7 @@ namespace sconnConnector
         public static int mAddr_SCHED_StartAddr =0x4000; //16384 - after Names CFG
         public static int RAM_SCHED_SIZE  = 8192;         //32 devices * 8sched/dev *  32B sched size
         public static int RAM_DEV_SCHED_SIZE = 256;
-        public static int RAM_SMS_RECP_MEM_SIZE = 256;
+      //  public static int RAM_SMS_RECP_MEM_SIZE = 256;
         public static int RAM_DEV_SCHED_NO    =0x08;     //32 schedules
         public static int RAM_DEV_SCHED_MEM_SIZE  =0x20;  //32B  
         public static int RAM_DEV_SCHED_DATETIME_SIZE = 0x08;
@@ -963,6 +963,7 @@ namespace sconnConnector
         static public int RAM_SMS_MSG_NO    = 16;
 
 
+        static public int RAM_SMS_RECP_MEM_SIZE = (RAM_SMS_RECP_SIZE*RAM_SMS_RECP_NO);
 
         /**********************  AUTH *********************/
         static public int AUTH_PASS_SIZE = 30;       // pass  15 x 2b UTF8
@@ -985,12 +986,11 @@ namespace sconnConnector
         static public int AUTH_RECORD_SIZE = (AUTH_RECORD_PASSWD_POS + AUTH_RECORD_PASSWD_LEN);
 
         static public int AUTH_CRED_SIZE   =   AUTH_RECORD_SIZE; 
-
-
-        /**********************************   PASSWD ************************************/
         static public int AUTH_MAX_USERS = 16;
+        static public int AUTH_RECORDS_SIZE = (AUTH_RECORD_SIZE * AUTH_MAX_USERS);
 
-        /******************   SCONN BERKELEY  *************/
+
+        /******************   NET   *************/
         static public int NET_MAX_TX_SIZE = 280;
         static public int NET_MAX_RX_SIZE = 2048;
         static public int NET_MAX_SESSION_IDLE_SEC = 100;

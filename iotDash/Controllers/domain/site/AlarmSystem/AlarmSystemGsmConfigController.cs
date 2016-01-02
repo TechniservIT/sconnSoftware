@@ -40,11 +40,7 @@ namespace iotDash.Controllers.domain.site.AlarmSystem
             return View(model);
         }
 
-        public ActionResult Edit(sconnGsmRcpt Rcpt)
-        {
-            AlarmSystemGsmAddRcptModel model = new AlarmSystemGsmAddRcptModel(Rcpt);
-            return View(model);
-        }
+
 
         public ActionResult Edit(int Id)
         {
@@ -53,7 +49,25 @@ namespace iotDash.Controllers.domain.site.AlarmSystem
             model.GsmRcpt = _provider.GetById(Id);
             return View(model);
         }
-        
+
+        [HttpPost]
+        public async Task<ActionResult> Edit(AlarmSystemGsmAddRcptModel model)
+        {
+            try
+            {
+                this._provider = new GsmConfigurationService(DomainSession.GetAlarmConfigForContextSession(this.HttpContext));
+                if (ModelState.IsValid)
+                {
+                    var res = (_provider.Update(model.GsmRcpt));
+                    model.Result = StatusResponseGenerator.GetStatusResponseResultForReturnParam(res);
+                }
+            }
+            catch (Exception e)
+            {
+                model.Result = StatusResponseGenerator.GetRequestResponseCriticalError();
+            }
+            return View(model);
+        }
         public ActionResult Search(string key)
         {
             this._provider = new GsmConfigurationService(DomainSession.GetAlarmConfigForContextSession(this.HttpContext));

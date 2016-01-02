@@ -318,7 +318,102 @@ namespace sconnConnector
 	        return WriteDeviceDevAuthCfgSingle(site, 0x00);
 	    }
 
-		public bool WriteDeviceCfg(sconnSite site)
+        public bool WriteUserCfg(sconnSite site)
+        {
+            if (site.siteCfg == null)
+            {
+                return false;
+            }
+            SconnClient client = new SconnClient(site.serverIP, site.serverPort, site.authPasswd, true);
+            site.siteStat.StartConnectionTimer();
+            try
+            {
+                int bfSize = ipcDefines.NET_MAX_TX_SIZE;
+                int packetData = bfSize - ipcDefines.NET_UPLOAD_PACKET_CONTROL_BYTES; // CMD1 -> CMD2 -> SVAL -> DATA... -> EVAL
+                int bytesToSend = ipcDefines.SYS_ALARM_DEV_AUTH_MEM_SIZE;
+
+                // Receiving byte array  
+                byte[] txBF = new byte[bfSize];
+                byte[] rxBF = new byte[ipcDefines.NET_MAX_RX_SIZE];
+                txBF[0] = ipcCMD.SET;
+                txBF[1] = ipcCMD.setPasswdCfg;
+
+                rxBF = client.berkeleySendMsg(txBF, ipcDefines.NET_CMD_PACKET_LEN);
+
+                if (rxBF[0] == ipcCMD.ACK)
+                {
+                    int fullTxNo = (int)ipcDefines.SYS_ALARM_DEV_AUTH_MEM_SIZE / packetData;
+                    int singleBytes = (int)ipcDefines.SYS_ALARM_DEV_AUTH_MEM_SIZE % packetData;
+
+                    txBF[0] = ipcCMD.PSH;
+                    txBF[1] = ipcCMD.PSHNXT;
+                    txBF[2] = ipcCMD.SVAL;
+
+                    int packetLastByteIndex = bytesToSend > packetData ? bfSize - 1 : ipcDefines.SYS_ALARM_DEV_AUTH_MEM_SIZE + ipcDefines.NET_UPLOAD_PACKET_DATA_OFFSET;
+                    txBF[packetLastByteIndex] = ipcCMD.EVAL;
+
+                    for (int j = 0; j < fullTxNo; j++)
+                    {
+                        for (int k = 0; k < packetData; k++)
+                        {
+                            txBF[k + ipcDefines.NET_UPLOAD_PACKET_DATA_OFFSET] = site.siteCfg.AuthDevices[j * packetData + k];
+                        }
+
+                        rxBF = client.berkeleySendMsg(txBF, bfSize);
+                        if (rxBF[0] != ipcCMD.ACKNXT)
+                        {
+                            site.siteStat.StopConnectionTimer();
+                            site.siteStat.FailedConnections++;
+                            return false;
+                        }
+                    }
+                    //last packet
+
+                    if (singleBytes > 0)
+                    {
+                        for (int l = 0; l < singleBytes; l++)
+                        {
+                            txBF[l + ipcDefines.NET_UPLOAD_PACKET_DATA_OFFSET] = site.siteCfg.deviceConfigs[0].AuthDevicesCFG[fullTxNo * packetData + l];
+                        }
+                        rxBF = client.berkeleySendMsg(txBF, singleBytes + ipcDefines.NET_UPLOAD_PACKET_CONTROL_BYTES);
+
+                        if (rxBF[0] != ipcCMD.ACKNXT)
+                        {
+                            site.siteStat.StopConnectionTimer();
+                            site.siteStat.FailedConnections++;
+                            return false;
+                        }
+                    }
+                    //signal finish
+                    txBF[0] = ipcCMD.PSH;
+                    txBF[1] = ipcCMD.PSHFIN;
+                    txBF[2] = ipcDefines.NET_PACKET_TYPE_DEVAUTHCFG;
+                    rxBF = client.berkeleySendMsg(txBF, ipcDefines.NET_CMD_PACKET_LEN);
+                    if (rxBF[0] != ipcCMD.ACKFIN)
+                    {
+                        site.siteStat.StopConnectionTimer();
+                        site.siteStat.FailedConnections++;
+                        return false;
+                    }
+                }
+                else
+                {
+                    site.siteStat.StopConnectionTimer();
+                    site.siteStat.FailedConnections++;
+                    return false;
+                }
+            }
+            catch (Exception e)
+            {
+                site.siteStat.StopConnectionTimer();
+                site.siteStat.FailedConnections++;
+                return false;
+            }
+            site.siteStat.StopConnectionTimer();
+            return true;
+        }
+
+        public bool WriteDeviceCfg(sconnSite site)
 		{         
 			if (site.siteCfg == null)
 			{
@@ -365,19 +460,7 @@ namespace sconnConnector
 					txBF[0] = ipcCMD.PSH;
 					txBF[1] = ipcCMD.PSHNXT;
 					txBF[2] = ipcCMD.SVAL;
-
-					//serialize
-					byte[] gsmRcptsBytes = new byte[bytesToSend];
-					for (int i = 0; i < ipcDefines.RAM_SMS_RECP_NO; i++)
-					{
-						byte[] rcpbytes = site.siteCfg.gsmRcpts[i].Serialized;
-						for (int j = 0; j < ipcDefines.RAM_SMS_RECP_SIZE; j++)
-						{
-							gsmRcptsBytes[(i * ipcDefines.RAM_SMS_RECP_SIZE) + j] = rcpbytes[j];
-						}
-					}
-					
-
+                    
 					int packetLastByteIndex = bytesToSend > packetData ? bfSize - 1 : bytesToSend + ipcDefines.NET_UPLOAD_PACKET_DATA_OFFSET;
 					txBF[packetLastByteIndex] = ipcCMD.EVAL;
 					for (int j = 0; j < fullTxNo; j++)
@@ -385,7 +468,7 @@ namespace sconnConnector
 						int startAddr = j * packetData;
 						for (int k = 0; k < packetData; k++)
 						{
-							txBF[k + ipcDefines.NET_UPLOAD_PACKET_DATA_OFFSET] = gsmRcptsBytes[(startAddr + k)];
+							txBF[k + ipcDefines.NET_UPLOAD_PACKET_DATA_OFFSET] = site.siteCfg.GsmConfig[(startAddr + k)];
 						}
 
 						rxBF = client.berkeleySendMsg(txBF, bfSize);
@@ -401,7 +484,7 @@ namespace sconnConnector
 					{
 						for (int l = 0; l < signleBytes; l++)
 						{
-							txBF[l + ipcDefines.NET_UPLOAD_PACKET_DATA_OFFSET] = gsmRcptsBytes[(fullTxNo * packetData) + l];
+							txBF[l + ipcDefines.NET_UPLOAD_PACKET_DATA_OFFSET] = site.siteCfg.GsmConfig[(fullTxNo * packetData) + l];
 						}
 						rxBF = client.berkeleySendMsg(txBF, signleBytes + ipcDefines.NET_UPLOAD_PACKET_CONTROL_BYTES);
 						if (rxBF[0] != ipcCMD.ACKNXT)
@@ -1219,8 +1302,10 @@ namespace sconnConnector
                bool NamesChanged;
 
 
-		   /**********  Read global config  ***********/
-		   if (configChanged)
+           configChanged = true; //for debug
+
+           /**********  Read global config  ***********/
+           if (configChanged)
 		   {
                //update hash
                for (int i = 0; i < ipcDefines.SHA256_DIGEST_SIZE; i++)
@@ -1295,14 +1380,23 @@ namespace sconnConnector
                            }    //dev rx ok
                        }
 
-                       // ReadSpecialRegs = true;
+                             ReadSpecialRegs = true;
+
                             if (ReadSpecialRegs)
                             {
                                 /*****  Get Device AUTH CFG ******/
 
                                 cmd[1] = ipcCMD.getAuthDevices;
                                 devAuthBF = client.berkeleySendMsg(cmd);
-                                site.siteCfg.AuthDevices = devAuthBF;
+                                if (devAuthBF[0] == ipcCMD.SVAL)
+                                {
+                                    site.siteCfg.AuthDevices = new byte[ipcDefines.AUTH_RECORDS_SIZE];
+                                    for (int j = 0; j < ipcDefines.AUTH_RECORDS_SIZE; j++)
+                                    {
+                                        site.siteCfg.AuthDevices[j] = devAuthBF[j + 1];
+                                    }
+                                }
+                                
 
                                 /*****  Get GSM RCPT ******/
 
@@ -1329,19 +1423,12 @@ namespace sconnConnector
                                 {
                                     try
                                     {
-                                        int bufferOffset = 1;
-                                        ipcRcpt[] rcpts = new ipcRcpt[ipcDefines.RAM_SMS_RECP_SIZE];
-                                        for (int r = 0; r < ipcDefines.RAM_SMS_RECP_SIZE; r++)
+                                        site.siteCfg.GsmConfig = new byte[ipcDefines.RAM_SMS_RECP_MEM_SIZE];
+                                        for (int j = 0; j < ipcDefines.RAM_SMS_RECP_MEM_SIZE; j++)
                                         {
-                                            byte[] record = new byte[ipcDefines.RAM_SMS_RECP_SIZE];
-                                            for (int btc = 0; btc < ipcDefines.RAM_SMS_RECP_SIZE; btc++)
-                                            {
-                                                record[btc] = gsmRcpBF[bufferOffset + (r * ipcDefines.RAM_SMS_RECP_SIZE) + btc];
-                                            }
-                                            ipcRcpt rcpt = new ipcRcpt(record);
-                                            rcpts[r] = rcpt;
+                                            site.siteCfg.GsmConfig[j] = gsmRcpBF[j+1];
                                         }
-                                        site.siteCfg.gsmRcpts = rcpts;
+                                        
                                     }
                                     catch (Exception e)
                                     {
@@ -1400,7 +1487,6 @@ namespace sconnConnector
                                    }
                                }
                            }
-
                            
                            //get events
                            cmd[0] = ipcCMD.GET;
@@ -1419,7 +1505,7 @@ namespace sconnConnector
                                    {
                                        evBF[k] = rxBF[k + 1];
                                    }
-                                    site.siteCfg.events[j] = new ipcEvent(evBF);
+                                   site.siteCfg.events[j] = new ipcEvent(evBF);
                            }
 
                                 //Auth cfg
@@ -1432,13 +1518,8 @@ namespace sconnConnector
                                     AuthBf[j] = rxBF[j + 1];
                                 }
                                 site.siteCfg.UserConfig = AuthBf;
-
-
                             }
-
-                        
-                   }
-
+                        }
 
                        deviceUploadStat = true;
                        globalUploadStat = true;
@@ -1449,10 +1530,7 @@ namespace sconnConnector
                        {
                            site.siteCfg.globalConfig.memCFG[j] = gcfgRx[j + rxOffset];
                        }
-                      
 				   }    //gcfg ok
-
-	
                  }  //config changed
 
                    client.CloseConnection();
@@ -1473,187 +1551,6 @@ namespace sconnConnector
 	   public bool ReadSiteRunningConfig(sconnSite site)
 	   {
            return ReadSiteRunningConfigMin(site, true);
-
-
-		   site.siteStat.StartConnectionTimer();
-		   bool globalUploadStat = false;
-		   bool deviceUploadStat = false;
-		   int devices = 0;
-		   byte[] cmd = new byte[32];
-		   SconnClient client = new SconnClient(site.serverIP, site.serverPort, site.authPasswd,true);
-
-
-			   /**********  Read global config  ***********/
-
-			   ushort siteMemAddr = (ushort)(ipcDefines.mAdrGlobalConfig);
-			   byte[] rxBF = new byte[ipcDefines.ipcGlobalConfigSize + 2];
-
-			   cmd[0] = ipcCMD.GET;
-			   cmd[1] = ipcCMD.getRunGlobCfg;
-			   rxBF = client.berkeleySendMsg(cmd);     //    ethernet.berkeleySendMsg(site.serverIP, cmd, site.serverPort);
-
-			   if (rxBF[0] == ipcCMD.SVAL)
-			   {
-				   devices = rxBF[2];
-				   site.siteCfg = new ipcSiteConfig(devices);
-				   
-				   for (int j = 0; j < ipcDefines.ipcGlobalConfigSize; j++)
-				   {
-					   site.siteCfg.globalConfig.memCFG[j] = rxBF[j + 1];
-				   }
-				   globalUploadStat = true;
-
-			   }
-
-			   /**********  Get device configs **********/
-
-			   cmd = new byte[32];
-			   rxBF = new byte[ipcDefines.deviceConfigSize + 2];
-			   byte[,] narrNamesBF = new byte[ipcDefines.RAM_DEV_NAMES_NO,ipcDefines.RAM_NAME_SIZE];
-			   byte[] SchedBF = new byte[ipcDefines.RAM_DEV_SCHED_SIZE];
-			   byte[] gsmRcpBF = new byte[ipcDefines.RAM_SMS_RECP_MEM_SIZE];
-			   byte[] devAuthBF = new byte[ipcDefines.SYS_ALARM_DEV_AUTH_MEM_SIZE];
-			   siteMemAddr = (ushort)(ipcDefines.mAdrDevStart);
-			   int MsgByteOffset = 1;
-
-			   try
-			   {
-				   for (int i = 0; i < devices; i++)
-				   {
-					   /*******  Get Device Config  ****/
-					   cmd[0] = ipcCMD.GET;
-					   cmd[1] = ipcCMD.getRunDevCfg;
-					   cmd[2] = (byte)i; //device number
-					   rxBF = client.berkeleySendMsg(cmd);
-
-					   if (rxBF[0] == ipcCMD.SVAL)
-					   {
-
-
-						   /*****  Get Device AUTH CFG ******/
-
-						   cmd[1] = ipcCMD.getAuthDevices;
-						   devAuthBF = client.berkeleySendMsg(cmd);
-
-
-						   /*****  Get GSM RCPT ******/
-
-						   cmd[1] = ipcCMD.getGsmRecpCfg;
-						   gsmRcpBF = client.berkeleySendMsg(cmd);
-						   
-						   deviceUploadStat = true;
-								
-						   //read device config
-						   for (int j = 0; j < ipcDefines.deviceConfigSize; j++)
-						   {
-							   site.siteCfg.deviceConfigs[i].memCFG[j] = rxBF[j + MsgByteOffset];
-						   }
-
-
-						   //read names config
-
-						   ///*****  Get Device Names ******/
-						   cmd[1] = ipcCMD.getDeviceName;
-						   for (int n = 0; n < ipcDefines.RAM_DEV_NAMES_NO; n++)
-						   {
-
-							   cmd[2] = (byte)n;
-							   cmd[3] = (byte)rxBF[ipcDefines.mAdrDevID + 1]; //TODO 2 byte addressing
-							   byte[] narr = client.berkeleySendMsg(cmd);
-							   if (narr[ 0] == ipcCMD.SVAL)
-							   {
-								   for (int txtbyte = MsgByteOffset; txtbyte < ipcDefines.RAM_NAME_SIZE + MsgByteOffset; txtbyte++)
-								   {
-									   //if (narr[txtbyte] == (byte)32) //decode space sign
-									   //{
-									   //    narr[txtbyte] = 0;
-									   //}
-									   site.siteCfg.deviceConfigs[i].NamesCFG[n][txtbyte - MsgByteOffset] = narr[txtbyte]; //1 byte buffer offset
-								   }
-							   }
-						   }
-
-
-
-						   ///*****  Get Global Names ******/
-						   cmd[1] = ipcCMD.getGlobalNames;
-						   byte[] nresp = client.berkeleySendMsg(cmd);
-						   if (nresp[0] == ipcCMD.SVAL)
-						   {
-							   for (int n = 0; n < ipcDefines.RAM_NAMES_Global_Total_Size; n++)
-							   {
-								   site.siteCfg.GlobalNameConfig[n] = nresp[n + MsgByteOffset];
-							   }
-						   }
-
-						   
-						   //read  schedule config
-						   if (SchedBF[0] == ipcCMD.SVAL)
-						   {
-							   for (int schedule = 0; schedule < ipcDefines.RAM_DEV_SCHED_NO; schedule++)
-							   {
-								   for (int schedbyte = 0; schedbyte < ipcDefines.RAM_DEV_SCHED_MEM_SIZE; schedbyte++)
-								   {
-									   site.siteCfg.deviceConfigs[i].ScheduleCFG[schedule][schedbyte] = SchedBF[(schedule * ipcDefines.RAM_DEV_SCHED_MEM_SIZE) + schedbyte + MsgByteOffset]; //1 byte buffer offset
-								   }
-							   } 
-						   }
-
-						   //read GSM config
-						   if (gsmRcpBF[0] == ipcCMD.SVAL)
-						   {
-							   try
-							   {
-								   int bufferOffset = 1;
-								    ipcRcpt[] rcpts = new  ipcRcpt[ipcDefines.RAM_SMS_RECP_SIZE];
-								   for (int r = 0; r < ipcDefines.RAM_SMS_RECP_SIZE; r++)
-								   {
-									   byte[] record = new byte[ipcDefines.RAM_SMS_RECP_SIZE];
-									   for (int btc = 0; btc < ipcDefines.RAM_SMS_RECP_SIZE; btc++)
-									   {
-										   record[btc] = gsmRcpBF[bufferOffset + (r * ipcDefines.RAM_SMS_RECP_SIZE) + btc];
-									   }
-									    ipcRcpt rcpt = new  ipcRcpt(record);
-									   rcpts[r] = rcpt;
-								   }
-								   site.siteCfg.gsmRcpts = rcpts;
-							   }
-							   catch (Exception e)
-							   {
-								   //TODO - buffer overflow
-							   }
-
-						   }
-
-					   }
-					   else
-					   {
-						   deviceUploadStat = false;
-					   }
-				   }
-
-				   //get events
-				   cmd[0] = ipcCMD.GET;
-				   cmd[1] = ipcCMD.getEventNo;
-				   rxBF = client.berkeleySendMsg(cmd);
-									
-				   cmd[1] = ipcCMD.getEvent;
-				   cmd[2] = (byte)1; //test event id 1
-				   rxBF = client.berkeleySendMsg(cmd);
-
-				   site.siteStat.StopConnectionTimer();
-				   
-			   }
-			   catch (Exception e)
-			   {
-				   site.siteStat.StopConnectionTimer();
-				   site.siteStat.FailedConnections++;
-				   client.CloseConnection();
-				   return (bool)(deviceUploadStat & globalUploadStat);
-				   throw;
-			   }
-			   client.CloseConnection();
-			   return (bool)(deviceUploadStat & globalUploadStat);
 	   }
 
 		public bool  updateSiteConfig( sconnSite site) //read entire running config

@@ -34,11 +34,6 @@ namespace iotDash.Controllers.domain.site.AlarmSystem
             return View(model);
         }
 
-        public ActionResult Edit(sconnUser User)
-        {
-            AlarmSystemUserAddModel model = new AlarmSystemUserAddModel(User);
-            return View(model);
-        }
 
         public ActionResult Edit(int Id)
         {
@@ -47,6 +42,26 @@ namespace iotDash.Controllers.domain.site.AlarmSystem
             model.User = _provider.GetById(Id);
             return View(model);
         }
+
+        [HttpPost]
+        public async Task<ActionResult> Edit(AlarmSystemUserAddModel model)
+        {
+            try
+            {
+                this._provider = new UsersConfigurationService(DomainSession.GetAlarmConfigForContextSession(this.HttpContext));
+                if (ModelState.IsValid)
+                {
+                    var res = (_provider.Update(model.User));
+                    model.Result = StatusResponseGenerator.GetStatusResponseResultForReturnParam(res);
+                }
+            }
+            catch (Exception e)
+            {
+                model.Result = StatusResponseGenerator.GetRequestResponseCriticalError();
+            }
+            return View(model);
+        }
+
 
         public ActionResult Search(string key)
         {
@@ -96,6 +111,9 @@ namespace iotDash.Controllers.domain.site.AlarmSystem
             }
             return View(model);
         }
+
+
+
 
         public ActionResult View(int DeviceId)
         {

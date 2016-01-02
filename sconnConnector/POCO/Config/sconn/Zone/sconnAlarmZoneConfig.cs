@@ -30,13 +30,13 @@ namespace sconnConnector.POCO.Config.sconn
 
         public void Deserialize(byte[] buffer)
         {
-            int zones = buffer[ipcDefines.ZONE_CFG_MAX_ZONES];
+            int zones = buffer[ipcDefines.mAdrZoneNo_Pos];  //ipcDefines.ZONE_CFG_MAX_ZONES;  
             for (int i = 0; i < zones; i++)
             {
                 byte[] zoneCfg = new byte[ipcDefines.ZONE_CFG_LEN];
                 for (int j = 0; j < ipcDefines.ZONE_CFG_LEN; j++)
                 {
-                    zoneCfg[j] = buffer[ipcDefines.mAdrZoneCfgStartAddr + i * ipcDefines.ZONE_CFG_LEN];
+                    zoneCfg[j] = buffer[ipcDefines.mAdrZoneCfgStartAddr + i * ipcDefines.ZONE_CFG_LEN +j];
                 }
                 sconnAlarmZone zone = new sconnAlarmZone(zoneCfg);
                 zone.Id = i;

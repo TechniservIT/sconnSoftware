@@ -9,7 +9,13 @@ namespace sconnConnector.POCO.Config.Abstract
 
     public enum GsmMessagingLevel
     {
-        
+        All = 1,
+        Violations,
+        PowerChange,
+        ArmChange,
+        IoControl,
+        ConfigChange,
+        UserChange
     }
 
     public abstract class AlarmSystemGsmConfig

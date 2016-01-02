@@ -7,7 +7,7 @@ using sconnConnector.POCO.Config.Abstract;
 
 namespace sconnConnector.POCO.Config.sconn
 {
-    public class sconnGsmRcpt 
+    public class sconnGsmRcpt : IAlarmSystemConfigurationEntity, ISerializableConfiguration, IFakeAbleConfiguration
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -15,14 +15,30 @@ namespace sconnConnector.POCO.Config.sconn
         public int CountryCode { get; set; }
         public string NumberE164 { get; set; }
         public GsmMessagingLevel MessageLevel { get; set; }
+        public int Value { get; set; }
 
-        public byte[] Serialized
+
+        public sconnGsmRcpt()
         {
-            get
+
+        }
+
+        public sconnGsmRcpt(ipcRcpt rcpt) : this()
+        {
+            this.Deserialize(rcpt.RawBytes);
+        }
+
+        public sconnGsmRcpt(byte[] Bytes): this()
+        {
+            this.Deserialize(Bytes);
+        }
+
+        public byte[] Serialize()
+        {
+            try
             {
                 //serialize
                 byte[] Bytes = new byte[ipcDefines.RAM_SMS_RECP_SIZE];
-
                 Bytes[ipcDefines.RAM_SMS_RECP_COUNTRY_CODE_POS] = (byte)(CountryCode << 8);
                 Bytes[ipcDefines.RAM_SMS_RECP_COUNTRY_CODE_POS + 1] = (byte)CountryCode;
 
@@ -31,45 +47,47 @@ namespace sconnConnector.POCO.Config.sconn
                 {
                     Bytes[ipcDefines.RAM_SMS_RECP_ADDR_POS + i] = numbytes[i];
                 }
-
                 Bytes[ipcDefines.RAM_SMS_RECP_ENABLED_POS] = (byte)(Enabled == true ? 1 : 0);
-
                 return Bytes;
             }
-            set
+            catch (Exception)
             {
-
+                return null;
             }
-        }
-
-        public sconnGsmRcpt()
-        {
 
         }
 
-        public sconnGsmRcpt(ipcRcpt rcpt)
+        public void Deserialize(byte[] buffer)
         {
-            this.MessageLevel = rcpt.MessageLevel;
-            this.CountryCode = rcpt.CountryCode;
-            this.Enabled = rcpt.Enabled;
-            this.NumberE164 = rcpt.NumberE164;
-        }
-
-        public sconnGsmRcpt(byte[] Bytes): this()
-        {
-            //decode
-            CountryCode = Bytes[ipcDefines.RAM_SMS_RECP_COUNTRY_CODE_POS] << 8;
-            CountryCode |= Bytes[ipcDefines.RAM_SMS_RECP_COUNTRY_CODE_POS + 1];
-
-            byte[] NumberBytes = new byte[ipcDefines.RAM_SMS_RECP_ADDR_LEN];
-            for (int i = 0; i < ipcDefines.RAM_SMS_RECP_ADDR_LEN; i++)
+            try
             {
-                NumberBytes[i] = Bytes[ipcDefines.RAM_SMS_RECP_ADDR_POS + i];
+                //decode
+                CountryCode = buffer[ipcDefines.RAM_SMS_RECP_COUNTRY_CODE_POS] << 8;
+                CountryCode |= buffer[ipcDefines.RAM_SMS_RECP_COUNTRY_CODE_POS + 1];
+
+                byte[] NumberBytes = new byte[ipcDefines.RAM_SMS_RECP_ADDR_LEN];
+                for (int i = 0; i < ipcDefines.RAM_SMS_RECP_ADDR_LEN; i++)
+                {
+                    NumberBytes[i] = buffer[ipcDefines.RAM_SMS_RECP_ADDR_POS + i];
+                }
+                NumberE164 = (System.Text.Encoding.ASCII.GetString(NumberBytes));
+                Enabled = buffer[ipcDefines.RAM_SMS_RECP_ENABLED_POS] == 1 ? true : false;
             }
-            NumberE164 = (System.Text.Encoding.ASCII.GetString(NumberBytes));
-            Enabled = Bytes[ipcDefines.RAM_SMS_RECP_ENABLED_POS] == 1 ? true : false;
+            catch (Exception)
+            {
+                    
+            }
+
 
         }
 
+        public void Fake()
+        {
+            this.Id = 0;
+            this.CountryCode = 48;
+            this.Enabled = true;
+            this.MessageLevel = GsmMessagingLevel.All;
+            this.Name = Guid.NewGuid().ToString();
+        }
     }
 }

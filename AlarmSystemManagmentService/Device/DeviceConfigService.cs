@@ -94,7 +94,7 @@ namespace AlarmSystemManagmentService
         {
             try
             {
-                var odevice = Manager.Config.DeviceConfig.Devices.Where(z => z.DeviceId.Equals(device.DeviceId)).FirstOrDefault();
+                var odevice = Manager.Config.DeviceConfig.Devices.Where(z => z.Id == device.Id).FirstOrDefault();
                 if (odevice != null)
                 {
                     odevice = device;
