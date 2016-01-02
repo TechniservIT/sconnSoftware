@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace sconnConnector.POCO.Config.sconn
 {
-    public enum AlarmZoneType
+    public enum AlarmZoneType 
     {
         General = 1,
         Nightly,
@@ -15,7 +15,7 @@ namespace sconnConnector.POCO.Config.sconn
         Time_Guarded
     }
 
-    public class sconnAlarmZone : IAlarmSystemConfigurationEntity
+    public class sconnAlarmZone : IAlarmSystemConfigurationEntity, ISerializableConfiguration, IFakeAbleConfiguration
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -30,9 +30,7 @@ namespace sconnConnector.POCO.Config.sconn
 
         public sconnAlarmZone(byte[] serialized) : this()
         {
-                //todo - load name
-            Type = (AlarmZoneType)serialized[ipcDefines.ZONE_CFG_TYPE_POS];
-            Enabled = serialized[ipcDefines.ZONE_CFG_ENABLED_POS] > 0 ? true  : false;
+            this.Deserialize(serialized);
         }
 
         public byte[] Serialize()
@@ -41,6 +39,17 @@ namespace sconnConnector.POCO.Config.sconn
             return new byte[0];
         }
 
+        public void Deserialize(byte[] buffer)
+        {
+            //todo - load name
+            Type = (AlarmZoneType)buffer[ipcDefines.ZONE_CFG_TYPE_POS];
+            Enabled = buffer[ipcDefines.ZONE_CFG_ENABLED_POS] > 0 ? true : false;
+        }
+
+        public void Fake()
+        {
+            throw new NotImplementedException();
+        }
     }
 
 }

@@ -51,7 +51,10 @@
     <Compile Include="Gsm\IGsmConfigurationService.cs" />
     <Compile Include="IAlarmSystemConfigurationService.cs" />
     <Compile Include="IO\IIoControlService.cs" />
+    <Compile Include="IO\Input\InputConfigService.cs" />
     <Compile Include="IO\IoControlService.cs" />
+    <Compile Include="IO\Output\OutputConfigService.cs" />
+    <Compile Include="IO\Relay\RelayConfigService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Users\IUsersConfigurationService.cs" />
     <Compile Include="Users\UsersConfigurationService.cs" />

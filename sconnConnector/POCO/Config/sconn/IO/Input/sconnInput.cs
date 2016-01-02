@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using sconnConnector.POCO.Config.Abstract.IO;
+using sconnConnector.POCO.Config.sconn;
 
 namespace sconnConnector.POCO.Config
 {
 
-    public class sconnInput 
+    public class sconnInput : IAlarmSystemConfigurationEntity, ISerializableConfiguration, IFakeAbleConfiguration
     {
         public int NameId { get; set; }
         public int Id { get; set; }
@@ -49,6 +50,20 @@ namespace sconnConnector.POCO.Config
         }
 
 
+        public byte[] Serialize()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Deserialize(byte[] buffer)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Fake()
+        {
+            throw new NotImplementedException();
+        }
     }
 
 }

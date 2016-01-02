@@ -14,7 +14,7 @@ namespace sconnConnector.POCO.Config.sconn
     }
 
 
-    public class sconnDevice : IAlarmSystemConfigurationEntity
+    public class sconnDevice : IAlarmSystemConfigurationEntity, ISerializableConfiguration, IFakeAbleConfiguration
     {
         public int Id { get; set; }
 
@@ -239,5 +239,19 @@ namespace sconnConnector.POCO.Config.sconn
             return new byte[0];
         }
 
+        public byte[] Serialize()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Deserialize(byte[] buffer)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Fake()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

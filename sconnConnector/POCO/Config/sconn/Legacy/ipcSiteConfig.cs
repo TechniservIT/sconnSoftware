@@ -18,12 +18,10 @@ namespace sconnConnector.POCO.Config
 
         public bool Violation;
         public bool Armed;
-
-
+        
         public byte[] AuthDevices;
         public byte[] UserConfig;
         public byte[] Hash;
-
         public byte[] GlobalNameConfig;
         public byte[] NamesHash;
 

@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AlarmSystemManagmentService
+namespace sconnConnector.POCO
 {
-    public interface IIoControlService
+    public interface IFakeAbleConfiguration
     {
-
+        void Fake();
     }
-
 }

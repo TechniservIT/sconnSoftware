@@ -31,7 +31,7 @@ namespace sconnConnector.POCO.Config.sconn
          EVENT_TYPE_REMOVE_USER     =     38
     }
 
-    public class sconnEvent
+    public class sconnEvent : IAlarmSystemConfigurationEntity, ISerializableConfiguration, IFakeAbleConfiguration
     {
         public int Id { get; set; }
         public DateTime Time { get; set; }
@@ -58,6 +58,21 @@ namespace sconnConnector.POCO.Config.sconn
                 UserId = EventBytes[ipcDefines.EVENT_DB_USER_ID_POS + 1];
 
             }
+        }
+
+        public byte[] Serialize()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Deserialize(byte[] buffer)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Fake()
+        {
+            throw new NotImplementedException();
         }
     }
 

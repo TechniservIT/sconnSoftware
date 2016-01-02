@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 using sconnConnector.POCO.Config.Abstract;
 using sconnConnector.POCO.Config.Abstract.Auth;
 using sconnConnector.POCO.Config.Abstract.Event;
+using sconnConnector.POCO.Config.sconn.IO;
+using sconnConnector.POCO.Config.sconn.IO.Output;
+using sconnConnector.POCO.Config.sconn.IO.Relay;
 
 namespace sconnConnector.POCO.Config.sconn
 {
@@ -21,6 +24,9 @@ namespace sconnConnector.POCO.Config.sconn
         public sconnGsmConfig GsmConfig { get; set; }
         public sconnAlarmZoneConfig ZoneConfig { get; set; }
         public sconnUserConfig UserConfig { get; set; }
+        public sconnInputConfig InputConfig { get; set; }
+        public sconnOutputConfig OutputConfig { get; set; }
+        public sconnRelayConfig RelayConfig { get; set; }
 
         public sconnAlarmSystem()
         {
@@ -49,7 +55,26 @@ namespace sconnConnector.POCO.Config.sconn
             ZoneConfig = new sconnAlarmZoneConfig(legacySiteConfig);
             UserConfig =  new sconnUserConfig(legacySiteConfig);
         }
-        
+
+
+        public void LoadFake()
+        {
+            //create config registers and reload
+            legacySiteConfig = new ipcSiteConfig();
+            ReloadConfig();
+
+            AuthorizedDevices = new sconnAuthorizedDevices();
+            AuthorizedDevices.Fake();
+
+            DeviceConfig = new sconnDeviceConfig(legacySiteConfig);
+            EventConfig = new sconnEventConfig(legacySiteConfig);
+            GlobalConfig = new sconnGlobalConfig(legacySiteConfig);
+            GsmConfig = new sconnGsmConfig(legacySiteConfig);
+            ZoneConfig = new sconnAlarmZoneConfig(legacySiteConfig);
+            UserConfig = new sconnUserConfig(legacySiteConfig);
+
+        }
+
 
     }
 }

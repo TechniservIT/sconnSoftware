@@ -52,13 +52,24 @@ namespace sconnConnector.Config
 
         public void LoadSiteConfig()
         {
-            if (CanUpdateDueToTimingContraints())
+            try
             {
-                mngr.ReadSiteRunningConfig(site);
-                LastUpDateTime = DateTime.Now;
-                site.siteCfg.ReloadConfig();
-                LoadAlarmSystemConfig();
+                if (CanUpdateDueToTimingContraints())
+                {
+                    bool readOk = mngr.ReadSiteRunningConfig(site);
+                    if (readOk)
+                    {
+                        site.siteCfg.ReloadConfig();
+                        LoadAlarmSystemConfig();
+                    }
+                    LastUpDateTime = DateTime.Now;
+                }
             }
+            catch (Exception)
+            {
+                    
+            }
+
         }
 
         private void LoadAlarmSystemConfig()

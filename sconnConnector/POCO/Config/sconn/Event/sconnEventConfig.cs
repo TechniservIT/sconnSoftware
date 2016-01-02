@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace sconnConnector.POCO.Config.sconn
 {
-    public class sconnEventConfig
+    public class sconnEventConfig : IAlarmSystemConfigurationEntity, ISerializableConfiguration, IFakeAbleConfiguration
     {
         public List<sconnEvent> Events { get; set; }
 
@@ -36,5 +36,19 @@ namespace sconnConnector.POCO.Config.sconn
 
         }
 
+        public byte[] Serialize()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Deserialize(byte[] buffer)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Fake()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace sconnConnector.POCO.Config.sconn
 {
-    public class sconnAlarmZoneConfig
+    public class sconnAlarmZoneConfig : IAlarmSystemConfigurationEntity, ISerializableConfiguration, IFakeAbleConfiguration
     {
         public List<sconnAlarmZone> Zones { get; set; }
 
@@ -28,6 +28,11 @@ namespace sconnConnector.POCO.Config.sconn
             return Serialized;
         }
 
+        public void Deserialize(byte[] buffer)
+        {
+            throw new NotImplementedException();
+        }
+
         public sconnAlarmZoneConfig(ipcSiteConfig cfg) :this()
         {
             int zones = cfg.globalConfig.memCFG[ipcDefines.mAdrZoneNo];
@@ -42,6 +47,11 @@ namespace sconnConnector.POCO.Config.sconn
                 zone.Id = i;
                 Zones.Add(zone);
             }
+        }
+
+        public void Fake()
+        {
+            throw new NotImplementedException();
         }
     }
 

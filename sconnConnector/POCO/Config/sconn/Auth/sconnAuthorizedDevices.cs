@@ -8,7 +8,7 @@ using sconnConnector.POCO.Config.sconn;
 
 namespace sconnConnector.POCO.Config
 {
-    public class sconnAuthorizedDevices : IAlarmSystemConfigurationEntity
+    public class sconnAuthorizedDevices : IAlarmSystemConfigurationEntity,ISerializableConfiguration, IFakeAbleConfiguration
     {
         public List<sconnAuthorizedDevice>  Devices { get; set; }
 
@@ -34,7 +34,12 @@ namespace sconnConnector.POCO.Config
             return bytes;
         }
 
-        void DeSerialize(byte[] buffer)
+        public void Fake()
+        {
+            
+        }
+
+        public void Deserialize(byte[] buffer)
         {
             Devices = new List<sconnAuthorizedDevice>();
             for (int i = 0; i < ipcDefines.SYS_ALARM_DEV_AUTH_MAX_RECORDS; i++)
