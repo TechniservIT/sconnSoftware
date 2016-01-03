@@ -25,6 +25,9 @@ namespace sconnConnector.POCO.Config
         public byte[] GlobalNameConfig;
         public byte[] NamesHash;
 
+        public int ZoneNumber { get; set; }
+        public byte[][] ZoneNames { get; set; }
+
         public void ReloadConfig()
         {
             foreach (var dev in deviceConfigs)
@@ -63,6 +66,7 @@ namespace sconnConnector.POCO.Config
             AuthDevices = new byte[0];
             UserConfig = new byte[0];
             events = new ipcEvent[0];
+            ZoneNames = new byte[0][];
             GlobalNameConfig = new byte[ipcDefines.RAM_NAMES_Global_Total_Size];
             Hash = new byte[ipcDefines.SHA256_DIGEST_SIZE];
             NamesHash = new byte[ipcDefines.SHA256_DIGEST_SIZE];

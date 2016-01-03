@@ -18,7 +18,7 @@ namespace sconnConnector.POCO.Config.sconn.IO
 
         public sconnInputConfig(ipcSiteConfig cfg) : this()
         {
-            
+           
         }
 
         public byte[] Serialize()

@@ -458,6 +458,7 @@ namespace sconnConnector
         public static byte setGsmRcptCfg = 0x60;
         public static byte setAuthDevCfg = 0x61;
         public static byte setGlobalNames = 0x62;
+        public static byte setZoneName = 0x63;
 
 
         public static byte GET = 0x06; // get following register group value
@@ -482,7 +483,9 @@ namespace sconnConnector
         public static byte getGsmModemResponse = 0x74;
         public static byte getDeviceName = 0x75;
         public static byte getGlobalNames = 0x76;
-         public static byte getConfigHash = 0x77;
+        public static byte getConfigHash = 0x77;
+        public static byte getZoneCfg = 0x78;
+        public static byte getZoneName = 0x79;
 
         public static byte CFG = 0x11; //register to set, followed by value SVAL <value bytes > EVAL
 
@@ -613,7 +616,7 @@ namespace sconnConnector
 
         public static int ZONE_CFG_LEN = (ZONE_CFG_NAME_ID_POS + ZONE_CFG_NAME_ID_LEN);
 
-        public static int ZONE_CFG_MAX_ZONES = 64;
+        public static int ZONE_CFG_MAX_ZONES = 32;
 
         public static int ZONE_CFG_TOTAL_LEN = (ZONE_CFG_MAX_ZONES*ZONE_CFG_LEN);
        
@@ -738,6 +741,7 @@ namespace sconnConnector
         public static int mAdrBackupVolt_Start_Pos = (mAdrSuppVolt_Start_Pos + mAdrSuppVolt_Start_Len);
         public static int mAdrBackupVolt_Start_Len = (4);
 
+       // public static int deviceTotalNames = ();
         public static int deviceConfigSize = 512;   //  mAdrRelay + (RelayMemSize * DeviceMaxRelays);
 
   
@@ -830,31 +834,16 @@ namespace sconnConnector
 
     public static int mAddr_NAMES_Global_StartAddr =mAddr_NAMES_StartAddr+(RAM_DEV_NAMES_NO*RAM_NAME_SIZE);
     public static int mAddr_NAMES_Global_SystemName_Pos=   0;
-    public static int mAddr_NAMES_Global_Zone_1_Pos   =    1;
-    public static int mAddr_NAMES_Global_Zone_2_Pos   =    2;
-    public static int mAddr_NAMES_Global_Zone_3_Pos   =    3;
-    public static int mAddr_NAMES_Global_Zone_4_Pos   =    4;
-    public static int mAddr_NAMES_Global_Zone_5_Pos    =   5;
-    public static int mAddr_NAMES_Global_Zone_6_Pos     =  6;
-    public static int mAddr_NAMES_Global_Zone_7_Pos     =  7;
-    public static int mAddr_NAMES_Global_Zone_8_Pos     =  8;
-    public static int mAddr_NAMES_Global_Zone_9_Pos     =  9;
-    public static int mAddr_NAMES_Global_Zone_10_Pos    =  10;
-    public static int mAddr_NAMES_Global_Zone_11_Pos    =  11;
-    public static int mAddr_NAMES_Global_Zone_12_Pos    =  12;
-    public static int mAddr_NAMES_Global_Zone_13_Pos    =  13;
-    public static int mAddr_NAMES_Global_Zone_14_Pos    =  14;
-    public static int mAddr_NAMES_Global_Zone_15_Pos    =  15;
-    public static int mAddr_NAMES_Global_Zone_16_Pos    =  16;
-
-    public static int mAddr_NAMES_Global_Reserved_Pos   =  17;
-    public static int mAddr_NAMES_Global_Reserved_Len   =  15;
         
-    public static int RAM_NAMES_Global_Total_Records   = (mAddr_NAMES_Global_Reserved_Pos+mAddr_NAMES_Global_Reserved_Len);
+    public static int RAM_NAMES_Global_Total_Records   = (mAddr_NAMES_Global_SystemName_Pos + 1);
     public static int RAM_NAMES_Global_Total_Size   =    (RAM_NAMES_Global_Total_Records*RAM_NAME_SIZE);
 
-    public static int RAM_NAMES_SIZE = ( (RAM_DEV_NAMES_NO*RAM_NAME_SIZE) + (RAM_NAMES_Global_Total_Size ) ) ;
-    public static int RAM_DEVICE_NAMES_SIZE = (RAM_DEV_NAMES_NO*RAM_NAME_SIZE);
+        public static int mAddr_NAMES_Zone_StartAddr=(mAddr_NAMES_Global_StartAddr +RAM_NAMES_Global_Total_Size);
+        public static int RAM_ZONE_NAMES_SIZE=(ZONE_CFG_MAX_ZONES* RAM_NAME_SIZE);
+
+        public static int RAM_NAMES_SIZE = ( (RAM_DEV_NAMES_NO*RAM_NAME_SIZE) + (RAM_NAMES_Global_Total_Size )+ (RAM_ZONE_NAMES_SIZE) ) ;
+
+        public static int RAM_DEVICE_NAMES_SIZE = (RAM_DEV_NAMES_NO*RAM_NAME_SIZE);
 
         public static int mAddr_NAMES_Board_Pos = 0x00;
         public static int mAddr_NAMES_Inputs_Pos = 0x01;

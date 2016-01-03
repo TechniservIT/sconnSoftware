@@ -44,7 +44,8 @@ namespace sconnConnector.POCO.Config.sconn
         public float MainVoltage { get; set; }
 
         public float BatteryVoltage { get; set; }
-        
+
+        public string Name { get; set; }
 
         private void LoadSupplyVoltageLevels()
         {
@@ -93,6 +94,7 @@ namespace sconnConnector.POCO.Config.sconn
             LoadOutputsFromConfig();
             LoadRelayFromConfig();
             LoadSupplyVoltageLevels();
+            LoadDeviceNames();
         }
 
         public byte[] NetworkConfig
@@ -110,7 +112,6 @@ namespace sconnConnector.POCO.Config.sconn
         public byte[][] NamesCFG
         {
             get { return _NamesCFG; }
-            // set { if (value != null) { _NamesCFG = value; } }
 
         }
 
@@ -124,14 +125,14 @@ namespace sconnConnector.POCO.Config.sconn
         {
             if (NameNo < ipcDefines.RAM_DEV_NAMES_NO)
             {
-                return System.Text.Encoding.Unicode.GetString(_NamesCFG[NameNo], 0, _NamesCFG[NameNo].GetLength(0));
+                return System.Text.Encoding.BigEndianUnicode.GetString(_NamesCFG[NameNo], 0, _NamesCFG[NameNo].GetLength(0));
             }
             else { return new string('E', 1); }
         }
 
         public void SetDeviceNameAt(int NameNo, string Name)
         {
-            byte[] namebuff = System.Text.Encoding.Unicode.GetBytes(Name);
+            byte[] namebuff = System.Text.Encoding.BigEndianUnicode.GetBytes(Name);
             SetDeviceNameAt(NameNo, namebuff);
         }
 
@@ -167,6 +168,38 @@ namespace sconnConnector.POCO.Config.sconn
             this._ScheduleCFG = cfg.ScheduleCFG;
             this._NamesCFG = cfg.NamesCFG;
             this.memCFG = cfg.memCFG;
+            LoadDeviceNames();
+        }
+
+        public void LoadDeviceNames()
+        {
+            try
+            {
+                if (this.NamesCFG.GetLength(0) == ipcDefines.RAM_DEV_NAMES_NO)
+                {
+                    string devName = Encoding.UTF8.GetString(this.NamesCFG[0]);
+                    this.Name = devName;
+                    int NameInc = 1;
+                    for (int i = 0; i < this.Inputs.Count; i++)
+                    {
+                        this.Inputs[i].Name = GetDeviceNameAt(i + NameInc);
+                    }
+                    NameInc += ipcDefines.DeviceMaxInputs;
+                    for (int i = 0; i < this.Outputs.Count; i++)
+                    {
+                        this.Outputs[i].Name = GetDeviceNameAt(i + NameInc);
+                    }
+                    NameInc += ipcDefines.DeviceMaxOutputs;
+                    for (int i = 0; i < this.Relays.Count; i++)
+                    {
+                        this.Relays[i].Name = GetDeviceNameAt(i + NameInc);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                
+            }
 
         }
 
@@ -205,7 +238,6 @@ namespace sconnConnector.POCO.Config.sconn
                 _memCFG[baseaddr + ipcDefines.mAdrInputEnabled] = (byte)(item.Enabled == false ? 0 : 1);
 
                 SetDeviceNameAt(ipcDefines.mAddr_NAMES_Inputs_Pos + item.Id, item.Name);
-                //_NamesCFG[] = System.Text.Encoding.Unicode.GetBytes(item.Name);
             }
 
             foreach (var item in Outputs)
@@ -217,7 +249,6 @@ namespace sconnConnector.POCO.Config.sconn
                 _memCFG[baseaddr + ipcDefines.mAdrOutputEnabled] = (byte)(item.Enabled == false ? 0 : 1);
 
                 SetDeviceNameAt(ipcDefines.mAddr_NAMES_Outputs_Pos + item.Id, item.Name);
-                //_NamesCFG[ipcDefines.mAddr_NAMES_Outputs_Pos + item.Id] = System.Text.Encoding.Unicode.GetBytes(item.Name);
             }
 
             foreach (var item in Relays)
@@ -229,7 +260,6 @@ namespace sconnConnector.POCO.Config.sconn
                 _memCFG[baseaddr + ipcDefines.mAdrRelayEnabled] = (byte)(item.Enabled == false ? 0 : 1);
 
                 SetDeviceNameAt(ipcDefines.mAddr_NAMES_Relays_Pos + item.Id, item.Name);
-                //_NamesCFG[ipcDefines.mAddr_NAMES_Relays_Pos + item.Id] = System.Text.Encoding.Unicode.GetBytes(item.Name);
             }
         }
 

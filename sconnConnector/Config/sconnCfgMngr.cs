@@ -1452,7 +1452,7 @@ namespace sconnConnector
                            }
                            NamesChanged = !(nameshashrx.SequenceEqual(site.siteCfg.NamesHash));
 
-
+        
                            if (NamesChanged)
                            {
                                for (int h = 0; h < ipcDefines.SHA256_DIGEST_SIZE; h++)
@@ -1486,7 +1486,33 @@ namespace sconnConnector
                                        site.siteCfg.GlobalNameConfig[n] = nresp[n + MsgByteOffset];
                                    }
                                }
-                           }
+
+                                    //Get Zone Names
+                                    cmd[1] = ipcCMD.getZoneName;
+                                    site.siteCfg.ZoneNames = new byte[ipcDefines.ZONE_CFG_MAX_ZONES][];
+                                    for (int n = 0; n < ipcDefines.ZONE_CFG_MAX_ZONES; n++)
+                                    {
+                                        try
+                                        {
+                                            site.siteCfg.ZoneNames[n] = new byte[ipcDefines.RAM_NAME_SIZE];
+                                            cmd[2] = (byte)n;
+                                            byte[] narr = client.berkeleySendMsg(cmd);
+                                            if (narr[0] == ipcCMD.SVAL)
+                                            {
+                                                for (int txtbyte = MsgByteOffset; txtbyte < ipcDefines.RAM_NAME_SIZE + MsgByteOffset; txtbyte++)
+                                                {
+                                                    site.siteCfg.ZoneNames[n][txtbyte - MsgByteOffset] = narr[txtbyte]; 
+                                                }
+                                            }
+                                        }
+                                        catch (Exception e)
+                                        {
+                                                
+                                        }
+
+                                    }
+
+                                }
                            
                            //get events
                            cmd[0] = ipcCMD.GET;

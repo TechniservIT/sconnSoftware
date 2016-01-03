@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -28,9 +29,25 @@ namespace sconnConnector.POCO.Config.sconn
             return Serialized;
         }
 
+        public void LoadNames(byte[][] NamesBf)
+        {
+                for (int i = 0; i < ipcDefines.ZONE_CFG_MAX_ZONES; i++)
+                {
+                    try
+                    {
+                        string name = Encoding.BigEndianUnicode.GetString(NamesBf[i]);
+                        this.Zones[i].Name = name;
+                    }
+                    catch (Exception e)
+                    {
+                    }
+
+                }
+        }
+
         public void Deserialize(byte[] buffer)
         {
-            int zones = buffer[ipcDefines.mAdrZoneNo_Pos];  //ipcDefines.ZONE_CFG_MAX_ZONES;  
+            int zones = ipcDefines.ZONE_CFG_MAX_ZONES;  //buffer[ipcDefines.mAdrZoneNo_Pos];  //ipcDefines.ZONE_CFG_MAX_ZONES;  
             for (int i = 0; i < zones; i++)
             {
                 byte[] zoneCfg = new byte[ipcDefines.ZONE_CFG_LEN];
@@ -47,6 +64,7 @@ namespace sconnConnector.POCO.Config.sconn
         public sconnAlarmZoneConfig(ipcSiteConfig cfg) :this()
         {
             this.Deserialize(cfg.globalConfig.memCFG);
+            this.LoadNames(cfg.ZoneNames);
         }
 
         public void Fake()

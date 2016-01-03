@@ -47,6 +47,18 @@ namespace sconnConnector.POCO.Config.sconn
 
         }
 
+        static string ByteArrayToHexViaLookupAndShift(byte[] bytes)
+        {
+            StringBuilder result = new StringBuilder(bytes.Length * 2);
+            string hexAlphabet = "0123456789ABCDEF";
+            foreach (byte b in bytes)
+            {
+                result.Append(hexAlphabet[(int)(b >> 4)]);
+                result.Append(hexAlphabet[(int)(b & 0xF)]);
+            }
+            return result.ToString();
+        }
+
         public void Deserialize(byte[] buffer)
         {
             try
@@ -59,7 +71,7 @@ namespace sconnConnector.POCO.Config.sconn
                 {
                     uuidBytes[j] = (byte)buffer[j];
                 }
-                uuid = Encoding.Unicode.GetString(uuidBytes);
+                uuid = ByteArrayToHexViaLookupAndShift(uuidBytes); //  Encoding.BigEndianUnicode.GetString(uuidBytes);
                 if (uuid.Length != 0)
                 {
                     _Serial = uuid;
