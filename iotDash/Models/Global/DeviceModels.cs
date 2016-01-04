@@ -12,7 +12,7 @@ using System.Web;
 
 namespace iotDash.Models
 {
-    public class DeviceAddTypeModel
+    public class DeviceAddTypeModel : IAsyncStatusModel
     {
         public DeviceType Type { get; set; }
 
@@ -25,12 +25,13 @@ namespace iotDash.Models
 
     }
 
-    public class DeviceAddModel
+    public class DeviceAddModel : IAsyncStatusModel
     {
         public List<Location> Locations { get; set; }
 
         public List<DeviceType> Types { get; set; }
 
+        public string Result { get; set; }
 
         public Site DeviceSite { get; set; }
 
@@ -85,9 +86,11 @@ namespace iotDash.Models
         }
     }
 
-    public class DeviceListViewModel
+    public class DeviceListViewModel : IAsyncStatusModel
     {
         public Site Site { get; set; }
+        public string Result { get; set; }
+
         public DeviceListViewModel(Site site)
         {
             Site = site;
@@ -127,7 +130,7 @@ namespace iotDash.Models
     }
 
 
-    public class DeviceEditModel
+    public class DeviceEditModel : IAsyncStatusModel
     {
 
         [Required]

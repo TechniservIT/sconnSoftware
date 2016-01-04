@@ -10,10 +10,11 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace iotDash.Models
 {
-    public class UserListModel
+    public class UserListModel : IAsyncStatusModel
     {
 
         public List<ApplicationUser> Users { get; set; }
+        public string Result { get; set; }
 
         public UserListModel(iotDomain domain)
         {
@@ -33,9 +34,10 @@ namespace iotDash.Models
 
     }
 
-    public class UserEditModel
+    public class UserEditModel : IAsyncStatusModel
     {
         public ApplicationUser User { get; set; }
+        public string Result { get; set; }
 
         public UserEditModel()
         {
@@ -44,7 +46,7 @@ namespace iotDash.Models
     }
 
 
-    public class UserCreateModel
+    public class UserCreateModel : IAsyncStatusModel
     {
         public ApplicationUser User { get; set; }
 

@@ -6,9 +6,10 @@ using System.Web;
 
 namespace iotDash.Models
 {
-    public class LocationListViewModel
+    public class LocationListViewModel : IAsyncStatusModel
     {
         public List<Location> Locations { get; set; }
+        public string Result { get; set; }
 
         public LocationListViewModel(List<Location> locations)
         {
@@ -16,9 +17,10 @@ namespace iotDash.Models
         }
     }
 
-    public class LocationEditViewModel
+    public class LocationEditViewModel : IAsyncStatusModel
     {
         public Location Location { get; set; }
+        public string Result { get; set; }
 
         public LocationEditViewModel(Location loc)
         {

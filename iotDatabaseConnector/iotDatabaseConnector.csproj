@@ -109,6 +109,7 @@
     <Compile Include="DAL\Repository\Connector\Entity\IIotContextBase.cs" />
     <Compile Include="DAL\Repository\Connector\Entity\iotContext.cs" />
     <Compile Include="DAL\Repository\Connector\Entity\iotDomainContext.cs" />
+    <Compile Include="DAL\Repository\Connector\Entity\iotInMemoryContext.cs" />
     <Compile Include="DAL\Repository\Connector\iotDbConnector.cs" />
     <Compile Include="DAL\Repository\IiotRepository.cs" />
     <Compile Include="DAL\Repository\Connector\iotRepository.cs" />

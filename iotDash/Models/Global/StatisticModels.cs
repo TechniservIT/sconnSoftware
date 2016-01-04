@@ -8,9 +8,10 @@ using System.Web;
 
 namespace iotDash.Models
 {
-    public class DevicePropertyStatisticModel
+    public class DevicePropertyStatisticModel : IAsyncStatusModel
     {
         public DeviceProperty Property { get; set; }
+        public string Result { get; set; }
 
         public DevicePropertyStatisticModel(DeviceProperty prop)
         {
@@ -32,9 +33,10 @@ namespace iotDash.Models
 
     }
 
-    public class DeviceActionStatisticModel
+    public class DeviceActionStatisticModel : IAsyncStatusModel
     {
         public DeviceAction DeviceAction { get; set; }
+        public string Result { get; set; }
 
         public DeviceActionStatisticModel(DeviceAction action)
         {

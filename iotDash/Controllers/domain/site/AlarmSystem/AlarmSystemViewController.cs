@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using AlarmSystemManagmentService;
 using iotDash.Areas.AlarmSystem.Models;
 using iotDash.Controllers.domain.navigation;
+using iotDash.Controllers.domain.site.AlarmSystem.Abstract;
 using iotDash.Models;
 using iotDash.Session;
 using iotDatabaseConnector.DAL.Repository.Connector.Entity;
@@ -18,15 +19,12 @@ using iotDash.Identity.Attributes;
 namespace iotDash.Controllers.domain.site.AlarmSystem
 {
     [DomainAuthorize]
-    public class AlarmSystemViewController : Controller
+    public class AlarmSystemViewController : AlarmSystemControllerBase, IAlarmSystemController, IAlarmSystemConfigurationController
     {
-        private IIotContextBase Icont;
         private DeviceConfigService _provider;
 
-        public AlarmSystemViewController(HttpContextBase contBase)
-        {
-            Icont = DomainSession.GetDataContextForUserContext(contBase);
-        }
+        public AlarmSystemViewController(HttpContextBase contBase) : base(contBase)
+        {}
 
 
         // GET: AlarmSystemView
@@ -44,26 +42,6 @@ namespace iotDash.Controllers.domain.site.AlarmSystem
             }
             return View();
         }
-
-        //TODO
-        //public ActionResult ToggleArm(int ServerId)
-        //{
-        //    try
-        //    {
-        //        Device alrmSysDev = Icont.Devices.First(d => d.Id == ServerId);
-        //        if (alrmSysDev != null)
-        //        {
-        //            var man = DomainSession.GetAlarmConfigForContextWithDevice(this.HttpContext, alrmSysDev);
-        //            AlarmSystemDetailModel model = new AlarmSystemDetailModel(alrmSysDev, man);
-        //            model.Config.ToogleArmStatus();
-        //        }
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        //err msg
-        //    }
-        //    return RedirectToAction("Index", new { DeviceId = ServerId });
-        //}
 
 
         // GET: AlarmSystemView

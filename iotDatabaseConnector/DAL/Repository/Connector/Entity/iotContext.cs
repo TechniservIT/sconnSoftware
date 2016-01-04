@@ -190,6 +190,34 @@ namespace iotDbConnector.DAL
         public iotContext(iotDomain domain) : base(domain)
         {
         }
+
+        public void Fake()
+        {
+            Location loc = new Location();
+            loc.Lat = 1.11;
+            loc.Lng=22.11;
+            loc.LocationName = Guid.NewGuid().ToString();
+            this.Locations.Add(loc);
+            this.SaveChanges();
+            Location storedloc = this.Locations.FirstOrDefault(nl => nl.LocationName == loc.LocationName);
+            iotDomain d = new iotDomain();
+            d.DomainName = Guid.NewGuid().ToString();
+            d.Id = 0;
+            d.Sites = new List<Site>();
+            this.Domains.Add(d);
+            this.SaveChanges();
+
+            iotDomain stored = this.Domains.First(s => s.DomainName == d.DomainName);
+            Site site = new Site();
+            site.Id = 0;
+            site.Devices = new List<Device>();
+            site.Domain = stored;
+            site.SiteName = Guid.NewGuid().ToString();
+            this.Sites.Add(site);
+            this.SaveChanges();
+
+        }
+
     }
 
 }

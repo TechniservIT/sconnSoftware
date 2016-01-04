@@ -5,6 +5,7 @@ using System.Web;
 using iotDash.Models;
 using iotDatabaseConnector.DAL.Repository.Connector.Entity;
 using iotDbConnector.DAL;
+using Moq;
 
 namespace iotDash.Identity
 {
@@ -20,6 +21,23 @@ namespace iotDash.Identity
             catch (Exception)
             {
                     
+                throw;
+            }
+        }
+
+       
+
+        public static IIotContextBase GetFakeContextForUserHttpContext(HttpContextBase context)
+        {
+            try
+            {
+                IIotContextBase icont = new Mock<iotContext>().Object;
+                icont.Fake();
+                return icont;
+            }
+            catch (Exception)
+            {
+
                 throw;
             }
         }

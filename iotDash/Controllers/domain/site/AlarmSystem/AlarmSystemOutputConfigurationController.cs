@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using AlarmSystemManagmentService;
 using iotDash.Content.Dynamic.Status;
+using iotDash.Controllers.domain.site.AlarmSystem.Abstract;
 using iotDash.Models;
 using iotDash.Session;
 using iotDatabaseConnector.DAL.Repository.Connector.Entity;
@@ -13,18 +14,18 @@ using sconnConnector.POCO.Config.sconn;
 
 namespace iotDash.Controllers.domain.site.AlarmSystem
 {
-    public class AlarmSystemOutputConfigurationController : Controller
+    public class AlarmSystemOutputConfigurationController : AlarmSystemControllerBase, IAlarmSystemController, IAlarmSystemConfigurationController
     {
-        private IIotContextBase Icont;
         private GsmConfigurationService _provider;
 
-        public AlarmSystemOutputConfigurationController(HttpContextBase contBase)
+        public AlarmSystemOutputConfigurationController()
         {
-            Icont = DomainSession.GetDataContextForUserContext(contBase);
+                
         }
 
-
-
+        public AlarmSystemOutputConfigurationController(HttpContextBase contBase) : base(contBase)
+        { }
+        
         public ActionResult View(int DeviceId)
         {
             this._provider = new GsmConfigurationService(DomainSession.GetAlarmConfigForContextWithDeviceId(this.HttpContext, DeviceId));

@@ -14,19 +14,22 @@ using iotDbConnector.DAL;
 using sconnConnector.Config;
 using SiteManagmentService;
 using AlarmSystemManagmentService.AuthorizedDevices;
+using iotDash.Controllers.domain.site.AlarmSystem.Abstract;
 using sconnConnector.POCO.Config.sconn;
 
 namespace iotDash.Controllers.domain.site.AlarmSystem
 {
-    public class AlarmSystemAuthorizedDevicesController : Controller
+    public class AlarmSystemAuthorizedDevicesController : AlarmSystemControllerBase, IAlarmSystemController, IAlarmSystemConfigurationController
     {
-        private IIotContextBase Icont;
         private IAuthorizedDevicesConfigurationService _provider;
 
-        public AlarmSystemAuthorizedDevicesController(HttpContextBase contBase)
+        public AlarmSystemAuthorizedDevicesController()
         {
-            Icont = DomainSession.GetDataContextForUserContext(contBase);
+                
         }
+
+        public AlarmSystemAuthorizedDevicesController(HttpContextBase contBase) : base(contBase)
+        { }
         
         public ActionResult Search(string key)
         {

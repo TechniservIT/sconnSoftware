@@ -9,7 +9,7 @@ using iotDbConnector.DAL;
 
 namespace iotDatabaseConnector.DAL.Repository.Connector.Entity
 {
-     public  interface IIotContextBase
+    public  interface IIotContextBase
     {
           event iotContextBase.DeviceUpdateEventCallbackHandler DeviceUpdateEvent;
           event iotContextBase.ParamUpdateEventCallbackHandler ParamUpdateEvent;
@@ -39,6 +39,7 @@ namespace iotDatabaseConnector.DAL.Repository.Connector.Entity
          void SetContextDomain(int domainId);
 
          int SaveChanges();
+         void Fake();
 
     }
 

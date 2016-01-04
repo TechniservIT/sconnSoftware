@@ -127,11 +127,10 @@
     <Compile Include="DeviceTypes\Alarm\AlarmServiceTests.cs" />
     <Compile Include="DeviceTypes\Alarm\AlarmServiceTheoreticalTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="iotUpdatePubSubTester.cs" />
+    <Compile Include="Other\iotUpdatePubSubTester.cs" />
     <Compile Include="External\Service\iotServiceConnector.cs" />
     <Compile Include="External\Service\iotRestfulTokenizerTest.cs" />
-    <Compile Include="SiteServiceTests.cs" />
-    <Compile Include="Zone\AlarmServiceTests.cs" />
+    <Compile Include="Other\SiteServiceTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

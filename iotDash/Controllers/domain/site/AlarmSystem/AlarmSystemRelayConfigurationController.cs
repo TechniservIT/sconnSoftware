@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using AlarmSystemManagmentService;
 using iotDash.Content.Dynamic.Status;
+using iotDash.Controllers.domain.site.AlarmSystem.Abstract;
 using iotDash.Models;
 using iotDash.Session;
 using iotDatabaseConnector.DAL.Repository.Connector.Entity;
@@ -13,15 +14,17 @@ using sconnConnector.POCO.Config.sconn;
 
 namespace iotDash.Controllers.domain.site.AlarmSystem
 {
-    public class AlarmSystemRelayConfigurationController : Controller
+    public class AlarmSystemRelayConfigurationController : AlarmSystemControllerBase, IAlarmSystemController
     {
-        private IIotContextBase Icont;
         private GsmConfigurationService _provider;
 
-        public AlarmSystemRelayConfigurationController(HttpContextBase contBase)
+        public AlarmSystemRelayConfigurationController()
         {
-            Icont = DomainSession.GetDataContextForUserContext(contBase);
+                
         }
+
+        public AlarmSystemRelayConfigurationController(HttpContextBase contBase) : base(contBase)
+        { }
         
 
         public ActionResult View(int DeviceId)
@@ -76,6 +79,27 @@ namespace iotDash.Controllers.domain.site.AlarmSystem
             model.Result = StatusResponseGenerator.GetStatusResponseResultForReturnParam(remRes);
             return View(model);
         }
+
+
+        //TODO
+        //public ActionResult ToggleArm(int ServerId)
+        //{
+        //    try
+        //    {
+        //        Device alrmSysDev = Icont.Devices.First(d => d.Id == ServerId);
+        //        if (alrmSysDev != null)
+        //        {
+        //            var man = DomainSession.GetAlarmConfigForContextWithDevice(this.HttpContext, alrmSysDev);
+        //            AlarmSystemDetailModel model = new AlarmSystemDetailModel(alrmSysDev, man);
+        //            model.Config.ToogleArmStatus();
+        //        }
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        //err msg
+        //    }
+        //    return RedirectToAction("Index", new { DeviceId = ServerId });
+        //}
 
 
         [HttpPost]

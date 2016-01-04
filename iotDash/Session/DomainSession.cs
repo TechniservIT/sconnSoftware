@@ -60,6 +60,17 @@ namespace iotDash.Session
             }
         }
 
+        static public void LoadFakeContextForUserContext(HttpContextBase httpContext)
+        {
+            IIotContextBase cont = (IIotContextBase)httpContext.Session["iotcontext"];
+            if (cont == null)
+            {
+                IIotContextBase icont = UserIotContextFactory.GetFakeContextForUserHttpContext(httpContext);
+                System.Web.HttpContext.Current.Session["iotcontext"] = icont;
+            }
+        }
+
+
         static public IIotContextBase GetDataContextForUserContext(HttpContextBase httpContext)
         {
             IIotContextBase cont = (IIotContextBase)httpContext.Session["iotcontext"];
@@ -74,6 +85,23 @@ namespace iotDash.Session
                 return cont;
             }
         }
+
+        static public IIotContextBase GetFakeContextForUserContext(HttpContextBase httpContext)
+        {
+            IIotContextBase cont = (IIotContextBase)httpContext.Session["iotcontext"];
+            if (cont == null)
+            {
+                IIotContextBase icont = UserIotContextFactory.GetFakeContextForUserHttpContext(httpContext);
+                System.Web.HttpContext.Current.Session["iotcontext"] = icont;
+                return icont;
+            }
+            else
+            {
+                return cont;
+            }
+        }
+
+        
 
 
         /********** Alarm system ***********/

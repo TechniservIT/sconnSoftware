@@ -12,19 +12,21 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace iotDash.Models
 {
-    public class CreateRoleBindingModel
+    public class CreateRoleBindingModel : IAsyncStatusModel
     {
         [Required]
         [StringLength(256, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 2)]
         [Display(Name = "Role Name")]
         public string Name { get; set; }
+        public string Result { get; set; }
 
     }
 
-    public class RoleListModel
+    public class RoleListModel : IAsyncStatusModel
     {
 
         public List<IotUserRole> Roles { get; set; }
+        public string Result { get; set; }
 
         public RoleListModel(iotDomain domain)
         {
@@ -45,7 +47,7 @@ namespace iotDash.Models
 
 
 
-    public class IotRoleModel
+    public class IotRoleModel : IAsyncStatusModel
     {
         public List<Site> Sites { get; set; }
 
@@ -82,11 +84,12 @@ namespace iotDash.Models
 
     }
 
-    public class UsersInRoleModel
+    public class UsersInRoleModel : IAsyncStatusModel
     {
 
         public string Id { get; set; }
         public List<string> EnrolledUsers { get; set; }
         public List<string> RemovedUsers { get; set; }
+        public string Result { get; set; }
     }
 }

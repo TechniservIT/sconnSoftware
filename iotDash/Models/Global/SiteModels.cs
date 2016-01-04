@@ -8,9 +8,11 @@ using iotDbConnector.DAL;
 namespace iotDash.Models
 {
 
-    public class ShowSitesViewModel
+    public class ShowSitesViewModel : IAsyncStatusModel
     {
         public List<Site> Sites { get; set; }
+        public string Result { get; set; }
+
         public ShowSitesViewModel()
         {
 

@@ -155,6 +155,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.Owin.Security.Twitter.3.0.0\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
     </Reference>
+    <Reference Include="Moq, Version=4.2.1510.2205, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
+      <HintPath>..\packages\Moq.4.2.1510.2205\lib\net40\Moq.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="MsieJavaScriptEngine, Version=1.5.0.0, Culture=neutral, PublicKeyToken=a3a2846a37ac0d3e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\MsieJavaScriptEngine.1.5.0\lib\net40\MsieJavaScriptEngine.dll</HintPath>
@@ -280,6 +284,11 @@
     <Compile Include="Controllers\domain\managment\security\UserSecurityController.cs" />
     <Compile Include="Controllers\domain\signaling\SignalingRulesController.cs" />
     <Compile Include="Areas\AlarmSystem\Controllers\AlarmSystemSummaryController.cs" />
+    <Compile Include="Controllers\domain\site\Abstract\IEditableController.cs" />
+    <Compile Include="Controllers\domain\site\Abstract\IViewAbleController.cs" />
+    <Compile Include="Controllers\domain\site\AlarmSystem\Abstract\AlarmSystemControllerBase.cs" />
+    <Compile Include="Controllers\domain\site\AlarmSystem\Abstract\IAlarmSystemConfigurationController.cs" />
+    <Compile Include="Controllers\domain\site\AlarmSystem\Abstract\IAlarmSystemController.cs" />
     <Compile Include="Controllers\domain\site\AlarmSystem\AlarmSystemAuthorizedDevicesController.cs" />
     <Compile Include="Controllers\domain\site\AlarmSystem\AlarmSystemConfigurationController.cs" />
     <Compile Include="Controllers\domain\site\AlarmSystem\AlarmSystemGsmConfigController.cs" />
