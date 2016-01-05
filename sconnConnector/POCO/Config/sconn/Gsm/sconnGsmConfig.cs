@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NLog;
 using sconnConnector.POCO.Config.Abstract;
 using sconnConnector.POCO.Config.sconn;
 
@@ -12,6 +13,7 @@ namespace sconnConnector.POCO.Config
     {
         public int RcptNo { get; set; }
         public List<sconnGsmRcpt> Rcpts { get; set; }
+        private static Logger _logger = LogManager.GetCurrentClassLogger();
 
         public sconnGsmConfig()
         {
@@ -35,8 +37,9 @@ namespace sconnConnector.POCO.Config
                 }
                 return Serialized;
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.Error(e, e.Message);
                 return null;
             }
 
@@ -59,17 +62,26 @@ namespace sconnConnector.POCO.Config
                     Rcpts.Add(relay);
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.Error(e, e.Message);
             }
 
         }
 
         public void Fake()
         {
-            sconnGsmRcpt zone = new sconnGsmRcpt();
-            zone.Fake();
-            Rcpts.Add(zone);
+            try
+            {
+                sconnGsmRcpt zone = new sconnGsmRcpt();
+                zone.Fake();
+                Rcpts.Add(zone);
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e, e.Message);
+            }
+
         }
 
     }

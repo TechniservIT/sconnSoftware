@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NLog;
 using sconnConnector.POCO.Config.Abstract.IO;
 using sconnConnector.POCO.Config.sconn;
 
@@ -23,6 +24,7 @@ namespace sconnConnector.POCO.Config
         public bool Enabled { get; set; }
         public string Name { get; set; }
         public int NameId { get; set; }
+        private static Logger _logger = LogManager.GetCurrentClassLogger();
 
         public sconnOutput() 
         {
@@ -37,29 +39,53 @@ namespace sconnConnector.POCO.Config
 
         public byte[] Serialize()
         {
-            byte[] buffer = new byte[ipcDefines.mAdrOutputMemSize];
-            buffer[ipcDefines.mAdrOutputType] = (byte)Type;
-            buffer[ipcDefines.mAdrOutputEnabled] = (byte)(Enabled ? 1 : 0);
-            buffer[ipcDefines.mAdrOutputVal] = (byte)Value;
-            buffer[ipcDefines.mAdrOutputNameAddr] = (byte)NameId;
-            return buffer;
+            try
+            {
+                byte[] buffer = new byte[ipcDefines.mAdrOutputMemSize];
+                buffer[ipcDefines.mAdrOutputType] = (byte)Type;
+                buffer[ipcDefines.mAdrOutputEnabled] = (byte)(Enabled ? 1 : 0);
+                buffer[ipcDefines.mAdrOutputVal] = (byte)Value;
+                buffer[ipcDefines.mAdrOutputNameAddr] = (byte)NameId;
+                return buffer;
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e, e.Message);
+                return null;
+            }
+
         }
 
         public void Deserialize(byte[] buffer)
         {
-            Type = (sconnOutputType)buffer[ipcDefines.mAdrOutputMemSize];
-            Value = buffer[ipcDefines.mAdrOutputVal];
-            NameId = buffer[ipcDefines.mAdrOutputNameAddr];
-            Enabled = buffer[ipcDefines.mAdrOutputEnabled] > 0 ? true : false;
+            try
+            {
+                Type = (sconnOutputType)buffer[ipcDefines.mAdrOutputMemSize];
+                Value = buffer[ipcDefines.mAdrOutputVal];
+                NameId = buffer[ipcDefines.mAdrOutputNameAddr];
+                Enabled = buffer[ipcDefines.mAdrOutputEnabled] > 0 ? true : false;
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e, e.Message);
+            }
+
         }
 
         public void Fake()
         {
-            this.Id = 0;
-            this.Enabled = true;
-            this.Name = Guid.NewGuid().ToString();
-            this.NameId = 0;
-            this.Type = sconnOutputType.Normal;
+            try
+            {
+                this.Id = 0;
+                this.Enabled = true;
+                this.Name = Guid.NewGuid().ToString();
+                this.NameId = 0;
+                this.Type = sconnOutputType.Normal;
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e, e.Message);
+            }
         }
 
     }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NLog;
 using sconnConnector.POCO.Config.sconn;
 
 namespace sconnConnector.POCO.Config.Abstract.Auth
@@ -10,6 +11,7 @@ namespace sconnConnector.POCO.Config.Abstract.Auth
     public class sconnUserConfig : IAlarmSystemConfigurationEntity, ISerializableConfiguration, IFakeAbleConfiguration
     {
         public List<sconnUser> Users { get; set; }
+        private static Logger _logger = LogManager.GetCurrentClassLogger();
 
         public sconnUserConfig()
         {
@@ -23,35 +25,60 @@ namespace sconnConnector.POCO.Config.Abstract.Auth
         
         public byte[] Serialize()
         {
-            byte[] Serialized = new byte[ipcDefines.AUTH_RECORDS_SIZE];
-            for (int i = 0; i < Users.Count; i++)
+            try
             {
-                byte[] partial = Users[i].Serialize();
-                partial.CopyTo(Serialized, i * ipcDefines.AUTH_RECORD_SIZE);
+                byte[] Serialized = new byte[ipcDefines.AUTH_RECORDS_SIZE];
+                for (int i = 0; i < Users.Count; i++)
+                {
+                    byte[] partial = Users[i].Serialize();
+                    partial.CopyTo(Serialized, i * ipcDefines.AUTH_RECORD_SIZE);
+                }
+                return Serialized;
             }
-            return Serialized;
+            catch (Exception e)
+            {
+                _logger.Error(e, e.Message);
+                return new byte[0];
+            }
+
         }
 
         public void Deserialize(byte[] buffer)
         {
-            for (int i = 0; i < ipcDefines.AUTH_MAX_USERS; i++)
+            try
             {
-                byte[] relayCfg = new byte[ipcDefines.AUTH_RECORD_SIZE];
-                for (int j = 0; j < ipcDefines.AUTH_RECORD_SIZE; j++)
+                for (int i = 0; i < ipcDefines.AUTH_MAX_USERS; i++)
                 {
-                    relayCfg[j] = buffer[i * ipcDefines.AUTH_RECORD_SIZE+j];
+                    byte[] relayCfg = new byte[ipcDefines.AUTH_RECORD_SIZE];
+                    for (int j = 0; j < ipcDefines.AUTH_RECORD_SIZE; j++)
+                    {
+                        relayCfg[j] = buffer[i * ipcDefines.AUTH_RECORD_SIZE + j];
+                    }
+                    sconnUser relay = new sconnUser(relayCfg);
+                    relay.Id = i;
+                    Users.Add(relay);
                 }
-                sconnUser relay = new sconnUser(relayCfg);
-                relay.Id = i;
-                Users.Add(relay);
             }
+            catch (Exception e)
+            {
+                _logger.Error(e, e.Message);
+            }
+
         }
 
         public void Fake()
         {
-            sconnUser zone = new sconnUser();
-            zone.Fake();
-            Users.Add(zone);
+            try
+            {
+                sconnUser zone = new sconnUser();
+                zone.Fake();
+                Users.Add(zone);
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e, e.Message);
+            }
+
         }
 
 

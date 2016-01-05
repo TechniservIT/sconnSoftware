@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NLog;
 using sconnConnector.POCO.Config.Abstract;
 
 namespace sconnConnector.POCO.Config.sconn
@@ -16,7 +17,7 @@ namespace sconnConnector.POCO.Config.sconn
         public string NumberE164 { get; set; }
         public GsmMessagingLevel MessageLevel { get; set; }
         public int Value { get; set; }
-
+        private static Logger _logger = LogManager.GetCurrentClassLogger();
 
         public sconnGsmRcpt()
         {
@@ -50,8 +51,9 @@ namespace sconnConnector.POCO.Config.sconn
                 Bytes[ipcDefines.RAM_SMS_RECP_ENABLED_POS] = (byte)(Enabled == true ? 1 : 0);
                 return Bytes;
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.Error(e, e.Message);
                 return null;
             }
 
@@ -73,9 +75,9 @@ namespace sconnConnector.POCO.Config.sconn
                 NumberE164 = (System.Text.Encoding.ASCII.GetString(NumberBytes));
                 Enabled = buffer[ipcDefines.RAM_SMS_RECP_ENABLED_POS] == 1 ? true : false;
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                    
+                _logger.Error(e, e.Message);
             }
 
 
@@ -83,11 +85,19 @@ namespace sconnConnector.POCO.Config.sconn
 
         public void Fake()
         {
-            this.Id = 0;
-            this.CountryCode = 48;
-            this.Enabled = true;
-            this.MessageLevel = GsmMessagingLevel.All;
-            this.Name = Guid.NewGuid().ToString();
+            try
+            {
+
+                this.Id = 0;
+                this.CountryCode = 48;
+                this.Enabled = true;
+                this.MessageLevel = GsmMessagingLevel.All;
+                this.Name = Guid.NewGuid().ToString();
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e, e.Message);
+            }
         }
     }
 }

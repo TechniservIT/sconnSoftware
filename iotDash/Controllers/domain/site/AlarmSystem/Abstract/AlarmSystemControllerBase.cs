@@ -22,10 +22,6 @@ namespace iotDash.Controllers.domain.site.AlarmSystem.Abstract
         {
             Icont = DomainSession.GetDataContextForUserContext(contBase);
         }
-
-        public ActionResult Index()
-        {
-            return View();
-        }
+        
     }
 }

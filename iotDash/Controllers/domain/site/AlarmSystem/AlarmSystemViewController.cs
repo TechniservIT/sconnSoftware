@@ -19,7 +19,7 @@ using iotDash.Identity.Attributes;
 namespace iotDash.Controllers.domain.site.AlarmSystem
 {
     [DomainAuthorize]
-    public class AlarmSystemViewController : AlarmSystemControllerBase, IAlarmSystemController, IAlarmSystemConfigurationController
+    public class AlarmSystemViewController : AlarmSystemControllerBase, IAlarmSystemController
     {
         private DeviceConfigService _provider;
 
@@ -126,6 +126,11 @@ namespace iotDash.Controllers.domain.site.AlarmSystem
             }
         }
 
+
+        public ActionResult View(int DeviceId)
+        {
+            return Index(DeviceId);
+        }
 
     }
 }

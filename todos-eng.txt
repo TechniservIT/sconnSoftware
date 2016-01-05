@@ -8,7 +8,8 @@ views for communication config
 device info template			+
 device info firmware / hw version in gcfg - display	+
 device firmware upload - firmware version database
-
+site controller device view bar - ctrl dev not site
+site/dev/loc add posts with model not jqry
 embedded add event logging		+
 fix bus protocol gkp
 add embedded event/gsm config		+ 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NLog;
 using sconnConnector.POCO.Config.sconn;
 
 namespace sconnConnector.POCO.Config.Abstract.Auth
@@ -38,6 +39,8 @@ namespace sconnConnector.POCO.Config.Abstract.Auth
 
         public int Value { get; set; }
 
+        private static Logger _logger = LogManager.GetCurrentClassLogger();
+
         public sconnUser()
         {
            
@@ -70,8 +73,9 @@ namespace sconnConnector.POCO.Config.Abstract.Auth
 
                 return buffer;
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.Error(e, e.Message);
                 return null;
             }
 
@@ -81,42 +85,52 @@ namespace sconnConnector.POCO.Config.Abstract.Auth
         {
             try
             {
-                Permissions = buffer[ipcDefines.AUTH_RECORD_PERM_POS];
-                Enabled = buffer[ipcDefines.AUTH_RECORD_ENABLED_POS] > 0 ? true : false;
-                Group = (sconnUserGroup)buffer[ipcDefines.AUTH_RECORD_GROUP_POS];
-
-                byte passLen = buffer[ipcDefines.AUTH_RECORD_PASS_LEN_POS];
-                byte[] passwdBf = new byte[ipcDefines.AUTH_RECORD_PASSWD_LEN];
-                for (int i = 0; i < passLen * 2; i++)
+                if (buffer.Length >= ipcDefines.AUTH_CRED_SIZE)
                 {
-                    passwdBf[i] = buffer[ipcDefines.AUTH_RECORD_PASSWD_POS + i];
-                }
-                Password = Encoding.UTF8.GetString(passwdBf);
+                    Permissions = buffer[ipcDefines.AUTH_RECORD_PERM_POS];
+                    Enabled = buffer[ipcDefines.AUTH_RECORD_ENABLED_POS] > 0 ? true : false;
+                    Group = (sconnUserGroup)buffer[ipcDefines.AUTH_RECORD_GROUP_POS];
 
-                byte logLen = buffer[ipcDefines.AUTH_RECORD_LOGIN_LEN];
-                byte[] logBf = new byte[ipcDefines.AUTH_PASS_SIZE];
-                for (int i = 0; i < logLen * 2; i++)
-                {
-                    logBf[i] = buffer[ipcDefines.AUTH_RECORD_LOGIN_POS + i];
-                }
-                Login = Encoding.UTF8.GetString(logBf);
+                    byte passLen = buffer[ipcDefines.AUTH_RECORD_PASS_LEN_POS];
+                    byte[] passwdBf = new byte[ipcDefines.AUTH_RECORD_PASSWD_LEN];
+                    for (int i = 0; i < passLen * 2; i++)
+                    {
+                        passwdBf[i] = buffer[ipcDefines.AUTH_RECORD_PASSWD_POS + i];
+                    }
+                    Password = Encoding.UTF8.GetString(passwdBf);
 
-
+                    byte logLen = buffer[ipcDefines.AUTH_RECORD_LOGIN_LEN];
+                    byte[] logBf = new byte[ipcDefines.AUTH_PASS_SIZE];
+                    for (int i = 0; i < logLen * 2; i++)
+                    {
+                        logBf[i] = buffer[ipcDefines.AUTH_RECORD_LOGIN_POS + i];
+                    }
+                    Login = Encoding.UTF8.GetString(logBf);
+                } 
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.Error(e, e.Message);
             }
         }
 
         public void Fake()
         {
-            this.Id = 0;
-            this.Enabled = true;
-            this.Login = Guid.NewGuid().ToString();
-            this.Password = Guid.NewGuid().ToString();
-            this.AllowedFrom = DateTime.MinValue;
-            this.AllowedUntil = DateTime.MaxValue;
-            this.Group = sconnUserGroup.Admin;
+            try
+            {
+                this.Id = 0;
+                this.Enabled = true;
+                this.Login = Guid.NewGuid().ToString();
+                this.Password = Guid.NewGuid().ToString();
+                this.AllowedFrom = DateTime.MinValue;
+                this.AllowedUntil = DateTime.MaxValue;
+                this.Group = sconnUserGroup.Admin;
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e, e.Message);
+            }
+
 
         }
 

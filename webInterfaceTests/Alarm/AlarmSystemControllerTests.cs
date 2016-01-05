@@ -40,9 +40,8 @@ namespace webInterfaceTests
 
         private void MockTest()
         {
-            ViewResult viewResult = (ViewResult)controller.Index();
-
-            Assert.True(viewResult.ViewName == "ViewForAuthenticatedRequest");
+        //    ViewResult viewResult = (ViewResult)controller.ActionInvoker; 
+         //   Assert.True(viewResult.ViewName == "ViewForAuthenticatedRequest");
         }
 
         [Test]

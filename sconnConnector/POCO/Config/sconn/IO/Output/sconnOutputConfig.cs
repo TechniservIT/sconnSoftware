@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NLog;
 
 namespace sconnConnector.POCO.Config.sconn.IO.Output
 {
     public class sconnOutputConfig : IAlarmSystemConfigurationEntity, ISerializableConfiguration, IFakeAbleConfiguration
     {
         public List<sconnOutput> Outputs { get; set; }
+        private static Logger _logger = LogManager.GetCurrentClassLogger();
 
         public sconnOutputConfig()
         {
@@ -23,36 +25,62 @@ namespace sconnConnector.POCO.Config.sconn.IO.Output
 
         public byte[] Serialize()
         {
-            byte[] Serialized = new byte[ipcDefines.OutputsTotalMemSize];
-            for (int i = 0; i < Outputs.Count; i++)
+
+            try
             {
-                byte[] partial = Outputs[i].Serialize();
-                partial.CopyTo(Serialized, i * ipcDefines.mAdrOutputMemSize);
+                byte[] Serialized = new byte[ipcDefines.OutputsTotalMemSize];
+                for (int i = 0; i < Outputs.Count; i++)
+                {
+                    byte[] partial = Outputs[i].Serialize();
+                    partial.CopyTo(Serialized, i * ipcDefines.mAdrOutputMemSize);
+                }
+                return Serialized;
             }
-            return Serialized;
+            catch (Exception e)
+            {
+                _logger.Error(e, e.Message);
+                return null;
+            }
+
         }
 
         public void Deserialize(byte[] buffer)
         {
-            int outputs = buffer[ipcDefines.DeviceMaxOutputs];
-            for (int i = 0; i < outputs; i++)
+            try
             {
-                byte[] relayCfg = new byte[ipcDefines.mAdrOutputMemSize];
-                for (int j = 0; j < ipcDefines.mAdrOutputMemSize; j++)
+                int outputs = buffer[ipcDefines.DeviceMaxOutputs];
+                for (int i = 0; i < outputs; i++)
                 {
-                    relayCfg[j] = buffer[ipcDefines.mAdrOutput + i * ipcDefines.mAdrOutputMemSize +j];
+                    byte[] relayCfg = new byte[ipcDefines.mAdrOutputMemSize];
+                    for (int j = 0; j < ipcDefines.mAdrOutputMemSize; j++)
+                    {
+                        relayCfg[j] = buffer[ipcDefines.mAdrOutput + i * ipcDefines.mAdrOutputMemSize + j];
+                    }
+                    sconnOutput relay = new sconnOutput(relayCfg);
+                    relay.Id = i;
+                    Outputs.Add(relay);
                 }
-                sconnOutput relay = new sconnOutput(relayCfg);
-                relay.Id = i;
-                Outputs.Add(relay);
             }
+            catch (Exception e)
+            {
+                _logger.Error(e, e.Message);
+            }
+
         }
 
         public void Fake()
         {
-            sconnOutput zone = new sconnOutput();
-            zone.Fake();
-            Outputs.Add(zone);
+            try
+            {
+                sconnOutput zone = new sconnOutput();
+                zone.Fake();
+                Outputs.Add(zone);
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e, e.Message);
+            }
+
         }
 
     }

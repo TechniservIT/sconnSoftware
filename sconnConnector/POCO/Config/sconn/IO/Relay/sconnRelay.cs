@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NLog;
 using sconnConnector.POCO.Config.sconn;
 
 namespace sconnConnector.POCO.Config
@@ -23,7 +24,8 @@ namespace sconnConnector.POCO.Config
         public bool Enabled { get; set; }
 
         public string Name { get; set; }
-        
+
+        private static Logger _logger = LogManager.GetCurrentClassLogger();
 
         public sconnRelay()
         {
@@ -46,8 +48,9 @@ namespace sconnConnector.POCO.Config
                 buffer[ipcDefines.mAdrRelayNameAddr] = (byte)NameId;
                 return buffer;
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.Error(e, e.Message);
                 return null;
             }
 
@@ -62,19 +65,28 @@ namespace sconnConnector.POCO.Config
                 NameId = buffer[ipcDefines.mAdrRelayNameAddr];
                 Enabled = buffer[ipcDefines.mAdrRelayEnabled] > 0 ? true : false;
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.Error(e, e.Message);
             }
 
         }
 
         public void Fake()
         {
-            this.Id = 0;
-            this.Enabled = true;
-            this.Name = Guid.NewGuid().ToString();
-            this.NameId = 0;
-            this.Type = sconnOutputType.Normal;
+            try
+            {
+                this.Id = 0;
+                this.Enabled = true;
+                this.Name = Guid.NewGuid().ToString();
+                this.NameId = 0;
+                this.Type = sconnOutputType.Normal;
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e, e.Message);
+            }
+
         }
     }
 

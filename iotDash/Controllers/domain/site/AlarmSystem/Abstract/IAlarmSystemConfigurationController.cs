@@ -11,7 +11,7 @@ namespace iotDash.Controllers.domain.site.AlarmSystem.Abstract
 {
     public interface IAlarmSystemConfigurationController : IEditableController, IAlarmSystemController
     {
-
+        ActionResult View(int DeviceId);
     }
 
 }

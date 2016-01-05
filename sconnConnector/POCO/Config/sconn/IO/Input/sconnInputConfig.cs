@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NLog;
 
 namespace sconnConnector.POCO.Config.sconn.IO
 {
@@ -10,6 +11,7 @@ namespace sconnConnector.POCO.Config.sconn.IO
     {
 
         public List<sconnInput> Inputs { get; set; }
+        private static Logger _logger = LogManager.GetCurrentClassLogger();
 
         public sconnInputConfig()
         {
@@ -23,36 +25,62 @@ namespace sconnConnector.POCO.Config.sconn.IO
 
         public byte[] Serialize()
         {
-            byte[] Serialized = new byte[ipcDefines.mAdrInputMemSize];
-            for (int i = 0; i < Inputs.Count; i++)
+            try
             {
-                byte[] partial = Inputs[i].Serialize();
-                partial.CopyTo(Serialized, i * ipcDefines.mAdrInputMemSize);
+                byte[] Serialized = new byte[ipcDefines.mAdrInputMemSize];
+                for (int i = 0; i < Inputs.Count; i++)
+                {
+                    byte[] partial = Inputs[i].Serialize();
+                    partial.CopyTo(Serialized, i * ipcDefines.mAdrInputMemSize);
+                }
+                return Serialized;
             }
-            return Serialized;
+            catch (Exception e)
+            {
+                _logger.Error(e, e.Message);
+                return null;
+            }
+
         }
 
         public void Deserialize(byte[] buffer)
         {
-            int relays = buffer[ipcDefines.DeviceMaxInputs];
-            for (int i = 0; i < relays; i++)
+
+            try
             {
-                byte[] relayCfg = new byte[ipcDefines.mAdrInputMemSize];
-                for (int j = 0; j < ipcDefines.mAdrInputMemSize; j++)
+                int relays = buffer[ipcDefines.DeviceMaxInputs];
+                for (int i = 0; i < relays; i++)
                 {
-                    relayCfg[j] = buffer[ipcDefines.mAdrInput + i * ipcDefines.mAdrInputMemSize + j];
+                    byte[] relayCfg = new byte[ipcDefines.mAdrInputMemSize];
+                    for (int j = 0; j < ipcDefines.mAdrInputMemSize; j++)
+                    {
+                        relayCfg[j] = buffer[ipcDefines.mAdrInput + i * ipcDefines.mAdrInputMemSize + j];
+                    }
+                    sconnInput relay = new sconnInput(relayCfg);
+                    relay.Id = i;
+                    Inputs.Add(relay);
                 }
-                sconnInput relay = new sconnInput(relayCfg);
-                relay.Id = i;
-                Inputs.Add(relay);
             }
+            catch (Exception e)
+            {
+                _logger.Error(e, e.Message);
+            }
+
         }
 
         public void Fake()
         {
-            sconnInput zone = new sconnInput();
-            zone.Fake();
-            Inputs.Add(zone);
+            try
+            {
+                sconnInput zone = new sconnInput();
+                zone.Fake();
+                Inputs.Add(zone);
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e, e.Message);
+            }
+
         }
 
     }

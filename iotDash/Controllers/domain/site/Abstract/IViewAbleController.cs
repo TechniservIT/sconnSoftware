@@ -8,6 +8,5 @@ namespace iotDash.Controllers.domain.site.Abstract
 {
     public interface IViewAbleController
     {
-        ActionResult Index();
     }
 }

@@ -9,6 +9,7 @@ using sconnConnector.POCO.Config;
 using sconnConnector.POCO.Config.Abstract;
 using sconnConnector.POCO.Config.sconn;
 using AlarmSystemManagmentService.AuthorizedDevices;
+using NLog;
 
 namespace AlarmSystemManagmentService
 {
@@ -16,6 +17,7 @@ namespace AlarmSystemManagmentService
     {
         public AlarmSystemConfigManager Manager { get; set; }
         public bool Online { get; set; }
+        private static Logger _logger = LogManager.GetCurrentClassLogger();
 
         public AuthorizedDevicesConfigurationService()
         {
@@ -48,19 +50,38 @@ namespace AlarmSystemManagmentService
 
         public bool RemoveById(int Id)
         {
-            sconnAuthorizedDevice dev = this.Manager.Config.AuthorizedDevices.Devices.Where(d => d.Id == Id).FirstOrDefault();
-            if(dev != null)
+            try
             {
-                Manager.Config.AuthorizedDevices.Devices.Remove(dev);
-                return SaveChanges();
+                sconnAuthorizedDevice dev = this.Manager.Config.AuthorizedDevices.Devices.Where(d => d.Id == Id).FirstOrDefault();
+                if (dev != null)
+                {
+                    Manager.Config.AuthorizedDevices.Devices.Remove(dev);
+                    return SaveChanges();
+                }
+                return false;
             }
-            return false;
+            catch (Exception e)
+            {
+                _logger.Error(e, e.Message);
+                return false;
+            }
+
         }
 
         public sconnAuthorizedDevice GetById(int Id)
         {
-            sconnAuthorizedDevice dev = this.Manager.Config.AuthorizedDevices.Devices.Where(d => d.Id == Id).FirstOrDefault();
-            return dev;
+            try
+            {
+
+                sconnAuthorizedDevice dev =
+                    this.Manager.Config.AuthorizedDevices.Devices.Where(d => d.Id == Id).FirstOrDefault();
+                return dev;
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e, e.Message);
+                return null;
+            }
         }
 
         public bool Add(sconnAuthorizedDevice device)
@@ -71,8 +92,9 @@ namespace AlarmSystemManagmentService
                 return SaveChanges();
 
             }
-            catch (Exception)
+            catch (Exception e )
             {
+                _logger.Error(e, e.Message);
                 return false;
             }
 
@@ -94,8 +116,9 @@ namespace AlarmSystemManagmentService
                     return false;
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.Error(e, e.Message);
                 return false;
             }
 
@@ -108,8 +131,9 @@ namespace AlarmSystemManagmentService
                 Manager.Config.AuthorizedDevices.Devices.Remove(device);
                 return SaveChanges();
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.Error(e, e.Message);
                 return false;
             }
 

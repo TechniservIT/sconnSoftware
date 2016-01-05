@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NLog;
 using sconnConnector.POCO.Config.Abstract.Event;
 
 namespace sconnConnector.POCO.Config.sconn
@@ -39,6 +40,7 @@ namespace sconnConnector.POCO.Config.sconn
         public int Domain { get; set; }
         public int DeviceId { get; set; }
         public int UserId { get; set; }
+        private static Logger _logger = LogManager.GetCurrentClassLogger();
 
         public sconnEvent()
         {
@@ -63,8 +65,9 @@ namespace sconnConnector.POCO.Config.sconn
                 buffer[ipcDefines.EVENT_DB_USER_ID_POS + 1] = (byte)UserId;
                 return buffer;
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.Error(e, e.Message);
                 return null;
             }
         }
@@ -85,20 +88,28 @@ namespace sconnConnector.POCO.Config.sconn
 
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                    
+                _logger.Error(e, e.Message);
             }
 
         }
 
         public void Fake()
         {
-            this.Id = 0;
-            this.Time = DateTime.Now;
-            this.Domain = 0;
-            this.UserId = 1;
-            this.Type = sconnEventType.EVENT_TYPE_ACTIVATION;
+            try
+            {
+                this.Id = 0;
+                this.Time = DateTime.Now;
+                this.Domain = 0;
+                this.UserId = 1;
+                this.Type = sconnEventType.EVENT_TYPE_ACTIVATION;
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e, e.Message);
+            }
+
         }
 
 

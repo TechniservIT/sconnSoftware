@@ -40,6 +40,11 @@ namespace iotDbConnector.DAL
             this.IotDomain = domain;
         }
 
+        public void Fake()
+        {
+            
+        }
+
         public delegate void DeviceUpdateEventCallbackHandler(Device dev);
 
         public virtual  event DeviceUpdateEventCallbackHandler DeviceUpdateEvent;

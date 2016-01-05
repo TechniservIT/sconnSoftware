@@ -28,4 +28,16 @@ namespace iotDash.Models
         }
     }
 
+    public class LocatioAddModel : IAsyncStatusModel
+    {
+        public Location Location { get; set; }
+        public string Result { get; set; }
+
+        public LocatioAddModel()
+        {
+            Location = new Location();
+        }
+    }
+
+
 }

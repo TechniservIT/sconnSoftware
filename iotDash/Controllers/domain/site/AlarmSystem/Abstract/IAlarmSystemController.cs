@@ -9,7 +9,7 @@ namespace iotDash.Controllers.domain.site.AlarmSystem.Abstract
 {
     public interface IAlarmSystemController
     {
-        ActionResult View(int DeviceId);
+
     }
 
 }

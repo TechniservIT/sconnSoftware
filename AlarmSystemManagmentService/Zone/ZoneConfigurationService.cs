@@ -8,6 +8,7 @@ using iotDbConnector.DAL;
 using sconnConnector.Config;
 using sconnConnector.POCO.Config.sconn;
 using AlarmSystemManagmentService;
+using NLog;
 
 namespace AlarmSystemManagmentService
 {
@@ -15,6 +16,7 @@ namespace AlarmSystemManagmentService
     {
         private AlarmSystemConfigManager Manager { get; set; }
         public bool Online { get; set; }
+        private static Logger _logger = LogManager.GetCurrentClassLogger();
 
         public ZoneConfigurationService()
         {
@@ -46,13 +48,22 @@ namespace AlarmSystemManagmentService
 
         public bool RemoveById(int Id)
         {
-            sconnAlarmZone dev = this.Manager.Config.ZoneConfig.Zones.Where(d => d.Id == Id).FirstOrDefault();
-            if (dev != null)
+            try
             {
-                Manager.Config.ZoneConfig.Zones.Remove(dev);
-                return SaveChanges();
+                sconnAlarmZone dev = this.Manager.Config.ZoneConfig.Zones.Where(d => d.Id == Id).FirstOrDefault();
+                if (dev != null)
+                {
+                    Manager.Config.ZoneConfig.Zones.Remove(dev);
+                    return SaveChanges();
+                }
+                return false;
             }
-            return false;
+            catch (Exception e)
+            {
+                _logger.Error(e, e.Message);
+                return false;
+            }
+
         }
 
         public sconnAlarmZone GetById(int Id)
@@ -74,8 +85,9 @@ namespace AlarmSystemManagmentService
                 Manager.Config.ZoneConfig.Zones.Add(zone);
                 return SaveChanges();
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.Error(e, e.Message);
                 return false;
             }
 
@@ -86,7 +98,7 @@ namespace AlarmSystemManagmentService
             try
             {
                 var ozone = Manager.Config.ZoneConfig.Zones.Where(d => d.Id == zone.Id).FirstOrDefault();
-                if(ozone != null)
+                if (ozone != null)
                 {
                     ozone = zone;
                     return SaveChanges();
@@ -96,8 +108,9 @@ namespace AlarmSystemManagmentService
                     return false;
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.Error(e, e.Message);
                 return false;
             }
 
@@ -110,8 +123,9 @@ namespace AlarmSystemManagmentService
                 Manager.Config.ZoneConfig.Zones.Remove(zone);
                 return SaveChanges();
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.Error(e, e.Message);
                 return false;
             }
 

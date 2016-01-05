@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NLog;
 using sconnConnector.POCO.Config.Abstract.Device;
 using sconnConnector.POCO.Config.Abstract.IO;
 
@@ -47,6 +48,8 @@ namespace sconnConnector.POCO.Config.sconn
 
         public string Name { get; set; }
 
+        private static Logger _logger = LogManager.GetCurrentClassLogger();
+
         private void LoadSupplyVoltageLevels()
         {
             MainVoltage = System.BitConverter.ToSingle(_memCFG, ipcDefines.mAdrSuppVolt_Start_Pos);
@@ -56,35 +59,59 @@ namespace sconnConnector.POCO.Config.sconn
 
         private void LoadInputsFromConfig()
         {
-            InputNo = _memCFG[ipcDefines.mAdrInputsNO];
-            Inputs = new List<sconnInput>();
-            for (int i = 0; i < InputNo; i++)
+            try
             {
-                sconnInput input = new sconnInput(_memCFG); //, _NamesCFG[ipcDefines.mAddr_NAMES_Inputs_Pos], i
-                Inputs.Add(input);
+                InputNo = _memCFG[ipcDefines.mAdrInputsNO];
+                Inputs = new List<sconnInput>();
+                for (int i = 0; i < InputNo; i++)
+                {
+                    sconnInput input = new sconnInput(_memCFG); //, _NamesCFG[ipcDefines.mAddr_NAMES_Inputs_Pos], i
+                    Inputs.Add(input);
+                }
             }
+            catch (Exception e)
+            {
+                _logger.Error(e, e.Message);
+            }
+
         }
 
         private void LoadOutputsFromConfig()
         {
-            OutputNo = _memCFG[ipcDefines.mAdrOutputsNO];
-            Outputs = new List<sconnOutput>();
-            for (int i = 0; i < OutputNo; i++)
+            try
             {
-                sconnOutput output = new sconnOutput(_memCFG);  //, _NamesCFG[ipcDefines.mAddr_NAMES_Outputs_Pos], i
-                Outputs.Add(output);
+                OutputNo = _memCFG[ipcDefines.mAdrOutputsNO];
+                Outputs = new List<sconnOutput>();
+                for (int i = 0; i < OutputNo; i++)
+                {
+                    sconnOutput output = new sconnOutput(_memCFG);  //, _NamesCFG[ipcDefines.mAddr_NAMES_Outputs_Pos], i
+                    Outputs.Add(output);
+                }
             }
+            catch (Exception e)
+            {
+                _logger.Error(e, e.Message);
+            }
+
         }
 
         private void LoadRelayFromConfig()
         {
-            RelayNo = _memCFG[ipcDefines.mAdrRelayNO];
-            Relays = new List<sconnRelay>();
-            for (int i = 0; i < RelayNo; i++)
+            try
             {
-                sconnRelay relay = new sconnRelay(_memCFG); //, _NamesCFG[ipcDefines.mAddr_NAMES_Relays_Pos], i
-                Relays.Add(relay);
+                RelayNo = _memCFG[ipcDefines.mAdrRelayNO];
+                Relays = new List<sconnRelay>();
+                for (int i = 0; i < RelayNo; i++)
+                {
+                    sconnRelay relay = new sconnRelay(_memCFG); //, _NamesCFG[ipcDefines.mAddr_NAMES_Relays_Pos], i
+                    Relays.Add(relay);
+                }
             }
+            catch (Exception e)
+            {
+                _logger.Error(e, e.Message);
+            }
+
         }
 
        
@@ -138,24 +165,31 @@ namespace sconnConnector.POCO.Config.sconn
 
         public void SetDeviceNameAt(int NameNo, byte[] Name)
         {
-            if (Name.GetLength(0) < 32)
+            try
             {
-                byte[] resized = new byte[32];
-                Name.CopyTo(resized, 0);
-                _NamesCFG[NameNo] = resized;
-            }
-            else
-            {
-                _NamesCFG[NameNo] = Name;
-            }
-
-            //replaces nulls by spaces
-            for (int i = 0; i < _NamesCFG[NameNo].GetLength(0); i += 2)
-            {
-                if ((_NamesCFG[NameNo][i] == (byte)0x00) && (_NamesCFG[NameNo][i + 1] == (byte)0x00))
+                if (Name.GetLength(0) < 32)
                 {
-                    _NamesCFG[NameNo][i] = (byte)0x20; //space
+                    byte[] resized = new byte[32];
+                    Name.CopyTo(resized, 0);
+                    _NamesCFG[NameNo] = resized;
                 }
+                else
+                {
+                    _NamesCFG[NameNo] = Name;
+                }
+
+                //replaces nulls by spaces
+                for (int i = 0; i < _NamesCFG[NameNo].GetLength(0); i += 2)
+                {
+                    if ((_NamesCFG[NameNo][i] == (byte)0x00) && (_NamesCFG[NameNo][i + 1] == (byte)0x00))
+                    {
+                        _NamesCFG[NameNo][i] = (byte)0x20; //space
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e, e.Message);
             }
         }
 
@@ -198,7 +232,7 @@ namespace sconnConnector.POCO.Config.sconn
             }
             catch (Exception e)
             {
-                
+                _logger.Error(e, e.Message);
             }
 
         }
@@ -227,40 +261,48 @@ namespace sconnConnector.POCO.Config.sconn
 
         public void SavePropertiesToRawConfig()
         {
-            foreach (var item in Inputs)
+            try
             {
-                int baseaddr = ipcDefines.mAdrInput + ipcDefines.mAdrInputMemSize * item.Id;
-                _memCFG[baseaddr + ipcDefines.mAdrInputType] = (byte)item.Type;
-                _memCFG[baseaddr + ipcDefines.mAdrInputVal] = (byte)item.Value;
-                _memCFG[baseaddr + ipcDefines.mAdrInputNameAddr] = (byte)item.NameId;
-                _memCFG[baseaddr + ipcDefines.mAdrInputAG] = (byte)item.ActivationGroup;
-                _memCFG[baseaddr + ipcDefines.mAdrInputSensitivity] = (byte)(item.Sensitivity / ipcDefines.InputSensitivityStep);
-                _memCFG[baseaddr + ipcDefines.mAdrInputEnabled] = (byte)(item.Enabled == false ? 0 : 1);
+                foreach (var item in Inputs)
+                {
+                    int baseaddr = ipcDefines.mAdrInput + ipcDefines.mAdrInputMemSize * item.Id;
+                    _memCFG[baseaddr + ipcDefines.mAdrInputType] = (byte)item.Type;
+                    _memCFG[baseaddr + ipcDefines.mAdrInputVal] = (byte)item.Value;
+                    _memCFG[baseaddr + ipcDefines.mAdrInputNameAddr] = (byte)item.NameId;
+                    _memCFG[baseaddr + ipcDefines.mAdrInputAG] = (byte)item.ActivationGroup;
+                    _memCFG[baseaddr + ipcDefines.mAdrInputSensitivity] = (byte)(item.Sensitivity / ipcDefines.InputSensitivityStep);
+                    _memCFG[baseaddr + ipcDefines.mAdrInputEnabled] = (byte)(item.Enabled == false ? 0 : 1);
 
-                SetDeviceNameAt(ipcDefines.mAddr_NAMES_Inputs_Pos + item.Id, item.Name);
+                    SetDeviceNameAt(ipcDefines.mAddr_NAMES_Inputs_Pos + item.Id, item.Name);
+                }
+
+                foreach (var item in Outputs)
+                {
+                    int baseaddr = ipcDefines.mAdrOutput + ipcDefines.mAdrOutputMemSize * item.Id;
+                    _memCFG[baseaddr + ipcDefines.mAdrOutputType] = (byte)item.Type;
+                    _memCFG[baseaddr + ipcDefines.mAdrOutputVal] = (byte)item.Value;
+                    _memCFG[baseaddr + ipcDefines.mAdrOutputNameAddr] = (byte)item.NameId;
+                    _memCFG[baseaddr + ipcDefines.mAdrOutputEnabled] = (byte)(item.Enabled == false ? 0 : 1);
+
+                    SetDeviceNameAt(ipcDefines.mAddr_NAMES_Outputs_Pos + item.Id, item.Name);
+                }
+
+                foreach (var item in Relays)
+                {
+                    int baseaddr = ipcDefines.mAdrRelay + ipcDefines.RelayMemSize * item.Id;
+                    _memCFG[baseaddr + ipcDefines.mAdrRelayType] = (byte)item.Type;
+                    _memCFG[baseaddr + ipcDefines.mAdrRelayVal] = (byte)item.Value;
+                    _memCFG[baseaddr + ipcDefines.mAdrRelayNameAddr] = (byte)item.NameId;
+                    _memCFG[baseaddr + ipcDefines.mAdrRelayEnabled] = (byte)(item.Enabled == false ? 0 : 1);
+
+                    SetDeviceNameAt(ipcDefines.mAddr_NAMES_Relays_Pos + item.Id, item.Name);
+                }
             }
-
-            foreach (var item in Outputs)
+            catch (Exception e)
             {
-                int baseaddr = ipcDefines.mAdrOutput + ipcDefines.mAdrOutputMemSize * item.Id;
-                _memCFG[baseaddr + ipcDefines.mAdrOutputType] = (byte)item.Type;
-                _memCFG[baseaddr + ipcDefines.mAdrOutputVal] = (byte)item.Value;
-                _memCFG[baseaddr + ipcDefines.mAdrOutputNameAddr] = (byte)item.NameId;
-                _memCFG[baseaddr + ipcDefines.mAdrOutputEnabled] = (byte)(item.Enabled == false ? 0 : 1);
-
-                SetDeviceNameAt(ipcDefines.mAddr_NAMES_Outputs_Pos + item.Id, item.Name);
+                _logger.Error(e, e.Message);
             }
-
-            foreach (var item in Relays)
-            {
-                int baseaddr = ipcDefines.mAdrRelay + ipcDefines.RelayMemSize * item.Id;
-                _memCFG[baseaddr + ipcDefines.mAdrRelayType] = (byte)item.Type;
-                _memCFG[baseaddr + ipcDefines.mAdrRelayVal] = (byte)item.Value;
-                _memCFG[baseaddr + ipcDefines.mAdrRelayNameAddr] = (byte)item.NameId;
-                _memCFG[baseaddr + ipcDefines.mAdrRelayEnabled] = (byte)(item.Enabled == false ? 0 : 1);
-
-                SetDeviceNameAt(ipcDefines.mAddr_NAMES_Relays_Pos + item.Id, item.Name);
-            }
+          
         }
 
 

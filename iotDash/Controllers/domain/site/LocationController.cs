@@ -65,7 +65,8 @@ namespace iotDash.Controllers.domain.site
 
 		public ActionResult Add()
 		{
-			return View();
+            LocatioAddModel model = new LocatioAddModel();
+            return View(model);
 		}
 		public ActionResult Edit(string LocationId)
 		{

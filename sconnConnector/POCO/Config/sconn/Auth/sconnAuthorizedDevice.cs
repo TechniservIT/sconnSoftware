@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NLog;
 using sconnConnector.POCO.Config.Abstract;
 
 namespace sconnConnector.POCO.Config.sconn
@@ -15,6 +16,8 @@ namespace sconnConnector.POCO.Config.sconn
         public DateTime _AllowedFrom { get; set; }
         public DateTime _AllowedUntil { get; set; }
         public int Value { get; set; }
+
+        private static Logger _logger = LogManager.GetCurrentClassLogger();
 
         public sconnAuthorizedDevice()
         {
@@ -40,8 +43,9 @@ namespace sconnConnector.POCO.Config.sconn
                 //TODO date range serialize/deserialize
                 return bytes;
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.Error(e, e.Message);
                 return new byte[0];
             }
 
@@ -49,14 +53,23 @@ namespace sconnConnector.POCO.Config.sconn
 
         static string ByteArrayToHexViaLookupAndShift(byte[] bytes)
         {
-            StringBuilder result = new StringBuilder(bytes.Length * 2);
-            string hexAlphabet = "0123456789ABCDEF";
-            foreach (byte b in bytes)
+            try
             {
-                result.Append(hexAlphabet[(int)(b >> 4)]);
-                result.Append(hexAlphabet[(int)(b & 0xF)]);
+                StringBuilder result = new StringBuilder(bytes.Length * 2);
+                string hexAlphabet = "0123456789ABCDEF";
+                foreach (byte b in bytes)
+                {
+                    result.Append(hexAlphabet[(int)(b >> 4)]);
+                    result.Append(hexAlphabet[(int)(b & 0xF)]);
+                }
+                return result.ToString();
             }
-            return result.ToString();
+            catch (Exception e)
+            {
+                _logger.Error(e, e.Message);
+                return null;
+            }
+
         }
 
         public void Deserialize(byte[] buffer)
@@ -77,18 +90,26 @@ namespace sconnConnector.POCO.Config.sconn
                     _Serial = uuid;
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
-
+                _logger.Error(e, e.Message);
             }
 
         }
 
         public void Fake()
         {
-            this.Id = 0;
-            this._Enabled = true;
-            this._Serial = Guid.NewGuid().ToString();
+            try
+            {
+                this.Id = 0;
+                this._Enabled = true;
+                this._Serial = Guid.NewGuid().ToString();
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e, e.Message);
+            }
+
         }
 
     }

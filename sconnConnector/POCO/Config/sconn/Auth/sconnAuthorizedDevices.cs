@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NLog;
 using sconnConnector.POCO.Config.Abstract;
 using sconnConnector.POCO.Config.sconn;
 
@@ -11,6 +12,7 @@ namespace sconnConnector.POCO.Config
     public class sconnAuthorizedDevices : IAlarmSystemConfigurationEntity,ISerializableConfiguration, IFakeAbleConfiguration
     {
         public List<sconnAuthorizedDevice>  Devices { get; set; }
+        private static Logger _logger = LogManager.GetCurrentClassLogger();
 
         public sconnAuthorizedDevices()
         {
@@ -29,8 +31,9 @@ namespace sconnConnector.POCO.Config
                 }
                 return Serialized;
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.Error(e, e.Message);
                 return null;
             }
 
@@ -65,8 +68,9 @@ namespace sconnConnector.POCO.Config
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.Error(e, e.Message);
             }
 
         }
