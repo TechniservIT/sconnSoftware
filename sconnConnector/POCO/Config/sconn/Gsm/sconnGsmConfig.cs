@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,7 +13,10 @@ namespace sconnConnector.POCO.Config
     public class sconnGsmConfig : IAlarmSystemConfigurationEntity, ISerializableConfiguration, IFakeAbleConfiguration
     {
         public int RcptNo { get; set; }
+        
+        [MaxLength(ipcDefines.RAM_SMS_RECP_NO)]
         public List<sconnGsmRcpt> Rcpts { get; set; }
+
         private static Logger _logger = LogManager.GetCurrentClassLogger();
 
         public sconnGsmConfig()

@@ -20,14 +20,14 @@ using sconnConnector.Config;
 namespace sconnConnector
 {
 
-    static public class sconnDataShare
+    public static class sconnDataShare
     {
-        static public int siteNo 
+        public static int siteNo 
         {
             get { return sconnSites.siteNo; }
         }
 
-        static public int GetLastItemID()
+        public static int GetLastItemID()
         {
             if (sconnSites.siteNo > 0)
             {
@@ -37,7 +37,7 @@ namespace sconnConnector
             { return 0; }
         }
 
-        static public XmlDocument getConfigXML()
+        public static XmlDocument getConfigXML()
         {
             XmlDocument configDoc = new XmlDocument();
 
@@ -46,7 +46,7 @@ namespace sconnConnector
 
 
 
-        static public sconnSite getSite(int siteNo)
+        public static sconnSite getSite(int siteNo)
         {
             foreach (sconnSite site in sconnSites)
             {
@@ -59,12 +59,12 @@ namespace sconnConnector
         }
 
 
-        static public sconnSite[] getSites()
+        public static sconnSite[] getSites()
         {
             return sconnSites.sites;
         }
 
-        static public bool addSite(string hostname, int port, string password, string siteName)
+        public static bool addSite(string hostname, int port, string password, string siteName)
         {
                 if (hostname == null || port == 0 || password == null)
             {
@@ -75,7 +75,7 @@ namespace sconnConnector
             return true;
         }
 
-        static public bool addSite(sconnSite addsite)
+        public static bool addSite(sconnSite addsite)
         {
             if (addsite.serverIP == null || addsite.serverPort == 0 || addsite.authPasswd == null)
             {
@@ -86,7 +86,7 @@ namespace sconnConnector
             return true;
         }
 
-        static public void removeSites()
+        public static void removeSites()
         {
             for (int i = 0; i < sconnSites.siteNo; i++)
             {
@@ -94,7 +94,7 @@ namespace sconnConnector
             }
         }
 
-        static public bool addSites(sconnSite[] sites)
+        public static bool addSites(sconnSite[] sites)
         {
             if (sites == null) { return false; }
             for (int i = 0; i < sites.GetLength(0); i++)
@@ -107,8 +107,8 @@ namespace sconnConnector
             }
             return true;
         }
-
-        static public void removeSite(int siteID)
+        
+        public static void removeSite(int siteID)
         {
             for (int i = 0; i < sconnSites.siteNo; i++)
             {
@@ -120,7 +120,7 @@ namespace sconnConnector
         }
 
         static private bool _SiteLiveViewEnabled = true;
-        static public bool SiteLiveViewEnabled { get { return _SiteLiveViewEnabled; } set { _SiteLiveViewEnabled = value; } }
+        public static bool SiteLiveViewEnabled { get { return _SiteLiveViewEnabled; } set { _SiteLiveViewEnabled = value; } }
 
 
         /********  Handles application data between View, Tasker and Mngr/Src , with R/W and R access  ************/
@@ -439,103 +439,103 @@ namespace sconnConnector
     {
 
         //ASCII proprietary CMDs
-        public static byte STX = 0x02; //start text
-        public static byte ETX = 0x03; //end text
-        public static byte EOT = 0x04; // end of transmission
+        public const byte STX = 0x02; //start text
+        public const byte ETX = 0x03; //end text
+        public const byte EOT = 0x04; // end of transmission
 
-        public static byte SVAL = 0x07; //start of value bytes
-        public static byte EVAL = 0x08; //end value
+        public const byte SVAL = 0x07; //start of value bytes
+        public const byte EVAL = 0x08; //end value
 
         //Custom CMDs replacing ASCII
-        public static byte SET = 0x05; // set following register group value
-        public static byte setRegVal = 0x51;
-        public static byte setGlobalCfg = 0x52;
-        public static byte setDeviceCfg = 0x53;
-        public static byte setDeviceNamesCfg = 0x54;
-        public static byte setDeviceSchedulesCfg = 0x57;
-        public static byte setPasswdCfg = 0x58;
-        public static byte setDeviceNetworkCfg = 0x59;
-        public static byte setGsmRcptCfg = 0x60;
-        public static byte setAuthDevCfg = 0x61;
-        public static byte setGlobalNames = 0x62;
-        public static byte setZoneName = 0x63;
+        public const byte SET = 0x05; // set following register group value
+        public const byte setRegVal = 0x51;
+        public const byte setGlobalCfg = 0x52;
+        public const byte setDeviceCfg = 0x53;
+        public const byte setDeviceNamesCfg = 0x54;
+        public const byte setDeviceSchedulesCfg = 0x57;
+        public const byte setPasswdCfg = 0x58;
+        public const byte setDeviceNetworkCfg = 0x59;
+        public const byte setGsmRcptCfg = 0x60;
+        public const byte setAuthDevCfg = 0x61;
+        public const byte setGlobalNames = 0x62;
+        public const byte setZoneName = 0x63;
 
 
-        public static byte GET = 0x06; // get following register group value
-        public static byte getRegVal = 0x61; //retrieve single register byte value    Param :   Register Address (2b)
-        public static byte getDevNo = 0x62; //get number of devices in system to map memory addresses Param : None
-        public static byte getDevCfg = 0x63;
-        public static byte getGlobCfg = 0x64;
-        public static byte getRunGlobCfg = 0x65;
-        public static byte getRunDevCfg = 0x66;
-        public static byte getArmStatus = 0x69;
-        public static byte getInputState = 0x6A;
-        public static byte getOutputState  = 0x6B;
-        public static byte getNamesDevCfg = 0x67;
-        public static byte getSchedulesDevCfg = 0x6C;
-        public static byte getPasswdCfg =  0x6D;
-        public static byte getEvents =  0x6E;
-        public static byte getEventNo =  0x6F;
-        public static byte getEvent  = 0x70;
-        public static byte getDevNetCfg = 0x71;
-        public static byte getGsmRecpCfg = 0x72;
-        public static byte getAuthDevices = 0x73;
-        public static byte getGsmModemResponse = 0x74;
-        public static byte getDeviceName = 0x75;
-        public static byte getGlobalNames = 0x76;
-        public static byte getConfigHash = 0x77;
-        public static byte getZoneCfg = 0x78;
-        public static byte getZoneName = 0x79;
+        public const byte GET = 0x06; // get following register group value
+        public const byte getRegVal = 0x61; //retrieve single register byte value    Param :   Register Address (2b)
+        public const byte getDevNo = 0x62; //get number of devices in system to map memory addresses Param : None
+        public const byte getDevCfg = 0x63;
+        public const byte getGlobCfg = 0x64;
+        public const byte getRunGlobCfg = 0x65;
+        public const byte getRunDevCfg = 0x66;
+        public const byte getArmStatus = 0x69;
+        public const byte getInputState = 0x6A;
+        public const byte getOutputState  = 0x6B;
+        public const byte getNamesDevCfg = 0x67;
+        public const byte getSchedulesDevCfg = 0x6C;
+        public const byte getPasswdCfg =  0x6D;
+        public const byte getEvents =  0x6E;
+        public const byte getEventNo =  0x6F;
+        public const byte getEvent  = 0x70;
+        public const byte getDevNetCfg = 0x71;
+        public const byte getGsmRecpCfg = 0x72;
+        public const byte getAuthDevices = 0x73;
+        public const byte getGsmModemResponse = 0x74;
+        public const byte getDeviceName = 0x75;
+        public const byte getGlobalNames = 0x76;
+        public const byte getConfigHash = 0x77;
+        public const byte getZoneCfg = 0x78;
+        public const byte getZoneName = 0x79;
 
-        public static byte CFG = 0x11; //register to set, followed by value SVAL <value bytes > EVAL
+        public const byte CFG = 0x11; //register to set, followed by value SVAL <value bytes > EVAL
 
         //groups of registers to be set
-        public static byte IO = 0x10; //output port
-        public static byte TM = 0x11; //timer to set
+        public const byte IO = 0x10; //output port
+        public const byte TM = 0x11; //timer to set
 
         //groups of get register
-        public static byte ADC = 0x12; //directly read input value
-        public static byte UI = 0x15; //Universal Input , specific for each slave device, NO/NC digital inputs, returns 1 / 0, 0 = normal state
-        public static byte TMP = 0x13; //temperature indicator value, 2 bytes are sent : signed decimal , unsigned 2digit precision
-        public static byte HUM = 0x14; //humidity % indicator value, 2 bytes are sent : signed decimal , unsigned 2digit precision
+        public const byte ADC = 0x12; //directly read input value
+        public const byte UI = 0x15; //Universal Input , specific for each slave device, NO/NC digital inputs, returns 1 / 0, 0 = normal state
+        public const byte TMP = 0x13; //temperature indicator value, 2 bytes are sent : signed decimal , unsigned 2digit precision
+        public const byte HUM = 0x14; //humidity % indicator value, 2 bytes are sent : signed decimal , unsigned 2digit precision
         //Following group code is string with peripherial name in format :  STX <name> ETX
 
 
-        public static byte SOP = 0x16;  //Start of Password ,following is password string
-        public static byte EOP = 0x17;   //password end
-        public static byte AUTHOK = 0x18;
-        public static byte AUTHFAIL = 0x19;
-        public static byte ACK = 0x20;
-        public static byte ACKNXT = 0x21;
-        public static byte ACKFIN = 0x22;
+        public const byte SOP = 0x16;  //Start of Password ,following is password string
+        public const byte EOP = 0x17;   //password end
+        public const byte AUTHOK = 0x18;
+        public const byte AUTHFAIL = 0x19;
+        public const byte ACK = 0x20;
+        public const byte ACKNXT = 0x21;
+        public const byte ACKFIN = 0x22;
 
-        public static byte ERRCMD = 0x21;
+        public const byte ERRCMD = 0x21;
 
-        public static byte PSH = 0x22;
-        public static byte PSHNXT = 0x23;
-        public static byte PSHFIN = 0x24;
+        public const byte PSH = 0x22;
+        public const byte PSHNXT = 0x23;
+        public const byte PSHFIN = 0x24;
 
-        public static byte OVF = 0x25;
+        public const byte OVF = 0x25;
 
         /********  Unique Device ID    *********/
-        public static byte DevID0 = 0x01;
-        public static byte DevID1 = 0x00;
+        public const byte DevID0 = 0x01;
+        public const byte DevID1 = 0x00;
 
     }
 
     public struct ipcDefines
     {
 
-        public static int SHA256_DIGEST_SIZE = 32;
+        public const int SHA256_DIGEST_SIZE = 32;
 
-        public static byte comI2C = 0x01;
-        public static byte comSPI = 0x02;
-        public static byte comMiWi = 0x03;
-        public static byte comUSB = 0x04;
-        public static byte comETH = 0x05;
+        public const byte comI2C = 0x01;
+        public const byte comSPI = 0x02;
+        public const byte comMiWi = 0x03;
+        public const byte comUSB = 0x04;
+        public const byte comETH = 0x05;
 
-        //public static int deviceConfigSize = 256;  //256 bytes
-        public static int ipcMaxDevices = 8;
+        //public const int deviceConfigSize = 256;  //256 bytes
+        public const int ipcMaxDevices = 8;
 
         /*
          256 Bytes for each devies ( 1024 devies @ 256Kb mem)
@@ -551,219 +551,219 @@ namespace sconnConnector
          *
          * 
          */
-        public static int ipcAbsMaxDevices = 16;
-        public static int RAM_DEVCFG_NO = 16;
-        public static int RAM_DEVCFG_SIZE = 512;
-        public static int RAM_GCFG_SIZE = 1024;
+        public const int ipcAbsMaxDevices = 16;
+        public const int RAM_DEVCFG_NO = 16;
+        public const int RAM_DEVCFG_SIZE = 512;
+        public const int RAM_GCFG_SIZE = 1024;
 
 
 
-        public static int mAdrDevID_LEN = 0x0002;
+        public const int mAdrDevID_LEN = 0x0002;
 
         /********    Global Config      **********/
-        public static int ipcGlobalConfigSize = 1024;
-        public static int mAdrDevNO = 0x0000; //number of devices
+        public const int ipcGlobalConfigSize = 1024;
+        public const int mAdrDevNO = 0x0000; //number of devices
 
-        public static int mAdrArmed =0x0002;
-        public static int mAdrViolation= 0x0003;
-        public static int mAdrDeamonType = 0x0004;
-        public static int mAdrDeamonType_LEN = 0x0001;
+        public const int mAdrArmed =0x0002;
+        public const int mAdrViolation= 0x0003;
+        public const int mAdrDeamonType = 0x0004;
+        public const int mAdrDeamonType_LEN = 0x0001;
 
-        public static int mAdrHostDeviceAddr = (mAdrDeamonType + mAdrDeamonType_LEN);      //system master dev id
-        public static int mAdrHostDeviceAddr_LEN = mAdrDevID_LEN;
+        public const int mAdrHostDeviceAddr = (mAdrDeamonType + mAdrDeamonType_LEN);      //system master dev id
+        public const int mAdrHostDeviceAddr_LEN = mAdrDevID_LEN;
 
-        public static int mAdrUserNo       =  (mAdrHostDeviceAddr+mAdrHostDeviceAddr_LEN);  // current number of registered users in PASSWD
-        public static int mAdrUserNo_LEN  =    0x0002;
-
-
-        public static int mAdrCurrDevIncPos     =  (mAdrUserNo+mAdrUserNo_LEN);
-        public static int mAdrCurrDevInc_LEN  =    mAdrDevID_LEN;
-
-        public static int mAdrHostDeviceSystemId    = (mAdrCurrDevIncPos+mAdrCurrDevInc_LEN);
-        public static int mAdrHostDeviceSystemId_LEN = mAdrDevID_LEN;
-
-        public static int mAdrHostDeviceIsSystemConnected= (mAdrHostDeviceSystemId+mAdrHostDeviceSystemId_LEN);
-        public static int mAdrHostDeviceIsSystemConnected_LEN =0x01;
-
-        public static int mAdrHostDeviceServerId = (mAdrHostDeviceIsSystemConnected+mAdrHostDeviceIsSystemConnected_LEN);
-        public static int mAdrHostDeviceServerId_LEN = 0x02;
+        public const int mAdrUserNo       =  (mAdrHostDeviceAddr+mAdrHostDeviceAddr_LEN);  // current number of registered users in PASSWD
+        public const int mAdrUserNo_LEN  =    0x0002;
 
 
-        public static int mAdrHostDeviceServerIpAddr = (mAdrHostDeviceServerId+mAdrHostDeviceServerId_LEN);
-        public static int mAdrHostDeviceServerIpAddr_LEN =  30;
+        public const int mAdrCurrDevIncPos     =  (mAdrUserNo+mAdrUserNo_LEN);
+        public const int mAdrCurrDevInc_LEN  =    mAdrDevID_LEN;
 
-        public static int mAdrHostDeviceServerPasswd = (mAdrHostDeviceServerId+mAdrHostDeviceServerId_LEN);
-        public static int mAdrHostDeviceServerPasswd_LEN = 30;
+        public const int mAdrHostDeviceSystemId    = (mAdrCurrDevIncPos+mAdrCurrDevInc_LEN);
+        public const int mAdrHostDeviceSystemId_LEN = mAdrDevID_LEN;
 
-        public static int mAdrSysFail = (mAdrHostDeviceServerPasswd+mAdrHostDeviceServerPasswd_LEN);
-        public static int mAdrSysFail_LEN  = 0x01;
+        public const int mAdrHostDeviceIsSystemConnected= (mAdrHostDeviceSystemId+mAdrHostDeviceSystemId_LEN);
+        public const int mAdrHostDeviceIsSystemConnected_LEN =0x01;
+
+        public const int mAdrHostDeviceServerId = (mAdrHostDeviceIsSystemConnected+mAdrHostDeviceIsSystemConnected_LEN);
+        public const int mAdrHostDeviceServerId_LEN = 0x02;
+
+
+        public const int mAdrHostDeviceServerIpAddr = (mAdrHostDeviceServerId+mAdrHostDeviceServerId_LEN);
+        public const int mAdrHostDeviceServerIpAddr_LEN =  30;
+
+        public const int mAdrHostDeviceServerPasswd = (mAdrHostDeviceServerId+mAdrHostDeviceServerId_LEN);
+        public const int mAdrHostDeviceServerPasswd_LEN = 30;
+
+        public const int mAdrSysFail = (mAdrHostDeviceServerPasswd+mAdrHostDeviceServerPasswd_LEN);
+        public const int mAdrSysFail_LEN  = 0x01;
       
-        public static int mAdrZoneNo = (mAdrSysFail + mAdrSysFail_LEN);
-        public static int mAdrZoneNo_LEN = 0x01;
+        public const int mAdrZoneNo = (mAdrSysFail + mAdrSysFail_LEN);
+        public const int mAdrZoneNo_LEN = 0x01;
 
-        public static int mAdrZoneNo_Pos = (0x00);
+        public const int mAdrZoneNo_Pos = (0x00);
 
-        public static int mAdrZoneCfgStartAddr = (mAdrZoneNo + mAdrZoneNo_LEN);
+        public const int mAdrZoneCfgStartAddr = (mAdrZoneNo + mAdrZoneNo_LEN);
 
-        public static int ZONE_CFG_ENABLED_POS = (mAdrZoneNo_LEN);
-        public static int ZONE_CFG_ENABLED_LEN = 0x01;
+        public const int ZONE_CFG_ENABLED_POS = (mAdrZoneNo_LEN);
+        public const int ZONE_CFG_ENABLED_LEN = 0x01;
 
-        public static int ZONE_CFG_TYPE_POS = (ZONE_CFG_ENABLED_POS + ZONE_CFG_ENABLED_LEN);
-        public static int ZONE_CFG_TYPE_LEN = 0x01;
+        public const int ZONE_CFG_TYPE_POS = (ZONE_CFG_ENABLED_POS + ZONE_CFG_ENABLED_LEN);
+        public const int ZONE_CFG_TYPE_LEN = 0x01;
 
-        public static int ZONE_CFG_NAME_ID_POS = (ZONE_CFG_TYPE_POS + ZONE_CFG_TYPE_LEN);
-        public static int ZONE_CFG_NAME_ID_LEN = 0x02;
+        public const int ZONE_CFG_NAME_ID_POS = (ZONE_CFG_TYPE_POS + ZONE_CFG_TYPE_LEN);
+        public const int ZONE_CFG_NAME_ID_LEN = 0x02;
 
-        public static int ZONE_CFG_LEN = (ZONE_CFG_NAME_ID_POS + ZONE_CFG_NAME_ID_LEN);
+        public const int ZONE_CFG_LEN = (ZONE_CFG_NAME_ID_POS + ZONE_CFG_NAME_ID_LEN);
 
-        public static int ZONE_CFG_MAX_ZONES = 32;
+        public const int ZONE_CFG_MAX_ZONES = 32;
 
-        public static int ZONE_CFG_TOTAL_LEN = (ZONE_CFG_MAX_ZONES*ZONE_CFG_LEN);
+        public const int ZONE_CFG_TOTAL_LEN = (ZONE_CFG_MAX_ZONES*ZONE_CFG_LEN);
        
 
-        public static int GSM_GCFG_LOG_LVL_START_ADDR = (mAdrZoneCfgStartAddr+ZONE_CFG_MAX_ZONES*ZONE_CFG_LEN);
-        public static int GSM_GCFG_LOG_LVL_LEN = 0x04;
+        public const int GSM_GCFG_LOG_LVL_START_ADDR = (mAdrZoneCfgStartAddr+ZONE_CFG_MAX_ZONES*ZONE_CFG_LEN);
+        public const int GSM_GCFG_LOG_LVL_LEN = 0x04;
 
-        public static int GSM_GCFG_LOG_LVL_EN_ARM_CHANGE_MASK   =   0x01;
-        public static int GSM_GCFG_LOG_LVL_EN_VIO_MASK         =    0x02;
-        public static int GSM_GCFG_LOG_LVL_EN_PWR_STAT_MASK    =    0x04;
-        public static int GSM_GCFG_LOG_LVL_EN_ENTRENCE_MASK    =    0x08;
+        public const int GSM_GCFG_LOG_LVL_EN_ARM_CHANGE_MASK   =   0x01;
+        public const int GSM_GCFG_LOG_LVL_EN_VIO_MASK         =    0x02;
+        public const int GSM_GCFG_LOG_LVL_EN_PWR_STAT_MASK    =    0x04;
+        public const int GSM_GCFG_LOG_LVL_EN_ENTRENCE_MASK    =    0x08;
 
-        public static int mAdrGeo_Pos     =   (GSM_GCFG_LOG_LVL_START_ADDR+GSM_GCFG_LOG_LVL_LEN);
-        public static int mAdrLATd_Pos    =       0x00; //degrees
-        public static int mAdrLATm_Pos     =      0x01; //minutes
-        public static int mAdrLATs_Pos     =      0x02; //seconds
-        public static int mAdrLNGd_Pos      =     0x03; //degrees
-        public static int mAdrLNGm_Pos      =     0x04; //minutes
-        public static int mAdrLNGs_Pos      =     0x05; //seconds
-        public static int mAdrGeo_Pos_LEN =  0x06;
-
-
-        public static int GCFG_HASH_POS  =  (mAdrGeo_Pos+mAdrGeo_Pos_LEN);
-        public static int GCFG_HASH_LEN  =  SHA256_DIGEST_SIZE;
-
-        public static int GCFG_DEV_MOD_CTR_START_POS = (GCFG_HASH_POS+GCFG_HASH_LEN);
-        public static int GCFG_DEV_MOD_CTR_LEN = 4;  //integer value on config revision
-        public static int GCFG_DEV_MOD_CTR_TOTAL_LEN = (GCFG_DEV_MOD_CTR_LEN * ipcAbsMaxDevices);
-
-        public static int GCFG_NAMES_MOD_CTR_POS  =    (GCFG_DEV_MOD_CTR_START_POS+GCFG_DEV_MOD_CTR_TOTAL_LEN);
-        public static int GCFG_NAMES_MOD_CTR_LEN = SHA256_DIGEST_SIZE;
-
-        public static int GCFG_END_REG            =    (GCFG_NAMES_MOD_CTR_POS+GCFG_NAMES_MOD_CTR_LEN);
+        public const int mAdrGeo_Pos     =   (GSM_GCFG_LOG_LVL_START_ADDR+GSM_GCFG_LOG_LVL_LEN);
+        public const int mAdrLATd_Pos    =       0x00; //degrees
+        public const int mAdrLATm_Pos     =      0x01; //minutes
+        public const int mAdrLATs_Pos     =      0x02; //seconds
+        public const int mAdrLNGd_Pos      =     0x03; //degrees
+        public const int mAdrLNGm_Pos      =     0x04; //minutes
+        public const int mAdrLNGs_Pos      =     0x05; //seconds
+        public const int mAdrGeo_Pos_LEN =  0x06;
 
 
-        public static int mAdrDevStart = 0x400; //1024- start address in memory of device configs
-        public static int mAdrGlobalConfig = 0x0000;
+        public const int GCFG_HASH_POS  =  (mAdrGeo_Pos+mAdrGeo_Pos_LEN);
+        public const int GCFG_HASH_LEN  =  SHA256_DIGEST_SIZE;
+
+        public const int GCFG_DEV_MOD_CTR_START_POS = (GCFG_HASH_POS+GCFG_HASH_LEN);
+        public const int GCFG_DEV_MOD_CTR_LEN = 4;  //integer value on config revision
+        public const int GCFG_DEV_MOD_CTR_TOTAL_LEN = (GCFG_DEV_MOD_CTR_LEN * ipcAbsMaxDevices);
+
+        public const int GCFG_NAMES_MOD_CTR_POS  =    (GCFG_DEV_MOD_CTR_START_POS+GCFG_DEV_MOD_CTR_TOTAL_LEN);
+        public const int GCFG_NAMES_MOD_CTR_LEN = SHA256_DIGEST_SIZE;
+
+        public const int GCFG_END_REG            =    (GCFG_NAMES_MOD_CTR_POS+GCFG_NAMES_MOD_CTR_LEN);
+
+
+        public const int mAdrDevStart = 0x400; //1024- start address in memory of device configs
+        public const int mAdrGlobalConfig = 0x0000;
 
 
 
 
-        public static int mAdrSiteName = 0x0040; //16 char UTF8(4b) site nam
-        public static int mAdrSitePasswd = 0x0080; // 32char UTF8 password
-        public static int PasswordMaxChars = 32;
-        public static int PasswordSize = 128; //32char 128 byte
+        public const int mAdrSiteName = 0x0040; //16 char UTF8(4b) site nam
+        public const int mAdrSitePasswd = 0x0080; // 32char UTF8 password
+        public const int PasswordMaxChars = 32;
+        public const int PasswordSize = 128; //32char 128 byte
 
-        public static byte sysVersion = 0x00;
+        public const byte sysVersion = 0x00;
 
         /********  Device config  ********/
 
-        public static byte mAdrDevID = 0x00;    //device unique ID , for I2C it is also bus Address
+        public const byte mAdrDevID = 0x00;    //device unique ID , for I2C it is also bus Address
 
-        public static byte mAdrDomain = 0x02;    //device domain
-        public static byte mAdrDevRev = 0x03;   //Revision number   
-        public static byte mAdrDevType = 0x04;  //Type of device, IO, motor etc.
-        public static byte mAdrInputsNO = 0x05;  //number of inputs on board
-        public static byte mAdrOutputsNO = 0x06; //number of outputs on board
-        public static byte mAdrRelayNO = 0x07; //number of Relays on board
-        public static byte mAdrKeypadMod = 0x08; //devices has KeyPad module
-        public static byte mAdrTempMod = 0x09; // device has temperature module ( bool )
-        public static byte mAdrHumMod = 0x0A;   //humidity
-        public static byte mAdrPresMod = 0xB;  //pressure
-        public static byte mAdrCOMi2c = 0xC;  //device has I2C COM , bool
-        public static byte mAdrCOMeth = 0xD;  //device has ETH COM
-        public static byte mAdrCOMmiwi = 0xE;  //device has MiWi COM
-        public static byte mAdrI2CAddr = 0xF; //i2c bus address
-        public static byte mAdrSensorBattLvl = 0xF;
+        public const byte mAdrDomain = 0x02;    //device domain
+        public const byte mAdrDevRev = 0x03;   //Revision number   
+        public const byte mAdrDevType = 0x04;  //Type of device, IO, motor etc.
+        public const byte mAdrInputsNO = 0x05;  //number of inputs on board
+        public const byte mAdrOutputsNO = 0x06; //number of outputs on board
+        public const byte mAdrRelayNO = 0x07; //number of Relays on board
+        public const byte mAdrKeypadMod = 0x08; //devices has KeyPad module
+        public const byte mAdrTempMod = 0x09; // device has temperature module ( bool )
+        public const byte mAdrHumMod = 0x0A;   //humidity
+        public const byte mAdrPresMod = 0xB;  //pressure
+        public const byte mAdrCOMi2c = 0xC;  //device has I2C COM , bool
+        public const byte mAdrCOMeth = 0xD;  //device has ETH COM
+        public const byte mAdrCOMmiwi = 0xE;  //device has MiWi COM
+        public const byte mAdrI2CAddr = 0xF; //i2c bus address
+        public const byte mAdrSensorBattLvl = 0xF;
 
         /********  Input state  ********/
-        public static int mAdrInput = 0x20;  //128 - start address of input states, format : <input type> <value1> <value2-Analog>
-        public static byte mAdrInputMemSize = 0x08;
-        public static byte mAdrInputType = 0x00;
-        public static byte mAdrInputAG = 0x01;
-        public static byte mAdrInputVal = 0x02;
-        public static byte mAdrInputSensitivity = 0x03;
-        public static byte mAdrInputEnabled = 0x04;
-        public static byte mAdrInputNameAddr = 0x05;
-        public static byte mAdrInputZoneId = 0x06;
-        public static byte mAdrInputTypeParam = 0x07;
+        public const int mAdrInput = 0x20;  //128 - start address of input states, format : <input type> <value1> <value2-Analog>
+        public const byte mAdrInputMemSize = 0x08;
+        public const byte mAdrInputType = 0x00;
+        public const byte mAdrInputAG = 0x01;
+        public const byte mAdrInputVal = 0x02;
+        public const byte mAdrInputSensitivity = 0x03;
+        public const byte mAdrInputEnabled = 0x04;
+        public const byte mAdrInputNameAddr = 0x05;
+        public const byte mAdrInputZoneId = 0x06;
+        public const byte mAdrInputTypeParam = 0x07;
 
 
-        public static byte DeviceMaxInputs = 24;
-        public static byte InputSensitivityStep = 50;
+        public const byte DeviceMaxInputs = 24;
+        public const byte InputSensitivityStep = 50;
 
 
         /********  Output state  ********/
-        public static int mAdrOutput = (mAdrInput + mAdrInputMemSize * DeviceMaxInputs);  //40 - start address of output states, format : <output type> <value1>
-        public static byte mAdrOutputType = 0x00;
-        public static byte mAdrOutputVal = 0x01;
-        public static byte mAdrOutputEnabled = 0x02;
-        public static byte mAdrOutputNameAddr = 0x03;
-        public static byte mAdrOutputPar1 = 0x04;
+        public const int mAdrOutput = (mAdrInput + mAdrInputMemSize * DeviceMaxInputs);  //40 - start address of output states, format : <output type> <value1>
+        public const byte mAdrOutputType = 0x00;
+        public const byte mAdrOutputVal = 0x01;
+        public const byte mAdrOutputEnabled = 0x02;
+        public const byte mAdrOutputNameAddr = 0x03;
+        public const byte mAdrOutputPar1 = 0x04;
 
-        public static byte mAdrOutputMemSize = 0x05;
+        public const byte mAdrOutputMemSize = 0x05;
 
-        public static byte outputON = 0x01;  //Output active
-        public static byte outputOFF = 0x00;  //Output inactive
+        public const byte outputON = 0x01;  //Output active
+        public const byte outputOFF = 0x00;  //Output inactive
 
-        public static byte OutputNA = 0x01;
-        public static byte OutputNIA = 0x00; // normaly inactive
+        public const byte OutputNA = 0x01;
+        public const byte OutputNIA = 0x00; // normaly inactive
 
-        public static byte Output1Addr = 0x40;
-        public static byte Output2Addr = 0x43;
+        public const byte Output1Addr = 0x40;
+        public const byte Output2Addr = 0x43;
 
-        public static byte DeviceMaxOutputs = 16;
-        public static int OutputsTotalMemSize = (mAdrOutputMemSize * DeviceMaxOutputs);
+        public const byte DeviceMaxOutputs = 16;
+        public const int OutputsTotalMemSize = (mAdrOutputMemSize * DeviceMaxOutputs);
 
         /******   Relay state ********/
-        public static int mAdrRelay = (mAdrOutput + mAdrOutputMemSize * DeviceMaxOutputs);
-        public static byte mAdrRelayType = 0x00;
-        public static byte mAdrRelayVal = 0x01;
-        public static byte mAdrRelayEnabled = 0x02;
-        public static byte mAdrRelayNameAddr = 0x03;
-        public static byte mAdrRelayPar1 = 0x04;
-        public static byte DeviceMaxRelays = 8;
-        public static byte RelayMemSize = 0x05;
+        public const int mAdrRelay = (mAdrOutput + mAdrOutputMemSize * DeviceMaxOutputs);
+        public const byte mAdrRelayType = 0x00;
+        public const byte mAdrRelayVal = 0x01;
+        public const byte mAdrRelayEnabled = 0x02;
+        public const byte mAdrRelayNameAddr = 0x03;
+        public const byte mAdrRelayPar1 = 0x04;
+        public const byte DeviceMaxRelays = 8;
+        public const byte RelayMemSize = 0x05;
 
-        public static int RelayTotalMemSize = (RelayMemSize*DeviceMaxRelays);
+        public const int RelayTotalMemSize = (RelayMemSize*DeviceMaxRelays);
 
-        public static int mAdrSuppVolt_Start_Pos = (mAdrRelay + RelayTotalMemSize);
-        public static int mAdrSuppVolt_Start_Len = (4);
-        public static int mAdrBackupVolt_Start_Pos = (mAdrSuppVolt_Start_Pos + mAdrSuppVolt_Start_Len);
-        public static int mAdrBackupVolt_Start_Len = (4);
+        public const int mAdrSuppVolt_Start_Pos = (mAdrRelay + RelayTotalMemSize);
+        public const int mAdrSuppVolt_Start_Len = (4);
+        public const int mAdrBackupVolt_Start_Pos = (mAdrSuppVolt_Start_Pos + mAdrSuppVolt_Start_Len);
+        public const int mAdrBackupVolt_Start_Len = (4);
 
-       // public static int deviceTotalNames = ();
-        public static int deviceConfigSize = 512;   //  mAdrRelay + (RelayMemSize * DeviceMaxRelays);
+       // public const int deviceTotalNames = ();
+        public const int deviceConfigSize = 512;   //  mAdrRelay + (RelayMemSize * DeviceMaxRelays);
 
   
 
         /******* Device types ***********/
 
-        public static int IPC_DEV_TYPE_GKP =   0x01;
-        public static int REV_HW_CFG_GKP_32MX_ETH   =  0x01;
-        public static int REV_HW_CFG_GKPNG_32MX      = 0x02;
-        public static int REV_HW_CFG_GKP_32MZ_WIFI    =0x11;
-        public static int IPC_DEV_TYPE_MB     =0x02;
-        public static int REV_HW_CFG_MB_32MX_ETH =     0x01;
-        public static int REV_HW_CFG_MB_32MX_ETH_GSM = 0x02;
-        public static int REV_HW_CFG_MB_32MZ         = 0x03;
-        public static int REV_HW_CFG_MB_32MX_NG      = 0x04;
-        public static int IPC_DEV_TYPE_GSM    = 0x03;
-        public static int REV_HW_CFG_GSM_32MX250_ETH =     0x01;
-        public static int REV_HW_CFG_GSM_32MX270_ETH =     0x02;
-        public static int IPC_DEV_TYPE_PIR_SENSOR   =  0x04;
-        public static int REV_HW_CFG_SENS_18F46K20   =   0x01;
-        public static int IPC_DEV_TYPE_RM   =  0x05;
-        public static int REV_HW_CFG_RM_32M795_ETH = 0x01;
+        public const int IPC_DEV_TYPE_GKP =   0x01;
+        public const int REV_HW_CFG_GKP_32MX_ETH   =  0x01;
+        public const int REV_HW_CFG_GKPNG_32MX      = 0x02;
+        public const int REV_HW_CFG_GKP_32MZ_WIFI    =0x11;
+        public const int IPC_DEV_TYPE_MB     =0x02;
+        public const int REV_HW_CFG_MB_32MX_ETH =     0x01;
+        public const int REV_HW_CFG_MB_32MX_ETH_GSM = 0x02;
+        public const int REV_HW_CFG_MB_32MZ         = 0x03;
+        public const int REV_HW_CFG_MB_32MX_NG      = 0x04;
+        public const int IPC_DEV_TYPE_GSM    = 0x03;
+        public const int REV_HW_CFG_GSM_32MX250_ETH =     0x01;
+        public const int REV_HW_CFG_GSM_32MX270_ETH =     0x02;
+        public const int IPC_DEV_TYPE_PIR_SENSOR   =  0x04;
+        public const int REV_HW_CFG_SENS_18F46K20   =   0x01;
+        public const int IPC_DEV_TYPE_RM   =  0x05;
+        public const int REV_HW_CFG_RM_32M795_ETH = 0x01;
 
 
 
@@ -774,49 +774,49 @@ namespace sconnConnector
         /******  DEAMON  *******/
 
         /***** DEAMON TYPES  *****/
-        public static byte DEA_ALARM      =     0x00;
-        public static byte DEA_SCHED     =      0x01;
-        public static byte DEA_MAN       =      0x02;
-        public static byte DEA_ALARM_SCHED = 0x03;     /* Alarm deamon with scheduled events*/
+        public const byte DEA_ALARM      =     0x00;
+        public const byte DEA_SCHED     =      0x01;
+        public const byte DEA_MAN       =      0x02;
+        public const byte DEA_ALARM_SCHED = 0x03;     /* Alarm deamon with scheduled events*/
 
 
         /********* ALARM DEAMON ********/
 
         /*  INPUT  TYPE        */
-        public static byte IN_TYPE_NO        =  0x00;
-        public static byte IN_TYPE_NC     =     0x01;
+        public const byte IN_TYPE_NO        =  0x00;
+        public const byte IN_TYPE_NC     =     0x01;
 
         /*  INPUT  ACTIVATION GROUP    */
-        public static byte IN_TYPE_ARM      =   0x40; /* Arm System */
-        public static byte IN_TYPE_DISARM   =   0x41;
-        public static byte IN_TYPE_AO1     =    0x42; /* Activate Output 1*/
-        public static byte IN_TYPE_AO2     =    0x43;
-        public static byte IN_TYPE_AV      =    0x44; /* Armed Violation  - Alarm input */
-        public static byte IN_TYPE_DAV     =    0x45; /* DisArmed Violation -  Alarm on disarmed */
-        public static byte IN_TYPE_ADV     =    0x46; /*Arm&Disarmed violation - 24/7 */
+        public const byte IN_TYPE_ARM      =   0x40; /* Arm System */
+        public const byte IN_TYPE_DISARM   =   0x41;
+        public const byte IN_TYPE_AO1     =    0x42; /* Activate Output 1*/
+        public const byte IN_TYPE_AO2     =    0x43;
+        public const byte IN_TYPE_AV      =    0x44; /* Armed Violation  - Alarm input */
+        public const byte IN_TYPE_DAV     =    0x45; /* DisArmed Violation -  Alarm on disarmed */
+        public const byte IN_TYPE_ADV     =    0x46; /*Arm&Disarmed violation - 24/7 */
 
-        public static byte ACTIVE    =  0x01;
-        public static byte INACTIVE   =  0x00;
+        public const byte ACTIVE    =  0x01;
+        public const byte INACTIVE   =  0x00;
 
         /* INPUT VALUE  */
-        public static byte IN_HIGH               =0x01;
-        public static byte IN_LOW               = 0x00;
+        public const byte IN_HIGH               =0x01;
+        public const byte IN_LOW               = 0x00;
 
         /*  OUTPUT  TYPE        */
-        public static byte OUT_TYPE_NA              =   0x00; /* Normaly Active*/
-        public static byte OUT_TYPE_NIA            =    0x01; /* Normaly InActive*/
+        public const byte OUT_TYPE_NA              =   0x00; /* Normaly Active*/
+        public const byte OUT_TYPE_NIA            =    0x01; /* Normaly InActive*/
 
-        public static byte OUT_TYPE_ALARM_NA        =   0x00;
-        public static byte OUT_TYPE_ALARM_NIA       =   0x01;
-        public static byte OUT_TYPE_PWR             =   0x02;
-        public static byte OUT_TYPE_SCHED_1_NA      =   0x03;
-        public static byte OUT_TYPE_SCHED_1_NIA     =   0x04;
-        public static byte OUT_TYPE_SCHED_2_NA      =   0x05;
-        public static byte OUT_TYPE_SCHED_2_NIA     =   0x06;
+        public const byte OUT_TYPE_ALARM_NA        =   0x00;
+        public const byte OUT_TYPE_ALARM_NIA       =   0x01;
+        public const byte OUT_TYPE_PWR             =   0x02;
+        public const byte OUT_TYPE_SCHED_1_NA      =   0x03;
+        public const byte OUT_TYPE_SCHED_1_NIA     =   0x04;
+        public const byte OUT_TYPE_SCHED_2_NA      =   0x05;
+        public const byte OUT_TYPE_SCHED_2_NIA     =   0x06;
 
         /*  OUTPUT STATE */
-        public static byte OUT_STATE_ACTIVE    =0x01;
-        public static byte OUT_STATE_INACTIVE  = 0x00;
+        public const byte OUT_STATE_ACTIVE    =0x01;
+        public const byte OUT_STATE_INACTIVE  = 0x00;
 
 
  
@@ -824,106 +824,106 @@ namespace sconnConnector
 
         /************  NAMES *****************/
 
-    public static int mAddr_NAMES_StartAddr = (RAM_GCFG_SIZE+(RAM_DEVCFG_SIZE*RAM_DEVCFG_NO));
-    public static int mAddr_NAMES_Board = (RAM_GCFG_SIZE+(RAM_DEVCFG_SIZE*RAM_DEVCFG_NO));
+    public const int mAddr_NAMES_StartAddr = (RAM_GCFG_SIZE+(RAM_DEVCFG_SIZE*RAM_DEVCFG_NO));
+    public const int mAddr_NAMES_Board = (RAM_GCFG_SIZE+(RAM_DEVCFG_SIZE*RAM_DEVCFG_NO));
 
-    public static int RAM_NAME_SIZE =  32;  //  16x 2byte unicode
+    public const int RAM_NAME_SIZE =  32;  //  16x 2byte unicode
 
-    public static int RAM_DEV_NAMES_NO = (DeviceMaxRelays + DeviceMaxOutputs + DeviceMaxInputs + 1); //device name + IOs
+    public const int RAM_DEV_NAMES_NO = (DeviceMaxRelays + DeviceMaxOutputs + DeviceMaxInputs + 1); //device name + IOs
 
 
-    public static int mAddr_NAMES_Global_StartAddr =mAddr_NAMES_StartAddr+(RAM_DEV_NAMES_NO*RAM_NAME_SIZE);
-    public static int mAddr_NAMES_Global_SystemName_Pos=   0;
+    public const int mAddr_NAMES_Global_StartAddr =mAddr_NAMES_StartAddr+(RAM_DEV_NAMES_NO*RAM_NAME_SIZE);
+    public const int mAddr_NAMES_Global_SystemName_Pos=   0;
         
-    public static int RAM_NAMES_Global_Total_Records   = (mAddr_NAMES_Global_SystemName_Pos + 1);
-    public static int RAM_NAMES_Global_Total_Size   =    (RAM_NAMES_Global_Total_Records*RAM_NAME_SIZE);
+    public const int RAM_NAMES_Global_Total_Records   = (mAddr_NAMES_Global_SystemName_Pos + 1);
+    public const int RAM_NAMES_Global_Total_Size   =    (RAM_NAMES_Global_Total_Records*RAM_NAME_SIZE);
 
-        public static int mAddr_NAMES_Zone_StartAddr=(mAddr_NAMES_Global_StartAddr +RAM_NAMES_Global_Total_Size);
-        public static int RAM_ZONE_NAMES_SIZE=(ZONE_CFG_MAX_ZONES* RAM_NAME_SIZE);
+        public const int mAddr_NAMES_Zone_StartAddr=(mAddr_NAMES_Global_StartAddr +RAM_NAMES_Global_Total_Size);
+        public const int RAM_ZONE_NAMES_SIZE=(ZONE_CFG_MAX_ZONES* RAM_NAME_SIZE);
 
-        public static int RAM_NAMES_SIZE = ( (RAM_DEV_NAMES_NO*RAM_NAME_SIZE) + (RAM_NAMES_Global_Total_Size )+ (RAM_ZONE_NAMES_SIZE) ) ;
+        public const int RAM_NAMES_SIZE = ( (RAM_DEV_NAMES_NO*RAM_NAME_SIZE) + (RAM_NAMES_Global_Total_Size )+ (RAM_ZONE_NAMES_SIZE) ) ;
 
-        public static int RAM_DEVICE_NAMES_SIZE = (RAM_DEV_NAMES_NO*RAM_NAME_SIZE);
+        public const int RAM_DEVICE_NAMES_SIZE = (RAM_DEV_NAMES_NO*RAM_NAME_SIZE);
 
-        public static int mAddr_NAMES_Board_Pos = 0x00;
-        public static int mAddr_NAMES_Inputs_Pos = 0x01;
-        public static int mAddr_NAMES_Outputs_Pos = (DeviceMaxInputs+mAddr_NAMES_Inputs_Pos);
-        public static int mAddr_NAMES_Relays_Pos = (mAddr_NAMES_Outputs_Pos+DeviceMaxOutputs);
+        public const int mAddr_NAMES_Board_Pos = 0x00;
+        public const int mAddr_NAMES_Inputs_Pos = 0x01;
+        public const int mAddr_NAMES_Outputs_Pos = (DeviceMaxInputs+mAddr_NAMES_Inputs_Pos);
+        public const int mAddr_NAMES_Relays_Pos = (mAddr_NAMES_Outputs_Pos+DeviceMaxOutputs);
 
 
 
 
 
         /************  SCHEDULE ***************/
-        public static int mAddr_SCHED_StartAddr =0x4000; //16384 - after Names CFG
-        public static int RAM_SCHED_SIZE  = 8192;         //32 devices * 8sched/dev *  32B sched size
-        public static int RAM_DEV_SCHED_SIZE = 256;
-      //  public static int RAM_SMS_RECP_MEM_SIZE = 256;
-        public static int RAM_DEV_SCHED_NO    =0x08;     //32 schedules
-        public static int RAM_DEV_SCHED_MEM_SIZE  =0x20;  //32B  
-        public static int RAM_DEV_SCHED_DATETIME_SIZE = 0x08;
+        public const int mAddr_SCHED_StartAddr =0x4000; //16384 - after Names CFG
+        public const int RAM_SCHED_SIZE  = 8192;         //32 devices * 8sched/dev *  32B sched size
+        public const int RAM_DEV_SCHED_SIZE = 256;
+      //  public const int RAM_SMS_RECP_MEM_SIZE = 256;
+        public const int RAM_DEV_SCHED_NO    =0x08;     //32 schedules
+        public const int RAM_DEV_SCHED_MEM_SIZE  =0x20;  //32B  
+        public const int RAM_DEV_SCHED_DATETIME_SIZE = 0x08;
 
         
         /****************    Schedule  *****************/
         //4b date, from 4b date to , 4b hr from, 4b hr to  = 16b/time
-        static public int SCHED_MEM_SIZE  =0x2000;
+        public const int SCHED_MEM_SIZE  =0x2000;
 
 
         /*************  Schdule Types ***************/
-        static public int SCHED_TYPE_POS =0x00;
-        static public int SCHED_TYPE_FROMTO   =0x00;    //activation
-        static public int SCHED_TYPE_ONDATE   =0x01;   //single on start activation, ex. sms, mail
-        static public int SCHED_TYPE_UNTIL    =0x02;    //Activate always, from now until date
-        static public int SCHED_TYPE_FROM     =0x03;    //Activate always, from date to infinity
+        public const int SCHED_TYPE_POS =0x00;
+        public const int SCHED_TYPE_FROMTO   =0x00;    //activation
+        public const int SCHED_TYPE_ONDATE   =0x01;   //single on start activation, ex. sms, mail
+        public const int SCHED_TYPE_UNTIL    =0x02;    //Activate always, from now until date
+        public const int SCHED_TYPE_FROM     =0x03;    //Activate always, from date to infinity
 
-        static public int SCHED_TIME_HR_POS = 0x03;
-        static public int SCHED_TIME_MIN_POS = 0x02;
-        static public int SCHED_TIME_SEC_POS = 0x01;
-        static public int SCHED_TIME_RSVD_POS = 0x00;
-        static public int SCHED_DATE_YR_POS   = 0x03;
-        static public int SCHED_DATE_MON_POS   = 0x02;
-        static public int SCHED_DATE_MDAY_POS   = 0x01;
-        static public int SCHED_DATE_WDAY_POS   = 0x00;
+        public const int SCHED_TIME_HR_POS = 0x03;
+        public const int SCHED_TIME_MIN_POS = 0x02;
+        public const int SCHED_TIME_SEC_POS = 0x01;
+        public const int SCHED_TIME_RSVD_POS = 0x00;
+        public const int SCHED_DATE_YR_POS   = 0x03;
+        public const int SCHED_DATE_MON_POS   = 0x02;
+        public const int SCHED_DATE_MDAY_POS   = 0x01;
+        public const int SCHED_DATE_WDAY_POS   = 0x00;
 
-        static public int SCHED_TIMEDATE_SIZE=   0x08;
+        public const int SCHED_TIMEDATE_SIZE=   0x08;
 
         /***********    Schedule  Dates  *********/
-        static public int SCHED_DATE_START_POS  =0x01;
-        static public int SCHED_TIME_FROM_POS   =0x01;
-        static public int SCHED_DATE_FROM_POS   =0x05;
-        static public int SCHED_TIME_TO_POS     =0x09;
-        static public int SCHED_DATE_TO_POS     =0x0E;
+        public const int SCHED_DATE_START_POS  =0x01;
+        public const int SCHED_TIME_FROM_POS   =0x01;
+        public const int SCHED_DATE_FROM_POS   =0x05;
+        public const int SCHED_TIME_TO_POS     =0x09;
+        public const int SCHED_DATE_TO_POS     =0x0E;
 
         /************  Action Types  *************/
-        static public int SCHED_ACTION_TYPE_POS =0x10;
-            static public int SCHED_ACTION_TYPE_ACTIV_OUT =0x00;
-                static public int SCHED_ACTION_ACTIV_OUTNO_POS =0x11;
-                static public int SCHED_ACTION_ACTIV_OUTVAL_POS   =0x12;
-                    static public int SCHED_ACTION_ACTIV_OUT_ON =0x01;
-                    static public int SCHED_ACTION_ACTIV_OUT_OFF =0x00;
-                    static public int SCHED_ACTION_ACTIV_OUT_PULSE = 0x02;
-                      static public int SCHED_ACTION_ACTIV_OUT_PULSE_ON_TIME_POS = 0x13;
-                      static public int SCHED_ACTION_ACTIV_OUT_PULSE_OFF_TIME_POS = 0x14;
-            static public int SCHED_ACTION_TYPE_ACTIV_REL =0x01;
-                static public int SCHED_ACTION_ACTIV_RELNO_POS =0x11;
-                static public int SCHED_ACTION_ACTIV_REL_VAL_POS    = 0x12;
-                    static public int SCHED_ACTION_ACTIV_REL_ON =0x01;
-                    static public int SCHED_ACTION_ACTIV_REL_OFF =0x00;
-                    static public int SCHED_ACTION_ACTIV_REL_PULSE = 0x02;
+        public const int SCHED_ACTION_TYPE_POS =0x10;
+            public const int SCHED_ACTION_TYPE_ACTIV_OUT =0x00;
+                public const int SCHED_ACTION_ACTIV_OUTNO_POS =0x11;
+                public const int SCHED_ACTION_ACTIV_OUTVAL_POS   =0x12;
+                    public const int SCHED_ACTION_ACTIV_OUT_ON =0x01;
+                    public const int SCHED_ACTION_ACTIV_OUT_OFF =0x00;
+                    public const int SCHED_ACTION_ACTIV_OUT_PULSE = 0x02;
+                      public const int SCHED_ACTION_ACTIV_OUT_PULSE_ON_TIME_POS = 0x13;
+                      public const int SCHED_ACTION_ACTIV_OUT_PULSE_OFF_TIME_POS = 0x14;
+            public const int SCHED_ACTION_TYPE_ACTIV_REL =0x01;
+                public const int SCHED_ACTION_ACTIV_RELNO_POS =0x11;
+                public const int SCHED_ACTION_ACTIV_REL_VAL_POS    = 0x12;
+                    public const int SCHED_ACTION_ACTIV_REL_ON =0x01;
+                    public const int SCHED_ACTION_ACTIV_REL_OFF =0x00;
+                    public const int SCHED_ACTION_ACTIV_REL_PULSE = 0x02;
                       
-            static public int SCHED_ACTION_TYPE_SEND_MAIL     =0x02;
-                static public int SCHED_ACTION_MAIL_SERVER_ID_POS =0x11;
-                static public int SCHED_ACTION_MAIL_MSG_POS   =0x12;
-            static public int SCHED_ACTION_TYPE_SEND_SMS     =0x03;
-                static public int SCHED_ACTION_SMS_RECP_ID_POS =0x11;
-                static public int SCHED_ACTION_SMS_MSG_ID_POS =0x12;
-            static public int SCHED_ACTION_TYPE_DISARM    =0x04;
-            static public int SCHED_ACTION_TYPE_ARM       =0x05;
+            public const int SCHED_ACTION_TYPE_SEND_MAIL     =0x02;
+                public const int SCHED_ACTION_MAIL_SERVER_ID_POS =0x11;
+                public const int SCHED_ACTION_MAIL_MSG_POS   =0x12;
+            public const int SCHED_ACTION_TYPE_SEND_SMS     =0x03;
+                public const int SCHED_ACTION_SMS_RECP_ID_POS =0x11;
+                public const int SCHED_ACTION_SMS_MSG_ID_POS =0x12;
+            public const int SCHED_ACTION_TYPE_DISARM    =0x04;
+            public const int SCHED_ACTION_TYPE_ARM       =0x05;
 
         /* Send Mail/SMS with content and recpients stored in memory config*/
-            static public int SCHED_STAT_POS =  31;
-            static public int SCHED_STAT_ACTIVE   =0x01;
-            static public int SCHED_STAT_INACTIVE =0x00;
+            public const int SCHED_STAT_POS =  31;
+            public const int SCHED_STAT_ACTIVE   =0x01;
+            public const int SCHED_STAT_INACTIVE =0x00;
 
 
         /*****************  Mail ***********************/
@@ -932,130 +932,131 @@ namespace sconnConnector
 
 
         /*****************  SMS ***********************/
-        static public int mAddr_SMS_StartAddr     =0x6000;  //24576 - after Schedule
-        static public int mAddr_RECP_StartAddr =0x6000;
-        static public int mAddr_SMS_MSG_StartAddr =0x6100;
+        public const int mAddr_SMS_StartAddr     =0x6000;  //24576 - after Schedule
+        public const int mAddr_RECP_StartAddr =0x6000;
+        public const int mAddr_SMS_MSG_StartAddr =0x6100;
 
-        static public byte RAM_SMS_RECP_ADDR_POS = (byte)0x0000;
-        static public byte RAM_SMS_RECP_ADDR_LEN = 15;
-        static public byte RAM_SMS_RECP_COUNTRY_CODE_POS = (byte)(RAM_SMS_RECP_ADDR_POS + RAM_SMS_RECP_ADDR_LEN);
-        static public byte RAM_SMS_RECP_COUNTRY_CODE_LEN = 0x02;
-        static public byte RAM_SMS_RECP_MESSAGE_LEVEL_POS = (byte)(RAM_SMS_RECP_COUNTRY_CODE_POS + RAM_SMS_RECP_COUNTRY_CODE_LEN);
-        static public byte RAM_SMS_RECP_MESSAGE_LEVEL_LEN = 0x01;
-        static public byte RAM_SMS_RECP_ENABLED_POS = (byte)(RAM_SMS_RECP_MESSAGE_LEVEL_POS + RAM_SMS_RECP_MESSAGE_LEVEL_LEN);
-        static public byte RAM_SMS_RECP_ENABLED_LEN = 0x01;
-
-        static public byte RAM_SMS_RECP_SIZE = 32;    // E.164 ITU-T max 15 digit 
-        static public byte RAM_SMS_RECP_NO = 16;    //16 recpients
-
-        static public int RAM_SMS_MSG_SIZE  = 64;    //64 ASCII chars
-        static public int RAM_SMS_MSG_NO    = 16;
+        public const byte RAM_SMS_RECP_ADDR_POS = (byte)0x0000;
+        public const byte RAM_SMS_RECP_ADDR_LEN = 15;
+        public const byte RAM_SMS_RECP_COUNTRY_CODE_POS = (byte)(RAM_SMS_RECP_ADDR_POS + RAM_SMS_RECP_ADDR_LEN);
+        public const byte RAM_SMS_RECP_COUNTRY_CODE_LEN = 0x02;
+        public const  byte RAM_SMS_RECP_MESSAGE_LEVEL_POS = (byte)(RAM_SMS_RECP_COUNTRY_CODE_POS + RAM_SMS_RECP_COUNTRY_CODE_LEN);
+        public const  byte RAM_SMS_RECP_MESSAGE_LEVEL_LEN = 0x01;
+        public const  byte RAM_SMS_RECP_ENABLED_POS = (byte)(RAM_SMS_RECP_MESSAGE_LEVEL_POS + RAM_SMS_RECP_MESSAGE_LEVEL_LEN);
+        public const  byte RAM_SMS_RECP_ENABLED_LEN = 0x01;
 
 
-        static public int RAM_SMS_RECP_MEM_SIZE = (RAM_SMS_RECP_SIZE*RAM_SMS_RECP_NO);
+        public const  byte RAM_SMS_RECP_SIZE = 32;    // E.164 ITU-T max 15 digit 
+        public const  byte RAM_SMS_RECP_NO = 16;    //16 recpients
+
+        public const  int RAM_SMS_MSG_SIZE  = 64;    //64 ASCII chars
+        public const  int RAM_SMS_MSG_NO    = 16;
+
+
+        public const int RAM_SMS_RECP_MEM_SIZE = (RAM_SMS_RECP_SIZE*RAM_SMS_RECP_NO);
 
         /**********************  AUTH *********************/
-        static public int AUTH_PASS_SIZE = 30;       // pass  15 x 2b UTF8
-        static public int AUTH_RECORD_PASS_LEN_POS = 0x00;
-        static public int AUTH_RECORD_PASS_LEN_LEN = 0x01;
-        static public int AUTH_RECORD_ENABLED_POS = (AUTH_RECORD_ENABLED_POS + AUTH_RECORD_PASS_LEN_LEN);
-        static public int AUTH_RECORD_ENABLED_LEN = 0x01;
-        static public int AUTH_RECORD_GROUP_POS = (AUTH_RECORD_ENABLED_POS + AUTH_RECORD_ENABLED_LEN);
-        static public int AUTH_RECORD_GROUP_LEN = 0x01;
-        static public int AUTH_RECORD_PERM_POS = (AUTH_RECORD_GROUP_POS + AUTH_RECORD_GROUP_LEN);
-        static public int AUTH_RECORD_PERM_LEN = 0x04;
-        static public int AUTH_RECORD_ALLOWED_FROM_POS = (AUTH_RECORD_PERM_POS + AUTH_RECORD_PERM_LEN);
-        static public int AUTH_RECORD_ALLOWED_FROM_LEN = 0x04;
-        static public int AUTH_RECORD_ALLOWED_UNTIL_POS = (AUTH_RECORD_ALLOWED_FROM_POS + AUTH_RECORD_ALLOWED_FROM_LEN);
-        static public int AUTH_RECORD_ALLOWED_UNTIL_LEN = 0x04;
-        static public int AUTH_RECORD_LOGIN_POS = (AUTH_RECORD_ALLOWED_UNTIL_POS + AUTH_RECORD_ALLOWED_UNTIL_LEN);
-        static public int AUTH_RECORD_LOGIN_LEN = AUTH_PASS_SIZE;
-        static public int AUTH_RECORD_PASSWD_POS = (AUTH_RECORD_LOGIN_POS + AUTH_RECORD_LOGIN_LEN);
-        static public int AUTH_RECORD_PASSWD_LEN = AUTH_PASS_SIZE;
-        static public int AUTH_RECORD_SIZE = (AUTH_RECORD_PASSWD_POS + AUTH_RECORD_PASSWD_LEN);
+        public const int AUTH_PASS_SIZE = 30;       // pass  15 x 2b UTF8
+        public const int AUTH_RECORD_PASS_LEN_POS = 0x00;
+        public const int AUTH_RECORD_PASS_LEN_LEN = 0x01;
+        public const int AUTH_RECORD_ENABLED_POS = (AUTH_RECORD_PASS_LEN_POS + AUTH_RECORD_PASS_LEN_LEN);
+        public const int AUTH_RECORD_ENABLED_LEN = 0x01;
+        public const int AUTH_RECORD_GROUP_POS = (AUTH_RECORD_ENABLED_POS + AUTH_RECORD_ENABLED_LEN);
+        public const int AUTH_RECORD_GROUP_LEN = 0x01;
+        public const int AUTH_RECORD_PERM_POS = (AUTH_RECORD_GROUP_POS + AUTH_RECORD_GROUP_LEN);
+        public const int AUTH_RECORD_PERM_LEN = 0x04;
+        public const int AUTH_RECORD_ALLOWED_FROM_POS = (AUTH_RECORD_PERM_POS + AUTH_RECORD_PERM_LEN);
+        public const int AUTH_RECORD_ALLOWED_FROM_LEN = 0x04;
+        public const int AUTH_RECORD_ALLOWED_UNTIL_POS = (AUTH_RECORD_ALLOWED_FROM_POS + AUTH_RECORD_ALLOWED_FROM_LEN);
+        public const int AUTH_RECORD_ALLOWED_UNTIL_LEN = 0x04;
+        public const int AUTH_RECORD_LOGIN_POS = (AUTH_RECORD_ALLOWED_UNTIL_POS + AUTH_RECORD_ALLOWED_UNTIL_LEN);
+        public const int AUTH_RECORD_LOGIN_LEN = AUTH_PASS_SIZE;
+        public const int AUTH_RECORD_PASSWD_POS = (AUTH_RECORD_LOGIN_POS + AUTH_RECORD_LOGIN_LEN);
+        public const int AUTH_RECORD_PASSWD_LEN = AUTH_PASS_SIZE;
+        public const int AUTH_RECORD_SIZE = (AUTH_RECORD_PASSWD_POS + AUTH_RECORD_PASSWD_LEN);
 
-        static public int AUTH_CRED_SIZE   =   AUTH_RECORD_SIZE; 
-        static public int AUTH_MAX_USERS = 16;
-        static public int AUTH_RECORDS_SIZE = (AUTH_RECORD_SIZE * AUTH_MAX_USERS);
+        public const int AUTH_CRED_SIZE   =   AUTH_RECORD_SIZE; 
+        public const int AUTH_MAX_USERS = 16;
+        public const int AUTH_RECORDS_SIZE = (AUTH_RECORD_SIZE * AUTH_MAX_USERS);
 
 
         /******************   NET   *************/
-        static public int NET_MAX_TX_SIZE = 280;
-        static public int NET_MAX_RX_SIZE = 2048;
-        static public int NET_MAX_SESSION_IDLE_SEC = 100;
-        static public int NET_DATA_PACKET_CONTROL_BYTES = 2;
-        static public int NET_CMD_PACKET_LEN = 3;
-        static public int NET_UPLOAD_PACKET_CONTROL_BYTES = 4;
-        static public int NET_UPLOAD_PACKET_DATA_OFFSET = 3;
+        public const int NET_MAX_TX_SIZE = 280;
+        public const int NET_MAX_RX_SIZE = 2048;
+        public const int NET_MAX_SESSION_IDLE_SEC = 100;
+        public const int NET_DATA_PACKET_CONTROL_BYTES = 2;
+        public const int NET_CMD_PACKET_LEN = 3;
+        public const int NET_UPLOAD_PACKET_CONTROL_BYTES = 4;
+        public const int NET_UPLOAD_PACKET_DATA_OFFSET = 3;
 
-        static public byte NET_PACKET_TYPE_GCFG = 0x0001;
-        static public byte NET_PACKET_TYPE_DEVCFG = 0x0002;
-        static public byte NET_PACKET_TYPE_DEVNAMECFG = 0x0003;
-        static public byte NET_PACKET_TYPE_SCHEDCFG = 0x0004;
-        static public byte NET_PACKET_TYPE_PASSWDCFG = 0x0005;
-        static public byte NET_PACKET_TYPE_AUTH = 0x0006;
-        static public byte NET_PACKET_TYPE_NETCFG = 0x0007;
-        static public byte NET_PACKET_TYPE_GSMRCPTCFG = 0x0008;
-        static public byte NET_PACKET_TYPE_DEVAUTHCFG = 0x0009;
-        static public byte NET_PACKET_TYPE_GLOBNAMECFG = 0x000A;
+        public const byte NET_PACKET_TYPE_GCFG = 0x0001;
+        public const byte NET_PACKET_TYPE_DEVCFG = 0x0002;
+        public const byte NET_PACKET_TYPE_DEVNAMECFG = 0x0003;
+        public const byte NET_PACKET_TYPE_SCHEDCFG = 0x0004;
+        public const byte NET_PACKET_TYPE_PASSWDCFG = 0x0005;
+        public const byte NET_PACKET_TYPE_AUTH = 0x0006;
+        public const byte NET_PACKET_TYPE_NETCFG = 0x0007;
+        public const byte NET_PACKET_TYPE_GSMRCPTCFG = 0x0008;
+        public const byte NET_PACKET_TYPE_DEVAUTHCFG = 0x0009;
+        public const byte NET_PACKET_TYPE_GLOBNAMECFG = 0x000A;
 
-        static public int SYS_ALRM_DEV_UUID_POS = 0x00;
-        static public int SYS_ALRM_DEV_UUID_LEN = 16;
-        static public int SYS_ALRM_DEV_ENABLED_POS = (SYS_ALRM_DEV_UUID_POS + SYS_ALRM_DEV_UUID_LEN);
-        static public int SYS_ALRM_DEV_ENABLED_LEN = 0x01;
-        static public int SYS_ALRM_DEV_START_DATE_POS = (SYS_ALRM_DEV_ENABLED_POS + SYS_ALRM_DEV_ENABLED_LEN);
-        static public int SYS_ALRM_DEV_START_DATE_LEN = 0x04;
-        static public int SYS_ALRM_DEV_END_DATE_POS = (SYS_ALRM_DEV_START_DATE_POS + SYS_ALRM_DEV_START_DATE_LEN);
-        static public int SYS_ALRM_DEV_END_DATE_LEN = 0x04;
+        public const int SYS_ALRM_DEV_UUID_POS = 0x00;
+        public const int SYS_ALRM_DEV_UUID_LEN = 16;
+        public const int SYS_ALRM_DEV_ENABLED_POS = (SYS_ALRM_DEV_UUID_POS + SYS_ALRM_DEV_UUID_LEN);
+        public const int SYS_ALRM_DEV_ENABLED_LEN = 0x01;
+        public const int SYS_ALRM_DEV_START_DATE_POS = (SYS_ALRM_DEV_ENABLED_POS + SYS_ALRM_DEV_ENABLED_LEN);
+        public const int SYS_ALRM_DEV_START_DATE_LEN = 0x04;
+        public const int SYS_ALRM_DEV_END_DATE_POS = (SYS_ALRM_DEV_START_DATE_POS + SYS_ALRM_DEV_START_DATE_LEN);
+        public const int SYS_ALRM_DEV_END_DATE_LEN = 0x04;
 
-        static public int SYS_ALRM_DEV_AUTH_LEN = (SYS_ALRM_DEV_END_DATE_POS + SYS_ALRM_DEV_END_DATE_LEN);
-        static public int SYS_ALRM_UUID_LEN = SYS_ALRM_DEV_AUTH_LEN;
+        public const int SYS_ALRM_DEV_AUTH_LEN = (SYS_ALRM_DEV_END_DATE_POS + SYS_ALRM_DEV_END_DATE_LEN);
+        public const int SYS_ALRM_UUID_LEN = SYS_ALRM_DEV_AUTH_LEN;
 
-        static public int SYS_ALARM_DEV_AUTH_MAX_RECORDS = 32;
-        static public int SYS_ALARM_DEV_AUTH_MEM_SIZE = SYS_ALARM_DEV_AUTH_MAX_RECORDS * SYS_ALRM_UUID_LEN;
+        public const int SYS_ALARM_DEV_AUTH_MAX_RECORDS = 32;
+        public const int SYS_ALARM_DEV_AUTH_MEM_SIZE = SYS_ALARM_DEV_AUTH_MAX_RECORDS * SYS_ALRM_UUID_LEN;
 
         
 
         /***************    EVENTS      *****************/
 
-        static public byte EVENT_DB_INFO_EVNO_POS =  0x00;
-        static public byte EVENT_DB_INFO_EVNO_LEN = 0x04;
+        public const byte EVENT_DB_INFO_EVNO_POS =  0x00;
+        public const byte EVENT_DB_INFO_EVNO_LEN = 0x04;
 
-        static public byte EVENT_DB_INFO_LEN =  (EVENT_DB_INFO_EVNO_LEN);
+        public const byte EVENT_DB_INFO_LEN =  (EVENT_DB_INFO_EVNO_LEN);
 
-        static public byte EVENT_DB_ID_POS= 0x00;
-        static public byte EVENT_DB_ID_LEN =0x04;
+        public const byte EVENT_DB_ID_POS= 0x00;
+        public const byte EVENT_DB_ID_LEN =0x04;
 
-        static public byte EVENT_DB_CODE_POS =  (byte)(EVENT_DB_ID_POS+EVENT_DB_ID_LEN);
-        static public byte EVENT_DB_CODE_LEN =  0x02;
+        public const byte EVENT_DB_CODE_POS =  (byte)(EVENT_DB_ID_POS+EVENT_DB_ID_LEN);
+        public const byte EVENT_DB_CODE_LEN =  0x02;
 
-        static public byte EVENT_DB_DOMAIN_POS = (byte)(EVENT_DB_CODE_POS + EVENT_DB_CODE_LEN);
-        static public byte EVENT_DB_DOMAIN_LEN= 0x02;
+        public const byte EVENT_DB_DOMAIN_POS = (byte)(EVENT_DB_CODE_POS + EVENT_DB_CODE_LEN);
+        public const byte EVENT_DB_DOMAIN_LEN= 0x02;
 
-        static public byte EVENT_DB_DEVICE_POS = (byte)(EVENT_DB_DOMAIN_POS + EVENT_DB_DOMAIN_LEN);
-        static public byte EVENT_DB_DEVICE_LEN= 0x02;
+        public const byte EVENT_DB_DEVICE_POS = (byte)(EVENT_DB_DOMAIN_POS + EVENT_DB_DOMAIN_LEN);
+        public const byte EVENT_DB_DEVICE_LEN= 0x02;
 
-        static public byte EVENT_DB_USER_ID_POS = (byte)(EVENT_DB_DEVICE_POS + EVENT_DB_DEVICE_LEN);
-        static public byte EVENT_DB_USER_ID_LEN  =   0x02;
+        public const byte EVENT_DB_USER_ID_POS = (byte)(EVENT_DB_DEVICE_POS + EVENT_DB_DEVICE_LEN);
+        public const byte EVENT_DB_USER_ID_LEN  =   0x02;
 
-        static public byte EVENT_DB_TIME_POS = (byte)(EVENT_DB_USER_ID_POS + EVENT_DB_USER_ID_LEN);
-        static public byte EVENT_DB_TIME_LEN =  0x04;
+        public const byte EVENT_DB_TIME_POS = (byte)(EVENT_DB_USER_ID_POS + EVENT_DB_USER_ID_LEN);
+        public const byte EVENT_DB_TIME_LEN =  0x04;
 
-        static public byte EVENT_DB_DATE_POS = (byte)(EVENT_DB_TIME_POS + EVENT_DB_TIME_LEN);
-        static public byte EVENT_DB_DATE_LEN  = 0x04;
+        public const byte EVENT_DB_DATE_POS = (byte)(EVENT_DB_TIME_POS + EVENT_DB_TIME_LEN);
+        public const byte EVENT_DB_DATE_LEN  = 0x04;
 
-        static public byte EVENT_DB_RECORD_LEN = (byte)(EVENT_DB_CODE_LEN + EVENT_DB_DOMAIN_LEN + EVENT_DB_DEVICE_LEN + EVENT_DB_USER_ID_LEN + EVENT_DB_TIME_LEN + EVENT_DB_DATE_LEN);
+        public const byte EVENT_DB_RECORD_LEN = (byte)(EVENT_DB_CODE_LEN + EVENT_DB_DOMAIN_LEN + EVENT_DB_DEVICE_LEN + EVENT_DB_USER_ID_LEN + EVENT_DB_TIME_LEN + EVENT_DB_DATE_LEN);
 
     
         /**************  NETWORK **************/
-        static public byte NET_UPLOAD_DATA_OFFSET= 0x03;
-        static public byte NET_UPLOAD_DATA_END_OFFSET =0x01;
-        static public byte NET_CFG_SIZE   = 52;
+        public const byte NET_UPLOAD_DATA_OFFSET= 0x03;
+        public const byte NET_UPLOAD_DATA_END_OFFSET =0x01;
+        public const byte NET_CFG_SIZE   = 52;
 
 
         /*************** OTHER *****************/
-        static public double SUPP_BATT_LEAD_ACID_MAX_VOLTAGE = 15.00;
-        static public double SUPP_MAIN_AC_MAX_VOLTAGE = 24.00;
+        public const double SUPP_BATT_LEAD_ACID_MAX_VOLTAGE = 15.00;
+        public const double SUPP_MAIN_AC_MAX_VOLTAGE = 24.00;
 
     }
 

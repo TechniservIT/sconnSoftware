@@ -13,7 +13,7 @@
 
     <div class="row">
         <div>
-            @using (Html.BeginForm("Add", "AlarmSystemAuthorizedDevices"))
+            @using (Html.BeginForm("Edit", "AlarmSystemAuthorizedDevices"))
             {
                 <fieldset>
 
@@ -39,9 +39,8 @@
                         @Html.EditorFor(model => model.AuthorizedDevice._AllowedUntil, new { @class = "form-control" })
                     </div>
 
-
                     <div class="form-group">
-                        <input type="submit" value="Send" />
+                        <button class="btn btn-primary" type="submit">Save</button>
                     </div>
 
                 </fieldset>

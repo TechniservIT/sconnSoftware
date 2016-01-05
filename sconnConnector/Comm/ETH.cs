@@ -22,56 +22,6 @@ using NLog;
 
 #endif
 
-#if WIN32_ENC
-
-#else
-
-//namespace System.Security.Authentication
-//{
-//    //     Defines the possible versions of System.Security.Authentication.SslProtocols.
-//    [Flags]
-//    public enum SslProtocols
-//    {
-//        // Summary:
-//        //     No SSL protocol is specified.
-//        None = 0,
-//        //
-//        // Summary:
-//        //     Specifies the SSL 2.0 protocol. SSL 2.0 has been superseded by the TLS protocol
-//        //     and is provided for backward compatibility only.
-//        Ssl2 = 12,
-//        //
-//        // Summary:
-//        //     Specifies the SSL 3.0 protocol. SSL 3.0 has been superseded by the TLS protocol
-//        //     and is provided for backward compatibility only.
-//        Ssl3 = 48,
-//        //
-//        // Summary:
-//        //     Specifies the TLS 1.0 security protocol. The TLS protocol is defined in IETF
-//        //     RFC 2246.
-//        Tls = 192,
-//        //
-//        // Summary:
-//        //     Specifies that either Secure Sockets Layer (SSL) 3.0 or Transport Layer Security
-//        //     (TLS) 1.0 are acceptable for secure communications
-//        Default = 240,
-//        //
-//        // Summary:
-//        //     Specifies the TLS 1.1 security protocol. The TLS protocol is defined in IETF
-//        //     RFC 4346.
-//        Tls11 = 768,
-//        //
-//        // Summary:
-//        //     Specifies the TLS 1.2 security protocol. The TLS protocol is defined in IETF
-//        //     RFC 5246.
-//        Tls12 = 3072,
-//    }
-
-//}
-
-#endif
-
-
 
 namespace sconnConnector
 {
@@ -154,7 +104,7 @@ namespace sconnConnector
                 {
                     
                     #if WIN32_ENC
-                        EncStream.AuthenticateAsClient(Hostname, null, SslProtocols.Tls12, false);
+                        EncStream.AuthenticateAsClient(Hostname, null, SslProtocols.Ssl3, false);
                     #else
                         EncStream.AuthenticateAsClient(Hostname, null, (System.Security.Authentication.SslProtocols)48, false);   //, null, (SslProtocols)48, false
                     #endif
