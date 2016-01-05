@@ -295,6 +295,16 @@ namespace sconnConnector
             }
         }
 
+        public bool Connect()
+        {
+            return false;
+        }
+
+        public bool Disconnect()
+        {
+            return false;
+        }
+
         public byte[] berkeleySendMsg(byte[] sendBF)  //single packet send-recieve
         {
             // Receiving byte array  

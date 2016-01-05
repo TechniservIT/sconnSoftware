@@ -559,14 +559,17 @@ namespace sconnConnector
 					{
 						site.siteStat.StopConnectionTimer();
 						site.siteStat.FailedConnections++;
-						return false;
+                        client.CloseConnection();
+                        return false;
 					}
-				}
+                    client.CloseConnection();
+                }
 				else
 				{
 					site.siteStat.StopConnectionTimer();
 					site.siteStat.FailedConnections++;
-					return false;
+                    client.CloseConnection();
+                    return false;
 				}
 				return true;
 			}
@@ -655,11 +658,14 @@ namespace sconnConnector
                         {
                             site.siteStat.StopConnectionTimer();
                             site.siteStat.FailedConnections++;
+                            client.CloseConnection();
                             return false;
                         }
+                        client.CloseConnection();
                     }
                     else
                     {
+                        client.CloseConnection();
                         site.siteStat.StopConnectionTimer();
                         site.siteStat.FailedConnections++;
                         return false;
@@ -667,6 +673,7 @@ namespace sconnConnector
                 }
                 catch (Exception e)
                 {
+                    client.CloseConnection();
                     _logger.Error(e, e.Message);
                     site.siteStat.StopConnectionTimer();
                     site.siteStat.FailedConnections++;

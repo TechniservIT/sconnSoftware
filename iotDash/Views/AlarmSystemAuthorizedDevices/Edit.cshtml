@@ -20,6 +20,10 @@
                     <legend>Add authorized device</legend>
 
                     <div class="form-group">
+                        @Html.HiddenFor(model => model.AuthorizedDevice.Id)
+                    </div>
+
+                    <div class="form-group">
                         @Html.LabelFor(model => model.AuthorizedDevice._Serial)
                         @Html.TextBoxFor(model => model.AuthorizedDevice._Serial, new { @class = "form-control", @id = "devname" })
                     </div>

@@ -57,7 +57,7 @@ namespace AlarmSystemManagmentService
 
         public sconnGsmRcpt GetById(int Id)
         {
-            sconnGsmRcpt dev = this.Manager.Config.GsmConfig.Rcpts.Where(d => d.Id == Id).FirstOrDefault();
+            sconnGsmRcpt dev = this.Manager.Config.GsmConfig.Rcpts.FirstOrDefault(d => d.Id == Id);
             return dev;
         }
 
@@ -86,16 +86,17 @@ namespace AlarmSystemManagmentService
         {
             try
             {
-                var oldrcpt = Manager.Config.GsmConfig.Rcpts.Where(z => z.Id == rcpt.Id).FirstOrDefault();
-                if (oldrcpt != null)
-                {
-                    oldrcpt = rcpt;
-                    return SaveChanges();
-                }
-                else
-                {
-                    return false;
-                }
+                Manager.Config.GsmConfig.Rcpts
+                    .Where(z => z.Id == rcpt.Id)
+                    .ToList()
+                    .ForEach(x =>
+                    {
+                        x.MessageLevel = rcpt.MessageLevel;
+                        x.NumberE164 = rcpt.NumberE164;
+                        x.CountryCode = rcpt.CountryCode;
+                    }
+                    );
+                return SaveChanges();
             }
             catch (Exception)
             {

@@ -24,6 +24,10 @@
                     <legend>Add gsm recipient</legend>
 
                     <div class="form-group">
+                        @Html.HiddenFor(model => model.GsmRcpt.Id)
+                    </div>
+
+                    <div class="form-group">
                         @Html.LabelFor(model => model.GsmRcpt.NumberE164)
                         @Html.TextBoxFor(model => model.GsmRcpt.NumberE164, new { @class = "form-control", @id = "devname" })
                     </div>

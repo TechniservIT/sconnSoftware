@@ -9,7 +9,7 @@ using sconnConnector.POCO.Config.Abstract.IO;
 
 namespace sconnConnector.POCO.Config.sconn
 {
-    public interface IAlarmSystemConfigurationEntity
+    public interface IAlarmSystemConfigurationEntity : ISerializableConfiguration
     {
         
     }

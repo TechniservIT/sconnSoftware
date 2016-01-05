@@ -23,6 +23,11 @@
 
                     <legend>Edit user</legend>
 
+
+                    <div class="form-group">
+                        @Html.HiddenFor(model => model.User.Id)
+                    </div>
+
                     <div class="form-group">
                         @Html.LabelFor(model => model.User.Login)
                         @Html.TextBoxFor(model => model.User.Login, new { @class = "form-control", @id = "devname" })
