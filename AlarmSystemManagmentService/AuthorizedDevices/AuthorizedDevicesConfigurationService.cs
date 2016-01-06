@@ -8,33 +8,36 @@ using sconnConnector.Config;
 using sconnConnector.POCO.Config;
 using sconnConnector.POCO.Config.Abstract;
 using sconnConnector.POCO.Config.sconn;
-using AlarmSystemManagmentService.AuthorizedDevices;
+using AlarmSystemManagmentService;
+using iotDbConnector.DAL;
 using NLog;
+using sconnConnector.Config.Abstract;
 
 namespace AlarmSystemManagmentService
 {
     public class AuthorizedDevicesConfigurationService : IAuthorizedDevicesConfigurationService  
     {
-        public AlarmSystemConfigManager Manager { get; set; }
         public bool Online { get; set; }
         private static Logger _logger = LogManager.GetCurrentClassLogger();
+        private AlarmGenericConfigManager<sconnAuthorizedDevices> EntityManager;
+        private AlarmSystemConfigManager ConfigManager;
 
         public AuthorizedDevicesConfigurationService()
         {
-
             Online = true; //online by default
         }
-
+        
         public AuthorizedDevicesConfigurationService(AlarmSystemConfigManager man) : this()
         {
-            Manager = man;
+            ConfigManager = man;
+            EntityManager = new AlarmGenericConfigManager<sconnAuthorizedDevices>(ConfigManager.Config.AuthorizedDevices, man.RemoteDevice);
         }
 
         private bool SaveChanges()
         {
             if (Online)
             {
-                return Manager.UploadAuthorizedDevicesConfig();
+                return EntityManager.Upload();
             }
             else
             {
@@ -44,19 +47,18 @@ namespace AlarmSystemManagmentService
 
         public List<sconnAuthorizedDevice> GetAll()
         {
-            Manager.LoadSiteConfig();
-            return Manager.Config.AuthorizedDevices.Devices.ToList();
+            EntityManager.Download();
+            return ConfigManager.Config.AuthorizedDevices.Devices.ToList();
         }
 
         public bool RemoveById(int Id)
         {
             try
             {
-                sconnAuthorizedDevice dev = this.Manager.Config.AuthorizedDevices.Devices.Where(d => d.Id == Id).FirstOrDefault();
+                sconnAuthorizedDevice dev = this.GetById(Id);
                 if (dev != null)
                 {
-                    Manager.Config.AuthorizedDevices.Devices.Remove(dev);
-                    return SaveChanges();
+                    return this.Remove(dev);
                 }
                 return false;
             }
@@ -72,9 +74,8 @@ namespace AlarmSystemManagmentService
         {
             try
             {
-
-                sconnAuthorizedDevice dev =
-                    this.Manager.Config.AuthorizedDevices.Devices.Where(d => d.Id == Id).FirstOrDefault();
+                EntityManager.Download();
+                sconnAuthorizedDevice dev = ConfigManager.Config.AuthorizedDevices.Devices.FirstOrDefault(d => d.Id == Id);
                 return dev;
             }
             catch (Exception e)
@@ -88,9 +89,7 @@ namespace AlarmSystemManagmentService
         {
             try
             {
-                Manager.Config.AuthorizedDevices.Devices.Add(device);
-                return SaveChanges();
-
+                return true;    //no adding -  filled with empty objects
             }
             catch (Exception e )
             {
@@ -104,17 +103,18 @@ namespace AlarmSystemManagmentService
         {
             try
             {
-                var odevice = Manager.Config.AuthorizedDevices.Devices.Where(z => z.Id == device.Id).FirstOrDefault();
-                if (odevice != null)
-                {
-                    odevice = device;
-                    Manager.Config.AuthorizedDevices.Devices.Add(device);
-                    return SaveChanges();
-                }
-                else
-                {
-                    return false;
-                }
+                ConfigManager.Config.AuthorizedDevices.Devices
+                   .Where(z => z.Id == device.Id)
+                   .ToList()
+                   .ForEach(x =>
+                   {
+                       x._Serial = device._Serial;
+                       x._Enabled = device._Enabled;
+                       x._AllowedFrom = device._AllowedFrom;
+                       x._AllowedUntil = device._AllowedUntil;
+                   }
+                   );
+                return SaveChanges();
             }
             catch (Exception e)
             {
@@ -128,7 +128,10 @@ namespace AlarmSystemManagmentService
         {
             try
             {
-                Manager.Config.AuthorizedDevices.Devices.Remove(device);
+                // 'Remove' clears static record instead - replace with new empty record with the same Id
+                sconnAuthorizedDevice stub = new sconnAuthorizedDevice();
+                stub.Id = device.Id;
+                this.Update(stub);
                 return SaveChanges();
             }
             catch (Exception e)

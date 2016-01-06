@@ -33,7 +33,7 @@ namespace sconnConnector.POCO.Config.sconn
         {
             try
             {
-                byte[] bytes = new byte[ipcDefines.AUTH_RECORD_SIZE];
+                byte[] bytes = new byte[ipcDefines.SYS_ALRM_DEV_AUTH_LEN];
                 char[] uuidBytes = _Serial.ToString().ToCharArray();
                 for (int j = 0; j < uuidBytes.Length; j++)
                 {
@@ -77,7 +77,6 @@ namespace sconnConnector.POCO.Config.sconn
             try
             {
                 // TODO date range
-                // TODO enable
                 string uuid;
                 byte[] uuidBytes = new byte[ipcDefines.SYS_ALRM_UUID_LEN];
                 for (int j = 0; j < ipcDefines.SYS_ALRM_UUID_LEN; j++)
@@ -89,6 +88,7 @@ namespace sconnConnector.POCO.Config.sconn
                 {
                     _Serial = uuid;
                 }
+                this._Enabled = buffer[ipcDefines.SYS_ALRM_DEV_ENABLED_POS] > 0 ? true : false;
             }
             catch (Exception e)
             {

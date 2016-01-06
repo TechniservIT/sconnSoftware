@@ -508,13 +508,10 @@ namespace sconnConnector
         public const byte ACK = 0x20;
         public const byte ACKNXT = 0x21;
         public const byte ACKFIN = 0x22;
-
         public const byte ERRCMD = 0x21;
-
         public const byte PSH = 0x22;
         public const byte PSHNXT = 0x23;
         public const byte PSHFIN = 0x24;
-
         public const byte OVF = 0x25;
 
         /********  Unique Device ID    *********/

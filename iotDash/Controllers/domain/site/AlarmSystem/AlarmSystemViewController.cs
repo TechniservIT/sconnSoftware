@@ -33,7 +33,7 @@ namespace iotDash.Controllers.domain.site.AlarmSystem
             try
             {      
                this._provider = new DeviceConfigService(DomainSession.GetAlarmConfigForContextWithDeviceId(this.HttpContext, ServerId));
-               AlarmSystemDetailModel model = new AlarmSystemDetailModel(this._provider.GetAll(), _provider.Manager.site);
+               AlarmSystemDetailModel model = new AlarmSystemDetailModel(this._provider.GetAll(), _provider.ConfigManager.site);
                 model.ServerId = ServerId;
                 return View(model);
             }
@@ -54,7 +54,7 @@ namespace iotDash.Controllers.domain.site.AlarmSystem
         public ActionResult ConfigurationSelect(int DeviceId)
         {
             this._provider = new DeviceConfigService(DomainSession.GetAlarmConfigForContextWithDeviceId(this.HttpContext, DeviceId));
-            AlarmSystemDetailModel model = new AlarmSystemDetailModel(null,_provider.Manager.site);
+            AlarmSystemDetailModel model = new AlarmSystemDetailModel(null,_provider.ConfigManager.site);
             model.ServerId = DeviceId;
             return View(model);
         }

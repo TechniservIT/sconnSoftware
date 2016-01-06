@@ -5,7 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using iotDatabaseConnector.DAL.Repository.Connector.Entity;
 using iotDbConnector.DAL;
+using NLog;
 using sconnConnector.Config;
+using sconnConnector.Config.Abstract;
 using sconnConnector.POCO.Config;
 using sconnConnector.POCO.Config.sconn;
 
@@ -13,19 +15,27 @@ namespace AlarmSystemManagmentService
 {
     public class GsmConfigurationService : IGsmConfigurationService
     {
-        public AlarmSystemConfigManager Manager { get; set; }
         public bool Online { get; set; }
+        private static Logger _logger = LogManager.GetCurrentClassLogger();
+        private AlarmGenericConfigManager<sconnGsmConfig> EntityManager;
+        private AlarmSystemConfigManager ConfigManager;
 
         public GsmConfigurationService()
         {
             Online = true; //online by default
         }
 
+        public GsmConfigurationService(AlarmSystemConfigManager man) : this()
+        {
+            ConfigManager = man;
+            EntityManager = new AlarmGenericConfigManager<sconnGsmConfig>(ConfigManager.Config.GsmConfig, man.RemoteDevice);
+        }
+
         private bool SaveChanges()
         {
             if (Online)
             {
-                return Manager.UploadGsmConfig();
+                return EntityManager.Upload();
             }
             else
             {
@@ -33,50 +43,55 @@ namespace AlarmSystemManagmentService
             }
         }
 
-        public GsmConfigurationService(Device AlarmDevice) : this()
+        public List<sconnGsmRcpt> GetAll()
         {
-            Manager = new AlarmSystemConfigManager(AlarmDevice.EndpInfo, AlarmDevice.Credentials);
+            EntityManager.Download();
+            return ConfigManager.Config.GsmConfig.Rcpts.ToList();
         }
-
-        public GsmConfigurationService(AlarmSystemConfigManager man) : this()
-        {
-            Manager = man;
-        }
-
 
         public bool RemoveById(int Id)
         {
-            sconnGsmRcpt dev = this.Manager.Config.GsmConfig.Rcpts.Where(d => d.Id == Id).FirstOrDefault();
-            if (dev != null)
+            try
             {
-                Manager.Config.GsmConfig.Rcpts.Remove(dev);
-                return SaveChanges();
+                sconnGsmRcpt dev = this.GetById(Id);
+                if (dev != null)
+                {
+                    return this.Remove(dev);
+                }
+                return false;
             }
-            return false;
+            catch (Exception e)
+            {
+                _logger.Error(e, e.Message);
+                return false;
+            }
+
         }
 
         public sconnGsmRcpt GetById(int Id)
         {
-            sconnGsmRcpt dev = this.Manager.Config.GsmConfig.Rcpts.FirstOrDefault(d => d.Id == Id);
-            return dev;
+            try
+            {
+                EntityManager.Download();
+                sconnGsmRcpt dev = ConfigManager.Config.GsmConfig.Rcpts.FirstOrDefault(d => d.Id == Id);
+                return dev;
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e, e.Message);
+                return null;
+            }
         }
 
-
-        public List<sconnGsmRcpt> GetAll()
-        {
-            Manager.LoadSiteConfig();
-            return Manager.Config.GsmConfig.Rcpts.ToList();
-        }
-
-        public bool Add(sconnGsmRcpt rcpt)
+        public bool Add(sconnGsmRcpt device)
         {
             try
             {
-                Manager.Config.GsmConfig.Rcpts.Add(rcpt);
-                return SaveChanges();
+                return true;    //no adding -  filled with empty objects
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.Error(e, e.Message);
                 return false;
             }
 
@@ -86,38 +101,42 @@ namespace AlarmSystemManagmentService
         {
             try
             {
-                Manager.Config.GsmConfig.Rcpts
-                    .Where(z => z.Id == rcpt.Id)
-                    .ToList()
-                    .ForEach(x =>
-                    {
-                        x.MessageLevel = rcpt.MessageLevel;
-                        x.NumberE164 = rcpt.NumberE164;
-                        x.CountryCode = rcpt.CountryCode;
-                    }
-                    );
+                ConfigManager.Config.GsmConfig.Rcpts
+                   .Where(z => z.Id == rcpt.Id)
+                   .ToList()
+                   .ForEach(x =>
+                   {
+                       x.MessageLevel = rcpt.MessageLevel;
+                       x.NumberE164 = rcpt.NumberE164;
+                       x.CountryCode = rcpt.CountryCode;
+                   }
+                   );
                 return SaveChanges();
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.Error(e, e.Message);
                 return false;
             }
 
         }
 
-        public bool Remove(sconnGsmRcpt rcpt)
+        public bool Remove(sconnGsmRcpt device)
         {
             try
             {
-                Manager.Config.GsmConfig.Rcpts.Remove(rcpt);
+                // 'Remove' clears static record instead - replace with new empty record with the same Id
+                sconnGsmRcpt stub = new sconnGsmRcpt {Id = device.Id};
+                this.Update(stub);
                 return SaveChanges();
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.Error(e, e.Message);
                 return false;
             }
-        }
 
+        }
 
     }
 }

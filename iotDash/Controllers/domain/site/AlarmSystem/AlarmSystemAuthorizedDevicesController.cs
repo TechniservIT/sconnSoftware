@@ -13,8 +13,10 @@ using iotDatabaseConnector.DAL.Repository.Connector.Entity;
 using iotDbConnector.DAL;
 using sconnConnector.Config;
 using SiteManagmentService;
-using AlarmSystemManagmentService.AuthorizedDevices;
+using AlarmSystemManagmentService;
 using iotDash.Controllers.domain.site.AlarmSystem.Abstract;
+using sconnConnector.Config.Abstract;
+using sconnConnector.POCO.Config;
 using sconnConnector.POCO.Config.sconn;
 
 namespace iotDash.Controllers.domain.site.AlarmSystem
@@ -25,11 +27,13 @@ namespace iotDash.Controllers.domain.site.AlarmSystem
 
         public AlarmSystemAuthorizedDevicesController()
         {
-                
+          
         }
 
         public AlarmSystemAuthorizedDevicesController(HttpContextBase contBase) : base(contBase)
-        { }
+        {
+            
+        }
         
         public ActionResult Search(string key)
         {
@@ -47,9 +51,7 @@ namespace iotDash.Controllers.domain.site.AlarmSystem
             AlarmSystemAddAuthorizedDeviceModel model = new AlarmSystemAddAuthorizedDeviceModel();
             return View(model);
         }
-
-
-
+        
         public ActionResult Edit(int Id)
         {
             AlarmSystemAddAuthorizedDeviceModel model = new AlarmSystemAddAuthorizedDeviceModel();
@@ -65,11 +67,9 @@ namespace iotDash.Controllers.domain.site.AlarmSystem
             try
             {
                 this._provider = new AuthorizedDevicesConfigurationService(DomainSession.GetAlarmConfigForContextSession(this.HttpContext));
-                if (ModelState.IsValid)
-                {
-                    var res = (_provider.Update(model.AuthorizedDevice));
-                    model.Result = StatusResponseGenerator.GetStatusResponseResultForReturnParam(res);
-                }
+                var res = (_provider.Update(model.AuthorizedDevice));
+                model.Result = StatusResponseGenerator.GetStatusResponseResultForReturnParam(res);
+
             }
             catch (Exception e)
             {
@@ -122,6 +122,7 @@ namespace iotDash.Controllers.domain.site.AlarmSystem
             AlarmSystemAuthorizedDevicesModel model = new AlarmSystemAuthorizedDevicesModel(this._provider.GetAll());
             return View(model);
         }
+
 
     }
 }

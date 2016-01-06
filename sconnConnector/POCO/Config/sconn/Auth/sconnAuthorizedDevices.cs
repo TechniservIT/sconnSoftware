@@ -27,7 +27,7 @@ namespace sconnConnector.POCO.Config
                 for (int i = 0; i < Devices.Count; i++)
                 {
                     byte[] partial = Devices[i].Serialize();
-                    partial.CopyTo(Serialized, i * ipcDefines.SYS_ALARM_DEV_AUTH_MEM_SIZE);
+                    partial.CopyTo(Serialized, i * ipcDefines.SYS_ALRM_DEV_AUTH_LEN);
                 }
                 return Serialized;
             }

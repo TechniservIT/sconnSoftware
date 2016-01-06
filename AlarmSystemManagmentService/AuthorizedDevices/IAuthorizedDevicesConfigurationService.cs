@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AlarmSystemManagmentService.AuthorizedDevices
+namespace AlarmSystemManagmentService
 {
     public interface IAuthorizedDevicesConfigurationService : IAlarmSystemConfigurationService<sconnAuthorizedDevice>
     {

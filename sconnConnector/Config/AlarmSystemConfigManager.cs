@@ -20,6 +20,8 @@ namespace sconnConnector.Config
 
         public sconnSite site;  //allow direct access to site config
 
+        public Device RemoteDevice { get; set; }
+
         
         /****** Update interval -  cannot connect to remote device more often then specified    ******/
         public int MinUpdatePeriod { get; set; }

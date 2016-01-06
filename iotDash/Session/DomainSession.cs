@@ -131,11 +131,13 @@ namespace iotDash.Session
                 AlarmSystemConfigManager man = (AlarmSystemConfigManager)cont.Session["alarmSysCfg"];
                 if (man != null)
                 {
+                    man.RemoteDevice = alrmSysDev;
                     return man;
                 }
                 else
                 {
                     man = new AlarmSystemConfigManager(alrmSysDev.EndpInfo, alrmSysDev.Credentials);
+                    man.RemoteDevice = alrmSysDev;
                     cont.Session["alarmSysCfg"] = man;
                 }
                 return man;
@@ -171,5 +173,21 @@ namespace iotDash.Session
             }
         }
 
-}
+
+        static public Device GetAlarmDeviceForContextWithDeviceIdDevice(HttpContextBase cont, int devid)
+        {
+            IIotContextBase Icont = (IIotContextBase) cont.Session["iotcontext"];
+            Device alrmSysDev = Icont.Devices.First(d => d.Id == devid);
+            return alrmSysDev;
+        }
+
+        static public Device GetAlarmDeviceForContextSession(HttpContextBase cont)
+        {
+            IIotContextBase Icont = (IIotContextBase)cont.Session["iotcontext"];
+            Device alrmSysDev = (Device)cont.Session["alarmDevice"];
+            return alrmSysDev;
+        }
+
+
+    }
 }

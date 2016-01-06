@@ -5,27 +5,39 @@ using System.Text;
 using System.Threading.Tasks;
 using iotDatabaseConnector.DAL.Repository.Connector.Entity;
 using iotDbConnector.DAL;
+using NLog;
 using sconnConnector.Config;
+using sconnConnector.Config.Abstract;
+using sconnConnector.POCO.Config;
 using sconnConnector.POCO.Config.Abstract.Auth;
+using sconnConnector.POCO.Config.sconn;
 
 namespace AlarmSystemManagmentService
 {
     public class UsersConfigurationService : IUsersConfigurationService
     {
 
-        public AlarmSystemConfigManager Manager { get; set; }
         public bool Online { get; set; }
+        private static Logger _logger = LogManager.GetCurrentClassLogger();
+        private AlarmGenericConfigManager<sconnUserConfig> EntityManager;
+        private AlarmSystemConfigManager ConfigManager;
 
         public UsersConfigurationService()
         {
             Online = true; //online by default
         }
 
+        public UsersConfigurationService(AlarmSystemConfigManager man) : this()
+        {
+            ConfigManager = man;
+            EntityManager = new AlarmGenericConfigManager<sconnUserConfig>(ConfigManager.Config.UserConfig, man.RemoteDevice);
+        }
+
         private bool SaveChanges()
         {
             if (Online)
             {
-                return Manager.UploadUserConfig();
+                return EntityManager.Upload();
             }
             else
             {
@@ -33,87 +45,104 @@ namespace AlarmSystemManagmentService
             }
         }
 
-        public UsersConfigurationService(Device AlarmDevice) : this()
+        public List<sconnUser> GetAll()
         {
-            Manager = new AlarmSystemConfigManager(AlarmDevice.EndpInfo, AlarmDevice.Credentials);
-        }
-
-        public UsersConfigurationService(AlarmSystemConfigManager man) : this()
-        {
-            Manager = man;
+            EntityManager.Download();
+            return ConfigManager.Config.UserConfig.Users.ToList();
         }
 
         public bool RemoveById(int Id)
         {
-            sconnUser dev = this.Manager.Config.UserConfig.Users.Where(d => d.Id == Id).FirstOrDefault();
-            if (dev != null)
+            try
             {
-                Manager.Config.UserConfig.Users.Remove(dev);
-                return SaveChanges();
+                sconnUser dev = this.GetById(Id);
+                if (dev != null)
+                {
+                    return this.Remove(dev);
+                }
+                return false;
             }
-            return false;
+            catch (Exception e)
+            {
+                _logger.Error(e, e.Message);
+                return false;
+            }
+
         }
 
         public sconnUser GetById(int Id)
         {
-            sconnUser dev = this.Manager.Config.UserConfig.Users.Where(d => d.Id == Id).FirstOrDefault();
-            return dev;
+            try
+            {
+                EntityManager.Download();
+                sconnUser dev = ConfigManager.Config.UserConfig.Users.FirstOrDefault(d => d.Id == Id);
+                return dev;
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e, e.Message);
+                return null;
+            }
         }
 
-        public List<sconnUser> GetAll()
-        {
-            Manager.LoadSiteConfig();
-            return Manager.Config.UserConfig.Users.ToList();
-        }
-
-        public bool Add(sconnUser user)
+        public bool Add(sconnUser device)
         {
             try
             {
-                Manager.Config.UserConfig.Users.Add(user);
+                return true;    //no adding -  filled with empty objects
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e, e.Message);
+                return false;
+            }
+
+        }
+
+        public bool Update(sconnUser rcpt)
+        {
+            try
+            {
+                ConfigManager.Config.UserConfig.Users
+                   .Where(z => z.Id == rcpt.Id)
+                   .ToList()
+                   .ForEach(x =>
+                   {
+                       x.Login = rcpt.Login;
+                       x.Password = rcpt.Password;
+                       x.Enabled = rcpt.Enabled;
+                       x.Group = rcpt.Group;
+                       x.Permissions = rcpt.Permissions;
+                       x.AllowedFrom = rcpt.AllowedFrom;
+                       x.AllowedUntil = rcpt.AllowedUntil;
+                   }
+                   );
                 return SaveChanges();
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.Error(e, e.Message);
                 return false;
             }
 
         }
 
-        public bool Update(sconnUser user)
+        public bool Remove(sconnUser device)
         {
             try
             {
-                var oldUser = Manager.Config.UserConfig.Users.Where(d => d.Id == user.Id).FirstOrDefault();
-                if (oldUser != null)
-                {
-                    oldUser = user;
-                    return SaveChanges();
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-
-        }
-
-        public bool Remove(sconnUser user)
-        {
-            try
-            {
-                Manager.Config.UserConfig.Users.Remove(user);
+                // 'Remove' clears static record instead - replace with new empty record with the same Id
+                sconnUser stub = new sconnUser { Id = device.Id };
+                this.Update(stub);
                 return SaveChanges();
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.Error(e, e.Message);
                 return false;
             }
+
         }
-        
+
     }
 }

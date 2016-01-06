@@ -5,31 +5,37 @@ using System.Text;
 using System.Threading.Tasks;
 using iotDatabaseConnector.DAL.Repository.Connector.Entity;
 using iotDbConnector.DAL;
+using NLog;
 using sconnConnector.Config;
+using sconnConnector.Config.Abstract;
+using sconnConnector.POCO.Config;
+using sconnConnector.POCO.Config.sconn;
 
 namespace AlarmSystemManagmentService
 {
     public class GlobalConfigService : IGlobalConfigService
     {
-        private IIotContextBase context;
         public bool Online { get; set; }
-        public AlarmSystemConfigManager Manager { get; set; }
+        private static Logger _logger = LogManager.GetCurrentClassLogger();
+        private AlarmGenericConfigManager<sconnGlobalConfig> EntityManager;
+        private AlarmSystemConfigManager ConfigManager;
 
         public GlobalConfigService()
         {
             Online = true; //online by default
         }
 
-        public GlobalConfigService(IIotContextBase cont)
+        public GlobalConfigService(AlarmSystemConfigManager man) : this()
         {
-            this.context = cont;
+            ConfigManager = man;
+            EntityManager = new AlarmGenericConfigManager<sconnGlobalConfig>(ConfigManager.Config.GlobalConfig, man.RemoteDevice);
         }
 
         private bool SaveChanges()
         {
             if (Online)
             {
-                return Manager.UploadGlobalConfig();
+                return EntityManager.Upload();
             }
             else
             {
@@ -37,15 +43,46 @@ namespace AlarmSystemManagmentService
             }
         }
 
-        public GlobalConfigService(IIotContextBase cont, Device AlarmDevice) : this(cont)
+        public sconnGlobalConfig Get()
         {
-            Manager = new AlarmSystemConfigManager(AlarmDevice.EndpInfo, AlarmDevice.Credentials);
+            EntityManager.Download();
+            return ConfigManager.Config.GlobalConfig;
+        }
+        
+
+        public bool Update(sconnGlobalConfig rcpt)
+        {
+            try
+            {
+                ConfigManager.Config.GlobalConfig.Armed = rcpt.Armed;
+                ConfigManager.Config.GlobalConfig.Devices = rcpt.Devices;
+                ConfigManager.Config.GlobalConfig.Lat = rcpt.Lat;
+                ConfigManager.Config.GlobalConfig.Lng = rcpt.Lng;
+                ConfigManager.Config.GlobalConfig.Violation = rcpt.Violation;
+                return SaveChanges();
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e, e.Message);
+                return false;
+            }
+
         }
 
-        public GlobalConfigService(IIotContextBase cont, AlarmSystemConfigManager man) : this(cont)
+        public bool Remove(sconnGlobalConfig device)
         {
-            Manager = man;
-            Manager.LoadSiteConfig();
+            try
+            {
+                // 'Remove' clears static record instead - replace with new empty record with the same Id
+                sconnGlobalConfig stub = new sconnGlobalConfig { Id = device.Id };
+                this.Update(stub);
+                return SaveChanges();
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e, e.Message);
+                return false;
+            }
         }
 
     }

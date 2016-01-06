@@ -10,7 +10,7 @@ using sconnConnector.POCO.Config.sconn;
 
 namespace sconnConnector.Config.Abstract
 {
-    public abstract class AlarmGenericConfigManager<T> where T: new()
+    public class AlarmGenericConfigManager<T> where T: new()
     {
         protected IAlarmSystemConfigurationEntity Entity;
         protected static Logger _logger = LogManager.GetCurrentClassLogger();
@@ -28,6 +28,7 @@ namespace sconnConnector.Config.Abstract
             {
                 if (!client.Connect())
                 {
+                    client.Disconnect();
                     return false;
                 }
 
@@ -36,6 +37,7 @@ namespace sconnConnector.Config.Abstract
                     Upload_Send_Config();
                     if (Upload_Send_Config())
                     {
+                        client.Disconnect();
                         return Upload_Signal_Finish();
                     }
                 }
@@ -172,6 +174,7 @@ namespace sconnConnector.Config.Abstract
             {
                 if (!client.Connect())
                 {
+                    client.Disconnect();
                     return false;
                 }
 
@@ -180,10 +183,13 @@ namespace sconnConnector.Config.Abstract
                 if (IsResultSuccessForOperation(res, CommandOperation.Get))
                 {
                     byte[] msgBody = GetResultMessageForOperationResult(res, CommandOperation.Get);
-                    Entity.Deserialize(res);
+                    Entity.Deserialize(msgBody);
+                    client.Disconnect();
                     return true;
                 }
-                return client.Disconnect();
+
+                client.Disconnect();
+                return false;
             }
             catch (Exception e)
             {
@@ -202,7 +208,7 @@ namespace sconnConnector.Config.Abstract
             }
             else if (oper == CommandOperation.Get)
             {
-                return result.Contains(ipcCMD.ACK);
+                return result.Contains(ipcCMD.SVAL);
             }
             else if (oper == CommandOperation.Push)
             {
@@ -221,7 +227,27 @@ namespace sconnConnector.Config.Abstract
 
         private byte[] GetResultMessageForOperationResult(byte[] result, CommandOperation oper)
         {
-            return null;
+            try
+            {
+                if (result.Length > 1)
+                {
+                    byte[] resultMsg = new byte[result.Length - 1];
+                    if (result[0] == ipcCMD.SVAL)
+                    {
+                        for (int i = 0; i < result.Length - 1; i++)
+                        {
+                            resultMsg[i] = result[i + 1];
+                        }
+                        return resultMsg;
+                    }
+                }
+                return new byte[0];
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e, e.Message);
+                return new byte[0];
+            }
         }
         
 

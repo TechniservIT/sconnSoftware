@@ -7,7 +7,7 @@ using sconnConnector.POCO.Config.Abstract;
 
 namespace sconnConnector.POCO.Config.sconn
 {
-    public class sconnGlobalConfig
+    public class sconnGlobalConfig : IAlarmSystemConfigurationEntity, ISerializableConfiguration, IFakeAbleConfiguration
     {
         private byte[] _memCFG;
         public byte[] memCFG
@@ -15,6 +15,17 @@ namespace sconnConnector.POCO.Config.sconn
             get { return _memCFG; }
             set { if (value != null) { _memCFG = value; } }
         }
+
+        public int Id { get; set; }
+
+        public bool Armed { get; set; }
+        public bool Violation { get; set; }
+        public int Devices { get; set; }
+
+        public int Lat { get; set; }
+        public int Lng { get; set; }
+
+
 
         public sconnGlobalConfig()
         {
@@ -27,6 +38,20 @@ namespace sconnConnector.POCO.Config.sconn
         }
 
 
+        public byte[] Serialize()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Deserialize(byte[] buffer)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Fake()
+        {
+            throw new NotImplementedException();
+        }
     }
 
 }

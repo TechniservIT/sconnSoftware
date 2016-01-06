@@ -32,8 +32,6 @@ namespace sconnConnector
     public class SconnClient
     {
         
-
-
         private Socket clientSocket { get; set; }
         private TcpClient client { get; set; }
         private SslStream EncStream;
@@ -79,7 +77,7 @@ namespace sconnConnector
             Hostname = hostname;
             Port = port;
             AuthenticationPassword = password;
-            ConnectionTimeoutMs = 800; //add more for debug
+            ConnectionTimeoutMs = 5000; //add more for debug
             ServicePointManager.ServerCertificateValidationCallback += (s, c, k, e) => true;
         }
 
@@ -87,9 +85,9 @@ namespace sconnConnector
         {
             if (useSsl)
             {
-                client = new TcpClient(Hostname, Port); //1214
-                client.ReceiveTimeout = 60000;  // this.ConnectionTimeoutMs;
-                client.SendTimeout = 60000; // this.ConnectionTimeoutMs;
+                client = new TcpClient(Hostname, Port); 
+                client.ReceiveTimeout = 5000;  // this.ConnectionTimeoutMs;
+                client.SendTimeout = 5000; // this.ConnectionTimeoutMs;
                 EncStream = new SslStream(
                     client.GetStream(),
                     false,
@@ -297,12 +295,31 @@ namespace sconnConnector
 
         public bool Connect()
         {
-            return false;
+            VerifyConnection();
+            return this.client.Connected;
         }
 
         public bool Disconnect()
         {
-            return false;
+            if (useSsl)
+            {
+                if (client != null)
+                {
+                    EncStream.Close();
+                    EncStream.Dispose();
+                    client.Close();
+                }
+            }
+            else
+            {
+                if (clientSocket != null)
+                {
+                   clientSocket.Close();
+                }
+            }
+            this.client = null;
+            this.clientSocket = null;
+            return true;
         }
 
         public byte[] berkeleySendMsg(byte[] sendBF)  //single packet send-recieve
@@ -356,7 +373,7 @@ namespace sconnConnector
             }
             else
             {
-                return new byte[1];
+                return new byte[0];
             }
 
         }

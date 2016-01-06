@@ -4,45 +4,85 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using sconnConnector.POCO.Config;
+using sconnConnector.POCO.Config.Abstract.Auth;
 using sconnConnector.POCO.Config.sconn;
 
 namespace sconnConnector.Config.Abstract
 {
     public enum CommandOperation
     {
-        Get = 1,
-        Set,
-        Push,
-        PushFin,
-        Fin,
-        Ack,
-        Alrm
+        Get = ipcCMD.GET,
+        Set = ipcCMD.SET,
+        Push = ipcCMD.PSH,
+        PushFin = ipcCMD.PSHFIN,
+        Fin = ipcCMD.EOT,
+        Ack = ipcCMD.ACK
 
     }
 
     public static class CommandManager
     {
 
-        private static byte? SetCommandForConfigType(Type type)
+        private static byte SetCommandForConfigType(Type type)
         {
             if (type == typeof(sconnAlarmZoneConfig))
             {
-                return ipcCMD.setGsmRcptCfg;
+                return ipcCMD.setZoneName;
             }
             else if (type == typeof(sconnGsmConfig))
             {
                 return ipcCMD.setGsmRcptCfg;
             }
-            return null;
+            else if (type == typeof(sconnDeviceConfig))
+            {
+                return ipcCMD.setDeviceCfg;
+            }
+            else if (type == typeof(sconnGlobalConfig))
+            {
+                return ipcCMD.setGlobalCfg;
+            }
+            else if (type == typeof(sconnAuthorizedDevices))
+            {
+                return ipcCMD.setAuthDevCfg;
+            }
+            else if (type == typeof(sconnUserConfig))
+            {
+                return ipcCMD.setPasswdCfg;
+            }
+
+            return ipcCMD.ERRCMD;
         }
 
-        private static byte? GetCommandForConfigType(Type type)
+        private static byte GetCommandForConfigType(Type type)
         {
-
-            return null;
+            if (type == typeof(sconnAlarmZoneConfig))
+            {
+                return ipcCMD.getZoneCfg;
+            }
+            else if (type == typeof(sconnGsmConfig))
+            {
+                return ipcCMD.getGsmRecpCfg;
+            }
+            else if (type == typeof(sconnDeviceConfig))
+            {
+                return ipcCMD.getRunDevCfg;
+            }
+            else if (type == typeof(sconnGlobalConfig))
+            {
+                return ipcCMD.getGlobCfg;
+            }
+            else if (type == typeof(sconnAuthorizedDevices))
+            {
+                return ipcCMD.getAuthDevices;
+            }
+            else if (type == typeof(sconnUserConfig))
+            {
+                return ipcCMD.getPasswdCfg;
+            }
+            return ipcCMD.ERRCMD;
         }
 
-        private static byte? GetCommandOperationType(Type type, CommandOperation oper)
+        private static byte GetCommandOperationType(Type type, CommandOperation oper)
         {
             if (oper == CommandOperation.Set)
             {
@@ -60,8 +100,7 @@ namespace sconnConnector.Config.Abstract
             {
                 return ipcCMD.PSHFIN;
             }
-
-            return null;
+            return ipcCMD.ERRCMD;
         }
 
         public static byte[] GetHeaderForOperation(Type type, CommandOperation oper)
