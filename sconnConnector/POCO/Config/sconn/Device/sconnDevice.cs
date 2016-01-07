@@ -14,37 +14,50 @@ namespace sconnConnector.POCO.Config.sconn
         
     }
 
+    public enum sconnDeviceType
+    {
+        Graphical_Keypad = 1,
+        Motherboard,
+        Gsm_Module,
+        Pir_Sensor,
+        Relay_Module
+    }
+
+
 
     public class sconnDevice : IAlarmSystemConfigurationEntity, ISerializableConfiguration, IFakeAbleConfiguration
     {
         public int Id { get; set; }
         public int Value { get; set; }
+        public bool Armed { get; set; }
+        public bool Violation { get; set; }
+        public bool Failure { get; set; }
+        public int DeviceId { get; set; }
+        public int InputNo { get; set; }
+        public int OutputNo { get; set; }
+        public int RelayNo { get; set; }
+        public List<sconnOutput> Outputs { get; set; }
+        public List<sconnInput> Inputs { get; set; }
+        public List<sconnRelay> Relays { get; set; }
+        public float MainVoltage { get; set; }
+        public float BatteryVoltage { get; set; }
+        public bool KeypadModule { get; set; }
+        public bool TemperatureModule { get; set; }
+        public bool HumidityModule { get; set; }
+        public bool ComMiWi { get; set; }
+        public bool ComTcpIp { get; set; }
+        public byte DomainNumber { get; set; }
+        public byte Revision { get; set; }
+        public sconnDeviceType Type { get; set; }
+
 
         private byte[] _memCFG;
         private byte[][] _NamesCFG;
         private byte[][] _ScheduleCFG;
         private byte[] _NetworkConfig;
         public byte[] Hash;
-
         public byte[] AuthDevicesCFG { get; set; }
-        
-        public int DeviceId { get; set; }
 
-        public int InputNo { get; set; }
-
-        public int OutputNo { get; set; }
-
-        public int RelayNo { get; set; }
-
-        public List<sconnOutput> Outputs { get; set; }
-
-        public List<sconnInput> Inputs { get; set; }
-
-        public List<sconnRelay> Relays { get; set; }
-
-        public float MainVoltage { get; set; }
-
-        public float BatteryVoltage { get; set; }
 
         public string Name { get; set; }
 
@@ -56,6 +69,19 @@ namespace sconnConnector.POCO.Config.sconn
             BatteryVoltage = System.BitConverter.ToSingle(_memCFG, ipcDefines.mAdrBackupVolt_Start_Pos);
         }
 
+        private void LoadDeviceStaticInfo()
+        {
+            this.KeypadModule = memCFG[ipcDefines.mAdrKeypadMod] > 0 ? true : false;
+            this.TemperatureModule = memCFG[ipcDefines.mAdrTempMod] > 0 ? true : false;
+            this.HumidityModule = memCFG[ipcDefines.mAdrHumMod] > 0 ? true : false;
+            this.ComMiWi = memCFG[ipcDefines.comMiWi] > 0 ? true : false;
+            this.ComTcpIp = memCFG[ipcDefines.comETH] > 0 ? true : false;
+            this.DomainNumber = memCFG[ipcDefines.mAdrDomain];
+            this.Revision = memCFG[ipcDefines.mAdrDevRev];
+            this.Type = (sconnDeviceType)memCFG[ipcDefines.mAdrDevType];
+
+        }
+
 
         private void LoadInputsFromConfig()
         {
@@ -65,7 +91,7 @@ namespace sconnConnector.POCO.Config.sconn
                 Inputs = new List<sconnInput>();
                 for (int i = 0; i < InputNo; i++)
                 {
-                    sconnInput input = new sconnInput(_memCFG); //, _NamesCFG[ipcDefines.mAddr_NAMES_Inputs_Pos], i
+                    sconnInput input = new sconnInput(_memCFG);
                     Inputs.Add(input);
                 }
             }
@@ -84,7 +110,7 @@ namespace sconnConnector.POCO.Config.sconn
                 Outputs = new List<sconnOutput>();
                 for (int i = 0; i < OutputNo; i++)
                 {
-                    sconnOutput output = new sconnOutput(_memCFG);  //, _NamesCFG[ipcDefines.mAddr_NAMES_Outputs_Pos], i
+                    sconnOutput output = new sconnOutput(_memCFG); 
                     Outputs.Add(output);
                 }
             }
@@ -103,7 +129,7 @@ namespace sconnConnector.POCO.Config.sconn
                 Relays = new List<sconnRelay>();
                 for (int i = 0; i < RelayNo; i++)
                 {
-                    sconnRelay relay = new sconnRelay(_memCFG); //, _NamesCFG[ipcDefines.mAddr_NAMES_Relays_Pos], i
+                    sconnRelay relay = new sconnRelay(_memCFG);
                     Relays.Add(relay);
                 }
             }
@@ -121,6 +147,7 @@ namespace sconnConnector.POCO.Config.sconn
             LoadOutputsFromConfig();
             LoadRelayFromConfig();
             LoadSupplyVoltageLevels();
+            LoadDeviceStaticInfo();
             LoadDeviceNames();
         }
 
@@ -203,6 +230,11 @@ namespace sconnConnector.POCO.Config.sconn
             this._NamesCFG = cfg.NamesCFG;
             this.memCFG = cfg.memCFG;
             LoadDeviceNames();
+        }
+
+        public sconnDevice(byte[] buffer)
+        {
+                this.Deserialize(buffer);
         }
 
         public void LoadDeviceNames()

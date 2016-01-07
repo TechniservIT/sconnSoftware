@@ -11,10 +11,17 @@ namespace sconnConnector.POCO.Config
 {
     public enum sconnOutputType
     {
-        Normal = 1,
-        Delayed = 2
+        AlarmNormallyActive = 0,
+        AlarmNormallyInActive,
+        Power,
+        SignalNormallyActive,
+        SignalNormallyInactive,
+        OnFailure,
+        OnViolation,
+        OnGsmTransmission,
+        OnConfigUpload
     }
-
+    
     public class sconnOutput : IAlarmSystemConfigurationEntity, ISerializableConfiguration, IFakeAbleConfiguration
     {
 
@@ -60,7 +67,7 @@ namespace sconnConnector.POCO.Config
         {
             try
             {
-                Type = (sconnOutputType)buffer[ipcDefines.mAdrOutputMemSize];
+                Type = (sconnOutputType)buffer[ipcDefines.mAdrOutputType];
                 Value = buffer[ipcDefines.mAdrOutputVal];
                 NameId = buffer[ipcDefines.mAdrOutputNameAddr];
                 Enabled = buffer[ipcDefines.mAdrOutputEnabled] > 0 ? true : false;
@@ -80,7 +87,7 @@ namespace sconnConnector.POCO.Config
                 this.Enabled = true;
                 this.Name = Guid.NewGuid().ToString();
                 this.NameId = 0;
-                this.Type = sconnOutputType.Normal;
+                this.Type = sconnOutputType.AlarmNormallyActive;
             }
             catch (Exception e)
             {

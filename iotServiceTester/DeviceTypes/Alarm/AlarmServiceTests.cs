@@ -7,9 +7,6 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using AlarmSystemManagmentService.IO.Input;
-using AlarmSystemManagmentService.IO.Output;
-using AlarmSystemManagmentService.IO.Relay;
 using iotDatabaseConnector.DAL.Repository.Connector.Entity;
 using iotDbConnector.DAL;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -97,18 +94,6 @@ namespace iotServiceTester.DeviceTypes.Alarm
             else if (typeof(T) == typeof(sconnAuthorizedDevice))
             {
                 service = new AuthorizedDevicesConfigurationService(man) as IAlarmSystemConfigurationService<T>;
-            }
-            else if (typeof(T) == typeof(sconnInput))
-            {
-                service = new InputConfigService(man) as IAlarmSystemConfigurationService<T>;
-            }
-            else if (typeof(T) == typeof(sconnOutput))
-            {
-                service = new OutputConfigService(man) as IAlarmSystemConfigurationService<T>;
-            }
-            else if (typeof(T) == typeof(sconnRelay))
-            {
-                service = new RelayConfigService(man) as IAlarmSystemConfigurationService<T>;
             }
             else
             {

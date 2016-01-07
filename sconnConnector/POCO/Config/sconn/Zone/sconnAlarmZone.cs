@@ -23,6 +23,7 @@ namespace sconnConnector.POCO.Config.sconn
         public AlarmZoneType Type { get; set; }
         public bool Enabled { get; set; }
         public int NameId { get; set; }
+
         private static Logger _logger = LogManager.GetCurrentClassLogger();
 
         public sconnAlarmZone()

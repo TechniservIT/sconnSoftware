@@ -52,6 +52,23 @@ namespace iotDash.Areas.AlarmSystem.Models
     }
 
 
+    public class AlarmSystemDeviceModel
+    {
+
+        [Required]
+        public int ServerId { get; set; }
+        public sconnDevice Device { get; set; }
+
+
+        public AlarmSystemDeviceModel(sconnDevice device)
+        {
+            this.Device = device;
+        }
+
+      
+    }
+
+
     public class AlarmSystemDetailModel
     {
 
@@ -69,6 +86,11 @@ namespace iotDash.Areas.AlarmSystem.Models
             Config = site;
         }
 
+        public AlarmSystemDetailModel(sconnDevice device)
+        {
+            this.Device = device;
+        }
+
         public AlarmSystemDetailModel(List<sconnDevice> devices)
         {
             if(devices != null)
@@ -77,6 +99,27 @@ namespace iotDash.Areas.AlarmSystem.Models
                 Device = Devices.FirstOrDefault();
             }
           
+        }
+
+    }
+
+
+    public class AlarmSystemGlobalModel
+    {
+
+        [Required]
+        public int ServerId { get; set; }
+
+        public sconnGlobalConfig Config { get; set; }
+
+        public AlarmSystemGlobalModel()
+        {
+                
+        }
+
+        public AlarmSystemGlobalModel(sconnGlobalConfig Config)
+        {
+            this.Config = Config;
         }
 
     }

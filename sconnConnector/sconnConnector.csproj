@@ -58,6 +58,7 @@
     <Compile Include="Config\GlobalSettings.cs" />
     <Compile Include="Config\sconnCfgMngr.cs" />
     <Compile Include="Config\sconnDataSrc.cs" />
+    <Compile Include="POCO\Config\IIndexAbleConfiguration.cs" />
     <Compile Include="POCO\Config\sconn\Auth\sconnUser.cs" />
     <Compile Include="POCO\Config\sconn\Auth\sconnUserConfig.cs" />
     <Compile Include="POCO\Config\Abstract\Device\AlarmSystemAuthorizedDevicesConfig.cs" />

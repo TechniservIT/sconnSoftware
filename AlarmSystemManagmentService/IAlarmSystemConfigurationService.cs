@@ -17,4 +17,13 @@ namespace AlarmSystemManagmentService
 
          bool Online { get; set; }
     }
+
+    public interface IAlarmSystemSingleEntityConfigurationService<T>
+    {
+        bool Remove(T entity);
+        T Get();
+        bool Update(T entity);
+        bool Online { get; set; }
+    }
+
 }

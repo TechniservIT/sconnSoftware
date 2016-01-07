@@ -20,7 +20,7 @@
 
 @if (Model.Config != null)
 {
-    <h2>@Model.Config.Name</h2>
+    <h2>@Model.Config.siteName</h2>
 }
 
 <script src="~/signalr/hubs"></script>
@@ -36,7 +36,7 @@
 
     public string SpanClassForArmStatusDisplay()
     {
-        if (Model.Config.Armed)
+        if (Model.Config.siteCfg.Armed)
         {
             return "label label-success";
         }
@@ -48,7 +48,7 @@
 
     public string DescForArmStatusDisplay()
     {
-        if (Model.Config.Armed)
+        if (Model.Config.siteCfg.Armed)
         {
             return "Armed";
         }
@@ -62,7 +62,7 @@
 
     public string SpanClassForViolationStatusDisplay()
     {
-        if (Model.Config.Violation)
+        if (Model.Config.siteCfg.Violation)
         {
             return "label label-danger";
 
@@ -75,7 +75,7 @@
 
     public string DescForViolationStatusDisplay()
     {
-        if (Model.Config.Violation)
+        if (Model.Config.siteCfg.Violation)
         {
             return "Yes";
         }
@@ -88,7 +88,7 @@
 
     public string DescForArmAction()
     {
-        if (Model.Config.Armed)
+        if (Model.Config.siteCfg.Armed)
         {
             return "Disarm";
         }
@@ -369,7 +369,7 @@
                         <table class="table">
                             <tr>
                                 <td>Device Number</td>
-                                <td>@Model.Config.Devices</td>
+                                <td>@Model.Config.siteCfg.deviceNo</td>
                             </tr>
 
                             <tr>
@@ -382,6 +382,33 @@
                                 <td><span class='@SpanClassForViolationStatusDisplay()'>@DescForViolationStatusDisplay()</span></td>
                             </tr>
 
+                            @if (Model.Device != null)
+                            {
+                                <tr>
+                                    <td>Power supply</td>
+                                    <td>
+                                        <div class="progress">
+                                            <div class="progress-bar  @(GetProgressBarClassForSupplyValue(Model.Device.MainVoltage))" role="progressbar" aria-valuenow="@Model.Device.MainVoltage.ToString()" aria-valuemin="0" aria-valuemax="24" style="width:  @(GetProgressBarValueForVoltageMain(Model.Device.MainVoltage))%;">
+                                                @Model.Device.MainVoltage.ToString() V
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+                                    <td>Battery</td>
+                                    <td>
+                                        <div class="progress">
+                                            <div class="progress-bar @(GetProgressBarClassForBatteryValue(Model.Device.BatteryVoltage))" role="progressbar" aria-valuenow="@Model.Device.BatteryVoltage.ToString()" aria-valuemin="0" aria-valuemax="15" style="width: @(GetProgressBarValueForVoltageBattery(Model.Device.MainVoltage))%;">
+                                                @Model.Device.BatteryVoltage.ToString() V
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+
+
                         </table>
 
                     </div>
@@ -390,6 +417,117 @@
 
                 <div class="row">
                     @Html.ActionLink(@DescForArmAction(), "ToggleArm", new { DeviceId = Model.ServerId }, new { @class = "btn btn-primary" })
+                </div>
+
+
+                <div class="row">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <img src="~/Content/img/sensorin.png" alt="563te" class="img-circle img-section-icon">
+                                    </div>
+                                    <div class="col-md-10">
+                                        <h2>Inputs</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-body"></div>
+                        <table class="table">
+                            <tr>
+                                <th>Input </th>
+                                <th>Type</th>
+                                <th>State </th>
+
+                            </tr>
+                            @if (Model.Device != null)
+                            {
+                                for (int i = 0; i < Model.Device.Inputs.Count; i++)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Model.Device.Inputs[i].Name.ToString()
+                                        </td>
+
+                                        @Html.HiddenFor(model => model.Device.Inputs[i].Id)
+                                        @Html.HiddenFor(model => model.Device.Inputs[i].NameId)
+
+                                        <td>
+                                            @Model.Device.Inputs[i].Type.ToString()
+                                        </td>
+
+                                        <td>
+                                            @Html.Raw(HttpUtility.HtmlDecode(ContentForDigitalIoValue(Model.Device.Inputs[i].Value)))
+                                        </td>
+
+                                    </tr>
+                                }
+                            }
+                        </table>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="container-fluid">
+
+                                <div class="row">
+
+                                    <div class="col-md-2">
+                                        <img src="~/Content/img/sensorout.png" alt="124das" class="img-circle img-section-icon">
+                                    </div>
+
+                                    <div class="col-md-10">
+
+                                        <h2>Outputs</h2>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="panel-body"></div>
+                        <table class="table">
+                            <tr>
+                                <th>Output </th>
+                                <th>Type</th>
+                                <th>State </th>
+
+                            </tr>
+                            @if (Model.Device != null)
+                            {
+                                for (int i = 0; i < Model.Device.Outputs.Count; i++)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Model.Device.Inputs[i].Name.ToString()
+                                        </td>
+
+                                        @Html.HiddenFor(model => model.Device.Outputs[i].Id)
+                                        @Html.HiddenFor(model => model.Device.Outputs[i].NameId)
+
+                                        <td>
+                                            @Model.Device.Outputs[i].Type.ToString()
+
+                                        </td>
+
+                                        <td>
+                                            @Html.Raw(HttpUtility.HtmlDecode(ContentForDigitalIoValue(Model.Device.Outputs[i].Value)))
+                                        </td>
+
+                                    </tr>
+                                }
+                            }
+
+
+                        </table>
+                    </div>
+
                 </div>
 
 
@@ -403,6 +541,7 @@
                 @{Html.RenderAction("ConfigurationSelect", new { DeviceId = Model.ServerId });}
 
             </div>
+
 
         </div>
 

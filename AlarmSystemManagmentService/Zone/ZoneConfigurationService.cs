@@ -9,25 +9,34 @@ using sconnConnector.Config;
 using sconnConnector.POCO.Config.sconn;
 using AlarmSystemManagmentService;
 using NLog;
+using sconnConnector.Config.Abstract;
+using sconnConnector.POCO.Config.Abstract.Auth;
 
 namespace AlarmSystemManagmentService
 {
     public class ZoneConfigurationService : IZoneConfigurationService
     {
-        private AlarmSystemConfigManager Manager { get; set; }
         public bool Online { get; set; }
         private static Logger _logger = LogManager.GetCurrentClassLogger();
+        private AlarmGenericConfigManager<sconnAlarmZoneConfig> EntityManager;
+        private AlarmSystemConfigManager ConfigManager;
 
         public ZoneConfigurationService()
         {
             Online = true; //online by default
         }
 
+        public ZoneConfigurationService(AlarmSystemConfigManager man) : this()
+        {
+            ConfigManager = man;
+            EntityManager = new AlarmGenericConfigManager<sconnAlarmZoneConfig>(ConfigManager.Config.ZoneConfig, man.RemoteDevice);
+        }
+
         private bool SaveChanges()
         {
             if (Online)
             {
-                return Manager.UploadZoneConfig();
+                return EntityManager.Upload();
             }
             else
             {
@@ -35,26 +44,20 @@ namespace AlarmSystemManagmentService
             }
         }
 
-
-        public ZoneConfigurationService(Device AlarmDevice) : this()
+        public List<sconnAlarmZone> GetAll()
         {
-            Manager = new AlarmSystemConfigManager(AlarmDevice.EndpInfo, AlarmDevice.Credentials);
-        }
-
-        public ZoneConfigurationService(AlarmSystemConfigManager man) : this()
-        {
-            Manager = man;
+            EntityManager.Download();
+            return ConfigManager.Config.ZoneConfig.Zones.ToList();
         }
 
         public bool RemoveById(int Id)
         {
             try
             {
-                sconnAlarmZone dev = this.Manager.Config.ZoneConfig.Zones.Where(d => d.Id == Id).FirstOrDefault();
+                sconnAlarmZone dev = this.GetById(Id);
                 if (dev != null)
                 {
-                    Manager.Config.ZoneConfig.Zones.Remove(dev);
-                    return SaveChanges();
+                    return this.Remove(dev);
                 }
                 return false;
             }
@@ -68,21 +71,47 @@ namespace AlarmSystemManagmentService
 
         public sconnAlarmZone GetById(int Id)
         {
-            sconnAlarmZone dev = this.Manager.Config.ZoneConfig.Zones.Where(d => d.Id == Id).FirstOrDefault();
-            return dev;
+            try
+            {
+                EntityManager.Download();
+                sconnAlarmZone dev = ConfigManager.Config.ZoneConfig.Zones.FirstOrDefault(d => d.Id == Id);
+                return dev;
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e, e.Message);
+                return null;
+            }
         }
 
-        public List<sconnAlarmZone> GetAll()
-        {
-            Manager.LoadSiteConfig();
-            return Manager.Config.ZoneConfig.Zones.ToList();
-        }
-
-        public bool Add(sconnAlarmZone zone)
+        public bool Add(sconnAlarmZone device)
         {
             try
             {
-                Manager.Config.ZoneConfig.Zones.Add(zone);
+                return true;    //no adding -  filled with empty objects
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e, e.Message);
+                return false;
+            }
+
+        }
+
+        public bool Update(sconnAlarmZone rcpt)
+        {
+            try
+            {
+                ConfigManager.Config.ZoneConfig.Zones
+                   .Where(z => z.Id == rcpt.Id)
+                   .ToList()
+                   .ForEach(x =>
+                   {
+                       x.Enabled = rcpt.Enabled;
+                       x.Name = rcpt.Name;
+                       x.Type = rcpt.Type;
+                   }
+                   );
                 return SaveChanges();
             }
             catch (Exception e)
@@ -93,34 +122,13 @@ namespace AlarmSystemManagmentService
 
         }
 
-        public bool Update(sconnAlarmZone zone)
+        public bool Remove(sconnAlarmZone device)
         {
             try
             {
-                var ozone = Manager.Config.ZoneConfig.Zones.Where(d => d.Id == zone.Id).FirstOrDefault();
-                if (ozone != null)
-                {
-                    ozone = zone;
-                    return SaveChanges();
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            catch (Exception e)
-            {
-                _logger.Error(e, e.Message);
-                return false;
-            }
-
-        }
-
-        public bool Remove(sconnAlarmZone zone)
-        {
-            try
-            {
-                Manager.Config.ZoneConfig.Zones.Remove(zone);
+                // 'Remove' clears static record instead - replace with new empty record with the same Id
+                sconnAlarmZone stub = new sconnAlarmZone { Id = device.Id };
+                this.Update(stub);
                 return SaveChanges();
             }
             catch (Exception e)

@@ -111,6 +111,15 @@ namespace sconnConnector.Config.Abstract
             return Header;
         }
 
+        public static byte[] GetHeaderForOperationParametrized(Type type, CommandOperation oper, int EntityId)
+        {
+            byte[] Header = new byte[ipcDefines.NET_UPLOAD_HEADER_BYTES];
+            Header[ipcDefines.MessageHeader_Command_Pos] = (byte)oper;
+            Header[ipcDefines.MessageHeader_CommandType_Pos] = (byte)GetCommandOperationType(type, oper);
+            Header[ipcDefines.MessageHeader_CommandParam_Pos] = (byte) EntityId;
+            return Header;
+        }
+
         public static byte[] GetTailForOperation(Type type, CommandOperation oper)
         {
             byte[] Header = new byte[ipcDefines.NET_UPLOAD_HEADER_BYTES];

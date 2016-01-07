@@ -80,7 +80,7 @@ namespace sconnConnector.POCO.Config
                 this.Enabled = true;
                 this.Name = Guid.NewGuid().ToString();
                 this.NameId = 0;
-                this.Type = sconnOutputType.Normal;
+                this.Type = sconnOutputType.AlarmNormallyActive;
             }
             catch (Exception e)
             {

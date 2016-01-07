@@ -12,12 +12,21 @@ namespace sconnConnector.POCO.Config
 
     public enum sconnInputType
     {
-        NO = 1
+        NormallyOpen = 0,
+        NormallyClosed,
+        ParametrizedNC,
+        ParametrizedArm,
+        ParametrizedSensor
     }
 
     public enum sconnActivationGroup
     {
-        ArmedViolation = 1
+        Arm = 0,
+        Disarm,
+        ActivateOutput,
+        ArmedViolation,
+        DisarmedViolation,
+        ArmedAndDisarmedViolation
     }
 
     public class sconnInput : IAlarmSystemConfigurationEntity, ISerializableConfiguration, IFakeAbleConfiguration
@@ -90,7 +99,7 @@ namespace sconnConnector.POCO.Config
                 this.Name = Guid.NewGuid().ToString();
                 this.NameId = 0;
                 this.Value = 1;
-                this.Type = sconnInputType.NO;
+                this.Type = sconnInputType.NormallyClosed;
                 this.ActivationGroup = sconnActivationGroup.ArmedViolation;
             }
             catch (Exception e)

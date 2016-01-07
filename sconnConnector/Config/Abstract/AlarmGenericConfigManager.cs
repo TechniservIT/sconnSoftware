@@ -16,9 +16,18 @@ namespace sconnConnector.Config.Abstract
         protected static Logger _logger = LogManager.GetCurrentClassLogger();
         protected SconnClient client;
 
+        protected int EntityId;
+
         public AlarmGenericConfigManager(IAlarmSystemConfigurationEntity entity, Device device)
         {
             Entity =  entity;
+            client = new SconnClient(device.EndpInfo.Hostname, device.EndpInfo.Port, device.Credentials.Password, true);
+        }
+        
+        public AlarmGenericConfigManager(IAlarmSystemConfigurationEntity entity, Device device, int EntityParam)
+        {
+            Entity = entity;
+            EntityId = EntityParam;
             client = new SconnClient(device.EndpInfo.Hostname, device.EndpInfo.Port, device.Credentials.Password, true);
         }
 
@@ -53,11 +62,18 @@ namespace sconnConnector.Config.Abstract
             
         }
 
+
+
+        private bool IsEntityParametrized(Type entity)
+        {
+            return false;
+        }
+
         private bool Upload_Send_Start_Message()
         {
             try
             {
-                byte[] header = CommandManager.GetHeaderForOperation(typeof(T),CommandOperation.Set);
+                byte[] header = CommandManager.GetHeaderForOperationParametrized(typeof(T),CommandOperation.Set,EntityId);
                 var res = this.SendMessage(header);
                 if (IsResultSuccessForOperation(res, CommandOperation.Set))
                 {

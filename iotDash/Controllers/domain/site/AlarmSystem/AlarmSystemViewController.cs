@@ -15,25 +15,25 @@ using sconnConnector;
 using sconnConnector.Config;
 using sconnConnector.POCO.Config;
 using iotDash.Identity.Attributes;
+using sconnConnector.POCO.Config.sconn;
 
 namespace iotDash.Controllers.domain.site.AlarmSystem
 {
     [DomainAuthorize]
     public class AlarmSystemViewController : AlarmSystemControllerBase, IAlarmSystemController
     {
-        private DeviceConfigService _provider;
-
+        private GlobalConfigService _provider;
+        
         public AlarmSystemViewController(HttpContextBase contBase) : base(contBase)
         {}
-
-
+        
         // GET: AlarmSystemView
         public ActionResult Index(int ServerId)
         {
             try
             {      
-               this._provider = new DeviceConfigService(DomainSession.GetAlarmConfigForContextWithDeviceId(this.HttpContext, ServerId));
-               AlarmSystemDetailModel model = new AlarmSystemDetailModel(this._provider.GetAll(), _provider.ConfigManager.site);
+               this._provider = new GlobalConfigService(DomainSession.GetAlarmConfigForContextWithDeviceId(this.HttpContext, ServerId));
+                AlarmSystemGlobalModel model = new AlarmSystemGlobalModel(this._provider.Get());
                 model.ServerId = ServerId;
                 return View(model);
             }
@@ -53,8 +53,7 @@ namespace iotDash.Controllers.domain.site.AlarmSystem
         // GET: ConfigurationSelect
         public ActionResult ConfigurationSelect(int DeviceId)
         {
-            this._provider = new DeviceConfigService(DomainSession.GetAlarmConfigForContextWithDeviceId(this.HttpContext, DeviceId));
-            AlarmSystemDetailModel model = new AlarmSystemDetailModel(null,_provider.ConfigManager.site);
+            AlarmSystemGlobalModel model = new AlarmSystemGlobalModel();
             model.ServerId = DeviceId;
             return View(model);
         }
@@ -63,70 +62,12 @@ namespace iotDash.Controllers.domain.site.AlarmSystem
         // GET: AlarmSystemView
         public ActionResult Device(int DeviceId)
         {
-            return View();
-        }
-
-
-
-        public ActionResult OutputsConfigure(int ServerId, int AlarmDeviceId)
-        {
-            try
-            {
-                Device alrmSysDev = Icont.Devices.First(d => d.Id == ServerId);
-                if (alrmSysDev != null)
-                {
-                    var man = DomainSession.GetAlarmConfigForContextWithDevice(this.HttpContext, alrmSysDev);
-                    AlarmSystemOutputsConfigureModel model = new AlarmSystemOutputsConfigureModel(alrmSysDev, AlarmDeviceId, man);
-                    return View(model);
-                }
-            }
-            catch (Exception e)
-            {
-               
-            }
-            return View();
+            var provider = new DeviceConfigService(DomainSession.GetAlarmConfigForContextWithDeviceId(this.HttpContext, DeviceId));
+            AlarmSystemDetailModel model = new AlarmSystemDetailModel(provider.Get());
+            model.ServerId = DeviceId;
+            return View(model);
         }
         
-
-        public ActionResult InputsConfigure(int ServerId, int AlarmDeviceId)
-        {
-            try
-            {
-                Device alrmSysDev = Icont.Devices.First(d => d.Id == ServerId);
-                if (alrmSysDev != null)
-                {
-                    var man = DomainSession.GetAlarmConfigForContextWithDevice(this.HttpContext, alrmSysDev);
-                    AlarmSystemInputsConfigureModel model = new AlarmSystemInputsConfigureModel(alrmSysDev, AlarmDeviceId, man);
-                     return View(model);
-                }
-                return View();
-            }
-            catch (Exception e)
-            {
-                return View();
-            }
-        }
-        
-        public ActionResult RelaysConfigure(int ServerId, int AlarmDeviceId)
-        {
-            try
-            {
-                Device alrmSysDev = Icont.Devices.First(d => d.Id == ServerId);
-                if (alrmSysDev != null)
-                {
-                    var man = DomainSession.GetAlarmConfigForContextWithDevice(this.HttpContext, alrmSysDev);
-                    AlarmSystemRelaysConfigureModel model = new AlarmSystemRelaysConfigureModel(alrmSysDev, AlarmDeviceId, man);
-                    return View(model);
-                }
-                return View();
-            }
-            catch (Exception e)
-            {
-                return View();
-            }
-        }
-
-
         public ActionResult View(int DeviceId)
         {
             return Index(DeviceId);

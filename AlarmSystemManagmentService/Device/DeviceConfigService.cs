@@ -14,7 +14,7 @@ using sconnConnector.POCO.Config.Abstract.Auth;
 
 namespace AlarmSystemManagmentService
 {
-    public class DeviceConfigService : IAlarmSystemConfigurationService<sconnDevice>
+    public class DeviceConfigService : IAlarmSystemSingleEntityConfigurationService<sconnDevice>
     {
         public bool Online { get; set; }
         private static Logger _logger = LogManager.GetCurrentClassLogger();
@@ -27,10 +27,17 @@ namespace AlarmSystemManagmentService
             Online = true; //online by default
         }
 
+
         public DeviceConfigService(AlarmSystemConfigManager man) : this()
         {
             ConfigManager = man;
-            EntityManager = new AlarmGenericConfigManager<sconnDeviceConfig>(ConfigManager.Config.UserConfig, man.RemoteDevice);
+            EntityManager = new AlarmGenericConfigManager<sconnDeviceConfig>(ConfigManager.Config.DeviceConfig, man.RemoteDevice);
+        }
+
+        public DeviceConfigService(AlarmSystemConfigManager man, int DeviceId) : this()
+        {
+            ConfigManager = man;
+            EntityManager = new AlarmGenericConfigManager<sconnDeviceConfig>(ConfigManager.Config.DeviceConfig, man.RemoteDevice, DeviceId);
         }
 
         private bool SaveChanges()
@@ -45,76 +52,21 @@ namespace AlarmSystemManagmentService
             }
         }
 
-        public List<sconnDevice> GetAll()
+        public sconnDevice Get()
         {
             EntityManager.Download();
-            return ConfigManager.Config.DeviceConfig.Devices.ToList();
-        }
-
-        public bool RemoveById(int Id)
-        {
-            try
-            {
-                sconnDevice dev = this.GetById(Id);
-                if (dev != null)
-                {
-                    return this.Remove(dev);
-                }
-                return false;
-            }
-            catch (Exception e)
-            {
-                _logger.Error(e, e.Message);
-                return false;
-            }
-
-        }
-
-        public sconnDevice GetById(int Id)
-        {
-            try
-            {
-                EntityManager.Download();
-                sconnDevice dev = ConfigManager.Config.DeviceConfig.Devices.FirstOrDefault(d => d.Id == Id);
-                return dev;
-            }
-            catch (Exception e)
-            {
-                _logger.Error(e, e.Message);
-                return null;
-            }
-        }
-
-        public bool Add(sconnDevice device)
-        {
-            try
-            {
-                return true;    //no adding -  filled with empty objects
-            }
-            catch (Exception e)
-            {
-                _logger.Error(e, e.Message);
-                return false;
-            }
-
+            return ConfigManager.Config.DeviceConfig.Device;
         }
 
         public bool Update(sconnDevice rcpt)
         {
             try
             {
-                ConfigManager.Config.DeviceConfig.Devices
-                   .Where(z => z.Id == rcpt.Id)
-                   .ToList()
-                   .ForEach(x =>
-                   {
-                       x.Inputs = rcpt.Inputs;
-                       x.Outputs = rcpt.Outputs;
-                       x.Relays = rcpt.Relays;
-                       x.Name = rcpt.Name;
-                       x.NetworkConfig = rcpt.NetworkConfig;
-                   }
-                   );
+                ConfigManager.Config.DeviceConfig.Device.Inputs = rcpt.Inputs;
+                ConfigManager.Config.DeviceConfig.Device.Outputs = rcpt.Outputs;
+                ConfigManager.Config.DeviceConfig.Device.Relays = rcpt.Relays;
+                ConfigManager.Config.DeviceConfig.Device.Name = rcpt.Name;
+                ConfigManager.Config.DeviceConfig.Device.NetworkConfig = rcpt.NetworkConfig;
                 return SaveChanges();
             }
             catch (Exception e)

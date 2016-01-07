@@ -109,9 +109,6 @@ namespace webInterfaceTests
     public class Controller_AlarmSystemAuthorizedDevicesController_Tests : AlarmSystemConfigurationControllerTests<AlarmSystemAuthorizedDevicesController> { }
     public class Controller_AlarmSystemConfigurationController_Tests : AlarmSystemConfigurationControllerTests<AlarmSystemConfigurationController> { }
     public class Controller_AlarmSystemGsmConfigController_Tests : AlarmSystemConfigurationControllerTests<AlarmSystemGsmConfigController> { }
-    public class Controller_AlarmSystemInputConfigurationController_Tests : AlarmSystemConfigurationControllerTests<AlarmSystemInputConfigurationController> { }
-    public class Controller_AlarmSystemOutputConfigurationController_Tests : AlarmSystemConfigurationControllerTests<AlarmSystemOutputConfigurationController> { }
-    public class Controller_AlarmSystemRelayConfigurationController_Tests : AlarmSystemConfigurationControllerTests<AlarmSystemRelayConfigurationController> { }
     public class Controller_AlarmSystemUsersConfigController_Tests : AlarmSystemConfigurationControllerTests<AlarmSystemUsersConfigController> { }
     public class Controller_AlarmSystemZonesConfigController_Tests : AlarmSystemConfigurationControllerTests<AlarmSystemZonesConfigController> { }
 

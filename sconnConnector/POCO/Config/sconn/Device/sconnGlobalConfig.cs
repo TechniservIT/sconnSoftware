@@ -20,12 +20,16 @@ namespace sconnConnector.POCO.Config.sconn
 
         public bool Armed { get; set; }
         public bool Violation { get; set; }
+        public bool Failure { get; set; }
         public int Devices { get; set; }
+        public int Zones { get; set; }
+
+        public string Name { get; set; }
+        
 
         public int Lat { get; set; }
         public int Lng { get; set; }
-
-
+        
 
         public sconnGlobalConfig()
         {
@@ -40,17 +44,27 @@ namespace sconnConnector.POCO.Config.sconn
 
         public byte[] Serialize()
         {
-            throw new NotImplementedException();
+            memCFG[ipcDefines.mAdrArmed] = (byte) (Armed ? 1 : 0);
+            memCFG[ipcDefines.mAdrViolation] = (byte)(Violation ? 1 : 0);
+            memCFG[ipcDefines.mAdrSysFail] = (byte)(Failure ? 1 : 0);
+            Devices = (byte)(memCFG[ipcDefines.mAdrDevNO +1]);
+            Zones = (byte)(memCFG[ipcDefines.mAdrZoneNo]);
+            return memCFG;
         }
 
         public void Deserialize(byte[] buffer)
         {
-            throw new NotImplementedException();
+            this.memCFG = buffer;
+            Armed = memCFG[ipcDefines.mAdrArmed] > 0 ? true : false;
+            Violation = memCFG[ipcDefines.mAdrViolation] > 0 ? true : false;
+            Failure = memCFG[ipcDefines.mAdrSysFail] > 0 ? true : false;
+            memCFG[ipcDefines.mAdrDevNO + 1] = (byte) Devices;
+            memCFG[ipcDefines.mAdrZoneNo] = (byte)Zones;
         }
 
         public void Fake()
         {
-            throw new NotImplementedException();
+            
         }
     }
 

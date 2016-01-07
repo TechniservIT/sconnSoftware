@@ -23,8 +23,8 @@ data service with DI		+
 redo controllers for DI		+
 custom view base
 context interface		+
-mocks
-unit tests
+mocks			+
+unit tests		+
 conn fix tls/ssl	+
 alarm views		+
 breadcrumbs		V
@@ -35,9 +35,17 @@ device simulators for testing
 web language translations and select
 emap controller and service 
 alarm IO map placement and store
+Auth service
+Routing service
+Message translation
+Protocol config interface
+CoAP service
+Message history
+Inter-protocol translation
+
 
 GUI :
-Alarm device image					
+Alarm device image			+		
 Top edit toolbox layout			V	
 side bar responsive/redo		V
 account login dropdown fix		V
@@ -45,6 +53,8 @@ breadcrumbs better style		+
 list edit/remove better style		+
 alarm config select add description	+
 list searchbar with add/refresh 	V
+alarm config select			V
+
 
 Extras :
 PLC protocols TCP/IP

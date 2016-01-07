@@ -1,4 +1,4 @@
-﻿@model iotDash.Areas.AlarmSystem.Models.AlarmSystemDetailModel
+﻿@model iotDash.Areas.AlarmSystem.Models.AlarmSystemGlobalModel
 
 
 <div class="panel panel-primary">
@@ -22,7 +22,7 @@
             </div>
             <div class="col-lg-4 col-sm-6 col-xs-12">
                 <div class="thumbnail">
-                    <a href="@Url.Action("InputsConfigure", "AlarmSystemView", new {DeviceId = Model.ServerId})" role="button">
+                    <a href="@Url.Action("Index", "AlarmSystemDeviceConfig", new {ServerId = Model.ServerId, DeviceId = 0})" role="button">
                         <img src="~/Content/img/config2.png" class="thumbnail img-responsive">
                     </a>
                     <div class="caption text-center">
@@ -34,7 +34,7 @@
             <div class="col-lg-4 col-sm-6 col-xs-12">
                 <div class="thumbnail">
                     <a href="@Url.Action("View", "AlarmSystemZonesConfig", new {DeviceId = Model.ServerId})" role="button">
-                        <img src="~/Content/img/strefa.png" class="thumbnail img-responsive">
+                        <img src="~/Content/img/strefy1.png" class="thumbnail img-responsive">
                     </a>
                     <div class="caption text-center">
                         <h3>Zones</h3>
@@ -56,7 +56,7 @@
 
             <div class="col-lg-4 col-sm-6 col-xs-12">
                 <div class="thumbnail">
-                    <a href="@Url.Action("CommunicationConfigure", "AlarmSystemView", new {DeviceId = Model.ServerId})" role="button">
+                    <a href="@Url.Action("CommunicationConfigure", "AlarmSystemDeviceConfig", new {DeviceId = Model.ServerId})" role="button">
                         <img src="~/Content/img/patchcord.png" class="thumbnail img-responsive">
                     </a>
                     <div class="caption  text-center">
@@ -69,7 +69,7 @@
             <div class="col-lg-4 col-sm-6 col-xs-12">
                 <div class="thumbnail">
                     <a href="@Url.Action("View", "AlarmSystemUsersConfig", new {DeviceId = Model.ServerId})" role="button">
-                        <img src="~/Content/img/patchcord.png" class="thumbnail img-responsive">
+                        <img src="~/Content/img/user.png" class="thumbnail img-responsive">
                     </a>
                     <div class="caption  text-center">
                         <h3>Users</h3>
@@ -92,39 +92,17 @@
 
             <div class="col-lg-4 col-sm-6 col-xs-12">
                 <div class="thumbnail">
-                    <a href="@Url.Action("OutputsConfigure", "AlarmSystemView", new {DeviceId = Model.ServerId})" role="button">
-                        <img src="~/Content/img/electro.png" class="thumbnail img-responsive">
+                    <a href="@Url.Action("View", "AlarmSystemEvents", new {DeviceId = Model.ServerId})" role="button">
+                        <img src="~/Content/img/zegar1.png" class="thumbnail img-responsive">
                     </a>
                     <div class="caption  text-center">
-                        <h3>Outputs</h3>
+                        <h3>Events</h3>
                     </div>
                 </div>
 
             </div>
 
-            <div class="col-lg-4 col-sm-6 col-xs-12">
-                <div class="thumbnail">
-                    <a href="@Url.Action("InputsConfigure", "AlarmSystemView", new {DeviceId = Model.ServerId})" role="button">
-                        <img src="~/Content/img/sensorin.png" class="thumbnail img-responsive">
-                    </a>
-                    <div class="caption  text-center">
-                        <h3>Inputs</h3>
-                    </div>
-                </div>
 
-            </div>
-
-            <div class="col-lg-4 col-sm-6 col-xs-12">
-                <div class="thumbnail">
-                    <a href="@Url.Action("RelaysConfigure", "AlarmSystemView", new {DeviceId = Model.ServerId})" role="button">
-                        <img src="~/Content/img/przekaznik.png" class="thumbnail img-responsive">
-                    </a>
-                    <div class="caption  text-center">
-                        <h3>Relays</h3>
-                    </div>
-                </div>
-
-            </div>
         </div>
     </div>
     <div class="panel-footer"></div>

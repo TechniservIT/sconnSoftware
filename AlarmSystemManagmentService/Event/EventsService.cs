@@ -3,17 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using iotDatabaseConnector.DAL.Repository.Connector.Entity;
-using iotDbConnector.DAL;
-using NLog;
-using sconnConnector.Config;
-using sconnConnector.Config.Abstract;
-using sconnConnector.POCO.Config;
-using sconnConnector.POCO.Config.sconn;
 
-namespace AlarmSystemManagmentService
+namespace AlarmSystemManagmentService.Event
 {
-    public class GlobalConfigService : IAlarmSystemSingleEntityConfigurationService<sconnGlobalConfig>
+    public class EventsService
     {
         public bool Online { get; set; }
         private static Logger _logger = LogManager.GetCurrentClassLogger();
@@ -48,7 +41,7 @@ namespace AlarmSystemManagmentService
             EntityManager.Download();
             return ConfigManager.Config.GlobalConfig;
         }
-        
+
 
         public bool Update(sconnGlobalConfig rcpt)
         {
@@ -85,5 +78,7 @@ namespace AlarmSystemManagmentService
             }
         }
 
+
     }
+
 }

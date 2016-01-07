@@ -9,32 +9,18 @@ using sconnConnector.POCO.Config.Abstract.Device;
 
 namespace sconnConnector.POCO.Config.sconn
 {
-    public class sconnDeviceConfig : IAlarmSystemConfigurationEntity, ISerializableConfiguration, IFakeAbleConfiguration
+    public class sconnDeviceConfig : IAlarmSystemConfigurationEntity, ISerializableConfiguration, IFakeAbleConfiguration, IIndexAbleConfiguration
     {
-        public List<sconnDevice> Devices { get; set; }
+        public sconnDevice Device { get; set; }
         private static Logger _logger = LogManager.GetCurrentClassLogger();
+
+        public sconnDeviceConfig(int Id)
+        {
+            Device = new sconnDevice {Id = Id};
+        }
 
         public sconnDeviceConfig()
         {
-                this.Devices = new List<sconnDevice>();
-        }
-
-        public sconnDeviceConfig(ipcSiteConfig cfg)
-        {
-            try
-            {
-                Devices = new List<sconnDevice>();
-                for (int i = 0; i < cfg.deviceNo; i++)
-                {
-                    sconnDevice dev = new sconnDevice(cfg.deviceConfigs[i]);
-                    dev.Id = i;
-                    Devices.Add(dev);
-                }
-            }
-            catch (Exception e)
-            {
-                _logger.Error(e, e.Message);
-            }
 
         }
 
@@ -42,12 +28,7 @@ namespace sconnConnector.POCO.Config.sconn
         {
             try
             {
-                byte[] devSerialized = new byte[ipcDefines.deviceConfigSize * Devices.Count];
-                for (int i = 0; i < Devices.Count; i++)
-                {
-                    Devices[i].memCFG.CopyTo(devSerialized, i * ipcDefines.AUTH_RECORD_SIZE);
-                }
-                return devSerialized;
+                return Device.memCFG;
             }
             catch (Exception e)
             {
@@ -58,7 +39,14 @@ namespace sconnConnector.POCO.Config.sconn
 
         public void Deserialize(byte[] buffer)
         {
-         
+            try
+            {
+                this.Device = new sconnDevice(buffer);
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e, e.Message);
+            }
         }
 
         public void Fake()
@@ -67,13 +55,17 @@ namespace sconnConnector.POCO.Config.sconn
             {
                 sconnDevice zone = new sconnDevice();
                 zone.Fake();
-                Devices.Add(zone);
+                this.Device = zone;
             }
             catch (Exception e)
             {
                 _logger.Error(e, e.Message);
             }
+        }
 
+        public int GetIndex()
+        {
+            return Device.Id;
         }
     }
 
