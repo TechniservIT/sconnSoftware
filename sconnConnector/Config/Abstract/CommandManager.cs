@@ -49,7 +49,6 @@ namespace sconnConnector.Config.Abstract
             {
                 return ipcCMD.setPasswdCfg;
             }
-
             return ipcCMD.ERRCMD;
         }
 
@@ -78,6 +77,10 @@ namespace sconnConnector.Config.Abstract
             else if (type == typeof(sconnUserConfig))
             {
                 return ipcCMD.getPasswdCfg;
+            }
+            else if (type == typeof(sconnEventConfig))
+            {
+                return ipcCMD.getEvents;
             }
             return ipcCMD.ERRCMD;
         }

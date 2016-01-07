@@ -14,7 +14,20 @@ using sconnConnector.POCO.Config.sconn;
 
 namespace iotDash.Models
 {
-    
+
+
+    public class AlarmSystemEventsModel : IAsyncStatusModel
+    {
+        public List<sconnEvent> Events { get; set; }
+
+        public AlarmSystemEventsModel(List<sconnEvent> events)
+        {
+            this.Events = events;
+        }
+
+        public string Result { get; set; }
+    }
+
 
     #region AuthorizedDevices
 

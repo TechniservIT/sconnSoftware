@@ -1,0 +1,69 @@
+﻿@using sconnConnector.POCO.Config.sconn
+@model iotDash.Models.AlarmSystemEventsModel
+
+@{
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+
+<div class="panel panel-primary">
+    <div class="panel-heading text-center">
+        <h2>Events</h2>
+    </div>
+
+    <div class="panel-body">
+
+
+        <div class="row">
+            <div class="col-md-12">
+                @Html.Partial("~/Views/Shared/EditorTemplate/ToolbarMenu.cshtml")
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="table-responsive">
+
+                <table class="table">
+                    <tr>
+                        <th>Id</th>
+                        <th>Type</th>
+                        <th>Domain</th>
+                        <th>Device Id</th>
+                    </tr>
+
+
+                    @foreach (sconnEvent d in Model.Events)
+            {
+                        <tr id="@d.Id.ToString()" class="rowRecord row-normal">
+
+                            <td> @d.Id </td>
+                            <td> @d.Type</td>
+                            <td> @d.Domain</td>
+                            <td> @d.DeviceId</td>
+
+                            <td>
+
+
+                                <div class="btn-group-vertical" role="group" aria-label="...">
+
+                                    <button type="button" class="btn btn-default">
+                                        <a href="@Url.Action("Remove", "AlarmSystemAuthorizedDevices", new {Device = d})">
+                                            <span class="glyphicon glyphicon-trash"></span>
+                                        </a>
+                                    </button>
+
+                                </div>
+
+                            </td>
+                        </tr>
+                    }
+
+                   
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+

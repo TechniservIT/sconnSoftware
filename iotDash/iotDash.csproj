@@ -289,7 +289,7 @@
     <Compile Include="Controllers\domain\site\AlarmSystem\Abstract\AlarmSystemControllerBase.cs" />
     <Compile Include="Controllers\domain\site\AlarmSystem\Abstract\IAlarmSystemConfigurationController.cs" />
     <Compile Include="Controllers\domain\site\AlarmSystem\Abstract\IAlarmSystemController.cs" />
-    <Compile Include="Controllers\domain\site\AlarmSystem\AlarmEventsController.cs" />
+    <Compile Include="Controllers\domain\site\AlarmSystem\AlarmSystemEventsController.cs" />
     <Compile Include="Controllers\domain\site\AlarmSystem\AlarmSystemAuthorizedDevicesController.cs" />
     <Compile Include="Controllers\domain\site\AlarmSystem\AlarmSystemConfigurationController.cs" />
     <Compile Include="Controllers\domain\site\AlarmSystem\AlarmSystemDeviceConfigController.cs" />
@@ -1493,6 +1493,7 @@
     <Content Include="Views\AlarmSystemUsersConfig\Edit.cshtml" />
     <Content Include="Views\AlarmSystemUsersConfig\Remove.cshtml" />
     <Content Include="Views\AlarmSystemGsmConfig\Edit.cshtml" />
+    <Content Include="Views\AlarmSystemEvents\View.cshtml" />
     <None Include="Views\AlarmSystemUsersConfig\View.cshtml" />
     <Content Include="Views\AlarmSystemView\ConfigurationSelect.cshtml" />
     <Content Include="Views\AlarmSystemDeviceConfig\CommunicationConfigure.cshtml" />
@@ -1649,7 +1650,6 @@
     <Folder Include="Controllers\domain\managment\automation\" />
     <Folder Include="RealTime\SignalR\StatusUpdate\ActionHistoryUpdater\" />
     <Folder Include="RealTime\SignalR\StatusUpdate\PropertyHistoryUpdater\" />
-    <Folder Include="Views\AlarmEvents\" />
     <Folder Include="Views\RecordingSettings\" />
     <Folder Include="Views\RouteTrackingLiveView\" />
     <Folder Include="Views\RouteTrackingSetup\" />

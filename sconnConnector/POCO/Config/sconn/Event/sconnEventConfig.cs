@@ -69,7 +69,7 @@ namespace sconnConnector.POCO.Config.sconn
                     byte[] relayCfg = new byte[ipcDefines.EVENT_DB_RECORD_LEN];
                     for (int j = 0; j < ipcDefines.EVENT_DB_RECORD_LEN; j++)
                     {
-                        relayCfg[j] = buffer[ipcDefines.EVENT_DB_ID_POS + i * ipcDefines.EVENT_DB_RECORD_LEN + j];
+                        relayCfg[j] = buffer[i * ipcDefines.EVENT_DB_RECORD_LEN + j+1]; //offset for ev no - todo - defines
                     }
                     sconnEvent relay = new sconnEvent(relayCfg);
                     relay.Id = i;

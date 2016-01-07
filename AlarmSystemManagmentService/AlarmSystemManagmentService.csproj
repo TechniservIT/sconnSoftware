@@ -49,6 +49,7 @@
     <Compile Include="AuthorizedDevices\IAuthorizedDevicesConfigurationService.cs" />
     <Compile Include="Device\DeviceConfigService.cs" />
     <Compile Include="Device\IDeviceConfigService.cs" />
+    <Compile Include="Event\EventsService.cs" />
     <Compile Include="Global\GlobalConfigService.cs" />
     <Compile Include="Global\IGlobalConfigService.cs" />
     <Compile Include="Gsm\GsmConfigurationService.cs" />

@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NLog;
+using sconnConnector.Config;
+using sconnConnector.Config.Abstract;
+using sconnConnector.POCO.Config.sconn;
 
 namespace AlarmSystemManagmentService.Event
 {
@@ -10,18 +14,18 @@ namespace AlarmSystemManagmentService.Event
     {
         public bool Online { get; set; }
         private static Logger _logger = LogManager.GetCurrentClassLogger();
-        private AlarmGenericConfigManager<sconnGlobalConfig> EntityManager;
+        private AlarmGenericConfigManager<sconnEventConfig> EntityManager;
         public AlarmSystemConfigManager ConfigManager;
 
-        public GlobalConfigService()
+        public EventsService()
         {
             Online = true; //online by default
         }
 
-        public GlobalConfigService(AlarmSystemConfigManager man) : this()
+        public EventsService(AlarmSystemConfigManager man) : this()
         {
             ConfigManager = man;
-            EntityManager = new AlarmGenericConfigManager<sconnGlobalConfig>(ConfigManager.Config.GlobalConfig, man.RemoteDevice);
+            EntityManager = new AlarmGenericConfigManager<sconnEventConfig>(ConfigManager.Config.EventConfig, man.RemoteDevice);
         }
 
         private bool SaveChanges()
@@ -35,24 +39,24 @@ namespace AlarmSystemManagmentService.Event
                 return true;
             }
         }
+        
 
-        public sconnGlobalConfig Get()
+        public List<sconnEvent> GetAll()
         {
             EntityManager.Download();
-            return ConfigManager.Config.GlobalConfig;
+            return ConfigManager.Config.EventConfig.Events.ToList();
         }
 
-
-        public bool Update(sconnGlobalConfig rcpt)
+        public bool RemoveById(int Id)
         {
             try
             {
-                ConfigManager.Config.GlobalConfig.Armed = rcpt.Armed;
-                ConfigManager.Config.GlobalConfig.Devices = rcpt.Devices;
-                ConfigManager.Config.GlobalConfig.Lat = rcpt.Lat;
-                ConfigManager.Config.GlobalConfig.Lng = rcpt.Lng;
-                ConfigManager.Config.GlobalConfig.Violation = rcpt.Violation;
-                return SaveChanges();
+                sconnEvent dev = this.GetById(Id);
+                if (dev != null)
+                {
+                    return this.Remove(dev);
+                }
+                return false;
             }
             catch (Exception e)
             {
@@ -62,13 +66,27 @@ namespace AlarmSystemManagmentService.Event
 
         }
 
-        public bool Remove(sconnGlobalConfig device)
+        public sconnEvent GetById(int Id)
         {
             try
             {
-                // 'Remove' clears static record instead - replace with new empty record with the same Id
-                sconnGlobalConfig stub = new sconnGlobalConfig { Id = device.Id };
-                this.Update(stub);
+                EntityManager.Download();
+                sconnEvent dev = ConfigManager.Config.EventConfig.Events.FirstOrDefault(d => d.Id == Id);
+                return dev;
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e, e.Message);
+                return null;
+            }
+        }
+
+
+        public bool Remove(sconnEvent device)
+        {
+            try
+            {
+                this.ConfigManager.Config.EventConfig.Events.Remove(device);
                 return SaveChanges();
             }
             catch (Exception e)
