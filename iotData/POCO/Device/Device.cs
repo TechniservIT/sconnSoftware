@@ -61,6 +61,8 @@ namespace iotDbConnector.DAL
         [DataMember]
         public bool IsVirtual { get; set; }
 
+        [DataMember]
+        public virtual List<MapDefinition> DeviceMaps { get; set; }
 
         public Device()
         {

@@ -75,6 +75,8 @@ namespace iotDbConnector.DAL
         public DbSet<Site> Sites { get; set; }
         public DbSet<iotDomain> Domains { get; set; }
         public DbSet<ParameterChangeHistory> ParameterChanges { get; set; }
+        public DbSet<MapDefinition> MapDefinitions { get; set; }
+        
 
         public override int SaveChanges()
         {

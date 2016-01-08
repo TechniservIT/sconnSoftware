@@ -86,6 +86,9 @@
     <Compile Include="POCO\Domain\iotDomain.cs" />
     <Compile Include="POCO\Domain\iotDomainSettings.cs" />
     <Compile Include="POCO\Generics\AIList.cs" />
+    <Compile Include="POCO\Maps\DeviceMapDefinition.cs" />
+    <Compile Include="POCO\Maps\IoMapDefinition.cs" />
+    <Compile Include="POCO\Maps\MapDefinition.cs" />
     <Compile Include="POCO\Surveillance\IpCamera.cs" />
     <Compile Include="POCO\User\IUserPermission.cs" />
     <Compile Include="POCO\User\User.cs" />

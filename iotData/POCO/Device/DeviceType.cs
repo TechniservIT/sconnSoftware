@@ -29,6 +29,17 @@ namespace iotDbConnector.DAL
     }
 
 
+    public enum DeviceIoCategory
+    {
+        CmosInputs = 1,
+        CmosOutput,
+        Temperature,
+        Humidity,
+        PowerOutput,
+        AnalogInput,
+        Relay
+    }
+
     [DataContract(IsReference = true)]
     public class DeviceType
     {
