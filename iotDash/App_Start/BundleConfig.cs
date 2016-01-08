@@ -44,6 +44,11 @@ namespace iotDash
               "~/Scripts/sb-admin.js"
            ));
 
+            bundles.Add(new ScriptBundle("~/bundles/bootstrap-formhelpers").Include(
+              "~/Scripts/bootstrap-formhelpers.js"
+           ));
+           
+
 
             /*  Frontpage */
 
@@ -65,7 +70,9 @@ namespace iotDash
             bundles.Add(new StyleBundle("~/bundles/css/sidebarsimple").Include(
                "~/Content/css/simple-sidebar.css"
            ));
-
+            bundles.Add(new StyleBundle("~/bundles/css/bootstrap-formhelpers").Include(
+               "~/Content/css/bootstrap-formhelpers.css"
+           ));
 
             /* Tools */
 

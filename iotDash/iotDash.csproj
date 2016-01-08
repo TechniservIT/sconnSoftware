@@ -294,6 +294,7 @@
     <Compile Include="Controllers\domain\site\AlarmSystem\AlarmSystemConfigurationController.cs" />
     <Compile Include="Controllers\domain\site\AlarmSystem\AlarmSystemDeviceConfigController.cs" />
     <Compile Include="Controllers\domain\site\AlarmSystem\AlarmSystemGsmConfigController.cs" />
+    <Compile Include="Controllers\domain\site\AlarmSystem\AlarmSystemMapController.cs" />
     <Compile Include="Controllers\domain\site\AlarmSystem\AlarmSystemUsersConfigController.cs" />
     <Compile Include="Controllers\domain\site\AlarmSystem\AlarmSystemViewController.cs" />
     <Compile Include="Controllers\domain\site\AlarmSystem\AlarmSystemZonesConfigController.cs" />
@@ -373,6 +374,8 @@
     <Compile Include="Views\Helpers\ApplicationHelpers.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\css\bootstrap-formhelpers.css" />
+    <Content Include="Content\css\bootstrap-formhelpers.min.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -585,6 +588,8 @@
     <Content Include="Scripts\angular-touch.min.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
+    <Content Include="Scripts\bootstrap-formhelpers.js" />
+    <Content Include="Scripts\bootstrap-formhelpers.min.js" />
     <Content Include="Scripts\bootstrap-spinedit.js" />
     <Content Include="Areas\Site\Views\web.config" />
     <Content Include="Areas\AlarmSystem\Views\web.config" />
@@ -1494,6 +1499,9 @@
     <Content Include="Views\AlarmSystemUsersConfig\Remove.cshtml" />
     <Content Include="Views\AlarmSystemGsmConfig\Edit.cshtml" />
     <Content Include="Views\AlarmSystemEvents\View.cshtml" />
+    <Content Include="Views\AlarmSystemMap\View.cshtml" />
+    <Content Include="Views\AlarmSystemMap\Index.cshtml" />
+    <Content Include="Views\AlarmSystemMap\Edit.cshtml" />
     <None Include="Views\AlarmSystemUsersConfig\View.cshtml" />
     <Content Include="Views\AlarmSystemView\ConfigurationSelect.cshtml" />
     <Content Include="Views\AlarmSystemDeviceConfig\CommunicationConfigure.cshtml" />
@@ -1588,7 +1596,6 @@
     <Content Include="Views\Map\Index.cshtml" />
     <Content Include="Views\Shared\_DashboardLayout.cshtml" />
     <Content Include="Views\Shared\_DashboardMenu.cshtml" />
-    <Content Include="Views\Shared\_DashboardTopBar.cshtml" />
     <Content Include="Views\Device\Index.cshtml" />
     <Content Include="Views\Device\Edit.cshtml" />
     <Content Include="Views\Device\View.cshtml" />
@@ -1635,6 +1642,7 @@
     <None Include="Views\SecuritySupervisorSetup\Index.cshtml" />
     <Content Include="Views\Shared\_DashboardBreadcrumbsPartial.cshtml" />
     <Content Include="Views\Shared\EditorTemplate\ToolbarMenu.cshtml" />
+    <Content Include="Views\Shared\_LanguageSelectPartial.cshtml" />
     <None Include="Views\Site\AddSite.cshtml" />
     <None Include="Views\UserSecurity\Index.cshtml" />
   </ItemGroup>

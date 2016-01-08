@@ -60,17 +60,12 @@ namespace sconnConnector
         public bool useSsl { get; set; }
 
 
-        #if WIN32_ENC
-
-                static bool CertHandler(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors error)
+        static bool CertHandler(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors error)
                 {
                     // Ignore errors
                     return true;
                 }
-        #else
-        
 
-        #endif
 
         public SconnClient(string hostname, int port, string password) 
         {
@@ -91,28 +86,18 @@ namespace sconnConnector
                 EncStream = new SslStream(
                     client.GetStream(),
                     false,
-                    #if WIN32_ENC
-                        CertHandler,
-                    #else
-                        null,
-                    #endif
+                    CertHandler,
                     null
                     );
                 try
                 {
-                    
-                    #if WIN32_ENC
-                        EncStream.AuthenticateAsClient(Hostname, null, SslProtocols.Ssl3, false);
-                    #else
-                        EncStream.AuthenticateAsClient(Hostname, null, (System.Security.Authentication.SslProtocols)48, false);   //, null, (SslProtocols)48, false
-                    #endif
+                    EncStream.AuthenticateAsClient(Hostname, null,
+                        System.Environment.OSVersion.Version.Major > 6 ? SslProtocols.Tls12  : SslProtocols.Ssl3, false);
                 }
                 catch (Exception e)
                 {
-                    #if WIN32_ENC
-                                        nlogger.ErrorException(e.Message, e);
-                    #endif
-                    //
+                   nlogger.ErrorException(e.Message, e);
+                   
                 }
             }
             else

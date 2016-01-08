@@ -9,6 +9,7 @@
 
     @Styles.Render("~/bundles/css")
     @Styles.Render("~/bundles/css/sidebarsimple")
+    @Styles.Render("~/bundles/css/bootstrap-formhelpers")
 
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
@@ -16,7 +17,8 @@
     @Scripts.Render("~/bundles/jqueryui")
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/bootstrap")
-
+    @Scripts.Render("~/bundles/bootstrap-formhelpers")
+    
 </head> 
 
 <body>
@@ -69,7 +71,15 @@
                 </div>
 
                 <div class="col-md-4">
-                    @Html.Partial("_LoginPartial")
+
+                    <div class="col-md-6">
+                        @Html.Partial("_LanguageSelectPartial")
+                    </div>
+
+                    <div class="col-md-6">
+                        @Html.Partial("_LoginPartial")
+                    </div>
+
                 </div>
 
             </div>

@@ -1,0 +1,120 @@
+﻿@{
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+@Scripts.Render("~/bundles/jqueryui")
+@Scripts.Render("~/bundles/toggleswitch")
+@Scripts.Render("~/bundles/signalr")
+@Scripts.Render("~/bundles/numspin")
+@Scripts.Render("~/bundles/fancybox")
+
+@Styles.Render("~/bundles/css/toggleswitch")
+@Styles.Render("~/bundles/css/numspin")
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css"/>
+<script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+
+@*<script src='https://api.mapbox.com/mapbox.js/v2.2.3/mapbox.js'></script>
+<link href='https://api.mapbox.com/mapbox.js/v2.2.3/mapbox.css' rel='stylesheet'/>*@
+
+<script>
+
+
+        $(function () {
+
+        //var map = L.map('map').setView([51.505, -0.09], 13);
+
+        //L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiZG9taW5pY3VzcGxhdHVzIiwiYSI6ImNpajR0MjI5aTAwMW12cm0zejNkb21iNXoifQ.xBO1SZg69rmDV2aa7jzbOw', {
+        //    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+        //    maxZoom: 18,
+        //    id: 'your.mapbox.project.id',
+        //    accessToken: 'your.mapbox.public.access.token'
+        //}).addTo(map);
+
+        var map = L.map('map', {
+            maxZoom: 24,
+            minZoom: 1,
+            crs: L.CRS.Simple
+        }).setView([0, 0], 1);
+
+        map.setMaxBounds(new L.LatLngBounds([0, 500], [500, 0]));
+
+            var imageUrl = 'http://www.lib.utexas.edu/maps/historical/newark_nj_1922.jpg';
+        var imageBounds = [[250, 0], [0, 250]];
+        L.imageOverlay(imageUrl, imageBounds).addTo(map);
+
+
+
+    });
+
+    </script>
+
+
+@*<script>
+    L.mapbox.accessToken = 'pk.eyJ1IjoiZG9taW5pY3VzcGxhdHVzIiwiYSI6ImNpajR0MjI5aTAwMW12cm0zejNkb21iNXoifQ.xBO1SZg69rmDV2aa7jzbOw';
+    var map = L.mapbox.map('map', 'mapbox.streets')
+        .setView([40, -74.50], 9);
+</script>*@
+
+
+<div class="panel panel-primary">
+    <div class="panel-heading text-center">
+        <h2>Alarm emap</h2>
+    </div>
+
+    <div class="panel-body">
+
+        <div class="row">
+            <div class="col-md-12">
+                @Html.Partial("~/Views/Shared/EditorTemplate/ToolbarMenu.cshtml")
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-12" id="bs-example-navbar-collapse-1">
+
+                <div class="col-md-9">
+
+                    <div id="map" style="height: 500px;">
+                    </div>
+
+                </div>
+
+                <div class="col-md-3">
+
+                    <ul class="nav navbar-nav">
+
+
+                        <li>
+                            <a id="ShowEditView" class="btn btn-default" href="#" role="button">
+                                <span class="glyphicon glyphicon-wrench"></span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a id="ActionRemove" class="btn btn-default" href="#" role="button">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</div>
+

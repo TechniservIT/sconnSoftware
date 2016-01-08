@@ -62,7 +62,7 @@ PLC services and interface
 Common logic definitions service
 Repository generic struct
 Sconn protocol serialization verification and struct
-Sconn dd cfg hashes to upload/download
+Sconn dd cfg hashes to upload/download			V
 Dvr http streaming and service
 Video streaming config services and interfaces
 Video recording service
