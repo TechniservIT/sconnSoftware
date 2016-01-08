@@ -7,15 +7,14 @@
 
     <ul class="nav navbar-nav navbar-right" >
         <li>
-            <div class="btn-group"  style="padding: 7px;">
-                @*<a class="btn btn-primary" href="#"><i class="fa fa-user fa-fw"></i> @HttpContext.Current.User.Identity.Name </a>
-                <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
-                    <span class="fa fa-caret-down"></span>
-                </a>*@
-
+            <div class="btn-group" style="padding: 7px;">
+          
                 <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" id="userDropDown" aria-haspopup="true" aria-expanded="false">
-                    @HttpContext.Current.User.Identity.Name
-                    <span class="caret"></span>
+                    <div class="inner-addon left-addon">
+                        <i class="glyphicon glyphicon-user"></i>
+                        @HttpContext.Current.User.Identity.Name
+                        <span class="caret"></span>
+                    </div>
                 </button>
 
                 <ul class="dropdown-menu" role="menu" aria-labelledby="userDropDown">
@@ -25,7 +24,6 @@
 
             </div>
         </li>
-        @*<li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>*@
     </ul>
     }
 }

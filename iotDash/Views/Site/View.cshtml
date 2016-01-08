@@ -1,4 +1,7 @@
-﻿@model iotDash.Models.DeviceListViewModel
+﻿@using System.Web.UI.WebControls
+@using iotDbConnector.DAL
+@using Raven.Database.Indexing
+@model iotDash.Models.DeviceListViewModel
 
 @{
     ViewBag.Title = "View";
@@ -9,102 +12,49 @@
 
 @Scripts.Render("~/bundles/jqueryui")
 
+
+@functions{
+
+    public string GetImagePathForDeviceCategory(DeviceCategory category)
+    {
+        if (category == DeviceCategory.AlarmSystem)
+        {
+            return "/Content/img/klucz1.png";
+        }
+        else
+        {
+            return "/Content/img/waves.png";
+        }
+    }
+
+    public string GetControllerNameForDeviceCategory(DeviceCategory category)
+    {
+        if (category == DeviceCategory.AlarmSystem)
+        {
+            return "AlarmSystemView";
+        }
+        else
+        {
+            return "DeviceTemplate";
+        }
+    }
+
+
+}
+
 <script>
 
-    $('#actionselector a').click(function (e) {
-        e.preventDefault()
-        $(this).tab('show')
-    })
+    $(function()
+            {
 
-
-    $(function () {
-
-        var CurrentSelectionId = -1;
-
-        $(".panel").click(function () {
-
-            //remove current selection
-            $(".panel").removeClass("panel-primary");
-            $(".panel").addClass("panel-info");
-
-            //set selected site
-            $(this).removeClass("panel-info");
-            $(this).addClass("panel-primary");
-            CurrentSelectionId = $(this).attr("id");
-
-        });
-
-        function VerifySelection() {
-            var selectedNodesNo = $(".panel-primary").length;
-            //alert("selected devices : " + selectedNodesNo);
-            if (selectedNodesNo > 0 && CurrentSelectionId >= 0) {
-                $("#StatusCont").html("");  //clear error
-                return true;
-            }
-            else {
-                //display error
-                $("#StatusCont").html(
-                    '<div class="alert alert-danger" role="alert"> \
-                      <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> \
-                      <span class="sr-only">Error:</span> \
-                          Select device. \
-                    </div>'
-                    );
-                return false;
-            }
-
-        }
-
-        $("#ShowDeviceEditView").click(function () {
-            if (VerifySelection()) {
-                var fullurl = '@Url.Action("Edit","Device")' + "?DeviceId=" + CurrentSelectionId;
-                window.location.href = fullurl;
-            }
-        });
-
-        $("#ShowAddDeviceView").click(function () {
-            var fullurl = '@Url.Action("Add","Device", new { SiteId = @Model.Site.Id} )';
-            window.location.href = fullurl;
-        });
-
-        $("#ActionRemoveDevice").click(function () {
-            if (VerifySelection()) {
-                // alert("Removing device : " + CurrentSelectionId);
-                $.ajax({
-                    url: '@Url.Action("RemoveDevice","Site")',
-                    type: this.method,
-                    data: { DeviceId: CurrentSelectionId },
-                    success: function (result) {
-                        if (result == "True") {
-                            //display success and update view
-
-                            $("#StatusCont").html('<div class="alert alert-success" role="alert"> \
-                              <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> \
-                              <span class="sr-only">Success:</span> \
-                                 Device removed. \
-                                </div>' );
-
-                        }
-                        else {
-                            //display error
-
-                            $("#StatusCont").html('<div class="alert alert-danger" role="alert"> \
-                              <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> \
-                              <span class="sr-only">Error:</span> \
-                                 Remove failed. \
-                                </div>'
-                                 );
-                        }
-                    }
-                });
-            }
-        });
-
-    });
+            });
 
 </script>
 
+
+
 <div class="panel panel-primary">
+    
     <div class="panel-heading text-center">
         <h2>@Model.Site.SiteName</h2>
     </div>
@@ -113,130 +63,88 @@
 
         <div class="row">
 
-            <div role="tabpanel">
+            <div id="content">
 
-                <!-- Nav tabs -->
-                <ul class="nav nav-tabs" role="tablist" id="actionselector">
-                    <li role="presentation" class="active"><a href="#tabStatus" aria-controls="tabStatus" role="tab" data-toggle="tab">Summary</a></li>
-                    <li role="presentation"><a href="#tabDevices" aria-controls="tabDevices" role="tab" data-toggle="tab">Devices</a></li>
-                    <li role="presentation"><a href="#tabLocation" aria-controls="tabLocation" role="tab" data-toggle="tab">Location</a></li>
-                    <li role="presentation"><a href="#tabAlarmSystem" aria-controls="tabAlarmSystem" role="tab" data-toggle="tab">Alarm system</a></li>
-                    <li role="presentation"><a href="#tabCCTV" aria-controls="tabCCTV" role="tab" data-toggle="tab">CCTV</a></li>
-                </ul>
+                <div class="container-fluid">
 
-                <!-- Tab panes -->
-                <div class="tab-content">
-
-                    <div role="tabpanel" class="tab-pane active" id="tabStatus">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <h4> Devices : @Model.Site.Devices.Count()</h4>
-                                    <h4> Location : @Model.Site.siteLocation.LocationName</h4>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div id="resultview">
-                                </div>
-                            </div>
-                        </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        @Html.Partial("~/Views/Shared/EditorTemplate/ToolbarMenu.cshtml")
                     </div>
+                </div>
 
-                    <div role="tabpanel" class="tab-pane" id="tabDevices">
-                        <div id="content">
+                <div class="row">
+                    @if (Model.Site != null)
+                    {
+                        foreach (var item in Model.Site.Devices)
+                        {
+                            <div class="col-lg-3 col-sm-6 col-xs-10">
 
-                            <div class="container-fluid">
 
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        @Html.Partial("~/Views/Shared/EditorTemplate/ToolbarMenu.cshtml")
-                                    </div>
-                                </div>
+                                <div id="@item.Id" class="panel panel-info">
 
-                                <div class="row">
-                                    @if (Model.Site != null)
-                                    {
-                                        foreach (var item in Model.Site.Devices)
-                                        {
-                                            <div class="col-md-3">
-                                                <div id="@item.Id" class="panel panel-info">
-                                                    <div class="panel-heading">@item.DeviceName</div>
-                                                    <div class="panel-body">
-                                                        <h4>@item.DeviceLocation.LocationName</h4>
-                                                        <h4>@item.Type.TypeName</h4>
-                                                        <a href="@Url.Action("View", "Device", new {DeviceId = item.Id})" class="btn">Show</a>
+                                    <div class="panel-heading">@item.DeviceName</div>
+
+                                    <div class="panel-body">
+
+                                        <div class="col-lg-12 col-sm-12 col-xs-10">
+                                            <div class="row">
+                                                <div class="col-lg-4 col-sm-4 col-xs-12">
+                                                    <img src="@GetImagePathForDeviceCategory(item.Type.Category)" class="thumbnail img-responsive">
+                                                </div>
+                                                <div class="col-lg-8 col-sm-8 col-xs-12">
+                                                    <div class="row">
+                                                        Location : @item.DeviceLocation.LocationName
                                                     </div>
+                                                    <div class="row">
+                                                        Type : @item.Type.TypeName
+                                                    </div>
+
+                                               </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <a href="@Url.Action("Index", GetControllerNameForDeviceCategory(item.Type.Category), new {ServerId = item.Id})" class="btn">
+                                                    <button class="btn btn-primary" type="button">
+                                                        <div class="inner-addon left-addon">
+                                                            <i class="glyphicon glyphicon-log-in"></i>
+                                                        </div>
+                                                    </button>
+                                                                                      </a>
+
+                                            </div>
+                                            
+                                        </div>
+
+                                        @*<div class="col-lg-4 col-sm-4 col-xs-4">
+                                            <div class="row">
+                                                <div class="col-lg-12 col-sm-12 col-xs-12">
+                                                    <button class="btn btn-primary" type="button">
+                                                        <i class="glyphicon glyphicon-log-in"></i>
+                                                        <a href="@Url.Action("View", "Device", new {DeviceId = item.Id})" class="btn"></a>
+                                                    </button>
                                                 </div>
                                             </div>
-                                        }
-                                    }
+                                        </div>*@
+
+                                    </div>
+
                                 </div>
 
                             </div>
 
-                        </div>
-                    </div>
-
-                        <div role="tabpanel" class="tab-pane" id="tabAlarmSystem">
-                            <div class="container-fluid">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        @{ Html.RenderAction("AlarmSystemSummary", new {siteId = Model.Site.Id}); }
-
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div id="resultview">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div role="tabpanel" class="tab-pane" id="tabCCTV">
-                            <div class="container-fluid">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        CCTV
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div id="resultview">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
 
-                        <div role="tabpanel" class="tab-pane" id="tabLocation">
-                            <div class="container-fluid">
-                                <div class="row">
-                                    <div class="col-md-12 embed-responsive embed-responsive-16by9">
-                                        <h4>Location</h4>
-                                        <iframe class="embed-responsive-item"
-                                                frameborder="0"
-                                                style="border: 0"
-                                                src="https://www.google.com/maps/embed/v1/view?key=AIzaSyCoh6OpbGQK7bY59n2qoMF4TvNKfTIEkWQ&center=@Model.SiteLatCordStr(),@Model.SiteLngCordStr()&zoom=18&maptype=satellite"></iframe>
+                        }
+                    }
+                </div>
 
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div id="resultview">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
             </div>
 
-
         </div>
-
     </div>
+
+</div>
 
 </div>
 

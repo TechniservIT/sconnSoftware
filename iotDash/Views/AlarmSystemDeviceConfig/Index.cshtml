@@ -470,20 +470,41 @@
             @if (Model.Device != null)
             {
                 <tr>
-                    <td>Power supply</td>
-                    <td>
+
+                    <td class="col-lg-2 col-sm-2 col-xs-3">
+                        <div class="col-lg-3 col-sm-3 col-xs-4">
+                            <img src="~/Content/img/zasilanie1.png" class="img-responsive">
+                        </div>
+                    </td>
+
+
+                    <td class="col-lg-4 col-sm-4 col-xs-3">
+                        Power supply
+                    </td>
+
+                    <td class="col-lg-6 col-sm-6 col-xs-6">
                         <div class="progress">
                             <div class="progress-bar  @(GetProgressBarClassForSupplyValue(Model.Device.MainVoltage))" role="progressbar" aria-valuenow="@Model.Device.MainVoltage.ToString()" aria-valuemin="0" aria-valuemax="24" style="width: @(GetProgressBarValueForVoltageMain(Model.Device.MainVoltage))%;">
                                 @Model.Device.MainVoltage.ToString() V
                             </div>
                         </div>
                     </td>
+
                 </tr>
 
 
                 <tr>
-                    <td>Battery</td>
-                    <td>
+                    <td class="col-lg-2 col-sm-2 col-xs-3">
+                        <div class="col-lg-3 col-sm-3 col-xs-4">
+                            <img src="~/Content/img/bateria2.png" class="thumbnail img-responsive">
+                        </div>
+                    </td>
+
+                    <td class="col-lg-4 col-sm-4 col-xs-3">
+                        Battery
+                    </td>
+
+                    <td class="col-lg-6 col-sm-6 col-xs-6">
                         <div class="progress">
                             <div class="progress-bar @(GetProgressBarClassForBatteryValue(Model.Device.BatteryVoltage))" role="progressbar" aria-valuenow="@Model.Device.BatteryVoltage.ToString()" aria-valuemin="0" aria-valuemax="15" style="width: @(GetProgressBarValueForVoltageBattery(Model.Device.MainVoltage))%;">
                                 @Model.Device.BatteryVoltage.ToString() V
@@ -598,7 +619,8 @@
                         </td>
 
                         <td>
-                            @Html.Raw(HttpUtility.HtmlDecode(ContentForDigitalIoValue(Model.Device.Outputs[i].Value)))
+                            <input class="tgsw-action" type="checkbox" value="@Model.Device.Outputs[i].Value.ToString()" title="" id='tgsw-@Model.Device.Outputs[i].Id.ToString()"'>
+                            @*@Html.Raw(HttpUtility.HtmlDecode(ContentForDigitalIoValue(Model.Device.Outputs[i].Value)))*@
                         </td>
 
                     </tr>

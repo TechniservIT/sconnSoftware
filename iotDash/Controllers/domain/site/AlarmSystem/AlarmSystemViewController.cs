@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using AlarmSystemManagmentService;
 using iotDash.Areas.AlarmSystem.Models;
+using iotDash.Content.Dynamic.Status;
 using iotDash.Controllers.domain.navigation;
 using iotDash.Controllers.domain.site.AlarmSystem.Abstract;
 using iotDash.Models;
@@ -26,13 +28,13 @@ namespace iotDash.Controllers.domain.site.AlarmSystem
         
         public AlarmSystemViewController(HttpContextBase contBase) : base(contBase)
         {}
+
         
-        // GET: AlarmSystemView
         public ActionResult Index(int ServerId)
         {
             try
-            {      
-               this._provider = new GlobalConfigService(DomainSession.GetAlarmConfigForContextWithDeviceId(this.HttpContext, ServerId));
+            {
+                this._provider = new GlobalConfigService(DomainSession.GetAlarmConfigForContextWithDeviceId(this.HttpContext, ServerId));
                 AlarmSystemGlobalModel model = new AlarmSystemGlobalModel(this._provider.Get());
                 model.ServerId = ServerId;
                 return View(model);
@@ -43,6 +45,23 @@ namespace iotDash.Controllers.domain.site.AlarmSystem
             return View();
         }
 
+
+        // GET: AlarmSystemView
+        public ActionResult Edit(int ServerId)
+        {
+            try
+            {
+                this._provider = new GlobalConfigService(DomainSession.GetAlarmConfigForContextWithDeviceId(this.HttpContext, ServerId));
+                AlarmSystemGlobalModel model = new AlarmSystemGlobalModel(this._provider.Get());
+                model.ServerId = ServerId;
+                return View(model);
+            }
+            catch (Exception e)
+            {
+            }
+            return View();
+        }
+        
 
         // GET: AlarmSystemView
         public ActionResult Summary()
@@ -58,7 +77,6 @@ namespace iotDash.Controllers.domain.site.AlarmSystem
             return View(model);
         }
 
-        
         // GET: AlarmSystemView
         public ActionResult Device(int DeviceId)
         {

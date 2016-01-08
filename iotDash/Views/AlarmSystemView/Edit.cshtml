@@ -1,0 +1,194 @@
+﻿@model iotDash.Areas.AlarmSystem.Models.AlarmSystemGlobalModel
+@using sconnConnector
+
+@{
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+@Scripts.Render("~/bundles/jqueryui")
+@Scripts.Render("~/bundles/toggleswitch")
+@Scripts.Render("~/bundles/signalr")
+@Scripts.Render("~/bundles/numspin")
+@Scripts.Render("~/bundles/fancybox")
+
+@Styles.Render("~/bundles/css/toggleswitch")
+@Styles.Render("~/bundles/css/numspin")
+
+
+<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+<script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@if (Model.Config != null)
+{
+    <h2>@Model.Config.Name</h2>
+}
+
+<script src="~/signalr/hubs"></script>
+
+<script type="text/javascript">
+
+    $(function () {
+
+        var map = L.map('map', {
+            maxZoom: 24,
+            minZoom: 1,
+            crs: L.CRS.Simple
+        }).setView([0, 0], 1);
+
+        map.setMaxBounds(new L.LatLngBounds([0, 500], [500, 0]));
+
+        var imageUrl = 'http://www.lib.utexas.edu/maps/historical/newark_nj_1922.jpg';
+        var imageBounds = [[250, 0], [0, 250]];
+        L.imageOverlay(imageUrl, imageBounds).addTo(map);
+
+        //$("#map").height($(window).height()).width($(window).width());
+        //map.invalidateSize();
+
+    });
+
+    $(document).ready(function() {
+        $(".fancybox").fancybox();
+    });
+
+
+</script>
+
+
+@functions{
+
+    public string SpanClassForArmStatusDisplay()
+    {
+        if (Model.Config.Armed)
+        {
+            return "label label-success";
+        }
+        else
+        {
+            return "label label-danger";
+        }
+    }
+
+    public string DescForArmStatusDisplay()
+    {
+        if (Model.Config.Armed)
+        {
+            return "Armed";
+        }
+        else
+        {
+            return "Disarmed";
+        }
+    }
+
+
+
+    public string SpanClassForViolationStatusDisplay()
+    {
+        if (Model.Config.Violation)
+        {
+            return "label label-danger";
+
+        }
+        else
+        {
+            return "label label-success";
+        }
+    }
+
+
+    public string SpanClassForFailureStatusDisplay()
+    {
+        if (Model.Config.Failure)
+        {
+            return "label label-danger";
+
+        }
+        else
+        {
+            return "label label-success";
+        }
+    }
+
+
+    public string DescForViolationStatusDisplay()
+    {
+        if (Model.Config.Violation)
+        {
+            return "Yes";
+        }
+        else
+        {
+            return "No";
+        }
+    }
+
+
+    public string DescForArmAction()
+    {
+        if (Model.Config.Armed)
+        {
+            return "Disarm";
+        }
+        else
+        {
+            return "Arm";
+        }
+    }
+
+}
+
+
+<div class="container-fluid">
+
+    <div class="row">
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <center>
+                    <h2>Status</h2>
+                </center>
+            </div>
+            <div class="panel-body">
+                <p></p>
+            </div>
+
+            <table class="table">
+                <tr>
+                    <td>Device Number</td>
+                    <td>@Model.Config.Devices</td>
+                </tr>
+
+                <tr>
+                    <td>Armed</td>
+                    <td><span class='@SpanClassForArmStatusDisplay()'>@DescForArmStatusDisplay()</span></td>
+                </tr>
+
+                <tr>
+                    <td>Violation</td>
+                    <td><span class='@SpanClassForViolationStatusDisplay()'>@DescForViolationStatusDisplay()</span></td>
+                </tr>
+
+                <tr>
+                    <td>Failure</td>
+                    <td><span class='@SpanClassForFailureStatusDisplay()'>@Model.Config.Failure.ToString()</span></td>
+                </tr>
+
+
+                <tr>
+                    <td></td>
+                    <td><span class='@SpanClassForViolationStatusDisplay()'>@DescForViolationStatusDisplay()</span></td>
+                </tr>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+</div>

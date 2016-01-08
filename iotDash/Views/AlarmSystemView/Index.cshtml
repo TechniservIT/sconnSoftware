@@ -14,6 +14,11 @@
 @Styles.Render("~/bundles/css/toggleswitch")
 @Styles.Render("~/bundles/css/numspin")
 
+
+<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+<script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+
+
 @{
     ViewBag.Title = "Index";
 }
@@ -26,9 +31,31 @@
 <script src="~/signalr/hubs"></script>
 
 <script type="text/javascript">
+    
+    $(function () {
+
+        var map = L.map('map', {
+            maxZoom: 24,
+            minZoom: 1,
+            crs: L.CRS.Simple
+        }).setView([0, 0], 1);
+
+        map.setMaxBounds(new L.LatLngBounds([0, 500], [500, 0]));
+
+        var imageUrl = 'http://www.lib.utexas.edu/maps/historical/newark_nj_1922.jpg';
+        var imageBounds = [[250, 0], [0, 250]];
+        L.imageOverlay(imageUrl, imageBounds).addTo(map);
+
+        //$("#map").height($(window).height()).width($(window).width());
+        //map.invalidateSize();
+
+    });
+
     $(document).ready(function() {
         $(".fancybox").fancybox();
     });
+
+
 </script>
 
 
@@ -73,6 +100,21 @@
         }
     }
 
+
+    public string SpanClassForFailureStatusDisplay()
+    {
+        if (Model.Config.Failure)
+        {
+            return "label label-danger";
+
+        }
+        else
+        {
+            return "label label-success";
+        }
+    }
+
+
     public string DescForViolationStatusDisplay()
     {
         if (Model.Config.Violation)
@@ -98,214 +140,19 @@
         }
     }
 
-
-    public string ContentForDigitalIoValue(int value)
-    {
-        if (value == 0)
-        {
-            return "<button type='button' class='btn btn-danger'>" + value.ToString() + "</button>";
-        }
-        else
-        {
-            return "<button type='button' class='btn btn-success'>" + value.ToString() + "</button>";
-        }
-    }
-
-    public string ImageUrlForDigitalIoValue(int value)
-    {
-        if (value == 0)
-        {
-            return "";
-        }
-        else
-        {
-            return "";
-        }
-    }
-
-    public string GetProgressBarClassForSupplyValue(double value)
-    {
-        if (value >= 16)
-        {
-            return "progress-bar-success";
-        }
-        else if (value >= 13.8)
-        {
-            return "progress-bar-warning";
-        }
-        else
-        {
-            return "progress-bar-danger";
-        }
-    }
-
-
-    public string GetProgressBarClassForBatteryValue(double value)
-    {
-        if (value >= 12)
-        {
-            return "progress-bar-success";
-        }
-        else if (value >= 9)
-        {
-            return "progress-bar-warning";
-        }
-        else
-        {
-            return "progress-bar-danger";
-        }
-    }
-
-    public string GetProgressBarValueForVoltageBattery(double value)
-    {
-        if (value >= 9)
-        {
-            return ((value / ipcDefines.SUPP_BATT_LEAD_ACID_MAX_VOLTAGE) * 100).ToString();
-        }
-        else
-        {
-            return "100";  ///error 100 full
-        }
-    }
-
-    public string GetProgressBarValueForVoltageMain(double value)
-    {
-        if (value >= 9)
-        {
-            return ((value / ipcDefines.SUPP_MAIN_AC_MAX_VOLTAGE) * 100).ToString();
-        }
-        else
-        {
-            return "100";  ///error 100 full
-        }
-    }
-
-    //TODO generate req param input lists
-
-
 }
 
-
-<script>
-
-    var Reloading = false;
-
-
-
-    function ReloadPanels() {
-
-        Reloading = true;
-
-        $(".panel").removeClass("panel-info");
-        $(".panel").removeClass("panel-primary");
-
-        $(".panel").each(function () {
-            //apply class based on value
-            var contval = $(this).find(".noderesval").first().attr("title");
-            var pval = parseInt(contval);
-            if (pval == 1) {
-                $(this).addClass("panel-primary");
-            } else {
-                $(this).addClass("panel-info");
-            }
-
-            //set all result params
-            $(this).find(".tgsw-action").each(function () {
-                var IsSet = (pval == 1 ? true : false);
-                var sw = $(this).bootstrapSwitch('state', IsSet);
-
-            });
-
-        });
-
-        Reloading = false;
-    }
-
-
-    function syntaxHighlight(json) {
-        json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-        return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
-            var cls = 'number';
-            if (/^"/.test(match)) {
-                if (/:$/.test(match)) {
-                    cls = 'key';
-                } else {
-                    cls = 'string';
-                }
-            } else if (/true|false/.test(match)) {
-                cls = 'boolean';
-            } else if (/null/.test(match)) {
-                cls = 'null';
-            }
-            return '<span class="' + cls + '">' + match + '</span>';
-        });
-    }
-
-    var obj = { a: 1, 'b': 'foo', c: [false, 'false', null, 'null', { d: { e: 1.3e5, f: '1.3e5' } }] };
-
-    $(function () {
-
-        ReloadPanels();
-
-        $('.spinEdit').spinedit({
-            minimum: 50,
-            maximum: 12500,
-            step: 50,
-            value: 150,
-            numberOfDecimals: 0
-        });
-
-
-
-        $('.tgsw-action').on('switchChange.bootstrapSwitch', function () {
-
-            if (!Reloading) {
-
-                //get sender id
-                var ElementId = $(this).attr("id");
-                var AccessorId = "#".concat(ElementId);
-
-                //TODO load req param input lists
-                var StateToSet = $(this).bootstrapSwitch('state');
-                //alert("req param :" + StateToSet);
-                var ParamList = [StateToSet];
-
-                //perform action
-                $.ajax({
-                    url: '@Url.Action("PerformAction", "Device")',
-                    type: this.method,
-                    data: {
-                        ActionId: $(AccessorId).attr("title"),
-                        ActionParams: ParamList
-                    },
-                    success: function (result) {
-                        $('#resultview').html(result);
-                    }
-                });
-
-            }
-
-
-        });
-
-
-        $('#actionselector a').click(function (e) {
-            e.preventDefault()
-            $(this).tab('show')
-        })
-
-
-    });
-
-</script>
 
 
 <div role="tabpanel">
 
-    <!-- Nav tabs -->
     <ul class="nav nav-tabs" role="tablist" id="actionselector">
-        <li role="presentation" class="active"><a href="#tabStatus" aria-controls="tabStatus" role="tab" data-toggle="tab">Status</a></li>
-        <li role="presentation"><a href="#tabConfigure" aria-controls="tabConfigure" role="tab" data-toggle="tab">Configure</a></li>
+        <li role="presentation" style="width: 50%;" class="active">
+            <a href="#tabStatus" aria-controls="tabStatus" role="tab" data-toggle="tab">Status</a>
+        </li>
+        <li role="presentation" style="width:50%;">
+            <a href="#tabConfigure" aria-controls="tabConfigure" role="tab" data-toggle="tab">Configure</a>
+        </li>
     </ul>
 
     <!-- Tab panes -->
@@ -313,40 +160,59 @@
 
         <div role="tabpanel" class="tab-pane active" id="tabStatus">
             <div class="container-fluid">
-                <div class="row">
-                    <div id="ReloadModelData" class="col-md-1">
-                        @Html.ActionLink("Refresh", "Index", new { DeviceId = Model.ServerId }, new { @class = "glyphicon glyphicon-refresh" })
-                    </div>
-                </div>
 
                 <div class="row">
+                    
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <center>
                                 <h2>Info</h2>
                             </center>
                         </div>
+
                         <div class="panel-body">
-                            <div class="col-md-7">
-                                <div class="col-md-12 embed-responsive embed-responsive-16by9">
-                                    <a class="fancybox" rel="group" href="http://farm2.staticflickr.com/1518/23483607324_5846f25522_b.jpg"><img src="http://farm2.staticflickr.com/1518/23483607324_5846f25522_m.jpg" alt="" /></a>
-                                    @*<img class="embed-responsive-item" src="http://farm2.staticflickr.com/1518/23483607324_5846f25522_b.jpg"/>*@
+
+                            <div class="col-md-6">
+                                <div id="map" style="height:400px;">
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+
+                                <div class="row">
+
+                                    <div class="col-lg-6 col-sm-6 col-xs-12">
+                                        <a href="@Url.Action("Index", "AlarmSystemConfiguration", new {DeviceId = Model.ServerId})" role="button">
+                                            <img src="~/Content/img/klodka2.png" class="thumbnail img-responsive">
+                                        </a>
+                                    </div>
+
+                                    <div class="col-lg-6 col-sm-6 col-xs-12">
+                                        <a href="@Url.Action("Index", "AlarmSystemConfiguration", new {DeviceId = Model.ServerId})" role="button">
+                                            <img src="~/Content/img/oko4.png" class="thumbnail img-responsive">
+                                        </a>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col-lg-6 col-sm-6 col-xs-12">
+                                        <a href="@Url.Action("Index", "AlarmSystemConfiguration", new {DeviceId = Model.ServerId})" role="button">
+                                            <img src="~/Content/img/wykrzyknik.png" class="thumbnail img-responsive">
+                                        </a>
+                                    </div>
+
+                                    <div class="col-lg-6 col-sm-6 col-xs-12">
+                                        <a href="@Url.Action("Index", "AlarmSystemConfiguration", new {DeviceId = Model.ServerId})" role="button">
+                                            <img src="~/Content/img/wykrzyknik.png" class="thumbnail img-responsive">
+                                        </a>
+                                    </div>
+
                                 </div>
 
                             </div>
 
-                            <div class="col-md-5">
-                                <ul>
-                                    <li>
-                                        <div class="col-md-6">
-                                            Firmware version :
-                                        </div>
-                                        <div class="col-md-6">
-                                            1.001
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
                         </div>
 
                     </div>
@@ -382,6 +248,17 @@
                                 <td><span class='@SpanClassForViolationStatusDisplay()'>@DescForViolationStatusDisplay()</span></td>
                             </tr>
 
+                            <tr>
+                                <td>Failure</td>
+                                <td><span class='@SpanClassForFailureStatusDisplay()'>@Model.Config.Failure.ToString()</span></td>
+                            </tr>
+
+
+                            <tr>
+                                <td></td>
+                                <td><span class='@SpanClassForViolationStatusDisplay()'>@DescForViolationStatusDisplay()</span></td>
+                            </tr>
+
                         </table>
 
                     </div>
@@ -389,7 +266,7 @@
                 </div>
 
                 <div class="row">
-                    @Html.ActionLink(@DescForArmAction(), "ToggleArm", new { DeviceId = Model.ServerId }, new { @class = "btn btn-primary" })
+                    @Html.ActionLink(@DescForArmAction(), "ToggleArm", new {DeviceId = Model.ServerId}, new {@class = "btn btn-primary"})
                 </div>
 
 
@@ -400,7 +277,115 @@
 
             <div role="tabpanel">
 
-                @{Html.RenderAction("ConfigurationSelect", new { DeviceId = Model.ServerId });}
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <center>
+                            <h2>Select configuration type</h2>
+                        </center>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-4 col-sm-6 col-xs-12">
+                                <div class="thumbnail">
+                                    <a href="@Url.Action("Index", "AlarmSystemConfiguration", new {DeviceId = Model.ServerId})" role="button">
+                                        <img src="~/Content/img/config1.png" class="thumbnail img-responsive">
+                                    </a>
+                                    <div class="caption text-center">
+                                        <h3>Global</h3>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-lg-4 col-sm-6 col-xs-12">
+                                <div class="thumbnail">
+                                    <a href="@Url.Action("Index", "AlarmSystemDeviceConfig", new {ServerId = Model.ServerId, DeviceId = 0})" role="button">
+                                        <img src="~/Content/img/config2.png" class="thumbnail img-responsive">
+                                    </a>
+                                    <div class="caption text-center">
+                                        <h3>Devices</h3>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-lg-4 col-sm-6 col-xs-12">
+                                <div class="thumbnail">
+                                    <a href="@Url.Action("View", "AlarmSystemZonesConfig", new {DeviceId = Model.ServerId})" role="button">
+                                        <img src="~/Content/img/strefy1.png" class="thumbnail img-responsive">
+                                    </a>
+                                    <div class="caption text-center">
+                                        <h3>Zones</h3>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-lg-4 col-sm-6 col-xs-12">
+                                <div class="thumbnail">
+                                    <a href="@Url.Action("View", "AlarmSystemGsmConfig", new {DeviceId = Model.ServerId})" role="button">
+                                        <img src="~/Content/img/tel.png" class="thumbnail img-responsive">
+                                    </a>
+                                    <div class="caption  text-center">
+                                        <h3>Reporting</h3>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="col-lg-4 col-sm-6 col-xs-12">
+                                <div class="thumbnail">
+                                    <a href="@Url.Action("CommunicationConfigure", "AlarmSystemDeviceConfig", new {DeviceId = Model.ServerId})" role="button">
+                                        <img src="~/Content/img/patchcord.png" class="thumbnail img-responsive">
+                                    </a>
+                                    <div class="caption  text-center">
+                                        <h3>Communication</h3>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="col-lg-4 col-sm-6 col-xs-12">
+                                <div class="thumbnail">
+                                    <a href="@Url.Action("View", "AlarmSystemUsersConfig", new {DeviceId = Model.ServerId})" role="button">
+                                        <img src="~/Content/img/user.png" class="thumbnail img-responsive">
+                                    </a>
+                                    <div class="caption  text-center">
+                                        <h3>Users</h3>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="col-lg-4 col-sm-6 col-xs-12">
+                                <div class="thumbnail">
+                                    <a href="@Url.Action("View", "AlarmSystemAuthorizedDevices", new {DeviceId = Model.ServerId})" role="button">
+                                        <img src="~/Content/img/config2.png" class="thumbnail img-responsive">
+                                    </a>
+                                    <div class="caption  text-center">
+                                        <h3>Authorization</h3>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="col-lg-4 col-sm-6 col-xs-12">
+                                <div class="thumbnail">
+                                    <a href="@Url.Action("View", "AlarmSystemEvents", new {DeviceId = Model.ServerId})" role="button">
+                                        <img src="~/Content/img/zegar1.png" class="thumbnail img-responsive">
+                                    </a>
+                                    <div class="caption  text-center">
+                                        <h3>Events</h3>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="panel-footer"></div>
+                </div>
+
+
+                @*@{Html.RenderAction("ConfigurationSelect", new { DeviceId = Model.ServerId });}*@
 
             </div>
 

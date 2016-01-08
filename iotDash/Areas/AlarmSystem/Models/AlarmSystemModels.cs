@@ -58,7 +58,7 @@ namespace iotDash.Areas.AlarmSystem.Models
         [Required]
         public int ServerId { get; set; }
         public sconnDevice Device { get; set; }
-
+        public string Result { get; set; }
 
         public AlarmSystemDeviceModel(sconnDevice device)
         {

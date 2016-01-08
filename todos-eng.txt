@@ -1,3 +1,16 @@
+FP tasks :
+alarm sys  landpage				+
+device view img based on type url		V
+alarm system device images pre-defined		V
+alarm system device view select			
+global cfg view
+io summary value fix
+device view output control switch post		+
+alarm status/cfg tabs full width		V
+config tab layout fix				V
+site device select load based on type
+
+Partially impl :
 tests for repo				+
 tests for alarm services		V
 embedded HAL
@@ -60,13 +73,10 @@ Extras :
 PLC protocols TCP/IP
 PLC services and interface
 Common logic definitions service
-Repository generic struct
-Sconn protocol serialization verification and struct
-Sconn dd cfg hashes to upload/download			V
+Sconn protocol serialization verification and struct	V
+Sconn cfg hashes to upload/download			V
 Dvr http streaming and service
 Video streaming config services and interfaces
 Video recording service
 Video playback service
-view engine for video rendering
-
 

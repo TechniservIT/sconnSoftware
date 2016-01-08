@@ -1729,15 +1729,15 @@
 
 .bfh-selectbox {
   position: relative;
-  color: #FFF;
-    background-color: #337AB7;
-    border-color: #2E6DA4;
 }
 
 .bfh-selectbox .bfh-selectbox-toggle {
   display: inline-block;
   padding: 6px 24px 6px 12px;
   text-decoration: none;
+ color: #FFF;
+background-color: #337AB7;
+border-color: #2E6DA4;
 }
 
 .bfh-selectbox .bfh-selectbox-toggle:focus {
@@ -1837,7 +1837,7 @@
 }
 
 .bfh-selectbox .bfh-selectbox-options ul .disabled > a {
-  color: #999999;
+  color: #999999;.bfh-selectbox-toggle
 }
 
 .bfh-selectbox .bfh-selectbox-options ul .disabled > a:hover,
