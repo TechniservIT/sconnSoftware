@@ -4,13 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{10B956BE-068F-4FBB-9B1E-63C080B24019}</ProjectGuid>
+    <ProjectGuid>{DC1FBE1D-13B6-4DD2-91E2-7FFE2F909CC5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DeviceManagmentService</RootNamespace>
-    <AssemblyName>DeviceManagmentService</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <RootNamespace>IotServiceAbstract</RootNamespace>
+    <AssemblyName>IotServiceAbstract</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -40,23 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DeviceManagmentService.cs" />
-    <Compile Include="IDeviceManagmentService.cs" />
+    <Compile Include="IEntityService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\iotDatabaseConnector\iotDatabaseConnector.csproj">
-      <Project>{7df5e6fa-5839-456f-959b-af4a7a742775}</Project>
-      <Name>iotDatabaseConnector</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\iotData\iotData.csproj">
-      <Project>{e94b0a02-089e-483a-aaef-3bfa49039598}</Project>
-      <Name>iotData</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\IotServiceAbstract\IotServiceAbstract.csproj">
-      <Project>{dc1fbe1d-13b6-4dd2-91e2-7ffe2f909cc5}</Project>
-      <Name>IotServiceAbstract</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

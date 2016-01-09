@@ -72,6 +72,10 @@
       <Project>{e94b0a02-089e-483a-aaef-3bfa49039598}</Project>
       <Name>iotData</Name>
     </ProjectReference>
+    <ProjectReference Include="..\IotServiceAbstract\IotServiceAbstract.csproj">
+      <Project>{dc1fbe1d-13b6-4dd2-91e2-7ffe2f909cc5}</Project>
+      <Name>IotServiceAbstract</Name>
+    </ProjectReference>
     <ProjectReference Include="..\sconnConnector\sconnConnector.csproj">
       <Project>{09c8a8f0-f85a-4534-922e-85e14ec32725}</Project>
       <Name>sconnConnector</Name>

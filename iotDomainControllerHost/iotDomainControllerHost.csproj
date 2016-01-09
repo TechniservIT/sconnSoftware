@@ -140,17 +140,29 @@
     <Folder Include="DomainService\Surveillance\Recording\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AlarmSystemManagmentService\AlarmSystemManagmentService.csproj">
+      <Project>{3d463251-18d3-451b-b06c-c4d655dd8a37}</Project>
+      <Name>AlarmSystemManagmentService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DeviceManagmentService\DeviceManagmentService.csproj">
+      <Project>{10b956be-068f-4fbb-9b1e-63c080b24019}</Project>
+      <Name>DeviceManagmentService</Name>
+    </ProjectReference>
     <ProjectReference Include="..\iotData\iotData.csproj">
       <Project>{e94b0a02-089e-483a-aaef-3bfa49039598}</Project>
       <Name>iotData</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\iotDomainDataAccessService\iotDomainDataAccessService.csproj">
+      <Project>{a73e1e91-a18c-48bd-bda8-931d429b7966}</Project>
+      <Name>iotDomainDataAccessService</Name>
     </ProjectReference>
     <ProjectReference Include="..\iotServiceLayer\iotServiceLayer.csproj">
       <Project>{6640ac88-df6b-43a6-bee3-a65b4396119b}</Project>
       <Name>iotServiceLayer</Name>
     </ProjectReference>
-    <ProjectReference Include="..\iotService\iotService.csproj">
-      <Project>{8fa92296-4f77-45ce-9b85-bcb37a7f2332}</Project>
-      <Name>iotService</Name>
+    <ProjectReference Include="..\SiteManagmentService\SiteManagmentService.csproj">
+      <Project>{cc9fb92a-c1d9-400a-bd9b-d814280a118e}</Project>
+      <Name>SiteManagmentService</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -12,7 +12,6 @@ using iotDash.Session;
 using iotDatabaseConnector.DAL.Repository.Connector.Entity;
 using iotDbConnector.DAL;
 using sconnConnector.Config;
-using SiteManagmentService;
 using AlarmSystemManagmentService;
 using iotDash.Controllers.domain.site.AlarmSystem.Abstract;
 using sconnConnector.Config.Abstract;

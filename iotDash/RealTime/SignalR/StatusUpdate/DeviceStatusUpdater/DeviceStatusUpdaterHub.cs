@@ -2,7 +2,6 @@
 using System.Linq;
 using iotDatabaseConnector.DAL.Repository.Connector.Entity;
 using iotDbConnector.DAL;
-using iotDeviceService;
 using Microsoft.AspNet.SignalR;
 using Newtonsoft.Json;
 
@@ -15,21 +14,7 @@ namespace iotDash.RealTime.SignalR.StatusUpdate.DeviceStatusUpdater
 
         public delegate void DeviceEventCallbackHandler(Device dev);
         public event DeviceEventCallbackHandler DeviceCallbackEvent;
-
-        private DeviceRestfulService client;
-      
-
-
-        /*************  WCF callback ************/
-        //[CallbackBehaviorAttribute(UseSynchronizationContext = true)]
-        //public class DeviceEventServiceCallback : IDeviceEventCallback
-        //{
-        //    public void OnDeviceUpdated(Device dev)
-        //    {
-        //        DeviceCallbackEvent(dev);
-        //    }
-        //}
-
+        
          public DeviceStatusUpdaterHub()
          {
             //cont.DeviceUpdateEvent += iotContext_DeviceUpdateEvent;
@@ -161,15 +146,15 @@ namespace iotDash.RealTime.SignalR.StatusUpdate.DeviceStatusUpdater
         public void UpdateProperty(string propertyData, int domainId)
          {
                 DeviceProperty prop = (DeviceProperty)JsonConvert.DeserializeObject(propertyData);
-                DeviceRestfulService cl = new DeviceRestfulService();
-                cl.PropertyUpdate(prop);
+                //DeviceRestfulService cl = new DeviceRestfulService();
+                //cl.PropertyUpdate(prop);
         }
 
         public void UpdateParameter(string paramData)
         {
             DeviceParameter param = (DeviceParameter)JsonConvert.DeserializeObject(paramData);
-            DeviceRestfulService cl = new DeviceRestfulService();
-            cl.ResParamUpdate(param);
+            //DeviceRestfulService cl = new DeviceRestfulService();
+            //cl.ResParamUpdate(param);
         }
 
     }

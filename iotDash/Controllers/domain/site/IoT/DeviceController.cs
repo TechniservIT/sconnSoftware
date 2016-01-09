@@ -7,7 +7,6 @@ using iotDash.Controllers.domain.navigation;
 using iotDash.Models;
 using iotDash.Session;
 using iotDbConnector.DAL;
-using iotDeviceService;
 using iotDash.Identity.Attributes;
 
 namespace iotDash.Controllers.domain.site.IoT
@@ -114,27 +113,27 @@ namespace iotDash.Controllers.domain.site.IoT
 		{
 			try
 			{
-				if (model != null)
-				{
-                    var cont = (iotContext)System.Web.HttpContext.Current.Session["iotcontext"];
-					DeviceRestfulService cl = new DeviceRestfulService();
-					string domainId = DomainSession.GetContextDomain(this.HttpContext);
-					iotDomain d = cont.Domains.First(dm => dm.DomainName.Equals(domainId));
-					Device dev = cl.DeviceAddWithParamsEntity(
-						model.DeviceSiteId.ToString(), 
-						model.DeviceName, 
-						model.DeviceIpAddr, 
-						model.DeviceNetPort.ToString(), 
-						model.DeviceLogin, 
-						model.DevicePassword, 
-						model.DeviceTypeId.ToString(), 
-						model.LocationId.ToString(),
-						model.DeviceProtocolName, 
-						d.Id,
-						model.DeviceIsVirtual
-						);
+				//if (model != null)
+				//{
+    //                var cont = (iotContext)System.Web.HttpContext.Current.Session["iotcontext"];
+				//	DeviceRestfulService cl = new DeviceRestfulService();
+				//	string domainId = DomainSession.GetContextDomain(this.HttpContext);
+				//	iotDomain d = cont.Domains.First(dm => dm.DomainName.Equals(domainId));
+				//	Device dev = cl.DeviceAddWithParamsEntity(
+				//		model.DeviceSiteId.ToString(), 
+				//		model.DeviceName, 
+				//		model.DeviceIpAddr, 
+				//		model.DeviceNetPort.ToString(), 
+				//		model.DeviceLogin, 
+				//		model.DevicePassword, 
+				//		model.DeviceTypeId.ToString(), 
+				//		model.LocationId.ToString(),
+				//		model.DeviceProtocolName, 
+				//		d.Id,
+				//		model.DeviceIsVirtual
+				//		);
 				
-				}
+				//}
 			}
 			catch (Exception e)
 			{
@@ -151,25 +150,27 @@ namespace iotDash.Controllers.domain.site.IoT
 			{
 			    if (model.Device != null)
 			    {
-			        var cont = (iotContext) System.Web.HttpContext.Current.Session["iotcontext"];
-			        DeviceRestfulService cl = new DeviceRestfulService();
-			        Device stored = cont.Devices.First(d => d.Id == model.Device.Id);
-			        if (stored != null)
-			        {
-			            Location loc = cont.Locations.First(l => l.Id == model.Device.DeviceLocation.Id);
-			            DeviceType type = cont.Types.First(t => t.Id == model.Device.Type.Id);
-			            //copy editable objects
-			            stored.DeviceName = model.Device.DeviceName;
-			            stored.Type = type;
-			            stored.DeviceLocation = loc;
-			            stored.Credentials.Username = model.Device.Credentials.Username;
-			            stored.Credentials.Password = model.Device.Credentials.Password;
-			            stored.EndpInfo.Hostname = model.Device.EndpInfo.Hostname;
-			            stored.EndpInfo.Port = model.Device.EndpInfo.Port;
-			            await cont.SaveChangesAsync();
-                        model = new DeviceEditModel(model.Device, cont.Locations.ToList(), cont.Types.ToList());
-                        model.Result = StatusResponseGenerator.GetAlertPanelWithMsgAndStat("Success.",RequestStatus.Success);
-			        }
+			        //var cont = (iotContext) System.Web.HttpContext.Current.Session["iotcontext"];
+			        //DeviceRestfulService cl = new DeviceRestfulService();
+			        //Device stored = cont.Devices.First(d => d.Id == model.Device.Id);
+			        //if (stored != null)
+			        //{
+			        //    Location loc = cont.Locations.First(l => l.Id == model.Device.DeviceLocation.Id);
+			        //    DeviceType type = cont.Types.First(t => t.Id == model.Device.Type.Id);
+			        //    //copy editable objects
+			        //    stored.DeviceName = model.Device.DeviceName;
+			        //    stored.Type = type;
+			        //    stored.DeviceLocation = loc;
+			        //    stored.Credentials.Username = model.Device.Credentials.Username;
+			        //    stored.Credentials.Password = model.Device.Credentials.Password;
+			        //    stored.EndpInfo.Hostname = model.Device.EndpInfo.Hostname;
+			        //    stored.EndpInfo.Port = model.Device.EndpInfo.Port;
+			        //    await cont.SaveChangesAsync();
+           //             model = new DeviceEditModel(model.Device, cont.Locations.ToList(), cont.Types.ToList());
+           //             model.Result = StatusResponseGenerator.GetAlertPanelWithMsgAndStat("Success.",RequestStatus.Success);
+			        //}
+
+
 			    }
 			    else
 			    {
@@ -191,20 +192,13 @@ namespace iotDash.Controllers.domain.site.IoT
 			
 			try
 			{
-				//TODO verify param
-                var cont = (iotContext)System.Web.HttpContext.Current.Session["iotcontext"];
-				DeviceRestfulService cl = new DeviceRestfulService();
-				string domainId = DomainSession.GetContextDomain(this.HttpContext);
-				iotDomain d = cont.Domains.First(dm => dm.DomainName.Equals(domainId));
-				Device dev = cl.DeviceAddWithParamsEntity(SiteId, Name, Host, Port, Login, Pass, Type, Loc, Prot,d.Id,false);
-				if (dev != null)
-				{
-					return "Success";       
-				}
-				else
-				{
-					return "Error";       
-				}
+    //            var cont = (iotContext)System.Web.HttpContext.Current.Session["iotcontext"];
+				//DeviceRestfulService cl = new DeviceRestfulService();
+				//string domainId = DomainSession.GetContextDomain(this.HttpContext);
+				//iotDomain d = cont.Domains.First(dm => dm.DomainName.Equals(domainId));
+				//Device dev = cl.DeviceAddWithParamsEntity(SiteId, Name, Host, Port, Login, Pass, Type, Loc, Prot,d.Id,false);
+
+					return "Error";   
 			}
 			catch (Exception e)
 			{
@@ -219,14 +213,14 @@ namespace iotDash.Controllers.domain.site.IoT
 			try
 			{
                 var cont = (iotContext)System.Web.HttpContext.Current.Session["iotcontext"];
-				DeviceRestfulService cl = new DeviceRestfulService();
-				Device dev = cont.Devices.First(d => d.Id == DeviceId);
-				if ( dev != null)
-				{
-					cl.UpdateDeviceProperties(dev);
-					DeviceViewModel model = new DeviceViewModel(dev);
-					return View(model);
-				}
+				//DeviceRestfulService cl = new DeviceRestfulService();
+				//Device dev = cont.Devices.First(d => d.Id == DeviceId);
+				//if ( dev != null)
+				//{
+				//	cl.UpdateDeviceProperties(dev);
+				//	DeviceViewModel model = new DeviceViewModel(dev);
+				//	return View(model);
+				//}
 				return View();
 			}
 			catch (Exception e)
@@ -242,14 +236,14 @@ namespace iotDash.Controllers.domain.site.IoT
 			try
 			{
                 var cont = (iotContext)System.Web.HttpContext.Current.Session["iotcontext"];
-				DeviceRestfulService cl = new DeviceRestfulService();
-				Device dev = cont.Devices.First(d => d.Id == DeviceId);
-				if (dev != null)
-				{
-					cl.UpdateDeviceProperties(dev);
-					DeviceViewModel model = new DeviceViewModel(dev);
-					return View(model);
-				}
+				//DeviceRestfulService cl = new DeviceRestfulService();
+				//Device dev = cont.Devices.First(d => d.Id == DeviceId);
+				//if (dev != null)
+				//{
+				//	cl.UpdateDeviceProperties(dev);
+				//	DeviceViewModel model = new DeviceViewModel(dev);
+				//	return View(model);
+				//}
 				return View();
 			}
 			catch (Exception e)
@@ -285,13 +279,14 @@ namespace iotDash.Controllers.domain.site.IoT
 			{
                 var cont = (iotContext)System.Web.HttpContext.Current.Session["iotcontext"];
 				DeviceAction action = cont.Actions.First(a => a.Id == ActionId);
-				DeviceRestfulService cl = new DeviceRestfulService();
-				string currValStr = action.ResultParameters.First().Value;
-				action.RequiredParameters.First().Value = currValStr.Equals("1") ? "0" : "1";   //toggle
-				action.RequiredParameters.First().Type = action.ResultParameters.First().Type;
-				bool result = cl.PerformDeviceAction(action);
-				return result == true ? "success" : "error";
-			}
+                //DeviceRestfulService cl = new DeviceRestfulService();
+                //string currValStr = action.ResultParameters.First().Value;
+                //action.RequiredParameters.First().Value = currValStr.Equals("1") ? "0" : "1";   //toggle
+                //action.RequiredParameters.First().Type = action.ResultParameters.First().Type;
+                //bool result = cl.PerformDeviceAction(action);
+                //return result == true ? "success" : "error";
+                return "error";
+            }
 			catch (Exception e)
 			{
 				return "error";

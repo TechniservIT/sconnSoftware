@@ -127,10 +127,6 @@
     <Compile Include="DeviceTypes\Alarm\AlarmServiceTests.cs" />
     <Compile Include="DeviceTypes\Alarm\AlarmServiceTheoreticalTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Other\iotUpdatePubSubTester.cs" />
-    <Compile Include="External\Service\iotServiceConnector.cs" />
-    <Compile Include="External\Service\iotRestfulTokenizerTest.cs" />
-    <Compile Include="Other\SiteServiceTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
@@ -161,10 +157,6 @@
       <Project>{3d463251-18d3-451b-b06c-c4d655dd8a37}</Project>
       <Name>AlarmSystemManagmentService</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DeviceRestfulService\DeviceRestfulService.csproj">
-      <Project>{685a47d8-1e7a-488d-9218-d8cbee2f1649}</Project>
-      <Name>DeviceRestfulService</Name>
-    </ProjectReference>
     <ProjectReference Include="..\iotDash\iotDash.csproj">
       <Project>{2835fdba-96ba-4d5c-850d-a909bb12f4e3}</Project>
       <Name>iotDash</Name>
@@ -177,29 +169,18 @@
       <Project>{e94b0a02-089e-483a-aaef-3bfa49039598}</Project>
       <Name>iotData</Name>
     </ProjectReference>
-    <ProjectReference Include="..\iotDeviceService\iotDeviceService.csproj">
-      <Project>{3c2419e5-d232-4c6f-9821-d8a491459ed1}</Project>
-      <Name>iotDeviceService</Name>
+    <ProjectReference Include="..\IotServiceAbstract\IotServiceAbstract.csproj">
+      <Project>{dc1fbe1d-13b6-4dd2-91e2-7ffe2f909cc5}</Project>
+      <Name>IotServiceAbstract</Name>
     </ProjectReference>
     <ProjectReference Include="..\iotServiceLayer\iotServiceLayer.csproj">
       <Project>{6640ac88-df6b-43a6-bee3-a65b4396119b}</Project>
       <Name>iotServiceLayer</Name>
     </ProjectReference>
-    <ProjectReference Include="..\iotService\iotService.csproj">
-      <Project>{8fa92296-4f77-45ce-9b85-bcb37a7f2332}</Project>
-      <Name>iotService</Name>
-    </ProjectReference>
     <ProjectReference Include="..\sconnConnector\sconnConnector.csproj">
       <Project>{09c8a8f0-f85a-4534-922e-85e14ec32725}</Project>
       <Name>sconnConnector</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Scripts\jquery-1.6.4-vsdoc.js" />
-    <Content Include="Scripts\jquery-1.6.4.js" />
-    <Content Include="Scripts\jquery-1.6.4.min.js" />
-    <Content Include="Scripts\jquery.signalR-2.2.0.js" />
-    <Content Include="Scripts\jquery.signalR-2.2.0.min.js" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DeviceTypes\GeneralIO\" />

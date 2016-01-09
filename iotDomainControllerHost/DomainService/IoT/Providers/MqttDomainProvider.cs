@@ -1,5 +1,4 @@
-﻿using iotDash.Service;
-using iotDbConnector.DAL;
+﻿using iotDbConnector.DAL;
 using iotServiceProvider;
 using System;
 using System.Collections.Generic;
@@ -31,14 +30,15 @@ namespace iotDomainController.DomainService.Providers
 
         public bool IsDeviceRegistered(Device dev)
         {
-            IiotDomainService cl = new iotServiceConnector().GetDomainClient();
-            List<Device> devices = cl.Devices().ToList();
-            return (from d in devices
-                    where 
-                    d.DeviceName.Equals( dev.DeviceName ) 
-                    &&
-                    d.EndpInfo.Hostname.Equals( dev.EndpInfo.Hostname )
-                    select d).Count() > 0;
+            //IiotDomainService cl = new iotServiceConnector().GetDomainClient();
+            //List<Device> devices = cl.Devices().ToList();
+            //return (from d in devices
+            //        where 
+            //        d.DeviceName.Equals( dev.DeviceName ) 
+            //        &&
+            //        d.EndpInfo.Hostname.Equals( dev.EndpInfo.Hostname )
+            //        select d).Count() > 0;
+            return false;
         }
 
         public Device DeviceForMqttClient(MqttClient client)
@@ -59,29 +59,29 @@ namespace iotDomainController.DomainService.Providers
             try
             {
                 //sconn Parser
-                IiotDomainService cl = new iotServiceConnector().GetDomainClient();
-                //EndpointInfo endp = cl.Endpoints().Where(e=> e.Hostname.Equals(dev.EndpInfo.Hostname) && e.Port == dev.EndpInfo.Port).FirstOrDefault();
-                Device stored = cl.DeviceWithEndpoint(dev.EndpInfo);
-                if (publish.Topic.Equals("Action"))
-                {
-                    foreach (var item in stored.Actions)
-                    {
-                        if (item.ResultParameters.FirstOrDefault().sconnMappers.Where(m => m.SeqNumber.ToString().Equals(publish.Message[0])) != null)
-                        {
-                            item.ResultParameters.FirstOrDefault().Value = publish.Message[1].ToString();
-                        }
-                    }
-                }
-                else if (publish.Topic.Equals("Property"))
-                {
-                    foreach (var item in stored.Properties)
-                    {
-                        if (item.ResultParameters.FirstOrDefault().sconnMappers.Where(m => m.SeqNumber.ToString().Equals(publish.Message[0])) != null)
-                        {
-                            item.ResultParameters.FirstOrDefault().Value = publish.Message[1].ToString();
-                        }
-                    }
-                }
+                //IiotDomainService cl = new iotServiceConnector().GetDomainClient();
+                ////EndpointInfo endp = cl.Endpoints().Where(e=> e.Hostname.Equals(dev.EndpInfo.Hostname) && e.Port == dev.EndpInfo.Port).FirstOrDefault();
+                //Device stored = cl.DeviceWithEndpoint(dev.EndpInfo);
+                //if (publish.Topic.Equals("Action"))
+                //{
+                //    foreach (var item in stored.Actions)
+                //    {
+                //        if (item.ResultParameters.FirstOrDefault().sconnMappers.Where(m => m.SeqNumber.ToString().Equals(publish.Message[0])) != null)
+                //        {
+                //            item.ResultParameters.FirstOrDefault().Value = publish.Message[1].ToString();
+                //        }
+                //    }
+                //}
+                //else if (publish.Topic.Equals("Property"))
+                //{
+                //    foreach (var item in stored.Properties)
+                //    {
+                //        if (item.ResultParameters.FirstOrDefault().sconnMappers.Where(m => m.SeqNumber.ToString().Equals(publish.Message[0])) != null)
+                //        {
+                //            item.ResultParameters.FirstOrDefault().Value = publish.Message[1].ToString();
+                //        }
+                //    }
+                //}
             }
             catch (Exception ex)
             {       

@@ -100,6 +100,10 @@
     <Folder Include="DomainService\Surveillance\Recording\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DeviceManagmentService\DeviceManagmentService.csproj">
+      <Project>{10b956be-068f-4fbb-9b1e-63c080b24019}</Project>
+      <Name>DeviceManagmentService</Name>
+    </ProjectReference>
     <ProjectReference Include="..\iotDatabaseConnector\iotDatabaseConnector.csproj">
       <Project>{7df5e6fa-5839-456f-959b-af4a7a742775}</Project>
       <Name>iotDatabaseConnector</Name>
@@ -111,6 +115,10 @@
     <ProjectReference Include="..\iotDomainController\DomainService\IoT\Providers\Mqtt\MqttBroker\MqttBroker.csproj">
       <Project>{4ebfa6e5-0636-496c-8c46-991b05df7491}</Project>
       <Name>MqttBroker</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SiteManagmentService\SiteManagmentService.csproj">
+      <Project>{cc9fb92a-c1d9-400a-bd9b-d814280a118e}</Project>
+      <Name>SiteManagmentService</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
