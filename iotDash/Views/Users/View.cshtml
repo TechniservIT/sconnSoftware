@@ -36,13 +36,12 @@
                         <th>Email</th>
                         <th>Phone  Number</th>
                         <th>Roles</th>
-                        <th>Action</th>
                     </tr>
 
 
                     @foreach (ApplicationUser d in Model.Users)
                     {
-                        <tr>
+                        <tr id="@d.Id.ToString()" class="rowRecord row-normal">
 
                             <td> @d.UserName </td>
 
@@ -52,34 +51,9 @@
 
                             <td> @d.Roles.Count.ToString()</td>
 
-                            <td>
-
-                                <ul class="sidebar-nav" id="sidebar">
-
-                                    <li role="presentation">
-                                        <a href="@Url.Action("Edit", "Users")"><span class=" glyphicon glyphicon-wrench"></span></a>
-                                    </li>
-
-                                    <li role="presentation">
-                                        <a href="@Url.Action("Remove", "Users")"><span class=" glyphicon glyphicon-trash"></span></a>
-                                    </li>
-
-                                </ul>
-
-                            </td>
-
-
                         </tr>
 
                     }
-
-                    <tr>
-                        <td>
-                            <a href="@Url.Action("Add", "Users")"><span class=" glyphicon glyphicon-plus"></span></a>
-                        </td>
-
-                    </tr>
-
 
                 </table>
 

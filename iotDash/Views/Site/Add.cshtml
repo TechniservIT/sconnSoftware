@@ -51,25 +51,41 @@
 
                 <form role="form" action="" method="post" id="addsiteform">
 
-                    <div class="form-group">
-                        <label for="SiteName">Name</label>
-                        <input type="text" class="form-control" name="siteinput" id="SiteName">
+                    <div class="row">
+                        <div class="form-group col-lg-12 col-sm-12 col-xs-10">
+                            <label for="SiteName">Name</label>
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="glyphicon glyphicon-list-alt"></i>
+                                </span>
+
+                                <input type="text" class="form-control" name="siteinput" id="SiteName">
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="locationselector">Location</label>
-                        <select class="form-control" id="locationselector">
-                            @if (Model != null)
-                            {
-                                foreach (var item in Model.Locations)
-                                {
-                                    <option value="@item.Id">@item.LocationName</option>
-                                }
-                            }
+                        <div class="row">
+                            <div class="form-group col-lg-12 col-sm-12 col-xs-10">
+                                <label for="locationselector">Location</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-map-marker"></i>
+                                    </span>
+                                    <select class="form-control" id="locationselector">
+                                        @if (Model != null)
+                                        {
+                                            foreach (var item in Model.Locations)
+                                            {
+                                                <option value="@item.Id">@item.LocationName</option>
+                                            }
+                                        }
+                                    </select>
+                                </div>
 
-                        </select>
-                        <br />
-                    </div>
+                                <br />
+                            </div>
+                        </div>
+
 
                     <button class="btn btn-primary" type="submit">Add</button>
 

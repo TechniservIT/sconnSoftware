@@ -16,7 +16,7 @@
         <div class="row">
             <div class="col-lg-4 col-sm-6 col-xs-12">
                 <div class="thumbnail">
-                    <a href="@Url.Action("Index", "AlarmSystemConfiguration", new {DeviceId = Model.ServerId})" role="button">
+                    <a href="@Url.Action("Edit", "AlarmSystemView", new {DeviceId = Model.ServerId})" role="button">
                         <img src="~/Content/img/config1.png" class="thumbnail img-responsive">
                     </a>
                     <div class="caption text-center">
@@ -86,7 +86,7 @@
             <div class="col-lg-4 col-sm-6 col-xs-12">
                 <div class="thumbnail">
                     <a href="@Url.Action("View", "AlarmSystemAuthorizedDevices", new {DeviceId = Model.ServerId})" role="button">
-                        <img src="~/Content/img/config2.png" class="thumbnail img-responsive">
+                        <img src="~/Content/img/klucz2.png" class="thumbnail img-responsive">
                     </a>
                     <div class="caption  text-center">
                         <h3>Authorization</h3>
@@ -98,7 +98,7 @@
             <div class="col-lg-4 col-sm-6 col-xs-12">
                 <div class="thumbnail">
                     <a href="@Url.Action("View", "AlarmSystemEvents", new {DeviceId = Model.ServerId})" role="button">
-                        <img src="~/Content/img/zegar1.png" class="thumbnail img-responsive">
+                        <img src="~/Content/img/lista1.png" class="thumbnail img-responsive">
                     </a>
                     <div class="caption  text-center">
                         <h3>Events</h3>
@@ -107,6 +107,17 @@
 
             </div>
 
+            <div class="col-lg-4 col-sm-6 col-xs-12">
+                <div class="thumbnail">
+                    <a href="@Url.Action("View", "AlarmSystemMap", new {DeviceId = Model.ServerId})" role="button">
+                        <img src="~/Content/img/glob2.png" class="thumbnail img-responsive">
+                    </a>
+                    <div class="caption  text-center">
+                        <h3>Map</h3>
+                    </div>
+                </div>
+
+            </div>
 
         </div>
     </div>

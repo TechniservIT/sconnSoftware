@@ -6,54 +6,59 @@
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 }
 
-@*<a class="ui-button" href="@Url.Action("Index", "Site")"><h3>Protocols</h3></a>*@
-
 <div class="panel panel-default">
-    <!-- Default panel contents -->
+    
     <div class="panel-heading">Settings</div>
-
-    <!-- Table -->
     <table class="table-responsive">
         <tr>
-            <td>
-                <div class="row">
-                    <div class="col-xs-4 col-md-2">
+            <div class="row">
+                <div class="col-lg-12 col-sm-12 col-xs-10">
+                    <div class="col-lg-1 col-sm-2 col-xs-2">
                         <img src="~/Content/img/config1.png" class="img-responsive" alt="typeimg">
-                        @*<span class="  glyphicon glyphicon-wrench" aria-hidden="true"></span>*@
                     </div>
-                    <div class="col-xs-12 col-md-10">
+                    <div class="col-lg-11 col-sm-10 col-xs-10">
                         <a class="ui-button" href="@Url.Action("AddType", "Device")">
-                            <h3>Device Types</h3></a>
+                            <h3>Device Types</h3>
+                        </a>
                     </div>
                 </div>
+            </div>
+        </tr>
 
-                <div class="row">
-                    <div class="col-xs-4 col-md-2">
+        <tr>
+            <div class="row">
+                <div class="col-lg-12 col-sm-12 col-xs-10">
+                    <div class="col-lg-1 col-sm-2 col-xs-2">
                         <img src="~/Content/img/eye.png" class="img-responsive" alt="typeimg">
                     </div>
-                    <div class="col-xs-12 col-md-10">
+                    <div class="col-lg-11 col-sm-10 col-xs-10">
                         <a class="ui-button" href="@Url.Action("View", "Users")">
-                            <h3>Users</h3></a>
+                            <h3>Users</h3>
+                        </a>
                     </div>
                 </div>
+            </div>
 
+        </tr>
 
-                <div class="row">
-                    <div class="col-xs-4 col-md-2">
+        <tr>
+            <div class="row">
+                <div class="col-lg-12 col-sm-12 col-xs-10">
+                    <div class="col-lg-1 col-sm-2 col-xs-2">
                         <img src="~/Content/img/electro.png" class="img-responsive" alt="typeimg">
                     </div>
-                    <div class="col-xs-12 col-md-10">
+                    <div class="col-lg-11 col-sm-10 col-xs-10">
                         <a class="ui-button" href="@Url.Action("View", "RoleManagment")">
-                            <h3>Roles</h3></a>
+                            <h3>Roles</h3>
+                        </a>
                     </div>
                 </div>
+            </div>
 
-
-            </td>
         </tr>
-        
 
     </table>
+
 
 </div>
 

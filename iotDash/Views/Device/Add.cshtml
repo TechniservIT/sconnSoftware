@@ -18,11 +18,8 @@
 <div class="container-fluid">
 
     <div class="row">
-
-    </div>
-
-    <div class="row">
-        <div id="addraz">
+        <div class="col-md-10">
+            
             @using (Html.BeginForm("Add", "Device"))
             {
                 <fieldset>
@@ -33,65 +30,123 @@
                         @Html.HiddenFor(model => model.DeviceSiteId)
                     </div>
 
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Device.DeviceName)
-                        @Html.TextBoxFor(model => model.Device.DeviceName, new { @class = "form-control", @id = "devname" })
+                    <div class="row">
+                        <div class="form-group col-lg-12 col-sm-12 col-xs-10">
+                            @Html.LabelFor(model => model.Device.DeviceName)
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="glyphicon glyphicon-list-alt"></i>
+                                </span>
+                                @Html.TextBoxFor(model => model.Device.DeviceName, new { @class = "form-control", @id = "devname" })
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Device.EndpInfo.Hostname)
-                        @Html.TextBoxFor(model => model.Device.EndpInfo.Hostname, new { @class = "form-control" })
+
+
+                    <div class="row">
+                        <div class="form-group col-lg-12 col-sm-12 col-xs-10">
+                            @Html.LabelFor(model => model.Device.EndpInfo.Hostname)
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="glyphicon glyphicon-list-alt"></i>
+                                </span>
+                                @Html.TextBoxFor(model => model.Device.EndpInfo.Hostname, new { @class = "form-control" })
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Device.EndpInfo.Port)
-                        @Html.TextBoxFor(model => model.Device.EndpInfo.Port, new { @class = "form-control" })
+
+                    <div class="row">
+                        <div class="form-group col-lg-12 col-sm-12 col-xs-10">
+                            @Html.LabelFor(model => model.Device.EndpInfo.Port)
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="glyphicon glyphicon-transfer"></i>
+                                </span>
+                                @Html.TextBoxFor(model => model.Device.EndpInfo.Port, new {@class = "form-control"})
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Device.Credentials.Username)
-                        @Html.TextBoxFor(model => model.Device.Credentials.Username, new { @class = "form-control" })
+
+                    <div class="row">
+                        <div class="form-group col-lg-12 col-sm-12 col-xs-10">
+                            @Html.LabelFor(model => model.Device.Credentials.Username)
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="glyphicon glyphicon-user"></i>
+                                </span>
+                                @Html.TextBoxFor(model => model.Device.Credentials.Username, new { @class = "form-control" })
+                            </div>
+                        </div>
                     </div>
 
                     <div class="form-group">
                         @Html.LabelFor(model => model.Device.Credentials.Password)
-                        @Html.TextBoxFor(model => model.Device.Credentials.Password, new { @class = "form-control" })
-                    </div>
-
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Device.DeviceLocation)
-                        @Html.DropDownListFor(
-                     model => model.LocationId,
-                         new SelectList(
-                           Model.Locations,
-                           "Id",
-                            "LocationName"
-                            ),
-                          new { @class = "form-control" }
-                        )
-                    </div>
-
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Device.Type, new { @class = "form-control" })
-                        @Html.DropDownListFor(
-                        model => model.TypeId,
-                         new SelectList(
-                           Model.Types,
-                            "Id",
-                            "TypeName"
-                            ),
-                          new { @class = "form-control" }
-                        )
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="glyphicon glyphicon-lock"></i>
+                            </span>
+                            @Html.TextBoxFor(model => model.Device.Credentials.Password, new {@class = "form-control"})
+                        </div>
                     </div>
 
 
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Device.IsVirtual)
-                        @Html.EditorFor(model => model.Device.IsVirtual)
+                    <div class="row">
+                        <div class="form-group col-lg-12 col-sm-12 col-xs-10">
+                            @Html.LabelFor(model => model.Device.DeviceLocation)
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="glyphicon glyphicon-map-marker"></i>
+                                </span>
+                                @Html.DropDownListFor(
+                                    model => model.LocationId,
+                                    new SelectList(
+                                        Model.Locations,
+                                        "Id",
+                                        "LocationName"
+                                        ),
+                                    new {@class = "form-control"}
+                                    )
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        <button class="btn btn-primary" type="submit">Add</button>
+
+                    <div class="row">
+                        <div class="form-group col-lg-12 col-sm-12 col-xs-10">
+                            @Html.LabelFor(model => model.Device.Type, new { @class = "form-control" })
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="glyphicon glyphicon-object-align-top"></i>
+                                </span>
+                                @Html.DropDownListFor(
+                                model => model.TypeId,
+                                new SelectList(
+                                    Model.Types,
+                                    "Id",
+                                    "TypeName"
+                                    ),
+                                new { @class = "form-control" }
+                                )
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="form-group col-lg-12 col-sm-12 col-xs-10">
+                            @Html.LabelFor(model => model.Device.IsVirtual)
+                            @Html.EditorFor(model => model.Device.IsVirtual)
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="form-group col-lg-12 col-sm-12 col-xs-10">
+                            <button class="btn btn-primary" type="submit">Add</button>
+                        </div>
                     </div>
 
                 </fieldset>

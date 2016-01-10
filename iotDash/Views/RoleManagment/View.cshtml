@@ -39,7 +39,7 @@
 
                     @foreach (IotUserRole d in Model.Roles)
                     {
-                        <tr>
+                        <tr id="@d.Id.ToString()" class="rowRecord row-normal">
 
                             <td> @d.Name </td>
 
@@ -53,14 +53,6 @@
 
                         </tr>
                     }
-
-                    <tr>
-                        <td>
-                            <a href="@Url.Action("Add", "RoleManagment")"><span class=" glyphicon glyphicon-plus"></span></a>
-                        </td>
-
-                    </tr>
-
 
                 </table>
 
