@@ -49,12 +49,12 @@
                             <div class="form-group">
                                 @Html.LabelFor(model => model.Device.DeviceLocation)
                                 @Html.DropDownListFor(
-                                model => model.Device.DeviceLocation.Id,
+                                model => model.LocationId,
                                  new SelectList(
                                    Model.Locations,
                                    "Id",
                                     "LocationName",
-                                    Model.Device.DeviceLocation
+                                    Model.LocationId
                                     ),
                                   new { @class = "form-control" }
                                 )
@@ -66,12 +66,12 @@
                             <div class="form-group">
                                 @Html.LabelFor(model => model.Device.Type, new { @class = "form-control" })
                                 @Html.DropDownListFor(
-                                    model => model.Device.Type.Id,
+                                    model => model.TypeId,
                                      new SelectList(
                                        Model.Types,
                                         "Id",
                                         "TypeName",
-                                         Model.Device.Type
+                                          Model.TypeId
                                         ),
                                       new { @class = "form-control" }
                                     )

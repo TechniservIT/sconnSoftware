@@ -31,7 +31,7 @@
 <script src="~/signalr/hubs"></script>
 
 <script type="text/javascript">
-    
+
     $(function () {
 
         var map = L.map('map', {
@@ -46,12 +46,9 @@
         var imageBounds = [[250, 0], [0, 250]];
         L.imageOverlay(imageUrl, imageBounds).addTo(map);
 
-        //$("#map").height($(window).height()).width($(window).width());
-        //map.invalidateSize();
-
     });
 
-    $(document).ready(function() {
+    $(document).ready(function () {
         $(".fancybox").fancybox();
     });
 
@@ -162,7 +159,7 @@
             <div class="container-fluid">
 
                 <div class="row">
-                    
+
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <center>
@@ -178,38 +175,67 @@
                             </div>
 
                             <div class="col-md-6">
+                                @if (Model.Config != null)
+                                {
+                                    <div class="row">
 
-                                <div class="row">
+                                        <div class="col-lg-6 col-sm-6 col-xs-12">
+                                            <div style="margin-left: auto; margin-right: auto;" align="center" class="pagination-centered">
+                                                <a  href="@Url.Action("Index", "AlarmSystemConfiguration", new {DeviceId = Model.ServerId})" role="button">
+                                                    @if (Model.Config.Armed)
+                                                    {
+                                                        <img src="~/Content/img/klodka2.png" class="thumbnail img-responsive">
+                                                    }
+                                                    else
+                                                    {
+                                                        <img src="~/Content/img/klodka1.png" class="thumbnail img-responsive">
+                                                    }
+                                                </a>        
+                                            </div>
+                                                                     
+                                        
 
-                                    <div class="col-lg-6 col-sm-6 col-xs-12">
-                                        <a href="@Url.Action("Index", "AlarmSystemConfiguration", new {DeviceId = Model.ServerId})" role="button">
-                                            <img src="~/Content/img/klodka2.png" class="thumbnail img-responsive">
-                                        </a>
+                                        </div>
+
+                                        <div class="col-lg-6 col-sm-6 col-xs-12 center-block">
+                                            <div style="margin-left: auto; margin-right: auto;" align="center" class="pagination-centered">
+                                                <a href="@Url.Action("Index", "AlarmSystemConfiguration", new {DeviceId = Model.ServerId})" role="button">
+                                                    @if (Model.Config.Violation)
+                                                    {
+                                                        <img src="~/Content/img/oko3.png" class="thumbnail img-responsive">
+                                                    }
+                                                    else
+                                                    {
+                                                        <img src="~/Content/img/oko4.png" class="thumbnail img-responsive">
+                                                    }
+                                                </a>
+                                            </div>
+
+                                        </div>
+
                                     </div>
 
-                                    <div class="col-lg-6 col-sm-6 col-xs-12">
-                                        <a href="@Url.Action("Index", "AlarmSystemConfiguration", new {DeviceId = Model.ServerId})" role="button">
-                                            <img src="~/Content/img/oko4.png" class="thumbnail img-responsive">
-                                        </a>
+                                    <div class="row">
+
+                                        @if (Model.Config.Failure)
+                                        {
+                                            <div class="col-lg-6 col-sm-6 col-xs-12">
+                                                <a href="@Url.Action("Index", "AlarmSystemConfiguration", new {DeviceId = Model.ServerId})" role="button">
+                                                    <img src="~/Content/img/wykrzyknik.png" class="thumbnail img-responsive">
+                                                </a>
+                                            </div>
+                                        }
+
+
+                                        @*<div class="col-lg-6 col-sm-6 col-xs-12">
+                                                <a href="@Url.Action("Index", "AlarmSystemConfiguration", new {DeviceId = Model.ServerId})" role="button">
+                                                    <img src="~/Content/img/wykrzyknik.png" class="thumbnail img-responsive">
+                                                </a>
+                                            </div>*@
+
                                     </div>
+                                }
 
-                                </div>
-
-                                <div class="row">
-
-                                    <div class="col-lg-6 col-sm-6 col-xs-12">
-                                        <a href="@Url.Action("Index", "AlarmSystemConfiguration", new {DeviceId = Model.ServerId})" role="button">
-                                            <img src="~/Content/img/wykrzyknik.png" class="thumbnail img-responsive">
-                                        </a>
-                                    </div>
-
-                                    <div class="col-lg-6 col-sm-6 col-xs-12">
-                                        <a href="@Url.Action("Index", "AlarmSystemConfiguration", new {DeviceId = Model.ServerId})" role="button">
-                                            <img src="~/Content/img/wykrzyknik.png" class="thumbnail img-responsive">
-                                        </a>
-                                    </div>
-
-                                </div>
 
                             </div>
 
@@ -266,7 +292,7 @@
                 </div>
 
                 <div class="row">
-                    @Html.ActionLink(@DescForArmAction(), "ToggleArm", new {DeviceId = Model.ServerId}, new {@class = "btn btn-primary"})
+                    @Html.ActionLink(@DescForArmAction(), "ToggleArm", new { DeviceId = Model.ServerId }, new { @class = "btn btn-primary" })
                 </div>
 
 
@@ -393,4 +419,3 @@
 
     </div>
 </div>
-

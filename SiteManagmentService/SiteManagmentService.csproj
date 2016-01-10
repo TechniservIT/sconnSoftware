@@ -39,6 +39,10 @@
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.2.3\lib\net45\NLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -50,6 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ISiteManagmentService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SiteProvider.cs" />
   </ItemGroup>
@@ -61,6 +66,10 @@
     <ProjectReference Include="..\iotData\iotData.csproj">
       <Project>{e94b0a02-089e-483a-aaef-3bfa49039598}</Project>
       <Name>iotData</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IotServiceAbstract\IotServiceAbstract.csproj">
+      <Project>{dc1fbe1d-13b6-4dd2-91e2-7ffe2f909cc5}</Project>
+      <Name>IotServiceAbstract</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

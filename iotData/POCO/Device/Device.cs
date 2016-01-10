@@ -29,6 +29,20 @@ namespace iotDbConnector.DAL
             }
         }
 
+        public void Load(Device dev)
+        {
+            this.Actions = dev.Actions;
+            this.Credentials = dev.Credentials;
+            this.DeviceLocation = dev.DeviceLocation;
+            this.DeviceMaps = dev.DeviceMaps;
+            this.DeviceName = dev.DeviceName;
+            this.EndpInfo = dev.EndpInfo;
+            this.Properties = dev.Properties;
+            this.Site = dev.Site;
+            this.Type = dev.Type;
+
+        }
+
         [DataMember]
         [Required]
         public string DeviceName { get; set; }

@@ -36,5 +36,16 @@ namespace iotDbConnector.DAL
             Devices = new List<Device>();
 
         }
+
+        public void Load(Site other)
+        {
+            this.Devices = other.Devices;
+            this.Domain = other.Domain;
+            this.Id = other.Id;
+            this.SiteName = other.SiteName;
+            this.siteLocation = other.siteLocation;
+           
+        }
+
     }
 }

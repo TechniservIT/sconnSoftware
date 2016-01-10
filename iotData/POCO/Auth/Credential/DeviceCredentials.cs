@@ -38,6 +38,11 @@ namespace iotDbConnector.DAL
         [DataMember]
         public virtual List<Device> Devices { get; set; }
 
+        public DeviceCredentials()
+        {
+            PermissionExpireDate = DateTime.Now.AddYears(1000).Date;
+            PasswordExpireDate = DateTime.Now.AddYears(1000).Date;
+        }
 
     }
 }

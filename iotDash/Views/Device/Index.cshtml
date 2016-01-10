@@ -1,7 +1,396 @@
-﻿@model iotDash.Models.DeviceListViewModel
+﻿@model iotDash.Models.DeviceViewModel
+
+@{
+    ViewBag.Title = "View";
+}
 
 @{
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 }
 
+
+@Scripts.Render("~/bundles/toggleswitch")
+@Styles.Render("~/bundles/css/toggleswitch")
+@Scripts.Render("~/bundles/signalr")
+
+<script src="~/signalr/hubs"></script>
+
+@functions{
+
+    public string PanelClassForResultParam(iotDbConnector.DAL.DeviceParameter param)
+    {
+        if (int.Parse(param.Value) == 1)
+        {
+            return "panel-primary";
+        }
+        else
+        {
+            return "panel-info";
+        }
+    }
+
+
+    public string PanelClassForActionResult(iotDbConnector.DAL.DeviceActionResult param)
+    {
+        if (int.Parse(param.Value) == 1)
+        {
+            return "panel-primary";
+        }
+        else
+        {
+            return "panel-info";
+        }
+    }
+
+    //TODO generate req param input lists
+
+
+}
+
+
+<script>
+
+    var Reloading = false;
+
+    function ReloadPanels() {
+
+        Reloading = true;
+
+        $(".panel").removeClass("panel-info");
+        $(".panel").removeClass("panel-primary");
+
+        $(".panel").each(function () {
+            //apply class based on value
+            var contval = $(this).find(".noderesval").first().attr("title");
+            var pval = parseInt(contval);
+            if (pval == 1) {
+                $(this).addClass("panel-primary");
+            } else {
+                $(this).addClass("panel-info");
+            }
+
+            //set all result params
+            $(this).find(".tgsw-action").each(function () {
+                var IsSet = (pval == 1 ? true : false);
+                var sw = $(this).bootstrapSwitch('state', IsSet);
+
+            });
+
+        });
+
+        Reloading = false;
+    }
+
+
+    function syntaxHighlight(json) {
+        json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
+            var cls = 'number';
+            if (/^"/.test(match)) {
+                if (/:$/.test(match)) {
+                    cls = 'key';
+                } else {
+                    cls = 'string';
+                }
+            } else if (/true|false/.test(match)) {
+                cls = 'boolean';
+            } else if (/null/.test(match)) {
+                cls = 'null';
+            }
+            return '<span class="' + cls + '">' + match + '</span>';
+        });
+    }
+
+    var obj = { a: 1, 'b': 'foo', c: [false, 'false', null, 'null', { d: { e: 1.3e5, f: '1.3e5' } }] };
+
+    //signalR
+    var connection = $.hubConnection();
+    var contosoChatHubProxy = connection.createHubProxy('deviceStatusUpdaterHub');
+    contosoChatHubProxy.on('updateDevice', function (deviceData) {
+        var obj = jQuery.parseJSON(deviceData);
+        var str = JSON.stringify(obj, undefined, 4);
+        console.log("Recieved : " + str);
+
+        $.each(obj, function () {
+            var cnode = $(this);
+            if (cnode[0]['Id'] === null) {
+                var PropId = cnode[0]['Id'];
+                var ResultParams = cnode[0]['ResultParameters'];
+                var ResVal = ResultParams[0]['Value'];
+                var ValDispIdHash = "#propvaldisp-" + PropId;
+                var ValDispId = "propvaldisp-" + PropId;
+
+                var element = document.getElementById(ValDispId);
+                element.innerHTML = ResVal.toString();
+                element.setAttribute("title", ResVal.toString());
+
+            }
+            else if (cnode[0]['Id'] != null) {
+                var ActId = cnode[0]['Id'];
+                var ResultParams = cnode[0]['ResultParameters'];
+                var ResVal = ResultParams[0]['Value'];
+                var ValDispIdHash = "#actvaldisp-" + ActId;
+                var ValDispId = "actvaldisp-" + ActId;
+
+                var element = document.getElementById(ValDispId);
+                element.innerHTML = ResVal.toString();
+                element.setAttribute("title", ResVal.toString());
+
+            }
+        });
+        ReloadPanels();
+
+
+    });
+
+
+    contosoChatHubProxy.on('updateParam', function (deviceData) {
+        var obj = jQuery.parseJSON(deviceData);
+        var str = JSON.stringify(obj, undefined, 4);
+        console.log("Recieved updateParam : " + str);
+
+        var cnode = obj;
+
+        if (cnode.hasOwnProperty("Property")) { //cnode['Property'] !== null
+
+            var PropId = cnode['Property']['Id'];
+            var ResVal = cnode['Value'];
+            var ValDispIdHash = "#propvaldisp-" + PropId;
+            var ValDispId = "propvaldisp-" + PropId;
+
+
+            var element = document.getElementById(ValDispId);
+            element.innerHTML = ResVal.toString();
+            element.setAttribute("title", ResVal.toString());
+
+        }
+
+        if (cnode.hasOwnProperty("Action")) {    //cnode['Action'] !== null
+            var ActId = cnode['Action']['Id'];
+            var ResVal = cnode['Value'];
+            var ValDispIdHash = "#actvaldisp-" + ActId;
+            var ValDispId = "actvaldisp-" + ActId;
+
+            var element = document.getElementById(ValDispId);
+            element.innerHTML = ResVal.toString();
+            element.setAttribute("title", ResVal.toString());
+        }
+
+
+        ReloadPanels();
+
+
+    });
+
+
+    connection.start()
+    .done(function () { console.log('SignalR Now connected, connection ID=' + connection.id); })
+    .fail(function () { console.log('SignalR Could not connect'); });
+
+
+    $(function () {
+
+        ReloadPanels();
+
+        $('.tgsw-action').on('switchChange.bootstrapSwitch', function () {
+
+            if (!Reloading) {
+
+                //get sender id
+                var ElementId = $(this).attr("id");
+                var AccessorId = "#".concat(ElementId);
+
+                //TODO load req param input lists
+                var StateToSet = $(this).bootstrapSwitch('state');
+                //alert("req param :" + StateToSet);
+                var ParamList = [StateToSet];
+
+                //perform action
+                $.ajax({
+                    url: '@Url.Action("PerformAction", "Device")',
+                    type: this.method,
+                    data: {
+                        ActionId: $(AccessorId).attr("title"),
+                        ActionParams: ParamList
+                    },
+                    success: function (result) {
+                        $('#resultview').html(result);
+                    }
+                });
+
+            }
+
+
+        });
+
+
+
+        $('#actionselector a').click(function (e) {
+            e.preventDefault()
+            $(this).tab('show')
+        })
+
+
+        $("#toolPropHistoryCont").click(function () {
+
+        });
+
+
+
+
+        $("body").ready(function () {
+            //remove current classes
+
+        });
+
+    });
+
+</script>
+
+
+<h3>@Model.Device.DeviceName<small></small></h3>
+
+<div role="tabpanel">
+
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist" id="actionselector">
+        <li role="presentation" class="active"><a href="#tabStatus" aria-controls="tabStatus" role="tab" data-toggle="tab">Status</a></li>
+        <li role="presentation"><a href="#tabActions" aria-controls="tabActions" role="tab" data-toggle="tab">Actions</a></li>
+        <li role="presentation"><a href="#tabLocation" aria-controls="tabLocation" role="tab" data-toggle="tab">Location</a></li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+
+        <div role="tabpanel" class="tab-pane active" id="tabStatus">
+            <div class="container-fluid">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        @Html.Partial("~/Views/Shared/EditorTemplate/ToolbarMenu.cshtml")
+                    </div>
+                </div>
+
+                <div class="row">
+                    @if (Model.Device != null)
+                    {
+                        foreach (var item in Model.Device.Properties)
+                        {
+                            <div class="col-md-3">
+                                <div id="property-@item.Id.ToString()" class="panel @PanelClassForResultParam(item.ResultParameters.First())">
+                                    <div class="panel-heading">@item.PropertyName</div>
+                                    <div class="panel-body">
+                                        <h4 class="noderesval" id="propvaldisp-@item.Id.ToString()" title="@item.ResultParameters.First().Value">@item.ResultParameters.First().Value</h4>
+                                        <h5>@item.PropertyDescription</h5>
+                                        <h5>@item.LastUpdateTime</h5>
+                                        <div id="toolPropHistoryCont" class="col-md-1">
+                                            <a class="btn btn-default" href="@Url.Action("PropertyStat", "Statistic", new { propertyId = item.Id })" role="button">
+                                                <span class="glyphicon glyphicon-stats"></span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+
+                <div class="row">
+                    <div id="resultview">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div role="tabpanel" class="tab-pane" id="tabActions">
+
+            <div class="container-fluid">
+
+                <div class="row">
+                    <div class="col-md-2"></div>
+
+                    <div class="col-md-1">
+                        <a class="btn btn-default" href="#" role="button">
+                            <span class="glyphicon glyphicon-plus"></span>
+                        </a>
+                    </div>
+
+                    <div class="col-md-1">
+                        <a class="btn btn-default" href="#" role="button">
+                            <span class="glyphicon glyphicon-wrench"></span>
+                        </a>
+                    </div>
+
+                    <div class="col-md-1">
+                        <a class="btn btn-default" href="#" role="button">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </a>
+                    </div>
+
+                    <div class="col-md-1">
+                        <a class="btn btn-default" href="#" role="button">
+                            <span class="glyphicon glyphicon-refresh"></span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="row">
+
+                    @if (Model.Device != null)
+                    {
+                        foreach (var item in Model.Device.Actions)
+                        {
+                            <div class="col-md-3">
+                                <div id='action-@item.Id.ToString()' class="panel @PanelClassForActionResult(item.ResultParameters.First())">
+                                    <div class="panel-heading">@item.ActionName</div>
+                                    <div class="panel-body">
+                                        <h4 class="noderesval" id="actvaldisp-@item.Id.ToString()" title="@item.ResultParameters.First().Value">@item.ResultParameters.First().Value</h4>
+                                        <h5>@item.ActionDescription</h5>
+                                        <h5>@item.LastActivationTime</h5>
+                                        <br />
+                                        <div id="toolPropHistoryCont" class="col-md-1">
+                                            <a class="btn btn-default" href="@Url.Action("ActionStat", "Statistic", new { actionId = item.Id })" role="button">
+                                                <span class="glyphicon glyphicon-stats"></span>
+                                            </a>
+                                        </div>
+                                        <br /><br />
+                                        <input class="tgsw-action" type="checkbox" value="@item.ResultParameters.First().ToString()" title="@item.Id.ToString()" id='tgsw-@item.Id.ToString()'>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+
+                </div>
+
+                <div class="row">
+                    <div id="resultview">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div role="tabpanel" class="tab-pane" id="tabLocation">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4>Location</h4>
+                        <iframe width="600"
+                                height="450"
+                                frameborder="0"
+                                style="border:0"
+                                src="https://www.google.com/maps/embed/v1/view?key=AIzaSyCoh6OpbGQK7bY59n2qoMF4TvNKfTIEkWQ&center=@Model.DeviceLatCordStr(),@Model.DeviceLngCordStr()&zoom=18&maptype=satellite"></iframe>
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div id="resultview">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
 

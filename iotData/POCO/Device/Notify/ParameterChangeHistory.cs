@@ -29,5 +29,10 @@ namespace iotDatabaseConnector.DAL.POCO.Device.Notify
         [DataMember]
         public string Value { get; set; }
 
+        public ParameterChangeHistory()
+        {
+            Date = DateTime.Now;
+        }
+       
     }
 }

@@ -284,7 +284,9 @@
     <Compile Include="Controllers\domain\managment\security\UserSecurityController.cs" />
     <Compile Include="Controllers\domain\signaling\SignalingRulesController.cs" />
     <Compile Include="Areas\AlarmSystem\Controllers\AlarmSystemSummaryController.cs" />
+    <Compile Include="Controllers\domain\site\Abstract\EntityControllerBase.cs" />
     <Compile Include="Controllers\domain\site\Abstract\IEditableController.cs" />
+    <Compile Include="Controllers\domain\site\Abstract\IEntityController.cs" />
     <Compile Include="Controllers\domain\site\Abstract\IViewAbleController.cs" />
     <Compile Include="Controllers\domain\site\AlarmSystem\Abstract\AlarmSystemControllerBase.cs" />
     <Compile Include="Controllers\domain\site\AlarmSystem\Abstract\IAlarmSystemConfigurationController.cs" />

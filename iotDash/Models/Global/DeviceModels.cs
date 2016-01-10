@@ -15,7 +15,6 @@ namespace iotDash.Models
     public class DeviceAddTypeModel : IAsyncStatusModel
     {
         public DeviceType Type { get; set; }
-
         public string Result { get; set; }
 
         public DeviceAddTypeModel()
@@ -27,53 +26,34 @@ namespace iotDash.Models
 
     public class DeviceAddModel : IAsyncStatusModel
     {
+        public Site DeviceSite { get; set; }
         public List<Location> Locations { get; set; }
-
         public List<DeviceType> Types { get; set; }
 
         public string Result { get; set; }
-
-        public Site DeviceSite { get; set; }
-
+        
         public int DeviceSiteId { get; set; }
-
-
-        [DisplayName("Location")]
-        public Location DeviceLocation { get; set; }
-
         public int LocationId { get; set; }
+        public int TypeId { get; set; }
 
-        public int DeviceTypeId { get; set; }
-
-        [DisplayName("Type")]
-        public DeviceType DeviceType { get; set; }
-
-        [DisplayName("Name")]
-        public string DeviceName { get; set; }
-
-        [DisplayName("Hostname")]
-        public string DeviceIpAddr { get; set; }
-
-        [DisplayName("Port")]
-        public int DeviceNetPort { get; set; }
-
-        [DisplayName("Login")]
-        public string DeviceLogin { get; set; }
-
-        [DisplayName("Password")]
-        public string DevicePassword { get; set; }
-
-        [DisplayName("Virtual")]
-        public bool  DeviceIsVirtual { get; set; }
-
+        public Device Device { get; set; }
+        
         //TODO protocol list
         //public CommSconnProtocol DeviceProtocol { get; set; }
-        [DisplayName("Protocol")]
-        public string DeviceProtocolName { get; set; }
-
-
+        //[DisplayName("Protocol")]
+        //public string DeviceProtocolName { get; set; }
+        
         public DeviceAddModel()
         {
+            this.Device = new Device();
+            Device.EndpInfo = new EndpointInfo();
+            Device.Credentials = new DeviceCredentials();
+            Device.DeviceLocation = new Location();
+            Device.Type = new DeviceType();
+
+            Locations = new List<Location>();
+            Types = new List<DeviceType>();
+            DeviceSite = new Site();
 
         }
         
@@ -88,23 +68,23 @@ namespace iotDash.Models
 
     public class DeviceListViewModel : IAsyncStatusModel
     {
-        public Site Site { get; set; }
         public string Result { get; set; }
+        public string SiteName { get; set; }
+        public int SiteId { get; set; }
+        public List<Device> Devices { get; set; }
 
         public DeviceListViewModel(Site site)
         {
-            Site = site;
+            Devices = site.Devices;
+            this.SiteName = site.SiteName;
+            this.SiteId = site.Id;
         }
 
-        public string SiteLatCordStr()
+        public DeviceListViewModel(List<Device> devices)
         {
-            return Site.siteLocation.Lat.ToString(CultureInfo.InvariantCulture);
+            Devices = devices;
         }
-
-        public string SiteLngCordStr()
-        {
-            return Site.siteLocation.Lng.ToString(CultureInfo.InvariantCulture);
-        }
+        
     }
 
     public class DeviceViewModel
@@ -132,18 +112,13 @@ namespace iotDash.Models
 
     public class DeviceEditModel : IAsyncStatusModel
     {
-
         [Required]
         public Device Device { get; set; }
-
-
         public List<Location> Locations { get; set; }
-
         public string Result { get; set; }
-
-
         public List<DeviceType> Types { get; set; }
-
+        public int LocationId { get; set; }
+        public int TypeId { get; set; }
 
         public DeviceEditModel(Device device, List<Location> locs, List<DeviceType> types)
         {

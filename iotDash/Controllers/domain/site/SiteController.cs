@@ -19,8 +19,8 @@ namespace iotDash.Controllers.domain.site
     [SiteAuthorize]
 	public class SiteController : Controller
 	{
-        private IIotContextBase _icont;
         private SiteProvider _provider;
+        public IIotContextBase Icont { get; set; }
 
         public SiteController(HttpContextBase contBase)
         {
@@ -33,37 +33,18 @@ namespace iotDash.Controllers.domain.site
                 iotDomain d = Icont.Domains.First(dm => dm.DomainName.Equals(domainId));
                 this._provider = new SiteProvider(this.Icont);
             }
-            catch (Exception)
+            catch (Exception e)
             {
                     
             }
         }
-
-		public Site Site { get; set; }
-
-        public IIotContextBase Icont
-        {
-            get
-            {
-                return _icont;
-            }
-
-            set
-            {
-                _icont = value;
-            }
-        }
-
-        //
-        // GET: /Site/
-        //  Display site list
-
+        
         public ActionResult Index()
 		{
 			List<Site> sites = new List<Site>();
 			try
 			{
-                sites = this._provider.GetSites();
+                sites = this._provider.GetAll();
                 ShowSitesViewModel model = new ShowSitesViewModel(sites);
                 return View(model);
 			}
@@ -74,14 +55,11 @@ namespace iotDash.Controllers.domain.site
 
 		}
         
-
-		//Remove device and return status
 		public bool RemoveDevice(string deviceId)
 		{
 			int devid = int.Parse(deviceId);    
 			try
 			{
-			    this._provider.RemoveDevice(devid);
 				return true;
 			}
 			catch (Exception e)
@@ -89,10 +67,7 @@ namespace iotDash.Controllers.domain.site
 				return false;
 			}
 		}
-
-
-		//
-		// GET: /Site/View/<number>
+        
 		public ActionResult View(int siteId)
 		{
 			try
@@ -109,20 +84,12 @@ namespace iotDash.Controllers.domain.site
 			}
 			return View();
 		}
-
-		//
-		// GET: /Site/Edit/<number>
+        
 		public ActionResult Edit(int siteId)
 		{
 			return View();
 		}
-
-
-
-
-
-		//
-		// GET: /Site/Add
+        
 		public ActionResult Add()
 		{          
 			try
@@ -139,8 +106,7 @@ namespace iotDash.Controllers.domain.site
             }
 		}
 
-		//
-		// GET: /Site/New
+
 		public string New(string name, string locId)
 		{
 			try
@@ -172,20 +138,12 @@ namespace iotDash.Controllers.domain.site
 
             return StatusResponseGenerator.GetAlertPanelWithMsgAndStat("Add success.", RequestStatus.Success);
 		}
-
-
-
-
-		//
-		// GET: /Site/Locate/<number>
+        
 		public ActionResult Locate(int number)
 		{
 			return View();
 		}
-
-
-		//
-		// GET: /Site/Status/<number>
+        
 		public ActionResult Status(int number)
 		{
 			return View();
@@ -202,8 +160,7 @@ namespace iotDash.Controllers.domain.site
 			//show status 
 			return View();
 		}
-
-        // GET: 
+        
 
         public ActionResult AlarmSystemSummary(int siteId)
         {
