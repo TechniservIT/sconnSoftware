@@ -3,53 +3,35 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using iotDatabaseConnector.DAL.Repository.Connector.Entity;
-using iotDbConnector.DAL;
 using NLog;
 using sconnConnector.Config;
 using sconnConnector.Config.Abstract;
 using sconnConnector.POCO.Config.sconn;
-using sconnConnector.POCO.Config;
-using sconnConnector.POCO.Config.Abstract.Auth;
 
-namespace AlarmSystemManagmentService
+namespace AlarmSystemManagmentService.Device
 {
-    public class DeviceConfigService : IAlarmSystemSingleEntityConfigurationService<sconnDevice>
+    public class AlarmDevicesConfigService : IAlarmSystemConfigurationService<sconnDevice>
     {
         public bool Online { get; set; }
         private static Logger _logger = LogManager.GetCurrentClassLogger();
         private AlarmGenericConfigManager<sconnDeviceConfig> EntityManager;
 
+        private int DeviceNo;
+        private List<sconnDevice> DeviceConfigs; 
+
         public AlarmSystemConfigManager ConfigManager;
 
-        public DeviceConfigService()
+        public AlarmDevicesConfigService()
         {
             Online = true; //online by default
         }
-
-
-        public DeviceConfigService(AlarmSystemConfigManager man) : this()
+        
+        public AlarmDevicesConfigService(AlarmSystemConfigManager man) : this()
         {
             ConfigManager = man;
             EntityManager = new AlarmGenericConfigManager<sconnDeviceConfig>(ConfigManager.Config.DeviceConfig, man.RemoteDevice);
         }
 
-        public DeviceConfigService(AlarmSystemConfigManager man, int DeviceId) : this()
-        {
-            ConfigManager = man;
-            EntityManager = new AlarmGenericConfigManager<sconnDeviceConfig>(ConfigManager.Config.DeviceConfig, man.RemoteDevice, DeviceId);
-        }
-
-        public bool ToggleOutput(int OutputId)
-        {
-            if (OutputId <= this.ConfigManager.Config.DeviceConfig.Device.Outputs.Count)
-            {
-                this.ConfigManager.Config.DeviceConfig.Device.Outputs[OutputId].Value = (
-                     this.ConfigManager.Config.DeviceConfig.Device.Outputs[OutputId].Value ? true : false);
-                return this.SaveChanges();
-            }
-            return false;
-        }
 
         private bool SaveChanges()
         {
@@ -63,10 +45,50 @@ namespace AlarmSystemManagmentService
             }
         }
 
-        public sconnDevice Get()
+        private void LoadDeviceConfigs()
         {
-            EntityManager.Download();
-            return ConfigManager.Config.DeviceConfig.Device;
+            sconnGlobalConfig glob = new sconnGlobalConfig();
+            AlarmGenericConfigManager<sconnGlobalConfig> gbman = new AlarmGenericConfigManager<sconnGlobalConfig>(glob, ConfigManager.RemoteDevice);
+            gbman.Download();
+            DeviceNo = glob.Devices;
+
+            DeviceConfigs = new List<sconnDevice>();
+            for (int i = 0; i < DeviceNo; i++)
+            {
+                sconnDeviceConfig dev = new sconnDeviceConfig();
+                AlarmGenericConfigManager<sconnDeviceConfig> dman = new AlarmGenericConfigManager<sconnDeviceConfig>(dev, ConfigManager.RemoteDevice, i);
+                dman.Download();
+                DeviceConfigs.Add(dev.Device);
+            }
+        }
+
+        public List<sconnDevice> GetAll()
+        {
+            LoadDeviceConfigs();
+            return DeviceConfigs;
+        }
+
+
+        public sconnDevice GetById(int Id)
+        {
+            if (Id <= DeviceConfigs.Count)
+            {
+                return DeviceConfigs[Id];
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public bool RemoveById(int Id)
+        {
+            return false;
+        }
+
+        public bool Add(sconnDevice entity)
+        {
+            return false;   //adding virtual devices is not supported 
         }
 
         public bool Update(sconnDevice rcpt)
@@ -104,6 +126,5 @@ namespace AlarmSystemManagmentService
             }
 
         }
-
     }
 }

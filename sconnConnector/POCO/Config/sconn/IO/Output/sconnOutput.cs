@@ -27,7 +27,7 @@ namespace sconnConnector.POCO.Config
 
         public int Id { get; set; }
         public sconnOutputType Type { get; set; }
-        public int Value { get; set; }
+        public bool Value { get; set; }
         public bool Enabled { get; set; }
         public string Name { get; set; }
         public int NameId { get; set; }
@@ -51,7 +51,7 @@ namespace sconnConnector.POCO.Config
                 byte[] buffer = new byte[ipcDefines.mAdrOutputMemSize];
                 buffer[ipcDefines.mAdrOutputType] = (byte)Type;
                 buffer[ipcDefines.mAdrOutputEnabled] = (byte)(Enabled ? 1 : 0);
-                buffer[ipcDefines.mAdrOutputVal] = (byte)Value;
+                buffer[ipcDefines.mAdrOutputVal] = (byte)(Value ? 1 : 0);
                 buffer[ipcDefines.mAdrOutputNameAddr] = (byte)NameId;
                 return buffer;
             }
@@ -68,7 +68,7 @@ namespace sconnConnector.POCO.Config
             try
             {
                 Type = (sconnOutputType)buffer[ipcDefines.mAdrOutputType];
-                Value = buffer[ipcDefines.mAdrOutputVal];
+                Value = (buffer[ipcDefines.mAdrOutputVal] > 0 ? true : false);
                 NameId = buffer[ipcDefines.mAdrOutputNameAddr];
                 Enabled = buffer[ipcDefines.mAdrOutputEnabled] > 0 ? true : false;
             }

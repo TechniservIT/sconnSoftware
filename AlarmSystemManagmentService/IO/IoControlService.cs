@@ -20,7 +20,7 @@ namespace AlarmSystemManagmentService
             this.context = cont;
         }
 
-        public IoControlService(IIotContextBase cont, Device AlarmDevice) : this(cont)
+        public IoControlService(IIotContextBase cont, iotDbConnector.DAL.Device AlarmDevice) : this(cont)
         {
             Manager = new AlarmSystemConfigManager(AlarmDevice.EndpInfo, AlarmDevice.Credentials);
         }

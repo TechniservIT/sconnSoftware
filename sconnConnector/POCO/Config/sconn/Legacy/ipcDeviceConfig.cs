@@ -178,7 +178,7 @@ namespace sconnConnector.POCO.Config
             {
                 int baseaddr = ipcDefines.mAdrOutput + ipcDefines.mAdrOutputMemSize * item.Id;
                 _memCFG[baseaddr + ipcDefines.mAdrOutputType] = (byte)item.Type;
-                _memCFG[baseaddr + ipcDefines.mAdrOutputVal] = (byte)item.Value;
+                _memCFG[baseaddr + ipcDefines.mAdrOutputVal] = (byte)(item.Value ? 1 : 0);
                 _memCFG[baseaddr + ipcDefines.mAdrOutputNameAddr] = (byte)item.NameId;
                 _memCFG[baseaddr + ipcDefines.mAdrOutputEnabled] = (byte)(item.Enabled == false ? 0 : 1);
 

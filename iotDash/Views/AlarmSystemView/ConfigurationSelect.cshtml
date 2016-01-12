@@ -3,7 +3,6 @@
 @{
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 }
-
 @Scripts.Render("~/bundles/jqueryui")
 
 <div class="panel panel-primary">
@@ -27,7 +26,7 @@
             </div>
             <div class="col-lg-4 col-sm-6 col-xs-12">
                 <div class="thumbnail">
-                    <a href="@Url.Action("Index", "AlarmSystemDeviceConfig", new {ServerId = Model.ServerId, DeviceId = 0})" role="button">
+                    <a href="@Url.Action("Index", "AlarmSystemDeviceConfig", new {ServerId = Model.ServerId})" role="button">
                         <img src="~/Content/img/config2.png" class="thumbnail img-responsive">
                     </a>
                     <div class="caption text-center">

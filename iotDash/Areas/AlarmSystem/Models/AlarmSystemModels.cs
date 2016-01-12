@@ -65,7 +65,27 @@ namespace iotDash.Areas.AlarmSystem.Models
             this.Device = device;
         }
 
+        public AlarmSystemDeviceModel()
+        {
+                
+        }
       
+    }
+
+
+    public class AlarmSystemDeviceListModel
+    {
+        [Required]
+        public int ServerId { get; set; }
+        public List<sconnDevice> Devices { get; set; }
+        public string Result { get; set; }
+
+        public AlarmSystemDeviceListModel(List<sconnDevice> devices)
+        {
+            this.Devices = devices;
+        }
+
+
     }
 
 

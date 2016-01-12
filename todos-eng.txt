@@ -1,4 +1,11 @@
 FP tasks :
+device list					V
+device param better ui				
+outputs activate				
+names						
+global config					
+forms fixups					
+user account pass change			
 alarm sys  landpage				+
 device view img based on type url		V
 alarm system device images pre-defined		V

@@ -1507,6 +1507,9 @@
     <Content Include="Views\AlarmSystemMap\View.cshtml" />
     <Content Include="Views\AlarmSystemMap\Index.cshtml" />
     <Content Include="Views\AlarmSystemMap\Edit.cshtml" />
+    <Content Include="Views\AlarmSystemDeviceConfig\View.cshtml" />
+    <None Include="Views\AlarmSystemDeviceConfig\Edit.cshtml" />
+    <None Include="Views\AlarmSystemDeviceConfig\Status.cshtml" />
     <None Include="Views\AlarmSystemUsersConfig\View.cshtml" />
     <Content Include="Views\AlarmSystemView\ConfigurationSelect.cshtml" />
     <Content Include="Views\AlarmSystemDeviceConfig\CommunicationConfigure.cshtml" />

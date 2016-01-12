@@ -1,0 +1,638 @@
+﻿@model iotDash.Areas.AlarmSystem.Models.AlarmSystemDeviceModel
+@using System.Globalization
+@using System.Linq.Expressions
+@using iotDash.Helpers
+@using sconnConnector
+
+@{
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+@Scripts.Render("~/bundles/jqueryui")
+@Scripts.Render("~/bundles/signalr")
+@Scripts.Render("~/bundles/numspin")
+@Scripts.Render("~/bundles/fancybox")
+@Styles.Render("~/bundles/css/numspin")
+
+<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.0/css/bootstrap-toggle.min.css" rel="stylesheet">
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.0/js/bootstrap-toggle.min.js"></script>
+
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@if (Model.Device != null)
+{
+    <h2>@Model.Device.Name</h2>
+}
+
+<script src="~/signalr/hubs"></script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".fancybox").fancybox();
+    });
+</script>
+
+
+@functions{
+
+
+
+
+    public string SpanClassForArmStatusDisplay()
+    {
+        if (Model.Device.Armed)
+        {
+            return "label label-success";
+        }
+        else
+        {
+            return "label label-danger";
+        }
+    }
+
+    public string DescForArmStatusDisplay()
+    {
+        if (Model.Device.Armed)
+        {
+            return "Armed";
+        }
+        else
+        {
+            return "Disarmed";
+        }
+    }
+
+
+
+    public string SpanClassForViolationStatusDisplay()
+    {
+        if (Model.Device.Violation)
+        {
+            return "label label-danger";
+
+        }
+        else
+        {
+            return "label label-success";
+        }
+    }
+
+    public string DescForViolationStatusDisplay()
+    {
+        if (Model.Device.Violation)
+        {
+            return "Yes";
+        }
+        else
+        {
+            return "No";
+        }
+    }
+
+
+    public string DescForArmAction()
+    {
+        if (Model.Device.Armed)
+        {
+            return "Disarm";
+        }
+        else
+        {
+            return "Arm";
+        }
+    }
+
+
+    public string ContentForDigitalIoValue(int value)
+    {
+        if (value == 0)
+        {
+            return "<button type='button' class='btn btn-danger'>"+value.ToString() + "</button>";
+        }
+        else
+        {
+            return "<button type='button' class='btn btn-success'>" + value.ToString() + "</button>";
+        }
+    }
+
+    public string ImageUrlForDigitalIoValue(int value)
+    {
+        if (value == 0)
+        {
+            return "";
+        }
+        else
+        {
+            return "";
+        }
+    }
+
+    public string GetProgressBarClassForSupplyValue(double value)
+    {
+        if(value >= 16)
+        {
+            return "progress-bar-success";
+        }
+        else if (value >= 13.8)
+        {
+            return "progress-bar-warning";
+        }
+        else
+        {
+            return "progress-bar-danger";
+        }
+    }
+
+
+    public string GetProgressBarClassForBatteryValue(double value)
+    {
+        if (value >= 12)
+        {
+            return "progress-bar-success";
+        }
+        else if (value >= 9)
+        {
+            return "progress-bar-warning";
+        }
+        else
+        {
+            return "progress-bar-danger";
+        }
+    }
+
+    public string GetProgressBarValueForVoltageBattery(double value)
+    {
+        if (value >= 9)
+        {
+            return ((value / ipcDefines.SUPP_BATT_LEAD_ACID_MAX_VOLTAGE) * 100).ToString("0.00", CultureInfo.CreateSpecificCulture("en-US"));
+        }
+        else
+        {
+            return "100.00";  ///error 100 full
+        }
+    }
+
+    public string GetProgressBarValueForVoltageMain(double value)
+    {
+        if (value >= 9)
+        {
+            return ((value / ipcDefines.SUPP_MAIN_AC_MAX_VOLTAGE) * 100).ToString("0.00", CultureInfo.CreateSpecificCulture("en-US"));
+        }
+        else
+        {
+            return "100.00";  ///error 100 full
+        }
+    }
+
+    //TODO generate req param input lists
+
+
+}
+
+
+<script>
+
+    var Reloading = false;
+
+
+
+    function ReloadPanels() {
+
+        Reloading = true;
+
+        $(".panel").removeClass("panel-info");
+        $(".panel").removeClass("panel-primary");
+
+        $(".panel").each(function () {
+            //apply class based on value
+            var contval = $(this).find(".noderesval").first().attr("title");
+            var pval = parseInt(contval);
+            if (pval == 1) {
+                $(this).addClass("panel-primary");
+            } else {
+                $(this).addClass("panel-info");
+            }
+
+            //set all result params
+            $(this).find(".tgsw-action").each(function () {
+                var bval = $(this).attr("value");
+                var sw = $(this).bootstrapSwitch('state', bval);
+            });
+
+        });
+
+        Reloading = false;
+    }
+
+
+    function syntaxHighlight(json) {
+        json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
+            var cls = 'number';
+            if (/^"/.test(match)) {
+                if (/:$/.test(match)) {
+                    cls = 'key';
+                } else {
+                    cls = 'string';
+                }
+            } else if (/true|false/.test(match)) {
+                cls = 'boolean';
+            } else if (/null/.test(match)) {
+                cls = 'null';
+            }
+            return '<span class="' + cls + '">' + match + '</span>';
+        });
+    }
+
+    var obj = { a: 1, 'b': 'foo', c: [false, 'false', null, 'null', { d: { e: 1.3e5, f: '1.3e5' } }] };
+
+
+    $(function() {
+    
+        $('.iotoggle').change(function () {
+            //$('#console-event').html('Toggle: ' + $(this).prop('checked'))
+            document.getElementById('IoActivationForm').submit();
+        })
+
+        ReloadPanels();
+
+        $('.spinEdit').spinedit({
+            minimum: 50,
+            maximum: 12500,
+            step: 50,
+            value: 150,
+            numberOfDecimals: 0
+        });
+
+
+        $(".OutputActivations").toggleSwitch().change(function () {
+            document.getElementById('IoActivationForm').submit();
+        });
+
+        $('.tgsw-action').on('switchChange.bootstrapSwitch', function() {
+              var ElementId = $(this).attr("value");
+              document.getElementById('IoActivationForm').submit();
+        });
+
+    });
+
+</script>
+
+
+
+<div class="container-fluid">
+
+    @*<div class="row">
+            <div id="ReloadModelData" class="col-md-1">
+                @Html.ActionLink("Refresh", "Index", new {DeviceId = Model.ServerId}, new {@class = "glyphicon glyphicon-refresh"})
+            </div>
+        </div>*@
+
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <center>
+                    <h2>Info</h2>
+                </center>
+            </div>
+            <div class="panel-body">
+                <div class="col-md-7">
+                    <div class="col-md-12 embed-responsive embed-responsive-16by9">
+                        @*<a class="fancybox" rel="group" href="http://farm2.staticflickr.com/1518/23483607324_5846f25522_b.jpg"><img src="http://farm2.staticflickr.com/1518/23483607324_5846f25522_m.jpg" alt=""/></a>*@
+                        <img class="embed-responsive-item" src="http://farm2.staticflickr.com/1518/23483607324_5846f25522_b.jpg" />
+                    </div>
+
+                </div>
+
+                <div class="col-md-5">
+                    <ul>
+
+                        <li>
+                            <div class="col-md-6">
+                                Hardware version :
+                            </div>
+                            <div class="col-md-6">
+                                @Model.Device.Revision.ToString()
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="col-md-6">
+                                Firmware version :
+                            </div>
+                            <div class="col-md-6">
+                                4.034
+                            </div>
+                        </li>
+
+
+                        <li>
+                            <div class="col-md-6">
+                                Domain number :
+                            </div>
+                            <div class="col-md-6">
+                                @Model.Device.DomainNumber
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="col-md-6">
+                                Type :
+                            </div>
+                            <div class="col-md-6">
+                                @Model.Device.Type.ToString()
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="col-md-6">
+                                Inputs :
+                            </div>
+                            <div class="col-md-6">
+                                @Model.Device.Inputs.Count.ToString()
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="col-md-6">
+                                Outputs :
+                            </div>
+                            <div class="col-md-6">
+                                @Model.Device.Outputs.Count.ToString()
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="col-md-6">
+                                Relays :
+                            </div>
+                            <div class="col-md-6">
+                                @Model.Device.Relays.Count.ToString()
+                            </div>
+                        </li>
+
+
+                        <li>
+                            <div class="col-md-6">
+                                Keypad :
+                            </div>
+                            <div class="col-md-6">
+                                @Model.Device.KeypadModule.ToString()
+                            </div>
+                        </li>
+
+
+                        <li>
+                            <div class="col-md-6">
+                                Temperature sensor :
+                            </div>
+                            <div class="col-md-6">
+                                @Model.Device.TemperatureModule.ToString()
+                            </div>
+                        </li>
+
+
+
+                        <li>
+                            <div class="col-md-6">
+                                Humidity sensor:
+                            </div>
+                            <div class="col-md-6">
+                                @Model.Device.HumidityModule.ToString()
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="col-md-6">
+                                Ethernet :
+                            </div>
+                            <div class="col-md-6">
+                                @Model.Device.ComTcpIp.ToString()
+                            </div>
+                        </li>
+
+
+                        <li>
+                            <div class="col-md-6">
+                                MiWi :
+                            </div>
+                            <div class="col-md-6">
+                                @Model.Device.ComMiWi.ToString()
+                            </div>
+                        </li>
+
+
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="row">
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <center>
+                    <h2>Status</h2>
+                </center>
+            </div>
+            <div class="panel-body">
+                <p></p>
+            </div>
+
+            <table class="table">
+
+                @if (Model.Device != null)
+            {
+                    <tr>
+
+                        <td class="col-lg-2 col-sm-2 col-xs-3">
+                            <div class="col-lg-3 col-sm-3 col-xs-4">
+                                <img src="~/Content/img/zasilanie1.png" class="img-responsive">
+                            </div>
+                        </td>
+
+
+                        <td class="col-lg-4 col-sm-4 col-xs-3">
+                            Power supply
+                        </td>
+
+                        <td class="col-lg-6 col-sm-6 col-xs-6">
+                            <div class="progress">
+                                <div class="progress-bar  @(GetProgressBarClassForSupplyValue(Model.Device.MainVoltage))" role="progressbar" aria-valuenow="@Model.Device.MainVoltage.ToString()" aria-valuemin="0" aria-valuemax="24" style="width: @(GetProgressBarValueForVoltageMain(Model.Device.MainVoltage))%;">
+                                    @Model.Device.MainVoltage.ToString() V
+                                </div>
+                            </div>
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+                        <td class="col-lg-2 col-sm-2 col-xs-3">
+                            <div class="col-lg-3 col-sm-3 col-xs-4">
+                                <img src="~/Content/img/bateria2.png" class="thumbnail img-responsive">
+                            </div>
+                        </td>
+
+                        <td class="col-lg-4 col-sm-4 col-xs-3">
+                            Battery
+                        </td>
+
+                        <td class="col-lg-6 col-sm-6 col-xs-6">
+                            <div class="progress">
+                                <div class="progress-bar @(GetProgressBarClassForBatteryValue(Model.Device.BatteryVoltage))" role="progressbar" aria-valuenow="@Model.Device.BatteryVoltage.ToString()" aria-valuemin="0" aria-valuemax="15" style="width: @(GetProgressBarValueForVoltageBattery(Model.Device.MainVoltage))%;">
+                                    @Model.Device.BatteryVoltage.ToString() V
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+            }
+
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <img src="~/Content/img/in.png" alt="563te" class="img-circle img-section-icon">
+                        </div>
+                        <div class="col-md-10">
+                            <h2>Inputs</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body"></div>
+            <table class="table">
+                <tr>
+                    <th>Name </th>
+                    <th>Type</th>
+                    <th>Value </th>
+
+                </tr>
+                @if (Model.Device != null)
+            {
+                for (int i = 0; i < Model.Device.Inputs.Count; i++)
+                {
+                    <tr>
+                        <td>
+                            @Model.Device.Inputs[i].Name.ToString()
+                        </td>
+
+                        @Html.HiddenFor(model => model.Device.Inputs[i].Id)
+                        @Html.HiddenFor(model => model.Device.Inputs[i].NameId)
+
+                        <td>
+                            @Model.Device.Inputs[i].Type.ToString()
+                        </td>
+
+                        <td>
+                            @Html.Raw(HttpUtility.HtmlDecode(ContentForDigitalIoValue(Model.Device.Inputs[i].Value)))
+                        </td>
+
+                    </tr>
+                }
+            }
+            </table>
+        </div>
+
+    </div>
+
+
+@using (Html.BeginForm("UpdateIo", "AlarmSystemDeviceConfig"))  //,null, new { @id = "IoActivationForm" }
+{
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="container-fluid">
+
+                    <div class="row">
+
+                        <div class="col-md-2">
+                            <img src="~/Content/img/out.png" alt="124das" class="img-circle img-section-icon">
+                        </div>
+
+                        <div class="col-md-10">
+
+                            <h2>Outputs</h2>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="panel-body"></div>
+            <table class="table">
+                <tr>
+                    <th>Name </th>
+                    <th>Type</th>
+                    <th>Value </th>
+
+                </tr>
+                @if (Model.Device != null)
+                {
+                    for (int i = 0; i < Model.Device.Outputs.Count; i++)
+                    {
+                        <tr>
+                            <td>
+                                @Model.Device.Inputs[i].Name.ToString()
+                            </td>
+
+                                @Html.HiddenFor(model => model.Device.Outputs[i].Id)
+                                @Html.HiddenFor(model => model.Device.Outputs[i].NameId)
+                                @Html.HiddenFor(model => model.Device.Outputs[i].Type)
+                                @Html.HiddenFor(model => model.Device.Outputs[i].Enabled)
+
+                            <td>
+                                @Model.Device.Outputs[i].Type.ToString()
+
+                            </td>
+
+                            <td>
+                                
+                                @*@Html.HiddenFor(model => model.Device.Outputs[i].Value)*@
+
+                                <div class="checkbox">
+                                    @Html.ToggleSwitchFor(model => model.Device.Outputs[i].Value)
+                                </div>
+
+                                @*<input class="tgsw-action" type="checkbox" value="@Model.Device.Outputs[i].Value.ToString()" title="@Model.Device.Outputs[i].Id.ToString()" id='@Model.Device.Outputs[i].Id.ToString()'>
+                                        <input type="submit" style="visibility: hidden;"/>*@
+
+                              
+
+
+                            </td>
+
+                        </tr>
+                    }
+
+
+                }
+                <input type="submit" />
+
+            </table>
+        </div>
+
+    </div>
+
+}
+
+</div>
+

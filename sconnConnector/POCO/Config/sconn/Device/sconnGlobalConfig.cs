@@ -47,8 +47,8 @@ namespace sconnConnector.POCO.Config.sconn
             memCFG[ipcDefines.mAdrArmed] = (byte) (Armed ? 1 : 0);
             memCFG[ipcDefines.mAdrViolation] = (byte)(Violation ? 1 : 0);
             memCFG[ipcDefines.mAdrSysFail] = (byte)(Failure ? 1 : 0);
-            Devices = (byte)(memCFG[ipcDefines.mAdrDevNO +1]);
-            Zones = (byte)(memCFG[ipcDefines.mAdrZoneNo]);
+            memCFG[ipcDefines.mAdrDevNO + 1] = (byte)Devices;
+            memCFG[ipcDefines.mAdrZoneNo] = (byte)Zones;
             return memCFG;
         }
 
@@ -58,8 +58,8 @@ namespace sconnConnector.POCO.Config.sconn
             Armed = memCFG[ipcDefines.mAdrArmed] > 0 ? true : false;
             Violation = memCFG[ipcDefines.mAdrViolation] > 0 ? true : false;
             Failure = memCFG[ipcDefines.mAdrSysFail] > 0 ? true : false;
-            memCFG[ipcDefines.mAdrDevNO + 1] = (byte) Devices;
-            memCFG[ipcDefines.mAdrZoneNo] = (byte)Zones;
+            Devices = (byte)(memCFG[ipcDefines.mAdrDevNO + 1]);
+            Zones = (byte)(memCFG[ipcDefines.mAdrZoneNo]);
         }
 
         public void Fake()
