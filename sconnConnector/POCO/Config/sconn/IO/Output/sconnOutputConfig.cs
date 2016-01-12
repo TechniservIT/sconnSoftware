@@ -48,16 +48,16 @@ namespace sconnConnector.POCO.Config.sconn.IO.Output
         {
             try
             {
-                int outputs = buffer[ipcDefines.DeviceMaxOutputs];
-                for (int i = 0; i < outputs; i++)
+                byte outputs = buffer[ipcDefines.DeviceMaxOutputs];
+                for (byte i = 0; i < outputs; i++)
                 {
                     byte[] relayCfg = new byte[ipcDefines.mAdrOutputMemSize];
-                    for (int j = 0; j < ipcDefines.mAdrOutputMemSize; j++)
+                    for (byte j = 0; j < ipcDefines.mAdrOutputMemSize; j++)
                     {
                         relayCfg[j] = buffer[ipcDefines.mAdrOutput + i * ipcDefines.mAdrOutputMemSize + j];
                     }
                     sconnOutput relay = new sconnOutput(relayCfg);
-                    relay.Id = i;
+                    relay.Id = (byte)i;
                     Outputs.Add(relay);
                 }
             }

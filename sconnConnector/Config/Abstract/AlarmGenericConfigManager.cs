@@ -41,15 +41,40 @@ namespace sconnConnector.Config.Abstract
                     return false;
                 }
 
-                if (Upload_Send_Start_Message())
+                bool SingleUpload = true;
+                if (SingleUpload)
                 {
-                    Upload_Send_Config();
-                    if (Upload_Send_Config())
+                    byte[] data = this.Entity.Serialize();
+                    byte[] msgHeader = CommandManager.GetHeaderForOperationParametrized(typeof(T), CommandOperation.Set, EntityId);
+                    byte[] messageTail = CommandManager.GetTailForOperation(typeof(T), CommandOperation.Set);
+                    byte[] uploadMsg = new byte[data.Length + msgHeader.Length + messageTail.Length];
+
+                    msgHeader.CopyTo(uploadMsg, 0);
+                    data.CopyTo(uploadMsg, ipcDefines.NET_UPLOAD_HEADER_BYTES);
+                    messageTail.CopyTo(uploadMsg, ipcDefines.NET_UPLOAD_HEADER_BYTES + data.Length);
+
+                    var res = this.SendMessage(uploadMsg);
+                    if (IsResultSuccessForOperation(res, CommandOperation.Set))
                     {
                         client.Disconnect();
-                        return Upload_Signal_Finish();
+                        return true;
                     }
                 }
+                else
+                {
+                    if (Upload_Send_Start_Message())
+                    {
+                        if (Upload_Send_Config())
+                        {
+                            if (Upload_Signal_Finish())
+                            {
+                                client.Disconnect();
+                                return true;
+                            }
+                        }
+                    }
+                }
+
                 client.Disconnect();
                 return false;
             }
@@ -94,14 +119,14 @@ namespace sconnConnector.Config.Abstract
             try
             {
                 byte[] configBody = this.Entity.Serialize();
-                int cfgPackets = (configBody.Length / ipcDefines.NET_MAX_TX_SIZE);
-                int partialPacketBytes = configBody.Length % ipcDefines.NET_MAX_TX_SIZE;
+                int cfgPackets = (configBody.Length / ipcDefines.NET_MAX_PACKET_DATA);
+                int partialPacketBytes = configBody.Length % ipcDefines.NET_MAX_PACKET_DATA;
                 for (int i = 0; i < cfgPackets; i++)
                 {
-                    byte[] packetBytes = new byte[ipcDefines.NET_PACKET_TX_PAYLOAD_SIZE];
-                    for (int j = 0; j < ipcDefines.NET_MAX_TX_SIZE; j++)
+                    byte[] packetBytes = new byte[ipcDefines.NET_MAX_PACKET_DATA];
+                    for (int j = 0; j < ipcDefines.NET_MAX_PACKET_DATA; j++)
                     {
-                        packetBytes[j] = configBody[i * ipcDefines.NET_MAX_TX_SIZE + j];
+                        packetBytes[j] = configBody[i * ipcDefines.NET_MAX_PACKET_DATA + j];
                     }
                     if (!Upload_Send_Config_Packet(packetBytes))
                     {
@@ -113,7 +138,7 @@ namespace sconnConnector.Config.Abstract
                     byte[] packetBytes = new byte[partialPacketBytes];
                     for (int j = 0; j < partialPacketBytes; j++)
                     {
-                        packetBytes[j] = configBody[cfgPackets * ipcDefines.NET_MAX_TX_SIZE + j];
+                        packetBytes[j] = configBody[cfgPackets * ipcDefines.NET_MAX_PACKET_DATA + j];
                     }
                     if (!Upload_Send_Config_Packet(packetBytes))
                     {
@@ -136,8 +161,8 @@ namespace sconnConnector.Config.Abstract
             try
             {
                 byte[] msgHeader = CommandManager.GetHeaderForOperation(typeof(T),CommandOperation.Push);
-                byte[] messageTail = CommandManager.GetHeaderForOperation(typeof(T), CommandOperation.Push);
-                byte[] uploadMsg = new byte[ipcDefines.NET_MAX_TX_SIZE];
+                byte[] messageTail = CommandManager.GetTailForOperation(typeof(T), CommandOperation.Push);
+                byte[] uploadMsg = new byte[data.Length+msgHeader.Length+messageTail.Length];
 
                 msgHeader.CopyTo(uploadMsg, 0);
                 data.CopyTo(uploadMsg, ipcDefines.NET_UPLOAD_HEADER_BYTES);
@@ -155,8 +180,6 @@ namespace sconnConnector.Config.Abstract
                 _logger.Error(e, e.Message);
                 return false;
             }
-
-
         }
 
         private bool Upload_Signal_Finish()
@@ -228,13 +251,9 @@ namespace sconnConnector.Config.Abstract
             }
             else if (oper == CommandOperation.Push)
             {
-                return result.Contains(ipcCMD.PSHNXT);
+                return result.Contains(ipcCMD.ACKNXT);
             }
             else if (oper == CommandOperation.PushFin)
-            {
-                return result.Contains(ipcCMD.ACKFIN);
-            }
-            else if (oper == CommandOperation.Fin)
             {
                 return result.Contains(ipcCMD.ACKFIN);
             }

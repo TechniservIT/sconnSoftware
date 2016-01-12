@@ -20,6 +20,22 @@ namespace sconnConnector.Config.Abstract
 
     }
 
+    public enum CommandConfigType
+    {
+         NET_PACKET_TYPE_GCFG = 1,
+         NET_PACKET_TYPE_DEVCFG,
+         NET_PACKET_TYPE_DEVNAMECFG,
+         NET_PACKET_TYPE_SCHEDCFG,
+         NET_PACKET_TYPE_PASSWDCFG,
+         NET_PACKET_TYPE_AUTH,
+         NET_PACKET_TYPE_DEVNETCFG,
+         NET_PACKET_TYPE_GSMRCPTCFG,
+         NET_PACKET_TYPE_DEVAUTHCFG,
+         NET_PACKET_TYPE_GLOBNAMECFG,
+         NET_PACKET_TYPE_ZONENAMECFG,
+         NET_PACKET_TYPE_ZONECFG
+    }
+
     public static class CommandManager
     {
 
@@ -48,6 +64,35 @@ namespace sconnConnector.Config.Abstract
             else if (type == typeof(sconnUserConfig))
             {
                 return ipcCMD.setPasswdCfg;
+            }
+            return ipcCMD.ERRCMD;
+        }
+
+        private static byte GetConfigUploadTypeCode(Type type)
+        {
+            if (type == typeof(sconnAlarmZoneConfig))
+            {
+                return (byte)CommandConfigType.NET_PACKET_TYPE_ZONECFG;
+            }
+            else if (type == typeof(sconnGsmConfig))
+            {
+                return (byte)CommandConfigType.NET_PACKET_TYPE_GSMRCPTCFG;
+            }
+            else if (type == typeof(sconnDeviceConfig))
+            {
+                return (byte)CommandConfigType.NET_PACKET_TYPE_DEVCFG;
+            }
+            else if (type == typeof(sconnGlobalConfig))
+            {
+                return (byte)CommandConfigType.NET_PACKET_TYPE_GCFG;
+            }
+            else if (type == typeof(sconnAuthorizedDevices))
+            {
+                return (byte)CommandConfigType.NET_PACKET_TYPE_DEVAUTHCFG;
+            }
+            else if (type == typeof(sconnUserConfig))
+            {
+                return (byte)CommandConfigType.NET_PACKET_TYPE_PASSWDCFG;
             }
             return ipcCMD.ERRCMD;
         }
@@ -97,13 +142,60 @@ namespace sconnConnector.Config.Abstract
             }
             else if (oper == CommandOperation.Push)
             {
-                return ipcCMD.PSH;
+                return ipcCMD.PSHNXT;
             }
             else if (oper == CommandOperation.PushFin)
             {
-                return ipcCMD.PSHFIN;
+                return GetConfigUploadTypeCode(type);
             }
             return ipcCMD.ERRCMD;
+        }
+
+
+        private static byte GetCommandValueParam(Type type, CommandOperation oper, byte value)
+        {
+            if (oper == CommandOperation.Set)
+            {
+                return value;
+            }
+            else if (oper == CommandOperation.Push)
+            {
+                return ipcCMD.SVAL;
+            }
+            else if (oper == CommandOperation.Get)
+            {
+                return value;
+            }
+            else if (oper == CommandOperation.Push)
+            {
+                return ipcCMD.SVAL;
+            }
+            else if (oper == CommandOperation.PushFin)
+            {
+                return ipcCMD.SVAL;
+            }
+            return ipcCMD.SVAL;
+        }
+
+        private static byte GetEndCommandForOperation(Type type, CommandOperation oper)
+        {
+            if (oper == CommandOperation.Set)
+            {
+                return ipcCMD.EVAL;
+            }
+            else if (oper == CommandOperation.Push)
+            {
+                return ipcCMD.EVAL;
+            }
+            else if (oper == CommandOperation.Get)
+            {
+                return 0;
+            }
+            else if (oper == CommandOperation.PushFin)
+            {
+                return ipcCMD.EVAL;
+            }
+            return ipcCMD.EVAL;
         }
 
         public static byte[] GetHeaderForOperation(Type type, CommandOperation oper)
@@ -111,6 +203,7 @@ namespace sconnConnector.Config.Abstract
             byte[] Header = new byte[ipcDefines.NET_UPLOAD_HEADER_BYTES];
             Header[ipcDefines.MessageHeader_Command_Pos] = (byte)oper;
             Header[ipcDefines.MessageHeader_CommandType_Pos] = (byte)GetCommandOperationType(type, oper);
+            Header[ipcDefines.MessageHeader_CommandParam_Pos] = GetCommandValueParam(type, oper, 0);
             return Header;
         }
 
@@ -119,15 +212,14 @@ namespace sconnConnector.Config.Abstract
             byte[] Header = new byte[ipcDefines.NET_UPLOAD_HEADER_BYTES];
             Header[ipcDefines.MessageHeader_Command_Pos] = (byte)oper;
             Header[ipcDefines.MessageHeader_CommandType_Pos] = (byte)GetCommandOperationType(type, oper);
-            Header[ipcDefines.MessageHeader_CommandParam_Pos] = (byte) EntityId;
+            Header[ipcDefines.MessageHeader_CommandParam_Pos] = GetCommandValueParam(type,oper,(byte)EntityId);
             return Header;
         }
 
         public static byte[] GetTailForOperation(Type type, CommandOperation oper)
         {
-            byte[] Header = new byte[ipcDefines.NET_UPLOAD_HEADER_BYTES];
-            Header[ipcDefines.MessageHeader_Command_Pos] = (byte)oper;
-            Header[ipcDefines.MessageHeader_CommandType_Pos] = (byte)GetCommandOperationType(type, oper);
+            byte[] Header = new byte[ipcDefines.NET_UPLOAD_TAIL_BYTES];
+            Header[ipcDefines.MessageHeader_Command_Pos] = GetEndCommandForOperation(type,oper);
             return Header;
         }
 

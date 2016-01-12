@@ -634,7 +634,7 @@ namespace sconnConnector
         }
 
 
-        int ConnectionTimeoutMs = 500;
+        int ConnectionTimeoutMs = 5000;
 
         // Incoming data from the client.
         public string soxData = null;

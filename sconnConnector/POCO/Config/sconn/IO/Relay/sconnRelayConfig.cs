@@ -46,11 +46,11 @@ namespace sconnConnector.POCO.Config.sconn.IO.Relay
         {
             try
             {
-                int relays = buffer[ipcDefines.DeviceMaxRelays];
-                for (int i = 0; i < relays; i++)
+                byte relays = buffer[ipcDefines.DeviceMaxRelays];
+                for (byte i = 0; i < relays; i++)
                 {
                     byte[] relayCfg = new byte[ipcDefines.RelayMemSize];
-                    for (int j = 0; j < ipcDefines.ZONE_CFG_LEN; j++)
+                    for (byte j = 0; j < ipcDefines.ZONE_CFG_LEN; j++)
                     {
                         relayCfg[j] = buffer[ipcDefines.mAdrZoneCfgStartAddr + i * ipcDefines.ZONE_CFG_LEN];
                     }

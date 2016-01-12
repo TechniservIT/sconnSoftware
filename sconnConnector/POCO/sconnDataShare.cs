@@ -531,6 +531,10 @@ namespace sconnConnector
         public const byte comUSB = 0x04;
         public const byte comETH = 0x05;
 
+
+        public const byte mAdrCfgSingleLen = 0x01;
+
+
         //public const int deviceConfigSize = 256;  //256 bytes
         public const int ipcMaxDevices = 8;
 
@@ -663,7 +667,7 @@ namespace sconnConnector
         public const byte sysVersion = 0x00;
 
         /********  Device config  ********/
-
+       
         public const byte mAdrDevID = 0x00;    //device unique ID , for I2C it is also bus Address
 
         public const byte mAdrDomain = 0x02;    //device domain
@@ -680,7 +684,14 @@ namespace sconnConnector
         public const byte mAdrCOMeth = 0xD;  //device has ETH COM
         public const byte mAdrCOMmiwi = 0xE;  //device has MiWi COM
         public const byte mAdrI2CAddr = 0xF; //i2c bus address
+
         public const byte mAdrSensorBattLvl = 0xF;
+
+        public const byte mAdrDevArmState = (mAdrI2CAddr + mAdrCfgSingleLen);
+        public const byte mAdrDevViolationState = (mAdrDevArmState + mAdrCfgSingleLen);
+        public const byte mAdrDevFailureState = (mAdrDevViolationState + mAdrCfgSingleLen);
+        public const byte mAdrDeviceZone = (mAdrDevFailureState + mAdrCfgSingleLen);
+        public const byte mAdrDeviceZone_LEN =  0x02;
 
         /********  Input state  ********/
         public const int mAdrInput = 0x20;  //128 - start address of input states, format : <input type> <value1> <value2-Analog>
@@ -730,6 +741,7 @@ namespace sconnConnector
         public const byte mAdrRelayPar1 = 0x04;
         public const byte DeviceMaxRelays = 8;
         public const byte RelayMemSize = 0x05;
+        public const int mAdrRelayMemSize = (RelayMemSize * DeviceMaxRelays);
 
         public const int RelayTotalMemSize = (RelayMemSize*DeviceMaxRelays);
 
@@ -983,15 +995,16 @@ namespace sconnConnector
         public const int NET_MAX_SESSION_IDLE_SEC = 100;
         public const int NET_DATA_PACKET_CONTROL_BYTES = 2;
         public const int NET_CMD_PACKET_LEN = 3;
-        public const int NET_UPLOAD_PACKET_CONTROL_BYTES = 4;
+        public const int NET_UPLOAD_HEADER_BYTES = 3;
+        public const int NET_UPLOAD_TAIL_BYTES = 1;
+        public const int NET_UPLOAD_PACKET_CONTROL_BYTES = (NET_UPLOAD_TAIL_BYTES+ NET_UPLOAD_HEADER_BYTES);
         public const int NET_UPLOAD_PACKET_DATA_OFFSET = 3;
+        public const int NET_MAX_PACKET_DATA = (NET_MAX_TX_SIZE - NET_UPLOAD_PACKET_CONTROL_BYTES);
 
         public const int MessageHeader_Command_Pos = 0;
         public const int MessageHeader_CommandType_Pos = 1;
         public const int MessageHeader_CommandParam_Pos = 2;
-
-        public const int NET_UPLOAD_HEADER_BYTES = 3;
-        public const int NET_PACKET_TX_PAYLOAD_SIZE = (NET_UPLOAD_PACKET_CONTROL_BYTES- NET_UPLOAD_PACKET_CONTROL_BYTES);
+        public const int NET_PACKET_TX_PAYLOAD_SIZE = (NET_MAX_PACKET_DATA);
 
         public const byte NET_PACKET_TYPE_GCFG = 0x0001;
         public const byte NET_PACKET_TYPE_DEVCFG = 0x0002;

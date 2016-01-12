@@ -13,13 +13,13 @@ namespace sconnConnector.POCO.Config
 
     public class sconnRelay : IAlarmSystemConfigurationEntity, ISerializableConfiguration, IFakeAbleConfiguration
     {
-        public int Id { get; set; }
+        public byte Id { get; set; }
 
         public sconnOutputType Type { get; set; }
 
-        public int Value { get; set; }
+        public byte Value { get; set; }
 
-        public int NameId { get; set; }
+        public byte NameId { get; set; }
 
         public bool Enabled { get; set; }
 

@@ -31,11 +31,11 @@ namespace sconnConnector.POCO.Config
 
     public class sconnInput : IAlarmSystemConfigurationEntity, ISerializableConfiguration, IFakeAbleConfiguration
     {
-        public int NameId { get; set; }
-        public int Id { get; set; }
+        public byte NameId { get; set; }
+        public byte Id { get; set; }
         public sconnInputType Type { get; set; }
-        public int Value { get; set; }
-        public int Sensitivity { get; set; }
+        public byte Value { get; set; }
+        public uint Sensitivity { get; set; }
         public bool Enabled { get; set; }
         public string Name { get; set; }
         public sconnActivationGroup ActivationGroup { get; set; }
@@ -80,7 +80,7 @@ namespace sconnConnector.POCO.Config
                 Value = buffer[ipcDefines.mAdrInputVal];
                 NameId = buffer[ipcDefines.mAdrInputNameAddr];
                 Enabled = buffer[ipcDefines.mAdrInputEnabled] > 0 ? true : false;
-                Sensitivity = buffer[ipcDefines.mAdrInputSensitivity] * ipcDefines.InputSensitivityStep;
+                Sensitivity = (uint) (buffer[ipcDefines.mAdrInputSensitivity] * ipcDefines.InputSensitivityStep);
                 ActivationGroup = (sconnActivationGroup)buffer[ipcDefines.mAdrInputAG];
 
             }

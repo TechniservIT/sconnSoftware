@@ -54,7 +54,7 @@ namespace iotDash.Controllers.domain.site.AlarmSystem
             }
             return View();
         }
-
+        
 
         public ActionResult Edit(int ServerId, int DeviceId)
         {
@@ -101,13 +101,13 @@ namespace iotDash.Controllers.domain.site.AlarmSystem
                     var res = (_provider.Update(model.Device));
                     model.Result = StatusResponseGenerator.GetStatusResponseResultForReturnParam(res);
                 }
-                return View(model);
+                return Status(model.ServerId, model.Device.DeviceId);
             }
             catch (Exception e)
             {
                 model.Result = StatusResponseGenerator.GetRequestResponseCriticalError();
             }
-            return View(model);
+            return Status(model.ServerId, model.Device.DeviceId);
         }
 
 

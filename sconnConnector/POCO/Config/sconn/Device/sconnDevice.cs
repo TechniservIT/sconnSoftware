@@ -27,15 +27,17 @@ namespace sconnConnector.POCO.Config.sconn
 
     public class sconnDevice : IAlarmSystemConfigurationEntity, ISerializableConfiguration, IFakeAbleConfiguration
     {
-        public int Id { get; set; }
-        public int Value { get; set; }
+        public byte Id { get; set; }
+        public byte Value { get; set; }
+
         public bool Armed { get; set; }
+        public byte ZoneId { get; set; }
         public bool Violation { get; set; }
         public bool Failure { get; set; }
-        public int DeviceId { get; set; }
-        public int InputNo { get; set; }
-        public int OutputNo { get; set; }
-        public int RelayNo { get; set; }
+        public byte DeviceId { get; set; }
+        public byte InputNo { get; set; }
+        public byte OutputNo { get; set; }
+        public byte RelayNo { get; set; }
         public List<sconnOutput> Outputs { get; set; }
         public List<sconnInput> Inputs { get; set; }
         public List<sconnRelay> Relays { get; set; }
@@ -91,7 +93,13 @@ namespace sconnConnector.POCO.Config.sconn
                 Inputs = new List<sconnInput>();
                 for (int i = 0; i < InputNo; i++)
                 {
-                    sconnInput input = new sconnInput(_memCFG);
+                    byte[] inputBytes = new byte[ipcDefines.mAdrInputMemSize];
+                    for (int j = 0; j < ipcDefines.mAdrInputMemSize; j++)
+                    {
+                        inputBytes[j] = _memCFG[ipcDefines.mAdrInput+ i*ipcDefines.mAdrInputMemSize + j];
+                    }
+                    sconnInput input = new sconnInput(inputBytes);
+                    input.Id = (byte) i;
                     Inputs.Add(input);
                 }
             }
@@ -110,7 +118,13 @@ namespace sconnConnector.POCO.Config.sconn
                 Outputs = new List<sconnOutput>();
                 for (int i = 0; i < OutputNo; i++)
                 {
-                    sconnOutput output = new sconnOutput(_memCFG); 
+                    byte[] outputBytes = new byte[ipcDefines.mAdrOutputMemSize];
+                    for (int j = 0; j < ipcDefines.mAdrOutputMemSize; j++)
+                    {
+                        outputBytes[j] = _memCFG[ipcDefines.mAdrOutput + i * ipcDefines.mAdrOutputMemSize + j];
+                    }
+                    sconnOutput output = new sconnOutput(outputBytes);
+                    output.Id = (byte)i;
                     Outputs.Add(output);
                 }
             }
@@ -129,7 +143,13 @@ namespace sconnConnector.POCO.Config.sconn
                 Relays = new List<sconnRelay>();
                 for (int i = 0; i < RelayNo; i++)
                 {
-                    sconnRelay relay = new sconnRelay(_memCFG);
+                    byte[] relayBytes = new byte[ipcDefines.mAdrRelayMemSize];
+                    for (int j = 0; j < ipcDefines.mAdrRelayMemSize; j++)
+                    {
+                        relayBytes[j] = _memCFG[ipcDefines.mAdrRelay + i * ipcDefines.mAdrRelayMemSize + j];
+                    }
+                    sconnRelay relay = new sconnRelay(relayBytes);
+                    relay.Id = (byte)i;
                     Relays.Add(relay);
                 }
             }
@@ -232,7 +252,7 @@ namespace sconnConnector.POCO.Config.sconn
             LoadDeviceNames();
         }
 
-        public sconnDevice(byte[] buffer)
+        public sconnDevice(byte[] buffer) :this()
         {
                 this.Deserialize(buffer);
         }
@@ -295,6 +315,9 @@ namespace sconnConnector.POCO.Config.sconn
         {
             try
             {
+
+
+                _memCFG[ipcDefines.mAdrInputsNO]  = (byte) InputNo;
                 foreach (var item in Inputs)
                 {
                     int baseaddr = ipcDefines.mAdrInput + ipcDefines.mAdrInputMemSize * item.Id;
@@ -308,6 +331,7 @@ namespace sconnConnector.POCO.Config.sconn
                     SetDeviceNameAt(ipcDefines.mAddr_NAMES_Inputs_Pos + item.Id, item.Name);
                 }
 
+                _memCFG[ipcDefines.mAdrOutputsNO] =  (byte)OutputNo;
                 foreach (var item in Outputs)
                 {
                     int baseaddr = ipcDefines.mAdrOutput + ipcDefines.mAdrOutputMemSize * item.Id;
@@ -319,6 +343,7 @@ namespace sconnConnector.POCO.Config.sconn
                     SetDeviceNameAt(ipcDefines.mAddr_NAMES_Outputs_Pos + item.Id, item.Name);
                 }
 
+                _memCFG[ipcDefines.mAdrRelayNO] = (byte)RelayNo;
                 foreach (var item in Relays)
                 {
                     int baseaddr = ipcDefines.mAdrRelay + ipcDefines.RelayMemSize * item.Id;
@@ -346,13 +371,41 @@ namespace sconnConnector.POCO.Config.sconn
         public byte[] Serialize()
         {
             SavePropertiesToRawConfig();
+            memCFG[ipcDefines.mAdrDevArmState] = (byte) (Armed ? 1 : 0);
+            memCFG[ipcDefines.mAdrDevViolationState] = (byte)(Violation ? 1 : 0);
+            memCFG[ipcDefines.mAdrDevFailureState] = (byte)(Failure ? 1 : 0);
+
+            memCFG[ipcDefines.mAdrDeviceZone] = (byte)(ZoneId);
+            memCFG[ipcDefines.mAdrDevRev] = (byte)(Revision);
+            memCFG[ipcDefines.mAdrDevType] = (byte)(Type);
+            memCFG[ipcDefines.mAdrDomain] = (byte)(DomainNumber);
+            
+            byte [] voltBackupBytes = System.BitConverter.GetBytes(BatteryVoltage);
+            voltBackupBytes.CopyTo(memCFG, ipcDefines.mAdrBackupVolt_Start_Pos);
+
+            byte[] voltMainBytes = System.BitConverter.GetBytes(MainVoltage);
+            voltMainBytes.CopyTo(memCFG, ipcDefines.mAdrSuppVolt_Start_Pos);
+
+            memCFG[ipcDefines.mAdrKeypadMod] = (byte)(KeypadModule ? 1 : 0);
+            memCFG[ipcDefines.mAdrTempMod] = (byte)(TemperatureModule ? 1 : 0);
+            memCFG[ipcDefines.mAdrHumMod] = (byte)(HumidityModule ? 1 : 0);
+            memCFG[ipcDefines.mAdrCOMeth] = (byte)(ComTcpIp ? 1 : 0);
+            memCFG[ipcDefines.mAdrCOMmiwi] = (byte)(ComMiWi ? 1 : 0);
+
+
             return this.memCFG;
         }
 
         public void Deserialize(byte[] buffer)
         {
-            this.memCFG = buffer;
-            LoadPropertiesFromConfig();
+            if (buffer.Length >= ipcDefines.deviceConfigSize)
+            {
+                for (int i = 0; i < ipcDefines.deviceConfigSize; i++)
+                {
+                    this.memCFG[i] = buffer[i];
+                }
+                LoadPropertiesFromConfig();
+            }
         }
 
         public void Fake()

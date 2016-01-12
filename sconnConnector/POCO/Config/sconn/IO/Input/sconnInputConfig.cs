@@ -48,11 +48,11 @@ namespace sconnConnector.POCO.Config.sconn.IO
 
             try
             {
-                int relays = buffer[ipcDefines.DeviceMaxInputs];
-                for (int i = 0; i < relays; i++)
+                byte relays = buffer[ipcDefines.DeviceMaxInputs];
+                for (byte i = 0; i < relays; i++)
                 {
                     byte[] relayCfg = new byte[ipcDefines.mAdrInputMemSize];
-                    for (int j = 0; j < ipcDefines.mAdrInputMemSize; j++)
+                    for (byte j = 0; j < ipcDefines.mAdrInputMemSize; j++)
                     {
                         relayCfg[j] = buffer[ipcDefines.mAdrInput + i * ipcDefines.mAdrInputMemSize + j];
                     }

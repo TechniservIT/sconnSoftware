@@ -258,7 +258,7 @@
         })
       
         $('.iotoggler').change(function () {
-            alert("changed !");
+            //alert("changed !");
             document.getElementById('IoActivationForm').submit();
         })
         
@@ -291,11 +291,18 @@
 
 <div class="container-fluid">
 
-    @*<div class="row">
-            <div id="ReloadModelData" class="col-md-1">
-                @Html.ActionLink("Refresh", "Index", new {DeviceId = Model.ServerId}, new {@class = "glyphicon glyphicon-refresh"})
-            </div>
-        </div>*@
+
+@using (Html.BeginForm("Status", "AlarmSystemDeviceConfig",FormMethod.Post,new { name = "outputsForm", id = "IoActivationForm" }))
+{
+    @Html.HiddenFor(model => model.ServerId)
+
+    @Html.HiddenFor(model => model.Device.Armed)
+    @Html.HiddenFor(model => model.Device.Violation)
+    @Html.HiddenFor(model => model.Device.Failure)
+
+    @Html.HiddenFor(model => model.Device.InputNo)
+    @Html.HiddenFor(model => model.Device.OutputNo)
+    @Html.HiddenFor(model => model.Device.RelayNo)
 
     <div class="row">
         <div class="panel panel-default">
@@ -321,6 +328,7 @@
                                 Hardware version :
                             </div>
                             <div class="col-md-6">
+c
                                 @Model.Device.Revision.ToString()
                             </div>
                         </li>
@@ -340,6 +348,7 @@
                                 Domain number :
                             </div>
                             <div class="col-md-6">
+                                @Html.HiddenFor(model => model.Device.DomainNumber)
                                 @Model.Device.DomainNumber
                             </div>
                         </li>
@@ -349,6 +358,7 @@
                                 Type :
                             </div>
                             <div class="col-md-6">
+                                @Html.HiddenFor(model => model.Device.Type)
                                 @Model.Device.Type.ToString()
                             </div>
                         </li>
@@ -386,6 +396,7 @@
                                 Keypad :
                             </div>
                             <div class="col-md-6">
+                                @Html.HiddenFor(model => model.Device.KeypadModule)
                                 @Model.Device.KeypadModule.ToString()
                             </div>
                         </li>
@@ -396,6 +407,7 @@
                                 Temperature sensor :
                             </div>
                             <div class="col-md-6">
+                                @Html.HiddenFor(model => model.Device.TemperatureModule)
                                 @Model.Device.TemperatureModule.ToString()
                             </div>
                         </li>
@@ -407,6 +419,7 @@
                                 Humidity sensor:
                             </div>
                             <div class="col-md-6">
+                                @Html.HiddenFor(model => model.Device.HumidityModule)
                                 @Model.Device.HumidityModule.ToString()
                             </div>
                         </li>
@@ -416,6 +429,7 @@
                                 Ethernet :
                             </div>
                             <div class="col-md-6">
+                                @Html.HiddenFor(model => model.Device.ComTcpIp)
                                 @Model.Device.ComTcpIp.ToString()
                             </div>
                         </li>
@@ -426,6 +440,7 @@
                                 MiWi :
                             </div>
                             <div class="col-md-6">
+                                @Html.HiddenFor(model => model.Device.ComMiWi)
                                 @Model.Device.ComMiWi.ToString()
                             </div>
                         </li>
@@ -472,7 +487,8 @@
                         <td class="col-lg-6 col-sm-6 col-xs-6">
                             <div class="progress">
                                 <div class="progress-bar  @(GetProgressBarClassForSupplyValue(Model.Device.MainVoltage))" role="progressbar" aria-valuenow="@Model.Device.MainVoltage.ToString()" aria-valuemin="0" aria-valuemax="24" style="width: @(GetProgressBarValueForVoltageMain(Model.Device.MainVoltage))%;">
-                                    @Model.Device.MainVoltage.ToString() V
+                                    @Html.HiddenFor(model => model.Device.MainVoltage)
+                                     @Model.Device.MainVoltage.ToString() V
                                 </div>
                             </div>
                         </td>
@@ -494,7 +510,8 @@
                         <td class="col-lg-6 col-sm-6 col-xs-6">
                             <div class="progress">
                                 <div class="progress-bar @(GetProgressBarClassForBatteryValue(Model.Device.BatteryVoltage))" role="progressbar" aria-valuenow="@Model.Device.BatteryVoltage.ToString()" aria-valuemin="0" aria-valuemax="15" style="width: @(GetProgressBarValueForVoltageBattery(Model.Device.MainVoltage))%;">
-                                    @Model.Device.BatteryVoltage.ToString() V
+                                        @Html.HiddenFor(model => model.Device.BatteryVoltage)
+                                        @Model.Device.BatteryVoltage.ToString() V
                                 </div>
                             </div>
                         </td>
@@ -532,7 +549,7 @@
 
                 </tr>
                 @if (Model.Device != null)
-            {
+                {
                 for (int i = 0; i < Model.Device.Inputs.Count; i++)
                 {
                         <tr>
@@ -542,6 +559,11 @@
 
                             @Html.HiddenFor(model => model.Device.Inputs[i].Id)
                             @Html.HiddenFor(model => model.Device.Inputs[i].NameId)
+                            @Html.HiddenFor(model => model.Device.Inputs[i].ActivationGroup)
+                            @Html.HiddenFor(model => model.Device.Inputs[i].Enabled)
+                            @Html.HiddenFor(model => model.Device.Inputs[i].Sensitivity)
+                            @Html.HiddenFor(model => model.Device.Inputs[i].Type)
+                            @Html.HiddenFor(model => model.Device.Inputs[i].Value)
 
                             <td>
                                 @Model.Device.Inputs[i].Type.ToString()
@@ -560,30 +582,26 @@
     </div>
 
 
-    @using (Html.BeginForm("UpdateIo", "AlarmSystemDeviceConfig"))  //,null, new { @id = "IoActivationForm" }
-    {
-        <div class="row">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <div class="container-fluid">
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="container-fluid">
 
-                        <div class="row">
+                    <div class="row">
 
-                            <div class="col-md-2">
-                                <img src="~/Content/img/out.png" alt="124das" class="img-circle img-section-icon">
-                            </div>
-
-                            <div class="col-md-10">
-
-                                <h2>Outputs</h2>
-
-                            </div>
+                        <div class="col-md-2">
+                            <img src="~/Content/img/out.png" alt="124das" class="img-circle img-section-icon">
                         </div>
 
+                        <div class="col-md-10">
+                            <h2>Outputs</h2>
+                        </div>
                     </div>
-                </div>
 
-                <div class="panel-body"></div>
+                </div>
+            </div>
+
+            <div class="panel-body">
                 <table class="table">
                     <tr>
                         <th>Name </th>
@@ -595,49 +613,41 @@
                 {
                     for (int i = 0; i < Model.Device.Outputs.Count; i++)
                     {
-                            <tr>
-                                <td>
-                                    @Model.Device.Inputs[i].Name.ToString()
-                                </td>
+                        <tr>
+                            <td>
+                                @Model.Device.Outputs[i].Name.ToString()
+                            </td>
 
-                                @Html.HiddenFor(model => model.Device.Outputs[i].Id)
-                                @Html.HiddenFor(model => model.Device.Outputs[i].NameId)
-                                @Html.HiddenFor(model => model.Device.Outputs[i].Type)
-                                @Html.HiddenFor(model => model.Device.Outputs[i].Enabled)
+                            @Html.HiddenFor(model => model.Device.Outputs[i].Id)
+                            @Html.HiddenFor(model => model.Device.Outputs[i].NameId)
+                            @Html.HiddenFor(model => model.Device.Outputs[i].Type)
+                            @Html.HiddenFor(model => model.Device.Outputs[i].Enabled)
 
-                                <td>
-                                    @Model.Device.Outputs[i].Type.ToString()
+                            <td>
+                                @Model.Device.Outputs[i].Type.ToString()
+                            </td>
 
-                                </td>
-
-                                <td>
-
-                                    @*@Html.HiddenFor(model => model.Device.Outputs[i].Value)*@
-
-                                    <div class="checkbox">
-                                        @Html.ToggleSwitchFor(model => model.Device.Outputs[i].Value)
-                                    </div>
-
-                                    @*<input class="tgsw-action" type="checkbox" value="@Model.Device.Outputs[i].Value.ToString()" title="@Model.Device.Outputs[i].Id.ToString()" id='@Model.Device.Outputs[i].Id.ToString()'>
-                                        <input type="submit" style="visibility: hidden;"/>*@
-
-
-
-
-                                </td>
-
-                            </tr>
+                            <td>
+                                <div class="checkbox">
+                                    @Html.ToggleSwitchFor(model => model.Device.Outputs[i].Value)
+                                </div>
+                            </td>
+                        </tr>
                         }
-
-
                     }
-                    <input type="submit" />
+
 
                 </table>
             </div>
 
         </div>
+    </div>
 
-    }
+    <div class="row">
+        <div class="col-md-12">
+            <input type="submit" class="btn btn-bitbucket" value="Update" />
+        </div>
+    </div>
+}
 
 </div>

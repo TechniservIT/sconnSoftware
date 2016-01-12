@@ -256,6 +256,12 @@
             //$('#console-event').html('Toggle: ' + $(this).prop('checked'))
             document.getElementById('IoActivationForm').submit();
         })
+        
+        $('.iotoggler').change(function () {
+            alert("toggled");
+            document.getElementById('IoActivationForm').submit();
+        })
+        
 
         ReloadPanels();
 
@@ -554,7 +560,7 @@
     </div>
 
 
-@using (Html.BeginForm("UpdateIo", "AlarmSystemDeviceConfig"))  //,null, new { @id = "IoActivationForm" }
+@using (Html.BeginForm("Status", "AlarmSystemDeviceConfig"))  //,null, new { @id = "IoActivationForm" }
 {
     <div class="row">
         <div class="panel panel-default">
@@ -577,62 +583,62 @@
                 </div>
             </div>
 
-            <div class="panel-body"></div>
-            <table class="table">
-                <tr>
-                    <th>Name </th>
-                    <th>Type</th>
-                    <th>Value </th>
+            <div class="panel-body">
+                <table class="table">
+                    <tr>
+                        <th>Name </th>
+                        <th>Type</th>
+                        <th>Value </th>
 
-                </tr>
-                @if (Model.Device != null)
+                    </tr>
+                    @if (Model.Device != null)
                 {
                     for (int i = 0; i < Model.Device.Outputs.Count; i++)
                     {
-                        <tr>
-                            <td>
-                                @Model.Device.Inputs[i].Name.ToString()
-                            </td>
+                            <tr>
+                                <td>
+                                    @Model.Device.Inputs[i].Name.ToString()
+                                </td>
 
                                 @Html.HiddenFor(model => model.Device.Outputs[i].Id)
                                 @Html.HiddenFor(model => model.Device.Outputs[i].NameId)
                                 @Html.HiddenFor(model => model.Device.Outputs[i].Type)
                                 @Html.HiddenFor(model => model.Device.Outputs[i].Enabled)
 
-                            <td>
-                                @Model.Device.Outputs[i].Type.ToString()
+                                <td>
+                                    @Model.Device.Outputs[i].Type.ToString()
 
-                            </td>
+                                </td>
 
-                            <td>
-                                
-                                @*@Html.HiddenFor(model => model.Device.Outputs[i].Value)*@
+                                <td>
+                                    @*@Html.HiddenFor(model => model.Device.Outputs[i].Value)*@
 
-                                <div class="checkbox">
-                                    @Html.ToggleSwitchFor(model => model.Device.Outputs[i].Value)
-                                </div>
+                                    <div class="checkbox">
+                                        @Html.ToggleSwitchFor(model => model.Device.Outputs[i].Value)
+                                    </div>
 
-                                @*<input class="tgsw-action" type="checkbox" value="@Model.Device.Outputs[i].Value.ToString()" title="@Model.Device.Outputs[i].Id.ToString()" id='@Model.Device.Outputs[i].Id.ToString()'>
-                                        <input type="submit" style="visibility: hidden;"/>*@
+                                    @*<input class="tgsw-action" type="checkbox" value="@Model.Device.Outputs[i].Value.ToString()" title="@Model.Device.Outputs[i].Id.ToString()" id='@Model.Device.Outputs[i].Id.ToString()'>
+                            <input type="submit" style="visibility: hidden;"/>*@
 
-                              
-
-
-                            </td>
-
-                        </tr>
+                                </td>
+                            </tr>
+                        }
                     }
 
 
-                }
-                <input type="submit" />
-
-            </table>
+                </table>
+            </div>
+       
         </div>
-
     </div>
 
+    <div class="row">
+        <div class="col-md-12">
+            <input type="submit" class="btn btn-bitbucket" value="Update" />
+        </div>
+    </div>
 }
+
 
 </div>
 

@@ -14,7 +14,7 @@ namespace sconnConnector.POCO.Config.sconn
         public sconnDevice Device { get; set; }
         private static Logger _logger = LogManager.GetCurrentClassLogger();
 
-        public sconnDeviceConfig(int Id)
+        public sconnDeviceConfig(byte Id)
         {
             Device = new sconnDevice {Id = Id};
         }
@@ -28,7 +28,7 @@ namespace sconnConnector.POCO.Config.sconn
         {
             try
             {
-                return Device.memCFG;
+                return Device.Serialize();
             }
             catch (Exception e)
             {
