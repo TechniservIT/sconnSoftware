@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.ComponentModel.DataAnnotations;
 using System.Web;
@@ -45,19 +46,24 @@ namespace iotDbConnector.DAL
 
         [DataMember]
         [Required]
+        [DisplayName("Name")]
         public string DeviceName { get; set; }
 
         [DataMember]
         [Required]
+        [DisplayName("Endpoint")]
         public virtual EndpointInfo EndpInfo { get; set; }
 
         [DataMember]
+        [DisplayName("Credentials")]
         public virtual DeviceCredentials Credentials { get; set; }
 
         [DataMember]
+        [DisplayName("Actions")]
         public virtual List<DeviceAction> Actions { get; set; }
 
         [DataMember]
+        [DisplayName("Properties")]
         public virtual List<DeviceProperty> Properties { get; set; }
 
         [DataMember]
@@ -70,9 +76,11 @@ namespace iotDbConnector.DAL
 
         [DataMember]
         [Required]
+        [DisplayName("Site")]
         public virtual Site Site { get; set; }
 
         [DataMember]
+        [DisplayName("Virtual")]
         public bool IsVirtual { get; set; }
 
         [DataMember]

@@ -20,9 +20,11 @@ namespace iotDbConnector.DAL
 
         [DataMember]
         [Required]
+        [DisplayName("Name")]
         public string ActionName { get; set; }
 
         [DataMember]
+        [DisplayName("Description")]
         public string ActionDescription { get; set; }
 
         [DataMember]
@@ -38,6 +40,7 @@ namespace iotDbConnector.DAL
 
 
         [DataMember]
+        [DisplayName("Last Activation")]
         public DateTime LastActivationTime { get; set; }
 
         [DataMember]

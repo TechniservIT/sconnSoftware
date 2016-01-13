@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using DeviceManagmentService;
 using iotDash.Areas.AlarmSystem.Models;
 using iotDash.Content.Dynamic.Status;
 using iotDash.Controllers.domain.navigation;
@@ -85,12 +87,46 @@ namespace iotDash.Controllers.domain.site
 			return View();
 		}
         
-		public ActionResult Edit(int siteId)
+		public ActionResult Edit(int Id)
 		{
 			return View();
 		}
-        
-		public ActionResult Add()
+
+        [HttpPost]
+        public async Task<ActionResult> Edit(AddSiteViewModel model)
+        {
+            try
+            {
+                if (model.SiteName != null)
+                {
+                    string domainId = DomainSession.GetContextDomain(this.HttpContext);
+                    iotDomain d = Icont.Domains.First(dm => dm.DomainName.Equals(domainId));
+                    Location loc = d.Locations.First(l => l.Id == d.Id);
+                    if (loc != null)
+                    {
+                        model.site.siteLocation = loc;
+                        model.site.Domain = d;
+                        Icont.Sites.Add(model.site);
+                        Icont.SaveChanges();
+                        var stored = Icont.Sites.First(s => s.SiteName.Equals(model.site.SiteName));
+                        model.Result = StatusResponseGenerator.GetStatusResponseResultForReturnParam(stored);
+                    }
+                    return View(model);
+                }
+                else
+                {
+                    model.Result = StatusResponseGenerator.GetAlertPanelWithMsgAndStat("Error.", RequestStatus.Failure);
+                }
+            }
+            catch (Exception e)
+            {
+                model.Result = StatusResponseGenerator.GetAlertPanelWithMsgAndStat("Error.", RequestStatus.Failure);
+            }
+            return View(model);
+        }
+
+
+        public ActionResult Add()
 		{          
 			try
 			{
@@ -139,15 +175,16 @@ namespace iotDash.Controllers.domain.site
             return StatusResponseGenerator.GetAlertPanelWithMsgAndStat("Add success.", RequestStatus.Success);
 		}
         
-		public ActionResult Locate(int number)
+		public ActionResult Locate(int Id)
 		{
 			return View();
 		}
         
-		public ActionResult Status(int number)
+		public ActionResult Status(int Id)
 		{
 			return View();
 		}
+
 		public ActionResult AddSite(Site site)
 		{
 			if (site != null)

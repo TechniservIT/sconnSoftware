@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
@@ -53,8 +54,12 @@ namespace iotDash.Models
 
         public List<Device> Devices { get; set; }
 
+        [Required]
+        [DisplayName("Domain")]
         public iotDomain Domain { get; set; }
 
+        [Required]
+        [DisplayName("Role")]
         public IotUserRole Role { get; set; }
 
         public string  Result { get; set; }

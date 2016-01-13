@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -45,6 +47,8 @@ namespace iotDash.Models
 
     public class AlarmSystemAddAuthorizedDeviceModel
     {
+        [Required]
+        [DisplayName("Authorizd Device")]
         public sconnAuthorizedDevice AuthorizedDevice { get; set; }
         public string Result { get; set; }
 
@@ -81,6 +85,8 @@ namespace iotDash.Models
 
     public class AlarmSystemGsmAddRcptModel : IAsyncStatusModel
     {
+        [Required]
+        [DisplayName("Recipient")]
         public  sconnGsmRcpt GsmRcpt { get; set; }
 
         public AlarmSystemGsmAddRcptModel()
@@ -104,6 +110,9 @@ namespace iotDash.Models
     public class AlarmSystemZoneConfigModel : IAsyncStatusModel
     {
         public List<sconnAlarmZone> ZoneConfigs { get; set; }
+
+        [Required]
+        [DisplayName("Device")]
         public int DeviceId { get; set; }
 
         public AlarmSystemZoneConfigModel(List<sconnAlarmZone> zoneCfg)
@@ -126,6 +135,8 @@ namespace iotDash.Models
 
     public class AlarmSystemZoneAddModel : IAsyncStatusModel
     {
+        [Required]
+        [DisplayName("Zone")]
         public sconnAlarmZone Zone { get; set; }
 
         public AlarmSystemZoneAddModel()
@@ -160,6 +171,8 @@ namespace iotDash.Models
 
     public class AlarmSystemUserAddModel : IAsyncStatusModel
     {
+        [Required]
+        [DisplayName("User")]
         public sconnUser User { get; set; }
 
         public AlarmSystemUserAddModel()

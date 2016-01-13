@@ -321,130 +321,92 @@
                 </div>
 
                 <div class="col-md-5">
-                    <ul>
 
-                        <li>
-                            <div class="col-md-6">
-                                Hardware version :
-                            </div>
-                            <div class="col-md-6">
-c
-                                @Model.Device.Revision.ToString()
-                            </div>
+                    <ul class="list-group">
+
+
+                        <li class="list-group-item">
+                            <span class="glyphicon glyphicon-barcode"></span> 
+                            Hardware version :
+                            <span class="label label-default label-pill pull-right pull-xs-right">@Model.Device.Revision.ToString()</span>
                         </li>
 
-                        <li>
-                            <div class="col-md-6">
-                                Firmware version :
-                            </div>
-                            <div class="col-md-6">
-                                4.034
-                            </div>
+                        <li class="list-group-item">
+                            <span class="glyphicon glyphicon-download"></span> 
+                            Firmware version :
+                            <span class="label label-default label-pill pull-right pull-xs-right">4.034</span>
                         </li>
 
 
-                        <li>
-                            <div class="col-md-6">
-                                Domain number :
-                            </div>
-                            <div class="col-md-6">
-                                @Html.HiddenFor(model => model.Device.DomainNumber)
-                                @Model.Device.DomainNumber
-                            </div>
+                        <li class="list-group-item">
+                            @Html.HiddenFor(model => model.Device.DomainNumber)
+                            <span class="glyphicon glyphicon-file"></span>
+                            Domain number :
+                            <span class="label label-default label-pill pull-right pull-xs-right">@Model.Device.DomainNumber</span>
                         </li>
 
-                        <li>
-                            <div class="col-md-6">
-                                Type :
-                            </div>
-                            <div class="col-md-6">
-                                @Html.HiddenFor(model => model.Device.Type)
-                                @Model.Device.Type.ToString()
-                            </div>
+                        <li class="list-group-item">
+                            @Html.HiddenFor(model => model.Device.Type)
+                            <span class="glyphicon glyphicon-list-alt"></span>
+                             Type :
+                            <span class="label label-default label-pill pull-right pull-xs-right">@Model.Device.Type.ToString()</span>
+  
                         </li>
 
-                        <li>
-                            <div class="col-md-6">
-                                Inputs :
-                            </div>
-                            <div class="col-md-6">
-                                @Model.Device.Inputs.Count.ToString()
-                            </div>
+                        <li class="list-group-item">
+                            <span class="glyphicon glyphicon-log-in"></span>
+                            Inputs :
+                            <span class="label label-default label-pill pull-right pull-xs-right">@Model.Device.Inputs.Count.ToString()</span>
                         </li>
 
-                        <li>
-                            <div class="col-md-6">
-                                Outputs :
-                            </div>
-                            <div class="col-md-6">
-                                @Model.Device.Outputs.Count.ToString()
-                            </div>
+                        <li class="list-group-item">
+                            <span class="glyphicon glyphicon-bell"></span>
+                            Outputs :
+                            <span class="label label-default label-pill pull-right pull-xs-right">@Model.Device.Outputs.Count.ToString()</span>
                         </li>
 
-                        <li>
-                            <div class="col-md-6">
-                                Relays :
-                            </div>
-                            <div class="col-md-6">
-                                @Model.Device.Relays.Count.ToString()
-                            </div>
+                        <li class="list-group-item">
+                            <span class="glyphicon glyphicon-flash"></span>
+                            Relays :
+                            <span class="label label-default label-pill pull-right pull-xs-right">@Model.Device.Relays.Count.ToString()</span>
                         </li>
 
 
-                        <li>
-                            <div class="col-md-6">
-                                Keypad :
-                            </div>
-                            <div class="col-md-6">
-                                @Html.HiddenFor(model => model.Device.KeypadModule)
-                                @Model.Device.KeypadModule.ToString()
-                            </div>
+                        <li class="list-group-item">
+                            @Html.HiddenFor(model => model.Device.KeypadModule)
+                            <span class="glyphicon glyphicon-modal-window"></span>
+                            Keypad :
+                            <span class="label label-default label-pill pull-right pull-xs-right">@Model.Device.KeypadModule.ToString()</span>
                         </li>
 
 
-                        <li>
-                            <div class="col-md-6">
-                                Temperature sensor :
-                            </div>
-                            <div class="col-md-6">
-                                @Html.HiddenFor(model => model.Device.TemperatureModule)
-                                @Model.Device.TemperatureModule.ToString()
-                            </div>
+                        <li class="list-group-item">
+                            @Html.HiddenFor(model => model.Device.TemperatureModule)
+                            <span class="glyphicon glyphicon-scale"></span>
+                            Temperature sensor :
+                            <span class="label label-default label-pill pull-right pull-xs-right">@Model.Device.TemperatureModule.ToString()</span>
                         </li>
 
-
-
-                        <li>
-                            <div class="col-md-6">
-                                Humidity sensor:
-                            </div>
-                            <div class="col-md-6">
-                                @Html.HiddenFor(model => model.Device.HumidityModule)
-                                @Model.Device.HumidityModule.ToString()
-                            </div>
+                        <li class="list-group-item">
+                            @Html.HiddenFor(model => model.Device.HumidityModule)
+                            <span class="glyphicon glyphicon-tint"></span>
+                            Humidity sensor:
+                            <span class="label label-default label-pill pull-right pull-xs-right">@Model.Device.HumidityModule.ToString()</span>
                         </li>
 
-                        <li>
-                            <div class="col-md-6">
-                                Ethernet :
-                            </div>
-                            <div class="col-md-6">
-                                @Html.HiddenFor(model => model.Device.ComTcpIp)
-                                @Model.Device.ComTcpIp.ToString()
-                            </div>
+                        <li class="list-group-item">
+                            @Html.HiddenFor(model => model.Device.ComTcpIp)
+                            <span class="glyphicon glyphicon-phone-alt"></span>
+                            Ethernet :
+                            <span class="label label-default label-pill pull-right pull-xs-right">@Model.Device.ComTcpIp.ToString()</span>
                         </li>
 
-
-                        <li>
-                            <div class="col-md-6">
-                                MiWi :
-                            </div>
-                            <div class="col-md-6">
-                                @Html.HiddenFor(model => model.Device.ComMiWi)
-                                @Model.Device.ComMiWi.ToString()
-                            </div>
+                        <li class="list-group-item">
+                            @Html.HiddenFor(model => model.Device.ComMiWi)
+                            <span class="glyphicon glyphicon-file"></span>
+                            MiWi :
+                            <span class="label label-default label-pill pull-right pull-xs-right">@Model.Device.ComMiWi.ToString()</span>
                         </li>
-
 
                     </ul>
                 </div>
@@ -645,7 +607,7 @@ c
 
     <div class="row">
         <div class="col-md-12">
-            <input type="submit" class="btn btn-bitbucket" value="Update" />
+            @*<input type="submit" class="btn btn-bitbucket" value="Update" />*@
         </div>
     </div>
 }

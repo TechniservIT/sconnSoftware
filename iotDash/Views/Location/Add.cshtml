@@ -9,11 +9,49 @@
 
 @Scripts.Render("~/bundles/jqueryui")
 
+<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+<script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
 
 
 <script>
 
     $(function () {
+    
+        var mapCenter = [22, 87];
+        var map = L.map('map', { center: mapCenter, zoom: 3 });
+        L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
+            maxZoom: 18,
+            attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+            '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+            'Imagery © <a href="http://mapbox.com">Mapbox</a>',
+            id: 'examples.map-i875mjb7',
+            noWrap: true
+        }).addTo(map);
+        
+        var marker = L.marker(mapCenter).addTo(map);
+        var updateMarker = function (lat, lng) {
+            marker
+                .setLatLng([lat, lng])
+                .bindPopup("Location :  " + marker.getLatLng().toString())
+                .openPopup();
+            return false;
+        };
+        
+        map.on('click', function (e) {
+            $('#latInput').val(e.latlng.lat);
+            $('#lngInput').val(e.latlng.lng);
+            updateMarker(e.latlng.lat, e.latlng.lng);
+        });
+        
+        
+        var updateMarkerByInputs = function () {
+            return updateMarker($('#latInput').val(), $('#lngInput').val());
+        }
+        $('#latInput').on('input', updateMarkerByInputs);
+        $('#lngInput').on('input', updateMarkerByInputs);
+        
+
+
         $('#addlocation').submit(function () {
             $.ajax({
                 url: '@Url.Action("New", "Location")',
@@ -29,6 +67,8 @@
             });
             return false;
         });
+        
+
 
     });
 
@@ -45,23 +85,12 @@
                 <h3>Add location. <small></small></h3>
                 <br /><br />
 
-                        @*
-                      public string LocationName { get; set; }
-
-                    public double Lat { get; set; }
-                    public double Lng { get; set; }
-
-                    public string LocationVisualRepresentationURL { get; set; }
-
-                        *@
-
                 <form role="form" action="" method="post" id="addlocation">
 
                     <div class="form-group">
                         <label for="LocationName">Name</label>
                         <input type="text" class="form-control" name="locationnameinput" id="LocationName">
                     </div>
-
 
                     <div class="form-group">
                         <label for="LatVal">Lat</label>
@@ -72,6 +101,12 @@
                         <label for="LngVal">Lng</label>
                         <input type="text" class="form-control" name="siteinput" id="LngVal">
                     </div>
+
+                    <label for="latInput">Latitude</label>
+                    <input id="latInput" />
+                    <label for="lngInput">Longitude</label>
+                    <input id="lngInput" />
+                    <div id="map" style="height: 200px"></div>
 
 
                     @*  TODO Image uploader

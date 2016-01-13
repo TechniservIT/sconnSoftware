@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,26 +17,40 @@ namespace sconnConnector.POCO.Config.Abstract.Auth
         ZoneAdmin,
         Service,
         TA
-
     }
 
 
     public class sconnUser : IAlarmSystemConfigurationEntity, ISerializableConfiguration, IFakeAbleConfiguration
     {
+
         public int Id { get; set; }
 
+        [Required]
+        [DisplayName("Login")]
         public string Login { get; set; }
 
+        [Required]
+        [DisplayName("Password")]
         public string Password { get; set; }
 
+        [Required]
+        [DisplayName("Permissions")]
         public int Permissions { get; set; }
 
+        [Required]
+        [DisplayName("Group")]
         public sconnUserGroup Group { get; set; }
 
+        [Required]
+        [DisplayName("Enabled")]
         public bool Enabled { get; set; }
 
+        [Required]
+        [DisplayName("Allowed From")]
         public DateTime AllowedFrom { get; set; }
 
+        [Required]
+        [DisplayName("Allowed Until")]
         public DateTime AllowedUntil { get; set; }
 
         public int Value { get; set; }

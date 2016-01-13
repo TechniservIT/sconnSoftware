@@ -1,6 +1,67 @@
-﻿@{
-    ViewBag.Title = "Index";
+﻿@using iotDash.Identity.Roles
+@using iotDash.Models
+@model iotDash.Models.UserListModel
+
+@{
+    ViewBag.Title = "View";
 }
 @{
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 }
+
+<h2>Users</h2>
+
+
+<div class="panel panel-primary">
+
+    <div class="panel-heading text-center">
+        <h2>Users</h2>
+    </div>
+
+    <div class="panel-body">
+
+        <div class="row">
+            <div class="col-md-12">
+                @Html.Partial("~/Views/Shared/EditorTemplate/ToolbarMenu.cshtml")
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="table-responsive">
+
+                <table class="table">
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone  Number</th>
+                        <th>Roles</th>
+                    </tr>
+
+
+                    @foreach (ApplicationUser d in Model.Users)
+                    {
+                        <tr id="@d.Id.ToString()" class="rowRecord row-normal">
+
+                            <td> @d.UserName </td>
+
+                            <td> @d.Email</td>
+
+                            <td> @d.PhoneNumber</td>
+
+                            <td> @d.Roles.Count.ToString()</td>
+
+                        </tr>
+
+                    }
+
+                </table>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+

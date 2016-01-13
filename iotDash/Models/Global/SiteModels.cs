@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
@@ -30,12 +31,22 @@ namespace iotDash.Models
     {
         public List<Location> Locations { get; set; }
 
+        [Required]
+        [DisplayName("Location")]
+        public int LocationId { get; set; }
+
+        [Required]
+        [DisplayName("Site")]
+        public Site site { get; set; }
+
+        public string Result { get; set; }
+
         public AddSiteViewModel()
         {
-
+            this.site = new Site();
         }
 
-        public AddSiteViewModel(List<Location> locs)
+        public AddSiteViewModel(List<Location> locs) : this()
         {
             Locations = locs;
         }

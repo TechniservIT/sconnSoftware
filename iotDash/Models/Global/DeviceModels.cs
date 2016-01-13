@@ -14,7 +14,10 @@ namespace iotDash.Models
 {
     public class DeviceAddTypeModel : IAsyncStatusModel
     {
+
+        [DisplayName("Type")]
         public DeviceType Type { get; set; }
+
         public string Result { get; set; }
 
         public DeviceAddTypeModel()
@@ -26,16 +29,28 @@ namespace iotDash.Models
 
     public class DeviceAddModel : IAsyncStatusModel
     {
+        [DisplayName("Site")]
         public Site DeviceSite { get; set; }
+
         public List<Location> Locations { get; set; }
         public List<DeviceType> Types { get; set; }
 
         public string Result { get; set; }
         
+        [Required]
+        [DisplayName("Site")]
         public int DeviceSiteId { get; set; }
+
+        [Required]
+        [DisplayName("Location")]
         public int LocationId { get; set; }
+
+        [Required]
+        [DisplayName("Type")]
         public int TypeId { get; set; }
 
+        [Required]
+        [DisplayName("Device")]
         public Device Device { get; set; }
         
         //TODO protocol list
@@ -114,10 +129,15 @@ namespace iotDash.Models
     {
         [Required]
         public Device Device { get; set; }
+
         public List<Location> Locations { get; set; }
         public string Result { get; set; }
         public List<DeviceType> Types { get; set; }
+
+        [Required]
         public int LocationId { get; set; }
+
+        [Required]
         public int TypeId { get; set; }
 
         public DeviceEditModel(Device device, List<Location> locs, List<DeviceType> types)

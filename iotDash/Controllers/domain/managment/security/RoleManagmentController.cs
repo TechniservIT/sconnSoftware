@@ -84,6 +84,38 @@ namespace iotDash.Controllers.domain.managment.security
         }
 
 
+        [HttpPost]
+        public async Task<ActionResult> Edit(IotRoleModel model)
+        {
+            try
+            {
+                var d = DomainSession.GetDomainForHttpContext(this.HttpContext);
+                if (ModelState.IsValid)
+                {
+                    ApplicationDbContext ucont = new ApplicationDbContext();
+                    var roleManager = new RoleManager<IotUserRole>(new RoleStore<IotUserRole>(ucont));
+                    if (roleManager.RoleExists(model.Role.Name))
+                    {
+                        await roleManager.UpdateAsync(model.Role);
+                        model.Result = (StatusResponseGenerator.GetAlertPanelWithMsgAndStat("Success.", RequestStatus.Success));
+                    }
+                    else
+                    {
+                        model.Result = (StatusResponseGenerator.GetAlertPanelWithMsgAndStat("Failure.", RequestStatus.Failure));
+                    }
+                }
+                else
+                {
+                    model.Result = (StatusResponseGenerator.GetAlertPanelWithMsgAndStat("Failure.", RequestStatus.Failure));
+                }
+                return View(model);
+            }
+            catch (Exception e)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
+            }
+        }
+
 
     }
 }

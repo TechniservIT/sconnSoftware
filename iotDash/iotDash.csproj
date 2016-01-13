@@ -1647,6 +1647,7 @@
     <Content Include="Views\RoleManagment\Add.cshtml" />
     <Content Include="Views\RoleManagment\View.cshtml" />
     <None Include="Views\DeviceSecurity\Index.cshtml" />
+    <Content Include="Views\RoleManagment\Edit.cshtml" />
     <None Include="Views\RoutingRules\Index.cshtml" />
     <None Include="Views\SecuritySupervisorSetup\Index.cshtml" />
     <Content Include="Views\Shared\_DashboardBreadcrumbsPartial.cshtml" />

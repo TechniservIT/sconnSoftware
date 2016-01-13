@@ -21,23 +21,6 @@ namespace iotDash.Controllers.domain.managment.security
     public class UsersController : Controller
     {
 
-        //[Authorize(Roles = "DomainAdmin")]
-        public ActionResult View()
-        {
-            try
-            {
-                var d = DomainSession.GetDomainForHttpContext(this.HttpContext);
-                var model = new UserListModel(d);
-                return View(model);
-            }
-            catch (Exception e)
-            {
-                    
-                throw;
-            }
-            return View();
-        }
-
 
          //[Authorize(Roles = "DomainAdmin")]
         public ActionResult Add()
@@ -93,24 +76,81 @@ namespace iotDash.Controllers.domain.managment.security
          }
 
 
+        [HttpPost]
+        public async Task<ActionResult> Edit(UserCreateModel model)
+        {
+            try
+            {
+                var d = DomainSession.GetDomainForHttpContext(this.HttpContext);
+                if (ModelState.IsValid)
+                {
+                    ApplicationDbContext ucont = new ApplicationDbContext();
+                    var userMan = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+                    
+                    var user = ucont.Users.FirstOrDefault(u => u.UserName.Equals(model.User.UserName));
+                    if (user != null)
+                    {
+                        String hashedNewPassword = userMan.PasswordHasher.HashPassword(model.Password);
+                        UserStore<ApplicationUser> store = new UserStore<ApplicationUser>();
+                        await store.SetPasswordHashAsync(user, hashedNewPassword);
+                        user.DomainId = model.User.DomainId;
+                        user.UserName = model.User.UserName;
+                        await ucont.SaveChangesAsync();
 
+                        var userRoles = userMan.GetRoles(model.User.Id);
+                        if (model.Roles.Count != userRoles.Count)
+                        {
+                            //remove all roles first
+                            foreach (var role in userRoles)
+                            {
+                                userMan.RemoveFromRole(model.User.Id, role);
+                            }
+                            //add model roles
+                            foreach (var role in model.Roles)
+                            {
+                                userMan.AddToRole(model.User.Id, role.Name);
+                            }
+                        }
+                    }
 
-
-         [Authorize(Roles = "DomainAdmin")]
+                    var result = await userMan.CreateAsync(model.User, model.Password);
+                    if (result.Succeeded)
+                    {
+                        model.Result = (StatusResponseGenerator.GetAlertPanelWithMsgAndStat("Success.", RequestStatus.Success));
+                    }
+                    else
+                    {
+                        model.Result = (StatusResponseGenerator.GetAlertPanelWithMsgAndStat("Failure.", RequestStatus.Failure));
+                    }
+                }
+                else
+                {
+                    model.Result = (StatusResponseGenerator.GetAlertPanelWithMsgAndStat("Failure.", RequestStatus.Failure));
+                }
+                return View(model);
+            }
+            catch (Exception e)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
+            }
+        }
+        
+        [Authorize(Roles = "DomainAdmin")]
         public ActionResult Edit(int number)
         {
             return View();
         }
-
-
+        
         public ActionResult Index()
         {
-            throw new NotImplementedException();
+            var d = DomainSession.GetDomainForHttpContext(this.HttpContext);
+            var model = new UserListModel(d);
+            return View(model);
         }
 
-        public ActionResult Remove()
+        public ActionResult Remove(int Id)
         {
-            throw new NotImplementedException();
+            return Index();
         }
     }
 }

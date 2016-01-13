@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
@@ -27,18 +28,27 @@ namespace iotDash.Identity.Roles
     public class IotUserRole : IdentityRole
     {
         [Required]
+        [DisplayName("Domain")]
         public  int DomainId { get; set; }
 
+        [Required]
+        [DisplayName("Site")]
         public  int SiteId { get; set; }
 
+        [Required]
+        [DisplayName("Device")]
         public  int DeviceId { get; set; }  
 
         [Required(ErrorMessage = "Please select activation status.")]
         [Display(Name = "Active")]
         public  bool Active { get; set; }
 
+        [Required]
+        [DisplayName("Valid From")]
         public  DateTime ValidFrom { get; set; }
 
+        [Required]
+        [DisplayName("Valid Until")]
         public  DateTime ValidUntil { get; set; }
 
         [Required(ErrorMessage = "Please select role type.")]

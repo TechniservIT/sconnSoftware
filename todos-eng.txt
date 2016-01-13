@@ -1,10 +1,13 @@
 FP tasks :
 device list					V
-device param better ui				
-outputs activate				
+device param better ui				+			
+outputs activate				V		
 names						
-global config					
-forms fixups					
+global config	
+events style redo - add dates
+device types list and edit
+main site register/logout - domain component								
+forms fixups - missing add/edits				
 user account pass change			
 alarm sys  landpage				+
 device view img based on type url		V

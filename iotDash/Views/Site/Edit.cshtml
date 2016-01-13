@@ -1,6 +1,73 @@
-﻿@{
-    ViewBag.Title = "Index";
-}
-@{
-    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
-}
+﻿@model iotDash.Models.AddSiteViewModel
+
+    @{
+        Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+    }
+
+@Scripts.Render("~/bundles/jqueryui")
+
+<script>
+    $(function () {
+      
+
+    });
+</script>
+
+<div class="container-fluid" id="wrapper">
+    <div class="row">
+        <div>
+            @using (Html.BeginForm("Edit", "Site"))
+            {
+                <fieldset>
+
+                    <legend>Device</legend>
+
+                    <div class="form-group">
+                        @Html.HiddenFor(model => model.site.Id)
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.site.SiteName)
+                        @Html.TextBoxFor(model => model.site.SiteName, new { @class = "form-control", @id = "devname" })
+                    </div>
+
+                    @if (Model.Locations != null)
+                    {
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.site.siteLocation)
+                            @Html.DropDownListFor(
+                                model => model.LocationId,
+                                 new SelectList(
+                                   Model.Locations,
+                                   "Id",
+                                    "LocationName"
+                                    ),
+                                  new { @class = "form-control" }
+                                )
+                        </div>
+                    }
+
+                    <div class="form-group">
+                        <button class="btn btn-primary" type="submit">Add</button>
+                    </div>
+
+                </fieldset>
+            }
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div id="resultview">
+            @if (Model.Result != null)
+            {
+                @Html.Raw(HttpUtility.HtmlDecode(Model.Result))
+            }
+
+        </div>
+    </div>
+
+</div>
+
+
+

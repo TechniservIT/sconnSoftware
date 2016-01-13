@@ -1,6 +1,67 @@
-﻿@{
-    ViewBag.Title = "Edit";
+﻿@model iotDash.Models.UserCreateModel
+
+@{
+    ViewBag.Title = "Add";
 }
+
 @{
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 }
+
+
+<div class="container-fluid">
+
+    <div class="row">
+    </div>
+
+    <div class="row">
+        <div id="addraz">
+            @using (Html.BeginForm("Add", "Users"))
+            {
+                <fieldset>
+
+                    <legend>Role</legend>
+
+                    <div class="form-group">
+                        @Html.HiddenFor(model => model.User.DomainId)
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.User.UserName)
+                        @Html.TextBoxFor(model => model.User.UserName, new { @class = "form-control" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Password)
+                        @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Roles)
+                        @for (int i = 0; i < Model.Roles.Count; i++)
+                        {
+                            <input type="checkbox" value="@Model.Roles[i].Id" id="@Model.Roles[i].Name" />
+                            @Model.Roles[i].Name
+                            @Html.HiddenFor(m => Model.Roles[i].Id)
+                            @Html.HiddenFor(m => Model.Roles[i].Name)
+                        }
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" value="Send" />
+                    </div>
+
+                </fieldset>
+            }
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div id="resultview">
+            @Html.Raw(HttpUtility.HtmlDecode(Model.Result))
+        </div>
+    </div>
+
+
+</div>

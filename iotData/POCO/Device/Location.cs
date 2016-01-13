@@ -2,6 +2,7 @@
 using iotData.POCO.Surveillance;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -19,17 +20,21 @@ namespace iotDbConnector.DAL
 
         [DataMember]
         [Required]
+        [DisplayName("Name")]
         public string LocationName { get; set; }
 
         [DataMember]
         [Required]
+        [DisplayName("Latitude")]
         public double Lat { get; set; }
 
         [DataMember]
         [Required]
+        [DisplayName("Longitude")]
         public double Lng { get; set; }
 
         [DataMember]
+        [DisplayName("Image URL")]
         public string LocationVisualRepresentationURL { get; set; }
 
         [DataMember]

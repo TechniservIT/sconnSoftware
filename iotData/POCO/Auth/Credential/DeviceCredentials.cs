@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -20,19 +21,23 @@ namespace iotDbConnector.DAL
 
         [Required]
         [DataMember]
+        [DisplayName("Username")]
         public string Username { get; set; }
 
         [Required]
         [DataMember]
+        [DisplayName("Password")]
         public string Password { get; set; }
 
         [DataMember]
         public byte[] HashData { get; set; }
 
         [DataMember]
+        [DisplayName("Permission Expiration")]
         public DateTime PermissionExpireDate { get; set; }
 
         [DataMember]
+        [DisplayName("Password Expiration")]
         public DateTime PasswordExpireDate { get; set; }
 
         [DataMember]
