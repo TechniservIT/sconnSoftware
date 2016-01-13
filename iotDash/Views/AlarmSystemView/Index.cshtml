@@ -34,18 +34,6 @@
 
     $(function () {
 
-        //var map = L.map('map', {
-        //    maxZoom: 24,
-        //    minZoom: 1,
-        //    crs: L.CRS.Simple
-        //}).setView([0, 0], 1);
-
-        //map.setMaxBounds(new L.LatLngBounds([0, 500], [500, 0]));
-
-        //var imageUrl = 'http://www.lib.utexas.edu/maps/historical/newark_nj_1922.jpg';
-        //var imageBounds = [[250, 0], [0, 250]];
-        //L.imageOverlay(imageUrl, imageBounds).addTo(map);
-        
         var startLat = 49.78395;
         var startLng = 19.05815;
 
@@ -236,11 +224,11 @@
                                                 <a href="@Url.Action("Index", "AlarmSystemConfiguration", new {DeviceId = Model.ServerId})" role="button">
                                                     @if (Model.Config.Armed)
                                                     {
-                                                        <img src="~/Content/img/klodka2.png" class="thumbnail img-responsive">
+                                                        <img src="~/Content/img/klodka4.png" class="thumbnail img-responsive">
                                                     }
                                                     else
                                                     {
-                                                        <img src="~/Content/img/klodka1.png" class="thumbnail img-responsive">
+                                                        <img src="~/Content/img/klodka3a.png" class="thumbnail img-responsive">
                                                     }
                                                 </a>
                                             </div>
@@ -249,14 +237,21 @@
 
                                         </div>
 
-                                        <div class="col-lg-6 col-sm-6 col-xs-12">
-                                            @if (Model.Config.Failure)
-                                            {
+                                        <div class="col-lg-3 col-sm-4 col-xs-12">
+                                            <div style="margin-left: auto; margin-right: auto;" align="center" class="pagination-centered">
                                                 <a href="@Url.Action("Index", "AlarmSystemConfiguration", new {DeviceId = Model.ServerId})" role="button">
-                                                    <img src="~/Content/img/wykrzyknik.png" class="thumbnail img-responsive">
+                                                    @if (Model.Config.Failure)
+                                                    {
+                                                        <img src="~/Content/img/wykrzyknik1.png" class="thumbnail img-responsive">
+
+                                                    }
+                                                    else
+                                                    {
+                                                        <img src="~/Content/img/wykrzyknik2.png" class="thumbnail img-responsive">
+                                                    }
                                                 </a>
-                                            }
-                                        </div>
+                                             </div>
+                                            </div>
 
 
                                         <div class="col-lg-3 col-sm-4 col-xs-12 center-block">
@@ -264,11 +259,11 @@
                                                 <a href="@Url.Action("Index", "AlarmSystemConfiguration", new {DeviceId = Model.ServerId})" role="button">
                                                     @if (Model.Config.Violation)
                                                     {
-                                                        <img src="~/Content/img/oko3.png" class="thumbnail img-responsive">
+                                                        <img src="~/Content/img/oko5.png" class="thumbnail img-responsive">
                                                     }
                                                     else
                                                     {
-                                                        <img src="~/Content/img/oko4.png" class="thumbnail img-responsive">
+                                                        <img src="~/Content/img/oko6.png" class="thumbnail img-responsive">
                                                     }
                                                 </a>
                                             </div>
@@ -333,9 +328,9 @@
                     </div>
                     <div class="panel-body">
                         <div class="row">
-                            <div class="col-lg-4 col-sm-6 col-xs-12">
+                            <div class="col-lg-3 col-sm-4 col-xs-12">
                                 <div class="thumbnail">
-                                    <a href="@Url.Action("Index", "AlarmSystemConfiguration", new {DeviceId = Model.ServerId})" role="button">
+                                    <a href="@Url.Action("Edit", "AlarmSystemView", new {ServerId = Model.ServerId})" role="button">
                                         <img src="~/Content/img/config1.png" class="thumbnail img-responsive">
                                     </a>
                                     <div class="caption text-center">
@@ -344,7 +339,7 @@
                                 </div>
 
                             </div>
-                            <div class="col-lg-4 col-sm-6 col-xs-12">
+                            <div class="col-lg-3 col-sm-4 col-xs-12">
                                 <div class="thumbnail">
                                     <a href="@Url.Action("Index", "AlarmSystemDeviceConfig", new {ServerId = Model.ServerId, DeviceId = 0})" role="button">
                                         <img src="~/Content/img/config2.png" class="thumbnail img-responsive">
@@ -355,7 +350,7 @@
                                 </div>
 
                             </div>
-                            <div class="col-lg-4 col-sm-6 col-xs-12">
+                            <div class="col-lg-3 col-sm-4 col-xs-12">
                                 <div class="thumbnail">
                                     <a href="@Url.Action("View", "AlarmSystemZonesConfig", new {DeviceId = Model.ServerId})" role="button">
                                         <img src="~/Content/img/strefy1.png" class="thumbnail img-responsive">
@@ -366,7 +361,7 @@
                                 </div>
 
                             </div>
-                            <div class="col-lg-4 col-sm-6 col-xs-12">
+                            <div class="col-lg-3 col-sm-4 col-xs-12">
                                 <div class="thumbnail">
                                     <a href="@Url.Action("View", "AlarmSystemGsmConfig", new {DeviceId = Model.ServerId})" role="button">
                                         <img src="~/Content/img/tel.png" class="thumbnail img-responsive">
@@ -378,7 +373,7 @@
 
                             </div>
 
-                            <div class="col-lg-4 col-sm-6 col-xs-12">
+                            <div class="col-lg-3 col-sm-4 col-xs-12">
                                 <div class="thumbnail">
                                     <a href="@Url.Action("CommunicationConfigure", "AlarmSystemDeviceConfig", new {DeviceId = Model.ServerId})" role="button">
                                         <img src="~/Content/img/patchcord.png" class="thumbnail img-responsive">
@@ -390,7 +385,7 @@
 
                             </div>
 
-                            <div class="col-lg-4 col-sm-6 col-xs-12">
+                            <div class="col-lg-3 col-sm-4 col-xs-12">
                                 <div class="thumbnail">
                                     <a href="@Url.Action("View", "AlarmSystemUsersConfig", new {DeviceId = Model.ServerId})" role="button">
                                         <img src="~/Content/img/user.png" class="thumbnail img-responsive">
@@ -402,7 +397,7 @@
 
                             </div>
 
-                            <div class="col-lg-4 col-sm-6 col-xs-12">
+                            <div class="col-lg-3 col-sm-4 col-xs-12">
                                 <div class="thumbnail">
                                     <a href="@Url.Action("View", "AlarmSystemAuthorizedDevices", new {DeviceId = Model.ServerId})" role="button">
                                         <img src="~/Content/img/config2.png" class="thumbnail img-responsive">
@@ -414,7 +409,7 @@
 
                             </div>
 
-                            <div class="col-lg-4 col-sm-6 col-xs-12">
+                            <div class="col-lg-3 col-sm-4 col-xs-12">
                                 <div class="thumbnail">
                                     <a href="@Url.Action("View", "AlarmSystemEvents", new {DeviceId = Model.ServerId})" role="button">
                                         <img src="~/Content/img/zegar1.png" class="thumbnail img-responsive">

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using AlarmSystemManagmentService;
+using AlarmSystemManagmentService.Device;
 using iotDash.Areas.AlarmSystem.Models;
 using iotDash.Content.Dynamic.Status;
 using iotDash.Controllers.domain.navigation;
@@ -51,8 +52,9 @@ namespace iotDash.Controllers.domain.site.AlarmSystem
         {
             try
             {
-                this._provider = new GlobalConfigService(DomainSession.GetAlarmConfigForContextWithDeviceId(this.HttpContext, ServerId));
-                AlarmSystemGlobalModel model = new AlarmSystemGlobalModel(this._provider.Get());
+                var gprovider = new GlobalConfigService(DomainSession.GetAlarmConfigForContextWithDeviceId(this.HttpContext, ServerId));
+                var deviceprovider = new AlarmDevicesConfigService(DomainSession.GetAlarmConfigForContextWithDeviceId(this.HttpContext, ServerId));
+                AlarmSystemGlobalEditModel model = new AlarmSystemGlobalEditModel(gprovider.Get(), deviceprovider.GetAll());
                 model.ServerId = ServerId;
                 return View(model);
             }
@@ -62,12 +64,7 @@ namespace iotDash.Controllers.domain.site.AlarmSystem
             return View();
         }
         
-
-        // GET: AlarmSystemView
-        public ActionResult Summary()
-        {
-            return View();
-        }
+       
 
         // GET: ConfigurationSelect
         public ActionResult ConfigurationSelect(int DeviceId)

@@ -1,4 +1,4 @@
-﻿@model iotDash.Areas.AlarmSystem.Models.AlarmSystemGlobalModel
+﻿@model iotDash.Areas.AlarmSystem.Models.AlarmSystemGlobalEditModel
 @using sconnConnector
 
 @{
@@ -18,6 +18,11 @@
 <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
 <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
 
+<link rel="stylesheet" href="http://code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css">
+
+<link rel="stylesheet" href="~/Content/css/leaflet.awesome-markers.css">
+<script src="~/Scripts/leaflet.awesome-markers.js"></script>
+
 
 @{
     ViewBag.Title = "Index";
@@ -28,36 +33,136 @@
     <h2>@Model.Config.Name</h2>
 }
 
-<script src="~/signalr/hubs"></script>
 
 <script type="text/javascript">
 
     $(function () {
 
-        var map = L.map('map', {
+        var startLat = 49.78395;
+        var startLng = 19.05815;
+
+        var mapCenter = [startLat, startLng];
+        var map = L.map('map', { center: mapCenter, zoom: 19 });
+        L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
             maxZoom: 24,
-            minZoom: 1,
-            crs: L.CRS.Simple
-        }).setView([0, 0], 1);
+            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+            id: 'domainlocation.map',
+            noWrap: true
+        }).addTo(map);
 
-        map.setMaxBounds(new L.LatLngBounds([0, 500], [500, 0]));
+        //var marker = L.marker(mapCenter).addTo(map);
+        //var updateMarker = function (lat, lng) {
+        //    marker
+        //        .setLatLng([lat, lng])
+        //        .bindPopup("Location :  " + marker.getLatLng().toString())
+        //        .openPopup();
+        //    return false;
+        //};
 
-        var imageUrl = 'http://www.lib.utexas.edu/maps/historical/newark_nj_1922.jpg';
-        var imageBounds = [[250, 0], [0, 250]];
-        L.imageOverlay(imageUrl, imageBounds).addTo(map);
+        //map.on('click', function (e) {
+        //    $('#latInput').val(e.latlng.lat);
+        //    $('#lngInput').val(e.latlng.lng);
+        //    updateMarker(e.latlng.lat, e.latlng.lng);
+        //});
 
-        //$("#map").height($(window).height()).width($(window).width());
-        //map.invalidateSize();
+
+        //var updateMarkerByInputs = function () {
+        //    return updateMarker($('#latInput').val(), $('#lngInput').val());
+        //}
+
+        //updateMarker(startLat, startLng); //initially update to start possition
+        //$('#latInput').val(startLat);
+        //$('#lngInput').val(startLng);
+
+        //$('#latInput').on('input', updateMarkerByInputs);
+        //$('#lngInput').on('input', updateMarkerByInputs);
+        
+         
+        L.marker([49.78411, 19.0582], { icon: L.AwesomeMarkers.icon({ icon: 'shield', prefix: 'fa', markerColor: 'green', spin: false }) }).addTo(map);
+        
+        L.marker([49.78421, 19.0572], { icon: L.AwesomeMarkers.icon({ icon: 'flash', prefix: 'fa', markerColor: 'green', spin: false }) }).addTo(map);
+        
+        L.marker([49.78431, 19.0562], { icon: L.AwesomeMarkers.icon({ icon: 'eye', prefix: 'fa', markerColor: 'red', spin: false }) }).addTo(map);
+        
+
+        //var poiIcon = L.Icon.extend({
+        //    options: {
+        //        iconSize: [22, 32],
+        //        iconAnchor: [-20, 0],
+        //        shadowUrl: '~/Content/img/map-marker.png',
+        //        shadowSize: [22, 13],
+        //        shadowAnchor: [-31, -19],
+        //        popupAnchor: [32, -2]
+        //    }
+        //});
+
+        //var blackIcon = new poiIcon({ iconUrl: '~/Content/img/mapka1.png' });
+        //var redIcon = new poiIcon({ iconUrl: '~/Content/img/mapka2.png' });
+        //var treeIcon = new poiIcon({ iconUrl: '~/Content/img/mapka3.png' });
+        
+        
 
     });
+    
+    
+    $('.tree-toggle').click(function () {
+        $(this).parent().children('ul.tree').toggle(200);
+    });
 
-    $(document).ready(function() {
+    $(document).ready(function () {
         $(".fancybox").fancybox();
     });
+    
+    
+    $(".drag").draggable({
+        helper: 'clone',
+        containment: 'map',
+        start: function (evt, ui) {
+            $('#box').fadeTo('fast', 0.6, function () { });
+        },
+        stop: function (evt, ui) {
+            $('#box').fadeTo('fast', 1.0, function () { });
+
+            var options = {
+                pid: guid(),
+                type: ui.helper.attr('type'),
+                icon: eval(ui.helper.attr('type') + 'Icon'),
+                draggable: true
+            };
+
+            var point = L.marker(position, options).addTo(map);
+            point.bindPopup(
+                '<a onClick="deletePoint(\'' + point.options.pid
+                    + '\');" href="#">Remove Me!</a>',
+                {
+                    closeButton: false
+                }
+            );
+
+            point.on('dragend', function (evt) {
+                // UPDATE POINT
+            });
+
+            markers.push(point);
+
+
+        }
+       
+    });
+    
+   
 
 
 </script>
 
+
+<style>
+        .awesome-marker i {
+        font-size: 18px;
+        margin-top: 8px;
+    }
+
+</style>
 
 @functions{
 
@@ -153,42 +258,125 @@
                     <h2>Status</h2>
                 </center>
             </div>
+
+
             <div class="panel-body">
-                <p></p>
+
+                <div class="row">
+                    <table class="table">
+
+                        <tr>
+                            <td>Armed</td>
+                            <td><span class='@SpanClassForArmStatusDisplay()'>@DescForArmStatusDisplay()</span></td>
+                        </tr>
+
+                        <tr>
+                            <td>Violation</td>
+                            <td><span class='@SpanClassForViolationStatusDisplay()'>@DescForViolationStatusDisplay()</span></td>
+                        </tr>
+
+                        <tr>
+                            <td>Failure</td>
+                            <td><span>@Model.Config.Failure.ToString()</span></td>
+                        </tr>
+
+                        <tr>
+                            <td>Device Number</td>
+                            <td>@Model.Config.Devices</td>
+                        </tr>
+
+                        <tr>
+                            <td>Zones</td>
+                            <td><span>@Model.Config.Zones.ToString()</span></td>
+                        </tr>
+
+                        <tr>
+                            <td>Latitude</td>
+                            <td><span>@Model.Config.Lat.ToString()</span></td>
+                        </tr>
+
+                        <tr>
+                            <td>Longitude</td>
+                            <td><span>@Model.Config.Lng.ToString()</span></td>
+                        </tr>
+
+                    </table>
+
+                </div>
+
+
+                <div class="row">
+
+
+                    <div class="col-lg-8 col-sm-8 col-xs-12 center-block">
+                        <div class="map_container">
+                            <div id="map_canvas" class="map_canvas">
+                                <div class="form-group">
+                                    <div id="map" style="height: 400px">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        @*<div id="box">
+                            Drag Marker on the map:
+                            <span class="poi-type"><img class="drag" type="tree" src="~/Content/img/mapka1.png" alt="TREE: green" />Tree</span>
+                            <span class="poi-type"><img class="drag" type="red" src="~/Content/img/mapka2.png" alt="POI: red" />Red</span>
+                            <span class="poi-type"><img class="drag" type="black" src="~/Content/img/mapka3.png" alt="POI: black" />Black</span>
+                        </div>*@
+                        
+                    </div>
+
+                    <div class="col-lg-4 col-sm-4 col-xs-12 center-block">
+
+                        <ul class="pull-right nav nav-pills nav-stacked right-menu" id="stacked-menu">
+
+                            @foreach (var device in Model.Devices)
+                            {
+                                <li>
+                                    <a href="#" data-target="#stack-menu-device-@device.Id.ToString()" data-toggle="collapse" data-parent="#stacked-menu">Device : @device.Name <span class="caret arrow"></span></a>
+                                    <ul class="nav nav-stacked collapse right-submenu" id='stack-menu-device-@device.Id.ToString()'>
+                                        
+                                        <li>
+                                            <a href="#" data-target="#input-list-@device.Id.ToString()" data-toggle="collapse" data-parent="#stack-menu-device-@device.Id.ToString()">Inputs<span class="caret arrow"></span></a>
+                                            <ul class="nav nav-stacked collapse right-submenu" id="input-list-@device.Id.ToString()">
+                                                @foreach (var input in device.Inputs)
+                                                {
+                                                    <li><span class="poi-type glyphicon glyphicon-log-in">@input.Id.ToString() @input.Name</span></li>
+                                                }
+                                            </ul>
+                                        </li>
+
+                                        <li>
+                                            <a href="#" data-target="#output-list-@device.Id.ToString()" data-toggle="collapse" data-parent="#stack-menu-device-@device.Id.ToString()">Outputs<span class="caret arrow"></span></a>
+                                            <ul class="nav nav-stacked collapse right-submenu" id="output-list-@device.Id.ToString()">
+                                                @foreach (var output in device.Outputs)
+                                                {
+                                                    <li><span class="poi-type glyphicon glyphicon-bell">@output.Id.ToString() @output.Name</span></li>
+                                                }
+                                            </ul>
+                                        </li>
+
+                                        <li>
+                                            <a href="#" data-target="#relay-list-@device.Id.ToString()" data-toggle="collapse" data-parent="#stack-menu-device-@device.Id.ToString()">Relays<span class="caret arrow"></span></a>
+                                            <ul class="nav nav-stacked collapse right-submenu" id="relay-list-@device.Id.ToString()">
+                                                @foreach (var relay in device.Relays)
+                                                {
+                                                    <li><span class="poi-type glyphicon glyphicon-flash">@relay.Id.ToString() @relay.Name</span></li>
+                                                }
+                                            </ul>
+                                        </li>
+
+                                    </ul>
+                                </li>
+                            }
+
+                        </ul>
+
+
+                </div>
             </div>
-
-            <table class="table">
-                <tr>
-                    <td>Device Number</td>
-                    <td>@Model.Config.Devices</td>
-                </tr>
-
-                <tr>
-                    <td>Armed</td>
-                    <td><span class='@SpanClassForArmStatusDisplay()'>@DescForArmStatusDisplay()</span></td>
-                </tr>
-
-                <tr>
-                    <td>Violation</td>
-                    <td><span class='@SpanClassForViolationStatusDisplay()'>@DescForViolationStatusDisplay()</span></td>
-                </tr>
-
-                <tr>
-                    <td>Failure</td>
-                    <td><span class='@SpanClassForFailureStatusDisplay()'>@Model.Config.Failure.ToString()</span></td>
-                </tr>
-
-
-                <tr>
-                    <td></td>
-                    <td><span class='@SpanClassForViolationStatusDisplay()'>@DescForViolationStatusDisplay()</span></td>
-                </tr>
-
-            </table>
-
         </div>
-
     </div>
-
 
 </div>

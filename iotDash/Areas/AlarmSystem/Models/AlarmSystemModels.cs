@@ -144,5 +144,31 @@ namespace iotDash.Areas.AlarmSystem.Models
 
     }
 
+    public class AlarmSystemGlobalEditModel
+    {
+
+        [Required]
+        public int ServerId { get; set; }
+
+        public sconnGlobalConfig Config { get; set; }
+        public List<sconnDevice> Devices { get; set; }
+
+        public MapDefinition Map { get; set; }
+
+        public AlarmSystemGlobalEditModel()
+        {
+            Config = new sconnGlobalConfig();
+            Devices = new List<sconnDevice>();
+            Map = new MapDefinition();
+        }
+
+        public AlarmSystemGlobalEditModel(sconnGlobalConfig config, List<sconnDevice> devices ) :this()
+        {
+            this.Config = config;
+            this.Devices = devices;
+        }
+
+    }
+
 
 }

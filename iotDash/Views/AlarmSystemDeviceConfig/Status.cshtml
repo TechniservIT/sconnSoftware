@@ -131,6 +131,18 @@
     }
 
 
+    public string SpanClassForNumericPositive(int val)
+    {
+        if (val > 0)
+        {
+            return "label label-success";
+        }
+        else
+        {
+            return "label label-danger";
+        }
+    }
+
     public string ContentForDigitalIoValue(int value)
     {
         if (value == 0)
@@ -375,27 +387,25 @@
                             <span class="glyphicon glyphicon-list-alt"></span>
                              Type :
                             <span class="label label-default label-pill pull-right pull-xs-right">@Model.Device.Type.ToString()</span>
-  
                         </li>
 
                         <li class="list-group-item">
                             <span class="glyphicon glyphicon-log-in"></span>
                             Inputs :
-                            <span class="label label-default label-pill pull-right pull-xs-right">@Model.Device.Inputs.Count.ToString()</span>
+                            <span class="@SpanClassForNumericPositive(@Model.Device.Inputs.Count) label label-default label-pill pull-right pull-xs-right">@Model.Device.Inputs.Count.ToString()</span>
                         </li>
 
                         <li class="list-group-item">
                             <span class="glyphicon glyphicon-bell"></span>
                             Outputs :
-                            <span class="label label-default label-pill pull-right pull-xs-right">@Model.Device.Outputs.Count.ToString()</span>
+                            <span class="@SpanClassForNumericPositive(@Model.Device.Outputs.Count) label label-default label-pill pull-right pull-xs-right">@Model.Device.Outputs.Count.ToString()</span>
                         </li>
 
                         <li class="list-group-item">
                             <span class="glyphicon glyphicon-flash"></span>
                             Relays :
-                            <span class="label label-default label-pill pull-right pull-xs-right">@Model.Device.Relays.Count.ToString()</span>
+                            <span class="@SpanClassForNumericPositive(@Model.Device.Relays.Count) label label-default label-pill pull-right pull-xs-right">@Model.Device.Relays.Count.ToString()</span>
                         </li>
-
 
                         <li class="list-group-item">
                             @Html.HiddenFor(model => model.Device.KeypadModule)

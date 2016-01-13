@@ -3,12 +3,14 @@ device list					V
 device param better ui				+			
 outputs activate				V		
 names						
-global config	
+global config					+
 events style redo - add dates
-device types list and edit
+device types list and edit			V
 main site register/logout - domain component								
-forms fixups - missing add/edits				
-user account pass change			
+forms fixups - missing add/edits		V		
+user account pass change			+
+olap global domain querying		
+gis providers : cartodb, mapbox
 alarm sys  landpage				+
 device view img based on type url		V
 alarm system device images pre-defined		V
