@@ -282,6 +282,7 @@
     <Compile Include="Controllers\domain\managment\security\RoleManagmentController.cs" />
     <Compile Include="Controllers\domain\managment\security\UserManagmentController.cs" />
     <Compile Include="Controllers\domain\managment\security\UserSecurityController.cs" />
+    <Compile Include="Controllers\domain\managment\types\DeviceTypesController.cs" />
     <Compile Include="Controllers\domain\signaling\SignalingRulesController.cs" />
     <Compile Include="Areas\AlarmSystem\Controllers\AlarmSystemSummaryController.cs" />
     <Compile Include="Controllers\domain\site\Abstract\EntityControllerBase.cs" />
@@ -1648,6 +1649,9 @@
     <Content Include="Views\RoleManagment\View.cshtml" />
     <None Include="Views\DeviceSecurity\Index.cshtml" />
     <Content Include="Views\RoleManagment\Edit.cshtml" />
+    <None Include="Views\DeviceTypes\Add.cshtml" />
+    <None Include="Views\DeviceTypes\Edit.cshtml" />
+    <None Include="Views\DeviceTypes\Index.cshtml" />
     <None Include="Views\RoutingRules\Index.cshtml" />
     <None Include="Views\SecuritySupervisorSetup\Index.cshtml" />
     <Content Include="Views\Shared\_DashboardBreadcrumbsPartial.cshtml" />

@@ -27,6 +27,26 @@ namespace iotDash.Models
 
     }
 
+    public class DeviceTypesListModel : IAsyncStatusModel
+    {
+
+        [DisplayName("Type")]
+        public List<DeviceType> Types { get; set; }
+
+        public string Result { get; set; }
+
+        public DeviceTypesListModel()
+        {
+            Types = new List<DeviceType>();
+        }
+
+        public DeviceTypesListModel(List<DeviceType> types) : this()
+        {
+            Types = types;
+        }
+
+    }
+
     public class DeviceAddModel : IAsyncStatusModel
     {
         [DisplayName("Site")]

@@ -1,0 +1,64 @@
+﻿@model iotDash.Models.DeviceAddTypeModel
+
+@{
+    ViewBag.Title = "AddType";
+}
+
+@{
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+
+
+<div class="container-fluid">
+
+    <div class="row">
+    </div>
+
+    <div class="row">
+        <div id="addraz">
+            @using (Html.BeginForm("Edit", "DeviceTypes"))
+            {
+                <fieldset>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Type.TypeName)
+                        @Html.TextBoxFor(model => model.Type.TypeName, new { @class = "form-control" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Type.TypeDescription)
+                        @Html.TextBoxFor(model => model.Type.TypeDescription, new { @class = "form-control" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Type.VisualRepresentationURL)
+                        @Html.TextBoxFor(model => model.Type.VisualRepresentationURL, new { @class = "form-control" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Type.Category)
+                        @Html.EnumDropDownListFor(model => model.Type.Category, new { @class = "form-control" })
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" value="Send" />
+                    </div>
+
+                </fieldset>
+            }
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div id="resultview">
+            @if (Model.Result != null)
+            {
+                @Html.Raw(HttpUtility.HtmlDecode(Model.Result))
+            }
+
+        </div>
+    </div>
+
+</div>

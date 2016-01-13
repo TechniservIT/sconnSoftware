@@ -1,0 +1,67 @@
+﻿@using iotDash.Identity.Roles
+@using iotDash.Models
+@model iotDash.Models.DeviceTypesListModel
+
+@{
+    ViewBag.Title = "View";
+}
+@{
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<h2>Users</h2>
+
+
+<div class="panel panel-primary">
+
+    <div class="panel-heading text-center">
+        <h2>Users</h2>
+    </div>
+
+    <div class="panel-body">
+
+        <div class="row">
+            <div class="col-md-12">
+                @Html.Partial("~/Views/Shared/EditorTemplate/ToolbarMenu.cshtml")
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="table-responsive">
+
+                <table class="table">
+                    <tr>
+                        <th>Name</th>
+                        <th>Category</th>
+                        <th>Description</th>
+                        <th>Devices</th>
+                    </tr>
+
+
+                    @foreach (var d in Model.Types)
+                    {
+                        <tr id="@d.Id.ToString()" class="rowRecord row-normal">
+
+                            <td> @d.TypeName </td>
+
+                            <td> @d.Category</td>
+
+                            <td> @d.TypeDescription.ToString()</td>
+
+                            <td> @d.Devices.Count().ToString()</td>
+
+                        </tr>
+
+                    }
+
+                </table>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+

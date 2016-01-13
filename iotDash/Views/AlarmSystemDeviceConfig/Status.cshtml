@@ -105,6 +105,31 @@
         }
     }
 
+    public string SpanClassForBooleanNormalPolarization(bool val)
+    {
+        if (val)
+        {
+            return "label label-success";
+        }
+        else
+        {
+            return "label label-danger";
+        }
+    }
+
+    public string SpanClassForBooleanReversePolarization(bool val)
+    {
+        if (val)
+        {
+            return "label label-danger";
+
+        }
+        else
+        {
+            return "label label-success";
+        }
+    }
+
 
     public string ContentForDigitalIoValue(int value)
     {
@@ -398,14 +423,14 @@
                             @Html.HiddenFor(model => model.Device.ComTcpIp)
                             <span class="glyphicon glyphicon-phone-alt"></span>
                             Ethernet :
-                            <span class="label label-default label-pill pull-right pull-xs-right">@Model.Device.ComTcpIp.ToString()</span>
+                            <span class="@SpanClassForBooleanNormalPolarization(Model.Device.ComTcpIp) label label-default label-pill pull-right pull-xs-right">@Model.Device.ComTcpIp.ToString()</span>
                         </li>
 
                         <li class="list-group-item">
                             @Html.HiddenFor(model => model.Device.ComMiWi)
                             <span class="glyphicon glyphicon-file"></span>
                             MiWi :
-                            <span class="label label-default label-pill pull-right pull-xs-right">@Model.Device.ComMiWi.ToString()</span>
+                            <span class="@SpanClassForBooleanNormalPolarization(Model.Device.ComMiWi) label label-default label-pill pull-right pull-xs-right">@Model.Device.ComMiWi.ToString()</span>
                         </li>
 
                     </ul>

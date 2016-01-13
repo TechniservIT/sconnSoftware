@@ -77,5 +77,15 @@ namespace iotDbConnector.DAL
         {
             Devices = new List<Device>();
         }
+
+        public void Load(DeviceType type)
+        {
+            this.Id = type.Id;
+            this.Category = type.Category;
+            this.TypeDescription = type.TypeDescription;
+            this.TypeName = type.TypeName;
+            this.VisualRepresentationURL = type.VisualRepresentationURL;
+        }
+
     }
 }
