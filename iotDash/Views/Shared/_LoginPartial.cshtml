@@ -1,26 +1,61 @@
 ﻿@using Microsoft.AspNet.Identity
+
+@*<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">*@
+
+
+@Styles.Render("~/bundles/css")
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryui")
+@Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/bundles/bootstrap")
+@Scripts.Render("~/bundles/bootstrap-formhelpers")
+
+
+
 @if (Request.IsAuthenticated)
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
-    @Html.AntiForgeryToken()
+     @Html.AntiForgeryToken()
 
-    <ul class="nav navbar-nav navbar-right" >
+        <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                @HttpContext.Current.User.Identity.Name
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+                <li><a href="@Url.Action("Manage", "Account", null)"><i class="fa fa-pencil fa-fw"></i>Manage</a></li>
+                <li><a href="javascript:document.getElementById('logoutForm').submit()"><i class="fa fa-ban fa-fw"></i> Logout</a></li>
+            </ul>
+        </div>
+
+    <ul class="nav navbar-nav navbar-right" id="user-acc-menu">
         <li>
             <div class="btn-group" style="padding: 7px;">
-          
-                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" id="userDropDown" aria-haspopup="true" aria-expanded="false">
-                    <div class="inner-addon left-addon">
-                        <i class="glyphicon glyphicon-user"></i>
-                        @HttpContext.Current.User.Identity.Name
-                        <span class="caret"></span>
-                    </div>
-                </button>
 
-                <ul class="dropdown-menu" role="menu" aria-labelledby="userDropDown">
-                    <li><a href=""><i class="fa fa-pencil fa-fw"></i> Account</a></li>
+                @*<a href="#" data-target="#stack-user-menu-dropdown" data-toggle="collapse" data-parent="#user-acc-menu">@HttpContext.Current.User.Identity.Name <span class="caret arrow"></span></a>
+                <ul class="nav nav-stacked collapse right-submenu" id='stack-user-menu-dropdown'>
+                    <li><a href="@Html.ActionLink("Account", "Manage", "Account")"><i class="fa fa-pencil fa-fw"></i></a></li>
                     <li><a href="javascript:document.getElementById('logoutForm').submit()"><i class="fa fa-ban fa-fw"></i> Logout</a></li>
-                </ul>
+                </ul>*@
+
+
+                
+                @*<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" id="userDropDown" aria-haspopup="true" aria-expanded="false">
+                        <div class="inner-addon left-addon">
+                            <i class="glyphicon glyphicon-user"></i>
+                            @HttpContext.Current.User.Identity.Name
+                            <span class="caret"></span>
+                        </div>
+                    </button>
+
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="userDropDown">
+                        <li><a href="@Html.ActionLink("Account", "Manage", "Account")"><i class="fa fa-pencil fa-fw"></i></a></li>
+                        <li><a href="javascript:document.getElementById('logoutForm').submit()"><i class="fa fa-ban fa-fw"></i> Logout</a></li>
+                    </ul>*@
 
             </div>
         </li>

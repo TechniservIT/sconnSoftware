@@ -46,8 +46,7 @@
         L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
             maxZoom: 24,
             attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-            id: 'domainlocation.map',
-            noWrap: true
+            id: 'domainlocation.map'
         }).addTo(map);
 
         //var marker = L.marker(mapCenter).addTo(map);
@@ -77,29 +76,89 @@
         //$('#latInput').on('input', updateMarkerByInputs);
         //$('#lngInput').on('input', updateMarkerByInputs);
         
-         
-        L.marker([49.78411, 19.0582], { icon: L.AwesomeMarkers.icon({ icon: 'shield', prefix: 'fa', markerColor: 'green', spin: false }) }).addTo(map);
+        //L.marker([49.78411, 19.0582], { icon: L.AwesomeMarkers.icon({ icon: 'send', prefix: 'glyphicon', markerColor: 'green' }) }).addTo(map);
+        //L.marker([49.78421, 19.0572], { icon: L.AwesomeMarkers.icon({ icon: 'star', prefix: 'glyphicon', markerColor: 'blue', iconColor: 'black' }) }).addTo(map);
         
-        L.marker([49.78421, 19.0572], { icon: L.AwesomeMarkers.icon({ icon: 'flash', prefix: 'fa', markerColor: 'green', spin: false }) }).addTo(map);
+        //L.marker([49.78431, 19.0562], { icon: L.AwesomeMarkers.icon({ icon: 'eye', prefix: 'fa', markerColor: 'red', spin: false }) }).addTo(map);
         
-        L.marker([49.78431, 19.0562], { icon: L.AwesomeMarkers.icon({ icon: 'eye', prefix: 'fa', markerColor: 'red', spin: false }) }).addTo(map);
+    
+        // Glyphicons
+        //L.marker([49.78531, 19.0542], { icon: L.AwesomeMarkers.icon({ icon: 'star', prefix: 'glyphicon', markerColor: 'green' }) }).addTo(map);
+        //L.marker([49.78221, 19.0522], { icon: L.AwesomeMarkers.icon({ icon: 'certificate', prefix: 'glyphicon', markerColor: 'blue' }) }).addTo(map);
         
+        
+        var greenIcon = L.icon({
+            iconUrl: '/Content/img/map-marker.png',
+            iconSize: [38, 95], // size of the icon
+            iconAnchor: [22, 94], // point of the icon which will correspond to marker's location
+            popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
+        });
 
-        //var poiIcon = L.Icon.extend({
-        //    options: {
-        //        iconSize: [22, 32],
-        //        iconAnchor: [-20, 0],
-        //        shadowUrl: '~/Content/img/map-marker.png',
-        //        shadowSize: [22, 13],
-        //        shadowAnchor: [-31, -19],
-        //        popupAnchor: [32, -2]
-        //    }
-        //});
-
-        //var blackIcon = new poiIcon({ iconUrl: '~/Content/img/mapka1.png' });
-        //var redIcon = new poiIcon({ iconUrl: '~/Content/img/mapka2.png' });
-        //var treeIcon = new poiIcon({ iconUrl: '~/Content/img/mapka3.png' });
+        var LeafIcon = L.Icon.extend({
+            options: {
+                iconSize: [38, 95],
+                iconAnchor: [22, 94],
+                popupAnchor: [-3, -76]
+            }
+        });
         
+        var outputIcon = new LeafIcon({ iconUrl: '/Content/img/mapka1.png' }),
+        inputIcon = new LeafIcon({ iconUrl: '/Content/img/mapka2.png' }),
+        systemIcon = new LeafIcon({ iconUrl: '/Content/img/mapka3.png' });
+        
+        
+        L.icon = function (options) {
+            return new L.Icon(options);
+        };
+        
+        L.marker([49.78531, 19.0542], { icon: outputIcon }).addTo(map).bindPopup("");
+        L.marker([49.78221, 19.0522], { icon: inputIcon }).addTo(map).bindPopup("");
+        L.marker([49.78221, 19.0532], { icon: systemIcon }).addTo(map).bindPopup("");
+
+        
+        var marker = L.marker([49.78441, 19.0522]).addTo(map);
+
+        var markers = [], // an array containing all the markers added to the map
+		markersCount = 0; // the number of the added markers
+        
+        // Dragging and dropping the markers to the map
+        var addMarkers = function () {
+            // The position of the marker icon
+            var posTop = $('.draggable-marker').css('top'),
+            posLeft = $('.draggable-marker').css('left');
+
+            $('.draggable-marker').draggable({
+                stop: function (e, ui) {
+                    // returning the icon to the menu
+                    $('.draggable-marker').css('top', posTop);
+                    $('.draggable-marker').css('left', posLeft);
+                    
+                    var positionMapX = $("#map").offset().left;
+                    var positionMapY = $("#map").offset().top;
+
+                    var coordsX = e.clientX - positionMapX, // 50 is the width of the menu
+                        coordsY = e.clientY - positionMapY, // 20 is the half of markers height
+                        point = L.point(coordsX, coordsY), // createing a Point object with the given x and y coordinates
+                        markerCoords = map.containerPointToLatLng(point), // getting the geographical coordinates of the point
+
+                        // Creating a custom icon
+                        myIcon = L.icon({
+                            iconUrl: '/Content/img/mapka1.png', // the url of the img
+                            iconSize: [20, 40],
+                            iconAnchor: [10, 40] // the coordinates of the &amp;amp;quot;tip&amp;amp;quot; of the icon ( in this case must be ( icon width/ 2, icon height )
+                        });
+
+                    // Creating a new marker and adding it to the map
+                    markers[markersCount] = L.marker([markerCoords.lat, markerCoords.lng], {
+                        draggable: true,
+                        icon: outputIcon
+                    }).addTo(map);
+
+                    markersCount++;
+                }
+            });
+        }
+        addMarkers();
         
 
     });
@@ -150,6 +209,7 @@
        
     });
     
+
    
 
 
@@ -161,6 +221,14 @@
         font-size: 18px;
         margin-top: 8px;
     }
+
+        .draggable-marker {
+    width: 20px;
+    margin: 12px;
+    cursor: pointer;
+    z-index: 2;
+}
+
 
 </style>
 
@@ -342,7 +410,12 @@
                                             <ul class="nav nav-stacked collapse right-submenu" id="input-list-@device.Id.ToString()">
                                                 @foreach (var input in device.Inputs)
                                                 {
-                                                    <li><span class="poi-type glyphicon glyphicon-log-in">@input.Id.ToString() @input.Name</span></li>
+                                                    <li>
+                                                        <span class="draggable-marker poi-type glyphicon glyphicon-log-in">
+                                                            @input.Id.ToString() @input.Name
+                                                        </span>
+                                                        <img class="draggable-marker" type="tree" src="/Content/img/mapka1.png" alt="marker" />
+                                                    </li>
                                                 }
                                             </ul>
                                         </li>
@@ -352,7 +425,7 @@
                                             <ul class="nav nav-stacked collapse right-submenu" id="output-list-@device.Id.ToString()">
                                                 @foreach (var output in device.Outputs)
                                                 {
-                                                    <li><span class="poi-type glyphicon glyphicon-bell">@output.Id.ToString() @output.Name</span></li>
+                                                    <li><span class="draggable-marker poi-type glyphicon glyphicon-bell">@output.Id.ToString() @output.Name</span></li>
                                                 }
                                             </ul>
                                         </li>
@@ -362,7 +435,7 @@
                                             <ul class="nav nav-stacked collapse right-submenu" id="relay-list-@device.Id.ToString()">
                                                 @foreach (var relay in device.Relays)
                                                 {
-                                                    <li><span class="poi-type glyphicon glyphicon-flash">@relay.Id.ToString() @relay.Name</span></li>
+                                                    <li><span class="draggable-marker poi-type glyphicon glyphicon-flash">@relay.Id.ToString() @relay.Name</span></li>
                                                 }
                                             </ul>
                                         </li>
