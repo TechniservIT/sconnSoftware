@@ -11,31 +11,36 @@ namespace iotDbConnector.DAL
     public class IoMapDefinition
     {
         [DataMember]
-        [Required]
         [Key]
         public int Id { get; set; }
 
         [DataMember]
-        [Required]
+	[Required]
         public int IoId { get; set; }
 
         [DataMember]
         public string Description { get; set; }
 
         [DataMember]
-        [Required]
+	[Required]
         public DeviceIoCategory Type { get; set; }
 
         [DataMember]
-        [Required]
         public int X { get; set; }
 
         [DataMember]
-        [Required]
         public int Y { get; set; }
-        
+
         [DataMember]
-        [Required]
+	[Required]
+        public double Latitude { get; set; }
+
+        [DataMember]
+	[Required]
+        public double Longitude { get; set; }
+
+        [DataMember]
+	[Required]
         public virtual DeviceMapDefinition Definition { get; set; }
      
 

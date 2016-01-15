@@ -130,6 +130,10 @@
     <Compile Include="Migrations\201601081643290_Map definitions.Designer.cs">
       <DependentUpon>201601081643290_Map definitions.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201601141453304_map def lat lng .cs" />
+    <Compile Include="Migrations\201601141453304_map def lat lng .Designer.cs">
+      <DependentUpon>201601141453304_map def lat lng .cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="DAL\Repository\NoSql\INoSqlDataSource.cs" />
     <Compile Include="DAL\Repository\NoSql\MongoNoSqlDataSource.cs" />
@@ -167,6 +171,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201601081643290_Map definitions.resx">
       <DependentUpon>201601081643290_Map definitions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601141453304_map def lat lng .resx">
+      <DependentUpon>201601141453304_map def lat lng .cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

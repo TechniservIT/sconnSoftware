@@ -1,4 +1,5 @@
 ﻿@model iotDash.Areas.AlarmSystem.Models.AlarmSystemGlobalEditModel
+@using Newtonsoft.Json
 @using sconnConnector
 
 @{
@@ -36,6 +37,12 @@
 
 <script type="text/javascript">
 
+    //var model = JSON.parse(@JsonConvert.SerializeObject(Model));        // @Html.Raw(Json.Encode(Model))
+    var model = new Object();
+   // model.Map = new Object();
+    model.MapDefinitions =  [];
+    model.ServerId  = @Model.ServerId.ToString();
+
     $(function () {
 
         var startLat = 49.78395;
@@ -49,44 +56,7 @@
             id: 'domainlocation.map'
         }).addTo(map);
 
-        //var marker = L.marker(mapCenter).addTo(map);
-        //var updateMarker = function (lat, lng) {
-        //    marker
-        //        .setLatLng([lat, lng])
-        //        .bindPopup("Location :  " + marker.getLatLng().toString())
-        //        .openPopup();
-        //    return false;
-        //};
 
-        //map.on('click', function (e) {
-        //    $('#latInput').val(e.latlng.lat);
-        //    $('#lngInput').val(e.latlng.lng);
-        //    updateMarker(e.latlng.lat, e.latlng.lng);
-        //});
-
-
-        //var updateMarkerByInputs = function () {
-        //    return updateMarker($('#latInput').val(), $('#lngInput').val());
-        //}
-
-        //updateMarker(startLat, startLng); //initially update to start possition
-        //$('#latInput').val(startLat);
-        //$('#lngInput').val(startLng);
-
-        //$('#latInput').on('input', updateMarkerByInputs);
-        //$('#lngInput').on('input', updateMarkerByInputs);
-        
-        //L.marker([49.78411, 19.0582], { icon: L.AwesomeMarkers.icon({ icon: 'send', prefix: 'glyphicon', markerColor: 'green' }) }).addTo(map);
-        //L.marker([49.78421, 19.0572], { icon: L.AwesomeMarkers.icon({ icon: 'star', prefix: 'glyphicon', markerColor: 'blue', iconColor: 'black' }) }).addTo(map);
-        
-        //L.marker([49.78431, 19.0562], { icon: L.AwesomeMarkers.icon({ icon: 'eye', prefix: 'fa', markerColor: 'red', spin: false }) }).addTo(map);
-        
-    
-        // Glyphicons
-        //L.marker([49.78531, 19.0542], { icon: L.AwesomeMarkers.icon({ icon: 'star', prefix: 'glyphicon', markerColor: 'green' }) }).addTo(map);
-        //L.marker([49.78221, 19.0522], { icon: L.AwesomeMarkers.icon({ icon: 'certificate', prefix: 'glyphicon', markerColor: 'blue' }) }).addTo(map);
-        
-        
         var greenIcon = L.icon({
             iconUrl: '/Content/img/map-marker.png',
             iconSize: [38, 95], // size of the icon
@@ -101,38 +71,40 @@
                 popupAnchor: [-3, -76]
             }
         });
-        
+
         var outputIcon = new LeafIcon({ iconUrl: '/Content/img/mapka1.png' }),
         inputIcon = new LeafIcon({ iconUrl: '/Content/img/mapka2.png' }),
         systemIcon = new LeafIcon({ iconUrl: '/Content/img/mapka3.png' });
-        
-        
+
+
         L.icon = function (options) {
             return new L.Icon(options);
         };
-        
+
         L.marker([49.78531, 19.0542], { icon: outputIcon }).addTo(map).bindPopup("");
         L.marker([49.78221, 19.0522], { icon: inputIcon }).addTo(map).bindPopup("");
         L.marker([49.78221, 19.0532], { icon: systemIcon }).addTo(map).bindPopup("");
 
-        
+
         var marker = L.marker([49.78441, 19.0522]).addTo(map);
 
         var markers = [], // an array containing all the markers added to the map
 		markersCount = 0; // the number of the added markers
-        
+
         // Dragging and dropping the markers to the map
         var addMarkers = function () {
+
             // The position of the marker icon
             var posTop = $('.draggable-marker').css('top'),
             posLeft = $('.draggable-marker').css('left');
 
             $('.draggable-marker').draggable({
                 stop: function (e, ui) {
+
                     // returning the icon to the menu
-                    $('.draggable-marker').css('top', posTop);
-                    $('.draggable-marker').css('left', posLeft);
-                    
+                   // $('.draggable-marker').remove();   //css('top', posTop);
+                    $(ui).remove();    //css('left', posLeft);
+
                     var positionMapX = $("#map").offset().left;
                     var positionMapY = $("#map").offset().top;
 
@@ -154,63 +126,79 @@
                         icon: outputIcon
                     }).addTo(map);
 
+                    var devicemap = new Object();
+                    devicemap.IoMapDefinitions =  [];
+
+                    var IoMapDefinition = new Object();
+                    IoMapDefinition.Latitude = markerCoords.lat;
+                    IoMapDefinition.Longitude = markerCoords.lng;
+                    IoMapDefinition.IoId = 0;
+                    //model.MapDefinitions.push(IoMapDefinition);
+                   // devicemap.IoMapDefinitions.push(IoMapDefinition);
+                    //model.Map.DeviceMaps.push(devicemap);
+                    model.MapDefinitions.push(IoMapDefinition);
+
                     markersCount++;
                 }
             });
         }
         addMarkers();
-        
 
-    });
-    
-    
-    $('.tree-toggle').click(function () {
-        $(this).parent().children('ul.tree').toggle(200);
-    });
 
-    $(document).ready(function () {
-        $(".fancybox").fancybox();
-    });
-    
-    
-    $(".drag").draggable({
-        helper: 'clone',
-        containment: 'map',
-        start: function (evt, ui) {
-            $('#box').fadeTo('fast', 0.6, function () { });
-        },
-        stop: function (evt, ui) {
-            $('#box').fadeTo('fast', 1.0, function () { });
 
-            var options = {
-                pid: guid(),
-                type: ui.helper.attr('type'),
-                icon: eval(ui.helper.attr('type') + 'Icon'),
-                draggable: true
+
+        $('#mapsubmit').click(function () {
+
+            @*$.post("@Url.Action("SaveMap")", {model : model}  ,function(data)     //{model : model}   JSON.stringify(model)
+            {
+
+            });*@
+            
+            var jsonObject = {
+                "ServerId" : "1",
+                "Roles": [{ "RoleName": "Admin", "Description" : "Admin Role"}, { "RoleName": "User", "Description" : "User Role"}]
             };
 
-            var point = L.marker(position, options).addTo(map);
-            point.bindPopup(
-                '<a onClick="deletePoint(\'' + point.options.pid
-                    + '\');" href="#">Remove Me!</a>',
-                {
-                    closeButton: false
+            $.ajax({
+                url: "@Url.Action("SaveMap")",
+                type: "POST",
+                data: JSON.stringify(model),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                error: function (response) {
+                    alert(response.responseText);
+                },
+                success: function (response) {
+                    alert(response);
                 }
-            );
-
-            point.on('dragend', function (evt) {
-                // UPDATE POINT
             });
 
-            markers.push(point);
+            @*$.ajax({
+                url: '@Url.Action("SaveMap")',
+                type: 'POST',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: { 
+                    ServerId: JSON.stringify(model.ServerId),
+                    MapDefinitions: JSON.stringify(model.MapDefinitions)
+                },
+                timeout: 5000
+            });*@
+
+            @*$.ajax({
+                url: '@Url.Action("SaveMap")',
+                data: JSON.stringify(model),
+                contentType: 'application/json',
+                type: "POST",
+                dataType: 'json',
+                success: function (data) { alert(data); }
+            });*@
+
+        });
 
 
-        }
-       
     });
-    
 
-   
 
 
 </script>
@@ -386,13 +374,6 @@
                             </div>
                         </div>
 
-                        @*<div id="box">
-                            Drag Marker on the map:
-                            <span class="poi-type"><img class="drag" type="tree" src="~/Content/img/mapka1.png" alt="TREE: green" />Tree</span>
-                            <span class="poi-type"><img class="drag" type="red" src="~/Content/img/mapka2.png" alt="POI: red" />Red</span>
-                            <span class="poi-type"><img class="drag" type="black" src="~/Content/img/mapka3.png" alt="POI: black" />Black</span>
-                        </div>*@
-                        
                     </div>
 
                     <div class="col-lg-4 col-sm-4 col-xs-12 center-block">
@@ -404,7 +385,7 @@
                                 <li>
                                     <a href="#" data-target="#stack-menu-device-@device.Id.ToString()" data-toggle="collapse" data-parent="#stacked-menu">Device : @device.Name <span class="caret arrow"></span></a>
                                     <ul class="nav nav-stacked collapse right-submenu" id='stack-menu-device-@device.Id.ToString()'>
-                                        
+
                                         <li>
                                             <a href="#" data-target="#input-list-@device.Id.ToString()" data-toggle="collapse" data-parent="#stack-menu-device-@device.Id.ToString()">Inputs<span class="caret arrow"></span></a>
                                             <ul class="nav nav-stacked collapse right-submenu" id="input-list-@device.Id.ToString()">
@@ -414,7 +395,7 @@
                                                         <span class="draggable-marker poi-type glyphicon glyphicon-log-in">
                                                             @input.Id.ToString() @input.Name
                                                         </span>
-                                                        <img class="draggable-marker" type="tree" src="/Content/img/mapka1.png" alt="marker" />
+                                                        <img id="iomarker-output-@input.Id.ToString()-@device.Id.ToString()" class="draggable-marker" type="tree" src="/Content/img/mapka1.png" alt="marker"/>
                                                     </li>
                                                 }
                                             </ul>
@@ -425,7 +406,12 @@
                                             <ul class="nav nav-stacked collapse right-submenu" id="output-list-@device.Id.ToString()">
                                                 @foreach (var output in device.Outputs)
                                                 {
-                                                    <li><span class="draggable-marker poi-type glyphicon glyphicon-bell">@output.Id.ToString() @output.Name</span></li>
+                                                    <li>
+                                                        <span class="draggable-marker poi-type glyphicon glyphicon-bell">
+                                                            @output.Id.ToString() @output.Name
+                                                        </span>
+                                                        <img id="iomarker-output-@output.Id.ToString()-@device.Id.ToString()" class="draggable-marker" type="tree" src="/Content/img/mapka2.png" alt="marker"/>
+                                                    </li>
                                                 }
                                             </ul>
                                         </li>
@@ -435,7 +421,9 @@
                                             <ul class="nav nav-stacked collapse right-submenu" id="relay-list-@device.Id.ToString()">
                                                 @foreach (var relay in device.Relays)
                                                 {
-                                                    <li><span class="draggable-marker poi-type glyphicon glyphicon-flash">@relay.Id.ToString() @relay.Name</span></li>
+                                                    <li><span class="draggable-marker poi-type glyphicon glyphicon-flash">@relay.Id.ToString() @relay.Name</span>
+                                                        <img id="iomarker-output-@relay.Id.ToString()-@device.Id.ToString()" class="draggable-marker" type="tree" src="/Content/img/mapka3.png" alt="marker"/>
+                                                    </li>
                                                 }
                                             </ul>
                                         </li>
@@ -446,10 +434,14 @@
 
                         </ul>
 
+                        <div class="form-group">
+                            <button id="mapsubmit" class="btn btn-primary" type="submit">Save</button>
+                        </div>
 
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
+    </div>
 </div>

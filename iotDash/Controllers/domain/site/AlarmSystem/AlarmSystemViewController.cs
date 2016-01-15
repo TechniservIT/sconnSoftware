@@ -18,7 +18,10 @@ using sconnConnector;
 using sconnConnector.Config;
 using sconnConnector.POCO.Config;
 using iotDash.Identity.Attributes;
+using Microsoft.Ajax.Utilities;
 using sconnConnector.POCO.Config.sconn;
+using System.Web.Helpers;
+using Newtonsoft.Json;
 
 namespace iotDash.Controllers.domain.site.AlarmSystem
 {
@@ -87,6 +90,18 @@ namespace iotDash.Controllers.domain.site.AlarmSystem
         {
             return Index(DeviceId);
         }
+
+        public ActionResult SaveMap(AlarmSystemMapEditModel model)
+        {
+            return new JsonResult();
+        }
+
+        //public ActionResult SaveMap(string model)
+        //{
+        //    var obj = JsonConvert.DeserializeObject<AlarmSystemGlobalEditModel>(model);
+        //    return new JsonResult();
+        //}
+
 
     }
 }

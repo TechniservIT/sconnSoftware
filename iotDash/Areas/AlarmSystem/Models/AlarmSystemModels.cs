@@ -124,6 +124,23 @@ namespace iotDash.Areas.AlarmSystem.Models
     }
 
 
+    public class AlarmSystemMapEditModel
+    {
+
+        [Required]
+        public int ServerId { get; set; }
+
+        //public List<IoMapDefinition> MapDefinitions; 
+        public IoMapDefinition[] MapDefinitions;
+
+        public AlarmSystemMapEditModel()
+        {
+          //  MapDefinitions= new List<IoMapDefinition>();
+            MapDefinitions = new IoMapDefinition[0];
+        }
+        
+    }
+
     public class AlarmSystemGlobalModel
     {
 

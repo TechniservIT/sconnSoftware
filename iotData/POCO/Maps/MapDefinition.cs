@@ -26,5 +26,10 @@ namespace iotDbConnector.DAL
 
         [DataMember]
         public virtual List<DeviceMapDefinition> DeviceMaps { get; set; }
+
+        public MapDefinition()
+        {
+                DeviceMaps = new List<DeviceMapDefinition>();
+        }
     }
 }
