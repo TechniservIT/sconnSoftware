@@ -48,17 +48,13 @@
 
     $(function () {
 
-
-
         hubProxy = $.connection.alarmSystemMapHub;     // the generated client-side hub proxy
-
         hubProxy.client.updateMap = function (mapData)
         {
             hubModel = mapData;
         }
 
         $.connection.hub.start().done(function () {
-            //  hubModel = hubProxy.server.getMapEditModel(@Model.ServerId.ToString());
             hubProxy.server.getMapData(@Model.ServerId.ToString());   //intialy load map data
         });
 
@@ -75,14 +71,7 @@
         }).addTo(map);
 
 
-        var greenIcon = L.icon({
-            iconUrl: '/Content/img/map-marker.png',
-            iconSize: [38, 95], // size of the icon
-            iconAnchor: [22, 94], // point of the icon which will correspond to marker's location
-            popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
-        });
-
-        var LeafIcon = L.Icon.extend({
+        var IoIcon = L.Icon.extend({
             options: {
                 iconSize: [38, 95],
                 iconAnchor: [22, 94],
@@ -90,21 +79,13 @@
             }
         });
 
-        var outputIcon = new LeafIcon({ iconUrl: '/Content/img/mapka1.png' }),
-        inputIcon = new LeafIcon({ iconUrl: '/Content/img/mapka2.png' }),
-        systemIcon = new LeafIcon({ iconUrl: '/Content/img/mapka3.png' });
-
+        var outputIcon = new IoIcon({ iconUrl: '/Content/img/mapka1.png' }),
+        inputIcon = new IoIcon({ iconUrl: '/Content/img/mapka2.png' }),
+        systemIcon = new IoIcon({ iconUrl: '/Content/img/mapka3.png' });
 
         L.icon = function (options) {
             return new L.Icon(options);
         };
-
-        L.marker([49.78531, 19.0542], { icon: outputIcon }).addTo(map).bindPopup("");
-        L.marker([49.78221, 19.0522], { icon: inputIcon }).addTo(map).bindPopup("");
-        L.marker([49.78221, 19.0532], { icon: systemIcon }).addTo(map).bindPopup("");
-
-
-        var marker = L.marker([49.78441, 19.0522]).addTo(map);
 
         var markers = [], // an array containing all the markers added to the map
 		markersCount = 0; // the number of the added markers
@@ -118,51 +99,63 @@
 
             $('.draggable-marker').draggable({
                 stop: function (e, ui) {
+                    
+                    var draggableId = $(this).draggable().attr("id");
+                    var ioId = $(this).draggable().attr("value");
+                    var ioType = $(this).draggable().attr("alt");
+                    //var droppableId = $(this).attr("id");
 
-                    // returning the icon to the menu
-                   // $('.draggable-marker').remove();   //css('top', posTop);
-                    $(ui).remove();    //css('left', posLeft);
+                    // $('.draggable-marker').remove();   //css('top', posTop);        // returning the icon to the menu
+                    $(this).draggable().remove();   //destroy draggable
 
                     var positionMapX = $("#map").offset().left;
                     var positionMapY = $("#map").offset().top;
+                    
+                    var ioIcon;
+                    if (draggableId.indexOf('output') > -1) {
+                        ioIcon = outputIcon;
+                    }
+                    else if (draggableId.indexOf('input') > -1) {
+                        ioIcon = inputIcon;
+                    }
+                    else if (draggableId.indexOf('relay') > -1) {
+                        ioIcon = outputIcon;
+                    }
+                    else {
+
+                    }
 
                     var coordsX = e.clientX - positionMapX, // 50 is the width of the menu
                         coordsY = e.clientY - positionMapY, // 20 is the half of markers height
                         point = L.point(coordsX, coordsY), // createing a Point object with the given x and y coordinates
-                        markerCoords = map.containerPointToLatLng(point), // getting the geographical coordinates of the point
-
-                        // Creating a custom icon
-                        myIcon = L.icon({
-                            iconUrl: '/Content/img/mapka1.png', // the url of the img
-                            iconSize: [20, 40],
-                            iconAnchor: [10, 40] // the coordinates of the &amp;amp;quot;tip&amp;amp;quot; of the icon ( in this case must be ( icon width/ 2, icon height )
-                        });
+                        markerCoords = map.containerPointToLatLng(point); // getting the geographical coordinates of the point
 
                     // Creating a new marker and adding it to the map
                     markers[markersCount] = L.marker([markerCoords.lat, markerCoords.lng], {
                         draggable: true,
-                        icon: outputIcon
+                        icon: ioIcon
                     }).addTo(map);
 
                     var devicemap = new Object();
                     devicemap.IoMapDefinitions =  [];
+                    
+
 
                     var ioMapDefinition = new Object();
                     ioMapDefinition.Latitude = markerCoords.lat;
                     ioMapDefinition.Longitude = markerCoords.lng;
-                    ioMapDefinition.IoId = 0;
-                    //model.MapDefinitions.push(IoMapDefinition);
+                    ioMapDefinition.IoId = ioId;
+                    ioMapDefinition.DeviceIoCategory = ioType;
                     devicemap.IoMapDefinitions.push(ioMapDefinition);
                     hubModel.Map.DeviceMaps.push(devicemap);
-                    //hubModel.Map.MapDefinitions.push(IoMapDefinition);
 
                     markersCount++;
                 }
             });
         }
-
-        addMarkers();
         
+        addMarkers();
+
         $('#mapsubmit').click(function () {
             hubProxy.server.updateAlarmMap(hubModel);
         });
@@ -362,10 +355,12 @@
                                                 @foreach (var input in device.Inputs)
                                                 {
                                                     <li>
-                                                        <span class="draggable-marker poi-type glyphicon glyphicon-log-in">
-                                                            @input.Id.ToString() @input.Name
-                                                        </span>
-                                                        <img id="iomarker-output-@input.Id.ToString()-@device.Id.ToString()" class="draggable-marker" type="tree" src="/Content/img/mapka1.png" alt="marker"/>
+                                                        <button type="button" class="btn btn-warning navbar-btn">
+                                                            <span class="draggable-marker poi-type glyphicon glyphicon-log-in">
+                                                                @input.Id.ToString() @input.Name
+                                                            </span>
+                                                            <img id="iomarker-output-@input.Id.ToString()-@device.Id.ToString()" value="@input.Id.ToString()" class="draggable-marker" type="tree" src="/Content/img/mapka2.png" alt="@input.Type.ToString()" />
+                                                        </button>
                                                     </li>
                                                 }
                                             </ul>
@@ -380,7 +375,7 @@
                                                         <span class="draggable-marker poi-type glyphicon glyphicon-bell">
                                                             @output.Id.ToString() @output.Name
                                                         </span>
-                                                        <img id="iomarker-output-@output.Id.ToString()-@device.Id.ToString()" class="draggable-marker" type="tree" src="/Content/img/mapka2.png" alt="marker"/>
+                                                        <img id="iomarker-output-@output.Id.ToString()-@device.Id.ToString()" value="@output.Id.ToString()" class="draggable-marker" type="tree" src="/Content/img/mapka1.png" alt="@output.Type.ToString()"/>
                                                     </li>
                                                 }
                                             </ul>
@@ -392,7 +387,7 @@
                                                 @foreach (var relay in device.Relays)
                                                 {
                                                     <li><span class="draggable-marker poi-type glyphicon glyphicon-flash">@relay.Id.ToString() @relay.Name</span>
-                                                        <img id="iomarker-output-@relay.Id.ToString()-@device.Id.ToString()" class="draggable-marker" type="tree" src="/Content/img/mapka3.png" alt="marker"/>
+                                                        <img id="iomarker-output-@relay.Id.ToString()-@device.Id.ToString()" value="@relay.Id.ToString()" class="draggable-marker" type="tree" src="/Content/img/mapka3.png" alt="@relay.Type.ToString()"/>
                                                     </li>
                                                 }
                                             </ul>
@@ -412,50 +407,65 @@
                 </div>
 
 
-                <div>
-                    @using (Html.BeginForm("UploadFirmware", "AlarmSysytemView", FormMethod.Post, new { enctype = "multipart/form-data" }))
-                    {
+            </div>
+        </div>
 
-                        <div style="position: relative;">
-                            <a class='btn btn-primary' href='javascript:;'>
-                                Choose File...
-                                <input type="file" style='position: absolute; z-index: 2; top: 0; left: 0; filter: alpha(opacity=0); -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"; opacity: 0; background-color: transparent; color: transparent;' name="file_source" size="40" onchange='$("#upload-file-info").html($(this).val());'>
-                            </a>
-                            &nbsp;
-                            <span class='label label-info' id="upload-file-info"></span>
-                        </div>
-                        
-                        @*<div class="form-group">
-                            <span class="btn btn-default btn-file">
-                                Browse <input type="file">
-                            </span>
-                        </div>*@
+    </div>
+
+    <div class="row">
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <center>
+                    <h2>Firmware upload</h2>
+                </center>
+            </div>
+
+
+            <div class="panel-body">
+                @using (Html.BeginForm("UploadFirmware", "AlarmSysytemView", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+
+                    <div class="form-group" style="position: relative;">
+                        <a class='btn btn-primary' href='javascript:;'>
+                            Choose File...
+                            <input type="file" style='position: absolute; z-index: 2; top: 0; left: 0; filter: alpha(opacity=0); -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"; opacity: 0; background-color: transparent; color: transparent;' name="file_source" size="40" onchange='$("#upload-file-info").html($(this).val());'>
+                        </a>
+                        &nbsp;
+                        <span class='label label-info' id="upload-file-info"></span>
+                    </div>
 
                         <div class="form-group">
                             <div class="form-group">
-                                <button  class="btn btn-primary" type="submit">Send</button>
+                                <button class="btn btn-primary" type="submit">Send</button>
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <div class="progress">
-                                Sending...
-                                <div class="progress-bar progress-bar-warning progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
-                                    60%
-                                </div>
+                    <div class="form-group">
+                        Sending...
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-succcess" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+                                100%
                             </div>
+                        </div>
+                    </div>
+
+                        <div class="form-group">
+                            Veryfing...
                             <div class="progress">
-                                Veryfing...
+
                                 <div class="progress-bar progress-bar-warning progress-bar-striped" role="progressbar" aria-valuenow="11" aria-valuemin="0" aria-valuemax="100" style="width: 11%;">
                                     20%
                                 </div>
                             </div>
                         </div>
-                    }
-                </div>
-
+                }
             </div>
+
         </div>
 
     </div>
+
+
+
 </div>
