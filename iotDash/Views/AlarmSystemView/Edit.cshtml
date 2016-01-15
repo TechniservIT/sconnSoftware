@@ -98,6 +98,7 @@
             posLeft = $('.draggable-marker').css('left');
 
             $('.draggable-marker').draggable({
+                cancel: false,
                 stop: function (e, ui) {
                     
                     var draggableId = $(this).draggable().attr("id");
@@ -339,56 +340,67 @@
 
                     </div>
 
+                    <style>
+                        .iomenuItem {
+                            background-color: aqua;
+                        }
+                    </style>
+
                     <div class="col-lg-4 col-sm-4 col-xs-12 center-block">
 
                         <ul class="pull-right nav nav-pills nav-stacked right-menu" id="stacked-menu">
 
                             @foreach (var device in Model.Devices)
                             {
-                                <li>
-                                    <a href="#" data-target="#stack-menu-device-@device.Id.ToString()" data-toggle="collapse" data-parent="#stacked-menu">Device : @device.Name <span class="caret arrow"></span></a>
+                                <li class="iomenuItem">
+                                    <a href="#"  data-target="#stack-menu-device-@device.Id.ToString()" data-toggle="collapse" data-parent="#stacked-menu">Device : @device.Name <span class="caret arrow"></span></a>
                                     <ul class="nav nav-stacked collapse right-submenu" id='stack-menu-device-@device.Id.ToString()'>
 
-                                        <li>
+                                        <li class="iomenuItem">
                                             <a href="#" data-target="#input-list-@device.Id.ToString()" data-toggle="collapse" data-parent="#stack-menu-device-@device.Id.ToString()">Inputs<span class="caret arrow"></span></a>
                                             <ul class="nav nav-stacked collapse right-submenu" id="input-list-@device.Id.ToString()">
                                                 @foreach (var input in device.Inputs)
                                                 {
-                                                    <li>
-                                                        <button type="button" class="btn btn-warning navbar-btn">
+                                                    <li class="iomenuItem">
+                                                        @*<button id="iomarker-output-@input.Id.ToString()-@device.Id.ToString()" value="@input.Id.ToString()" class="col-md-12 btn btn-warning navbar-btn draggable-marker" src="/Content/img/mapka2.png" alt="@input.Type.ToString()" type="button">
                                                             <span class="draggable-marker poi-type glyphicon glyphicon-log-in">
-                                                                @input.Id.ToString() @input.Name
                                                             </span>
-                                                            <img id="iomarker-output-@input.Id.ToString()-@device.Id.ToString()" value="@input.Id.ToString()" class="draggable-marker" type="tree" src="/Content/img/mapka2.png" alt="@input.Type.ToString()" />
-                                                        </button>
+                                                            @input.Id.ToString() @input.Name
+                                                        </button>*@
+                                                        <img id="iomarker-output-@input.Id.ToString()-@device.Id.ToString()" value="@input.Id.ToString()" class="draggable-marker" type="tree" src="/Content/img/mapka2.png" alt="@input.Type.ToString()" />
+                                                        @input.Id.ToString() @input.Name
                                                     </li>
                                                 }
                                             </ul>
                                         </li>
 
-                                        <li>
-                                            <a href="#" data-target="#output-list-@device.Id.ToString()" data-toggle="collapse" data-parent="#stack-menu-device-@device.Id.ToString()">Outputs<span class="caret arrow"></span></a>
+                                        <li class="iomenuItem">
+                                            <a href="#"   data-target="#output-list-@device.Id.ToString()" data-toggle="collapse" data-parent="#stack-menu-device-@device.Id.ToString()">Outputs<span class="caret arrow"></span></a>
                                             <ul class="nav nav-stacked collapse right-submenu" id="output-list-@device.Id.ToString()">
                                                 @foreach (var output in device.Outputs)
                                                 {
-                                                    <li>
-                                                        <span class="draggable-marker poi-type glyphicon glyphicon-bell">
+                                                    <li class="iomenuItem">
+                                                        @*<span class="draggable-marker poi-type glyphicon glyphicon-bell">
                                                             @output.Id.ToString() @output.Name
                                                         </span>
-                                                        <img id="iomarker-output-@output.Id.ToString()-@device.Id.ToString()" value="@output.Id.ToString()" class="draggable-marker" type="tree" src="/Content/img/mapka1.png" alt="@output.Type.ToString()"/>
+                                                        <img id="iomarker-output-@output.Id.ToString()-@device.Id.ToString()" value="@output.Id.ToString()" class="draggable-marker" type="tree" src="/Content/img/mapka1.png" alt="@output.Type.ToString()"/>*@
+                                                        <img id="iomarker-output-@output.Id.ToString()-@device.Id.ToString()" value="@output.Id.ToString()" class="draggable-marker" type="tree" src="/Content/img/mapka2.png" alt="@output.Type.ToString()" />
+                                                        @output.Id.ToString() @output.Name
                                                     </li>
                                                 }
                                             </ul>
                                         </li>
 
-                                        <li>
+                                        <li class="iomenuItem">
                                             <a href="#" data-target="#relay-list-@device.Id.ToString()" data-toggle="collapse" data-parent="#stack-menu-device-@device.Id.ToString()">Relays<span class="caret arrow"></span></a>
                                             <ul class="nav nav-stacked collapse right-submenu" id="relay-list-@device.Id.ToString()">
                                                 @foreach (var relay in device.Relays)
                                                 {
-                                                    <li><span class="draggable-marker poi-type glyphicon glyphicon-flash">@relay.Id.ToString() @relay.Name</span>
-                                                        <img id="iomarker-output-@relay.Id.ToString()-@device.Id.ToString()" value="@relay.Id.ToString()" class="draggable-marker" type="tree" src="/Content/img/mapka3.png" alt="@relay.Type.ToString()"/>
+                                                    <li class="iomenuItem">
+                                                        <img id="iomarker-output-@relay.Id.ToString()-@device.Id.ToString()" value="@relay.Id.ToString()" class="draggable-marker" type="tree" src="/Content/img/mapka2.png" alt="@relay.Type.ToString()" />
+                                                        @relay.Id.ToString() @relay.Name
                                                     </li>
+
                                                 }
                                             </ul>
                                         </li>
