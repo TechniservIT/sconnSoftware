@@ -403,10 +403,6 @@
     <Compile Include="Serialization\iotSerializationFactory.cs" />
     <Compile Include="Session\DomainSession.cs" />
     <Compile Include="Session\SessionManager.cs" />
-    <Compile Include="SignalR.Sample\Startup.cs" />
-    <Compile Include="SignalR.Sample\Stock.cs" />
-    <Compile Include="SignalR.Sample\StockTicker.cs" />
-    <Compile Include="SignalR.Sample\StockTickerHub.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Views\Helpers\ApplicationHelpers.cs" />
   </ItemGroup>
@@ -1532,8 +1528,6 @@
     <Content Include="Scripts\switch\bootstrap-switch.js" />
     <Content Include="Scripts\switch\bootstrap-switch.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="SignalR.Sample\jquery-1.10.2.min.js" />
-    <Content Include="SignalR.Sample\jquery-1.10.2.min.map" />
     <Content Include="Content\css\bootstrap.css" />
     <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="Content\css\plugins\dataTables.bootstrap.css" />
@@ -1585,10 +1579,6 @@
     <Content Include="Views\AlarmSystemView\Index.cshtml" />
     <Content Include="Views\AlarmSystemView\Edit.cshtml" />
     <None Include="Views\Dashboard\Index.cshtml" />
-    <Content Include="SignalR.Sample\jquery.color-2.1.2.min.js" />
-    <Content Include="SignalR.Sample\SignalR.StockTicker.js" />
-    <Content Include="SignalR.Sample\StockTicker.css" />
-    <Content Include="SignalR.Sample\StockTicker.html" />
     <Content Include="Views\Dashboard\js\bootstrap.js" />
     <Content Include="Views\Dashboard\js\bootstrap.min.js" />
     <Content Include="Views\Dashboard\js\jquery.js" />

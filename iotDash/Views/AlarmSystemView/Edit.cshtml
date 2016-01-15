@@ -40,51 +40,29 @@
 
 <script type="text/javascript">
 
-    //signalR
-    //$.connection.hub.url = 'http://server1.net/signalr';
-    //var server1Hub = $.connection.server1Hub;
-
-    //var connection = $.hubConnection();
-    //var hubproxy = connection.createHubProxy('AlarmSystemMapHub');
-
-    //hubproxy.start();
-    //var hubModel = jQuery.parseJSON(hubproxy.GetMapEditModel(@Model.ServerId.ToString()));
-    //var model = JSON.parse(@JsonConvert.SerializeObject(Model));        // @Html.Raw(Json.Encode(Model))
-    //var model = new Object();
-    //hubModel.Map = new Object();
-    //hubModel.DeviceMapDefinition = [];
-    //model.ServerId  = @Model.ServerId.ToString();
-
-    var hubProxy = $.connection.AlarmSystemMapHub;     // the generated client-side hub proxy
+    /*
+        !!!!!!!!! ALL HUB OBJECTS START WITH LOWERCASE IN JS !!!!!!!!!!
+    */
+    var hubModel;
+    var hubProxy;
 
     $(function () {
 
-        var hubModel = new Object();
-        // Start the connection
-        $.connection.hub.start()
-            .then(init)
-            .then(function () {
-
-            })
-            .done(function (state) {
-                hubModel =  hubproxy.server.GetMapEditModel(@Model.ServerId.ToString());
-            });
-
-        @*$.connection.hub.start().done(function () {
-            var hubModel = hubproxy.server.GetMapEditModel(@Model.ServerId.ToString());
-        }).fail(function (e) {
-            alert(e);
-        });*@
-
-        var hubModel = hubproxy.GetMapEditModel(@Model.ServerId.ToString());
-
-        //hubproxy.on('updateDevice', function (deviceData) {
-        //    var obj = jQuery.parseJSON(deviceData);
-        //    var str = JSON.stringify(obj, undefined, 4);
-        //    console.log("Recieved : " + str);
-        //});
 
 
+        hubProxy = $.connection.alarmSystemMapHub;     // the generated client-side hub proxy
+
+        hubProxy.client.updateMap = function (mapData)
+        {
+            hubModel = mapData;
+        }
+
+        $.connection.hub.start().done(function () {
+            //  hubModel = hubProxy.server.getMapEditModel(@Model.ServerId.ToString());
+            hubProxy.server.getMapData(@Model.ServerId.ToString());   //intialy load map data
+        });
+
+        
         var startLat = 49.78395;
         var startLng = 19.05815;
 
@@ -169,75 +147,25 @@
                     var devicemap = new Object();
                     devicemap.IoMapDefinitions =  [];
 
-                    var IoMapDefinition = new Object();
-                    IoMapDefinition.Latitude = markerCoords.lat;
-                    IoMapDefinition.Longitude = markerCoords.lng;
-                    IoMapDefinition.IoId = 0;
+                    var ioMapDefinition = new Object();
+                    ioMapDefinition.Latitude = markerCoords.lat;
+                    ioMapDefinition.Longitude = markerCoords.lng;
+                    ioMapDefinition.IoId = 0;
                     //model.MapDefinitions.push(IoMapDefinition);
-                   // devicemap.IoMapDefinitions.push(IoMapDefinition);
-                    //model.Map.DeviceMaps.push(devicemap);
-                    model.MapDefinitions.push(IoMapDefinition);
+                    devicemap.IoMapDefinitions.push(ioMapDefinition);
+                    hubModel.Map.DeviceMaps.push(devicemap);
+                    //hubModel.Map.MapDefinitions.push(IoMapDefinition);
 
                     markersCount++;
                 }
             });
         }
+
         addMarkers();
-
-
-
-
+        
         $('#mapsubmit').click(function () {
-
-            hubproxy.PublishMapUpdated();
-
-            @*$.post("@Url.Action("SaveMap")", {model : model}  ,function(data)     //{model : model}   JSON.stringify(model)
-            {
-
-            });*@
-
-            @*var jsonObject = {
-                "ServerId" : "1",
-                "Roles": [{ "RoleName": "Admin", "Description" : "Admin Role"}, { "RoleName": "User", "Description" : "User Role"}]
-            };
-
-            $.ajax({
-                url: "@Url.Action("SaveMap")",
-                type: "POST",
-                data: JSON.stringify(model),
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                error: function (response) {
-                    alert(response.responseText);
-                },
-                success: function (response) {
-                    alert(response);
-                }
-            });*@
-
-            @*$.ajax({
-                url: '@Url.Action("SaveMap")',
-                type: 'POST',
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                data: {
-                    ServerId: JSON.stringify(model.ServerId),
-                    MapDefinitions: JSON.stringify(model.MapDefinitions)
-                },
-                timeout: 5000
-            });*@
-
-            @*$.ajax({
-                url: '@Url.Action("SaveMap")',
-                data: JSON.stringify(model),
-                contentType: 'application/json',
-                type: "POST",
-                dataType: 'json',
-                success: function (data) { alert(data); }
-            });*@
-
+            hubProxy.server.updateAlarmMap(hubModel);
         });
-
 
     });
 

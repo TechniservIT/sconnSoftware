@@ -139,9 +139,9 @@ namespace iotDash.Areas.AlarmSystem.Models
             Devices = new List<sconnDevice>();
         }
 
-        public AlarmSystemMapEditModel(List<sconnDevice> devies)
+        public AlarmSystemMapEditModel(List<sconnDevice> devies) : this()
         {
-                
+            Devices = devies;
         }
 
         public AlarmSystemMapEditModel(List<sconnDevice>  devices, MapDefinition map)

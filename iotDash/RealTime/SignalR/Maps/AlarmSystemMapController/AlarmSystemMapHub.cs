@@ -10,6 +10,7 @@ using iotDash.Identity.Attributes;
 using iotDash.Session;
 using iotDatabaseConnector.DAL.Repository.Connector.Entity;
 using iotDbConnector.DAL;
+using Microsoft.Ajax.Utilities;
 using Microsoft.AspNet.SignalR;
 using Newtonsoft.Json;
 using NLog;
@@ -27,9 +28,53 @@ namespace iotDash.RealTime.SignalR.Maps.AlarmSystemMapController
         
         public AlarmSystemMapHub()
         {
-                
+            MapClientSessions = new Dictionary<string, AlarmSystemConfigManager>();
         }
-        
+
+        public void GetMapData(int ServerId)
+        {
+            try
+            {
+                AlarmSystemMapEditModel model = new AlarmSystemMapEditModel();
+                string clientId = Context.ConnectionId;
+                if (MapClientSessions.ContainsKey(clientId))
+                {
+                    AlarmSystemConfigManager cfg = new AlarmSystemConfigManager();
+                    MapClientSessions.TryGetValue(clientId, out cfg);
+                    if (cfg != null)
+                    {
+                        AlarmDevicesConfigService deviceprovider = new AlarmDevicesConfigService(cfg);
+                        model = new AlarmSystemMapEditModel(deviceprovider.GetAll());
+                        Clients.Client(Context.ConnectionId).UpdateMap(model);
+                    }
+                }
+                else
+                {
+                    //find server 
+                    IIotContextBase cont = new iotContext();
+                    var serv = cont.Devices.FirstOrDefault(d => d.Id == ServerId);
+                    if (serv != null)
+                    {
+                        //get alarm service 
+                        AlarmSystemConfigManager cfg = GetAlarmConfigForContextWithDeviceId(ServerId);
+                        AlarmDevicesConfigService deviceprovider = new AlarmDevicesConfigService(cfg);
+                        model = new AlarmSystemMapEditModel(deviceprovider.GetAll());
+                        MapClientSessions.Add(Context.ConnectionId, cfg);
+                        Clients.Client(Context.ConnectionId).UpdateMap(model);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e, e.Message);
+            }
+        }
+
+        public string GetMapEditModelJson(int ServerId)
+        {
+            return JsonConvert.SerializeObject(this.GetMapEditModel(ServerId));
+        }
+
         public AlarmSystemMapEditModel GetMapEditModel(int ServerId)
         {
             AlarmSystemMapEditModel model = new AlarmSystemMapEditModel();
@@ -132,6 +177,7 @@ namespace iotDash.RealTime.SignalR.Maps.AlarmSystemMapController
                 if (alrmSysDev != null)
                 {
                     var man = new AlarmSystemConfigManager(alrmSysDev.EndpInfo, alrmSysDev.Credentials);
+                    man.RemoteDevice = alrmSysDev;
                     return man;
                 }
                 else
