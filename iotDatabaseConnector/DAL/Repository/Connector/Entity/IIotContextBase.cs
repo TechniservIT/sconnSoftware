@@ -36,7 +36,12 @@ namespace iotDatabaseConnector.DAL.Repository.Connector.Entity
          DbSet<iotDomain> Domains { get; set; }
          DbSet<ParameterChangeHistory> ParameterChanges { get; set; }
 
-         void SetContextDomain(int domainId);
+        DbSet<MapDefinition> MapDefinitions { get; set; }
+        DbSet<IoMapDefinition> IoMapDefinitions { get; set; }
+        DbSet<DeviceMapDefinition> DeviceMapDefinitions { get; set; }
+
+
+        void SetContextDomain(int domainId);
 
          int SaveChanges();
          void Fake();

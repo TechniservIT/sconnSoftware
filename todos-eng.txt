@@ -5,6 +5,10 @@ outputs activate				V
 names						
 global config					+
 events style redo - add dates
+user statistics - access times /hot paths
+access limiting by admin per device
+maps strategic points and gradient polygons
+map event statistic and projection
 device types list and edit			V
 main site register/logout - domain component								
 forms fixups - missing add/edits		V		

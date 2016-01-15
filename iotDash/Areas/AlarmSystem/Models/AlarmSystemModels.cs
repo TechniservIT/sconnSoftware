@@ -130,13 +130,23 @@ namespace iotDash.Areas.AlarmSystem.Models
         [Required]
         public int ServerId { get; set; }
 
-        //public List<IoMapDefinition> MapDefinitions; 
-        public IoMapDefinition[] MapDefinitions;
-
+        public List<sconnDevice> Devices { get; set; }
+        public MapDefinition Map { get; set; }
+        
         public AlarmSystemMapEditModel()
         {
-          //  MapDefinitions= new List<IoMapDefinition>();
-            MapDefinitions = new IoMapDefinition[0];
+            Map = new MapDefinition();
+            Devices = new List<sconnDevice>();
+        }
+
+        public AlarmSystemMapEditModel(List<sconnDevice> devies)
+        {
+                
+        }
+
+        public AlarmSystemMapEditModel(List<sconnDevice>  devices, MapDefinition map)
+        {
+                
         }
         
     }
