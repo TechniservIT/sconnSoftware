@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -101,6 +102,21 @@ namespace iotDash.Controllers.domain.site.AlarmSystem
         //    var obj = JsonConvert.DeserializeObject<AlarmSystemGlobalEditModel>(model);
         //    return new JsonResult();
         //}
+
+
+        [HttpPost]
+        public JsonResult Upload(HttpPostedFileBase file)
+        {
+            if (file != null && file.ContentLength > 0)
+            {
+                var fileName = Path.GetFileName(file.FileName);
+                var path = Path.Combine(Server.MapPath("~/Images/"), fileName);
+                file.SaveAs(path);
+            }
+            //Todo remote upload status async
+
+            return new JsonResult();
+        }
 
 
     }

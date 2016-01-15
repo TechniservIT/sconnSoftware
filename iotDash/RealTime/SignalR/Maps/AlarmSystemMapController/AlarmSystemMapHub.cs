@@ -21,15 +21,15 @@ namespace iotDash.RealTime.SignalR.Maps.AlarmSystemMapController
     [DomainAuthorize]
     public class AlarmSystemMapHub : Hub
     {
-        private IIotContextBase cont;
+
         private Dictionary<string, AlarmSystemConfigManager> MapClientSessions;
         private static Logger _logger = LogManager.GetCurrentClassLogger();
-
-        public AlarmSystemMapHub(IIotContextBase context)
+        
+        public AlarmSystemMapHub()
         {
-            this.cont = context;
+                
         }
-
+        
         public AlarmSystemMapEditModel GetMapEditModel(int ServerId)
         {
             AlarmSystemMapEditModel model = new AlarmSystemMapEditModel();
@@ -49,6 +49,7 @@ namespace iotDash.RealTime.SignalR.Maps.AlarmSystemMapController
                 else
                 {
                     //find server 
+                    IIotContextBase cont = new iotContext();
                     var serv = cont.Devices.FirstOrDefault(d => d.Id == ServerId);
                     if (serv != null)
                     {
@@ -77,6 +78,7 @@ namespace iotDash.RealTime.SignalR.Maps.AlarmSystemMapController
                 MapClientSessions.TryGetValue(clientId, out cfg);
                 if (cfg != null)
                 {
+                    IIotContextBase cont = new iotContext();
                     AlarmDevicesConfigService deviceprovider = new AlarmDevicesConfigService(cfg);
                     //update map into database
                     if (model.Map != null)
@@ -101,21 +103,21 @@ namespace iotDash.RealTime.SignalR.Maps.AlarmSystemMapController
             return new JsonResult();
         }
 
-        public void PublishMapUpdated(DeviceActionResult param)
-        {
-            try
-            {
-                IIotContextBase cont = new iotContext();
-                DeviceActionResult toUpdate = cont.ActionResultParameters.Include("Action").FirstOrDefault(e => e.Id == param.Id);
+        //public void PublishMapUpdated(DeviceActionResult param)
+        //{
+        //    try
+        //    {
+        //        IIotContextBase cont = new iotContext();
+        //        DeviceActionResult toUpdate = cont.ActionResultParameters.Include("Action").FirstOrDefault(e => e.Id == param.Id);
 
-                string jsonParam = JsonConvert.SerializeObject(toUpdate);
-                Clients.All.updateParam(jsonParam);
-            }
-            catch (Exception e)
-            {
-                _logger.Error(e, e.Message);
-            }
-        }
+        //        string jsonParam = JsonConvert.SerializeObject(toUpdate);
+        //        Clients.All.updateParam(jsonParam);
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        _logger.Error(e, e.Message);
+        //    }
+        //}
 
 
 
@@ -125,6 +127,7 @@ namespace iotDash.RealTime.SignalR.Maps.AlarmSystemMapController
         {
             try
             {
+                IIotContextBase cont = new iotContext();
                 Device alrmSysDev = cont.Devices.First(d => d.Id == devid);
                 if (alrmSysDev != null)
                 {
@@ -147,12 +150,12 @@ namespace iotDash.RealTime.SignalR.Maps.AlarmSystemMapController
 
         //public override Task OnConnected()
         //{
-        //    var clientId = Context.ConnectionId;
-        //    if (!MapClientSessions.ContainsKey(clientId))
-        //    {
-        //        AlarmSystemConfigManager cfg = new AlarmSystemConfigManager();
-        //        MapClientSessions.Add(Context.ConnectionId, cfg);
-        //    }
+        //    //var clientId = Context.ConnectionId;
+        //    //if (!MapClientSessions.ContainsKey(clientId))
+        //    //{
+        //    //    AlarmSystemConfigManager cfg = new AlarmSystemConfigManager();
+        //    //    MapClientSessions.Add(Context.ConnectionId, cfg);
+        //    //}
         //    return base.OnConnected();
         //}
 

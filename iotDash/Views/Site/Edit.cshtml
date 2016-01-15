@@ -16,6 +16,7 @@
 <div class="container-fluid" id="wrapper">
     <div class="row">
         <div>
+            
             @using (Html.BeginForm("Edit", "Site"))
             {
                 <fieldset>
@@ -28,7 +29,7 @@
 
                     <div class="form-group">
                         @Html.LabelFor(model => model.site.SiteName)
-                        @Html.TextBoxFor(model => model.site.SiteName, new { @class = "form-control", @id = "devname" })
+                        @Html.TextBoxFor(model => model.site.SiteName, new {@class = "form-control", @id = "devname"})
                     </div>
 
                     @if (Model.Locations != null)
@@ -37,12 +38,12 @@
                             @Html.LabelFor(model => model.site.siteLocation)
                             @Html.DropDownListFor(
                                 model => model.LocationId,
-                                 new SelectList(
-                                   Model.Locations,
-                                   "Id",
+                                new SelectList(
+                                    Model.Locations,
+                                    "Id",
                                     "LocationName"
                                     ),
-                                  new { @class = "form-control" }
+                                new {@class = "form-control"}
                                 )
                         </div>
                     }

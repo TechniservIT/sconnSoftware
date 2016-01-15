@@ -25,6 +25,7 @@ namespace iotDbConnector.DAL
         }
 
 
+
         public void SetContextDomain(int domainId)
         {
             this.IotDomain = Queryable.First<iotDomain>(this.Domains, d => d.Id == domainId);
@@ -75,8 +76,10 @@ namespace iotDbConnector.DAL
         public DbSet<Site> Sites { get; set; }
         public DbSet<iotDomain> Domains { get; set; }
         public DbSet<ParameterChangeHistory> ParameterChanges { get; set; }
+
         public DbSet<MapDefinition> MapDefinitions { get; set; }
-        
+        public DbSet<IoMapDefinition> IoMapDefinitions { get; set; }
+        public DbSet<DeviceMapDefinition> DeviceMapDefinitions { get; set; }
 
         public override int SaveChanges()
         {

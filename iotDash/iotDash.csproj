@@ -138,6 +138,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.2.0\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Owin, Version=1.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Owin.1.2.2\lib\net45\Microsoft.AspNet.SignalR.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.AspNet.SignalR.SystemWeb, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.2.0\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
@@ -376,6 +380,10 @@
     <Compile Include="Migrations\201512011200480_Custom configurable roles.cs" />
     <Compile Include="Migrations\201512011200480_Custom configurable roles.Designer.cs">
       <DependentUpon>201512011200480_Custom configurable roles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201601151202554_map defnitions tables.cs" />
+    <Compile Include="Migrations\201601151202554_map defnitions tables.Designer.cs">
+      <DependentUpon>201601151202554_map defnitions tables.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\IAsyncStatusModel.cs" />
@@ -1791,6 +1799,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201512011200480_Custom configurable roles.resx">
       <DependentUpon>201512011200480_Custom configurable roles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601151202554_map defnitions tables.resx">
+      <DependentUpon>201601151202554_map defnitions tables.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
