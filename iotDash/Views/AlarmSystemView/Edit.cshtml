@@ -131,11 +131,14 @@
                         point = L.point(coordsX, coordsY), // createing a Point object with the given x and y coordinates
                         markerCoords = map.containerPointToLatLng(point); // getting the geographical coordinates of the point
 
+
+                    var innerPopupContent = "<div>" + ioType + " : " + ioId + "</div>";
+
                     // Creating a new marker and adding it to the map
                     markers[markersCount] = L.marker([markerCoords.lat, markerCoords.lng], {
                         draggable: true,
                         icon: ioIcon
-                    }).addTo(map);
+                    }).addTo(map).bindPopup(innerPopupContent);
 
                     var devicemap = new Object();
                     devicemap.IoMapDefinitions =  [];

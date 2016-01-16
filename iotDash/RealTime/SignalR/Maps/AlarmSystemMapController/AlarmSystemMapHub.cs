@@ -126,11 +126,53 @@ namespace iotDash.RealTime.SignalR.Maps.AlarmSystemMapController
                     IIotContextBase cont = new iotContext();
                     AlarmDevicesConfigService deviceprovider = new AlarmDevicesConfigService(cfg);
                     //update map into database
-                    if (model.Map != null)
+                    if (model.Map.Id != 0)
                     {
                         var existingMap = cont.MapDefinitions.FirstOrDefault(m => m.Id == model.Map.Id);
                         if (existingMap != null)
                         {
+                            existingMap.Url = model.Map.Url;
+                            foreach (var dmap in model.Map.DeviceMaps)
+                            {
+                                if (dmap.Id != 0)   //update
+                                {
+                                    var existingDeviceMap = existingMap.DeviceMaps.FirstOrDefault(dm => dm.Id == dmap.Id);
+                                    if (existingDeviceMap != null)
+                                    {
+                                        existingDeviceMap.Description = dmap.Description;
+                                        existingDeviceMap.Definition = dmap.Definition;
+                                        existingDeviceMap.DeviceId = dmap.Id;
+                                        existingDeviceMap.Type = dmap.Type;
+                                        foreach (var iomap in dmap.IoMapDefinitions)
+                                        {
+                                            if (iomap.Id != 0)
+                                            {
+                                                var existingIoMap =
+                                                    existingDeviceMap.IoMapDefinitions.FirstOrDefault(
+                                                        iom => iom.Id == iomap.Id);
+                                                if (existingIoMap != null)
+                                                {   //update only coordiantes
+                                                //    existingIoMap.Definition = iomap.Definition;
+                                                //    existingIoMap.Description = iomap.Description;
+                                                //    existingIoMap.IoId = iomap.Id;
+                                                    existingIoMap.Latitude = iomap.Latitude;
+                                                    existingIoMap.Longitude = iomap.Longitude;
+                                                    existingIoMap.X = iomap.X;
+                                                    existingIoMap.Y = iomap.Y;
+                                                }
+                                            }
+                                            else
+                                            {
+                                                existingDeviceMap.IoMapDefinitions.Add(iomap);
+                                            }
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    existingMap.DeviceMaps.Add(dmap);
+                                }
+                            }
                             existingMap.Device = model.Map.Device;
                             existingMap.DeviceMaps = model.Map.DeviceMaps;
                             existingMap.Url = model.Map.Url;
@@ -140,6 +182,10 @@ namespace iotDash.RealTime.SignalR.Maps.AlarmSystemMapController
                             cont.MapDefinitions.Add(model.Map);
                         }
                         cont.SaveChanges();
+                    }
+                    else
+                    {
+                        
                     }
                     model = new AlarmSystemMapEditModel(deviceprovider.GetAll());
                     MapClientSessions.Add(Context.ConnectionId, cfg);
