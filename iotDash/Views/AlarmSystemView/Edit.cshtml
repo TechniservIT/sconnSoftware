@@ -39,14 +39,32 @@
 
 
 <script type="text/javascript">
-
+    
     /*
         !!!!!!!!! ALL HUB OBJECTS START WITH LOWERCASE IN JS !!!!!!!!!!
     */
     var hubModel;
     var hubProxy;
+    
+    var startLat;
+    var startLng;
+    var map;
+    var IoIcon;
+
+    var markers = [], // an array containing all the markers added to the map
+    markersCount = 0; // the number of the added markers
 
     $(function () {
+        
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(setMapCenter);
+            startLat = 49.78395;
+            startLng = 19.05815;
+        } else {
+            startLat = 49.78395;
+            startLng = 19.05815;
+        }
+        
 
         hubProxy = $.connection.alarmSystemMapHub;     // the generated client-side hub proxy
         hubProxy.client.updateMap = function (mapData)
@@ -57,21 +75,19 @@
         $.connection.hub.start().done(function () {
             hubProxy.server.getMapData(@Model.ServerId.ToString());   //intialy load map data
         });
-
         
-        var startLat = 49.78395;
-        var startLng = 19.05815;
+        markers = [];   //reset
+        markersCount = 0;
 
         var mapCenter = [startLat, startLng];
-        var map = L.map('map', { center: mapCenter, zoom: 19 });
+        map = L.map('map', { center: mapCenter, zoom: 19 });
         L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
             maxZoom: 24,
             attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
             id: 'domainlocation.map'
         }).addTo(map);
 
-
-        var IoIcon = L.Icon.extend({
+        IoIcon = L.Icon.extend({
             options: {
                 iconSize: [38, 95],
                 iconAnchor: [22, 94],
@@ -87,8 +103,6 @@
             return new L.Icon(options);
         };
 
-        var markers = [], // an array containing all the markers added to the map
-		markersCount = 0; // the number of the added markers
 
         // Dragging and dropping the markers to the map
         var addMarkers = function () {
@@ -102,15 +116,13 @@
                 stop: function (e, ui) {
                     
                     var draggableId = $(this).draggable().attr("id");
-                    var ioId = $(this).draggable().attr("value");
-                    var ioType = $(this).draggable().attr("alt");
-                    //var droppableId = $(this).attr("id");
+                    var ioId = $(this).draggable().dataset.ioid;  //attr("value");
+                    var ioType = $(this).draggable().dataset.iotype;    //attr("alt");
 
-                    // $('.draggable-marker').remove();   //css('top', posTop);        // returning the icon to the menu
                     $(this).draggable().remove();   //destroy draggable
 
-                    var positionMapX = $("#map").offset().left;
-                    var positionMapY = $("#map").offset().top;
+                    var positionMapX = $("#map").offset().left - $(window).scrollLeft();
+                    var positionMapY = $("#map").offset().top - $(window).scrollTop();
                     
                     var ioIcon;
                     if (draggableId.indexOf('output') > -1) {
@@ -131,7 +143,6 @@
                         point = L.point(coordsX, coordsY), // createing a Point object with the given x and y coordinates
                         markerCoords = map.containerPointToLatLng(point); // getting the geographical coordinates of the point
 
-
                     var innerPopupContent = "<div>" + ioType + " : " + ioId + "</div>";
 
                     // Creating a new marker and adding it to the map
@@ -140,18 +151,25 @@
                         icon: ioIcon
                     }).addTo(map).bindPopup(innerPopupContent);
 
-                    var devicemap = new Object();
-                    devicemap.IoMapDefinitions =  [];
+                    var ioDeviceId = $(this).draggable().parent().attr("id");
                     
-
+                   // var devicemap = new Object();
+                   // devicemap.IoMapDefinitions = [];
 
                     var ioMapDefinition = new Object();
                     ioMapDefinition.Latitude = markerCoords.lat;
                     ioMapDefinition.Longitude = markerCoords.lng;
                     ioMapDefinition.IoId = ioId;
                     ioMapDefinition.DeviceIoCategory = ioType;
-                    devicemap.IoMapDefinitions.push(ioMapDefinition);
-                    hubModel.Map.DeviceMaps.push(devicemap);
+                    
+                    var devId = $(this).draggable().dataset.deviceid;
+                    ioMapDefinition.Definition.Id = devId;
+                    
+                    var ioMarker = markers[markersCount];
+                    ioMarker.ioMapDefinition = ioMapDefinition;
+
+                  //  devicemap.IoMapDefinitions.push(ioMapDefinition);
+                 //   hubModel.Map.DeviceMaps.push(devicemap);
 
                     markersCount++;
                 }
@@ -161,12 +179,77 @@
         addMarkers();
 
         $('#mapsubmit').click(function () {
+            var devicemap = new Object();
+            devicemap.IoMapDefinitions = [];
+
+            //read current possitions for markers and load to adjacent data structs
+            for (i = 0, len = markers.length; i < len; i++) {
+                var marker = markers[i];
+                var def = marker.ioMapDefinition;
+                var DevId = def.ioDeviceId;
+
+                devicemap.IoMapDefinitions.push(def);
+                markers = markers.splice(i, 1);
+               // map.removeLayer(marker);
+
+                //load all io definitions for current device from markers
+                for (j = i+1, len = markers.length; j < len; j++) {
+                    var nmarker = markers[j];
+                    if (markers[j].ioMapDefinition.ioDeviceId == DevId) {
+                            devicemap.IoMapDefinitions.push(markers[j].ioMapDefinition);
+                            markers = markers.splice(j, 1);
+                           // map.removeLayer(markers[j]);
+                    }
+                }
+                i--;
+            }
+            hubModel.Map.DeviceMaps.push(devicemap);
+
             hubProxy.server.updateAlarmMap(hubModel);
         });
+        
+
 
     });
 
 
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(setMapCenter);
+        } else {
+        }
+    }
+
+    function setMapCenter(position) {
+        startLat = position.coords.latitude;
+        startLng = position.coords.longitude;
+    }
+    
+    
+    
+    /**************** FILE UPLOAD *************/
+    
+    function uploadFile(){
+        myApp.showPleaseWait(); //show dialog
+        var file=document.getElementById('file_name').files[0];
+        var formData = new FormData();
+        formdata.append("file_name", file);
+        ajax = new XMLHttpRequest();
+        ajax.upload.addEventListener("progress", progressHandler, false);
+        ajax.addEventListener("load", completeHandler, false);
+        ajax.open("POST", "/to/action");
+        ajax.send(formdata);
+    }
+
+    function progressHandler(event){
+        var percent = (event.loaded / event.total) * 100;
+        $('.bar').width(percent); //from bootstrap bar class
+    }
+
+    function completeHandler(){
+        myApp.hidePleaseWait(); //hide dialog
+        $('.bar').width(100);
+    }
 
 </script>
 
@@ -364,13 +447,8 @@
                                             <ul class="nav nav-stacked collapse right-submenu" id="input-list-@device.Id.ToString()">
                                                 @foreach (var input in device.Inputs)
                                                 {
-                                                    <li class="iomenuItem">
-                                                        @*<button id="iomarker-output-@input.Id.ToString()-@device.Id.ToString()" value="@input.Id.ToString()" class="col-md-12 btn btn-warning navbar-btn draggable-marker" src="/Content/img/mapka2.png" alt="@input.Type.ToString()" type="button">
-                                                            <span class="draggable-marker poi-type glyphicon glyphicon-log-in">
-                                                            </span>
-                                                            @input.Id.ToString() @input.Name
-                                                        </button>*@
-                                                        <img id="iomarker-output-@input.Id.ToString()-@device.Id.ToString()" value="@input.Id.ToString()" class="draggable-marker" type="tree" src="/Content/img/mapka2.png" alt="@input.Type.ToString()" />
+                                                    <li  class="iomenuItem">
+                                                        <img id="iomarker-input-@input.Id.ToString()-@device.Id.ToString()" data-deviceid="@device.Id.ToString()" data-ioid="@input.Id.ToString()"  data-iotype="@input.Type.ToString()" draggable="true" value="@input.Id.ToString()" class="draggable-marker" type="tree" src="/Content/img/mapka2.png" alt="@input.Type.ToString()" />
                                                         @input.Id.ToString() @input.Name
                                                     </li>
                                                 }
@@ -382,7 +460,7 @@
                                             <ul class="nav nav-stacked collapse right-submenu" id="output-list-@device.Id.ToString()">
                                                 @foreach (var output in device.Outputs)
                                                 {
-                                                    <li class="iomenuItem">
+                                                    <li value="@device.Id.ToString()" class="iomenuItem">
                                                         @*<span class="draggable-marker poi-type glyphicon glyphicon-bell">
                                                             @output.Id.ToString() @output.Name
                                                         </span>
@@ -399,8 +477,8 @@
                                             <ul class="nav nav-stacked collapse right-submenu" id="relay-list-@device.Id.ToString()">
                                                 @foreach (var relay in device.Relays)
                                                 {
-                                                    <li class="iomenuItem">
-                                                        <img id="iomarker-output-@relay.Id.ToString()-@device.Id.ToString()" value="@relay.Id.ToString()" class="draggable-marker" type="tree" src="/Content/img/mapka2.png" alt="@relay.Type.ToString()" />
+                                                    <li value="@device.Id.ToString()" class="iomenuItem">
+                                                        <img id="iomarker-relay-@relay.Id.ToString()-@device.Id.ToString()" value="@relay.Id.ToString()" class="draggable-marker" type="tree" src="/Content/img/mapka2.png" alt="@relay.Type.ToString()" />
                                                         @relay.Id.ToString() @relay.Name
                                                     </li>
 
@@ -438,7 +516,7 @@
 
 
             <div class="panel-body">
-                @using (Html.BeginForm("UploadFirmware", "AlarmSysytemView", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                @using (Html.BeginForm("Upload", "AlarmSystemView", FormMethod.Post, new { enctype = "multipart/form-data" }))
                 {
 
                     <div class="form-group" style="position: relative;">

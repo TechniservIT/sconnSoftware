@@ -1,4 +1,15 @@
 FP tasks :
+map icons markers
+map menu boostrapy
+geolocation html5
+file upload status xmlhttpreq2 	
+map store mappings signalr 
+map load mappings initialy
+use leaflet angular controller
+file upload final UI
+map view verify mobile 
+map IO controll buttons popup
+map io activation action toggle
 device list					V
 device param better ui				+			
 outputs activate				V		
