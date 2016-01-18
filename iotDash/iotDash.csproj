@@ -295,7 +295,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="Content\css\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
@@ -413,6 +413,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\css\bootstrap-treeview.css" />
     <Content Include="Content\css\leaflet.awesome-markers.css" />
     <Content Include="Content\css\simple-sidebar.css" />
     <Content Include="Content\css\spinedit.css" />
@@ -467,6 +468,11 @@
     <Content Include="Content\img\mapka1.png" />
     <Content Include="Content\img\mapka2.png" />
     <Content Include="Content\img\mapka3.png" />
+    <Content Include="Content\img\markerInputSmall.png" />
+    <Content Include="Content\img\markerInputSmallOff.png" />
+    <Content Include="Content\img\markerInputSmallOn.png" />
+    <Content Include="Content\img\markerOutputSmallOff.png" />
+    <Content Include="Content\img\markerOutputSmallOn.png" />
     <Content Include="Content\img\markers-matte%402x.png" />
     <Content Include="Content\img\markers-matte.png" />
     <Content Include="Content\img\markers-plain.png" />
@@ -712,6 +718,8 @@
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="Scripts\bootstrap-treeview.js" />
+    <Content Include="Scripts\bootstrap-treeview.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\errors.json" />

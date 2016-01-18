@@ -6,6 +6,13 @@ using System.Web;
 
 namespace iotDbConnector.DAL
 {
+
+    public enum AuthMethod
+    {
+        Password,
+        Certificate
+    }
+
     public class AppAuthLevel
     {
         [Key]

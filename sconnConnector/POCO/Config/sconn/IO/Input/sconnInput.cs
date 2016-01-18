@@ -32,7 +32,18 @@ namespace sconnConnector.POCO.Config
     public class sconnInput : IAlarmSystemConfigurationEntity, ISerializableConfiguration, IFakeAbleConfiguration
     {
         public byte NameId { get; set; }
-        public byte Id { get; set; }
+
+        private byte _Id;
+        public byte Id
+        {
+            get { return _Id; }
+            set
+            {
+                _Id = value;
+                Name = "Wejście " + _Id.ToString();
+            }
+        }
+
         public sconnInputType Type { get; set; }
         public byte Value { get; set; }
         public uint Sensitivity { get; set; }
@@ -82,7 +93,6 @@ namespace sconnConnector.POCO.Config
                 Enabled = buffer[ipcDefines.mAdrInputEnabled] > 0 ? true : false;
                 Sensitivity = (uint) (buffer[ipcDefines.mAdrInputSensitivity] * ipcDefines.InputSensitivityStep);
                 ActivationGroup = (sconnActivationGroup)buffer[ipcDefines.mAdrInputAG];
-
             }
             catch (Exception e)
             {

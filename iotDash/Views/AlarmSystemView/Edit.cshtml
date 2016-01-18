@@ -12,10 +12,11 @@
 @Scripts.Render("~/bundles/signalr")
 @Scripts.Render("~/bundles/numspin")
 @Scripts.Render("~/bundles/fancybox")
+@Scripts.Render("~/bundles/bootstrap-treeview")
 
 @Styles.Render("~/bundles/css/toggleswitch")
 @Styles.Render("~/bundles/css/numspin")
-
+@Styles.Render("~/bundles/css/bootstrap-treeview")
 
 <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
 <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
@@ -57,6 +58,8 @@
 
     var markers = [], // an array containing all the markers added to the map
     markersCount = 0; // the number of the added markers
+    
+    var mapIoDefninitions = [];
     
     
     function reloadMapCenter() {
@@ -102,6 +105,12 @@
         $('.bar').width(100);
     }
     
+    function parseBool(value) {
+        return (typeof value === "undefined") ?
+               false :
+               // trim using jQuery.trim()'s source 
+               value.replace(/^\s+|\s+$/g, "").toLowerCase() === "true";
+    }
 
 
     $(function () {
@@ -131,8 +140,8 @@
 
         IoIcon = L.Icon.extend({
             options: {
-                iconSize: [38, 95],
-                iconAnchor: [22, 94],
+                iconSize: [50, 50],
+                iconAnchor: [25, 25],
                 popupAnchor: [-3, -76]
             }
         });
@@ -140,6 +149,15 @@
         var outputIcon = new IoIcon({ iconUrl: '/Content/img/markerOutputSmall.png' }),
         inputIcon = new IoIcon({ iconUrl: '/Content/img/markerInputSmall.png' }),
         systemIcon = new IoIcon({ iconUrl: '/Content/img/markerOutputSmall.png' });
+        
+        var outputIconOff = new IoIcon({ iconUrl: '/Content/img/markerOutputSmallOff.png' }),
+         inputIconOff = new IoIcon({ iconUrl: '/Content/img/markerInputSmallOff.png' }),
+         systemIconOff = new IoIcon({ iconUrl: '/Content/img/markerOutputSmallOff.png' });
+        
+        
+        var outputIconOn = new IoIcon({ iconUrl: '/Content/img/markerOutputSmallOn.png' }),
+         inputIconOn = new IoIcon({ iconUrl: '/Content/img/markerInputSmallOn.png' }),
+         systemIconOn = new IoIcon({ iconUrl: '/Content/img/markerOutputSmallOn.png' });
 
         L.icon = function (options) {
             return new L.Icon(options);
@@ -158,8 +176,9 @@
                 stop: function (e, ui) {
 
                     var draggableId = $(this).draggable().attr("id");
-                    var ioId = $(this).draggable().attr("data-ioid");   // ioid;  //attr("value");
-                    var ioType = $(this).draggable().attr("data-iotype");    //attr("alt");
+                    var ioId = $(this).draggable().attr("data-ioid");   
+                    var ioType = $(this).draggable().attr("data-iotype");   
+                    var ioVal = parseBool($(this).draggable().attr("data-iovalue"));
 
                     $(this).draggable().remove();   //destroy draggable
 
@@ -170,10 +189,12 @@
 
                     var ioIcon;
                     if (draggableId.indexOf('output') > -1) {
-                        ioIcon = outputIcon;
-                         // var childioctrlbtn = $( ".class" );
-                        // var childCtrl = $( "#"+draggableId ).find( childioctrlbtn );
-                        //iconIoControllContent = $('.ioCtrlSwitch', $(this).draggable()).html();
+                        if (ioVal) {
+                            ioIcon = outputIconOn;
+                        }
+                        else {
+                            ioIcon = outputIconOff;
+                        }
                         iconIoControllContent = $('#ioCtrlSwitch-'+ioId).html();
                     }
                     else if (draggableId.indexOf('input') > -1) {
@@ -181,7 +202,6 @@
                     }
                     else if (draggableId.indexOf('relay') > -1) {
                         ioIcon = outputIcon;
-                        //iconIoControllContent = $('.ioCtrlSwitch', $(this).draggable()).html();
                         iconIoControllContent = $('#ioCtrlSwitch-' + ioId).html();
                     }
                     else {
@@ -200,24 +220,16 @@
                         draggable: true,
                         icon: ioIcon
                     }).addTo(map).bindPopup(innerPopupContent);
-
-                    var ioDeviceId = $(this).draggable().attr("data-deviceid");     //$(this).draggable().parent().attr("id");
-
-                   // var devicemap = new Object();
-                   // devicemap.IoMapDefinitions = [];
-
                     var ioMapDefinition = new Object();
                     ioMapDefinition.Latitude = markerCoords.lat;
                     ioMapDefinition.Longitude = markerCoords.lng;
                     ioMapDefinition.IoId = ioId;
                     ioMapDefinition.DeviceIoCategory = ioType;
+                    ioMapDefinition.ioDeviceId = $(this).draggable().attr("data-deviceid");
+                    ioMapDefinition.Marker = markers[markersCount];
 
-                    var devId = $(this).draggable().dataset.deviceid;
-                    ioMapDefinition.Definition.Id = devId;
-
-                    var ioMarker = markers[markersCount];
-                    ioMarker.ioMapDefinition = ioMapDefinition;
-
+                   // var ioMarker = markers[markersCount];
+                   // ioMarker.ioMapDefinition = ioMapDefinition;
                   //  devicemap.IoMapDefinitions.push(ioMapDefinition);
                  //   hubModel.Map.DeviceMaps.push(devicemap);
 
@@ -233,22 +245,24 @@
             devicemap.IoMapDefinitions = [];
 
             //read current possitions for markers and load to adjacent data structs
-            for (i = 0, len = markers.length; i < len; i++) {
-                var marker = markers[i];
-                var def = marker.ioMapDefinition;
-                var DevId = def.ioDeviceId;
+            for (i = 0, len = mapIoDefninitions.length; i < len; i++) {
+                var iodef = mapIoDefninitions[i];
+                iodef.Latitude = iodef.Marker.lat;
+                iodef.Longitude = iodef.Marker.lng;
+                var DevId = iodef.ioDeviceId;
 
-                devicemap.IoMapDefinitions.push(def);
+                devicemap.IoMapDefinitions.push(iodef);
                 markers = markers.splice(i, 1);
-               // map.removeLayer(marker);
 
                 //load all io definitions for current device from markers
                 for (j = i+1, len = markers.length; j < len; j++) {
                     var nmarker = markers[j];
                     if (markers[j].ioMapDefinition.ioDeviceId == DevId) {
-                            devicemap.IoMapDefinitions.push(markers[j].ioMapDefinition);
+                        var iodefn = mapIoDefninitions[j];
+                        iodef.Latitude = iodef.Marker.lat;
+                        iodef.Longitude = iodef.Marker.lng;
+                        devicemap.IoMapDefinitions.push(iodefn);
                             markers = markers.splice(j, 1);
-                           // map.removeLayer(markers[j]);
                     }
                 }
                 i--;
@@ -261,9 +275,18 @@
         
 
         getLocation();  //async get location
+        
+        $('.iomenutoggle').on('click', function (e) {
+            e.preventDefault();
+        });
+        
+        //$(document).on('click', '.nav.in', function (e) {
+        //    if ($(e.target).is('a') && $(e.target).attr('class') != 'dropdown-toggle') {
+        //        $(this).collapse('hide');
+        //    }
+        //})
 
     });
-
 
 
 
@@ -454,31 +477,35 @@
 
                             @foreach (var device in Model.Devices)
                             {
-                                <li class="iomenuItem">
-                                    <a href="#"  data-target="#stack-menu-device-@device.Id.ToString()" data-toggle="collapse" data-parent="#stacked-menu">Device : @device.Name <span class="caret arrow"></span></a>
-                                    <ul class="nav nav-stacked collapse right-submenu" id='stack-menu-device-@device.Id.ToString()'>
+                                <li>
+                                    <a href="#" class="btn btn-primary" data-target="#stack-menu-device-@device.Id.ToString()" data-toggle="collapse" data-parent="#stacked-menu">Device : @device.Name <span class="caret arrow"></span></a>   @*iomenutoggle*@
+                                    <ul class="nav nav-stacked collapse right-submenu iomenutoggle" id='stack-menu-device-@device.Id.ToString()'>
 
-                                        <li class="iomenuItem">
-                                            <a href="#" data-target="#input-list-@device.Id.ToString()" data-toggle="collapse" data-parent="#stack-menu-device-@device.Id.ToString()">Inputs<span class="caret arrow"></span></a>
+                                        <li>
+                                            <a class="btn btn-primary" href="#" data-target="#input-list-@device.Id.ToString()" data-toggle="collapse" data-parent="#stack-menu-device-@device.Id.ToString()">Inputs<span class="caret arrow"></span></a>
                                             <ul class="nav nav-stacked collapse right-submenu" id="input-list-@device.Id.ToString()">
                                                 @foreach (var input in device.Inputs)
                                                 {
-                                                    <li  class="iomenuItem">
-                                                        <img id="iomarker-input-@input.Id.ToString()-@device.Id.ToString()" data-deviceid="@device.Id.ToString()" data-ioid="@input.Id.ToString()"  data-iotype="@input.Type.ToString()" draggable="true" value="@input.Id.ToString()" class="draggable-marker" type="tree" src="/Content/img/mapka2.png" alt="@input.Type.ToString()" />
-                                                        @input.Id.ToString() @input.Name
+                                                    <li>
+                                                        <a class="btn btn-primary draggable-marker" style="width : 100%;" draggable="true" href="#" id="iomarker-input-@input.Id.ToString()-@device.Id.ToString()" data-iovalue="@input.Value.ToString()" data-deviceid="@device.Id.ToString()" data-ioid="@input.Id.ToString()" data-iotype="@input.Type.ToString()" src="/Content/img/mapka2.png">
+                                                            <span class="glyphicon glyphicon-alert"></span>
+                                                            @input.Id.ToString() @input.Name
+                                                        </a>
                                                     </li>
                                                 }
                                             </ul>
                                         </li>
 
-                                        <li class="iomenuItem">
-                                            <a href="#"   data-target="#output-list-@device.Id.ToString()" data-toggle="collapse" data-parent="#stack-menu-device-@device.Id.ToString()">Outputs<span class="caret arrow"></span></a>
+                                        <li>
+                                            <a class="btn btn-primary" href="#" data-target="#output-list-@device.Id.ToString()" data-toggle="collapse" data-parent="#stack-menu-device-@device.Id.ToString()">Outputs<span class="caret arrow"></span></a>
                                             <ul class="nav nav-stacked collapse right-submenu" id="output-list-@device.Id.ToString()">
                                                 @foreach (var output in device.Outputs)
                                                 {
-                                                    <li value="@device.Id.ToString()" class="iomenuItem">
-                                                        <img id="iomarker-output-@output.Id.ToString()-@device.Id.ToString()" data-ioid="@output.Id.ToString()"  data-iotype="@output.Type.ToString()"  value="@output.Id.ToString()" class="draggable-marker" type="tree" src="/Content/img/mapka2.png" alt="@output.Type.ToString()" />
-                                                        @output.Id.ToString() @output.Name
+                                                    <li>
+                                                        <a class="btn btn-primary draggable-marker" style="width: 100%;" draggable="true" href="#" id="iomarker-output-@output.Id.ToString()-@device.Id.ToString()" data-iovalue="@output.Value.ToString()" data-deviceid="@device.Id.ToString()" data-ioid="@output.Id.ToString()" data-iotype="@output.Type.ToString()">
+                                                            <span class="glyphicon glyphicon-alert"></span>
+                                                            @output.Id.ToString() @output.Name
+                                                        </a>
                                                         <div id="ioCtrlSwitch-@output.Id.ToString()" class="checkbox" style="display: none;">
                                                             @Html.ToggleSwitchFor(model => output.Value)
                                                         </div>
@@ -487,19 +514,20 @@
                                             </ul>
                                         </li>
 
-                                        <li class="iomenuItem">
-                                            <a href="#" data-target="#relay-list-@device.Id.ToString()" data-toggle="collapse" data-parent="#stack-menu-device-@device.Id.ToString()">Relays<span class="caret arrow"></span></a>
+                                        <li>
+                                            <a href="#" class="btn btn-primary" style="width : 100%;" data-target="#relay-list-@device.Id.ToString()" data-toggle="collapse" data-parent="#stack-menu-device-@device.Id.ToString()">Relays<span class="caret arrow"></span></a>
                                             <ul class="nav nav-stacked collapse right-submenu" id="relay-list-@device.Id.ToString()">
                                                 @foreach (var relay in device.Relays)
                                                 {
-                                                    <li value="@device.Id.ToString()" class="iomenuItem">
-                                                        <img id="iomarker-relay-@relay.Id.ToString()-@device.Id.ToString()" data-ioid="@relay.Id.ToString()"  data-iotype="@relay.Type.ToString()" value="@relay.Id.ToString()" class="draggable-marker" type="tree" src="/Content/img/mapka2.png" alt="@relay.Type.ToString()" />
-                                                        @relay.Id.ToString()                                                         @relay.Name
+                                                    <li>
+                                                        <a class="btn btn-primary draggable-marker" draggable="true" href="#" id="iomarker-relay-@relay.Id.ToString()-@device.Id.ToString()" data-iovalue="@relay.Value.ToString()" data-deviceid="@device.Id.ToString()" data-ioid="@relay.Id.ToString()" data-iotype="@relay.Type.ToString()">
+                                                            <span class="glyphicon glyphicon-alert"></span>
+                                                            @relay.Id.ToString() @relay.Name
+                                                        </a>
                                                         <div id="ioCtrlSwitch-@relay.Id.ToString()" class="checkbox" style="display: none;">
                                                             @Html.ToggleSwitchFor(model => relay.Value)
                                                         </div>
                                                     </li>
-
                                                 }
                                             </ul>
                                         </li>

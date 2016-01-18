@@ -24,8 +24,16 @@ namespace sconnConnector.POCO.Config
     
     public class sconnOutput : IAlarmSystemConfigurationEntity, ISerializableConfiguration, IFakeAbleConfiguration
     {
-
-        public byte Id { get; set; }
+        private byte _Id;
+        public byte Id
+        {
+            get { return _Id; }
+            set
+            {
+                _Id = value;
+                Name = "Wyjście " + _Id.ToString();
+            }
+        }
         public sconnOutputType Type { get; set; }
         public bool Value { get; set; }
         public bool Enabled { get; set; }

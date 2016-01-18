@@ -66,6 +66,7 @@
     <Compile Include="POCO\Auth\Credential\AuthDatabaseContext.cs" />
     <Compile Include="POCO\Auth\Credential\DeviceCredentials.cs" />
     <Compile Include="POCO\Auth\Credential\IAuthCredentials.cs" />
+    <Compile Include="POCO\Auth\Credential\RemoteSystemAccessRule.cs" />
     <Compile Include="POCO\Device\ActionParameter.cs" />
     <Compile Include="POCO\Device\DeviceActionResult.cs" />
     <Compile Include="POCO\Device\Device.cs" />

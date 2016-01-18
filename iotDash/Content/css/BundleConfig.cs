@@ -47,8 +47,10 @@ namespace iotDash
             bundles.Add(new ScriptBundle("~/bundles/bootstrap-formhelpers").Include(
               "~/Scripts/bootstrap-formhelpers.js"
            ));
-           
 
+            bundles.Add(new ScriptBundle("~/bundles/bootstrap-treeview").Include(
+              "~/Scripts/bootstrap-treeview.js"
+           ));
 
             /*  Frontpage */
 
@@ -116,6 +118,10 @@ namespace iotDash
 
             bundles.Add(new StyleBundle("~/bundles/css/numspin").Include(
             "~/Content/css/spinedit.css"
+                ));
+
+            bundles.Add(new StyleBundle("~/bundles/css/bootstrap-treeview").Include(
+            "~/Content/css/bootstrap-treeview.css"
                 ));
 
 
