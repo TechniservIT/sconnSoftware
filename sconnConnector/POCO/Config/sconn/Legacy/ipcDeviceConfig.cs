@@ -170,7 +170,9 @@ namespace sconnConnector.POCO.Config
                 _memCFG[baseaddr + ipcDefines.mAdrInputSensitivity] = (byte)(item.Sensitivity / ipcDefines.InputSensitivityStep);
                 _memCFG[baseaddr + ipcDefines.mAdrInputEnabled] = (byte)(item.Enabled == false ? 0 : 1);
 
-                SetDeviceNameAt(ipcDefines.mAddr_NAMES_Inputs_Pos + item.Id, item.Name);
+                //TODO - load from memory separate service
+                //SetDeviceNameAt(ipcDefines.mAddr_NAMES_Inputs_Pos + item.Id, item.Name);
+
                 //_NamesCFG[] = System.Text.Encoding.Unicode.GetBytes(item.Name);
             }
 
@@ -182,8 +184,8 @@ namespace sconnConnector.POCO.Config
                 _memCFG[baseaddr + ipcDefines.mAdrOutputNameAddr] = (byte)item.NameId;
                 _memCFG[baseaddr + ipcDefines.mAdrOutputEnabled] = (byte)(item.Enabled == false ? 0 : 1);
 
-                SetDeviceNameAt(ipcDefines.mAddr_NAMES_Outputs_Pos + item.Id, item.Name);
-                //_NamesCFG[ipcDefines.mAddr_NAMES_Outputs_Pos + item.Id] = System.Text.Encoding.Unicode.GetBytes(item.Name);
+                //TODO - load from memory separate service
+               // SetDeviceNameAt(ipcDefines.mAddr_NAMES_Outputs_Pos + item.Id, item.Name);
             }
 
             foreach (var item in Relays)
@@ -194,7 +196,8 @@ namespace sconnConnector.POCO.Config
                 _memCFG[baseaddr + ipcDefines.mAdrRelayNameAddr] = (byte)item.NameId;
                 _memCFG[baseaddr + ipcDefines.mAdrRelayEnabled] = (byte)(item.Enabled == false ? 0 : 1);
 
-                SetDeviceNameAt(ipcDefines.mAddr_NAMES_Relays_Pos + item.Id, item.Name);
+                //TODO - load from memory separate service
+                //SetDeviceNameAt(ipcDefines.mAddr_NAMES_Relays_Pos + item.Id, item.Name);
                 //_NamesCFG[ipcDefines.mAddr_NAMES_Relays_Pos + item.Id] = System.Text.Encoding.Unicode.GetBytes(item.Name);
             }
         }

@@ -142,7 +142,7 @@
             options: {
                 iconSize: [50, 50],
                 iconAnchor: [25, 25],
-                popupAnchor: [-3, -76]
+                popupAnchor: [-3, -25]
             }
         });
 
@@ -488,7 +488,7 @@
                                                 {
                                                     <li>
                                                         <a class="btn btn-primary draggable-marker" style="width : 100%;" draggable="true" href="#" id="iomarker-input-@input.Id.ToString()-@device.Id.ToString()" data-iovalue="@input.Value.ToString()" data-deviceid="@device.Id.ToString()" data-ioid="@input.Id.ToString()" data-iotype="@input.Type.ToString()" src="/Content/img/mapka2.png">
-                                                            <span class="glyphicon glyphicon-alert"></span>
+                                                            <span class="glyphicon glyphicon-log-in"></span>
                                                             @input.Id.ToString() @input.Name
                                                         </a>
                                                     </li>
@@ -503,7 +503,7 @@
                                                 {
                                                     <li>
                                                         <a class="btn btn-primary draggable-marker" style="width: 100%;" draggable="true" href="#" id="iomarker-output-@output.Id.ToString()-@device.Id.ToString()" data-iovalue="@output.Value.ToString()" data-deviceid="@device.Id.ToString()" data-ioid="@output.Id.ToString()" data-iotype="@output.Type.ToString()">
-                                                            <span class="glyphicon glyphicon-alert"></span>
+                                                            <span class="glyphicon glyphicon-flash"></span>
                                                             @output.Id.ToString() @output.Name
                                                         </a>
                                                         <div id="ioCtrlSwitch-@output.Id.ToString()" class="checkbox" style="display: none;">
@@ -521,7 +521,7 @@
                                                 {
                                                     <li>
                                                         <a class="btn btn-primary draggable-marker" draggable="true" href="#" id="iomarker-relay-@relay.Id.ToString()-@device.Id.ToString()" data-iovalue="@relay.Value.ToString()" data-deviceid="@device.Id.ToString()" data-ioid="@relay.Id.ToString()" data-iotype="@relay.Type.ToString()">
-                                                            <span class="glyphicon glyphicon-alert"></span>
+                                                            <span class="glyphicon glyphicon-flash"></span>
                                                             @relay.Id.ToString() @relay.Name
                                                         </a>
                                                         <div id="ioCtrlSwitch-@relay.Id.ToString()" class="checkbox" style="display: none;">
