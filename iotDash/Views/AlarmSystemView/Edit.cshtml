@@ -1,4 +1,5 @@
 ﻿@model iotDash.Areas.AlarmSystem.Models.AlarmSystemGlobalEditModel
+@using iotDash.Helpers
 @using Newtonsoft.Json
 @using sconnConnector
 
@@ -21,6 +22,9 @@
 
 <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css">
 
+<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.0/css/bootstrap-toggle.min.css" rel="stylesheet">
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.0/js/bootstrap-toggle.min.js"></script>
+
 <link rel="stylesheet" href="~/Content/css/leaflet.awesome-markers.css">
 <script src="~/Scripts/leaflet.awesome-markers.js"></script>
 
@@ -39,13 +43,13 @@
 
 
 <script type="text/javascript">
-    
+
     /*
         !!!!!!!!! ALL HUB OBJECTS START WITH LOWERCASE IN JS !!!!!!!!!!
     */
     var hubModel;
     var hubProxy;
-    
+
     var startLat;
     var startLng;
     var map;
@@ -53,19 +57,55 @@
 
     var markers = [], // an array containing all the markers added to the map
     markersCount = 0; // the number of the added markers
+    
+    
+    function reloadMapCenter() {
+        map.panTo(new L.LatLng(startLat, startLng));
+    }
+
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(setMapCenter);
+        } else {
+        }
+    }
+
+    function setMapCenter(position) {
+        startLat = position.coords.latitude;
+        startLng = position.coords.longitude;
+        reloadMapCenter();
+    }
+
+
+
+    /**************** FILE UPLOAD *************/
+
+    function uploadFile() {
+        myApp.showPleaseWait(); //show dialog
+        var file = document.getElementById('file_name').files[0];
+        var formData = new FormData();
+        formdata.append("file_name", file);
+        ajax = new XMLHttpRequest();
+        ajax.upload.addEventListener("progress", progressHandler, false);
+        ajax.addEventListener("load", completeHandler, false);
+        ajax.open("POST", "/to/action");
+        ajax.send(formdata);
+    }
+
+    function progressHandler(event) {
+        var percent = (event.loaded / event.total) * 100;
+        $('.bar').width(percent); //from bootstrap bar class
+    }
+
+    function completeHandler() {
+        myApp.hidePleaseWait(); //hide dialog
+        $('.bar').width(100);
+    }
+    
+
 
     $(function () {
         
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(setMapCenter);
-            startLat = 49.78395;
-            startLng = 19.05815;
-        } else {
-            startLat = 49.78395;
-            startLng = 19.05815;
-        }
-        
-
         hubProxy = $.connection.alarmSystemMapHub;     // the generated client-side hub proxy
         hubProxy.client.updateMap = function (mapData)
         {
@@ -75,16 +115,18 @@
         $.connection.hub.start().done(function () {
             hubProxy.server.getMapData(@Model.ServerId.ToString());   //intialy load map data
         });
-        
+
         markers = [];   //reset
         markersCount = 0;
-
+        
+        startLat = 49.78395;
+        startLng = 19.05815;
         var mapCenter = [startLat, startLng];
-        map = L.map('map', { center: mapCenter, zoom: 19 });
+        map = L.map('map', { center: mapCenter, zoom: 18 });
         L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
             maxZoom: 24,
             attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-            id: 'domainlocation.map'
+            id: 'iomap'
         }).addTo(map);
 
         IoIcon = L.Icon.extend({
@@ -95,9 +137,9 @@
             }
         });
 
-        var outputIcon = new IoIcon({ iconUrl: '/Content/img/mapka1.png' }),
-        inputIcon = new IoIcon({ iconUrl: '/Content/img/mapka2.png' }),
-        systemIcon = new IoIcon({ iconUrl: '/Content/img/mapka3.png' });
+        var outputIcon = new IoIcon({ iconUrl: '/Content/img/markerOutputSmall.png' }),
+        inputIcon = new IoIcon({ iconUrl: '/Content/img/markerInputSmall.png' }),
+        systemIcon = new IoIcon({ iconUrl: '/Content/img/markerOutputSmall.png' });
 
         L.icon = function (options) {
             return new L.Icon(options);
@@ -114,25 +156,33 @@
             $('.draggable-marker').draggable({
                 cancel: false,
                 stop: function (e, ui) {
-                    
+
                     var draggableId = $(this).draggable().attr("id");
-                    var ioId = $(this).draggable().dataset.ioid;  //attr("value");
-                    var ioType = $(this).draggable().dataset.iotype;    //attr("alt");
+                    var ioId = $(this).draggable().attr("data-ioid");   // ioid;  //attr("value");
+                    var ioType = $(this).draggable().attr("data-iotype");    //attr("alt");
 
                     $(this).draggable().remove();   //destroy draggable
 
                     var positionMapX = $("#map").offset().left - $(window).scrollLeft();
                     var positionMapY = $("#map").offset().top - $(window).scrollTop();
-                    
+
+                    var iconIoControllContent = "";
+
                     var ioIcon;
                     if (draggableId.indexOf('output') > -1) {
                         ioIcon = outputIcon;
+                         // var childioctrlbtn = $( ".class" );
+                        // var childCtrl = $( "#"+draggableId ).find( childioctrlbtn );
+                        //iconIoControllContent = $('.ioCtrlSwitch', $(this).draggable()).html();
+                        iconIoControllContent = $('#ioCtrlSwitch-'+ioId).html();
                     }
                     else if (draggableId.indexOf('input') > -1) {
                         ioIcon = inputIcon;
                     }
                     else if (draggableId.indexOf('relay') > -1) {
                         ioIcon = outputIcon;
+                        //iconIoControllContent = $('.ioCtrlSwitch', $(this).draggable()).html();
+                        iconIoControllContent = $('#ioCtrlSwitch-' + ioId).html();
                     }
                     else {
 
@@ -143,7 +193,7 @@
                         point = L.point(coordsX, coordsY), // createing a Point object with the given x and y coordinates
                         markerCoords = map.containerPointToLatLng(point); // getting the geographical coordinates of the point
 
-                    var innerPopupContent = "<div>" + ioType + " : " + ioId + "</div>";
+                    var innerPopupContent = "<div>" + ioType + " : " + ioId + "</div> <div>" + iconIoControllContent + "</div>";
 
                     // Creating a new marker and adding it to the map
                     markers[markersCount] = L.marker([markerCoords.lat, markerCoords.lng], {
@@ -151,8 +201,8 @@
                         icon: ioIcon
                     }).addTo(map).bindPopup(innerPopupContent);
 
-                    var ioDeviceId = $(this).draggable().parent().attr("id");
-                    
+                    var ioDeviceId = $(this).draggable().attr("data-deviceid");     //$(this).draggable().parent().attr("id");
+
                    // var devicemap = new Object();
                    // devicemap.IoMapDefinitions = [];
 
@@ -161,10 +211,10 @@
                     ioMapDefinition.Longitude = markerCoords.lng;
                     ioMapDefinition.IoId = ioId;
                     ioMapDefinition.DeviceIoCategory = ioType;
-                    
+
                     var devId = $(this).draggable().dataset.deviceid;
                     ioMapDefinition.Definition.Id = devId;
-                    
+
                     var ioMarker = markers[markersCount];
                     ioMarker.ioMapDefinition = ioMapDefinition;
 
@@ -175,7 +225,7 @@
                 }
             });
         }
-        
+
         addMarkers();
 
         $('#mapsubmit').click(function () {
@@ -207,49 +257,15 @@
 
             hubProxy.server.updateAlarmMap(hubModel);
         });
+
         
 
+        getLocation();  //async get location
 
     });
 
 
-    function getLocation() {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(setMapCenter);
-        } else {
-        }
-    }
 
-    function setMapCenter(position) {
-        startLat = position.coords.latitude;
-        startLng = position.coords.longitude;
-    }
-    
-    
-    
-    /**************** FILE UPLOAD *************/
-    
-    function uploadFile(){
-        myApp.showPleaseWait(); //show dialog
-        var file=document.getElementById('file_name').files[0];
-        var formData = new FormData();
-        formdata.append("file_name", file);
-        ajax = new XMLHttpRequest();
-        ajax.upload.addEventListener("progress", progressHandler, false);
-        ajax.addEventListener("load", completeHandler, false);
-        ajax.open("POST", "/to/action");
-        ajax.send(formdata);
-    }
-
-    function progressHandler(event){
-        var percent = (event.loaded / event.total) * 100;
-        $('.bar').width(percent); //from bootstrap bar class
-    }
-
-    function completeHandler(){
-        myApp.hidePleaseWait(); //hide dialog
-        $('.bar').width(100);
-    }
 
 </script>
 
@@ -461,12 +477,11 @@
                                                 @foreach (var output in device.Outputs)
                                                 {
                                                     <li value="@device.Id.ToString()" class="iomenuItem">
-                                                        @*<span class="draggable-marker poi-type glyphicon glyphicon-bell">
-                                                            @output.Id.ToString() @output.Name
-                                                        </span>
-                                                        <img id="iomarker-output-@output.Id.ToString()-@device.Id.ToString()" value="@output.Id.ToString()" class="draggable-marker" type="tree" src="/Content/img/mapka1.png" alt="@output.Type.ToString()"/>*@
-                                                        <img id="iomarker-output-@output.Id.ToString()-@device.Id.ToString()" value="@output.Id.ToString()" class="draggable-marker" type="tree" src="/Content/img/mapka2.png" alt="@output.Type.ToString()" />
+                                                        <img id="iomarker-output-@output.Id.ToString()-@device.Id.ToString()" data-ioid="@output.Id.ToString()"  data-iotype="@output.Type.ToString()"  value="@output.Id.ToString()" class="draggable-marker" type="tree" src="/Content/img/mapka2.png" alt="@output.Type.ToString()" />
                                                         @output.Id.ToString() @output.Name
+                                                        <div id="ioCtrlSwitch-@output.Id.ToString()" class="checkbox" style="display: none;">
+                                                            @Html.ToggleSwitchFor(model => output.Value)
+                                                        </div>
                                                     </li>
                                                 }
                                             </ul>
@@ -478,8 +493,11 @@
                                                 @foreach (var relay in device.Relays)
                                                 {
                                                     <li value="@device.Id.ToString()" class="iomenuItem">
-                                                        <img id="iomarker-relay-@relay.Id.ToString()-@device.Id.ToString()" value="@relay.Id.ToString()" class="draggable-marker" type="tree" src="/Content/img/mapka2.png" alt="@relay.Type.ToString()" />
-                                                        @relay.Id.ToString() @relay.Name
+                                                        <img id="iomarker-relay-@relay.Id.ToString()-@device.Id.ToString()" data-ioid="@relay.Id.ToString()"  data-iotype="@relay.Type.ToString()" value="@relay.Id.ToString()" class="draggable-marker" type="tree" src="/Content/img/mapka2.png" alt="@relay.Type.ToString()" />
+                                                        @relay.Id.ToString()                                                         @relay.Name
+                                                        <div id="ioCtrlSwitch-@relay.Id.ToString()" class="checkbox" style="display: none;">
+                                                            @Html.ToggleSwitchFor(model => relay.Value)
+                                                        </div>
                                                     </li>
 
                                                 }

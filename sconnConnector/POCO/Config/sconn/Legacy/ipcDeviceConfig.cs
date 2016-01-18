@@ -190,7 +190,7 @@ namespace sconnConnector.POCO.Config
             {
                 int baseaddr = ipcDefines.mAdrRelay + ipcDefines.RelayMemSize * item.Id;
                 _memCFG[baseaddr + ipcDefines.mAdrRelayType] = (byte)item.Type;
-                _memCFG[baseaddr + ipcDefines.mAdrRelayVal] = (byte)item.Value;
+                _memCFG[baseaddr + ipcDefines.mAdrRelayVal] = (byte)(item.Value ? 1 : 0);
                 _memCFG[baseaddr + ipcDefines.mAdrRelayNameAddr] = (byte)item.NameId;
                 _memCFG[baseaddr + ipcDefines.mAdrRelayEnabled] = (byte)(item.Enabled == false ? 0 : 1);
 

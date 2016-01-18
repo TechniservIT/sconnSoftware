@@ -134,6 +134,10 @@
     <Compile Include="Migrations\201601141453304_map def lat lng .Designer.cs">
       <DependentUpon>201601141453304_map def lat lng .cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201601181338388_relay value as bool.cs" />
+    <Compile Include="Migrations\201601181338388_relay value as bool.Designer.cs">
+      <DependentUpon>201601181338388_relay value as bool.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="DAL\Repository\NoSql\INoSqlDataSource.cs" />
     <Compile Include="DAL\Repository\NoSql\MongoNoSqlDataSource.cs" />
@@ -174,6 +178,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201601141453304_map def lat lng .resx">
       <DependentUpon>201601141453304_map def lat lng .cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601181338388_relay value as bool.resx">
+      <DependentUpon>201601181338388_relay value as bool.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

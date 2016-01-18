@@ -14,15 +14,10 @@ namespace sconnConnector.POCO.Config
     public class sconnRelay : IAlarmSystemConfigurationEntity, ISerializableConfiguration, IFakeAbleConfiguration
     {
         public byte Id { get; set; }
-
         public sconnOutputType Type { get; set; }
-
-        public byte Value { get; set; }
-
+        public bool Value { get; set; }
         public byte NameId { get; set; }
-
         public bool Enabled { get; set; }
-
         public string Name { get; set; }
 
         private static Logger _logger = LogManager.GetCurrentClassLogger();
@@ -44,7 +39,7 @@ namespace sconnConnector.POCO.Config
                 byte[] buffer = new byte[ipcDefines.RelayMemSize];
                 buffer[ipcDefines.mAdrRelayType] = (byte)Type;
                 buffer[ipcDefines.mAdrRelayEnabled] = (byte)(Enabled ? 1 : 0);
-                buffer[ipcDefines.mAdrRelayVal] = (byte)Value;
+                buffer[ipcDefines.mAdrRelayVal] = (byte)(Value ? 1 : 0);
                 buffer[ipcDefines.mAdrRelayNameAddr] = (byte)NameId;
                 return buffer;
             }
@@ -61,7 +56,7 @@ namespace sconnConnector.POCO.Config
             try
             {
                 Type = (sconnOutputType)buffer[ipcDefines.mAdrRelayType];
-                Value = buffer[ipcDefines.mAdrRelayVal];
+                Value = buffer[ipcDefines.mAdrRelayVal] > 0 ? true : false;
                 NameId = buffer[ipcDefines.mAdrRelayNameAddr];
                 Enabled = buffer[ipcDefines.mAdrRelayEnabled] > 0 ? true : false;
             }
