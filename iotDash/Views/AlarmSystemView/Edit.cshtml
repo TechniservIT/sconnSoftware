@@ -228,11 +228,6 @@
                     ioMapDefinition.ioDeviceId = $(this).draggable().attr("data-deviceid");
                     ioMapDefinition.Marker = markers[markersCount];
 
-                   // var ioMarker = markers[markersCount];
-                   // ioMarker.ioMapDefinition = ioMapDefinition;
-                  //  devicemap.IoMapDefinitions.push(ioMapDefinition);
-                 //   hubModel.Map.DeviceMaps.push(devicemap);
-
                     markersCount++;
                 }
             });
@@ -280,6 +275,54 @@
             e.preventDefault();
         });
         
+        
+        var MapMarkerFromData = function (ioMapDefinition) {
+            
+            ioMapDefinition.Latitude = markerCoords.lat;
+            ioMapDefinition.Longitude = markerCoords.lng;
+            ioMapDefinition.IoId = ioId;
+            ioMapDefinition.DeviceIoCategory = ioType;
+            ioMapDefinition.ioDeviceId = $(this).draggable().attr("data-deviceid");
+
+            var draggableId = ioMapDefinition.IoId; 
+            var ioId = ioMapDefinition.IoId;   
+            var ioType = ioMapDefinition.DeviceIoCategory; 
+            var ioVal = parseBool($(this).draggable().attr("data-iovalue"));
+
+            var positionMapX = $("#map").offset().left - $(window).scrollLeft();
+            var positionMapY = $("#map").offset().top - $(window).scrollTop();
+            var iconIoControllContent = "";
+
+            var ioIcon;
+            if (ioType == 1) {
+                if (ioVal) {
+                    ioIcon = outputIconOn;
+                }
+                else {
+                    ioIcon = outputIconOff;
+                }
+                iconIoControllContent = $('#ioCtrlSwitch-' + ioId).html();
+            }
+            else if (ioType == 2) {
+                ioIcon = inputIcon;
+            }
+            else if (ioType==3) {
+                ioIcon = outputIcon;
+                iconIoControllContent = $('#ioCtrlSwitch-' + ioId).html();
+            }
+
+            point = L.point(ioMapDefinition.Latitude, ioMapDefinition.Longitude), // createing a Point object with the given x and y coordinates
+            markerCoords = map.containerPointToLatLng(point); // getting the geographical coordinates of the point
+            var innerPopupContent = "<div>" + ioType + " : " + ioId + "</div> <div>" + iconIoControllContent + "</div>";
+
+            // Creating a new marker and adding it to the map
+            markers[markersCount] = L.marker([markerCoords.lat, markerCoords.lng], {
+                draggable: true,
+                icon: ioIcon
+            }).addTo(map).bindPopup(innerPopupContent);
+
+        };
+
         //$(document).on('click', '.nav.in', function (e) {
         //    if ($(e.target).is('a') && $(e.target).attr('class') != 'dropdown-toggle') {
         //        $(this).collapse('hide');

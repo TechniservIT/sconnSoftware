@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using iotDatabaseConnector.DAL.Repository.Connector.Entity;
 using iotDbConnector.DAL;
+using iotServiceProvider.NET.Protocols;
 using NLog;
 
 namespace DeviceManagmentService
@@ -17,6 +18,36 @@ namespace DeviceManagmentService
         public DeviceProvider(IIotContextBase cont)
         {
             this.context = cont;
+        }
+
+        private bool UpdateDeviceProperties(Device dev)
+        {
+            try
+            {
+                CommDeviceProtocolManager man = new CommDeviceProtocolManager(dev);
+                man.QueryDeviceProperties();
+                return true;
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e, e.Message);
+                return false;
+            }
+        }
+
+        private bool UpdateDeviceActionState(Device dev)
+        {
+            try
+            {
+                CommDeviceProtocolManager man = new CommDeviceProtocolManager(dev);
+                man.QueryDeviceActions();
+                return true;
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e, e.Message);
+                return false;
+            }
         }
 
         public bool Add(Device entity, int LocationId, int TypeId, int SiteId)
@@ -127,6 +158,7 @@ namespace DeviceManagmentService
             try
             {
                 var device = context.Devices.FirstOrDefault(d => d.Id == Id);
+                UpdateDeviceProperties(device);
                 return device;
             }
             catch (Exception e)

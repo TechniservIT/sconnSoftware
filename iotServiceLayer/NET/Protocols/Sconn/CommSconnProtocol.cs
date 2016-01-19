@@ -514,9 +514,9 @@ namespace iotServiceProvider
                     watch.Start();
 
                     //clear current properies
-                    foreach (var item in edited.Properties)
+                    for (int i = 0; i < edited.Properties.Count; i++)
                     {
-                        cont.Properties.Remove(item);
+                        cont.Properties.Remove(edited.Properties[i]);
                     }
                     cont.SaveChanges();
 
@@ -603,7 +603,6 @@ namespace iotServiceProvider
                         for (int i = 0; i < edited.Actions.Count; i++)
                         {
                             cont.Actions.Remove(edited.Actions[i]);
-                            //edited.Actions.RemoveAt(0);
                         }
                         cont.SaveChanges();
                     }

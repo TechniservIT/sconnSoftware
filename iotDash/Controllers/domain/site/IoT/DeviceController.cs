@@ -23,15 +23,6 @@ namespace iotDash.Controllers.domain.site.IoT
         { }
 
 
-        //
-        // GET: /Device/
-        public ActionResult Index()
-		{
-			//TODO select site
-			return View();
-		}
-
-
 		//
 		// GET: /Device/Add/<SiteId>
 		public ActionResult Add(int SiteId)

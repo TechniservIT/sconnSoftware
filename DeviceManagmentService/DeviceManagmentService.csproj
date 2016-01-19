@@ -66,6 +66,10 @@
       <Project>{dc1fbe1d-13b6-4dd2-91e2-7ffe2f909cc5}</Project>
       <Name>IotServiceAbstract</Name>
     </ProjectReference>
+    <ProjectReference Include="..\iotServiceLayer\iotServiceLayer.csproj">
+      <Project>{6640AC88-DF6B-43A6-BEE3-A65B4396119B}</Project>
+      <Name>iotServiceLayer</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
