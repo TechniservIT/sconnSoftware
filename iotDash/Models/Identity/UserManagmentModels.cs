@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 using iotDash.Identity.Roles;
 using iotDbConnector.DAL;
 using Microsoft.AspNet.Identity;
@@ -57,8 +58,12 @@ namespace iotDash.Models
         public string Password { get; set; }
 
         public string Result { get; set; }
-        
+
+        //public string[] SelectedIds { get; set; }
+        //public IEnumerable<SelectListItem> Roles { get; set; } 
+        //public MultiSelectList Roles { get; set; }
         public List<IotUserRole> Roles { get; set; } 
+        
 
         public UserCreateModel()
         {
@@ -70,7 +75,12 @@ namespace iotDash.Models
             User = new ApplicationUser();
             ApplicationDbContext ucont = new ApplicationDbContext();
             var roleManager = new RoleManager<IotUserRole>(new RoleStore<IotUserRole>(ucont));
-            Roles = roleManager.Roles.Where(r => r.DomainId == domain.Id).ToList();
+            var roleList = roleManager.Roles.Where(r => r.DomainId == domain.Id).ToList();
+            Roles = roleList;
+            foreach (var role in this.Roles)
+            {
+                role.Active = false;    //use activation as user role enable and default all to false
+            }
             User.DomainId = domain.Id;
         }
     }

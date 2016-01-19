@@ -53,7 +53,10 @@ namespace iotDash.Controllers.domain.managment.security
                          {
                              foreach (var role in model.Roles)
                              {
-                                 userMan.AddToRole(model.User.Id, role.Name);
+                                if (role.Active)   //use activation status as select for role
+                                {
+                                    userMan.AddToRole(model.User.Id, role.Name);
+                                }
                              }
                          }
                          nmod.Result = (StatusResponseGenerator.GetAlertPanelWithMsgAndStat("Success.", RequestStatus.Success));
@@ -98,7 +101,7 @@ namespace iotDash.Controllers.domain.managment.security
                         await ucont.SaveChangesAsync();
 
                         var userRoles = userMan.GetRoles(model.User.Id);
-                        if (model.Roles.Count != userRoles.Count)
+                        if (model.Roles.Count() != userRoles.Count)
                         {
                             //remove all roles first
                             foreach (var role in userRoles)
@@ -108,7 +111,10 @@ namespace iotDash.Controllers.domain.managment.security
                             //add model roles
                             foreach (var role in model.Roles)
                             {
-                                userMan.AddToRole(model.User.Id, role.Name);
+                                if (role.Active)   //use activation status as select for role
+                                {
+                                    userMan.AddToRole(model.User.Id, role.Name);
+                                }
                             }
                         }
                     }

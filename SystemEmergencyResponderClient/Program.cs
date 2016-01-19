@@ -28,7 +28,7 @@ namespace SystemEmergencyResponderClient
             // create client instance 
             client = new MqttClient(IPAddress.Parse(MQTT_BROKER_ADDRESS));
             _subscribedTopics = new List<string>();
-            _subscribedTopics.Add("/Alarm/Violation");
+            _subscribedTopics.Add("/AlarmSystem/Violation");
             client.MqttMsgSubscribeReceived += Client_MqttMsgSubscribeReceived;
         }
 
@@ -42,16 +42,15 @@ namespace SystemEmergencyResponderClient
 
         public void Run()
         {
-            SubscribeToViolationEvent();
             string clientId = Guid.NewGuid().ToString();
-
             while (!client.IsConnected)
             {
 
-                 client.Connect(clientId, "serverpc", "serverpass");
+                client.Connect(clientId, "OfficeServerClient", "OfficeServerPass");
                 System.Threading.Thread.Sleep(2500);
             }
-            
+
+            SubscribeToViolationEvent();
         }
 
 

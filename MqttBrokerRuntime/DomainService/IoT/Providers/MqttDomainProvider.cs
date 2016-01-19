@@ -4,6 +4,7 @@ using iotDbConnector.DAL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using iotDash.Identity;
@@ -69,15 +70,28 @@ namespace iotDomainController.DomainService.Providers
             broker.Stop();
         }
 
+        public bool HandleAuth(string u, string p)
+        {
+            //using (var handler = new HttpClientHandler { Credentials = ... })
+            //using (var client = new HttpClient(handler))
+            //{
+            //    var result = await client.GetAsync(...);
+            //}
+            //TODO AUTH SERVICE
+            return true;
+        }
+
         public MqttDomainProvider()
         {
             broker = new MqttBroker();
-            AuthService = new IotDeviceAuthorizationService();
+
+           // AuthService = new IotDeviceAuthorizationService();
 
             broker.ClientDisconnected += OnDeviceDisconnected;
             broker.DidAcceptNewClient += OnDeviceJoinedDomain;
             broker.DidRecievePublishMessageFromClient += OnPropertyChanged;
-            broker.UserAuth += AuthService.AccessWithCredentials;
+
+            broker.UserAuth += HandleAuth; //AuthService.AccessWithCredentials;
 
         }
 

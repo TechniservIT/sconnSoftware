@@ -55,8 +55,8 @@ namespace iotDash.Identity
             try
             {
                 var cont = new ApplicationDbContext();
-                var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(cont));
-                var user =  UserManager.Find(username, password);
+                var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(cont));
+                var user =  userManager.Find(username, password);
                 if (user != null)
                 {
                     //store user domain session 
@@ -76,9 +76,9 @@ namespace iotDash.Identity
                 }
                 return false;
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return false;
+                 return false;
             }
 
         }
