@@ -104,6 +104,10 @@
       <Project>{10b956be-068f-4fbb-9b1e-63c080b24019}</Project>
       <Name>DeviceManagmentService</Name>
     </ProjectReference>
+    <ProjectReference Include="..\iotDash\iotDash.csproj">
+      <Project>{2835FDBA-96BA-4D5C-850D-A909BB12F4E3}</Project>
+      <Name>iotDash</Name>
+    </ProjectReference>
     <ProjectReference Include="..\iotDatabaseConnector\iotDatabaseConnector.csproj">
       <Project>{7df5e6fa-5839-456f-959b-af4a7a742775}</Project>
       <Name>iotDatabaseConnector</Name>

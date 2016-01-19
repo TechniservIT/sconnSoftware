@@ -364,6 +364,7 @@
     <Compile Include="Identity\Attributes\DeviceAuthorize.cs" />
     <Compile Include="Identity\Attributes\DomainAuthorize.cs" />
     <Compile Include="Identity\Attributes\SiteAuthorize.cs" />
+    <Compile Include="Identity\IotDeviceAuthorizationService.cs" />
     <Compile Include="Identity\Roles\IotUserRole.cs" />
     <Compile Include="Identity\Roles\IotAlarmSystemAdminRole.cs" />
     <Compile Include="Identity\Roles\IotCctvAdminRole.cs" />

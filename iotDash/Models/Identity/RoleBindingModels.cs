@@ -55,10 +55,6 @@ namespace iotDash.Models
         public List<Device> Devices { get; set; }
 
         [Required]
-        [DisplayName("Domain")]
-        public iotDomain Domain { get; set; }
-
-        [Required]
         [DisplayName("Role")]
         public IotUserRole Role { get; set; }
 
@@ -77,8 +73,7 @@ namespace iotDash.Models
             {
                 Sites = domain.Sites.ToList();
                 Devices = Sites.FirstOrDefault().Devices.ToList();
-                Domain = domain;
-                this.Role.DomainId = this.Domain.Id;
+                this.Role.DomainId = domain.Id;
             }
             catch (Exception e)
             {

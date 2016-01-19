@@ -48,6 +48,20 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\iotDatabaseConnector\iotDatabaseConnector.csproj">
+      <Project>{7df5e6fa-5839-456f-959b-af4a7a742775}</Project>
+      <Name>iotDatabaseConnector</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\iotData\iotData.csproj">
+      <Project>{e94b0a02-089e-483a-aaef-3bfa49039598}</Project>
+      <Name>iotData</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\iotDomainController\DomainService\IoT\Providers\Mqtt\MqttBroker\MqttBroker.csproj">
+      <Project>{4ebfa6e5-0636-496c-8c46-991b05df7491}</Project>
+      <Name>MqttBroker</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

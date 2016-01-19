@@ -1,6 +1,14 @@
 FP tasks :
+identity add user login/pass/cert as device	+
+mqtt daemon delegate auth identity		+
+mqtt daemon routing pub within domains 		
+mqtt pc client shutdown/lock on violation	+
+events abstraction for web+mqtt+alarmsys
+events admin view from history and live signalr
+raspberry mqtt client subscribe
+raspberry active camera hdmi output on mqtt rx
 map icons markers				+
-map menu boostrapy
+map menu boostrapy				V
 geolocation html5				V
 file upload status xmlhttpreq2 			+
 map store mappings signalr 			+

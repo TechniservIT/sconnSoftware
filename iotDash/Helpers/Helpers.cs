@@ -28,7 +28,13 @@ namespace iotDash.Helpers
         public static MvcHtmlString ToggleSwitchFor<TModel>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, bool>> expression)
         {
             return htmlHelper.CheckBoxFor(expression,new { @class="iotoggler", @type ="checkbox", @data_toggle = "toggle", @data_onstyle="success" });
-       }
+        }
+
+        public static MvcHtmlString SelectListFor<TModel>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, bool>> expression)
+        {
+            return htmlHelper.CheckBoxFor(expression, new { @class = "iotoggler", @type = "checkbox", @data_toggle = "toggle", @data_onstyle = "success" });
+        }
+
     }
 
 

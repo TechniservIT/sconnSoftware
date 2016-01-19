@@ -14,20 +14,24 @@ namespace iotDash
     public partial class Startup
     {
 
+        private void SetupTestAccounts()
+        {
+            //ApplicationDbContext cont = new ApplicationDbContext();
+            //var iotDevRoles = cont.Roles.Where(r => r.Name.Equals("DomainAdmin"));
+            //if (iotDevRoles.Count() <= 0)
+            //{
+            //    IdentityRole adminRoleCr = new IdentityRole("DomainAdmin");
+            //    cont.Roles.Add(adminRoleCr);
+            //    cont.SaveChanges();
+            //}
+
+
+        }
+
 
         private void SetupRoles()
         {
-            ApplicationDbContext cont = new ApplicationDbContext();
 
-            /*
-            var adminRoles = cont.Roles.Where(r => r.Name.Equals("DomainAdmin"));
-            if (adminRoles.Count() <= 0)
-            {
-                IdentityRole adminRoleCr = new IdentityRole("DomainAdmin");
-                cont.Roles.Add(adminRoleCr);
-                cont.SaveChanges();
-            }
-             */
 
         }
 
@@ -69,7 +73,7 @@ namespace iotDash
             //app.UseGoogleAuthentication();
 
             SetupRoles();
-
+            SetupTestAccounts();
         }
     }
 }

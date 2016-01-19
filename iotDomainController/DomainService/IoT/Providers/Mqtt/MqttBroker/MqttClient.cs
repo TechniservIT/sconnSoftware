@@ -559,8 +559,12 @@ namespace uPLibrary.Networking.M2Mqtt
             Fx.StartThread(this.ReceiveThread);
             
             MqttMsgConnack connack = (MqttMsgConnack)this.SendReceive(connect);
+            if (connack == null)
+            {
+                return new byte();
+            }
             // if connection accepted, start keep alive timer and 
-            if (connack.ReturnCode == MqttMsgConnack.CONN_ACCEPTED)
+            if (connack?.ReturnCode == MqttMsgConnack.CONN_ACCEPTED)
             {
                 // set all client properties
                 this.ClientId = clientId;
@@ -570,7 +574,7 @@ namespace uPLibrary.Networking.M2Mqtt
                 this.WillMessage = willMessage;
                 this.WillQosLevel = willQosLevel;
 
-                this.keepAlivePeriod = keepAlivePeriod * 1000; // convert in ms
+                this.keepAlivePeriod = keepAlivePeriod*1000; // convert in ms
 
                 // restore previous session
                 this.RestoreSession();
@@ -584,7 +588,7 @@ namespace uPLibrary.Networking.M2Mqtt
 
                 // start thread for raising received message event from broker
                 Fx.StartThread(this.DispatchEventThread);
-                
+
                 // start thread for handling inflight messages queue to broker asynchronously (publish and acknowledge)
                 Fx.StartThread(this.ProcessInflightThread);
 
@@ -1082,7 +1086,8 @@ namespace uPLibrary.Networking.M2Mqtt
             else
             {
                 // throw timeout exception
-                throw new MqttCommunicationException();
+               // throw new MqttCommunicationException();
+                return null;
             }
         }
 
