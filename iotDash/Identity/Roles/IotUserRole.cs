@@ -20,7 +20,9 @@ namespace iotDash.Identity.Roles
         MapAndTrackingAdmin,
         ScheduledSiteAdmin,
         SiteManager,
-        DomainAdmin
+        DomainAdmin,
+        IotRemoteDevice,
+        IotDomainAdmin
 
     }
 

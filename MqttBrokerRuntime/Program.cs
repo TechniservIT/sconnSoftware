@@ -26,27 +26,27 @@ namespace MqttBrokerRuntime
 
         static void prov_PropertyChanged(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+           // throw new NotImplementedException();
         }
 
         static void prov_DeviceUpdated(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+           // throw new NotImplementedException();
         }
 
         static void prov_DeviceSubscribedToEvent(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+           // throw new NotImplementedException();
         }
 
         static void prov_DeviceJoinedDomain(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+           // throw new NotImplementedException();
         }
 
         static void prov_DeviceDisconnected(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+           // throw new NotImplementedException();
         }
     }
 }

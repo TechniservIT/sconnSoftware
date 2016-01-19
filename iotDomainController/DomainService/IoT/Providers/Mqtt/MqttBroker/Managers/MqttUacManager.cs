@@ -29,6 +29,16 @@ namespace uPLibrary.Networking.M2Mqtt.Managers
     /// <returns></returns>
     public delegate bool MqttUserAuthenticationDelegate(string username, string password);
 
+
+    /// <summary>
+    /// Delegate for executing user authentication in domain
+    /// </summary>
+    /// <param name="username">Username</param>
+    /// <param name="password">Password</param>
+    /// <returns></returns>
+    public delegate bool MqttUserDomainAuthenticationDelegate(string domainname, string username, string password);
+
+
     /// <summary>
     /// Manager for User Access Control
     /// </summary>
@@ -36,6 +46,9 @@ namespace uPLibrary.Networking.M2Mqtt.Managers
     {
         // user authentication delegate
         private MqttUserAuthenticationDelegate userAuth;
+
+        // user authentication delegate
+        private MqttUserDomainAuthenticationDelegate userDomainAuth;
 
         /// <summary>
         /// User authentication method
@@ -45,6 +58,17 @@ namespace uPLibrary.Networking.M2Mqtt.Managers
             get { return this.userAuth; }
             set { this.userAuth = value; }
         }
+
+
+        /// <summary>
+        /// User domain authentication method
+        /// </summary>
+        public MqttUserDomainAuthenticationDelegate UserDomainAuth
+        {
+            get { return this.userDomainAuth; }
+            set { this.userDomainAuth = value; }
+        }
+
 
         /// <summary>
         /// Execute user authentication
@@ -59,5 +83,24 @@ namespace uPLibrary.Networking.M2Mqtt.Managers
             else
                 return this.userAuth(username, password);
         }
+
+
+
+        /// <summary>
+        /// Execute user domain authentication
+        /// </summary>
+        /// <param name="username">Username</param>
+        /// <param name="password">Password</param>
+        /// <param name="domain">domain</param>
+        /// <returns>Access granted or not</returns>
+        public bool UserDomainAuthentication(string domain, string username, string password)
+        {
+            if (this.userAuth == null)
+                return true;
+            else
+                return this.userDomainAuth(domain, username, password);
+        }
+
+
     }
 }

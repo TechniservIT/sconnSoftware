@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using iotDash.Identity;
 using uPLibrary;
 using uPLibrary.Networking.M2Mqtt;
 
@@ -25,6 +26,8 @@ namespace iotDomainController.DomainService.Providers
         public event EventHandler DeviceSubscribedToEvent;
 
         private MqttBroker broker;
+
+        private IotDeviceAuthorizationService AuthService;
 
 
         public void OnDeviceJoinedDomain(object sender, EventArgs e)
@@ -69,11 +72,13 @@ namespace iotDomainController.DomainService.Providers
         public MqttDomainProvider()
         {
             broker = new MqttBroker();
+            AuthService = new IotDeviceAuthorizationService();
+
             broker.ClientDisconnected += OnDeviceDisconnected;
             broker.DidAcceptNewClient += OnDeviceJoinedDomain;
             broker.DidRecievePublishMessageFromClient += OnPropertyChanged;
+            broker.UserAuth += AuthService.AccessWithCredentials;
 
-            
         }
 
     }
