@@ -305,28 +305,40 @@ namespace sconnConnector.Config.Abstract
         {
              return  this.client.berkeleySendMsg(Message);
         }
-
-
+        
 
         private bool DownloadNames()
         {
-            var hostNamedEntity = (IAlarmSystemNamedConfigurationEntity) this.Entity;
-            if (client.client.Connected)
+            try
             {
-                int names = CommandManager.GetNamesNumberForEntity(typeof(T));
-                byte[] namesCfgBuffer = new byte[ipcDefines.RAM_NAME_SIZE*names];
-                int EntityNamesStartPos = CommandManager.GetNameStartPossitionForEntity(typeof(T));
-                for (int i = 0; i < names; i++)
+                var hostNamedEntity = (IAlarmSystemNamedConfigurationEntity)this.Entity;
+                if (client.client.Connected)
                 {
-                    byte[] header = CommandManager.GetHeaderForOperationRegisterParametrized(CommandOperation.Get,ipcCMD.getName, EntityNamesStartPos+i);
-                    var res = this.SendMessage(header);
-                    if (IsResultSuccessForOperation(res, CommandOperation.Get))
+                    int names = CommandManager.GetNamesNumberForEntity(typeof(T));
+                    byte[] namesCfgBuffer = new byte[ipcDefines.RAM_NAME_SIZE * names];
+                    int entityNamesStartPos = CommandManager.GetNameStartPossitionForEntity(typeof(T));
+                    for (int i = 0; i < names; i++)
                     {
-                        byte[] msgBody = GetResultMessageForOperationResult(res, CommandOperation.Get);
-                        msgBody.CopyTo(namesCfgBuffer,i*ipcDefines.RAM_NAME_SIZE);
+                        byte[] header = CommandManager.GetHeaderForOperationRegisterParametrized(CommandOperation.Get, ipcCMD.getName, entityNamesStartPos + i);
+                        var res = this.SendMessage(header);
+                        if (IsResultSuccessForOperation(res, CommandOperation.Get))
+                        {
+                            byte[] msgBody = GetResultMessageForOperationResult(res, CommandOperation.Get);
+                            byte[] msgBytesName = new byte[ipcDefines.RAM_NAME_SIZE];
+                            for (int j = 0; j < ipcDefines.RAM_NAME_SIZE; j++)
+                            {
+                                msgBytesName[j] = msgBody[j];
+                            }
+                            msgBytesName.CopyTo(namesCfgBuffer, i * ipcDefines.RAM_NAME_SIZE);
+                        }
                     }
+                    hostNamedEntity.DeserializeNames(namesCfgBuffer);
+                    return true;
                 }
-                hostNamedEntity.DeserializeNames(namesCfgBuffer);
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e, e.Message);
             }
             return false;
         }

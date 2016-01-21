@@ -31,7 +31,7 @@ namespace sconnConnector.POCO.Config.sconn
 
 
 
-    public class sconnDevice : IAlarmSystemConfigurationEntity, ISerializableConfiguration, IFakeAbleConfiguration
+    public class sconnDevice : IAlarmSystemNamedConfigurationEntity, ISerializableConfiguration, IFakeAbleConfiguration
     {
         public byte Id { get; set; }
         public byte Value { get; set; }
@@ -417,6 +417,34 @@ namespace sconnConnector.POCO.Config.sconn
         public void Fake()
         {
             this.memCFG = new byte[ipcDefines.deviceConfigSize];
+        }
+
+        public byte[] SerializeNames()
+        {
+            byte[] DeviceNameBf = new byte[ipcDefines.RAM_DEVICE_NAMES_SIZE];
+            for (int i = 0; i < ipcDefines.RAM_DEV_NAMES_NO; i++)
+            {
+                byte[] sName = _NamesCFG[i];
+                sName.CopyTo(DeviceNameBf,i*ipcDefines.RAM_NAME_SIZE);
+            }
+            return DeviceNameBf;
+        }
+
+        public void DeserializeNames(byte[] buffer)
+        {
+            //convert to legacy 2dim
+            byte[][] convNamesCFG = new byte[ipcDefines.RAM_DEV_NAMES_NO][];
+            for (int i = 0; i < ipcDefines.RAM_DEV_NAMES_NO; i++)
+            {
+                byte[] sName = new byte[ipcDefines.RAM_NAME_SIZE];
+                for (int j = 0; j < ipcDefines.RAM_NAME_SIZE; j++)
+                {
+                    sName[j] = buffer[i*ipcDefines.RAM_NAME_SIZE + j];
+                }
+                convNamesCFG[i] = sName;
+            }
+            this._NamesCFG = convNamesCFG;
+            LoadDeviceNames();
         }
     }
 }

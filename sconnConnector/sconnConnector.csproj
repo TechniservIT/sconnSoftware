@@ -56,6 +56,7 @@
     <Compile Include="Config\AlarmSystemConfigManager.cs" />
     <Compile Include="Config\CfgOper.cs" />
     <Compile Include="Config\GlobalSettings.cs" />
+    <Compile Include="Config\Abstract\AlarmGenericNamesConfigManager.cs" />
     <Compile Include="Config\sconnCfgMngr.cs" />
     <Compile Include="Config\sconnDataSrc.cs" />
     <Compile Include="POCO\Config\IIndexAbleConfiguration.cs" />

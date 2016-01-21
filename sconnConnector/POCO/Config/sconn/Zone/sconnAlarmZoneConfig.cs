@@ -8,7 +8,7 @@ using NLog;
 
 namespace sconnConnector.POCO.Config.sconn
 {
-    public class sconnAlarmZoneConfig : IAlarmSystemConfigurationEntity, ISerializableConfiguration, IFakeAbleConfiguration
+    public class sconnAlarmZoneConfig : IAlarmSystemNamedConfigurationEntity, ISerializableConfiguration, IFakeAbleConfiguration
     {
         public List<sconnAlarmZone> Zones { get; set; }
         private static Logger _logger = LogManager.GetCurrentClassLogger();
@@ -100,6 +100,21 @@ namespace sconnConnector.POCO.Config.sconn
                 _logger.Error(e, e.Message);
             }
 
+        }
+
+        public byte[] SerializeNames()
+        {
+            byte[] Serialized = new byte[ipcDefines.RAM_NAME_SIZE * Zones.Count];
+            for (int i = 0; i < Zones.Count; i++)
+            {
+              
+            }
+            return Serialized;
+        }
+
+        public void DeserializeNames(byte[] buffer)
+        {
+            throw new NotImplementedException();
         }
     }
 

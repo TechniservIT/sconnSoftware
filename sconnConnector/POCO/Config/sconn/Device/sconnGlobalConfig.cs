@@ -7,7 +7,7 @@ using sconnConnector.POCO.Config.Abstract;
 
 namespace sconnConnector.POCO.Config.sconn
 {
-    public class sconnGlobalConfig : IAlarmSystemConfigurationEntity, ISerializableConfiguration, IFakeAbleConfiguration
+    public class sconnGlobalConfig : IAlarmSystemNamedConfigurationEntity, ISerializableConfiguration, IFakeAbleConfiguration
     {
         private byte[] _memCFG;
         public byte[] memCFG
@@ -65,6 +65,16 @@ namespace sconnConnector.POCO.Config.sconn
         public void Fake()
         {
             
+        }
+
+        public byte[] SerializeNames()
+        {
+           return System.Text.Encoding.BigEndianUnicode.GetBytes(this.Name);
+        }
+
+        public void DeserializeNames(byte[] buffer)
+        {
+            Name = System.Text.Encoding.BigEndianUnicode.GetString(buffer, 0, buffer.GetLength(0));
         }
     }
 

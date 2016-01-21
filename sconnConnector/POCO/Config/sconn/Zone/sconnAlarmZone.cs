@@ -16,7 +16,7 @@ namespace sconnConnector.POCO.Config.sconn
         Time_Guarded
     }
 
-    public class sconnAlarmZone : IAlarmSystemConfigurationEntity, ISerializableConfiguration, IFakeAbleConfiguration
+    public class sconnAlarmZone : IAlarmSystemNamedConfigurationEntity, ISerializableConfiguration, IFakeAbleConfiguration
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -83,6 +83,16 @@ namespace sconnConnector.POCO.Config.sconn
                 _logger.Error(e, e.Message);
             }
 
+        }
+
+        public byte[] SerializeNames()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeserializeNames(byte[] buffer)
+        {
+            throw new NotImplementedException();
         }
     }
 
