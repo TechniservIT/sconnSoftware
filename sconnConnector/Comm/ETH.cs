@@ -10,17 +10,11 @@ using System.Diagnostics;
 
 using System.Net.Security;
 using System.Collections;
-
-
-
-#if WIN32_ENC
 using System.Security.Authentication;
 using System.Security.Cryptography.X509Certificates;
 using System.IO;
 using NLog;
-#else
 
-#endif
 
 
 namespace sconnConnector
@@ -31,33 +25,22 @@ namespace sconnConnector
 
     public class SconnClient
     {
-        
-        private Socket clientSocket { get; set; }
-        private TcpClient client { get; set; }
-        private SslStream EncStream;
 
-        #if WIN32_ENC
-                private Logger nlogger = LogManager.GetCurrentClassLogger();
-        #endif
-        
-
+        public Socket clientSocket { get; set; }
+        public TcpClient client { get; set; }
+        public SslStream EncStream;
+        private Logger nlogger = LogManager.GetCurrentClassLogger();
 
         public SocketPermission clientPermission { get; set; }
-
         public string Hostname { get; set; }
-
         public int Port { get; set; }
-
         public string AuthenticationPassword { get; set; }
-
         public IPAddress Adress { get; set; }
         public IPEndPoint EndPoint { get; set; }
-
         public int ConnectionTimeoutMs { get; set; }
-
         private bool Authenticated = false;
-
         public bool useSsl { get; set; }
+        
 
 
         static bool CertHandler(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors error)
@@ -153,9 +136,7 @@ namespace sconnConnector
             }
             catch (Exception e)
             {
-               #if WIN32_ENC
-                    nlogger.ErrorException(e.Message, e);
-                #endif
+                nlogger.ErrorException(e.Message, e);
                 return false;
             }
             
@@ -201,9 +182,7 @@ namespace sconnConnector
                 }
                 catch (Exception e)
                 {
-               #if WIN32_ENC
                     nlogger.ErrorException(e.Message, e);
-                #endif
                     client.Close();
                     return false;
                 }
@@ -239,9 +218,7 @@ namespace sconnConnector
 
                 catch (Exception e)
                 {
-               #if WIN32_ENC
                     nlogger.ErrorException(e.Message, e);
-                #endif
                     clientSocket.Shutdown(SocketShutdown.Both);
                     clientSocket.Close();
                     return false;
@@ -332,9 +309,7 @@ namespace sconnConnector
                     }
                     catch (Exception e)
                     {
-                       #if WIN32_ENC
-                            nlogger.ErrorException(e.Message, e);
-                        #endif
+                        nlogger.ErrorException(e.Message, e);
                         return new byte[1];
                     }
                 }
@@ -348,9 +323,7 @@ namespace sconnConnector
                     }
                     catch (Exception e)
                     {
-                       #if WIN32_ENC
-                            nlogger.ErrorException(e.Message, e);
-                        #endif
+                        nlogger.Error(e.Message, e);
                         return new byte[1];
                     }
                 }
@@ -388,9 +361,7 @@ namespace sconnConnector
                     }
                     catch (Exception e)
                     {
-                       #if WIN32_ENC
-                            nlogger.ErrorException(e.Message, e);
-                        #endif
+                        nlogger.Error(e, e.Message);
                         return new byte[1];
                     }
                 }
@@ -404,9 +375,7 @@ namespace sconnConnector
                     }
                     catch (Exception e)
                     {
-                       #if WIN32_ENC
-                            nlogger.ErrorException(e.Message, e);
-                        #endif
+                        nlogger.Error(e, e.Message);
                         return new byte[1];
                     }
                 }
@@ -458,12 +427,9 @@ namespace sconnConnector
         private int _AverageResponseTimeMs;
         private int _ConnectionElapsed;
         private Stopwatch _ConnectionTimer;
+        private Logger nlogger = LogManager.GetCurrentClassLogger();
 
-        #if WIN32_ENC
-              private Logger nlogger = LogManager.GetCurrentClassLogger();       
-        #endif
 
-        
         private int[] ResponsesTimeMs;
         private int _Responses;
         const int MaxResponsesBuffered = 100;
@@ -562,9 +528,7 @@ namespace sconnConnector
             }
             catch (Exception e)
             {
-               #if WIN32_ENC
-                    nlogger.ErrorException(e.Message, e);
-                #endif
+                nlogger.Error(e, e.Message);
             }
 
         }
@@ -577,9 +541,7 @@ namespace sconnConnector
             }
             catch (Exception e)
             {
-               #if WIN32_ENC
-                    nlogger.ErrorException(e.Message, e);
-                #endif
+                nlogger.Error(e, e.Message);
                 throw;
             }            
         }
@@ -592,9 +554,7 @@ namespace sconnConnector
             }
             catch (Exception e)
             {
-               #if WIN32_ENC
-                    nlogger.ErrorException(e.Message, e);
-                #endif
+                nlogger.Error(e, e.Message);
                 throw;
             }                   
         }

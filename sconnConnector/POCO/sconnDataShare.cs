@@ -486,6 +486,7 @@ namespace sconnConnector
         public const byte getConfigHash = 0x77;
         public const byte getZoneCfg = 0x78;
         public const byte getZoneName = 0x79;
+        public const byte getName = 0x80;
 
         public const byte CFG = 0x11; //register to set, followed by value SVAL <value bytes > EVAL
 
@@ -828,40 +829,37 @@ namespace sconnConnector
         public const byte OUT_STATE_INACTIVE  = 0x00;
 
 
- 
+
 
 
         /************  NAMES *****************/
 
-    public const int mAddr_NAMES_StartAddr = (RAM_GCFG_SIZE+(RAM_DEVCFG_SIZE*RAM_DEVCFG_NO));
-    public const int mAddr_NAMES_Board = (RAM_GCFG_SIZE+(RAM_DEVCFG_SIZE*RAM_DEVCFG_NO));
-
-    public const int RAM_NAME_SIZE =  32;  //  16x 2byte unicode
-
-    public const int RAM_DEV_NAMES_NO = (DeviceMaxRelays + DeviceMaxOutputs + DeviceMaxInputs + 1); //device name + IOs
-
-
-    public const int mAddr_NAMES_Global_StartAddr =mAddr_NAMES_StartAddr+(RAM_DEV_NAMES_NO*RAM_NAME_SIZE);
-    public const int mAddr_NAMES_Global_SystemName_Pos=   0;
+        public const int RAM_NAME_SIZE = 32;  //  16x 2byte unicode
+        public const int mAddr_NAMES_StartAddr = (RAM_GCFG_SIZE+(RAM_DEVCFG_SIZE*RAM_DEVCFG_NO));
         
-    public const int RAM_NAMES_Global_Total_Records   = (mAddr_NAMES_Global_SystemName_Pos + 1);
-    public const int RAM_NAMES_Global_Total_Size   =    (RAM_NAMES_Global_Total_Records*RAM_NAME_SIZE);
-
-        public const int mAddr_NAMES_Zone_StartAddr=(mAddr_NAMES_Global_StartAddr +RAM_NAMES_Global_Total_Size);
-        public const int RAM_ZONE_NAMES_SIZE=(ZONE_CFG_MAX_ZONES* RAM_NAME_SIZE);
-
-        public const int RAM_NAMES_SIZE = ( (RAM_DEV_NAMES_NO*RAM_NAME_SIZE) + (RAM_NAMES_Global_Total_Size )+ (RAM_ZONE_NAMES_SIZE) ) ;
-
+        public const int mAddr_NAMES_Device_StartIndex = 0x0000; 
         public const int RAM_DEVICE_NAMES_SIZE = (RAM_DEV_NAMES_NO*RAM_NAME_SIZE);
-
+        public const int RAM_DEV_NAMES_NO = (DeviceMaxRelays + DeviceMaxOutputs + DeviceMaxInputs + 1); //device name + IOs
         public const int mAddr_NAMES_Board_Pos = 0x00;
         public const int mAddr_NAMES_Inputs_Pos = 0x01;
-        public const int mAddr_NAMES_Outputs_Pos = (DeviceMaxInputs+mAddr_NAMES_Inputs_Pos);
-        public const int mAddr_NAMES_Relays_Pos = (mAddr_NAMES_Outputs_Pos+DeviceMaxOutputs);
+        public const int mAddr_NAMES_Outputs_Pos = (DeviceMaxInputs + mAddr_NAMES_Inputs_Pos);
+        public const int mAddr_NAMES_Relays_Pos = (mAddr_NAMES_Outputs_Pos + DeviceMaxOutputs);
+
+        public const int mAddr_NAMES_Global_StartIndex = (mAddr_NAMES_Device_StartIndex + (RAM_DEV_NAMES_NO* RAM_DEVCFG_NO));
+        public const int mAddr_NAMES_Global_StartAddr = mAddr_NAMES_StartAddr + (RAM_DEV_NAMES_NO * RAM_NAME_SIZE);
+        public const int mAddr_NAMES_Global_SystemName_Pos = 0;
+        public const int RAM_NAMES_Global_Total_Records = (mAddr_NAMES_Global_SystemName_Pos + 1);
+        public const int RAM_NAMES_Global_Total_Size = (RAM_NAMES_Global_Total_Records * RAM_NAME_SIZE);
+
+        public const int mAddr_NAMES_Zone_StartIndex = (mAddr_NAMES_Global_StartIndex + RAM_NAMES_Global_Total_Records);
+        public const int mAddr_NAMES_Zone_StartAddr = (mAddr_NAMES_Global_StartAddr + RAM_NAMES_Global_Total_Size);
+        public const int RAM_ZONE_NAMES_SIZE = (ZONE_CFG_MAX_ZONES * RAM_NAME_SIZE);
 
 
+        public const int RAM_NAMES_SIZE = ((RAM_DEV_NAMES_NO * RAM_NAME_SIZE) + (RAM_NAMES_Global_Total_Size) + (RAM_ZONE_NAMES_SIZE));
+        
 
-
+        
 
         /************  SCHEDULE ***************/
         public const int mAddr_SCHED_StartAddr =0x4000; //16384 - after Names CFG
@@ -995,15 +993,17 @@ namespace sconnConnector
         public const int NET_MAX_SESSION_IDLE_SEC = 100;
         public const int NET_DATA_PACKET_CONTROL_BYTES = 2;
         public const int NET_CMD_PACKET_LEN = 3;
-        public const int NET_UPLOAD_HEADER_BYTES = 3;
+        public const int NET_UPLOAD_HEADER_BYTES = 4;
         public const int NET_UPLOAD_TAIL_BYTES = 1;
         public const int NET_UPLOAD_PACKET_CONTROL_BYTES = (NET_UPLOAD_TAIL_BYTES+ NET_UPLOAD_HEADER_BYTES);
-        public const int NET_UPLOAD_PACKET_DATA_OFFSET = 3;
+        public const int NET_UPLOAD_PACKET_DATA_OFFSET = 4;
         public const int NET_MAX_PACKET_DATA = (NET_MAX_TX_SIZE - NET_UPLOAD_PACKET_CONTROL_BYTES);
 
         public const int MessageHeader_Command_Pos = 0;
         public const int MessageHeader_CommandType_Pos = 1;
         public const int MessageHeader_CommandParam_Pos = 2;
+        public const int MessageHeader_Command_Reg_Low_Pos = 2;
+        public const int MessageHeader_Command_Reg_High_Pos = 3;
         public const int NET_PACKET_TX_PAYLOAD_SIZE = (NET_MAX_PACKET_DATA);
 
         public const byte NET_PACKET_TYPE_GCFG = 0x0001;

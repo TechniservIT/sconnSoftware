@@ -216,6 +216,16 @@ namespace sconnConnector.Config.Abstract
             return Header;
         }
 
+        public static byte[] GetHeaderForOperationRegisterParametrized(CommandOperation oper, byte CfgType, int RegisterId)
+        {
+            byte[] Header = new byte[ipcDefines.NET_UPLOAD_HEADER_BYTES];
+            Header[ipcDefines.MessageHeader_Command_Pos] = (byte)oper;
+            Header[ipcDefines.MessageHeader_CommandType_Pos] = (byte)CfgType;
+            Header[ipcDefines.MessageHeader_Command_Reg_Low_Pos] = (byte)(RegisterId>>8);
+            Header[ipcDefines.MessageHeader_Command_Reg_High_Pos] = (byte)(RegisterId);
+            return Header;
+        }
+
         public static byte[] GetTailForOperation(Type type, CommandOperation oper)
         {
             byte[] Header = new byte[ipcDefines.NET_UPLOAD_TAIL_BYTES];
@@ -231,6 +241,59 @@ namespace sconnConnector.Config.Abstract
             return Header;
         }
 
+
+        /********** Config names ***********/
+
+        public static bool IsConfigEntityNamed(Type type)
+        {
+            if (type == typeof(sconnAlarmZoneConfig))
+            {
+                return true;
+            }
+            else if (type == typeof(sconnDeviceConfig))
+            {
+                return true;
+            }
+            else if (type == typeof(sconnGlobalConfig))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public static int GetNamesNumberForEntity(Type type)
+        {
+            if (type == typeof(sconnAlarmZoneConfig))
+            {
+                return ipcDefines.ZONE_CFG_MAX_ZONES;
+            }
+            else if (type == typeof(sconnDeviceConfig))
+            {
+                return ipcDefines.RAM_DEV_NAMES_NO;
+            }
+            else if (type == typeof(sconnGlobalConfig))
+            {
+                return ipcDefines.RAM_NAMES_Global_Total_Records;
+            }
+            return 0;
+        }
+
+        public static int GetNameStartPossitionForEntity(Type type)
+        {
+            if (type == typeof(sconnAlarmZoneConfig))
+            {
+                return ipcDefines.mAddr_NAMES_Zone_StartIndex;
+            }
+            else if (type == typeof(sconnDeviceConfig))
+            {
+                return ipcDefines.mAddr_NAMES_Device_StartIndex;
+            }
+            else if (type == typeof(sconnGlobalConfig))
+            {
+                return ipcDefines.mAddr_NAMES_Global_StartIndex;
+            }
+            return 0;
+        }
 
     }
 

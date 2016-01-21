@@ -1,4 +1,16 @@
-FP tasks :
+FP tasks :	
+embedded names redo single cfg
+embedded net command 4b header
+names						
+global config					+
+events style redo - add dates
+alarm multiple devices types
+alarm device config io edit
+map model tx/rw verify
+map model signalr load on startup
+dash front page stat + quick links 
+front landing page info gfx
+register auto login
 identity add user login/pass/cert as device	+
 mqtt daemon delegate auth identity		+
 mqtt daemon routing pub within domains 		
@@ -20,10 +32,7 @@ map IO controll buttons popup			V
 map io activation action toggle			
 device list					V
 device param better ui				+			
-outputs activate				V		
-names						
-global config					+
-events style redo - add dates
+outputs activate				V
 user statistics - access times /hot paths
 access limiting by admin per device
 maps strategic points and gradient polygons
@@ -50,7 +59,7 @@ tests for repo				+
 tests for alarm services		V
 embedded HAL
 embedded RTOS
-embedded add gsm msg lvls
+embedded add gsm msg lvls		+
 views for IO config			+
 views for communication config
 device info template			+
@@ -59,31 +68,30 @@ device firmware upload - firmware version database
 site controller device view bar - ctrl dev not site
 site/dev/loc add posts with model not jqry
 embedded add event logging		+
-fix bus protocol gkp
-add embedded event/gsm config		+ 
-test and verify embedded config r/w	+
+fix bus protocol gkp			+
+add embedded event/gsm config		V 
+test and verify embedded config r/w	V
 device type view redo :
 - device type depenedent views
 - device type select / autodetect
 - common device types database and custom defs
-ioc container			V
-data service with DI		+
-redo controllers for DI		+
-custom view base
-context interface		+
-mocks			+
-unit tests		+
-conn fix tls/ssl	+
-alarm views		+
-breadcrumbs		V
-iot services architecture
-iot services configs 
+ioc container				V
+data service with DI			V
+redo controllers for DI			V
+context interface			V
+mocks					V
+unit tests				V
+conn fix tls/ssl			V
+alarm views				V
+breadcrumbs				V
+iot services architecture		+
+iot services configs 		
 gui for service managment
 device simulators for testing 
 web language translations and select
-emap controller and service 
+emap controller and service		+ 
 alarm IO map placement and store
-Auth service
+Auth service				+
 Routing service
 Message translation
 Protocol config interface
@@ -93,13 +101,13 @@ Inter-protocol translation
 
 
 GUI :
-Alarm device image			+		
+Alarm device image			V		
 Top edit toolbox layout			V	
 side bar responsive/redo		V
 account login dropdown fix		V
-breadcrumbs better style		+
-list edit/remove better style		+
-alarm config select add description	+
+breadcrumbs better style		V
+list edit/remove better style		V
+alarm config select add description	V
 list searchbar with add/refresh 	V
 alarm config select			V
 

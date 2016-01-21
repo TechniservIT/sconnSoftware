@@ -14,6 +14,12 @@ namespace sconnConnector.POCO.Config.sconn
         
     }
 
+    public interface IAlarmSystemNamedConfigurationEntity : IAlarmSystemConfigurationEntity
+    {
+        byte[] SerializeNames();
+        void DeserializeNames(byte[] buffer);
+    }
+
     public enum sconnDeviceType
     {
         Graphical_Keypad = 1,

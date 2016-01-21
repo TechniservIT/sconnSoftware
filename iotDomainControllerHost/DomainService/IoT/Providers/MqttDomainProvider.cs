@@ -5,10 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using uPLibrary;
 using uPLibrary.Networking.M2Mqtt;
 using uPLibrary.Networking.M2Mqtt.Messages;
-
 
 namespace iotDomainController.DomainService.Providers
 {
@@ -16,13 +14,9 @@ namespace iotDomainController.DomainService.Providers
     {
 
         public event EventHandler DeviceJoinedDomain;
-
         public event EventHandler DeviceDisconnected;
-
         public event EventHandler PropertyChanged;
-
         public event EventHandler DeviceUpdated;
-
         public event EventHandler DeviceSubscribedToEvent;
 
         private MqttBroker broker;
@@ -46,13 +40,13 @@ namespace iotDomainController.DomainService.Providers
             Device dev = new Device();
             dev.DeviceName = client.ClientId;
             EndpointInfo info = new EndpointInfo();
-            info.Hostname = client.clientHostname;
+            //info.Hostname = client.clientHostname;
             dev.EndpInfo = info;
             return dev;   
 
         }
 
-        public void UpdateDeviceFromPublish(Device dev, MqttMsgPublish publish)
+        public void UpdateDeviceFromPublish(Device dev, byte[] msg)
         {
             //parse publish and update properties
 
@@ -90,28 +84,28 @@ namespace iotDomainController.DomainService.Providers
 
         }
 
-        public void OnDeviceJoinedDomain(object sender, MqttClientEventArgs e)
+        public void OnDeviceJoinedDomain(object sender, MqttBroker.MqttClientEventArgs e)
         {
 
         }
 
-        public void OnDeviceDisconnected(object sender, MqttClientEventArgs e)
+        public void OnDeviceDisconnected(object sender, MqttBroker.MqttClientEventArgs e)
         {
 
         }
-        public void OnPropertyChanged(object sender, MqttClientEventArgs e)
+        public void OnPropertyChanged(object sender, MqttBroker.MqttClientEventArgs e)
         {
             MqttClient cl = e.Client;
             Device dev = DeviceForMqttClient(cl);
             UpdateDeviceFromPublish(dev, e.Message);
         }
 
-        public void OnDeviceUpdated(object sender, MqttClientEventArgs e)
+        public void OnDeviceUpdated(object sender, MqttBroker.MqttClientEventArgs e)
         {
 
         }
 
-        public void OnDeviceSubscribedToEvent(object sender, MqttClientEventArgs e)
+        public void OnDeviceSubscribedToEvent(object sender, MqttBroker.MqttClientEventArgs e)
         {
 
         }
