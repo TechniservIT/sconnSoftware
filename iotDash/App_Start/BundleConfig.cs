@@ -89,7 +89,8 @@ namespace iotDash
 
             bundles.Add(new ScriptBundle("~/bundles/maps").Include(
             "~/Scripts/leaflet.js",
-            "~/Scripts/leaflet.awesome-markers.js"
+            "~/Scripts/leaflet.awesome-markers.js",
+            "~/Scripts/leaflet.extra-markers.js"
              ));
 
 
@@ -147,7 +148,8 @@ namespace iotDash
 
             bundles.Add(new StyleBundle("~/bundles/css/maps").Include(
                  "~/Content/css/leaflet.css",
-                 "~/Content/css/leaflet.awesome-markers.css"
+                 "~/Content/css/leaflet.awesome-markers.css",
+                  "~/Content/css/leaflet.extra-markers.css"
              ));
 
 

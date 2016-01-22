@@ -417,6 +417,7 @@
     <Content Include="Content\css\bootstrap-treeview.css" />
     <Content Include="Content\css\leaflet.awesome-markers.css" />
     <Content Include="Content\css\leaflet.css" />
+    <Content Include="Content\css\leaflet.extra-markers.css" />
     <Content Include="Content\css\simple-sidebar.css" />
     <Content Include="Content\css\spinedit.css" />
     <Content Include="Content\css\font-awesome.css" />
@@ -482,6 +483,10 @@
     <Content Include="Content\img\markers-shadow.png" />
     <Content Include="Content\img\markers-soft%402x.png" />
     <Content Include="Content\img\markers-soft.png" />
+    <Content Include="Content\img\markers_default%402x.png" />
+    <Content Include="Content\img\markers_default.png" />
+    <Content Include="Content\img\markers_shadow%402x.png" />
+    <Content Include="Content\img\markers_shadow.png" />
     <Content Include="Content\img\ok1.jpg" />
     <Content Include="Content\img\oko11.png" />
     <Content Include="Content\img\oko3.png" />
@@ -1515,6 +1520,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\leaflet.awesome-markers.js" />
     <Content Include="Scripts\leaflet.awesome-markers.min.js" />
+    <Content Include="Scripts\leaflet.extra-markers.js" />
     <Content Include="Scripts\leaflet.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\query\i18n\da.js" />

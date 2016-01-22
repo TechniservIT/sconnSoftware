@@ -1,11 +1,13 @@
 FP tasks :	
-embedded names redo single cfg
-embedded net command 4b header
-names						
+embedded names redo single cfg			V
+embedded net command 4b header			V
+names						V
 global config					+
-events style redo - add dates
-alarm multiple devices types
+events style redo - add dates			+		
+zone config name tab desc, columns fix		V
+alarm multiple devices types			+
 alarm device config io edit
+map style better markers 
 map model tx/rw verify
 map model signalr load on startup
 dash front page stat + quick links 

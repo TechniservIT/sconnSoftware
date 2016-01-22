@@ -22,11 +22,6 @@
 @Styles.Render("~/bundles/css/maps")
 @Styles.Render("~/bundles/css/bootstrap-toggle")
 
-<link rel="stylesheet" href="~/Content/css/leaflet.awesome-markers.css">
-
-<script src="~/Scripts/leaflet.awesome-markers.js"></script>
-
-
 
 <script src="~/signalr/hubs"></script>
 
@@ -134,32 +129,73 @@
             attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
             id: 'iomap'
         }).addTo(map);
-
-        IoIcon = L.Icon.extend({
-            options: {
-                iconSize: [50, 50],
-                iconAnchor: [25, 25],
-                popupAnchor: [-3, -25]
-            }
+        
+    
+        
+        var outputIconOff = L.ExtraMarkers.icon({
+            icon: 'fa-coffee',
+            markerColor: 'red',
+            shape: 'square',
+            prefix: 'fa'
+        });
+        
+        var inputIconOff = L.ExtraMarkers.icon({
+            icon: 'fa-coffee',
+            markerColor: 'red',
+            shape: 'square',
+            prefix: 'fa'
+        });
+        
+        var systemIconOff = L.ExtraMarkers.icon({
+            icon: 'fa-coffee',
+            markerColor: 'red',
+            shape: 'square',
+            prefix: 'fa'
+        });
+        
+        var outputIconOn = L.ExtraMarkers.icon({
+            icon: 'fa-coffee',
+            markerColor: 'green',
+            shape: 'square',
+            prefix: 'fa'
+        });
+        
+        var inputIconOn = L.ExtraMarkers.icon({
+            icon: 'fa-coffee',
+            markerColor: 'green',
+            shape: 'square',
+            prefix: 'fa'
         });
 
-        var outputIcon = new IoIcon({ iconUrl: '/Content/img/markerOutputSmall.png' }),
-        inputIcon = new IoIcon({ iconUrl: '/Content/img/markerInputSmall.png' }),
-        systemIcon = new IoIcon({ iconUrl: '/Content/img/markerOutputSmall.png' });
+        var systemIconOn = L.ExtraMarkers.icon({
+            icon: 'fa-coffee',
+            markerColor: 'green',
+            shape: 'square',
+            prefix: 'fa'
+        });
+
         
-        var outputIconOff = new IoIcon({ iconUrl: '/Content/img/markerOutputSmallOff.png' }),
-         inputIconOff = new IoIcon({ iconUrl: '/Content/img/markerInputSmallOff.png' }),
-         systemIconOff = new IoIcon({ iconUrl: '/Content/img/markerOutputSmallOff.png' });
+        //var outputIconOn = new IoIcon({ iconUrl: '/Content/img/markerOutputSmallOn.png' }),
+        // inputIconOn = new IoIcon({ iconUrl: '/Content/img/markerInputSmallOn.png' }),
+        // systemIconOn = new IoIcon({ iconUrl: '/Content/img/markerOutputSmallOn.png' });
+
+
+        //IoIcon = L.Icon.extend({
+        //    options: {
+        //        iconSize: [50, 50],
+        //        iconAnchor: [25, 25],
+        //        popupAnchor: [-3, -25]
+        //    }
+        //});
+    //var outputIcon = new IoIcon({ iconUrl: '/Content/img/markerOutputSmall.png' }),
+    //inputIcon = new IoIcon({ iconUrl: '/Content/img/markerInputSmall.png' }),
+    //systemIcon = new IoIcon({ iconUrl: '/Content/img/markerOutputSmall.png' });
         
-        
-        var outputIconOn = new IoIcon({ iconUrl: '/Content/img/markerOutputSmallOn.png' }),
-         inputIconOn = new IoIcon({ iconUrl: '/Content/img/markerInputSmallOn.png' }),
-         systemIconOn = new IoIcon({ iconUrl: '/Content/img/markerOutputSmallOn.png' });
 
         L.icon = function (options) {
             return new L.Icon(options);
         };
-
+        
 
         // Dragging and dropping the markers to the map
         var addMarkers = function () {
@@ -195,10 +231,10 @@
                         iconIoControllContent = $('#ioCtrlSwitch-'+ioId).html();
                     }
                     else if (draggableId.indexOf('input') > -1) {
-                        ioIcon = inputIcon;
+                        ioIcon = inputIconOff;
                     }
                     else if (draggableId.indexOf('relay') > -1) {
-                        ioIcon = outputIcon;
+                        ioIcon = outputIconOff;
                         iconIoControllContent = $('#ioCtrlSwitch-' + ioId).html();
                     }
                     else {
@@ -215,7 +251,7 @@
                     // Creating a new marker and adding it to the map
                     markers[markersCount] = L.marker([markerCoords.lat, markerCoords.lng], {
                         draggable: true,
-                        icon: ioIcon
+                        icon: ioIcon //ioIcon
                     }).addTo(map).bindPopup(innerPopupContent);
                     var ioMapDefinition = new Object();
                     ioMapDefinition.Latitude = markerCoords.lat;
