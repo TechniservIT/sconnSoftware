@@ -11,7 +11,13 @@ namespace iotDash
         public static void RegisterBundles(BundleCollection bundles)
         {
 
-            /*  Global */
+
+
+
+            /*************************  SCRIPTS *************************/
+
+
+            /************ Global **********/
 
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                        "~/Scripts/jquery-{version}.js",
@@ -51,9 +57,7 @@ namespace iotDash
             bundles.Add(new ScriptBundle("~/bundles/bootstrap-treeview").Include(
               "~/Scripts/bootstrap-treeview.js"
            ));
-
-            /*  Frontpage */
-
+            
             bundles.Add(new ScriptBundle("~/bundles/gray").Include(
               "~/Scripts/grayscale.js"
            ));
@@ -61,20 +65,7 @@ namespace iotDash
             bundles.Add(new ScriptBundle("~/bundles/easing").Include(
               "~/Scripts/jquery.easing.min.js"
            ));
-
-            bundles.Add(new StyleBundle("~/bundles/css/grayscale").Include(
-                 "~/Content/css/grayscale.css"
-             ));
-
-            bundles.Add(new StyleBundle("~/bundles/css/sidebar").Include(
-                 "~/Content/css/sidebar.css"
-             ));
-            bundles.Add(new StyleBundle("~/bundles/css/sidebarsimple").Include(
-               "~/Content/css/simple-sidebar.css"
-           ));
-            bundles.Add(new StyleBundle("~/bundles/css/bootstrap-formhelpers").Include(
-               "~/Content/css/bootstrap-formhelpers.css"
-           ));
+            
 
             /* Tools */
 
@@ -91,6 +82,18 @@ namespace iotDash
             bundles.Add(new ScriptBundle("~/bundles/html5shiv").Include(
             "~/Scripts/html5shiv.js"
              ));
+
+            bundles.Add(new ScriptBundle("~/bundles/bootstrap-toggle").Include(
+              "~/Scripts/bootstrap-toggle.js"
+            ));
+
+            bundles.Add(new ScriptBundle("~/bundles/maps").Include(
+            "~/Scripts/leaflet.js",
+            "~/Scripts/leaflet.awesome-markers.js"
+             ));
+
+
+            /*************************  STYLES *************************/
 
             /* Style */
 
@@ -123,10 +126,34 @@ namespace iotDash
             bundles.Add(new StyleBundle("~/bundles/css/bootstrap-treeview").Include(
             "~/Content/css/bootstrap-treeview.css"
                 ));
+            
+            bundles.Add(new StyleBundle("~/bundles/css/grayscale").Include(
+                 "~/Content/css/grayscale.css"
+             ));
+
+            bundles.Add(new StyleBundle("~/bundles/css/bootstrap-toggle").Include(
+                 "~/Content/css/bootstrap-toggle.css"
+             ));
+
+            bundles.Add(new StyleBundle("~/bundles/css/sidebar").Include(
+                 "~/Content/css/sidebar.css"
+             ));
+            bundles.Add(new StyleBundle("~/bundles/css/sidebarsimple").Include(
+               "~/Content/css/simple-sidebar.css"
+           ));
+            bundles.Add(new StyleBundle("~/bundles/css/bootstrap-formhelpers").Include(
+               "~/Content/css/bootstrap-formhelpers.css"
+           ));
+
+            bundles.Add(new StyleBundle("~/bundles/css/maps").Include(
+                 "~/Content/css/leaflet.css",
+                 "~/Content/css/leaflet.awesome-markers.css"
+             ));
 
 
             /* LESS Bundles */
             bundles.Add(new LessBundle("~/bundles/less").Include("~/Content/less/*.less"));
+
 
 
         }

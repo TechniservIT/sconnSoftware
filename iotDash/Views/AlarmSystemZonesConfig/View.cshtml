@@ -27,21 +27,19 @@
 
                 <table class="table">
                     <tr>
-                        <th>Id</th>
                         <th>Name</th>
                         <th>Type</th>
-                        <th>Devices</th>
-                         
+                        <th>Enabled</th>
+
                     </tr>
 
            @foreach (sconnAlarmZone d in Model.ZoneConfigs)
             {
                         <tr id="@d.Id.ToString()" class="rowRecord row-normal">
 
-                            <td> @d.Enabled </td>
                             <td> @d.Name</td>
                             <td> @d.Type</td>
-                            <td>       </td>
+                            <td> @d.Enabled </td>
 
                         </tr>
                     }

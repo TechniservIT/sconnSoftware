@@ -87,12 +87,12 @@ namespace sconnConnector.POCO.Config.sconn
 
         public byte[] SerializeNames()
         {
-            throw new NotImplementedException();
+            return  System.Text.Encoding.BigEndianUnicode.GetBytes(Name);
         }
 
         public void DeserializeNames(byte[] buffer)
         {
-            throw new NotImplementedException();
+            Name = System.Text.Encoding.BigEndianUnicode.GetString(buffer, 0, buffer.GetLength(0));
         }
     }
 

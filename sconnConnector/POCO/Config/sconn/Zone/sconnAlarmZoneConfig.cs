@@ -99,22 +99,30 @@ namespace sconnConnector.POCO.Config.sconn
             {
                 _logger.Error(e, e.Message);
             }
-
         }
 
         public byte[] SerializeNames()
         {
-            byte[] Serialized = new byte[ipcDefines.RAM_NAME_SIZE * Zones.Count];
+            byte[] serialized = new byte[ipcDefines.RAM_NAME_SIZE * Zones.Count];
             for (int i = 0; i < Zones.Count; i++)
             {
-              
+                byte[] zName = this.Zones[i].SerializeNames();
+                zName.CopyTo(serialized,i*ipcDefines.RAM_NAME_SIZE);
             }
-            return Serialized;
+            return serialized;
         }
 
         public void DeserializeNames(byte[] buffer)
         {
-            throw new NotImplementedException();
+            for (int i = 0; i < Zones.Count; i++)
+            {
+                byte[] zName = new byte[ipcDefines.RAM_NAME_SIZE];
+                for (int j = 0; j < ipcDefines.RAM_NAME_SIZE; j++)
+                {
+                    zName[j] = buffer[i*ipcDefines.RAM_NAME_SIZE + j];
+                }
+                this.Zones[i].DeserializeNames(zName);
+            }
         }
     }
 

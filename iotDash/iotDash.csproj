@@ -295,7 +295,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Content\css\BundleConfig.cs" />
+    <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
@@ -416,6 +416,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\css\bootstrap-treeview.css" />
     <Content Include="Content\css\leaflet.awesome-markers.css" />
+    <Content Include="Content\css\leaflet.css" />
     <Content Include="Content\css\simple-sidebar.css" />
     <Content Include="Content\css\spinedit.css" />
     <Content Include="Content\css\font-awesome.css" />
@@ -1514,6 +1515,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\leaflet.awesome-markers.js" />
     <Content Include="Scripts\leaflet.awesome-markers.min.js" />
+    <Content Include="Scripts\leaflet.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\query\i18n\da.js" />
     <Content Include="Scripts\query\i18n\de.js" />

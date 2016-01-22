@@ -13,25 +13,22 @@
 @Scripts.Render("~/bundles/numspin")
 @Scripts.Render("~/bundles/fancybox")
 @Scripts.Render("~/bundles/bootstrap-treeview")
+@Scripts.Render("~/bundles/maps")
+@Scripts.Render("~/bundles/bootstrap-toggle")
 
 @Styles.Render("~/bundles/css/toggleswitch")
 @Styles.Render("~/bundles/css/numspin")
 @Styles.Render("~/bundles/css/bootstrap-treeview")
-
-<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
-<script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
-
-<link rel="stylesheet" href="http://code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css">
-
-<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.0/css/bootstrap-toggle.min.css" rel="stylesheet">
-<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.0/js/bootstrap-toggle.min.js"></script>
+@Styles.Render("~/bundles/css/maps")
+@Styles.Render("~/bundles/css/bootstrap-toggle")
 
 <link rel="stylesheet" href="~/Content/css/leaflet.awesome-markers.css">
+
 <script src="~/Scripts/leaflet.awesome-markers.js"></script>
 
 
-<script src="~/signalr/hubs"></script>
 
+<script src="~/signalr/hubs"></script>
 
 @{
     ViewBag.Title = "Index";
@@ -335,22 +332,6 @@
 
 </script>
 
-
-<style>
-    .awesome-marker i {
-        font-size: 18px;
-        margin-top: 8px;
-    }
-
-    .draggable-marker {
-        width: 20px;
-        margin: 12px;
-        cursor: pointer;
-        z-index: 2;
-    }
-
-
-</style>
 
 @functions{
 

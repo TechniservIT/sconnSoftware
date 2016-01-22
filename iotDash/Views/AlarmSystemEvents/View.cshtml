@@ -5,6 +5,62 @@
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 }
 
+@functions
+{
+
+    public string GetEventRowClassForType(sconnEventType type)
+    {
+        if (
+            type == sconnEventType.EVENT_TYPE_ACTIVATION ||
+            type == sconnEventType.EVENT_TYPE_ADD_USER ||
+            type == sconnEventType.EVENT_TYPE_CHANGE_PASSWD ||
+            type == sconnEventType.EVENT_TYPE_SET_PASSWD ||
+             type == sconnEventType.EVENT_TYPE_ARM ||
+            type == sconnEventType.EVENT_TYPE_DISARM ||
+            type == sconnEventType.EVENT_TYPE_ENTER
+            )
+        {
+            return "info";
+        }
+        else if
+            (
+            type == sconnEventType.EVENT_TYPE_BOOT ||
+            type == sconnEventType.EVENT_TYPE_CONFIG_CHANGE ||
+            type == sconnEventType.EVENT_TYPE_DET_CONN_LOSS ||
+            type == sconnEventType.EVENT_TYPE_DEVICE_ADDED
+            )
+        {
+            return "warning";
+        }
+        //else if
+        //(
+
+        //)
+        //{
+        //    return "success";
+        //}
+        else if
+        (
+            type == sconnEventType.EVENT_TYPE_DET_HUM_BREACH ||
+            type == sconnEventType.EVENT_TYPE_POWER_LOSS ||
+            type == sconnEventType.EVENT_TYPE_HW_FAILURE ||
+            type == sconnEventType.EVENT_TYPE_DET_MASKING ||
+            type == sconnEventType.EVENT_TYPE_DET_VIOLATION ||
+            type == sconnEventType.EVENT_TYPE_DET_SABOTAGE
+        )
+        {
+            return "danger";
+        }
+        else
+        {
+            return "";
+        }
+    }
+
+
+
+}
+
 
 <div class="panel panel-primary">
     <div class="panel-heading text-center">
@@ -33,28 +89,14 @@
 
 
                     @foreach (sconnEvent d in Model.Events)
-            {
-                        <tr id="@d.Id.ToString()" class="rowRecord row-normal">
+                    {
+                        <tr id="@d.Id.ToString()" class="@GetEventRowClassForType(d.Type) rowRecord row-normal">
 
                             <td> @d.Id </td>
                             <td> @d.Type</td>
                             <td> @d.Domain</td>
                             <td> @d.DeviceId</td>
 
-                            <td>
-
-
-                                <div class="btn-group-vertical" role="group" aria-label="...">
-
-                                    <button type="button" class="btn btn-default">
-                                        <a href="@Url.Action("Remove", "AlarmSystemAuthorizedDevices", new {Device = d})">
-                                            <span class="glyphicon glyphicon-trash"></span>
-                                        </a>
-                                    </button>
-
-                                </div>
-
-                            </td>
                         </tr>
                     }
 
