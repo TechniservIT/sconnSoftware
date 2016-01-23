@@ -9,7 +9,9 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
 using System.Web;
+using System.Web.Security;
 
 namespace iotDash.Helpers
 {
@@ -73,12 +75,30 @@ namespace iotDash.Helpers
             {
                 return true;
             }
-
-
             return false;
         }
 
-
+        static public bool UserHasDeviceAccess(Device dev, IPrincipal user)
+        {
+            if (user != null && dev != null)
+            {
+                ApplicationDbContext ucont = new ApplicationDbContext();
+                 ApplicationUser nuser = ucont.Users.FirstOrDefault(u => u.UserName.Equals(user.Identity.Name));
+                UserManager<ApplicationUser> userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(ucont));
+               // var userName = user.Identity.GetUserName();
+               // var nuser = userManager.FindByName<ApplicationUser>(userName);
+                iotDomain d = dev.Site.Domain;
+                if (nuser.DomainId == dev.Site.Domain.Id)   //user is accessed domain
+                {
+                    var roleManager = new RoleManager<IotUserRole>(new RoleStore<IotUserRole>(ucont));
+                    IotUserRole DomainAdminRole = roleManager.Roles.Where(r => r.DomainId == d.Id && r.Type == IotUserRoleType.DomainAdmin).FirstOrDefault();
+                    IotUserRole SiteRole = roleManager.Roles.Where(r => r.DomainId == d.Id && r.Type == IotUserRoleType.SiteManager).FirstOrDefault();
+                    IotUserRole DeviceRoles = roleManager.Roles.Where(r => r.DomainId == d.Id && r.Type == IotUserRoleType.DeviceManager).FirstOrDefault();
+                    return ((DomainAdminRole!= null) || (SiteRole!= null) || (DeviceRoles!= null));  //user has device access role
+                }
+            }
+            return false;
+        }
 
     }
 

@@ -50,10 +50,53 @@
 
     var markers = [], // an array containing all the markers added to the map
     markersCount = 0; // the number of the added markers
-    
+
+    var outputIconOff = L.ExtraMarkers.icon({
+        icon: 'fa-bolt',
+        markerColor: 'red',
+        shape: 'circle',
+        prefix: 'fa'
+    });
+
+    var inputIconOff = L.ExtraMarkers.icon({
+        icon: 'fa-eye',
+        markerColor: 'red',
+        shape: 'circle',
+        prefix: 'fa'
+    });
+
+    var systemIconOff = L.ExtraMarkers.icon({
+        icon: 'fa-shield',
+        markerColor: 'red',
+        shape: 'circle',
+        prefix: 'fa'
+    });
+
+    var outputIconOn = L.ExtraMarkers.icon({
+        icon: 'fa-bolt',
+        markerColor: 'green',
+        shape: 'circle',
+        prefix: 'fa'
+    });
+
+    var inputIconOn = L.ExtraMarkers.icon({
+        icon: 'fa-eye',
+        markerColor: 'green',
+        shape: 'circle',
+        prefix: 'fa'
+    });
+
+    var systemIconOn = L.ExtraMarkers.icon({
+        icon: 'fa-shield',
+        markerColor: 'green',
+        shape: 'circle',
+        prefix: 'fa'
+    });
+
+
     //var mapIoDefninitions = [];
     //var mapIoDefninitionCount = 0;
-    
+
     function reloadMapCenter() {
         map.panTo(new L.LatLng(startLat, startLng));
     }
@@ -71,7 +114,10 @@
         reloadMapCenter();
     }
 
+    function loadMarkersDataFromModel(model)
+    {
 
+    }
 
     /**************** FILE UPLOAD *************/
 
@@ -96,33 +142,20 @@
         myApp.hidePleaseWait(); //hide dialog
         $('.bar').width(100);
     }
-    
+
     function parseBool(value) {
         return (typeof value === "undefined") ?
                false :
-               // trim using jQuery.trim()'s source 
+               // trim using jQuery.trim()'s source
                value.replace(/^\s+|\s+$/g, "").toLowerCase() === "true";
     }
 
     $(function () {
-        
-        hubProxy = $.connection.alarmSystemMapHub;     // the generated client-side hub proxy
-        hubProxy.client.updateMap = function (mapData)
-        {
-            hubModel = mapData;
-        }
 
-        $.connection.hub.start().done(function () {
-            hubProxy.server.getMapData(@Model.ServerId.ToString());   //intialy load map data
-
-            //load model to menu/map
-            
-
-        });
 
         markers = [];   //reset
         markersCount = 0;
-        
+
         startLat = 49.78395;
         startLng = 19.05815;
         var mapCenter = [startLat, startLng];
@@ -132,71 +165,12 @@
             attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
             id: 'iomap'
         }).addTo(map);
-        
-        var outputIconOff = L.ExtraMarkers.icon({
-            icon: 'fa-bolt',
-            markerColor: 'red',
-            shape: 'circle',
-            prefix: 'fa'
-        });
-        
-        var inputIconOff = L.ExtraMarkers.icon({
-            icon: 'fa-eye',
-            markerColor: 'red',
-            shape: 'circle',
-            prefix: 'fa'
-        });
-        
-        var systemIconOff = L.ExtraMarkers.icon({
-            icon: 'fa-shield',
-            markerColor: 'red',
-            shape: 'circle',
-            prefix: 'fa'
-        });
-        
-        var outputIconOn = L.ExtraMarkers.icon({
-            icon: 'fa-bolt',
-            markerColor: 'green',
-            shape: 'circle',
-            prefix: 'fa'
-        });
-        
-        var inputIconOn = L.ExtraMarkers.icon({
-            icon: 'fa-eye',
-            markerColor: 'green',
-            shape: 'circle',
-            prefix: 'fa'
-        });
 
-        var systemIconOn = L.ExtraMarkers.icon({
-            icon: 'fa-shield',
-            markerColor: 'green',
-            shape: 'circle',
-            prefix: 'fa'
-        });
-
-        
-        //var outputIconOn = new IoIcon({ iconUrl: '/Content/img/markerOutputSmallOn.png' }),
-        // inputIconOn = new IoIcon({ iconUrl: '/Content/img/markerInputSmallOn.png' }),
-        // systemIconOn = new IoIcon({ iconUrl: '/Content/img/markerOutputSmallOn.png' });
-
-
-        //IoIcon = L.Icon.extend({
-        //    options: {
-        //        iconSize: [50, 50],
-        //        iconAnchor: [25, 25],
-        //        popupAnchor: [-3, -25]
-        //    }
-        //});
-    //var outputIcon = new IoIcon({ iconUrl: '/Content/img/markerOutputSmall.png' }),
-    //inputIcon = new IoIcon({ iconUrl: '/Content/img/markerInputSmall.png' }),
-    //systemIcon = new IoIcon({ iconUrl: '/Content/img/markerOutputSmall.png' });
-        
 
         L.icon = function (options) {
             return new L.Icon(options);
         };
-        
+
 
         // Dragging and dropping the markers to the map
         var addMarkers = function () {
@@ -210,8 +184,8 @@
                 stop: function (e, ui) {
 
                     var draggableId = $(this).draggable().attr("id");
-                    var ioId = $(this).draggable().attr("data-ioid");   
-                    var ioType = $(this).draggable().attr("data-iotype");   
+                    var ioId = $(this).draggable().attr("data-ioid");
+                    var ioType = $(this).draggable().attr("data-iotype");
                     var ioVal = parseBool($(this).draggable().attr("data-iovalue"));
 
                     $(this).draggable().remove();   //destroy draggable
@@ -239,7 +213,12 @@
                         iconIoControllContent = $('#ioCtrlSwitch-' + ioId).html();
                     }
                     else {
-
+                        if (ioVal) {
+                            ioIcon = systemIconOn;
+                        }
+                        else {
+                            ioIcon = systemIconOff;
+                        }
                     }
 
                     var coordsX = e.clientX - positionMapX, // 50 is the width of the menu
@@ -247,7 +226,7 @@
                         point = L.point(coordsX, coordsY), // createing a Point object with the given x and y coordinates
                         markerCoords = map.containerPointToLatLng(point); // getting the geographical coordinates of the point
 
-                    var innerPopupContent = "<div>" + ioType + " : " + ioId + "</div> <div>" + iconIoControllContent + "</div>";
+                    var innerPopupContent = "<div>" + ioId + "</div> <div>" + iconIoControllContent + "</div>";    //ioType + " : " +
 
                     // Creating a new marker and adding it to the map
                     markers[markersCount] = L.marker([markerCoords.lat, markerCoords.lng], {
@@ -258,11 +237,12 @@
                     ioMapDefinition.Latitude = markerCoords.lat;
                     ioMapDefinition.Longitude = markerCoords.lng;
                     ioMapDefinition.IoId = ioId;
-                    ioMapDefinition.DeviceIoCategory = ioType;
+                    ioMapDefinition.Type = ioType;
                     ioMapDefinition.DeviceId = $(this).draggable().attr("data-deviceid");
-                    ioMapDefinition.Marker = markers[markersCount];
 
-                    hubModel.mapIoDefninitions.push(ioMapDefinition);
+                    //  ioMapDefinition.Marker = markers[markersCount];
+
+                    hubModel.MapDefinition.IoMapDefinitions.push(ioMapDefinition);
 
                     markersCount++;
                 }
@@ -272,82 +252,40 @@
         addMarkers();
 
         $('#mapsubmit').click(function () {
-            var MapDefinition = new Object();
-            
+          //  var MapDefinition = new Object();
+
             //update coordiantes for io from adj markers
-            $.each(hubModel.mapIoDefninitions, function (index, value) {
-                var curPos = value.Marker.getLatLng();
-                value.Latitude = curPos.lat;   //load marker possitions 
-                value.Longitude = curPos.lng;
-                delete value.Marker;    // = null;
+            $.each(hubModel.MapDefinition.IoMapDefinitions, function (index, value) {
+                //TODO some other way of tracking changed marker pos - not loading bound markers data
+                //var curPos = value.Marker.getLatLng();
+                //value.Latitude = curPos.lat;   //load marker possitions
+                //value.Longitude = curPos.lng;
+                //delete value.Marker;    // = null;
             });
             hubModel.Devices = null;
             hubModel.Map = null;
 
             //post all mapped io defs
             hubProxy.server.updateAlarmMap(hubModel);
-            
-            
-            
 
-            ////read current possitions for markers and load to adjacent data structs
-            //for (i = 0, len = mapIoDefninitions.length; i < len; i++) {
-            //    var iodef = mapIoDefninitions[i];
-
-            //    var devicemap = new Object();   //initialy create device for each io mapping and load all corresponding io
-            //    devicemap.IoMapDefinitions = [];
-            //    var CurrDeviceId = iodef.ioDeviceId; //load device id from first IO
-            //    devicemap.DeviceId = CurrDeviceId;
-
-            //    var curPos = iodef.Marker.getLatLng();
-            //    iodef.Latitude = curPos.lat;   //load marker possitions 
-            //    iodef.Longitude = curPos.lng;
-                
-            //    devicemap.IoMapDefinitions.push(iodef);
-            //    mapIoDefninitions = mapIoDefninitions.splice(i, 1); //remove add IO from list
-
-            //    //load all io definitions for current device from markers
-            //    for (j = i, len = mapIoDefninitions.length; j < len; j++) {
-            //        var iodefn = mapIoDefninitions[j];
-            //       // var nmarker = markers[j];
-            //        if (iodefn.ioDeviceId == CurrDeviceId) {
-            //            var curPosN = iodefn.Marker.getLatLng();
-            //            iodef.Latitude = curPosN.lat;   //load marker possitions 
-            //            iodef.Longitude = curPosN.lng;
-            //            devicemap.IoMapDefinitions.push(iodefn);
-            //            mapIoDefninitions = mapIoDefninitions.splice(j, 1);  //remove add IO from list
-            //            j=0;  //start from the beggining
-            //        }
-            //    }
-            //    MapDefinition.DeviceMaps.push(devicemap);
-            //    i=0;    //start from the beggining
-            //}
-
-            //hubModel.Map = MapDefinition;
-            //hubProxy.server.updateAlarmMap(hubModel);
         });
 
-        
+
 
         getLocation();  //async get location
-        
+
         $('.iomenutoggle').on('click', function (e) {
             e.preventDefault();
         });
-        
-        
-        var MapMarkerFromData = function (ioMapDefinition) {
-            
-            ioMapDefinition.Latitude = markerCoords.lat;
-            ioMapDefinition.Longitude = markerCoords.lng;
-            ioMapDefinition.IoId = ioId;
-            ioMapDefinition.DeviceIoCategory = ioType;
-            ioMapDefinition.ioDeviceId = $(this).draggable().attr("data-deviceid");
 
-            var draggableId = ioMapDefinition.IoId; 
-            var ioId = ioMapDefinition.IoId;   
-            var ioType = ioMapDefinition.DeviceIoCategory; 
-            var ioVal = parseBool($(this).draggable().attr("data-iovalue"));
+
+        var MapMarkerFromData = function (ioMapDefinition) {
+
+            var draggableId = ioMapDefinition.IoId;
+            var ioId = ioMapDefinition.IoId;
+            var ioType = ioMapDefinition.DeviceIoCategory;
+
+            //var ioVal = parseBool(ioMapDefinition.DeviceIoCategory);
 
             var positionMapX = $("#map").offset().left - $(window).scrollLeft();
             var positionMapY = $("#map").offset().top - $(window).scrollTop();
@@ -373,7 +311,7 @@
 
             point = L.point(ioMapDefinition.Latitude, ioMapDefinition.Longitude), // createing a Point object with the given x and y coordinates
             markerCoords = map.containerPointToLatLng(point); // getting the geographical coordinates of the point
-            var innerPopupContent = "<div>" + ioType + " : " + ioId + "</div> <div>" + iconIoControllContent + "</div>";
+            var innerPopupContent = "<div>" + ioId + "</div> <div>" + iconIoControllContent + "</div>";
 
             // Creating a new marker and adding it to the map
             markers[markersCount] = L.marker([markerCoords.lat, markerCoords.lng], {
@@ -383,14 +321,80 @@
 
         };
 
-        //$(document).on('click', '.nav.in', function (e) {
-        //    if ($(e.target).is('a') && $(e.target).attr('class') != 'dropdown-toggle') {
-        //        $(this).collapse('hide');
-        //    }
-        //})
+        /********** Hub/Model ****************/
+
+        hubProxy = $.connection.alarmSystemMapHub;     // the generated client-side hub proxy
+        hubProxy.client.updateMap = function (mapData)
+        {
+            hubModel = mapData;
+
+            //load model to menu/map
+            $.each(hubModel.MapDefinition.IoMapDefinitions, function (index, value) {
+
+                var ioMapDefinition = value;
+                var draggableId = ioMapDefinition.IoId;
+                var ioId = ioMapDefinition.IoId;
+                var ioType = ioMapDefinition.Type;
+
+                var ioVal = 0;  //parseBool(ioMapDefinition.DeviceIoCategory);
+
+                var positionMapX = $("#map").offset().left - $(window).scrollLeft();
+                var positionMapY = $("#map").offset().top - $(window).scrollTop();
+                var iconIoControllContent = "";
+
+                var ioIcon;
+                if (ioType == 1) {
+                    if (ioVal) {
+                        ioIcon = outputIconOn;
+                    }
+                    else {
+                        ioIcon = outputIconOff;
+                    }
+                    iconIoControllContent = $('#ioCtrlSwitch-' + ioId).html();
+                }
+                else if (ioType == 2) {
+                    if (ioVal) {
+                        ioIcon = inputIconOn;
+                    }
+                    else {
+                        ioIcon = inputIconOff;
+                    }
+                }
+                else if (ioType == 3) {
+                    ioIcon = outputIcon;
+                    iconIoControllContent = $('#ioCtrlSwitch-' + ioId).html();
+                }
+                else {
+                    if (ioVal) {
+                        ioIcon = systemIconOn;
+                    }
+                    else {
+                        ioIcon = systemIconOff;
+                    }
+                }
+
+                point = L.point(ioMapDefinition.Latitude, ioMapDefinition.Longitude), // createing a Point object with the given x and y coordinates
+                markerCoords = map.containerPointToLatLng(point); // getting the geographical coordinates of the point
+                var innerPopupContent = "<div>" + ioId + "</div> <div>" + iconIoControllContent + "</div>";
+
+                // Creating a new marker and adding it to the map
+                markers[markersCount] = L.marker([markerCoords.lat, markerCoords.lng], {
+                    draggable: true,
+                    icon: ioIcon
+                }).addTo(map).bindPopup(innerPopupContent);
+
+
+            });
+
+
+        }
+
+        $.connection.hub.start().done(function () {
+            hubProxy.server.getMapData(@Model.ServerId.ToString());   //intialy load map data
+        });
+
 
     });
-
 
 
 </script>
@@ -574,7 +578,7 @@
                                                 @foreach (var input in device.Inputs)
                                                 {
                                                     <li>
-                                                        <a class="btn btn-primary draggable-marker" style="width : 100%;" draggable="true" href="#" id="iomarker-input-@input.Id.ToString()-@device.Id.ToString()" data-iovalue="@input.Value.ToString()" data-deviceid="@device.Id.ToString()" data-ioid="@input.Id.ToString()" data-iotype="@input.Type.ToString()" src="/Content/img/mapka2.png">
+                                                        <a class="btn btn-primary draggable-marker" style="width : 100%;" draggable="true" href="#" id="iomarker-input-@input.Id.ToString()-@device.Id.ToString()" data-iovalue="@input.Value.ToString()" data-deviceid="@device.Id.ToString()" data-ioid="@input.Id.ToString()" data-iotype="@((int)input.IoCategory)" src="/Content/img/mapka2.png">
                                                             <span class="glyphicon glyphicon-log-in"></span>
                                                             @input.Id.ToString() @input.Name
                                                         </a>
@@ -589,7 +593,7 @@
                                                 @foreach (var output in device.Outputs)
                                                 {
                                                     <li>
-                                                        <a class="btn btn-primary draggable-marker" style="width: 100%;" draggable="true" href="#" id="iomarker-output-@output.Id.ToString()-@device.Id.ToString()" data-iovalue="@output.Value.ToString()" data-deviceid="@device.Id.ToString()" data-ioid="@output.Id.ToString()" data-iotype="@output.Type.ToString()">
+                                                        <a class="btn btn-primary draggable-marker" style="width: 100%;" draggable="true" href="#" id="iomarker-output-@output.Id.ToString()-@device.Id.ToString()" data-iovalue="@output.Value.ToString()" data-deviceid="@device.Id.ToString()" data-ioid="@output.Id.ToString()" data-iotype="@((int)output.IoCategory)">
                                                             <span class="glyphicon glyphicon-flash"></span>
                                                             @output.Id.ToString() @output.Name
                                                         </a>
@@ -607,7 +611,7 @@
                                                 @foreach (var relay in device.Relays)
                                                 {
                                                     <li>
-                                                        <a class="btn btn-primary draggable-marker" draggable="true" href="#" id="iomarker-relay-@relay.Id.ToString()-@device.Id.ToString()" data-iovalue="@relay.Value.ToString()" data-deviceid="@device.Id.ToString()" data-ioid="@relay.Id.ToString()" data-iotype="@relay.Type.ToString()">
+                                                        <a class="btn btn-primary draggable-marker" draggable="true" href="#" id="iomarker-relay-@relay.Id.ToString()-@device.Id.ToString()" data-iovalue="@relay.Value.ToString()" data-deviceid="@device.Id.ToString()" data-ioid="@relay.Id.ToString()" data-iotype="@((int)relay.IoCategory)">
                                                             <span class="glyphicon glyphicon-flash"></span>
                                                             @relay.Id.ToString() @relay.Name
                                                         </a>

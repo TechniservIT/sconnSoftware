@@ -16,6 +16,8 @@ namespace iotDash.Models
         [Required]
         public virtual int DomainId { get; set; }
 
+
+
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one 

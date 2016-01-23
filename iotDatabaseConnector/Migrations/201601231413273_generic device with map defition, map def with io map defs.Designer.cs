@@ -7,13 +7,13 @@ namespace iotDatabaseConnector.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.2-31219")]
-    public sealed partial class mapiodefconntodevicegeneric : IMigrationMetadata
+    public sealed partial class genericdevicewithmapdefitionmapdefwithiomapdefs : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(mapiodefconntodevicegeneric));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(genericdevicewithmapdefitionmapdefwithiomapdefs));
         
         string IMigrationMetadata.Id
         {
-            get { return "201601231235029_map io def conn to device generic"; }
+            get { return "201601231413273_generic device with map defition, map def with io map defs"; }
         }
         
         string IMigrationMetadata.Source

@@ -41,7 +41,6 @@ namespace iotDbConnector.DAL
             this.Properties = dev.Properties;
             this.Site = dev.Site;
             this.Type = dev.Type;
-
         }
 
         [DataMember]
@@ -84,12 +83,13 @@ namespace iotDbConnector.DAL
         public bool IsVirtual { get; set; }
 
         [DataMember]
-        public virtual List<MapDefinition> DeviceMaps { get; set; }
+        public virtual List<DeviceMapDefinition> DeviceMaps { get; set; }
 
         public Device()
         {
             Actions = new List<DeviceAction>();
             Properties = new List<DeviceProperty>();
+            DeviceMaps = new List<DeviceMapDefinition>();
         }
 
        

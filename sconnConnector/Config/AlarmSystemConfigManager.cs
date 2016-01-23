@@ -35,6 +35,11 @@ namespace sconnConnector.Config
             creds = cred;
         }
 
+        public AlarmSystemConfigManager(Device dev) : this(dev.EndpInfo,dev.Credentials)
+        {
+            this.RemoteDevice = dev;
+        }
+
 
         private bool CanUpdateDueToTimingContraints()
         {

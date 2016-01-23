@@ -14,11 +14,7 @@ namespace iotDbConnector.DAL
         [Required]
         [Key]
         public int Id { get; set; }
-
-        [DataMember]
-        [Required]
-        public int DeviceId { get; set; }
-
+        
         [DataMember]
         public string Description { get; set; }
 
@@ -38,12 +34,9 @@ namespace iotDbConnector.DAL
 
         [DataMember]
         public string ImageMapUrl { get; set; }
-
-
+        
         [DataMember]
-        public virtual MapDefinition Definition { get; set; }
-
-        [DataMember]
+        [Required]
         public virtual List<IoMapDefinition> IoMapDefinitions { get; set; }
 
         public DeviceMapDefinition()

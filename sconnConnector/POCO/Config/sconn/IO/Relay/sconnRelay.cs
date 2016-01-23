@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using NLog;
 using sconnConnector.POCO.Config.sconn;
+using iotDbConnector.DAL;
 
 namespace sconnConnector.POCO.Config
 {
@@ -19,12 +20,13 @@ namespace sconnConnector.POCO.Config
         public byte NameId { get; set; }
         public bool Enabled { get; set; }
         public string Name { get; set; }
-
+        public DeviceIoCategory IoCategory { get; set; }
         private static Logger _logger = LogManager.GetCurrentClassLogger();
 
         public sconnRelay()
         {
             Name = "Relay";
+            IoCategory = DeviceIoCategory.Relay; 
         }
 
         public sconnRelay(byte[] rawCfg) : this()

@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using AlarmSystemManagmentService.Device;
 using iotDash.Areas.AlarmSystem.Models;
+using iotDash.Helpers;
 using iotDash.Identity.Attributes;
 using iotDash.Session;
 using iotDatabaseConnector.DAL.Repository.Connector.Entity;
@@ -35,31 +36,25 @@ namespace iotDash.RealTime.SignalR.Maps.AlarmSystemMapController
         {
             try
             {
-                AlarmSystemMapEditModel model = new AlarmSystemMapEditModel();
-                string clientId = Context.ConnectionId;
-                if (MapClientSessions.ContainsKey(clientId))
+                IIotContextBase cont = new iotContext();
+                var serv = cont.Devices.FirstOrDefault(d => d.Id == ServerId);
+                if (serv != null)   //correct server
                 {
-                    AlarmSystemConfigManager cfg = new AlarmSystemConfigManager();
-                    MapClientSessions.TryGetValue(clientId, out cfg);
-                    if (cfg != null)
+                    AlarmSystemMapEditModel model = new AlarmSystemMapEditModel();
+                    string clientId = Context.ConnectionId;
+                    if (DomainAuthHelper.UserHasDeviceAccess(serv, Context.User))   //authorized
                     {
-                        AlarmDevicesConfigService deviceprovider = new AlarmDevicesConfigService(cfg);
+                        var man = new AlarmSystemConfigManager(serv);
+                        AlarmDevicesConfigService deviceprovider = new AlarmDevicesConfigService(man);
                         model = new AlarmSystemMapEditModel(deviceprovider.GetAll());
-                        Clients.Client(Context.ConnectionId).UpdateMap(model);
-                    }
-                }
-                else
-                {
-                    //find server 
-                    IIotContextBase cont = new iotContext();
-                    var serv = cont.Devices.FirstOrDefault(d => d.Id == ServerId);
-                    if (serv != null)
-                    {
-                        //get alarm service 
-                        AlarmSystemConfigManager cfg = GetAlarmConfigForContextWithDeviceId(ServerId);
-                        AlarmDevicesConfigService deviceprovider = new AlarmDevicesConfigService(cfg);
-                        model = new AlarmSystemMapEditModel(deviceprovider.GetAll());
-                        MapClientSessions.Add(Context.ConnectionId, cfg);
+                        model.ServerId = ServerId;
+                        var fMapDefinition = serv.DeviceMaps.FirstOrDefault();
+                        fMapDefinition.Device = null;
+                        foreach (var d in fMapDefinition.IoMapDefinitions)
+                        {
+                            d.Definition = null; //unbind
+                        }
+                        model.MapDefinition = fMapDefinition;
                         Clients.Client(Context.ConnectionId).UpdateMap(model);
                     }
                 }
@@ -69,147 +64,69 @@ namespace iotDash.RealTime.SignalR.Maps.AlarmSystemMapController
                 _logger.Error(e, e.Message);
             }
         }
-
-        public string GetMapEditModelJson(int ServerId)
-        {
-            return JsonConvert.SerializeObject(this.GetMapEditModel(ServerId));
-        }
-
-        public AlarmSystemMapEditModel GetMapEditModel(int ServerId)
-        {
-            AlarmSystemMapEditModel model = new AlarmSystemMapEditModel();
-            try
-            {
-                string clientId = Context.ConnectionId;
-                if (MapClientSessions.ContainsKey(clientId))
-                {
-                    AlarmSystemConfigManager cfg = new AlarmSystemConfigManager();
-                    MapClientSessions.TryGetValue(clientId, out cfg);
-                    if (cfg != null)
-                    {
-                        AlarmDevicesConfigService deviceprovider = new AlarmDevicesConfigService(cfg);
-                        model = new AlarmSystemMapEditModel(deviceprovider.GetAll());
-                    }
-                }
-                else
-                {
-                    //find server 
-                    IIotContextBase cont = new iotContext();
-                    var serv = cont.Devices.FirstOrDefault(d => d.Id == ServerId);
-                    if (serv != null)
-                    {
-                        //get alarm service 
-                        AlarmSystemConfigManager cfg = GetAlarmConfigForContextWithDeviceId(ServerId);
-                        AlarmDevicesConfigService deviceprovider = new AlarmDevicesConfigService(cfg);
-                        model = new AlarmSystemMapEditModel(deviceprovider.GetAll());
-                        MapClientSessions.Add(Context.ConnectionId, cfg);
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                _logger.Error(e, e.Message);
-            }
-            return model;
-        }
-
+        
 
         public JsonResult UpdateAlarmMap(AlarmSystemMapEditModel model)
         {
-            var clientId = Context.ConnectionId;
-            if (MapClientSessions.ContainsKey(clientId))
+            try
             {
-                AlarmSystemConfigManager cfg = new AlarmSystemConfigManager();
-                MapClientSessions.TryGetValue(clientId, out cfg);
-                if (cfg != null)
+                IIotContextBase cont = new iotContext();
+                Device dev = cont.Devices.FirstOrDefault(d => d.Id == model.ServerId);
+                if (dev != null)
                 {
-                    IIotContextBase cont = new iotContext();
-                    AlarmDevicesConfigService deviceprovider = new AlarmDevicesConfigService(cfg);
-                    //update map into database
-                    if (model.Map.Id != 0)
+                    if (DomainAuthHelper.UserHasDeviceAccess(dev, Context.User)) //authorized
                     {
-                        var existingMap = cont.MapDefinitions.FirstOrDefault(m => m.Id == model.Map.Id);
-                        if (existingMap != null)
+                        if (dev.DeviceMaps.Count > 0)
                         {
-                            existingMap.Url = model.Map.Url;
-                            foreach (var dmap in model.Map.DeviceMaps)
+                            //find adj map and update
+                            var existing = dev.DeviceMaps.FirstOrDefault(m => m.Id == model.MapDefinition.Id);
+                            if (existing != null)
                             {
-                                if (dmap.Id != 0)   //update
+                                //bind relations 
+                                foreach (var iomd in model.MapDefinition.IoMapDefinitions)
                                 {
-                                    var existingDeviceMap = existingMap.DeviceMaps.FirstOrDefault(dm => dm.Id == dmap.Id);
-                                    if (existingDeviceMap != null)
+                                    try
                                     {
-                                        existingDeviceMap.Description = dmap.Description;
-                                        existingDeviceMap.Definition = dmap.Definition;
-                                        existingDeviceMap.DeviceId = dmap.Id;
-                                        existingDeviceMap.Type = dmap.Type;
-                                        foreach (var iomap in dmap.IoMapDefinitions)
+                                        var existingMapDef = existing.IoMapDefinitions.FirstOrDefault(d => d.Id == iomd.Id);
+                                        if (existingMapDef != null)
                                         {
-                                            if (iomap.Id != 0)
-                                            {
-                                                var existingIoMap =
-                                                    existingDeviceMap.IoMapDefinitions.FirstOrDefault(
-                                                        iom => iom.Id == iomap.Id);
-                                                if (existingIoMap != null)
-                                                {   //update only coordiantes
-                                                //    existingIoMap.Definition = iomap.Definition;
-                                                //    existingIoMap.Description = iomap.Description;
-                                                //    existingIoMap.IoId = iomap.Id;
-                                                    existingIoMap.Latitude = iomap.Latitude;
-                                                    existingIoMap.Longitude = iomap.Longitude;
-                                                    existingIoMap.X = iomap.X;
-                                                    existingIoMap.Y = iomap.Y;
-                                                }
-                                            }
-                                            else
-                                            {
-                                                existingDeviceMap.IoMapDefinitions.Add(iomap);
-                                            }
+                                            existingMapDef.Copy(iomd);
+                                        }
+                                        else
+                                        {
+                                            iomd.Definition = existing;
+                                            cont.IoMapDefinitions.Add(iomd);
+                                            cont.SaveChanges();
                                         }
                                     }
+                                    catch (Exception e)
+                                    {
+                                        _logger.Error(e, e.Message);
+                                    }
                                 }
-                                else
-                                {
-                                    existingMap.DeviceMaps.Add(dmap);
-                                }
+                                cont.SaveChanges();
                             }
-                            existingMap.Device = model.Map.Device;
-                            existingMap.DeviceMaps = model.Map.DeviceMaps;
-                            existingMap.Url = model.Map.Url;
+                            else
+                            {
+                                //has map and new one sent ? todo : ovewrite conditionally
+                            }
                         }
                         else
                         {
-                            cont.MapDefinitions.Add(model.Map);
+                            //add the map
+                            dev.DeviceMaps.Add(model.MapDefinition);
+                            cont.SaveChanges();
                         }
-                        cont.SaveChanges();
                     }
-                    else
-                    {
-                        
-                    }
-                    model = new AlarmSystemMapEditModel(deviceprovider.GetAll());
-                    MapClientSessions.Add(Context.ConnectionId, cfg);
+
                 }
             }
+            catch (Exception e)
+            {
+                _logger.Error(e, e.Message);
+            } 
             return new JsonResult();
         }
-
-        //public void PublishMapUpdated(DeviceActionResult param)
-        //{
-        //    try
-        //    {
-        //        IIotContextBase cont = new iotContext();
-        //        DeviceActionResult toUpdate = cont.ActionResultParameters.Include("Action").FirstOrDefault(e => e.Id == param.Id);
-
-        //        string jsonParam = JsonConvert.SerializeObject(toUpdate);
-        //        Clients.All.updateParam(jsonParam);
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        _logger.Error(e, e.Message);
-        //    }
-        //}
-
 
 
         /*************  Alarm config session **************/
@@ -238,19 +155,7 @@ namespace iotDash.RealTime.SignalR.Maps.AlarmSystemMapController
             }
 
         }
-
-
-        //public override Task OnConnected()
-        //{
-        //    //var clientId = Context.ConnectionId;
-        //    //if (!MapClientSessions.ContainsKey(clientId))
-        //    //{
-        //    //    AlarmSystemConfigManager cfg = new AlarmSystemConfigManager();
-        //    //    MapClientSessions.Add(Context.ConnectionId, cfg);
-        //    //}
-        //    return base.OnConnected();
-        //}
-
+        
         public override Task OnDisconnected(bool stopCalled)
         {
             var clientId = Context.ConnectionId;

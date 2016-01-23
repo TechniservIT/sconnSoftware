@@ -142,13 +142,9 @@
     <Compile Include="Migrations\201601231231386_map io def standalone, image map opt.Designer.cs">
       <DependentUpon>201601231231386_map io def standalone, image map opt.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201601231235029_map io def conn to device generic.cs" />
-    <Compile Include="Migrations\201601231235029_map io def conn to device generic.Designer.cs">
-      <DependentUpon>201601231235029_map io def conn to device generic.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201601231344157_abstract io map for device optional maps from image.cs" />
-    <Compile Include="Migrations\201601231344157_abstract io map for device optional maps from image.Designer.cs">
-      <DependentUpon>201601231344157_abstract io map for device optional maps from image.cs</DependentUpon>
+    <Compile Include="Migrations\201601231413273_generic device with map defition, map def with io map defs.cs" />
+    <Compile Include="Migrations\201601231413273_generic device with map defition, map def with io map defs.Designer.cs">
+      <DependentUpon>201601231413273_generic device with map defition, map def with io map defs.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="DAL\Repository\NoSql\INoSqlDataSource.cs" />
@@ -197,11 +193,8 @@
     <EmbeddedResource Include="Migrations\201601231231386_map io def standalone, image map opt.resx">
       <DependentUpon>201601231231386_map io def standalone, image map opt.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201601231235029_map io def conn to device generic.resx">
-      <DependentUpon>201601231235029_map io def conn to device generic.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201601231344157_abstract io map for device optional maps from image.resx">
-      <DependentUpon>201601231344157_abstract io map for device optional maps from image.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201601231413273_generic device with map defition, map def with io map defs.resx">
+      <DependentUpon>201601231413273_generic device with map defition, map def with io map defs.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

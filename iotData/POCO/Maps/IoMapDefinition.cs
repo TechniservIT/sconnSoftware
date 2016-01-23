@@ -44,8 +44,24 @@ namespace iotDbConnector.DAL
         [DataMember]
         [Required]
         public virtual DeviceMapDefinition Definition { get; set; }
-     
 
+        public IoMapDefinition()
+        {
+
+        }
+        
+
+        public void Copy(IoMapDefinition other)
+        {
+            this.Description = other.Description;
+            this.DeviceId = other.DeviceId;
+            this.IoId = other.IoId;
+            this.Latitude = other.Latitude;
+            this.Longitude = other.Longitude;
+            this.Type = other.Type;
+            this.X = other.X;
+            this.Y = other.Y;
+        }
     }
 
 }

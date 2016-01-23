@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using NLog;
 using sconnConnector.POCO.Config.Abstract.IO;
 using sconnConnector.POCO.Config.sconn;
+using iotDbConnector.DAL;
 
 namespace sconnConnector.POCO.Config
 {
@@ -39,11 +40,14 @@ namespace sconnConnector.POCO.Config
         public bool Enabled { get; set; }
         public string Name { get; set; }
         public byte NameId { get; set; }
+        public DeviceIoCategory IoCategory { get; set; }
+
         private static Logger _logger = LogManager.GetCurrentClassLogger();
 
         public sconnOutput() 
         {
             Name = "Output";
+            IoCategory = DeviceIoCategory.PowerOutput;  //TODO - detect
         }
          
         public sconnOutput(byte[] rawCfg) : this()
