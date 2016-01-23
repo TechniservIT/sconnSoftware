@@ -19,6 +19,10 @@ namespace iotDbConnector.DAL
         public int IoId { get; set; }
 
         [DataMember]
+        [Required]
+        public int DeviceId { get; set; }
+
+        [DataMember]
         public string Description { get; set; }
 
         [DataMember]
@@ -32,15 +36,13 @@ namespace iotDbConnector.DAL
         public int Y { get; set; }
 
         [DataMember]
-	    [Required]
         public double Latitude { get; set; }
 
         [DataMember]
-	    [Required]
         public double Longitude { get; set; }
 
         [DataMember]
-	    [Required]
+        [Required]
         public virtual DeviceMapDefinition Definition { get; set; }
      
 

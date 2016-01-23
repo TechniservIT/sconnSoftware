@@ -673,6 +673,9 @@
     <Content Include="Areas\Site\Views\web.config" />
     <Content Include="Areas\AlarmSystem\Views\web.config" />
     <Content Include="Areas\Administration\Views\web.config" />
+    <None Include=".bin\bower.cmd" />
+    <None Include=".bin\git.cmd" />
+    <None Include=".bin\node.cmd" />
     <None Include="Areas\AlarmSystem\Views\AlarmSystemSummary\Index.cshtml" />
     <None Include="BundleTransformer.Configuration.xsd">
       <SubType>Designer</SubType>

@@ -51,8 +51,8 @@
     var markers = [], // an array containing all the markers added to the map
     markersCount = 0; // the number of the added markers
     
-    var mapIoDefninitions = [];
-    
+    //var mapIoDefninitions = [];
+    //var mapIoDefninitionCount = 0;
     
     function reloadMapCenter() {
         map.panTo(new L.LatLng(startLat, startLng));
@@ -104,7 +104,6 @@
                value.replace(/^\s+|\s+$/g, "").toLowerCase() === "true";
     }
 
-
     $(function () {
         
         hubProxy = $.connection.alarmSystemMapHub;     // the generated client-side hub proxy
@@ -115,6 +114,10 @@
 
         $.connection.hub.start().done(function () {
             hubProxy.server.getMapData(@Model.ServerId.ToString());   //intialy load map data
+
+            //load model to menu/map
+            
+
         });
 
         markers = [];   //reset
@@ -130,47 +133,45 @@
             id: 'iomap'
         }).addTo(map);
         
-    
-        
         var outputIconOff = L.ExtraMarkers.icon({
-            icon: 'fa-coffee',
+            icon: 'fa-bolt',
             markerColor: 'red',
-            shape: 'square',
+            shape: 'circle',
             prefix: 'fa'
         });
         
         var inputIconOff = L.ExtraMarkers.icon({
-            icon: 'fa-coffee',
+            icon: 'fa-eye',
             markerColor: 'red',
-            shape: 'square',
+            shape: 'circle',
             prefix: 'fa'
         });
         
         var systemIconOff = L.ExtraMarkers.icon({
-            icon: 'fa-coffee',
+            icon: 'fa-shield',
             markerColor: 'red',
-            shape: 'square',
+            shape: 'circle',
             prefix: 'fa'
         });
         
         var outputIconOn = L.ExtraMarkers.icon({
-            icon: 'fa-coffee',
+            icon: 'fa-bolt',
             markerColor: 'green',
-            shape: 'square',
+            shape: 'circle',
             prefix: 'fa'
         });
         
         var inputIconOn = L.ExtraMarkers.icon({
-            icon: 'fa-coffee',
+            icon: 'fa-eye',
             markerColor: 'green',
-            shape: 'square',
+            shape: 'circle',
             prefix: 'fa'
         });
 
         var systemIconOn = L.ExtraMarkers.icon({
-            icon: 'fa-coffee',
+            icon: 'fa-shield',
             markerColor: 'green',
-            shape: 'square',
+            shape: 'circle',
             prefix: 'fa'
         });
 
@@ -258,8 +259,10 @@
                     ioMapDefinition.Longitude = markerCoords.lng;
                     ioMapDefinition.IoId = ioId;
                     ioMapDefinition.DeviceIoCategory = ioType;
-                    ioMapDefinition.ioDeviceId = $(this).draggable().attr("data-deviceid");
+                    ioMapDefinition.DeviceId = $(this).draggable().attr("data-deviceid");
                     ioMapDefinition.Marker = markers[markersCount];
+
+                    hubModel.mapIoDefninitions.push(ioMapDefinition);
 
                     markersCount++;
                 }
@@ -269,35 +272,59 @@
         addMarkers();
 
         $('#mapsubmit').click(function () {
-            var devicemap = new Object();
-            devicemap.IoMapDefinitions = [];
+            var MapDefinition = new Object();
+            
+            //update coordiantes for io from adj markers
+            $.each(hubModel.mapIoDefninitions, function (index, value) {
+                var curPos = value.Marker.getLatLng();
+                value.Latitude = curPos.lat;   //load marker possitions 
+                value.Longitude = curPos.lng;
+                delete value.Marker;    // = null;
+            });
+            hubModel.Devices = null;
+            hubModel.Map = null;
 
-            //read current possitions for markers and load to adjacent data structs
-            for (i = 0, len = mapIoDefninitions.length; i < len; i++) {
-                var iodef = mapIoDefninitions[i];
-                iodef.Latitude = iodef.Marker.lat;
-                iodef.Longitude = iodef.Marker.lng;
-                var DevId = iodef.ioDeviceId;
-
-                devicemap.IoMapDefinitions.push(iodef);
-                markers = markers.splice(i, 1);
-
-                //load all io definitions for current device from markers
-                for (j = i+1, len = markers.length; j < len; j++) {
-                    var nmarker = markers[j];
-                    if (markers[j].ioMapDefinition.ioDeviceId == DevId) {
-                        var iodefn = mapIoDefninitions[j];
-                        iodef.Latitude = iodef.Marker.lat;
-                        iodef.Longitude = iodef.Marker.lng;
-                        devicemap.IoMapDefinitions.push(iodefn);
-                            markers = markers.splice(j, 1);
-                    }
-                }
-                i--;
-            }
-            hubModel.Map.DeviceMaps.push(devicemap);
-
+            //post all mapped io defs
             hubProxy.server.updateAlarmMap(hubModel);
+            
+            
+            
+
+            ////read current possitions for markers and load to adjacent data structs
+            //for (i = 0, len = mapIoDefninitions.length; i < len; i++) {
+            //    var iodef = mapIoDefninitions[i];
+
+            //    var devicemap = new Object();   //initialy create device for each io mapping and load all corresponding io
+            //    devicemap.IoMapDefinitions = [];
+            //    var CurrDeviceId = iodef.ioDeviceId; //load device id from first IO
+            //    devicemap.DeviceId = CurrDeviceId;
+
+            //    var curPos = iodef.Marker.getLatLng();
+            //    iodef.Latitude = curPos.lat;   //load marker possitions 
+            //    iodef.Longitude = curPos.lng;
+                
+            //    devicemap.IoMapDefinitions.push(iodef);
+            //    mapIoDefninitions = mapIoDefninitions.splice(i, 1); //remove add IO from list
+
+            //    //load all io definitions for current device from markers
+            //    for (j = i, len = mapIoDefninitions.length; j < len; j++) {
+            //        var iodefn = mapIoDefninitions[j];
+            //       // var nmarker = markers[j];
+            //        if (iodefn.ioDeviceId == CurrDeviceId) {
+            //            var curPosN = iodefn.Marker.getLatLng();
+            //            iodef.Latitude = curPosN.lat;   //load marker possitions 
+            //            iodef.Longitude = curPosN.lng;
+            //            devicemap.IoMapDefinitions.push(iodefn);
+            //            mapIoDefninitions = mapIoDefninitions.splice(j, 1);  //remove add IO from list
+            //            j=0;  //start from the beggining
+            //        }
+            //    }
+            //    MapDefinition.DeviceMaps.push(devicemap);
+            //    i=0;    //start from the beggining
+            //}
+
+            //hubModel.Map = MapDefinition;
+            //hubProxy.server.updateAlarmMap(hubModel);
         });
 
         

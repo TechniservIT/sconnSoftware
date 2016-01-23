@@ -138,6 +138,18 @@
     <Compile Include="Migrations\201601181338388_relay value as bool.Designer.cs">
       <DependentUpon>201601181338388_relay value as bool.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201601231231386_map io def standalone, image map opt.cs" />
+    <Compile Include="Migrations\201601231231386_map io def standalone, image map opt.Designer.cs">
+      <DependentUpon>201601231231386_map io def standalone, image map opt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201601231235029_map io def conn to device generic.cs" />
+    <Compile Include="Migrations\201601231235029_map io def conn to device generic.Designer.cs">
+      <DependentUpon>201601231235029_map io def conn to device generic.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201601231344157_abstract io map for device optional maps from image.cs" />
+    <Compile Include="Migrations\201601231344157_abstract io map for device optional maps from image.Designer.cs">
+      <DependentUpon>201601231344157_abstract io map for device optional maps from image.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="DAL\Repository\NoSql\INoSqlDataSource.cs" />
     <Compile Include="DAL\Repository\NoSql\MongoNoSqlDataSource.cs" />
@@ -181,6 +193,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201601181338388_relay value as bool.resx">
       <DependentUpon>201601181338388_relay value as bool.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601231231386_map io def standalone, image map opt.resx">
+      <DependentUpon>201601231231386_map io def standalone, image map opt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601231235029_map io def conn to device generic.resx">
+      <DependentUpon>201601231235029_map io def conn to device generic.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601231344157_abstract io map for device optional maps from image.resx">
+      <DependentUpon>201601231344157_abstract io map for device optional maps from image.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

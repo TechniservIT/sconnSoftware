@@ -26,8 +26,21 @@ namespace iotDbConnector.DAL
         [Required]
         public DeviceCategory Type { get; set; }
 
+
         [DataMember]
         [Required]
+        public virtual Device Device { get; set; }
+
+
+        /**********  Emap from image *********/
+        [DataMember]
+        public bool IsImageMap { get; set; }
+
+        [DataMember]
+        public string ImageMapUrl { get; set; }
+
+
+        [DataMember]
         public virtual MapDefinition Definition { get; set; }
 
         [DataMember]
