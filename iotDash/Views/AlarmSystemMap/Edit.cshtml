@@ -29,12 +29,6 @@
     ViewBag.Title = "Index";
 }
 
-@if (Model.Config != null)
-{
-    <h2>@Model.Config.Name</h2>
-}
-
-
 <script type="text/javascript">
 
     /*
@@ -46,7 +40,9 @@
     var startLat;
     var startLng;
     var map;
+    var mapInternal;
     var IoIcon;
+    var mapImageActivated;
 
     var markers = [], // an array containing all the markers added to the map
     markersCount = 0; // the number of the added markers
@@ -114,9 +110,47 @@
         reloadMapCenter();
     }
 
-    function loadMarkersDataFromModel(model)
-    {
+    function loadMarkersDataFromModel(model) {
 
+    }
+
+    function reloadMap() {
+
+    }
+
+    function loadMapFromImageUrlModel() {
+        var mapCenter = [startLat, startLng];
+
+        var mapInternal = L.map('mapInternal', {
+            maxZoom: 30,
+            minZoom: 1,
+            drawControl: true,
+            crs: L.CRS.Simple
+        }).setView([0, 0], 1);
+
+        map.setMaxBounds(new L.LatLngBounds([0, 400], [400, 0]));
+
+        var imageUrl = '/Content/img/MikolowSM.png'
+        var imageBounds = [[200, 0], [0, 200]];
+
+        L.imageOverlay(imageUrl, imageBounds).addTo(mapInternal);
+
+        //mapInternal = L.map('mapInternal', { center: mapCenter, zoom: 18, drawControl: true });
+        //L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+        //    maxZoom: 24,
+        //    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+        //    id: 'iomap'
+        //}).addTo(mapInternal);
+    }
+
+    function loadMapFromGeoCordsModel() {
+        var mapCenter = [startLat, startLng];
+        map = L.map('map', { center: mapCenter, zoom: 18, drawControl: true });
+        L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+            maxZoom: 24,
+            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+            id: 'iomap'
+        }).addTo(map);
     }
 
     /**************** FILE UPLOAD *************/
@@ -158,25 +192,9 @@
 
         startLat = 49.78395;
         startLng = 19.05815;
-        var mapCenter = [startLat, startLng];
-        map = L.map('map', { center: mapCenter, zoom: 18, drawControl: true });
-        L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-            maxZoom: 24,
-            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-            id: 'iomap'
-        }).addTo(map);
 
-        // Initialise the FeatureGroup to store editable layers
-        var drawnItems = new L.FeatureGroup();
-        map.addLayer(drawnItems);
-
-        // Initialise the draw control and pass it the FeatureGroup of editable layers
-        var drawControl = new L.Control.Draw({
-            edit: {
-                featureGroup: drawnItems
-            }
-        });
-        map.addControl(drawControl);
+        loadMapFromGeoCordsModel();
+        loadMapFromImageUrlModel();
 
 
         map.on('draw:edited', function (e) {
@@ -235,7 +253,7 @@
                         else {
                             ioIcon = outputIconOff;
                         }
-                        iconIoControllContent = $('#ioCtrlSwitch-'+ioId).html();
+                        iconIoControllContent = $('#ioCtrlSwitch-' + ioId).html();
                     }
                     else if (draggableId.indexOf('input') > -1) {
                         ioIcon = inputIconOff;
@@ -284,7 +302,7 @@
         addMarkers();
 
         $('#mapsubmit').click(function () {
-          //  var MapDefinition = new Object();
+            //  var MapDefinition = new Object();
 
             //update coordiantes for io from adj markers
             $.each(hubModel.MapDefinition.IoMapDefinitions, function (index, value) {
@@ -314,8 +332,7 @@
         /********** Hub/Model ****************/
 
         hubProxy = $.connection.alarmSystemMapHub;     // the generated client-side hub proxy
-        hubProxy.client.updateMap = function (mapData)
-        {
+        hubProxy.client.updateMap = function (mapData) {
             hubModel = mapData;
 
             //load model to menu/map
@@ -469,9 +486,10 @@
     <div class="row">
 
         <div class="panel panel-default">
+
             <div class="panel-heading">
                 <center>
-                    <h2>Status</h2>
+                    <h2>System map</h2>
                 </center>
             </div>
 
@@ -480,57 +498,69 @@
 
                 <div class="row">
 
-                    @using (Html.BeginForm("Edit", "AlarmSystemView"))
-                    {
-                        <fieldset>
-
-                            <legend>Global config</legend>
-
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.Config.Name)
-                                @Html.EditorFor(model => model.Config.Name, new { @class = "form-control" })
-                            </div>
-
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.Config.Lat)
-                                @Html.TextBoxFor(model => model.Config.Lat, new { @class = "form-control" })
-                            </div>
-
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.Config.Lng)
-                                @Html.TextBoxFor(model => model.Config.Lng, new { @class = "form-control" })
-                            </div>
-
-
-
-                            <div class="form-group">
-                                <button class="btn btn-primary" type="submit">Save</button>
-                            </div>
-
-                        </fieldset>
-                    }
-                </div>
-
-                <br />
-
-                <br />
-
-
-
-                <div class="row">
-
-                    <legend>System map</legend>
-
                     <div class="col-lg-8 col-sm-8 col-xs-12 center-block">
 
-                        <div class="map_container">
-                            <div id="map_canvas" class="map_canvas">
-                                <div class="form-group">
-                                    <div id="map" style="height: 400px">
+                        <div role="tabpanel">
+                            <ul class="nav nav-tabs" role="tablist" id="actionselector">
+                                <li role="presentation" style="width: 50%;" class="">
+                                    <a aria-expanded="false" href="#tabStatus" aria-controls="tabStatus" role="tab" data-toggle="tab">Geographic</a>
+                                </li>
+                                <li class="active" role="presentation" style="width:50%;">
+                                    <a aria-expanded="true" href="#tabConfigure" aria-controls="tabConfigure" role="tab" data-toggle="tab">Plans</a>
+                                </li>
+                            </ul>
+
+                            <div class="tab-content">
+
+                                <div role="tabpanel" class="tab-pane" id="tabStatus">
+                                    <div class="container-fluid">
+
+
+                                        <div class="row">
+                                            <div class="map_container">
+                                                <div id="map_canvas" class="map_canvas">
+                                                    <div class="form-group">
+                                                        <div id="map" style="height: 400px">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div role="tabpanel" class="tab-pane active" id="tabConfigure">
+                                    <div class="container-fluid">
+
+                                        <div class="row">
+                                            <div class="map_container">
+                                                <div id="map_canvas" class="map_canvas">
+                                                    <div class="form-group">
+                                                        <div id="mapInternal" style="height: 400px">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="row">
+                                            
+                                            <div class="form-group">
+                                                <label for="mapImageViewUrl">Image Url</label>
+                                                <input type="text" class="form-control" id="mapImageViewUrl">
+                                            </div>
+
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
+
                         </div>
+
+
 
                     </div>
 
@@ -612,19 +642,7 @@
                 </div>
 
 
-                <div class="row">
 
-                    <div class="form-group">
-                        <label for="mapEnableImageView">Emap image</label>
-                        <input type="checkbox" class="form-control" id="mapEnableImageView">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="mapImageViewUrl">Image Url</label>
-                        <input type="text" class="form-control" id="mapImageViewUrl">
-                    </div>
-
-                </div>
 
                 <div class="row">
                     <div class="form-group">
@@ -638,59 +656,7 @@
 
     </div>
 
-    <div class="row">
 
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <center>
-                    <h2>Firmware upload</h2>
-                </center>
-            </div>
-
-
-            <div class="panel-body">
-                @using (Html.BeginForm("Upload", "AlarmSystemView", FormMethod.Post, new { enctype = "multipart/form-data" }))
-                {
-
-                    <div class="form-group" style="position: relative;">
-                        <a class='btn btn-primary' href='javascript:;'>
-                            Choose File...
-                            <input type="file" style='position: absolute; z-index: 2; top: 0; left: 0; filter: alpha(opacity=0); -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"; opacity: 0; background-color: transparent; color: transparent;' name="file_source" size="40" onchange='$("#upload-file-info").html($(this).val());'>
-                        </a>
-                        &nbsp;
-                        <span class='label label-info' id="upload-file-info"></span>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="form-group">
-                            <button class="btn btn-primary" type="submit">Send</button>
-                        </div>
-                    </div>
-
-                        <div class="form-group">
-                            Sending...
-                            <div class="progress">
-                                <div class="progress-bar progress-bar-succcess" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-                                    100%
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            Veryfing...
-                            <div class="progress">
-
-                                <div class="progress-bar progress-bar-warning progress-bar-striped" role="progressbar" aria-valuenow="11" aria-valuemin="0" aria-valuemax="100" style="width: 11%;">
-                                    20%
-                                </div>
-                            </div>
-                        </div>
-                }
-            </div>
-
-        </div>
-
-    </div>
 
 
 

@@ -4,6 +4,7 @@ using iotDash.Areas.AlarmSystem.Models;
 using iotDash.Controllers.domain.site.AlarmSystem.Abstract;
 using iotDash.Identity.Attributes;
 using iotDash.Session;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,8 @@ namespace iotDash.Controllers.domain.site.AlarmSystem
     public class AlarmSystemMapController : AlarmSystemControllerBase, IAlarmSystemController
     {
         private GlobalConfigService _provider;
+        private static Logger _logger = LogManager.GetCurrentClassLogger();
+
 
         public AlarmSystemMapController(HttpContextBase contBase) : base(contBase)
         {
@@ -47,6 +50,7 @@ namespace iotDash.Controllers.domain.site.AlarmSystem
             }
             catch (Exception e)
             {
+                _logger.Error(e, e.Message);
             }
             return View();
         }

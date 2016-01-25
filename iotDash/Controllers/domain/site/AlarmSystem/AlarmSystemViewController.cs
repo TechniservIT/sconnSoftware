@@ -23,6 +23,7 @@ using Microsoft.Ajax.Utilities;
 using sconnConnector.POCO.Config.sconn;
 using System.Web.Helpers;
 using Newtonsoft.Json;
+using NLog;
 
 namespace iotDash.Controllers.domain.site.AlarmSystem
 {
@@ -30,7 +31,9 @@ namespace iotDash.Controllers.domain.site.AlarmSystem
     public class AlarmSystemViewController : AlarmSystemControllerBase, IAlarmSystemController
     {
         private GlobalConfigService _provider;
-        
+        private static Logger _logger = LogManager.GetCurrentClassLogger();
+
+
         public AlarmSystemViewController(HttpContextBase contBase) : base(contBase)
         {}
 
@@ -46,6 +49,8 @@ namespace iotDash.Controllers.domain.site.AlarmSystem
             }
             catch (Exception e)
             {
+
+                _logger.Error(e, e.Message);
             }
             return View();
         }
@@ -64,6 +69,8 @@ namespace iotDash.Controllers.domain.site.AlarmSystem
             }
             catch (Exception e)
             {
+
+                _logger.Error(e, e.Message);
             }
             return View();
         }
@@ -81,9 +88,19 @@ namespace iotDash.Controllers.domain.site.AlarmSystem
         // GET: AlarmSystemView
         public ActionResult Device(int DeviceId)
         {
-            var provider = new DeviceConfigService(DomainSession.GetAlarmConfigForContextWithDeviceId(this.HttpContext, DeviceId));
-            AlarmSystemDetailModel model = new AlarmSystemDetailModel(provider.Get());
-            model.ServerId = DeviceId;
+            AlarmSystemDetailModel model = null;
+            try
+            {
+                var provider = new DeviceConfigService(DomainSession.GetAlarmConfigForContextWithDeviceId(this.HttpContext, DeviceId));
+                model = new AlarmSystemDetailModel(provider.Get());
+                model.ServerId = DeviceId;
+            }
+            catch (Exception e)
+            {
+
+                _logger.Error(e, e.Message);
+            }
+
             return View(model);
         }
         

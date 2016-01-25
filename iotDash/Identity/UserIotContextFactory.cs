@@ -6,11 +6,15 @@ using iotDash.Models;
 using iotDatabaseConnector.DAL.Repository.Connector.Entity;
 using iotDbConnector.DAL;
 using Moq;
+using NLog;
 
 namespace iotDash.Identity
 {
     public static class UserIotContextFactory
     {
+        private static Logger _logger = LogManager.GetCurrentClassLogger();
+
+
         public static IIotContextBase GetContextForUser(ApplicationUser user)
         {
             try
@@ -18,10 +22,10 @@ namespace iotDash.Identity
                 IIotContextBase cont = new iotContext(user.DomainId);
                 return cont;
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                    
-                throw;
+                _logger.Error(e, e.Message);
+                return null;
             }
         }
 
@@ -35,10 +39,10 @@ namespace iotDash.Identity
                 icont.Fake();
                 return icont;
             }
-            catch (Exception)
+            catch (Exception e)
             {
-
-                throw;
+                _logger.Error(e, e.Message);
+                return null;
             }
         }
 
@@ -53,10 +57,10 @@ namespace iotDash.Identity
                 IIotContextBase icont = new iotContext(currentUser.DomainId);
                 return icont;
             }
-            catch (Exception)
+            catch (Exception e)
             {
-
-                throw;
+                _logger.Error(e, e.Message);
+                return null;
             }
         }
 

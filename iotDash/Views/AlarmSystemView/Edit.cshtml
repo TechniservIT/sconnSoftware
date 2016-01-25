@@ -126,7 +126,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <center>
-                    <h2>Status</h2>
+                    <h2>Global config</h2>
                 </center>
             </div>
 
@@ -138,8 +138,6 @@
                         @using (Html.BeginForm("Edit", "AlarmSystemView"))
                         {
                             <fieldset>
-
-                                <legend>Global config</legend>
 
                                 <div class="form-group">
                                     @Html.LabelFor(model => model.Config.Name)

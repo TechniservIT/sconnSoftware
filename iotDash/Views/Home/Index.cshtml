@@ -1,56 +1,448 @@
-﻿@{
-    ViewBag.Title = "Home Page";
-}
-
-@*@{
-    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
-}*@
-
+﻿
+@Scripts.Render("~/bundles/jquery")
 @Scripts.Render("~/bundles/jqueryui")
+@Scripts.Render("~/bundles/jqueryval")
+
+@Scripts.Render("~/bundles/modernizr")
+
+@Scripts.Render("~/bundles/bootstrap")
+@Scripts.Render("~/bundles/bootstrap-formhelpers")
+
+
 @Scripts.Render("~/bundles/fullpage")
+
+
+
+@Styles.Render("~/bundles/css")
 @Styles.Render("~/bundles/css/fullpage")
 
 
 
 @*<div class="jumbotron">
-    <h1>iotDash</h1>
-    <p class="lead">iotDash is a free online administration tool for managing IoT devices.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
-</div>*@
+        <h1>iotDash</h1>
+        <p class="lead">iotDash is a free online administration tool for managing IoT devices.</p>
+        <p><a href="http://asp.net" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
+    </div>*@
 
-<script>
+<script type="text/javascript">
+
 
     $(document).ready(function () {
-        $('#fullpage').fullpage();
+        $("#demosMenu").change(function () {
+            window.location.href = $(this).find("option:selected").attr("id") + '.html';
+        });
     });
 
+
+    $(document).ready(function () {
+        $('#fullpage').fullpage({
+            sectionsColor: ['whitesmoke', 'whitesmoke', 'whitesmoke'],
+            anchors: ['firstPage', 'secondPage', '3rdPage'],
+            menu: '#menu',
+            scrollingSpeed: 1000
+        });
+
+    });
 </script>
+
+
+<style>
+    /*.modal-dialog {
+        width: 100%;
+        height: 50%;
+        padding: 0;
+    }
+
+    .modal-content {
+        height: 100%;
+        border-radius: 0;
+        background-color: deepskyblue;
+    }*/
+
+
+    /* Sections
+         * --------------------------------------- */
+    #section0 img,
+    #section1 img {
+        margin: 20px 0 0 0;
+    }
+
+    #section2 img {
+        margin: 20px 0 0 52px;
+    }
+
+    #section3 img {
+        bottom: 0px;
+        position: absolute;
+        margin-left: -420px;
+    }
+
+    .intro p {
+        width: 50%;
+        margin: 0 auto;
+        font-size: 1.5em;
+    }
+
+    .twitter-share-button {
+        position: absolute;
+        z-index: 99;
+        right: 149px;
+        top: 9px;
+    }
+
+    .sectionimg {
+        border: 0 none;
+        display: inline-block;
+        height: auto;
+        max-width: 400px;
+        vertical-align: middle;
+    }
+
+
+    /* Reset CSS
+         * --------------------------------------- */
+    body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre,
+    form, fieldset, input, textarea, p, blockquote, th, td {
+        padding: 0;
+        margin: 0;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    table {
+        border-spacing: 0;
+    }
+
+    fieldset, img {
+        border: 0;
+    }
+
+    address, caption, cite, code, dfn, em, strong, th, var {
+        font-weight: normal;
+        font-style: normal;
+    }
+
+    strong {
+        font-weight: bold;
+    }
+
+    ol, ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    caption, th {
+        text-align: left;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-weight: normal;
+        font-size: 100%;
+        margin: 0;
+        padding: 0;
+        color: #444;
+    }
+
+    q:before, q:after {
+        content: '';
+    }
+
+    abbr, acronym {
+        border: 0;
+    }
+
+
+    /* Custom CSS
+         * --------------------------------------- */
+    body {
+        font-family: arial,helvetica;
+        color: #333;
+        color: rgba(0,0,0,0.5);
+    }
+
+    .wrap {
+        margin-left: auto;
+        margin-right: auto;
+        width: 960px;
+        position: relative;
+    }
+
+    h1 {
+        font-size: 6em;
+    }
+
+    p {
+        font-size: 2em;
+    }
+
+    .intro p {
+        width: 50%;
+        margin: 0 auto;
+        font-size: 1.5em;
+    }
+
+    .section {
+        text-align: center;
+    }
+
+    #menu li {
+        display: inline-block;
+        margin: 10px;
+        color: #000;
+        background: #fff;
+        background: rgba(255,255,255, 0.5);
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+    }
+
+        #menu li.active {
+            background: #666;
+            background: rgba(0,0,0, 0.5);
+            color: #fff;
+        }
+
+        #menu li a {
+            text-decoration: none;
+            color: #000;
+        }
+
+        #menu li.active a:hover {
+            color: #000;
+        }
+
+        #menu li:hover {
+            background: rgba(255,255,255, 0.8);
+        }
+
+        #menu li a,
+        #menu li.active a {
+            padding: 9px 18px;
+            display: block;
+        }
+
+        #menu li.active a {
+            color: #fff;
+        }
+
+    #menu {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 40px;
+        z-index: 70;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+    }
+
+    .twitter-share-button {
+        position: fixed;
+        z-index: 99;
+        right: 149px;
+        top: 9px;
+    }
+
+    #download {
+        margin: 10px 0 0 0;
+        padding: 15px 10px;
+        color: #fff;
+        text-shadow: 0 -1px 0 rgba(0,0,0,0.25);
+        background-color: #49afcd;
+        background-image: -moz-linear-gradient(top, #5bc0de, #2f96b4);
+        background-image: -ms-linear-gradient(top, #5bc0de, #2f96b4);
+        background-image: -webkit-gradient(linear,0 0,0 100%,from( #5bc0de),to( #2f96b4));
+        background-image: -webkit-linear-gradient(top, #5bc0de, #2f96b4);
+        background-image: -o-linear-gradient(top, #5bc0de, #2f96b4);
+        background-image: linear-gradient(top, #5bc0de, #2f96b4);
+        background-repeat: repeat-x;
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#5bc0de', endColorstr='#2f96b4', GradientType=0);
+        border-color: #2f96b4 #2f96b4 #1f6377;
+        border-color: rgba(0,0,0,.1) rgba(0,0,0,.1) rgba(0,0,0,.25);
+        filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+        -webkit-border-radius: 6px;
+        -moz-border-radius: 6px;
+        border-radius: 6px;
+        vertical-align: middle;
+        cursor: pointer;
+        display: inline-block;
+        -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);
+        -moz-box-shadow: inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);
+    }
+
+        #download a {
+            text-decoration: none;
+            color: #fff;
+        }
+
+        #download:hover {
+            text-shadow: 0 -1px 0 rgba(0,0,0,.25);
+            background-color: #2F96B4;
+            background-position: 0 -15px;
+            -webkit-transition: background-position .1s linear;
+            -moz-transition: background-position .1s linear;
+            -ms-transition: background-position .1s linear;
+            -o-transition: background-position .1s linear;
+            transition: background-position .1s linear;
+        }
+
+    #infoMenu {
+        height: 20px;
+        color: #f2f2f2;
+        position: fixed;
+        z-index: 70;
+        bottom: 0;
+        width: 100%;
+        text-align: right;
+        font-size: 0.9em;
+        padding: 8px 0 8px 0;
+    }
+
+        #infoMenu ul {
+            padding: 0 40px;
+        }
+
+        #infoMenu li a {
+            display: block;
+            margin: 0 22px 0 0;
+            color: #333;
+        }
+
+            #infoMenu li a:hover {
+                text-decoration: underline;
+            }
+
+        #infoMenu li {
+            display: inline-block;
+            position: relative;
+        }
+
+    #examplesList {
+        display: none;
+        background: #282828;
+        -webkit-border-radius: 6px;
+        -moz-border-radius: 6px;
+        border-radius: 6px;
+        padding: 20px;
+        float: left;
+        position: absolute;
+        bottom: 29px;
+        right: 0;
+        width: 638px;
+        text-align: left;
+    }
+
+        #examplesList ul {
+            padding: 0;
+        }
+
+            #examplesList ul li {
+                display: block;
+                margin: 5px 0;
+            }
+
+                #examplesList ul li a {
+                    color: #BDBDBD;
+                    margin: 0;
+                }
+
+                    #examplesList ul li a:hover {
+                        color: #f2f2f2;
+                    }
+
+        #examplesList .column {
+            float: left;
+            margin: 0 20px 0 0;
+        }
+
+        #examplesList h3 {
+            color: #f2f2f2;
+            font-size: 1.2em;
+            margin: 0 0 15px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+            -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1);
+            -moz-box-shadow: 0 1px 0 rgba(255,255,255,0.1);
+            box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1);
+            padding: 0 0 5px 0;
+        }
+
+
+
+    /* Demos Menu
+         * --------------------------------------- */
+    #demosMenu {
+        position: fixed;
+        bottom: 10px;
+        right: 10px;
+        z-index: 999;
+    }
+</style>
+
+<!--[if IE]>
+    <script type="text/javascript">
+         var console = { log: function() {} };
+    </script>
+<![endif]-->
+}
+
+
+</style>
+
 
 <div class="row">
 
+
+    <ul id="menu">
+        <li data-menuanchor="firstPage"><a href="#firstPage">First slide</a></li>
+        <li data-menuanchor="secondPage"><a href="#secondPage">Second slide</a></li>
+        <li data-menuanchor="3rdPage"><a href="#3rdPage">Third slide</a></li>
+        <li data-menuanchor="4thpage"><a href="#4thpage">Fourth slide</a></li>
+    </ul>
+
+
     <div id="fullpage">
-        <div class="section">Multi protocol</div>
-        <div class="section">Easy setup</div>
-        <div class="section">Logic gateway</div>
-    </div>
 
-    @*<div class="col-md-4">
-        <h2>Multi protocol</h2>
-        <p>
-            iotDash support major IoT protocols including MQTT, AllJoyn, CoAP.
-        </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Easy setup</h2>
-        <p>Connection wizards alow for quick setup of systems.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Logic gateway</h2>
-        <p>Application allows for defining custom M2M event driven logic for supported protocols.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>*@
+        <div class="section" id="section0">
+            <h1>IoT protocols</h1>
+            <p>iotDash support major IoT protocols including MQTT, AllJoyn, CoAP.</p>
+            <img class="img-fluid sectionimg" src="/Content/img/wwwprotocol.png" alt="fullPage" />
+        </div>
 
+        <div class="section" id="section1">
+
+            <div class="slide">
+                <div class="intro">
+                    <h1>Alarm system</h1>
+                    <p>Advanced alarm system managment. </p>
+                    <p> Configure, view and act on your alarm system. </p>
+                    <p>  Geolocation with emaps for any objects.</p>
+                    <img class="img-fluid sectionimg" src="/Content/img/wwwalarm.png" alt="slider" />
+                </div>
+            </div>
+
+            <div class="slide">
+                <div class="intro">
+                    <h1>Alarm system</h1>
+                    <p></p>
+                    <img class="img-fluid sectionimg" src="/Content/img/wwwalarm.png" alt="slider" />
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="section" id="section2">
+            <h1>Global</h1>
+            <p>Enterprise level asset managment.</p>
+            <img class="img-fluid sectionimg" src="/Content/img/wwwmap.png" alt="fullPage" />
+        </div>
+
+
+    </div>
 
 </div>
+
+
