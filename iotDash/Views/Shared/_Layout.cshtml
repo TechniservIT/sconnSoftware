@@ -14,7 +14,7 @@
 
     @RenderSection("scripts", required: false)
 
-    <script>
+    @*<script>
 
         function startTime() {
             var today = new Date();
@@ -32,13 +32,12 @@
             return i;
         }
 
-
         $(function () {
            // alert("startin timer");
             startTime();
         });
 
-    </script>
+    </script>*@
 
 </head>
 <body>
@@ -61,7 +60,7 @@
 
                 <div class="navbar-collapse collapse">
 
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <ul class="nav navbar-nav">
 
                             @if (Request.IsAuthenticated)
@@ -78,11 +77,11 @@
                         </ul>
                     </div>
 
-                    <div class="col-md-2">
+                    @*<div class="col-md-2">
                         <center>
                             <div class="pull-left" style="color: #64F0FE; padding: 15px;" id="menuTimer"></div>
                         </center>
-                    </div>
+                    </div>*@
 
                     <div class="col-md-4">
                         @Html.Partial("_LoginPartial")

@@ -159,13 +159,45 @@
         startLat = 49.78395;
         startLng = 19.05815;
         var mapCenter = [startLat, startLng];
-        map = L.map('map', { center: mapCenter, zoom: 18 });
+        map = L.map('map', { center: mapCenter, zoom: 18, drawControl: true });
         L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
             maxZoom: 24,
             attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
             id: 'iomap'
         }).addTo(map);
 
+        // Initialise the FeatureGroup to store editable layers
+        var drawnItems = new L.FeatureGroup();
+        map.addLayer(drawnItems);
+
+        // Initialise the draw control and pass it the FeatureGroup of editable layers
+        var drawControl = new L.Control.Draw({
+            edit: {
+                featureGroup: drawnItems
+            }
+        });
+        map.addControl(drawControl);
+
+
+        map.on('draw:edited', function (e) {
+            var layers = e.layers;
+            layers.eachLayer(function (layer) {
+                //do whatever you want, most likely save back to db
+            });
+        });
+
+
+        map.on('draw:created', function (e) {
+            var type = e.layerType,
+                layer = e.layer;
+
+            if (type === 'marker') {
+                // Do marker specific actions
+            }
+
+            // Do whatever else you need to. (save to db, add to map etc)
+            map.addLayer(layer);
+        });
 
         L.icon = function (options) {
             return new L.Icon(options);
@@ -174,7 +206,7 @@
 
         // Dragging and dropping the markers to the map
         var addMarkers = function () {
-
+            
             // The position of the marker icon
             var posTop = $('.draggable-marker').css('top'),
             posLeft = $('.draggable-marker').css('left');
@@ -279,48 +311,6 @@
         });
 
 
-        var MapMarkerFromData = function (ioMapDefinition) {
-
-            var draggableId = ioMapDefinition.IoId;
-            var ioId = ioMapDefinition.IoId;
-            var ioType = ioMapDefinition.DeviceIoCategory;
-
-            //var ioVal = parseBool(ioMapDefinition.DeviceIoCategory);
-
-            var positionMapX = $("#map").offset().left - $(window).scrollLeft();
-            var positionMapY = $("#map").offset().top - $(window).scrollTop();
-            var iconIoControllContent = "";
-
-            var ioIcon;
-            if (ioType == 1) {
-                if (ioVal) {
-                    ioIcon = outputIconOn;
-                }
-                else {
-                    ioIcon = outputIconOff;
-                }
-                iconIoControllContent = $('#ioCtrlSwitch-' + ioId).html();
-            }
-            else if (ioType == 2) {
-                ioIcon = inputIcon;
-            }
-            else if (ioType==3) {
-                ioIcon = outputIcon;
-                iconIoControllContent = $('#ioCtrlSwitch-' + ioId).html();
-            }
-
-            point = L.point(ioMapDefinition.Latitude, ioMapDefinition.Longitude), // createing a Point object with the given x and y coordinates
-            markerCoords = map.containerPointToLatLng(point); // getting the geographical coordinates of the point
-            var innerPopupContent = "<div>" + ioId + "</div> <div>" + iconIoControllContent + "</div>";
-
-            // Creating a new marker and adding it to the map
-            markers[markersCount] = L.marker([markerCoords.lat, markerCoords.lng], {
-                draggable: true,
-                icon: ioIcon
-            }).addTo(map).bindPopup(innerPopupContent);
-
-        };
-
         /********** Hub/Model ****************/
 
         hubProxy = $.connection.alarmSystemMapHub;     // the generated client-side hub proxy
@@ -337,9 +327,6 @@
                 var ioType = ioMapDefinition.Type;
 
                 var ioVal = 0;  //parseBool(ioMapDefinition.DeviceIoCategory);
-
-                var positionMapX = $("#map").offset().left - $(window).scrollLeft();
-                var positionMapY = $("#map").offset().top - $(window).scrollTop();
                 var iconIoControllContent = "";
 
                 var ioIcon;
@@ -372,21 +359,14 @@
                         ioIcon = systemIconOff;
                     }
                 }
-
-                point = L.point(ioMapDefinition.Latitude, ioMapDefinition.Longitude), // createing a Point object with the given x and y coordinates
-                markerCoords = map.containerPointToLatLng(point); // getting the geographical coordinates of the point
                 var innerPopupContent = "<div>" + ioId + "</div> <div>" + iconIoControllContent + "</div>";
-
-                // Creating a new marker and adding it to the map
-                markers[markersCount] = L.marker([markerCoords.lat, markerCoords.lng], {
+                markers[markersCount] = L.marker([ioMapDefinition.Latitude, ioMapDefinition.Longitude], {
                     draggable: true,
                     icon: ioIcon
                 }).addTo(map).bindPopup(innerPopupContent);
-
+                markersCount++;
 
             });
-
-
         }
 
         $.connection.hub.start().done(function () {
@@ -499,52 +479,50 @@
             <div class="panel-body">
 
                 <div class="row">
-                    <table class="table">
 
-                        <tr>
-                            <td>Armed</td>
-                            <td><span class='@SpanClassForArmStatusDisplay()'>@DescForArmStatusDisplay()</span></td>
-                        </tr>
+                        @using (Html.BeginForm("Edit", "AlarmSystemView"))
+                        {
+                            <fieldset>
 
-                        <tr>
-                            <td>Violation</td>
-                            <td><span class='@SpanClassForViolationStatusDisplay()'>@DescForViolationStatusDisplay()</span></td>
-                        </tr>
+                                <legend>Global config</legend>
 
-                        <tr>
-                            <td>Failure</td>
-                            <td><span>@Model.Config.Failure.ToString()</span></td>
-                        </tr>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Config.Name)
+                                    @Html.EditorFor(model => model.Config.Name, new { @class = "form-control" })
+                                </div>
 
-                        <tr>
-                            <td>Device Number</td>
-                            <td>@Model.Config.Devices</td>
-                        </tr>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Config.Lat)
+                                    @Html.TextBoxFor(model => model.Config.Lat, new { @class = "form-control" })
+                                </div>
 
-                        <tr>
-                            <td>Zones</td>
-                            <td><span>@Model.Config.Zones.ToString()</span></td>
-                        </tr>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Config.Lng)
+                                    @Html.TextBoxFor(model => model.Config.Lng, new { @class = "form-control" })
+                                </div>
 
-                        <tr>
-                            <td>Latitude</td>
-                            <td><span>@Model.Config.Lat.ToString()</span></td>
-                        </tr>
 
-                        <tr>
-                            <td>Longitude</td>
-                            <td><span>@Model.Config.Lng.ToString()</span></td>
-                        </tr>
 
-                    </table>
+                                <div class="form-group">
+                                    <button class="btn btn-primary" type="submit">Save</button>
+                                </div>
+                                
+                                </fieldset>
+                        }
+                 </div>
 
-                </div>
+                <br />
+
+                <br />
+
 
 
                 <div class="row">
 
+                    <legend>System map</legend>
 
                     <div class="col-lg-8 col-sm-8 col-xs-12 center-block">
+
                         <div class="map_container">
                             <div id="map_canvas" class="map_canvas">
                                 <div class="form-group">
@@ -556,13 +534,12 @@
 
                     </div>
 
-                    <style>
-                        .iomenuItem {
-                            background-color: aqua;
-                        }
-                    </style>
-
                     <div class="col-lg-4 col-sm-4 col-xs-12 center-block">
+
+                        <div class="row">
+
+                        </div>
+
 
                         <ul class="pull-right nav nav-pills nav-stacked right-menu" id="stacked-menu">
 
@@ -629,15 +606,34 @@
 
                         </ul>
 
-                        <div class="form-group">
-                            <button id="mapsubmit" class="btn btn-primary" type="submit">Save</button>
-                        </div>
 
                     </div>
+
                 </div>
 
 
+                <div class="row">
+
+                    <div class="form-group">
+                        <label for="mapEnableImageView">Emap image</label>
+                        <input type="checkbox" class="form-control" id="mapEnableImageView">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="mapImageViewUrl">Image Url</label>
+                        <input type="text" class="form-control" id="mapImageViewUrl">
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="form-group">
+                        <button id="mapsubmit" class="btn btn-primary" type="submit">Save</button>
+                    </div>
+                </div>
+
             </div>
+
         </div>
 
     </div>

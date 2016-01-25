@@ -232,7 +232,7 @@
                     ioMapDefinition.Latitude = markerCoords.lat;
                     ioMapDefinition.Longitude = markerCoords.lng;
                     ioMapDefinition.IoId = ioId;
-                    ioMapDefinition.DeviceIoCategory = ioType;
+                    ioMapDefinition.Type = ioType;
                     ioMapDefinition.DeviceId = $(this).draggable().attr("data-deviceid");
 
                     //  ioMapDefinition.Marker = markers[markersCount];
@@ -265,62 +265,16 @@
 
         });
 
-
-
         getLocation();  //async get location
 
         $('.iomenutoggle').on('click', function (e) {
             e.preventDefault();
         });
 
-
-        var MapMarkerFromData = function (ioMapDefinition) {
-
-            var draggableId = ioMapDefinition.IoId;
-            var ioId = ioMapDefinition.IoId;
-            var ioType = ioMapDefinition.DeviceIoCategory;
-
-            //var ioVal = parseBool(ioMapDefinition.DeviceIoCategory);
-
-            var positionMapX = $("#map").offset().left - $(window).scrollLeft();
-            var positionMapY = $("#map").offset().top - $(window).scrollTop();
-            var iconIoControllContent = "";
-
-            var ioIcon;
-            if (ioType == 1) {
-                if (ioVal) {
-                    ioIcon = outputIconOn;
-                }
-                else {
-                    ioIcon = outputIconOff;
-                }
-                iconIoControllContent = $('#ioCtrlSwitch-' + ioId).html();
-            }
-            else if (ioType == 2) {
-                ioIcon = inputIcon;
-            }
-            else if (ioType==3) {
-                ioIcon = outputIcon;
-                iconIoControllContent = $('#ioCtrlSwitch-' + ioId).html();
-            }
-
-            point = L.point(ioMapDefinition.Latitude, ioMapDefinition.Longitude), // createing a Point object with the given x and y coordinates
-            markerCoords = map.containerPointToLatLng(point); // getting the geographical coordinates of the point
-            var innerPopupContent = "<div>" + ioType + " : " + ioId + "</div> <div>" + iconIoControllContent + "</div>";
-
-            // Creating a new marker and adding it to the map
-            markers[markersCount] = L.marker([markerCoords.lat, markerCoords.lng], {
-                draggable: true,
-                icon: ioIcon
-            }).addTo(map).bindPopup(innerPopupContent);
-
-        };
-
         /********** Hub/Model ****************/
 
         hubProxy = $.connection.alarmSystemMapHub;     // the generated client-side hub proxy
-        hubProxy.client.updateMap = function (mapData)
-        {
+        hubProxy.client.updateMap = function (mapData) {
             hubModel = mapData;
 
             //load model to menu/map
@@ -329,12 +283,9 @@
                 var ioMapDefinition = value;
                 var draggableId = ioMapDefinition.IoId;
                 var ioId = ioMapDefinition.IoId;
-                var ioType = ioMapDefinition.DeviceIoCategory;
+                var ioType = ioMapDefinition.Type;
 
                 var ioVal = 0;  //parseBool(ioMapDefinition.DeviceIoCategory);
-
-                var positionMapX = $("#map").offset().left - $(window).scrollLeft();
-                var positionMapY = $("#map").offset().top - $(window).scrollTop();
                 var iconIoControllContent = "";
 
                 var ioIcon;
@@ -367,21 +318,14 @@
                         ioIcon = systemIconOff;
                     }
                 }
-
-                point = L.point(ioMapDefinition.Latitude, ioMapDefinition.Longitude), // createing a Point object with the given x and y coordinates
-                markerCoords = map.containerPointToLatLng(point); // getting the geographical coordinates of the point
-                var innerPopupContent = "<div>" + ioType + " : " + ioId + "</div> <div>" + iconIoControllContent + "</div>";
-
-                // Creating a new marker and adding it to the map
-                markers[markersCount] = L.marker([markerCoords.lat, markerCoords.lng], {
+                var innerPopupContent = "<div>" + ioId + "</div> <div>" + iconIoControllContent + "</div>";
+                markers[markersCount] = L.marker([ioMapDefinition.Latitude, ioMapDefinition.Longitude], {
                     draggable: true,
                     icon: ioIcon
                 }).addTo(map).bindPopup(innerPopupContent);
-
+                markersCount++;
 
             });
-
-
         }
 
         $.connection.hub.start().done(function () {
@@ -684,7 +628,7 @@
 
                             <div class="col-lg-3 col-sm-4 col-xs-12">
                                 <div class="thumbnail">
-                                    <a href="@Url.Action("CommunicationConfigure", "AlarmSystemDeviceConfig", new {DeviceId = Model.ServerId})" role="button">
+                                    <a href="@Url.Action("Edit", "AlarmSystemCommunicationConfig", new {DeviceId = Model.ServerId})" role="button">
                                         <img src="~/Content/img/patchcord.png" class="thumbnail img-responsive">
                                     </a>
                                     <div class="caption  text-center">

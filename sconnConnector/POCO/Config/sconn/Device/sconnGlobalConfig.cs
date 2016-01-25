@@ -26,10 +26,26 @@ namespace sconnConnector.POCO.Config.sconn
 
         public string Name { get; set; }
         
-
         public int Lat { get; set; }
         public int Lng { get; set; }
+
+        public string IpAddress { get; set; }
+
+        public int BusShortMaxDistanceMeters { get; set; }
+
+        public int BusLongMaxDistanceMeters { get; set; }
         
+        public bool BusComEnabled { get; set; }
+
+        public bool TcpIpComEnabled { get; set; }
+
+        public byte MaximumPeerSyncIntervalSeconds { get; set; }
+
+        public byte MaximumPeerFailRequests { get; set; }
+
+        public byte BusMaxFailedMessagesPerSecond { get; set; }
+
+
 
         public sconnGlobalConfig()
         {

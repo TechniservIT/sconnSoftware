@@ -41,34 +41,9 @@
                             <td> @d._AllowedUntil</td>
                             <td> @d._Enabled</td>
 
-                            <td>
-
-
-                                <div class="btn-group-vertical" role="group" aria-label="...">
-
-                                    <button type="button" class="btn btn-default">
-                                        <a href="@Url.Action("Edit", "AlarmSystemAuthorizedDevices", new {Device = d})">
-                                            <span class="glyphicon glyphicon-wrench"></span>
-                                        </a>
-                                    </button>
-
-                                    <button type="button" class="btn btn-default">
-                                        <a href="@Url.Action("Remove", "AlarmSystemAuthorizedDevices", new {Device = d})">
-                                            <span class="glyphicon glyphicon-trash"></span>
-                                        </a>
-                                    </button>
-
-                                </div>
-
-                            </td>
                         </tr>
                     }
 
-                    <tr>
-                        <td>
-                            <a href="@Url.Action("Add", "AlarmSystemAuthorizedDevices")"><span class=" glyphicon glyphicon-plus"></span></a>
-                        </td>
-                    </tr>
                 </table>
             </div>
         </div>

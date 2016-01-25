@@ -198,4 +198,28 @@ namespace iotDash.Areas.AlarmSystem.Models
     }
 
 
+    public class AlarmSystemCommunicationEditModel
+    {
+
+        [Required]
+        public int ServerId { get; set; }
+
+        public sconnGlobalConfig Config { get; set; }
+
+        public MapDefinition Map { get; set; }
+
+        public AlarmSystemCommunicationEditModel()
+        {
+            Config = new sconnGlobalConfig();
+            Map = new MapDefinition();
+        }
+
+        public AlarmSystemCommunicationEditModel(sconnGlobalConfig config) : this()
+        {
+            this.Config = config;
+        }
+
+    }
+
+
 }

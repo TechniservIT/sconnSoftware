@@ -47,39 +47,42 @@
 
             <div class="navbar-collapse collapse">
 
-                <div class="col-md-4">
-                    <ul class="nav navbar-nav">
+                <div class="row">
+                    <div class="col-md-6">
+                        <ul class="nav navbar-nav">
 
-                        @if (Request.IsAuthenticated)
-                        {
+                            @if (Request.IsAuthenticated)
+                            {
 
-                        }
-                        else
-                        {
-                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                            <li>@Html.ActionLink("About", "About", "Home")</li>
-                            <li>@Html.ActionLink("Register", "Register", "Account")</li>
-                        }
+                            }
+                            else
+                            {
+                                <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                                <li>@Html.ActionLink("About", "About", "Home")</li>
+                                <li>@Html.ActionLink("Register", "Register", "Account")</li>
+                            }
 
-                    </ul>
-                </div>
-
-                <div class="col-md-2">
-                    <center>
-                        <div class="pull-left" style="color: #64F0FE; padding: 15px;" id="menuTimer"></div>
-                    </center>
-                </div>
-
-                <div class="col-md-4">
-
-                    <div class="col-md-8">
-                        @Html.Partial("_LoginPartial")
+                        </ul>
                     </div>
+
+                    @*<div class="col-md-2">
+                        <center>
+                            <div class="pull-left" style="color: #64F0FE; padding: 15px;" id="menuTimer"></div>
+                        </center>
+                    </div>*@
 
                     <div class="col-md-4">
-                        @*@Html.Partial("_LanguageSelectPartial")*@
-                    </div>
 
+                        <div class="col-md-8">
+                            @Html.Partial("_LoginPartial")
+                        </div>
+
+                        <div class="col-md-4">
+                            @*@Html.Partial("_LanguageSelectPartial")*@
+                        </div>
+
+
+                    </div>
 
                 </div>
 

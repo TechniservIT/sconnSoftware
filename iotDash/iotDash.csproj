@@ -320,6 +320,7 @@
     <Compile Include="Controllers\domain\site\AlarmSystem\Abstract\AlarmSystemControllerBase.cs" />
     <Compile Include="Controllers\domain\site\AlarmSystem\Abstract\IAlarmSystemConfigurationController.cs" />
     <Compile Include="Controllers\domain\site\AlarmSystem\Abstract\IAlarmSystemController.cs" />
+    <Compile Include="Controllers\domain\site\AlarmSystem\AlarmSystemCommunicationConfigController.cs" />
     <Compile Include="Controllers\domain\site\AlarmSystem\AlarmSystemEventsController.cs" />
     <Compile Include="Controllers\domain\site\AlarmSystem\AlarmSystemAuthorizedDevicesController.cs" />
     <Compile Include="Controllers\domain\site\AlarmSystem\AlarmSystemConfigurationController.cs" />
@@ -1590,6 +1591,7 @@
     <Content Include="Views\AlarmSystemMap\Index.cshtml" />
     <Content Include="Views\AlarmSystemMap\Edit.cshtml" />
     <Content Include="Views\AlarmSystemDeviceConfig\View.cshtml" />
+    <Content Include="Views\AlarmSystemCommunicationConfig\Edit.cshtml" />
     <None Include="Views\AlarmSystemDeviceConfig\Edit.cshtml" />
     <None Include="Views\AlarmSystemDeviceConfig\Status.cshtml" />
     <None Include="Views\AlarmSystemUsersConfig\View.cshtml" />

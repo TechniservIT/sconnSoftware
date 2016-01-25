@@ -1,0 +1,131 @@
+﻿@model iotDash.Areas.AlarmSystem.Models.AlarmSystemCommunicationEditModel
+@using iotDash.Helpers
+@using Newtonsoft.Json
+@using sconnConnector
+
+@{
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+@Scripts.Render("~/bundles/jqueryui")
+@Scripts.Render("~/bundles/toggleswitch")
+@Scripts.Render("~/bundles/signalr")
+@Scripts.Render("~/bundles/numspin")
+@Scripts.Render("~/bundles/fancybox")
+@Scripts.Render("~/bundles/bootstrap-treeview")
+@Scripts.Render("~/bundles/maps")
+@Scripts.Render("~/bundles/bootstrap-toggle")
+
+@Styles.Render("~/bundles/css/toggleswitch")
+@Styles.Render("~/bundles/css/numspin")
+@Styles.Render("~/bundles/css/bootstrap-treeview")
+@Styles.Render("~/bundles/css/maps")
+@Styles.Render("~/bundles/css/bootstrap-toggle")
+
+
+<script src="~/signalr/hubs"></script>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@if (Model.Config != null)
+{
+    <h2>@Model.Config.Name</h2>
+}
+
+
+<script type="text/javascript">
+
+</script>
+
+
+@functions{
+
+
+}
+
+
+<div class="container-fluid">
+
+    <div class="row">
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <center>
+                    <h2>Status</h2>
+                </center>
+            </div>
+
+
+            <div class="panel-body">
+
+                @using (Html.BeginForm("Add", "AlarmSystemZonesConfig"))
+                {
+                        <fieldset>
+
+                            <legend>Communication config</legend>
+
+
+                            
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Config.BusComEnabled)
+                                @Html.EditorFor(model => model.Config.BusComEnabled, new { @class = "form-control" })
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Config.BusShortMaxDistanceMeters)
+                                @Html.EditorFor(model => model.Config.BusShortMaxDistanceMeters, new { @class = "form-control" })
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Config.BusLongMaxDistanceMeters)
+                                @Html.EditorFor(model => model.Config.BusShortMaxDistanceMeters, new { @class = "form-control" })
+                            </div>
+
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Config.TcpIpComEnabled)
+                                @Html.EditorFor(model => model.Config.TcpIpComEnabled, new { @class = "form-control" })
+                            </div>
+                            
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Config.IpAddress)
+                                @Html.TextBoxFor(model => model.Config.IpAddress, new { @class = "form-control" })
+                            </div>
+
+
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Config.MaximumPeerSyncIntervalSeconds)
+                                @Html.EditorFor(model => model.Config.MaximumPeerSyncIntervalSeconds, new { @class = "form-control" })
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Config.MaximumPeerFailRequests)
+                                @Html.EditorFor(model => model.Config.MaximumPeerFailRequests, new { @class = "form-control" })
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Config.BusMaxFailedMessagesPerSecond)
+                                @Html.EditorFor(model => model.Config.BusMaxFailedMessagesPerSecond, new { @class = "form-control" })
+                            </div>
+                            
+
+                            <div class="form-group">
+                                <button class="btn btn-primary" type="submit">Save</button>
+                            </div>
+
+                        </fieldset>
+                    }
+
+
+            </div>
+        </div>
+
+    </div>
+
+  
+
+
+</div>
