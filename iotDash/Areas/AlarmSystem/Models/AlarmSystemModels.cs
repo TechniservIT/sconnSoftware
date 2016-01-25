@@ -126,29 +126,32 @@ namespace iotDash.Areas.AlarmSystem.Models
 
     public class AlarmSystemMapEditModel
     {
-
         [Required]
         public int ServerId { get; set; }
 
+        public sconnGlobalConfig Config { get; set; }
         public List<sconnDevice> Devices { get; set; }
         public DeviceMapDefinition MapDefinition { get; set; }
 
         public AlarmSystemMapEditModel()
         {
+            Config = new sconnGlobalConfig();
             Devices = new List<sconnDevice>();
             MapDefinition = new DeviceMapDefinition();
         }
 
-        public AlarmSystemMapEditModel(List<sconnDevice> devies) : this()
+        public AlarmSystemMapEditModel(List<sconnDevice> devices) : this()
         {
-            Devices = devies;
+            this.Devices = devices;
         }
 
-        public AlarmSystemMapEditModel(List<sconnDevice>  devices, MapDefinition map)
+        public AlarmSystemMapEditModel(sconnGlobalConfig config, List<sconnDevice> devices) :this()
         {
-                
+            this.Config = config;
+            this.Devices = devices;
         }
-        
+
+
     }
 
     public class AlarmSystemGlobalModel
@@ -171,6 +174,7 @@ namespace iotDash.Areas.AlarmSystem.Models
 
     }
 
+
     public class AlarmSystemGlobalEditModel
     {
 
@@ -178,22 +182,17 @@ namespace iotDash.Areas.AlarmSystem.Models
         public int ServerId { get; set; }
 
         public sconnGlobalConfig Config { get; set; }
-        public List<sconnDevice> Devices { get; set; }
-
-        public MapDefinition Map { get; set; }
 
         public AlarmSystemGlobalEditModel()
         {
             Config = new sconnGlobalConfig();
-            Devices = new List<sconnDevice>();
-            Map = new MapDefinition();
         }
 
-        public AlarmSystemGlobalEditModel(sconnGlobalConfig config, List<sconnDevice> devices ) :this()
+        public AlarmSystemGlobalEditModel(sconnGlobalConfig gcfg)
         {
-            this.Config = config;
-            this.Devices = devices;
+            Config = gcfg;
         }
+        
 
     }
 
@@ -206,12 +205,9 @@ namespace iotDash.Areas.AlarmSystem.Models
 
         public sconnGlobalConfig Config { get; set; }
 
-        public MapDefinition Map { get; set; }
-
         public AlarmSystemCommunicationEditModel()
         {
             Config = new sconnGlobalConfig();
-            Map = new MapDefinition();
         }
 
         public AlarmSystemCommunicationEditModel(sconnGlobalConfig config) : this()

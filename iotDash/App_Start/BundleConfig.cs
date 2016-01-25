@@ -90,9 +90,13 @@ namespace iotDash
             bundles.Add(new ScriptBundle("~/bundles/maps").Include(
             "~/Scripts/leaflet.js",
             "~/Scripts/leaflet.awesome-markers.js",
-            "~/Scripts/leaflet.extra-markers.js"
+            "~/Scripts/leaflet.extra-markers.js",
+            "~/Scripts/leaflet.draw.js"
              ));
 
+            bundles.Add(new ScriptBundle("~/bundles/fullpage").Include(
+              "~/Scripts/jquery.fullpage.js"
+            ));
 
             /*************************  STYLES *************************/
 
@@ -149,9 +153,13 @@ namespace iotDash
             bundles.Add(new StyleBundle("~/bundles/css/maps").Include(
                  "~/Content/css/leaflet.css",
                  "~/Content/css/leaflet.awesome-markers.css",
-                  "~/Content/css/leaflet.extra-markers.css"
+                  "~/Content/css/leaflet.extra-markers.css",
+                    "~/Content/css/leaflet.draw.css"
              ));
 
+            bundles.Add(new StyleBundle("~/bundles/css/fullpage").Include(
+               "~/Content/css/jquery.fullpage.css"
+           ));
 
             /* LESS Bundles */
             bundles.Add(new LessBundle("~/bundles/less").Include("~/Content/less/*.less"));

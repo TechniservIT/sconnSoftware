@@ -1,7 +1,697 @@
-﻿
+﻿@model iotDash.Areas.AlarmSystem.Models.AlarmSystemMapEditModel
+@using iotDash.Helpers
+@using Newtonsoft.Json
+@using sconnConnector
+
 @{
-    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 }
 
-<h2>Edit</h2>
+@Scripts.Render("~/bundles/jqueryui")
+@Scripts.Render("~/bundles/toggleswitch")
+@Scripts.Render("~/bundles/signalr")
+@Scripts.Render("~/bundles/numspin")
+@Scripts.Render("~/bundles/fancybox")
+@Scripts.Render("~/bundles/bootstrap-treeview")
+@Scripts.Render("~/bundles/maps")
+@Scripts.Render("~/bundles/bootstrap-toggle")
 
+@Styles.Render("~/bundles/css/toggleswitch")
+@Styles.Render("~/bundles/css/numspin")
+@Styles.Render("~/bundles/css/bootstrap-treeview")
+@Styles.Render("~/bundles/css/maps")
+@Styles.Render("~/bundles/css/bootstrap-toggle")
+
+
+<script src="~/signalr/hubs"></script>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@if (Model.Config != null)
+{
+    <h2>@Model.Config.Name</h2>
+}
+
+
+<script type="text/javascript">
+
+    /*
+        !!!!!!!!! ALL HUB OBJECTS START WITH LOWERCASE IN JS !!!!!!!!!!
+    */
+    var hubModel;
+    var hubProxy;
+
+    var startLat;
+    var startLng;
+    var map;
+    var IoIcon;
+
+    var markers = [], // an array containing all the markers added to the map
+    markersCount = 0; // the number of the added markers
+
+    var outputIconOff = L.ExtraMarkers.icon({
+        icon: 'fa-bolt',
+        markerColor: 'red',
+        shape: 'circle',
+        prefix: 'fa'
+    });
+
+    var inputIconOff = L.ExtraMarkers.icon({
+        icon: 'fa-eye',
+        markerColor: 'red',
+        shape: 'circle',
+        prefix: 'fa'
+    });
+
+    var systemIconOff = L.ExtraMarkers.icon({
+        icon: 'fa-shield',
+        markerColor: 'red',
+        shape: 'circle',
+        prefix: 'fa'
+    });
+
+    var outputIconOn = L.ExtraMarkers.icon({
+        icon: 'fa-bolt',
+        markerColor: 'green',
+        shape: 'circle',
+        prefix: 'fa'
+    });
+
+    var inputIconOn = L.ExtraMarkers.icon({
+        icon: 'fa-eye',
+        markerColor: 'green',
+        shape: 'circle',
+        prefix: 'fa'
+    });
+
+    var systemIconOn = L.ExtraMarkers.icon({
+        icon: 'fa-shield',
+        markerColor: 'green',
+        shape: 'circle',
+        prefix: 'fa'
+    });
+
+
+    //var mapIoDefninitions = [];
+    //var mapIoDefninitionCount = 0;
+
+    function reloadMapCenter() {
+        map.panTo(new L.LatLng(startLat, startLng));
+    }
+
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(setMapCenter);
+        } else {
+        }
+    }
+
+    function setMapCenter(position) {
+        startLat = position.coords.latitude;
+        startLng = position.coords.longitude;
+        reloadMapCenter();
+    }
+
+    function loadMarkersDataFromModel(model)
+    {
+
+    }
+
+    /**************** FILE UPLOAD *************/
+
+    function uploadFile() {
+        myApp.showPleaseWait(); //show dialog
+        var file = document.getElementById('file_name').files[0];
+        var formData = new FormData();
+        formdata.append("file_name", file);
+        ajax = new XMLHttpRequest();
+        ajax.upload.addEventListener("progress", progressHandler, false);
+        ajax.addEventListener("load", completeHandler, false);
+        ajax.open("POST", "/to/action");
+        ajax.send(formdata);
+    }
+
+    function progressHandler(event) {
+        var percent = (event.loaded / event.total) * 100;
+        $('.bar').width(percent); //from bootstrap bar class
+    }
+
+    function completeHandler() {
+        myApp.hidePleaseWait(); //hide dialog
+        $('.bar').width(100);
+    }
+
+    function parseBool(value) {
+        return (typeof value === "undefined") ?
+               false :
+               // trim using jQuery.trim()'s source
+               value.replace(/^\s+|\s+$/g, "").toLowerCase() === "true";
+    }
+
+    $(function () {
+
+
+        markers = [];   //reset
+        markersCount = 0;
+
+        startLat = 49.78395;
+        startLng = 19.05815;
+        var mapCenter = [startLat, startLng];
+        map = L.map('map', { center: mapCenter, zoom: 18, drawControl: true });
+        L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+            maxZoom: 24,
+            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+            id: 'iomap'
+        }).addTo(map);
+
+        // Initialise the FeatureGroup to store editable layers
+        var drawnItems = new L.FeatureGroup();
+        map.addLayer(drawnItems);
+
+        // Initialise the draw control and pass it the FeatureGroup of editable layers
+        var drawControl = new L.Control.Draw({
+            edit: {
+                featureGroup: drawnItems
+            }
+        });
+        map.addControl(drawControl);
+
+
+        map.on('draw:edited', function (e) {
+            var layers = e.layers;
+            layers.eachLayer(function (layer) {
+                //do whatever you want, most likely save back to db
+            });
+        });
+
+
+        map.on('draw:created', function (e) {
+            var type = e.layerType,
+                layer = e.layer;
+
+            if (type === 'marker') {
+                // Do marker specific actions
+            }
+
+            // Do whatever else you need to. (save to db, add to map etc)
+            map.addLayer(layer);
+        });
+
+        L.icon = function (options) {
+            return new L.Icon(options);
+        };
+
+
+        // Dragging and dropping the markers to the map
+        var addMarkers = function () {
+
+            // The position of the marker icon
+            var posTop = $('.draggable-marker').css('top'),
+            posLeft = $('.draggable-marker').css('left');
+
+            $('.draggable-marker').draggable({
+                cancel: false,
+                stop: function (e, ui) {
+
+                    var draggableId = $(this).draggable().attr("id");
+                    var ioId = $(this).draggable().attr("data-ioid");
+                    var ioType = $(this).draggable().attr("data-iotype");
+                    var ioVal = parseBool($(this).draggable().attr("data-iovalue"));
+
+                    $(this).draggable().remove();   //destroy draggable
+
+                    var positionMapX = $("#map").offset().left - $(window).scrollLeft();
+                    var positionMapY = $("#map").offset().top - $(window).scrollTop();
+
+                    var iconIoControllContent = "";
+
+                    var ioIcon;
+                    if (draggableId.indexOf('output') > -1) {
+                        if (ioVal) {
+                            ioIcon = outputIconOn;
+                        }
+                        else {
+                            ioIcon = outputIconOff;
+                        }
+                        iconIoControllContent = $('#ioCtrlSwitch-'+ioId).html();
+                    }
+                    else if (draggableId.indexOf('input') > -1) {
+                        ioIcon = inputIconOff;
+                    }
+                    else if (draggableId.indexOf('relay') > -1) {
+                        ioIcon = outputIconOff;
+                        iconIoControllContent = $('#ioCtrlSwitch-' + ioId).html();
+                    }
+                    else {
+                        if (ioVal) {
+                            ioIcon = systemIconOn;
+                        }
+                        else {
+                            ioIcon = systemIconOff;
+                        }
+                    }
+
+                    var coordsX = e.clientX - positionMapX, // 50 is the width of the menu
+                        coordsY = e.clientY - positionMapY, // 20 is the half of markers height
+                        point = L.point(coordsX, coordsY), // createing a Point object with the given x and y coordinates
+                        markerCoords = map.containerPointToLatLng(point); // getting the geographical coordinates of the point
+
+                    var innerPopupContent = "<div>" + ioId + "</div> <div>" + iconIoControllContent + "</div>";    //ioType + " : " +
+
+                    // Creating a new marker and adding it to the map
+                    markers[markersCount] = L.marker([markerCoords.lat, markerCoords.lng], {
+                        draggable: true,
+                        icon: ioIcon //ioIcon
+                    }).addTo(map).bindPopup(innerPopupContent);
+                    var ioMapDefinition = new Object();
+                    ioMapDefinition.Latitude = markerCoords.lat;
+                    ioMapDefinition.Longitude = markerCoords.lng;
+                    ioMapDefinition.IoId = ioId;
+                    ioMapDefinition.Type = ioType;
+                    ioMapDefinition.DeviceId = $(this).draggable().attr("data-deviceid");
+
+                    //  ioMapDefinition.Marker = markers[markersCount];
+
+                    hubModel.MapDefinition.IoMapDefinitions.push(ioMapDefinition);
+
+                    markersCount++;
+                }
+            });
+        }
+
+        addMarkers();
+
+        $('#mapsubmit').click(function () {
+          //  var MapDefinition = new Object();
+
+            //update coordiantes for io from adj markers
+            $.each(hubModel.MapDefinition.IoMapDefinitions, function (index, value) {
+                //TODO some other way of tracking changed marker pos - not loading bound markers data
+                //var curPos = value.Marker.getLatLng();
+                //value.Latitude = curPos.lat;   //load marker possitions
+                //value.Longitude = curPos.lng;
+                //delete value.Marker;    // = null;
+            });
+            hubModel.Devices = null;
+            hubModel.Map = null;
+
+            //post all mapped io defs
+            hubProxy.server.updateAlarmMap(hubModel);
+
+        });
+
+
+
+        getLocation();  //async get location
+
+        $('.iomenutoggle').on('click', function (e) {
+            e.preventDefault();
+        });
+
+
+        /********** Hub/Model ****************/
+
+        hubProxy = $.connection.alarmSystemMapHub;     // the generated client-side hub proxy
+        hubProxy.client.updateMap = function (mapData)
+        {
+            hubModel = mapData;
+
+            //load model to menu/map
+            $.each(hubModel.MapDefinition.IoMapDefinitions, function (index, value) {
+
+                var ioMapDefinition = value;
+                var draggableId = ioMapDefinition.IoId;
+                var ioId = ioMapDefinition.IoId;
+                var ioType = ioMapDefinition.Type;
+
+                var ioVal = 0;  //parseBool(ioMapDefinition.DeviceIoCategory);
+                var iconIoControllContent = "";
+
+                var ioIcon;
+                if (ioType == 1) {
+                    if (ioVal) {
+                        ioIcon = outputIconOn;
+                    }
+                    else {
+                        ioIcon = outputIconOff;
+                    }
+                    iconIoControllContent = $('#ioCtrlSwitch-' + ioId).html();
+                }
+                else if (ioType == 2) {
+                    if (ioVal) {
+                        ioIcon = inputIconOn;
+                    }
+                    else {
+                        ioIcon = inputIconOff;
+                    }
+                }
+                else if (ioType == 3) {
+                    ioIcon = outputIcon;
+                    iconIoControllContent = $('#ioCtrlSwitch-' + ioId).html();
+                }
+                else {
+                    if (ioVal) {
+                        ioIcon = systemIconOn;
+                    }
+                    else {
+                        ioIcon = systemIconOff;
+                    }
+                }
+                var innerPopupContent = "<div>" + ioId + "</div> <div>" + iconIoControllContent + "</div>";
+                markers[markersCount] = L.marker([ioMapDefinition.Latitude, ioMapDefinition.Longitude], {
+                    draggable: true,
+                    icon: ioIcon
+                }).addTo(map).bindPopup(innerPopupContent);
+                markersCount++;
+
+            });
+        }
+
+        $.connection.hub.start().done(function () {
+            hubProxy.server.getMapData(@Model.ServerId.ToString());   //intialy load map data
+        });
+
+
+    });
+
+
+</script>
+
+
+@functions{
+
+    public string SpanClassForArmStatusDisplay()
+    {
+        if (Model.Config.Armed)
+        {
+            return "label label-success";
+        }
+        else
+        {
+            return "label label-danger";
+        }
+    }
+
+    public string DescForArmStatusDisplay()
+    {
+        if (Model.Config.Armed)
+        {
+            return "Armed";
+        }
+        else
+        {
+            return "Disarmed";
+        }
+    }
+
+
+
+    public string SpanClassForViolationStatusDisplay()
+    {
+        if (Model.Config.Violation)
+        {
+            return "label label-danger";
+
+        }
+        else
+        {
+            return "label label-success";
+        }
+    }
+
+
+    public string SpanClassForFailureStatusDisplay()
+    {
+        if (Model.Config.Failure)
+        {
+            return "label label-danger";
+
+        }
+        else
+        {
+            return "label label-success";
+        }
+    }
+
+
+    public string DescForViolationStatusDisplay()
+    {
+        if (Model.Config.Violation)
+        {
+            return "Yes";
+        }
+        else
+        {
+            return "No";
+        }
+    }
+
+
+    public string DescForArmAction()
+    {
+        if (Model.Config.Armed)
+        {
+            return "Disarm";
+        }
+        else
+        {
+            return "Arm";
+        }
+    }
+
+}
+
+
+<div class="container-fluid">
+
+    <div class="row">
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <center>
+                    <h2>Status</h2>
+                </center>
+            </div>
+
+
+            <div class="panel-body">
+
+                <div class="row">
+
+                    @using (Html.BeginForm("Edit", "AlarmSystemView"))
+                    {
+                        <fieldset>
+
+                            <legend>Global config</legend>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Config.Name)
+                                @Html.EditorFor(model => model.Config.Name, new { @class = "form-control" })
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Config.Lat)
+                                @Html.TextBoxFor(model => model.Config.Lat, new { @class = "form-control" })
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Config.Lng)
+                                @Html.TextBoxFor(model => model.Config.Lng, new { @class = "form-control" })
+                            </div>
+
+
+
+                            <div class="form-group">
+                                <button class="btn btn-primary" type="submit">Save</button>
+                            </div>
+
+                        </fieldset>
+                    }
+                </div>
+
+                <br />
+
+                <br />
+
+
+
+                <div class="row">
+
+                    <legend>System map</legend>
+
+                    <div class="col-lg-8 col-sm-8 col-xs-12 center-block">
+
+                        <div class="map_container">
+                            <div id="map_canvas" class="map_canvas">
+                                <div class="form-group">
+                                    <div id="map" style="height: 400px">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-4 col-sm-4 col-xs-12 center-block">
+
+                        <div class="row">
+
+                        </div>
+
+
+                        <ul class="pull-right nav nav-pills nav-stacked right-menu" id="stacked-menu">
+
+                            @foreach (var device in Model.Devices)
+                            {
+                                <li>
+                                    <a href="#" class="btn btn-primary" data-target="#stack-menu-device-@device.Id.ToString()" data-toggle="collapse" data-parent="#stacked-menu">Device : @device.Name <span class="caret arrow"></span></a>   @*iomenutoggle*@
+                                    <ul class="nav nav-stacked collapse right-submenu iomenutoggle" id='stack-menu-device-@device.Id.ToString()'>
+
+                                        <li>
+                                            <a class="btn btn-primary" href="#" data-target="#input-list-@device.Id.ToString()" data-toggle="collapse" data-parent="#stack-menu-device-@device.Id.ToString()">Inputs<span class="caret arrow"></span></a>
+                                            <ul class="nav nav-stacked collapse right-submenu" id="input-list-@device.Id.ToString()">
+                                                @foreach (var input in device.Inputs)
+                                                {
+                                                    <li>
+                                                        <a class="btn btn-primary draggable-marker" style="width : 100%;" draggable="true" href="#" id="iomarker-input-@input.Id.ToString()-@device.Id.ToString()" data-iovalue="@input.Value.ToString()" data-deviceid="@device.Id.ToString()" data-ioid="@input.Id.ToString()" data-iotype="@((int)input.IoCategory)" src="/Content/img/mapka2.png">
+                                                            <span class="glyphicon glyphicon-log-in"></span>
+                                                            @input.Id.ToString() @input.Name
+                                                        </a>
+                                                    </li>
+                                                }
+                                            </ul>
+                                        </li>
+
+                                        <li>
+                                            <a class="btn btn-primary" href="#" data-target="#output-list-@device.Id.ToString()" data-toggle="collapse" data-parent="#stack-menu-device-@device.Id.ToString()">Outputs<span class="caret arrow"></span></a>
+                                            <ul class="nav nav-stacked collapse right-submenu" id="output-list-@device.Id.ToString()">
+                                                @foreach (var output in device.Outputs)
+                                                {
+                                                    <li>
+                                                        <a class="btn btn-primary draggable-marker" style="width: 100%;" draggable="true" href="#" id="iomarker-output-@output.Id.ToString()-@device.Id.ToString()" data-iovalue="@output.Value.ToString()" data-deviceid="@device.Id.ToString()" data-ioid="@output.Id.ToString()" data-iotype="@((int)output.IoCategory)">
+                                                            <span class="glyphicon glyphicon-flash"></span>
+                                                            @output.Id.ToString() @output.Name
+                                                        </a>
+                                                        <div id="ioCtrlSwitch-@output.Id.ToString()" class="checkbox" style="display: none;">
+                                                            @Html.ToggleSwitchFor(model => output.Value)
+                                                        </div>
+                                                    </li>
+                                                }
+                                            </ul>
+                                        </li>
+
+                                        <li>
+                                            <a href="#" class="btn btn-primary" style="width : 100%;" data-target="#relay-list-@device.Id.ToString()" data-toggle="collapse" data-parent="#stack-menu-device-@device.Id.ToString()">Relays<span class="caret arrow"></span></a>
+                                            <ul class="nav nav-stacked collapse right-submenu" id="relay-list-@device.Id.ToString()">
+                                                @foreach (var relay in device.Relays)
+                                                {
+                                                    <li>
+                                                        <a class="btn btn-primary draggable-marker" draggable="true" href="#" id="iomarker-relay-@relay.Id.ToString()-@device.Id.ToString()" data-iovalue="@relay.Value.ToString()" data-deviceid="@device.Id.ToString()" data-ioid="@relay.Id.ToString()" data-iotype="@((int)relay.IoCategory)">
+                                                            <span class="glyphicon glyphicon-flash"></span>
+                                                            @relay.Id.ToString() @relay.Name
+                                                        </a>
+                                                        <div id="ioCtrlSwitch-@relay.Id.ToString()" class="checkbox" style="display: none;">
+                                                            @Html.ToggleSwitchFor(model => relay.Value)
+                                                        </div>
+                                                    </li>
+                                                }
+                                            </ul>
+                                        </li>
+
+                                    </ul>
+                                </li>
+                            }
+
+                        </ul>
+
+
+                    </div>
+
+                </div>
+
+
+                <div class="row">
+
+                    <div class="form-group">
+                        <label for="mapEnableImageView">Emap image</label>
+                        <input type="checkbox" class="form-control" id="mapEnableImageView">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="mapImageViewUrl">Image Url</label>
+                        <input type="text" class="form-control" id="mapImageViewUrl">
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="form-group">
+                        <button id="mapsubmit" class="btn btn-primary" type="submit">Save</button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <center>
+                    <h2>Firmware upload</h2>
+                </center>
+            </div>
+
+
+            <div class="panel-body">
+                @using (Html.BeginForm("Upload", "AlarmSystemView", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+
+                    <div class="form-group" style="position: relative;">
+                        <a class='btn btn-primary' href='javascript:;'>
+                            Choose File...
+                            <input type="file" style='position: absolute; z-index: 2; top: 0; left: 0; filter: alpha(opacity=0); -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"; opacity: 0; background-color: transparent; color: transparent;' name="file_source" size="40" onchange='$("#upload-file-info").html($(this).val());'>
+                        </a>
+                        &nbsp;
+                        <span class='label label-info' id="upload-file-info"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="form-group">
+                            <button class="btn btn-primary" type="submit">Send</button>
+                        </div>
+                    </div>
+
+                        <div class="form-group">
+                            Sending...
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-succcess" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+                                    100%
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            Veryfing...
+                            <div class="progress">
+
+                                <div class="progress-bar progress-bar-warning progress-bar-striped" role="progressbar" aria-valuenow="11" aria-valuemin="0" aria-valuemax="100" style="width: 11%;">
+                                    20%
+                                </div>
+                            </div>
+                        </div>
+                }
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+</div>

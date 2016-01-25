@@ -58,7 +58,7 @@ namespace iotDash.Controllers.domain.site.AlarmSystem
             {
                 var gprovider = new GlobalConfigService(DomainSession.GetAlarmConfigForContextWithDeviceId(this.HttpContext, ServerId));
                 var deviceprovider = new AlarmDevicesConfigService(DomainSession.GetAlarmConfigForContextWithDeviceId(this.HttpContext, ServerId));
-                AlarmSystemGlobalEditModel model = new AlarmSystemGlobalEditModel(gprovider.Get(), deviceprovider.GetAll());
+                AlarmSystemGlobalEditModel model = new AlarmSystemGlobalEditModel(gprovider.Get());
                 model.ServerId = ServerId;
                 return View(model);
             }

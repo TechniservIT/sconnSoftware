@@ -416,8 +416,10 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\css\bootstrap-treeview.css" />
+    <Content Include="Content\css\jquery.fullpage.css" />
     <Content Include="Content\css\leaflet.awesome-markers.css" />
     <Content Include="Content\css\leaflet.css" />
+    <Content Include="Content\css\leaflet.draw.css" />
     <Content Include="Content\css\leaflet.extra-markers.css" />
     <Content Include="Content\css\simple-sidebar.css" />
     <Content Include="Content\css\spinedit.css" />
@@ -469,6 +471,7 @@
     <Content Include="Content\img\lista1.png" />
     <Content Include="Content\img\lista2.png" />
     <Content Include="Content\img\map-marker.png" />
+    <Content Include="Content\img\mapa.png" />
     <Content Include="Content\img\mapka1.png" />
     <Content Include="Content\img\mapka2.png" />
     <Content Include="Content\img\mapka3.png" />
@@ -488,6 +491,7 @@
     <Content Include="Content\img\markers_default.png" />
     <Content Include="Content\img\markers_shadow%402x.png" />
     <Content Include="Content\img\markers_shadow.png" />
+    <Content Include="Content\img\Mikolow refit 2016-Model.png" />
     <Content Include="Content\img\ok1.jpg" />
     <Content Include="Content\img\oko11.png" />
     <Content Include="Content\img\oko3.png" />
@@ -496,11 +500,15 @@
     <Content Include="Content\img\oko6.png" />
     <Content Include="Content\img\out.png" />
     <Content Include="Content\img\out2.png" />
+    <Content Include="Content\img\Parter aranzacja-Model.png" />
     <Content Include="Content\img\patchcord.png" />
     <Content Include="Content\img\person2.png" />
     <Content Include="Content\img\przekaznik.png" />
+    <Content Include="Content\img\Rysunek2.png" />
     <Content Include="Content\img\sensorin.png" />
     <Content Include="Content\img\sensorout.png" />
+    <Content Include="Content\img\spritesheet-2x.png" />
+    <Content Include="Content\img\spritesheet.png" />
     <Content Include="Content\img\stat1.jpg" />
     <Content Include="Content\img\strefa.png" />
     <Content Include="Content\img\strefy1.png" />
@@ -513,6 +521,9 @@
     <Content Include="Content\img\waves.png" />
     <Content Include="Content\img\worldLock.jpg" />
     <Content Include="Content\img\worldlock2.jpg" />
+    <Content Include="Content\img\wwwalarm.png" />
+    <Content Include="Content\img\wwwmap.png" />
+    <Content Include="Content\img\wwwprotocol.png" />
     <Content Include="Content\img\wykrzyknik.png" />
     <Content Include="Content\img\wykrzyknik1.png" />
     <Content Include="Content\img\wykrzyknik2.png" />
@@ -1515,6 +1526,7 @@
     <Content Include="Scripts\jquery.fancybox-thumbs.js" />
     <Content Include="Scripts\jquery.fancybox.js" />
     <Content Include="Scripts\jquery.fancybox.pack.js" />
+    <Content Include="Scripts\jquery.fullpage.js" />
     <Content Include="Scripts\jquery.mousewheel-3.0.6.pack.js" />
     <Content Include="Scripts\jquery.signalR-2.2.0.js" />
     <Content Include="Scripts\jquery.signalR-2.2.0.min.js" />
@@ -1524,6 +1536,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\leaflet.awesome-markers.js" />
     <Content Include="Scripts\leaflet.awesome-markers.min.js" />
+    <Content Include="Scripts\leaflet.draw.js" />
     <Content Include="Scripts\leaflet.extra-markers.js" />
     <Content Include="Scripts\leaflet.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
