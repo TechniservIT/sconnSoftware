@@ -31,7 +31,7 @@ namespace iotDash.Controllers.domain.site.AlarmSystem
         }
 
         // GET: AlarmSystemMap
-        public ActionResult View(int Id)
+        public ActionResult View(int ServerId)
         {
             return View();
         }

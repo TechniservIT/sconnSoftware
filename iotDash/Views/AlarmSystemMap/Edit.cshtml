@@ -15,6 +15,8 @@
 @Scripts.Render("~/bundles/bootstrap-treeview")
 @Scripts.Render("~/bundles/maps")
 @Scripts.Render("~/bundles/bootstrap-toggle")
+@Scripts.Render("~/bundles/linq")
+
 
 @Styles.Render("~/bundles/css/toggleswitch")
 @Styles.Render("~/bundles/css/numspin")
@@ -23,11 +25,19 @@
 @Styles.Render("~/bundles/css/bootstrap-toggle")
 
 
+@*<script src='https://api.mapbox.com/mapbox.js/v2.2.4/mapbox.js'></script>
+<link href='https://api.mapbox.com/mapbox.js/v2.2.4/mapbox.css' rel='stylesheet' />*@
+
+<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.12.4/mapbox-gl.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.12.4/mapbox-gl.css' rel='stylesheet' />
+
+
 <script src="~/signalr/hubs"></script>
 
 @{
     ViewBag.Title = "Index";
 }
+
 
 <script type="text/javascript">
 
@@ -119,6 +129,37 @@
     }
 
     function loadMapFromImageUrlModel() {
+
+        //Classic
+        //L.mapbox.accessToken = 'pk.eyJ1IjoiZG9taW5pY3VzcGxhdHVzIiwiYSI6ImNpajR0MjI5aTAwMW12cm0zejNkb21iNXoifQ.xBO1SZg69rmDV2aa7jzbOw';
+        //var mapboxTiles = L.tileLayer('https://api.mapbox.com/v4/mapbox.streets/{z}/{x}/{y}.png?access_token=' + L.mapbox.accessToken, {
+        //    attribution: '<a href="http://www.mapbox.com/about/maps/" target="_blank">Terms &amp; Feedback</a>'
+        //});
+
+
+        //Mapbox JS
+        var centerPos = [-77.38, 39];
+        mapboxgl.accessToken = 'pk.eyJ1IjoiZG9taW5pY3VzcGxhdHVzIiwiYSI6ImNpajR0MjI5aTAwMW12cm0zejNkb21iNXoifQ.xBO1SZg69rmDV2aa7jzbOw';
+        mapInternal = new mapboxgl.Map({
+            container: 'mapInternalPlans', // container id
+            style: 'mapbox://styles/dominicusplatus/cijv7ydqw00hhcakwt6pw0tpw', //hosted style id
+            center: centerPos, // starting position
+            zoom: 3 // starting zoom
+        });
+
+
+        //var iconIoControllContent = $('#ioCtrlSwitch-' + "0").html();
+        //markerCoords = centerPos;
+        //var innerPopupContent = "<div>" + "Default Name" + "</div> <div>" + iconIoControllContent + "</div>";    //ioType + " : " +
+        //L.marker([markerCoords.lat, markerCoords.lng], {
+        //    draggable: true,
+        //    icon: outputIconOn //ioIcon
+        //}).addTo(mapInternal).bindPopup(innerPopupContent);
+
+        L.marker([0.987365, 1.214520]).addTo(mapInternal);
+
+        //var imagePath ="http://localhost:53130/Content/tiles/sample/{z}/{x}/{y}.png"; 
+
         //var mapCenter = [startLat, startLng];
 
         //var mapInternal = L.map('mapInternal', {
@@ -135,26 +176,37 @@
 
         //L.imageOverlay(imageUrl, imageBounds).addTo(mapInternal);
 
-        var mapMinZoom = 0;
-        var mapMaxZoom = 3;
-        var mapInternal = L.map('mapInternal', {
-            maxZoom: mapMaxZoom,
-            minZoom: mapMinZoom,
-            crs: L.CRS.Simple
-        }).setView([0, 0], mapMaxZoom);
+        //var imagePath = "http://localhost:53130/Content/tiles/sample/{z}/{x}/{y}.png"; 
 
-        var mapBounds = new L.LatLngBounds(
-            map.unproject([0, 1024], mapMaxZoom),
-            map.unproject([1280, 0], mapMaxZoom));
+        //var mapMinZoom = 0;
+        //var mapMaxZoom = 3;
+        //mapInternal = L.map('mapInternalPlans', {
+        //    maxZoom: mapMaxZoom,
+        //    minZoom: mapMinZoom,
+        //    crs: L.CRS.Simple
+        //    //center: new L.LatLng(51.505, -0.09),
+        //    //zoom: 8,
+        //}).setView([0, 0], mapMaxZoom);
 
-        mapInternal.fitBounds(mapBounds);
-        L.tileLayer('/Content/tiles/sample/{z}/{x}/{y}.png', {
-            minZoom: mapMinZoom, maxZoom: mapMaxZoom,
-            bounds: mapBounds,
-            attribution: 'Rendered with <a href="http://www.maptiler.com/">MapTiler</a>',
-            noWrap: true,
-            tms: false
-        }).addTo(mapInternal);
+
+        //L.tileLayer(imagePath, {          //'/Content/tiles/sample/{z}/{x}/{y}.png'     https://a.tiles.mapbox.com/v3/mapbox.world-bright/{z}/{x}/{y}.png'
+        //    minZoom: mapMinZoom, maxZoom: mapMaxZoom,
+        //    // bounds: mapBounds,
+        //    // attribution: 'Rendered with <a href="http://www.maptiler.com/">MapTiler</a>',
+        //    noWrap: true,
+        //    tms: false
+        //}).addTo(mapInternal);
+
+
+        //var mapBounds = new L.LatLngBounds(
+        //    mapInternal.unproject([0, 1024], mapMaxZoom),
+        //    mapInternal.unproject([1280, 0], mapMaxZoom));
+
+        //mapInternal.fitBounds(mapBounds);
+
+
+        $("#mapInternalPlans").height(400);
+        $("#mapInternalPlans").width(800);
 
     }
 
@@ -237,10 +289,10 @@
             return new L.Icon(options);
         };
 
-        //$('#actionselector a').click(function (e) {
-        //    e.preventDefault()
-        //    $(this).tab('show')
-        //})
+        $('#actionselector a').click(function (e) {
+            e.preventDefault()
+            $(this).tab('show')
+        })
 
         $('#plansMapLink').click(function (e) {
             mapImageActivated = true;
@@ -264,6 +316,7 @@
                     var draggableId = $(this).draggable().attr("id");
                     var ioId = $(this).draggable().attr("data-ioid");
                     var ioType = $(this).draggable().attr("data-iotype");
+                    var ioName = $(this).draggable().attr("data-name");
                     var ioVal = parseBool($(this).draggable().attr("data-iovalue"));
 
                     $(this).draggable().remove();   //destroy draggable
@@ -271,7 +324,7 @@
                     var mapId;
                     if (mapImageActivated)
                     {
-                        mapId = "mapInternal";
+                        mapId = "mapInternalPlans";
                     } else {
                         mapId = "map";
                     }
@@ -316,9 +369,9 @@
                     } else {
                         markerCoords = map.containerPointToLatLng(point); // getting the geographical coordinates of the point
                     }
-                       
 
-                    var innerPopupContent = "<div>" + ioId + "</div> <div>" + iconIoControllContent + "</div>";    //ioType + " : " +
+
+                    var innerPopupContent = "<div>" + ioName + "</div> <div>" + iconIoControllContent + "</div>";    //ioType + " : " +
 
                     // Creating a new marker and adding it to the map
                     if (mapImageActivated) {
@@ -369,8 +422,6 @@
 
         });
 
-
-
         getLocation();  //async get location
 
         $('.iomenutoggle').on('click', function (e) {
@@ -391,8 +442,37 @@
                 var draggableId = ioMapDefinition.IoId;
                 var ioId = ioMapDefinition.IoId;
                 var ioType = ioMapDefinition.Type;
+                var ioName; // = ioMapDefinition.Name;
 
-                var ioVal = 0;  //parseBool(ioMapDefinition.DeviceIoCategory);
+                var modelDevice = Enumerable.From(hubModel.Devices)
+                    .Where(function (x) { return x.Id == ioMapDefinition.DeviceId })
+                    .First();
+
+                var modelIo = new Object();
+                if (ioType == 1) {
+                    modelIo = Enumerable.From(modelDevice.Inputs)
+                    .Where(function (x) { return x.Id == ioMapDefinition.IoId })
+                    .First();
+                }
+                else if (ioType == 2) {
+                    modelIo = Enumerable.From(modelDevice.Outputs)
+                   .Where(function (x) { return x.Id == ioMapDefinition.IoId })
+                   .First();
+                }
+                else if (ioType == 3) {
+                    modelIo = Enumerable.From(modelDevice.Relays)
+                    .Where(function (x) { return x.Id == ioMapDefinition.IoId })
+                    .First();
+                }
+                else {
+                    modelIo.Value = false;
+                }
+
+                if (!(modelIo.Value === undefined && typeof modelIo.Value === "undefined")) {
+                    var ioVal = modelIo.Value;
+                    ioName = modelIo.Name;
+                }
+                
                 var iconIoControllContent = "";
 
                 var ioIcon;
@@ -425,7 +505,7 @@
                         ioIcon = systemIconOff;
                     }
                 }
-                var innerPopupContent = "<div>" + ioId + "</div> <div>" + iconIoControllContent + "</div>";
+                var innerPopupContent = "<div>" + ioName + "</div> <div>" + iconIoControllContent + "</div>";
                 markers[markersCount] = L.marker([ioMapDefinition.Latitude, ioMapDefinition.Longitude], {
                     draggable: true,
                     icon: ioIcon
@@ -551,10 +631,10 @@
 
                         <div role="tabpanel">
                             <ul class="nav nav-tabs" role="tablist" id="actionselector">
-                                <li role="presentation" style="width: 50%;" class="">
+                                <li class="active" role="presentation" style="width: 50%;" class="">
                                     <a id="geoMapLink" aria-expanded="false" href="#tabStatus" aria-controls="tabStatus" role="tab" data-toggle="tab">Geographic</a>
                                 </li>
-                                <li class="active" role="presentation" style="width:50%;">
+                                <li  role="presentation" style="width:50%;">
                                     <a id="plansMapLink" aria-expanded="true" href="#tabConfigure" aria-controls="tabConfigure" role="tab" data-toggle="tab">Plans</a>
                                 </li>
                             </ul>
@@ -580,17 +660,19 @@
                                 </div>
 
                                 <div role="tabpanel" class="tab-pane" id="tabConfigure">
+
                                     <div class="container-fluid">
 
                                         <div class="row">
                                             <div class="map_container">
                                                 <div id="map_canvas" class="map_canvas">
                                                     <div class="form-group">
-                                                        <div id="mapInternal" style="height: 400px">
+                                                        <div id="mapInternalPlans" style="height: 400px">
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
+
                                         </div>
 
 
@@ -625,7 +707,7 @@
                             @foreach (var device in Model.Devices)
                             {
                                 <li>
-                                    <a href="#" class="btn btn-primary" data-target="#stack-menu-device-@device.Id.ToString()" data-toggle="collapse" data-parent="#stacked-menu">Device : @device.Name <span class="caret arrow"></span></a>   @*iomenutoggle*@
+                                    <a href="#" class="btn btn-primary" data-target="#stack-menu-device-@device.Id.ToString()" data-toggle="collapse" data-parent="#stacked-menu">Device : @device.Name <span class="caret arrow"></span></a> 
                                     <ul class="nav nav-stacked collapse right-submenu iomenutoggle" id='stack-menu-device-@device.Id.ToString()'>
 
                                         <li>
@@ -634,7 +716,7 @@
                                                 @foreach (var input in device.Inputs)
                                                 {
                                                     <li>
-                                                        <a class="btn btn-primary draggable-marker" style="width : 100%;" draggable="true" href="#" id="iomarker-input-@input.Id.ToString()-@device.Id.ToString()" data-iovalue="@input.Value.ToString()" data-deviceid="@device.Id.ToString()" data-ioid="@input.Id.ToString()" data-iotype="@((int)input.IoCategory)" src="/Content/img/mapka2.png">
+                                                        <a class="btn btn-primary draggable-marker" style="width : 100%;" draggable="true" href="#" id="iomarker-input-@input.Id.ToString()-@device.Id.ToString()" data-name="@input.Name.ToString()" data-iovalue="@input.Value.ToString()" data-deviceid="@device.Id.ToString()" data-ioid="@input.Id.ToString()" data-iotype="@((int)input.IoCategory)" src="/Content/img/mapka2.png">
                                                             <span class="glyphicon glyphicon-log-in"></span>
                                                             @input.Id.ToString() @input.Name
                                                         </a>
@@ -649,7 +731,7 @@
                                                 @foreach (var output in device.Outputs)
                                                 {
                                                     <li>
-                                                        <a class="btn btn-primary draggable-marker" style="width: 100%;" draggable="true" href="#" id="iomarker-output-@output.Id.ToString()-@device.Id.ToString()" data-iovalue="@output.Value.ToString()" data-deviceid="@device.Id.ToString()" data-ioid="@output.Id.ToString()" data-iotype="@((int)output.IoCategory)">
+                                                        <a class="btn btn-primary draggable-marker" style="width: 100%;" draggable="true" href="#" id="iomarker-output-@output.Id.ToString()-@device.Id.ToString()" data-name="@output.Name.ToString()" data-iovalue="@output.Value.ToString()" data-deviceid="@device.Id.ToString()" data-ioid="@output.Id.ToString()" data-iotype="@((int)output.IoCategory)">
                                                             <span class="glyphicon glyphicon-flash"></span>
                                                             @output.Id.ToString() @output.Name
                                                         </a>
@@ -667,7 +749,7 @@
                                                 @foreach (var relay in device.Relays)
                                                 {
                                                     <li>
-                                                        <a class="btn btn-primary draggable-marker" draggable="true" href="#" id="iomarker-relay-@relay.Id.ToString()-@device.Id.ToString()" data-iovalue="@relay.Value.ToString()" data-deviceid="@device.Id.ToString()" data-ioid="@relay.Id.ToString()" data-iotype="@((int)relay.IoCategory)">
+                                                        <a class="btn btn-primary draggable-marker" draggable="true" href="#" id="iomarker-relay-@relay.Id.ToString()-@device.Id.ToString()" data-iovalue="@relay.Value.ToString()" data-name="@relay.Name.ToString()" data-deviceid="@device.Id.ToString()" data-ioid="@relay.Id.ToString()" data-iotype="@((int)relay.IoCategory)">
                                                             <span class="glyphicon glyphicon-flash"></span>
                                                             @relay.Id.ToString() @relay.Name
                                                         </a>

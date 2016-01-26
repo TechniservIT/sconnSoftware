@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
   <head>
     <title>sample</title>
@@ -13,31 +13,31 @@
       function init() {
         var mapMinZoom = 0;
         var mapMaxZoom = 3;
-        var map = L.map('map', {
+        var mapInternal = L.map('mapInternal', {
           maxZoom: mapMaxZoom,
           minZoom: mapMinZoom,
           crs: L.CRS.Simple
         }).setView([0, 0], mapMaxZoom);
         
         var mapBounds = new L.LatLngBounds(
-            map.unproject([0, 1024], mapMaxZoom),
-            map.unproject([1280, 0], mapMaxZoom));
+            mapInternal.unproject([0, 1024], mapMaxZoom),
+            mapInternal.unproject([1280, 0], mapMaxZoom));
             
-        map.fitBounds(mapBounds);
+        mapInternal.fitBounds(mapBounds);
         L.tileLayer('{z}/{x}/{y}.png', {
           minZoom: mapMinZoom, maxZoom: mapMaxZoom,
           bounds: mapBounds,
           attribution: 'Rendered with <a href="http://www.maptiler.com/">MapTiler</a>',
           noWrap: true,
           tms: false
-        }).addTo(map);
+        }).addTo(mapInternal);
       }
     </script>
     <style>
-      html, body, #map { width:100%; height:100%; margin:0; padding:0; }
+      html, body, #mapInternal { width:100%; height:100%; margin:0; padding:0; }
     </style>
   </head>
   <body onload="init()">
-    <div id="map"></div>
+    <div id="mapInternal"></div>
   </body>
 </html>

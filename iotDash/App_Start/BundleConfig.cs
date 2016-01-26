@@ -65,7 +65,11 @@ namespace iotDash
             bundles.Add(new ScriptBundle("~/bundles/easing").Include(
               "~/Scripts/jquery.easing.min.js"
            ));
-            
+
+            bundles.Add(new ScriptBundle("~/bundles/linq").Include(
+             "~/Scripts/linq.js"
+          ));
+
 
             /* Tools */
 

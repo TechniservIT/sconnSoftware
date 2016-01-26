@@ -1,4 +1,17 @@
 FP tasks :	
+Login page routing domain access		V
+Domain access attr verify			V
+Site/Device access verify			V
+Map Io Show full name				V
+Alarm Firmware Upload		
+Alarm Map Io control				+	
+Alarm Io Config Views						
+Alarm Map range polygon				+
+Alarm Map static image upload			+
+Front page UI parallax				V	
+Embedded double RS comm
+Embedded analog Inputs
+Embedded RTOS
 embedded names redo single cfg			V
 embedded net command 4b header			V
 names						V
