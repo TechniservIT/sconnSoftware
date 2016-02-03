@@ -10,12 +10,16 @@
 
 @Scripts.Render("~/bundles/jqueryui")
 @Scripts.Render("~/bundles/signalr")
+@Scripts.Render("~/bundles/toggleswitch")
 @Scripts.Render("~/bundles/numspin")
 @Scripts.Render("~/bundles/fancybox")
-@Styles.Render("~/bundles/css/numspin")
 
-<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.0/css/bootstrap-toggle.min.css" rel="stylesheet">
-<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.0/js/bootstrap-toggle.min.js"></script>
+
+@Styles.Render("~/bundles/css/numspin")
+@Styles.Render("~/bundles/css/toggleswitch")
+
+@*<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.0/css/bootstrap-toggle.min.css" rel="stylesheet">
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.0/js/bootstrap-toggle.min.js"></script>*@
 
 @{
     ViewBag.Title = "Index";
@@ -290,11 +294,10 @@
 
 <div class="container-fluid">
 
-    @*<div class="row">
-            <div id="ReloadModelData" class="col-md-1">
-                @Html.ActionLink("Refresh", "Index", new {DeviceId = Model.ServerId}, new {@class = "glyphicon glyphicon-refresh"})
-            </div>
-        </div>*@
+@using (Html.BeginForm("Edit", "AlarmSystemDeviceConfig", FormMethod.Post, new { @id = "IoActivationForm" }))  //
+{
+
+
 
     <div class="row">
         <div class="panel panel-default">
@@ -559,8 +562,7 @@
     </div>
 
 
-@using (Html.BeginForm("Status", "AlarmSystemDeviceConfig"))  //,null, new { @id = "IoActivationForm" }
-{
+
     <div class="row">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -636,6 +638,8 @@
             <input type="submit" class="btn btn-bitbucket" value="Update" />
         </div>
     </div>
+
+
 }
 
 
