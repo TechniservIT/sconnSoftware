@@ -8,6 +8,7 @@
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 }
 
+@Scripts.Render("~/bundles/jquery")
 @Scripts.Render("~/bundles/jqueryui")
 @Scripts.Render("~/bundles/signalr")
 @Scripts.Render("~/bundles/numspin")
@@ -28,12 +29,6 @@
 }
 
 <script src="~/signalr/hubs"></script>
-
-<script type="text/javascript">
-    $(document).ready(function() {
-        $(".fancybox").fancybox();
-    });
-</script>
 
 
 @functions{
@@ -233,6 +228,9 @@
 <script>
 
     var Reloading = false;
+    var InputEditing = false;
+    var OutputEditing = false;
+
 
 
 
@@ -287,6 +285,14 @@
     var obj = { a: 1, 'b': 'foo', c: [false, 'false', null, 'null', { d: { e: 1.3e5, f: '1.3e5' } }] };
 
 
+   
+
+    $(document).ready(function () {
+        $(".fancybox").fancybox();
+    });
+
+
+
     $(function() {
 
         $('.iotoggle').change(function () {
@@ -300,6 +306,37 @@
         })
         
 
+        $("#inputsEditToggle").click(function () {
+            if (InputEditing) {
+                $(".inputsEditView").hide();   //slideToggle("fast");
+                $(".inputsStatusView").show();
+            }
+            else {
+                $(".inputsStatusView").hide();
+                $(".inputsEditView").show();
+            }
+            InputEditing = !InputEditing;
+        });
+
+
+        $("#outputsEditToggle").click(function () {
+            if (OutputEditing) {
+                $(".outputsEditView").hide();
+                $(".outputsStatusView").show();
+            }
+            else {
+                $(".outputsStatusView").hide();
+                $(".outputsEditView").show();
+            }
+            OutputEditing = !OutputEditing;
+        });
+
+
+        $(".inputsEditView").hide();
+        $(".outputsEditView").hide();
+
+
+
         ReloadPanels();
 
         $('.spinEdit').spinedit({
@@ -311,9 +348,9 @@
         });
 
 
-        $(".OutputActivations").toggleSwitch().change(function () {
-            document.getElementById('IoActivationForm').submit();
-        });
+        //$(".OutputActivations").toggleSwitch().change(function () {
+        //    document.getElementById('IoActivationForm').submit();
+        //});
 
         $('.tgsw-action').on('switchChange.bootstrapSwitch', function() {
               var ElementId = $(this).attr("value");
@@ -341,6 +378,7 @@
     @Html.HiddenFor(model => model.Device.OutputNo)
     @Html.HiddenFor(model => model.Device.RelayNo)
 
+    //info
     <div class="row">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -451,7 +489,7 @@
 
     </div>
 
-
+    //status
     <div class="row">
 
         <div class="panel panel-default">
@@ -523,6 +561,7 @@
     </div>
 
 
+    //inputs
     <div class="row">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -531,67 +570,146 @@
                         <div class="col-md-2">
                             <img src="~/Content/img/in.png" alt="563te" class="img-circle img-section-icon">
                         </div>
-                        <div class="col-md-10">
+                        <div class="col-md-8">
                             <h2>Inputs</h2>
+                        </div>
+                        <div class="col-md-2">
+                            <button id="inputsEditToggle" type="button" class="btn btn-default btn-lg">
+                                <span class="glyphicon glyphicon-wrench">
+                                </span>
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="panel-body"></div>
-            <table class="table">
-                <tr>
-                    <th>Name </th>
-                    <th>Type</th>
-                    <th>Value </th>
 
-                </tr>
-                @if (Model.Device != null)
-                {
-                for (int i = 0; i < Model.Device.Inputs.Count; i++)
-                {
+
+            <div class="panel-body">
+
+                <div class="row inputsEditView">
+
+                    <div class="form-group">
+                        @Html.HiddenFor(model => model.Device.DeviceId)
+                        @Html.HiddenFor(model => model.ServerId)
+                    </div>
+
+                    <div class="form-group">
+                        <table class="table">
+                            <tr>
+                                <th>Input </th>
+                                <th>Enabled</th>
+                                <th>Sensitivity</th>
+                                <th>Type</th>
+                                <th>Activation group </th>
+
+                            </tr>
+
+                            @for (int i = 0; i < Model.Device.Inputs.Count; i++)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.TextBoxFor(model => model.Device.Inputs[i].Name)
+                                    </td>
+
+                                    @Html.HiddenFor(model => model.Device.Inputs[i].Id)
+                                    @Html.HiddenFor(model => model.Device.Inputs[i].NameId)
+
+                                    <td>
+                                        @Html.CheckBoxFor(model => model.Device.Inputs[i].Enabled)
+                                    </td>
+
+                                    <td>
+                                        @Html.TextBoxFor(model => model.Device.Inputs[i].Sensitivity)
+
+                                    </td>
+
+                                    <td>
+                                        @Html.TextBoxFor(model => model.Device.Inputs[i].Type)
+
+                                    </td>
+
+                                    <td>
+                                        @Html.TextBoxFor(model => model.Device.Inputs[i].ActivationGroup)
+
+                                    </td>
+
+                                </tr>
+                            }
+                        </table>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-primary" value="Save" />
+                    </div>
+
+                </div>
+
+                <div class="row inputsStatusView">
+                    <table class="table">
                         <tr>
-                            <td>
-                                @Model.Device.Inputs[i].Name.ToString()
-                            </td>
-
-                            @Html.HiddenFor(model => model.Device.Inputs[i].Id)
-                            @Html.HiddenFor(model => model.Device.Inputs[i].NameId)
-                            @Html.HiddenFor(model => model.Device.Inputs[i].ActivationGroup)
-                            @Html.HiddenFor(model => model.Device.Inputs[i].Enabled)
-                            @Html.HiddenFor(model => model.Device.Inputs[i].Sensitivity)
-                            @Html.HiddenFor(model => model.Device.Inputs[i].Type)
-                            @Html.HiddenFor(model => model.Device.Inputs[i].Value)
-
-                            <td>
-                                @Model.Device.Inputs[i].Type.ToString()
-                            </td>
-
-                            <td>
-                                @Html.Raw(HttpUtility.HtmlDecode(ContentForDigitalIoValue(Model.Device.Inputs[i].Value)))
-                            </td>
+                            <th>Name </th>
+                            <th>Type</th>
+                            <th>Value </th>
 
                         </tr>
-                    }
-                }
-            </table>
+                        @if (Model.Device != null)
+                        {
+                            for (int i = 0; i < Model.Device.Inputs.Count; i++)
+                            {
+                                <tr>
+                                    <td>
+                                        @Model.Device.Inputs[i].Name.ToString()
+                                    </td>
+
+                                    @Html.HiddenFor(model => model.Device.Inputs[i].Id)
+                                    @Html.HiddenFor(model => model.Device.Inputs[i].NameId)
+                                    @Html.HiddenFor(model => model.Device.Inputs[i].ActivationGroup)
+                                    @Html.HiddenFor(model => model.Device.Inputs[i].Enabled)
+                                    @Html.HiddenFor(model => model.Device.Inputs[i].Sensitivity)
+                                    @Html.HiddenFor(model => model.Device.Inputs[i].Type)
+                                    @Html.HiddenFor(model => model.Device.Inputs[i].Value)
+
+                                    <td>
+                                        @Model.Device.Inputs[i].Type.ToString()
+                                    </td>
+
+                                    <td>
+                                        @Html.Raw(HttpUtility.HtmlDecode(ContentForDigitalIoValue(Model.Device.Inputs[i].Value)))
+                                    </td>
+
+                                </tr>
+                            }
+                        }
+                    </table>
+                </div>
+
+
+            </div>
+
+  
         </div>
 
     </div>
 
 
+    //outputs
     <div class="row">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <div class="container-fluid">
 
                     <div class="row">
-
                         <div class="col-md-2">
                             <img src="~/Content/img/out.png" alt="124das" class="img-circle img-section-icon">
                         </div>
-
-                        <div class="col-md-10">
+                        <div class="col-md-8">
                             <h2>Outputs</h2>
+                        </div>
+                        <div class="col-md-2">
+                            <button id="outputsEditToggle" type="button" class="btn btn-default btn-lg">
+                                <span class="glyphicon glyphicon-wrench">
+                                </span>
+                            </button>
                         </div>
                     </div>
 
@@ -599,42 +717,92 @@
             </div>
 
             <div class="panel-body">
-                <table class="table">
-                    <tr>
-                        <th>Name </th>
-                        <th>Type</th>
-                        <th>Value </th>
 
-                    </tr>
-                    @if (Model.Device != null)
+                <div class="outputsEditView">
+                    <div class="form-group">
+                        @Html.HiddenFor(model => model.Device.DeviceId)
+                        @Html.HiddenFor(model => model.ServerId)
+                    </div>
+
+                    <div class="form-group">
+                        <table class="table">
+                            <tr>
+                                <th>Output </th>
+                                <th>Enabled</th>
+                                <th>Type</th>
+
+                            </tr>
+
+                            @for (int i = 0; i < Model.Device.Outputs.Count; i++)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.TextBoxFor(model => model.Device.Outputs[i].Name)
+                                    </td>
+
+                                    @Html.HiddenFor(model => model.Device.Outputs[i].Id)
+                                    @Html.HiddenFor(model => model.Device.Outputs[i].NameId)
+
+                                    <td>
+                                        @Html.CheckBoxFor(model => model.Device.Outputs[i].Enabled)
+                                    </td>
+
+
+                                    <td>
+                                        @Html.TextBoxFor(model => model.Device.Outputs[i].Type)
+
+                                    </td>
+
+                                </tr>
+                            }
+                        </table>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-primary" value="Send" />
+                    </div>
+
+                </div>
+
+                <div class="outputsStatusView">
+                    <table class="table">
+                        <tr>
+                            <th>Name </th>
+                            <th>Type</th>
+                            <th>Value </th>
+
+                        </tr>
+                        @if (Model.Device != null)
                 {
                     for (int i = 0; i < Model.Device.Outputs.Count; i++)
                     {
-                        <tr>
-                            <td>
-                                @Model.Device.Outputs[i].Name.ToString()
-                            </td>
+                                <tr>
+                                    <td>
+                                        @Model.Device.Outputs[i].Name.ToString()
+                                    </td>
 
-                            @Html.HiddenFor(model => model.Device.Outputs[i].Id)
-                            @Html.HiddenFor(model => model.Device.Outputs[i].NameId)
-                            @Html.HiddenFor(model => model.Device.Outputs[i].Type)
-                            @Html.HiddenFor(model => model.Device.Outputs[i].Enabled)
+                                    @Html.HiddenFor(model => model.Device.Outputs[i].Id)
+                                    @Html.HiddenFor(model => model.Device.Outputs[i].NameId)
+                                    @Html.HiddenFor(model => model.Device.Outputs[i].Type)
+                                    @Html.HiddenFor(model => model.Device.Outputs[i].Enabled)
 
-                            <td>
-                                @Model.Device.Outputs[i].Type.ToString()
-                            </td>
+                                    <td>
+                                        @Model.Device.Outputs[i].Type.ToString()
+                                    </td>
 
-                            <td>
-                                <div class="checkbox">
-                                    @Html.ToggleSwitchFor(model => model.Device.Outputs[i].Value)
-                                </div>
-                            </td>
-                        </tr>
+                                    <td>
+                                        <div class="checkbox">
+                                            @Html.ToggleSwitchFor(model => model.Device.Outputs[i].Value)
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
                         }
-                    }
 
 
-                </table>
+                    </table>
+                </div>
+
             </div>
 
         </div>
