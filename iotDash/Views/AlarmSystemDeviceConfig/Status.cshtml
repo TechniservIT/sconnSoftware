@@ -3,6 +3,8 @@
 @using System.Linq.Expressions
 @using iotDash.Helpers
 @using sconnConnector
+@using sconnConnector.POCO.Config
+
 
 @{
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
@@ -13,11 +15,10 @@
 @Scripts.Render("~/bundles/signalr")
 @Scripts.Render("~/bundles/numspin")
 @Scripts.Render("~/bundles/fancybox")
+@Scripts.Render("~/bundles/bootstrap-toggle")
+
 @Styles.Render("~/bundles/css/numspin")
-
-<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.0/css/bootstrap-toggle.min.css" rel="stylesheet">
-<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.0/js/bootstrap-toggle.min.js"></script>
-
+@Styles.Render("~/bundles/css/bootstrap-toggle")
 
 @{
     ViewBag.Title = "Index";
@@ -32,9 +33,6 @@
 
 
 @functions{
-
-
-
 
     public string SpanClassForArmStatusDisplay()
     {
@@ -112,6 +110,50 @@
         }
     }
 
+    public string SpanSclassForInputTypeValue(sconnInput Input)
+    {
+        bool valueIsOk = false;
+        if (Input.Type == sconnInputType.NormallyClosed)
+        {
+            if (Input.Value > 0)
+            {
+                valueIsOk = true;
+            }
+        }
+        else if (Input.Type == sconnInputType.NormallyOpen)
+        {
+            if (Input.Value == 0)
+            {
+                valueIsOk = true;
+            }
+        }
+        else if (Input.Type == sconnInputType.DoubleParametrizedNC)
+        {
+            if (Input.Value == 1)
+            {
+                valueIsOk = true;
+            }
+        }
+        else if (Input.Type == sconnInputType.SingleParametrizedNC)
+        {
+            if (Input.Value == 1)
+            {
+                valueIsOk = true;
+            }
+        }
+
+
+        if (valueIsOk)
+        {
+            return "btn btn-success";
+        }
+        else
+        {
+            return "btn btn-danger";
+        }
+
+    }
+
     public string SpanClassForBooleanReversePolarization(bool val)
     {
         if (val)
@@ -136,6 +178,12 @@
         {
             return "label label-danger";
         }
+    }
+
+    public string ContentForDigitalInput(sconnInput input)
+    {
+        string valClass = SpanSclassForInputTypeValue(input);
+        return "<button type='button' class='" + valClass + "'>" + input.Value.ToString() + "</button>";
     }
 
     public string ContentForDigitalIoValue(int value)
@@ -674,7 +722,7 @@
                                     </td>
 
                                     <td>
-                                        @Html.Raw(HttpUtility.HtmlDecode(ContentForDigitalIoValue(Model.Device.Inputs[i].Value)))
+                                        @Html.Raw(HttpUtility.HtmlDecode(ContentForDigitalInput(Model.Device.Inputs[i])))
                                     </td>
 
                                 </tr>

@@ -15,9 +15,9 @@ namespace sconnConnector.POCO.Config
     {
         NormallyOpen = 0,
         NormallyClosed,
-        ParametrizedNC,
-        ParametrizedArm,
-        ParametrizedSensor
+        DoubleParametrizedNC,
+        SingleParametrizedNC,
+        DoubleParametrizedNO
     }
 
     public enum sconnActivationGroup
