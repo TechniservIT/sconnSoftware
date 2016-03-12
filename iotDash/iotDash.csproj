@@ -491,7 +491,6 @@
     <Content Include="Content\img\markers_default.png" />
     <Content Include="Content\img\markers_shadow%402x.png" />
     <Content Include="Content\img\markers_shadow.png" />
-    <Content Include="Content\img\Mikolow refit 2016-Model.png" />
     <Content Include="Content\img\ok1.jpg" />
     <Content Include="Content\img\oko11.png" />
     <Content Include="Content\img\oko3.png" />
@@ -500,7 +499,6 @@
     <Content Include="Content\img\oko6.png" />
     <Content Include="Content\img\out.png" />
     <Content Include="Content\img\out2.png" />
-    <Content Include="Content\img\Parter aranzacja-Model.png" />
     <Content Include="Content\img\patchcord.png" />
     <Content Include="Content\img\person2.png" />
     <Content Include="Content\img\przekaznik.png" />

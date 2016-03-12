@@ -81,12 +81,14 @@ namespace sconnConnector
         {
             //default setup for USB connection
             //FindSconnPort()
-            int baud = 115200;
-            port1 = new SerialPort("COM18", baud); //BaudDefaultValue
-            port1.ReadBufferSize = 64;
-            port1.WriteBufferSize = 64;
+
+            int baud = 9600;
+            port1 = new SerialPort("COM4", baud); //BaudDefaultValue
+            port1.ReadBufferSize = 32;
+            port1.WriteBufferSize = 32;
             port1.Handshake = Handshake.XOnXOff;
-          
+            port1.ReadTimeout = 400;
+            port1.WriteTimeout = 400;
            
 
         }
@@ -109,9 +111,14 @@ namespace sconnConnector
         {
             try
             {
+                byte[] testArr = new byte[1100];
+                testArr[0] = (byte)(0x9900 >> 8);
+                testArr[1] = (byte) (0x9900 & 0x00FF );
+
                 port1.Open();
-                bool txok = writeConsole("testpass");
-                string resp = readConsole();
+                bool txok = Console_Write_Bytes(testArr,4);
+                byte[] resp = Usb_Read_Bytes();
+
                 port1.Close();
                 return resp.Length > 0 ? true : false;
             }
@@ -142,6 +149,42 @@ namespace sconnConnector
                 }
             }
 
+        }
+
+        private bool Console_Write_Bytes(byte[] bytes)
+        {
+            try
+            {
+                if (port1.IsOpen)
+                {
+                    port1.Write(bytes,0,bytes.Length);
+                    return true;
+                }
+                else return false;
+            }
+            catch (Exception e)
+            {
+
+                throw;
+            }
+        }
+
+        private bool Console_Write_Bytes(byte[] bytes, int len)
+        {
+            try
+            {
+                if (port1.IsOpen)
+                {
+                    port1.Write(bytes, 0, len);
+                    return true;
+                }
+                else return false;
+            }
+            catch (Exception e)
+            {
+
+                throw;
+            }
         }
 
         private bool writeConsole(string txt)
@@ -193,6 +236,27 @@ namespace sconnConnector
             return bufferdata;
         }
 
+        private byte[] Usb_Read_Bytes()
+        {
+            if (port1.IsOpen)
+            {
+                try
+                {
+                    byte[] bufferdata = new byte[32];
+                    int bread = port1.Read(bufferdata,0, port1.BytesToRead % 32);
+                    return bufferdata;
+                }
+                catch (Exception e)
+                {
+                    throw;
+                }
+
+            }
+            else
+            {
+                return new byte[0];
+            }
+        }
 
         private string readConsole()
         {

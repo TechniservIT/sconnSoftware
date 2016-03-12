@@ -59,10 +59,12 @@ namespace sconnRem
 
         public sconnView()
         {
-           // USB usbcomm = new USB();
-           //string resp = usbcomm.ReadUsbBlocking();
+
+            USB usbcomm = new USB();
+            usbcomm.TestConnection();
+           // string resp = usbcomm.ReadUsbBlocking();
            // usbcomm.TransmitLoop();
-           // usbcomm.TestConnection();
+           
 
             ConfigSource.SetXmlPath(Directory.GetCurrentDirectory().ToString());
             ConfigSource.SetXmlFileName("sconnRem.xml");
