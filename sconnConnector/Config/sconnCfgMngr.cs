@@ -21,6 +21,9 @@ namespace sconnConnector
 	public class sconnCfgMngr
 	{
 		ETH ethernet;
+        USB usbClient;
+
+        private bool Trx_Com_Usb;
 
         private static Logger _logger = LogManager.GetCurrentClassLogger();
 
@@ -1398,6 +1401,7 @@ namespace sconnConnector
             try
             {
                 SconnClient client = new SconnClient(site.serverIP, site.serverPort, site.authPasswd, true);
+
                 bool globalUploadStat = false;
                 bool deviceUploadStat = false;
                 int devices = 0;
@@ -1719,15 +1723,44 @@ namespace sconnConnector
 
 	   }
 
+        //public byte[] Eth_Trx_Io(sconnSite site, byte[] tx)
+        //{
+        //    if (Trx_Com_Usb)
+        //    {
+
+        //    }
+        //    else
+        //    {
+        //        SconnClient client = new SconnClient(site.serverIP, site.serverPort, site.authPasswd, true);
+        //        return client.berkeleySendMsg(tx);
+        //    }
+        //}
+
 
 	   public bool ReadSiteRunningConfig(sconnSite site)
 	   {
-           return ReadSiteRunningConfigMin(site, true);
-	   }
+            if (site.UsbCom)
+            {
+                return usbClient.ReadSiteRunningConfigMin(site, true);
+            }
+            else
+            {
+                return ReadSiteRunningConfigMin(site, true);
+            }
+        }
+
 
 		public bool  updateSiteConfig( sconnSite site) //read entire running config
 			{
-                return ReadSiteRunningConfigMin(site,true);
-			}    
+            if (site.UsbCom)
+            {
+                return usbClient.ReadSiteRunningConfigMin(site, true);
+            }
+            else
+            {
+                return ReadSiteRunningConfigMin(site, true);
+            }
+        }
+            
 	}
 }

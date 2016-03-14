@@ -66,7 +66,7 @@ namespace sconnConnector
 
         public static bool addSite(string hostname, int port, string password, string siteName)
         {
-                if (hostname == null || port == 0 || password == null)
+            if (hostname == null ||  password == null)
             {
                 return false;
             }
@@ -77,7 +77,7 @@ namespace sconnConnector
 
         public static bool addSite(sconnSite addsite)
         {
-            if (addsite.serverIP == null || addsite.serverPort == 0 || addsite.authPasswd == null)
+            if (addsite.serverIP == null || addsite.authPasswd == null)
             {
                 return false;
             }

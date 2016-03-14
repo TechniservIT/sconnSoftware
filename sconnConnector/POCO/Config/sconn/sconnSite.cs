@@ -19,6 +19,8 @@ namespace sconnConnector.POCO.Config
         private string _siteName;
         private int SelectedTabId = 0;
         
+        public bool UsbCom;
+        
         public SiteConnectionStat siteStat;
 
         public ipcSiteConfig siteCfg;

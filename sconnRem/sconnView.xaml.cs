@@ -57,15 +57,28 @@ namespace sconnRem
             dataView.Children.Add(panel);
         }
 
+        private void Bootstrap_FindAndLoad_UsbDevices()
+        {
+            USB usbcomm = new USB();
+             //   usbcomm.UsbComm_Test_Trx();
+            //  usbcomm.UsbComm_Sample_Trx();
+            bool UsbConn = usbcomm.TestConnection();
+            if (UsbConn)
+            {
+                sconnSite site = new sconnSite("USB_PROG",400,"",0,"");   //string siteName, int intervalMs, string server, int port, string password)
+                site.UsbCom = true;
+                sconnDataShare.addSite(site);
+                ConfigManager.saveConfig();
+            }
+
+
+            // string resp = usbcomm.ReadUsbBlocking();
+            // usbcomm.TransmitLoop();
+        }
+
         public sconnView()
         {
-
-            USB usbcomm = new USB();
-            usbcomm.TestConnection();
-           // string resp = usbcomm.ReadUsbBlocking();
-           // usbcomm.TransmitLoop();
-           
-
+            
             ConfigSource.SetXmlPath(Directory.GetCurrentDirectory().ToString());
             ConfigSource.SetXmlFileName("sconnRem.xml");
             settings = ConfigSource.LoadRegistryData();
@@ -84,6 +97,10 @@ namespace sconnRem
             seDiag.KeyDown += seDiag_KeyDown;
             seDiag.loginButton.Click += loginButton_Click;
 
+
+            Bootstrap_FindAndLoad_UsbDevices();
+
+
             //mapView = new MapWindow();
             //mapView.Show();
 
@@ -91,6 +108,8 @@ namespace sconnRem
 
             initMainView();
             this.Hide(); //hide gui until login 
+
+
         }
 
 
