@@ -34,6 +34,7 @@ namespace sconnConnector
 
 		public sconnCfgMngr()
 		{
+            usbClient = new USB();
 			ethernet = new ETH();
 		}
 

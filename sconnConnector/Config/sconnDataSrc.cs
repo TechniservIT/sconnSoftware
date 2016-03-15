@@ -254,6 +254,10 @@ namespace sconnConnector
                 deviceNoNode.InnerText = site.siteCfg.deviceNo.ToString();
                 siteNode.AppendChild(deviceNoNode);
 
+                XmlNode UsbComNode = doc.CreateNode("element", "UsbCom", "");
+                UsbComNode.InnerText = site.UsbCom.ToString();
+                siteNode.AppendChild(UsbComNode);
+
                 XmlNode deviceConfigs = doc.CreateNode("element", "deviceConfigs", "");
                 string deviceData = "";
                 for (int i = 0; i < site.siteCfg.deviceNo; i++)
@@ -356,6 +360,11 @@ namespace sconnConnector
                     else if (node.Name == "deviceNo")
                     {
                         int deviceNo = int.Parse(node.InnerText);
+
+                    }
+                    else if (node.Name == "UsbCom")
+                    {
+                        site.UsbCom = bool.Parse(node.InnerText);
 
                     }
                     else if (node.Name == "deviceConfigs")

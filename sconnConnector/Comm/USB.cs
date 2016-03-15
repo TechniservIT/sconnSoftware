@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Win32;
 using sconnConnector.POCO.Config;
 using NLog;
+using System.Security.Cryptography;
 
 #if WIN32_ENC
 using System.IO.Ports;
@@ -79,9 +80,19 @@ namespace sconnConnector
             return port;
         }
 
+        private byte[] berkeleySendMsg( byte[] msg)
+        {
+            return UsbComm_Trx_Message(msg, msg.Length);    //UsbComm_Trx_Transaction(msg, msg.Length);
+        }
+
+        private byte[] berkeleySendMsg(string server, byte[] msg, int port)
+        {
+            return UsbComm_Trx_Message(msg, msg.Length);
+        }
+
         private byte[] berkeleySendMsg(byte[] msg, int bytes)
         {
-            return UsbComm_Trx_Transaction(msg,bytes);
+            return UsbComm_Trx_Message(msg,bytes);
         }
 
         public USB()
@@ -130,8 +141,8 @@ namespace sconnConnector
                 return resp.Length > 0 ? true : false;
             }
             catch (Exception e)
-            {        
-                throw;
+            {
+                return false;
             }
 
 
@@ -175,6 +186,8 @@ namespace sconnConnector
 
         static public int USB_PACKET_DATA_SIZE = (USB_EP0_BUFF_SIZE- USB_PACKET_DATA_HEADER_SIZE);
 
+        static public int USB_CMD_NET_TX_ACK = 0x0108;
+        static public int USB_CMD_NET_RX_ACK = 0x0109;
 
         public short WordFromBufferAtPossition(byte[] buffer, int pos)
         {
@@ -190,17 +203,14 @@ namespace sconnConnector
             USB_Out_Buffer = new byte[1100];
         }
 
-        public void UsbComm_Transmit_Message(byte[] message, int len)
-        {
 
-        }
 
         public bool UsbComm_Sample_Trx()
         {
             byte[] trxMsg = new byte[2];
             trxMsg[0]= ipcCMD.GET;
             trxMsg[1] = ipcCMD.getDevNo;
-            return UsbComm_Trx_Transaction(trxMsg).Length != 0;
+            return UsbComm_Trx_Transaction(trxMsg, trxMsg.Length).Length != 0;
         }
 
         public void UsbComm_Test_Trx()
@@ -226,20 +236,521 @@ namespace sconnConnector
             client.Close();
         }
 
+        
+        public void UsbComm_Trx_Setup()
+        {
+            client.WriteTimeout = 400;
+            client.ReadTimeout = 400;
+            client.ReadBufferSize = 2048;
+            client.WriteBufferSize = 2048;
+
+        }
+
+        #region USB_TRX
+
+        public byte[] UsbComm_Recieve_Packet_NoAck(int bytes, int timeoutCycles)
+        {
+            try
+            {
+
+                //recieve
+                byte[] Rx_Buffer = new byte[2048];
+                byte[] Result_Buffer = new byte[2048];
+                int rxLeft = bytes;
+                int rxCt = 0;
+                int timeout = 0;
+
+                while (rxLeft > 0 && !(timeout > timeoutCycles))
+                {
+                    int bread = 0;
+                    bread = client.Read(Rx_Buffer, rxCt, rxLeft);
+                    rxCt += bread;
+                    rxLeft -= bread;
+                    if (rxLeft == 0)
+                    {
+                        return Rx_Buffer;
+                    }
+                }
+
+                return Rx_Buffer;
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e, e.Message);
+                return new byte[0];
+            }
+        }
+
+        //TX_UPLOAD 
+        public bool UsbComm_Transmit_Packet_NoAck(byte[] packet, int len, int timeoutCycles)
+        {
+            try
+            {
+                byte[] Trx_Response = new byte[2048];
+                byte[] Rx_Buffer = new byte[2048];
+                byte[] packetBuffer = new byte[USB_EP0_BUFF_SIZE];
+
+                //transmit
+                int txLeft = len;
+                int txPos = 0;
+                int timeout = 0;
+
+                while (txLeft > 0 && !(timeout > timeoutCycles))
+                {
+
+                    if (client.IsOpen)
+                    {
+                        int txbinc = 0;
+                        if (txLeft > USB_EP0_BUFF_SIZE)
+                        {
+                            txbinc = USB_EP0_BUFF_SIZE - USB_PACKET_DATA_HEADER_SIZE;
+                        }
+                        else
+                        {
+                            txbinc = txLeft;
+                        }
+                        //append response with header
+                        packetBuffer[0] = (byte)(USB_CMD_NET_TX_PUSH >> 8);
+                        packetBuffer[1] = (byte)USB_CMD_NET_TX_PUSH;
+                        for (int i = 0; i < txbinc; i++)
+                        {
+                            packetBuffer[USB_PACKET_DATA_HEADER_SIZE + i] = packet[txPos + i];
+                        }
+                        client.Write(packetBuffer, 0, txbinc + USB_PACKET_DATA_HEADER_SIZE);
+                        txPos += txbinc;
+                        txLeft -= txbinc;
+                    }
+                    timeout++;
+                }
+                return ((txLeft == 0));
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e, e.Message);
+                return false;
+            }
+
+        }
+
+
+        //TX_UPLOAD  - Success if ACKed 
+        public byte[] UsbComm_Trx_NoAck(byte[] packet, int txLen, int timeoutCycles, int rxLen)
+        {
+            try
+            {
+                UsbComm_Transmit_Packet_NoAck(packet, txLen, timeoutCycles);
+                return UsbComm_Recieve_Packet_NoAck(rxLen,200);
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e, e.Message);
+                return new byte[0];
+            }
+
+        }
+
+
+        #endregion
+
+        #region USB_TX
+
+        /*************************  TX *******************************/
+        /*
+            TX_START
+            TX_UPLOAD_ALL
+                TX_UPLOAD
+	                TX_ACK
+            TX_FIN
+        */
+
+        //TX_START  - Success if ACKed
+        public bool UsbComm_Trx_Upload_Start(int length)
+        {
+            try
+            {
+                byte[] packetBuffer = new byte[USB_EP0_BUFF_SIZE];
+                //send start packet
+                packetBuffer[0] = (byte)(USB_CMD_NET_TX_START >> 8);
+                packetBuffer[1] = (byte)USB_CMD_NET_TX_START;
+                packetBuffer[2] = (byte)(length >> 8);
+                packetBuffer[3] = (byte)(length & 0xFF);
+                client.Write(packetBuffer, 0, 4);
+
+                //verify response
+                return UsbComm_Rx_Acked();
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e, e.Message);
+                return false;
+            }
+        }
+
+        //TX_UPLOAD  - Success if ACKed 
+        public bool UsbComm_Transmit_Packet(byte[] packet, int len, int timeoutCycles)
+        {
+            try
+            {
+                byte[] Trx_Response = new byte[2048];
+                byte[] Rx_Buffer = new byte[2048];
+                byte[] packetBuffer = new byte[USB_EP0_BUFF_SIZE];
+
+                //transmit
+                int txLeft = len;
+                int txPos = 0;
+                int timeout = 0;
+                
+                while (txLeft > 0 && !(timeout > timeoutCycles))
+                {
+
+                    if (client.IsOpen)
+                    {
+                        int txbinc = 0;
+                        if (txLeft > USB_EP0_BUFF_SIZE)
+                        {
+                            txbinc = USB_EP0_BUFF_SIZE - USB_PACKET_DATA_HEADER_SIZE;
+                        }
+                        else
+                        {
+                            txbinc = txLeft;
+                        }
+                        //append response with header
+                        packetBuffer[0] = (byte)(USB_CMD_NET_TX_PUSH >> 8);
+                        packetBuffer[1] = (byte)USB_CMD_NET_TX_PUSH;
+                        for (int i = 0; i < txbinc; i++)
+                        {
+                            packetBuffer[USB_PACKET_DATA_HEADER_SIZE + i] = packet[txPos + i];
+                        }
+                        client.Write(packetBuffer, 0, txbinc + USB_PACKET_DATA_HEADER_SIZE);
+                        txPos += txbinc;
+                        txLeft -= txbinc;
+                    }
+                    timeout++;
+                }
+                //read ack
+                return ((txLeft == 0) && UsbComm_Rx_Acked());
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e, e.Message);
+                return false;
+            }
+
+        }
+
+
+        // TX_ACK?  - Success if ACK rx
+        public bool UsbComm_Rx_Acked()
+        {
+            try
+            {
+                byte[] resp = UsbComm_Recieve_Packet_NoAck(2, 200);
+                if (resp != null)
+                {
+                    if (resp.Length >= USB_PACKET_CMD_LEN)
+                    {
+                        if (WordFromBufferAtPossition(resp, 0) == USB_CMD_NET_TX_ACK)
+                        {
+                            client.Close();
+                            return true;
+                        }
+                    }
+                }
+                return false;
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e, e.Message);
+                return false;
+            }
+        }
+
+
+        public bool UsbComm_Transmit_Message(byte[] message, int len)
+        {
+            return UsbComm_Trx_Upload_Data(message, len);
+        }
+
+        //TX_UPLOAD_ALL
+        public bool UsbComm_Trx_Upload_Data(byte[] data, int len)
+        {
+            try
+            {
+                bool result = false;
+                if (UsbComm_Trx_Upload_Start(len))
+                {
+                    result = true;
+                    //transmit 
+                    byte[] packetBytes = new byte[USB_EP0_BUFF_SIZE];
+                    int packets = data.Length / USB_EP0_BUFF_SIZE;
+                    for (int i = 0; i < packets; i++)
+                    {
+                        for (int j = 0; j < USB_EP0_BUFF_SIZE; j++)
+                        {
+                            packetBytes[j] = data[i * USB_EP0_BUFF_SIZE + j];
+                        }
+                        bool txOk = UsbComm_Transmit_Packet(packetBytes, USB_EP0_BUFF_SIZE,10);
+                        if (!txOk)
+                        {
+                            result = false;
+                        }
+                    }
+                    int singleBytes = data.Length % USB_EP0_BUFF_SIZE;
+                    if(singleBytes > 0)
+                    {
+                        for (int j = 0; j < USB_EP0_BUFF_SIZE; j++)
+                        {
+                            packetBytes[j] = data[packets * USB_EP0_BUFF_SIZE + j];
+                        }
+                        bool txOk = UsbComm_Transmit_Packet(packetBytes, singleBytes, 10);
+                        if (!txOk)
+                        {
+                            result = false;
+                        }
+                    }
+                }
+                else
+                {
+                    result = false;
+                }
+                return result;
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e, e.Message);
+                client.Close();
+                return false;
+            }
+
+        }
+
+        //TX_FIN
+
+        #endregion
+
+
+
+
+        #region USB_RX
+        /*************************  RX *******************************/
+        /*
+            RX_START
+            RX_DOWNLOAD_ALL
+                RX_DOWNLOAD
+	                RX_ACK
+            RX_FIN
+        */
+
+        static int UsbComm_Rx_Data_Size = 0;
+
+        //RX_START
+        public bool UsbComm_Trx_Download_Start()
+        {
+            try
+            {
+                byte[] packetBuffer = new byte[USB_EP0_BUFF_SIZE];
+                packetBuffer[0] = (byte)(USB_CMD_NET_RX_START >> 8);
+                packetBuffer[1] = (byte)USB_CMD_NET_RX_START;
+                byte[] StartResp = UsbComm_Trx_NoAck(packetBuffer, 2, 20,4);
+                if (StartResp != null)
+                {
+                    if(StartResp.Length >= 4)
+                    {
+                        UsbComm_Rx_Data_Size = WordFromBufferAtPossition(StartResp, 2);
+                        return true;
+                    }
+                }
+                return false;
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e, e.Message);
+                return false;
+            }
+        }
+
+        //RX_DOWNLOAD_ALL
+        public byte[] UsbComm_Trx_Download_Message(int timeoutCycles)
+        {
+            try
+            {
+                byte[] ResultData = new byte[2048];
+                byte[] packetBytes = new byte[USB_EP0_BUFF_SIZE];
+                if (UsbComm_Trx_Download_Start())
+                {
+                    int packets = UsbComm_Rx_Data_Size / USB_EP0_BUFF_SIZE;
+                    for (int i = 0; i < packets; i++)
+                    {
+                        byte[] packetData = UsbComm_Download_Packet(USB_EP0_BUFF_SIZE, 10);
+                        if (packetData.Length == USB_EP0_BUFF_SIZE)
+                        {
+                            for (int j = 0; j < packetData.Length; j++)
+                            {
+                                ResultData[i* USB_EP0_BUFF_SIZE + j] = packetData[j];
+                            }
+                        }
+                        else
+                        {
+                            return null;
+                        }
+                    }
+
+                    int singleBytes = UsbComm_Rx_Data_Size % USB_EP0_BUFF_SIZE;
+                    if (singleBytes > 0)
+                    {
+                        byte[] packetData = UsbComm_Download_Packet(singleBytes, 10);
+                        if (packetData.Length == singleBytes)
+                        {
+                            for (int j = 0; j < packetData.Length; j++)
+                            {
+                                ResultData[packets * USB_EP0_BUFF_SIZE + j] = packetData[j];
+                            }
+                        }
+                        else
+                        {
+                            return null;
+                        }
+                    }
+                }
+
+                return ResultData;
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e, e.Message);
+                return null;
+
+            }
+        }
+
+
+        //RX_DOWNLOAD
+
+        //download data single packet with ack
+        public byte[] UsbComm_Download_Packet(int len, int timeoutCycles)
+        {
+            try
+            {
+                //send sync
+                byte[] packetBuffer = new byte[USB_EP0_BUFF_SIZE];
+                packetBuffer[0] = (byte)(USB_CMD_NET_RX_PUSH >> 8);
+                packetBuffer[1] = (byte)USB_CMD_NET_RX_PUSH;
+                bool sentSync = UsbComm_Transmit_Packet_NoAck(packetBuffer, 2, 20);
+
+                if (sentSync)
+                {
+                    //recieve
+                    byte[] Rx_Buffer = new byte[2048];
+                    byte[] Result_Buffer = new byte[2048];
+                    int rxLeft = len;
+                    int rxCt = 0;
+                    int timeout = 0;
+
+                    while (rxLeft > 0 && !(timeout > timeoutCycles))
+                    {
+                        int bread = 0;
+                        bread = client.Read(Rx_Buffer, rxCt, rxLeft);
+                        rxCt += bread;
+                        rxLeft -= bread;
+                        if (rxLeft == 0)
+                        {
+                            return Rx_Buffer;
+                        }
+                    }
+                }
+                else
+                {
+                }
+                return new byte[0];
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e, e.Message);
+                return new byte[0];
+            }
+        }
+
+
+        
+        //RX_ACK
+        public bool UsbComm_Ack_Rx()
+        {
+            try
+            {
+                byte[] packetBuffer = new byte[USB_EP0_BUFF_SIZE];
+                packetBuffer[0] = (byte)(USB_CMD_NET_TX_START >> 8);
+                packetBuffer[1] = (byte)USB_CMD_NET_TX_START;
+                return UsbComm_Transmit_Packet_NoAck(packetBuffer, 2, 20);
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e, e.Message);
+                return false;
+            }
+
+        }
+
+
+        //RX_FIN
+
+            
+
+        public bool UsbComm_Is_Packet_Success_For_Oper()
+        {
+            return false;
+        }
+
+
+        #endregion
+
+        
+
+
+        public bool UsbComm_Trx_Upload_Verify()
+        {
+            return false;
+        }
+
+        
+
+        public bool UsbComm_Trx_Download_Verify()
+        {
+            return false;
+        }
+
+        public byte[] UsbComm_Trx_Message(byte[] message, int length)
+        {
+            try
+            {
+                byte[] Result = new byte[2048];
+                UsbComm_Trx_Setup();
+                client.Open();
+                UsbComm_Transmit_Message(message, length);
+                Result = UsbComm_Trx_Download_Message(20);
+                return Result;
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e, e.Message);
+                client.Close();
+                return new byte[0];
+            }
+        }
+
         public byte[] UsbComm_Trx_Transaction(byte[] message, int length)
         {
             try
             {
 
-                client.WriteTimeout = 500;
-                client.ReadTimeout = 120000;
+                client.WriteTimeout = 400;
+                client.ReadTimeout = 400;
                 client.ReadBufferSize = 2048;
                 client.WriteBufferSize = 2048;
 
                 client.Open();
-                byte[] Trx_Response = new byte[1100];
+                byte[] Trx_Response = new byte[2048];
                 int TrxRecieved = 0;
-                byte[] Rx_Buffer = new byte[1100];
+                byte[] Rx_Buffer = new byte[2048];
                 byte[] packetBuffer = new byte[USB_EP0_BUFF_SIZE];
                 int len = length;   // message.Length;
 
@@ -256,7 +767,7 @@ namespace sconnConnector
                 packetBuffer[3] = (byte)(len & 0xFF);
                 client.Write(packetBuffer, 0, 4);
 
-                while (txLeft > 0 && !(timeout > 100))
+                while (txLeft > 0 && !(timeout > 300))
                 {
 
                     if (client.IsOpen)
@@ -285,7 +796,7 @@ namespace sconnConnector
                     timeout++;
                 }
 
-                client.DiscardInBuffer();
+               // client.DiscardInBuffer();
 
                 //recieve
                 int Rx_Data_Total_Left = 0;
@@ -294,12 +805,21 @@ namespace sconnConnector
                 //rx start packet
                 //System.Threading.Thread.Sleep(150); //settling
 
-                while (rxLeft > 0 && !(timeout > 100))
+                while (rxLeft > 0 && !(timeout > 300))
                 {
 
 
                     //read the resp
-                    int bread = client.Read(Rx_Buffer, rxCt, rxLeft);
+                    int bread = 0;
+                    try
+                    {
+                        bread = client.Read(Rx_Buffer, rxCt, rxLeft);
+                    }
+                    catch (Exception e)
+                    {
+
+                    }
+
                     rxCt += bread;
                     if (rxCt == 4)
                     {
@@ -319,12 +839,13 @@ namespace sconnConnector
 
                 int ReadOffset = rxCt;
                 rxCt = 0;
-                Rx_Buffer = new byte[1100];
-                rxLeft = Rx_Data_Total_Left >= USB_PACKET_DATA_SIZE ? USB_EP0_BUFF_SIZE : (Rx_Data_Total_Left + USB_PACKET_DATA_HEADER_SIZE);
-                int btoRead = rxLeft;
+                Rx_Buffer = new byte[2048];
+                rxLeft = Rx_Data_Total_Left;    // >= USB_PACKET_DATA_SIZE ? USB_EP0_BUFF_SIZE : (Rx_Data_Total_Left + USB_PACKET_DATA_HEADER_SIZE);
+                int btoRead = 0;
+                int pbytesLeft = 0;
                 client.DiscardInBuffer();
 
-                while (rxLeft > 0 && !(timeout > 100))
+                while (rxLeft > 0 && !(timeout > 300))
                 {
                     if (client.IsOpen)
                     {
@@ -333,22 +854,46 @@ namespace sconnConnector
                         packetBuffer[1] = (byte)USB_CMD_NET_RX_PUSH;
                         client.Write(packetBuffer, 0, 2);
 
-                        int pcktRx = client.Read(Rx_Buffer, rxCt, rxLeft);
-                        rxCt += pcktRx;
-                        if (rxCt == btoRead)
+                        //calc bytes needed to read
+                        if(rxLeft >= USB_PACKET_DATA_SIZE)
                         {
-                            //strip header and copy msg
-                            for (int i = USB_PACKET_DATA_HEADER_SIZE; i < (pcktRx); i++)
-                            {
-                                Trx_Response[TrxRecieved] = Rx_Buffer[i];
-                                TrxRecieved++;  // (pcktRx - USB_PACKET_DATA_HEADER_SIZE);
-                               // rxLeft--;
-                            }
+                            btoRead = USB_EP0_BUFF_SIZE;
+                            pbytesLeft = btoRead;
                         }
                         else
                         {
-                            rxLeft -= pcktRx;
+                            btoRead = rxLeft + USB_PACKET_DATA_HEADER_SIZE;
+                            pbytesLeft = btoRead;
                         }
+
+
+                        while (pbytesLeft > 0 && !(timeout > 100))
+                        {
+                            int pcktRx = 0;
+                            pcktRx = client.Read(Rx_Buffer, rxCt, pbytesLeft);
+                            rxCt += pcktRx;
+                            pbytesLeft -= pcktRx;
+                            if (rxCt == btoRead)
+                            {
+                                //strip header and copy msg
+                                for (int i = USB_PACKET_DATA_HEADER_SIZE; i < (rxCt); i++)
+                                {
+                                    Trx_Response[TrxRecieved] = Rx_Buffer[i];
+                                    TrxRecieved++;
+                                    //client.DiscardInBuffer();
+                                    // (pcktRx - USB_PACKET_DATA_HEADER_SIZE);
+                                    // rxLeft--;
+                                }
+                                rxLeft -= rxCt;
+                                rxCt = 0;
+                                pbytesLeft = 0;
+                                btoRead = 0;
+                            }
+                            timeout++;
+
+                        }
+
+
                     }
                     timeout++;
                 }
@@ -645,6 +1190,7 @@ namespace sconnConnector
         }
 
 
+        #region USB_SITE_TRX
 
         /************** TRX *******************************************/
 
@@ -712,7 +1258,7 @@ namespace sconnConnector
                 byte[] cmd = new byte[ipcDefines.NET_CMD_PACKET_LEN];
                 cmd[0] = ipcCMD.GET;
                 cmd[1] = ipcCMD.getDevNo;
-                byte[] resp = berkeleySendMsg(cmd); //ethernet.berkeleySendMsg(site.serverIP, cmd, site.serverPort);
+                byte[] resp = berkeleySendMsg(cmd, 4); //ethernet.berkeleySendMsg(site.serverIP, cmd, site.serverPort);
                 if (resp[0] == ipcCMD.SVAL)
                 {
                     sites = (int)resp[2]; // second byte is data,  <SVAL> <DATA> <EVAL>                  
@@ -1804,7 +2350,7 @@ namespace sconnConnector
                 catch (Exception e)
                 {
                     _logger.Error(e, e.Message);
-                    Debug.WriteLine(e.Message + " | " + e.InnerException.Message);
+                    //Debug.WriteLine(e.Message + " | " + e.InnerException.Message);
                     return false;
                 }
 
@@ -1849,7 +2395,7 @@ namespace sconnConnector
 
                     cmd[0] = ipcCMD.GET;
                     cmd[1] = ipcCMD.getGlobCfg;
-                    rxBF = ethernet.berkeleySendMsg(site.serverIP, cmd, site.serverPort);
+                    rxBF = berkeleySendMsg(site.serverIP, cmd, site.serverPort);
                     //rxBF = ethernet.berkeleyReadLen(site.serverIP, cmd, site.serverPort, ipcDefines.ipcGlobalConfigSize + 2);
 
                     if (rxBF[0] == ipcCMD.SVAL)
@@ -1876,7 +2422,7 @@ namespace sconnConnector
                             cmd[0] = ipcCMD.GET;
                             cmd[1] = ipcCMD.getDevCfg;
                             cmd[2] = (byte)i; //device number
-                            rxBF = ethernet.berkeleySendMsg(site.serverIP, cmd, site.serverPort);
+                            rxBF = berkeleySendMsg(site.serverIP, cmd, site.serverPort);
                             //rxBF = ethernet.berkeleyReadLen(site.serverIP, cmd, site.serverPort, ipcDefines.deviceConfigSize + 2);
                             deviceUploadStat = true;
                             if (rxBF[0] == ipcCMD.SVAL)
@@ -1953,7 +2499,7 @@ namespace sconnConnector
                     cmd[0] = ipcCMD.GET;
                     cmd[1] = ipcCMD.getRunDevCfg;
                     cmd[2] = (byte)i; //devi ce number
-                    rxBF = berkeleySendMsg(cmd);
+                    rxBF = berkeleySendMsg(cmd, 3);
 
                     if (rxBF[0] == ipcCMD.SVAL)
                     {
@@ -1975,11 +2521,11 @@ namespace sconnConnector
                 //get events
                 cmd[0] = ipcCMD.GET;
                 cmd[1] = ipcCMD.getEventNo;
-                rxBF = berkeleySendMsg(cmd);
+                rxBF = berkeleySendMsg(cmd, 2);
 
                 cmd[1] = ipcCMD.getEvent;
                 cmd[2] = (byte)1; //test event id 1
-                rxBF = berkeleySendMsg(cmd);
+                rxBF = berkeleySendMsg(cmd, 2);
 
                 site.siteStat.StopConnectionTimer();
 
@@ -2038,7 +2584,7 @@ namespace sconnConnector
                     //Get config hash first to verify if config has changed at all
                     cmd[0] = ipcCMD.GET;
                     cmd[1] = ipcCMD.getConfigHash;
-                    rxBF = berkeleySendMsg(cmd);
+                    rxBF = berkeleySendMsg(cmd, 2);
                     if (rxBF[0] == ipcCMD.SVAL)
                     {
                         byte[] hashrx = new byte[ipcDefines.SHA256_DIGEST_SIZE];
@@ -2074,7 +2620,7 @@ namespace sconnConnector
 
                         cmd[0] = ipcCMD.GET;
                         cmd[1] = ipcCMD.getRunGlobCfg;
-                        gcfgRx = berkeleySendMsg(cmd);     //    ethernet.berkeleySendMsg(site.serverIP, cmd, site.serverPort);
+                        gcfgRx = berkeleySendMsg(cmd, 2);     //    ethernet.berkeleySendMsg(site.serverIP, cmd, site.serverPort);
                         bool GcfgOk = (gcfgRx[0] == ipcCMD.SVAL);
 
                         /**********  Get device configs **********/
@@ -2125,7 +2671,7 @@ namespace sconnConnector
                                     cmd[0] = ipcCMD.GET;
                                     cmd[1] = ipcCMD.getRunDevCfg;
                                     cmd[2] = (byte)i; //device number
-                                    rxBF = berkeleySendMsg(cmd);
+                                    rxBF = berkeleySendMsg(cmd, 3);
 
                                     if (rxBF[0] == ipcCMD.SVAL)
                                     {
@@ -2146,7 +2692,7 @@ namespace sconnConnector
                                     /*****  Get Device AUTH CFG ******/
 
                                     cmd[1] = ipcCMD.getAuthDevices;
-                                    devAuthBF = berkeleySendMsg(cmd);
+                                    devAuthBF = berkeleySendMsg(cmd, 2);
                                     if (devAuthBF[0] == ipcCMD.SVAL)
                                     {
                                         site.siteCfg.AuthDevices = new byte[ipcDefines.AUTH_RECORDS_SIZE];
@@ -2160,7 +2706,7 @@ namespace sconnConnector
                                     /*****  Get GSM RCPT ******/
 
                                     cmd[1] = ipcCMD.getGsmRecpCfg;
-                                    gsmRcpBF = berkeleySendMsg(cmd);
+                                    gsmRcpBF = berkeleySendMsg(cmd, 2);
 
                                     deviceUploadStat = true;
 
@@ -2225,7 +2771,7 @@ namespace sconnConnector
 
                                             cmd[2] = (byte)n;
                                             cmd[3] = (byte)rxBF[ipcDefines.mAdrDevID + 1]; //TODO 2 byte addressing
-                                            byte[] narr = berkeleySendMsg(cmd);
+                                            byte[] narr = berkeleySendMsg(cmd, 4);
                                             if (narr[0] == ipcCMD.SVAL)
                                             {
                                                 for (int txtbyte = MsgByteOffset; txtbyte < ipcDefines.RAM_NAME_SIZE + MsgByteOffset; txtbyte++)
@@ -2237,7 +2783,7 @@ namespace sconnConnector
 
                                         ///*****  Get Global Names ******/
                                         cmd[1] = ipcCMD.getGlobalNames;
-                                        byte[] nresp = berkeleySendMsg(cmd);
+                                        byte[] nresp = berkeleySendMsg(cmd, 2);
                                         if (nresp[0] == ipcCMD.SVAL)
                                         {
                                             for (int n = 0; n < ipcDefines.RAM_NAMES_Global_Total_Size; n++)
@@ -2255,7 +2801,7 @@ namespace sconnConnector
                                             {
                                                 site.siteCfg.ZoneNames[n] = new byte[ipcDefines.RAM_NAME_SIZE];
                                                 cmd[2] = (byte)n;
-                                                byte[] narr = berkeleySendMsg(cmd);
+                                                byte[] narr = berkeleySendMsg(cmd, 3);
                                                 if (narr[0] == ipcCMD.SVAL)
                                                 {
                                                     for (int txtbyte = MsgByteOffset; txtbyte < ipcDefines.RAM_NAME_SIZE + MsgByteOffset; txtbyte++)
@@ -2276,7 +2822,7 @@ namespace sconnConnector
                                     //get events
                                     cmd[0] = ipcCMD.GET;
                                     cmd[1] = ipcCMD.getEventNo;
-                                    rxBF = berkeleySendMsg(cmd);
+                                    rxBF = berkeleySendMsg(cmd, 2);
                                     int events = (((int)rxBF[1] << 8) | (int)rxBF[2]);
                                     site.siteCfg.events = new ipcEvent[events];
                                     //TODO events track change
@@ -2284,7 +2830,7 @@ namespace sconnConnector
                                     {
                                         cmd[1] = ipcCMD.getEvent;
                                         cmd[2] = (byte)j;
-                                        rxBF = berkeleySendMsg(cmd);
+                                        rxBF = berkeleySendMsg(cmd, 3);
                                         byte[] evBF = new byte[ipcDefines.EVENT_DB_RECORD_LEN];
                                         for (int k = 0; k < ipcDefines.EVENT_DB_RECORD_LEN; k++)
                                         {
@@ -2296,7 +2842,7 @@ namespace sconnConnector
                                     //Auth cfg
                                     cmd[0] = ipcCMD.GET;
                                     cmd[1] = ipcCMD.getPasswdCfg;
-                                    rxBF = berkeleySendMsg(cmd);
+                                    rxBF = berkeleySendMsg(cmd, 4);
                                     byte[] AuthBf = new byte[ipcDefines.AUTH_MAX_USERS * ipcDefines.AUTH_RECORD_SIZE];
                                     for (int j = 0; j < ipcDefines.AUTH_MAX_USERS * ipcDefines.AUTH_RECORD_SIZE; j++)
                                     {
@@ -2360,6 +2906,8 @@ namespace sconnConnector
         {
             return ReadSiteRunningConfigMin(site, true);
         }
+
+        #endregion
 
 
 

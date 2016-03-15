@@ -104,10 +104,10 @@ namespace sconnRem
                  }
                  return stat;
              }
-             catch (Exception)
+             catch (Exception e)
              {
                  Progress = ConnectionProgress.ConnectErr;
-                 throw;
+                return false;
              }
         }
 
