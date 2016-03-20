@@ -1,0 +1,12 @@
+﻿<UserControl x:Class="sconnRem.View.Config.GsmConfig"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:sconnRem.View.Config"
+             mc:Ignorable="d" Height="600" Width="800">
+    <ScrollViewer  Grid.Row="0" Grid.Column="2"  Height="{Binding ActualHeight, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type RowDefinition}}}"  Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type RowDefinition}}}"  VerticalScrollBarVisibility="auto" HorizontalScrollBarVisibility="Visible" Grid.RowSpan="2"  >
+        <StackPanel x:Name="dataView" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch"  Height="Auto"  Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ScrollViewer}}}"  x:FieldModifier="public"/>
+    </ScrollViewer>
+
+</UserControl>

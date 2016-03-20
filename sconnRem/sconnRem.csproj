@@ -47,9 +47,12 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -59,6 +62,15 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="Telerik.Windows.Controls, Version=2016.1.217.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Controls.Data, Version=2016.1.217.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Controls.DataVisualization, Version=2016.1.217.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Controls.GridView, Version=2016.1.217.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Controls.Input, Version=2016.1.217.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Controls.Navigation, Version=2016.1.217.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Data, Version=2016.1.217.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="UIAutomationTypes" />
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -111,6 +123,40 @@
     <Compile Include="Controls\MainView\SiteView.cs" />
     <Compile Include="Controls\SiteConfig\SitePanel\statusViewPanel.cs" />
     <Compile Include="Controls\MainView\ViewSiteLoading.cs" />
+    <Compile Include="View\Config\AlarmSystem\AuthConfigView.xaml.cs">
+      <DependentUpon>AuthConfigView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Config\AlarmSystem\CommConfigView.xaml.cs">
+      <DependentUpon>CommConfigView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Config\AlarmSystem\ConfigSelectView.xaml.cs">
+      <DependentUpon>ConfigSelectView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Config\AlarmSystem\Device\DeviceConfigView.xaml.cs">
+      <DependentUpon>DeviceConfigView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Config\AlarmSystem\DeviceSelectView.xaml.cs">
+      <DependentUpon>DeviceSelectView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Config\AlarmSystem\Device\OutputsConfigView.xaml.cs">
+      <DependentUpon>OutputsConfigView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Config\AlarmSystem\GsmConfigView.xaml.cs">
+      <DependentUpon>GsmConfigView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Config\AlarmSystem\Device\InputsConfigView.xaml.cs">
+      <DependentUpon>InputsConfigView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Config\AlarmSystem\UserConfigView.xaml.cs">
+      <DependentUpon>UserConfigView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Config\AlarmSystem\ZoneConfigView.xaml.cs">
+      <DependentUpon>ZoneConfigView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\gridSiteConfigSelect.cs" />
+    <Compile Include="View\Setting\wndAppSettings.xaml.cs">
+      <DependentUpon>wndAppSettings.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Wnd\changePasswordWnd.xaml.cs">
       <DependentUpon>changePasswordWnd.xaml</DependentUpon>
     </Compile>
@@ -120,7 +166,10 @@
     <Compile Include="Controls\SiteConfig\DeviceConfigGroups\GbxConfigureInputsGroup.cs" />
     <Compile Include="Controls\SiteConfig\DeviceConfigGroups\GbxConfigureOutputsGroup.cs" />
     <Compile Include="Controls\SiteConfig\DeviceConfigGroups\GbxConfigureRelaysGroup.cs" />
-    <Compile Include="Wnd\HelpWnd.xaml.cs">
+    <Compile Include="Wnd\Help\About.xaml.cs">
+      <DependentUpon>About.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Wnd\Help\HelpWnd.xaml.cs">
       <DependentUpon>HelpWnd.xaml</DependentUpon>
     </Compile>
     <Compile Include="Wnd\MapWindow.xaml.cs">
@@ -161,6 +210,50 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Config\AlarmSystem\AuthConfigView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Config\AlarmSystem\CommConfigView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Config\AlarmSystem\ConfigSelectView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Config\AlarmSystem\Device\DeviceConfigView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Config\AlarmSystem\DeviceSelectView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Config\AlarmSystem\Device\OutputsConfigView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Config\AlarmSystem\GsmConfigView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Config\AlarmSystem\Device\InputsConfigView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Config\AlarmSystem\UserConfigView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Config\AlarmSystem\ZoneConfigView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Setting\wndAppSettings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Wnd\changePasswordWnd.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -169,7 +262,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Wnd\HelpWnd.xaml">
+    <Page Include="Wnd\Help\About.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Wnd\Help\HelpWnd.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -228,6 +325,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Properties\Licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.de-DE.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.de-DE.Designer.cs</LastGenOutput>
@@ -291,6 +389,11 @@
       <Project>{09c8a8f0-f85a-4534-922e-85e14ec32725}</Project>
       <Name>sconnConnector</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Model\" />
+    <Folder Include="ViewModel\" />
+    <Folder Include="Wnd\Navigation\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

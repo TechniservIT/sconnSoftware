@@ -281,15 +281,15 @@ namespace sconnRem
             }
             sitesPanel.SelectItemChanged += sitesPanel_SelectItemChanged;        
             siteList.Children.Add(sitesPanel);
-            ImageBrush img1 = new ImageBrush();
-            ImageBrush img2 = new ImageBrush();
-            ImageBrush img3 = new ImageBrush();
-            img1.ImageSource = new BitmapImage(new Uri("pack://application:,,,/images/cog3.jpg", UriKind.Absolute));
-            btnSites.Background = img1;
-            img2.ImageSource = new BitmapImage(new Uri("pack://application:,,,/images/key1.jpg", UriKind.Absolute));
-            btnConfig.Background = img2;
-            img3.ImageSource = new BitmapImage(new Uri("pack://application:,,,/images/stat1.jpg", UriKind.Absolute));
-            btnMap.Background = img3;
+            //ImageBrush img1 = new ImageBrush();
+            //ImageBrush img2 = new ImageBrush();
+            //ImageBrush img3 = new ImageBrush();
+            //img1.ImageSource = new BitmapImage(new Uri("pack://application:,,,/images/cog3.jpg", UriKind.Absolute));
+            //btnSites.Background = img1;
+            //img2.ImageSource = new BitmapImage(new Uri("pack://application:,,,/images/key1.jpg", UriKind.Absolute));
+            //btnConfig.Background = img2;
+            //img3.ImageSource = new BitmapImage(new Uri("pack://application:,,,/images/stat1.jpg", UriKind.Absolute));
+            //btnMap.Background = img3;
 
         }
 
@@ -496,10 +496,6 @@ namespace sconnRem
 
         }
 
-        private void MenuItem_Click_1(object sender, RoutedEventArgs e)
-        {
-
-        }
         
 
 
