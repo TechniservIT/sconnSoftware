@@ -21,6 +21,7 @@ using System.Xml.Linq;
 using System.Xml;
 using sconnConnector;
 using sconnConnector.POCO.Config;
+using sconnRem.View.Config;
 
 namespace sconnRem
 {
@@ -114,6 +115,14 @@ namespace sconnRem
 
         private void updateView(ref sconnSite site)
         {
+            this.Children.Clear();
+            //siteViewPanel.Children.Clear();
+            //siteViewPanel.Children.Add(siteTabView);
+            ConfigSelect cfgView = new ConfigSelect();
+            this.Children.Add(cfgView);
+
+            return;
+
             if (site.siteCfg != null && sconnDataShare.SiteLiveViewEnabled == true)
             {
 

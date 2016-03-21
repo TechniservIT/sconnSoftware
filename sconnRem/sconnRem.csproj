@@ -124,6 +124,7 @@
     <Compile Include="Controls\SiteConfig\SitePanel\statusViewPanel.cs" />
     <Compile Include="Controls\MainView\ViewSiteLoading.cs" />
     <Compile Include="ViewModel\Alarm\AlarmAuthConfigViewModel.cs" />
+    <Compile Include="ViewModel\Alarm\AlarmConfigSelectViewModel.cs" />
     <Compile Include="ViewModel\Alarm\AlarmDeviceConfigViewModel.cs" />
     <Compile Include="ViewModel\Alarm\AlarmGlobalConfigViewModel.cs" />
     <Compile Include="ViewModel\Alarm\AlarmGsmConfigViewModel.cs" />
@@ -131,6 +132,7 @@
     <Compile Include="ViewModel\Alarm\AlarmZoneConfigViewModel.cs" />
     <Compile Include="ViewModel\Generic\GenericAlarmConfigViewModel.cs" />
     <Compile Include="ViewModel\Generic\IGenericAlarmConfigViewModel.cs" />
+    <Compile Include="ViewModel\Generic\ViewModelBase.cs" />
     <Compile Include="View\Config\AlarmSystem\AuthConfigView.xaml.cs">
       <DependentUpon>AuthConfigView.xaml</DependentUpon>
     </Compile>

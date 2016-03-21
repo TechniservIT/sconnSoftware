@@ -8,7 +8,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.DataContext>
-        <datapath:AlarmAuthConfigViewModel />
+        <datapath:AlarmGlobalConfigViewModel />
     </UserControl.DataContext>
     
     <Grid>

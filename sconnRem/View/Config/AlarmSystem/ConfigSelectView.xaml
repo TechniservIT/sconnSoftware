@@ -11,9 +11,9 @@
         <StackPanel x:Name="stckConfigSelect" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch"  Height="Auto"  Width="Auto"  x:FieldModifier="public">
             <Grid d:DesignHeight="600" d:DesignWidth="800" Height="{Binding ActualHeight, RelativeSource={RelativeSource FindAncestor, AncestorType=Grid, AncestorLevel=1}}">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="33*" />
+                    <RowDefinition Height="33*"/>
+                    <RowDefinition Height="33*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="33*" />
@@ -21,9 +21,27 @@
                     <ColumnDefinition Width="33*" />
                 </Grid.ColumnDefinitions>
 
-                <Image Grid.Row="0" Grid.Column="0"   x:Name="image00" HorizontalAlignment="Center" Height="Auto" Margin="10,10,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/config1.png"/>
-                <Image Grid.Row="0" Grid.Column="1"   x:Name="image01" HorizontalAlignment="Center" Height="Auto" Margin="10,10,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/config2.png"/>
-                <Image Grid.Row="0" Grid.Column="2"   x:Name="image02" HorizontalAlignment="Center" Height="Auto" Margin="10,10,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/strefa.png"/>
+                <StackPanel  Grid.Row="0" Grid.Column="0">
+                    <Button Margin="20,20,20,20" Command="{Binding cmdShowGlobalConfig}"   HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Height="Auto"  Width="Auto"  >
+                        <Image  x:Name="image00"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="50*" Margin="10,10,10,10" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/config1.png"/>
+                    </Button>
+                </StackPanel>
+
+
+                <StackPanel  Grid.Row="0" Grid.Column="1">
+                    <Button Margin="20,20,20,20" Command="{Binding cmdShowSettings}">
+                        <Image   x:Name="image01" HorizontalAlignment="Center" Height="Auto" Margin="10,10,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/config2.png"/>
+                    </Button>
+                </StackPanel>
+
+
+                <StackPanel  Grid.Row="0" Grid.Column="2">
+                    <Button Margin="20,20,20,20" Command="{Binding cmdShowNetworkConfig}">
+                        <Image   x:Name="image02" HorizontalAlignment="Center" Height="Auto" Margin="10,10,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/strefa.png"/>
+                    </Button>
+                </StackPanel>
+
+
 
                 <Image Grid.Row="1" Grid.Column="0"   x:Name="image10" HorizontalAlignment="Center" Height="Auto" Margin="10,10,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/patchcord.png"/>
                 <Image Grid.Row="1" Grid.Column="1"   x:Name="image11" HorizontalAlignment="Center" Height="Auto" Margin="10,10,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/tel.png"/>
@@ -32,8 +50,9 @@
                 <Image Grid.Row="2" Grid.Column="0"   x:Name="image20" HorizontalAlignment="Center" Height="Auto" Margin="10,10,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/waves.png"/>
                 <Image Grid.Row="2" Grid.Column="1"   x:Name="image21" HorizontalAlignment="Center" Height="Auto" Margin="10,10,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/tmp.png"/>
                 <Image Grid.Row="2" Grid.Column="2"   x:Name="image22" HorizontalAlignment="Center" Height="Auto" Margin="10,10,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/water.png"/>
-                
+
             </Grid>
+            <StackPanel Height="100" Width="100"/>
         </StackPanel>
     </ScrollViewer>
 </UserControl>
