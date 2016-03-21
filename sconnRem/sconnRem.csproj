@@ -123,6 +123,14 @@
     <Compile Include="Controls\MainView\SiteView.cs" />
     <Compile Include="Controls\SiteConfig\SitePanel\statusViewPanel.cs" />
     <Compile Include="Controls\MainView\ViewSiteLoading.cs" />
+    <Compile Include="ViewModel\Alarm\AlarmAuthConfigViewModel.cs" />
+    <Compile Include="ViewModel\Alarm\AlarmDeviceConfigViewModel.cs" />
+    <Compile Include="ViewModel\Alarm\AlarmGlobalConfigViewModel.cs" />
+    <Compile Include="ViewModel\Alarm\AlarmGsmConfigViewModel.cs" />
+    <Compile Include="ViewModel\Alarm\AlarmUsersConfigViewModel.cs" />
+    <Compile Include="ViewModel\Alarm\AlarmZoneConfigViewModel.cs" />
+    <Compile Include="ViewModel\Generic\GenericAlarmConfigViewModel.cs" />
+    <Compile Include="ViewModel\Generic\IGenericAlarmConfigViewModel.cs" />
     <Compile Include="View\Config\AlarmSystem\AuthConfigView.xaml.cs">
       <DependentUpon>AuthConfigView.xaml</DependentUpon>
     </Compile>
@@ -138,8 +146,20 @@
     <Compile Include="View\Config\AlarmSystem\DeviceSelectView.xaml.cs">
       <DependentUpon>DeviceSelectView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Config\AlarmSystem\Device\KeypadConfigView.xaml.cs">
+      <DependentUpon>KeypadConfigView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Config\AlarmSystem\Device\MotherboardConfigView.xaml.cs">
+      <DependentUpon>MotherboardConfigView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Config\AlarmSystem\Device\OutputsConfigView.xaml.cs">
       <DependentUpon>OutputsConfigView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Config\AlarmSystem\Device\SensorConfigView.xaml.cs">
+      <DependentUpon>SensorConfigView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Config\AlarmSystem\Device\SirenConfigView.xaml.cs">
+      <DependentUpon>SirenConfigView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Config\AlarmSystem\GsmConfigView.xaml.cs">
       <DependentUpon>GsmConfigView.xaml</DependentUpon>
@@ -230,7 +250,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Config\AlarmSystem\Device\KeypadConfigView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Config\AlarmSystem\Device\MotherboardConfigView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Config\AlarmSystem\Device\OutputsConfigView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Config\AlarmSystem\Device\SensorConfigView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Config\AlarmSystem\Device\SirenConfigView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -385,14 +421,41 @@
     <Resource Include="images\worldlock2.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AlarmSystemManagmentService\AlarmSystemManagmentService.csproj">
+      <Project>{3d463251-18d3-451b-b06c-c4d655dd8a37}</Project>
+      <Name>AlarmSystemManagmentService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DeviceManagmentService\DeviceManagmentService.csproj">
+      <Project>{10b956be-068f-4fbb-9b1e-63c080b24019}</Project>
+      <Name>DeviceManagmentService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\iotDatabaseConnector\iotDatabaseConnector.csproj">
+      <Project>{7df5e6fa-5839-456f-959b-af4a7a742775}</Project>
+      <Name>iotDatabaseConnector</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\iotData\iotData.csproj">
+      <Project>{e94b0a02-089e-483a-aaef-3bfa49039598}</Project>
+      <Name>iotData</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\iotDomainDataAccessService\iotDomainDataAccessService.csproj">
+      <Project>{a73e1e91-a18c-48bd-bda8-931d429b7966}</Project>
+      <Name>iotDomainDataAccessService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IotServiceAbstract\IotServiceAbstract.csproj">
+      <Project>{dc1fbe1d-13b6-4dd2-91e2-7ffe2f909cc5}</Project>
+      <Name>IotServiceAbstract</Name>
+    </ProjectReference>
     <ProjectReference Include="..\sconnConnector\sconnConnector.csproj">
       <Project>{09c8a8f0-f85a-4534-922e-85e14ec32725}</Project>
       <Name>sconnConnector</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SiteManagmentService\SiteManagmentService.csproj">
+      <Project>{cc9fb92a-c1d9-400a-bd9b-d814280a118e}</Project>
+      <Name>SiteManagmentService</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
-    <Folder Include="ViewModel\" />
     <Folder Include="Wnd\Navigation\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

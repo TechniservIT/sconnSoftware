@@ -1,16 +1,11 @@
-﻿<UserControl x:Class="sconnRem.View.Config.CommConfigView"
+﻿<UserControl x:Class="sconnRem.View.Config.AlarmSystem.Device.MotherboardConfigView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:sconnRem.View.Config"
-              xmlns:datapath="clr-namespace:sconnRem.ViewModel.Alarm"
+             xmlns:local="clr-namespace:sconnRem.View.Config.AlarmSystem.Device"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <UserControl.DataContext>
-        <datapath:AlarmAuthConfigViewModel />
-    </UserControl.DataContext>
-    
     <Grid>
             
     </Grid>
