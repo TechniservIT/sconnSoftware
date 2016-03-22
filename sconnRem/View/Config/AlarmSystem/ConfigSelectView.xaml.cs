@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using sconnConnector.Config;
+using sconnRem.ViewModel.Generic;
 
 namespace sconnRem.View.Config
 {
@@ -20,9 +22,35 @@ namespace sconnRem.View.Config
     /// </summary>
     public partial class ConfigSelect : UserControl
     {
+        private AlarmSystemConfigManager _manager;
+
         public ConfigSelect()
         {
             InitializeComponent();
         }
+
+        public ConfigSelect(AlarmSystemConfigManager _Manager)
+        {
+            this._manager = _Manager;
+            InitializeComponent();
+        }
+
+        public void DidSelectItem()
+        {
+
+        }
+
+        private void Show_GlobalConfig(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Show_Settings(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+     
+
     }
 }

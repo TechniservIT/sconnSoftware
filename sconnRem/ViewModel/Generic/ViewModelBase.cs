@@ -22,8 +22,7 @@ namespace sconnRem.ViewModel.Generic
         object DataContext { get; set; }
     }
 
-    public class ViewModelBase<ViewType> : INotifyPropertyChanged
-    where ViewType : IGridView
+    public class ViewModelBase<ViewType> : INotifyPropertyChanged  where ViewType : IGridView
     {
         public event PropertyChangedEventHandler PropertyChanged;
         private readonly ViewType view;

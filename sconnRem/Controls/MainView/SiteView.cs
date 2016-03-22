@@ -19,7 +19,9 @@ using System.Windows.Shapes;
 using System.Threading;
 using System.Xml.Linq;
 using System.Xml;
+using iotDbConnector.DAL;
 using sconnConnector;
+using sconnConnector.Config;
 using sconnConnector.POCO.Config;
 using sconnRem.View.Config;
 
@@ -37,6 +39,9 @@ namespace sconnRem
         private CheckBox cbxAddCarriageReturn;
         private CheckBox cbxAddSignSub;
 
+        private AlarmSystemConfigManager _Manager;
+
+
         public bool LiveViewEnabled { get; set; }
 
         public StackPanel SiteViewPanel { get { return siteViewPanel; } }
@@ -46,6 +51,13 @@ namespace sconnRem
             _SiteId = siteID;
             siteViewPanel = new StackPanel();
             sconnSite site = sconnDataShare.getSite(_SiteId);
+            EndpointInfo info = new EndpointInfo();
+            info.Hostname = site.serverIP;
+            info.Port = site.serverPort;
+            DeviceCredentials cred = new DeviceCredentials();
+            cred.Password = site.authPasswd;
+            cred.Username = "";
+            _Manager = new AlarmSystemConfigManager(info,cred);
             updateView(ref site);
         }
 
@@ -116,12 +128,8 @@ namespace sconnRem
         private void updateView(ref sconnSite site)
         {
             this.Children.Clear();
-            //siteViewPanel.Children.Clear();
-            //siteViewPanel.Children.Add(siteTabView);
-            ConfigSelect cfgView = new ConfigSelect();
-            this.Children.Add(cfgView);
-
-            return;
+            siteViewPanel.Children.Clear();
+            this.Children.Add(siteViewPanel);
 
             if (site.siteCfg != null && sconnDataShare.SiteLiveViewEnabled == true)
             {

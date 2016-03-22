@@ -1,0 +1,15 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:sconnRem.Wnd.Config"
+        xmlns:Config="clr-namespace:sconnRem.View.Config" x:Class="sconnRem.Wnd.Config.wndConfigureSite"
+        mc:Ignorable="d"
+        Title="wndConfigureSite" Height="600" Width="800">
+    <Grid>
+
+        <Config:ConfigSelect HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="549" Width="772"/>
+
+    </Grid>
+</Window>

@@ -23,6 +23,7 @@ using System.Globalization;
 using sconnRem.Properties;
 using sconnConnector;
 using sconnConnector.POCO.Config;
+using sconnRem.Wnd.Config;
 
 namespace sconnRem
 {
@@ -155,10 +156,10 @@ namespace sconnRem
                 int CurrentTabId = 0;//default is first tab;
                 if (siteView != null)
                 {
-                    CurrentTabId = 0;   // siteView.siteTabView.SelectedIndex;
+                    CurrentTabId =  siteView.siteTabView.SelectedIndex;
                 }
                 siteView = new SiteView(ViewedSiteId);
-             //   siteView.siteTabView.SelectedIndex = CurrentTabId;
+                siteView.siteTabView.SelectedIndex = CurrentTabId;
                 dataView.Children.Clear();
                 dataView.Children.Add(siteView);
             }
@@ -393,7 +394,10 @@ namespace sconnRem
                         if (updated)
                         {
                             ViewedSiteId = sconnSite.siteID;
-                            LoadSiteEdit();
+
+                            //LoadSiteEdit();
+                            wndConfigureSite wnd = new wndConfigureSite();
+                            wnd.Show();
                         }
                         else
                         {

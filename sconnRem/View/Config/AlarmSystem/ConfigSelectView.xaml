@@ -7,6 +7,8 @@
               xmlns:datapath="clr-namespace:sconnRem.ViewModel.Alarm"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="800">
+
+ 
     <ScrollViewer  Grid.Row="0" Grid.Column="2"  Height="{Binding ActualHeight, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type RowDefinition}}}"  Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type RowDefinition}}}"  VerticalScrollBarVisibility="auto" HorizontalScrollBarVisibility="Visible" Grid.RowSpan="2"  >
         <StackPanel x:Name="stckConfigSelect" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch"  Height="Auto"  Width="Auto"  x:FieldModifier="public">
             <Grid d:DesignHeight="600" d:DesignWidth="800" Height="{Binding ActualHeight, RelativeSource={RelativeSource FindAncestor, AncestorType=Grid, AncestorLevel=1}}">
@@ -22,14 +24,14 @@
                 </Grid.ColumnDefinitions>
 
                 <StackPanel  Grid.Row="0" Grid.Column="0">
-                    <Button Margin="20,20,20,20" Command="{Binding cmdShowGlobalConfig}"   HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Height="Auto"  Width="Auto"  >
-                        <Image  x:Name="image00"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="50*" Margin="10,10,10,10" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/config1.png"/>
+                    <Button Margin="20,20,20,20"  Click="Show_GlobalConfig"   HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Height="Auto"  Width="Auto"  >
+                        <Image  x:Name="image00"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="10,10,10,10" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/config1.png"/>
                     </Button>
                 </StackPanel>
 
 
                 <StackPanel  Grid.Row="0" Grid.Column="1">
-                    <Button Margin="20,20,20,20" Command="{Binding cmdShowSettings}">
+                    <Button Margin="20,20,20,20" Click="Show_Settings">
                         <Image   x:Name="image01" HorizontalAlignment="Center" Height="Auto" Margin="10,10,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/config2.png"/>
                     </Button>
                 </StackPanel>
