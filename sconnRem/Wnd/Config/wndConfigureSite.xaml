@@ -19,6 +19,9 @@
             <viewsrc:GlobalConfigView/>
             <!-- This is a UserControl -->
         </DataTemplate>
+
+        <Image  x:Key="MyImage"  x:Name="image00"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="10,10,10,10" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/config1.png"/>
+   
     </Window.Resources>
 
     <DockPanel>
@@ -29,11 +32,11 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
 
-                        <Button  Content="{Binding Name}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Height="Auto"  Width="Auto"  
+                        <Button   Content="{StaticResource MyImage}"   HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Height="Auto"  Width="Auto"  
                                   Command="{Binding DataContext.ChangePageCommand,
                              RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
                           CommandParameter="{Binding }">
-                            <!--<Image  x:Name="image00"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="10,10,10,10" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/config1.png"/>-->
+                           
                         </Button>
                         
                     </DataTemplate>
