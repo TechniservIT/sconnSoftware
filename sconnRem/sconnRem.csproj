@@ -126,6 +126,7 @@
     <Compile Include="ViewModel\Generic\GenericAlarmConfigViewModel.cs" />
     <Compile Include="ViewModel\Generic\IGenericAlarmConfigViewModel.cs" />
     <Compile Include="ViewModel\Generic\ViewModelBase.cs" />
+    <Compile Include="ViewModel\Navigation\ConfigureSiteViewModel.cs" />
     <Compile Include="View\Config\AlarmSystem\AuthConfigView.xaml.cs">
       <DependentUpon>AuthConfigView.xaml</DependentUpon>
     </Compile>
@@ -167,6 +168,9 @@
     </Compile>
     <Compile Include="View\Config\AlarmSystem\ZoneConfigView.xaml.cs">
       <DependentUpon>ZoneConfigView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Config\GlobalConfigView.xaml.cs">
+      <DependentUpon>GlobalConfigView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\gridSiteConfigSelect.cs" />
     <Compile Include="View\Setting\wndAppSettings.xaml.cs">
@@ -281,6 +285,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Config\AlarmSystem\ZoneConfigView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Config\GlobalConfigView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

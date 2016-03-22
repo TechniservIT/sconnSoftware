@@ -4,12 +4,51 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:sconnRem.Wnd.Config"
+        xmlns:modelsrc="clr-namespace:sconnRem.ViewModel.Alarm"
+         xmlns:viewsrc="clr-namespace:sconnRem.View.Config"
         xmlns:Config="clr-namespace:sconnRem.View.Config" x:Class="sconnRem.Wnd.Config.wndConfigureSite"
         mc:Ignorable="d"
         Title="wndConfigureSite" Height="600" Width="800">
-    <Grid>
 
-        <Config:ConfigSelect HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="549" Width="772"/>
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type modelsrc:AlarmAuthConfigViewModel}">
+            <viewsrc:AuthConfig/>
+            <!-- This is a UserControl -->
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type modelsrc:AlarmGlobalConfigViewModel}">
+            <viewsrc:GlobalConfigView/>
+            <!-- This is a UserControl -->
+        </DataTemplate>
+    </Window.Resources>
 
-    </Grid>
+    <DockPanel>
+        <!-- Navigation Buttons -->
+        <Border DockPanel.Dock="Left" BorderBrush="Black"
+                                    BorderThickness="0,0,1,0">
+            <ItemsControl ItemsSource="{Binding PageViewModels}" Height="569" Width="100" VerticalAlignment="Bottom">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+
+                        <Button  Content="{Binding Name}"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Height="Auto"  Width="Auto"  
+                                  Command="{Binding DataContext.ChangePageCommand,
+                             RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+                          CommandParameter="{Binding }">
+                            <!--<Image  x:Name="image00"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="10,10,10,10" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/config1.png"/>-->
+                        </Button>
+                        
+                    </DataTemplate>
+                    
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Border>
+
+        <!-- Content Area -->
+        <ContentControl Content="{Binding CurrentPageViewModel}" />
+        
+    </DockPanel>
+    
+    <!--<Frame Source="/View/Config/AlarmSystem/ConfigSelectView.xaml" NavigationUIVisibility="Visible">
+
+    </Frame>-->
+    
 </Window>

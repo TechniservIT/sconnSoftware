@@ -24,6 +24,7 @@ using sconnRem.Properties;
 using sconnConnector;
 using sconnConnector.POCO.Config;
 using sconnRem.Wnd.Config;
+using sconnRem.ViewModel.Navigation;
 
 namespace sconnRem
 {
@@ -397,6 +398,8 @@ namespace sconnRem
 
                             //LoadSiteEdit();
                             wndConfigureSite wnd = new wndConfigureSite();
+                            ConfigureSiteViewModel context = new ConfigureSiteViewModel();
+                            wnd.DataContext = context;
                             wnd.Show();
                         }
                         else

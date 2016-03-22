@@ -10,30 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace sconnRem.Wnd.Config
+namespace sconnRem.View.Config
 {
     /// <summary>
-    /// Interaction logic for wndConfigureSite.xaml
+    /// Interaction logic for GlobalConfigView.xaml
     /// </summary>
-    public partial class wndConfigureSite : Window
+    public partial class GlobalConfigView : UserControl
     {
-        public wndConfigureSite()
+        public GlobalConfigView()
         {
             InitializeComponent();
-        }
-
-        private void Show_GlobalConfig(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Show_Settings(object sender, RoutedEventArgs e)
-        {
-
-
-
         }
     }
 }
