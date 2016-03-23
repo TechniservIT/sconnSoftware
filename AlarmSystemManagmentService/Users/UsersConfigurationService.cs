@@ -29,8 +29,12 @@ namespace AlarmSystemManagmentService
 
         public UsersConfigurationService(AlarmSystemConfigManager man) : this()
         {
-            ConfigManager = man;
-            EntityManager = new AlarmGenericConfigManager<sconnUserConfig>(ConfigManager.Config.UserConfig, man.RemoteDevice);
+            if(man != null)
+            {
+                ConfigManager = man;
+                EntityManager = new AlarmGenericConfigManager<sconnUserConfig>(ConfigManager.Config.UserConfig, man.RemoteDevice);
+            }
+
         }
 
         private bool SaveChanges()

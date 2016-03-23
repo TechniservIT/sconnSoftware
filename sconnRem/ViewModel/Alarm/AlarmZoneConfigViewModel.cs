@@ -7,12 +7,16 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using sconnConnector.Config;
 using sconnConnector.POCO.Config.Abstract;
+using sconnRem.ViewModel.Generic;
+using sconnConnector.POCO.Config.sconn;
 
 namespace sconnRem.ViewModel.Alarm
 {
-    public class AlarmZoneConfigViewModel : ZoneConfigurationService
+    public class AlarmZoneConfigViewModel : ObservableObject, IPageViewModel
     {
-        public AlarmSystemAuthorizedDevicesConfig Config { get; set; }
+        public sconnAlarmZoneConfig Config { get; set; }
+        private ZoneConfigurationService _Provider;
+        private AlarmSystemConfigManager _Manager;
 
         private string _Name;
         public string Name
@@ -23,8 +27,7 @@ namespace sconnRem.ViewModel.Alarm
             }
         }
 
-        private AuthorizedDevicesConfigurationService _Provider;
-        private AlarmSystemConfigManager _Manager;
+
 
         private ICommand _getDataCommand;
         private ICommand _saveDataCommand;
@@ -40,8 +43,15 @@ namespace sconnRem.ViewModel.Alarm
 
         public AlarmZoneConfigViewModel()
         {
-            _Name = "Auth";
+            _Name = "Zones";
+            this._Provider = new ZoneConfigurationService(_Manager);
         }
+
+        public string DisplayedImagePath
+        {
+            get { return "pack://application:,,,/images/strefy1.png"; }
+        }
+
     }
 
 }

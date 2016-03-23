@@ -339,4 +339,7 @@
   <data name="lblcomBusDesc" xml:space="preserve">
     <value>Komunikacja RS485</value>
   </data>
+  <data name="btnConfSiteEdit" xml:space="preserve">
+    <value>Edycja</value>
+  </data>
 </root>

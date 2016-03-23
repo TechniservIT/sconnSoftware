@@ -29,8 +29,12 @@ namespace AlarmSystemManagmentService
         
         public AuthorizedDevicesConfigurationService(AlarmSystemConfigManager man) : this()
         {
-            ConfigManager = man;
-            EntityManager = new AlarmGenericConfigManager<sconnAuthorizedDevices>(ConfigManager.Config.AuthorizedDevices, man.RemoteDevice);
+            if(man != null)
+            {
+                ConfigManager = man;
+                EntityManager = new AlarmGenericConfigManager<sconnAuthorizedDevices>(ConfigManager.Config.AuthorizedDevices, man.RemoteDevice);
+            }
+
         }
 
         private bool SaveChanges()

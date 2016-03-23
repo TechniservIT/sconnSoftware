@@ -278,6 +278,7 @@ namespace sconnRem
                 SitePanelItem item = new SitePanelItem(site.siteName, siteList.Width, siteList.Height *0.1, site.siteID);
                 item.siteBtn1.Click += new RoutedEventHandler((sender, e) => ViewSiteClick(sender, e, item.siteName));
                 item.siteBtn2.Click += new RoutedEventHandler((sender, e) => ConfigSiteClick(sender, e, item.siteName));
+                item.siteBtn3.Click += new RoutedEventHandler((sender, e) => EditSiteClick(sender, e, item.siteName));
                 //siteList.Children.Add(item);
                 sitesPanel.addStatusItem(item);
             }
@@ -378,6 +379,13 @@ namespace sconnRem
             }
 
         }
+
+        private void EditSiteClick(object sender, RoutedEventArgs e, string name)
+        {
+
+
+        }
+
 
         /******* site editor window ********/
         private void ConfigSiteClick(object sender, RoutedEventArgs e, string name)

@@ -14,6 +14,8 @@ namespace sconnRem.ViewModel.Alarm
     public class AlarmAuthConfigViewModel : ObservableObject, IPageViewModel    //  :  ViewModelBase<IGridNavigatedView>
     {
         public AlarmSystemAuthorizedDevicesConfig Config { get; set; }
+        private AuthorizedDevicesConfigurationService _Provider;
+        private AlarmSystemConfigManager _Manager;
 
         private string _Name;
         public string Name
@@ -23,10 +25,7 @@ namespace sconnRem.ViewModel.Alarm
                 return _Name;
             }
         }
-
-        private AuthorizedDevicesConfigurationService _Provider;
-        private AlarmSystemConfigManager _Manager;
-
+        
         private ICommand _getDataCommand;
         private ICommand _saveDataCommand;
 
@@ -39,22 +38,20 @@ namespace sconnRem.ViewModel.Alarm
 
         }
 
-        //public AlarmAuthConfigViewModel(IGridNavigatedView view) : base(view)
-        //{
-        //    this._Provider = new AuthorizedDevicesConfigurationService(_Manager);
-        //}
+        public string DisplayedImagePath
+        {
+            get { return "pack://application:,,,/images/lista2.png"; }
+        }
+
+
 
         public AlarmAuthConfigViewModel()
         {
             _Name = "Auth";
+            this._Provider = new AuthorizedDevicesConfigurationService(_Manager);
         }
 
-        //public AlarmAuthConfigViewModel(AlarmSystemConfigManager manager)
-        //{
-        //    this._Manager = manager;
-        //    this._Provider = new AuthorizedDevicesConfigurationService(_Manager);
-        //}
-
+     
 
     }
 

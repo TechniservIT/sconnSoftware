@@ -13,8 +13,8 @@ namespace sconnRem.ViewModel.Alarm
 {
     public class AlarmGlobalConfigViewModel  : ObservableObject, IPageViewModel    //:  ViewModelBase<IGridNavigatedView>  
     {
-        public AlarmSystemAuthorizedDevicesConfig Config { get; set; }
-        private AuthorizedDevicesConfigurationService _Provider;
+        public AlarmSystemGlobalConfig Config { get; set; }
+        private GlobalConfigService _Provider;
         private AlarmSystemConfigManager _Manager;
 
 
@@ -42,12 +42,15 @@ namespace sconnRem.ViewModel.Alarm
         public AlarmGlobalConfigViewModel()
         {
             _Name = "Gcfg";
+            this._Provider = new GlobalConfigService(_Manager);
         }
 
-        //public AlarmGlobalConfigViewModel(IGridNavigatedView view) : base(view)
-        //{
-        //    this._Provider = new AuthorizedDevicesConfigurationService(_Manager);
-        //}
+
+        public string DisplayedImagePath
+        {
+            get { return "pack://application:,,,/images/config2.png"; }
+        }
+
     }
 
 }

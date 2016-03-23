@@ -27,8 +27,12 @@ namespace AlarmSystemManagmentService
 
         public GlobalConfigService(AlarmSystemConfigManager man) : this()
         {
-            ConfigManager = man;
-            EntityManager = new AlarmGenericConfigManager<sconnGlobalConfig>(ConfigManager.Config.GlobalConfig, man.RemoteDevice);
+            if(man != null)
+            {
+                ConfigManager = man;
+                EntityManager = new AlarmGenericConfigManager<sconnGlobalConfig>(ConfigManager.Config.GlobalConfig, man.RemoteDevice);
+            }
+
         }
 
         private bool SaveChanges()

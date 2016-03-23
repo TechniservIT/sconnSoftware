@@ -28,8 +28,12 @@ namespace AlarmSystemManagmentService
 
         public ZoneConfigurationService(AlarmSystemConfigManager man) : this()
         {
-            ConfigManager = man;
-            EntityManager = new AlarmGenericConfigManager<sconnAlarmZoneConfig>(ConfigManager.Config.ZoneConfig, man.RemoteDevice);
+            if (man != null)
+            {
+                ConfigManager = man;
+                EntityManager = new AlarmGenericConfigManager<sconnAlarmZoneConfig>(ConfigManager.Config.ZoneConfig, man.RemoteDevice);
+            }
+
         }
 
         private bool SaveChanges()

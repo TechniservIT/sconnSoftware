@@ -26,6 +26,10 @@ namespace sconnRem.ViewModel.Navigation
             // Add available pages
             PageViewModels.Add(new AlarmAuthConfigViewModel());
             PageViewModels.Add(new AlarmGlobalConfigViewModel());
+            PageViewModels.Add(new AlarmDeviceConfigViewModel());
+            PageViewModels.Add(new AlarmGsmConfigViewModel());
+            PageViewModels.Add(new AlarmZoneConfigViewModel());
+            PageViewModels.Add(new AlarmUsersConfigViewModel());
 
             // Set starting page
             CurrentPageViewModel = PageViewModels[0];

@@ -300,4 +300,7 @@
   <data name="wndSecurityDialogTitle" xml:space="preserve">
     <value>Security</value>
   </data>
+  <data name="btnConfSiteEdit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
 </root>

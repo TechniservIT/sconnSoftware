@@ -7,12 +7,15 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using sconnConnector.Config;
 using sconnConnector.POCO.Config.Abstract;
+using sconnRem.ViewModel.Generic;
 
 namespace sconnRem.ViewModel.Alarm
 {
-    public class AlarmDeviceConfigViewModel : DeviceConfigService
+    public class AlarmDeviceConfigViewModel : ObservableObject, IPageViewModel
     {
-        public AlarmSystemAuthorizedDevicesConfig Config { get; set; }
+        public AlarmSystemDeviceConfig Config { get; set; }
+        private DeviceConfigService _Provider;
+        private AlarmSystemConfigManager _Manager;
 
         private string _Name;
         public string Name
@@ -23,9 +26,7 @@ namespace sconnRem.ViewModel.Alarm
             }
         }
 
-        private AuthorizedDevicesConfigurationService _Provider;
-        private AlarmSystemConfigManager _Manager;
-
+        
         private ICommand _getDataCommand;
         private ICommand _saveDataCommand;
 
@@ -40,7 +41,14 @@ namespace sconnRem.ViewModel.Alarm
         
         public AlarmDeviceConfigViewModel()
         {
-            _Name = "Auth";
+            _Name = "Dev";
+            this._Provider = new DeviceConfigService(_Manager);
         }
+
+        public string DisplayedImagePath
+        {
+            get { return "pack://application:,,,/images/config1.png"; }
+        }
+
     }
 }

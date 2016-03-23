@@ -26,6 +26,7 @@ namespace sconnRem
     {
         public Button siteBtn1;
         public Button siteBtn2;
+        public Button siteBtn3;
 
         private string _siteName;
         public string siteName { get { return _siteName; } }
@@ -75,8 +76,8 @@ namespace sconnRem
             Grid.SetColumn(siteBtn2, 1);
             siteGrid.Children.Add(siteBtn2);
 
-            Button siteBtn3 = new Button();
-            siteBtn3.Content = "";
+            siteBtn3 = new Button();
+            siteBtn3.Content  = Properties.Resources.btnConfSiteDesc;
             siteBtn3.Width = this.Width * 0.33;
             siteBtn3.Height = this.Height * 0.5;
             Grid.SetRow(siteBtn3, 1);
@@ -90,10 +91,7 @@ namespace sconnRem
             Grid.SetRow(siteDesc, 0);
             Grid.SetColumn(siteDesc, 0);
             siteGrid.Children.Add(siteDesc);
-
-            //LinearGradientBrush lgb = new LinearGradientBrush();
-            //lgb.GradientStops.Add(new GradientStop(Colors.Yellow, 0));
-            //lgb.GradientStops.Add(new GradientStop(Colors.Red, 1));
+            
             SolidColorBrush myBrushBtnBack = new SolidColorBrush(Colors.SkyBlue);
             siteBtn1.Background = myBrushBtnBack;
             siteBtn2.Background = myBrushBtnBack;
