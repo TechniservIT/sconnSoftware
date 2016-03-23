@@ -5,25 +5,29 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:sconnRem.View.Config"
              xmlns:datapath="clr-namespace:sconnRem.ViewModel.Alarm"
-             mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             mc:Ignorable="d" Height="Auto" Width="Auto">
 
     <UserControl.DataContext>
         <datapath:AlarmAuthConfigViewModel/>
     </UserControl.DataContext>
 
     <Grid>
-        <Button x:Name="button" Content="Auth" HorizontalAlignment="Left" Margin="74,106,0,0" VerticalAlignment="Top" Width="148" RenderTransformOrigin="0.5,0.5" Height="59">
-            <Button.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-18.05"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Button.RenderTransform>
-        </Button>
+        <DataGrid
+         ItemsSource="{Binding AuthorizedDevices}" 
+             AutoGenerateColumns="True"
+          >
+            <!--DisplayMemberPath="{Binding AuthorizedDevices/Id}"-->
+            <!--<DataGrid.DataContext>
+                <datapath:AlarmAuthConfigViewModel/>
+            </DataGrid.DataContext>-->
+            
+            <!--CanUserAddRows="false"
+            EnableRowVirtualization="True"
+            ItemsSource="{Binding Path=AuthorizedDevices}" 
+            AutoGenerateColumns="True">-->
 
+            
+        </DataGrid>
     </Grid>
 
 </UserControl>

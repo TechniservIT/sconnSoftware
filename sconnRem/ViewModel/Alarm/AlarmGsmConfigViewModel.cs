@@ -45,6 +45,14 @@ namespace sconnRem.ViewModel.Alarm
             this._Provider = new GsmConfigurationService(_Manager);
         }
 
+        public AlarmGsmConfigViewModel(AlarmSystemConfigManager Manager)
+        {
+            _Manager = Manager;
+            _Name = "Gsm";
+            this._Provider = new GsmConfigurationService(_Manager);
+        }
+
+
         public string DisplayedImagePath
         {
             get { return "pack://application:,,,/images/tel.png"; }

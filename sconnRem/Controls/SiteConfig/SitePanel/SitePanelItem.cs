@@ -37,6 +37,7 @@ namespace sconnRem
         public SitePanelItem(string name, double width, double height)
         {
             _siteName = name;
+            
 
             Grid siteGrid = new Grid();
             // Define the Columns
@@ -77,7 +78,12 @@ namespace sconnRem
             siteGrid.Children.Add(siteBtn2);
 
             siteBtn3 = new Button();
-            siteBtn3.Content  = Properties.Resources.btnConfSiteDesc;
+    //            <StackPanel>
+    //    <Image Source="Pictures/apple.jpg" />
+    //    <TextBlock>Disconnect from Server</TextBlock>
+    //</StackPanel>
+
+            siteBtn3.Content  = Properties.Resources.btnConfSiteEdit;
             siteBtn3.Width = this.Width * 0.33;
             siteBtn3.Height = this.Height * 0.5;
             Grid.SetRow(siteBtn3, 1);

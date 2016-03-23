@@ -9,10 +9,20 @@ using sconnConnector.POCO.Config.sconn;
 
 namespace sconnConnector.Config
 {
-    public class AlarmSystemConfigManager
+
+    public interface IConfigManager
     {
-        private EndpointInfo info;
-        private DeviceCredentials creds;
+        sconnAlarmSystem Config { get; set; }
+        Device RemoteDevice { get; set; }
+        EndpointInfo info { get; set; }
+        DeviceCredentials creds { get; set; }
+    }
+
+
+    public class AlarmSystemConfigManager : IConfigManager
+    {
+        public EndpointInfo info { get; set; }
+        public DeviceCredentials creds { get; set; }
         public Device RemoteDevice { get; set; }
 
         

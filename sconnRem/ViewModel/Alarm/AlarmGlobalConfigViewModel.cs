@@ -39,12 +39,20 @@ namespace sconnRem.ViewModel.Alarm
 
 
         }
+
         public AlarmGlobalConfigViewModel()
         {
             _Name = "Gcfg";
             this._Provider = new GlobalConfigService(_Manager);
         }
 
+        public AlarmGlobalConfigViewModel(AlarmSystemConfigManager Manager)
+        {
+            _Manager = Manager;
+            _Name = "Gcfg";
+            this._Provider = new GlobalConfigService(_Manager);
+
+        }
 
         public string DisplayedImagePath
         {

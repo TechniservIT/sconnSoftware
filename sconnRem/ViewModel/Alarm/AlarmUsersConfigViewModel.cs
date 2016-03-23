@@ -48,6 +48,13 @@ namespace sconnRem.ViewModel.Alarm
             this._Provider = new UsersConfigurationService(_Manager);
         }
 
+        public AlarmUsersConfigViewModel(AlarmSystemConfigManager Manager)
+        {
+            _Manager = Manager;
+            _Name = "Users";
+            this._Provider = new UsersConfigurationService(_Manager);
+        }
+
         public string DisplayedImagePath
         {
             get { return "pack://application:,,,/images/user.png"; }

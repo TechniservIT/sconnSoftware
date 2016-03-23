@@ -37,7 +37,7 @@ namespace AlarmSystemManagmentService
 
         }
 
-        private bool SaveChanges()
+        public bool SaveChanges()
         {
             if (Online)
             {

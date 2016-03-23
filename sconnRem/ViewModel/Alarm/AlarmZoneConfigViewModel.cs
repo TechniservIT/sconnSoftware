@@ -47,6 +47,13 @@ namespace sconnRem.ViewModel.Alarm
             this._Provider = new ZoneConfigurationService(_Manager);
         }
 
+        public AlarmZoneConfigViewModel(AlarmSystemConfigManager Manager)
+        {
+            _Manager = Manager;
+            _Name = "Zones";
+            this._Provider = new ZoneConfigurationService(_Manager);
+        }
+
         public string DisplayedImagePath
         {
             get { return "pack://application:,,,/images/strefy1.png"; }

@@ -1,4 +1,5 @@
-﻿using sconnRem.View.Config;
+﻿using sconnConnector.Config;
+using sconnRem.View.Config;
 using sconnRem.ViewModel.Alarm;
 using sconnRem.ViewModel.Generic;
 using System;
@@ -12,6 +13,10 @@ namespace sconnRem.ViewModel.Navigation
 {
     public class ConfigureSiteViewModel : ObservableObject
     {
+
+        private AlarmSystemConfigManager _Manager;
+
+
         #region Fields
 
         private ICommand _changePageCommand;
@@ -21,19 +26,33 @@ namespace sconnRem.ViewModel.Navigation
 
         #endregion
 
-        public ConfigureSiteViewModel()
+        private void LoadConfigPages()
         {
+
             // Add available pages
-            PageViewModels.Add(new AlarmAuthConfigViewModel());
-            PageViewModels.Add(new AlarmGlobalConfigViewModel());
-            PageViewModels.Add(new AlarmDeviceConfigViewModel());
-            PageViewModels.Add(new AlarmGsmConfigViewModel());
-            PageViewModels.Add(new AlarmZoneConfigViewModel());
-            PageViewModels.Add(new AlarmUsersConfigViewModel());
+            PageViewModels.Add(new AlarmAuthConfigViewModel(_Manager));
+            PageViewModels.Add(new AlarmGlobalConfigViewModel(_Manager));
+            PageViewModels.Add(new AlarmDeviceConfigViewModel(_Manager));
+            PageViewModels.Add(new AlarmGsmConfigViewModel(_Manager));
+            PageViewModels.Add(new AlarmZoneConfigViewModel(_Manager));
+            PageViewModels.Add(new AlarmUsersConfigViewModel(_Manager));
 
             // Set starting page
             CurrentPageViewModel = PageViewModels[0];
         }
+
+        public ConfigureSiteViewModel()
+        {
+            LoadConfigPages();
+        }
+
+        public ConfigureSiteViewModel(AlarmSystemConfigManager Manager)
+        {
+            _Manager = Manager;
+            LoadConfigPages();
+        }
+
+
 
         #region Properties / Commands
 

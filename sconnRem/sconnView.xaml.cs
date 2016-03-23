@@ -25,6 +25,9 @@ using sconnConnector;
 using sconnConnector.POCO.Config;
 using sconnRem.Wnd.Config;
 using sconnRem.ViewModel.Navigation;
+using sconnConnector.Config;
+using iotDbConnector.DAL;
+using Microsoft.Practices.Unity;
 
 namespace sconnRem
 {
@@ -80,7 +83,10 @@ namespace sconnRem
 
         public sconnView()
         {
-            
+            IUnityContainer container = new UnityContainer();
+            container.RegisterType<AlarmSystemConfigManager, AlarmSystemConfigManager>();
+
+
             ConfigSource.SetXmlPath(Directory.GetCurrentDirectory().ToString());
             ConfigSource.SetXmlFileName("sconnRem.xml");
             settings = ConfigSource.LoadRegistryData();
@@ -406,7 +412,20 @@ namespace sconnRem
 
                             //LoadSiteEdit();
                             wndConfigureSite wnd = new wndConfigureSite();
-                            ConfigureSiteViewModel context = new ConfigureSiteViewModel();
+
+                            EndpointInfo info = new EndpointInfo();
+                            info.Hostname = sconnSite.serverIP;
+                            info.Port = sconnSite.serverPort;
+                            DeviceCredentials cred = new DeviceCredentials();
+                            cred.Password = sconnSite.authPasswd;
+                            cred.Username = "";
+                            AlarmSystemConfigManager _Manager = new AlarmSystemConfigManager(info, cred);
+                            Device alrmSysDev = new Device();
+                            alrmSysDev.Credentials = cred;
+                            alrmSysDev.EndpInfo = info;
+                            _Manager.RemoteDevice = alrmSysDev;
+
+                            ConfigureSiteViewModel context = new ConfigureSiteViewModel(_Manager);
                             wnd.DataContext = context;
                             wnd.Show();
                         }

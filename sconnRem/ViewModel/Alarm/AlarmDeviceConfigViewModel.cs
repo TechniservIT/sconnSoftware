@@ -45,6 +45,14 @@ namespace sconnRem.ViewModel.Alarm
             this._Provider = new DeviceConfigService(_Manager);
         }
 
+        public AlarmDeviceConfigViewModel(AlarmSystemConfigManager Manager)
+        {
+            _Manager = Manager;
+            _Name = "Dev";
+            this._Provider = new DeviceConfigService(_Manager);
+
+        }
+
         public string DisplayedImagePath
         {
             get { return "pack://application:,,,/images/config1.png"; }
