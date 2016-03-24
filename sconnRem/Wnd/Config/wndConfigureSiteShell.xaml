@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:sconnRem.Wnd.Config"
         xmlns:modelsrc="clr-namespace:sconnRem.ViewModel.Alarm"
          xmlns:viewsrc="clr-namespace:sconnRem.View.Config"
-        xmlns:Config="clr-namespace:sconnRem.View.Config" x:Class="sconnRem.Wnd.Config.wndConfigureSite"
+        xmlns:Config="clr-namespace:sconnRem.View.Config" x:Class="sconnRem.Wnd.Config.wndConfigureSiteShell"
         mc:Ignorable="d"
         Title="wndConfigureSite" Height="600" Width="800">
 

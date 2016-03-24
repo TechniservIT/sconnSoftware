@@ -13,6 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.ComponentModel.Composition;
+using Prism.Regions;
+using Prism.Modularity;
 
 namespace sconnRem.Wnd.Config
 {
@@ -20,6 +22,14 @@ namespace sconnRem.Wnd.Config
     /// Interaction logic for wndConfigureSite.xaml
     /// </summary>
     /// 
+
+
+
+    public static class RegionNames
+    {
+        public const String MainContentRegion = "MainContentRegion";
+        public const String MainNavigationRegion = "MainNavigationRegion";
+    }
 
 
     [Export]
@@ -41,7 +51,7 @@ namespace sconnRem.Wnd.Config
 
         private void Show_Settings(object sender, RoutedEventArgs e)
         {
-            
+
 
         }
         [Import(AllowRecomposition = false)]
@@ -77,4 +87,6 @@ namespace sconnRem.Wnd.Config
 
 
     }
+
+
 }

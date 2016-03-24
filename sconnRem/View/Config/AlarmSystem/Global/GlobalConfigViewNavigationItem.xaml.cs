@@ -10,21 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace sconnRem.View.Setting
+namespace sconnRem.View.Config.AlarmSystem.Global
 {
     /// <summary>
-    /// Interaction logic for wndAppSettings.xaml
+    /// Interaction logic for GlobalConfigViewNavigationItem.xaml
     /// </summary>
-    public partial class wndAppSettings : Window
+    public partial class GlobalConfigViewNavigationItem : UserControl
     {
-        public wndAppSettings()
+        public GlobalConfigViewNavigationItem()
         {
             InitializeComponent();
         }
     }
-
-
-
 }

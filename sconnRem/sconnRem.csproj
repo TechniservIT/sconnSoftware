@@ -74,7 +74,24 @@
       <HintPath>..\packages\NLog.4.2.3\lib\net45\NLog.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Prism, Version=6.1.0.0, Culture=neutral, PublicKeyToken=91a96d2a154366d8, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Core.6.1.0\lib\net45\Prism.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Prism.Mef.Wpf, Version=6.1.0.0, Culture=neutral, PublicKeyToken=91a96d2a154366d8, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Mef.6.1.0\lib\net45\Prism.Mef.Wpf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Prism.Unity.Wpf, Version=6.1.0.0, Culture=neutral, PublicKeyToken=91a96d2a154366d8, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Unity.6.1.0\lib\net45\Prism.Unity.Wpf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Prism.Wpf, Version=6.1.0.0, Culture=neutral, PublicKeyToken=91a96d2a154366d8, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Wpf.6.1.0\lib\net45\Prism.Wpf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -162,11 +179,17 @@
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\Navigation\ConfigureSiteViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
-    <Compile Include="View\Config\AlarmSystem\AuthConfigView.xaml.cs">
+    <Compile Include="View\Config\AlarmSystem\Auth\AuthConfigView.xaml.cs">
       <DependentUpon>AuthConfigView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Config\AlarmSystem\CommConfigView.xaml.cs">
+    <Compile Include="View\Config\AlarmSystem\Auth\AuthConfigViewNavigationItem.xaml.cs">
+      <DependentUpon>AuthConfigViewNavigationItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Config\AlarmSystem\Comm\CommConfigView.xaml.cs">
       <DependentUpon>CommConfigView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Config\AlarmSystem\Comm\CommConfigViewNavigationItem.xaml.cs">
+      <DependentUpon>CommConfigViewNavigationItem.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Config\AlarmSystem\ConfigSelectView.xaml.cs">
       <DependentUpon>ConfigSelectView.xaml</DependentUpon>
@@ -174,7 +197,10 @@
     <Compile Include="View\Config\AlarmSystem\Device\DeviceConfigView.xaml.cs">
       <DependentUpon>DeviceConfigView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Config\AlarmSystem\DeviceSelectView.xaml.cs">
+    <Compile Include="View\Config\AlarmSystem\Device\DeviceConfigViewNavigationItem.xaml.cs">
+      <DependentUpon>DeviceConfigViewNavigationItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Config\AlarmSystem\Device\DeviceSelectView.xaml.cs">
       <DependentUpon>DeviceSelectView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Config\AlarmSystem\Device\KeypadConfigView.xaml.cs">
@@ -192,19 +218,31 @@
     <Compile Include="View\Config\AlarmSystem\Device\SirenConfigView.xaml.cs">
       <DependentUpon>SirenConfigView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Config\AlarmSystem\GsmConfigView.xaml.cs">
+    <Compile Include="View\Config\AlarmSystem\Global\GlobalConfigViewNavigationItem.xaml.cs">
+      <DependentUpon>GlobalConfigViewNavigationItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Config\AlarmSystem\Gsm\GsmConfigView.xaml.cs">
       <DependentUpon>GsmConfigView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Config\AlarmSystem\Device\InputsConfigView.xaml.cs">
       <DependentUpon>InputsConfigView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Config\AlarmSystem\UserConfigView.xaml.cs">
+    <Compile Include="View\Config\AlarmSystem\Gsm\GsmConfigViewNavigationItem.xaml.cs">
+      <DependentUpon>GsmConfigViewNavigationItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Config\AlarmSystem\User\UserConfigView.xaml.cs">
       <DependentUpon>UserConfigView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Config\AlarmSystem\ZoneConfigView.xaml.cs">
+    <Compile Include="View\Config\AlarmSystem\User\UserConfigViewNavigationItem.xaml.cs">
+      <DependentUpon>UserConfigViewNavigationItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Config\AlarmSystem\Zone\ZoneConfigView.xaml.cs">
       <DependentUpon>ZoneConfigView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Config\GlobalConfigView.xaml.cs">
+    <Compile Include="View\Config\AlarmSystem\Zone\ZoneConfigViewNavigationItem.xaml.cs">
+      <DependentUpon>ZoneConfigViewNavigationItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Config\AlarmSystem\Global\GlobalConfigView.xaml.cs">
       <DependentUpon>GlobalConfigView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\gridSiteConfigSelect.cs" />
@@ -220,8 +258,10 @@
     <Compile Include="Controls\SiteConfig\DeviceConfigGroups\GbxConfigureInputsGroup.cs" />
     <Compile Include="Controls\SiteConfig\DeviceConfigGroups\GbxConfigureOutputsGroup.cs" />
     <Compile Include="Controls\SiteConfig\DeviceConfigGroups\GbxConfigureRelaysGroup.cs" />
-    <Compile Include="Wnd\Config\wndConfigureSite.xaml.cs">
-      <DependentUpon>wndConfigureSite.xaml</DependentUpon>
+    <Compile Include="Wnd\Config\ExportAttribute.cs" />
+    <Compile Include="Wnd\Config\Shell\ConfigureSiteShell.cs" />
+    <Compile Include="Wnd\Config\wndConfigureSiteShell.xaml.cs">
+      <DependentUpon>wndConfigureSiteShell.xaml</DependentUpon>
     </Compile>
     <Compile Include="Wnd\Help\About.xaml.cs">
       <DependentUpon>About.xaml</DependentUpon>
@@ -232,6 +272,7 @@
     <Compile Include="Wnd\MapWindow.xaml.cs">
       <DependentUpon>MapWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Wnd\Navigation\ConfigNavBootstrapper.cs" />
     <Compile Include="Wnd\Page1.xaml.cs">
       <DependentUpon>Page1.xaml</DependentUpon>
     </Compile>
@@ -267,11 +308,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Config\AlarmSystem\AuthConfigView.xaml">
+    <Page Include="View\Config\AlarmSystem\Auth\AuthConfigView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Config\AlarmSystem\CommConfigView.xaml">
+    <Page Include="View\Config\AlarmSystem\Auth\AuthConfigViewNavigationItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Config\AlarmSystem\Comm\CommConfigView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Config\AlarmSystem\Comm\CommConfigViewNavigationItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -283,7 +332,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Config\AlarmSystem\DeviceSelectView.xaml">
+    <Page Include="View\Config\AlarmSystem\Device\DeviceConfigViewNavigationItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Config\AlarmSystem\Device\DeviceSelectView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -307,7 +360,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Config\AlarmSystem\GsmConfigView.xaml">
+    <Page Include="View\Config\AlarmSystem\Global\GlobalConfigViewNavigationItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Config\AlarmSystem\Gsm\GsmConfigView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -315,15 +372,27 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Config\AlarmSystem\UserConfigView.xaml">
+    <Page Include="View\Config\AlarmSystem\Gsm\GsmConfigViewNavigationItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Config\AlarmSystem\ZoneConfigView.xaml">
+    <Page Include="View\Config\AlarmSystem\User\UserConfigView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Config\GlobalConfigView.xaml">
+    <Page Include="View\Config\AlarmSystem\User\UserConfigViewNavigationItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Config\AlarmSystem\Zone\ZoneConfigView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Config\AlarmSystem\Zone\ZoneConfigViewNavigationItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Config\AlarmSystem\Global\GlobalConfigView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -339,7 +408,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Wnd\Config\wndConfigureSite.xaml">
+    <Page Include="Wnd\Config\wndConfigureSiteShell.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -502,7 +571,6 @@
   <ItemGroup>
     <Folder Include="Model\" />
     <Folder Include="Tests\" />
-    <Folder Include="Wnd\Navigation\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\bateria1.png" />

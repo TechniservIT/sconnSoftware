@@ -1,8 +1,14 @@
-﻿using System;
+﻿using Prism.Mef;
+using Prism.Modularity;
+using sconnRem.Wnd.Config;
+using sconnRem.Wnd.Config.Shell;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition.Hosting;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace sconnRem.Wnd.Navigation
 {
@@ -14,7 +20,7 @@ namespace sconnRem.Wnd.Navigation
         {
             base.ConfigureAggregateCatalog();
 
-            this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(QuickStartBootstrapper).Assembly));
+            this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(ConfigNavBootstrapper).Assembly));
         }
 
         protected override IModuleCatalog CreateModuleCatalog()
@@ -24,7 +30,7 @@ namespace sconnRem.Wnd.Navigation
 
         protected override DependencyObject CreateShell()
         {
-            return this.Container.GetExportedValue<Shell>();
+            return this.Container.GetExportedValue<wndConfigureSiteShell>();
         }
 
         protected override void InitializeShell()

@@ -1,9 +1,9 @@
-﻿<UserControl x:Class="sconnRem.View.Config.AlarmSystem.Gsm.GsmConfigViewNavigationItem"
+﻿<UserControl x:Class="sconnRem.View.Config.AlarmSystem.Global.GlobalConfigViewNavigationItem"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:sconnRem.View.Config.AlarmSystem.Gsm"
+             xmlns:local="clr-namespace:sconnRem.View.Config.AlarmSystem.Global"
              mc:Ignorable="d" 
              d:DesignHeight="200" d:DesignWidth="200">
     <Grid>
@@ -32,10 +32,10 @@
                     </Grid.ColumnDefinitions>
 
                     <StackPanel MouseDown="{Binding Show_Config}"  Grid.Row="0" Grid.Column="0">
-                        <Button Margin="10,10,10,00"  Click="{Binding Show_Config}"   HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Height="120"  Width="120"  >
-                            <Image  x:Name="image00"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="10,10,10,10" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/config1.png"/>
+                        <Button Margin="10,10,10,00" Click="{Binding Show_Config}"   HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Height="120"  Width="120"  >
+                            <Image  x:Name="image00"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="10,10,10,10" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/glob2.png"/>
                         </Button>
-                        <Label HorizontalContentAlignment="Center" Grid.Row="1" Grid.Column="0" Content="Text" FontSize="14.667" FontFamily="Motorwerk">
+                        <Label HorizontalContentAlignment="Center" Grid.Row="1" Grid.Column="0" Content="Global" FontSize="14.667" FontFamily="Motorwerk">
 
                         </Label>
                     </StackPanel>

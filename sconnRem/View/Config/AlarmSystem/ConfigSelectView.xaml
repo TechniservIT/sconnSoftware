@@ -46,7 +46,7 @@
 
 
                         <StackPanel  Grid.Row="0" Grid.Column="0">
-                            <Button Margin="20,20,20,20"  Click="Show_GlobalConfig"   HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Height="Auto"  Width="Auto"  >
+                            <Button Margin="20,20,20,20"  Click="{Binding Show_Config}"   HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Height="Auto"  Width="Auto"  >
                                 <Image  x:Name="image00"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="10,10,10,10" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/config1.png"/>
                             </Button>
                         </StackPanel>
