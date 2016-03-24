@@ -31,12 +31,12 @@ namespace sconnRem.ViewModel.Navigation
 
             // Add available pages
             _pageViewModels = new List<IPageViewModel>();
-            PageViewModels.Add(new AlarmAuthConfigViewModel(_Manager));
-            PageViewModels.Add(new AlarmGlobalConfigViewModel(_Manager));
-            PageViewModels.Add(new AlarmDeviceConfigViewModel(_Manager));
-            PageViewModels.Add(new AlarmGsmConfigViewModel(_Manager));
-            PageViewModels.Add(new AlarmZoneConfigViewModel(_Manager));
-            PageViewModels.Add(new AlarmUsersConfigViewModel(_Manager));
+            //PageViewModels.Add(new AlarmAuthConfigViewModel(_Manager));
+            //PageViewModels.Add(new AlarmGlobalConfigViewModel(_Manager));
+            //PageViewModels.Add(new AlarmDeviceConfigViewModel(_Manager));
+            //PageViewModels.Add(new AlarmGsmConfigViewModel(_Manager));
+            //PageViewModels.Add(new AlarmZoneConfigViewModel(_Manager));
+            //PageViewModels.Add(new AlarmUsersConfigViewModel(_Manager));
 
             // Set starting page
             CurrentPageViewModel = PageViewModels[0];

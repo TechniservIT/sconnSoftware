@@ -1,9 +1,11 @@
 ﻿using AlarmSystemManagmentService;
+using Prism.Mvvm;
 using sconnConnector.Config;
 using sconnConnector.POCO.Config.Abstract;
 using sconnRem.ViewModel.Generic;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,7 +13,8 @@ using System.Windows.Input;
 
 namespace sconnRem.ViewModel.Alarm
 {
-    public class AlarmGlobalConfigViewModel  : ObservableObject, IPageViewModel    //:  ViewModelBase<IGridNavigatedView>  
+    [Export]
+    public class AlarmGlobalConfigViewModel  : BindableBase // ObservableObject, IPageViewModel    //:  ViewModelBase<IGridNavigatedView>  
     {
         public AlarmSystemGlobalConfig Config { get; set; }
         private GlobalConfigService _Provider;
@@ -46,6 +49,7 @@ namespace sconnRem.ViewModel.Alarm
             this._Provider = new GlobalConfigService(_Manager);
         }
 
+        [ImportingConstructor]
         public AlarmGlobalConfigViewModel(AlarmSystemConfigManager Manager)
         {
             _Manager = Manager;

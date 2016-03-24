@@ -14,7 +14,7 @@ namespace sconnRem.Wnd.Navigation
 {
     public class ConfigNavBootstrapper : MefBootstrapper
     {
-        private const string ModuleCatalogUri = "/ViewSwitchingNavigation;component/ModulesCatalog.xaml";
+        private const string ModuleCatalogUri = "/sconnRem;component/Wnd/Config/Shell/wndConfigureSiteShell.xaml";
 
         protected override void ConfigureAggregateCatalog()
         {

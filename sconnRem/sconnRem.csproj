@@ -122,6 +122,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controls\Common\InfoTipToggleButton.xaml.cs">
+      <DependentUpon>InfoTipToggleButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Common\NavControlItem.xaml.cs">
+      <DependentUpon>NavControlItem.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\DateTimePickerPanel.cs" />
     <Compile Include="Controls\SiteConfig\DeviceConfigGroups\GbxConfigureDeviceAuth.cs" />
     <Compile Include="Controls\SiteConfig\DeviceConfigGroups\GbxConfigureSchedulesGroup.cs" />
@@ -179,6 +185,10 @@
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\Navigation\ConfigureSiteViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="View\Config\AlarmSystem\Auth\AlarmAuthConfigModule.cs" />
+    <Compile Include="View\Config\AlarmSystem\Auth\AlarmAuthRecordView.xaml.cs">
+      <DependentUpon>AlarmAuthRecordView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Config\AlarmSystem\Auth\AuthConfigView.xaml.cs">
       <DependentUpon>AuthConfigView.xaml</DependentUpon>
     </Compile>
@@ -288,6 +298,14 @@
     <Compile Include="Wnd\WndEditScheduleAction.xaml.cs">
       <DependentUpon>WndEditScheduleAction.xaml</DependentUpon>
     </Compile>
+    <Page Include="Controls\Common\InfoTipToggleButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Common\NavControlItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\SiteConfig\NetworkSetup\DeviceNetworkConfig.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -305,6 +323,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\SiteConfig\ScheduleAction\StkPnConfigureIoActivation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Config\AlarmSystem\Auth\AlarmAuthRecordView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -569,6 +591,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Controls\SiteConfig\Common\" />
     <Folder Include="Model\" />
     <Folder Include="Tests\" />
   </ItemGroup>

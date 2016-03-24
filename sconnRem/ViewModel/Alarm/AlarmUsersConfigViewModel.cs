@@ -9,11 +9,13 @@ using sconnConnector.Config;
 using sconnConnector.POCO.Config.Abstract;
 using sconnRem.ViewModel.Generic;
 using sconnConnector.POCO.Config.Abstract.Auth;
+using Prism.Mvvm;
+using System.ComponentModel.Composition;
 
 namespace sconnRem.ViewModel.Alarm
 {
-
-    public class AlarmUsersConfigViewModel : ObservableObject, IPageViewModel
+    [Export]
+    public class AlarmUsersConfigViewModel : BindableBase   // ObservableObject, IPageViewModel
     {
         public sconnUserConfig Config { get; set; }
         private UsersConfigurationService _Provider;
@@ -48,6 +50,7 @@ namespace sconnRem.ViewModel.Alarm
             this._Provider = new UsersConfigurationService(_Manager);
         }
 
+        [ImportingConstructor]
         public AlarmUsersConfigViewModel(AlarmSystemConfigManager Manager)
         {
             _Manager = Manager;

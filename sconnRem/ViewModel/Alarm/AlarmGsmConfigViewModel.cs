@@ -9,10 +9,14 @@ using sconnConnector.Config;
 using sconnConnector.POCO.Config.Abstract;
 using sconnRem.ViewModel.Generic;
 using sconnConnector.POCO.Config;
+using Prism.Mvvm;
+using System.ComponentModel.Composition;
 
 namespace sconnRem.ViewModel.Alarm
 {
-    public class AlarmGsmConfigViewModel : ObservableObject, IPageViewModel
+
+    [Export]
+    public class AlarmGsmConfigViewModel : BindableBase     // ObservableObject, IPageViewModel
     {
         public sconnGsmConfig Config { get; set; }
         private GsmConfigurationService _Provider;
@@ -45,6 +49,7 @@ namespace sconnRem.ViewModel.Alarm
             this._Provider = new GsmConfigurationService(_Manager);
         }
 
+        [ImportingConstructor]
         public AlarmGsmConfigViewModel(AlarmSystemConfigManager Manager)
         {
             _Manager = Manager;

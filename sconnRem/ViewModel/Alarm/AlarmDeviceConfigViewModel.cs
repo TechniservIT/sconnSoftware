@@ -8,10 +8,14 @@ using System.Windows.Input;
 using sconnConnector.Config;
 using sconnConnector.POCO.Config.Abstract;
 using sconnRem.ViewModel.Generic;
+using Prism.Mvvm;
+using System.ComponentModel.Composition;
 
 namespace sconnRem.ViewModel.Alarm
 {
-    public class AlarmDeviceConfigViewModel : ObservableObject, IPageViewModel
+
+    [Export]
+    public class AlarmDeviceConfigViewModel : BindableBase  //ObservableObject, IPageViewModel
     {
         public AlarmSystemDeviceConfig Config { get; set; }
         private DeviceConfigService _Provider;
@@ -45,6 +49,7 @@ namespace sconnRem.ViewModel.Alarm
             this._Provider = new DeviceConfigService(_Manager);
         }
 
+        [ImportingConstructor]
         public AlarmDeviceConfigViewModel(AlarmSystemConfigManager Manager)
         {
             _Manager = Manager;

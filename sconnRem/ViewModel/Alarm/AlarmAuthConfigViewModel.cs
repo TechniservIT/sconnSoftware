@@ -11,10 +11,19 @@ using System.Windows.Input;
 using sconnConnector.POCO.Config.sconn;
 using System.Collections.ObjectModel;
 using Microsoft.Practices.Unity;
+using System.ComponentModel.Composition;
+using Prism.Mvvm;
+using Prism.Mef.Modularity;
+using Prism.Modularity;
+using sconnRem.Wnd.Config;
+using Prism.Regions;
 
 namespace sconnRem.ViewModel.Alarm
 {
-    public class AlarmAuthConfigViewModel : ObservableObject, IPageViewModel    //  :  ViewModelBase<IGridNavigatedView>
+
+
+    [Export]
+    public class AlarmAuthConfigViewModel : BindableBase    // ObservableObject, IPageViewModel    //  :  ViewModelBase<IGridNavigatedView>
     {
         public ObservableCollection<sconnAuthorizedDevice> AuthorizedDevices { get; set; }
         private AuthorizedDevicesConfigurationService _Provider;
@@ -68,6 +77,7 @@ namespace sconnRem.ViewModel.Alarm
             this._Provider = new AuthorizedDevicesConfigurationService(_Manager);
         }
 
+        [ImportingConstructor]
         public AlarmAuthConfigViewModel(AlarmSystemConfigManager Manager)
         {
             AuthorizedDevices = new ObservableCollection<sconnAuthorizedDevice>();

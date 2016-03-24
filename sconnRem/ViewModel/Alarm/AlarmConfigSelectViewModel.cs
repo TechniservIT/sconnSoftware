@@ -4,10 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using sconnRem.ViewModel.Generic;
+using Prism.Mvvm;
+using System.ComponentModel.Composition;
 
 namespace sconnRem.ViewModel.Alarm
 {
-    public class AlarmConfigSelectViewModel : ObservableObject, IPageViewModel   /*: ViewModelBase<IGridNavigatedView>*/
+    [Export]
+    public class AlarmConfigSelectViewModel : BindableBase      // ObservableObject, IPageViewModel   /*: ViewModelBase<IGridNavigatedView>*/
     {
         //public AlarmConfigSelectViewModel(IGridNavigatedView view) : base(view)
         //{
