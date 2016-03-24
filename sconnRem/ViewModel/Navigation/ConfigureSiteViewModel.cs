@@ -30,6 +30,7 @@ namespace sconnRem.ViewModel.Navigation
         {
 
             // Add available pages
+            _pageViewModels = new List<IPageViewModel>();
             PageViewModels.Add(new AlarmAuthConfigViewModel(_Manager));
             PageViewModels.Add(new AlarmGlobalConfigViewModel(_Manager));
             PageViewModels.Add(new AlarmDeviceConfigViewModel(_Manager));

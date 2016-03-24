@@ -411,6 +411,7 @@ namespace sconnRem
                             ViewedSiteId = sconnSite.siteID;
 
                             //LoadSiteEdit();
+                           
                             wndConfigureSite wnd = new wndConfigureSite();
 
                             EndpointInfo info = new EndpointInfo();

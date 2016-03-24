@@ -126,6 +126,7 @@
     </Compile>
     <Compile Include="Controls\SiteConfig\SiteConfigGroups\GbxConfigureSiteNames.cs" />
     <Compile Include="Controls\SiteConfig\SiteConfigGroups\GbxConfigureSiteZones.cs" />
+    <Compile Include="Global\UnityConfig.cs" />
     <Compile Include="Properties\Resources.de-DE.Designer.cs">
       <DependentUpon>Resources.de-DE.resx</DependentUpon>
       <AutoGen>True</AutoGen>
