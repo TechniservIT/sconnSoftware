@@ -128,6 +128,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SurveillanceEventController
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SurveillanceAnalysisController", "SurveillanceAnalysisController\SurveillanceAnalysisController.csproj", "{66176CC4-CBB3-4937-8CD1-B0D110C962FE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sconnConnector.Tests", "sconnConnector.Tests\sconnConnector.Tests.csproj", "{4E7C647F-935E-40B9-8FF0-8CA185C468DF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -266,6 +268,10 @@ Global
 		{66176CC4-CBB3-4937-8CD1-B0D110C962FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{66176CC4-CBB3-4937-8CD1-B0D110C962FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{66176CC4-CBB3-4937-8CD1-B0D110C962FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E7C647F-935E-40B9-8FF0-8CA185C468DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E7C647F-935E-40B9-8FF0-8CA185C468DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E7C647F-935E-40B9-8FF0-8CA185C468DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E7C647F-935E-40B9-8FF0-8CA185C468DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -325,5 +331,6 @@ Global
 		{F28B4734-87D8-4F4F-A81D-B39BCE86EFBE} = {FEDD7EFC-388D-401C-8027-0792008AD132}
 		{9546EC3F-0E73-4557-902C-672620073138} = {FEDD7EFC-388D-401C-8027-0792008AD132}
 		{66176CC4-CBB3-4937-8CD1-B0D110C962FE} = {FEDD7EFC-388D-401C-8027-0792008AD132}
+		{4E7C647F-935E-40B9-8FF0-8CA185C468DF} = {F5C74956-17E6-4D49-AA51-48B89B962D52}
 	EndGlobalSection
 EndGlobal
