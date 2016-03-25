@@ -28,6 +28,7 @@ using sconnRem.ViewModel.Navigation;
 using sconnConnector.Config;
 using iotDbConnector.DAL;
 using Microsoft.Practices.Unity;
+using sconnRem.Wnd.Navigation;
 
 namespace sconnRem
 {
@@ -412,23 +413,28 @@ namespace sconnRem
 
                             //LoadSiteEdit();
 
-                            wndConfigureSiteShell wnd = new wndConfigureSiteShell();
+                            ConfigNavBootstrapper bootstrapper = new ConfigNavBootstrapper();
+                            bootstrapper.Run();
 
-                            EndpointInfo info = new EndpointInfo();
-                            info.Hostname = sconnSite.serverIP;
-                            info.Port = sconnSite.serverPort;
-                            DeviceCredentials cred = new DeviceCredentials();
-                            cred.Password = sconnSite.authPasswd;
-                            cred.Username = "";
-                            AlarmSystemConfigManager _Manager = new AlarmSystemConfigManager(info, cred);
-                            Device alrmSysDev = new Device();
-                            alrmSysDev.Credentials = cred;
-                            alrmSysDev.EndpInfo = info;
-                            _Manager.RemoteDevice = alrmSysDev;
+                            //wndConfigureSiteShell wnd = new wndConfigureSiteShell();
 
-                            ConfigureSiteViewModel context = new ConfigureSiteViewModel(_Manager);
-                            wnd.DataContext = context;
-                            wnd.Show();
+                            //EndpointInfo info = new EndpointInfo();
+                            //info.Hostname = sconnSite.serverIP;
+                            //info.Port = sconnSite.serverPort;
+                            //DeviceCredentials cred = new DeviceCredentials();
+                            //cred.Password = sconnSite.authPasswd;
+                            //cred.Username = "";
+                            //AlarmSystemConfigManager _Manager = new AlarmSystemConfigManager(info, cred);
+                            //Device alrmSysDev = new Device();
+                            //alrmSysDev.Credentials = cred;
+                            //alrmSysDev.EndpInfo = info;
+                            //_Manager.RemoteDevice = alrmSysDev;
+
+                            //ConfigureSiteViewModel context = new ConfigureSiteViewModel(_Manager);
+                            //wnd.DataContext = context;
+                            //wnd.Show();
+
+
                         }
                         else
                         {

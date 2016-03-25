@@ -1,7 +1,5 @@
-﻿using sconnRem.ViewModel.Alarm;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,24 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace sconnRem.View.Config
+namespace sconnRem.View.Status.AlarmSystem
 {
     /// <summary>
-    /// Interaction logic for AuthConfig.xaml
+    /// Interaction logic for AlarmSystemStatusFullScreen.xaml
     /// </summary>
-    /// 
-
-    [Export("AuthConfig")]
-    public partial class AuthConfig : UserControl
+    public partial class AlarmSystemStatusFullScreen : UserControl
     {
-
-        [Import]
-        public AlarmAuthConfigViewModel ViewModel
-        {
-            set { this.DataContext = value; }
-
-        }
-        public AuthConfig()
+        public AlarmSystemStatusFullScreen()
         {
             InitializeComponent();
         }

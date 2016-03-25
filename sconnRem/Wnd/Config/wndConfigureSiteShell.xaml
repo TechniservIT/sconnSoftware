@@ -7,13 +7,13 @@
     xmlns:prism="http://www.codeplex.com/prism"
     xmlns:controls="clr-namespace:sconnRem.Controls.Common"
     Title="View-Switching Navigation QuickStart"
-    d:DesignHeight="300" d:DesignWidth="400">
+    d:DesignHeight="768" d:DesignWidth="1024">
 
     <Grid x:Name="LayoutRoot"   >
-        <Grid MinWidth="300" MaxWidth="1000">
+        <Grid MinWidth="400" MaxWidth="2568">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition />
+                <ColumnDefinition Width="20*" />
+                <ColumnDefinition  Width="80*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -23,7 +23,8 @@
             <StackPanel Grid.Row="0" Orientation="Horizontal">
                 <TextBlock HorizontalAlignment="Left" Width="Auto" Text="View-Switching Navigation" FontWeight="Normal" Foreground="#FFFFFFFF" FontSize="24" FontFamily="Comic Sans MS" VerticalAlignment="Center"/>
             </StackPanel>
-            <controls:InfoTipToggleButton Grid.Row="1">
+            
+            <!--<controls:InfoTipToggleButton Grid.Row="1">
                 <controls:InfoTipToggleButton.Popup>
                     <Popup>
                         <Border BorderBrush="Black" BorderThickness="2">
@@ -33,8 +34,10 @@
                         </Border>
                     </Popup>
                 </controls:InfoTipToggleButton.Popup>
-            </controls:InfoTipToggleButton>
-            <Border Grid.Column="0" Grid.Row="2" Background="LightGray" MinWidth="250" Margin="5,0,0,5">
+            </controls:InfoTipToggleButton>-->
+            
+            
+            <Border Grid.Column="0" Grid.Row="2" Background="LightGray" MinWidth="5" Margin="5,0,0,5">
                 <ItemsControl x:Name="NavigationItemsControl" prism:RegionManager.RegionName="MainNavigationRegion" Grid.Column="0" Margin="5" Padding="5" />
             </Border>
             <ContentControl prism:RegionManager.RegionName="MainContentRegion" 

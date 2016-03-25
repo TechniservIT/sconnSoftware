@@ -172,7 +172,9 @@
     <Compile Include="Controls\MainView\SiteView.cs" />
     <Compile Include="Controls\SiteConfig\SitePanel\statusViewPanel.cs" />
     <Compile Include="Controls\MainView\ViewSiteLoading.cs" />
+    <Compile Include="QuickStartBootstrapper.cs" />
     <Compile Include="ViewModel\Alarm\AlarmAuthConfigViewModel.cs" />
+    <Compile Include="ViewModel\Alarm\AlarmCommConfigViewModel.cs" />
     <Compile Include="ViewModel\Alarm\AlarmConfigSelectViewModel.cs" />
     <Compile Include="ViewModel\Alarm\AlarmDeviceConfigViewModel.cs" />
     <Compile Include="ViewModel\Alarm\AlarmGlobalConfigViewModel.cs" />
@@ -185,6 +187,8 @@
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\Navigation\ConfigureSiteViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="View\Config\AlarmSystem\Abstract\AlarmConfigRegions.cs" />
+    <Compile Include="View\Config\AlarmSystem\Abstract\IAlarmSystemDataRecordView.cs" />
     <Compile Include="View\Config\AlarmSystem\Auth\AlarmAuthConfigModule.cs" />
     <Compile Include="View\Config\AlarmSystem\Auth\AlarmAuthRecordView.xaml.cs">
       <DependentUpon>AlarmAuthRecordView.xaml</DependentUpon>
@@ -195,6 +199,7 @@
     <Compile Include="View\Config\AlarmSystem\Auth\AuthConfigViewNavigationItem.xaml.cs">
       <DependentUpon>AuthConfigViewNavigationItem.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Config\AlarmSystem\Comm\AlarmCommConfigModule.cs" />
     <Compile Include="View\Config\AlarmSystem\Comm\CommConfigView.xaml.cs">
       <DependentUpon>CommConfigView.xaml</DependentUpon>
     </Compile>
@@ -258,6 +263,12 @@
     <Compile Include="View\gridSiteConfigSelect.cs" />
     <Compile Include="View\Setting\wndAppSettings.xaml.cs">
       <DependentUpon>wndAppSettings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Status\AlarmSystem\AlarmSystemStatusFullScreen.xaml.cs">
+      <DependentUpon>AlarmSystemStatusFullScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Status\AlarmSystem\AlarmSystemStatusMin.xaml.cs">
+      <DependentUpon>AlarmSystemStatusMin.xaml</DependentUpon>
     </Compile>
     <Compile Include="Wnd\changePasswordWnd.xaml.cs">
       <DependentUpon>changePasswordWnd.xaml</DependentUpon>
@@ -421,6 +432,14 @@
     <Page Include="View\Setting\wndAppSettings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Status\AlarmSystem\AlarmSystemStatusFullScreen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Status\AlarmSystem\AlarmSystemStatusMin.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Wnd\changePasswordWnd.xaml">
       <SubType>Designer</SubType>

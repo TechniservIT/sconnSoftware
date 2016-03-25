@@ -7,8 +7,9 @@
               xmlns:datapath="clr-namespace:sconnRem.ViewModel.Alarm"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
+    
     <UserControl.DataContext>
-        <datapath:AlarmGlobalConfigViewModel />
+        <datapath:AlarmCommConfigViewModel />
     </UserControl.DataContext>
     
     <Grid>

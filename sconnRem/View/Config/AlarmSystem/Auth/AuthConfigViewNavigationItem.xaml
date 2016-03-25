@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:sconnRem.View.Config.AlarmSystem.Auth"
              mc:Ignorable="d" 
              d:DesignHeight="200" d:DesignWidth="200">
-    <Grid>
+    <Grid MinHeight="200" MinWidth="200">
 
 
         <StackPanel x:Name="stckConfigSelect" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch"  Height="Auto"  Width="Auto"  x:FieldModifier="public">
@@ -31,11 +31,11 @@
                         <ColumnDefinition Width="100*" />
                     </Grid.ColumnDefinitions>
 
-                    <StackPanel MouseDown="{Binding Show_Config}"  Grid.Row="0" Grid.Column="0">
-                        <Button Margin="10,10,10,00"  Click="{Binding Show_Config}"   HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Height="120"  Width="120"  >
-                            <Image  x:Name="image00"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="10,10,10,10" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/config1.png"/>
+                    <StackPanel   Grid.Row="0" Grid.Column="0">
+                        <Button Margin="10,10,10,00" Click="Nav_Button_Click"   HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Height="120"  Width="120"  >
+                            <Image  x:Name="image00"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="10,10,10,10" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/lista2.png"/>
                         </Button>
-                        <Label HorizontalContentAlignment="Center" Grid.Row="1" Grid.Column="0" Content="Text" FontSize="14.667" FontFamily="Motorwerk">
+                        <Label HorizontalContentAlignment="Center" Grid.Row="1" Grid.Column="0" Content="Authentication" FontSize="14.667" FontFamily="Motorwerk">
                             
                         </Label>
                     </StackPanel>

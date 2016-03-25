@@ -19,7 +19,6 @@ namespace sconnRem.Wnd.Navigation
         protected override void ConfigureAggregateCatalog()
         {
             base.ConfigureAggregateCatalog();
-
             this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(ConfigNavBootstrapper).Assembly));
         }
 

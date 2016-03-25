@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Prism.Regions;
+using sconnRem.ViewModel.Alarm;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,11 +21,23 @@ namespace sconnRem.View.Config
     /// <summary>
     /// Interaction logic for CommConfigView.xaml
     /// </summary>
+    /// 
+
+    [Export("CommConfigView")]
     public partial class CommConfigView : UserControl
     {
+        [Import]
+        public AlarmCommConfigViewModel ViewModel
+        {
+            set { this.DataContext = value; }
+        }
+
         public CommConfigView()
         {
             InitializeComponent();
         }
+
+       
     }
+
 }
