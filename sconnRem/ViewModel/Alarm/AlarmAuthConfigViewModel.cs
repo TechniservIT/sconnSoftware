@@ -27,6 +27,7 @@ namespace sconnRem.ViewModel.Alarm
     {
         public ObservableCollection<sconnAuthorizedDevice> AuthorizedDevices { get; set; }
         private AuthorizedDevicesConfigurationService _Provider;
+        private readonly IRegionManager regionManager;
 
         [Dependency]
         public AlarmSystemConfigManager _Manager { get; set; }
@@ -65,7 +66,7 @@ namespace sconnRem.ViewModel.Alarm
         }
 
 
-
+        [ImportingConstructor]
         public AlarmAuthConfigViewModel()
         {
             _Name = "Auth";
@@ -90,9 +91,21 @@ namespace sconnRem.ViewModel.Alarm
             
 
         }
-        
+
+
+
+
+        [ImportingConstructor]
+        public AlarmAuthConfigViewModel(IRegionManager regionManager)
+        {
+            this.regionManager = regionManager;
+        }
+
+
+
+
     }
 
-    
+
 
 }

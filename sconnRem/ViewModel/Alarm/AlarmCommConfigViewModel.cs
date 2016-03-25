@@ -1,6 +1,7 @@
 ﻿using AlarmSystemManagmentService;
 using Microsoft.Practices.Unity;
 using Prism.Mvvm;
+using Prism.Regions;
 using sconnConnector.Config;
 using sconnConnector.POCO.Config.sconn;
 using System;
@@ -22,6 +23,8 @@ namespace sconnRem.ViewModel.Alarm
         public sconnGlobalConfig CommConfig { get; set; }
 
         private AuthorizedDevicesConfigurationService _Provider;
+        private readonly IRegionManager regionManager;
+
 
         [Dependency]
         public AlarmSystemConfigManager _Manager { get; set; }
@@ -51,7 +54,8 @@ namespace sconnRem.ViewModel.Alarm
             get { return "pack://application:,,,/images/lista2.png"; }
         }
 
-        
+
+        [ImportingConstructor]
         public AlarmCommConfigViewModel()
         {
             _Name = "Auth";
@@ -68,6 +72,13 @@ namespace sconnRem.ViewModel.Alarm
         }
 
 
+
+        [ImportingConstructor]
+        public AlarmCommConfigViewModel(IRegionManager regionManager)
+        {
+            this.regionManager = regionManager;
+
+        }
     }
     
 }

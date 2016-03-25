@@ -1,7 +1,8 @@
-﻿using Prism.Mef;
+﻿using Prism.Logging;
+using Prism.Mef;
 using Prism.Modularity;
+using sconnRem.Logging;
 using sconnRem.Wnd.Config;
-using sconnRem.Wnd.Config.Shell;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition.Hosting;
@@ -14,8 +15,14 @@ namespace sconnRem.Wnd.Navigation
 {
     public class ConfigNavBootstrapper : MefBootstrapper
     {
+
         private const string ModuleCatalogUri = "/sconnRem;component/Wnd/Config/Shell/wndConfigureSiteShell.xaml";
 
+        protected override ILoggerFacade CreateLogger()
+        {
+            return new MvvmLogger();
+
+        }
         protected override void ConfigureAggregateCatalog()
         {
             base.ConfigureAggregateCatalog();

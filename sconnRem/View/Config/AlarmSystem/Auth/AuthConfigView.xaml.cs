@@ -22,8 +22,8 @@ namespace sconnRem.View.Config
     /// </summary>
     /// 
 
-    [Export("AuthConfig")]
-    public partial class AuthConfig : UserControl
+    [Export("AuthConfigView")]
+    public partial class AuthConfigView : UserControl
     {
 
         [Import]
@@ -32,7 +32,7 @@ namespace sconnRem.View.Config
             set { this.DataContext = value; }
 
         }
-        public AuthConfig()
+        public AuthConfigView()
         {
             InitializeComponent();
         }

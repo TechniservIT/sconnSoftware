@@ -1,4 +1,7 @@
-﻿using iotDbConnector.DAL;
+﻿using iotData.POCO.Surveillance.Analysis;
+using iotData.POCO.Surveillance.Events;
+using iotData.POCO.Surveillance.Recording;
+using iotDbConnector.DAL;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -25,18 +28,25 @@ namespace iotData.POCO.Surveillance
 
         [DataMember]
         public bool RequiresAuth { get; set; }
-
-
-
+        
         [DataMember]
         public virtual Location Location { get; set; }
 
         [DataMember]
         public virtual EndpointInfo Endpoint { get; set; }
+
+
+        [DataMember]
+        public virtual List<ISurveillanceEvent> Events { get; set; }
+
+        [DataMember]
+        public virtual List<ISurveillanceAnalysisConfig> Analysis { get; set; }
         
- 
+        [DataMember]
+        public virtual List<ISurveillanceRecordingSetup> Recording { get; set; }
 
-
+        [DataMember]
+        public virtual Site Site { get; set; }
 
     }
 }

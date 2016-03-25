@@ -32,7 +32,7 @@
                     </Grid.ColumnDefinitions>
 
                     <StackPanel Grid.Row="0" Grid.Column="0">
-                        <Button Margin="10,10,10,00"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Height="120"  Width="120"  >
+                        <Button Margin="10,10,10,00"  Click="Nav_Button_Click"   HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Height="120"  Width="120"  >
                             <Image  x:Name="image00"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="10,10,10,10" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/strefa.png"/>
                         </Button>
                         <Label HorizontalContentAlignment="Center" Grid.Row="1" Grid.Column="0" Content="Communication" FontSize="14.667" FontFamily="Motorwerk">

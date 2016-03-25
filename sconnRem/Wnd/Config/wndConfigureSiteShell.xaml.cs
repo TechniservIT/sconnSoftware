@@ -24,7 +24,6 @@ namespace sconnRem.Wnd.Config
     /// 
 
 
-
     public static class RegionNames
     {
         public const String MainContentRegion = "MainContentRegion";
@@ -37,7 +36,11 @@ namespace sconnRem.Wnd.Config
     {
 
         private const string StartModuleName = "AlarmAuthConfigModule";
-        private static Uri StartViewUri = new Uri("/View/Config/AlarmSystem/AuthConfig", UriKind.Absolute);
+        private static Uri StartViewUri = new Uri("/View/Config/AlarmSystem/AuthConfig", UriKind.Relative);
+
+        //private const string EmailModuleName = "EmailModule";
+        //private static Uri InboxViewUri = new Uri("/InboxView", UriKind.Relative);
+
 
         public wndConfigureSiteShell()
         {
@@ -62,16 +65,39 @@ namespace sconnRem.Wnd.Config
 
         public void OnImportsSatisfied()
         {
+            this.ModuleManager.LoadModuleCompleted +=
+                (s, e) =>
+                {
+
+                    if (e.ModuleInfo.ModuleName == StartModuleName)
+                    {
+                        this.RegionManager.RequestNavigate(
+                            RegionNames.MainContentRegion,
+                            StartViewUri);
+                    }
+                };
+
             //this.ModuleManager.LoadModuleCompleted +=
             //    (s, e) =>
             //    {
-               
-            //        if (e.ModuleInfo.ModuleName == StartModuleName)
+            //        // todo: 01 - Navigation on when modules are loaded.
+            //        // When using region navigation, be sure to use it consistently
+            //        // to ensure you get proper journal behavior.  If we mixed
+            //        // usage of adding views directly to regions, such as through
+            //        // RegionManager.AddToRegion, and then use RegionManager.RequestNavigate,
+            //        // we may not be able to navigate back correctly.
+            //        // 
+            //        // Here, we wait until the module we want to start with is
+            //        // loaded and then navigate to the view we want to display
+            //        // initially.
+            //        //     
+            //        if (e.ModuleInfo.ModuleName == EmailModuleName)
             //        {
             //            this.RegionManager.RequestNavigate(
             //                RegionNames.MainContentRegion,
-            //                StartViewUri);
+            //                InboxViewUri);
             //        }
+
             //    };
         }
 

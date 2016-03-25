@@ -28,7 +28,7 @@ namespace sconnRem.View.Config.AlarmSystem.Auth
 
         // todo: 17a - ContactsView Avatar Option
         // This navigation uri provides additional query data to indicate the 'Avatar' view should be shown.
-        private static Uri AuthViewUri = new Uri("AuthConfig", UriKind.Relative);
+        private static Uri AuthViewUri = new Uri("AuthConfigView", UriKind.Relative);
 
         [Import]
         public IRegionManager regionManager;

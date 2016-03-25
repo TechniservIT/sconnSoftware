@@ -150,6 +150,7 @@
     <Compile Include="Controls\SiteConfig\SiteConfigGroups\GbxConfigureSiteNames.cs" />
     <Compile Include="Controls\SiteConfig\SiteConfigGroups\GbxConfigureSiteZones.cs" />
     <Compile Include="Global\UnityConfig.cs" />
+    <Compile Include="Logging\MvvmLogger.cs" />
     <Compile Include="Properties\Resources.de-DE.Designer.cs">
       <DependentUpon>Resources.de-DE.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -172,7 +173,6 @@
     <Compile Include="Controls\MainView\SiteView.cs" />
     <Compile Include="Controls\SiteConfig\SitePanel\statusViewPanel.cs" />
     <Compile Include="Controls\MainView\ViewSiteLoading.cs" />
-    <Compile Include="QuickStartBootstrapper.cs" />
     <Compile Include="ViewModel\Alarm\AlarmAuthConfigViewModel.cs" />
     <Compile Include="ViewModel\Alarm\AlarmCommConfigViewModel.cs" />
     <Compile Include="ViewModel\Alarm\AlarmConfigSelectViewModel.cs" />
@@ -280,7 +280,6 @@
     <Compile Include="Controls\SiteConfig\DeviceConfigGroups\GbxConfigureOutputsGroup.cs" />
     <Compile Include="Controls\SiteConfig\DeviceConfigGroups\GbxConfigureRelaysGroup.cs" />
     <Compile Include="Wnd\Config\ExportAttribute.cs" />
-    <Compile Include="Wnd\Config\Shell\ConfigureSiteShell.cs" />
     <Compile Include="Wnd\Config\wndConfigureSiteShell.xaml.cs">
       <DependentUpon>wndConfigureSiteShell.xaml</DependentUpon>
     </Compile>
@@ -613,6 +612,7 @@
     <Folder Include="Controls\SiteConfig\Common\" />
     <Folder Include="Model\" />
     <Folder Include="Tests\" />
+    <Folder Include="Wnd\Config\Shell\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\bateria1.png" />
