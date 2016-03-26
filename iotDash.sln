@@ -112,7 +112,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sconnRem_Tests_AlarmSystem"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sconnRem_Tests_Security", "sconnRem_Tests_Security\sconnRem_Tests_Security.csproj", "{99646347-E28E-4582-9799-74FA5274018E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sconnRem_Tests_Models", "sconnRem_Tests_Models\sconnRem_Tests_Models.csproj", "{745BF0A6-5BBF-4AA3-96D3-BA57D91F9BB1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sconnRem_Tests_Functional", "sconnRem_Tests_Models\sconnRem_Tests_Functional.csproj", "{745BF0A6-5BBF-4AA3-96D3-BA57D91F9BB1}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mobile", "Mobile", "{EAB5B51A-0B86-4D51-8485-946C9CDE34DC}"
 EndProject

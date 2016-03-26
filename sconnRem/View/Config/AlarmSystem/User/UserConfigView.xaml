@@ -11,15 +11,12 @@
     <UserControl.DataContext>
         <datapath:AlarmUsersConfigViewModel />
     </UserControl.DataContext>
-
-    <Button x:Name="button" Content="User" HorizontalAlignment="Left" Margin="74,106,0,0" VerticalAlignment="Top" Width="148" RenderTransformOrigin="0.5,0.5" Height="59">
-        <Button.RenderTransform>
-            <TransformGroup>
-                <ScaleTransform/>
-                <SkewTransform/>
-                <RotateTransform Angle="-18.05"/>
-                <TranslateTransform/>
-            </TransformGroup>
-        </Button.RenderTransform>
-    </Button>
+    <Grid>
+        <DataGrid MinWidth="200" MinHeight="250"
+         ItemsSource="{Binding Config}" 
+             AutoGenerateColumns="True"
+          >
+        </DataGrid>
+    </Grid>
+    
 </UserControl>

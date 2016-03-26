@@ -5,23 +5,20 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:sconnRem.View.Config"
               xmlns:datapath="clr-namespace:sconnRem.ViewModel.Alarm"
-             mc:Ignorable="d" Height="600" Width="800">
+             mc:Ignorable="d"
+               d:DesignHeight="300" d:DesignWidth="300"
+             >
 
     <UserControl.DataContext>
         <datapath:AlarmGsmConfigViewModel />
     </UserControl.DataContext>
-    
-    <Button x:Name="button" Content="Gsm" HorizontalAlignment="Left" Margin="98,73,0,0" VerticalAlignment="Top" Width="335" RenderTransformOrigin="0.5,0.5" Height="245">
-        <Button.RenderTransform>
-            <TransformGroup>
-                <ScaleTransform/>
-                <SkewTransform/>
-                <RotateTransform Angle="-18.05"/>
-                <TranslateTransform/>
-            </TransformGroup>
-        </Button.RenderTransform>
-    </Button>
 
-
+    <Grid>
+        <DataGrid MinWidth="200" MinHeight="250"
+         ItemsSource="{Binding Config}" 
+             AutoGenerateColumns="True"
+          >
+        </DataGrid>
+    </Grid>
 
 </UserControl>
