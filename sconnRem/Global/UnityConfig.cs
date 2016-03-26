@@ -14,7 +14,7 @@ namespace sconnRem.Global
         public static void RegisterComponents()
         {
             var container = new UnityContainer();
-            container.RegisterType<IConfigManager, AlarmSystemConfigManager>();
+            container.RegisterType<IAlarmConfigManager, AlarmSystemConfigManager>();
 
             //GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);
         }

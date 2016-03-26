@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using NLog;
 
 namespace sconnRem.View.Config.AlarmSystem.Auth
 {
@@ -25,6 +26,7 @@ namespace sconnRem.View.Config.AlarmSystem.Auth
     public partial class AuthConfigViewNavigationItem : UserControl, IPartImportsSatisfiedNotification
     {
         private const string mainContentRegionName = "MainContentRegion";
+        private Logger nlogger = LogManager.GetCurrentClassLogger();
 
         // todo: 17a - ContactsView Avatar Option
         // This navigation uri provides additional query data to indicate the 'Avatar' view should be shown.
@@ -54,7 +56,17 @@ namespace sconnRem.View.Config.AlarmSystem.Auth
         
         private void Nav_Button_Click(object sender, RoutedEventArgs e)
         {
-            this.regionManager.RequestNavigate(RegionNames.MainContentRegion, AuthViewUri);
+            this.regionManager.RequestNavigate(RegionNames.MainContentRegion, AuthViewUri
+                ,
+                (NavigationResult nr) =>
+                {
+                    var error = nr.Error;
+                    var result = nr.Result;
+                    if (error != null)
+                    {
+                        nlogger.Error(error);
+                    }
+                });
         }
 
 

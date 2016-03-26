@@ -10,12 +10,9 @@ using System.ComponentModel.Composition;
 namespace sconnRem.ViewModel.Alarm
 {
     [Export]
-    public class AlarmConfigSelectViewModel : BindableBase      // ObservableObject, IPageViewModel   /*: ViewModelBase<IGridNavigatedView>*/
+    public class AlarmConfigSelectViewModel : BindableBase   
     {
-        //public AlarmConfigSelectViewModel(IGridNavigatedView view) : base(view)
-        //{
-        //}
-
+      
         public string DisplayedImagePath
         {
             get { return "pack://application:,,,/images/config1.png"; }

@@ -233,9 +233,11 @@
     <Compile Include="View\Config\AlarmSystem\Device\SirenConfigView.xaml.cs">
       <DependentUpon>SirenConfigView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Config\AlarmSystem\Global\GlobalConfigModule.cs" />
     <Compile Include="View\Config\AlarmSystem\Global\GlobalConfigViewNavigationItem.xaml.cs">
       <DependentUpon>GlobalConfigViewNavigationItem.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Config\AlarmSystem\Gsm\GsmConfigModule.cs" />
     <Compile Include="View\Config\AlarmSystem\Gsm\GsmConfigView.xaml.cs">
       <DependentUpon>GsmConfigView.xaml</DependentUpon>
     </Compile>
@@ -245,12 +247,14 @@
     <Compile Include="View\Config\AlarmSystem\Gsm\GsmConfigViewNavigationItem.xaml.cs">
       <DependentUpon>GsmConfigViewNavigationItem.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Config\AlarmSystem\User\UserConfigModule.cs" />
     <Compile Include="View\Config\AlarmSystem\User\UserConfigView.xaml.cs">
       <DependentUpon>UserConfigView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Config\AlarmSystem\User\UserConfigViewNavigationItem.xaml.cs">
       <DependentUpon>UserConfigViewNavigationItem.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Config\AlarmSystem\Zone\ZoneConfigModule.cs" />
     <Compile Include="View\Config\AlarmSystem\Zone\ZoneConfigView.xaml.cs">
       <DependentUpon>ZoneConfigView.xaml</DependentUpon>
     </Compile>

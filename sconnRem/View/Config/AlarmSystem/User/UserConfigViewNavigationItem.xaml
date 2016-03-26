@@ -31,9 +31,9 @@
                         <ColumnDefinition Width="100*" />
                     </Grid.ColumnDefinitions>
 
-                    <StackPanel MouseDown="{Binding Show_Config}"  Grid.Row="0" Grid.Column="0">
-                        <Button Margin="10,10,10,00"  Click="{Binding Show_Config}"   HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Height="120"  Width="120"  >
-                            <Image  x:Name="image00"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="10,10,10,10" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/config1.png"/>
+                    <StackPanel  Grid.Row="0" Grid.Column="0">
+                        <Button Margin="10,10,10,00" Click="Nav_Button_Click"   HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Height="120"  Width="120"  >
+                            <Image  x:Name="image00"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="10,10,10,10" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/user.png"/>
                         </Button>
                         <Label HorizontalContentAlignment="Center" Grid.Row="1" Grid.Column="0" Content="Text" FontSize="14.667" FontFamily="Motorwerk">
 

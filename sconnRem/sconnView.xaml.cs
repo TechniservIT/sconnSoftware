@@ -413,22 +413,24 @@ namespace sconnRem
 
                             //LoadSiteEdit();
 
-                            ConfigNavBootstrapper bootstrapper = new ConfigNavBootstrapper();
-                            bootstrapper.Run();
 
                             //wndConfigureSiteShell wnd = new wndConfigureSiteShell();
 
-                            //EndpointInfo info = new EndpointInfo();
-                            //info.Hostname = sconnSite.serverIP;
-                            //info.Port = sconnSite.serverPort;
-                            //DeviceCredentials cred = new DeviceCredentials();
-                            //cred.Password = sconnSite.authPasswd;
-                            //cred.Username = "";
-                            //AlarmSystemConfigManager _Manager = new AlarmSystemConfigManager(info, cred);
-                            //Device alrmSysDev = new Device();
-                            //alrmSysDev.Credentials = cred;
-                            //alrmSysDev.EndpInfo = info;
-                            //_Manager.RemoteDevice = alrmSysDev;
+                            EndpointInfo info = new EndpointInfo();
+                            info.Hostname = sconnSite.serverIP;
+                            info.Port = sconnSite.serverPort;
+                            DeviceCredentials cred = new DeviceCredentials();
+                            cred.Password = sconnSite.authPasswd;
+                            cred.Username = "";
+                            AlarmSystemConfigManager _Manager = new AlarmSystemConfigManager(info, cred);
+                            Device alrmSysDev = new Device();
+                            alrmSysDev.Credentials = cred;
+                            alrmSysDev.EndpInfo = info;
+                            _Manager.RemoteDevice = alrmSysDev;
+
+
+                            ConfigNavBootstrapper bootstrapper = new ConfigNavBootstrapper(_Manager);
+                            bootstrapper.Run();
 
                             //ConfigureSiteViewModel context = new ConfigureSiteViewModel(_Manager);
                             //wnd.DataContext = context;

@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using NLog;
 
 namespace sconnRem.ViewModel.Alarm
 {
@@ -22,8 +23,10 @@ namespace sconnRem.ViewModel.Alarm
     {
         public sconnGlobalConfig CommConfig { get; set; }
 
-        private AuthorizedDevicesConfigurationService _Provider;
+        private GlobalConfigService _Provider;
         private readonly IRegionManager regionManager;
+
+        private Logger nlogger = LogManager.GetCurrentClassLogger();
 
 
         [Dependency]
@@ -42,11 +45,23 @@ namespace sconnRem.ViewModel.Alarm
         private ICommand _getDataCommand;
         private ICommand _saveDataCommand;
 
-  
+
+        private void GetData()
+        {
+            try
+            {
+                CommConfig = _Provider.Get();
+                
+            }
+            catch (Exception ex)
+            {
+                nlogger.Error(ex, ex.Message);
+            }
+        }
 
         private void SaveData()
         {
-            _Provider.SaveChanges();
+            _Provider.Update(CommConfig);
         }
 
         public string DisplayedImagePath
@@ -54,24 +69,13 @@ namespace sconnRem.ViewModel.Alarm
             get { return "pack://application:,,,/images/lista2.png"; }
         }
 
-
-        [ImportingConstructor]
+        
         public AlarmCommConfigViewModel()
         {
             _Name = "Auth";
-            this._Provider = new AuthorizedDevicesConfigurationService(_Manager);
+            this._Provider = new GlobalConfigService(_Manager);
         }
-
-        [ImportingConstructor]
-        public AlarmCommConfigViewModel(AlarmSystemConfigManager Manager)
-        {
-            _Manager = Manager;
-            _Name = "Auth";
-            this._Provider = new AuthorizedDevicesConfigurationService(_Manager);
-            //  GetData();
-        }
-
-
+        
 
         [ImportingConstructor]
         public AlarmCommConfigViewModel(IRegionManager regionManager)
@@ -79,6 +83,18 @@ namespace sconnRem.ViewModel.Alarm
             this.regionManager = regionManager;
 
         }
+
+        [ImportingConstructor]
+        public AlarmCommConfigViewModel(IAlarmConfigManager Manager, IRegionManager regionManager)
+        {
+            CommConfig = new sconnGlobalConfig();
+            this._Manager = (AlarmSystemConfigManager)Manager;
+            this._Provider = new GlobalConfigService(_Manager);
+            this.regionManager = regionManager;
+            GetData();
+        }
+
+
     }
     
 }

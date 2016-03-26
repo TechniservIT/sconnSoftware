@@ -1,6 +1,7 @@
 ﻿using AlarmSystemManagmentService;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,15 +12,21 @@ using sconnRem.ViewModel.Generic;
 using sconnConnector.POCO.Config.Abstract.Auth;
 using Prism.Mvvm;
 using System.ComponentModel.Composition;
+using NLog;
+using Prism.Regions;
+using sconnConnector.POCO.Config;
+using sconnConnector.POCO.Config.sconn;
 
 namespace sconnRem.ViewModel.Alarm
 {
     [Export]
     public class AlarmUsersConfigViewModel : BindableBase   // ObservableObject, IPageViewModel
     {
-        public sconnUserConfig Config { get; set; }
+        public ObservableCollection<sconnUser> Config { get; set; }
         private UsersConfigurationService _Provider;
         private AlarmSystemConfigManager _Manager;
+        private readonly IRegionManager regionManager;
+        private Logger nlogger = LogManager.GetCurrentClassLogger();
 
         private string _Name;
         public string Name
@@ -37,11 +44,23 @@ namespace sconnRem.ViewModel.Alarm
 
         private void GetData()
         {
+            try
+            {
+                Config = new ObservableCollection<sconnUser>(_Provider.GetAll());
+
+            }
+            catch (Exception ex)
+            {
+                nlogger.Error(ex, ex.Message);
+            }
         }
 
         private void SaveData()
         {
-
+            foreach (var item in Config)
+            {
+                _Provider.Update(item);
+            }
         }
 
         public AlarmUsersConfigViewModel()
@@ -50,13 +69,17 @@ namespace sconnRem.ViewModel.Alarm
             this._Provider = new UsersConfigurationService(_Manager);
         }
 
+
         [ImportingConstructor]
-        public AlarmUsersConfigViewModel(AlarmSystemConfigManager Manager)
+        public AlarmUsersConfigViewModel(IAlarmConfigManager Manager, IRegionManager regionManager)
         {
-            _Manager = Manager;
-            _Name = "Users";
+            Config = new ObservableCollection<sconnUser>();
+            this._Manager = (AlarmSystemConfigManager)Manager;
             this._Provider = new UsersConfigurationService(_Manager);
+            this.regionManager = regionManager;
+            GetData();
         }
+
 
         public string DisplayedImagePath
         {

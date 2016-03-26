@@ -40,7 +40,7 @@ namespace sconnRem.ViewModel
             ////{
             ////    // Create run time view services and models
             ////    SimpleIoc.Default.Register<IDataService, DataService>();
-            ////}
+            ////}try
 
             SimpleIoc.Default.Register<MainViewModel>();
         }

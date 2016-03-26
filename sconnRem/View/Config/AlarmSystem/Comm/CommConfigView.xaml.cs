@@ -26,16 +26,25 @@ namespace sconnRem.View.Config
     [Export("CommConfigView")]
     public partial class CommConfigView : UserControl
     {
-        [Import]
-        public AlarmCommConfigViewModel ViewModel
-        {
-            set { this.DataContext = value; }
-        }
+        //[Import]
+        //public AlarmCommConfigViewModel ViewModel
+        //{
+        //    set { this.DataContext = value; }
+        //}
 
-        public CommConfigView()
+
+        [ImportingConstructor]
+        public CommConfigView(AlarmCommConfigViewModel ViewModel)
         {
             InitializeComponent();
+            this.DataContext = ViewModel;
         }
+
+
+        //public CommConfigView()
+        //{
+        //    InitializeComponent();
+        //}
 
        
     }

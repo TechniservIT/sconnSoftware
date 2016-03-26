@@ -1,6 +1,7 @@
 ﻿using iotDbConnector.DAL;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,16 +11,18 @@ using sconnConnector.POCO.Config.sconn;
 namespace sconnConnector.Config
 {
 
-    public interface IConfigManager
+    public interface IAlarmConfigManager
     {
         sconnAlarmSystem Config { get; set; }
         Device RemoteDevice { get; set; }
         EndpointInfo info { get; set; }
         DeviceCredentials creds { get; set; }
+        DateTime LastUpDateTime { get; set; }
     }
 
 
-    public class AlarmSystemConfigManager : IConfigManager
+    [Export(typeof(IAlarmConfigManager))]
+    public class AlarmSystemConfigManager : IAlarmConfigManager
     {
         public EndpointInfo info { get; set; }
         public DeviceCredentials creds { get; set; }

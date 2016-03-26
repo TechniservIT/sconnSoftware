@@ -1,6 +1,7 @@
 ﻿using AlarmSystemManagmentService;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,9 @@ using sconnRem.ViewModel.Generic;
 using sconnConnector.POCO.Config;
 using Prism.Mvvm;
 using System.ComponentModel.Composition;
+using NLog;
+using Prism.Regions;
+using sconnConnector.POCO.Config.sconn;
 
 namespace sconnRem.ViewModel.Alarm
 {
@@ -18,9 +22,11 @@ namespace sconnRem.ViewModel.Alarm
     [Export]
     public class AlarmGsmConfigViewModel : BindableBase     // ObservableObject, IPageViewModel
     {
-        public sconnGsmConfig Config { get; set; }
+        public ObservableCollection<sconnGsmRcpt> Config { get; set; }
         private GsmConfigurationService _Provider;
         private AlarmSystemConfigManager _Manager;
+        private readonly IRegionManager regionManager;
+        private Logger nlogger = LogManager.GetCurrentClassLogger();
 
         private string _Name;
         public string Name
@@ -36,11 +42,23 @@ namespace sconnRem.ViewModel.Alarm
 
         private void GetData()
         {
+            try
+            {
+                Config = new ObservableCollection<sconnGsmRcpt>(_Provider.GetAll());
+
+            }
+            catch (Exception ex)
+            {
+                nlogger.Error(ex, ex.Message);
+            }
         }
 
         private void SaveData()
         {
-
+            foreach (var item in Config)
+            {
+                _Provider.Update(item);
+            }
         }
 
         public AlarmGsmConfigViewModel()
@@ -49,13 +67,18 @@ namespace sconnRem.ViewModel.Alarm
             this._Provider = new GsmConfigurationService(_Manager);
         }
 
+       
+
         [ImportingConstructor]
-        public AlarmGsmConfigViewModel(AlarmSystemConfigManager Manager)
+        public AlarmGsmConfigViewModel(IAlarmConfigManager Manager, IRegionManager regionManager)
         {
-            _Manager = Manager;
-            _Name = "Gsm";
+            Config = new ObservableCollection<sconnGsmRcpt>();
+            this._Manager = (AlarmSystemConfigManager)Manager;
             this._Provider = new GsmConfigurationService(_Manager);
+            this.regionManager = regionManager;
+            GetData();
         }
+
 
 
         public string DisplayedImagePath

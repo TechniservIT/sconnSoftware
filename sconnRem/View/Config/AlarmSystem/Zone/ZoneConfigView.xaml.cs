@@ -12,17 +12,23 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using sconnRem.ViewModel.Alarm;
+using System.ComponentModel.Composition;
 
 namespace sconnRem.View.Config
 {
     /// <summary>
     /// Interaction logic for ZoneConfig.xaml
     /// </summary>
-    public partial class ZoneConfig : UserControl
+
+    [Export("ZoneConfigView")]
+    public partial class ZoneConfigView : UserControl
     {
-        public ZoneConfig()
+        [ImportingConstructor]
+        public ZoneConfigView(AlarmZoneConfigViewModel ViewModel)
         {
             InitializeComponent();
+            this.DataContext = ViewModel;
         }
     }
 }

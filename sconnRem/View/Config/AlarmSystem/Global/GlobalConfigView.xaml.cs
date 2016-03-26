@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,17 +13,25 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using sconnRem.ViewModel.Alarm;
 
 namespace sconnRem.View.Config
 {
     /// <summary>
     /// Interaction logic for GlobalConfigView.xaml
     /// </summary>
+    ///    
+    /// 
+
+    [Export("GlobalConfigView")]
     public partial class GlobalConfigView : UserControl
     {
-        public GlobalConfigView()
+        [ImportingConstructor]
+        public GlobalConfigView(AlarmGlobalConfigViewModel ViewModel)
         {
             InitializeComponent();
+            this.DataContext = ViewModel;
         }
     }
+
 }
