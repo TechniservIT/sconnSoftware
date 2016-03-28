@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace iotDatabaseConnector.Tests
 {
-    class iotDatabaseIntegrationTests
+    public class iotDatabaseIntegrationTests
     {
     }
 }
