@@ -18,11 +18,10 @@ namespace iotDatabaseConnector.Tests
 
         public static iotRepository<T> GetIotRepository<T>() where T : class
         {
-            iotRepository<T> service = new iotRepository<T>();
-            return service;
+            return new iotRepository<T>();
         }
-    }
 
+    }
 
     public abstract class IotRepositoryTests<T> where T : class, new()
     {

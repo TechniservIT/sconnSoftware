@@ -1,4 +1,5 @@
 ﻿using iotDatabaseConnector.DAL.POCO.Device.Notify;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -10,13 +11,12 @@ using System.Threading.Tasks;
 
 namespace iotDbConnector.DAL
 {
-    /// <summary>
-    /// The EF-dependent, generic repository for data access
-    /// </summary>
-    /// <typeparam name="T">Type of entity for this Repository.</typeparam>
+
     public class iotRepository<T> : IiotRepository<T> where T : class
     {
-       
+
+        private static Logger _logger = LogManager.GetCurrentClassLogger();
+
         public iotRepository()
         {
             iotContext dbContext = new iotContext();
@@ -57,6 +57,7 @@ namespace iotDbConnector.DAL
             }
             catch (Exception e)
             {
+                _logger.Error(e, e.Message);
                 return null;
             }
         }
@@ -69,6 +70,7 @@ namespace iotDbConnector.DAL
             }
             catch (Exception e)
             {
+                _logger.Error(e, e.Message);
                 return null;
             }
         }
@@ -81,6 +83,7 @@ namespace iotDbConnector.DAL
             }
             catch (Exception e)
             {
+                _logger.Error(e, e.Message);
                 return null;
             }
         }
@@ -99,6 +102,7 @@ namespace iotDbConnector.DAL
             }
             catch (Exception e)
             {
+                _logger.Error(e, e.Message);
                 return -1;
             }
         }
@@ -208,10 +212,10 @@ namespace iotDbConnector.DAL
                     }
                     dbEntityEntry.State = EntityState.Modified;
             }
-            catch (Exception exc)
+            catch (Exception e)
             {
-                
-           
+                _logger.Error(e, e.Message);
+
             }
 
         }
@@ -238,7 +242,7 @@ namespace iotDbConnector.DAL
             }
             catch (Exception e)
             {
-   
+                _logger.Error(e, e.Message);
             }
         }
 
@@ -259,7 +263,7 @@ namespace iotDbConnector.DAL
             }
             catch (Exception e)
             {
-
+                _logger.Error(e, e.Message);
             }
 
         }
