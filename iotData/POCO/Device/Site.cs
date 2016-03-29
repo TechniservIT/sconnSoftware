@@ -10,7 +10,7 @@ using System.Runtime.Serialization;
 namespace iotDbConnector.DAL
 {
     [DataContract(IsReference = true)] 
-    public class Site
+    public class Site : IFakeAbleEntity
     {
         [DataMember]
         [Key]
@@ -45,6 +45,11 @@ namespace iotDbConnector.DAL
             this.SiteName = other.SiteName;
             this.siteLocation = other.siteLocation;
            
+        }
+
+        public void Fake()
+        {
+            this.SiteName = Guid.NewGuid().ToString();
         }
 
     }

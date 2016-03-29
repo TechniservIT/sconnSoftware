@@ -11,7 +11,7 @@ using System.Web;
 namespace iotDbConnector.DAL
 {
     [DataContract(IsReference = true)]
-    public class Location
+    public class Location : IFakeAbleEntity
     {
         [DataMember]
         [Key]
@@ -50,6 +50,12 @@ namespace iotDbConnector.DAL
 
         [DataMember]
         public virtual iotDomain Domain { get; set; }
-        
+
+        public void Fake()
+        {
+            this.LocationName = Guid.NewGuid().ToString();
+            this.Lat = 0;
+            this.Lng = 0;
+        }
     }
 }

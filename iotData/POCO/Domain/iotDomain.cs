@@ -11,7 +11,7 @@ namespace iotDbConnector.DAL
 {
 
     [DataContract(IsReference = true)]
-    public class iotDomain
+    public class iotDomain : IFakeAbleEntity
     {
 
         [DataMember]
@@ -58,5 +58,14 @@ namespace iotDbConnector.DAL
             }
         }
 
+        public void Fake()
+        {
+            this.DomainName = Guid.NewGuid().ToString();
+        }
+    }
+
+    public interface IFakeAbleEntity
+    {
+        void Fake();
     }
 }

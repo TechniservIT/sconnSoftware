@@ -43,7 +43,10 @@ namespace iotDatabaseConnector.Tests
         [Test]
         public void Test_AlarmService_GetById()
         {
-            var res = _service.GetById(0);
+            //Arrange
+            T proto = new T();
+            int Id = _service.Add(proto);
+            var res = _service.GetById(Id);
             Assert.IsTrue(res != null);
         }
 
@@ -51,7 +54,7 @@ namespace iotDatabaseConnector.Tests
         public void Test_AlarmService_Add()
         {
             var res = _service.Add(new T());
-            Assert.IsTrue(res > 0);
+            Assert.IsTrue(res >= 0);
         }
 
         [Test]

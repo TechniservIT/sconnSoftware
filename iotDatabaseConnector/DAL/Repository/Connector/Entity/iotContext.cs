@@ -15,14 +15,16 @@ using iotData.POCO.Surveillance.Analysis;
 using iotData.POCO.Surveillance.Events;
 using iotData.POCO.Surveillance.Recording;
 using iotDatabaseConnector.DAL.Repository.Connector.Entity;
+using iotDatabaseConnector.Migrations;
 
 namespace iotDbConnector.DAL
 {
     public abstract class iotContextBase : DbContext, IIotContextBase
     {
-        public iotContextBase() :base("iotDbConn")
+        private static string DefaultDbConnStrName = "iotDbConn";
+
+        public iotContextBase(string domainId) :base(domainId)
         {
-            
             this.Configuration.ProxyCreationEnabled = true;
             this.Configuration.LazyLoadingEnabled = true;
         }
@@ -34,12 +36,12 @@ namespace iotDbConnector.DAL
             this.IotDomain = Queryable.First<iotDomain>(this.Domains, d => d.Id == domainId);
         }
 
-        public iotContextBase(int DomainId) :this()
+        public iotContextBase(int DomainId) :this(DefaultDbConnStrName)
         {
             this.IotDomain = Queryable.First<iotDomain>(this.Domains, d=>d.Id == DomainId);
         }
 
-        public iotContextBase(iotDomain domain) :this()
+        public iotContextBase(iotDomain domain) :this(DefaultDbConnStrName)
         {
             this.IotDomain = domain;
         }
@@ -203,8 +205,10 @@ namespace iotDbConnector.DAL
 
         public override  event ActionResultUpdateEventCallbackHandler ActionUpdateEvent = delegate { };
 
-        public iotContext() : base()
+        public iotContext() : base("iotDbConn")
         {
+            this.Database.Connection.ConnectionString ="Data Source=(LocalDb)\\MSSQLLocalDB;Initial Catalog=iotDashDB;Integrated Security=True";
+            Database.SetInitializer(strategy: new MigrateDatabaseToLatestVersion<iotContext, Configuration>());
         }
 
         public iotContext(int DomainId) : base(DomainId)

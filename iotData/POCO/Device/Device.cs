@@ -10,7 +10,7 @@ using System.Runtime.Serialization;
 namespace iotDbConnector.DAL
 {
     [DataContract(IsReference = true)]
-    public class Device
+    public class Device : IFakeAbleEntity
     {
         private int _Id;
 
@@ -92,8 +92,10 @@ namespace iotDbConnector.DAL
             DeviceMaps = new List<DeviceMapDefinition>();
         }
 
-       
 
-
+        public void Fake()
+        {
+            DeviceName = Guid.NewGuid().ToString();
+        }
     }
 }

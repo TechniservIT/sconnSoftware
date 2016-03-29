@@ -149,6 +149,10 @@
     <Compile Include="Migrations\201603290957059_cctv &amp; image procesing models.Designer.cs">
       <DependentUpon>201603290957059_cctv &amp; image procesing models.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201603291031585_cctv &amp; image procesing models migrate .cs" />
+    <Compile Include="Migrations\201603291031585_cctv &amp; image procesing models migrate .Designer.cs">
+      <DependentUpon>201603291031585_cctv &amp; image procesing models migrate .cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="DAL\Repository\NoSql\INoSqlDataSource.cs" />
     <Compile Include="DAL\Repository\NoSql\MongoNoSqlDataSource.cs" />
@@ -165,7 +169,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -201,6 +207,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201603290957059_cctv &amp; image procesing models.resx">
       <DependentUpon>201603290957059_cctv &amp; image procesing models.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603291031585_cctv &amp; image procesing models migrate .resx">
+      <DependentUpon>201603291031585_cctv &amp; image procesing models migrate .cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

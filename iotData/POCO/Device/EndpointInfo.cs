@@ -10,7 +10,7 @@ using System.Web;
 namespace iotDbConnector.DAL
 {
     [DataContract(IsReference = true)]
-    public class EndpointInfo
+    public class EndpointInfo : IFakeAbleEntity
     {
         [DataMember]
         [Key]
@@ -72,5 +72,9 @@ namespace iotDbConnector.DAL
         }
 
 
+        public void Fake()
+        {
+           this.Hostname =  Guid.NewGuid().ToString();
+        }
     }
 }

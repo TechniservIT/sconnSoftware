@@ -1,3 +1,6 @@
+using System.Data.Entity.Core.Objects;
+using iotDbConnector.DAL;
+
 namespace iotDatabaseConnector.Migrations
 {
     using System;
@@ -5,7 +8,7 @@ namespace iotDatabaseConnector.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<iotDbConnector.DAL.iotContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<iotContext>
     {
         public Configuration()
         {
