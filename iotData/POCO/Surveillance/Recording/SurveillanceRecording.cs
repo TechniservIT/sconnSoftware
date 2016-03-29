@@ -8,24 +8,7 @@ using System.Threading.Tasks;
 
 namespace iotData.POCO.Surveillance.Recording
 {
-
-    public enum SurveillanceRecordingType
-    {
-        ContinousRecording = 1,
-        Triggered,
-        Scheduled, 
-        Manual
-    }
-
-
-    public interface ISurveillanceRecordingSetup
-    {
-        DateTime From { get; set; }
-        DateTime Until { get; set; }
-        SurveillanceRecordingType Type { get; set; }
-    }
-
-    public class SurveillanceRecordingSetup
+    public class SurveillanceRecording
     {
         [DataMember]
         [Key]
@@ -39,10 +22,9 @@ namespace iotData.POCO.Surveillance.Recording
         public DateTime Until { get; set; }
 
         [DataMember]
-        public SurveillanceRecordingType Type { get; set; }
+        public  virtual SurveillanceRecordingSetup RecordingSetup { get; set; }
 
         [DataMember]
         public virtual IpCamera Source { get; set; }
     }
-
 }

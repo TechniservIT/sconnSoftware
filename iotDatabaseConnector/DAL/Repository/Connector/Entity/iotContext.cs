@@ -11,6 +11,9 @@ using System.Data.Entity.Infrastructure;
 using System.Data.Common;
 using System.Data.Entity.Core.Metadata.Edm;
 using System.Threading.Tasks;
+using iotData.POCO.Surveillance.Analysis;
+using iotData.POCO.Surveillance.Events;
+using iotData.POCO.Surveillance.Recording;
 using iotDatabaseConnector.DAL.Repository.Connector.Entity;
 
 namespace iotDbConnector.DAL
@@ -57,6 +60,8 @@ namespace iotDbConnector.DAL
         public delegate void ActionResultUpdateEventCallbackHandler(DeviceActionResult param);
 
         public virtual  event ActionResultUpdateEventCallbackHandler ActionUpdateEvent;
+
+        /* IoT / Abstract */
         public iotDomain IotDomain { get; set; }
         public DbSet<Location> Locations { get; set; }
         public DbSet<EndpointInfo> Endpoints { get; set; }
@@ -77,9 +82,18 @@ namespace iotDbConnector.DAL
         public DbSet<iotDomain> Domains { get; set; }
         public DbSet<ParameterChangeHistory> ParameterChanges { get; set; }
 
+        /* Mapping */
+
         public DbSet<MapDefinition> MapDefinitions { get; set; }
         public DbSet<IoMapDefinition> IoMapDefinitions { get; set; }
         public DbSet<DeviceMapDefinition> DeviceMapDefinitions { get; set; }
+
+        /*  CCTV */
+        public DbSet<SurveillanceAnalysisConfig> SurveillanceAnalysisConfigs { get; set; }
+        public DbSet<SurveillanceRecordingSetup> SurveillanceRecordingSetups { get; set; }
+        public DbSet<SurveillanceRecording> SurveillanceRecordings { get; set; }
+        public DbSet<SurveillanceEvent> SurveillanceEvents { get; set; }
+        
 
         public override int SaveChanges()
         {

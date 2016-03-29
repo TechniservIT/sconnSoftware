@@ -103,6 +103,7 @@
     <Compile Include="POCO\Surveillance\IpCamera.cs" />
     <Compile Include="POCO\Surveillance\Recording\ISurveillanceRecordingSetup.cs" />
     <Compile Include="POCO\Surveillance\Recording\SurveillanceLocalRecodingSetup.cs" />
+    <Compile Include="POCO\Surveillance\Recording\SurveillanceRecording.cs" />
     <Compile Include="POCO\User\IUserPermission.cs" />
     <Compile Include="POCO\User\User.cs" />
     <Compile Include="POCO\User\UserDatabaseAdminPermission.cs" />

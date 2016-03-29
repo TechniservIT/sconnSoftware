@@ -37,13 +37,17 @@ namespace iotData.POCO.Surveillance
 
 
         [DataMember]
-        public virtual List<ISurveillanceEvent> Events { get; set; }
+        public virtual List<SurveillanceEvent> Events { get; set; }
 
         [DataMember]
-        public virtual List<ISurveillanceAnalysisConfig> Analysis { get; set; }
+        public virtual List<SurveillanceAnalysisConfig> Analysis { get; set; }
         
         [DataMember]
-        public virtual List<ISurveillanceRecordingSetup> Recording { get; set; }
+        public virtual List<SurveillanceRecordingSetup> RecordingSetup { get; set; }
+
+        [DataMember]
+        public virtual List<SurveillanceRecording> Recordings { get; set; }
+
 
         [DataMember]
         public virtual Site Site { get; set; }
