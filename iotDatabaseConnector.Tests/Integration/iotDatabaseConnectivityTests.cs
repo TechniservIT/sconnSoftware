@@ -11,7 +11,7 @@ namespace iotDatabaseConnector.Tests
     /// Summary description for ConnectivityUnitTest
     /// </summary>
     [TestFixture]
-    public class ConnectivityUnitTests
+    public class iotDatabaseConnectivityTests
     {
         private iotContext _context;
 
@@ -22,7 +22,7 @@ namespace iotDatabaseConnector.Tests
             this._context = new iotContext();
         }
 
-        public ConnectivityUnitTests()
+        public iotDatabaseConnectivityTests()
         {
         }
 

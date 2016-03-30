@@ -51,7 +51,7 @@ namespace iotDbConnector.DAL
 
         public virtual IQueryable<T> GetAll()
         {
-            try
+            try 
             {
                 return DbContext.Set<T>();
             }
