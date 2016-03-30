@@ -27,20 +27,20 @@ namespace sconnRem.ViewModel.Alarm
     public class AlarmAuthConfigViewModel : BindableBase    // ObservableObject, IPageViewModel    //  :  ViewModelBase<IGridNavigatedView>
     {
         public ObservableCollection<sconnAuthorizedDevice> AuthorizedDevices { get; set; }
-        private AuthorizedDevicesConfigurationService _Provider;
-        private readonly IRegionManager regionManager;
-        private Logger nlogger = LogManager.GetCurrentClassLogger();
+        private AuthorizedDevicesConfigurationService _provider;
+        private readonly IRegionManager _regionManager;
+        private Logger _nlogger = LogManager.GetCurrentClassLogger();
 
         [Dependency]
-        public AlarmSystemConfigManager _Manager { get; set; }
+        public AlarmSystemConfigManager Manager { get; set; }
         
 
-        private string _Name;
+        private string _name;
         public string Name
         {
             get
             {
-                return _Name;
+                return _name;
             }
         }
         
@@ -53,7 +53,7 @@ namespace sconnRem.ViewModel.Alarm
             {
 
                 AuthorizedDevices.Clear();
-                var retr = _Provider.GetAll();
+                var retr = _provider.GetAll();
                 foreach (var item in retr)
                 {
                     AuthorizedDevices.Add(item);
@@ -61,13 +61,13 @@ namespace sconnRem.ViewModel.Alarm
             }
             catch (Exception ex)
             {
-                nlogger.Error(ex,ex.Message);
+                _nlogger.Error(ex,ex.Message);
             }
         }
 
         private void SaveData()
         {
-            _Provider.SaveChanges();
+            _provider.SaveChanges();
         }
 
         public string DisplayedImagePath
@@ -78,19 +78,19 @@ namespace sconnRem.ViewModel.Alarm
         
         public AlarmAuthConfigViewModel()
         {
-            _Name = "Auth";
+            _name = "Auth";
             AuthorizedDevices = new ObservableCollection<sconnAuthorizedDevice>();
-            this._Provider = new AuthorizedDevicesConfigurationService(_Manager);
+            this._provider = new AuthorizedDevicesConfigurationService(Manager);
         }
         
 
         [ImportingConstructor]
-        public AlarmAuthConfigViewModel(IAlarmConfigManager Manager, IRegionManager regionManager)
+        public AlarmAuthConfigViewModel(IAlarmConfigManager manager, IRegionManager regionManager)
         {
             AuthorizedDevices = new ObservableCollection<sconnAuthorizedDevice>();
-            this._Manager = (AlarmSystemConfigManager) Manager;
-            this._Provider = new AuthorizedDevicesConfigurationService(_Manager);
-            this.regionManager = regionManager;
+            this.Manager = (AlarmSystemConfigManager) manager;
+            this._provider = new AuthorizedDevicesConfigurationService(this.Manager);
+            this._regionManager = regionManager;
             GetData();
         }
         

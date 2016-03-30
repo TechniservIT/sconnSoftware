@@ -38,7 +38,7 @@ namespace sconnRem.Controls
         {    
             InitializeComponent();
             LbxSelectActionIoValue.SelectionChanged += LbxSelectActionIoValue_SelectionChanged;
-            grdActionPulseSetup.Visibility = Visibility.Hidden;
+            GrdActionPulseSetup.Visibility = Visibility.Hidden;
             for (int i = 1; i < 254; i++)
             {
                 LboxScheduleActionPulseTimeOn.Items.Add(new ListBoxItem().Content = (i * SchedActionTimeMsMultiplier).ToString() );
@@ -51,7 +51,7 @@ namespace sconnRem.Controls
             ListBoxItem item = (ListBoxItem)((ListBox)sender).SelectedItem;
             if (item.Content.ToString().Equals("Pulse"))
             {
-                grdActionPulseSetup.Visibility = Visibility.Visible;
+                GrdActionPulseSetup.Visibility = Visibility.Visible;
             }
         }
 

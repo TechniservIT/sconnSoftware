@@ -13,7 +13,7 @@
     </UserControl.DataContext>
     
     <Grid>
-        <Button x:Name="button" Content="Comm" HorizontalAlignment="Left" Margin="74,106,0,0" VerticalAlignment="Top" Width="148" RenderTransformOrigin="0.5,0.5" Height="59">
+        <Button x:Name="Button" Content="Comm" HorizontalAlignment="Left" Margin="74,106,0,0" VerticalAlignment="Top" Width="148" RenderTransformOrigin="0.5,0.5" Height="59">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>

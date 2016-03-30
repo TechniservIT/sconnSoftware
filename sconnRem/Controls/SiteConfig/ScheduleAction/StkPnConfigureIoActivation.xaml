@@ -6,15 +6,15 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300" Width="415" Height="320">
     <Grid x:Name="GrdConfigureIoActivation" Width="415" Height="320">
-        <Label x:Name="lblSelectActionIOValue" Content="Value" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="280"/>
+        <Label x:Name="LblSelectActionIoValue" Content="Value" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="280"/>
         <ListBox x:Name="LbxSelectActionIoValue" HorizontalAlignment="Left" Height="52" Margin="10,41,0,0" VerticalAlignment="Top" Width="395">
-            <ListBoxItem x:Name="lboxItemActionIoValueON" Content="On"/>
-            <ListBoxItem x:Name="lboxItemActionIoValueOFF" Content="Off"/>
+            <ListBoxItem x:Name="LboxItemActionIoValueOn" Content="On"/>
+            <ListBoxItem x:Name="LboxItemActionIoValueOff" Content="Off"/>
             <ListBoxItem Content="Pulse"/>
         </ListBox>
-        <Grid x:Name="grdActionPulseSetup" HorizontalAlignment="Left" Height="212" Margin="10,98,0,0" VerticalAlignment="Top" Width="395">
-            <Label x:Name="lblActionPulseOnDuration" Content="On duration (ms)" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="142"/>
-            <Label x:Name="lblActionPulseOffDuration" Content="Off duration (ms)" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" Width="142"/>
+        <Grid x:Name="GrdActionPulseSetup" HorizontalAlignment="Left" Height="212" Margin="10,98,0,0" VerticalAlignment="Top" Width="395">
+            <Label x:Name="LblActionPulseOnDuration" Content="On duration (ms)" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="142"/>
+            <Label x:Name="LblActionPulseOffDuration" Content="Off duration (ms)" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" Width="142"/>
             <ListBox x:Name="LboxScheduleActionPulseTimeOn" HorizontalAlignment="Left" Height="26" Margin="157,10,0,0" VerticalAlignment="Top" Width="113"/>
             <ListBox x:Name="LboxScheduleActionPulseTimeOff" HorizontalAlignment="Left" Height="26" Margin="157,41,0,0" VerticalAlignment="Top" Width="113"/>
         </Grid>

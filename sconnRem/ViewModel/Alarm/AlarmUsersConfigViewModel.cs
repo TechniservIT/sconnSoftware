@@ -23,17 +23,17 @@ namespace sconnRem.ViewModel.Alarm
     public class AlarmUsersConfigViewModel : BindableBase   // ObservableObject, IPageViewModel
     {
         public ObservableCollection<sconnUser> Config { get; set; }
-        private UsersConfigurationService _Provider;
-        private AlarmSystemConfigManager _Manager;
-        private readonly IRegionManager regionManager;
-        private Logger nlogger = LogManager.GetCurrentClassLogger();
+        private UsersConfigurationService _provider;
+        private AlarmSystemConfigManager _manager;
+        private readonly IRegionManager _regionManager;
+        private Logger _nlogger = LogManager.GetCurrentClassLogger();
 
-        private string _Name;
+        private string _name;
         public string Name
         {
             get
             {
-                return _Name;
+                return _name;
             }
         }
 
@@ -46,12 +46,12 @@ namespace sconnRem.ViewModel.Alarm
         {
             try
             {
-                Config = new ObservableCollection<sconnUser>(_Provider.GetAll());
+                Config = new ObservableCollection<sconnUser>(_provider.GetAll());
 
             }
             catch (Exception ex)
             {
-                nlogger.Error(ex, ex.Message);
+                _nlogger.Error(ex, ex.Message);
             }
         }
 
@@ -59,24 +59,24 @@ namespace sconnRem.ViewModel.Alarm
         {
             foreach (var item in Config)
             {
-                _Provider.Update(item);
+                _provider.Update(item);
             }
         }
 
         public AlarmUsersConfigViewModel()
         {
-            _Name = "Users";
-            this._Provider = new UsersConfigurationService(_Manager);
+            _name = "Users";
+            this._provider = new UsersConfigurationService(_manager);
         }
 
 
         [ImportingConstructor]
-        public AlarmUsersConfigViewModel(IAlarmConfigManager Manager, IRegionManager regionManager)
+        public AlarmUsersConfigViewModel(IAlarmConfigManager manager, IRegionManager regionManager)
         {
             Config = new ObservableCollection<sconnUser>();
-            this._Manager = (AlarmSystemConfigManager)Manager;
-            this._Provider = new UsersConfigurationService(_Manager);
-            this.regionManager = regionManager;
+            this._manager = (AlarmSystemConfigManager)manager;
+            this._provider = new UsersConfigurationService(_manager);
+            this._regionManager = regionManager;
             GetData();
         }
 

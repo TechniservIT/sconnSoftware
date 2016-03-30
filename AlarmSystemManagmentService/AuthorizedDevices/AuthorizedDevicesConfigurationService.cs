@@ -51,7 +51,10 @@ namespace AlarmSystemManagmentService
 
         public List<sconnAuthorizedDevice> GetAll()
         {
-            EntityManager.Download();
+            if (Online)
+            {
+                EntityManager.Download();
+            }
             return ConfigManager.Config.AuthorizedDevices.Devices.ToList();
         }
 
@@ -78,7 +81,10 @@ namespace AlarmSystemManagmentService
         {
             try
             {
-                EntityManager.Download();
+                if (Online)
+                {
+                    EntityManager.Download();
+                }
                 sconnAuthorizedDevice dev = ConfigManager.Config.AuthorizedDevices.Devices.FirstOrDefault(d => d.Id == Id);
                 return dev;
             }
@@ -93,6 +99,7 @@ namespace AlarmSystemManagmentService
         {
             try
             {
+                ConfigManager.Config.AuthorizedDevices.Devices.Add(device);
                 return true;    //no adding -  filled with empty objects
             }
             catch (Exception e )
@@ -132,11 +139,20 @@ namespace AlarmSystemManagmentService
         {
             try
             {
-                // 'Remove' clears static record instead - replace with new empty record with the same Id
-                sconnAuthorizedDevice stub = new sconnAuthorizedDevice();
-                stub.Id = device.Id;
-                this.Update(stub);
-                return SaveChanges();
+                if (Online)
+                {
+                    // 'Remove' clears static record instead - replace with new empty record with the same Id
+                    sconnAuthorizedDevice stub = new sconnAuthorizedDevice();
+                    stub.Id = device.Id;
+                    this.Update(stub);
+                    return SaveChanges();
+                }
+                else
+                {
+                    this.ConfigManager.Config.AuthorizedDevices.Devices.Remove(device);
+                    return true;
+                }
+
             }
             catch (Exception e)
             {

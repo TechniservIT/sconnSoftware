@@ -19,16 +19,16 @@ namespace sconnRem.Wnd.Navigation
     {
 
         private const string ModuleCatalogUri = "/sconnRem;component/Wnd/Config/Shell/wndConfigureSiteShell.xaml";
-        private IAlarmConfigManager _Manager;
+        private IAlarmConfigManager _manager;
 
         public ConfigNavBootstrapper()
         {
                 
         }
 
-        public ConfigNavBootstrapper(IAlarmConfigManager Manager) :this()
+        public ConfigNavBootstrapper(IAlarmConfigManager manager) :this()
         {
-            _Manager = Manager;
+            _manager = manager;
         }
 
         protected override ILoggerFacade CreateLogger()
@@ -51,11 +51,11 @@ namespace sconnRem.Wnd.Navigation
         protected override DependencyObject CreateShell()
         {
             var batch = new CompositionBatch();
-            var repoPart = batch.AddExportedValue<IAlarmConfigManager>(_Manager);
+            var repoPart = batch.AddExportedValue<IAlarmConfigManager>(_manager);
             this.Container.Compose(batch);
             // repo will now be injected on any matching [Import] or [ImportingConstructor]
 
-            return this.Container.GetExportedValue<wndConfigureSiteShell>();
+            return this.Container.GetExportedValue<WndConfigureSiteShell>();
         }
 
         protected override void InitializeShell()

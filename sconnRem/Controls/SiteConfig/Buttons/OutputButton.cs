@@ -26,7 +26,7 @@ namespace sconnRem
     {
         private int _outputNumber;
 
-        public int outputNumber
+        public int OutputNumber
         {
             get { return _outputNumber; }
             set { if (value > 0) { _outputNumber = value; } }

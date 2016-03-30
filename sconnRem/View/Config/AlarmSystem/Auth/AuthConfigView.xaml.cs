@@ -26,10 +26,10 @@ namespace sconnRem.View.Config
     public partial class AuthConfigView : UserControl
     {
         [ImportingConstructor]
-        public AuthConfigView(AlarmAuthConfigViewModel ViewModel)
+        public AuthConfigView(AlarmAuthConfigViewModel viewModel)
         {
             InitializeComponent();
-            this.DataContext = ViewModel;
+            this.DataContext = viewModel;
         }
     }
 

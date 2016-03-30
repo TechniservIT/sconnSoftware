@@ -23,20 +23,20 @@ namespace sconnRem
     /// Interaction logic for sconnSecurityDialog.xaml
     /// </summary>
     /// 
-    public partial class sconnSecurityDialog : Window
+    public partial class SconnSecurityDialog : Window
     {
 
         private bool _valid = false;
         public bool UserValidated { get { return _valid; } set { _valid = value; } }
 
-        public sconnSecurityDialog()
+        public SconnSecurityDialog()
         {
             
             //System.Threading.Thread.CurrentThread.CurrentCulture = culture;
             InitializeComponent();
-            lblUsernameDesc.Content = Properties.Resources.ResourceManager.GetString("lblUsernameDesc");
-            lblPasswordDesc.Content = Properties.Resources.ResourceManager.GetString("lblPasswordDesc");
-            loginButton.Content = Properties.Resources.ResourceManager.GetString("btnLoginDesc");
+            LblUsernameDesc.Content = Properties.Resources.ResourceManager.GetString("lblUsernameDesc");
+            LblPasswordDesc.Content = Properties.Resources.ResourceManager.GetString("lblPasswordDesc");
+            LoginButton.Content = Properties.Resources.ResourceManager.GetString("btnLoginDesc");
             this.Title = Properties.Resources.ResourceManager.GetString("wndSecurityDialogTitle");
             this.Show();
         }

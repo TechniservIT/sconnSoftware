@@ -12,29 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace sconnRem.Wnd
+namespace sconnRem
 {
     /// <summary>
-    /// Interaction logic for userManager.xaml
+    /// Interaction logic for MapWindow.xaml
     /// </summary>
-    public partial class userManager : Window
+    public partial class MapWindow : Window
     {
-        
-
-
-
-
-        public userManager()
+        public MapWindow()
         {
             InitializeComponent();
-        }
-
-
-        private void btnSaveEdit_Click(object sender, RoutedEventArgs e)
-        {
 
         }
-
-
     }
 }

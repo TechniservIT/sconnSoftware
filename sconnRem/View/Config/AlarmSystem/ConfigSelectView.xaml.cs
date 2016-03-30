@@ -29,9 +29,9 @@ namespace sconnRem.View.Config
             InitializeComponent();
         }
 
-        public ConfigSelect(AlarmSystemConfigManager _Manager)
+        public ConfigSelect(AlarmSystemConfigManager manager)
         {
-            this._manager = _Manager;
+            this._manager = manager;
             InitializeComponent();
         }
 

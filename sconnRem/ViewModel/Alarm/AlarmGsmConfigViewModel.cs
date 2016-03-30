@@ -23,17 +23,17 @@ namespace sconnRem.ViewModel.Alarm
     public class AlarmGsmConfigViewModel : BindableBase     // ObservableObject, IPageViewModel
     {
         public ObservableCollection<sconnGsmRcpt> Config { get; set; }
-        private GsmConfigurationService _Provider;
-        private AlarmSystemConfigManager _Manager;
-        private readonly IRegionManager regionManager;
-        private Logger nlogger = LogManager.GetCurrentClassLogger();
+        private GsmConfigurationService _provider;
+        private AlarmSystemConfigManager _manager;
+        private readonly IRegionManager _regionManager;
+        private Logger _nlogger = LogManager.GetCurrentClassLogger();
 
-        private string _Name;
+        private string _name;
         public string Name
         {
             get
             {
-                return _Name;
+                return _name;
             }
         }
 
@@ -44,12 +44,12 @@ namespace sconnRem.ViewModel.Alarm
         {
             try
             {
-                Config = new ObservableCollection<sconnGsmRcpt>(_Provider.GetAll());
+                Config = new ObservableCollection<sconnGsmRcpt>(_provider.GetAll());
 
             }
             catch (Exception ex)
             {
-                nlogger.Error(ex, ex.Message);
+                _nlogger.Error(ex, ex.Message);
             }
         }
 
@@ -57,25 +57,25 @@ namespace sconnRem.ViewModel.Alarm
         {
             foreach (var item in Config)
             {
-                _Provider.Update(item);
+                _provider.Update(item);
             }
         }
 
         public AlarmGsmConfigViewModel()
         {
-            _Name = "Gsm";
-            this._Provider = new GsmConfigurationService(_Manager);
+            _name = "Gsm";
+            this._provider = new GsmConfigurationService(_manager);
         }
 
        
 
         [ImportingConstructor]
-        public AlarmGsmConfigViewModel(IAlarmConfigManager Manager, IRegionManager regionManager)
+        public AlarmGsmConfigViewModel(IAlarmConfigManager manager, IRegionManager regionManager)
         {
             Config = new ObservableCollection<sconnGsmRcpt>();
-            this._Manager = (AlarmSystemConfigManager)Manager;
-            this._Provider = new GsmConfigurationService(_Manager);
-            this.regionManager = regionManager;
+            this._manager = (AlarmSystemConfigManager)manager;
+            this._provider = new GsmConfigurationService(_manager);
+            this._regionManager = regionManager;
             GetData();
         }
 

@@ -27,10 +27,10 @@ namespace sconnRem.View.Config
     public partial class GlobalConfigView : UserControl
     {
         [ImportingConstructor]
-        public GlobalConfigView(AlarmGlobalConfigViewModel ViewModel)
+        public GlobalConfigView(AlarmGlobalConfigViewModel viewModel)
         {
             InitializeComponent();
-            this.DataContext = ViewModel;
+            this.DataContext = viewModel;
         }
     }
 

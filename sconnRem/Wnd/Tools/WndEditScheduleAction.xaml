@@ -7,11 +7,9 @@
             <ColumnDefinition Width="637"/>
             <ColumnDefinition Width="0*"/>
         </Grid.ColumnDefinitions>
-        <Button x:Name="btnSaveSchedActionEdit" Content="Save" Grid.Column="1" HorizontalAlignment="Left" Margin="527,374,0,0" VerticalAlignment="Top" Width="100" Height="35" RenderTransformOrigin="3.293,3" Click="btnSaveSchedActionEdit_Click"/>
         <StackPanel x:Name="SckPanConfigureAction" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="359" Margin="194,10,0,0" VerticalAlignment="Top" Width="433">
             <Grid Height="340" Margin="10,0,0,0" Width="425"/>
         </StackPanel>
-        <Grid x:Name="grdScheduleActionSelect" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="44" Margin="10,10,0,0" VerticalAlignment="Top" Width="179"/>
 
     </Grid>
 </Window>

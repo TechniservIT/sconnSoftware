@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace sconnRem.View.Config.AlarmSystem.Abstract
 {
-    public class IAlarmSystemDataRecordView
+    public class AlarmSystemDataRecordView
     {
     }
 }

@@ -23,21 +23,21 @@ using System.Xml;
 namespace sconnRem
 {
 
-    public class statusViewPanel : StackPanel
+    public class StatusViewPanel : StackPanel
     {
         private string _statusText;
-        public string statusText { get { return _statusText; } }
+        public string StatusText { get { return _statusText; } }
 
-        public void setStatusText(string text)
+        public void SetStatusText(string text)
         {
             if (text != null && text.Length > 0)
             {
                 _statusText = text;
-                getViewBody(); //update body
+                GetViewBody(); //update body
             }
         }
 
-        private void getViewBody()
+        private void GetViewBody()
         {
             this.Children.Clear();
             Label status = new Label();
@@ -47,16 +47,16 @@ namespace sconnRem
             this.Children.Add(status);
         }
 
-        public statusViewPanel()
+        public StatusViewPanel()
         {
             _statusText = "";
-            getViewBody();
+            GetViewBody();
         }
 
-        public statusViewPanel(string text)
+        public StatusViewPanel(string text)
         {
             _statusText = text;
-            getViewBody();
+            GetViewBody();
         }
     }
 

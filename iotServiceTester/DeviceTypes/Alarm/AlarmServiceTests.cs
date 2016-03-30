@@ -71,15 +71,28 @@ namespace iotServiceTester.DeviceTypes.Alarm
 
         }
 
+        public static Device GetFakeAlarmDevice()
+        {
+            Device fakeDevice = new Device();
+            DeviceCredentials fakeCredentials = new DeviceCredentials();
+            fakeCredentials.Fake();
+            fakeDevice.Credentials = fakeCredentials;
+            EndpointInfo fakeEndpointInfo = new EndpointInfo();
+            fakeEndpointInfo.Fake();
+            fakeDevice.EndpInfo = fakeEndpointInfo;
+            fakeDevice.Fake();
+            return fakeDevice;;
+        }
+
+
         public static IAlarmSystemConfigurationService<T> GetAlarmService<T>()
         {
             AlarmSystemConfigManager man = FakeAlarmServiceFactory.GetAlarmConfigManager();
+            man.RemoteDevice = GetFakeAlarmDevice();
+
             IAlarmSystemConfigurationService<T> service;
-            if (typeof(T) == typeof(sconnDevice))
-            {
-                service = new DeviceConfigService(man) as IAlarmSystemConfigurationService<T>;
-            }
-            else if (typeof (T) == typeof (sconnAlarmZone))
+            var type = typeof (T);
+            if (typeof (T) == typeof (sconnAlarmZone))
             {
                 service = new ZoneConfigurationService(man) as IAlarmSystemConfigurationService<T>;
             }
@@ -99,25 +112,61 @@ namespace iotServiceTester.DeviceTypes.Alarm
             {
                 service =  null;
             }
-            service.Online = false; //Disable online config sync for testing
+            if (service != null)
+            {
+                service.Online = false; //Disable online config sync for testing
+            }
+
             return service;
         }
-}
+
+        
 
 
-    public abstract class AlarmServiceDeviceTests<T> where T : new()
+
+        public static IAlarmSystemSingleEntityConfigurationService<T> GetAlarmSingleEntityConfigurationService<T>()
+        {
+            AlarmSystemConfigManager man = FakeAlarmServiceFactory.GetAlarmConfigManager();
+            man.RemoteDevice = GetFakeAlarmDevice();
+
+            IAlarmSystemSingleEntityConfigurationService<T> service;
+            var type = typeof(T);
+            if (type == typeof(sconnDevice))
+            {
+                service = new DeviceConfigService(man) as IAlarmSystemSingleEntityConfigurationService<T>;
+            }
+            else if (typeof(T) == typeof(sconnGlobalConfig))
+            {
+                service = new GlobalConfigService(man) as IAlarmSystemSingleEntityConfigurationService<T>;
+            }
+            else
+            {
+                service = null;
+            }
+            if (service != null)
+            {
+                service.Online = false; //Disable online config sync for testing
+            }
+
+            return service;
+        }
+
+    }
+
+
+    public abstract class AlarmServiceConfigurationTests<T> where T : new()
     {
-        private IAlarmSystemConfigurationService<T> _service;
 
         [SetUp]
         public void  SetUp()
         {
-            _service = FakeAlarmServiceFactory.GetAlarmService<T>();
+         
         }
 
         [Test]
         public void Test_AlarmService_GetAll()
         {
+            var _service = FakeAlarmServiceFactory.GetAlarmService<T>();
             var res = _service.GetAll();
             Assert.IsTrue(res != null);
         }
@@ -125,6 +174,7 @@ namespace iotServiceTester.DeviceTypes.Alarm
         [Test]
         public void Test_AlarmService_GetById()
         {
+            var _service = FakeAlarmServiceFactory.GetAlarmService<T>();
             var res = _service.GetById(0);
             Assert.IsTrue(res != null);
         }
@@ -132,6 +182,7 @@ namespace iotServiceTester.DeviceTypes.Alarm
         [Test]
         public void Test_AlarmService_Add() 
         {
+            var _service = FakeAlarmServiceFactory.GetAlarmService<T>();
             var res = _service.Add(new T());
             Assert.IsTrue(res);
         }
@@ -145,6 +196,7 @@ namespace iotServiceTester.DeviceTypes.Alarm
         [Test]
         public void Test_AlarmService_Remove()
         {
+            var _service = FakeAlarmServiceFactory.GetAlarmService<T>();
             T proto = new T();
             _service.Add(proto);
             var res = _service.Remove(proto);
@@ -155,6 +207,7 @@ namespace iotServiceTester.DeviceTypes.Alarm
         [Test]
         public void Test_AlarmService_RemoveById()
         {
+            var _service = FakeAlarmServiceFactory.GetAlarmService<T>();
             T proto = new T();
             int RandomId = 156164831;
             PropertyInfo prop = proto.GetType().GetProperty("Id");
@@ -163,8 +216,8 @@ namespace iotServiceTester.DeviceTypes.Alarm
                 prop.SetValue(proto, RandomId);
                 _service.Add(proto);
                 var res = _service.RemoveById(RandomId);
-                var ResCont = _service.GetAll();
-                Assert.IsTrue(res && !ResCont.Contains(proto));
+                var resCont = _service.GetAll();
+                Assert.IsTrue(res && !resCont.Contains(proto));
             }
             else
             {
@@ -176,6 +229,7 @@ namespace iotServiceTester.DeviceTypes.Alarm
         [Test]
         public void Test_AlarmService_Update()
         {
+            var _service = FakeAlarmServiceFactory.GetAlarmService<T>();
             T proto = new T();
             int RandomId = 156164831;   //Test updating by Id property
             int Val1 = 64234123;
@@ -201,14 +255,80 @@ namespace iotServiceTester.DeviceTypes.Alarm
 
     }
     
-    public class AlarmServiceDeviceTests_Device_Tests : AlarmServiceDeviceTests<sconnDevice> { }
-    public class AlarmServiceDeviceTests_Zone_Tests : AlarmServiceDeviceTests<sconnAlarmZone> { }
-    public class AlarmServiceDeviceTests_User_Tests : AlarmServiceDeviceTests<sconnUser> { }
-    public class AlarmServiceDeviceTests_AuthD_Tests : AlarmServiceDeviceTests<sconnAuthorizedDevice> { }
-    public class AlarmServiceDeviceTests_GSM_Tests : AlarmServiceDeviceTests<sconnGsmRcpt> { }
-    public class AlarmServiceDeviceTests_Input_Tests : AlarmServiceDeviceTests<sconnInput> { }
-    public class AlarmServiceDeviceTests_Output_Tests : AlarmServiceDeviceTests<sconnOutput> { }
-    public class AlarmServiceDeviceTests_Relay_Tests : AlarmServiceDeviceTests<sconnRelay> { }
-    
+    public class AlarmServiceDeviceTests_Zone_Tests : AlarmServiceConfigurationTests<sconnAlarmZone> { }
+    public class AlarmServiceDeviceTests_User_Tests : AlarmServiceConfigurationTests<sconnUser> { }
+    public class AlarmServiceDeviceTests_AuthD_Tests : AlarmServiceConfigurationTests<sconnAuthorizedDevice> { }
+    public class AlarmServiceDeviceTests_GSM_Tests : AlarmServiceConfigurationTests<sconnGsmRcpt> { }
+
+    //public class AlarmServiceDeviceTests_Input_Tests : AlarmServiceDeviceTests<sconnInput> { }
+    //public class AlarmServiceDeviceTests_Output_Tests : AlarmServiceDeviceTests<sconnOutput> { }
+    //public class AlarmServiceDeviceTests_Relay_Tests : AlarmServiceDeviceTests<sconnRelay> { }
+
+
+
+
+    /***********  Single entity *************/
+
+
+    public class AlarmServiceSingleConfigurationTests_Device_Tests : AlarmServiceSingleConfigurationTests<sconnDevice> { }
+    public class AlarmServiceSingleConfigurationTests_GlobalCfg_Tests : AlarmServiceSingleConfigurationTests<sconnGlobalConfig> { }
+
+    public abstract class AlarmServiceSingleConfigurationTests<T> where T : new()
+    {
+        private IAlarmSystemSingleEntityConfigurationService<T> _service;
+
+        [SetUp]
+        public void SetUp()
+        {
+            _service = FakeAlarmServiceFactory.GetAlarmSingleEntityConfigurationService<T>();
+        }
+        
+        [Test]
+        public void Test_AlarmService_Get()
+        {
+
+        }
+        
+        [Test]
+        public void Test_AlarmService_Update()
+        {
+            //T proto = new T();
+            //int RandomId = 156164831;   //Test updating by Id property
+            //int Val1 = 64234123;
+            //int Val2 = 7512356;
+            //PropertyInfo idInfo = proto.GetType().GetProperty("Id");
+            //idInfo.SetValue(proto, RandomId);
+            //PropertyInfo prop = proto.GetType().GetProperty("Value");
+            //if ((prop) != null)
+            //{
+            //    prop.SetValue(proto, Val1);
+            //    _service.Add(proto);
+            //    prop.SetValue(proto, Val2);
+            //    var res = _service.Update(proto);
+            //    var Updated = _service.GetById(RandomId);
+            //    var UpdatedValue = (int)prop.GetValue(Updated);
+            //    Assert.IsTrue(res && (UpdatedValue == Val2));
+            //}
+            //else
+            //{
+
+            //}
+            Assert.IsTrue(false);
+        }
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 
 }

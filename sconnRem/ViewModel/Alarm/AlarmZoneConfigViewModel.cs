@@ -21,17 +21,17 @@ namespace sconnRem.ViewModel.Alarm
     public class AlarmZoneConfigViewModel : BindableBase    // ObservableObject, IPageViewModel
     {
         public ObservableCollection<sconnAlarmZone> Config { get; set; }
-        private ZoneConfigurationService _Provider;
-        private AlarmSystemConfigManager _Manager;
-        private readonly IRegionManager regionManager;
-        private Logger nlogger = LogManager.GetCurrentClassLogger();
+        private ZoneConfigurationService _provider;
+        private AlarmSystemConfigManager _manager;
+        private readonly IRegionManager _regionManager;
+        private Logger _nlogger = LogManager.GetCurrentClassLogger();
 
-        private string _Name;
+        private string _name;
         public string Name
         {
             get
             {
-                return _Name;
+                return _name;
             }
         }
         
@@ -42,12 +42,12 @@ namespace sconnRem.ViewModel.Alarm
         {
             try
             {
-                Config = new ObservableCollection<sconnAlarmZone>(_Provider.GetAll());
+                Config = new ObservableCollection<sconnAlarmZone>(_provider.GetAll());
 
             }
             catch (Exception ex)
             {
-                nlogger.Error(ex, ex.Message);
+                _nlogger.Error(ex, ex.Message);
             }
         }
 
@@ -55,24 +55,24 @@ namespace sconnRem.ViewModel.Alarm
         {
             foreach (var item in Config)
             {
-                _Provider.Update(item);
+                _provider.Update(item);
             }
         }
 
         public AlarmZoneConfigViewModel()
         {
-            _Name = "Zones";
-            this._Provider = new ZoneConfigurationService(_Manager);
+            _name = "Zones";
+            this._provider = new ZoneConfigurationService(_manager);
         }
         
 
         [ImportingConstructor]
-        public AlarmZoneConfigViewModel(IAlarmConfigManager Manager, IRegionManager regionManager)
+        public AlarmZoneConfigViewModel(IAlarmConfigManager manager, IRegionManager regionManager)
         {
             Config = new ObservableCollection<sconnAlarmZone>();
-            this._Manager = (AlarmSystemConfigManager)Manager;
-            this._Provider = new ZoneConfigurationService(_Manager);
-            this.regionManager = regionManager;
+            this._manager = (AlarmSystemConfigManager)manager;
+            this._provider = new ZoneConfigurationService(_manager);
+            this._regionManager = regionManager;
             GetData();
         }
 

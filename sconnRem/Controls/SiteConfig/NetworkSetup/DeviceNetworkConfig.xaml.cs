@@ -25,9 +25,9 @@ namespace sconnRem.Controls.SiteConfig.NetworkSetup
 
         public string Gateway { get; set; }
 
-        public string DNS1 { get; set; }
+        public string Dns1 { get; set; }
 
-        public string DNS2 { get; set; }
+        public string Dns2 { get; set; }
 
         public DeviceNetworkConfig()
         {
@@ -47,43 +47,43 @@ namespace sconnRem.Controls.SiteConfig.NetworkSetup
         public byte[] GetNetworkConfig()
         {
             LoadNetworkParamInput();
-            return NetConfig;
+            return _netConfig;
         }
 
-        private byte[] NetConfig;
+        private byte[] _netConfig;
 
-        public void SetNetworkParams(byte[] NetCfg)
+        public void SetNetworkParams(byte[] netCfg)
         {
             try
             {
-                NetConfig = NetCfg;
+                _netConfig = netCfg;
 
                 //load to view
-                TbxIpAddrB1.Text = NetCfg[0].ToString();
-                TbxIpAddrB2.Text = NetCfg[1].ToString();
-                TbxIpAddrB3.Text = NetCfg[2].ToString();
-                TbxIpAddrB4.Text = NetCfg[3].ToString();
+                TbxIpAddrB1.Text = netCfg[0].ToString();
+                TbxIpAddrB2.Text = netCfg[1].ToString();
+                TbxIpAddrB3.Text = netCfg[2].ToString();
+                TbxIpAddrB4.Text = netCfg[3].ToString();
 
-                TbxNetmaskB1.Text = NetCfg[4].ToString();
-                TbxNetmaskB2.Text = NetCfg[5].ToString();
-                TbxNetmaskB3.Text = NetCfg[6].ToString();
-                TbxNetmaskB4.Text = NetCfg[7].ToString();
+                TbxNetmaskB1.Text = netCfg[4].ToString();
+                TbxNetmaskB2.Text = netCfg[5].ToString();
+                TbxNetmaskB3.Text = netCfg[6].ToString();
+                TbxNetmaskB4.Text = netCfg[7].ToString();
 
-                TbxGatewayB1.Text = NetCfg[8].ToString();
-                TbxGatewayB2.Text = NetCfg[9].ToString();
-                TbxGatewayB3.Text = NetCfg[10].ToString();
-                TbxGatewayB4.Text = NetCfg[11].ToString();
+                TbxGatewayB1.Text = netCfg[8].ToString();
+                TbxGatewayB2.Text = netCfg[9].ToString();
+                TbxGatewayB3.Text = netCfg[10].ToString();
+                TbxGatewayB4.Text = netCfg[11].ToString();
 
-                TbxDNS1B1.Text = NetCfg[12].ToString();
-                TbxDNS1B2.Text = NetCfg[13].ToString();
-                TbxDNS1B3.Text = NetCfg[14].ToString();
-                TbxDNS1B4.Text = NetCfg[15].ToString();
+                TbxDns1B1.Text = netCfg[12].ToString();
+                TbxDns1B2.Text = netCfg[13].ToString();
+                TbxDns1B3.Text = netCfg[14].ToString();
+                TbxDns1B4.Text = netCfg[15].ToString();
 
 
-                TbxDNS2B1.Text = NetCfg[16].ToString();
-                TbxDNS2B2.Text = NetCfg[17].ToString();
-                TbxDNS2B3.Text = NetCfg[18].ToString();
-                TbxDNS2B4.Text = NetCfg[19].ToString();
+                TbxDns2B1.Text = netCfg[16].ToString();
+                TbxDns2B2.Text = netCfg[17].ToString();
+                TbxDns2B3.Text = netCfg[18].ToString();
+                TbxDns2B4.Text = netCfg[19].ToString();
 
             }
             catch (Exception e)
@@ -97,26 +97,26 @@ namespace sconnRem.Controls.SiteConfig.NetworkSetup
 
         private void LoadNetworkParamInput()
         {
-            NetConfig[0] = (byte)int.Parse(TbxIpAddrB1.Text);
-            NetConfig[1] = (byte)int.Parse(TbxIpAddrB2.Text);
-            NetConfig[2] = (byte)int.Parse(TbxIpAddrB3.Text);
-            NetConfig[3] = (byte)int.Parse(TbxIpAddrB4.Text);
-            NetConfig[4] = (byte)int.Parse(TbxNetmaskB1.Text);
-            NetConfig[5] = (byte)int.Parse(TbxNetmaskB2.Text);
-            NetConfig[6] = (byte)int.Parse(TbxNetmaskB3.Text);
-            NetConfig[7] = (byte)int.Parse(TbxNetmaskB4.Text);
-            NetConfig[8] = (byte)int.Parse(TbxGatewayB1.Text);
-            NetConfig[9] = (byte)int.Parse(TbxGatewayB2.Text);
-            NetConfig[10] = (byte)int.Parse(TbxGatewayB3.Text);
-            NetConfig[11] = (byte)int.Parse(TbxGatewayB4.Text);
-            NetConfig[12] = (byte)int.Parse(TbxDNS1B1.Text);
-            NetConfig[13] = (byte)int.Parse(TbxDNS1B2.Text);
-            NetConfig[14] = (byte)int.Parse(TbxDNS1B3.Text);
-            NetConfig[15] = (byte)int.Parse(TbxDNS1B4.Text);
-            NetConfig[16] = (byte)int.Parse(TbxDNS2B1.Text);
-            NetConfig[17] = (byte)int.Parse(TbxDNS2B2.Text);
-            NetConfig[18] = (byte)int.Parse(TbxDNS2B3.Text);
-            NetConfig[19] = (byte)int.Parse(TbxDNS2B4.Text);
+            _netConfig[0] = (byte)int.Parse(TbxIpAddrB1.Text);
+            _netConfig[1] = (byte)int.Parse(TbxIpAddrB2.Text);
+            _netConfig[2] = (byte)int.Parse(TbxIpAddrB3.Text);
+            _netConfig[3] = (byte)int.Parse(TbxIpAddrB4.Text);
+            _netConfig[4] = (byte)int.Parse(TbxNetmaskB1.Text);
+            _netConfig[5] = (byte)int.Parse(TbxNetmaskB2.Text);
+            _netConfig[6] = (byte)int.Parse(TbxNetmaskB3.Text);
+            _netConfig[7] = (byte)int.Parse(TbxNetmaskB4.Text);
+            _netConfig[8] = (byte)int.Parse(TbxGatewayB1.Text);
+            _netConfig[9] = (byte)int.Parse(TbxGatewayB2.Text);
+            _netConfig[10] = (byte)int.Parse(TbxGatewayB3.Text);
+            _netConfig[11] = (byte)int.Parse(TbxGatewayB4.Text);
+            _netConfig[12] = (byte)int.Parse(TbxDns1B1.Text);
+            _netConfig[13] = (byte)int.Parse(TbxDns1B2.Text);
+            _netConfig[14] = (byte)int.Parse(TbxDns1B3.Text);
+            _netConfig[15] = (byte)int.Parse(TbxDns1B4.Text);
+            _netConfig[16] = (byte)int.Parse(TbxDns2B1.Text);
+            _netConfig[17] = (byte)int.Parse(TbxDns2B2.Text);
+            _netConfig[18] = (byte)int.Parse(TbxDns2B3.Text);
+            _netConfig[19] = (byte)int.Parse(TbxDns2B4.Text);
         }
 
         private void BtnSaveNetCfg_Click(object sender, RoutedEventArgs e)

@@ -27,11 +27,11 @@ namespace sconnRem
     
     class ViewSiteLoading : StackPanel
     {
-        private Label lblConnectionProgress = new Label();
-        private ProgressBar pbar = new ProgressBar();
-        private int SiteId;
-        private sconnCfgMngr ConfMan = new sconnCfgMngr();
-        private ETH ethernet = new ETH();
+        private Label _lblConnectionProgress = new Label();
+        private ProgressBar _pbar = new ProgressBar();
+        private int _siteId;
+        private sconnCfgMngr _confMan = new sconnCfgMngr();
+        private ETH _ethernet = new ETH();
 
         public delegate void UpdateProgressDel();
         public UpdateProgressDel UpdateDel;
@@ -42,24 +42,24 @@ namespace sconnRem
 
         public enum ConnectionProgress { Connecting=0, Authenticating, Authenticated, RequestingData, Recieving, Success, ConnectErr, ReadErr };
 
-        private ConnectionProgress _Progress;
+        private ConnectionProgress _progress;
         public ConnectionProgress Progress {
-            get { return _Progress; }
+            get { return _progress; }
             set {
-                _Progress = value;
+                _progress = value;
                 UpdateHandler();
                 } 
         }
 
         private void ProgressBarInit()
         {
-            lblConnectionProgress.FontSize = 18.0;
-            lblConnectionProgress.Content = StatusToString(ConnectionProgress.Connecting);
-            this.Children.Add(lblConnectionProgress);
-            pbar.Height = 50.00;
-            pbar.Value = 0;
-            pbar.Maximum = 5;
-            this.Children.Add(pbar);
+            _lblConnectionProgress.FontSize = 18.0;
+            _lblConnectionProgress.Content = StatusToString(ConnectionProgress.Connecting);
+            this.Children.Add(_lblConnectionProgress);
+            _pbar.Height = 50.00;
+            _pbar.Value = 0;
+            _pbar.Maximum = 5;
+            this.Children.Add(_pbar);
         }
 
         public ViewSiteLoading()
@@ -70,7 +70,7 @@ namespace sconnRem
 
          public ViewSiteLoading(int id) 
         {
-            SiteId = id;
+            _siteId = id;
             ProgressBarInit();
 
         }
@@ -87,15 +87,15 @@ namespace sconnRem
              try
              {
                  Progress = ConnectionProgress.Connecting;
-                 sconnSite site = sconnDataShare.getSite(SiteId);
+                 sconnSite site = sconnDataShare.getSite(_siteId);
                  Progress = ConnectionProgress.Authenticating;
-                 bool stat = ConfMan.ReadSiteRunningConfig(site);   //update
+                 bool stat = _confMan.ReadSiteRunningConfig(site);   //update
                  if (stat)
                  {
                      Progress = ConnectionProgress.Success;
                      Dispatcher.BeginInvoke((Action)(() =>
                      {
-                         ConnectedDel.Invoke(this, new EventArgs(), true, this.SiteId);
+                         ConnectedDel.Invoke(this, new EventArgs(), true, this._siteId);
                      }));
                  }
                  else
@@ -115,14 +115,14 @@ namespace sconnRem
         public void UpdateHandler()
         {
             UpdateDel = delegate() { 
-                                 lblConnectionProgress.Content = StatusToString(this.Progress);                          
+                                 _lblConnectionProgress.Content = StatusToString(this.Progress);                          
                                    };
-            lblConnectionProgress.Dispatcher.Invoke(UpdateDel);
+            _lblConnectionProgress.Dispatcher.Invoke(UpdateDel);
             UpdateDel = delegate()
             {
-                pbar.Value = (int)Progress;
+                _pbar.Value = (int)Progress;
             };
-            pbar.Dispatcher.Invoke(UpdateDel);
+            _pbar.Dispatcher.Invoke(UpdateDel);
 
         }
 
@@ -130,13 +130,13 @@ namespace sconnRem
 
         public void UpdateProgress()
          {           
-             lblConnectionProgress.Content = StatusToString(this.Progress);
-             pbar.Value = (int)Progress;
+             _lblConnectionProgress.Content = StatusToString(this.Progress);
+             _pbar.Value = (int)Progress;
          }
 
         private string StatusToString(ConnectionProgress prog)
         {
-            string sitename = sconnDataShare.getSite(SiteId).siteName;
+            string sitename = sconnDataShare.getSite(_siteId).siteName;
             string resp = Properties.Resources.lblStatus_ConnectError;
             if ( prog == ConnectionProgress.Connecting )
             {

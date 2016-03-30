@@ -34,10 +34,10 @@ namespace sconnRem.View.Config
 
 
         [ImportingConstructor]
-        public CommConfigView(AlarmCommConfigViewModel ViewModel)
+        public CommConfigView(AlarmCommConfigViewModel viewModel)
         {
             InitializeComponent();
-            this.DataContext = ViewModel;
+            this.DataContext = viewModel;
         }
 
 

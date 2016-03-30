@@ -9,7 +9,7 @@
     <Grid>
 
 
-        <StackPanel x:Name="stckConfigSelect" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch"  Height="Auto"  Width="Auto"  x:FieldModifier="public">
+        <StackPanel x:Name="StckConfigSelect" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch"  Height="Auto"  Width="Auto"  x:FieldModifier="public">
 
             <Grid  Height="{Binding ActualHeight, RelativeSource={RelativeSource FindAncestor, AncestorType=Grid, AncestorLevel=1}}">
 
@@ -33,7 +33,7 @@
 
                     <StackPanel MouseDown="{Binding Show_Config}"  Grid.Row="0" Grid.Column="0">
                         <Button Margin="10,10,10,00"  Click="{Binding Show_Config}"   HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Height="120"  Width="120"  >
-                            <Image  x:Name="image00"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="10,10,10,10" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/config1.png"/>
+                            <Image  x:Name="Image00"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="10,10,10,10" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/config1.png"/>
                         </Button>
                         <Label HorizontalContentAlignment="Center" Grid.Row="1" Grid.Column="0" Content="Text" FontSize="14.667" FontFamily="Motorwerk">
 

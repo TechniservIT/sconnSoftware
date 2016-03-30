@@ -30,39 +30,39 @@ namespace sconnRem
 
     public class SiteEditView : StackPanel
     {
-        private StackPanel siteEditPanel;
-        private sconnCfgMngr ConfigManager = new sconnCfgMngr();
-        private int _SiteId;
+        private StackPanel _siteEditPanel;
+        private sconnCfgMngr _configManager = new sconnCfgMngr();
+        private int _siteId;
 
 
-        private Dictionary<string, FrameworkElement> EditViewControls = new Dictionary<string, FrameworkElement>();
+        private Dictionary<string, FrameworkElement> _editViewControls = new Dictionary<string, FrameworkElement>();
 
 
 
         public static readonly DependencyProperty SiteId =
        DependencyProperty.RegisterAttached("SiteId", typeof(int), typeof(Extensions), new PropertyMetadata(default(int)));
 
-        public StackPanel SiteEditPanel { get { return siteEditPanel; } }
+        public StackPanel SiteEditPanel { get { return _siteEditPanel; } }
 
-        public SiteEditView(int siteID)
+        public SiteEditView(int siteId)
         {
-            _SiteId = siteID;
-            siteEditPanel = new StackPanel();
-            sconnSite site = sconnDataShare.getSite(siteID);
-            updateEdit(ref site);
+            _siteId = siteId;
+            _siteEditPanel = new StackPanel();
+            sconnSite site = sconnDataShare.getSite(siteId);
+            UpdateEdit(ref site);
         }
 
         private void SaveGlobalConfigClick(object sender, RoutedEventArgs e)
         {
             try
             {
-                sconnSite toSave = sconnDataShare.getSite(_SiteId);
+                sconnSite toSave = sconnDataShare.getSite(_siteId);
 
-                GbxConfigureSiteNames gnames = (GbxConfigureSiteNames)EditViewControls["GlobalNames"];
+                GbxConfigureSiteNames gnames = (GbxConfigureSiteNames)_editViewControls["GlobalNames"];
                 toSave.siteCfg.GlobalNameConfig = gnames.Serialize();
 
 
-                if ( ConfigManager.WriteGlobalNamesCfg(toSave) && ConfigManager.WriteGlobalCfg(toSave) )  //try uploading changed device
+                if ( _configManager.WriteGlobalNamesCfg(toSave) && _configManager.WriteGlobalCfg(toSave) )  //try uploading changed device
                 {
                     sconnDataSrc filesrc = new sconnDataSrc();
                     filesrc.SaveConfig(DataSourceType.xml);
@@ -83,19 +83,19 @@ namespace sconnRem
 
             try
             {
-                sconnSite toSave = sconnDataShare.getSite(_SiteId);
+                sconnSite toSave = sconnDataShare.getSite(_siteId);
 
                 //load data to save
                 for (int i = 0; i < ipcDefines.RAM_SMS_RECP_NO; i++)
                 {
-                    TextBox inputname = (TextBox)EditViewControls["Recipient" + i];
-                    CheckBox chkbx = (CheckBox)EditViewControls["RecipientEn" + i];
+                    TextBox inputname = (TextBox)_editViewControls["Recipient" + i];
+                    CheckBox chkbx = (CheckBox)_editViewControls["RecipientEn" + i];
                     //TODO  
                     //toSave.siteCfg.gsmRcpts[i].NumberE164 = inputname.Text;
                     //toSave.siteCfg.gsmRcpts[i].Enabled = (bool)chkbx.IsChecked;   
                 }
 
-                if (ConfigManager.WriteSiteGsmCfg(toSave))  //try uploading changed device
+                if (_configManager.WriteSiteGsmCfg(toSave))  //try uploading changed device
                 {
                     sconnDataSrc filesrc = new sconnDataSrc();
                     filesrc.SaveConfig(DataSourceType.xml);
@@ -117,8 +117,8 @@ namespace sconnRem
         private void SaveDeviceConfigClick(object sender, RoutedEventArgs e, int devId)
         {
             //load data to save
-            sconnSite toSave = sconnDataShare.getSite(_SiteId);
-            TextBox devicename = (TextBox)EditViewControls["Device" + devId.ToString()];
+            sconnSite toSave = sconnDataShare.getSite(_siteId);
+            TextBox devicename = (TextBox)_editViewControls["Device" + devId.ToString()];
             string dname = devicename.Text;
 
 
@@ -129,46 +129,46 @@ namespace sconnRem
             int relayNo = toSave.siteCfg.deviceConfigs[devId].memCFG[ipcDefines.mAdrRelayNO];
             int schedNo = ipcDefines.RAM_DEV_SCHED_NO;
 
-            GbxConfigureInputsGroup GbxInputConfig = (GbxConfigureInputsGroup)EditViewControls["Input_Cfg" + devId];
+            GbxConfigureInputsGroup gbxInputConfig = (GbxConfigureInputsGroup)_editViewControls["Input_Cfg" + devId];
             for (int i = 0; i < inputsNo; i++)
             {
-                TextBox inputname = (TextBox)EditViewControls["Input" + devId + "." + i];
+                TextBox inputname = (TextBox)_editViewControls["Input" + devId + "." + i];
                 string inname = inputname.Text;
                 toSave.siteCfg.deviceConfigs[devId].SetDeviceNameAt(i + ipcDefines.mAddr_NAMES_Inputs_Pos, inname);
                 
-                toSave.siteCfg.deviceConfigs[devId].memCFG[ipcDefines.mAdrInput + i * ipcDefines.mAdrInputMemSize + ipcDefines.mAdrInputType] = GbxInputConfig.GetInputTypeAt(i);
-                toSave.siteCfg.deviceConfigs[devId].memCFG[ipcDefines.mAdrInput + i * ipcDefines.mAdrInputMemSize + ipcDefines.mAdrInputAG] = GbxInputConfig.GetInputAgAt(i);
+                toSave.siteCfg.deviceConfigs[devId].memCFG[ipcDefines.mAdrInput + i * ipcDefines.mAdrInputMemSize + ipcDefines.mAdrInputType] = gbxInputConfig.GetInputTypeAt(i);
+                toSave.siteCfg.deviceConfigs[devId].memCFG[ipcDefines.mAdrInput + i * ipcDefines.mAdrInputMemSize + ipcDefines.mAdrInputAG] = gbxInputConfig.GetInputAgAt(i);
             }
 
-            GbxConfigureOutputsGroup GbxOutputConfig = (GbxConfigureOutputsGroup)EditViewControls["Output_Cfg" + devId];
+            GbxConfigureOutputsGroup gbxOutputConfig = (GbxConfigureOutputsGroup)_editViewControls["Output_Cfg" + devId];
             for (int i = 0; i < outputsNo; i++)
             {
-                TextBox inputname = (TextBox)EditViewControls["Output" + devId + "." + i];
+                TextBox inputname = (TextBox)_editViewControls["Output" + devId + "." + i];
                 string inname = inputname.Text;
                 toSave.siteCfg.deviceConfigs[devId].SetDeviceNameAt(i + ipcDefines.mAddr_NAMES_Outputs_Pos, inname);
-                toSave.siteCfg.deviceConfigs[devId].memCFG[ipcDefines.mAdrOutput + i * ipcDefines.mAdrOutputMemSize + ipcDefines.mAdrOutputType] = GbxOutputConfig.GetOutputTypeAt(i);
+                toSave.siteCfg.deviceConfigs[devId].memCFG[ipcDefines.mAdrOutput + i * ipcDefines.mAdrOutputMemSize + ipcDefines.mAdrOutputType] = gbxOutputConfig.GetOutputTypeAt(i);
             }
 
             //GbxConfigureOutputsGroup GbxOutputConfig = (GbxConfigureOutputsGroup)EditViewControls["Relay_Cfg" + devId + "." + i];
             for (int i = 0; i < relayNo; i++)
             {
-                TextBox inputname = (TextBox)EditViewControls["Relay" + devId];
+                TextBox inputname = (TextBox)_editViewControls["Relay" + devId];
                 string inname = inputname.Text;
                 toSave.siteCfg.deviceConfigs[devId].SetDeviceNameAt(i + ipcDefines.mAddr_NAMES_Relays_Pos, inname);
             }
 
             //load schedules
-            GbxConfigureSchedulesGroup GbxScheduleConfig = (GbxConfigureSchedulesGroup)EditViewControls["Sched_Cfg" + devId];
+            GbxConfigureSchedulesGroup gbxScheduleConfig = (GbxConfigureSchedulesGroup)_editViewControls["Sched_Cfg" + devId];
             for (int i = 0; i < schedNo; i++)
             {
-                toSave.siteCfg.deviceConfigs[devId].ScheduleCFG[i][ipcDefines.SCHED_TYPE_POS] = (byte) GbxScheduleConfig.GetScheduleTypeAt(i);
-                toSave.siteCfg.deviceConfigs[devId].ScheduleCFG[i][ipcDefines.SCHED_ACTION_TYPE_POS] = (byte) GbxScheduleConfig.GetScheduleActionAt(i);
-                byte[] frombytes = GbxScheduleConfig.GetDateTimeConfig(DateTimeType.FromDate, (byte)i);
+                toSave.siteCfg.deviceConfigs[devId].ScheduleCFG[i][ipcDefines.SCHED_TYPE_POS] = (byte) gbxScheduleConfig.GetScheduleTypeAt(i);
+                toSave.siteCfg.deviceConfigs[devId].ScheduleCFG[i][ipcDefines.SCHED_ACTION_TYPE_POS] = (byte) gbxScheduleConfig.GetScheduleActionAt(i);
+                byte[] frombytes = gbxScheduleConfig.GetDateTimeConfig(DateTimeType.FromDate, (byte)i);
                 for (int j = 0; j < ipcDefines.RAM_DEV_SCHED_DATETIME_SIZE; j++)
                 {
                     toSave.siteCfg.deviceConfigs[devId].ScheduleCFG[i][ipcDefines.SCHED_TIME_FROM_POS + j] = frombytes[j];
                 }
-                byte[] tobytes = GbxScheduleConfig.GetDateTimeConfig(DateTimeType.ToDate, (byte)i);
+                byte[] tobytes = gbxScheduleConfig.GetDateTimeConfig(DateTimeType.ToDate, (byte)i);
                 for (int k = 0; k < ipcDefines.RAM_DEV_SCHED_DATETIME_SIZE; k++)
                 {
                     toSave.siteCfg.deviceConfigs[devId].ScheduleCFG[i][ipcDefines.SCHED_TIME_TO_POS + k] = frombytes[k];
@@ -176,23 +176,23 @@ namespace sconnRem
             }
 
             //load net cfg
-            DeviceNetworkConfig NetworkConfigPanel = (DeviceNetworkConfig)EditViewControls["Net_Cfg" + devId];
-            toSave.siteCfg.deviceConfigs[devId].NetworkConfig = NetworkConfigPanel.GetNetworkConfig();
+            DeviceNetworkConfig networkConfigPanel = (DeviceNetworkConfig)_editViewControls["Net_Cfg" + devId];
+            toSave.siteCfg.deviceConfigs[devId].NetworkConfig = networkConfigPanel.GetNetworkConfig();
 
 
             //load dev auth cfg
-            GbxConfigureAuthDevicesGroup dauthcfg = (GbxConfigureAuthDevicesGroup)EditViewControls["Device authorization " + devId];
+            GbxConfigureAuthDevicesGroup dauthcfg = (GbxConfigureAuthDevicesGroup)_editViewControls["Device authorization " + devId];
             toSave.siteCfg.deviceConfigs[devId].AuthDevicesCFG = dauthcfg.Serialize();
 
 
             try
             {
                 //TODO upload net cfg only on change
-                bool netwrite = ConfigManager.WriteDeviceNetCfg( toSave, devId);
-                bool devwrite = ConfigManager.WriteDeviceCfgSingle( toSave,devId);       
-                bool namewrite =  ConfigManager.WriteDeviceNamesCfgSingle( toSave, devId);
-                bool schedwrite =  ConfigManager.WriteDeviceSchedulesCfgSingle( toSave, devId);
-                bool dauthwrite = ConfigManager.WriteDeviceDevAuthCfgSingle(toSave, devId);
+                bool netwrite = _configManager.WriteDeviceNetCfg( toSave, devId);
+                bool devwrite = _configManager.WriteDeviceCfgSingle( toSave,devId);       
+                bool namewrite =  _configManager.WriteDeviceNamesCfgSingle( toSave, devId);
+                bool schedwrite =  _configManager.WriteDeviceSchedulesCfgSingle( toSave, devId);
+                bool dauthwrite = _configManager.WriteDeviceDevAuthCfgSingle(toSave, devId);
 
                 if (devwrite || namewrite || schedwrite || schedwrite)  //try uploading changed device
                 {
@@ -210,26 +210,26 @@ namespace sconnRem
 
         private void ChangePasswordClick(object sender, RoutedEventArgs e)
         {
-            changePasswordWnd passWnd = new changePasswordWnd(this._SiteId);
+            ChangePasswordWnd passWnd = new ChangePasswordWnd(this._siteId);
             passWnd.Show();
 
         }
 
         public void UpdateEditBody()
         {
-            sconnSite site = sconnDataShare.getSite(_SiteId);
-            updateEdit(ref site); //reload view for changes
+            sconnSite site = sconnDataShare.getSite(_siteId);
+            UpdateEdit(ref site); //reload view for changes
             this.Children.Clear();
-            this.Children.Add(siteEditPanel);
+            this.Children.Add(_siteEditPanel);
         }
 
-        private void updateEdit(ref sconnSite site)
+        private void UpdateEdit(ref sconnSite site)
         {
             if (site.siteCfg != null)
             {
                 int sites = site.siteCfg.deviceNo;
                 this.Children.Clear();
-                siteEditPanel.Children.Clear();
+                _siteEditPanel.Children.Clear();
                 TabControl siteTabView = new TabControl();
 
                 /************* Global site config *******************/
@@ -239,8 +239,8 @@ namespace sconnRem
                     globalTabItem.Header = "Site";
 
                     StackPanel globalCfgPanel = new StackPanel();
-                    globalCfgPanel.Width = sconnView.viewWidth;
-                    globalCfgPanel.Height = sconnView.viewHeight;
+                    globalCfgPanel.Width = SconnView.ViewWidth;
+                    globalCfgPanel.Height = SconnView.ViewHeight;
                     globalCfgPanel.HorizontalAlignment = HorizontalAlignment.Stretch;
                     globalCfgPanel.VerticalAlignment = VerticalAlignment.Stretch;
 
@@ -277,18 +277,18 @@ namespace sconnRem
 
                     for (int i = 0; i < configFieldNames.GetLength(0); i++)
                     {
-                        Label GloballabelDesc = new Label();
-                        GloballabelDesc.Content = configFieldNames[i];
-                        Grid.SetRow(GloballabelDesc, i);
-                        Grid.SetColumn(GloballabelDesc, 0);
-                        siteCfgGrid.Children.Add(GloballabelDesc);
+                        Label globallabelDesc = new Label();
+                        globallabelDesc.Content = configFieldNames[i];
+                        Grid.SetRow(globallabelDesc, i);
+                        Grid.SetColumn(globallabelDesc, 0);
+                        siteCfgGrid.Children.Add(globallabelDesc);
 
 
-                        TextBox GlobalTextBox = new TextBox();
-                        GlobalTextBox.Text = site.siteCfg.globalConfig.memCFG[ipcDefines.mAdrGlobalConfig + i].ToString();
-                        Grid.SetRow(GlobalTextBox, i);
-                        Grid.SetColumn(GlobalTextBox, 1);
-                        siteCfgGrid.Children.Add(GlobalTextBox);
+                        TextBox globalTextBox = new TextBox();
+                        globalTextBox.Text = site.siteCfg.globalConfig.memCFG[ipcDefines.mAdrGlobalConfig + i].ToString();
+                        Grid.SetRow(globalTextBox, i);
+                        Grid.SetColumn(globalTextBox, 1);
+                        siteCfgGrid.Children.Add(globalTextBox);
                     }
 
        
@@ -321,8 +321,8 @@ namespace sconnRem
                     gsmCfgGrid.ColumnDefinitions.Add(gsmcolDef3);
                     gsmCfgGrid.Background = deviceBrush;
 
-                    GroupBox siteGSMCfgGroup = new GroupBox();
-                    siteGSMCfgGroup.Header = "GSM config";
+                    GroupBox siteGsmCfgGroup = new GroupBox();
+                    siteGsmCfgGroup.Header = "GSM config";
 
                     //TODO
                     if (site.siteCfg.GsmConfig != null)
@@ -335,11 +335,11 @@ namespace sconnRem
 
                         for (int i = 0; i < ipcDefines.RAM_SMS_RECP_NO; i++)
                         {
-                            Label GloballabelDesc = new Label();
-                            GloballabelDesc.Content = "Recipient " + i.ToString();
-                            Grid.SetRow(GloballabelDesc, i);
-                            Grid.SetColumn(GloballabelDesc, 0);
-                            gsmCfgGrid.Children.Add(GloballabelDesc);
+                            Label globallabelDesc = new Label();
+                            globallabelDesc.Content = "Recipient " + i.ToString();
+                            Grid.SetRow(globallabelDesc, i);
+                            Grid.SetColumn(globallabelDesc, 0);
+                            gsmCfgGrid.Children.Add(globallabelDesc);
 
                             CheckBox enBox = new CheckBox();
                             enBox.Content = "Enabled";
@@ -348,14 +348,14 @@ namespace sconnRem
                             //TODO
                             //enBox.IsChecked = site.siteCfg.gsmRcpts[i].Enabled;
                             gsmCfgGrid.Children.Add(enBox);
-                            this.EditViewControls.Add("RecipientEn" + i, enBox);
+                            this._editViewControls.Add("RecipientEn" + i, enBox);
 
-                            TextBox GlobalTextBox = new TextBox();
+                            TextBox globalTextBox = new TextBox();
                             //GlobalTextBox.Text = site.siteCfg.gsmRcpts[i].NumberE164;
-                            Grid.SetRow(GlobalTextBox, i);
-                            Grid.SetColumn(GlobalTextBox, 2);
-                            gsmCfgGrid.Children.Add(GlobalTextBox);
-                            this.EditViewControls.Add("Recipient" + i, GlobalTextBox);
+                            Grid.SetRow(globalTextBox, i);
+                            Grid.SetColumn(globalTextBox, 2);
+                            gsmCfgGrid.Children.Add(globalTextBox);
+                            this._editViewControls.Add("Recipient" + i, globalTextBox);
                         }
 
 
@@ -375,13 +375,13 @@ namespace sconnRem
 
                     GbxConfigureSiteNames namesGrp = new GbxConfigureSiteNames(site.siteCfg.GlobalNameConfig);
                     globalCfgPanel.Children.Add(namesGrp);
-                    this.EditViewControls.Add("GlobalNames", namesGrp);
+                    this._editViewControls.Add("GlobalNames", namesGrp);
                     
                     //TODO
                     if (site.siteCfg.GsmConfig != null)
                     {
-                        siteGSMCfgGroup.Content = gsmCfgGrid;
-                        globalCfgPanel.Children.Add(siteGSMCfgGroup);
+                        siteGsmCfgGroup.Content = gsmCfgGrid;
+                        globalCfgPanel.Children.Add(siteGsmCfgGroup);
                     }
 
                     globalTabItem.Content = globalCfgPanel;
@@ -398,8 +398,8 @@ namespace sconnRem
                     deviceTabItem.Header = "Dev " + site.siteCfg.deviceConfigs[i].memCFG[ipcDefines.mAdrDevID];
 
                     StackPanel deviceCfgPanel = new StackPanel();
-                    deviceCfgPanel.Width = sconnView.viewWidth;
-                    deviceCfgPanel.Height = sconnView.viewHeight;
+                    deviceCfgPanel.Width = SconnView.ViewWidth;
+                    deviceCfgPanel.Height = SconnView.ViewHeight;
                     deviceCfgPanel.HorizontalAlignment = HorizontalAlignment.Stretch;
                     deviceCfgPanel.VerticalAlignment = VerticalAlignment.Stretch;
 
@@ -460,10 +460,10 @@ namespace sconnRem
 
                     Grid siteNamesCfgGrid = new Grid();
                     siteNamesCfgGrid.Background = deviceBrush;
-                    ColumnDefinition NameCol1 = new ColumnDefinition();
-                    ColumnDefinition NameCol2 = new ColumnDefinition();
-                    siteNamesCfgGrid.ColumnDefinitions.Add(NameCol1);
-                    siteNamesCfgGrid.ColumnDefinitions.Add(NameCol2);
+                    ColumnDefinition nameCol1 = new ColumnDefinition();
+                    ColumnDefinition nameCol2 = new ColumnDefinition();
+                    siteNamesCfgGrid.ColumnDefinitions.Add(nameCol1);
+                    siteNamesCfgGrid.ColumnDefinitions.Add(nameCol2);
 
 
                     int inputsNo = site.siteCfg.deviceConfigs[i].memCFG[ipcDefines.mAdrInputsNO];
@@ -509,7 +509,7 @@ namespace sconnRem
                         Grid.SetRow(fieldDevlabelVal, 0);
                         Grid.SetColumn(fieldDevlabelVal, 1);
                         siteNamesCfgGrid.Children.Add(fieldDevlabelVal);
-                        this.EditViewControls.Add("Device" + i.ToString(), fieldDevlabelVal);
+                        this._editViewControls.Add("Device" + i.ToString(), fieldDevlabelVal);
 
 
                         //Inputs
@@ -530,7 +530,7 @@ namespace sconnRem
                             Grid.SetRow(fieldDevInputlabelVal, 1 + o);
                             Grid.SetColumn(fieldDevInputlabelVal, 1);
                             siteNamesCfgGrid.Children.Add(fieldDevInputlabelVal);
-                            this.EditViewControls.Add("Input" + i + "." + o, fieldDevInputlabelVal);
+                            this._editViewControls.Add("Input" + i + "." + o, fieldDevInputlabelVal);
                         }
 
 
@@ -552,7 +552,7 @@ namespace sconnRem
                             Grid.SetRow(fieldDevOutputlabelVal, 3 + inputsNo + o);
                             Grid.SetColumn(fieldDevOutputlabelVal, 1);
                             siteNamesCfgGrid.Children.Add(fieldDevOutputlabelVal);
-                            this.EditViewControls.Add("Output" + i + "." + o, fieldDevOutputlabelVal);
+                            this._editViewControls.Add("Output" + i + "." + o, fieldDevOutputlabelVal);
                         }
 
                         //relays
@@ -573,7 +573,7 @@ namespace sconnRem
                             Grid.SetRow(fieldDevRelaylabelVal, 4 + inputsNo + outputsNo + o);
                             Grid.SetColumn(fieldDevRelaylabelVal, 1);
                             siteNamesCfgGrid.Children.Add(fieldDevRelaylabelVal);
-                            this.EditViewControls.Add("Relay" + i + "." + o, fieldDevRelaylabelVal);
+                            this._editViewControls.Add("Relay" + i + "." + o, fieldDevRelaylabelVal);
                         }
                         deviceNamesCfgGroup.Content = siteNamesCfgGrid;
 
@@ -582,24 +582,24 @@ namespace sconnRem
                     
 
                     /********** Output types ************/
-                    GbxConfigureOutputsGroup GbxOutputConfig = new GbxConfigureOutputsGroup(site.siteCfg.deviceConfigs[i].memCFG, site.siteCfg.deviceConfigs[i].NamesCFG, outputsNo);
-                    this.EditViewControls.Add("Output_Cfg" + i, GbxOutputConfig);
+                    GbxConfigureOutputsGroup gbxOutputConfig = new GbxConfigureOutputsGroup(site.siteCfg.deviceConfigs[i].memCFG, site.siteCfg.deviceConfigs[i].NamesCFG, outputsNo);
+                    this._editViewControls.Add("Output_Cfg" + i, gbxOutputConfig);
 
 
                     /********** Input types ************/
-                    GbxConfigureInputsGroup GbxInputConfig = new GbxConfigureInputsGroup(site.siteCfg.deviceConfigs[i].memCFG, site.siteCfg.deviceConfigs[i].NamesCFG, inputsNo);
-                    this.EditViewControls.Add("Input_Cfg" + i, GbxInputConfig);
+                    GbxConfigureInputsGroup gbxInputConfig = new GbxConfigureInputsGroup(site.siteCfg.deviceConfigs[i].memCFG, site.siteCfg.deviceConfigs[i].NamesCFG, inputsNo);
+                    this._editViewControls.Add("Input_Cfg" + i, gbxInputConfig);
 
 
                     /********** Relay types ************/
 
                     /********** Schedules  ************/
-                    GbxConfigureSchedulesGroup GbxScheduleConfig = new GbxConfigureSchedulesGroup(site.siteCfg.deviceConfigs[i].ScheduleCFG, ipcDefines.RAM_DEV_SCHED_NO);
-                    this.EditViewControls.Add("Sched_Cfg" + i, GbxScheduleConfig);
+                    GbxConfigureSchedulesGroup gbxScheduleConfig = new GbxConfigureSchedulesGroup(site.siteCfg.deviceConfigs[i].ScheduleCFG, ipcDefines.RAM_DEV_SCHED_NO);
+                    this._editViewControls.Add("Sched_Cfg" + i, gbxScheduleConfig);
                     if (site.siteCfg.deviceConfigs[i].ScheduleCFG != null)
                     {
-                        GbxScheduleConfig = new GbxConfigureSchedulesGroup(site.siteCfg.deviceConfigs[i].ScheduleCFG, ipcDefines.RAM_DEV_SCHED_NO);
-                        GbxScheduleConfig.ConfigChanged += GbxScheduleConfig_ConfigChanged;
+                        gbxScheduleConfig = new GbxConfigureSchedulesGroup(site.siteCfg.deviceConfigs[i].ScheduleCFG, ipcDefines.RAM_DEV_SCHED_NO);
+                        gbxScheduleConfig.ConfigChanged += GbxScheduleConfig_ConfigChanged;
 
                     }
 
@@ -613,7 +613,7 @@ namespace sconnRem
 
                     /**********  Authorized system devices  ************/
                     GbxConfigureAuthDevicesGroup authcfgConfig = new GbxConfigureAuthDevicesGroup();
-                    this.EditViewControls.Add("Device authorization "+ i, authcfgConfig);
+                    this._editViewControls.Add("Device authorization "+ i, authcfgConfig);
 
 
 
@@ -627,22 +627,22 @@ namespace sconnRem
                     RowDefinition netRow = new RowDefinition();
                     siteNetCfgGrid.RowDefinitions.Add(netRow);
 
-                    DeviceNetworkConfig NetworkConfigPanel = new DeviceNetworkConfig(site.siteCfg.deviceConfigs[i].NetworkConfig);
-                    this.EditViewControls.Add("Net_Cfg" + i, NetworkConfigPanel);
-                    NetworkConfigPanel = new DeviceNetworkConfig(site.siteCfg.deviceConfigs[i].NetworkConfig);
+                    DeviceNetworkConfig networkConfigPanel = new DeviceNetworkConfig(site.siteCfg.deviceConfigs[i].NetworkConfig);
+                    this._editViewControls.Add("Net_Cfg" + i, networkConfigPanel);
+                    networkConfigPanel = new DeviceNetworkConfig(site.siteCfg.deviceConfigs[i].NetworkConfig);
 
-                    Grid.SetRow(NetworkConfigPanel, 0);
-                    Grid.SetColumn(NetworkConfigPanel, 0);
-                    siteNetCfgGrid.Children.Add(NetworkConfigPanel);
+                    Grid.SetRow(networkConfigPanel, 0);
+                    Grid.SetColumn(networkConfigPanel, 0);
+                    siteNetCfgGrid.Children.Add(networkConfigPanel);
 
                     deviceNetCfgGroup.Content = siteNetCfgGrid;
 
 
                     deviceCfgPanel.Children.Add(deviceGlobalCfgGroup);
                     deviceCfgPanel.Children.Add(deviceNamesCfgGroup);
-                    deviceCfgPanel.Children.Add(GbxOutputConfig);
-                    deviceCfgPanel.Children.Add(GbxInputConfig);
-                    deviceCfgPanel.Children.Add(GbxScheduleConfig);
+                    deviceCfgPanel.Children.Add(gbxOutputConfig);
+                    deviceCfgPanel.Children.Add(gbxInputConfig);
+                    deviceCfgPanel.Children.Add(gbxScheduleConfig);
                     deviceCfgPanel.Children.Add(deviceNetCfgGroup);
                     deviceCfgPanel.Children.Add(authcfgConfig);
                     deviceCfgPanel.Children.Add(saveButton);
@@ -651,15 +651,15 @@ namespace sconnRem
                 }
 
                 SolidColorBrush panelBrush2 = new SolidColorBrush(Colors.DeepSkyBlue);
-                siteEditPanel.Background = panelBrush2;
+                _siteEditPanel.Background = panelBrush2;
 
-                siteEditPanel.Width = (double)sconnView.viewWidth;
-                siteEditPanel.Height = (double)sconnView.viewHeight;
-                siteEditPanel.HorizontalAlignment = HorizontalAlignment.Stretch;
-                siteEditPanel.VerticalAlignment = VerticalAlignment.Stretch;
-                siteEditPanel.Children.Add(siteTabView);
+                _siteEditPanel.Width = (double)SconnView.ViewWidth;
+                _siteEditPanel.Height = (double)SconnView.ViewHeight;
+                _siteEditPanel.HorizontalAlignment = HorizontalAlignment.Stretch;
+                _siteEditPanel.VerticalAlignment = VerticalAlignment.Stretch;
+                _siteEditPanel.Children.Add(siteTabView);
 
-                this.Children.Add(siteEditPanel);
+                this.Children.Add(_siteEditPanel);
             } //config is init
             else
             {

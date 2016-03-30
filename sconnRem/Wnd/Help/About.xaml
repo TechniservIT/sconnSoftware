@@ -8,8 +8,8 @@
             <ColumnDefinition Width="45*"/>
             <ColumnDefinition Width="4*"/>
         </Grid.ColumnDefinitions>
-        <Label x:Name="label" Content="sconnRemote" HorizontalAlignment="Left" Margin="10,27,0,0" VerticalAlignment="Top" Height="42" Width="191"/>
-        <Label x:Name="label_Copy1" Content="V1.01" HorizontalAlignment="Left" Margin="10,74,0,0" VerticalAlignment="Top" Height="42" Width="191"/>
-        <Label x:Name="label_Copy" Content="19/03/2016" HorizontalAlignment="Left" Margin="10,121,0,0" VerticalAlignment="Top" Height="42" Width="191"/>
+        <Label x:Name="Label" Content="sconnRemote" HorizontalAlignment="Left" Margin="10,27,0,0" VerticalAlignment="Top" Height="42" Width="191"/>
+        <Label x:Name="LabelCopy1" Content="V1.01" HorizontalAlignment="Left" Margin="10,74,0,0" VerticalAlignment="Top" Height="42" Width="191"/>
+        <Label x:Name="LabelCopy" Content="19/03/2016" HorizontalAlignment="Left" Margin="10,121,0,0" VerticalAlignment="Top" Height="42" Width="191"/>
     </Grid>
 </Window>

@@ -18,12 +18,12 @@ namespace sconnRem.ViewModel.Alarm
             get { return "pack://application:,,,/images/config1.png"; }
         }
 
-        private string _Name;
+        private string _name;
         public string Name
         {
             get
             {
-                return _Name;
+                return _name;
             }
         }
 

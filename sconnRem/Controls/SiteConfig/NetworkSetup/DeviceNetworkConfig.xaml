@@ -13,24 +13,24 @@
         <Label Content="Gateway" HorizontalAlignment="Left" Margin="10,68,0,0" VerticalAlignment="Top" Height="24" Width="104"/>
         <TextBox   Name="TbxGatewayB1" HorizontalAlignment="Left" Height="23" Margin="119,68,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="46"/>
         <Label Content="DNS1" HorizontalAlignment="Left" Margin="10,96,0,0" VerticalAlignment="Top" Height="24" Width="104"/>
-        <TextBox  Name="TbxDNS1B1" HorizontalAlignment="Left" Height="23" Margin="119,96,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="46"/>
+        <TextBox  Name="TbxDns1B1" HorizontalAlignment="Left" Height="23" Margin="119,96,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="46"/>
         <Label Content="DNS2" HorizontalAlignment="Left" Margin="10,124,0,0" VerticalAlignment="Top" Height="24" Width="104"/>
-        <TextBox Name="TbxDNS2B1" HorizontalAlignment="Left" Height="23" Margin="119,124,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="46"/>
+        <TextBox Name="TbxDns2B1" HorizontalAlignment="Left" Height="23" Margin="119,124,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="46"/>
         <TextBox x:Name="TbxIpAddrB2" HorizontalAlignment="Left" Height="23" Margin="170,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="46" RenderTransformOrigin="1.435,0.565"/>
         <TextBox x:Name="TbxIpAddrB3" HorizontalAlignment="Left" Height="23" Margin="221,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="46"/>
         <TextBox x:Name="TbxIpAddrB4" HorizontalAlignment="Left" Height="23" Margin="272,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="46" RenderTransformOrigin="3.217,0.348"/>
         <TextBox  x:Name="TbxNetmaskB2" HorizontalAlignment="Left" Height="23" Margin="170,39,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="46"/>
         <TextBox   x:Name="TbxGatewayB2" HorizontalAlignment="Left" Height="23" Margin="170,68,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="46"/>
-        <TextBox  x:Name="TbxDNS1B2" HorizontalAlignment="Left" Height="23" Margin="170,96,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="46"/>
-        <TextBox x:Name="TbxDNS2B2" HorizontalAlignment="Left" Height="23" Margin="170,124,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="46"/>
+        <TextBox  x:Name="TbxDns1B2" HorizontalAlignment="Left" Height="23" Margin="170,96,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="46"/>
+        <TextBox x:Name="TbxDns2B2" HorizontalAlignment="Left" Height="23" Margin="170,124,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="46"/>
         <TextBox  x:Name="TbxNetmaskB3" HorizontalAlignment="Left" Height="23" Margin="221,39,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="46"/>
         <TextBox   x:Name="TbxGatewayB3" HorizontalAlignment="Left" Height="23" Margin="221,68,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="46"/>
-        <TextBox  x:Name="TbxDNS1B3" HorizontalAlignment="Left" Height="23" Margin="221,96,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="46"/>
-        <TextBox x:Name="TbxDNS2B3" HorizontalAlignment="Left" Height="23" Margin="221,124,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="46"/>
+        <TextBox  x:Name="TbxDns1B3" HorizontalAlignment="Left" Height="23" Margin="221,96,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="46"/>
+        <TextBox x:Name="TbxDns2B3" HorizontalAlignment="Left" Height="23" Margin="221,124,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="46"/>
         <TextBox  x:Name="TbxNetmaskB4" HorizontalAlignment="Left" Height="23" Margin="272,39,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="46"/>
         <TextBox   x:Name="TbxGatewayB4" HorizontalAlignment="Left" Height="23" Margin="272,68,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="46"/>
-        <TextBox  x:Name="TbxDNS1B4" HorizontalAlignment="Left" Height="23" Margin="272,96,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="46"/>
-        <TextBox x:Name="TbxDNS2B4" HorizontalAlignment="Left" Height="23" Margin="272,124,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="46"/>
+        <TextBox  x:Name="TbxDns1B4" HorizontalAlignment="Left" Height="23" Margin="272,96,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="46"/>
+        <TextBox x:Name="TbxDns2B4" HorizontalAlignment="Left" Height="23" Margin="272,124,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="46"/>
 
     </Grid>
 </UserControl>

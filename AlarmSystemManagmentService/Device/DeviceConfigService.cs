@@ -73,7 +73,10 @@ namespace AlarmSystemManagmentService
 
         public sconnDevice Get()
         {
-            EntityManager.Download();
+            if (Online)
+            {
+                EntityManager.Download();
+            }
             return ConfigManager.Config.DeviceConfig.Device;
         }
 

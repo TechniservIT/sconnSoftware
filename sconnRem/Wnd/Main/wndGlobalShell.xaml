@@ -1,0 +1,36 @@
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:prism="http://www.codeplex.com/prism"
+    xmlns:controls="clr-namespace:sconnRem.Controls.Common"
+    Title="sconnRemote"
+    d:DesignHeight="768" d:DesignWidth="1024">
+
+    <Grid x:Name="LayoutRoot"   >
+        <Grid MinWidth="400" MaxWidth="2568">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="15*" />
+                <ColumnDefinition  Width="70*"/>
+                <ColumnDefinition Width="15*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="15*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                <TextBlock HorizontalAlignment="Left" Width="Auto" Text="View-Switching Navigation" FontWeight="Normal" Foreground="#FFFFFFFF" FontSize="24" FontFamily="Comic Sans MS" VerticalAlignment="Center"/>
+            </StackPanel>
+
+            <Border Grid.Column="0" Grid.Row="2" Background="LightGray" MinWidth="5" Margin="5,0,0,5">
+                <ItemsControl x:Name="NavigationItemsControl" prism:RegionManager.RegionName="MainNavigationRegion" Grid.Column="0" Margin="5" Padding="5" />
+            </Border>
+            <ContentControl prism:RegionManager.RegionName="MainContentRegion" 
+                        Grid.Column="1" Grid.Row="2" Margin="5,0,5,5" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"/>
+        </Grid>
+    </Grid>
+</Window>
+    

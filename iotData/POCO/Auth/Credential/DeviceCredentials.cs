@@ -49,5 +49,13 @@ namespace iotDbConnector.DAL
             PasswordExpireDate = DateTime.Now.AddYears(1000).Date;
         }
 
+
+        public void Fake()
+        {
+            Username = Guid.NewGuid().ToString();
+            Password = Guid.NewGuid().ToString();
+        }
+
+
     }
 }

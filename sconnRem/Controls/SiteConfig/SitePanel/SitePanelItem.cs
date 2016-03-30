@@ -24,15 +24,15 @@ namespace sconnRem
 
     public class SitePanelItem : StackPanel
     {
-        public Button siteBtn1;
-        public Button siteBtn2;
-        public Button siteBtn3;
+        public Button SiteBtn1;
+        public Button SiteBtn2;
+        public Button SiteBtn3;
 
         private string _siteName;
-        public string siteName { get { return _siteName; } }
+        public string SiteName { get { return _siteName; } }
 
-        private int _siteID = 0;
-        public int siteID { get { return _siteID; } }
+        private int _siteId = 0;
+        public int SiteId { get { return _siteId; } }
 
         public SitePanelItem(string name, double width, double height)
         {
@@ -59,36 +59,36 @@ namespace sconnRem
             this.Height = height;
             this.Width = width;
 
-            siteBtn1 = new Button();
-            siteBtn1.Content = Properties.Resources.btnViewSiteDesc;
-            siteBtn1.Width = this.Width * 0.33;
-            siteBtn1.Height = this.Height * 0.5;
+            SiteBtn1 = new Button();
+            SiteBtn1.Content = Properties.Resources.btnViewSiteDesc;
+            SiteBtn1.Width = this.Width * 0.33;
+            SiteBtn1.Height = this.Height * 0.5;
        //     siteBtn1.Click += new RoutedEventHandler((sender, e) => ViewSiteClick(sender, e, name));
-            Grid.SetRow(siteBtn1, 1);
-            Grid.SetColumn(siteBtn1, 0);
-            siteGrid.Children.Add(siteBtn1);
+            Grid.SetRow(SiteBtn1, 1);
+            Grid.SetColumn(SiteBtn1, 0);
+            siteGrid.Children.Add(SiteBtn1);
 
-            siteBtn2 = new Button();
-            siteBtn2.Content = Properties.Resources.btnConfSiteDesc;
-            siteBtn2.Width = this.Width * 0.33;
-            siteBtn2.Height = this.Height * 0.5;
+            SiteBtn2 = new Button();
+            SiteBtn2.Content = Properties.Resources.btnConfSiteDesc;
+            SiteBtn2.Width = this.Width * 0.33;
+            SiteBtn2.Height = this.Height * 0.5;
       //      siteBtn2.Click += new RoutedEventHandler((sender, e) => ConfigSiteClick(sender, e, name));
-            Grid.SetRow(siteBtn2, 1);
-            Grid.SetColumn(siteBtn2, 1);
-            siteGrid.Children.Add(siteBtn2);
+            Grid.SetRow(SiteBtn2, 1);
+            Grid.SetColumn(SiteBtn2, 1);
+            siteGrid.Children.Add(SiteBtn2);
 
-            siteBtn3 = new Button();
+            SiteBtn3 = new Button();
     //            <StackPanel>
     //    <Image Source="Pictures/apple.jpg" />
     //    <TextBlock>Disconnect from Server</TextBlock>
     //</StackPanel>
 
-            siteBtn3.Content  = Properties.Resources.btnConfSiteEdit;
-            siteBtn3.Width = this.Width * 0.33;
-            siteBtn3.Height = this.Height * 0.5;
-            Grid.SetRow(siteBtn3, 1);
-            Grid.SetColumn(siteBtn3, 2);
-            siteGrid.Children.Add(siteBtn3);
+            SiteBtn3.Content  = Properties.Resources.btnConfSiteEdit;
+            SiteBtn3.Width = this.Width * 0.33;
+            SiteBtn3.Height = this.Height * 0.5;
+            Grid.SetRow(SiteBtn3, 1);
+            Grid.SetColumn(SiteBtn3, 2);
+            siteGrid.Children.Add(SiteBtn3);
 
             Label siteDesc = new Label();
             siteDesc.Content = _siteName;
@@ -99,9 +99,9 @@ namespace sconnRem
             siteGrid.Children.Add(siteDesc);
             
             SolidColorBrush myBrushBtnBack = new SolidColorBrush(Colors.SkyBlue);
-            siteBtn1.Background = myBrushBtnBack;
-            siteBtn2.Background = myBrushBtnBack;
-            siteBtn3.Background = myBrushBtnBack;
+            SiteBtn1.Background = myBrushBtnBack;
+            SiteBtn2.Background = myBrushBtnBack;
+            SiteBtn3.Background = myBrushBtnBack;
 
             SolidColorBrush myBrush = new SolidColorBrush(Colors.LightBlue);
             this.Background = myBrush;
@@ -109,10 +109,10 @@ namespace sconnRem
 
         }
 
-        public SitePanelItem(string name, double width, double height, int siteID)
+        public SitePanelItem(string name, double width, double height, int siteId)
             : this(name, width, height)
         {
-            _siteID = siteID;
+            _siteId = siteId;
         }
 
     }

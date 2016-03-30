@@ -30,21 +30,21 @@ namespace sconnRem
 
     public class SitePanel : StackPanel
     {
-        private SitePanelItem[] items;
+        private SitePanelItem[] _items;
         private int _itemCount = 0;
         private double _width;
         private double _height;
-        private static int selectedItemID = -1;
+        private static int _selectedItemId = -1;
 
         public event EventHandler SelectItemChanged;
 
-        public int SelectedItemID { get { return selectedItemID; } }
+        public int SelectedItemId { get { return _selectedItemId; } }
 
         public SitePanel()
         {
             //SolidColorBrush myBrush = new SolidColorBrush(Colors.DarkBlue);
             //this.Background = myBrush;
-            items = new SitePanelItem[0];
+            _items = new SitePanelItem[0];
         }
 
         public SitePanel(double width, double height)
@@ -56,41 +56,41 @@ namespace sconnRem
             this.Height = height;
         }
 
-        public void SelectItem(int itemID)
+        public void SelectItem(int itemId)
         {
-            if (itemID > -1)
+            if (itemId > -1)
             {
-                if (sconnDataShare.GetLastItemID() < itemID) //item to set is higher then last item
+                if (sconnDataShare.GetLastItemID() < itemId) //item to set is higher then last item
                 {
-                    selectedItemID = sconnDataShare.GetLastItemID();
+                    _selectedItemId = sconnDataShare.GetLastItemID();
                 }
-                selectedItemID = itemID; //getItemIndexByID(siteID);
+                _selectedItemId = itemId; //getItemIndexByID(siteID);
                 SelectItemChanged.Invoke(this, new EventArgs());
             }
         }
 
         public void ReloadSitesFromShare()
         {
-            removeItems();
+            RemoveItems();
             sconnSite[] sites = sconnDataShare.getSites();
             foreach (sconnSite site in sites)
             {
                 SitePanelItem item = new SitePanelItem(site.siteName, this.Width, this.Height * 0.2, site.siteID);
-                this.addStatusItem(item);
+                this.AddStatusItem(item);
             }
         }
 
-        private void setItemSelected(object sender, MouseButtonEventArgs e, int siteID)
+        private void SetItemSelected(object sender, MouseButtonEventArgs e, int siteId)
         {
-            selectedItemID = siteID; //getItemIndexByID(siteID);
+            _selectedItemId = siteId; //getItemIndexByID(siteID);
             SelectItemChanged.Invoke(this, new EventArgs());
         }
 
-        private int getItemIndexByID(int ID)
+        private int GetItemIndexById(int id)
         {
             for (int i = 0; i < _itemCount; i++)
             {
-                if (items[i].siteID == ID)
+                if (_items[i].SiteId == id)
                 {
                     return i;
                 }
@@ -98,21 +98,21 @@ namespace sconnRem
             return 0;
         }
 
-        public void addStatusItem(SitePanelItem item)
+        public void AddStatusItem(SitePanelItem item)
         {
             try
             {
                 _itemCount++;
-                SitePanelItem[] ResizedItems = new SitePanelItem[_itemCount];
-                for (int i = 0; i < items.GetLength(0); i++)
+                SitePanelItem[] resizedItems = new SitePanelItem[_itemCount];
+                for (int i = 0; i < _items.GetLength(0); i++)
                 {
-                    ResizedItems[i] = items[i];
+                    resizedItems[i] = _items[i];
                 }
-                ResizedItems[_itemCount - 1] = item;
-                ResizedItems[_itemCount - 1].MouseDown += new MouseButtonEventHandler((sender, e) => setItemSelected(sender, e, item.siteID));
-                items = ResizedItems;
+                resizedItems[_itemCount - 1] = item;
+                resizedItems[_itemCount - 1].MouseDown += new MouseButtonEventHandler((sender, e) => SetItemSelected(sender, e, item.SiteId));
+                _items = resizedItems;
                 //check if item is selected and modify 
-                if (item.siteID == selectedItemID)
+                if (item.SiteId == _selectedItemId)
                 {
                     item.Background = new SolidColorBrush(Colors.Aqua);
                 }
@@ -124,32 +124,32 @@ namespace sconnRem
             }
         }
 
-        public void removeItems()
+        public void RemoveItems()
         {
             this.Children.Clear();
             _itemCount = 0;
-            items = new SitePanelItem[0];
+            _items = new SitePanelItem[0];
         }
 
-        public void removeStatusItem(int ID)
+        public void RemoveStatusItem(int id)
         {
-            if (ID <= 0 && ID > _itemCount - 1)
+            if (id <= 0 && id > _itemCount - 1)
             {
                 return;
             }
-            for (int i = ID; i < _itemCount - 2; i++)
+            for (int i = id; i < _itemCount - 2; i++)
             {
-                items[i] = items[i + 1];
+                _items[i] = _items[i + 1];
             }
             _itemCount--;
-            SitePanelItem[] ResizedItems = new SitePanelItem[_itemCount];
-            items.CopyTo(ResizedItems, 0);
-            items = ResizedItems;
+            SitePanelItem[] resizedItems = new SitePanelItem[_itemCount];
+            _items.CopyTo(resizedItems, 0);
+            _items = resizedItems;
         }
 
-        public int itemCount { get { return _itemCount; } }
-        public SitePanelItem[] getItems { get { return items; } }
-        public SitePanelItem getItem(int i) { return items[i]; }
+        public int ItemCount { get { return _itemCount; } }
+        public SitePanelItem[] GetItems { get { return _items; } }
+        public SitePanelItem GetItem(int i) { return _items[i]; }
 
     }
 

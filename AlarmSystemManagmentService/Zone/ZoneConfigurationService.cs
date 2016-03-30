@@ -50,7 +50,10 @@ namespace AlarmSystemManagmentService
 
         public List<sconnAlarmZone> GetAll()
         {
-            EntityManager.Download();
+            if (Online)
+            {
+                EntityManager.Download();
+            }
             return ConfigManager.Config.ZoneConfig.Zones.ToList();
         }
 
@@ -77,7 +80,10 @@ namespace AlarmSystemManagmentService
         {
             try
             {
-                EntityManager.Download();
+                if (Online)
+                {
+                    EntityManager.Download();
+                }
                 sconnAlarmZone dev = ConfigManager.Config.ZoneConfig.Zones.FirstOrDefault(d => d.Id == Id);
                 return dev;
             }
@@ -92,6 +98,7 @@ namespace AlarmSystemManagmentService
         {
             try
             {
+                ConfigManager.Config.ZoneConfig.Zones.Add(device);
                 return true;    //no adding -  filled with empty objects
             }
             catch (Exception e)
@@ -130,10 +137,20 @@ namespace AlarmSystemManagmentService
         {
             try
             {
-                // 'Remove' clears static record instead - replace with new empty record with the same Id
-                sconnAlarmZone stub = new sconnAlarmZone { Id = device.Id };
-                this.Update(stub);
-                return SaveChanges();
+                if (Online)
+                {
+
+                    // 'Remove' clears static record instead - replace with new empty record with the same Id
+                    sconnAlarmZone stub = new sconnAlarmZone { Id = device.Id };
+                    this.Update(stub);
+                    return SaveChanges();
+                }
+                else
+                {
+                    this.ConfigManager.Config.ZoneConfig.Zones.Remove(device);
+                    return true;
+                }
+
             }
             catch (Exception e)
             {

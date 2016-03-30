@@ -27,10 +27,10 @@ namespace sconnRem.View.Config
     public partial class GsmConfigView : UserControl
     {
         [ImportingConstructor]
-        public GsmConfigView(AlarmGsmConfigViewModel ViewModel)
+        public GsmConfigView(AlarmGsmConfigViewModel viewModel)
         {
             InitializeComponent();
-            this.DataContext = ViewModel;
+            this.DataContext = viewModel;
         }
     }
     

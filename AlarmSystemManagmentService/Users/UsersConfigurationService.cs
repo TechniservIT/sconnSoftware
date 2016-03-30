@@ -51,7 +51,10 @@ namespace AlarmSystemManagmentService
 
         public List<sconnUser> GetAll()
         {
-            EntityManager.Download();
+            if (Online)
+            {
+                EntityManager.Download();
+            }
             return ConfigManager.Config.UserConfig.Users.ToList();
         }
 
@@ -78,7 +81,10 @@ namespace AlarmSystemManagmentService
         {
             try
             {
-                EntityManager.Download();
+                if (Online)
+                {
+                    EntityManager.Download();
+                }
                 sconnUser dev = ConfigManager.Config.UserConfig.Users.FirstOrDefault(d => d.Id == Id);
                 return dev;
             }
@@ -93,6 +99,7 @@ namespace AlarmSystemManagmentService
         {
             try
             {
+                ConfigManager.Config.UserConfig.Users.Add(device);
                 return true;    //no adding -  filled with empty objects
             }
             catch (Exception e)
@@ -135,10 +142,19 @@ namespace AlarmSystemManagmentService
         {
             try
             {
-                // 'Remove' clears static record instead - replace with new empty record with the same Id
-                sconnUser stub = new sconnUser { Id = device.Id };
-                this.Update(stub);
-                return SaveChanges();
+                if (Online)
+                {
+                    // 'Remove' clears static record instead - replace with new empty record with the same Id
+                    sconnUser stub = new sconnUser { Id = device.Id };
+                    this.Update(stub);
+                    return SaveChanges();
+                }
+                else
+                {
+                    this.ConfigManager.Config.UserConfig.Users.Remove(device);
+                    return true;
+                }
+
             }
             catch (Exception e)
             {

@@ -14,7 +14,7 @@ namespace sconnRem.ViewModel.Navigation
     public class ConfigureSiteViewModel : ObservableObject
     {
 
-        private AlarmSystemConfigManager _Manager;
+        private AlarmSystemConfigManager _manager;
 
 
         #region Fields
@@ -47,9 +47,9 @@ namespace sconnRem.ViewModel.Navigation
             LoadConfigPages();
         }
 
-        public ConfigureSiteViewModel(AlarmSystemConfigManager Manager)
+        public ConfigureSiteViewModel(AlarmSystemConfigManager manager)
         {
-            _Manager = Manager;
+            _manager = manager;
             LoadConfigPages();
         }
 

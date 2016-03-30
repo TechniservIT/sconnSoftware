@@ -20,17 +20,17 @@ namespace sconnRem.ViewModel.Alarm
     public class AlarmGlobalConfigViewModel  : BindableBase // ObservableObject, IPageViewModel    //:  ViewModelBase<IGridNavigatedView>  
     {
         public sconnGlobalConfig Config { get; set; }
-        private GlobalConfigService _Provider;
-        private AlarmSystemConfigManager _Manager;
-        private readonly IRegionManager regionManager;
-        private Logger nlogger = LogManager.GetCurrentClassLogger();
+        private GlobalConfigService _provider;
+        private AlarmSystemConfigManager _manager;
+        private readonly IRegionManager _regionManager;
+        private Logger _nlogger = LogManager.GetCurrentClassLogger();
 
-        private string _Name;
+        private string _name;
         public string Name
         {
             get
             {
-                return _Name;
+                return _name;
             }
         }
 
@@ -41,35 +41,35 @@ namespace sconnRem.ViewModel.Alarm
         {
             try
             {
-                Config = _Provider.Get();
+                Config = _provider.Get();
 
             }
             catch (Exception ex)
             {
-                nlogger.Error(ex, ex.Message);
+                _nlogger.Error(ex, ex.Message);
             }
         }
 
         private void SaveData()
         {
-            _Provider.Update(Config);
+            _provider.Update(Config);
         }
 
         public AlarmGlobalConfigViewModel()
         {
-            _Name = "Gcfg";
-            this._Provider = new GlobalConfigService(_Manager);
+            _name = "Gcfg";
+            this._provider = new GlobalConfigService(_manager);
         }
 
       
 
         [ImportingConstructor]
-        public AlarmGlobalConfigViewModel(IAlarmConfigManager Manager, IRegionManager regionManager)
+        public AlarmGlobalConfigViewModel(IAlarmConfigManager manager, IRegionManager regionManager)
         {
             Config = new sconnGlobalConfig();
-            this._Manager = (AlarmSystemConfigManager)Manager;
-            this._Provider = new GlobalConfigService(_Manager);
-            this.regionManager = regionManager;
+            this._manager = (AlarmSystemConfigManager)manager;
+            this._provider = new GlobalConfigService(_manager);
+            this._regionManager = regionManager;
             GetData();
         }
 

@@ -33,34 +33,34 @@ using sconnRem.Wnd.Navigation;
 namespace sconnRem
 {
 
-    public  partial class sconnView : Window
+    public  partial class SconnView : Window
     {
         
-        private static System.Timers.Timer sconnTask;
+        private static System.Timers.Timer _sconnTask;
         //private static StackPanel dataViewPanel;
         private static double _viewHeight;
         private static double _viewWidth;
-        private int ViewedSiteId = 0;
-        private sconnDataSrc ConfigSource  = new sconnDataSrc();
-        private sconnSecurityDialog seDiag;
-        private sconnSiteManagerWindow siteManagerWnd;
-        private statusViewPanel statusView;
-        private SitePanel sitesPanel;
-        private SiteView siteView;
-        private SiteEditView siteEditView;
-        private MapWindow mapView;
-        private sconnCfgMngr ConfigManager = new sconnCfgMngr();
-        private GlobalSettings settings = new GlobalSettings();
+        private int _viewedSiteId = 0;
+        private sconnDataSrc _configSource  = new sconnDataSrc();
+        private SconnSecurityDialog _seDiag;
+        private SconnSiteManagerWindow _siteManagerWnd;
+        private StatusViewPanel _statusView;
+        private SitePanel _sitesPanel;
+        private SiteView _siteView;
+        private SiteEditView _siteEditView;
+        private MapWindow _mapView;
+        private sconnCfgMngr _configManager = new sconnCfgMngr();
+        private GlobalSettings _settings = new GlobalSettings();
 
-        public static double viewHeight { get { return _viewHeight; } set { _viewHeight = value; } }
-        public static double viewWidth { get { return _viewWidth; } set { _viewWidth = value; } }
+        public static double ViewHeight { get { return _viewHeight; } set { _viewHeight = value; } }
+        public static double ViewWidth { get { return _viewWidth; } set { _viewWidth = value; } }
 
-        private delegate void updateSiteViewDelegate(); //site status update del function
+        private delegate void UpdateSiteViewDelegate(); //site status update del function
 
-        public void populateDataView(StackPanel panel)
+        public void PopulateDataView(StackPanel panel)
         {
-            dataView.Children.Clear();
-            dataView.Children.Add(panel);
+            DataView.Children.Clear();
+            DataView.Children.Add(panel);
         }
 
         private void Bootstrap_FindAndLoad_UsbDevices()
@@ -68,13 +68,13 @@ namespace sconnRem
             USB usbcomm = new USB();
              //   usbcomm.UsbComm_Test_Trx();
             //  usbcomm.UsbComm_Sample_Trx();
-            bool UsbConn = usbcomm.TestConnection();
-            if (UsbConn)
+            bool usbConn = usbcomm.TestConnection();
+            if (usbConn)
             {
                 sconnSite site = new sconnSite("USB_PROG",400,"",0,"");   //string siteName, int intervalMs, string server, int port, string password)
                 site.UsbCom = true;
                 sconnDataShare.addSite(site);
-                ConfigManager.saveConfig();
+                _configManager.saveConfig();
             }
 
 
@@ -82,29 +82,29 @@ namespace sconnRem
             // usbcomm.TransmitLoop();
         }
 
-        public sconnView()
+        public SconnView()
         {
             IUnityContainer container = new UnityContainer();
             container.RegisterType<AlarmSystemConfigManager, AlarmSystemConfigManager>();
 
 
-            ConfigSource.SetXmlPath(Directory.GetCurrentDirectory().ToString());
-            ConfigSource.SetXmlFileName("sconnRem.xml");
-            settings = ConfigSource.LoadRegistryData();
+            _configSource.SetXmlPath(Directory.GetCurrentDirectory().ToString());
+            _configSource.SetXmlFileName("sconnRem.xml");
+            _settings = _configSource.LoadRegistryData();
 
-            CultureInfo info = new CultureInfo(settings.CultureName);
+            CultureInfo info = new CultureInfo(_settings.CultureName);
             System.Globalization.CultureInfo.DefaultThreadCurrentCulture = info; //CultureInfo.InstalledUICulture;
             Thread.CurrentThread.CurrentUICulture = info;
             Thread.CurrentThread.CurrentCulture = info;
 
             //prompt for access before init
-            seDiag = new sconnSecurityDialog();
-            seDiag.WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
+            _seDiag = new SconnSecurityDialog();
+            _seDiag.WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
            // seDiag.Topmost = true;
-            seDiag.Closed += seDiag_Closed;
-            seDiag.Closing += seDiag_Closing;
-            seDiag.KeyDown += seDiag_KeyDown;
-            seDiag.loginButton.Click += loginButton_Click;
+            _seDiag.Closed += seDiag_Closed;
+            _seDiag.Closing += seDiag_Closing;
+            _seDiag.KeyDown += seDiag_KeyDown;
+            _seDiag.LoginButton.Click += loginButton_Click;
 
 
             Bootstrap_FindAndLoad_UsbDevices();
@@ -113,36 +113,36 @@ namespace sconnRem
             //mapView = new MapWindow();
             //mapView.Show();
 
-            statusView = new statusViewPanel();
+            _statusView = new StatusViewPanel();
 
-            initMainView();
+            InitMainView();
             this.Hide(); //hide gui until login 
 
 
         }
 
 
-        private void initMainView()
+        private void InitMainView()
         {
-            initSiteConfig();
+            InitSiteConfig();
             InitializeComponent();
-            initSiteList();
+            InitSiteList();
            
-            viewHeight = dataView.Height;
-            viewWidth = dataView.Width;
+            ViewHeight = DataView.Height;
+            ViewWidth = DataView.Width;
         }
       
 
-        private void initSiteConfig()
+        private void InitSiteConfig()
         {
 
             /**** site config is read from file no need to add */
-            ConfigSource.LoadConfig(DataSourceType.xml);
+            _configSource.LoadConfig(DataSourceType.xml);
             //sconnDataShare.removeSites();
 
-            sconnTask = new System.Timers.Timer(1000);
-            sconnTask.Elapsed += new ElapsedEventHandler(ProcessSiteUpdates);
-            sconnTask.Interval = 1000;
+            _sconnTask = new System.Timers.Timer(1000);
+            _sconnTask.Elapsed += new ElapsedEventHandler(ProcessSiteUpdates);
+            _sconnTask.Interval = 1000;
            // sconnTask.Start();  -disable for network debug
 
         }
@@ -161,15 +161,15 @@ namespace sconnRem
         {
             if (sconnDataShare.SiteLiveViewEnabled == true)
             {
-                int CurrentTabId = 0;//default is first tab;
-                if (siteView != null)
+                int currentTabId = 0;//default is first tab;
+                if (_siteView != null)
                 {
-                    CurrentTabId =  siteView.siteTabView.SelectedIndex;
+                    currentTabId =  _siteView.SiteTabView.SelectedIndex;
                 }
-                siteView = new SiteView(ViewedSiteId);
-                siteView.siteTabView.SelectedIndex = CurrentTabId;
-                dataView.Children.Clear();
-                dataView.Children.Add(siteView);
+                _siteView = new SiteView(_viewedSiteId);
+                _siteView.SiteTabView.SelectedIndex = currentTabId;
+                DataView.Children.Clear();
+                DataView.Children.Add(_siteView);
             }
         }
 
@@ -177,9 +177,9 @@ namespace sconnRem
 
         private void LoadSiteEdit()
         {
-            siteEditView = new SiteEditView(ViewedSiteId);
-            dataView.Children.Clear();
-            dataView.Children.Add(siteEditView);
+            _siteEditView = new SiteEditView(_viewedSiteId);
+            DataView.Children.Clear();
+            DataView.Children.Add(_siteEditView);
         }
 
         private void ProcessSiteUpdates(object source, ElapsedEventArgs e)
@@ -196,14 +196,14 @@ namespace sconnRem
                         {
                             sites[currentSite].LastUpdate = DateTime.Now;
                            // ThreadStart threadDelegate = new ThreadStart(updateSite);
-                            Thread updateThread = new Thread(() => updateSite( sites[currentSite]));         
+                            Thread updateThread = new Thread(() => UpdateSite( sites[currentSite]));         
                             updateThread.Start();
                         }
 
                     }
                 } 
                 //run gui update delegate after sites are refereshed
-                dataView.Dispatcher.Invoke(new updateSiteViewDelegate(LoadSiteView));
+                DataView.Dispatcher.Invoke(new UpdateSiteViewDelegate(LoadSiteView));
 
             }
             catch (Exception)
@@ -213,21 +213,21 @@ namespace sconnRem
         }
 
 
-        private void updateSite( sconnSite site)
+        private void UpdateSite( sconnSite site)
         {
-            ConfigManager.updateSiteConfig( site);  //update status for each device ( read IO registers )
+            _configManager.updateSiteConfig( site);  //update status for each device ( read IO registers )
         }
 
-        private void updateSites()
+        private void UpdateSites()
         {
             sconnSite[] sites = sconnDataShare.getSites();
             for (int i = 0; i < sites.GetLength(0); i++)
 			    {
-                    ConfigManager.updateSiteConfig( sites[i]); //update status for each device ( read IO registers )
+                    _configManager.updateSiteConfig( sites[i]); //update status for each device ( read IO registers )
 			    }
         }
 
-        private bool isUserValid(string username, string password)
+        private bool IsUserValid(string username, string password)
         {
             bool valid = false;
             //check sql/file user database
@@ -241,16 +241,16 @@ namespace sconnRem
 
         void loginButton_Click(object sender, RoutedEventArgs e)
         {
-            string login = seDiag.usernameInput.Text;
-            string password = seDiag.passwordInput.Text;
+            string login = _seDiag.UsernameInput.Text;
+            string password = _seDiag.PasswordInput.Text;
             if (login != null && password != null)
             {
-                if (isUserValid(login, password))
+                if (IsUserValid(login, password))
                 {
                     //TODO : check user permissions
-                    seDiag.UserValidated = true;
+                    _seDiag.UserValidated = true;
                     this.Show();
-                    seDiag.Close();
+                    _seDiag.Close();
                 }
             }
         }
@@ -258,7 +258,7 @@ namespace sconnRem
 
         void seDiag_Closing(object sender, EventArgs e)
         {
-            if (!seDiag.UserValidated)
+            if (!_seDiag.UserValidated)
             {
                 this.Close(); //close parent only if user did not auth
             }
@@ -269,28 +269,28 @@ namespace sconnRem
     
         }
 
-        public  void setMainView(StackPanel viewContent)
+        public  void SetMainView(StackPanel viewContent)
         {
-            dataView.Children.Clear();
-            dataView.Children.Add(viewContent);
+            DataView.Children.Clear();
+            DataView.Children.Add(viewContent);
         }
 
-        private void initSiteList()
+        private void InitSiteList()
         {
-            siteList.Children.Clear();
+            SiteList.Children.Clear();
             sconnSite[] sites = sconnDataShare.getSites();
-            sitesPanel = new SitePanel(siteList.Width, siteList.Height); 
+            _sitesPanel = new SitePanel(SiteList.Width, SiteList.Height); 
             foreach (sconnSite site in sites)
             {
-                SitePanelItem item = new SitePanelItem(site.siteName, siteList.Width, siteList.Height *0.1, site.siteID);
-                item.siteBtn1.Click += new RoutedEventHandler((sender, e) => ViewSiteClick(sender, e, item.siteName));
-                item.siteBtn2.Click += new RoutedEventHandler((sender, e) => ConfigSiteClick(sender, e, item.siteName));
-                item.siteBtn3.Click += new RoutedEventHandler((sender, e) => EditSiteClick(sender, e, item.siteName));
+                SitePanelItem item = new SitePanelItem(site.siteName, SiteList.Width, SiteList.Height *0.1, site.siteID);
+                item.SiteBtn1.Click += new RoutedEventHandler((sender, e) => ViewSiteClick(sender, e, item.SiteName));
+                item.SiteBtn2.Click += new RoutedEventHandler((sender, e) => ConfigSiteClick(sender, e, item.SiteName));
+                item.SiteBtn3.Click += new RoutedEventHandler((sender, e) => EditSiteClick(sender, e, item.SiteName));
                 //siteList.Children.Add(item);
-                sitesPanel.addStatusItem(item);
+                _sitesPanel.AddStatusItem(item);
             }
-            sitesPanel.SelectItemChanged += sitesPanel_SelectItemChanged;        
-            siteList.Children.Add(sitesPanel);
+            _sitesPanel.SelectItemChanged += sitesPanel_SelectItemChanged;        
+            SiteList.Children.Add(_sitesPanel);
             //ImageBrush img1 = new ImageBrush();
             //ImageBrush img2 = new ImageBrush();
             //ImageBrush img3 = new ImageBrush();
@@ -305,7 +305,7 @@ namespace sconnRem
 
         void sitesPanel_SelectItemChanged(object sender, EventArgs e)
         {
-            initSiteList();  
+            InitSiteList();  
         }
 
 
@@ -332,19 +332,19 @@ namespace sconnRem
         }
 
         /********  connect and upload config to remote device in background ******/
-        private void configureSiteThread(int siteID)
+        private void ConfigureSiteThread(int siteId)
         {
-            Thread updateThread = new Thread(() => configureSite(siteID));
+            Thread updateThread = new Thread(() => ConfigureSite(siteId));
             updateThread.Start();
         } 
     
-        private void configureSite(int siteID)
+        private void ConfigureSite(int siteId)
         {
             //write config to remote device
-            sconnSite site = sconnDataShare.getSite(siteID);
+            sconnSite site = sconnDataShare.getSite(siteId);
 
-            ConfigManager.WriteGlobalCfg( site);
-            ConfigManager.WriteDeviceCfg( site);
+            _configManager.WriteGlobalCfg( site);
+            _configManager.WriteDeviceCfg( site);
         }
 
 
@@ -355,7 +355,7 @@ namespace sconnRem
             if ( success == true)
             {
                 sconnDataShare.SiteLiveViewEnabled = true;
-                ViewedSiteId = siteId;
+                _viewedSiteId = siteId;
                 LoadSiteView();
 
             }
@@ -376,8 +376,8 @@ namespace sconnRem
                         sconnDataShare.SiteLiveViewEnabled = false; //suppress view updates during connection test
                         ViewSiteLoading status = new ViewSiteLoading(sconnSite.siteID);
                         status.ConnectedDel += SiteLoadingFinished;
-                        dataView.Children.Clear();
-                        dataView.Children.Add(status);
+                        DataView.Children.Clear();
+                        DataView.Children.Add(status);
                         status.TestConnection();
                       
                     }
@@ -409,7 +409,7 @@ namespace sconnRem
                         bool updated = true; //TODO: create non-blocking update
                         if (updated)
                         {
-                            ViewedSiteId = sconnSite.siteID;
+                            _viewedSiteId = sconnSite.siteID;
 
                             //LoadSiteEdit();
 
@@ -422,14 +422,14 @@ namespace sconnRem
                             DeviceCredentials cred = new DeviceCredentials();
                             cred.Password = sconnSite.authPasswd;
                             cred.Username = "";
-                            AlarmSystemConfigManager _Manager = new AlarmSystemConfigManager(info, cred);
+                            AlarmSystemConfigManager manager = new AlarmSystemConfigManager(info, cred);
                             Device alrmSysDev = new Device();
                             alrmSysDev.Credentials = cred;
                             alrmSysDev.EndpInfo = info;
-                            _Manager.RemoteDevice = alrmSysDev;
+                            manager.RemoteDevice = alrmSysDev;
 
 
-                            ConfigNavBootstrapper bootstrapper = new ConfigNavBootstrapper(_Manager);
+                            ConfigNavBootstrapper bootstrapper = new ConfigNavBootstrapper(manager);
                             bootstrapper.Run();
 
                             //ConfigureSiteViewModel context = new ConfigureSiteViewModel(_Manager);
@@ -440,9 +440,9 @@ namespace sconnRem
                         }
                         else
                         {
-                            statusView.setStatusText("Błąd połączenia");
-                            dataView.Children.Clear();
-                            dataView.Children.Add(statusView);
+                            _statusView.SetStatusText("Błąd połączenia");
+                            DataView.Children.Clear();
+                            DataView.Children.Add(_statusView);
                         }
                     }
                 }
@@ -452,19 +452,19 @@ namespace sconnRem
 
         private void setupMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            siteManagerWnd = new sconnSiteManagerWindow();
-            siteManagerWnd.ConfigChanged += siteManagerWnd_ConfigChanged;
+            _siteManagerWnd = new SconnSiteManagerWindow();
+            _siteManagerWnd.ConfigChanged += siteManagerWnd_ConfigChanged;
         }
 
         void siteManagerWnd_ConfigChanged(object sender, EventArgs e)
         {
             //reload sitelist when config was changed by config manager
-            initSiteList();
+            InitSiteList();
         }
 
         private void saveConfigMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            ConfigSource.SaveConfig(DataSourceType.xml);
+            _configSource.SaveConfig(DataSourceType.xml);
         }
 
         private void LangSelectMenuItem_Click(object sender, RoutedEventArgs e)
@@ -480,25 +480,25 @@ namespace sconnRem
 
         private void File_SaveAs_MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            Microsoft.Win32.SaveFileDialog Diag = new Microsoft.Win32.SaveFileDialog();
-            Diag.FileName = "sconnRem_" + DateTime.Now.ToShortDateString();
-            Diag.DefaultExt = ".xml";
-            Diag.Filter = "Xml Document (*.xml)|*.xml|All files (*.*)|*.*";
+            Microsoft.Win32.SaveFileDialog diag = new Microsoft.Win32.SaveFileDialog();
+            diag.FileName = "sconnRem_" + DateTime.Now.ToShortDateString();
+            diag.DefaultExt = ".xml";
+            diag.Filter = "Xml Document (*.xml)|*.xml|All files (*.*)|*.*";
 
-            XDocument ConfigDoc = new XDocument();
-            ConfigDoc = ConfigSource.GetConfigFileXmlLinq(); //GetConfigFileXml();
-            Nullable<bool> result = Diag.ShowDialog();
+            XDocument configDoc = new XDocument();
+            configDoc = _configSource.GetConfigFileXmlLinq(); //GetConfigFileXml();
+            Nullable<bool> result = diag.ShowDialog();
             if (result == true)
             {
-                string filename = Diag.FileName;
-                ConfigDoc.Save(filename);
+                string filename = diag.FileName;
+                configDoc.Save(filename);
             }
 
         }
 
         private void File_Save_MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            ConfigSource.SaveConfig(DataSourceType.xml);
+            _configSource.SaveConfig(DataSourceType.xml);
         }
         private void File_Import_MenuItem_Click(object sender, RoutedEventArgs e)
         {
@@ -511,9 +511,9 @@ namespace sconnRem
             System.Globalization.CultureInfo.DefaultThreadCurrentCulture = info;
             Thread.CurrentThread.CurrentCulture = info;
             Thread.CurrentThread.CurrentUICulture = info;
-            settings.CultureName = info.Name;
-            ConfigSource.SaveSettingsToRegistry(settings);
-            sconnView view = new sconnView();
+            _settings.CultureName = info.Name;
+            _configSource.SaveSettingsToRegistry(_settings);
+            SconnView view = new SconnView();
             this.Close();
         }
 

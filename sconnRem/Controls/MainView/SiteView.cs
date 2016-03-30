@@ -30,72 +30,72 @@ namespace sconnRem
 
     public class SiteView : StackPanel
     {
-        private StackPanel siteViewPanel;
-        private int _SiteId;
-        private sconnCfgMngr ConfigManager = new sconnCfgMngr();
+        private StackPanel _siteViewPanel;
+        private int _siteId;
+        private sconnCfgMngr _configManager = new sconnCfgMngr();
 
-        private TextBox gsmBx;
-        private CheckBox cbxAddLineFeed;
-        private CheckBox cbxAddCarriageReturn;
-        private CheckBox cbxAddSignSub;
+        private TextBox _gsmBx;
+        private CheckBox _cbxAddLineFeed;
+        private CheckBox _cbxAddCarriageReturn;
+        private CheckBox _cbxAddSignSub;
 
-        private AlarmSystemConfigManager _Manager;
+        private AlarmSystemConfigManager _manager;
 
 
         public bool LiveViewEnabled { get; set; }
 
-        public StackPanel SiteViewPanel { get { return siteViewPanel; } }
+        public StackPanel SiteViewPanel { get { return _siteViewPanel; } }
 
-        public SiteView(int siteID)
+        public SiteView(int siteId)
         {
-            _SiteId = siteID;
-            siteViewPanel = new StackPanel();
-            sconnSite site = sconnDataShare.getSite(_SiteId);
+            _siteId = siteId;
+            _siteViewPanel = new StackPanel();
+            sconnSite site = sconnDataShare.getSite(_siteId);
             EndpointInfo info = new EndpointInfo();
             info.Hostname = site.serverIP;
             info.Port = site.serverPort;
             DeviceCredentials cred = new DeviceCredentials();
             cred.Password = site.authPasswd;
             cred.Username = "";
-            _Manager = new AlarmSystemConfigManager(info,cred);
-            updateView(ref site);
+            _manager = new AlarmSystemConfigManager(info,cred);
+            UpdateView(ref site);
         }
 
         public void UpdateViewBody()
         {
-            sconnSite site = sconnDataShare.getSite(_SiteId);
-            updateView(ref site);
+            sconnSite site = sconnDataShare.getSite(_siteId);
+            UpdateView(ref site);
             this.Children.Clear();
-            this.Children.Add(siteViewPanel);
+            this.Children.Add(_siteViewPanel);
         }
 
         private void OutputClick(object sender, RoutedEventArgs e, int outNo)
         {
-            sconnSite site = sconnDataShare.getSite(_SiteId);
+            sconnSite site = sconnDataShare.getSite(_siteId);
             int outputNo = outNo;
             int outputCfgAddr = ipcDefines.mAdrOutput + (outNo * ipcDefines.mAdrOutputMemSize); //output 1 starts at 0
             int toSet = 0;
             int aktState = site.siteCfg.deviceConfigs[0].memCFG[outputCfgAddr + ipcDefines.mAdrOutputVal];
             toSet = aktState == 1 ? 0 : 1;
             site.siteCfg.deviceConfigs[0].memCFG[outputCfgAddr + ipcDefines.mAdrOutputVal] = (byte)toSet;
-            ConfigManager.WriteDeviceCfg( site);
+            _configManager.WriteDeviceCfg( site);
         }
 
-        private void RelayClick(object sender, RoutedEventArgs e, int Relays)
+        private void RelayClick(object sender, RoutedEventArgs e, int relays)
         {
-            sconnSite site = sconnDataShare.getSite(_SiteId);
-            int RelNo = Relays;
-            int outputCfgAddr = ipcDefines.mAdrRelay + (RelNo * ipcDefines.RelayMemSize);
+            sconnSite site = sconnDataShare.getSite(_siteId);
+            int relNo = relays;
+            int outputCfgAddr = ipcDefines.mAdrRelay + (relNo * ipcDefines.RelayMemSize);
             int toSet = 0;
             int aktState = site.siteCfg.deviceConfigs[0].memCFG[outputCfgAddr + ipcDefines.mAdrRelayVal];
             toSet = aktState == 1 ? 0 : 1;
             site.siteCfg.deviceConfigs[0].memCFG[outputCfgAddr + ipcDefines.mAdrRelayVal] = (byte)toSet;
-            ConfigManager.WriteDeviceCfg( site);
+            _configManager.WriteDeviceCfg( site);
         }
 
         private void ArmChangeClick(object sender, RoutedEventArgs e)
         {
-            sconnSite site = sconnDataShare.getSite(_SiteId);
+            sconnSite site = sconnDataShare.getSite(_siteId);
             int toSet = 0;
             int aktState = site.siteCfg.globalConfig.memCFG[ipcDefines.mAdrArmed];
             toSet = aktState == 1 ? 0 : 1;
@@ -104,12 +104,12 @@ namespace sconnRem
             {
                 site.siteCfg.globalConfig.memCFG[ipcDefines.mAdrViolation] = 0;
             }
-            ConfigManager.WriteGlobalCfg( site);
+            _configManager.WriteGlobalCfg( site);
         }
 
-        public TabControl siteTabView;
-        public TabItem globalTabItem;
-        public StackPanel globalCfgPanel;
+        public TabControl SiteTabView;
+        public TabItem GlobalTabItem;
+        public StackPanel GlobalCfgPanel;
 
         private BitmapImage GetImg()
         {
@@ -125,11 +125,11 @@ namespace sconnRem
         }
            
 
-        private void updateView(ref sconnSite site)
+        private void UpdateView(ref sconnSite site)
         {
             this.Children.Clear();
-            siteViewPanel.Children.Clear();
-            this.Children.Add(siteViewPanel);
+            _siteViewPanel.Children.Clear();
+            this.Children.Add(_siteViewPanel);
 
             if (site.siteCfg != null && sconnDataShare.SiteLiveViewEnabled == true)
             {
@@ -138,8 +138,8 @@ namespace sconnRem
 
                 int sites = site.siteCfg.deviceNo;
                 this.Children.Clear();
-                siteViewPanel.Children.Clear();
-                siteTabView = new TabControl();
+                _siteViewPanel.Children.Clear();
+                SiteTabView = new TabControl();
 
                 double outterMargin = 25.0;
                 SolidColorBrush onBrush = new SolidColorBrush(Colors.YellowGreen);
@@ -148,19 +148,19 @@ namespace sconnRem
                 /************* Global site config *******************/
                 if (site.siteCfg.globalConfig.memCFG != null)
                 {
-                    globalTabItem = new TabItem();
-                    globalTabItem.Header = Properties.Resources.lblSiteDesc;
+                    GlobalTabItem = new TabItem();
+                    GlobalTabItem.Header = Properties.Resources.lblSiteDesc;
 
-                    globalCfgPanel = new StackPanel();
-                    globalCfgPanel.Width = sconnView.viewWidth;
-                    globalCfgPanel.Height = sconnView.viewHeight;
-                    globalCfgPanel.HorizontalAlignment = HorizontalAlignment.Stretch;
-                    globalCfgPanel.VerticalAlignment = VerticalAlignment.Stretch;
+                    GlobalCfgPanel = new StackPanel();
+                    GlobalCfgPanel.Width = SconnView.ViewWidth;
+                    GlobalCfgPanel.Height = SconnView.ViewHeight;
+                    GlobalCfgPanel.HorizontalAlignment = HorizontalAlignment.Stretch;
+                    GlobalCfgPanel.VerticalAlignment = VerticalAlignment.Stretch;
 
                     SolidColorBrush panelBrush = new SolidColorBrush(Colors.LightBlue);
                     SolidColorBrush deviceBrush = new SolidColorBrush(Colors.SkyBlue);
 
-                    globalCfgPanel.Background = panelBrush;
+                    GlobalCfgPanel.Background = panelBrush;
                     GroupBox siteGlobalCfgGroup = new GroupBox();
                     siteGlobalCfgGroup.Header = Properties.Resources.lblGlobalConfigDesc;
                     Grid siteCfgGrid = new Grid();
@@ -186,36 +186,36 @@ namespace sconnRem
                     int cfgPosCounter = 0;
                     for (int i = 0; i < configFieldNames.GetLength(0); i++)
                     {
-                        Label GloballabelDesc = new Label();
-                        GloballabelDesc.Content = configFieldNames[i];
-                        Grid.SetRow(GloballabelDesc, i);
-                        Grid.SetColumn(GloballabelDesc, 0);
-                        siteCfgGrid.Children.Add(GloballabelDesc);
+                        Label globallabelDesc = new Label();
+                        globallabelDesc.Content = configFieldNames[i];
+                        Grid.SetRow(globallabelDesc, i);
+                        Grid.SetColumn(globallabelDesc, 0);
+                        siteCfgGrid.Children.Add(globallabelDesc);
 
-                        int CfgLen = 1;
+                        int cfgLen = 1;
                         if (cfgPosCounter == ipcDefines.mAdrDevID)
                         {
-                            CfgLen = ipcDefines.mAdrDevID_LEN;
+                            cfgLen = ipcDefines.mAdrDevID_LEN;
                         }
                         int cfgval = 0;
                         int shftinc = 0;
-                        for (int b = (CfgLen - 1); b >= 0; b--)
+                        for (int b = (cfgLen - 1); b >= 0; b--)
                         {
                             cfgval |= (site.siteCfg.globalConfig.memCFG[cfgPosCounter + b]) << (8 * shftinc);
                             shftinc++;
                         }
 
 
-                        Label GlobalTextBox = new Label();
-                        GlobalTextBox.Content = cfgval.ToString();
-                        Grid.SetRow(GlobalTextBox, i);
-                        Grid.SetColumn(GlobalTextBox, 1);
-                        siteCfgGrid.Children.Add(GlobalTextBox);
+                        Label globalTextBox = new Label();
+                        globalTextBox.Content = cfgval.ToString();
+                        Grid.SetRow(globalTextBox, i);
+                        Grid.SetColumn(globalTextBox, 1);
+                        siteCfgGrid.Children.Add(globalTextBox);
 
-                        cfgPosCounter += CfgLen;
+                        cfgPosCounter += cfgLen;
                     }
                     siteGlobalCfgGroup.Content = siteCfgGrid;
-                    globalCfgPanel.Children.Add(siteGlobalCfgGroup);
+                    GlobalCfgPanel.Children.Add(siteGlobalCfgGroup);
 
 
                     /************ Deamon Config *************/
@@ -226,15 +226,15 @@ namespace sconnRem
                     siteDeamonGrid.Width = deamonPanel.Width;
                     siteDeamonGrid.Margin = new Thickness(outterMargin, outterMargin, outterMargin, outterMargin);
 
-                    int SiteDeamonType = site.siteCfg.globalConfig.memCFG[ipcDefines.mAdrDeamonType];
-                    if (SiteDeamonType == ipcDefines.DEA_ALARM)
+                    int siteDeamonType = site.siteCfg.globalConfig.memCFG[ipcDefines.mAdrDeamonType];
+                    if (siteDeamonType == ipcDefines.DEA_ALARM)
                     {
-                        RowDefinition ArmDescRow = new RowDefinition();
-                        siteDeamonGrid.RowDefinitions.Add(ArmDescRow);
-                        RowDefinition ArmStateRow = new RowDefinition();
-                        siteDeamonGrid.RowDefinitions.Add(ArmStateRow);
-                        RowDefinition ArmRow = new RowDefinition();
-                        siteDeamonGrid.RowDefinitions.Add(ArmRow);
+                        RowDefinition armDescRow = new RowDefinition();
+                        siteDeamonGrid.RowDefinitions.Add(armDescRow);
+                        RowDefinition armStateRow = new RowDefinition();
+                        siteDeamonGrid.RowDefinitions.Add(armStateRow);
+                        RowDefinition armRow = new RowDefinition();
+                        siteDeamonGrid.RowDefinitions.Add(armRow);
 
                         Label out1Desc = new Label();
                         out1Desc.Content = "Arm State";
@@ -271,25 +271,25 @@ namespace sconnRem
                         Grid.SetColumn(out1Btn, 0);
                         siteDeamonGrid.Children.Add(out1Btn);
                     }
-                    else if (SiteDeamonType == ipcDefines.DEA_ALARM_SCHED)
+                    else if (siteDeamonType == ipcDefines.DEA_ALARM_SCHED)
                     {
 
                     }
-                    else if (SiteDeamonType == ipcDefines.DEA_MAN)
+                    else if (siteDeamonType == ipcDefines.DEA_MAN)
                     {
 
                     }
 
-                    else if (SiteDeamonType == ipcDefines.DEA_SCHED)
+                    else if (siteDeamonType == ipcDefines.DEA_SCHED)
                     {
 
                     }
                     siteDeamonGroup.Content = siteDeamonGrid;
-                    globalCfgPanel.Children.Add(siteDeamonGroup);
+                    GlobalCfgPanel.Children.Add(siteDeamonGroup);
 
 
-                    globalTabItem.Content = globalCfgPanel;
-                    siteTabView.Items.Add(globalTabItem);
+                    GlobalTabItem.Content = GlobalCfgPanel;
+                    SiteTabView.Items.Add(GlobalTabItem);
                 }
 
 
@@ -303,8 +303,8 @@ namespace sconnRem
                     deviceTabItem.Header = site.siteCfg.deviceConfigs[i].GetDeviceNameAt(0); // "Dev " + site.siteCfg.deviceConfigs[i].memCFG[ipcDefines.mAdrDevID];
 
                     StackPanel deviceCfgPanel = new StackPanel();
-                    deviceCfgPanel.Width = sconnView.viewWidth;
-                    deviceCfgPanel.Height = sconnView.viewHeight;
+                    deviceCfgPanel.Width = SconnView.ViewWidth;
+                    deviceCfgPanel.Height = SconnView.ViewHeight;
                     deviceCfgPanel.HorizontalAlignment = HorizontalAlignment.Stretch;
                     deviceCfgPanel.VerticalAlignment = VerticalAlignment.Stretch;
 
@@ -364,14 +364,14 @@ namespace sconnRem
                         Grid.SetColumn(fieldlabelDesc, 0);
                         siteCfgGrid.Children.Add(fieldlabelDesc);
 
-                        int CfgLen = 1;
+                        int cfgLen = 1;
                         if (cfgPosCounter == ipcDefines.mAdrDevID)
                         {
-                            CfgLen = ipcDefines.mAdrDevID_LEN;
+                            cfgLen = ipcDefines.mAdrDevID_LEN;
                         }
                         int cfgval  = 0;
                         int shftinc = 0;
-                        for (int b = (CfgLen-1); b >= 0; b--)
+                        for (int b = (cfgLen-1); b >= 0; b--)
                         {
                             cfgval |= (site.siteCfg.deviceConfigs[i].memCFG[cfgPosCounter + b]) << (8 * shftinc);
                             shftinc++;
@@ -383,7 +383,7 @@ namespace sconnRem
                         Grid.SetColumn(fieldlabelVal, 1);
                         siteCfgGrid.Children.Add(fieldlabelVal);
 
-                        cfgPosCounter += CfgLen;
+                        cfgPosCounter += cfgLen;
                     }
 
                      deviceGlobalCfgGroup.Content = siteCfgGrid;
@@ -424,18 +424,18 @@ namespace sconnRem
                         Grid.SetColumn(battDesc, 0);
                         sensBattStatGrid.Children.Add(battDesc);
 
-                        ProgressBar Pbbattlvl = new ProgressBar();
-                        Pbbattlvl.Height = 50;
-                        Pbbattlvl.Maximum = 100;
-                        Pbbattlvl.Value = site.siteCfg.deviceConfigs[i].memCFG[ipcDefines.mAdrSensorBattLvl];
+                        ProgressBar pbbattlvl = new ProgressBar();
+                        pbbattlvl.Height = 50;
+                        pbbattlvl.Maximum = 100;
+                        pbbattlvl.Value = site.siteCfg.deviceConfigs[i].memCFG[ipcDefines.mAdrSensorBattLvl];
 
                         TextBlock tbBattPercDesc = new TextBlock();
                         tbBattPercDesc.Text = Properties.Resources.lblInputsDesc;
-                        Pbbattlvl.Tag = Pbbattlvl.Value.ToString();
+                        pbbattlvl.Tag = pbbattlvl.Value.ToString();
                        
-                        Grid.SetRow(Pbbattlvl, 1);
-                        Grid.SetColumn(Pbbattlvl, 0);
-                        sensBattStatGrid.Children.Add(Pbbattlvl);
+                        Grid.SetRow(pbbattlvl, 1);
+                        Grid.SetColumn(pbbattlvl, 0);
+                        sensBattStatGrid.Children.Add(pbbattlvl);
 
                         sensBattStatPanel.Children.Add(sensBattStatGrid);
 
@@ -635,7 +635,7 @@ namespace sconnRem
                             }
 
                             OutputButton out1Btn = new OutputButton();
-                            out1Btn.outputNumber = k;
+                            out1Btn.OutputNumber = k;
                             if (outputState == 1)
                             {
                                 out1Btn.Content = Properties.Resources.lblDeactivateDesc;
@@ -644,7 +644,7 @@ namespace sconnRem
                             {
                                 out1Btn.Content = Properties.Resources.lblActivateDesc;
                             }
-                            out1Btn.Click += new RoutedEventHandler((sender, e) => OutputClick(sender, e, out1Btn.outputNumber));
+                            out1Btn.Click += new RoutedEventHandler((sender, e) => OutputClick(sender, e, out1Btn.OutputNumber));
                             Grid.SetRow(out1Btn, 2);
                             Grid.SetColumn(out1Btn, 0);
                             siteOutStateGrid.Children.Add(out1Btn);
@@ -740,7 +740,7 @@ namespace sconnRem
                             }
 
                             OutputButton rel1Btn = new OutputButton();
-                            rel1Btn.outputNumber = k;
+                            rel1Btn.OutputNumber = k;
                             if (relayState == 1)
                             {
                                 rel1Btn.Content = Properties.Resources.lblDeactivateDesc;
@@ -749,7 +749,7 @@ namespace sconnRem
                             {
                                 rel1Btn.Content = Properties.Resources.lblActivateDesc;
                             }
-                            rel1Btn.Click += new RoutedEventHandler((sender, e) => RelayClick(sender, e, rel1Btn.outputNumber));
+                            rel1Btn.Click += new RoutedEventHandler((sender, e) => RelayClick(sender, e, rel1Btn.OutputNumber));
                             Grid.SetRow(rel1Btn, 2);
                             Grid.SetColumn(rel1Btn, 0);
                             siteRelStateGrid.Children.Add(rel1Btn);
@@ -854,29 +854,29 @@ namespace sconnRem
                      schedulesPanel.Children.Add(siteSchedulesGrid);
 
                     /*GSM*/
-                     gsmBx = new TextBox();
-                     gsmBx.Width = 400;
+                     _gsmBx = new TextBox();
+                     _gsmBx.Width = 400;
 
                      Label cbxLabel1 = new Label();
                      cbxLabel1.Content = "Line Feed";
-                     cbxAddLineFeed =  new CheckBox();
-                     cbxAddLineFeed.Content = cbxLabel1;
+                     _cbxAddLineFeed =  new CheckBox();
+                     _cbxAddLineFeed.Content = cbxLabel1;
 
                      Label cbxLabel2 = new Label();
                      cbxLabel2.Content = "Career Return";
-                     cbxAddCarriageReturn = new CheckBox();
-                     cbxAddCarriageReturn.Content = cbxLabel2;
+                     _cbxAddCarriageReturn = new CheckBox();
+                     _cbxAddCarriageReturn.Content = cbxLabel2;
 
                      Label cbxLabel3 = new Label();
                      cbxLabel3.Content = "Substitue (CTRL-Z)";
-                     cbxAddSignSub = new CheckBox();
-                     cbxAddSignSub.Content = cbxLabel3;
+                     _cbxAddSignSub = new CheckBox();
+                     _cbxAddSignSub.Content = cbxLabel3;
                     
 
 
-                     OutputButton gsmBTN = new OutputButton();
-                     gsmBTN.Content = "GSM";
-                     gsmBTN.Click += gsmBTN_Click;
+                     OutputButton gsmBtn = new OutputButton();
+                     gsmBtn.Content = "GSM";
+                     gsmBtn.Click += gsmBTN_Click;
                         
                     deviceOutputGroup.Content = ouputsPanel;
                     deviceInputGroup.Content = inputsPanel;
@@ -889,16 +889,16 @@ namespace sconnRem
                     deviceCfgPanel.Children.Add(deviceRelayGroup);
                     deviceCfgPanel.Children.Add(deviceSchedulesGroup);
 
-                    deviceCfgPanel.Children.Add(gsmBx);
-                    deviceCfgPanel.Children.Add(gsmBTN);
-                    deviceCfgPanel.Children.Add(cbxAddCarriageReturn);
-                    deviceCfgPanel.Children.Add(cbxAddLineFeed);
-                    deviceCfgPanel.Children.Add(cbxAddSignSub);
+                    deviceCfgPanel.Children.Add(_gsmBx);
+                    deviceCfgPanel.Children.Add(gsmBtn);
+                    deviceCfgPanel.Children.Add(_cbxAddCarriageReturn);
+                    deviceCfgPanel.Children.Add(_cbxAddLineFeed);
+                    deviceCfgPanel.Children.Add(_cbxAddSignSub);
                     
 
                     deviceTabItem.Content = deviceCfgPanel;
 
-                    siteTabView.Items.Add(deviceTabItem);
+                    SiteTabView.Items.Add(deviceTabItem);
 
                 }// devices
 
@@ -906,14 +906,14 @@ namespace sconnRem
 
                 /************* Sites summary config *******************/
 
-                TabItem SummaryTabItem = new TabItem();
-                SummaryTabItem.Header = Properties.Resources.lblSummaryDesc;
+                TabItem summaryTabItem = new TabItem();
+                summaryTabItem.Header = Properties.Resources.lblSummaryDesc;
 
-                StackPanel SummaryCfgPanel = new StackPanel();
-                SummaryCfgPanel.Width = sconnView.viewWidth;
-                SummaryCfgPanel.Height = sconnView.viewHeight;
-                SummaryCfgPanel.HorizontalAlignment = HorizontalAlignment.Stretch;
-                SummaryCfgPanel.VerticalAlignment = VerticalAlignment.Stretch;
+                StackPanel summaryCfgPanel = new StackPanel();
+                summaryCfgPanel.Width = SconnView.ViewWidth;
+                summaryCfgPanel.Height = SconnView.ViewHeight;
+                summaryCfgPanel.HorizontalAlignment = HorizontalAlignment.Stretch;
+                summaryCfgPanel.VerticalAlignment = VerticalAlignment.Stretch;
 
                 /*******  Connection Staistic ******/
                 GroupBox siteSummaryStatisticCfgGroup = new GroupBox();
@@ -944,21 +944,21 @@ namespace sconnRem
 
                 for (int x = 0; x < configSummaryFieldNames.GetLength(0); x++)
                 {
-                    Label SummarylabelDesc = new Label();
-                    SummarylabelDesc.Content = configSummaryFieldNames[x];
-                    Grid.SetRow(SummarylabelDesc, x);
-                    Grid.SetColumn(SummarylabelDesc, 0);
-                    siteStatisticGrid.Children.Add(SummarylabelDesc);
+                    Label summarylabelDesc = new Label();
+                    summarylabelDesc.Content = configSummaryFieldNames[x];
+                    Grid.SetRow(summarylabelDesc, x);
+                    Grid.SetColumn(summarylabelDesc, 0);
+                    siteStatisticGrid.Children.Add(summarylabelDesc);
 
-                    Label SummaryTextBox = new Label();
-                    SummaryTextBox.Content = configFieldValues[x];
-                    Grid.SetRow(SummaryTextBox, x);
-                    Grid.SetColumn(SummaryTextBox, 1);
-                    siteStatisticGrid.Children.Add(SummaryTextBox);
+                    Label summaryTextBox = new Label();
+                    summaryTextBox.Content = configFieldValues[x];
+                    Grid.SetRow(summaryTextBox, x);
+                    Grid.SetColumn(summaryTextBox, 1);
+                    siteStatisticGrid.Children.Add(summaryTextBox);
 
                 }
                 siteSummaryStatisticCfgGroup.Content = siteStatisticGrid;
-                SummaryCfgPanel.Children.Add(siteSummaryStatisticCfgGroup);
+                summaryCfgPanel.Children.Add(siteSummaryStatisticCfgGroup);
 
 
                 /*******  Site config summary ******/
@@ -972,13 +972,13 @@ namespace sconnRem
                 siteSummaryConfigGrid.ColumnDefinitions.Add(columnC1);
                 siteSummaryConfigGrid.ColumnDefinitions.Add(columnC2);
 
-                string[] FieldNames = {
+                string[] fieldNames = {
                                                     Properties.Resources.lblDomainDesc,
                                                     Properties.Resources.lblDevicesDesc,
                                                     Properties.Resources.lblTotalInputsDesc,
                                                     Properties.Resources.lblTotalOutputsDesc
                                                 };
-                string[] FieldValues = {
+                string[] fieldValues = {
                                                    site.siteCfg.globalConfig.memCFG[ipcDefines.mAdrDomain].ToString(),
                                                    site.siteCfg.deviceNo.ToString(),
                                                    totalInputs.ToString(),
@@ -993,57 +993,57 @@ namespace sconnRem
 
                 for (int x = 0; x < configSummaryFieldNames.GetLength(0); x++)
                 {
-                    Label SummarylabelDesc = new Label();
-                    SummarylabelDesc.Content = FieldNames[x];
-                    Grid.SetRow(SummarylabelDesc, x);
-                    Grid.SetColumn(SummarylabelDesc, 0);
-                    siteSummaryConfigGrid.Children.Add(SummarylabelDesc);
+                    Label summarylabelDesc = new Label();
+                    summarylabelDesc.Content = fieldNames[x];
+                    Grid.SetRow(summarylabelDesc, x);
+                    Grid.SetColumn(summarylabelDesc, 0);
+                    siteSummaryConfigGrid.Children.Add(summarylabelDesc);
 
-                    Label SummaryTextBox = new Label();
-                    SummaryTextBox.Content = FieldValues[x];
-                    Grid.SetRow(SummaryTextBox, x);
-                    Grid.SetColumn(SummaryTextBox, 1);
-                    siteSummaryConfigGrid.Children.Add(SummaryTextBox);
+                    Label summaryTextBox = new Label();
+                    summaryTextBox.Content = fieldValues[x];
+                    Grid.SetRow(summaryTextBox, x);
+                    Grid.SetColumn(summaryTextBox, 1);
+                    siteSummaryConfigGrid.Children.Add(summaryTextBox);
 
                 }
                 siteSummaryConfigCfgGroup.Content = siteSummaryConfigGrid;
-                SummaryCfgPanel.Children.Add(siteSummaryConfigCfgGroup);
+                summaryCfgPanel.Children.Add(siteSummaryConfigCfgGroup);
 
-                SummaryTabItem.Content = SummaryCfgPanel;
-                siteTabView.Items.Add(SummaryTabItem);
+                summaryTabItem.Content = summaryCfgPanel;
+                SiteTabView.Items.Add(summaryTabItem);
 
-                siteTabView.SelectionChanged += siteTabView_SelectionChanged;
+                SiteTabView.SelectionChanged += siteTabView_SelectionChanged;
                 SolidColorBrush panelBrush2 = new SolidColorBrush(Colors.DeepSkyBlue);
-                siteViewPanel.Background = panelBrush2;
-                siteViewPanel.Width = (double)sconnView.viewWidth;
-                siteViewPanel.Height = (double)sconnView.viewHeight;
-                siteViewPanel.HorizontalAlignment = HorizontalAlignment.Stretch;
-                siteViewPanel.VerticalAlignment = VerticalAlignment.Stretch;
-                siteViewPanel.Children.Add(siteTabView);
+                _siteViewPanel.Background = panelBrush2;
+                _siteViewPanel.Width = (double)SconnView.ViewWidth;
+                _siteViewPanel.Height = (double)SconnView.ViewHeight;
+                _siteViewPanel.HorizontalAlignment = HorizontalAlignment.Stretch;
+                _siteViewPanel.VerticalAlignment = VerticalAlignment.Stretch;
+                _siteViewPanel.Children.Add(SiteTabView);
 
-                this.Children.Add(siteViewPanel);
+                this.Children.Add(_siteViewPanel);
             } //config initialized
 
         }
 
         void gsmBTN_Click(object sender, RoutedEventArgs e)
         {
-            sconnSite site = sconnDataShare.getSite(_SiteId);
-            string cmd = gsmBx.Text;    // "AT\r";
-            if (cbxAddCarriageReturn.IsChecked == true)
+            sconnSite site = sconnDataShare.getSite(_siteId);
+            string cmd = _gsmBx.Text;    // "AT\r";
+            if (_cbxAddCarriageReturn.IsChecked == true)
             {
                 cmd = cmd + '\r';
             }
-            if (cbxAddLineFeed.IsChecked == true)
+            if (_cbxAddLineFeed.IsChecked == true)
             {
                 cmd = cmd + '\n';
             }
-            if (cbxAddSignSub.IsChecked == true)
+            if (_cbxAddSignSub.IsChecked == true)
             {
                 cmd = cmd + Convert.ToChar(26);
             }
             
-            string resp = ConfigManager.SendGsmCommandDirect(site,cmd);
+            string resp = _configManager.SendGsmCommandDirect(site,cmd);
             MessageBoxResult result = MessageBox.Show(resp);
            
             

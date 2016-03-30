@@ -28,7 +28,7 @@ namespace sconnRem
                 {129, "Delayed NC"}
         };
 
-        private string[] InputTypeDescriptions = new string[]
+        private string[] _inputTypeDescriptions = new string[]
         {
             "NO",
             "NC",
@@ -36,18 +36,18 @@ namespace sconnRem
             "Delayed NC"
         };
 
-        public CbxInputTypeSelect(int SelectedIndex)
+        public CbxInputTypeSelect(int selectedIndex)
         {
-            foreach (string desc in InputTypeDescriptions)
+            foreach (string desc in _inputTypeDescriptions)
             {
                 ComboBoxItem cbxItem = new ComboBoxItem();
                 cbxItem.Content = desc;
                 this.Items.Add(cbxItem);
             }
-            if (SelectedIndex < this.Items.Count)
+            if (selectedIndex < this.Items.Count)
             {
-                this.SelectedIndex = SelectedIndex;
-                this.SelectedItem = this.Items[SelectedIndex];
+                this.SelectedIndex = selectedIndex;
+                this.SelectedItem = this.Items[selectedIndex];
             }
 
         }
@@ -56,29 +56,29 @@ namespace sconnRem
         {
             string selName;
             bool valok = InputTypeValueForName.TryGetValue(configVal,  out selName);
-            int SelectedIndex = 0;
-            for (int i = 0; i < InputTypeDescriptions.Count(); i++)
+            int selectedIndex = 0;
+            for (int i = 0; i < _inputTypeDescriptions.Count(); i++)
 			{
 			 ComboBoxItem cbxItem = new ComboBoxItem();
-                cbxItem.Content = InputTypeDescriptions[i];
+                cbxItem.Content = _inputTypeDescriptions[i];
                 this.Items.Add(cbxItem);
                 if (valok)
                 {
-                    if (InputTypeDescriptions[i].Equals(selName))
+                    if (_inputTypeDescriptions[i].Equals(selName))
                     {
-                        SelectedIndex = i;
+                        selectedIndex = i;
                     }
                 }
 			}
 
-            this.SelectedIndex = SelectedIndex;
-            this.SelectedItem = this.Items[SelectedIndex];
+            this.SelectedIndex = selectedIndex;
+            this.SelectedItem = this.Items[selectedIndex];
         }
 
-        public void SetSelectedItem(int ItemNo)
+        public void SetSelectedItem(int itemNo)
         {
-            this.SelectedIndex = ItemNo;
-            this.SelectedItem = this.Items[ItemNo];
+            this.SelectedIndex = itemNo;
+            this.SelectedItem = this.Items[itemNo];
         }
 
     }
@@ -87,7 +87,7 @@ namespace sconnRem
     {
 
 
-         private string[] InputTypeDescriptions = new string[]
+         private string[] _inputTypeDescriptions = new string[]
         {
             "Arm",
             "Disarm",
@@ -98,25 +98,25 @@ namespace sconnRem
             "Armed or Disarmed Violation",
         };
 
-        public CbxInputAgSelect(int SelectedIndex)
+        public CbxInputAgSelect(int selectedIndex)
         {
-            foreach (string desc in InputTypeDescriptions)
+            foreach (string desc in _inputTypeDescriptions)
             {
                 ComboBoxItem cbxItem = new ComboBoxItem();
                 cbxItem.Content = desc;
                 this.Items.Add(cbxItem);
             }
-            if (SelectedIndex < this.Items.Count)
+            if (selectedIndex < this.Items.Count)
             {
-                this.SelectedItem = this.Items[SelectedIndex];
+                this.SelectedItem = this.Items[selectedIndex];
             }
 
         }
 
-        public void SetSelectedItem(int ItemNo)
+        public void SetSelectedItem(int itemNo)
         {
-            this.SelectedIndex = ItemNo;
-            this.SelectedItem = this.Items[ItemNo];
+            this.SelectedIndex = itemNo;
+            this.SelectedItem = this.Items[itemNo];
         }
     }
 
@@ -126,7 +126,7 @@ namespace sconnRem
     {
 
 
-        private string[] ZoneDescriptions = new string[]    //TODO - load from name cfg
+        private string[] _zoneDescriptions = new string[]    //TODO - load from name cfg
         {
             "Zone 1",
             "Zone 2",
@@ -146,25 +146,25 @@ namespace sconnRem
             "Zone 16"
         };
 
-        public CbxZoneSelect(int SelectedIndex)
+        public CbxZoneSelect(int selectedIndex)
         {
-            foreach (string desc in ZoneDescriptions)
+            foreach (string desc in _zoneDescriptions)
             {
                 ComboBoxItem cbxItem = new ComboBoxItem();
                 cbxItem.Content = desc;
                 this.Items.Add(cbxItem);
             }
-            if (SelectedIndex < this.Items.Count)
+            if (selectedIndex < this.Items.Count)
             {
-                this.SelectedItem = this.Items[SelectedIndex];
+                this.SelectedItem = this.Items[selectedIndex];
             }
 
         }
 
-        public void SetSelectedItem(int ItemNo)
+        public void SetSelectedItem(int itemNo)
         {
-            this.SelectedIndex = ItemNo;
-            this.SelectedItem = this.Items[ItemNo];
+            this.SelectedIndex = itemNo;
+            this.SelectedItem = this.Items[itemNo];
         }
     }
 
@@ -214,11 +214,11 @@ namespace sconnRem
         };
 
         public int InputsNo { get; set; }
-        private Grid GrdInputsConfig;
-        private List<Label> LblInputNames;
-        private List<CbxInputTypeSelect> CbxInputTypeSelect;
-        private List<CbxInputAgSelect> CbxInputAgSelect;
-        private List<CbxZoneSelect>     CbxZoneSelect;
+        private Grid _grdInputsConfig;
+        private List<Label> _lblInputNames;
+        private List<CbxInputTypeSelect> _cbxInputTypeSelect;
+        private List<CbxInputAgSelect> _cbxInputAgSelect;
+        private List<CbxZoneSelect>     _cbxZoneSelect;
         
 
         private void InitStaticFields()
@@ -227,104 +227,104 @@ namespace sconnRem
             ColumnDefinition colDef2 = new ColumnDefinition();
             ColumnDefinition colDef3 = new ColumnDefinition();
             ColumnDefinition colDef4 = new ColumnDefinition();
-            GrdInputsConfig.ColumnDefinitions.Add(colDef1);
-            GrdInputsConfig.ColumnDefinitions.Add(colDef2);
-            GrdInputsConfig.ColumnDefinitions.Add(colDef3);
-            GrdInputsConfig.ColumnDefinitions.Add(colDef4);
+            _grdInputsConfig.ColumnDefinitions.Add(colDef1);
+            _grdInputsConfig.ColumnDefinitions.Add(colDef2);
+            _grdInputsConfig.ColumnDefinitions.Add(colDef3);
+            _grdInputsConfig.ColumnDefinitions.Add(colDef4);
         }
 
 
-        public byte GetInputAgAt(int InputNo)
+        public byte GetInputAgAt(int inputNo)
         {
-            int selindex = CbxInputAgSelect[InputNo].SelectedIndex;
+            int selindex = _cbxInputAgSelect[inputNo].SelectedIndex;
              if (selindex >= 0){
-                 ComboBoxItem selitem = (ComboBoxItem)CbxInputAgSelect[InputNo].Items[selindex]; 
+                 ComboBoxItem selitem = (ComboBoxItem)_cbxInputAgSelect[inputNo].Items[selindex]; 
                 return InputAgNameValue[(string)selitem.Content];            
              }
 
             return 0;
         }
 
-        public byte GetInputTypeAt(int InputNo)
+        public byte GetInputTypeAt(int inputNo)
         {
-             int selindex = CbxInputTypeSelect[InputNo].SelectedIndex;
+             int selindex = _cbxInputTypeSelect[inputNo].SelectedIndex;
              if (selindex >= 0)
              {
-                 ComboBoxItem selitem = (ComboBoxItem)CbxInputTypeSelect[InputNo].Items[selindex];
+                 ComboBoxItem selitem = (ComboBoxItem)_cbxInputTypeSelect[inputNo].Items[selindex];
                  return InputTypeNameValue[(string)selitem.Content];
              }
              return 0;
         }
 
-        public GbxConfigureInputsGroup(byte[] InputsConfig, int Inputs) : base()
+        public GbxConfigureInputsGroup(byte[] inputsConfig, int inputs) : base()
         {
-            GrdInputsConfig = new Grid();
-            LblInputNames = new List<Label>();
-            CbxInputTypeSelect = new List<CbxInputTypeSelect>();
-            CbxInputAgSelect = new List<CbxInputAgSelect>();
-            CbxZoneSelect = new List<CbxZoneSelect>();
+            _grdInputsConfig = new Grid();
+            _lblInputNames = new List<Label>();
+            _cbxInputTypeSelect = new List<CbxInputTypeSelect>();
+            _cbxInputAgSelect = new List<CbxInputAgSelect>();
+            _cbxZoneSelect = new List<CbxZoneSelect>();
 
-            this.InputsNo = Inputs;
+            this.InputsNo = inputs;
             InitStaticFields();
             for (int i = 0; i < InputsNo; i++)
             {
                 //create required rows 
                 RowDefinition rowDef1 = new RowDefinition();
-                GrdInputsConfig.RowDefinitions.Add(rowDef1);
+                _grdInputsConfig.RowDefinitions.Add(rowDef1);
 
                 //set type select
-                CbxInputTypeSelect.Add(new CbxInputTypeSelect(InputsConfig[ipcDefines.mAdrInput + (i * ipcDefines.mAdrInputMemSize) + ipcDefines.mAdrInputType]));
-                Grid.SetRow(CbxInputTypeSelect[i], i);
-                Grid.SetColumn(CbxInputTypeSelect[i], 1);
-                GrdInputsConfig.Children.Add(CbxInputTypeSelect[i]);
+                _cbxInputTypeSelect.Add(new CbxInputTypeSelect(inputsConfig[ipcDefines.mAdrInput + (i * ipcDefines.mAdrInputMemSize) + ipcDefines.mAdrInputType]));
+                Grid.SetRow(_cbxInputTypeSelect[i], i);
+                Grid.SetColumn(_cbxInputTypeSelect[i], 1);
+                _grdInputsConfig.Children.Add(_cbxInputTypeSelect[i]);
 
                 //set AG select
-                CbxInputAgSelect.Add(new CbxInputAgSelect(InputsConfig[ipcDefines.mAdrInput + (i * ipcDefines.mAdrInputMemSize) + ipcDefines.mAdrInputAG]));
+                _cbxInputAgSelect.Add(new CbxInputAgSelect(inputsConfig[ipcDefines.mAdrInput + (i * ipcDefines.mAdrInputMemSize) + ipcDefines.mAdrInputAG]));
                 //CbxInputAgSelect[i].SelectedIndex = 0;
-                Grid.SetRow(CbxInputAgSelect[i], i);
-                Grid.SetColumn(CbxInputAgSelect[i], 2);
-                GrdInputsConfig.Children.Add(CbxInputAgSelect[i]);
+                Grid.SetRow(_cbxInputAgSelect[i], i);
+                Grid.SetColumn(_cbxInputAgSelect[i], 2);
+                _grdInputsConfig.Children.Add(_cbxInputAgSelect[i]);
 
                 //set type select
-                CbxZoneSelect.Add(new CbxZoneSelect(InputsConfig[ipcDefines.mAdrInput + (i * ipcDefines.mAdrInputMemSize) + ipcDefines.mAdrInputZoneId]));
-                Grid.SetRow(CbxZoneSelect[i], i);
-                Grid.SetColumn(CbxZoneSelect[i], 3);
-                GrdInputsConfig.Children.Add(CbxZoneSelect[i]);
+                _cbxZoneSelect.Add(new CbxZoneSelect(inputsConfig[ipcDefines.mAdrInput + (i * ipcDefines.mAdrInputMemSize) + ipcDefines.mAdrInputZoneId]));
+                Grid.SetRow(_cbxZoneSelect[i], i);
+                Grid.SetColumn(_cbxZoneSelect[i], 3);
+                _grdInputsConfig.Children.Add(_cbxZoneSelect[i]);
 
             }
         }
 
-        public GbxConfigureInputsGroup(byte[] InputsConfig, byte[][] InputsNamesConfig, int Inputs)
-            : this(InputsConfig, Inputs)
+        public GbxConfigureInputsGroup(byte[] inputsConfig, byte[][] inputsNamesConfig, int inputs)
+            : this(inputsConfig, inputs)
         {
-            this.InputsNo = Inputs;
+            this.InputsNo = inputs;
             for (int i = 0; i < InputsNo; i++)
             {
                 //set names
-                LblInputNames.Add(new Label());
-                LblInputNames[i].Content = System.Text.Encoding.BigEndianUnicode.GetString(InputsNamesConfig[i], 0, InputsNamesConfig[i].GetLength(0)); 
-                Grid.SetRow(LblInputNames[i], i);
-                Grid.SetColumn(LblInputNames[i], 0);
-                GrdInputsConfig.Children.Add(LblInputNames[i]);
+                _lblInputNames.Add(new Label());
+                _lblInputNames[i].Content = System.Text.Encoding.BigEndianUnicode.GetString(inputsNamesConfig[i], 0, inputsNamesConfig[i].GetLength(0)); 
+                Grid.SetRow(_lblInputNames[i], i);
+                Grid.SetColumn(_lblInputNames[i], 0);
+                _grdInputsConfig.Children.Add(_lblInputNames[i]);
             }
 
             this.Visibility = Visibility.Visible;
             bool visisble = this.IsVisible;
             this.Header = "Input Config";
 
-            this.Content = GrdInputsConfig;
+            this.Content = _grdInputsConfig;
 
         }
 
-        public void UpdateData(byte[] InputsConfig, byte[][] InputsNamesConfig, int Inputs)
+        public void UpdateData(byte[] inputsConfig, byte[][] inputsNamesConfig, int inputs)
         {
-            this.InputsNo = Inputs;
+            this.InputsNo = inputs;
             for (int i = 0; i < InputsNo; i++)
             {
 
-                LblInputNames[i].Content = System.Text.Encoding.BigEndianUnicode.GetString(InputsNamesConfig[i + ipcDefines.mAddr_NAMES_Inputs_Pos], 0, InputsNamesConfig[i + ipcDefines.mAddr_NAMES_Inputs_Pos].GetLength(0));
-                CbxInputTypeSelect[i].SetSelectedItem(InputsConfig[ipcDefines.mAdrInput + i * ipcDefines.mAdrInputMemSize + ipcDefines.mAdrInputType]);
-                CbxInputAgSelect[i].SetSelectedItem(InputsConfig[ipcDefines.mAdrInput + i * ipcDefines.mAdrInputMemSize + ipcDefines.mAdrInputAG]);
+                _lblInputNames[i].Content = System.Text.Encoding.BigEndianUnicode.GetString(inputsNamesConfig[i + ipcDefines.mAddr_NAMES_Inputs_Pos], 0, inputsNamesConfig[i + ipcDefines.mAddr_NAMES_Inputs_Pos].GetLength(0));
+                _cbxInputTypeSelect[i].SetSelectedItem(inputsConfig[ipcDefines.mAdrInput + i * ipcDefines.mAdrInputMemSize + ipcDefines.mAdrInputType]);
+                _cbxInputAgSelect[i].SetSelectedItem(inputsConfig[ipcDefines.mAdrInput + i * ipcDefines.mAdrInputMemSize + ipcDefines.mAdrInputAG]);
             
             }
         }

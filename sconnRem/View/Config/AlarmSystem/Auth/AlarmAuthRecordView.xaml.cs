@@ -23,14 +23,14 @@ namespace sconnRem.View.Config.AlarmSystem.Auth
     [ViewSortHint("04")]
     public partial class AlarmAuthRecordView : UserControl, IPartImportsSatisfiedNotification
     {
-        private const string mainContentRegionName = "MainContentRegion";
+        private const string MainContentRegionName = "MainContentRegion";
 
         // todo: 17a - ContactsView Avatar Option
         // This navigation uri provides additional query data to indicate the 'Avatar' view should be shown.
-        private static Uri contactsAvatarsViewUri = new Uri("ContactsView?Show=Avatars", UriKind.Relative);
+        private static Uri _contactsAvatarsViewUri = new Uri("ContactsView?Show=Avatars", UriKind.Relative);
 
         [Import]
-        public IRegionManager regionManager;
+        public IRegionManager RegionManager;
 
         public AlarmAuthRecordView()
         {
@@ -39,7 +39,7 @@ namespace sconnRem.View.Config.AlarmSystem.Auth
 
         void IPartImportsSatisfiedNotification.OnImportsSatisfied()
         {
-            IRegion mainContentRegion = this.regionManager.Regions[mainContentRegionName];
+            IRegion mainContentRegion = this.RegionManager.Regions[MainContentRegionName];
             if (mainContentRegion != null && mainContentRegion.NavigationService != null)
             {
                 mainContentRegion.NavigationService.Navigated += this.MainContentRegion_Navigated;
@@ -58,7 +58,7 @@ namespace sconnRem.View.Config.AlarmSystem.Auth
 
         private void NavigateToContactAvatarsRadioButton_Click(object sender, RoutedEventArgs e)
         {
-            this.regionManager.RequestNavigate(mainContentRegionName, contactsAvatarsViewUri);
+            this.RegionManager.RequestNavigate(MainContentRegionName, _contactsAvatarsViewUri);
         }
     }
 

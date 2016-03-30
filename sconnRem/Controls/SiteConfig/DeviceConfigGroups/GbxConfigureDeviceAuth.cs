@@ -15,17 +15,17 @@ namespace sconnRem.Controls
 
         public int DeviceNo { get; set; }
 
-        private Grid AuthDevCfgGrid;
+        private Grid _authDevCfgGrid;
 
-        private ListView AuthedView;
+        private ListView _authedView;
 
-        private TextBox TbxDeviceIdEntry;
+        private TextBox _tbxDeviceIdEntry;
 
-        private Button BtnAddDeviceAuth;
+        private Button _btnAddDeviceAuth;
 
-        private Button BtnRmvDeviceAuth;
+        private Button _btnRmvDeviceAuth;
 
-        private Button BtnEditDeviceAuth;
+        private Button _btnEditDeviceAuth;
 
         public ListViewItem SelectedDevice { get; set; }
 
@@ -34,16 +34,16 @@ namespace sconnRem.Controls
             LoadChildControls();
             bool visisble = this.IsVisible;
             this.Header = "Authorized devices";
-            this.Content = AuthDevCfgGrid;
+            this.Content = _authDevCfgGrid;
 
         }
 
         public byte[] Serialize()
         {
             byte[] bytes = new byte[ipcDefines.SYS_ALARM_DEV_AUTH_MEM_SIZE];
-            for (int i = 0; i < AuthedView.Items.Count; i++)
+            for (int i = 0; i < _authedView.Items.Count; i++)
             {
-                ListViewItem item = (ListViewItem)AuthedView.Items[i];
+                ListViewItem item = (ListViewItem)_authedView.Items[i];
                 char[] uuidBytes = item.Content.ToString().ToCharArray();
                 for (int j = 0; j < uuidBytes.Length; j++)
                 {
@@ -63,50 +63,50 @@ namespace sconnRem.Controls
         {
             try
             {
-                AuthDevCfgGrid = new Grid();
+                _authDevCfgGrid = new Grid();
 
       
-                AuthDevCfgGrid.RowDefinitions.Add(new RowDefinition());
-                AuthDevCfgGrid.RowDefinitions.Add(new RowDefinition());
-                AuthDevCfgGrid.RowDefinitions.Add(new RowDefinition());
-                AuthDevCfgGrid.RowDefinitions.Add(new RowDefinition());
-                AuthDevCfgGrid.RowDefinitions.Add(new RowDefinition());
+                _authDevCfgGrid.RowDefinitions.Add(new RowDefinition());
+                _authDevCfgGrid.RowDefinitions.Add(new RowDefinition());
+                _authDevCfgGrid.RowDefinitions.Add(new RowDefinition());
+                _authDevCfgGrid.RowDefinitions.Add(new RowDefinition());
+                _authDevCfgGrid.RowDefinitions.Add(new RowDefinition());
 
                 ColumnDefinition col1 = new ColumnDefinition();
                 ColumnDefinition col2 = new ColumnDefinition();
-                AuthDevCfgGrid.ColumnDefinitions.Add(col1);
-                AuthDevCfgGrid.ColumnDefinitions.Add(col2);
+                _authDevCfgGrid.ColumnDefinitions.Add(col1);
+                _authDevCfgGrid.ColumnDefinitions.Add(col2);
 
-                this.TbxDeviceIdEntry = new TextBox();
-                Grid.SetRow(TbxDeviceIdEntry, 0);
-                Grid.SetColumn(TbxDeviceIdEntry, 0);
-                AuthDevCfgGrid.Children.Add(TbxDeviceIdEntry);
+                this._tbxDeviceIdEntry = new TextBox();
+                Grid.SetRow(_tbxDeviceIdEntry, 0);
+                Grid.SetColumn(_tbxDeviceIdEntry, 0);
+                _authDevCfgGrid.Children.Add(_tbxDeviceIdEntry);
 
-                this.AuthedView = new ListView();
-                Grid.SetRow(AuthedView, 1);
-                Grid.SetColumn(AuthedView, 0);
-                AuthDevCfgGrid.Children.Add(AuthedView);
+                this._authedView = new ListView();
+                Grid.SetRow(_authedView, 1);
+                Grid.SetColumn(_authedView, 0);
+                _authDevCfgGrid.Children.Add(_authedView);
 
-                this.BtnAddDeviceAuth = new Button();
-                BtnAddDeviceAuth.Content = "Add";
-                this.BtnAddDeviceAuth.Click += BtnAddDeviceAuth_Click;
-                Grid.SetRow(BtnAddDeviceAuth, 0);
-                Grid.SetColumn(BtnAddDeviceAuth, 1);
-                AuthDevCfgGrid.Children.Add(BtnAddDeviceAuth);
+                this._btnAddDeviceAuth = new Button();
+                _btnAddDeviceAuth.Content = "Add";
+                this._btnAddDeviceAuth.Click += BtnAddDeviceAuth_Click;
+                Grid.SetRow(_btnAddDeviceAuth, 0);
+                Grid.SetColumn(_btnAddDeviceAuth, 1);
+                _authDevCfgGrid.Children.Add(_btnAddDeviceAuth);
 
-                this.BtnRmvDeviceAuth = new Button();
-                BtnRmvDeviceAuth.Content = "Remove";
-                this.BtnRmvDeviceAuth.Click += BtnRmvDeviceAuth_Click;
-                Grid.SetRow(BtnRmvDeviceAuth, 1);
-                Grid.SetColumn(BtnRmvDeviceAuth, 1);
-                AuthDevCfgGrid.Children.Add(BtnRmvDeviceAuth);
+                this._btnRmvDeviceAuth = new Button();
+                _btnRmvDeviceAuth.Content = "Remove";
+                this._btnRmvDeviceAuth.Click += BtnRmvDeviceAuth_Click;
+                Grid.SetRow(_btnRmvDeviceAuth, 1);
+                Grid.SetColumn(_btnRmvDeviceAuth, 1);
+                _authDevCfgGrid.Children.Add(_btnRmvDeviceAuth);
 
-                this.BtnEditDeviceAuth = new Button();
-                BtnEditDeviceAuth.Content = "Edit";
-                this.BtnEditDeviceAuth.Click += BtnEditDeviceAuth_Click;
-                Grid.SetRow(BtnEditDeviceAuth, 2);
-                Grid.SetColumn(BtnEditDeviceAuth, 1);
-                AuthDevCfgGrid.Children.Add(BtnEditDeviceAuth);
+                this._btnEditDeviceAuth = new Button();
+                _btnEditDeviceAuth.Content = "Edit";
+                this._btnEditDeviceAuth.Click += BtnEditDeviceAuth_Click;
+                Grid.SetRow(_btnEditDeviceAuth, 2);
+                Grid.SetColumn(_btnEditDeviceAuth, 1);
+                _authDevCfgGrid.Children.Add(_btnEditDeviceAuth);
 
             }
             catch (Exception e)
@@ -121,10 +121,10 @@ namespace sconnRem.Controls
         {
             try
             {
-                int selectedIndex = AuthedView.SelectedIndex;
+                int selectedIndex = _authedView.SelectedIndex;
                 if (selectedIndex >= 0)
                 {
-                    TbxDeviceIdEntry.Text = ((ListViewItem)AuthedView.SelectedItem).Content.ToString();
+                    _tbxDeviceIdEntry.Text = ((ListViewItem)_authedView.SelectedItem).Content.ToString();
                 }
             }
             catch (Exception exc)
@@ -143,23 +143,23 @@ namespace sconnRem.Controls
         {
             try
             {
-                int selectedIndex = AuthedView.SelectedIndex;
+                int selectedIndex = _authedView.SelectedIndex;
 
-                AuthedView.Items.Remove(AuthedView.SelectedItem);
+                _authedView.Items.Remove(_authedView.SelectedItem);
 
                 // if no rows left, add a blank row
-                if (AuthedView.Items.Count == 0)
+                if (_authedView.Items.Count == 0)
                 {
                     AddRow();
                 }
                 // otherwise select next row
-                else if (selectedIndex <= AuthedView.Items.Count - 1)
+                else if (selectedIndex <= _authedView.Items.Count - 1)
                 {
-                    AuthedView.SelectedIndex = selectedIndex;
+                    _authedView.SelectedIndex = selectedIndex;
                 }
                 else // not above cases? Select last row
                 {
-                    AuthedView.SelectedIndex = AuthedView.Items.Count - 1;
+                    _authedView.SelectedIndex = _authedView.Items.Count - 1;
                 }
             }
             catch (Exception exc)
@@ -171,10 +171,10 @@ namespace sconnRem.Controls
 
         private void AuthedView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ListViewItem lvc = (ListViewItem)AuthedView.SelectedItem;
+            ListViewItem lvc = (ListViewItem)_authedView.SelectedItem;
             if (lvc != null)
             {
-                TbxDeviceIdEntry.Text = lvc.Content.ToString();
+                _tbxDeviceIdEntry.Text = lvc.Content.ToString();
             }
         }
 
@@ -183,12 +183,12 @@ namespace sconnRem.Controls
         private void AddRow()
         {
             ListViewItem item = new ListViewItem();
-            item.Content = TbxDeviceIdEntry.Text;
-            AuthedView.Items.Add(item);
-            AuthedView.SelectedIndex = AuthedView.Items.Count - 1;
+            item.Content = _tbxDeviceIdEntry.Text;
+            _authedView.Items.Add(item);
+            _authedView.SelectedIndex = _authedView.Items.Count - 1;
 
-            TbxDeviceIdEntry.Text = ""; //clear after adding
-            TbxDeviceIdEntry.Focus();
+            _tbxDeviceIdEntry.Text = ""; //clear after adding
+            _tbxDeviceIdEntry.Focus();
         }
 
 

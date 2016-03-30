@@ -1,0 +1,11 @@
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="sconnSiteManagerWindow" Height="448.966" Width="595.517">
+    <Grid>
+        <Button x:Name="AddSiteButton" Content="Add" HorizontalAlignment="Left" Margin="0,388,0,0" VerticalAlignment="Top" Width="75" Click="AddSiteButton_Click"/>
+        <Button x:Name="RemoveSiteButton" Content="Del" HorizontalAlignment="Left" Margin="240,388,0,0" VerticalAlignment="Top" Width="75" Click="RemoveSiteButton_Click"/>
+        <Button x:Name="EditSiteButton" Content="Edit" HorizontalAlignment="Left" Margin="160,388,0,0" VerticalAlignment="Top" Width="75" Click="EditSiteButton_Click"/>
+        <Button x:Name="SearchSiteButton" Content="Search" HorizontalAlignment="Left" Margin="80,387,0,0" VerticalAlignment="Top" Width="75" Click="SearchSiteButton_Click"/>
+
+    </Grid>
+</Window>

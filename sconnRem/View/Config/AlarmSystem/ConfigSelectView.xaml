@@ -12,7 +12,7 @@
     <Page Title="Configuration Select">
         <ScrollViewer  Grid.Row="0" Grid.Column="2"  Height="{Binding ActualHeight, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type RowDefinition}}}"  Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type RowDefinition}}}"  VerticalScrollBarVisibility="auto" HorizontalScrollBarVisibility="Visible" Grid.RowSpan="2"  >
 
-            <StackPanel x:Name="stckConfigSelect" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch"  Height="Auto"  Width="Auto"  x:FieldModifier="public">
+            <StackPanel x:Name="StckConfigSelect" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch"  Height="Auto"  Width="Auto"  x:FieldModifier="public">
 
                 <Grid  Height="{Binding ActualHeight, RelativeSource={RelativeSource FindAncestor, AncestorType=Grid, AncestorLevel=1}}">
 
@@ -47,50 +47,50 @@
 
                         <StackPanel  Grid.Row="0" Grid.Column="0">
                             <Button Margin="20,20,20,20"  Click="{Binding Show_Config}"   HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Height="Auto"  Width="Auto"  >
-                                <Image  x:Name="image00"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="10,10,10,10" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/config1.png"/>
+                                <Image  x:Name="Image00"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="10,10,10,10" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/config1.png"/>
                             </Button>
                         </StackPanel>
                         <StackPanel  Grid.Row="0" Grid.Column="1">
                             <Button Margin="20,20,20,20" Click="Show_Settings">
-                                <Image   x:Name="image01" HorizontalAlignment="Center" Height="Auto" Margin="10,10,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/config2.png"/>
+                                <Image   x:Name="Image01" HorizontalAlignment="Center" Height="Auto" Margin="10,10,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/config2.png"/>
                             </Button>
                         </StackPanel>
                         <StackPanel  Grid.Row="0" Grid.Column="2">
                             <Button Margin="20,20,20,20" Command="{Binding cmdShowNetworkConfig}">
-                                <Image   x:Name="image02" HorizontalAlignment="Center" Height="Auto" Margin="10,10,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/strefa.png"/>
+                                <Image   x:Name="Image02" HorizontalAlignment="Center" Height="Auto" Margin="10,10,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/strefa.png"/>
                             </Button>
                         </StackPanel>
 
                         <StackPanel  Grid.Row="1" Grid.Column="0">
                             <Button Margin="20,20,20,20" Click="Show_Settings">
-                                <Image Grid.Row="1" Grid.Column="0"   x:Name="image10" HorizontalAlignment="Center" Height="Auto" Margin="10,10,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/patchcord.png"/>
+                                <Image Grid.Row="1" Grid.Column="0"   x:Name="Image10" HorizontalAlignment="Center" Height="Auto" Margin="10,10,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/patchcord.png"/>
                             </Button>
                         </StackPanel>
                         <StackPanel  Grid.Row="1" Grid.Column="1">
                             <Button Margin="20,20,20,20" Click="Show_Settings">
-                                <Image Grid.Row="1" Grid.Column="1"   x:Name="image11" HorizontalAlignment="Center" Height="Auto" Margin="10,10,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/tel.png"/>
+                                <Image Grid.Row="1" Grid.Column="1"   x:Name="Image11" HorizontalAlignment="Center" Height="Auto" Margin="10,10,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/tel.png"/>
                             </Button>
                         </StackPanel>
                         <StackPanel  Grid.Row="1" Grid.Column="2">
                             <Button Margin="20,20,20,20" Click="Show_Settings">
-                                <Image Grid.Row="1" Grid.Column="2"   x:Name="image12" HorizontalAlignment="Center" Height="Auto" Margin="10,10,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/eye.png"/>
+                                <Image Grid.Row="1" Grid.Column="2"   x:Name="Image12" HorizontalAlignment="Center" Height="Auto" Margin="10,10,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/eye.png"/>
                             </Button>
                         </StackPanel>
 
 
                         <StackPanel  Grid.Row="2" Grid.Column="0">
                             <Button Margin="20,20,20,20" Click="Show_Settings">
-                                <Image Grid.Row="2" Grid.Column="0"   x:Name="image20" HorizontalAlignment="Center" Height="Auto" Margin="10,10,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/waves.png"/>
+                                <Image Grid.Row="2" Grid.Column="0"   x:Name="Image20" HorizontalAlignment="Center" Height="Auto" Margin="10,10,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/waves.png"/>
                             </Button>
                         </StackPanel>
                         <StackPanel  Grid.Row="2" Grid.Column="1">
                             <Button Margin="20,20,20,20" Click="Show_Settings">
-                                <Image Grid.Row="2" Grid.Column="1"   x:Name="image21" HorizontalAlignment="Center" Height="Auto" Margin="10,10,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/tmp.png"/>
+                                <Image Grid.Row="2" Grid.Column="1"   x:Name="Image21" HorizontalAlignment="Center" Height="Auto" Margin="10,10,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/tmp.png"/>
                             </Button>
                         </StackPanel>
                         <StackPanel  Grid.Row="3" Grid.Column="2">
                             <Button Margin="20,20,20,20" Click="Show_Settings">
-                                <Image Grid.Row="2" Grid.Column="2"   x:Name="image22" HorizontalAlignment="Center" Height="Auto" Margin="10,10,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/water.png"/>
+                                <Image Grid.Row="2" Grid.Column="2"   x:Name="Image22" HorizontalAlignment="Center" Height="Auto" Margin="10,10,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/water.png"/>
                             </Button>
                         </StackPanel>
 

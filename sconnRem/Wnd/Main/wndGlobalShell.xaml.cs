@@ -1,6 +1,6 @@
-﻿using sconnConnector.Config;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,37 +12,33 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using System.ComponentModel.Composition;
-using Prism.Regions;
 using Prism.Modularity;
+using Prism.Regions;
 
-namespace sconnRem.Wnd.Config
+namespace sconnRem.Wnd.Main
 {
     /// <summary>
-    /// Interaction logic for wndConfigureSite.xaml
+    /// Interaction logic for wndGlobalShell.xaml
     /// </summary>
-    /// 
-
 
     public static class RegionNames
     {
-        public const String MainContentRegion = "MainContentRegion";
-        public const String MainNavigationRegion = "MainNavigationRegion";
+        public const String MainContentRegion = "MainViewGridRegion";
+        public const String RNavigationRegion = "RightSideToolbarRegion";
+        public const String LNavigationRegion = "LeftSideMenuRegion";
+        public const String RopNavigationRegion = "TopToolbarRegion";
     }
 
 
     [Export]
-    public partial class WndConfigureSiteShell : Window, IPartImportsSatisfiedNotification
     {
 
         private const string StartModuleName = "AlarmAuthConfigModule";
-        private static Uri _startViewUri = new Uri("/View/Config/AlarmSystem/AuthConfig", UriKind.Relative);
 
         //private const string EmailModuleName = "EmailModule";
         //private static Uri InboxViewUri = new Uri("/InboxView", UriKind.Relative);
 
 
-        public WndConfigureSiteShell()
         {
             InitializeComponent();
         }
@@ -72,14 +68,12 @@ namespace sconnRem.Wnd.Config
                     if (e.ModuleInfo.ModuleName == StartModuleName)
                     {
                         this.RegionManager.RequestNavigate(
-                            RegionNames.MainContentRegion,
-                            _startViewUri);
+                            Config.RegionNames.MainContentRegion,
                     }
                 };
         }
 
 
     }
-
 
 }

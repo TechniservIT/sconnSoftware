@@ -274,7 +274,10 @@
     <Compile Include="View\Status\AlarmSystem\AlarmSystemStatusMin.xaml.cs">
       <DependentUpon>AlarmSystemStatusMin.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Wnd\changePasswordWnd.xaml.cs">
+    <Compile Include="Wnd\Main\WndGlobalShell.xaml.cs">
+      <DependentUpon>WndGlobalShell.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Wnd\Tools\changePasswordWnd.xaml.cs">
       <DependentUpon>changePasswordWnd.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ControlsTest.xaml.cs">
@@ -293,23 +296,23 @@
     <Compile Include="Wnd\Help\HelpWnd.xaml.cs">
       <DependentUpon>HelpWnd.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Wnd\MapWindow.xaml.cs">
+    <Compile Include="Wnd\Tools\MapWindow.xaml.cs">
       <DependentUpon>MapWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Wnd\Navigation\ConfigNavBootstrapper.cs" />
-    <Compile Include="Wnd\Page1.xaml.cs">
+    <Compile Include="Wnd\Tools\Page1.xaml.cs">
       <DependentUpon>Page1.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Wnd\sconnSecurityDialog.xaml.cs">
+    <Compile Include="Wnd\Tools\sconnSecurityDialog.xaml.cs">
       <DependentUpon>sconnSecurityDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Wnd\sconnSiteManagerWindow.xaml.cs">
+    <Compile Include="Wnd\Tools\sconnSiteManagerWindow.xaml.cs">
       <DependentUpon>sconnSiteManagerWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Wnd\userManager.xaml.cs">
+    <Compile Include="Wnd\Tools\userManager.xaml.cs">
       <DependentUpon>userManager.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Wnd\WndEditScheduleAction.xaml.cs">
+    <Compile Include="Wnd\Tools\WndEditScheduleAction.xaml.cs">
       <DependentUpon>WndEditScheduleAction.xaml</DependentUpon>
     </Compile>
     <Page Include="Controls\Common\InfoTipToggleButton.xaml">
@@ -444,7 +447,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Wnd\changePasswordWnd.xaml">
+    <Page Include="Wnd\Main\WndGlobalShell.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Wnd\Tools\changePasswordWnd.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -464,19 +471,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Wnd\MapWindow.xaml">
+    <Page Include="Wnd\Tools\MapWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Wnd\Page1.xaml">
+    <Page Include="Wnd\Tools\Page1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Wnd\sconnSecurityDialog.xaml">
+    <Page Include="Wnd\Tools\sconnSecurityDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Wnd\sconnSiteManagerWindow.xaml">
+    <Page Include="Wnd\Tools\sconnSiteManagerWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -496,11 +503,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Wnd\userManager.xaml">
+    <Page Include="Wnd\Tools\userManager.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Wnd\WndEditScheduleAction.xaml">
+    <Page Include="Wnd\Tools\WndEditScheduleAction.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -616,6 +623,7 @@
     <Folder Include="Controls\SiteConfig\Common\" />
     <Folder Include="Model\" />
     <Folder Include="Tests\" />
+    <Folder Include="View\Menu\" />
     <Folder Include="Wnd\Config\Shell\" />
   </ItemGroup>
   <ItemGroup>

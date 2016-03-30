@@ -12,27 +12,27 @@ namespace sconnRem.Controls.SiteConfig.SiteConfigGroups
     public class GbxConfigureSiteNames : GroupBox
     {
         
-        private Grid GrdGlobalNameConfig;
-        private List<Label> LblNameDesc;
-        private List<TextBox> TbxGlobalName;
-        private List<string> Names;
+        private Grid _grdGlobalNameConfig;
+        private List<Label> _lblNameDesc;
+        private List<TextBox> _tbxGlobalName;
+        private List<string> _names;
         
 
         private void InitStaticFields()
         {
             ColumnDefinition colDef1 = new ColumnDefinition();
             ColumnDefinition colDef2 = new ColumnDefinition();
-            GrdGlobalNameConfig.ColumnDefinitions.Add(colDef1);
-            GrdGlobalNameConfig.ColumnDefinitions.Add(colDef2);
+            _grdGlobalNameConfig.ColumnDefinitions.Add(colDef1);
+            _grdGlobalNameConfig.ColumnDefinitions.Add(colDef2);
         }
 
 
         public GbxConfigureSiteNames() : base()
         {
-            GrdGlobalNameConfig = new Grid();
-            LblNameDesc = new List<Label>();
-            TbxGlobalName = new List<TextBox>();
-            Names = new List<string>();
+            _grdGlobalNameConfig = new Grid();
+            _lblNameDesc = new List<Label>();
+            _tbxGlobalName = new List<TextBox>();
+            _names = new List<string>();
 
             InitStaticFields();
 
@@ -44,19 +44,19 @@ namespace sconnRem.Controls.SiteConfig.SiteConfigGroups
             {
                 //create required rows 
                 RowDefinition rowDef1 = new RowDefinition();
-                GrdGlobalNameConfig.RowDefinitions.Add(rowDef1);
+                _grdGlobalNameConfig.RowDefinitions.Add(rowDef1);
 
                 //set text 
-                TbxGlobalName.Add(new TextBox());
-                Grid.SetRow(TbxGlobalName[i], i);
-                Grid.SetColumn(TbxGlobalName[i], 1);
-                GrdGlobalNameConfig.Children.Add(TbxGlobalName[i]);
+                _tbxGlobalName.Add(new TextBox());
+                Grid.SetRow(_tbxGlobalName[i], i);
+                Grid.SetColumn(_tbxGlobalName[i], 1);
+                _grdGlobalNameConfig.Children.Add(_tbxGlobalName[i]);
 
 
             }
 
 
-            this.Content = GrdGlobalNameConfig;
+            this.Content = _grdGlobalNameConfig;
         }
 
         private void AddDescLabels()
@@ -65,22 +65,22 @@ namespace sconnRem.Controls.SiteConfig.SiteConfigGroups
             for (int i = 0; i < ipcDefines.RAM_NAMES_Global_Total_Records; i++)
             {
                 //set names
-                LblNameDesc.Add(new Label());
+                _lblNameDesc.Add(new Label());
                 //TODO zone/sys name desc
-                LblNameDesc[i].Content = "Name " + i.ToString();
+                _lblNameDesc[i].Content = "Name " + i.ToString();
               
-                Grid.SetRow(LblNameDesc[i], i);
-                Grid.SetColumn(LblNameDesc[i], 0);
-                GrdGlobalNameConfig.Children.Add(LblNameDesc[i]);
+                Grid.SetRow(_lblNameDesc[i], i);
+                Grid.SetColumn(_lblNameDesc[i], 0);
+                _grdGlobalNameConfig.Children.Add(_lblNameDesc[i]);
             }
         }
 
         public byte[] Serialize()
         {
             byte[] mem = new byte[ipcDefines.RAM_NAMES_Global_Total_Size];
-            for (int j = 0; j < TbxGlobalName.Count; j++)
+            for (int j = 0; j < _tbxGlobalName.Count; j++)
 			{
-                string txt = TbxGlobalName[j].Text;
+                string txt = _tbxGlobalName[j].Text;
                 byte[] namebuff = System.Text.Encoding.BigEndianUnicode.GetBytes(txt);
                 for (int i = 0; i < namebuff.Length; i++)
                 {
@@ -91,7 +91,7 @@ namespace sconnRem.Controls.SiteConfig.SiteConfigGroups
             return mem;
         }
 
-        public GbxConfigureSiteNames(byte[] GlobalNamesConfig)
+        public GbxConfigureSiteNames(byte[] globalNamesConfig)
             : this()
         {
             //TODO load names
@@ -100,11 +100,11 @@ namespace sconnRem.Controls.SiteConfig.SiteConfigGroups
                 byte[] name = new byte[ipcDefines.RAM_NAME_SIZE];
                 for (int j = 0; j < ipcDefines.RAM_NAME_SIZE; j++)
                 {
-                    name[j] = GlobalNamesConfig[i * ipcDefines.RAM_NAME_SIZE + j];
+                    name[j] = globalNamesConfig[i * ipcDefines.RAM_NAME_SIZE + j];
                 }
                 //string txt = System.Text.Encoding.BigEndianUnicode  .GetString(name, 0, ipcDefines.RAM_NAME_SIZE);
                 string txt = System.Text.Encoding.BigEndianUnicode.GetString(name, 0, CfgOper.GetUnicodeArrayStringLen(name)); 
-                Names.Add(txt);
+                _names.Add(txt);
             }
             UpdateData();
         }
@@ -113,7 +113,7 @@ namespace sconnRem.Controls.SiteConfig.SiteConfigGroups
         {
             for (int i = 0; i < ipcDefines.RAM_NAMES_Global_Total_Records; i++)
             {
-                TbxGlobalName[i].Text = Names[i];
+                _tbxGlobalName[i].Text = _names[i];
             }
         }
 

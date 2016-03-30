@@ -49,7 +49,10 @@ namespace AlarmSystemManagmentService
 
         public sconnGlobalConfig Get()
         {
-            EntityManager.Download();
+            if (Online)
+            {
+                EntityManager.Download();
+            }
             return ConfigManager.Config.GlobalConfig;
         }
         

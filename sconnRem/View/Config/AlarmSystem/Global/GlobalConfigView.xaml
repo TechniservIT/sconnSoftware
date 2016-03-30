@@ -13,8 +13,8 @@
     </UserControl.DataContext>
 
     <Grid>
-        <Label x:Name="label" Content="{Binding Config.Devices}" HorizontalAlignment="Left" Margin="10,24,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="label1" Content="{Binding Config.Armed}" HorizontalAlignment="Left" Margin="10,67,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="Label" Content="{Binding Config.Devices}" HorizontalAlignment="Left" Margin="10,24,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="Label1" Content="{Binding Config.Armed}" HorizontalAlignment="Left" Margin="10,67,0,0" VerticalAlignment="Top"/>
     </Grid>
 
 

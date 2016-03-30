@@ -45,11 +45,11 @@ namespace sconnRem.View
     ///
     /// </summary>
     /// 
-    public class gridSiteConfigSelect : Control
+    public class GridSiteConfigSelect : Control
     {
-        static gridSiteConfigSelect()
+        static GridSiteConfigSelect()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(gridSiteConfigSelect), new FrameworkPropertyMetadata(typeof(gridSiteConfigSelect)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(GridSiteConfigSelect), new FrameworkPropertyMetadata(typeof(GridSiteConfigSelect)));
         }
     }
 }

@@ -23,20 +23,20 @@ namespace sconnRem.ViewModel.Generic
         object DataContext { get; set; }
     }
 
-    public class ViewModelBase<ViewType> : INotifyPropertyChanged  where ViewType : IGridView
+    public class ViewModelBase<TViewType> : INotifyPropertyChanged  where TViewType : IGridView
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        private readonly ViewType view;
-        public ViewType View
+        private readonly TViewType _view;
+        public TViewType View
         {
             get
             {
-                return this.view;
+                return this._view;
             }
         }
-        public ViewModelBase(ViewType view)
+        public ViewModelBase(TViewType view)
         {
-            this.view = view;
+            this._view = view;
            this.View.DataContext = this;
         }
         public void RaisePropertyChanged(string propertyName)

@@ -28,15 +28,15 @@ namespace sconnRem.View.Config.AlarmSystem.Gsm
     [ViewSortHint("01")]
     public partial class GsmConfigViewNavigationItem : UserControl, IPartImportsSatisfiedNotification
     {
-        private const string mainContentRegionName = "MainContentRegion";
-        private Logger nlogger = LogManager.GetCurrentClassLogger();
+        private const string MainContentRegionName = "MainContentRegion";
+        private Logger _nlogger = LogManager.GetCurrentClassLogger();
 
         // todo: 17a - ContactsView Avatar Option
         // This navigation uri provides additional query data to indicate the 'Avatar' view should be shown.
-        private static Uri AuthViewUri = new Uri("GsmConfigView", UriKind.Relative);
+        private static Uri _authViewUri = new Uri("GsmConfigView", UriKind.Relative);
 
         [Import]
-        public IRegionManager regionManager;
+        public IRegionManager RegionManager;
 
         public GsmConfigViewNavigationItem()
         {
@@ -45,7 +45,7 @@ namespace sconnRem.View.Config.AlarmSystem.Gsm
 
         void IPartImportsSatisfiedNotification.OnImportsSatisfied()
         {
-            IRegion mainContentRegion = this.regionManager.Regions[mainContentRegionName];
+            IRegion mainContentRegion = this.RegionManager.Regions[MainContentRegionName];
             if (mainContentRegion != null && mainContentRegion.NavigationService != null)
             {
                 mainContentRegion.NavigationService.Navigated += this.MainContentRegion_Navigated;
@@ -59,7 +59,7 @@ namespace sconnRem.View.Config.AlarmSystem.Gsm
 
         private void Nav_Button_Click(object sender, RoutedEventArgs e)
         {
-            this.regionManager.RequestNavigate(RegionNames.MainContentRegion, AuthViewUri
+            this.RegionManager.RequestNavigate(RegionNames.MainContentRegion, _authViewUri
                 ,
                 (NavigationResult nr) =>
                 {
@@ -67,7 +67,7 @@ namespace sconnRem.View.Config.AlarmSystem.Gsm
                     var result = nr.Result;
                     if (error != null)
                     {
-                        nlogger.Error(error);
+                        _nlogger.Error(error);
                     }
                 });
         }

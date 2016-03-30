@@ -20,7 +20,7 @@ namespace sconnRem.Controls
 
     public class CbxRelayTypeSelect : ComboBox
     {
-        private string[] OutputTypeDescriptions = new string[]
+        private string[] _outputTypeDescriptions = new string[]
         {
             "Alarm NA",
             "Alarm NIA",
@@ -31,22 +31,22 @@ namespace sconnRem.Controls
             "Schedule 2 NIA",
         };
 
-        public CbxRelayTypeSelect(int SelectedIndex)
+        public CbxRelayTypeSelect(int selectedIndex)
         {
-            foreach (string desc in OutputTypeDescriptions)
+            foreach (string desc in _outputTypeDescriptions)
             {
                 ComboBoxItem cbxItem = new ComboBoxItem();
                 cbxItem.Content = desc;
                 this.Items.Add(cbxItem);
             }
-            if (SelectedIndex < this.Items.Count)
-                this.SelectedItem = this.Items[SelectedIndex];
+            if (selectedIndex < this.Items.Count)
+                this.SelectedItem = this.Items[selectedIndex];
 
         }
 
-        public void SetSelectedItem(int ItemNo)
+        public void SetSelectedItem(int itemNo)
         {
-            this.SelectedItem = this.Items[ItemNo];
+            this.SelectedItem = this.Items[itemNo];
         }
 
     }
@@ -55,9 +55,9 @@ namespace sconnRem.Controls
     public class GbxConfigureRelaysGroup : GroupBox
     {
         public int OutputsNo { get; set; }
-        private Grid GrdOutputsConfig;
-        private List<Label> LblOutputNames;
-        private List<CbxOutputTypeSelect> CbxOutputTypeSelect;
+        private Grid _grdOutputsConfig;
+        private List<Label> _lblOutputNames;
+        private List<CbxOutputTypeSelect> _cbxOutputTypeSelect;
 
 
         private delegate byte[] CopyNameBytes();
@@ -66,65 +66,65 @@ namespace sconnRem.Controls
         {
             ColumnDefinition colDef1 = new ColumnDefinition();
             ColumnDefinition colDef2 = new ColumnDefinition();
-            GrdOutputsConfig.ColumnDefinitions.Add(colDef1);
-            GrdOutputsConfig.ColumnDefinitions.Add(colDef2);
+            _grdOutputsConfig.ColumnDefinitions.Add(colDef1);
+            _grdOutputsConfig.ColumnDefinitions.Add(colDef2);
         }
 
 
 
-        public GbxConfigureRelaysGroup(byte[] OutputsConfig, int Outputs)
+        public GbxConfigureRelaysGroup(byte[] outputsConfig, int outputs)
             : base()
         {
-            GrdOutputsConfig = new Grid();
-            LblOutputNames = new List<Label>();
-            CbxOutputTypeSelect = new List<CbxOutputTypeSelect>();
+            _grdOutputsConfig = new Grid();
+            _lblOutputNames = new List<Label>();
+            _cbxOutputTypeSelect = new List<CbxOutputTypeSelect>();
 
-            this.OutputsNo = Outputs;
+            this.OutputsNo = outputs;
             InitStaticFields();
             for (int i = 0; i < OutputsNo; i++)
             {
                 //create required rows 
                 RowDefinition rowDef1 = new RowDefinition();
-                GrdOutputsConfig.RowDefinitions.Add(rowDef1);
+                _grdOutputsConfig.RowDefinitions.Add(rowDef1);
 
                 //set type select
-                CbxOutputTypeSelect.Add(new CbxOutputTypeSelect(OutputsConfig[ipcDefines.mAdrOutput + (i * ipcDefines.mAdrOutputMemSize) + ipcDefines.mAdrOutputType]));
-                Grid.SetRow(CbxOutputTypeSelect[i], i);
-                Grid.SetColumn(CbxOutputTypeSelect[i], 1);
-                GrdOutputsConfig.Children.Add(CbxOutputTypeSelect[i]);
+                _cbxOutputTypeSelect.Add(new CbxOutputTypeSelect(outputsConfig[ipcDefines.mAdrOutput + (i * ipcDefines.mAdrOutputMemSize) + ipcDefines.mAdrOutputType]));
+                Grid.SetRow(_cbxOutputTypeSelect[i], i);
+                Grid.SetColumn(_cbxOutputTypeSelect[i], 1);
+                _grdOutputsConfig.Children.Add(_cbxOutputTypeSelect[i]);
             }
         }
 
-        public GbxConfigureRelaysGroup(byte[] OutputsConfig, byte[][] OutputsNamesConfig, int Outputs)
-            : this(OutputsConfig, Outputs)
+        public GbxConfigureRelaysGroup(byte[] outputsConfig, byte[][] outputsNamesConfig, int outputs)
+            : this(outputsConfig, outputs)
         {
-            this.OutputsNo = Outputs;
+            this.OutputsNo = outputs;
             for (int i = 0; i < OutputsNo; i++)
             {
                 //set names
-                LblOutputNames.Add(new Label());
-                LblOutputNames[i].Content = System.Text.Encoding.BigEndianUnicode.GetString(OutputsNamesConfig[i + ipcDefines.mAddr_NAMES_Outputs_Pos], 0, OutputsNamesConfig[i + ipcDefines.mAddr_NAMES_Outputs_Pos].GetLength(0)); 
-                Grid.SetRow(LblOutputNames[i], i);
-                Grid.SetColumn(LblOutputNames[i], 0);
-                GrdOutputsConfig.Children.Add(LblOutputNames[i]);
+                _lblOutputNames.Add(new Label());
+                _lblOutputNames[i].Content = System.Text.Encoding.BigEndianUnicode.GetString(outputsNamesConfig[i + ipcDefines.mAddr_NAMES_Outputs_Pos], 0, outputsNamesConfig[i + ipcDefines.mAddr_NAMES_Outputs_Pos].GetLength(0)); 
+                Grid.SetRow(_lblOutputNames[i], i);
+                Grid.SetColumn(_lblOutputNames[i], 0);
+                _grdOutputsConfig.Children.Add(_lblOutputNames[i]);
             }
 
             this.Visibility = Visibility.Visible;
             bool visisble = this.IsVisible;
             this.Header = "Output Config";
 
-            this.Content = GrdOutputsConfig;
+            this.Content = _grdOutputsConfig;
 
         }
 
-        public void UpdateData(byte[] OutputsConfig, byte[][] OutputsNamesConfig, int Outputs)
+        public void UpdateData(byte[] outputsConfig, byte[][] outputsNamesConfig, int outputs)
         {
-            this.OutputsNo = Outputs;
+            this.OutputsNo = outputs;
             for (int i = 0; i < OutputsNo; i++)
             {
 
-                LblOutputNames[i].Content = System.Text.Encoding.BigEndianUnicode.GetString(OutputsNamesConfig[i + ipcDefines.mAddr_NAMES_Outputs_Pos], 0, OutputsNamesConfig[i + ipcDefines.mAddr_NAMES_Outputs_Pos].GetLength(0));
-                CbxOutputTypeSelect[i].SetSelectedItem(OutputsConfig[ipcDefines.mAdrOutput + i * ipcDefines.mAdrOutputMemSize + ipcDefines.mAdrOutputType]);
+                _lblOutputNames[i].Content = System.Text.Encoding.BigEndianUnicode.GetString(outputsNamesConfig[i + ipcDefines.mAddr_NAMES_Outputs_Pos], 0, outputsNamesConfig[i + ipcDefines.mAddr_NAMES_Outputs_Pos].GetLength(0));
+                _cbxOutputTypeSelect[i].SetSelectedItem(outputsConfig[ipcDefines.mAdrOutput + i * ipcDefines.mAdrOutputMemSize + ipcDefines.mAdrOutputType]);
             }
         }
 

@@ -49,7 +49,10 @@ namespace AlarmSystemManagmentService
 
         public List<sconnGsmRcpt> GetAll()
         {
-            EntityManager.Download();
+            if (Online)
+            {
+                EntityManager.Download();
+            }
             return ConfigManager.Config.GsmConfig.Rcpts.ToList();
         }
 
@@ -76,7 +79,10 @@ namespace AlarmSystemManagmentService
         {
             try
             {
-                EntityManager.Download();
+                if (Online)
+                {
+                    EntityManager.Download();
+                }
                 sconnGsmRcpt dev = ConfigManager.Config.GsmConfig.Rcpts.FirstOrDefault(d => d.Id == Id);
                 return dev;
             }
@@ -129,10 +135,21 @@ namespace AlarmSystemManagmentService
         {
             try
             {
-                // 'Remove' clears static record instead - replace with new empty record with the same Id
-                sconnGsmRcpt stub = new sconnGsmRcpt {Id = device.Id};
-                this.Update(stub);
-                return SaveChanges();
+
+                if (Online)
+                {
+
+                    // 'Remove' clears static record instead - replace with new empty record with the same Id
+                    sconnGsmRcpt stub = new sconnGsmRcpt { Id = device.Id };
+                    this.Update(stub);
+                    return SaveChanges();
+                }
+                else
+                {
+                    this.ConfigManager.Config.GsmConfig.Rcpts.Remove(device);
+                    return true;
+                }
+
             }
             catch (Exception e)
             {

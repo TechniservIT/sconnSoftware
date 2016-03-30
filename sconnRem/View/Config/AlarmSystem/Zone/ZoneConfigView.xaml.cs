@@ -25,10 +25,10 @@ namespace sconnRem.View.Config
     public partial class ZoneConfigView : UserControl
     {
         [ImportingConstructor]
-        public ZoneConfigView(AlarmZoneConfigViewModel ViewModel)
+        public ZoneConfigView(AlarmZoneConfigViewModel viewModel)
         {
             InitializeComponent();
-            this.DataContext = ViewModel;
+            this.DataContext = viewModel;
         }
     }
 }

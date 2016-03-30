@@ -22,7 +22,7 @@ namespace sconnRem.Controls
     {
        
 
-        private string[] ScheduleTypeDescriptions = new string[]
+        private string[] _scheduleTypeDescriptions = new string[]
         {
             "From <Date> To <Date>",
             "On <Date>",
@@ -30,17 +30,17 @@ namespace sconnRem.Controls
             "From <Date>",
         };
 
-        public CbxScheduleTypeSelect(int SelectedIndex)
+        public CbxScheduleTypeSelect(int selectedIndex)
         {
-            foreach (string desc in ScheduleTypeDescriptions)
+            foreach (string desc in _scheduleTypeDescriptions)
             {
                 ComboBoxItem cbxItem = new ComboBoxItem();
                 cbxItem.Content = desc;
                 this.Items.Add(cbxItem);
             }
-            if (SelectedIndex < this.Items.Count)
+            if (selectedIndex < this.Items.Count)
             {
-                this.SelectedIndex = SelectedIndex;
+                this.SelectedIndex = selectedIndex;
             }
             else
             {
@@ -50,9 +50,9 @@ namespace sconnRem.Controls
             this.SelectedItem = this.Items[this.SelectedIndex];
         }
 
-        public void SetSelectedItem(int ItemNo)
+        public void SetSelectedItem(int itemNo)
         {
-            this.SelectedItem = this.Items[ItemNo];     
+            this.SelectedItem = this.Items[itemNo];     
         }
 
     }
@@ -72,7 +72,7 @@ namespace sconnRem.Controls
         };
 
         public 
-            CbxScheduleActionSelect(int SelectedIndex)
+            CbxScheduleActionSelect(int selectedIndex)
         {
             foreach (string desc in ScheduleActionDescriptions)
             {
@@ -80,9 +80,9 @@ namespace sconnRem.Controls
                 cbxItem.Content = desc;
                 this.Items.Add(cbxItem);
             }
-            if (SelectedIndex < this.Items.Count)
+            if (selectedIndex < this.Items.Count)
             {
-                this.SelectedIndex = SelectedIndex;
+                this.SelectedIndex = selectedIndex;
             }
             else
             {
@@ -93,10 +93,10 @@ namespace sconnRem.Controls
 
         }
 
-        public void SetSelectedItem(int ItemNo)
+        public void SetSelectedItem(int itemNo)
         {
-            this.SelectedIndex = ItemNo;
-            this.SelectedItem = this.Items[ItemNo];
+            this.SelectedIndex = itemNo;
+            this.SelectedItem = this.Items[itemNo];
         }
     }
 
@@ -119,14 +119,14 @@ namespace sconnRem.Controls
         public event EventHandler ConfigChanged;
 
         public int SchedulesNo { get; set; }
-        private Grid GrdSchedulesConfig;
-        private List<Label> LblScheduleNames;
-        private List<CbxScheduleActionSelect> CbxScheduleActionSelectList;
-        private List<CbxScheduleTypeSelect> CbxScheduleTypeSelectList;
-        private List<DateTimePickerPanel> DtToPickerPanelList;
-        private List<DateTimePickerPanel> DtFromPickerPanelList;
+        private Grid _grdSchedulesConfig;
+        private List<Label> _lblScheduleNames;
+        private List<CbxScheduleActionSelect> _cbxScheduleActionSelectList;
+        private List<CbxScheduleTypeSelect> _cbxScheduleTypeSelectList;
+        private List<DateTimePickerPanel> _dtToPickerPanelList;
+        private List<DateTimePickerPanel> _dtFromPickerPanelList;
 
-        private byte[][] schedules;
+        private byte[][] _schedules;
 
         public Dictionary<string, byte> ScheduleTypeNameValue = new Dictionary<string, byte>()      
         {     
@@ -148,22 +148,22 @@ namespace sconnRem.Controls
 
         private delegate byte[] CopyNameBytes();
 
-        public byte GetScheduleTypeAt(int ScheduleNo)
+        public byte GetScheduleTypeAt(int scheduleNo)
         {
-            ComboBoxItem selitem = (ComboBoxItem)CbxScheduleTypeSelectList[ScheduleNo].SelectedItem;
+            ComboBoxItem selitem = (ComboBoxItem)_cbxScheduleTypeSelectList[scheduleNo].SelectedItem;
             return ScheduleTypeNameValue[(string)selitem.Content];
         }
 
-        public byte GetScheduleActionAt(int ScheduleNo)
+        public byte GetScheduleActionAt(int scheduleNo)
         {
-            ComboBoxItem selitem = (ComboBoxItem)CbxScheduleActionSelectList[ScheduleNo].SelectedItem;
+            ComboBoxItem selitem = (ComboBoxItem)_cbxScheduleActionSelectList[scheduleNo].SelectedItem;
             return ScheduleActionNameValue[(string)selitem.Content];
         }
 
-        public byte[] GetScheduleConfig(int ScheduleNo)
+        public byte[] GetScheduleConfig(int scheduleNo)
         {
             ReadScheduleInput();
-            return schedules[ScheduleNo];
+            return _schedules[scheduleNo];
         }
 
 
@@ -178,14 +178,14 @@ namespace sconnRem.Controls
             int columns = 5;
             for (int i = 0; i < columns; i++)
             {
-                GrdSchedulesConfig.ColumnDefinitions.Add(new ColumnDefinition());
+                _grdSchedulesConfig.ColumnDefinitions.Add(new ColumnDefinition());
             }
         }
 
-        public GbxConfigureSchedulesGroup(byte[][] SchedulesConfig, int Schedules)
+        public GbxConfigureSchedulesGroup(byte[][] schedulesConfig, int Schedules)
             : base()
         {
-            schedules = SchedulesConfig;
+            _schedules = schedulesConfig;
             this.SchedulesNo = Schedules;
             LoadScheduleView();
     
@@ -193,7 +193,7 @@ namespace sconnRem.Controls
             this.Visibility = Visibility.Visible;
             bool visisble = this.IsVisible;
             this.Header = "Schedules Config";
-            this.Content = GrdSchedulesConfig;
+            this.Content = _grdSchedulesConfig;
         }
 
         void GbxConfigureSchedulesGroup_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -201,10 +201,10 @@ namespace sconnRem.Controls
             try
             {
                 CbxScheduleActionSelect schedCbx = (CbxScheduleActionSelect)sender;
-                int scheduleid = CbxScheduleActionSelectList.IndexOf(schedCbx);
+                int scheduleid = _cbxScheduleActionSelectList.IndexOf(schedCbx);
                 int actionid = schedCbx.SelectedIndex;
                 ReadScheduleInput(); //update selection data
-                WndEditScheduleAction editwnd = new WndEditScheduleAction(schedules[scheduleid], actionid, scheduleid);
+                WndEditScheduleAction editwnd = new WndEditScheduleAction(_schedules[scheduleid], actionid, scheduleid);
                 editwnd.Closing += editwnd_Closing;
                 editwnd.Show();
                 //throw new NotImplementedException();
@@ -217,12 +217,12 @@ namespace sconnRem.Controls
 
         private void LoadScheduleView()
         {
-            GrdSchedulesConfig = new Grid();
-            LblScheduleNames = new List<Label>();
-            CbxScheduleTypeSelectList = new List<CbxScheduleTypeSelect>();
-            CbxScheduleActionSelectList = new List<CbxScheduleActionSelect>();
-            DtToPickerPanelList = new List<DateTimePickerPanel>();
-            DtFromPickerPanelList = new List<DateTimePickerPanel>();
+            _grdSchedulesConfig = new Grid();
+            _lblScheduleNames = new List<Label>();
+            _cbxScheduleTypeSelectList = new List<CbxScheduleTypeSelect>();
+            _cbxScheduleActionSelectList = new List<CbxScheduleActionSelect>();
+            _dtToPickerPanelList = new List<DateTimePickerPanel>();
+            _dtFromPickerPanelList = new List<DateTimePickerPanel>();
 
             
             InitStaticFields();
@@ -230,38 +230,38 @@ namespace sconnRem.Controls
             {
                 //create required rows 
                 RowDefinition rowDef1 = new RowDefinition();
-                GrdSchedulesConfig.RowDefinitions.Add(rowDef1);
+                _grdSchedulesConfig.RowDefinitions.Add(rowDef1);
 
                 //set names
-                LblScheduleNames.Add(new Label());
-                LblScheduleNames[i].Content = "Schedule " + i.ToString();
-                Grid.SetRow(LblScheduleNames[i], i);
-                Grid.SetColumn(LblScheduleNames[i], 0);
-                GrdSchedulesConfig.Children.Add(LblScheduleNames[i]);
+                _lblScheduleNames.Add(new Label());
+                _lblScheduleNames[i].Content = "Schedule " + i.ToString();
+                Grid.SetRow(_lblScheduleNames[i], i);
+                Grid.SetColumn(_lblScheduleNames[i], 0);
+                _grdSchedulesConfig.Children.Add(_lblScheduleNames[i]);
 
                 //set type select
-                CbxScheduleTypeSelectList.Add(new CbxScheduleTypeSelect(schedules[i][ipcDefines.SCHED_TYPE_POS]));
-                Grid.SetRow(CbxScheduleTypeSelectList[i], i);
-                Grid.SetColumn(CbxScheduleTypeSelectList[i], 1);
-                GrdSchedulesConfig.Children.Add(CbxScheduleTypeSelectList[i]);
+                _cbxScheduleTypeSelectList.Add(new CbxScheduleTypeSelect(_schedules[i][ipcDefines.SCHED_TYPE_POS]));
+                Grid.SetRow(_cbxScheduleTypeSelectList[i], i);
+                Grid.SetColumn(_cbxScheduleTypeSelectList[i], 1);
+                _grdSchedulesConfig.Children.Add(_cbxScheduleTypeSelectList[i]);
 
                 //set from - to dates
-                DtFromPickerPanelList.Add(new DateTimePickerPanel(schedules[i], (byte)DateTimeType.FromDate));
-                Grid.SetRow(DtFromPickerPanelList[i], i);
-                Grid.SetColumn(DtFromPickerPanelList[i], 2);
-                GrdSchedulesConfig.Children.Add(DtFromPickerPanelList[i]);
+                _dtFromPickerPanelList.Add(new DateTimePickerPanel(_schedules[i], (byte)DateTimeType.FromDate));
+                Grid.SetRow(_dtFromPickerPanelList[i], i);
+                Grid.SetColumn(_dtFromPickerPanelList[i], 2);
+                _grdSchedulesConfig.Children.Add(_dtFromPickerPanelList[i]);
 
-                DtToPickerPanelList.Add(new DateTimePickerPanel(schedules[i], (byte)DateTimeType.ToDate));
-                Grid.SetRow(DtToPickerPanelList[i], i);
-                Grid.SetColumn(DtToPickerPanelList[i], 3);
-                GrdSchedulesConfig.Children.Add(DtToPickerPanelList[i]);
+                _dtToPickerPanelList.Add(new DateTimePickerPanel(_schedules[i], (byte)DateTimeType.ToDate));
+                Grid.SetRow(_dtToPickerPanelList[i], i);
+                Grid.SetColumn(_dtToPickerPanelList[i], 3);
+                _grdSchedulesConfig.Children.Add(_dtToPickerPanelList[i]);
 
                 //set action select
-                CbxScheduleActionSelectList.Add(new CbxScheduleActionSelect(schedules[i][ipcDefines.SCHED_ACTION_TYPE_POS]));
-                CbxScheduleActionSelectList[i].SelectionChanged += GbxConfigureSchedulesGroup_SelectionChanged;
-                Grid.SetRow(CbxScheduleActionSelectList[i], i);
-                Grid.SetColumn(CbxScheduleActionSelectList[i], 4);
-                GrdSchedulesConfig.Children.Add(CbxScheduleActionSelectList[i]);
+                _cbxScheduleActionSelectList.Add(new CbxScheduleActionSelect(_schedules[i][ipcDefines.SCHED_ACTION_TYPE_POS]));
+                _cbxScheduleActionSelectList[i].SelectionChanged += GbxConfigureSchedulesGroup_SelectionChanged;
+                Grid.SetRow(_cbxScheduleActionSelectList[i], i);
+                Grid.SetColumn(_cbxScheduleActionSelectList[i], 4);
+                _grdSchedulesConfig.Children.Add(_cbxScheduleActionSelectList[i]);
 
             }
         }
@@ -270,33 +270,33 @@ namespace sconnRem.Controls
         {
             WndEditScheduleAction editwnd = (WndEditScheduleAction)sender;
             //parse schedule and update view
-            schedules[editwnd.ScheduleId] = editwnd.schedule;
+            _schedules[editwnd.ScheduleId] = editwnd.Schedule;
             LoadScheduleView();
             ConfigChanged.Invoke(this, new EventArgs());  //invoke parent update
         }
 
 
-        public void UpdateData(byte[][] SchedulesConfig, int Schedules)
+        public void UpdateData(byte[][] schedulesConfig, int Schedules)
         {
             this.SchedulesNo = Schedules;
             for (int i = 0; i < SchedulesNo; i++)
             {
-                LblScheduleNames[i].Content = "Schedule " + i.ToString();
-                CbxScheduleTypeSelectList[i].SetSelectedItem(SchedulesConfig[i][ipcDefines.SCHED_TYPE_POS]);
-                CbxScheduleActionSelectList[i].SetSelectedItem(SchedulesConfig[i][ipcDefines.SCHED_ACTION_TYPE_POS]);
+                _lblScheduleNames[i].Content = "Schedule " + i.ToString();
+                _cbxScheduleTypeSelectList[i].SetSelectedItem(schedulesConfig[i][ipcDefines.SCHED_TYPE_POS]);
+                _cbxScheduleActionSelectList[i].SetSelectedItem(schedulesConfig[i][ipcDefines.SCHED_ACTION_TYPE_POS]);
                 //date update
             }
         }
 
-        public byte[] GetDateTimeConfig(DateTimeType type, byte SchedId)
+        public byte[] GetDateTimeConfig(DateTimeType type, byte schedId)
         {
             if ( type == DateTimeType.FromDate)
             {
-                return DtFromPickerPanelList[SchedId].GetDateBinary();
+                return _dtFromPickerPanelList[schedId].GetDateBinary();
             }
             else if ( type == DateTimeType.ToDate)
             {
-                return DtToPickerPanelList[SchedId].GetDateBinary();
+                return _dtToPickerPanelList[schedId].GetDateBinary();
             }
             else
             { return new byte[0]; }

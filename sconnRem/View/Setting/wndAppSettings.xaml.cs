@@ -17,9 +17,9 @@ namespace sconnRem.View.Setting
     /// <summary>
     /// Interaction logic for wndAppSettings.xaml
     /// </summary>
-    public partial class wndAppSettings : Window
+    public partial class WndAppSettings : Window
     {
-        public wndAppSettings()
+        public WndAppSettings()
         {
             InitializeComponent();
         }

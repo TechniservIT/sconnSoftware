@@ -12,18 +12,27 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace sconnRem
+namespace sconnRem.Wnd
 {
     /// <summary>
-    /// Interaction logic for MapWindow.xaml
+    /// Interaction logic for userManager.xaml
     /// </summary>
-    public partial class MapWindow : Window
     {
-        public MapWindow()
+        
+
+
+
+
         {
             InitializeComponent();
-            mapView.Navigate(new Uri("http://maps.google.com/?q=Bulwar Słoneczny 3 Wisła Polska"));
+        }
+
+
+        private void btnSaveEdit_Click(object sender, RoutedEventArgs e)
+        {
 
         }
+
+
     }
 }
