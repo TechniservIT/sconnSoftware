@@ -61,19 +61,35 @@ namespace sconnRem.Wnd
     public partial class WndEditScheduleAction : Window
     {
 
+        public byte[] Schedule { get; set; }
 
+        private int _selectedAction = 0;
 
         public int ScheduleId { get; set; }
 
+        private CbxScheduleActionSelect _actionSelect;
 
+        StkPnConfigureIoActivation _ioSelect;
+        StckPanConfigureArmChangeActivation _armSelect;
+        StckPanConfigureMailActivation _mailSelect;
+        StckPanConfigureSmsActivation _smsSelect;
 
         public WndEditScheduleAction()
         {
+            Schedule = new byte[ipcDefines.RAM_DEV_SCHED_MEM_SIZE];
 
             InitializeComponent();
+            _ioSelect = new StkPnConfigureIoActivation();
+            _armSelect = new StckPanConfigureArmChangeActivation();
+            _mailSelect = new StckPanConfigureMailActivation();
+            _smsSelect = new StckPanConfigureSmsActivation();
 
+            _actionSelect = new CbxScheduleActionSelect(_selectedAction);
+            _actionSelect.SelectionChanged += ActionSelect_SelectionChanged;
 
+            GrdScheduleActionSelect.Children.Add(_actionSelect);
 
+            LoadActionConfigurationView(_selectedAction);
         }
 
 
@@ -82,15 +98,19 @@ namespace sconnRem.Wnd
             SckPanConfigureAction.Children.Clear();
             if (actionid == ipcDefines.SCHED_ACTION_TYPE_ACTIV_OUT || actionid == ipcDefines.SCHED_ACTION_TYPE_ACTIV_REL)
             {
+                SckPanConfigureAction.Children.Add(_ioSelect);
             }
             else if (actionid == ipcDefines.SCHED_ACTION_TYPE_SEND_MAIL)
             {
+                SckPanConfigureAction.Children.Add(_mailSelect);
             }
             else if (actionid == ipcDefines.SCHED_ACTION_TYPE_SEND_SMS)
             {
+                SckPanConfigureAction.Children.Add(_smsSelect);
             }
             else if ((actionid == ipcDefines.SCHED_ACTION_TYPE_ARM) || (actionid == ipcDefines.SCHED_ACTION_TYPE_DISARM))
             {
+                SckPanConfigureAction.Children.Add(_armSelect);
             }
             else
             {
@@ -102,20 +122,32 @@ namespace sconnRem.Wnd
         void ActionSelect_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             //load correct action config view       
+            _selectedAction = _actionSelect.SelectedIndex;
+            LoadActionConfigurationView(_selectedAction);
         }
 
         void LoadUserInputToSchedule()
         {
 
+            Schedule[ipcDefines.SCHED_ACTION_TYPE_POS] = (byte)_selectedAction;
+            if (_selectedAction == ipcDefines.SCHED_ACTION_TYPE_ACTIV_OUT || _selectedAction == ipcDefines.SCHED_ACTION_TYPE_ACTIV_REL)
             {
+                Schedule[ipcDefines.SCHED_ACTION_ACTIV_OUTNO_POS] = _ioSelect.IoNo;
+                Schedule[ipcDefines.SCHED_ACTION_ACTIV_OUTVAL_POS] = _ioSelect.IoActionValue;
+                if (_ioSelect.IoActionValue == ipcDefines.SCHED_ACTION_ACTIV_OUT_PULSE)
                 {
+                    Schedule[ipcDefines.SCHED_ACTION_ACTIV_OUT_PULSE_ON_TIME_POS] = _ioSelect.PulseOnTime;
+                    Schedule[ipcDefines.SCHED_ACTION_ACTIV_OUT_PULSE_OFF_TIME_POS] = _ioSelect.PulseOffTime;
                 }
 
             }
+            else if (_selectedAction == ipcDefines.SCHED_ACTION_TYPE_SEND_MAIL)
             {
             }
+            else if (_selectedAction == ipcDefines.SCHED_ACTION_TYPE_SEND_SMS)
             {
             }
+            else if ((_selectedAction == ipcDefines.SCHED_ACTION_TYPE_ARM) || (_selectedAction == ipcDefines.SCHED_ACTION_TYPE_DISARM))
             {
             }
             else
@@ -127,16 +159,19 @@ namespace sconnRem.Wnd
 
         public WndEditScheduleAction(byte[] sched) : this()
         {
+            Schedule = sched;
         }
 
         public WndEditScheduleAction(byte[] sched, int actionid)
             : this(sched)
         {
+            _selectedAction = actionid;
         }
 
         public WndEditScheduleAction(byte[] sched, int actionid, int scheduleid)
             : this(sched)
         {
+            _selectedAction = actionid;
             ScheduleId = scheduleid;
 
         }

@@ -31,14 +31,17 @@ namespace sconnRem.Wnd.Main
 
 
     [Export]
+    public partial class WndGlobalShell : Window, IPartImportsSatisfiedNotification
     {
 
         private const string StartModuleName = "AlarmAuthConfigModule";
+        private static Uri _startViewUri = new Uri("/View/Config/AlarmSystem/AuthConfig", UriKind.Relative);
 
         //private const string EmailModuleName = "EmailModule";
         //private static Uri InboxViewUri = new Uri("/InboxView", UriKind.Relative);
 
 
+        public WndGlobalShell()
         {
             InitializeComponent();
         }
@@ -69,6 +72,7 @@ namespace sconnRem.Wnd.Main
                     {
                         this.RegionManager.RequestNavigate(
                             Config.RegionNames.MainContentRegion,
+                            _startViewUri);
                     }
                 };
         }

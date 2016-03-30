@@ -22,6 +22,7 @@ namespace sconnRem
         public MapWindow()
         {
             InitializeComponent();
+            MapView.Navigate(new Uri("http://maps.google.com/?q=Bulwar Słoneczny 3 Wisła Polska"));
 
         }
     }

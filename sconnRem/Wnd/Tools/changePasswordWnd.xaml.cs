@@ -19,18 +19,33 @@ namespace sconnRem
     /// <summary>
     /// Interaction logic for changePasswordWnd.xaml
     /// </summary>
+    public partial class ChangePasswordWnd : Window
     {
+        private int _siteId;
+        private sconnCfgMngr _cfgMan;
+        private sconnDataSrc _configSource;
 
+        public ChangePasswordWnd(int site)
         {
             InitializeComponent();
+            _siteId = site;
+            InputPasswordTb.MaxLength = ipcDefines.PasswordMaxChars;
+            InputConfirmTb.MaxLength = ipcDefines.PasswordMaxChars;
+            _cfgMan = new sconnCfgMngr();
+            _configSource = new sconnDataSrc();
         }
 
+        private bool InputDataValid()
         {
+            return InputConfirmTb.Text == InputPasswordTb.Text ? true : false;
         }
 
         private void savePasswordBtn_Click(object sender, RoutedEventArgs e)
         {
+            if (InputDataValid())
             {
+                sconnSite site = sconnDataShare.getSite(_siteId);
+                byte[] passwdFormated = Encoding.UTF8.GetBytes(InputConfirmTb.Text.ToCharArray());
                 for (int i = 0; i < passwdFormated.GetLength(0); i++)
                 {
                     site.siteCfg.globalConfig.memCFG[ipcDefines.mAdrSitePasswd] = passwdFormated[i];
@@ -41,7 +56,10 @@ namespace sconnRem
                 {
                     site.siteCfg.globalConfig.memCFG[ipcDefines.mAdrSitePasswd + passwdLen + j] = 0;
                 }
+                if (_cfgMan.WriteGlobalCfg( site))//upload changed password
                 {
+                    site.authPasswd = InputConfirmTb.Text; //update runtime password for auth
+                    _configSource.SaveConfig(DataSourceType.xml); // save changes to file        
                     this.Close(); //close window after success
                 }
             }

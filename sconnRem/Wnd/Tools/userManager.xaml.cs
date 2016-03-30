@@ -17,12 +17,14 @@ namespace sconnRem.Wnd
     /// <summary>
     /// Interaction logic for userManager.xaml
     /// </summary>
+    public partial class UserManager : Window
     {
         
 
 
 
 
+        public UserManager()
         {
             InitializeComponent();
         }
