@@ -21,10 +21,10 @@ namespace sconnRem.View.Menu.ToolTopMenu
 {
 
 
-    //[Export]
-    //[ViewSortHint("01")]
-    [ViewExport(RegionName = GlobalViewRegionNames.RopNavigationRegion)]
-    [PartCreationPolicy(CreationPolicy.NonShared)]
+    //[ViewExport(RegionName = GlobalViewRegionNames.RopNavigationRegion)]
+    //[PartCreationPolicy(CreationPolicy.NonShared)]
+    [Export]
+    [ViewSortHint("01")]
     public partial class ToolTopMenuView : UserControl, IPartImportsSatisfiedNotification
     {
         private Logger _nlogger = LogManager.GetCurrentClassLogger();

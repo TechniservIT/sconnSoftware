@@ -20,12 +20,10 @@ using sconnRem.Wnd.Main;
 
 namespace sconnRem.View.Menu.GridNavSideMenu
 {
-
-    //[Export]
-    //[ViewSortHint("01")]    
-
-    [ViewExport(RegionName = GlobalViewRegionNames.RNavigationRegion)]
-    [PartCreationPolicy(CreationPolicy.NonShared)]
+    //[ViewExport(RegionName = GlobalViewRegionNames.RNavigationRegion)]
+    //[PartCreationPolicy(CreationPolicy.NonShared)]
+    [Export]
+    [ViewSortHint("01")]
     public partial class GridNavSideMenuView : UserControl, IPartImportsSatisfiedNotification
     {
         private Logger _nlogger = LogManager.GetCurrentClassLogger();
@@ -65,7 +63,7 @@ namespace sconnRem.View.Menu.GridNavSideMenu
         {
             try
             {
-                this.RegionManager.RequestNavigate(GlobalViewRegionNames.MainGridContentRegion, _TargetNavUri
+                this.RegionManager.RequestNavigate(GlobalViewRegionNames.RNavigationRegion, _TargetNavUri
                     ,
                     (NavigationResult nr) =>
                     {

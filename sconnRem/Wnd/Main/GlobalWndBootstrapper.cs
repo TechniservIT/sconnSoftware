@@ -28,7 +28,7 @@ namespace sconnRem.Wnd.Main
         //todo - inject from cfg bootstraper
         private void LoadConfigFromDataStore()
         {
-            
+
         }
 
         public GlobalWndBootstrapper()
@@ -45,12 +45,12 @@ namespace sconnRem.Wnd.Main
         protected override void ConfigureAggregateCatalog()
         {
             base.ConfigureAggregateCatalog();
-             this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(GlobalWndBootstrapper).Assembly));
+            this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(GlobalWndBootstrapper).Assembly));
 
-            this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(GridNavSideMenuModule).Assembly));
+            //this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(GridNavSideMenuModule).Assembly));
             //this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(SiteNavSideMenuModule).Assembly));
             //this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(ToolTopMenuModule).Assembly));
-            this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(SiteStatusGridViewModule).Assembly));
+            //this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(SiteStatusGridViewModule).Assembly));
         }
 
         protected override IModuleCatalog CreateModuleCatalog()
@@ -59,14 +59,14 @@ namespace sconnRem.Wnd.Main
         }
 
 
-        protected override Prism.Regions.IRegionBehaviorFactory ConfigureDefaultRegionBehaviors()
-        {
-            var factory = base.ConfigureDefaultRegionBehaviors();
+        //protected override Prism.Regions.IRegionBehaviorFactory ConfigureDefaultRegionBehaviors()
+        //{
+        //    var factory = base.ConfigureDefaultRegionBehaviors();
 
-            factory.AddIfMissing("AutoPopulateExportedViewsBehavior", typeof(AutoPopulateExportedViewsBehavior));
+        //    factory.AddIfMissing("AutoPopulateExportedViewsBehavior", typeof(AutoPopulateExportedViewsBehavior));
 
-            return factory;
-        }
+        //    return factory;
+        //}
 
         protected override DependencyObject CreateShell()
         {

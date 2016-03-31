@@ -19,13 +19,10 @@ using sconnRem.Wnd.Main;
 
 namespace sconnRem.View.Menu.SiteNavSideMenu
 {
-
-
-    //[Export]
-    //[ViewSortHint("01")]
-
-    [ViewExport(RegionName = GlobalViewRegionNames.LNavigationRegion)]
-    [PartCreationPolicy(CreationPolicy.NonShared)]
+    //[ViewExport(RegionName = GlobalViewRegionNames.LNavigationRegion)]
+    //[PartCreationPolicy(CreationPolicy.NonShared)]
+    [Export]
+    [ViewSortHint("01")]
     public partial class SiteNavSideMenuView : UserControl, IPartImportsSatisfiedNotification
     {
         private Logger _nlogger = LogManager.GetCurrentClassLogger();

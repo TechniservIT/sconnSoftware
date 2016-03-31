@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:sconnRem.View.Menu.GridNavSideMenu"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
+    <Grid Background="#FFDE1E1E">
             
     </Grid>
 </UserControl>

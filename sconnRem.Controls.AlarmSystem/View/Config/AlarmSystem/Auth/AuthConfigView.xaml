@@ -1,0 +1,33 @@
+﻿<UserControl x:Class="sconnRem.View.Config.AuthConfigView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:sconnRem.View.Config"
+             xmlns:datapath="clr-namespace:sconnRem.ViewModel.Alarm"
+             mc:Ignorable="d" Height="Auto" Width="Auto">
+
+    <!--<UserControl.DataContext>
+        <datapath:AlarmAuthConfigViewModel/>
+    </UserControl.DataContext>-->
+
+    <Grid>
+        <DataGrid MinWidth="200" MinHeight="250"
+         ItemsSource="{Binding AuthorizedDevices}" 
+             AutoGenerateColumns="True"
+          >
+            <!--DisplayMemberPath="{Binding AuthorizedDevices/Id}"-->
+            <!--<DataGrid.DataContext>
+                <datapath:AlarmAuthConfigViewModel/>
+            </DataGrid.DataContext>-->
+            
+            <!--CanUserAddRows="false"
+            EnableRowVirtualization="True"
+            ItemsSource="{Binding Path=AuthorizedDevices}" 
+            AutoGenerateColumns="True">-->
+
+            
+        </DataGrid>
+    </Grid>
+
+</UserControl>

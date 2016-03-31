@@ -1,0 +1,106 @@
+﻿<UserControl x:Class="sconnRem.View.Config.ConfigSelect"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:sconnRem.View.Config"
+              xmlns:datapath="clr-namespace:sconnRem.ViewModel.Alarm"
+             mc:Ignorable="d" 
+             d:DesignHeight="786" d:DesignWidth="1024">
+
+
+    <Page Title="Configuration Select">
+        <ScrollViewer  Grid.Row="0" Grid.Column="2"  Height="{Binding ActualHeight, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type RowDefinition}}}"  Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type RowDefinition}}}"  VerticalScrollBarVisibility="auto" HorizontalScrollBarVisibility="Visible" Grid.RowSpan="2"  >
+
+            <StackPanel x:Name="StckConfigSelect" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch"  Height="Auto"  Width="Auto"  x:FieldModifier="public">
+
+                <Grid  Height="{Binding ActualHeight, RelativeSource={RelativeSource FindAncestor, AncestorType=Grid, AncestorLevel=1}}">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="10*" />
+                        <RowDefinition Height="90*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100*" />
+                    </Grid.ColumnDefinitions>
+
+
+                    <StackPanel  Grid.Row="0" Grid.Column="0">
+                        <Frame Source="ConfigSelectView.xaml" NavigationUIVisibility="Visible">
+
+                        </Frame>
+                    </StackPanel>
+
+                    <Grid  Grid.Row="1" Grid.Column="0" Height="{Binding ActualHeight, RelativeSource={RelativeSource FindAncestor, AncestorType=Grid, AncestorLevel=1}}">
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="33*" />
+                            <RowDefinition Height="33*"/>
+                            <RowDefinition Height="33*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="33*" />
+                            <ColumnDefinition Width="33*"/>
+                            <ColumnDefinition Width="33*" />
+                        </Grid.ColumnDefinitions>
+
+
+                        <StackPanel  Grid.Row="0" Grid.Column="0">
+                            <Button Margin="20,20,20,20"  Click="{Binding Show_Config}"   HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Height="Auto"  Width="Auto"  >
+                                <Image  x:Name="Image00"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="10,10,10,10" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/config1.png"/>
+                            </Button>
+                        </StackPanel>
+                        <StackPanel  Grid.Row="0" Grid.Column="1">
+                            <Button Margin="20,20,20,20" Click="Show_Settings">
+                                <Image   x:Name="Image01" HorizontalAlignment="Center" Height="Auto" Margin="10,10,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/config2.png"/>
+                            </Button>
+                        </StackPanel>
+                        <StackPanel  Grid.Row="0" Grid.Column="2">
+                            <Button Margin="20,20,20,20" Command="{Binding cmdShowNetworkConfig}">
+                                <Image   x:Name="Image02" HorizontalAlignment="Center" Height="Auto" Margin="10,10,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/strefa.png"/>
+                            </Button>
+                        </StackPanel>
+
+                        <StackPanel  Grid.Row="1" Grid.Column="0">
+                            <Button Margin="20,20,20,20" Click="Show_Settings">
+                                <Image Grid.Row="1" Grid.Column="0"   x:Name="Image10" HorizontalAlignment="Center" Height="Auto" Margin="10,10,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/patchcord.png"/>
+                            </Button>
+                        </StackPanel>
+                        <StackPanel  Grid.Row="1" Grid.Column="1">
+                            <Button Margin="20,20,20,20" Click="Show_Settings">
+                                <Image Grid.Row="1" Grid.Column="1"   x:Name="Image11" HorizontalAlignment="Center" Height="Auto" Margin="10,10,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/tel.png"/>
+                            </Button>
+                        </StackPanel>
+                        <StackPanel  Grid.Row="1" Grid.Column="2">
+                            <Button Margin="20,20,20,20" Click="Show_Settings">
+                                <Image Grid.Row="1" Grid.Column="2"   x:Name="Image12" HorizontalAlignment="Center" Height="Auto" Margin="10,10,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/eye.png"/>
+                            </Button>
+                        </StackPanel>
+
+
+                        <StackPanel  Grid.Row="2" Grid.Column="0">
+                            <Button Margin="20,20,20,20" Click="Show_Settings">
+                                <Image Grid.Row="2" Grid.Column="0"   x:Name="Image20" HorizontalAlignment="Center" Height="Auto" Margin="10,10,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/waves.png"/>
+                            </Button>
+                        </StackPanel>
+                        <StackPanel  Grid.Row="2" Grid.Column="1">
+                            <Button Margin="20,20,20,20" Click="Show_Settings">
+                                <Image Grid.Row="2" Grid.Column="1"   x:Name="Image21" HorizontalAlignment="Center" Height="Auto" Margin="10,10,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/tmp.png"/>
+                            </Button>
+                        </StackPanel>
+                        <StackPanel  Grid.Row="3" Grid.Column="2">
+                            <Button Margin="20,20,20,20" Click="Show_Settings">
+                                <Image Grid.Row="2" Grid.Column="2"   x:Name="Image22" HorizontalAlignment="Center" Height="Auto" Margin="10,10,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/water.png"/>
+                            </Button>
+                        </StackPanel>
+
+                    </Grid>
+
+                </Grid>
+
+            </StackPanel>
+        </ScrollViewer>
+
+    </Page>
+
+</UserControl>

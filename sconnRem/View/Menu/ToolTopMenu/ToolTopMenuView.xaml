@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:sconnRem.View.Menu.ToolTopMenu"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
+    <Grid Background="#FF522BD4">
             
     </Grid>
 </UserControl>

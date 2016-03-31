@@ -13,16 +13,12 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.ComponentModel.Composition;
+using Prism.Mef.Regions;
 using Prism.Regions;
 using Prism.Modularity;
 
 namespace sconnRem.Wnd.Config
 {
-    /// <summary>
-    /// Interaction logic for wndConfigureSite.xaml
-    /// </summary>
-    /// 
-
 
     public static class RegionNames
     {
@@ -35,20 +31,25 @@ namespace sconnRem.Wnd.Config
     public partial class WndConfigureSiteShell : Window, IPartImportsSatisfiedNotification
     {
 
+        [Import(AllowRecomposition = false)]
+        public IModuleManager ModuleManager;
+
+        //[Import(AllowRecomposition = false)]
+        //public IRegionManager RegionManager;
+
+        public IRegionManager RegionManager { get; private set; }
+
+
         private const string StartModuleName = "AlarmAuthConfigModule";
         private static Uri _startViewUri = new Uri("/View/Config/AlarmSystem/AuthConfig", UriKind.Relative);
         
         public WndConfigureSiteShell()
         {
+            RegionManager = new MefRegionManager();
             InitializeComponent();
         }
         
 
-        [Import(AllowRecomposition = false)]
-        public IModuleManager ModuleManager;
-
-        [Import(AllowRecomposition = false)]
-        public IRegionManager RegionManager;
 
         public void OnImportsSatisfied()
         {

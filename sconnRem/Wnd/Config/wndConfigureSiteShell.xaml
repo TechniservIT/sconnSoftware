@@ -9,6 +9,7 @@
     Title="View-Switching Navigation QuickStart"
     d:DesignHeight="768" d:DesignWidth="1024">
 
+    
     <Grid x:Name="LayoutRoot"   >
         <Grid MinWidth="400" MaxWidth="2568">
             <Grid.ColumnDefinitions>

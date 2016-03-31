@@ -12,22 +12,23 @@ using sconnRem.Wnd.Main;
 
 namespace sconnRem.View.Menu.GridNavSideMenu
 {
-    //[ModuleExport(typeof(GridNavSideMenuModule))]
-    //public class GridNavSideMenuModule : IModule
-    //{
-    //    [Import]
-    //    public IRegionManager RegionManager;
 
-    //    public void Initialize()
-    //    {
-    //        this.RegionManager.RegisterViewWithRegion(GlobalViewRegionNames.RNavigationRegion, typeof(GridNavSideMenuView));
-    //    }
-    //}
-
-  
-    public class GridNavSideMenuModule
+    [ModuleExport(typeof(GridNavSideMenuModule))]
+    public class GridNavSideMenuModule : IModule
     {
-       
+        [Import]
+        public IRegionManager RegionManager;
+
+        public void Initialize()
+        {
+            this.RegionManager.RegisterViewWithRegion(GlobalViewRegionNames.RNavigationRegion, typeof(GridNavSideMenuView));
+        }
     }
+
+
+    //public class GridNavSideMenuModule
+    //{
+       
+    //}
 
 }

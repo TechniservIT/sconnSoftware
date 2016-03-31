@@ -20,7 +20,7 @@ namespace sconnRem.View.Menu.SiteNavSideMenu
 
         public void Initialize()
         {
-            this.RegionManager.RegisterViewWithRegion(GlobalViewRegionNames.RNavigationRegion, typeof(SiteNavSideMenuView));
+            this.RegionManager.RegisterViewWithRegion(GlobalViewRegionNames.LNavigationRegion, typeof(SiteNavSideMenuView));
         }
     }
     
