@@ -151,6 +151,7 @@
     <Compile Include="Controls\SiteConfig\SiteConfigGroups\GbxConfigureSiteZones.cs" />
     <Compile Include="Global\UnityConfig.cs" />
     <Compile Include="Logging\MvvmLogger.cs" />
+    <Compile Include="Model\Global\GlobalAppDataModel.cs" />
     <Compile Include="Properties\Resources.de-DE.Designer.cs">
       <DependentUpon>Resources.de-DE.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -264,7 +265,22 @@
     <Compile Include="View\Config\AlarmSystem\Global\GlobalConfigView.xaml.cs">
       <DependentUpon>GlobalConfigView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\gridSiteConfigSelect.cs" />
+    <Compile Include="View\Status\Cctv\CctvStatusStreamingView.xaml.cs">
+      <DependentUpon>CctvStatusStreamingView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Status\gridSiteConfigSelect.cs" />
+    <Compile Include="View\Menu\GridNavSideMenu\GridNavSideMenuModule.cs" />
+    <Compile Include="View\Menu\GridNavSideMenu\GridNavSideMenuView.xaml.cs">
+      <DependentUpon>GridNavSideMenuView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Menu\SiteNavSideMenu\SiteNavSideMenuModule.cs" />
+    <Compile Include="View\Menu\SiteNavSideMenu\SiteNavSideMenuView.xaml.cs">
+      <DependentUpon>SiteNavSideMenuView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Menu\ToolTopMenu\ToolTopMenuModule.cs" />
+    <Compile Include="View\Menu\ToolTopMenu\ToolTopMenuView.xaml.cs">
+      <DependentUpon>ToolTopMenuView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Setting\wndAppSettings.xaml.cs">
       <DependentUpon>wndAppSettings.xaml</DependentUpon>
     </Compile>
@@ -274,9 +290,12 @@
     <Compile Include="View\Status\AlarmSystem\AlarmSystemStatusMin.xaml.cs">
       <DependentUpon>AlarmSystemStatusMin.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Status\SiteStatusGridViewModule.cs" />
+    <Compile Include="Wnd\Main\GlobalWndBootstrapper.cs" />
     <Compile Include="Wnd\Main\WndGlobalShell.xaml.cs">
       <DependentUpon>WndGlobalShell.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Wnd\Navigation\NavigationWndBootstrapper.cs" />
     <Compile Include="Wnd\Tools\changePasswordWnd.xaml.cs">
       <DependentUpon>changePasswordWnd.xaml</DependentUpon>
     </Compile>
@@ -299,7 +318,7 @@
     <Compile Include="Wnd\Tools\MapWindow.xaml.cs">
       <DependentUpon>MapWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Wnd\Navigation\ConfigNavBootstrapper.cs" />
+    <Compile Include="Wnd\Config\ConfigNavBootstrapper.cs" />
     <Compile Include="Wnd\Tools\Page1.xaml.cs">
       <DependentUpon>Page1.xaml</DependentUpon>
     </Compile>
@@ -435,6 +454,18 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Menu\GridNavSideMenu\GridNavSideMenuView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Menu\SiteNavSideMenu\SiteNavSideMenuView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Menu\ToolTopMenu\ToolTopMenuView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Setting\wndAppSettings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -446,6 +477,10 @@
     <Page Include="View\Status\AlarmSystem\AlarmSystemStatusMin.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Status\Cctv\CctvStatusStreamingView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Wnd\Main\WndGlobalShell.xaml">
       <SubType>Designer</SubType>
@@ -621,10 +656,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controls\SiteConfig\Common\" />
-    <Folder Include="Model\" />
     <Folder Include="Tests\" />
-    <Folder Include="View\Menu\" />
-    <Folder Include="Wnd\Config\Shell\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\bateria1.png" />

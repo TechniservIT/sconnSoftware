@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using sconnConnector.Config;
 
-namespace sconnRem.Wnd.Navigation
+namespace sconnRem.Wnd.Config
 {
     public class ConfigNavBootstrapper : MefBootstrapper
     {

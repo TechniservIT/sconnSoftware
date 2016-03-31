@@ -17,15 +17,13 @@ using NLog;
 using Prism.Regions;
 using sconnRem.Wnd.Main;
 
-namespace sconnRem.View.Status.AlarmSystem
+namespace sconnRem.View.Status.Cctv
 {
-    /// <summary>
-    /// Interaction logic for AlarmSystemStatusMin.xaml
-    /// </summary>
+
 
     [Export]
     [ViewSortHint("01")]
-    public partial class AlarmSystemStatusMin : UserControl, IPartImportsSatisfiedNotification
+    public partial class CctvStatusStreamingView : UserControl, IPartImportsSatisfiedNotification
     {
         private Logger _nlogger = LogManager.GetCurrentClassLogger();
         private static Uri _TargetNavUri = new Uri("AuthConfigView", UriKind.Relative);
@@ -33,7 +31,7 @@ namespace sconnRem.View.Status.AlarmSystem
         [Import]
         public IRegionManager RegionManager;
 
-        public AlarmSystemStatusMin()
+        public CctvStatusStreamingView()
         {
             InitializeComponent();
         }
@@ -82,7 +80,7 @@ namespace sconnRem.View.Status.AlarmSystem
             }
 
         }
+
+
     }
-
-
 }

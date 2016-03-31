@@ -15,17 +15,18 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using NLog;
 using Prism.Regions;
+using sconnRem.Wnd.Config;
 using sconnRem.Wnd.Main;
 
-namespace sconnRem.View.Status.AlarmSystem
+namespace sconnRem.View.Menu.GridNavSideMenu
 {
-    /// <summary>
-    /// Interaction logic for AlarmSystemStatusMin.xaml
-    /// </summary>
 
-    [Export]
-    [ViewSortHint("01")]
-    public partial class AlarmSystemStatusMin : UserControl, IPartImportsSatisfiedNotification
+    //[Export]
+    //[ViewSortHint("01")]    
+
+    [ViewExport(RegionName = GlobalViewRegionNames.RNavigationRegion)]
+    [PartCreationPolicy(CreationPolicy.NonShared)]
+    public partial class GridNavSideMenuView : UserControl, IPartImportsSatisfiedNotification
     {
         private Logger _nlogger = LogManager.GetCurrentClassLogger();
         private static Uri _TargetNavUri = new Uri("AuthConfigView", UriKind.Relative);
@@ -33,7 +34,7 @@ namespace sconnRem.View.Status.AlarmSystem
         [Import]
         public IRegionManager RegionManager;
 
-        public AlarmSystemStatusMin()
+        public GridNavSideMenuView()
         {
             InitializeComponent();
         }
@@ -42,7 +43,7 @@ namespace sconnRem.View.Status.AlarmSystem
         {
             try
             {
-                IRegion mainContentRegion = this.RegionManager.Regions[GlobalViewRegionNames.MainGridContentRegion];
+                IRegion mainContentRegion = this.RegionManager.Regions[GlobalViewRegionNames.RNavigationRegion];
                 if (mainContentRegion != null && mainContentRegion.NavigationService != null)
                 {
                     mainContentRegion.NavigationService.Navigated += this.MainContentRegion_Navigated;
@@ -50,7 +51,7 @@ namespace sconnRem.View.Status.AlarmSystem
             }
             catch (Exception ex)
             {
-                _nlogger.Error(ex, ex.Message);
+                _nlogger.Error(ex,ex.Message);
             }
 
         }
@@ -82,7 +83,8 @@ namespace sconnRem.View.Status.AlarmSystem
             }
 
         }
+
+        
+
     }
-
-
 }

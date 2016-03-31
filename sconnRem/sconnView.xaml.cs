@@ -28,7 +28,7 @@ using sconnRem.ViewModel.Navigation;
 using sconnConnector.Config;
 using iotDbConnector.DAL;
 using Microsoft.Practices.Unity;
-using sconnRem.Wnd.Navigation;
+using sconnRem.Wnd.Config;
 
 namespace sconnRem
 {
@@ -84,10 +84,7 @@ namespace sconnRem
 
         public SconnView()
         {
-            IUnityContainer container = new UnityContainer();
-            container.RegisterType<AlarmSystemConfigManager, AlarmSystemConfigManager>();
-
-
+          
             _configSource.SetXmlPath(Directory.GetCurrentDirectory().ToString());
             _configSource.SetXmlFileName("sconnRem.xml");
             _settings = _configSource.LoadRegistryData();
@@ -416,21 +413,21 @@ namespace sconnRem
 
                             //wndConfigureSiteShell wnd = new wndConfigureSiteShell();
 
-                            EndpointInfo info = new EndpointInfo();
-                            info.Hostname = sconnSite.serverIP;
-                            info.Port = sconnSite.serverPort;
-                            DeviceCredentials cred = new DeviceCredentials();
-                            cred.Password = sconnSite.authPasswd;
-                            cred.Username = "";
-                            AlarmSystemConfigManager manager = new AlarmSystemConfigManager(info, cred);
-                            Device alrmSysDev = new Device();
-                            alrmSysDev.Credentials = cred;
-                            alrmSysDev.EndpInfo = info;
-                            manager.RemoteDevice = alrmSysDev;
+                            //EndpointInfo info = new EndpointInfo();
+                            //info.Hostname = sconnSite.serverIP;
+                            //info.Port = sconnSite.serverPort;
+                            //DeviceCredentials cred = new DeviceCredentials();
+                            //cred.Password = sconnSite.authPasswd;
+                            //cred.Username = "";
+                            //AlarmSystemConfigManager manager = new AlarmSystemConfigManager(info, cred);
+                            //Device alrmSysDev = new Device();
+                            //alrmSysDev.Credentials = cred;
+                            //alrmSysDev.EndpInfo = info;
+                            //manager.RemoteDevice = alrmSysDev;
 
 
-                            ConfigNavBootstrapper bootstrapper = new ConfigNavBootstrapper(manager);
-                            bootstrapper.Run();
+                            //ConfigNavBootstrapper bootstrapper = new ConfigNavBootstrapper(manager);
+                            //bootstrapper.Run();
 
                             //ConfigureSiteViewModel context = new ConfigureSiteViewModel(_Manager);
                             //wnd.DataContext = context;

@@ -6,6 +6,9 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using Microsoft.Practices.Unity;
+using sconnConnector.Config;
+using sconnRem.Wnd.Main;
 
 namespace sconnRem
 {
@@ -16,6 +19,14 @@ namespace sconnRem
     {
         protected override void OnStartup(StartupEventArgs e)
         {
+            base.OnStartup(e);
+
+            IUnityContainer container = new UnityContainer();
+            container.RegisterType<AlarmSystemConfigManager, AlarmSystemConfigManager>();
+            
+
+            GlobalWndBootstrapper bootstrapper = new GlobalWndBootstrapper();
+            bootstrapper.Run();
 
             //ConfigNavBootstrapper bootstrapper = new ConfigNavBootstrapper();
             //bootstrapper.Run();

@@ -37,26 +37,13 @@ namespace sconnRem.Wnd.Config
 
         private const string StartModuleName = "AlarmAuthConfigModule";
         private static Uri _startViewUri = new Uri("/View/Config/AlarmSystem/AuthConfig", UriKind.Relative);
-
-        //private const string EmailModuleName = "EmailModule";
-        //private static Uri InboxViewUri = new Uri("/InboxView", UriKind.Relative);
-
-
+        
         public WndConfigureSiteShell()
         {
             InitializeComponent();
         }
+        
 
-        private void Show_GlobalConfig(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Show_Settings(object sender, RoutedEventArgs e)
-        {
-
-
-        }
         [Import(AllowRecomposition = false)]
         public IModuleManager ModuleManager;
 

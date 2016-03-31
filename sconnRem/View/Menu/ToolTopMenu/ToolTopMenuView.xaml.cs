@@ -17,15 +17,15 @@ using NLog;
 using Prism.Regions;
 using sconnRem.Wnd.Main;
 
-namespace sconnRem.View.Status.AlarmSystem
+namespace sconnRem.View.Menu.ToolTopMenu
 {
-    /// <summary>
-    /// Interaction logic for AlarmSystemStatusMin.xaml
-    /// </summary>
 
-    [Export]
-    [ViewSortHint("01")]
-    public partial class AlarmSystemStatusMin : UserControl, IPartImportsSatisfiedNotification
+
+    //[Export]
+    //[ViewSortHint("01")]
+    [ViewExport(RegionName = GlobalViewRegionNames.RopNavigationRegion)]
+    [PartCreationPolicy(CreationPolicy.NonShared)]
+    public partial class ToolTopMenuView : UserControl, IPartImportsSatisfiedNotification
     {
         private Logger _nlogger = LogManager.GetCurrentClassLogger();
         private static Uri _TargetNavUri = new Uri("AuthConfigView", UriKind.Relative);
@@ -33,7 +33,7 @@ namespace sconnRem.View.Status.AlarmSystem
         [Import]
         public IRegionManager RegionManager;
 
-        public AlarmSystemStatusMin()
+        public ToolTopMenuView()
         {
             InitializeComponent();
         }
@@ -42,7 +42,7 @@ namespace sconnRem.View.Status.AlarmSystem
         {
             try
             {
-                IRegion mainContentRegion = this.RegionManager.Regions[GlobalViewRegionNames.MainGridContentRegion];
+                IRegion mainContentRegion = this.RegionManager.Regions[GlobalViewRegionNames.RopNavigationRegion];
                 if (mainContentRegion != null && mainContentRegion.NavigationService != null)
                 {
                     mainContentRegion.NavigationService.Navigated += this.MainContentRegion_Navigated;
@@ -82,7 +82,9 @@ namespace sconnRem.View.Status.AlarmSystem
             }
 
         }
-    }
 
+
+
+    }
 
 }
