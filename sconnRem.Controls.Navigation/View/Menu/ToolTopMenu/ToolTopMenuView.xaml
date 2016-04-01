@@ -5,8 +5,76 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:sconnRem.View.Menu.ToolTopMenu"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-    <Grid Background="#FF522BD4">
+             d:DesignHeight="150" d:DesignWidth="800">
+    
+    <Grid Background="#7F5AE1FF">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50*" />
+            <ColumnDefinition  Width="50*"/>
+            <ColumnDefinition  Width="50*"/>
+            <ColumnDefinition  Width="50*"/>
+            <ColumnDefinition  Width="50*"/>
+            <ColumnDefinition  Width="50*"/>
+            <ColumnDefinition  Width="50*"/>
+             <ColumnDefinition  Width="50*"/>
+        </Grid.ColumnDefinitions>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50*"/>
+            <RowDefinition Height="50*"/>
+        </Grid.RowDefinitions>
+        
+        <StackPanel   Grid.Row="0" Grid.Column="0">
+            <Button Margin="10,10,10,00" Click="Nav_Button_Click"   HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Height="Auto"  Width="Auto"  >
+                <Image  x:Name="imgTopNav1"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="10,10,10,10" VerticalAlignment="Center" Width="Auto" Source="/sconnRem.Controls.Navigation;component/images/strefy2.png"/>
+            </Button>
+            <Label HorizontalContentAlignment="Center" Grid.Row="1" Grid.Column="0" Content="Zones" FontSize="14.667" FontFamily="Motorwerk">
+            </Label>
+        </StackPanel>
+
+        <StackPanel   Grid.Row="0" Grid.Column="1">
+            <Button Margin="10,10,10,00" Click="Nav_Button_Click"   HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Height="Auto"  Width="Auto"  >
+                <Image  x:Name="imgTopNav2"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="10,10,10,10" VerticalAlignment="Center" Width="Auto" Source="/sconnRem.Controls.Navigation;component/images/glob2.png"/>
+            </Button>
+            <Label HorizontalContentAlignment="Center" Grid.Row="1" Grid.Column="0" Content="Global" FontSize="14.667" FontFamily="Motorwerk">
+            </Label>
+        </StackPanel>
+
+
+        <Grid Grid.Row="0" Grid.Column="2">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50*"/>
+                <RowDefinition Height="50*"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel   Grid.Row="0" Grid.Column="0">
+                <Button Margin="10,10,10,00" Click="Nav_Button_Click"   HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Height="Auto"  Width="Auto"  >
+                    <Label HorizontalContentAlignment="Center" Grid.Row="1" Grid.Column="0" Content="Global" FontSize="14.667" FontFamily="Motorwerk">
+                    </Label>
+                    <!--<Image  x:Name="imgTopNav4"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="10,10,10,10" VerticalAlignment="Center" Width="Auto" Source="/sconnRem.Controls.Navigation;component/images/glob2.png"/>-->
+                </Button>
+            </StackPanel>
+
+            <StackPanel   Grid.Row="1" Grid.Column="0">
+                <Button Margin="10,10,10,00" Click="Nav_Button_Click"   HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Height="Auto"  Width="Auto"  >
+                    <!--<Image  x:Name="imgTopNav5"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="10,10,10,10" VerticalAlignment="Center" Width="Auto" Source="/sconnRem.Controls.Navigation;component/images/glob2.png"/>-->
+                    <Label HorizontalContentAlignment="Center" Grid.Row="1" Grid.Column="0" Content="Global" FontSize="14.667" FontFamily="Motorwerk">
+                    </Label>
+                </Button>
+
+            </StackPanel>
             
+        </Grid>
+        
+
+
+    
     </Grid>
+    
 </UserControl>

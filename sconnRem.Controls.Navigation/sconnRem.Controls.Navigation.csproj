@@ -107,6 +107,270 @@
       <Name>sconnRem.Navigation</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\ask1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bateria1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bateria2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bootstrap-formhelpers-countries.flags.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bootstrap-formhelpers-currencies.flags.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bootstrap-formhelpers-googlefonts.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\cog2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\cog3.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\config1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\config2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\deviceplaceholder.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\electro.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\eye.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\glob1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\glob2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\homesch.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\in.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\in2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\key1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\klodka1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\klodka2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\klodka3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\klodka3a.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\klodka4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\klucz1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\klucz2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\lista1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\lista2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\map-marker.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\mapa.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\mapka1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\mapka2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\mapka3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\markerInputSmall.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\markerInputSmallOff.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\markerInputSmallOn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\markerOutputSmallOff.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\markerOutputSmallOn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\markers-matte.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\markers-matte%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\markers-plain.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\markers-shadow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\markers-shadow%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\markers-soft.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\markers-soft%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\markers_default.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\markers_default%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\markers_shadow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\markers_shadow%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\MikolowSM.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\ok1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\oko11.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\oko3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\oko4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\oko5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\oko6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\out.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\out2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\patchcord.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\person2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\przekaznik.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Rysunek2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\sensorin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\sensorout.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\spritesheet-2x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\spritesheet.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\stat1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\strefa.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\strefy1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\strefy2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\tel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\tmp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\tools1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\user.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\water.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\waves.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\worldLock.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\worldlock2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\wwwalarm.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\wwwmap.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\wwwprotocol.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\wykrzyknik.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\wykrzyknik1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\wykrzyknik2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\zasilanie1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\zasilanie2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\zegar1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\zegar2.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

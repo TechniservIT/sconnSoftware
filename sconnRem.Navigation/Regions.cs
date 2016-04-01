@@ -12,8 +12,7 @@ namespace sconnRem.Navigation
         public const String MainContentRegion = "MainContentRegion";
         public const String MainNavigationRegion = "MainNavigationRegion";
     }
-
-
+    
     public static class GlobalViewRegionNames
     {
         public const String MainGridContentRegion = "MainViewGridRegion";
@@ -21,7 +20,5 @@ namespace sconnRem.Navigation
         public const String LNavigationRegion = "LeftSideMenuRegion";
         public const String RopNavigationRegion = "TopToolbarRegion";
     }
-
-
-
+    
 }

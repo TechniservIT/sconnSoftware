@@ -17,20 +17,15 @@
                 <ColumnDefinition Width="15*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="15*"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="80*"/>
+                <RowDefinition Height="10*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
+
+            <UserControl prism:RegionManager.RegionName="TopToolbarRegion" 
+                        Grid.Column="1" Grid.Row="0" Margin="5,0,5,5" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"/>
             
-            <StackPanel Grid.Row="0" Orientation="Horizontal">
-                <TextBlock HorizontalAlignment="Left" Width="Auto" Text="View-Switching Navigation" FontWeight="Normal" Foreground="#FFFFFFFF" FontSize="24" FontFamily="Comic Sans MS" VerticalAlignment="Center"/>
-            </StackPanel>
-
-            <Border Grid.Column="0" Grid.Row="2" Background="LightGray" MinWidth="5" Margin="5,0,0,5">
-                <ItemsControl x:Name="NavigationItemsControl" prism:RegionManager.RegionName="MainNavigationRegion" Grid.Column="0" Margin="5" Padding="5" />
-            </Border>
-
             <UserControl prism:RegionManager.RegionName="LeftSideMenuRegion" 
                         Grid.Column="0" Grid.Row="1" Margin="5,0,5,5" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"/>
 
@@ -40,10 +35,7 @@
             <UserControl prism:RegionManager.RegionName="MainViewGridRegion" 
                         Grid.Column="1" Grid.Row="1" Margin="5,0,5,5" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"/>
             
-            <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal">
-                <TextBlock HorizontalAlignment="Left" Width="Auto" Text="View-Switching Navigation" FontWeight="Normal" Foreground="#FFFFFFFF" FontSize="24" FontFamily="Comic Sans MS" VerticalAlignment="Center"/>
-            </StackPanel>
-            
+
             
         </Grid>
     </Grid>
