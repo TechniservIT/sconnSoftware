@@ -19,6 +19,7 @@ using Prism.Modularity;
 using Prism.Mvvm;
 using Prism.Regions;
 using sconnRem.Model.Global;
+using sconnRem.Navigation;
 
 namespace sconnRem.Wnd.Main
 {
@@ -26,13 +27,6 @@ namespace sconnRem.Wnd.Main
     /// Interaction logic for wndGlobalShell.xaml
     /// </summary>
 
-    public static class GlobalViewRegionNames
-    {
-        public const String MainGridContentRegion = "MainViewGridRegion";
-        public const String RNavigationRegion = "RightSideToolbarRegion";
-        public const String LNavigationRegion = "LeftSideMenuRegion";
-        public const String RopNavigationRegion = "TopToolbarRegion";
-    }
 
 
 
@@ -74,7 +68,7 @@ namespace sconnRem.Wnd.Main
                     if (e.ModuleInfo.ModuleName == StartModuleName)
                     {
                         this.RegionManager.RequestNavigate(
-                            Config.RegionNames.MainContentRegion,
+                           GlobalViewRegionNames.MainGridContentRegion,
                             _startViewUri);
                     }
                 };

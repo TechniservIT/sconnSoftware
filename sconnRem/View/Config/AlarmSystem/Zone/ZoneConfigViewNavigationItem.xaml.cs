@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using NLog;
 using Prism.Regions;
+using sconnRem.Navigation;
 using sconnRem.Wnd.Config;
 
 namespace sconnRem.View.Config.AlarmSystem.Zone

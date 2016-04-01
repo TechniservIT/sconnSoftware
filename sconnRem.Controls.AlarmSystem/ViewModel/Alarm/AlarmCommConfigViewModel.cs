@@ -1,5 +1,4 @@
 ﻿using AlarmSystemManagmentService;
-using Microsoft.Practices.Unity;
 using Prism.Mvvm;
 using Prism.Regions;
 using sconnConnector.Config;
@@ -28,8 +27,7 @@ namespace sconnRem.ViewModel.Alarm
 
         private Logger _nlogger = LogManager.GetCurrentClassLogger();
 
-
-        [Dependency]
+        
         public AlarmSystemConfigManager Manager { get; set; }
 
 

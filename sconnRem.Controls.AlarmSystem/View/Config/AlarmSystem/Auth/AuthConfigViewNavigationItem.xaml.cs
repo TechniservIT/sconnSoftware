@@ -1,5 +1,4 @@
 ﻿using Prism.Regions;
-using sconnRem.Wnd.Config;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
@@ -16,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using NLog;
+using sconnRem.Navigation;
 
 namespace sconnRem.View.Config.AlarmSystem.Auth
 {

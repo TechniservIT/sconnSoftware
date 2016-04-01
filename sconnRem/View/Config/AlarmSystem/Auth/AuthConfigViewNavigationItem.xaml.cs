@@ -16,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using NLog;
+using sconnRem.Navigation;
 
 namespace sconnRem.View.Config.AlarmSystem.Auth
 {

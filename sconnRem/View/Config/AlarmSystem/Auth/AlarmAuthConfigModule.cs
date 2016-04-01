@@ -9,6 +9,7 @@ using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using sconnRem.Navigation;
 
 namespace sconnRem.View.Config.AlarmSystem.Auth
 {

@@ -15,7 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using NLog;
 using Prism.Regions;
-using sconnRem.Wnd.Config;
+using sconnRem.Navigation;
 
 namespace sconnRem.View.Config.AlarmSystem.User
 {

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Prism.Mef.Modularity;
 using Prism.Modularity;
 using Prism.Regions;
-using sconnRem.Wnd.Config;
+using sconnRem.Navigation;
 
 namespace sconnRem.View.Config.AlarmSystem.Gsm
 {

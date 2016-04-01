@@ -44,6 +44,10 @@
       <HintPath>..\packages\Prism.Core.6.1.0\lib\net45\Prism.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Prism.Mef.Wpf, Version=6.1.0.0, Culture=neutral, PublicKeyToken=91a96d2a154366d8, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Mef.6.1.0\lib\net45\Prism.Mef.Wpf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Prism.Wpf, Version=6.1.0.0, Culture=neutral, PublicKeyToken=91a96d2a154366d8, processorArchitecture=MSIL">
       <HintPath>..\packages\Prism.Wpf.6.1.0\lib\net45\Prism.Wpf.dll</HintPath>
       <Private>True</Private>
@@ -52,6 +56,7 @@
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -258,9 +263,21 @@
       <Project>{e94b0a02-089e-483a-aaef-3bfa49039598}</Project>
       <Name>iotData</Name>
     </ProjectReference>
+    <ProjectReference Include="..\IotServiceAbstract\IotServiceAbstract.csproj">
+      <Project>{DC1FBE1D-13B6-4DD2-91E2-7FFE2F909CC5}</Project>
+      <Name>IotServiceAbstract</Name>
+    </ProjectReference>
     <ProjectReference Include="..\sconnConnector\sconnConnector.csproj">
       <Project>{09C8A8F0-F85A-4534-922E-85E14EC32725}</Project>
       <Name>sconnConnector</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\sconnRem.Infrastructure\sconnRem.Infrastructure.csproj">
+      <Project>{e5740f97-e6a7-4010-b267-79d3aa2f7f48}</Project>
+      <Name>sconnRem.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\sconnRem.Navigation\sconnRem.Navigation.csproj">
+      <Project>{7a5fad15-614c-4d5d-9daa-4bc9628d479c}</Project>
+      <Name>sconnRem.Navigation</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

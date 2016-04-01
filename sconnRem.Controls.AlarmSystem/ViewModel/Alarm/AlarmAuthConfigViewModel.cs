@@ -10,13 +10,11 @@ using sconnConnector.POCO.Config.Abstract;
 using System.Windows.Input;
 using sconnConnector.POCO.Config.sconn;
 using System.Collections.ObjectModel;
-using Microsoft.Practices.Unity;
 using System.ComponentModel.Composition;
 using NLog;
 using Prism.Mvvm;
 using Prism.Mef.Modularity;
 using Prism.Modularity;
-using sconnRem.Wnd.Config;
 using Prism.Regions;
 
 namespace sconnRem.ViewModel.Alarm
@@ -31,7 +29,7 @@ namespace sconnRem.ViewModel.Alarm
         private readonly IRegionManager _regionManager;
         private Logger _nlogger = LogManager.GetCurrentClassLogger();
 
-        [Dependency]
+
         public AlarmSystemConfigManager Manager { get; set; }
         
 

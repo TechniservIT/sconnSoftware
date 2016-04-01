@@ -16,16 +16,10 @@ using System.ComponentModel.Composition;
 using Prism.Mef.Regions;
 using Prism.Regions;
 using Prism.Modularity;
+using sconnRem.Navigation;
 
 namespace sconnRem.Wnd.Config
 {
-
-    public static class RegionNames
-    {
-        public const String MainContentRegion = "MainContentRegion";
-        public const String MainNavigationRegion = "MainNavigationRegion";
-    }
-
 
     [Export]
     public partial class WndConfigureSiteShell : Window, IPartImportsSatisfiedNotification

@@ -649,6 +649,14 @@
       <Project>{09c8a8f0-f85a-4534-922e-85e14ec32725}</Project>
       <Name>sconnConnector</Name>
     </ProjectReference>
+    <ProjectReference Include="..\sconnRem.Infrastructure\sconnRem.Infrastructure.csproj">
+      <Project>{e5740f97-e6a7-4010-b267-79d3aa2f7f48}</Project>
+      <Name>sconnRem.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\sconnRem.Navigation\sconnRem.Navigation.csproj">
+      <Project>{7a5fad15-614c-4d5d-9daa-4bc9628d479c}</Project>
+      <Name>sconnRem.Navigation</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SiteManagmentService\SiteManagmentService.csproj">
       <Project>{cc9fb92a-c1d9-400a-bd9b-d814280a118e}</Project>
       <Name>SiteManagmentService</Name>

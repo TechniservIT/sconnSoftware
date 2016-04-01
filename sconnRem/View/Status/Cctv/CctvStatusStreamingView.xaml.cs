@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using NLog;
 using Prism.Regions;
+using sconnRem.Navigation;
 using sconnRem.Wnd.Main;
 
 namespace sconnRem.View.Status.Cctv
