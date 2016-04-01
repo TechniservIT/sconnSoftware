@@ -10,6 +10,7 @@ using Prism.Logging;
 using Prism.Mef;
 using Prism.Modularity;
 using Prism.Regions;
+using sconnConnector;
 using sconnConnector.Config;
 using sconnRem.Logging;
 using sconnRem.View.Menu.GridNavSideMenu;
@@ -23,12 +24,15 @@ namespace sconnRem.Wnd.Main
     public class GlobalWndBootstrapper : MefBootstrapper
     {
 
+
+        private sconnDataSrc _configSource = new sconnDataSrc();
+
         private const string ModuleCatalogUri = "/sconnRem;component/Wnd/Main/WndGlobalShell.xaml";
 
         //todo - inject from cfg bootstraper
         private void LoadConfigFromDataStore()
         {
-
+            _configSource.LoadConfig(DataSourceType.xml);
         }
 
         public GlobalWndBootstrapper()

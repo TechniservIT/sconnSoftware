@@ -15,12 +15,12 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using NLog;
 using Prism.Regions;
+using sconnRem.Controls.Navigation.ViewModel.Navigation;
 using sconnRem.Navigation;
 
 namespace sconnRem.View.Menu.SiteNavSideMenu
 {
-    //[ViewExport(RegionName = GlobalViewRegionNames.LNavigationRegion)]
-    //[PartCreationPolicy(CreationPolicy.NonShared)]
+    
     [Export]
     [ViewSortHint("01")]
     public partial class SiteNavSideMenuView : UserControl, IPartImportsSatisfiedNotification
@@ -34,6 +34,13 @@ namespace sconnRem.View.Menu.SiteNavSideMenu
         public SiteNavSideMenuView()
         {
             InitializeComponent();
+        }
+
+        [ImportingConstructor]
+        public SiteNavSideMenuView(SiteNavViewModel viewModel)
+        {
+            InitializeComponent();
+            this.DataContext = viewModel;
         }
 
         void IPartImportsSatisfiedNotification.OnImportsSatisfied()
