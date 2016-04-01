@@ -174,123 +174,11 @@
     <Compile Include="Controls\MainView\SiteView.cs" />
     <Compile Include="Controls\SiteConfig\SitePanel\statusViewPanel.cs" />
     <Compile Include="Controls\MainView\ViewSiteLoading.cs" />
-    <Compile Include="ViewModel\Alarm\AlarmAuthConfigViewModel.cs" />
-    <Compile Include="ViewModel\Alarm\AlarmCommConfigViewModel.cs" />
-    <Compile Include="ViewModel\Alarm\AlarmConfigSelectViewModel.cs" />
-    <Compile Include="ViewModel\Alarm\AlarmDeviceConfigViewModel.cs" />
-    <Compile Include="ViewModel\Alarm\AlarmGlobalConfigViewModel.cs" />
-    <Compile Include="ViewModel\Alarm\AlarmGsmConfigViewModel.cs" />
-    <Compile Include="ViewModel\Alarm\AlarmUsersConfigViewModel.cs" />
-    <Compile Include="ViewModel\Alarm\AlarmZoneConfigViewModel.cs" />
-    <Compile Include="ViewModel\Generic\GenericAlarmConfigViewModel.cs" />
-    <Compile Include="ViewModel\Generic\IGenericAlarmConfigViewModel.cs" />
-    <Compile Include="ViewModel\Generic\ViewModelBase.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
-    <Compile Include="ViewModel\Navigation\ConfigureSiteViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
-    <Compile Include="View\Config\AlarmSystem\Abstract\AlarmConfigRegions.cs" />
-    <Compile Include="View\Config\AlarmSystem\Abstract\IAlarmSystemDataRecordView.cs" />
-    <Compile Include="View\Config\AlarmSystem\Auth\AlarmAuthConfigModule.cs" />
-    <Compile Include="View\Config\AlarmSystem\Auth\AlarmAuthRecordView.xaml.cs">
-      <DependentUpon>AlarmAuthRecordView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Config\AlarmSystem\Auth\AuthConfigView.xaml.cs">
-      <DependentUpon>AuthConfigView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Config\AlarmSystem\Auth\AuthConfigViewNavigationItem.xaml.cs">
-      <DependentUpon>AuthConfigViewNavigationItem.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Config\AlarmSystem\Comm\AlarmCommConfigModule.cs" />
-    <Compile Include="View\Config\AlarmSystem\Comm\CommConfigView.xaml.cs">
-      <DependentUpon>CommConfigView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Config\AlarmSystem\Comm\CommConfigViewNavigationItem.xaml.cs">
-      <DependentUpon>CommConfigViewNavigationItem.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Config\AlarmSystem\ConfigSelectView.xaml.cs">
-      <DependentUpon>ConfigSelectView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Config\AlarmSystem\Device\DeviceConfigView.xaml.cs">
-      <DependentUpon>DeviceConfigView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Config\AlarmSystem\Device\DeviceConfigViewNavigationItem.xaml.cs">
-      <DependentUpon>DeviceConfigViewNavigationItem.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Config\AlarmSystem\Device\DeviceSelectView.xaml.cs">
-      <DependentUpon>DeviceSelectView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Config\AlarmSystem\Device\KeypadConfigView.xaml.cs">
-      <DependentUpon>KeypadConfigView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Config\AlarmSystem\Device\MotherboardConfigView.xaml.cs">
-      <DependentUpon>MotherboardConfigView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Config\AlarmSystem\Device\OutputsConfigView.xaml.cs">
-      <DependentUpon>OutputsConfigView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Config\AlarmSystem\Device\SensorConfigView.xaml.cs">
-      <DependentUpon>SensorConfigView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Config\AlarmSystem\Device\SirenConfigView.xaml.cs">
-      <DependentUpon>SirenConfigView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Config\AlarmSystem\Global\GlobalConfigModule.cs" />
-    <Compile Include="View\Config\AlarmSystem\Global\GlobalConfigViewNavigationItem.xaml.cs">
-      <DependentUpon>GlobalConfigViewNavigationItem.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Config\AlarmSystem\Gsm\GsmConfigModule.cs" />
-    <Compile Include="View\Config\AlarmSystem\Gsm\GsmConfigView.xaml.cs">
-      <DependentUpon>GsmConfigView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Config\AlarmSystem\Device\InputsConfigView.xaml.cs">
-      <DependentUpon>InputsConfigView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Config\AlarmSystem\Gsm\GsmConfigViewNavigationItem.xaml.cs">
-      <DependentUpon>GsmConfigViewNavigationItem.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Config\AlarmSystem\User\UserConfigModule.cs" />
-    <Compile Include="View\Config\AlarmSystem\User\UserConfigView.xaml.cs">
-      <DependentUpon>UserConfigView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Config\AlarmSystem\User\UserConfigViewNavigationItem.xaml.cs">
-      <DependentUpon>UserConfigViewNavigationItem.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Config\AlarmSystem\Zone\ZoneConfigModule.cs" />
-    <Compile Include="View\Config\AlarmSystem\Zone\ZoneConfigView.xaml.cs">
-      <DependentUpon>ZoneConfigView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Config\AlarmSystem\Zone\ZoneConfigViewNavigationItem.xaml.cs">
-      <DependentUpon>ZoneConfigViewNavigationItem.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Config\AlarmSystem\Global\GlobalConfigView.xaml.cs">
-      <DependentUpon>GlobalConfigView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Status\Cctv\CctvStatusStreamingView.xaml.cs">
-      <DependentUpon>CctvStatusStreamingView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Status\gridSiteConfigSelect.cs" />
-    <Compile Include="View\Menu\GridNavSideMenu\GridNavSideMenuModule.cs" />
-    <Compile Include="View\Menu\GridNavSideMenu\GridNavSideMenuView.xaml.cs">
-      <DependentUpon>GridNavSideMenuView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Menu\SiteNavSideMenu\SiteNavSideMenuModule.cs" />
-    <Compile Include="View\Menu\SiteNavSideMenu\SiteNavSideMenuView.xaml.cs">
-      <DependentUpon>SiteNavSideMenuView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Menu\ToolTopMenu\ToolTopMenuModule.cs" />
-    <Compile Include="View\Menu\ToolTopMenu\ToolTopMenuView.xaml.cs">
-      <DependentUpon>ToolTopMenuView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\Setting\wndAppSettings.xaml.cs">
       <DependentUpon>wndAppSettings.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Status\AlarmSystem\AlarmSystemStatusFullScreen.xaml.cs">
-      <DependentUpon>AlarmSystemStatusFullScreen.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Status\AlarmSystem\AlarmSystemStatusMin.xaml.cs">
-      <DependentUpon>AlarmSystemStatusMin.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Status\SiteStatusGridViewModule.cs" />
     <Compile Include="Wnd\Main\GlobalWndBootstrapper.cs" />
     <Compile Include="Wnd\Main\WndGlobalShell.xaml.cs">
       <DependentUpon>WndGlobalShell.xaml</DependentUpon>
@@ -362,123 +250,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Config\AlarmSystem\Auth\AlarmAuthRecordView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Config\AlarmSystem\Auth\AuthConfigView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Config\AlarmSystem\Auth\AuthConfigViewNavigationItem.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Config\AlarmSystem\Comm\CommConfigView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Config\AlarmSystem\Comm\CommConfigViewNavigationItem.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Config\AlarmSystem\ConfigSelectView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Config\AlarmSystem\Device\DeviceConfigView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Config\AlarmSystem\Device\DeviceConfigViewNavigationItem.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Config\AlarmSystem\Device\DeviceSelectView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Config\AlarmSystem\Device\KeypadConfigView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Config\AlarmSystem\Device\MotherboardConfigView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Config\AlarmSystem\Device\OutputsConfigView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Config\AlarmSystem\Device\SensorConfigView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Config\AlarmSystem\Device\SirenConfigView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Config\AlarmSystem\Global\GlobalConfigViewNavigationItem.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Config\AlarmSystem\Gsm\GsmConfigView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Config\AlarmSystem\Device\InputsConfigView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Config\AlarmSystem\Gsm\GsmConfigViewNavigationItem.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Config\AlarmSystem\User\UserConfigView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Config\AlarmSystem\User\UserConfigViewNavigationItem.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Config\AlarmSystem\Zone\ZoneConfigView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Config\AlarmSystem\Zone\ZoneConfigViewNavigationItem.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Config\AlarmSystem\Global\GlobalConfigView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Menu\GridNavSideMenu\GridNavSideMenuView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Menu\SiteNavSideMenu\SiteNavSideMenuView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Menu\ToolTopMenu\ToolTopMenuView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\Setting\wndAppSettings.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Status\AlarmSystem\AlarmSystemStatusFullScreen.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\Status\AlarmSystem\AlarmSystemStatusMin.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\Status\Cctv\CctvStatusStreamingView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -648,6 +420,22 @@
     <ProjectReference Include="..\sconnConnector\sconnConnector.csproj">
       <Project>{09c8a8f0-f85a-4534-922e-85e14ec32725}</Project>
       <Name>sconnConnector</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\sconnRem.Controls.AlarmSystem\sconnRem.Controls.AlarmSystem.csproj">
+      <Project>{c567fe8b-3834-4ad8-aad4-71bdd36dded6}</Project>
+      <Name>sconnRem.Controls.AlarmSystem</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\sconnRem.Controls.Navigation\sconnRem.Controls.Navigation.csproj">
+      <Project>{97a1614e-9a15-4676-a3e9-9c8182c5b3e4}</Project>
+      <Name>sconnRem.Controls.Navigation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\sconnRem.Controls.Status\sconnRem.Controls.Status.csproj">
+      <Project>{fbec1121-bba2-41a9-aa91-64cd67de68ff}</Project>
+      <Name>sconnRem.Controls.Status</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\sconnRem.Controls.Tests\sconnRem.Controls.Tests.csproj">
+      <Project>{7801873e-538c-414c-b399-f9466efbc069}</Project>
+      <Name>sconnRem.Controls.Tests</Name>
     </ProjectReference>
     <ProjectReference Include="..\sconnRem.Infrastructure\sconnRem.Infrastructure.csproj">
       <Project>{e5740f97-e6a7-4010-b267-79d3aa2f7f48}</Project>

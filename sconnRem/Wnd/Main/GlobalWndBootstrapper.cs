@@ -45,7 +45,7 @@ namespace sconnRem.Wnd.Main
         protected override void ConfigureAggregateCatalog()
         {
             base.ConfigureAggregateCatalog();
-            this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(GlobalWndBootstrapper).Assembly));
+            this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(GlobalWndBootstrapper).Namespace));
 
             //this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(GridNavSideMenuModule).Assembly));
             //this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(SiteNavSideMenuModule).Assembly));
@@ -93,65 +93,6 @@ namespace sconnRem.Wnd.Main
     }
 
 
-    [Export(typeof(AutoPopulateExportedViewsBehavior))]
-    [PartCreationPolicy(CreationPolicy.NonShared)]
-    public class AutoPopulateExportedViewsBehavior : RegionBehavior, IPartImportsSatisfiedNotification
-    {
-        protected override void OnAttach()
-        {
-            AddRegisteredViews();
-        }
-
-        public void OnImportsSatisfied()
-        {
-            AddRegisteredViews();
-        }
-
-        private void AddRegisteredViews()
-        {
-            if (this.Region != null)
-            {
-                foreach (var viewEntry in this.RegisteredViews)
-                {
-                    if (viewEntry.Metadata.RegionName == this.Region.Name)
-                    {
-                        var view = viewEntry.Value;
-
-                        if (!this.Region.Views.Contains(view))
-                        {
-                            this.Region.Add(view);
-                        }
-                    }
-                }
-            }
-        }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays", Justification = "MEF injected values"), ImportMany(AllowRecomposition = true)]
-        public Lazy<object, IViewRegionRegistration>[] RegisteredViews { get; set; }
-    }
-
-    public interface IViewRegionRegistration
-    {
-        string RegionName { get; }
-    }
-
-
-    [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
-    [MetadataAttribute]
-    public sealed class ViewExportAttribute : ExportAttribute, IViewRegionRegistration
-    {
-        public ViewExportAttribute()
-            : base(typeof(object))
-        { }
-
-        public ViewExportAttribute(string viewName)
-            : base(viewName, typeof(object))
-        { }
-
-        public string ViewName { get { return base.ContractName; } }
-
-        public string RegionName { get; set; }
-    }
 
 
 }

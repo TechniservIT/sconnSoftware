@@ -154,7 +154,6 @@
     <Compile Include="ViewModel\Alarm\AlarmZoneConfigViewModel.cs" />
     <Compile Include="ViewModel\Generic\GenericAlarmConfigViewModel.cs" />
     <Compile Include="ViewModel\Generic\IGenericAlarmConfigViewModel.cs" />
-    <Compile Include="ViewModel\Generic\ViewModelBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="View\Config\AlarmSystem\Auth\AlarmAuthRecordView.xaml">
