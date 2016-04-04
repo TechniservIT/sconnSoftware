@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace iotDatabaseConnector.DAL.Repository
+namespace iotDatabaseConnector.Tests
 {
-    class IotGenericRepository
+    public class iotDatabaseIntegrationTests
     {
     }
 }
