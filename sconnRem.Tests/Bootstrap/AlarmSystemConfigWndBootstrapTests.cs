@@ -12,6 +12,11 @@ using Prism.Regions;
 using sconnConnector.Config;
 using sconnRem.Navigation;
 using sconnRem.View.Config;
+using sconnRem.View.Config.AlarmSystem.Auth;
+using sconnRem.View.Config.AlarmSystem.Comm;
+using sconnRem.View.Config.AlarmSystem.Global;
+using sconnRem.View.Config.AlarmSystem.Gsm;
+using sconnRem.View.Config.AlarmSystem.Zone;
 using sconnRem.View.Menu.GridNavSideMenu;
 using sconnRem.View.Menu.SiteNavSideMenu;
 using sconnRem.View.Menu.ToolTopMenu;
@@ -22,7 +27,7 @@ namespace sconnRem.Tests.Bootstrap
 {
 
     [TestFixture]
-    public class AlarmsystemConfigBootstrap
+    public class AlarmSystemConfigWndBootstrapTests
     {
 
         IUnityContainer container = new UnityContainer();
@@ -33,107 +38,7 @@ namespace sconnRem.Tests.Bootstrap
             container.RegisterType<AlarmSystemConfigManager, AlarmSystemConfigManager>();
         }
 
-        /************** View export ***************/
-
-
-        [Test]
-        [RequiresSTA]
-        public void TestBootstrap_Should_Register_View_TopNavigation()
-        {
-            GlobalWndBootstrapper wnd = new GlobalWndBootstrapper();
-            wnd.Run();
-            var container = wnd.GetContainer();
-            var exported = container.Catalog.Parts.Where(x => x.GetType() == typeof(ToolTopMenuView));
-            Assert.True(exported != null);
-        }
-
-
-
-        [Test]
-        [RequiresSTA]
-        public void TestBootstrap_Should_Register_View_SiteNavigation()
-        {
-            GlobalWndBootstrapper wnd = new GlobalWndBootstrapper();
-            wnd.Run();
-            var container = wnd.GetContainer();
-            var exported = container.Catalog.Parts.Where(x => x.GetType() == typeof(SiteNavSideMenuView));
-            Assert.True(exported != null);
-        }
-
-
-        [Test]
-        [RequiresSTA]
-        public void TestBootstrap_Should_Register_View_ToolbarNavigation()
-        {
-            GlobalWndBootstrapper wnd = new GlobalWndBootstrapper();
-            wnd.Run();
-            var container = wnd.GetContainer();
-            var exported = container.Catalog.Parts.Where(x => x.GetType() == typeof(GridNavSideMenuView));
-            Assert.True(exported != null);
-        }
-
-
-        /***********  Module export ***************/
-
-
-        [Test]
-        [RequiresSTA]
-        public void TestBootstrap_Should_Register_Module_ToolbarNavigation()
-        {
-            GlobalWndBootstrapper wnd = new GlobalWndBootstrapper();
-            wnd.Run();
-            var container = wnd.GetContainer();
-            var exported = container.Catalog.Parts.Where(x => x.GetType() == typeof(GridNavSideMenuModule));
-            Assert.True(exported != null);
-        }
-
-        [Test]
-        [RequiresSTA]
-        public void TestBootstrap_Should_Register_Module_SiteNavigation()
-        {
-            GlobalWndBootstrapper wnd = new GlobalWndBootstrapper();
-            wnd.Run();
-            var container = wnd.GetContainer();
-            var exported = container.Catalog.Parts.Where(x => x.GetType() == typeof(SiteNavSideMenuModule));
-            Assert.True(exported != null);
-        }
-
-
-        [Test]
-        [RequiresSTA]
-        public void TestBootstrap_Should_Register_Module_TopNavigation()
-        {
-            GlobalWndBootstrapper wnd = new GlobalWndBootstrapper();
-            wnd.Run();
-            var container = wnd.GetContainer();
-            var exported = container.Catalog.Parts.Where(x => x.GetType() == typeof(ToolTopMenuModule));
-            Assert.True(exported != null);
-        }
-
-
-
-
-        //[Test]
-        //[RequiresSTA]
-        //public void TestBootstrap_Loads_Configuration_Wnd()
-        //{
-        //    GlobalWndBootstrapper wnd = new GlobalWndBootstrapper();
-        //    wnd.Run();
-        //    var container = wnd.GetContainer();
-        //    // container.Catalog.Parts.ElementType
-        //    var exported = container.Catalog.Parts.Where(x => x.GetType() == typeof(CommConfigView));
-        //    //GetExportedValues<CommConfigView>(AlarmRegionNames.AlarmConfig_Contract_CommConfigView);
-        //    Assert.True(exported != null);
-
-        //    //Mock<WndGlobalShell> regionManagerMock = new Mock<WndGlobalShell>();
-        //    //regionManagerMock.s
-        //    //  wnd.RegionManager.Regions.First().Views.Contains()
-        //    //Mock<WndConfigureSiteShell> wndMock = new Mock<WndConfigureSiteShell>();
-        //    //wndMock.Setup(x => x.);
-        //    //regionManagerMock.VerifyAll();
-        //}
-
-            
+ 
 
         /**************** Alarm System View Export ****************/
         
@@ -194,6 +99,70 @@ namespace sconnRem.Tests.Bootstrap
             var exported = container.Catalog.Parts.Where(x => x.GetType() == typeof(ZoneConfigView));
             Assert.True(exported != null);
         }
+
+
+
+        /************** Alarm System Module Export **************/
+        
+        [Test]
+        [RequiresSTA]
+        public void TestBootstrap_Loads_Module_AlarmSystem_Conf_Auth()
+        {
+            ConfigNavBootstrapper wnd = new ConfigNavBootstrapper();
+            wnd.Run();
+            var container = wnd.GetContainer();
+            var exported = container.Catalog.Parts.Where(x => x.GetType() == typeof(AlarmAuthConfigModule));
+            Assert.True(exported != null);
+        }
+
+
+        [Test]
+        [RequiresSTA]
+        public void TestBootstrap_Loads_Module_AlarmSystem_Conf_Comm()
+        {
+            ConfigNavBootstrapper wnd = new ConfigNavBootstrapper();
+            wnd.Run();
+            var container = wnd.GetContainer();
+            var exported = container.Catalog.Parts.Where(x => x.GetType() == typeof(AlarmCommConfigModule));
+            Assert.True(exported != null);
+        }
+
+
+        [Test]
+        [RequiresSTA]
+        public void TestBootstrap_Loads_Module_AlarmSystem_Conf_Global()
+        {
+            ConfigNavBootstrapper wnd = new ConfigNavBootstrapper();
+            wnd.Run();
+            var container = wnd.GetContainer();
+            var exported = container.Catalog.Parts.Where(x => x.GetType() == typeof(GlobalConfigModule));
+            Assert.True(exported != null);
+        }
+
+
+        [Test]
+        [RequiresSTA]
+        public void TestBootstrap_Loads_Module_AlarmSystem_Conf_Gsm()
+        {
+            ConfigNavBootstrapper wnd = new ConfigNavBootstrapper();
+            wnd.Run();
+            var container = wnd.GetContainer();
+            var exported = container.Catalog.Parts.Where(x => x.GetType() == typeof(GsmConfigModule));
+            Assert.True(exported != null);
+        }
+
+        [Test]
+        [RequiresSTA]
+        public void TestBootstrap_Loads_Module_AlarmSystem_Conf_Zones()
+        {
+            ConfigNavBootstrapper wnd = new ConfigNavBootstrapper();
+            wnd.Run();
+            var container = wnd.GetContainer();
+            var exported = container.Catalog.Parts.Where(x => x.GetType() == typeof(ZoneConfigModule));
+            Assert.True(exported != null);
+        }
+
+
 
 
 
