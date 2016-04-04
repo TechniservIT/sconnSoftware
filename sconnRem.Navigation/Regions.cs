@@ -7,10 +7,18 @@ using System.Threading.Tasks;
 namespace sconnRem.Navigation
 {
 
-    public static class RegionNames
+    public static class AlarmRegionNames
     {
         public const String MainContentRegion = "MainContentRegion";
         public const String MainNavigationRegion = "MainNavigationRegion";
+
+        public static Uri AlarmUri_Config_Auth_View = new Uri("AuthConfigView", UriKind.Relative);
+        public static Uri AlarmUri_Config_Global_View = new Uri("GlobalConfigView", UriKind.Relative);
+        public static Uri AlarmUri_Config_Gsm_View = new Uri("GsmConfigView", UriKind.Relative);
+        public static Uri AlarmUri_Config_Zone_View = new Uri("ZoneConfigView", UriKind.Relative);
+        public static Uri AlarmUri_Config_Users_View = new Uri("UserConfigView", UriKind.Relative);
+
+
     }
     
     public static class GlobalViewRegionNames

@@ -21,7 +21,7 @@ namespace sconnRem.View.Config.AlarmSystem.Comm
 
         public void Initialize()
         {
-            this.RegionManager.RegisterViewWithRegion(RegionNames.MainNavigationRegion, typeof(CommConfigViewNavigationItem));
+            this.RegionManager.RegisterViewWithRegion(AlarmRegionNames.MainNavigationRegion, typeof(CommConfigViewNavigationItem));
         }
     }
 

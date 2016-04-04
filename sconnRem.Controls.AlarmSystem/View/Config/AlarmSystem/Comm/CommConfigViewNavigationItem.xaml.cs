@@ -71,7 +71,7 @@ namespace sconnRem.View.Config.AlarmSystem.Comm
 
         private void Nav_Button_Click(object sender, RoutedEventArgs e)
         {
-            this.RegionManager.RequestNavigate(RegionNames.MainContentRegion, _commConfigViewUri
+            this.RegionManager.RequestNavigate(AlarmRegionNames.MainContentRegion, _commConfigViewUri
                 ,
                 (NavigationResult nr) =>
                 {

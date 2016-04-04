@@ -54,7 +54,7 @@ namespace sconnRem.Wnd.Config
                     if (e.ModuleInfo.ModuleName == StartModuleName)
                     {
                         this.RegionManager.RequestNavigate(
-                            RegionNames.MainContentRegion,
+                            AlarmRegionNames.MainContentRegion,
                             _startViewUri);
                     }
                 };

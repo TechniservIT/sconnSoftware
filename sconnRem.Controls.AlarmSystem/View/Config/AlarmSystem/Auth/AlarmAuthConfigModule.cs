@@ -20,7 +20,7 @@ namespace sconnRem.View.Config.AlarmSystem.Auth
 
         public void Initialize()
         {
-            this.RegionManager.RegisterViewWithRegion(RegionNames.MainNavigationRegion, typeof(AuthConfigViewNavigationItem));
+            this.RegionManager.RegisterViewWithRegion(AlarmRegionNames.MainNavigationRegion, typeof(AuthConfigViewNavigationItem));
         }
     }
 

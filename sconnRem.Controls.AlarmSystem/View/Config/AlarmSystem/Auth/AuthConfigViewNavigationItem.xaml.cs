@@ -56,7 +56,7 @@ namespace sconnRem.View.Config.AlarmSystem.Auth
         
         private void Nav_Button_Click(object sender, RoutedEventArgs e)
         {
-            this.RegionManager.RequestNavigate(RegionNames.MainContentRegion, _authViewUri
+            this.RegionManager.RequestNavigate(AlarmRegionNames.MainContentRegion, _authViewUri
                 ,
                 (NavigationResult nr) =>
                 {

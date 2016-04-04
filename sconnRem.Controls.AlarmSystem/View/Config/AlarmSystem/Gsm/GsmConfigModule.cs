@@ -19,7 +19,7 @@ namespace sconnRem.View.Config.AlarmSystem.Gsm
 
         public void Initialize()
         {
-            this.RegionManager.RegisterViewWithRegion(RegionNames.MainNavigationRegion, typeof(GsmConfigViewNavigationItem));
+            this.RegionManager.RegisterViewWithRegion(AlarmRegionNames.MainNavigationRegion, typeof(GsmConfigViewNavigationItem));
         }
     }
 }
