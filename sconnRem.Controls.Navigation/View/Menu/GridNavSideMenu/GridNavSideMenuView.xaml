@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:sconnRem.View.Menu.GridNavSideMenu"
              mc:Ignorable="d" 
-             d:DesignHeight="800" d:DesignWidth="200">
+             d:DesignHeight="200" d:DesignWidth="200">
 
     <Grid Background="#4C71D9E4">
         
@@ -14,14 +14,14 @@
                 <ColumnDefinition  Width="50*"/>
             </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="5*"/>
-            <RowDefinition Height="5*"/>
+            <RowDefinition Height="15*"/>
+            <RowDefinition Height="15*"/>
         </Grid.RowDefinitions>
 
 
         <StackPanel   Grid.Row="0" Grid.Column="0">
             <Button Margin="10,10,10,00" Click="Nav_Button_Click"   HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Height="Auto"  Width="Auto"  >
-                <Image  x:Name="ImgDispActionGridFullScreen"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="10,10,10,10" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/lista2.png"/>
+                <Image  x:Name="ImgDispActionGridFullScreen"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="10,10,10,10" VerticalAlignment="Center" Width="Auto" Source="../../../images/4.jpg"/>
             </Button>
             <!--<Label HorizontalContentAlignment="Center" Grid.Row="1" Grid.Column="0" Content="Authentication" FontSize="14.667" FontFamily="Motorwerk">
             </Label>-->
@@ -29,19 +29,19 @@
 
         <StackPanel   Grid.Row="0" Grid.Column="1">
             <Button Margin="10,10,10,00" Click="Nav_Button_Click"   HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Height="Auto"  Width="Auto"  >
-                <Image  x:Name="ImgDispActionGridDoublecreen"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="10,10,10,10" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/lista2.png"/>
+                <Image  x:Name="ImgDispActionGridDoublecreen"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="10,10,10,10" VerticalAlignment="Center" Width="Auto" Source="../../../images/16.jpg"/>
             </Button>
         </StackPanel>
 
         <StackPanel   Grid.Row="1" Grid.Column="0">
             <Button Margin="10,10,10,00" Click="Nav_Button_Click"   HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Height="Auto"  Width="Auto"  >
-                <Image  x:Name="ImgDispActionGridQuadratureScreen"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="10,10,10,10" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/lista2.png"/>
+                <Image  x:Name="ImgDispActionGridQuadratureScreen"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="10,10,10,10" VerticalAlignment="Center" Width="Auto" Source="../../../images/2.jpg"/>
             </Button>
         </StackPanel>
 
         <StackPanel   Grid.Row="1" Grid.Column="1">
             <Button Margin="10,10,10,00" Click="Nav_Button_Click"   HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Height="Auto"  Width="Auto"  >
-                <Image  x:Name="ImgDispActionGridHexScreen"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="10,10,10,10" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/lista2.png"/>
+                <Image  x:Name="ImgDispActionGridHexScreen"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="10,10,10,10" VerticalAlignment="Center" Width="Auto" Source="../../../images/1.jpg"/>
             </Button>
         </StackPanel>
     
