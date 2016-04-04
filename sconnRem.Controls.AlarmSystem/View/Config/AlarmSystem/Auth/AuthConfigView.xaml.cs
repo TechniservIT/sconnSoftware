@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using sconnRem.Navigation;
 
 namespace sconnRem.View.Config
 {
@@ -22,7 +23,7 @@ namespace sconnRem.View.Config
     /// </summary>
     /// 
 
-    [Export("AuthConfigView")]
+    [Export(AlarmRegionNames.AlarmConfig_Contract_AuthConfigView)]
     public partial class AuthConfigView : UserControl
     {
         [ImportingConstructor]

@@ -73,18 +73,7 @@ namespace sconnRem.Wnd.Main
                     }
                 };
         }
-
-       
-
-        //[Import]
-        //GlobalShellViewModel ViewModel
-        //{
-        //    set
-        //    {
-        //        this.DataContext = value;
-        //    }
-        //}
-
+        
 
     }
 

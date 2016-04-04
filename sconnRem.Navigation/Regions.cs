@@ -12,11 +12,20 @@ namespace sconnRem.Navigation
         public const String MainContentRegion = "MainContentRegion";
         public const String MainNavigationRegion = "MainNavigationRegion";
 
-        public static Uri AlarmUri_Config_Auth_View = new Uri("AuthConfigView", UriKind.Relative);
-        public static Uri AlarmUri_Config_Global_View = new Uri("GlobalConfigView", UriKind.Relative);
-        public static Uri AlarmUri_Config_Gsm_View = new Uri("GsmConfigView", UriKind.Relative);
-        public static Uri AlarmUri_Config_Zone_View = new Uri("ZoneConfigView", UriKind.Relative);
-        public static Uri AlarmUri_Config_Users_View = new Uri("UserConfigView", UriKind.Relative);
+        public const String AlarmConfig_Contract_AuthConfigView = "AuthConfigView";
+        public const String AlarmConfig_Contract_GlobalConfigView = "GlobalConfigView";
+        public const String AlarmConfig_Contract_CommConfigView = "CommConfigView";
+        public const String AlarmConfig_Contract_GsmConfigView = "GsmConfigView";
+        public const String AlarmConfig_Contract_ZoneConfigView = "ZoneConfigView";
+        public const String AlarmConfig_Contract_UsersConfigView = "UserConfigView";
+
+
+        public static Uri AlarmUri_Config_Auth_View = new Uri("/View/Config/AlarmSystem/" + AlarmConfig_Contract_AuthConfigView, UriKind.Relative);
+        public static Uri AlarmUri_Config_Global_View = new Uri("/View/Config/AlarmSystem/" + AlarmConfig_Contract_GlobalConfigView, UriKind.Relative);
+        public static Uri AlarmUri_Config_Comm_View = new Uri("/View/Config/AlarmSystem/" + AlarmConfig_Contract_CommConfigView, UriKind.Relative);
+        public static Uri AlarmUri_Config_Gsm_View = new Uri("/View/Config/AlarmSystem/" + AlarmConfig_Contract_GsmConfigView, UriKind.Relative);
+        public static Uri AlarmUri_Config_Zone_View = new Uri("/View/Config/AlarmSystem/" + AlarmConfig_Contract_ZoneConfigView, UriKind.Relative);
+        public static Uri AlarmUri_Config_Users_View = new Uri("/View/Config/AlarmSystem/" + AlarmConfig_Contract_UsersConfigView, UriKind.Relative);
 
 
     }

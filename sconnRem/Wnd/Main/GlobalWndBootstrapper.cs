@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using NLog;
 using Prism.Logging;
 using Prism.Mef;
 using Prism.Modularity;
@@ -21,12 +23,20 @@ using sconnRem.Wnd.Config;
 
 namespace sconnRem.Wnd.Main
 {
-    public class GlobalWndBootstrapper : MefBootstrapper
+
+    public interface IVerifiableBootstraper
+    {
+        CompositionContainer GetContainer();
+        AggregateCatalog GetAggregateCatalog();
+    }
+
+
+    public class GlobalWndBootstrapper : MefBootstrapper, IVerifiableBootstraper
     {
 
 
         private sconnDataSrc _configSource = new sconnDataSrc();
-
+        private Logger _nlogger = LogManager.GetCurrentClassLogger();
         private const string ModuleCatalogUri = "/sconnRem;component/Wnd/Main/WndGlobalShell.xaml";
 
         //todo - inject from cfg bootstraper
@@ -48,13 +58,21 @@ namespace sconnRem.Wnd.Main
 
         protected override void ConfigureAggregateCatalog()
         {
-            base.ConfigureAggregateCatalog();
-            this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(GlobalWndBootstrapper).Assembly));
+            try
+            {
+                base.ConfigureAggregateCatalog();
+                this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(GlobalWndBootstrapper).Assembly));
 
-            this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(GridNavSideMenuModule).Assembly));
-            //this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(SiteNavSideMenuModule).Assembly));
-            //this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(ToolTopMenuModule).Assembly));
-            this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(SiteStatusGridViewModule).Assembly));
+                this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(GridNavSideMenuModule).Assembly));
+                //this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(SiteNavSideMenuModule).Assembly));
+                //this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(ToolTopMenuModule).Assembly));
+                this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(SiteStatusGridViewModule).Assembly));
+            }
+            catch (Exception ex)
+            {
+                _nlogger.Error(ex, ex.Message);
+            }        
+
         }
 
         protected override IModuleCatalog CreateModuleCatalog()
@@ -90,9 +108,27 @@ namespace sconnRem.Wnd.Main
 
         protected override void InitializeShell()
         {
-            base.InitializeShell();
-            Application.Current.MainWindow = (Window)this.Shell;
-            Application.Current.MainWindow.Show();
+            try
+            {
+                base.InitializeShell();
+                Application.Current.MainWindow = (Window)this.Shell;
+                Application.Current.MainWindow.Show();
+            }
+            catch (Exception ex)
+            {
+                _nlogger.Error(ex,ex.Message);
+            }
+
+        }
+
+        public CompositionContainer GetContainer()
+        {
+            return this.Container;
+        }
+
+        public AggregateCatalog GetAggregateCatalog()
+        {
+            return this.AggregateCatalog;
         }
     }
 

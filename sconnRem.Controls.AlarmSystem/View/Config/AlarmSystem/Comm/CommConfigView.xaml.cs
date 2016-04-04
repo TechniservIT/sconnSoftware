@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using sconnRem.Navigation;
 
 namespace sconnRem.View.Config
 {
@@ -23,7 +24,7 @@ namespace sconnRem.View.Config
     /// </summary>
     /// 
 
-    [Export("CommConfigView")]
+    [Export(AlarmRegionNames.AlarmConfig_Contract_CommConfigView)]
     public partial class CommConfigView : UserControl
     {
         //[Import]

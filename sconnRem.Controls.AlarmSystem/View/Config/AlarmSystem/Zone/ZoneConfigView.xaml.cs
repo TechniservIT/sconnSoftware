@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using sconnRem.ViewModel.Alarm;
 using System.ComponentModel.Composition;
+using sconnRem.Navigation;
 
 namespace sconnRem.View.Config
 {
@@ -21,7 +22,7 @@ namespace sconnRem.View.Config
     /// Interaction logic for ZoneConfig.xaml
     /// </summary>
 
-    [Export("ZoneConfigView")]
+    [Export(AlarmRegionNames.AlarmConfig_Contract_ZoneConfigView)]
     public partial class ZoneConfigView : UserControl
     {
         [ImportingConstructor]

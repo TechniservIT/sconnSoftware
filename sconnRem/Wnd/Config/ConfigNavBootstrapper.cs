@@ -11,15 +11,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using NLog;
 using sconnConnector.Config;
+using sconnRem.Wnd.Main;
 
 namespace sconnRem.Wnd.Config
 {
-    public class ConfigNavBootstrapper : MefBootstrapper
+    public class ConfigNavBootstrapper : MefBootstrapper, IVerifiableBootstraper
     {
 
         private const string ModuleCatalogUri = "/sconnRem;component/Wnd/Config/Shell/wndConfigureSiteShell.xaml";
         private IAlarmConfigManager _manager;
+        private Logger _nlogger = LogManager.GetCurrentClassLogger();
 
         public ConfigNavBootstrapper()
         {
@@ -39,8 +42,16 @@ namespace sconnRem.Wnd.Config
 
         protected override void ConfigureAggregateCatalog()
         {
-            base.ConfigureAggregateCatalog();
-            this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(ConfigNavBootstrapper).Assembly));
+            try
+            {
+                base.ConfigureAggregateCatalog();
+                this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(ConfigNavBootstrapper).Assembly));
+            }
+            catch (Exception ex)
+            {
+                _nlogger.Error(ex, ex.Message);
+            }
+
         }
 
         protected override IModuleCatalog CreateModuleCatalog()
@@ -50,9 +61,17 @@ namespace sconnRem.Wnd.Config
 
         protected override DependencyObject CreateShell()
         {
-            var batch = new CompositionBatch();
-            var repoPart = batch.AddExportedValue<IAlarmConfigManager>(_manager);
-            this.Container.Compose(batch);
+            try
+            {
+                var batch = new CompositionBatch();
+                var repoPart = batch.AddExportedValue<IAlarmConfigManager>(_manager);
+                this.Container.Compose(batch);
+            }
+            catch (Exception ex)
+            {
+                _nlogger.Error(ex, ex.Message);
+            }
+
             // repo will now be injected on any matching [Import] or [ImportingConstructor]
 
             return this.Container.GetExportedValue<WndConfigureSiteShell>();
@@ -60,9 +79,28 @@ namespace sconnRem.Wnd.Config
 
         protected override void InitializeShell()
         {
-            base.InitializeShell();
-            Application.Current.MainWindow = (Window)this.Shell;
-            Application.Current.MainWindow.Show();
+            try
+            {
+                base.InitializeShell();
+                Application.Current.MainWindow = (Window)this.Shell;
+                Application.Current.MainWindow.Show();
+            }
+            catch (Exception ex)
+            {
+                _nlogger.Error(ex, ex.Message);
+            }
+
         }
+
+        public CompositionContainer GetContainer()
+        {
+            return this.Container;
+        }
+
+        public AggregateCatalog GetAggregateCatalog()
+        {
+            return this.AggregateCatalog;
+        }
+
     }
 }

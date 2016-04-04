@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using sconnRem.Navigation;
 using sconnRem.ViewModel.Alarm;
 
 namespace sconnRem.View.Config
@@ -23,7 +24,7 @@ namespace sconnRem.View.Config
     ///    
     /// 
 
-    [Export("GlobalConfigView")]
+    [Export(AlarmRegionNames.AlarmConfig_Contract_GlobalConfigView)]
     public partial class GlobalConfigView : UserControl
     {
         [ImportingConstructor]
