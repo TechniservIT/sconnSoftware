@@ -10,5 +10,9 @@ namespace sconnConnector.Tests
     [TestFixture]
     public class sconnConnectorUsbTests
     {
+
+
     }
+
+
 }
