@@ -39,8 +39,8 @@ namespace sconnRem.View.Menu.SiteNavSideMenu
         [ImportingConstructor]
         public SiteNavSideMenuView(SiteNavViewModel viewModel)
         {
-            InitializeComponent();
             this.DataContext = viewModel;
+            InitializeComponent();
         }
 
         void IPartImportsSatisfiedNotification.OnImportsSatisfied()
