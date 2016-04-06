@@ -76,6 +76,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xaml" />
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <Choose>
@@ -91,8 +92,8 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Bootstrap\AlarmsystemConfigBootstrap.cs" />
-    <Compile Include="Bootstrap\GlobalBootstrapTests.cs" />
+    <Compile Include="Bootstrap\AlarmSystemConfigWndBootstrapTests.cs" />
+    <Compile Include="Bootstrap\GlobalWndBootstrapTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -111,6 +112,10 @@
     <ProjectReference Include="..\sconnRem.Controls.AlarmSystem\sconnRem.Controls.AlarmSystem.csproj">
       <Project>{C567FE8B-3834-4AD8-AAD4-71BDD36DDED6}</Project>
       <Name>sconnRem.Controls.AlarmSystem</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\sconnRem.Controls.Navigation\sconnRem.Controls.Navigation.csproj">
+      <Project>{97A1614E-9A15-4676-A3E9-9C8182C5B3E4}</Project>
+      <Name>sconnRem.Controls.Navigation</Name>
     </ProjectReference>
     <ProjectReference Include="..\sconnRem.Navigation\sconnRem.Navigation.csproj">
       <Project>{7A5FAD15-614C-4D5D-9DAA-4BC9628D479C}</Project>

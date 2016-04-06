@@ -108,7 +108,7 @@
                                           VerticalAlignment="Center"/>
                                     <Canvas Background="AliceBlue" Grid.Column="0" />
 
-                                    <Image Grid.Column="0" Grid.Row="0"  x:Name="ImgDispActionGridQuadratureScreen"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="5,5,5,5" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/2.jpg"/>
+                                    <Image Grid.Column="0" Grid.Row="0"  x:Name="ImgDispActionGridQuadratureScreen"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="10,10,10,10" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/2.jpg"/>
 
                                 </Grid>
                             </Border>
@@ -121,26 +121,39 @@
 
         <StackPanel   Grid.Row="1" Grid.Column="1">
 
-            <Button Height="Auto" Content="">
+            <Button x:Name="BtnSh1"  Height="Auto" Content="">
+                
                 <Button.Template>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Grid>
+
+                    <ControlTemplate  TargetType="{x:Type Button}">
+
+                        <Grid x:Name="btn1grid">
+                            
                             <Border Background="{TemplateBinding Background}"
                          BorderBrush="{TemplateBinding BorderBrush}"
                          BorderThickness="{TemplateBinding BorderThickness}">
+
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
                                     <ContentPresenter HorizontalAlignment="Left"  Grid.Column="0"
                                           VerticalAlignment="Center"/>
-                                    <Canvas Background="AliceBlue" Grid.Column="0" />
+
 
                                     <Image  Grid.Column="0" Grid.Row="0" x:Name="ImgDispActionGridHexScreen1"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="10,10,10,10" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/1.jpg"/>
 
                                 </Grid>
                             </Border>
                         </Grid>
+
+                        <!--<ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="Black" TargetName="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>-->
+
+
                     </ControlTemplate>
                 </Button.Template>
             </Button>

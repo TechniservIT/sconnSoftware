@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:sconnRem.View.Menu.ToolTopMenu"
              mc:Ignorable="d" 
-             d:DesignHeight="150" d:DesignWidth="800">
+             d:DesignHeight="200" d:DesignWidth="800">
     
     <Grid Background="#7F5AE1FF">
 
@@ -16,21 +16,44 @@
             <ColumnDefinition  Width="50*"/>
             <ColumnDefinition  Width="50*"/>
             <ColumnDefinition  Width="50*"/>
-            <ColumnDefinition  Width="50*"/>
-             <ColumnDefinition  Width="50*"/>
         </Grid.ColumnDefinitions>
         
         <Grid.RowDefinitions>
-            <RowDefinition Height="50*"/>
-            <RowDefinition Height="50*"/>
+            <RowDefinition Height="100*"/>
         </Grid.RowDefinitions>
         
         <StackPanel   Grid.Row="0" Grid.Column="0">
-            <Button Margin="10,10,10,00" Click="Nav_Button_Click"   HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Height="Auto"  Width="Auto"  >
+
+            <Button Height="Auto" Content="">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Border Background="{TemplateBinding Background}"
+                         BorderBrush="{TemplateBinding BorderBrush}"
+                         BorderThickness="{TemplateBinding BorderThickness}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <ContentPresenter HorizontalAlignment="Left"  Grid.Column="0"
+                                          VerticalAlignment="Center"/>
+                                    <Canvas Background="AliceBlue" Grid.Column="0" />
+
+                                    <Image  Grid.Column="0" Grid.Row="0" x:Name="imgTopNav1"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="10,10,10,10" VerticalAlignment="Center" Width="Auto" Source="/sconnRem.Controls.Navigation;component/images/strefy2.png"/>
+                               
+
+                                </Grid>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            
+            <!--<Button Margin="10,10,10,00" Click="Nav_Button_Click"   HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Height="Auto"  Width="Auto"  >
                 <Image  x:Name="imgTopNav1"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="10,10,10,10" VerticalAlignment="Center" Width="Auto" Source="/sconnRem.Controls.Navigation;component/images/strefy2.png"/>
             </Button>
             <Label HorizontalContentAlignment="Center" Grid.Row="1" Grid.Column="0" Content="Zones" FontSize="14.667" FontFamily="Motorwerk">
-            </Label>
+            </Label>-->
         </StackPanel>
 
         <StackPanel   Grid.Row="0" Grid.Column="1">

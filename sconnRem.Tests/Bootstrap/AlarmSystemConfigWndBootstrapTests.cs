@@ -17,9 +17,6 @@ using sconnRem.View.Config.AlarmSystem.Comm;
 using sconnRem.View.Config.AlarmSystem.Global;
 using sconnRem.View.Config.AlarmSystem.Gsm;
 using sconnRem.View.Config.AlarmSystem.Zone;
-using sconnRem.View.Menu.GridNavSideMenu;
-using sconnRem.View.Menu.SiteNavSideMenu;
-using sconnRem.View.Menu.ToolTopMenu;
 using sconnRem.Wnd.Config;
 using sconnRem.Wnd.Main;
 
