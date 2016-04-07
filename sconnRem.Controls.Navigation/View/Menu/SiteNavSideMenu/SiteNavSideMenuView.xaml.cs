@@ -88,8 +88,10 @@ namespace sconnRem.View.Menu.SiteNavSideMenu
 
         }
 
+        private void OrdersListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
 
-
+        }
     }
 
 

@@ -5,31 +5,28 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:sconnRem.View.Menu.ToolTopMenu"
              mc:Ignorable="d" 
-             d:DesignHeight="200" d:DesignWidth="1400">
-
-    <Grid  Background="#7F1F798D">
+             d:DesignHeight="100" d:DesignWidth="1400">
+    <Grid>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="10*" />
-            <ColumnDefinition Width="10*" />
-            <ColumnDefinition Width="10*" />
-            <ColumnDefinition Width="10*" />
-            <ColumnDefinition Width="10*" />
-            <ColumnDefinition Width="10*" />
-            <ColumnDefinition Width="10*" />
-            <ColumnDefinition Width="10*" />
-            <ColumnDefinition Width="10*" />
-            <ColumnDefinition Width="10*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
-
         <Grid.RowDefinitions>
-            <RowDefinition Height="40*"/>
-            <RowDefinition Height="40*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel   Grid.Row="0" Grid.Column="0">
-
-            <Button  Height="Auto" Content="">
+        <Grid    Grid.Row="0" Grid.Column="0" Background="#FF6EF2FF">
+            <Button Height="Auto" Content="">
                 <Button.Template>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Grid>
@@ -46,6 +43,59 @@
 
                                     <Image  Grid.Column="0" Grid.Row="0" x:Name="imgTopNav1"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="10,10,10,10" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/open.jpg"/>
 
+                                </Grid>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+
+        </Grid>
+
+        <Grid    Grid.Row="0" Grid.Column="1" Background="#FF6EF2FF">
+            <Button Height="Auto" Content="">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Border Background="{TemplateBinding Background}"
+                         BorderBrush="{TemplateBinding BorderBrush}"
+                         BorderThickness="{TemplateBinding BorderThickness}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <ContentPresenter HorizontalAlignment="Left"  Grid.Column="0"
+                                          VerticalAlignment="Center"/>
+                                    <Canvas Background="AliceBlue" Grid.Column="0" />
+
+                                    <Image  Grid.Column="0" Grid.Row="0" x:Name="imgTopNav1"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="10,10,10,10" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/save.jpg"/>
+
+                                </Grid>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+        </Grid>
+
+        <Grid    Grid.Row="1" Grid.Column="0" Background="#FF6EF2FF">
+            <Button Height="Auto" Content="">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Border Background="{TemplateBinding Background}"
+                         BorderBrush="{TemplateBinding BorderBrush}"
+                         BorderThickness="{TemplateBinding BorderThickness}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <ContentPresenter HorizontalAlignment="Left"  Grid.Column="0"
+                                          VerticalAlignment="Center"/>
+                                    <Canvas Background="AliceBlue" Grid.Column="0" />
+
+                                    <Image  Grid.Column="0" Grid.Row="0" x:Name="imgTopNav1"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="10,10,10,10" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/add.jpg"/>
+
 
                                 </Grid>
                             </Border>
@@ -54,140 +104,42 @@
                 </Button.Template>
             </Button>
 
-            <!--<Button Margin="10,10,10,00" Click="Nav_Button_Click"   HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Height="Auto"  Width="Auto"  >
-                <Image  x:Name="imgTopNav1"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="10,10,10,10" VerticalAlignment="Center" Width="Auto" Source="/sconnRem.Controls.Navigation;component/images/strefy2.png"/>
-            </Button>
-            <Label HorizontalContentAlignment="Center" Grid.Row="1" Grid.Column="0" Content="Zones" FontSize="14.667" FontFamily="Motorwerk">
-            </Label>-->
-        </StackPanel>
-
-
-        <StackPanel   Grid.Row="1" Grid.Column="0">
-
-            <Grid Background="#7F5AE1FF">
-
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="50*" />
-                    <ColumnDefinition  Width="50*"/>
-                </Grid.ColumnDefinitions>
-
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="80*"/>
-                </Grid.RowDefinitions>
-
-                <StackPanel   Grid.Row="0" Grid.Column="1">
-                    <Button  Height="Auto" Content="">
-                        <Button.Template>
-                            <ControlTemplate TargetType="{x:Type Button}">
-                                <Grid>
-                                    <Border Background="{TemplateBinding Background}"
-                         BorderBrush="{TemplateBinding BorderBrush}"
-                         BorderThickness="{TemplateBinding BorderThickness}">
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*"/>
-                                            </Grid.ColumnDefinitions>
-                                            <ContentPresenter HorizontalAlignment="Left"  Grid.Column="0"
-                                          VerticalAlignment="Center"/>
-                                            <Canvas Background="AliceBlue" Grid.Column="0" />
-
-                                            <Image  Grid.Column="0" Grid.Row="0" x:Name="imgTopNav1"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="10,10,10,10" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/save.jpg"/>
-
-
-                                        </Grid>
-                                    </Border>
-                                </Grid>
-                            </ControlTemplate>
-                        </Button.Template>
-                    </Button>
-                </StackPanel>
-
-                <StackPanel   Grid.Row="0" Grid.Column="0">
-                    <Button  Height="Auto" Content="">
-                        <Button.Template>
-                            <ControlTemplate TargetType="{x:Type Button}">
-                                <Grid>
-                                    <Border Background="{TemplateBinding Background}"
-                         BorderBrush="{TemplateBinding BorderBrush}"
-                         BorderThickness="{TemplateBinding BorderThickness}">
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*"/>
-                                            </Grid.ColumnDefinitions>
-                                            <ContentPresenter HorizontalAlignment="Left"  Grid.Column="0"
-                                          VerticalAlignment="Center"/>
-                                            <Canvas Background="AliceBlue" Grid.Column="0" />
-
-                                            <Image  Grid.Column="0" Grid.Row="0" x:Name="imgTopNav1"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="10,10,10,10" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/add.jpg"/>
-
-
-                                        </Grid>
-                                    </Border>
-                                </Grid>
-                            </ControlTemplate>
-                        </Button.Template>
-                    </Button>
-                </StackPanel>
-
-            </Grid>
-
-
-
-            <!--<Button Margin="10,10,10,00" Click="Nav_Button_Click"   HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Height="Auto"  Width="Auto"  >
-                <Image  x:Name="imgTopNav1"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="10,10,10,10" VerticalAlignment="Center" Width="Auto" Source="/sconnRem.Controls.Navigation;component/images/strefy2.png"/>
-            </Button>
-            <Label HorizontalContentAlignment="Center" Grid.Row="1" Grid.Column="0" Content="Zones" FontSize="14.667" FontFamily="Motorwerk">
-            </Label>-->
-        </StackPanel>
-
-
-
-        <StackPanel   Grid.Row="0" Grid.Column="1">
-            <!--<Button Margin="10,10,10,00" Click="Nav_Button_Click"   HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Height="Auto"  Width="Auto"  >
-                <Image  x:Name="imgTopNav2"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="10,10,10,10" VerticalAlignment="Center" Width="Auto" Source="/sconnRem.Controls.Navigation;component/images/glob2.png"/>
-            </Button>
-            <Label HorizontalContentAlignment="Center" Grid.Row="1" Grid.Column="0" Content="Global" FontSize="14.667" FontFamily="Motorwerk">
-            </Label>-->
-        </StackPanel>
-
-
-        <Grid Grid.Row="0" Grid.Column="2">
-
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="100*" />
-            </Grid.ColumnDefinitions>
-
-            <Grid.RowDefinitions>
-                <RowDefinition Height="50*"/>
-                <RowDefinition Height="50*"/>
-            </Grid.RowDefinitions>
-
-            <StackPanel   Grid.Row="0" Grid.Column="0">
-                <!--<Button Margin="10,10,10,00" Click="Nav_Button_Click"   HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Height="Auto"  Width="Auto"  >
-                    <Label HorizontalContentAlignment="Center" Grid.Row="1" Grid.Column="0" Content="Global" FontSize="14.667" FontFamily="Motorwerk">
-                    </Label>
-                    -->
-                <!--<Image  x:Name="imgTopNav4"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="10,10,10,10" VerticalAlignment="Center" Width="Auto" Source="/sconnRem.Controls.Navigation;component/images/glob2.png"/>-->
-                <!--
-                </Button>-->
-            </StackPanel>
-
-            <StackPanel   Grid.Row="1" Grid.Column="0">
-                <!--<Button Margin="10,10,10,00" Click="Nav_Button_Click"   HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Height="Auto"  Width="Auto"  >
-                    -->
-                <!--<Image  x:Name="imgTopNav5"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="10,10,10,10" VerticalAlignment="Center" Width="Auto" Source="/sconnRem.Controls.Navigation;component/images/glob2.png"/>-->
-                <!--
-                    <Label HorizontalContentAlignment="Center" Grid.Row="1" Grid.Column="0" Content="Global" FontSize="14.667" FontFamily="Motorwerk">
-                    </Label>
-                </Button>-->
-
-            </StackPanel>
-
         </Grid>
 
+        <Grid    Grid.Row="1" Grid.Column="1" Background="#FF6EF2FF">
+            <Button x:Name="BtnSh1"  Height="Auto" Content="">
+
+                <Button.Template>
+
+                    <ControlTemplate  TargetType="{x:Type Button}">
+
+                        <Grid x:Name="btn1grid">
+
+                            <Border Background="{TemplateBinding Background}"
+                         BorderBrush="{TemplateBinding BorderBrush}"
+                         BorderThickness="{TemplateBinding BorderThickness}">
+
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <ContentPresenter HorizontalAlignment="Left"  Grid.Column="0"
+                                          VerticalAlignment="Center"/>
 
 
+                                    <Image  Grid.Column="0" Grid.Row="0" x:Name="ImgDispActionGridHexScreen1"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="10,10,10,10" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/1.jpg"/>
 
+                                </Grid>
+                            </Border>
+                        </Grid>
+
+
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+
+        </Grid>
+       
     </Grid>
-
+    
 </UserControl>

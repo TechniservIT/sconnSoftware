@@ -8,13 +8,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="50" d:DesignWidth="150">
 
-    <!--<DataContext>
-        
-    </DataContext>-->
-    <!--<Viewbox Stretch="Fill">
-        
-        </Viewbox>-->
-
     <Grid  Background="#4C71D9E4">
 
         <Grid.ColumnDefinitions>
@@ -23,18 +16,12 @@
             <ColumnDefinition  Width="15*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="100*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-
-        <StackPanel  Grid.Row="0" Grid.Column="0">
-
-            <Button VerticalAlignment="Center" VerticalContentAlignment="Stretch" HorizontalAlignment="Stretch" Height="Auto">
-                <StackPanel>
-                    <Image  x:Name="ImgDispActionGridFullScreen"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="5,5,5,5" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/alarm.jpg"/>
-                </StackPanel>
-            </Button>
+    
+        <Grid    Grid.Row="0" Grid.Column="0" Background="#FF6EF2FF">
             
-            <!--<Button VerticalAlignment="Center" Height="Auto" Content="">
+            <Button VerticalAlignment="Center" Height="Auto" Content="">
                 <Button.Template>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Grid>
@@ -48,45 +35,36 @@
                                     <ContentPresenter HorizontalAlignment="Left"
                                           VerticalAlignment="Center"/>
                                     <Canvas Background="AliceBlue" />
-
-                                    --><!--<Image  Grid.Column="0" Grid.Row="0" x:Name="ImgDispActionGridFullScreen"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="10,10,10,10" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/4.jpg"/>--><!--
-                                    <Image  x:Name="ImgDispActionGridFullScreen"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="10,10,10,10" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/alarm.jpg"/>
+                                    
+                                    <Image  x:Name="ImgDispActionGridFullScreen141"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="10,10,10,10" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/alarm.jpg"/>
 
                                 </Grid>
                             </Border>
                         </Grid>
                     </ControlTemplate>
                 </Button.Template>
-            </Button>-->
+            </Button>
+        </Grid>
 
-        </StackPanel>
+        <Grid    Grid.Row="0" Grid.Column="1" Background="#FF6EF2FF">
+            
+        </Grid>
 
-
-        <StackPanel   Grid.Row="0" Grid.Column="1" Background="#FF47A9EE">
-            <!--<Label HorizontalContentAlignment="Center" Grid.Row="1" Grid.Column="0" Content="{Binding Name}" FontSize="11.667" FontFamily="Motorwerk">
-            </Label>-->
-        </StackPanel>
-
-        <StackPanel   Grid.Row="0" Grid.Column="2">
+        <Grid    Grid.Row="0" Grid.Column="2" Background="#FF6EF2FF">
+            
             <Grid   Background="#4C71D9E4">
 
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="100*" />
+                    <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition  Height="50*"/>
-                    <RowDefinition  Height="50*"/>
+                    <RowDefinition  Height="5*"/>
+                    <RowDefinition  Height="5*"/>
                 </Grid.RowDefinitions>
 
-                <StackPanel  VerticalAlignment="Center"   Grid.Row="0" Grid.Column="0">
+                <Grid    Grid.Row="0" Grid.Column="0" Background="#FF6EF2FF">
 
-                    <Button VerticalAlignment="Center" VerticalContentAlignment="Stretch" HorizontalAlignment="Stretch" Height="Auto">
-                        <StackPanel>
-                            <Image  x:Name="ImgDispActionGridFullScreen2"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="0,0,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/edit.jpg"/>
-                        </StackPanel>
-                    </Button>
-                    
-                    <!--<Button VerticalAlignment="Center" Height="Auto" Content="">
+                    <Button VerticalAlignment="Center" Height="Auto" Content="">
                         <Button.Template>
                             <ControlTemplate TargetType="{x:Type Button}">
                                 <Grid>
@@ -101,28 +79,21 @@
                                           VerticalAlignment="Center"/>
                                             <Canvas Background="AliceBlue" Grid.Column="0" />
 
-                                            --><!--<Image  Grid.Column="0" Grid.Row="0" x:Name="ImgDispActionGridFullScreen"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="10,10,10,10" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/4.jpg"/>--><!--
-                                            <Image  x:Name="ImgDispActionGridFullScreen"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="0,0,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/edit.jpg"/>
+                                            <Image  x:Name="ImgDispActionGridFullScreen521"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="0,0,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/edit.jpg"/>
 
                                         </Grid>
                                     </Border>
                                 </Grid>
                             </ControlTemplate>
                         </Button.Template>
-                    </Button>-->
-
-
-                </StackPanel>
-
-                <StackPanel VerticalAlignment="Center"   Grid.Row="1" Grid.Column="0">
-
-                    <Button VerticalAlignment="Center" VerticalContentAlignment="Stretch" HorizontalAlignment="Stretch" Height="Auto">
-                        <StackPanel>
-                            <Image  x:Name="ImgDispActionGridFullScreen3"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="0,0,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/rem.jpg"/>
-                        </StackPanel>
                     </Button>
+
                     
-                    <!--<Button VerticalAlignment="Center" Height="Auto" Content="">
+                </Grid>
+
+                <Grid    Grid.Row="1" Grid.Column="0" Background="#FF6EF2FF">
+
+                    <Button VerticalAlignment="Center" Height="Auto" Content="">
                         <Button.Template>
                             <ControlTemplate TargetType="{x:Type Button}">
                                 <Grid>
@@ -137,23 +108,21 @@
                                           VerticalAlignment="Center"/>
                                             <Canvas Background="AliceBlue" Grid.Column="0" />
 
-                                            --><!--<Image  Grid.Column="0" Grid.Row="0" x:Name="ImgDispActionGridFullScreen"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="10,10,10,10" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/4.jpg"/>--><!--
-                                            <Image  x:Name="ImgDispActionGridFullScreen"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="0,0,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/rem.jpg"/>
+                                            <Image  x:Name="ImgDispActionGridFullScreen521"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="0,0,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/rem.jpg"/>
 
                                         </Grid>
                                     </Border>
                                 </Grid>
                             </ControlTemplate>
                         </Button.Template>
-                    </Button>-->
-                    
-                    
-                </StackPanel>
+                    </Button>
+
+                </Grid>
+                
 
             </Grid>
-        </StackPanel>
-
-
+            
+        </Grid>
 
     </Grid>
 
