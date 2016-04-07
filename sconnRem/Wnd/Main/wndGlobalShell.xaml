@@ -9,35 +9,35 @@
     Title="sconnRemote"
     d:DesignHeight="768" d:DesignWidth="1024">
 
-    <Grid  x:Name="LayoutRoot" MinWidth="400" MaxWidth="2568">
+    <Grid  x:Name="LayoutRoot">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="22*"/>
-            <RowDefinition Height="68*"/>
+            <RowDefinition Height="25*"/>
+            <RowDefinition Height="75*"/>
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0" Grid.Column="0" x:Name="GridMainTop">
-         
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
 
-            <StackPanel   Grid.Row="0" Grid.Column="0">
-                <UserControl prism:RegionManager.RegionName="TopToolbarRegion" Grid.Column="0" Grid.Row="0" Margin="5,0,5,5" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"/>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel    Grid.Row="0" Grid.Column="0" Background="#FF6EF2FF">
+                <UserControl   prism:RegionManager.RegionName="TopToolbarRegion" />
             </StackPanel>
-               
+
         </Grid>
 
-        <Grid Grid.Row="1" Grid.Column="0" x:Name="LayoutNested">
-            <Grid MinWidth="400" MaxWidth="2568">
+        <Grid   Grid.Row="1" Grid.Column="0" x:Name="LayoutNested">
+            <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="20*" />
-                    <ColumnDefinition  Width="70*"/>
+                    <ColumnDefinition Width="15*" />
+                    <ColumnDefinition  Width="75*"/>
                     <ColumnDefinition Width="10*" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
@@ -45,20 +45,21 @@
                     <RowDefinition Height="10*"/>
                 </Grid.RowDefinitions>
 
-                <StackPanel   Grid.Row="0" Grid.Column="0">
-                    <UserControl prism:RegionManager.RegionName="LeftSideMenuRegion"  Margin="5,0,5,5" Height="Auto" Width="Auto"/>
+                <StackPanel    Grid.Row="0" Grid.Column="0" Background="#FF6BD6EE">
+                    <UserControl   prism:RegionManager.RegionName="LeftSideMenuRegion"  />
                 </StackPanel>
 
-                <StackPanel   Grid.Row="0" Grid.Column="2">
-                    <UserControl prism:RegionManager.RegionName="RightSideToolbarRegion"  Margin="5,0,5,5" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"/>
+                <StackPanel   Grid.Row="0" Grid.Column="2" Background="#FF68CFFF">
+                    <UserControl prism:RegionManager.RegionName="RightSideToolbarRegion"/>
+                    <!--VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"-->
                 </StackPanel>
 
-                <StackPanel   Grid.Row="0" Grid.Column="1">
-                    <UserControl prism:RegionManager.RegionName="MainViewGridRegion" Margin="5,0,5,5" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"/>
+                <StackPanel   Grid.Row="0" Grid.Column="1" Background="#FF6BFFF8">
+                    <UserControl prism:RegionManager.RegionName="MainViewGridRegion"/>
                 </StackPanel>
-                
+
             </Grid>
-            
+
         </Grid>
     </Grid>
 

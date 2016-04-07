@@ -12,12 +12,12 @@
 
     <Grid Background="#3F23B6E2">
 
-        <Grid.ColumnDefinitions>
+        <!--<Grid.ColumnDefinitions>
             <ColumnDefinition  Width="100*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="100*"/>
-        </Grid.RowDefinitions>
+        </Grid.RowDefinitions>-->
 
 
         <ListBox x:Name="OrdersListBox" BorderThickness="0" ItemsSource="{Binding Sites}"  IsSynchronizedWithCurrentItem="True" 

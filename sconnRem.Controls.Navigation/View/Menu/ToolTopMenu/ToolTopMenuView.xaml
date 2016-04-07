@@ -5,27 +5,31 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:sconnRem.View.Menu.ToolTopMenu"
              mc:Ignorable="d" 
-             d:DesignHeight="200" d:DesignWidth="800">
+             d:DesignHeight="200" d:DesignWidth="1400">
 
-    <Grid Width="Auto" Height="Auto" Background="#7F1F798D">
+    <Grid  Background="#7F1F798D">
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="50*" />
-            <ColumnDefinition  Width="50*"/>
-            <ColumnDefinition  Width="50*"/>
-            <ColumnDefinition  Width="50*"/>
-            <ColumnDefinition  Width="50*"/>
-            <ColumnDefinition  Width="50*"/>
+            <ColumnDefinition Width="10*" />
+            <ColumnDefinition Width="10*" />
+            <ColumnDefinition Width="10*" />
+            <ColumnDefinition Width="10*" />
+            <ColumnDefinition Width="10*" />
+            <ColumnDefinition Width="10*" />
+            <ColumnDefinition Width="10*" />
+            <ColumnDefinition Width="10*" />
+            <ColumnDefinition Width="10*" />
+            <ColumnDefinition Width="10*" />
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="50*"/>
-            <RowDefinition Height="50*"/>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="40*"/>
         </Grid.RowDefinitions>
 
         <StackPanel   Grid.Row="0" Grid.Column="0">
 
-            <Button Height="Auto" Width="Auto"  Content="">
+            <Button  Height="Auto" Content="">
                 <Button.Template>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Grid>
@@ -40,7 +44,7 @@
                                           VerticalAlignment="Center"/>
                                     <Canvas Background="AliceBlue" Grid.Column="0" />
 
-                                    <Image  Grid.Column="0" Grid.Row="0" x:Name="imgTopNav1"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="10,10,10,10" VerticalAlignment="Center" Width="Auto" Source="/sconnRem.Controls.Navigation;component/images/open.jpg"/>
+                                    <Image  Grid.Column="0" Grid.Row="0" x:Name="imgTopNav1"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="10,10,10,10" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/open.jpg"/>
 
 
                                 </Grid>
@@ -68,11 +72,11 @@
                 </Grid.ColumnDefinitions>
 
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="100*"/>
+                    <RowDefinition Height="80*"/>
                 </Grid.RowDefinitions>
 
                 <StackPanel   Grid.Row="0" Grid.Column="1">
-                    <Button Grid.Column="0" Height="Auto" Content="">
+                    <Button  Height="Auto" Content="">
                         <Button.Template>
                             <ControlTemplate TargetType="{x:Type Button}">
                                 <Grid>
@@ -87,7 +91,7 @@
                                           VerticalAlignment="Center"/>
                                             <Canvas Background="AliceBlue" Grid.Column="0" />
 
-                                            <Image  Grid.Column="0" Grid.Row="0" x:Name="imgTopNav1"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="10,10,10,10" VerticalAlignment="Center" Width="Auto" Source="/sconnRem.Controls.Navigation;component/images/save.jpg"/>
+                                            <Image  Grid.Column="0" Grid.Row="0" x:Name="imgTopNav1"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="10,10,10,10" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/save.jpg"/>
 
 
                                         </Grid>
@@ -99,7 +103,7 @@
                 </StackPanel>
 
                 <StackPanel   Grid.Row="0" Grid.Column="0">
-                    <Button Grid.Column="0" Height="Auto" Content="">
+                    <Button  Height="Auto" Content="">
                         <Button.Template>
                             <ControlTemplate TargetType="{x:Type Button}">
                                 <Grid>
@@ -114,7 +118,7 @@
                                           VerticalAlignment="Center"/>
                                             <Canvas Background="AliceBlue" Grid.Column="0" />
 
-                                            <Image  Grid.Column="0" Grid.Row="0" x:Name="imgTopNav1"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="10,10,10,10" VerticalAlignment="Center" Width="Auto" Source="/sconnRem.Controls.Navigation;component/images/add.jpg"/>
+                                            <Image  Grid.Column="0" Grid.Row="0" x:Name="imgTopNav1"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="10,10,10,10" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/add.jpg"/>
 
 
                                         </Grid>
