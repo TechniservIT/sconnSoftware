@@ -7,6 +7,7 @@
              xmlns:regions="http://prismlibrary.com/"
              xmlns:inf="clr-namespace:sconnRem.Navigation;assembly=sconnRem.Navigation"
              xmlns:siteNavSideMenu="clr-namespace:sconnRem.Controls.Navigation.View.Menu.SiteNavSideMenu"
+             xmlns:siteNavItemModel="clr-namespace:sconnRem.Controls.Navigation.ViewModel.Navigation"
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="250">
 
@@ -23,7 +24,12 @@
                      regions:RegionManager.RegionName="{x:Static inf:GlobalViewRegionNames.LNavigationRegion}" Background="#701B7EE0" SelectionChanged="OrdersListBox_SelectionChanged">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <siteNavSideMenu:SiteNavMenuViewItem/>
+
+                    <ContentControl>
+                        <siteNavSideMenu:SiteNavMenuViewItem DataContext="{Binding Source=siteNavItemModel:SiteNavItemViewModel}"/>
+                    </ContentControl>
+                    <!--<siteNavSideMenu:SiteNavMenuViewItem/>-->
+                   
                 </DataTemplate>
             </ListBox.ItemTemplate>
 

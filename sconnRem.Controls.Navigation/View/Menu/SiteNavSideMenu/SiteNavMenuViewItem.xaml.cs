@@ -27,7 +27,8 @@ namespace sconnRem.Controls.Navigation.View.Menu.SiteNavSideMenu
     {
         private Logger _nlogger = LogManager.GetCurrentClassLogger();
         private static Uri _authViewUri = new Uri("AuthConfigView", UriKind.Relative);
-        private sconnSite _site;
+
+        public sconnSite Site { get; set; }
 
         [Import]
         public IRegionManager RegionManager;
@@ -38,9 +39,9 @@ namespace sconnRem.Controls.Navigation.View.Menu.SiteNavSideMenu
         }
 
         [ImportingConstructor]
-        public SiteNavMenuViewItem(sconnSite Site)
+        public SiteNavMenuViewItem(sconnSite site)
         {
-            _site = Site;
+            Site = site;
             InitializeComponent();
 
         }
