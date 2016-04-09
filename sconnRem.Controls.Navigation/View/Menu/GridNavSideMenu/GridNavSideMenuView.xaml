@@ -25,7 +25,7 @@
 
             <Button Height="Auto" Content="">
                 <Button.Template>
-                    <ControlTemplate TargetType="{x:Type Button}">
+                    <ControlTemplate  TargetType="{x:Type Button}">
                         <Grid>
                             <Border Background="{TemplateBinding Background}"
                          BorderBrush="{TemplateBinding BorderBrush}"
@@ -38,7 +38,7 @@
                                           VerticalAlignment="Center"/>
                                     <Canvas Background="AliceBlue" Grid.Column="0" />
 
-                                    <Image  Grid.Column="0" Grid.Row="0" x:Name="ImgDispActionGridFullScreen"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="10,10,10,10" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/4.jpg"/>
+                                    <Image   Grid.Column="0" Grid.Row="0" x:Name="ImgDispActionGridFullScreen"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="10,10,10,10" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/4.jpg"/>
                                     
                                 </Grid>
                             </Border>

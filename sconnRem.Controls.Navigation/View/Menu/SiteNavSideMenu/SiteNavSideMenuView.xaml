@@ -26,7 +26,8 @@
                 <DataTemplate>
 
                     <ContentControl>
-                        <siteNavSideMenu:SiteNavMenuViewItem DataContext="{Binding Source=siteNavItemModel:SiteNavItemViewModel}"/>
+                        <siteNavSideMenu:SiteNavMenuViewItem DataContext="{Binding}" />
+                        <!--DataContext="{Binding Source=siteNavItemModel:SiteNavItemViewModel}"-->
                     </ContentControl>
                     <!--<siteNavSideMenu:SiteNavMenuViewItem/>-->
                    

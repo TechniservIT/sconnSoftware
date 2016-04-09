@@ -5,9 +5,16 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:src="sconnRem.Controls.Navigation.View.Menu.SiteNavSideMenu.SiteNavMenuViewItem" 
              xmlns:local="clr-namespace:sconnRem.Controls.Navigation.View.Menu.SiteNavSideMenu"
+             xmlns:model="clr-namespace:sconnRem.Controls.Navigation.ViewModel.Navigation"
+             xmlns:navigation="clr-namespace:sconnRem.Controls.Navigation.ViewModel.Navigation"
              mc:Ignorable="d" 
              d:DesignHeight="50" d:DesignWidth="150">
 
+
+    <UserControl.DataContext>
+        <navigation:SiteNavItemViewModel />
+    </UserControl.DataContext>
+    
     <Grid  Background="#4C71D9E4">
 
         <Grid.ColumnDefinitions>
@@ -21,7 +28,7 @@
 
         <Grid    Grid.Row="0" Grid.Column="0" Background="#FF6EF2FF">
 
-            <Button VerticalAlignment="Center" Height="Auto" Content="">
+            <Button Command="{Binding Path=ViewSiteCommand}"  VerticalAlignment="Center" Height="Auto" Content="">
                 <Button.Template>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Grid>
@@ -58,9 +65,16 @@
                     <RowDefinition Height="0.5*"/>
                 </Grid.RowDefinitions>
 
-                <Label Grid.Column="0" Grid.Row="0" Content="{Binding Path=Site.siteName}" />
+                <Grid  Grid.Column="0" Grid.Row="0">
+                    <Label Content="{Binding Path=Site.siteName}" />
+                </Grid>
 
-                <Label Grid.Column="0" Grid.Row="0" Content="{Binding Path=Site.serverIP}"   />
+                <Grid  Grid.Column="0" Grid.Row="1">
+                    <!--<Button Command="{Binding Path=DisplayProductCommand}" >
+                        <Image  x:Name="ImgDispActionGridFullScreen521521"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="0,0,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/edit.jpg"/>
+                    </Button>-->
+                </Grid>
+                <!--<Label Content="{Binding Path=Site.serverIP}"   />-->
 
             </Grid>
         </Grid>
@@ -79,7 +93,7 @@
 
                 <Grid    Grid.Row="0" Grid.Column="0" Background="#FF6EF2FF">
 
-                    <Button VerticalAlignment="Center" Height="Auto" Content="">
+                    <Button  Command="{Binding Path=EditSiteCommand}" VerticalAlignment="Center" Height="Auto" Content="">
                         <Button.Template>
                             <ControlTemplate TargetType="{x:Type Button}">
                                 <Grid>
@@ -103,12 +117,11 @@
                         </Button.Template>
                     </Button>
 
-
                 </Grid>
 
                 <Grid    Grid.Row="1" Grid.Column="0" Background="#FF6EF2FF">
 
-                    <Button VerticalAlignment="Center" Height="Auto" Content="">
+                    <Button Command="{Binding Path=RemoveSiteCommand}" VerticalAlignment="Center" Height="Auto" Content="">
                         <Button.Template>
                             <ControlTemplate TargetType="{x:Type Button}">
                                 <Grid>

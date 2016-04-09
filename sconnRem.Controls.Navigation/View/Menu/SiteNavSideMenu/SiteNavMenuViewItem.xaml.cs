@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using NLog;
+using Prism.Commands;
 using Prism.Regions;
 using sconnConnector.POCO.Config;
 using sconnRem.Navigation;
@@ -30,6 +31,7 @@ namespace sconnRem.Controls.Navigation.View.Menu.SiteNavSideMenu
 
         public sconnSite Site { get; set; }
 
+
         [Import]
         public IRegionManager RegionManager;
 
@@ -41,6 +43,7 @@ namespace sconnRem.Controls.Navigation.View.Menu.SiteNavSideMenu
         [ImportingConstructor]
         public SiteNavMenuViewItem(sconnSite site)
         {
+
             Site = site;
             InitializeComponent();
 
