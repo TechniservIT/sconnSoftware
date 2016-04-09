@@ -17,13 +17,12 @@ using NLog;
 using Prism.Regions;
 using sconnRem.Navigation;
 
-namespace sconnRem.Controls.Navigation.View.Menu.ContextToolbar.AlarmSystem
+namespace sconnRem.Controls.Navigation.View.Menu.ContextToolbar.Global
 {
 
-
     [Export]
-    [ViewSortHint("02")]
-    public partial class AlarmSystemToolbarView : UserControl, IPartImportsSatisfiedNotification
+    [ViewSortHint("01")]
+    public partial class GlobalToolbarView : UserControl, IPartImportsSatisfiedNotification
     {
         private Logger _nlogger = LogManager.GetCurrentClassLogger();
         //private static Uri _TargetNavUri = new Uri("AuthConfigView", UriKind.Relative);
@@ -31,7 +30,7 @@ namespace sconnRem.Controls.Navigation.View.Menu.ContextToolbar.AlarmSystem
         [Import]
         public IRegionManager RegionManager;
 
-        public AlarmSystemToolbarView()
+        public GlobalToolbarView()
         {
             InitializeComponent();
         }
@@ -84,6 +83,5 @@ namespace sconnRem.Controls.Navigation.View.Menu.ContextToolbar.AlarmSystem
 
 
     }
-
 
 }

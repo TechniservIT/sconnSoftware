@@ -155,7 +155,7 @@
 
 
             <Grid    Grid.Row="0" Grid.Column="0" Background="White">
-                <UserControl regions:RegionManager.RegionName="MainViewGridRegion"/>
+                <UserControl regions:RegionManager.RegionName="TopContextToolbarRegion"/>
             </Grid>
 
         </Grid>

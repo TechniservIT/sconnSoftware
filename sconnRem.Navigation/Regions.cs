@@ -33,7 +33,7 @@ namespace sconnRem.Navigation
     public static class NavContextToolbarRegionNames
     {
         public const String ContextToolbar_AlarmSystem_ViewName = "AlarmSystemToolbarView";
-        public static Uri ContextToolbar_AlarmSystem_ViewUri = new Uri("/View/Menu/ContextToolbar/AlarmSystem/" + ContextToolbar_AlarmSystem_ViewName, UriKind.Relative);
+        public static Uri ContextToolbar_AlarmSystem_ViewUri = new Uri(ContextToolbar_AlarmSystem_ViewName, UriKind.Relative);  //"/View/Menu/ContextToolbar/AlarmSystem/" + 
     }
 
     public static class GlobalViewRegionNames
