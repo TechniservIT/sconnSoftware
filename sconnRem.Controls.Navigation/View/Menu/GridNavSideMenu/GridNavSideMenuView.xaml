@@ -36,7 +36,7 @@
                                     </Grid.ColumnDefinitions>
                                     <ContentPresenter HorizontalAlignment="Left"  Grid.Column="0"
                                           VerticalAlignment="Center"/>
-                                    <Canvas Background="AliceBlue" Grid.Column="0" />
+                                    <Canvas Background="White" Grid.Column="0" />
 
                                     <Image   Grid.Column="0" Grid.Row="0" x:Name="ImgDispActionGridFullScreen"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="10,10,10,10" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/4.jpg"/>
                                     
@@ -77,7 +77,7 @@
                                     </Grid.ColumnDefinitions>
                                     <ContentPresenter HorizontalAlignment="Left"  Grid.Column="0"
                                           VerticalAlignment="Center"/>
-                                    <Canvas Background="AliceBlue" Grid.Column="0" />
+                                    <Canvas Background="White" Grid.Column="0" />
 
                                     <Image Grid.Column="0" Grid.Row="0"  x:Name="ImgDispActionGridDoublecreen"  Stretch="Fill"   HorizontalAlignment="Center" Height="Auto" Margin="10,10,10,10" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/16.jpg"/>
 
@@ -106,7 +106,7 @@
                                     </Grid.ColumnDefinitions>
                                     <ContentPresenter HorizontalAlignment="Left"  Grid.Column="0"
                                           VerticalAlignment="Center"/>
-                                    <Canvas Background="AliceBlue" Grid.Column="0" />
+                                    <Canvas Background="White" Grid.Column="0" />
 
                                     <Image Grid.Column="0" Grid.Row="0"  x:Name="ImgDispActionGridQuadratureScreen"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="10,10,10,10" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/2.jpg"/>
 
@@ -139,7 +139,7 @@
                                     </Grid.ColumnDefinitions>
                                     <ContentPresenter HorizontalAlignment="Left"  Grid.Column="0"
                                           VerticalAlignment="Center"/>
-
+                                    <Canvas Background="White" Grid.Column="0" />
 
                                     <Image  Grid.Column="0" Grid.Row="0" x:Name="ImgDispActionGridHexScreen1"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="10,10,10,10" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/1.jpg"/>
 

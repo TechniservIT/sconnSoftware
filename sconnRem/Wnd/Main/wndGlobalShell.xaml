@@ -15,11 +15,11 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.2*"/>
-            <RowDefinition Height="0.8*"/>
+            <RowDefinition Height="0.10*"/>
+            <RowDefinition Height="0.90*"/>
         </Grid.RowDefinitions>
 
-        <Grid    Grid.Row="0" Grid.Column="0">
+        <Grid  Background="White"  Grid.Row="0" Grid.Column="0">
             <UserControl   prism:RegionManager.RegionName="TopToolbarRegion" />
         </Grid>
 
@@ -36,26 +36,37 @@
                         <RowDefinition Height="1*"/>
                     </Grid.RowDefinitions>
 
-                    <Grid   Grid.Row="0" Grid.Column="0" Background="#FF6EF2FF">
+                    <Grid   Grid.Row="0" Grid.Column="0" Background="White">
                         <UserControl   prism:RegionManager.RegionName="LeftSideMenuRegion"  />
                     </Grid>
 
-                    <Grid    Grid.Row="0" Grid.Column="1" Background="#FF6EF2FF">
+                    <Grid    Grid.Row="0" Grid.Column="1" Background="White">
                         <UserControl prism:RegionManager.RegionName="MainViewGridRegion"/>
                     </Grid>
 
-                    <Grid    Grid.Row="0" Grid.Column="2" Background="#FF6EF2FF">
+                    <Grid    Grid.Row="0" Grid.Column="2" Background="White">
                         <UserControl prism:RegionManager.RegionName="RightSideToolbarRegion"/>
                     </Grid>
+
+
+                    <Grid  Background="White"  Grid.Row="1" Grid.Column="0">
+                      
+                    </Grid>
+
+                    <Grid  Background="White"  Grid.Row="1" Grid.Column="1">
+                      
+                    </Grid>
                     
-                 
+                    <Grid  Background="White"  Grid.Row="1" Grid.Column="2">
+                       
+                    </Grid>
 
                 </Grid>
 
             </Grid>
         </Grid>
         
-        <!--<StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch"   Grid.Row="1" Grid.Column="0" Background="#FF6EF2FF">
+        <!--<StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch"   Grid.Row="1" Grid.Column="0" Background="White">
         </StackPanel>-->
 
     </Grid>

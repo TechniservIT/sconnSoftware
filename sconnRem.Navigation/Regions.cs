@@ -29,13 +29,22 @@ namespace sconnRem.Navigation
 
 
     }
-    
+
+    public static class NavContextToolbarRegionNames
+    {
+        public const String ContextToolbar_AlarmSystem_ViewName = "AlarmSystemToolbarView";
+        public static Uri ContextToolbar_AlarmSystem_ViewUri = new Uri("/View/Menu/ContextToolbar/AlarmSystem/" + ContextToolbar_AlarmSystem_ViewName, UriKind.Relative);
+    }
+
     public static class GlobalViewRegionNames
     {
         public const String MainGridContentRegion = "MainViewGridRegion";
+
         public const String RNavigationRegion = "RightSideToolbarRegion";
         public const String LNavigationRegion = "LeftSideMenuRegion";
         public const String RopNavigationRegion = "TopToolbarRegion";
+
+        public const String TopContextToolbarRegion = "TopContextToolbarRegion";
     }
     
 }

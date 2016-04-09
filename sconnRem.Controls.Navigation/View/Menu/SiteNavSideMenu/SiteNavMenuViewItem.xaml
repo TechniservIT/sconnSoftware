@@ -41,7 +41,7 @@
                                     </Grid.ColumnDefinitions>
                                     <ContentPresenter HorizontalAlignment="Left"
                                           VerticalAlignment="Center"/>
-                                    <Canvas Background="AliceBlue" />
+                                    <Canvas Background="White" />
 
                                     <Image  x:Name="ImgDispActionGridFullScreen141"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="10,10,10,10" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/alarm.jpg"/>
 
