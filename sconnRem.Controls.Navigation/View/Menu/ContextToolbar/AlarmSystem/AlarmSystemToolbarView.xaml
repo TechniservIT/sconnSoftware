@@ -4,9 +4,16 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:sconnRem.Controls.Navigation.View.Menu.ContextToolbar.AlarmSystem"
+             xmlns:alarmNavModel="clr-namespace:sconnRem.Controls.Navigation.ViewModel.AlarmSystem"
              mc:Ignorable="d" 
              d:DesignHeight="150" d:DesignWidth="800">
+
+
+    <UserControl.DataContext>
+        <alarmNavModel:AlarmSystemToolbarViewModel/>
+    </UserControl.DataContext>
     
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.2*" />
@@ -54,7 +61,7 @@
             </Grid>
 
             <Grid    Grid.Row="1" Grid.Column="0" Background="White">
-                <Button Width="Auto" Content="">
+                <Button Command="{Binding Path=Show_Configure_Command}"  Width="Auto" Content="">
                     <Button.Template>
                         <ControlTemplate TargetType="{x:Type Button}">
                             <Grid>
