@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace sconnRem.Logging
+namespace sconnPrismGenerics.Logging
 {
     public class MvvmLogger : ILoggerFacade
     {

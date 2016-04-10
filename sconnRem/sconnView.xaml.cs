@@ -23,12 +23,9 @@ using System.Globalization;
 using sconnRem.Properties;
 using sconnConnector;
 using sconnConnector.POCO.Config;
-using sconnRem.Wnd.Config;
-using sconnRem.ViewModel.Navigation;
 using sconnConnector.Config;
 using iotDbConnector.DAL;
 using Microsoft.Practices.Unity;
-using sconnRem.Wnd.Config;
 
 namespace sconnRem
 {

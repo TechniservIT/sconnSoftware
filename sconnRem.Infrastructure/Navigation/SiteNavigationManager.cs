@@ -7,6 +7,7 @@ using iotDbConnector.DAL;
 using sconnConnector.Config;
 using sconnConnector.POCO.Config;
 using sconnRem.Infrastructure.Content;
+using sconnRem.Shells.Config;
 
 namespace sconnRem.Infrastructure.Navigation
 {
@@ -25,7 +26,7 @@ namespace sconnRem.Infrastructure.Navigation
 
         static public void ShowConfigureScreen(sconnSite site)
         {
-            wndConfigureSiteShell wnd = new wndConfigureSiteShell();
+            WndConfigureSiteShell wnd = new WndConfigureSiteShell();
 
             EndpointInfo info = new EndpointInfo();
             info.Hostname = site.serverIP;
@@ -43,7 +44,7 @@ namespace sconnRem.Infrastructure.Navigation
             ConfigNavBootstrapper bootstrapper = new ConfigNavBootstrapper(manager);
             bootstrapper.Run();
 
-            ConfigureSiteViewModel context = new ConfigureSiteViewModel(_Manager);
+            ConfigureSiteViewModel context = new ConfigureSiteViewModel(manager);
             wnd.DataContext = context;
             wnd.Show();
         }

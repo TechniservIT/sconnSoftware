@@ -121,6 +121,10 @@
       <Project>{7A5FAD15-614C-4D5D-9DAA-4BC9628D479C}</Project>
       <Name>sconnRem.Navigation</Name>
     </ProjectReference>
+    <ProjectReference Include="..\sconnRem.Shells\sconnRem.Shells.csproj">
+      <Project>{687F4D7B-3759-45D4-A8EC-1CB6BC0A8CC3}</Project>
+      <Name>sconnRem.Shells</Name>
+    </ProjectReference>
     <ProjectReference Include="..\sconnRem\sconnRem.csproj">
       <Project>{9F7BCC3B-DC29-4BFE-8152-F74E1ED1F687}</Project>
       <Name>sconnRem</Name>

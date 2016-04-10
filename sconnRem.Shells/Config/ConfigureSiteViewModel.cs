@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using sconnRem.Infrastructure;
+using sconnPrismGenerics.Model;
 
-namespace sconnRem.ViewModel.Navigation
+namespace sconnRem.Shells.Config
 {
     public class ConfigureSiteViewModel : ObservableObject
     {

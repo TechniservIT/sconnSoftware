@@ -52,10 +52,6 @@
       <Project>{e94b0a02-089e-483a-aaef-3bfa49039598}</Project>
       <Name>iotData</Name>
     </ProjectReference>
-    <ProjectReference Include="..\sconnRem.Infrastructure\sconnRem.Infrastructure.csproj">
-      <Project>{e5740f97-e6a7-4010-b267-79d3aa2f7f48}</Project>
-      <Name>sconnRem.Infrastructure</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

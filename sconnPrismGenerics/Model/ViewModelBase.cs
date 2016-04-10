@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace sconnRem.Infrastructure
+namespace sconnPrismGenerics.Model
 {
     
     public interface IGridNavigatedView : IGridView

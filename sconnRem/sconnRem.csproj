@@ -150,7 +150,6 @@
     <Compile Include="Controls\SiteConfig\SiteConfigGroups\GbxConfigureSiteNames.cs" />
     <Compile Include="Controls\SiteConfig\SiteConfigGroups\GbxConfigureSiteZones.cs" />
     <Compile Include="Global\UnityConfig.cs" />
-    <Compile Include="Logging\MvvmLogger.cs" />
     <Compile Include="Model\Global\GlobalAppDataModel.cs" />
     <Compile Include="Properties\Resources.de-DE.Designer.cs">
       <DependentUpon>Resources.de-DE.resx</DependentUpon>
@@ -174,18 +173,8 @@
     <Compile Include="Controls\MainView\SiteView.cs" />
     <Compile Include="Controls\SiteConfig\SitePanel\statusViewPanel.cs" />
     <Compile Include="Controls\MainView\ViewSiteLoading.cs" />
-    <Compile Include="ViewModel\MainViewModel.cs" />
-    <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\Setting\wndAppSettings.xaml.cs">
       <DependentUpon>wndAppSettings.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Wnd\Main\GlobalWndBootstrapper.cs" />
-    <Compile Include="Wnd\Main\WndGlobalShell.xaml.cs">
-      <DependentUpon>WndGlobalShell.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Wnd\Navigation\NavigationWndBootstrapper.cs" />
-    <Compile Include="Wnd\Tools\changePasswordWnd.xaml.cs">
-      <DependentUpon>changePasswordWnd.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ControlsTest.xaml.cs">
       <DependentUpon>ControlsTest.xaml</DependentUpon>
@@ -193,20 +182,23 @@
     <Compile Include="Controls\SiteConfig\DeviceConfigGroups\GbxConfigureInputsGroup.cs" />
     <Compile Include="Controls\SiteConfig\DeviceConfigGroups\GbxConfigureOutputsGroup.cs" />
     <Compile Include="Controls\SiteConfig\DeviceConfigGroups\GbxConfigureRelaysGroup.cs" />
-    <Compile Include="Wnd\Config\ExportAttribute.cs" />
-    <Compile Include="Wnd\Config\wndConfigureSiteShell.xaml.cs">
-      <DependentUpon>wndConfigureSiteShell.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Wnd\Help\About.xaml.cs">
       <DependentUpon>About.xaml</DependentUpon>
     </Compile>
     <Compile Include="Wnd\Help\HelpWnd.xaml.cs">
       <DependentUpon>HelpWnd.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Wnd\Main\GlobalWndBootstrapper.cs" />
+    <Compile Include="Wnd\Main\wndGlobalShell.xaml.cs">
+      <DependentUpon>WndGlobalShell.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Wnd\Navigation\NavigationWndBootstrapper.cs" />
+    <Compile Include="Wnd\Tools\changePasswordWnd.xaml.cs">
+      <DependentUpon>changePasswordWnd.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Wnd\Tools\MapWindow.xaml.cs">
       <DependentUpon>MapWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Wnd\Config\ConfigNavBootstrapper.cs" />
     <Compile Include="Wnd\Tools\Page1.xaml.cs">
       <DependentUpon>Page1.xaml</DependentUpon>
     </Compile>
@@ -254,43 +246,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Wnd\Main\WndGlobalShell.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Wnd\Tools\changePasswordWnd.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Controls\ControlsTest.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Wnd\Config\wndConfigureSiteShell.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Wnd\Help\About.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Wnd\Help\HelpWnd.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Wnd\Tools\MapWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Wnd\Tools\Page1.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Wnd\Tools\sconnSecurityDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Wnd\Tools\sconnSiteManagerWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -310,13 +266,45 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Wnd\Tools\userManager.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="Wnd\Help\About.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Wnd\Help\HelpWnd.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Wnd\Main\WndGlobalShell.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Wnd\Tools\changePasswordWnd.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Wnd\Tools\MapWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Wnd\Tools\Page1.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Wnd\Tools\sconnSecurityDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Wnd\Tools\sconnSiteManagerWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Wnd\Tools\userManager.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Wnd\Tools\WndEditScheduleAction.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
@@ -420,6 +408,10 @@
     <ProjectReference Include="..\sconnConnector\sconnConnector.csproj">
       <Project>{09c8a8f0-f85a-4534-922e-85e14ec32725}</Project>
       <Name>sconnConnector</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\sconnPrismGenerics\sconnPrismGenerics.csproj">
+      <Project>{9c17810c-efc7-4806-8414-6868deabbca0}</Project>
+      <Name>sconnPrismGenerics</Name>
     </ProjectReference>
     <ProjectReference Include="..\sconnRem.Controls.AlarmSystem\sconnRem.Controls.AlarmSystem.csproj">
       <Project>{c567fe8b-3834-4ad8-aad4-71bdd36dded6}</Project>

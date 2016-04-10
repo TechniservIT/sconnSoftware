@@ -62,7 +62,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModel\Navigation\ConfigureSiteViewModel.cs" />
     <Compile Include="ViewModel\Navigation\SiteNavItemViewModel.cs" />
     <Compile Include="ViewModel\Navigation\SiteNavViewModel.cs" />
     <Compile Include="View\Menu\ContextToolbar\AlarmSystem\AlarmSystemToolbarModule.cs" />
@@ -426,6 +425,9 @@
     <Folder Include="View\Menu\Footer\FooterCenterToolMenu\" />
     <Folder Include="View\Menu\Footer\FooterSiteToolMenu\" />
     <Folder Include="View\Menu\Footer\FootRightToolMenu\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

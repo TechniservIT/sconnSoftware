@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Prism.Regions;
 
-namespace sconnRem.Infrastructure.View.Atrributes
+namespace sconnPrismGenerics.Atrributes
 {
 
     [Export(typeof(AutoPopulateExportedViewsBehavior))]

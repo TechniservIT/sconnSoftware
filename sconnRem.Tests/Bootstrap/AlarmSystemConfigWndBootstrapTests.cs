@@ -11,13 +11,13 @@ using NUnit.Framework.Internal;
 using Prism.Regions;
 using sconnConnector.Config;
 using sconnRem.Navigation;
+using sconnRem.Shells.Config;
 using sconnRem.View.Config;
 using sconnRem.View.Config.AlarmSystem.Auth;
 using sconnRem.View.Config.AlarmSystem.Comm;
 using sconnRem.View.Config.AlarmSystem.Global;
 using sconnRem.View.Config.AlarmSystem.Gsm;
 using sconnRem.View.Config.AlarmSystem.Zone;
-using sconnRem.Wnd.Config;
 using sconnRem.Wnd.Main;
 
 namespace sconnRem.Tests.Bootstrap
