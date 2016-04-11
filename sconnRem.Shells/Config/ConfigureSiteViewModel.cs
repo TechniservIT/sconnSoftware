@@ -37,7 +37,11 @@ namespace sconnRem.Shells.Config
             //PageViewModels.Add(new AlarmUsersConfigViewModel(_Manager));
 
             // Set starting page
-            CurrentPageViewModel = PageViewModels[0];
+            if (PageViewModels.Count > 0)
+            {
+
+                CurrentPageViewModel = PageViewModels[0];
+            }
         }
 
         public ConfigureSiteViewModel()

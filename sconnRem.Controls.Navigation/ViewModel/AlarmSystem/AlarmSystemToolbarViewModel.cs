@@ -13,6 +13,7 @@ using Prism.Regions;
 using sconnConnector;
 using sconnConnector.Config;
 using sconnConnector.POCO.Config;
+using sconnRem.Infrastructure.Navigation;
 using sconnRem.Navigation;
 
 namespace sconnRem.Controls.Navigation.ViewModel.AlarmSystem
@@ -56,7 +57,7 @@ namespace sconnRem.Controls.Navigation.ViewModel.AlarmSystem
 
         private void ShowConfigure(sconnSite site)
         {
-           
+            SiteNavigationManager.ShowConfigureScreen();
         }
 
 

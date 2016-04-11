@@ -14,6 +14,7 @@ using sconnConnector;
 using sconnConnector.Config;
 using sconnConnector.POCO.Config;
 using sconnConnector.POCO.Config.sconn;
+using sconnRem.Infrastructure.Navigation;
 using sconnRem.Navigation;
 
 namespace sconnRem.Controls.Navigation.ViewModel.Navigation
@@ -36,6 +37,7 @@ namespace sconnRem.Controls.Navigation.ViewModel.Navigation
 
         private void ViewSite(sconnSite site)
         {
+            SiteNavigationManager.ActivateSiteContext(site);
             this._regionManager.RequestNavigate(GlobalViewRegionNames.TopContextToolbarRegion, NavContextToolbarRegionNames.ContextToolbar_AlarmSystem_ViewUri
                 ,
                 (NavigationResult nr) =>

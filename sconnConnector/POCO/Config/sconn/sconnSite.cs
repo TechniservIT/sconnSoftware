@@ -110,6 +110,15 @@ namespace sconnConnector.POCO.Config
             }
         }
 
+
+        public sconnSite(sconnSite otherSite) :this()
+        {
+            this.siteName = otherSite.siteName;
+            this.serverIP = otherSite.serverIP;
+            this.serverPort = otherSite.serverPort;
+            this.siteCfg = otherSite.siteCfg;
+        }
+
         public sconnSite()
         {
             statusCheckInterval = 5000; //5s interval

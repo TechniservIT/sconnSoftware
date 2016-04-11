@@ -9,6 +9,7 @@ using Prism.Modularity;
 using sconnConnector.Config;
 using sconnPrismGenerics.Boostrapper;
 using sconnPrismGenerics.Logging;
+using sconnRem.View.Config.AlarmSystem.Comm;
 
 namespace sconnRem.Shells.Config
 {
@@ -41,6 +42,7 @@ namespace sconnRem.Shells.Config
             {
                 base.ConfigureAggregateCatalog();
                 this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(ConfigNavBootstrapper).Assembly));
+                this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(AlarmCommConfigModule).Assembly));
             }
             catch (Exception ex)
             {
