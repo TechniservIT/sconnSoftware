@@ -17,6 +17,7 @@ using sconnConnector.Config;
 using sconnPrismGenerics;
 using sconnPrismGenerics.Boostrapper;
 using sconnPrismGenerics.Logging;
+using sconnRem.Controls.AlarmSystem.View.Status.Inputs;
 using sconnRem.View.Menu.GridNavSideMenu;
 using sconnRem.View.Menu.SiteNavSideMenu;
 using sconnRem.View.Menu.ToolTopMenu;
@@ -61,6 +62,8 @@ namespace sconnRem.Wnd.Main
                 //this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(SiteNavSideMenuModule).Assembly));
                 //this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(ToolTopMenuModule).Assembly));
                 this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(SiteStatusGridViewModule).Assembly));
+
+                this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(AlarmInputsViewModule).Assembly));
             }
             catch (Exception ex)
             {

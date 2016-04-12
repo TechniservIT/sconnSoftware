@@ -38,7 +38,7 @@ namespace sconnRem.Infrastructure.Navigation
             {
                 if (currentContextSconnSite != null)
                 {
-                    WndConfigureSiteShell wnd = new WndConfigureSiteShell();
+                   // WndConfigureSiteShell wnd = new WndConfigureSiteShell();
 
                     EndpointInfo info = new EndpointInfo();
                     info.Hostname = currentContextSconnSite.serverIP;

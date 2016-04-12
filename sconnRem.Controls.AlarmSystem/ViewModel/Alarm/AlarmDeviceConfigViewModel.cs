@@ -35,7 +35,6 @@ namespace sconnRem.ViewModel.Alarm
                 return _name;
             }
         }
-
         
         private ICommand _getDataCommand;
         private ICommand _saveDataCommand;

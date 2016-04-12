@@ -30,9 +30,6 @@ namespace sconnRem.View.Config.AlarmSystem.Gsm
     {
         private const string MainContentRegionName = "MainContentRegion";
         private Logger _nlogger = LogManager.GetCurrentClassLogger();
-
-        // todo: 17a - ContactsView Avatar Option
-        // This navigation uri provides additional query data to indicate the 'Avatar' view should be shown.
         private static Uri _authViewUri = new Uri("GsmConfigView", UriKind.Relative);
 
         [Import]
