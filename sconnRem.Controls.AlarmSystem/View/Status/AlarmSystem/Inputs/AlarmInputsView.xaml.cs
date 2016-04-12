@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using NLog;
 using Prism.Regions;
+using sconnRem.Controls.AlarmSystem.ViewModel.Alarm;
 using sconnRem.Navigation;
 
 namespace sconnRem.Controls.AlarmSystem.View.Status.Inputs
@@ -36,6 +37,14 @@ namespace sconnRem.Controls.AlarmSystem.View.Status.Inputs
         {
             InitializeComponent();
         }
+
+        [ImportingConstructor]
+        public AlarmInputsView(AlarmSharedDeviceConfigViewModel viewModel)
+        {
+            this.DataContext = viewModel;
+            InitializeComponent();
+        }
+
 
         void IPartImportsSatisfiedNotification.OnImportsSatisfied()
         {

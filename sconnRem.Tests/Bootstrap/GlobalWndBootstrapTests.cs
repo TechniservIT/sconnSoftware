@@ -8,6 +8,7 @@ using Moq;
 using NUnit.Framework;
 using Prism.Regions;
 using sconnConnector.Config;
+using sconnRem.Controls.AlarmSystem.View.Status.Inputs;
 using sconnRem.Navigation;
 using sconnRem.View.Menu.GridNavSideMenu;
 using sconnRem.View.Menu.SiteNavSideMenu;
@@ -66,6 +67,20 @@ namespace sconnRem.Tests.Bootstrap
             var exported = container.Catalog.Parts.Where(x => x.GetType() == typeof(GridNavSideMenuView));
             Assert.True(exported != null);
         }
+
+
+
+        [Test]
+        [RequiresSTA]
+        public void TestBootstrap_Should_Register_View_AlarmInputs()
+        {
+            GlobalWndBootstrapper wnd = new GlobalWndBootstrapper();
+            wnd.Run();
+            var container = wnd.GetContainer();
+            var exported = container.Catalog.Parts.Where(x => x.GetType() == typeof(AlarmInputsView));
+            Assert.True(exported != null);
+        }
+
 
 
         /***********  Module export ***************/

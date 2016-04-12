@@ -15,6 +15,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using NLog;
 using Prism.Regions;
+using sconnRem.Controls.Navigation.ViewModel.AlarmSystem;
+using sconnRem.Controls.Navigation.ViewModel.Navigation;
 using sconnRem.Navigation;
 
 namespace sconnRem.Controls.Navigation.View.Menu.ContextToolbar.AlarmSystem
@@ -33,6 +35,14 @@ namespace sconnRem.Controls.Navigation.View.Menu.ContextToolbar.AlarmSystem
 
         public AlarmSystemToolbarView()
         {
+            InitializeComponent();
+        }
+
+
+        [ImportingConstructor]
+        public AlarmSystemToolbarView(AlarmSystemToolbarViewModel viewModel)
+        {
+            this.DataContext = viewModel;
             InitializeComponent();
         }
 

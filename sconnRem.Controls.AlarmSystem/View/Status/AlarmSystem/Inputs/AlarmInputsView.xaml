@@ -8,9 +8,9 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
 
-    <UserControl.DataContext>
+    <!--<UserControl.DataContext>
         <alarm:AlarmSharedDeviceConfigViewModel />
-    </UserControl.DataContext>
+    </UserControl.DataContext>-->
     
     <Grid>
             
