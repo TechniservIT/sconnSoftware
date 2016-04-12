@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using NLog;
 using Prism.Regions;
+using sconnPrismGenerics.View.Interface;
 using sconnRem.Navigation;
 
 namespace sconnRem.View.Menu.GridNavSideMenu
@@ -23,7 +24,7 @@ namespace sconnRem.View.Menu.GridNavSideMenu
     //[PartCreationPolicy(CreationPolicy.NonShared)]
     [Export]
     [ViewSortHint("01")]
-    public partial class GridNavSideMenuView : UserControl, IPartImportsSatisfiedNotification
+    public partial class GridNavSideMenuView : UserControl, IPartImportsSatisfiedNotification, IAlarmSystemStatusView
     {
         private Logger _nlogger = LogManager.GetCurrentClassLogger();
         private static Uri _TargetNavUri = new Uri("AuthConfigView", UriKind.Relative);

@@ -19,7 +19,20 @@ namespace sconnRem.Navigation
         public const String AlarmConfig_Contract_ZoneConfigView = "ZoneConfigView";
         public const String AlarmConfig_Contract_UsersConfigView = "UserConfigView";
 
+        public const String AlarmStatus_Contract_InputsView = "AlarmInputsView";
+        public const String AlarmStatus_Contract_OutputsView = "AlarmOutputsView";
+        public const String AlarmStatus_Contract_RelaysView = "AlarmRelaysView";
+        public const String AlarmStatus_Contract_ZonesView = "AlarmZonesView";
+        public const String AlarmStatus_Contract_SensorsView = "AlarmSensorsView";
+        public const String AlarmStatus_Contract_DeviceView = "AlarmDeviceView";
 
+        public static Uri AlarmUri_Status_Inputs_View = new Uri("/View/Status/AlarmSystem/" + AlarmStatus_Contract_InputsView, UriKind.Relative);
+        public static Uri AlarmUri_Status_Outputs_View = new Uri("/View/Status/AlarmSystem/" + AlarmStatus_Contract_OutputsView, UriKind.Relative);
+        public static Uri AlarmUri_Status_Relays_View = new Uri("/View/Status/AlarmSystem/" + AlarmStatus_Contract_RelaysView, UriKind.Relative);
+        public static Uri AlarmUri_Status_Zones_View = new Uri("/View/Status/AlarmSystem/" + AlarmStatus_Contract_ZonesView, UriKind.Relative);
+        public static Uri AlarmUri_Status_Sensors_View = new Uri("/View/Status/AlarmSystem/" + AlarmStatus_Contract_SensorsView, UriKind.Relative);
+        public static Uri AlarmUri_Status_Device_View = new Uri("/View/Status/AlarmSystem/" + AlarmStatus_Contract_DeviceView, UriKind.Relative);
+        
         public static Uri AlarmUri_Config_Auth_View = new Uri("/View/Config/AlarmSystem/" + AlarmConfig_Contract_AuthConfigView, UriKind.Relative);
         public static Uri AlarmUri_Config_Global_View = new Uri("/View/Config/AlarmSystem/" + AlarmConfig_Contract_GlobalConfigView, UriKind.Relative);
         public static Uri AlarmUri_Config_Comm_View = new Uri("/View/Config/AlarmSystem/" + AlarmConfig_Contract_CommConfigView, UriKind.Relative);

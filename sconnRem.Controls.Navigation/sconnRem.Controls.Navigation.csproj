@@ -136,6 +136,14 @@
       <Project>{09C8A8F0-F85A-4534-922E-85E14EC32725}</Project>
       <Name>sconnConnector</Name>
     </ProjectReference>
+    <ProjectReference Include="..\sconnPrismGenerics\sconnPrismGenerics.csproj">
+      <Project>{9C17810C-EFC7-4806-8414-6868DEABBCA0}</Project>
+      <Name>sconnPrismGenerics</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\sconnRem.Controls.AlarmSystem\sconnRem.Controls.AlarmSystem.csproj">
+      <Project>{c567fe8b-3834-4ad8-aad4-71bdd36dded6}</Project>
+      <Name>sconnRem.Controls.AlarmSystem</Name>
+    </ProjectReference>
     <ProjectReference Include="..\sconnRem.Infrastructure\sconnRem.Infrastructure.csproj">
       <Project>{e5740f97-e6a7-4010-b267-79d3aa2f7f48}</Project>
       <Name>sconnRem.Infrastructure</Name>

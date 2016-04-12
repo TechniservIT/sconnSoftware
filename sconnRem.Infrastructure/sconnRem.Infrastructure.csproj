@@ -66,6 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Content\MainContentViewManager.cs" />
+    <Compile Include="Controllers\AlarmSystemContextController.cs" />
     <Compile Include="Navigation\SiteNavigationManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -86,6 +87,14 @@
     <ProjectReference Include="..\sconnPrismGenerics\sconnPrismGenerics.csproj">
       <Project>{9c17810c-efc7-4806-8414-6868deabbca0}</Project>
       <Name>sconnPrismGenerics</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\sconnPrismSharedContext\sconnPrismSharedContext.csproj">
+      <Project>{541885ad-53c0-41c4-b98f-c97815c5f168}</Project>
+      <Name>sconnPrismSharedContext</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\sconnRem.Navigation\sconnRem.Navigation.csproj">
+      <Project>{7A5FAD15-614C-4D5D-9DAA-4BC9628D479C}</Project>
+      <Name>sconnRem.Navigation</Name>
     </ProjectReference>
     <ProjectReference Include="..\sconnRem.Shells\sconnRem.Shells.csproj">
       <Project>{687f4d7b-3759-45d4-a8ec-1cb6bc0a8cc3}</Project>

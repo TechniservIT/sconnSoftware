@@ -66,6 +66,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ViewModel\Alarm\AlarmSharedDeviceConfigViewModel.cs" />
     <Compile Include="View\Config\AlarmSystem\Abstract\AlarmConfigRegions.cs" />
     <Compile Include="View\Config\AlarmSystem\Abstract\IAlarmSystemDataRecordView.cs" />
     <Compile Include="View\Config\AlarmSystem\Auth\AlarmAuthConfigModule.cs" />
@@ -154,6 +155,36 @@
     <Compile Include="ViewModel\Alarm\AlarmZoneConfigViewModel.cs" />
     <Compile Include="ViewModel\Generic\GenericAlarmConfigViewModel.cs" />
     <Compile Include="ViewModel\Generic\IGenericAlarmConfigViewModel.cs" />
+    <Compile Include="View\Status\AlarmSystem\Comm\AlarmSystemCommStatusView.xaml.cs">
+      <DependentUpon>AlarmSystemCommStatusView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Status\AlarmSystem\Comm\AlarmSystemCommStatusViewModule.cs" />
+    <Compile Include="View\Status\AlarmSystem\Device\AlarmSystemDeviceStatusView.xaml.cs">
+      <DependentUpon>AlarmSystemDeviceStatusView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Status\AlarmSystem\Device\AlarmSystemDeviceStatusViewModule.cs" />
+    <Compile Include="View\Status\AlarmSystem\Inputs\AlarmInputsView.xaml.cs">
+      <DependentUpon>AlarmInputsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Status\AlarmSystem\Inputs\AlarmInputsViewModule.cs" />
+    <Compile Include="View\Status\AlarmSystem\Inputs\AlarmInputViewItem.xaml.cs">
+      <DependentUpon>AlarmInputViewItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Status\AlarmSystem\Outputs\AlarmOutputsView.xaml.cs">
+      <DependentUpon>AlarmOutputsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Status\AlarmSystem\Outputs\AlarmOutputsViewItem.xaml.cs">
+      <DependentUpon>AlarmOutputsViewItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Status\AlarmSystem\Outputs\AlarmOutputsViewModule.cs" />
+    <Compile Include="View\Status\AlarmSystem\Sensors\AlarmSystemSensorsView.xaml.cs">
+      <DependentUpon>AlarmSystemSensorsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Status\AlarmSystem\Sensors\AlarmSystemSensorsViewModule.cs" />
+    <Compile Include="View\Status\AlarmSystem\Zones\AlarmSystemZonesView.xaml.cs">
+      <DependentUpon>AlarmSystemZonesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Status\AlarmSystem\Zones\AlarmSystemZonesViewModule.cs" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="View\Config\AlarmSystem\Auth\AlarmAuthRecordView.xaml">
@@ -248,6 +279,38 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\Status\AlarmSystem\Comm\AlarmSystemCommStatusView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Status\AlarmSystem\Device\AlarmSystemDeviceStatusView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Status\AlarmSystem\Inputs\AlarmInputsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Status\AlarmSystem\Inputs\AlarmInputViewItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Status\AlarmSystem\Outputs\AlarmOutputsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Status\AlarmSystem\Outputs\AlarmOutputsViewItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Status\AlarmSystem\Sensors\AlarmSystemSensorsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Status\AlarmSystem\Zones\AlarmSystemZonesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AlarmSystemManagmentService\AlarmSystemManagmentService.csproj">
@@ -269,6 +332,14 @@
     <ProjectReference Include="..\sconnConnector\sconnConnector.csproj">
       <Project>{09C8A8F0-F85A-4534-922E-85E14EC32725}</Project>
       <Name>sconnConnector</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\sconnPrismGenerics\sconnPrismGenerics.csproj">
+      <Project>{9c17810c-efc7-4806-8414-6868deabbca0}</Project>
+      <Name>sconnPrismGenerics</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\sconnPrismSharedContext\sconnPrismSharedContext.csproj">
+      <Project>{541885ad-53c0-41c4-b98f-c97815c5f168}</Project>
+      <Name>sconnPrismSharedContext</Name>
     </ProjectReference>
     <ProjectReference Include="..\sconnRem.Navigation\sconnRem.Navigation.csproj">
       <Project>{7a5fad15-614c-4d5d-9daa-4bc9628d479c}</Project>
@@ -550,6 +621,9 @@
     <Content Include="images\4.jpg" />
     <Content Include="images\add.jpg" />
     <Content Include="images\alarm.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="View\Status\AlarmSystem\Relays\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

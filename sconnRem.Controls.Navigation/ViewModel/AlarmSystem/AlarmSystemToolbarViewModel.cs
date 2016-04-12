@@ -60,10 +60,56 @@ namespace sconnRem.Controls.Navigation.ViewModel.AlarmSystem
             SiteNavigationManager.ShowConfigureScreen();
         }
 
+        private void NavigateToAlarmUri(Uri uri)
+        {
+            try
+            {
+                this._regionManager.RequestNavigate(GlobalViewRegionNames.MainGridContentRegion, uri
+                    ,
+                    (NavigationResult nr) =>
+                    {
+                        var error = nr.Error;
+                        var result = nr.Result;
+                        if (error != null)
+                        {
+                            _nlogger.Error(error);
+                        }
+                    });
+            }
+            catch (Exception ex)
+            {
+                _nlogger.Error(ex, ex.Message);
+            }
+        }
+
+        private void ShowInputs(sconnSite site)
+        {
+            NavigateToAlarmUri(AlarmRegionNames.AlarmUri_Status_Inputs_View);
+        }
+        
+        private void ShowOutputs(sconnSite site)
+        {
+            NavigateToAlarmUri(AlarmRegionNames.AlarmUri_Status_Outputs_View);
+        }
+
+        private void ShowRelays(sconnSite site)
+        {
+            NavigateToAlarmUri(AlarmRegionNames.AlarmUri_Status_Relays_View);
+        }
+
+
 
         private void SetupCmds()
         {
             Show_Configure_Command = new DelegateCommand<sconnSite>(ShowConfigure);
+
+            Show_Alarm_Inputs_Command = new DelegateCommand<sconnSite>(ShowInputs);
+            Show_Alarm_Outputs_Command = new DelegateCommand<sconnSite>(ShowOutputs);
+            Show_Alarm_Relay_Command = new DelegateCommand<sconnSite>(ShowRelays);
+
+            //Show_Alarm_Zones_Command = new DelegateCommand<sconnSite>(ShowConfigure);
+            //Show_Alarm_Users_Command = new DelegateCommand<sconnSite>(ShowConfigure);
+
         }
 
         public AlarmSystemToolbarViewModel()
@@ -79,6 +125,13 @@ namespace sconnRem.Controls.Navigation.ViewModel.AlarmSystem
 
 
         [ImportingConstructor]
+        public AlarmSystemToolbarViewModel(IRegionManager regionManager)
+        {
+            SetupCmds();
+            this._regionManager = regionManager;
+        }
+
+        
         public AlarmSystemToolbarViewModel(IRegionManager regionManager, sconnSite site)
         {
             this.Site = site;

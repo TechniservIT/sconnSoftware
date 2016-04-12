@@ -1,23 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition.Hosting;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using iotDbConnector.DAL;
 using NLog;
 using sconnConnector.Config;
 using sconnConnector.POCO.Config;
+using sconnPrismSharedContext;
 using sconnRem.Infrastructure.Content;
 using sconnRem.Shells.Config;
 
 namespace sconnRem.Infrastructure.Navigation
 {
+
+    
+
+
     public static class SiteNavigationManager
     {
         private static Logger _nlogger = LogManager.GetCurrentClassLogger();
-
-
+        
         private static sconnSite currentContextSconnSite;
+
+        //alarm syste,
+        private static AlarmSystemConfigManager alarmSystemConfigManager;
+        private static ConfigNavBootstrapper alarmBootstrapper;
+        private static CompositionContainer contextContainer;
 
         public static void ShowFullScreen()
         {
@@ -39,21 +50,7 @@ namespace sconnRem.Infrastructure.Navigation
                 if (currentContextSconnSite != null)
                 {
                    // WndConfigureSiteShell wnd = new WndConfigureSiteShell();
-
-                    EndpointInfo info = new EndpointInfo();
-                    info.Hostname = currentContextSconnSite.serverIP;
-                    info.Port = currentContextSconnSite.serverPort;
-                    DeviceCredentials cred = new DeviceCredentials();
-                    cred.Password = currentContextSconnSite.authPasswd;
-                    cred.Username = "";
-                    AlarmSystemConfigManager manager = new AlarmSystemConfigManager(info, cred);
-                    Device alrmSysDev = new Device();
-                    alrmSysDev.Credentials = cred;
-                    alrmSysDev.EndpInfo = info;
-                    manager.RemoteDevice = alrmSysDev;
-
-
-                    ConfigNavBootstrapper bootstrapper = new ConfigNavBootstrapper(manager);
+                    ConfigNavBootstrapper bootstrapper = new ConfigNavBootstrapper(alarmSystemConfigManager);
                     bootstrapper.Run();
 
                     //ConfigureSiteViewModel context = new ConfigureSiteViewModel(manager);
@@ -69,12 +66,31 @@ namespace sconnRem.Infrastructure.Navigation
  
           
         }
+        
+        public static void SetNavigationContextContainer(CompositionContainer container)
+        {
+            contextContainer = container;
+        }
 
         public static void ActivateSiteContext(sconnSite site)
         {
             if (site != null)
             {
                 currentContextSconnSite = site;
+
+                EndpointInfo info = new EndpointInfo();
+                info.Hostname = currentContextSconnSite.serverIP;
+                info.Port = currentContextSconnSite.serverPort;
+                DeviceCredentials cred = new DeviceCredentials();
+                cred.Password = currentContextSconnSite.authPasswd;
+                cred.Username = "";
+                alarmSystemConfigManager = new AlarmSystemConfigManager(info, cred);
+                Device alrmSysDev = new Device();
+                alrmSysDev.Credentials = cred;
+                alrmSysDev.EndpInfo = info;
+                alarmSystemConfigManager.RemoteDevice = alrmSysDev;
+
+                AlarmSystemContext.SetManager(alarmSystemConfigManager);
             }
         }
 

@@ -105,7 +105,7 @@
             </Grid.RowDefinitions>
 
             <Grid    Grid.Row="0" Grid.Column="0" Background="White">
-                <Button Width="Auto" Content="">
+                <Button  Command="{Binding Path=Show_Alarm_Inputs_Command}"  Width="Auto" Content="">
                     <Button.Template>
                         <ControlTemplate TargetType="{x:Type Button}">
                             <Grid>
@@ -132,7 +132,7 @@
             </Grid>
 
             <Grid    Grid.Row="0" Grid.Column="1" Background="White">
-                <Button Width="Auto" Content="">
+                <Button  Command="{Binding Path=Show_Alarm_Outputs_Command}"   Width="Auto" Content="">
                     <Button.Template>
                         <ControlTemplate TargetType="{x:Type Button}">
                             <Grid>
@@ -159,7 +159,7 @@
             </Grid>
 
             <Grid    Grid.Row="0" Grid.Column="2" Background="White">
-                <Button Width="Auto" Content="">
+                <Button  Command="{Binding Path=Show_Alarm_Relay_Command}"  Width="Auto" Content="">
                     <Button.Template>
                         <ControlTemplate TargetType="{x:Type Button}">
                             <Grid>
