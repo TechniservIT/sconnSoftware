@@ -60,6 +60,29 @@ namespace sconnRem.Controls.Navigation.ViewModel.AlarmSystem
             SiteNavigationManager.ShowConfigureScreen();
         }
 
+        private void NavigateToAlarmContract(string contractName)
+        {
+            try
+            {
+                this._regionManager.RequestNavigate(GlobalViewRegionNames.MainGridContentRegion, contractName
+                    ,
+                    (NavigationResult nr) =>
+                    {
+                        var error = nr.Error;
+                        var result = nr.Result;
+                        if (error != null)
+                        {
+                            _nlogger.Error(error);
+                        }
+                    });
+            }
+            catch (Exception ex)
+            {
+                _nlogger.Error(ex, ex.Message);
+
+            }
+        }
+
         private void NavigateToAlarmUri(Uri uri)
         {
             try
@@ -84,7 +107,7 @@ namespace sconnRem.Controls.Navigation.ViewModel.AlarmSystem
 
         private void ShowInputs(sconnSite site)
         {
-            NavigateToAlarmUri(AlarmRegionNames.AlarmUri_Status_Inputs_View);
+            NavigateToAlarmContract(AlarmRegionNames.AlarmStatus_Contract_InputsView);
         }
         
         private void ShowOutputs(sconnSite site)

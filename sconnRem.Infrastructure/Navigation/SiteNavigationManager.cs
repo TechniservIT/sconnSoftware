@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
+using System.ComponentModel.Composition.Primitives;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -29,6 +31,7 @@ namespace sconnRem.Infrastructure.Navigation
         private static AlarmSystemConfigManager alarmSystemConfigManager;
         private static ConfigNavBootstrapper alarmBootstrapper;
         private static CompositionContainer contextContainer;
+        private static ComposablePart exportedComposablePart;
 
         public static void ShowFullScreen()
         {
@@ -84,6 +87,15 @@ namespace sconnRem.Infrastructure.Navigation
                 DeviceCredentials cred = new DeviceCredentials();
                 cred.Password = currentContextSconnSite.authPasswd;
                 cred.Username = "";
+
+                //ensure container does not maintain old manager
+                if (alarmSystemConfigManager != null && exportedComposablePart != null && contextContainer != null)
+                {
+                    var batchrem = new CompositionBatch();
+                    batchrem.RemovePart(exportedComposablePart);
+                    contextContainer.Compose(batchrem);
+                }
+
                 alarmSystemConfigManager = new AlarmSystemConfigManager(info, cred);
                 Device alrmSysDev = new Device();
                 alrmSysDev.Credentials = cred;
@@ -91,6 +103,15 @@ namespace sconnRem.Infrastructure.Navigation
                 alarmSystemConfigManager.RemoteDevice = alrmSysDev;
 
                 AlarmSystemContext.SetManager(alarmSystemConfigManager);
+
+                //register new manager in container
+                if (contextContainer != null)
+                {
+                    var batch = new CompositionBatch();
+                    exportedComposablePart = batch.AddExportedValue<IAlarmConfigManager>(alarmSystemConfigManager);
+                    contextContainer.Compose(batch);
+                }
+
             }
         }
 

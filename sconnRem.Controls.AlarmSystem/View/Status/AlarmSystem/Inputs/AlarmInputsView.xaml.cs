@@ -22,21 +22,21 @@ namespace sconnRem.Controls.AlarmSystem.View.Status.Inputs
 {
     
 
-    [Export]
+    [Export(AlarmRegionNames.AlarmStatus_Contract_InputsView)]
     [ViewSortHint("01")]
     public partial class AlarmInputsView : UserControl, IPartImportsSatisfiedNotification
     {
-        private const string MainContentRegionName = "MainContentRegion";
+        private const string MainContentRegionName = GlobalViewRegionNames.MainGridContentRegion;   //GlobalViewRegionNames.MainGridContentRegion
         private Logger _nlogger = LogManager.GetCurrentClassLogger();
         private static Uri configureUri = new Uri("InputsConfig", UriKind.Relative);
 
         [Import]
         public IRegionManager RegionManager;
 
-        public AlarmInputsView()
-        {
-            InitializeComponent();
-        }
+        //public AlarmInputsView()
+        //{
+        //    InitializeComponent();
+        //}
 
         [ImportingConstructor]
         public AlarmInputsView(AlarmSharedDeviceConfigViewModel viewModel)
@@ -62,7 +62,7 @@ namespace sconnRem.Controls.AlarmSystem.View.Status.Inputs
 
         private void Configure_Button_Click(object sender, RoutedEventArgs e)
         {
-            this.RegionManager.RequestNavigate(AlarmRegionNames.MainContentRegion, configureUri
+            this.RegionManager.RequestNavigate(GlobalViewRegionNames.MainGridContentRegion, configureUri
                 ,
                 (NavigationResult nr) =>
                 {

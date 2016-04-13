@@ -55,7 +55,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
         {
             _provider.Update(Config);
         }
-
+        
         public AlarmSharedDeviceConfigViewModel()
         {
             this._manager = AlarmSystemContext.GetManager();
@@ -63,26 +63,39 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
             this._provider = new DeviceConfigService(_manager);
         }
 
-        [ImportingConstructor]
-        public AlarmSharedDeviceConfigViewModel(AlarmSystemConfigManager manager)
-        {
-            // _manager = manager;
-            this._manager = AlarmSystemContext.GetManager();
-            _name = "Dev";
-            this._provider = new DeviceConfigService(_manager);
+        //[ImportingConstructor]
+        //public AlarmSharedDeviceConfigViewModel(IAlarmConfigManager manager)
+        //{
+        //    // _manager = manager;
+        //    this._manager = AlarmSystemContext.GetManager();
+        //    _name = "Dev";
+        //    this._provider = new DeviceConfigService(_manager);
 
-        }
+        //}
 
         [ImportingConstructor]
-        public AlarmSharedDeviceConfigViewModel(IAlarmConfigManager manager, IRegionManager regionManager)
+        public AlarmSharedDeviceConfigViewModel(IRegionManager regionManager)
         {
             Config = new sconnDevice();
-            //this._manager = (AlarmSystemConfigManager)manager;
             this._manager = AlarmSystemContext.GetManager();
             this._provider = new DeviceConfigService(_manager);
             this._regionManager = regionManager;
             GetData();
+
+
         }
+
+
+        //[ImportingConstructor]
+        //public AlarmSharedDeviceConfigViewModel(IAlarmConfigManager manager, IRegionManager regionManager)
+        //{
+        //    Config = new sconnDevice();
+        //    //this._manager = (AlarmSystemConfigManager)manager;
+        //    this._manager = AlarmSystemContext.GetManager();
+        //    this._provider = new DeviceConfigService(_manager);
+        //    this._regionManager = regionManager;
+        //    GetData();
+        //}
 
         public string DisplayedImagePath
         {

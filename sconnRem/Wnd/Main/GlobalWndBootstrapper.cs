@@ -18,6 +18,7 @@ using sconnPrismGenerics;
 using sconnPrismGenerics.Boostrapper;
 using sconnPrismGenerics.Logging;
 using sconnRem.Controls.AlarmSystem.View.Status.Inputs;
+using sconnRem.Infrastructure.Navigation;
 using sconnRem.View.Menu.GridNavSideMenu;
 using sconnRem.View.Menu.SiteNavSideMenu;
 using sconnRem.View.Menu.ToolTopMenu;
@@ -89,6 +90,7 @@ namespace sconnRem.Wnd.Main
 
         protected override DependencyObject CreateShell()
         {
+            SiteNavigationManager.SetNavigationContextContainer(this.Container);
             return this.Container.GetExportedValue<WndGlobalShell>();
         }
 
