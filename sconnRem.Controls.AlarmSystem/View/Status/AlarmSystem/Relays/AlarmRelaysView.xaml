@@ -1,10 +1,9 @@
-﻿<UserControl x:Class="sconnRem.Controls.AlarmSystem.View.Status.Outputs.AlarmOutputsView"
+﻿<UserControl x:Class="sconnRem.Controls.AlarmSystem.View.Status.AlarmSystem.Relays.AlarmRelaysView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:sconnRem.Controls.AlarmSystem.View.Status.Outputs"
-             xmlns:alarm="clr-namespace:sconnRem.Controls.AlarmSystem.ViewModel.Alarm"
+             xmlns:local="clr-namespace:sconnRem.Controls.AlarmSystem.View.Status.AlarmSystem.Relays"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
 
@@ -18,7 +17,7 @@
         </Grid.RowDefinitions>
 
         <Grid  Grid.Column="0" Grid.Row="0">
-            <ListBox ScrollViewer.HorizontalScrollBarVisibility="Disabled" x:Name="OrdersListBox" BorderThickness="0" ItemsSource="{Binding Config.Outputs}"  IsSynchronizedWithCurrentItem="True" Background="White">
+            <ListBox ScrollViewer.HorizontalScrollBarVisibility="Disabled" x:Name="OrdersListBox" BorderThickness="0" ItemsSource="{Binding Config.Relays}"  IsSynchronizedWithCurrentItem="True" Background="White">
                 <ListBox.ItemTemplate>
 
                     <DataTemplate>
@@ -125,5 +124,5 @@
 
     </Grid>
 
-
+    
 </UserControl>

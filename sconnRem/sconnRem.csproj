@@ -531,6 +531,41 @@
     <Resource Include="images\rem.jpg" />
     <Resource Include="images\save.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\aku1-1000.jpg" />
+    <Resource Include="images\aku1000.jpg" />
+    <Resource Include="images\bateria1-1000.jpg" />
+    <Resource Include="images\bateria1000.jpg" />
+    <Resource Include="images\config1000 %282%29.jpg" />
+    <Resource Include="images\config1000.jpg" />
+    <Resource Include="images\elektro1000.jpg" />
+    <Resource Include="images\eye1000.jpg" />
+    <Resource Include="images\glob1000.jpg" />
+    <Resource Include="images\in1-1000.jpg" />
+    <Resource Include="images\in1000.jpg" />
+    <Resource Include="images\klucz1000.jpg" />
+    <Resource Include="images\lista1-1000.jpg" />
+    <Resource Include="images\lista1000.jpg" />
+    <Resource Include="images\out1-1000.jpg" />
+    <Resource Include="images\out1000.jpg" />
+    <Resource Include="images\person1-1000.jpg" />
+    <Resource Include="images\person1000.jpg" />
+    <Resource Include="images\przekaznik1000.jpg" />
+    <Resource Include="images\rj1000.jpg" />
+    <Resource Include="images\rozb-1000.jpg" />
+    <Resource Include="images\strefa1000.jpg" />
+    <Resource Include="images\strefy1-1000.jpg" />
+    <Resource Include="images\strefy2-1000.jpg" />
+    <Resource Include="images\tel1000.jpg" />
+    <Resource Include="images\tmp1000.jpg" />
+    <Resource Include="images\wawes1000.jpg" />
+    <Resource Include="images\wilgot1000.jpg" />
+    <Resource Include="images\wtyczka1-1000.jpg" />
+    <Resource Include="images\wtyczka1000.jpg" />
+    <Resource Include="images\wykrz-1000.jpg" />
+    <Resource Include="images\zazb-1000.jpg" />
+    <Resource Include="images\zegar1000.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -18,22 +18,21 @@ using Prism.Regions;
 using sconnRem.Controls.AlarmSystem.ViewModel.Alarm;
 using sconnRem.Navigation;
 
-namespace sconnRem.Controls.AlarmSystem.View.Status.Outputs
+namespace sconnRem.Controls.AlarmSystem.View.Status.AlarmSystem.Relays
 {
-
-    [Export(AlarmRegionNames.AlarmStatus_Contract_OutputsView)]
+    [Export(AlarmRegionNames.AlarmStatus_Contract_RelaysView)]
     [ViewSortHint("01")]
-    public partial class AlarmOutputsView : UserControl, IPartImportsSatisfiedNotification
+    public partial class AlarmRelaysView : UserControl, IPartImportsSatisfiedNotification
     {
         private const string MainContentRegionName = GlobalViewRegionNames.MainGridContentRegion;   //GlobalViewRegionNames.MainGridContentRegion
         private Logger _nlogger = LogManager.GetCurrentClassLogger();
-        private static Uri configureUri = new Uri(AlarmRegionNames.AlarmStatus_Contract_OutputsView, UriKind.Relative);
+        private static Uri configureUri = new Uri(AlarmRegionNames.AlarmStatus_Contract_RelaysView, UriKind.Relative);
 
         [Import]
         public IRegionManager RegionManager;
 
         [ImportingConstructor]
-        public AlarmOutputsView(AlarmSharedDeviceConfigViewModel viewModel)
+        public AlarmRelaysView(AlarmSharedDeviceConfigViewModel viewModel)
         {
             this.DataContext = viewModel;
             InitializeComponent();
@@ -70,6 +69,8 @@ namespace sconnRem.Controls.AlarmSystem.View.Status.Outputs
         }
 
     }
+
+
 
 
 }

@@ -47,6 +47,37 @@ namespace sconnConnector.POCO.Config.sconn
         public List<sconnOutput> Outputs { get; set; }
         public List<sconnInput> Inputs { get; set; }
         public List<sconnRelay> Relays { get; set; }
+
+        public List<sconnInput> Sensors
+        {
+            get
+            {
+                //device inputs are sensors if miwi com enabled
+                if (this.ComMiWi && this.Type == sconnDeviceType.Pir_Sensor)
+                {
+                    return Inputs;
+                }
+                else
+                {
+                    return new List<sconnInput>();
+                }
+            }
+
+            set
+            {
+                //device inputs are sensors if miwi com enabled
+                if (this.ComMiWi && this.Type == sconnDeviceType.Pir_Sensor)
+                {
+                    Inputs = value;
+                }
+                else
+                {
+
+                }
+            }
+            
+        }
+
         public float MainVoltage { get; set; }
         public float BatteryVoltage { get; set; }
         public bool KeypadModule { get; set; }

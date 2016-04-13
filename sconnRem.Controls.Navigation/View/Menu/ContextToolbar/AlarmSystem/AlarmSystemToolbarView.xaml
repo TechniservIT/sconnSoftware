@@ -76,7 +76,7 @@
                                           VerticalAlignment="Center"/>
                                         <Canvas Background="White" Grid.Column="0" />
 
-                                        <Image  Grid.Column="0" Grid.Row="0" x:Name="imgTopNav1"  Stretch="Uniform"   HorizontalAlignment="Center" Height="Auto" Margin="5,5,5,5" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/config1.png"/>
+                                        <Image  Grid.Column="0" Grid.Row="0" x:Name="imgTopNav1"  Stretch="Uniform"   HorizontalAlignment="Center" Height="Auto" Margin="5,5,5,5" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/config1000.jpg"/>
 
                                     </Grid>
                                 </Border>
@@ -201,7 +201,7 @@
                                           VerticalAlignment="Center"/>
                                         <Canvas Background="White" Grid.Column="0" />
 
-                                        <Image  Grid.Column="0" Grid.Row="0" x:Name="imgTopNav1"  Stretch="Uniform"   HorizontalAlignment="Center" Height="Auto" Margin="5,5,5,5" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/bateria2.png"/>
+                                        <Image  Grid.Column="0" Grid.Row="0" x:Name="imgTopNav1"  Stretch="Uniform"   HorizontalAlignment="Center" Height="Auto" Margin="5,5,5,5" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/aku1000.jpg"/>
 
                                     </Grid>
                                 </Border>
@@ -228,7 +228,7 @@
                                           VerticalAlignment="Center"/>
                                         <Canvas Background="White" Grid.Column="0" />
 
-                                        <Image  Grid.Column="0" Grid.Row="0" x:Name="imgTopNav1"  Stretch="Uniform"   HorizontalAlignment="Center" Height="Auto" Margin="5,5,5,5" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/tmp.png"/>
+                                        <Image  Grid.Column="0" Grid.Row="0" x:Name="imgTopNav1"  Stretch="Uniform"   HorizontalAlignment="Center" Height="Auto" Margin="5,5,5,5" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/tmp1000.jpg"/>
 
                                     </Grid>
                                 </Border>
@@ -255,7 +255,7 @@
                                           VerticalAlignment="Center"/>
                                         <Canvas Background="White" Grid.Column="0" />
 
-                                        <Image  Grid.Column="0" Grid.Row="0" x:Name="imgTopNav1"  Stretch="Uniform"   HorizontalAlignment="Center" Height="Auto" Margin="5,5,5,5" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/water.png"/>
+                                        <Image  Grid.Column="0" Grid.Row="0" x:Name="imgTopNav1"  Stretch="Uniform"   HorizontalAlignment="Center" Height="Auto" Margin="5,5,5,5" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/wilgot1000.jpg"/>
 
                                     </Grid>
                                 </Border>
@@ -282,7 +282,7 @@
                                           VerticalAlignment="Center"/>
                                         <Canvas Background="White" Grid.Column="0" />
 
-                                        <Image  Grid.Column="0" Grid.Row="0" x:Name="imgTopNav1"  Stretch="Uniform"   HorizontalAlignment="Center" Height="Auto" Margin="5,5,5,5" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/strefy1.png"/>
+                                        <Image  Grid.Column="0" Grid.Row="0" x:Name="imgTopNav1"  Stretch="Uniform"   HorizontalAlignment="Center" Height="Auto" Margin="5,5,5,5" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/strefy2-1000.jpg"/>
 
                                     </Grid>
                                 </Border>
@@ -309,7 +309,7 @@
                                           VerticalAlignment="Center"/>
                                         <Canvas Background="White" Grid.Column="0" />
 
-                                        <Image  Grid.Column="0" Grid.Row="0" x:Name="imgTopNav1"  Stretch="Uniform"   HorizontalAlignment="Center" Height="Auto" Margin="5,5,5,5" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/patchcord.png"/>
+                                        <Image  Grid.Column="0" Grid.Row="0" x:Name="imgTopNav1"  Stretch="Uniform"   HorizontalAlignment="Center" Height="Auto" Margin="5,5,5,5" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/rj1000.jpg"/>
 
                                     </Grid>
                                 </Border>
@@ -336,7 +336,7 @@
                                           VerticalAlignment="Center"/>
                                         <Canvas Background="White" Grid.Column="0" />
 
-                                        <Image  Grid.Column="0" Grid.Row="0" x:Name="imgTopNav1"  Stretch="Uniform"   HorizontalAlignment="Center" Height="Auto" Margin="5,5,5,5" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/user.png"/>
+                                        <Image  Grid.Column="0" Grid.Row="0" x:Name="imgTopNav1"  Stretch="Uniform"   HorizontalAlignment="Center" Height="Auto" Margin="5,5,5,5" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/person1000.jpg"/>
 
                                     </Grid>
                                 </Border>
@@ -346,7 +346,7 @@
                 </Button>
 
             </Grid>
-            
+          
             <Grid    Grid.Row="1" Grid.Column="3" Background="White">
                 <Button Width="Auto" Content="">
                     <Button.Template>
@@ -363,34 +363,7 @@
                                           VerticalAlignment="Center"/>
                                         <Canvas Background="White" Grid.Column="0" />
 
-                                        <Image  Grid.Column="0" Grid.Row="0" x:Name="imgTopNav1"  Stretch="Uniform"   HorizontalAlignment="Center" Height="Auto" Margin="5,5,5,5" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/klucz2.png"/>
-
-                                    </Grid>
-                                </Border>
-                            </Grid>
-                        </ControlTemplate>
-                    </Button.Template>
-                </Button>
-
-            </Grid>
-
-            <Grid    Grid.Row="1" Grid.Column="3" Background="White">
-                <Button Width="Auto" Content="">
-                    <Button.Template>
-                        <ControlTemplate TargetType="{x:Type Button}">
-                            <Grid>
-                                <Border Background="{TemplateBinding Background}"
-                         BorderBrush="{TemplateBinding BorderBrush}"
-                         BorderThickness="{TemplateBinding BorderThickness}">
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*"/>
-                                        </Grid.ColumnDefinitions>
-                                        <ContentPresenter HorizontalAlignment="Left"  Grid.Column="0"
-                                          VerticalAlignment="Center"/>
-                                        <Canvas Background="White" Grid.Column="0" />
-
-                                        <Image  Grid.Column="0" Grid.Row="0" x:Name="imgTopNav1"  Stretch="Uniform"   HorizontalAlignment="Center" Height="Auto" Margin="5,5,5,5" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/klucz2.png"/>
+                                        <Image  Grid.Column="0" Grid.Row="0" x:Name="imgTopNav1"  Stretch="Uniform"   HorizontalAlignment="Center" Height="Auto" Margin="5,5,5,5" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/klucz1000.jpg"/>
 
                                     </Grid>
                                 </Border>
@@ -417,7 +390,7 @@
                                           VerticalAlignment="Center"/>
                                         <Canvas Background="White" Grid.Column="0" />
 
-                                        <Image  Grid.Column="0" Grid.Row="0" x:Name="imgTopNav1"  Stretch="Uniform"   HorizontalAlignment="Center" Height="Auto" Margin="5,5,5,5" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/lista2.png"/>
+                                        <Image  Grid.Column="0" Grid.Row="0" x:Name="imgTopNav1"  Stretch="Uniform"   HorizontalAlignment="Center" Height="Auto" Margin="5,5,5,5" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/lista1000.jpg"/>
 
                                     </Grid>
                                 </Border>
@@ -444,7 +417,7 @@
                                           VerticalAlignment="Center"/>
                                         <Canvas Background="White" Grid.Column="0" />
 
-                                        <Image  Grid.Column="0" Grid.Row="0" x:Name="imgTopNav1"  Stretch="Uniform"   HorizontalAlignment="Center" Height="Auto" Margin="5,5,5,5" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/mapa.png"/>
+                                        <Image  Grid.Column="0" Grid.Row="0" x:Name="imgTopNav1"  Stretch="Uniform"   HorizontalAlignment="Center" Height="Auto" Margin="5,5,5,5" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/zegar1000.jpg"/>
 
                                     </Grid>
                                 </Border>

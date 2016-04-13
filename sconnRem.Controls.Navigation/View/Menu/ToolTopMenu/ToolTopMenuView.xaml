@@ -128,7 +128,7 @@
                                         <Canvas Background="White" Grid.Column="0" />
 
 
-                                        <Image  Grid.Column="0" Grid.Row="0" x:Name="ImgDispActionGridHexScreen1"  Stretch="Uniform"   HorizontalAlignment="Center" Height="Auto" Margin="5,5,5,5" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/config2.png"/>
+                                        <Image  Grid.Column="0" Grid.Row="0" x:Name="ImgDispActionGridHexScreen1"  Stretch="Uniform"   HorizontalAlignment="Center" Height="Auto" Margin="5,5,5,5" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/config1000 (2).jpg"/>
 
                                     </Grid>
                                 </Border>

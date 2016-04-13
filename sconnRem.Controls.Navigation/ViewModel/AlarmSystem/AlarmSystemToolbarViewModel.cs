@@ -112,12 +112,12 @@ namespace sconnRem.Controls.Navigation.ViewModel.AlarmSystem
         
         private void ShowOutputs(sconnSite site)
         {
-            NavigateToAlarmUri(AlarmRegionNames.AlarmUri_Status_Outputs_View);
+            NavigateToAlarmContract(AlarmRegionNames.AlarmStatus_Contract_OutputsView);
         }
 
         private void ShowRelays(sconnSite site)
         {
-            NavigateToAlarmUri(AlarmRegionNames.AlarmUri_Status_Relays_View);
+            NavigateToAlarmContract(AlarmRegionNames.AlarmStatus_Contract_RelaysView);
         }
 
 
