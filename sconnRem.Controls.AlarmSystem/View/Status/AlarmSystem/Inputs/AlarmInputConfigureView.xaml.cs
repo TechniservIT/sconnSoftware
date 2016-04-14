@@ -21,7 +21,7 @@ using sconnRem.Navigation;
 namespace sconnRem.Controls.AlarmSystem.View.Status.AlarmSystem.Inputs
 {
 
-    [Export(AlarmRegionNames.AlarmStatus_Contract_InputsView)]
+    [Export(AlarmRegionNames.AlarmConfig_Contract_Input_Config_View)]
     [ViewSortHint("01")]
     public partial class AlarmInputConfigureView : UserControl, IPartImportsSatisfiedNotification
     {
@@ -68,8 +68,7 @@ namespace sconnRem.Controls.AlarmSystem.View.Status.AlarmSystem.Inputs
                     }
                 });
         }
-
-
-
+        
     }
+
 }

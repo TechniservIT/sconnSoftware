@@ -18,22 +18,22 @@ using Prism.Regions;
 using sconnRem.Controls.AlarmSystem.ViewModel.Alarm;
 using sconnRem.Navigation;
 
-namespace sconnRem.Controls.AlarmSystem.View.Status.AlarmSystem.Device.Motherboard
+namespace sconnRem.Controls.AlarmSystem.View.Status.AlarmSystem.Device.InputsModule
 {
 
-    [Export(AlarmRegionNames.AlarmConfig_Contract_Device_Motherboard_View)]
+    [Export(AlarmRegionNames.AlarmStatus_Contract_Device_List_View)]
     [ViewSortHint("01")]
-    public partial class AlarmDeviceMotherboardConfigureView : UserControl, IPartImportsSatisfiedNotification
+    public partial class AlarmSystemDeviceListView : UserControl, IPartImportsSatisfiedNotification
     {
         private const string MainContentRegionName = GlobalViewRegionNames.MainGridContentRegion;
         private Logger _nlogger = LogManager.GetCurrentClassLogger();
-        private static Uri configureUri = new Uri(AlarmRegionNames.AlarmStatus_Contract_Device_Motherboard_View, UriKind.Relative);
+        private static Uri configureUri = new Uri(AlarmRegionNames.AlarmStatus_Contract_Device_List_View, UriKind.Relative);
 
         [Import]
         public IRegionManager RegionManager;
 
         [ImportingConstructor]
-        public AlarmDeviceMotherboardConfigureView(AlarmSharedDeviceConfigViewModel viewModel)
+        public AlarmSystemDeviceListView(AlarmSharedDeviceConfigViewModel viewModel)
         {
             this.DataContext = viewModel;
             InitializeComponent();
@@ -69,6 +69,9 @@ namespace sconnRem.Controls.AlarmSystem.View.Status.AlarmSystem.Device.Motherboa
                 });
         }
 
+
+
     }
+
 
 }
