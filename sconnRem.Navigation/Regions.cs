@@ -19,6 +19,9 @@ namespace sconnRem.Navigation
         public const String AlarmConfig_Contract_ZoneConfigView = "ZoneConfigView";
         public const String AlarmConfig_Contract_UsersConfigView = "UserConfigView";
 
+
+        #region AlarmSystemEntitiesView
+
         public const String AlarmStatus_Contract_InputsView = "AlarmInputsView";
         public const String AlarmStatus_Contract_OutputsView = "AlarmOutputsView";
         public const String AlarmStatus_Contract_RelaysView = "AlarmRelaysView";
@@ -32,7 +35,44 @@ namespace sconnRem.Navigation
         public static Uri AlarmUri_Status_Zones_View = new Uri(AlarmStatus_Contract_ZonesView, UriKind.Relative);
         public static Uri AlarmUri_Status_Sensors_View = new Uri(AlarmStatus_Contract_SensorsView, UriKind.Relative);
         public static Uri AlarmUri_Status_Device_View = new Uri(AlarmStatus_Contract_DeviceView, UriKind.Relative);
-        
+
+        #endregion
+
+
+
+        #region AlarmSystemEntitiesConfig
+
+        public const String AlarmConfig_Contract_Input_Config_View = "AlarmInputConfigureView";
+        public const String AlarmConfig_Contract_Output_Config_View = "AlarmOutputConfigureView";
+        public const String AlarmConfig_Contract_Relay_Config_View = "AlarmRelayConfigureView";
+        public const String AlarmConfig_Contract_Zone_Config_View = "AlarmZoneConfigureView";
+        public const String AlarmConfig_Contract_Sensor_Config_View = "AlarmSensorConfigureView";
+        public const String AlarmConfig_Contract_Device_Config_View = "AlarmDeviceConfigureView";
+
+        public static Uri AlarmUri_Config_Input_View = new Uri(AlarmConfig_Contract_Input_Config_View, UriKind.Relative);
+        public static Uri AlarmUri_Config_Output_View = new Uri(AlarmConfig_Contract_Output_Config_View, UriKind.Relative);
+        public static Uri AlarmUri_Config_Relay_View = new Uri(AlarmConfig_Contract_Relay_Config_View, UriKind.Relative);
+        public static Uri AlarmUri_Config_Zone_View = new Uri(AlarmConfig_Contract_Zone_Config_View, UriKind.Relative);
+        public static Uri AlarmUri_Config_Sensor_View = new Uri(AlarmConfig_Contract_Sensor_Config_View, UriKind.Relative);
+        public static Uri AlarmUri_Config_Device_View = new Uri(AlarmConfig_Contract_Device_Config_View, UriKind.Relative);
+
+        #endregion
+
+
+        #region AlarmDevicesViews
+
+
+
+        #endregion
+
+        #region AlarmDevicesConfigure
+
+
+
+        #endregion
+
+
+
         public static Uri AlarmUri_Config_Auth_View = new Uri("/View/Config/AlarmSystem/" + AlarmConfig_Contract_AuthConfigView, UriKind.Relative);
         public static Uri AlarmUri_Config_Global_View = new Uri("/View/Config/AlarmSystem/" + AlarmConfig_Contract_GlobalConfigView, UriKind.Relative);
         public static Uri AlarmUri_Config_Comm_View = new Uri("/View/Config/AlarmSystem/" + AlarmConfig_Contract_CommConfigView, UriKind.Relative);

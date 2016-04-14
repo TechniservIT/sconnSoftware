@@ -7,22 +7,22 @@ using System.Threading.Tasks;
 using Prism.Mef.Modularity;
 using Prism.Modularity;
 using Prism.Regions;
+using sconnRem.Controls.AlarmSystem.View.Status.AlarmSystem.Outputs;
 using sconnRem.Navigation;
 
-namespace sconnRem.Controls.AlarmSystem.View.Status.AlarmSystem.Device.Sensors
+namespace sconnRem.Controls.AlarmSystem.View.Status.AlarmSystem.Zones
 {
 
-    [ModuleExport(typeof(AlarmDeviceSensorViewModule))]
-    public class AlarmDeviceSensorViewModule : IModule
+    [ModuleExport(typeof(AlarmSystemZonesConfigureViewModule))]
+    public class AlarmSystemZonesConfigureViewModule : IModule
     {
         [Import]
         public IRegionManager RegionManager;
 
         public void Initialize()
         {
-            this.RegionManager.RegisterViewWithRegion(AlarmRegionNames.MainContentRegion, typeof(AlarmDeviceSensorView));
+            this.RegionManager.RegisterViewWithRegion(AlarmRegionNames.MainContentRegion, typeof(AlarmSystemZonesConfigureView));
         }
-
     }
 
 
