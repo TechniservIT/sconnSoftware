@@ -159,6 +159,9 @@
       <DependentUpon>AlarmSystemCommStatusView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Status\AlarmSystem\Comm\AlarmSystemCommStatusViewModule.cs" />
+    <Compile Include="View\Status\AlarmSystem\Device\AlarmSystemDeviceConfigureView.xaml.cs">
+      <DependentUpon>AlarmSystemDeviceConfigureView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Status\AlarmSystem\Device\AlarmSystemDeviceConfigureViewModule.cs" />
     <Compile Include="View\Status\AlarmSystem\Device\AlarmSystemDeviceListViewModule.cs" />
     <Compile Include="View\Status\AlarmSystem\Device\AlarmSystemDeviceStatusView.xaml.cs">
@@ -172,6 +175,9 @@
     <Compile Include="View\Status\AlarmSystem\Device\InputsModule\AlarmDeviceInputsModuleConfigureModule.cs" />
     <Compile Include="View\Status\AlarmSystem\Device\InputsModule\AlarmDeviceInputsModuleView.xaml.cs">
       <DependentUpon>AlarmDeviceInputsModuleView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Status\AlarmSystem\Device\AlarmSystemDeviceListView.xaml.cs">
+      <DependentUpon>AlarmSystemDeviceListView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Status\AlarmSystem\Device\Keypad\AlarmDeviceKeypadConfigureModule.cs" />
     <Compile Include="View\Status\AlarmSystem\Device\Keypad\AlarmDeviceKeypadConfigureView.xaml.cs">
@@ -189,6 +195,14 @@
       <DependentUpon>AlarmDeviceMotherboardView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Status\AlarmSystem\Device\Motherboard\AlarmDeviceMotherboardViewModule.cs" />
+    <Compile Include="View\Status\AlarmSystem\Device\RelayModule\AlarmDeviceRelaysModuleConfigureModule.cs" />
+    <Compile Include="View\Status\AlarmSystem\Device\RelayModule\AlarmDeviceRelaysModuleConfigureView.xaml.cs">
+      <DependentUpon>AlarmDeviceRelaysModuleConfigureView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Status\AlarmSystem\Device\RelayModule\AlarmDeviceRelaysModuleView.xaml.cs">
+      <DependentUpon>AlarmDeviceRelaysModuleView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Status\AlarmSystem\Device\RelayModule\AlarmDeviceRelaysModuleViewModule.cs" />
     <Compile Include="View\Status\AlarmSystem\Device\Sensors\AlarmDeviceSensorConfigureModule.cs" />
     <Compile Include="View\Status\AlarmSystem\Device\Sensors\AlarmDeviceSensorConfigureView.xaml.cs">
       <DependentUpon>AlarmDeviceSensorConfigureView.xaml</DependentUpon>
@@ -335,6 +349,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Status\AlarmSystem\Device\AlarmSystemDeviceConfigureView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Status\AlarmSystem\Device\AlarmSystemDeviceStatusView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -344,6 +362,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Status\AlarmSystem\Device\InputsModule\AlarmDeviceInputsModuleView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Status\AlarmSystem\Device\AlarmSystemDeviceListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -360,6 +382,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Status\AlarmSystem\Device\Motherboard\AlarmDeviceMotherboardView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Status\AlarmSystem\Device\RelayModule\AlarmDeviceRelaysModuleConfigureView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Status\AlarmSystem\Device\RelayModule\AlarmDeviceRelaysModuleView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -723,7 +753,6 @@
     <Content Include="images\alarm.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="View\Status\AlarmSystem\Device\RelayModule\" />
     <Folder Include="View\Status\AlarmSystem\Global\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
