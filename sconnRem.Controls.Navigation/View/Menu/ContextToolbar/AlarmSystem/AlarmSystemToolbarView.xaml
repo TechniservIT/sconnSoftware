@@ -34,7 +34,7 @@
             </Grid.RowDefinitions>
 
             <Grid    Grid.Row="0" Grid.Column="0" Background="White">
-                <Button Width="Auto" Content="">
+                <Button Command="{Binding Path=Show_Alarm_Devices_Command}" Width="Auto" Content="">
                     <Button.Template>
                         <ControlTemplate TargetType="{x:Type Button}">
                             <Grid>

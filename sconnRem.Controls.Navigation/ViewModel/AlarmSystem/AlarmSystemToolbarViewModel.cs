@@ -37,7 +37,8 @@ namespace sconnRem.Controls.Navigation.ViewModel.AlarmSystem
         public ICommand Show_Alarm_Zones_Command { get; set; }
         public ICommand Show_Alarm_Gsm_Command { get; set; }
         public ICommand Show_Alarm_Users_Command { get; set; }
-
+        public ICommand Show_Alarm_Devices_Command { get; set; }
+        
 
 
         private void ViewSite(sconnSite site)
@@ -120,6 +121,10 @@ namespace sconnRem.Controls.Navigation.ViewModel.AlarmSystem
             NavigateToAlarmContract(AlarmRegionNames.AlarmStatus_Contract_RelaysView);
         }
 
+        private void ShowDevices()
+        {
+            NavigateToAlarmContract(AlarmRegionNames.AlarmStatus_Contract_Device_List_View);
+        }
 
 
         private void SetupCmds()
@@ -129,6 +134,8 @@ namespace sconnRem.Controls.Navigation.ViewModel.AlarmSystem
             Show_Alarm_Inputs_Command = new DelegateCommand<sconnSite>(ShowInputs);
             Show_Alarm_Outputs_Command = new DelegateCommand<sconnSite>(ShowOutputs);
             Show_Alarm_Relay_Command = new DelegateCommand<sconnSite>(ShowRelays);
+
+            Show_Alarm_Devices_Command= new DelegateCommand(ShowDevices);
 
             //Show_Alarm_Zones_Command = new DelegateCommand<sconnSite>(ShowConfigure);
             //Show_Alarm_Users_Command = new DelegateCommand<sconnSite>(ShowConfigure);

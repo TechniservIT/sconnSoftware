@@ -85,18 +85,6 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
 
         }
 
-
-        //[ImportingConstructor]
-        //public AlarmSharedDeviceConfigViewModel(IAlarmConfigManager manager, IRegionManager regionManager)
-        //{
-        //    Config = new sconnDevice();
-        //    //this._manager = (AlarmSystemConfigManager)manager;
-        //    this._manager = AlarmSystemContext.GetManager();
-        //    this._provider = new DeviceConfigService(_manager);
-        //    this._regionManager = regionManager;
-        //    GetData();
-        //}
-
         public string DisplayedImagePath
         {
             get { return "pack://application:,,,/images/config1.png"; }

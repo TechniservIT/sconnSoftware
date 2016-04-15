@@ -66,6 +66,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ViewModel\Alarm\AlarmDeviceListViewModel.cs" />
     <Compile Include="ViewModel\Alarm\AlarmSharedDeviceConfigViewModel.cs" />
     <Compile Include="View\Config\AlarmSystem\Abstract\AlarmConfigRegions.cs" />
     <Compile Include="View\Config\AlarmSystem\Abstract\IAlarmSystemDataRecordView.cs" />
