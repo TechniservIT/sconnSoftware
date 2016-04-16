@@ -413,6 +413,10 @@
       <Project>{9c17810c-efc7-4806-8414-6868deabbca0}</Project>
       <Name>sconnPrismGenerics</Name>
     </ProjectReference>
+    <ProjectReference Include="..\sconnPrismSharedContext\sconnPrismSharedContext.csproj">
+      <Project>{541885ad-53c0-41c4-b98f-c97815c5f168}</Project>
+      <Name>sconnPrismSharedContext</Name>
+    </ProjectReference>
     <ProjectReference Include="..\sconnRem.Controls.AlarmSystem\sconnRem.Controls.AlarmSystem.csproj">
       <Project>{c567fe8b-3834-4ad8-aad4-71bdd36dded6}</Project>
       <Name>sconnRem.Controls.AlarmSystem</Name>
@@ -425,10 +429,6 @@
       <Project>{fbec1121-bba2-41a9-aa91-64cd67de68ff}</Project>
       <Name>sconnRem.Controls.Status</Name>
     </ProjectReference>
-    <ProjectReference Include="..\sconnRem.Controls.Tests\sconnRem.Controls.Tests.csproj">
-      <Project>{7801873e-538c-414c-b399-f9466efbc069}</Project>
-      <Name>sconnRem.Controls.Tests</Name>
-    </ProjectReference>
     <ProjectReference Include="..\sconnRem.Infrastructure\sconnRem.Infrastructure.csproj">
       <Project>{e5740f97-e6a7-4010-b267-79d3aa2f7f48}</Project>
       <Name>sconnRem.Infrastructure</Name>
@@ -436,6 +436,10 @@
     <ProjectReference Include="..\sconnRem.Navigation\sconnRem.Navigation.csproj">
       <Project>{7a5fad15-614c-4d5d-9daa-4bc9628d479c}</Project>
       <Name>sconnRem.Navigation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\sconnRem.Shells\sconnRem.Shells.csproj">
+      <Project>{687f4d7b-3759-45d4-a8ec-1cb6bc0a8cc3}</Project>
+      <Name>sconnRem.Shells</Name>
     </ProjectReference>
     <ProjectReference Include="..\SiteManagmentService\SiteManagmentService.csproj">
       <Project>{cc9fb92a-c1d9-400a-bd9b-d814280a118e}</Project>

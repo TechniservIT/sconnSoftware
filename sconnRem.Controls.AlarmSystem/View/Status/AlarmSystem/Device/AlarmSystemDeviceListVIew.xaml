@@ -17,6 +17,7 @@
         </Grid.RowDefinitions>
 
         <Grid  Grid.Column="0" Grid.Row="0">
+            
             <ListBox ScrollViewer.HorizontalScrollBarVisibility="Disabled" x:Name="OrdersListBox" BorderThickness="0" ItemsSource="{Binding Config}"  IsSynchronizedWithCurrentItem="True" Background="White">
                 <ListBox.ItemTemplate>
 

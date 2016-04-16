@@ -81,7 +81,7 @@
       <Name>iotData</Name>
     </ProjectReference>
     <ProjectReference Include="..\sconnConnector\sconnConnector.csproj">
-      <Project>{09C8A8F0-F85A-4534-922E-85E14EC32725}</Project>
+      <Project>{09c8a8f0-f85a-4534-922e-85e14ec32725}</Project>
       <Name>sconnConnector</Name>
     </ProjectReference>
     <ProjectReference Include="..\sconnPrismGenerics\sconnPrismGenerics.csproj">
@@ -93,12 +93,8 @@
       <Name>sconnPrismSharedContext</Name>
     </ProjectReference>
     <ProjectReference Include="..\sconnRem.Navigation\sconnRem.Navigation.csproj">
-      <Project>{7A5FAD15-614C-4D5D-9DAA-4BC9628D479C}</Project>
+      <Project>{7a5fad15-614c-4d5d-9daa-4bc9628d479c}</Project>
       <Name>sconnRem.Navigation</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\sconnRem.Shells\sconnRem.Shells.csproj">
-      <Project>{687f4d7b-3759-45d4-a8ec-1cb6bc0a8cc3}</Project>
-      <Name>sconnRem.Shells</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

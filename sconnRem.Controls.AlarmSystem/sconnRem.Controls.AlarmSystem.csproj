@@ -448,6 +448,10 @@
       <Project>{3D463251-18D3-451B-B06C-C4D655DD8A37}</Project>
       <Name>AlarmSystemManagmentService</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DeviceManagmentService\DeviceManagmentService.csproj">
+      <Project>{10b956be-068f-4fbb-9b1e-63c080b24019}</Project>
+      <Name>DeviceManagmentService</Name>
+    </ProjectReference>
     <ProjectReference Include="..\iotDatabaseConnector\iotDatabaseConnector.csproj">
       <Project>{7df5e6fa-5839-456f-959b-af4a7a742775}</Project>
       <Name>iotDatabaseConnector</Name>
@@ -475,6 +479,10 @@
     <ProjectReference Include="..\sconnRem.Navigation\sconnRem.Navigation.csproj">
       <Project>{7a5fad15-614c-4d5d-9daa-4bc9628d479c}</Project>
       <Name>sconnRem.Navigation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SiteListService\SconnSiteService.csproj">
+      <Project>{a2977b52-4cf1-4c09-aa07-e5e85f41c4f0}</Project>
+      <Name>SconnSiteService</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

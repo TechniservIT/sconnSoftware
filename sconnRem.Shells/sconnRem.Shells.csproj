@@ -81,6 +81,14 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AlarmSystemManagmentService\AlarmSystemManagmentService.csproj">
+      <Project>{3d463251-18d3-451b-b06c-c4d655dd8a37}</Project>
+      <Name>AlarmSystemManagmentService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DeviceManagmentService\DeviceManagmentService.csproj">
+      <Project>{10b956be-068f-4fbb-9b1e-63c080b24019}</Project>
+      <Name>DeviceManagmentService</Name>
+    </ProjectReference>
     <ProjectReference Include="..\iotDatabaseConnector\iotDatabaseConnector.csproj">
       <Project>{7df5e6fa-5839-456f-959b-af4a7a742775}</Project>
       <Name>iotDatabaseConnector</Name>
@@ -90,20 +98,24 @@
       <Name>iotData</Name>
     </ProjectReference>
     <ProjectReference Include="..\sconnConnector\sconnConnector.csproj">
-      <Project>{09C8A8F0-F85A-4534-922E-85E14EC32725}</Project>
+      <Project>{09c8a8f0-f85a-4534-922e-85e14ec32725}</Project>
       <Name>sconnConnector</Name>
     </ProjectReference>
     <ProjectReference Include="..\sconnPrismGenerics\sconnPrismGenerics.csproj">
-      <Project>{9C17810C-EFC7-4806-8414-6868DEABBCA0}</Project>
+      <Project>{9c17810c-efc7-4806-8414-6868deabbca0}</Project>
       <Name>sconnPrismGenerics</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\sconnPrismSharedContext\sconnPrismSharedContext.csproj">
+      <Project>{541885ad-53c0-41c4-b98f-c97815c5f168}</Project>
+      <Name>sconnPrismSharedContext</Name>
     </ProjectReference>
     <ProjectReference Include="..\sconnRem.Controls.AlarmSystem\sconnRem.Controls.AlarmSystem.csproj">
       <Project>{c567fe8b-3834-4ad8-aad4-71bdd36dded6}</Project>
       <Name>sconnRem.Controls.AlarmSystem</Name>
     </ProjectReference>
-    <ProjectReference Include="..\sconnRem.Navigation\sconnRem.Navigation.csproj">
-      <Project>{7a5fad15-614c-4d5d-9daa-4bc9628d479c}</Project>
-      <Name>sconnRem.Navigation</Name>
+    <ProjectReference Include="..\SurveillanceRecordingService\SconnRecordingService.csproj">
+      <Project>{f28b4734-87d8-4f4f-a81d-b39bce86efbe}</Project>
+      <Name>SconnRecordingService</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
