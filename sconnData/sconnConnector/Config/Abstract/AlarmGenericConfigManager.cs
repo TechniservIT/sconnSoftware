@@ -4,11 +4,11 @@ using System.Linq;
 using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
-using iotDbConnector.DAL;
 using NLog;
 using sconnConnector.POCO.Config;
 using sconnConnector.POCO.Config.Abstract.Auth;
 using sconnConnector.POCO.Config.sconn;
+using sconnConnector.POCO.Device;
 
 namespace sconnConnector.Config.Abstract
 {

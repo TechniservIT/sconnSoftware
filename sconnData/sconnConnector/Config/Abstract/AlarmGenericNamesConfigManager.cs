@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using iotDbConnector.DAL;
 using NLog;
 using sconnConnector.Config.Abstract;
 using sconnConnector.POCO.Config.sconn;
+using sconnConnector.POCO.Device;
 
 namespace sconnConnector.Config.Manager
 {

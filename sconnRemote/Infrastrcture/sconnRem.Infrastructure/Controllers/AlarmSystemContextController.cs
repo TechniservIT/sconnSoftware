@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
-using iotDbConnector.DAL;
 using Prism.Events;
 using Prism.Mef;
 using Prism.Regions;

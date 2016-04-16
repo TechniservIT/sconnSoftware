@@ -36,3 +36,13 @@ H:\Inf\PZPP\IoT\iotDash\AlarmSystemManagmentService\obj\Debug\AlarmSystemManagme
 H:\Inf\PZPP\IoT\iotDash\AlarmSystemManagmentService\obj\Debug\AlarmSystemManagmentService.dll
 H:\Inf\PZPP\IoT\iotDash\AlarmSystemManagmentService\obj\Debug\AlarmSystemManagmentService.pdb
 H:\Repo\Bucket\iotdashn\sconnService\AlarmSystemManagmentService\obj\Debug\AlarmSystemManagmentService.csprojResolveAssemblyReference.cache
+H:\Repo\Bucket\iotdashn\sconnService\AlarmSystemManagmentService\bin\Debug\NLog.config
+H:\Repo\Bucket\iotdashn\sconnService\AlarmSystemManagmentService\bin\Debug\AlarmSystemManagmentService.dll.config
+H:\Repo\Bucket\iotdashn\sconnService\AlarmSystemManagmentService\bin\Debug\AlarmSystemManagmentService.dll
+H:\Repo\Bucket\iotdashn\sconnService\AlarmSystemManagmentService\bin\Debug\AlarmSystemManagmentService.pdb
+H:\Repo\Bucket\iotdashn\sconnService\AlarmSystemManagmentService\bin\Debug\NLog.dll
+H:\Repo\Bucket\iotdashn\sconnService\AlarmSystemManagmentService\bin\Debug\sconnConnector.dll
+H:\Repo\Bucket\iotdashn\sconnService\AlarmSystemManagmentService\bin\Debug\sconnConnector.pdb
+H:\Repo\Bucket\iotdashn\sconnService\AlarmSystemManagmentService\bin\Debug\NLog.xml
+H:\Repo\Bucket\iotdashn\sconnService\AlarmSystemManagmentService\obj\Debug\AlarmSystemManagmentService.dll
+H:\Repo\Bucket\iotdashn\sconnService\AlarmSystemManagmentService\obj\Debug\AlarmSystemManagmentService.pdb

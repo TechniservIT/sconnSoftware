@@ -35,13 +35,14 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
-      <HintPath>..\packages\NLog.4.2.3\lib\net45\NLog.dll</HintPath>
+      <HintPath>..\..\sconnRemote\packages\NLog.4.3.0\lib\net45\NLog.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -103,6 +104,9 @@
     <Compile Include="POCO\Config\sconn\IO\Relay\sconnRelay.cs" />
     <Compile Include="POCO\Config\sconn\sconnSite.cs" />
     <Compile Include="POCO\Config\sconn\Zone\sconnAlarmZoneConfig.cs" />
+    <Compile Include="POCO\Device\Device.cs" />
+    <Compile Include="POCO\Device\DeviceCredentials.cs" />
+    <Compile Include="POCO\Device\EndpointInfo.cs" />
     <Compile Include="POCO\IFakeAbleConfiguration.cs" />
     <Compile Include="POCO\ISerializableConfiguration.cs" />
     <Compile Include="POCO\sconnDataShare.cs" />
@@ -110,18 +114,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\iotDatabaseConnector\iotDatabaseConnector.csproj">
-      <Project>{7df5e6fa-5839-456f-959b-af4a7a742775}</Project>
-      <Name>iotDatabaseConnector</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\iotData\iotData.csproj">
-      <Project>{e94b0a02-089e-483a-aaef-3bfa49039598}</Project>
-      <Name>iotData</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="app.config" />
-    <None Include="NLog.config" />
+    <Content Include="NLog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>

@@ -1,5 +1,4 @@
-﻿using iotDbConnector.DAL;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
@@ -7,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using sconnConnector.POCO.Config;
 using sconnConnector.POCO.Config.sconn;
+using sconnConnector.POCO.Device;
 
 namespace sconnConnector.Config
 {

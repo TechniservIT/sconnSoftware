@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using NLog;
 using sconnConnector.POCO.Config.Abstract.IO;
 using sconnConnector.POCO.Config.sconn;
-using iotDbConnector.DAL;
 
 namespace sconnConnector.POCO.Config
 {

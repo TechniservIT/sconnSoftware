@@ -90,6 +90,8 @@ H:\Repo\Bucket\iotdashn\sconnRemote\Presentation\sconnRem.Controls.Navigation\ob
 H:\Repo\Bucket\iotdashn\sconnRemote\Presentation\sconnRem.Controls.Navigation\obj\Debug\View\Menu\ContextToolbar\Global\GlobalToolbarView.g.cs
 H:\Repo\Bucket\iotdashn\sconnRemote\Presentation\sconnRem.Controls.Navigation\obj\Debug\View\Menu\GridNavSideMenu\GridNavSideMenuView.g.cs
 H:\Repo\Bucket\iotdashn\sconnRemote\Presentation\sconnRem.Controls.Navigation\obj\Debug\View\Menu\SiteNavSideMenu\SiteNavMenuViewItem.g.cs
+H:\Repo\Bucket\iotdashn\sconnRemote\Presentation\sconnRem.Controls.Navigation\obj\Debug\View\Menu\SiteNavSideMenu\SiteNavSideMenuView.g.cs
+H:\Repo\Bucket\iotdashn\sconnRemote\Presentation\sconnRem.Controls.Navigation\obj\Debug\View\Menu\ToolTopMenu\ToolTopMenuView.g.cs
 H:\Repo\Bucket\iotdashn\sconnRemote\Presentation\sconnRem.Controls.Navigation\obj\Debug\GeneratedInternalTypeHelper.g.cs
 H:\Repo\Bucket\iotdashn\sconnRemote\Presentation\sconnRem.Controls.Navigation\obj\Debug\sconnRem.Controls.Navigation_MarkupCompile.cache
 H:\Repo\Bucket\iotdashn\sconnRemote\Presentation\sconnRem.Controls.Navigation\obj\Debug\sconnRem.Controls.Navigation_MarkupCompile.lref

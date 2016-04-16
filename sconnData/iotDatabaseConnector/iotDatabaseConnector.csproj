@@ -41,60 +41,79 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CoAP.NET">
-      <HintPath>..\packages\CoAP.0.18\lib\net40\CoAP.NET.dll</HintPath>
+      <HintPath>..\..\sconnRemote\packages\CoAP.0.18\lib\net40\CoAP.NET.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="CoAP.NET-03">
+      <HintPath>..\..\sconnRemote\packages\CoAP.0.18\lib\net40\CoAP.NET-03.dll</HintPath>
+    </Reference>
+    <Reference Include="CoAP.NET-08">
+      <HintPath>..\..\sconnRemote\packages\CoAP.0.18\lib\net40\CoAP.NET-08.dll</HintPath>
+    </Reference>
+    <Reference Include="CoAP.NET-13">
+      <HintPath>..\..\sconnRemote\packages\CoAP.0.18\lib\net40\CoAP.NET-13.dll</HintPath>
+    </Reference>
+    <Reference Include="CoAP.NET-18">
+      <HintPath>..\..\sconnRemote\packages\CoAP.0.18\lib\net40\CoAP.NET-18.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\..\sconnRemote\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\..\sconnRemote\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="M2Mqtt">
-      <HintPath>..\packages\M2Mqtt.4.0\lib\net45\M2Mqtt.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
-      <HintPath>..\packages\NLog.4.2.3\lib\net45\NLog.dll</HintPath>
+      <HintPath>..\..\sconnRemote\packages\M2Mqtt.4.0\lib\net45\M2Mqtt.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Raven.Abstractions, Version=3.0.0.0, Culture=neutral, PublicKeyToken=37f41c7f99471593, processorArchitecture=MSIL">
-      <HintPath>..\packages\RavenDB.Database.3.0.3697-Unstable\lib\net45\Raven.Abstractions.dll</HintPath>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\sconnRemote\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Raven.Client.Lightweight, Version=3.0.0.0, Culture=neutral, PublicKeyToken=37f41c7f99471593, processorArchitecture=MSIL">
-      <HintPath>..\packages\RavenDB.Client.3.0.3697-Unstable\lib\net45\Raven.Client.Lightweight.dll</HintPath>
+    <Reference Include="NLog">
+      <HintPath>..\..\sconnRemote\packages\NLog.4.2.3\lib\net45\NLog.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Raven.Database, Version=3.0.0.0, Culture=neutral, PublicKeyToken=37f41c7f99471593, processorArchitecture=MSIL">
-      <HintPath>..\packages\RavenDB.Database.3.0.3697-Unstable\lib\net45\Raven.Database.dll</HintPath>
+    <Reference Include="Raven.Abstractions">
+      <HintPath>..\..\sconnRemote\packages\RavenDB.Database.3.0.3697-Unstable\lib\net45\Raven.Abstractions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Raven.Client.Lightweight">
+      <HintPath>..\..\sconnRemote\packages\RavenDB.Client.3.0.3697-Unstable\lib\net45\Raven.Client.Lightweight.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Raven.Database">
+      <HintPath>..\..\sconnRemote\packages\RavenDB.Database.3.0.3697-Unstable\lib\net45\Raven.Database.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="StackExchange.Redis">
-      <HintPath>..\packages\StackExchange.Redis.1.0.450\lib\net45\StackExchange.Redis.dll</HintPath>
+      <HintPath>..\..\sconnRemote\packages\StackExchange.Redis.1.0.450\lib\net45\StackExchange.Redis.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="StackExchange.Redis.Extensions.Core">
-      <HintPath>..\packages\StackExchange.Redis.Extensions.Core.1.1.11.0\lib\net45\StackExchange.Redis.Extensions.Core.dll</HintPath>
+      <HintPath>..\..\sconnRemote\packages\StackExchange.Redis.Extensions.Core.1.1.11.0\lib\net45\StackExchange.Redis.Extensions.Core.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="StackExchange.Redis.Extensions.Newtonsoft">
-      <HintPath>..\packages\StackExchange.Redis.Extensions.Newtonsoft.1.1.8.0\lib\net45\StackExchange.Redis.Extensions.Newtonsoft.dll</HintPath>
+      <HintPath>..\..\sconnRemote\packages\StackExchange.Redis.Extensions.Newtonsoft.1.1.8.0\lib\net45\StackExchange.Redis.Extensions.Newtonsoft.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data.SQLite, Version=1.0.97.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Data.SQLite.Core.1.0.97.0\lib\net45\System.Data.SQLite.dll</HintPath>
+    <Reference Include="System.Data.SQLite">
+      <HintPath>..\..\sconnRemote\packages\System.Data.SQLite.Core.1.0.97.0\lib\net45\System.Data.SQLite.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="System.Data.SQLite.EF6, Version=1.0.97.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Data.SQLite.EF6.1.0.97.0\lib\net45\System.Data.SQLite.EF6.dll</HintPath>
+    <Reference Include="System.Data.SQLite.EF6">
+      <HintPath>..\..\sconnRemote\packages\System.Data.SQLite.EF6.1.0.97.0\lib\net45\System.Data.SQLite.EF6.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="System.Data.SQLite.Linq, Version=1.0.97.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Data.SQLite.Linq.1.0.97.0\lib\net45\System.Data.SQLite.Linq.dll</HintPath>
+    <Reference Include="System.Data.SQLite.Linq">
+      <HintPath>..\..\sconnRemote\packages\System.Data.SQLite.Linq.1.0.97.0\lib\net45\System.Data.SQLite.Linq.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Runtime.Remoting" />
@@ -220,7 +239,9 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\System.Data.SQLite.Core.1.0.97.0\build\net45\System.Data.SQLite.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\System.Data.SQLite.Core.1.0.97.0\build\net45\System.Data.SQLite.Core.targets'))" />
+    <Error Condition="!Exists('..\..\sconnRemote\packages\System.Data.SQLite.Core.1.0.97.0\build\net45\System.Data.SQLite.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\sconnRemote\packages\System.Data.SQLite.Core.1.0.97.0\build\net45\System.Data.SQLite.Core.targets'))" />
   </Target>
+  <Import Project="..\..\sconnRemote\packages\System.Data.SQLite.Core.1.0.97.0\build\net45\System.Data.SQLite.Core.targets" Condition="Exists('..\..\sconnRemote\packages\System.Data.SQLite.Core.1.0.97.0\build\net45\System.Data.SQLite.Core.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

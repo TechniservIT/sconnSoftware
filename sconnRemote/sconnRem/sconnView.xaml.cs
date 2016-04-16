@@ -24,7 +24,6 @@ using sconnRem.Properties;
 using sconnConnector;
 using sconnConnector.POCO.Config;
 using sconnConnector.Config;
-using iotDbConnector.DAL;
 using Microsoft.Practices.Unity;
 
 namespace sconnRem

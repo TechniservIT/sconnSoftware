@@ -5,10 +5,41 @@ using System.Text;
 using System.Threading.Tasks;
 using NLog;
 using sconnConnector.POCO.Config.sconn;
-using iotDbConnector.DAL;
 
 namespace sconnConnector.POCO.Config
 {
+
+    public enum DeviceCategory
+    {
+        GenericInputOutput = 1,
+        AlarmSystem,
+        IpCamera,
+        Vehicle,
+        Thermostat,
+        Sensor,
+        CommunicationModule,
+        SpectrumAnalyser,
+        Oscilloscope,
+        Speaker,
+        Servo,
+        ThreePhaseMotor,
+        Actuator,
+        GpsTracked
+    }
+
+
+    public enum DeviceIoCategory
+    {
+        CmosInputs = 1,
+        CmosOutput,
+        Temperature,
+        Humidity,
+        PowerOutput,
+        AnalogInput,
+        Relay
+    }
+
+
 
 
 

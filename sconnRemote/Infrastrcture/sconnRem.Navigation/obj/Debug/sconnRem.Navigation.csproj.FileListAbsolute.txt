@@ -32,6 +32,5 @@ H:\Inf\PZPP\IoT\iotDash\sconnRem.Navigation\obj\Debug\sconnRem.Navigation.dll
 H:\Inf\PZPP\IoT\iotDash\sconnRem.Navigation\obj\Debug\sconnRem.Navigation.pdb
 H:\Repo\Bucket\iotdashn\sconnRemote\Infrastrcture\sconnRem.Navigation\bin\Debug\sconnRem.Navigation.dll
 H:\Repo\Bucket\iotdashn\sconnRemote\Infrastrcture\sconnRem.Navigation\bin\Debug\sconnRem.Navigation.pdb
-H:\Repo\Bucket\iotdashn\sconnRemote\Infrastrcture\sconnRem.Navigation\obj\Debug\sconnRem.Navigation.csprojResolveAssemblyReference.cache
 H:\Repo\Bucket\iotdashn\sconnRemote\Infrastrcture\sconnRem.Navigation\obj\Debug\sconnRem.Navigation.dll
 H:\Repo\Bucket\iotdashn\sconnRemote\Infrastrcture\sconnRem.Navigation\obj\Debug\sconnRem.Navigation.pdb

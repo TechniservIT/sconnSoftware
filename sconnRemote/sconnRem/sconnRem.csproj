@@ -173,6 +173,8 @@
     <Compile Include="Controls\MainView\SiteView.cs" />
     <Compile Include="Controls\SiteConfig\SitePanel\statusViewPanel.cs" />
     <Compile Include="Controls\MainView\ViewSiteLoading.cs" />
+    <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\Setting\wndAppSettings.xaml.cs">
       <DependentUpon>wndAppSettings.xaml</DependentUpon>
     </Compile>
@@ -351,7 +353,9 @@
     <Resource Include="images\tmp.png" />
     <Resource Include="images\water.png" />
     <Resource Include="images\waves.png" />
-    <None Include="NLog.config" />
+    <Content Include="NLog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -384,26 +388,6 @@
     <ProjectReference Include="..\..\sconnService\AlarmSystemManagmentService\AlarmSystemManagmentService.csproj">
       <Project>{3d463251-18d3-451b-b06c-c4d655dd8a37}</Project>
       <Name>AlarmSystemManagmentService</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DeviceManagmentService\DeviceManagmentService.csproj">
-      <Project>{10b956be-068f-4fbb-9b1e-63c080b24019}</Project>
-      <Name>DeviceManagmentService</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\iotDatabaseConnector\iotDatabaseConnector.csproj">
-      <Project>{7df5e6fa-5839-456f-959b-af4a7a742775}</Project>
-      <Name>iotDatabaseConnector</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\iotData\iotData.csproj">
-      <Project>{e94b0a02-089e-483a-aaef-3bfa49039598}</Project>
-      <Name>iotData</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\iotDomainDataAccessService\iotDomainDataAccessService.csproj">
-      <Project>{a73e1e91-a18c-48bd-bda8-931d429b7966}</Project>
-      <Name>iotDomainDataAccessService</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\IotServiceAbstract\IotServiceAbstract.csproj">
-      <Project>{dc1fbe1d-13b6-4dd2-91e2-7ffe2f909cc5}</Project>
-      <Name>IotServiceAbstract</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\sconnData\sconnConnector\sconnConnector.csproj">
       <Project>{09c8a8f0-f85a-4534-922e-85e14ec32725}</Project>
@@ -440,10 +424,6 @@
     <ProjectReference Include="..\Presentation\sconnRem.Shells\sconnRem.Shells.csproj">
       <Project>{687f4d7b-3759-45d4-a8ec-1cb6bc0a8cc3}</Project>
       <Name>sconnRem.Shells</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SiteManagmentService\SiteManagmentService.csproj">
-      <Project>{cc9fb92a-c1d9-400a-bd9b-d814280a118e}</Project>
-      <Name>SiteManagmentService</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

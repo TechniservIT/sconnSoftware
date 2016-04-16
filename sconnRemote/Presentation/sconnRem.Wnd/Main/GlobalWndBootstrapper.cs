@@ -14,7 +14,7 @@ using Prism.Modularity;
 using Prism.Regions;
 using sconnConnector;
 using sconnConnector.Config;
-using sconnRem.Logging;
+using sconnPrismGenerics.Logging;
 using sconnRem.View.Menu.GridNavSideMenu;
 using sconnRem.View.Menu.SiteNavSideMenu;
 using sconnRem.View.Menu.ToolTopMenu;

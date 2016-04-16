@@ -9,6 +9,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Prism.Interactivity;
+using Prism.Interactivity.InteractionRequest;
+using Prism.Mvvm;
+using Prism.Regions;
+using Prism.Regions.Behaviors;
 using System;
 using System.Diagnostics;
 using System.Windows;

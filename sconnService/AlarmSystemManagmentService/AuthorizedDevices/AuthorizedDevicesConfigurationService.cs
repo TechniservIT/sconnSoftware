@@ -3,13 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using iotDatabaseConnector.DAL.Repository.Connector.Entity;
 using sconnConnector.Config;
 using sconnConnector.POCO.Config;
 using sconnConnector.POCO.Config.Abstract;
 using sconnConnector.POCO.Config.sconn;
 using AlarmSystemManagmentService;
-using iotDbConnector.DAL;
 using NLog;
 using sconnConnector.Config.Abstract;
 

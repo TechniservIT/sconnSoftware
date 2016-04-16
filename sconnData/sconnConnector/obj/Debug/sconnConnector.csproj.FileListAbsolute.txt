@@ -39,4 +39,11 @@ H:\Inf\PZPP\IoT\iotDash\sconnConnector\bin\Debug\Newtonsoft.Json.xml
 H:\Inf\PZPP\IoT\iotDash\sconnConnector\obj\Debug\sconnConnector.csprojResolveAssemblyReference.cache
 H:\Inf\PZPP\IoT\iotDash\sconnConnector\obj\Debug\sconnConnector.dll
 H:\Inf\PZPP\IoT\iotDash\sconnConnector\obj\Debug\sconnConnector.pdb
-H:\Repo\Bucket\iotdashn\sconnData\sconnConnector\obj\Debug\sconnConnector.csprojResolveAssemblyReference.cache
+H:\Repo\Bucket\iotdashn\sconnData\sconnConnector\bin\Debug\NLog.config
+H:\Repo\Bucket\iotdashn\sconnData\sconnConnector\bin\Debug\sconnConnector.dll.config
+H:\Repo\Bucket\iotdashn\sconnData\sconnConnector\bin\Debug\sconnConnector.dll
+H:\Repo\Bucket\iotdashn\sconnData\sconnConnector\bin\Debug\sconnConnector.pdb
+H:\Repo\Bucket\iotdashn\sconnData\sconnConnector\bin\Debug\NLog.dll
+H:\Repo\Bucket\iotdashn\sconnData\sconnConnector\bin\Debug\NLog.xml
+H:\Repo\Bucket\iotdashn\sconnData\sconnConnector\obj\Debug\sconnConnector.dll
+H:\Repo\Bucket\iotdashn\sconnData\sconnConnector\obj\Debug\sconnConnector.pdb

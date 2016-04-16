@@ -11,4 +11,13 @@ H:\Inf\PZPP\IoT\iotDash\sconnPrismSharedContext\bin\Debug\iotData.pdb
 H:\Inf\PZPP\IoT\iotDash\sconnPrismSharedContext\obj\Debug\sconnPrismSharedContext.csprojResolveAssemblyReference.cache
 H:\Inf\PZPP\IoT\iotDash\sconnPrismSharedContext\obj\Debug\sconnPrismSharedContext.dll
 H:\Inf\PZPP\IoT\iotDash\sconnPrismSharedContext\obj\Debug\sconnPrismSharedContext.pdb
+H:\Repo\Bucket\iotdashn\sconnRemote\Infrastrcture\sconnPrismSharedContext\bin\Debug\NLog.config
+H:\Repo\Bucket\iotdashn\sconnRemote\Infrastrcture\sconnPrismSharedContext\bin\Debug\sconnPrismSharedContext.dll
+H:\Repo\Bucket\iotdashn\sconnRemote\Infrastrcture\sconnPrismSharedContext\bin\Debug\sconnPrismSharedContext.pdb
+H:\Repo\Bucket\iotdashn\sconnRemote\Infrastrcture\sconnPrismSharedContext\bin\Debug\sconnConnector.dll
+H:\Repo\Bucket\iotdashn\sconnRemote\Infrastrcture\sconnPrismSharedContext\bin\Debug\NLog.dll
+H:\Repo\Bucket\iotdashn\sconnRemote\Infrastrcture\sconnPrismSharedContext\bin\Debug\sconnConnector.pdb
+H:\Repo\Bucket\iotdashn\sconnRemote\Infrastrcture\sconnPrismSharedContext\bin\Debug\NLog.xml
 H:\Repo\Bucket\iotdashn\sconnRemote\Infrastrcture\sconnPrismSharedContext\obj\Debug\sconnPrismSharedContext.csprojResolveAssemblyReference.cache
+H:\Repo\Bucket\iotdashn\sconnRemote\Infrastrcture\sconnPrismSharedContext\obj\Debug\sconnPrismSharedContext.dll
+H:\Repo\Bucket\iotdashn\sconnRemote\Infrastrcture\sconnPrismSharedContext\obj\Debug\sconnPrismSharedContext.pdb

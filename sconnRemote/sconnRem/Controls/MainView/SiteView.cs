@@ -19,10 +19,10 @@ using System.Windows.Shapes;
 using System.Threading;
 using System.Xml.Linq;
 using System.Xml;
-using iotDbConnector.DAL;
 using sconnConnector;
 using sconnConnector.Config;
 using sconnConnector.POCO.Config;
+using sconnConnector.POCO.Device;
 using sconnRem.View.Config;
 
 namespace sconnRem

@@ -147,7 +147,6 @@ H:\Inf\PZPP\IoT\iotDash\sconnRem\bin\Debug\sconnRem.Shells.dll
 H:\Inf\PZPP\IoT\iotDash\sconnRem\bin\Debug\sconnRem.Shells.pdb
 H:\Inf\PZPP\IoT\iotDash\sconnRem\bin\Debug\sconnPrismSharedContext.dll
 H:\Inf\PZPP\IoT\iotDash\sconnRem\bin\Debug\sconnPrismSharedContext.pdb
-H:\Repo\Bucket\iotdashn\sconnRemote\sconnRem\bin\Debug\sconnRem.exe.config
 H:\Repo\Bucket\iotdashn\sconnRemote\sconnRem\obj\Debug\sconnRem.csprojResolveAssemblyReference.cache
 H:\Repo\Bucket\iotdashn\sconnRemote\sconnRem\obj\Debug\Controls\Common\InfoTipToggleButton.baml
 H:\Repo\Bucket\iotdashn\sconnRemote\sconnRem\obj\Debug\Controls\SiteConfig\NetworkSetup\DeviceNetworkConfig.baml
@@ -183,5 +182,7 @@ H:\Repo\Bucket\iotdashn\sconnRemote\sconnRem\obj\Debug\Wnd\Tools\sconnSiteManage
 H:\Repo\Bucket\iotdashn\sconnRemote\sconnRem\obj\Debug\Wnd\Tools\userManager.g.cs
 H:\Repo\Bucket\iotdashn\sconnRemote\sconnRem\obj\Debug\Wnd\Tools\WndEditScheduleAction.g.cs
 H:\Repo\Bucket\iotdashn\sconnRemote\sconnRem\obj\Debug\App.g.cs
+H:\Repo\Bucket\iotdashn\sconnRemote\sconnRem\obj\Debug\sconnRem_Content.g.cs
+H:\Repo\Bucket\iotdashn\sconnRemote\sconnRem\obj\Debug\GeneratedInternalTypeHelper.g.cs
 H:\Repo\Bucket\iotdashn\sconnRemote\sconnRem\obj\Debug\sconnRem_MarkupCompile.cache
 H:\Repo\Bucket\iotdashn\sconnRemote\sconnRem\obj\Debug\sconnRem_MarkupCompile.lref

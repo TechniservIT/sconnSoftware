@@ -1,7 +1,6 @@
 ﻿using Prism.Logging;
 using Prism.Mef;
 using Prism.Modularity;
-using sconnRem.Logging;
 using sconnRem.Wnd.Config;
 using System;
 using System.Collections.Generic;
@@ -13,6 +12,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using NLog;
 using sconnConnector.Config;
+using sconnPrismGenerics.Logging;
 using sconnRem.Wnd.Main;
 
 namespace sconnRem.Wnd.Config
