@@ -1,5 +1,0 @@
-H:\Inf\PZPP\IoT\iotDash\iotFastDatabase\bin\Debug\iotFastDatabase.dll
-H:\Inf\PZPP\IoT\iotDash\iotFastDatabase\bin\Debug\iotFastDatabase.pdb
-H:\Inf\PZPP\IoT\iotDash\iotFastDatabase\obj\Debug\iotFastDatabase.csprojResolveAssemblyReference.cache
-H:\Inf\PZPP\IoT\iotDash\iotFastDatabase\obj\Debug\iotFastDatabase.dll
-H:\Inf\PZPP\IoT\iotDash\iotFastDatabase\obj\Debug\iotFastDatabase.pdb

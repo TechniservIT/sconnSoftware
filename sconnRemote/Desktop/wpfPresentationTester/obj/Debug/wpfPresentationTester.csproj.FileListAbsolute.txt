@@ -1,7 +1,0 @@
-H:\Inf\PZPP\IoT\iotDash\wpfPresentationTester\bin\Debug\wpfPresentationTester.dll
-H:\Inf\PZPP\IoT\iotDash\wpfPresentationTester\bin\Debug\wpfPresentationTester.pdb
-H:\Inf\PZPP\IoT\iotDash\wpfPresentationTester\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
-H:\Inf\PZPP\IoT\iotDash\wpfPresentationTester\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.xml
-H:\Inf\PZPP\IoT\iotDash\wpfPresentationTester\obj\Debug\wpfPresentationTester.dll
-H:\Inf\PZPP\IoT\iotDash\wpfPresentationTester\obj\Debug\wpfPresentationTester.pdb
-H:\Inf\PZPP\IoT\iotDash\wpfPresentationTester\obj\Debug\wpfPresentationTester.csprojResolveAssemblyReference.cache

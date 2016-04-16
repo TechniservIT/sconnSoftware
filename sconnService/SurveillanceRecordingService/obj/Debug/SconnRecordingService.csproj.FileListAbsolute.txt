@@ -1,6 +1,0 @@
-H:\Inf\PZPP\IoT\iotDash\SurveillanceRecordingService\bin\Debug\SurveillanceRecordingService.exe.config
-H:\Inf\PZPP\IoT\iotDash\SurveillanceRecordingService\bin\Debug\SurveillanceRecordingService.exe
-H:\Inf\PZPP\IoT\iotDash\SurveillanceRecordingService\bin\Debug\SurveillanceRecordingService.pdb
-H:\Inf\PZPP\IoT\iotDash\SurveillanceRecordingService\obj\Debug\SconnRecordingService.csprojResolveAssemblyReference.cache
-H:\Inf\PZPP\IoT\iotDash\SurveillanceRecordingService\obj\Debug\SurveillanceRecordingService.exe
-H:\Inf\PZPP\IoT\iotDash\SurveillanceRecordingService\obj\Debug\SurveillanceRecordingService.pdb

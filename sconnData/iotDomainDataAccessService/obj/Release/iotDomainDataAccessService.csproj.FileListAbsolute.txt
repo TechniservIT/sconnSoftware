@@ -1,5 +1,0 @@
-H:\Inf\PZPP\IoT\iotDash\iotDomainDataAccessService\bin\Release\iotDomainDataAccessService.dll
-H:\Inf\PZPP\IoT\iotDash\iotDomainDataAccessService\bin\Release\iotDomainDataAccessService.pdb
-H:\Inf\PZPP\IoT\iotDash\iotDomainDataAccessService\obj\Release\iotDomainDataAccessService.dll
-H:\Inf\PZPP\IoT\iotDash\iotDomainDataAccessService\obj\Release\iotDomainDataAccessService.pdb
-H:\Inf\PZPP\IoT\iotDash\iotDomainDataAccessService\obj\Release\iotDomainDataAccessService.csprojResolveAssemblyReference.cache

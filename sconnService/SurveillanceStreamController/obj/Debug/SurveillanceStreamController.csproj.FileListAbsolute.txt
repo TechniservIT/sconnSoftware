@@ -1,4 +1,0 @@
-H:\Inf\PZPP\IoT\iotDash\SurveillanceStreamController\bin\Debug\SurveillanceStreamController.dll
-H:\Inf\PZPP\IoT\iotDash\SurveillanceStreamController\bin\Debug\SurveillanceStreamController.pdb
-H:\Inf\PZPP\IoT\iotDash\SurveillanceStreamController\obj\Debug\SurveillanceStreamController.dll
-H:\Inf\PZPP\IoT\iotDash\SurveillanceStreamController\obj\Debug\SurveillanceStreamController.pdb

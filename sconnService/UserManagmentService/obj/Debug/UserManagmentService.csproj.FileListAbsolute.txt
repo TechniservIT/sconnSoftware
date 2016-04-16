@@ -1,4 +1,0 @@
-H:\Inf\PZPP\IoT\iotDash\UserManagmentService\bin\Debug\UserManagmentService.dll
-H:\Inf\PZPP\IoT\iotDash\UserManagmentService\bin\Debug\UserManagmentService.pdb
-H:\Inf\PZPP\IoT\iotDash\UserManagmentService\obj\Debug\UserManagmentService.dll
-H:\Inf\PZPP\IoT\iotDash\UserManagmentService\obj\Debug\UserManagmentService.pdb
