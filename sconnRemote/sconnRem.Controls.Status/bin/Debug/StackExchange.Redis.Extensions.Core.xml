@@ -1,0 +1,868 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>StackExchange.Redis.Extensions.Core</name>
+    </assembly>
+    <members>
+        <member name="T:StackExchange.Redis.Extensions.Core.Configuration.IRedisCachingConfiguration">
+            <summary>
+            Handle Redis Configuration
+            </summary>
+        </member>
+        <member name="P:StackExchange.Redis.Extensions.Core.Configuration.IRedisCachingConfiguration.RedisHosts">
+            <summary>
+            The host of Redis Server
+            </summary>
+            <value>
+            The ip or name
+            </value>
+        </member>
+        <member name="P:StackExchange.Redis.Extensions.Core.Configuration.IRedisCachingConfiguration.AllowAdmin">
+            <summary>
+            Specify if the connection can use Admin commands like flush database
+            </summary>
+            <value>
+              <c>true</c> if can use admin commands; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:StackExchange.Redis.Extensions.Core.Configuration.IRedisCachingConfiguration.Ssl">
+            <summary>
+            Specify if the connection is a secure connection or not.
+            </summary>
+            <value>
+              <c>true</c> if is secure; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:StackExchange.Redis.Extensions.Core.Configuration.IRedisCachingConfiguration.ConnectTimeout">
+            <summary>
+            The connection timeout
+            </summary>
+        </member>
+        <member name="P:StackExchange.Redis.Extensions.Core.Configuration.IRedisCachingConfiguration.Database">
+            <summary>
+            Database Id
+            </summary>
+            <value>
+            The database id, the default value is 0
+            </value>
+        </member>
+        <member name="P:StackExchange.Redis.Extensions.Core.Configuration.IRedisCachingConfiguration.Password">
+            <summary>
+            The password or access key
+            </summary>
+        </member>
+        <member name="T:StackExchange.Redis.Extensions.Core.Configuration.RedisCachingSectionHandler">
+            <summary>
+            The implementation of <see cref="T:StackExchange.Redis.Extensions.Core.Configuration.IRedisCachingConfiguration"/>
+            </summary>
+        </member>
+        <member name="M:StackExchange.Redis.Extensions.Core.Configuration.RedisCachingSectionHandler.GetConfig">
+            <summary>
+            Gets the configuration.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:StackExchange.Redis.Extensions.Core.Configuration.RedisCachingSectionHandler.RedisHosts">
+            <summary>
+            The host of Redis Server
+            </summary>
+            <value>
+            The ip or name
+            </value>
+        </member>
+        <member name="P:StackExchange.Redis.Extensions.Core.Configuration.RedisCachingSectionHandler.AllowAdmin">
+            <summary>
+            Specify if the connection can use Admin commands like flush database
+            </summary>
+            <value>
+              <c>true</c> if can use admin commands; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:StackExchange.Redis.Extensions.Core.Configuration.RedisCachingSectionHandler.Ssl">
+            <summary>
+            Specify if the connection is a secure connection or not.
+            </summary>
+            <value>
+              <c>true</c> if is secure; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:StackExchange.Redis.Extensions.Core.Configuration.RedisCachingSectionHandler.ConnectTimeout">
+            <summary>
+            The connection timeout
+            </summary>
+        </member>
+        <member name="P:StackExchange.Redis.Extensions.Core.Configuration.RedisCachingSectionHandler.Database">
+            <summary>
+            Database Id
+            </summary>
+            <value>
+            The database id, the default value is 0
+            </value>
+        </member>
+        <member name="P:StackExchange.Redis.Extensions.Core.Configuration.RedisCachingSectionHandler.Password">
+            <summary>
+            The password or access key
+            </summary>
+        </member>
+        <member name="T:StackExchange.Redis.Extensions.Core.StackExchangeRedisCacheClient">
+            <summary>
+            The implementation of <see cref="T:StackExchange.Redis.Extensions.Core.ICacheClient"/>
+            </summary>
+        </member>
+        <member name="M:StackExchange.Redis.Extensions.Core.ICacheClient.Exists(System.String)">
+            <summary>
+            Verify that the specified cache key exists
+            </summary>
+            <param name="key">The cache key.</param>
+            <returns>True if the key is present into Redis. Othwerwise False</returns>
+        </member>
+        <member name="M:StackExchange.Redis.Extensions.Core.ICacheClient.ExistsAsync(System.String)">
+            <summary>
+            Verify that the specified cache key exists
+            </summary>
+            <param name="key">The cache key.</param>
+            <returns>True if the key is present into Redis. Othwerwise False</returns>
+        </member>
+        <member name="M:StackExchange.Redis.Extensions.Core.ICacheClient.Remove(System.String)">
+            <summary>
+            Removes the specified key from Redis Database
+            </summary>
+            <param name="key">The key.</param>
+            <returns>True if the key has removed. Othwerwise False</returns>
+        </member>
+        <member name="M:StackExchange.Redis.Extensions.Core.ICacheClient.RemoveAsync(System.String)">
+            <summary>
+            Removes the specified key from Redis Database
+            </summary>
+            <param name="key">The key.</param>
+            <returns>True if the key has removed. Othwerwise False</returns>
+        </member>
+        <member name="M:StackExchange.Redis.Extensions.Core.ICacheClient.RemoveAll(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Removes all specified keys from Redis Database
+            </summary>
+            <param name="keys">The key.</param>
+        </member>
+        <member name="M:StackExchange.Redis.Extensions.Core.ICacheClient.RemoveAllAsync(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Removes all specified keys from Redis Database
+            </summary>
+            <param name="keys">The key.</param>
+        </member>
+        <member name="M:StackExchange.Redis.Extensions.Core.ICacheClient.Get``1(System.String)">
+            <summary>
+            Get the object with the specified key from Redis database
+            </summary>
+            <typeparam name="T">The type of the expected object</typeparam>
+            <param name="key">The cache key.</param>
+            <returns>Null if not present, otherwise the instance of T.</returns>
+        </member>
+        <member name="M:StackExchange.Redis.Extensions.Core.ICacheClient.GetAsync``1(System.String)">
+            <summary>
+            Get the object with the specified key from Redis database
+            </summary>
+            <typeparam name="T">The type of the expected object</typeparam>
+            <param name="key">The cache key.</param>
+            <returns>Null if not present, otherwise the instance of T.</returns>
+        </member>
+        <member name="M:StackExchange.Redis.Extensions.Core.ICacheClient.Add``1(System.String,``0)">
+            <summary>
+            Adds the specified instance to the Redis database.
+            </summary>
+            <typeparam name="T">The type of the class to add to Redis</typeparam>
+            <param name="key">The cache key.</param>
+            <param name="value">The instance of T.</param>
+            <returns>True if the object has been added. Otherwise false</returns>
+        </member>
+        <member name="M:StackExchange.Redis.Extensions.Core.ICacheClient.AddAsync``1(System.String,``0)">
+            <summary>
+            Adds the specified instance to the Redis database.
+            </summary>
+            <typeparam name="T">The type of the class to add to Redis</typeparam>
+            <param name="key">The cache key.</param>
+            <param name="value">The instance of T.</param>
+            <returns>True if the object has been added. Otherwise false</returns>
+        </member>
+        <member name="M:StackExchange.Redis.Extensions.Core.ICacheClient.Replace``1(System.String,``0)">
+            <summary>
+            Replaces the object with specified key into Redis database.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key">The key.</param>
+            <param name="value">The instance of T</param>
+            <returns>
+            True if the object has been added. Otherwise false
+            </returns>
+        </member>
+        <member name="M:StackExchange.Redis.Extensions.Core.ICacheClient.ReplaceAsync``1(System.String,``0)">
+            <summary>
+            Replaces the object with specified key into Redis database.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key">The key.</param>
+            <param name="value">The instance of T</param>
+            <returns>
+            True if the object has been added. Otherwise false
+            </returns>
+        </member>
+        <member name="M:StackExchange.Redis.Extensions.Core.ICacheClient.Add``1(System.String,``0,System.DateTimeOffset)">
+            <summary>
+            Adds the specified instance to the Redis database.
+            </summary>
+            <typeparam name="T">The type of the class to add to Redis</typeparam>
+            <param name="key">The cache key.</param>
+            <param name="value">The instance of T.</param>
+            <param name="expiresAt">Expiration time.</param>
+            <returns>
+            True if the object has been added. Otherwise false
+            </returns>
+        </member>
+        <member name="M:StackExchange.Redis.Extensions.Core.ICacheClient.AddAsync``1(System.String,``0,System.DateTimeOffset)">
+            <summary>
+            Adds the specified instance to the Redis database.
+            </summary>
+            <typeparam name="T">The type of the class to add to Redis</typeparam>
+            <param name="key">The cache key.</param>
+            <param name="value">The instance of T.</param>
+            <param name="expiresAt">Expiration time.</param>
+            <returns>
+            True if the object has been added. Otherwise false
+            </returns>
+        </member>
+        <member name="M:StackExchange.Redis.Extensions.Core.ICacheClient.Replace``1(System.String,``0,System.DateTimeOffset)">
+            <summary>
+            Replaces the object with specified key into Redis database.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key">The key.</param>
+            <param name="value">The instance of T</param>
+            <param name="expiresAt">Expiration time.</param>
+            <returns>
+            True if the object has been added. Otherwise false
+            </returns>
+        </member>
+        <member name="M:StackExchange.Redis.Extensions.Core.ICacheClient.ReplaceAsync``1(System.String,``0,System.DateTimeOffset)">
+            <summary>
+            Replaces the object with specified key into Redis database.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key">The key.</param>
+            <param name="value">The instance of T</param>
+            <param name="expiresAt">Expiration time.</param>
+            <returns>
+            True if the object has been added. Otherwise false
+            </returns>
+        </member>
+        <member name="M:StackExchange.Redis.Extensions.Core.ICacheClient.Add``1(System.String,``0,System.TimeSpan)">
+            <summary>
+            Adds the specified instance to the Redis database.
+            </summary>
+            <typeparam name="T">The type of the class to add to Redis</typeparam>
+            <param name="key">The cache key.</param>
+            <param name="value">The instance of T.</param>
+            <param name="expiresIn">The duration of the cache using Timespan.</param>
+            <returns>
+            True if the object has been added. Otherwise false
+            </returns>
+        </member>
+        <member name="M:StackExchange.Redis.Extensions.Core.ICacheClient.AddAsync``1(System.String,``0,System.TimeSpan)">
+            <summary>
+            Adds the specified instance to the Redis database.
+            </summary>
+            <typeparam name="T">The type of the class to add to Redis</typeparam>
+            <param name="key">The cache key.</param>
+            <param name="value">The instance of T.</param>
+            <param name="expiresIn">The duration of the cache using Timespan.</param>
+            <returns>
+            True if the object has been added. Otherwise false
+            </returns>
+        </member>
+        <member name="M:StackExchange.Redis.Extensions.Core.ICacheClient.Replace``1(System.String,``0,System.TimeSpan)">
+            <summary>
+            Replaces the object with specified key into Redis database.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key">The key.</param>
+            <param name="value">The instance of T</param>
+            <param name="expiresIn">The duration of the cache using Timespan.</param>
+            <returns>
+            True if the object has been added. Otherwise false
+            </returns>
+        </member>
+        <member name="M:StackExchange.Redis.Extensions.Core.ICacheClient.ReplaceAsync``1(System.String,``0,System.TimeSpan)">
+            <summary>
+            Replaces the object with specified key into Redis database.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key">The key.</param>
+            <param name="value">The instance of T</param>
+            <param name="expiresIn">The duration of the cache using Timespan.</param>
+            <returns>
+            True if the object has been added. Otherwise false
+            </returns>
+        </member>
+        <member name="M:StackExchange.Redis.Extensions.Core.ICacheClient.GetAll``1(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Get the objects with the specified keys from Redis database with one roundtrip
+            </summary>
+            <typeparam name="T">The type of the expected object</typeparam>
+            <param name="keys">The keys.</param>
+            <returns>
+            Empty list if there are no results, otherwise the instance of T.
+            If a cache key is not present on Redis the specified object into the returned Dictionary will be null
+            </returns>
+        </member>
+        <member name="M:StackExchange.Redis.Extensions.Core.ICacheClient.GetAllAsync``1(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Get the objects with the specified keys from Redis database with a single roundtrip
+            </summary>
+            <typeparam name="T">The type of the expected object</typeparam>
+            <param name="keys">The keys.</param>
+            <returns>
+            Empty list if there are no results, otherwise the instance of T.
+            If a cache key is not present on Redis the specified object into the returned Dictionary will be null
+            </returns>
+        </member>
+        <member name="M:StackExchange.Redis.Extensions.Core.ICacheClient.AddAll``1(System.Collections.Generic.IList{System.Tuple{System.String,``0}})">
+            <summary>
+            Add the objects with the specified keys to Redis database with a single roundtrip
+            </summary>
+            <typeparam name="T">The type of the expected object</typeparam>
+            <param name="items">The items.</param>
+        </member>
+        <member name="M:StackExchange.Redis.Extensions.Core.ICacheClient.AddAllAsync``1(System.Collections.Generic.IList{System.Tuple{System.String,``0}})">
+            <summary>
+            Add the objects with the specified keys to Redis database with a single roundtrip
+            </summary>
+            <typeparam name="T">The type of the expected object</typeparam>
+            <param name="items">The items.</param>
+        </member>
+        <member name="M:StackExchange.Redis.Extensions.Core.ICacheClient.SetAdd(System.String,System.String)">
+            <summary>
+            Run SADD command <see cref="!:http://redis.io/commands/sadd"/>
+            </summary>
+            <param name="memberName">Name of the member.</param>
+            <param name="key">The key.</param>
+        </member>
+        <member name="M:StackExchange.Redis.Extensions.Core.ICacheClient.SetAddAsync(System.String,System.String)">
+            <summary>
+            Run SADD command <see cref="!:http://redis.io/commands/sadd"/>
+            </summary>
+            <param name="memberName">Name of the member.</param>
+            <param name="key">The key.</param>
+        </member>
+        <member name="M:StackExchange.Redis.Extensions.Core.ICacheClient.SetMember(System.String)">
+            <summary>
+            Run SMEMBERS command <see cref="!:http://redis.io/commands/SMEMBERS"/>
+            </summary>
+            <param name="memberName">Name of the member.</param>
+        </member>
+        <member name="M:StackExchange.Redis.Extensions.Core.ICacheClient.SetMemberAsync(System.String)">
+            <summary>
+            Run SMEMBERS command <see cref="!:http://redis.io/commands/SMEMBERS"/>
+            </summary>
+            <param name="memberName">Name of the member.</param>
+        </member>
+        <member name="M:StackExchange.Redis.Extensions.Core.ICacheClient.SearchKeys(System.String)">
+            <summary>
+            Searches the keys from Redis database
+            </summary>
+            <remarks>
+            Consider this as a command that should only be used in production environments with extreme care. It may ruin performance when it is executed against large databases
+            </remarks>
+            <param name="pattern">The pattern.</param>
+            <example>
+            	if you want to return all keys that start with "myCacheKey" uses "myCacheKey*"
+            	if you want to return all keys that contain with "myCacheKey" uses "*myCacheKey*"
+            	if you want to return all keys that end with "myCacheKey" uses "*myCacheKey"
+            </example>
+            <returns>A list of cache keys retrieved from Redis database</returns>
+        </member>
+        <member name="M:StackExchange.Redis.Extensions.Core.ICacheClient.SearchKeysAsync(System.String)">
+            <summary>
+            Searches the keys from Redis database
+            </summary>
+            <remarks>
+            Consider this as a command that should only be used in production environments with extreme care. It may ruin performance when it is executed against large databases
+            </remarks>
+            <param name="pattern">The pattern.</param>
+            <example>
+            	if you want to return all keys that start with "myCacheKey" uses "myCacheKey*"
+            	if you want to return all keys that contain with "myCacheKey" uses "*myCacheKey*"
+            	if you want to return all keys that end with "myCacheKey" uses "*myCacheKey"
+            </example>
+            <returns>A list of cache keys retrieved from Redis database</returns>
+        </member>
+        <member name="M:StackExchange.Redis.Extensions.Core.ICacheClient.FlushDb">
+            <summary>
+            Flushes the database.
+            </summary>
+        </member>
+        <member name="M:StackExchange.Redis.Extensions.Core.ICacheClient.FlushDbAsync">
+            <summary>
+            Flushes the database asynchronous.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:StackExchange.Redis.Extensions.Core.ICacheClient.Save(StackExchange.Redis.SaveType)">
+            <summary>
+            Save the DB in background.
+            </summary>
+        </member>
+        <member name="M:StackExchange.Redis.Extensions.Core.ICacheClient.SaveAsync(StackExchange.Redis.SaveType)">
+            <summary>
+            Save the DB in background asynchronous.
+            </summary>
+        </member>
+        <member name="M:StackExchange.Redis.Extensions.Core.ICacheClient.GetInfo">
+            <summary>
+            Gets the information about redis.
+            More info <see cref="!:http://redis.io/commands/INFO"/>
+            </summary>
+        </member>
+        <member name="M:StackExchange.Redis.Extensions.Core.ICacheClient.GetInfoAsync">
+            <summary>
+            Gets the information about redis.
+            More info <see cref="!:http://redis.io/commands/INFO"/>
+            </summary>
+        </member>
+        <member name="P:StackExchange.Redis.Extensions.Core.ICacheClient.Database">
+            <summary>
+            Return the instance of <see cref="T:StackExchange.Redis.IDatabase"/> used be ICacheClient implementation
+            </summary>
+        </member>
+        <member name="P:StackExchange.Redis.Extensions.Core.ICacheClient.Serializer">
+            <summary>
+            Return the instance of <see cref="T:StackExchange.Redis.Extensions.Core.ISerializer"/>
+            </summary>
+        </member>
+        <member name="M:StackExchange.Redis.Extensions.Core.StackExchangeRedisCacheClient.#ctor(StackExchange.Redis.Extensions.Core.ISerializer,StackExchange.Redis.Extensions.Core.Configuration.IRedisCachingConfiguration)">
+            <summary>
+            Initializes a new instance of the <see cref="T:StackExchange.Redis.Extensions.Core.StackExchangeRedisCacheClient"/> class.
+            </summary>
+            <param name="serializer">The serializer.</param>
+            <param name="configuration">The configuration.</param>
+        </member>
+        <member name="M:StackExchange.Redis.Extensions.Core.StackExchangeRedisCacheClient.#ctor(StackExchange.Redis.Extensions.Core.ISerializer,System.String,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:StackExchange.Redis.Extensions.Core.StackExchangeRedisCacheClient"/> class.
+            </summary>
+            <param name="serializer">The serializer.</param>
+            <param name="connectionString">The connection string.</param>
+            <param name="database">The database.</param>
+            <exception cref="T:System.ArgumentNullException">serializer</exception>
+        </member>
+        <member name="M:StackExchange.Redis.Extensions.Core.StackExchangeRedisCacheClient.#ctor(StackExchange.Redis.ConnectionMultiplexer,StackExchange.Redis.Extensions.Core.ISerializer,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:StackExchange.Redis.Extensions.Core.StackExchangeRedisCacheClient"/> class.
+            </summary>
+            <param name="connectionMultiplexer">The connection multiplexer.</param>
+            <param name="serializer">The serializer.</param>
+            <param name="database">The database.</param>
+            <exception cref="T:System.ArgumentNullException">
+            connectionMultiplexer
+            or
+            serializer
+            </exception>
+        </member>
+        <member name="M:StackExchange.Redis.Extensions.Core.StackExchangeRedisCacheClient.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+        </member>
+        <member name="M:StackExchange.Redis.Extensions.Core.StackExchangeRedisCacheClient.Exists(System.String)">
+            <summary>
+            Verify that the specified cache key exists
+            </summary>
+            <param name="key">The cache key.</param>
+            <returns>
+            True if the key is present into Redis. Othwerwise False
+            </returns>
+        </member>
+        <member name="M:StackExchange.Redis.Extensions.Core.StackExchangeRedisCacheClient.ExistsAsync(System.String)">
+            <summary>
+            Verify that the specified cache key exists
+            </summary>
+            <param name="key">The cache key.</param>
+            <returns>
+            True if the key is present into Redis. Othwerwise False
+            </returns>
+        </member>
+        <member name="M:StackExchange.Redis.Extensions.Core.StackExchangeRedisCacheClient.Remove(System.String)">
+            <summary>
+            Removes the specified key from Redis Database
+            </summary>
+            <param name="key">The key.</param>
+            <returns>
+            True if the key has removed. Othwerwise False
+            </returns>
+        </member>
+        <member name="M:StackExchange.Redis.Extensions.Core.StackExchangeRedisCacheClient.RemoveAsync(System.String)">
+            <summary>
+            Removes the specified key from Redis Database
+            </summary>
+            <param name="key">The key.</param>
+            <returns>
+            True if the key has removed. Othwerwise False
+            </returns>
+        </member>
+        <member name="M:StackExchange.Redis.Extensions.Core.StackExchangeRedisCacheClient.RemoveAll(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Removes all specified keys from Redis Database
+            </summary>
+            <param name="keys">The key.</param>
+        </member>
+        <member name="M:StackExchange.Redis.Extensions.Core.StackExchangeRedisCacheClient.RemoveAllAsync(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Removes all specified keys from Redis Database
+            </summary>
+            <param name="keys">The key.</param>
+            <returns></returns>
+        </member>
+        <member name="M:StackExchange.Redis.Extensions.Core.StackExchangeRedisCacheClient.Get``1(System.String)">
+            <summary>
+            Get the object with the specified key from Redis database
+            </summary>
+            <typeparam name="T">The type of the expected object</typeparam>
+            <param name="key">The cache key.</param>
+            <returns>
+            Null if not present, otherwise the instance of T.
+            </returns>
+        </member>
+        <member name="M:StackExchange.Redis.Extensions.Core.StackExchangeRedisCacheClient.GetAsync``1(System.String)">
+            <summary>
+            Get the object with the specified key from Redis database
+            </summary>
+            <typeparam name="T">The type of the expected object</typeparam>
+            <param name="key">The cache key.</param>
+            <returns>
+            Null if not present, otherwise the instance of T.
+            </returns>
+        </member>
+        <member name="M:StackExchange.Redis.Extensions.Core.StackExchangeRedisCacheClient.Add``1(System.String,``0)">
+            <summary>
+            Adds the specified instance to the Redis database.
+            </summary>
+            <typeparam name="T">The type of the class to add to Redis</typeparam>
+            <param name="key">The cache key.</param>
+            <param name="value">The instance of T.</param>
+            <returns>
+            True if the object has been added. Otherwise false
+            </returns>
+        </member>
+        <member name="M:StackExchange.Redis.Extensions.Core.StackExchangeRedisCacheClient.AddAsync``1(System.String,``0)">
+            <summary>
+            Adds the specified instance to the Redis database.
+            </summary>
+            <typeparam name="T">The type of the class to add to Redis</typeparam>
+            <param name="key">The cache key.</param>
+            <param name="value">The instance of T.</param>
+            <returns>
+            True if the object has been added. Otherwise false
+            </returns>
+        </member>
+        <member name="M:StackExchange.Redis.Extensions.Core.StackExchangeRedisCacheClient.Replace``1(System.String,``0)">
+            <summary>
+            Replaces the object with specified key into Redis database.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key">The key.</param>
+            <param name="value">The instance of T</param>
+            <returns>
+            True if the object has been added. Otherwise false
+            </returns>
+        </member>
+        <member name="M:StackExchange.Redis.Extensions.Core.StackExchangeRedisCacheClient.ReplaceAsync``1(System.String,``0)">
+            <summary>
+            Replaces the object with specified key into Redis database.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key">The key.</param>
+            <param name="value">The instance of T</param>
+            <returns>
+            True if the object has been added. Otherwise false
+            </returns>
+        </member>
+        <member name="M:StackExchange.Redis.Extensions.Core.StackExchangeRedisCacheClient.Add``1(System.String,``0,System.DateTimeOffset)">
+            <summary>
+            Adds the specified instance to the Redis database.
+            </summary>
+            <typeparam name="T">The type of the class to add to Redis</typeparam>
+            <param name="key">The cache key.</param>
+            <param name="value">The instance of T.</param>
+            <param name="expiresAt">Expiration time.</param>
+            <returns>
+            True if the object has been added. Otherwise false
+            </returns>
+        </member>
+        <member name="M:StackExchange.Redis.Extensions.Core.StackExchangeRedisCacheClient.AddAsync``1(System.String,``0,System.DateTimeOffset)">
+            <summary>
+            Adds the specified instance to the Redis database.
+            </summary>
+            <typeparam name="T">The type of the class to add to Redis</typeparam>
+            <param name="key">The cache key.</param>
+            <param name="value">The instance of T.</param>
+            <param name="expiresAt">Expiration time.</param>
+            <returns>
+            True if the object has been added. Otherwise false
+            </returns>
+        </member>
+        <member name="M:StackExchange.Redis.Extensions.Core.StackExchangeRedisCacheClient.Replace``1(System.String,``0,System.DateTimeOffset)">
+            <summary>
+            Replaces the object with specified key into Redis database.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key">The key.</param>
+            <param name="value">The instance of T</param>
+            <param name="expiresAt">Expiration time.</param>
+            <returns>
+            True if the object has been added. Otherwise false
+            </returns>
+        </member>
+        <member name="M:StackExchange.Redis.Extensions.Core.StackExchangeRedisCacheClient.ReplaceAsync``1(System.String,``0,System.DateTimeOffset)">
+            <summary>
+            Replaces the object with specified key into Redis database.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key">The key.</param>
+            <param name="value">The instance of T</param>
+            <param name="expiresAt">Expiration time.</param>
+            <returns>
+            True if the object has been added. Otherwise false
+            </returns>
+        </member>
+        <member name="M:StackExchange.Redis.Extensions.Core.StackExchangeRedisCacheClient.Add``1(System.String,``0,System.TimeSpan)">
+            <summary>
+            Adds the specified instance to the Redis database.
+            </summary>
+            <typeparam name="T">The type of the class to add to Redis</typeparam>
+            <param name="key">The cache key.</param>
+            <param name="value">The instance of T.</param>
+            <param name="expiresIn">The duration of the cache using Timespan.</param>
+            <returns>
+            True if the object has been added. Otherwise false
+            </returns>
+        </member>
+        <member name="M:StackExchange.Redis.Extensions.Core.StackExchangeRedisCacheClient.AddAsync``1(System.String,``0,System.TimeSpan)">
+            <summary>
+            Adds the specified instance to the Redis database.
+            </summary>
+            <typeparam name="T">The type of the class to add to Redis</typeparam>
+            <param name="key">The cache key.</param>
+            <param name="value">The instance of T.</param>
+            <param name="expiresIn">The duration of the cache using Timespan.</param>
+            <returns>
+            True if the object has been added. Otherwise false
+            </returns>
+        </member>
+        <member name="M:StackExchange.Redis.Extensions.Core.StackExchangeRedisCacheClient.Replace``1(System.String,``0,System.TimeSpan)">
+            <summary>
+            Replaces the object with specified key into Redis database.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key">The key.</param>
+            <param name="value">The instance of T</param>
+            <param name="expiresIn">The duration of the cache using Timespan.</param>
+            <returns>
+            True if the object has been added. Otherwise false
+            </returns>
+        </member>
+        <member name="M:StackExchange.Redis.Extensions.Core.StackExchangeRedisCacheClient.ReplaceAsync``1(System.String,``0,System.TimeSpan)">
+            <summary>
+            Replaces the object with specified key into Redis database.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key">The key.</param>
+            <param name="value">The instance of T</param>
+            <param name="expiresIn">The duration of the cache using Timespan.</param>
+            <returns>
+            True if the object has been added. Otherwise false
+            </returns>
+        </member>
+        <member name="M:StackExchange.Redis.Extensions.Core.StackExchangeRedisCacheClient.GetAll``1(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Get the objects with the specified keys from Redis database with one roundtrip
+            </summary>
+            <typeparam name="T">The type of the expected object</typeparam>
+            <param name="keys">The keys.</param>
+            <returns>
+            Empty list if there are no results, otherwise the instance of T.
+            If a cache key is not present on Redis the specified object into the returned Dictionary will be null
+            </returns>
+        </member>
+        <member name="M:StackExchange.Redis.Extensions.Core.StackExchangeRedisCacheClient.GetAllAsync``1(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Get the objects with the specified keys from Redis database with one roundtrip
+            </summary>
+            <typeparam name="T">The type of the expected object</typeparam>
+            <param name="keys">The keys.</param>
+            <returns>
+            Empty list if there are no results, otherwise the instance of T.
+            If a cache key is not present on Redis the specified object into the returned Dictionary will be null
+            </returns>
+        </member>
+        <member name="M:StackExchange.Redis.Extensions.Core.StackExchangeRedisCacheClient.AddAll``1(System.Collections.Generic.IList{System.Tuple{System.String,``0}})">
+            <summary>
+            Adds all.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="items">The items.</param>
+        </member>
+        <member name="M:StackExchange.Redis.Extensions.Core.StackExchangeRedisCacheClient.AddAllAsync``1(System.Collections.Generic.IList{System.Tuple{System.String,``0}})">
+            <summary>
+            Adds all asynchronous.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="items">The items.</param>
+            <returns></returns>
+        </member>
+        <member name="M:StackExchange.Redis.Extensions.Core.StackExchangeRedisCacheClient.SetAdd(System.String,System.String)">
+            <summary>
+            Run SADD command <see cref="!:http://redis.io/commands/sadd"/>
+            </summary>
+            <param name="memberName">Name of the member.</param>
+            <param name="key">The key.</param>
+            <returns></returns>
+        </member>
+        <member name="M:StackExchange.Redis.Extensions.Core.StackExchangeRedisCacheClient.SetAddAsync(System.String,System.String)">
+            <summary>
+            Run SADD command <see cref="!:http://redis.io/commands/sadd"/>
+            </summary>
+            <param name="memberName">Name of the member.</param>
+            <param name="key">The key.</param>
+            <returns></returns>
+        </member>
+        <member name="M:StackExchange.Redis.Extensions.Core.StackExchangeRedisCacheClient.SetMember(System.String)">
+            <summary>
+            Run SMEMBERS command <see cref="!:http://redis.io/commands/SMEMBERS"/>
+            </summary>
+            <param name="memberName">Name of the member.</param>
+            <returns></returns>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="M:StackExchange.Redis.Extensions.Core.StackExchangeRedisCacheClient.SetMemberAsync(System.String)">
+            <summary>
+            Run SMEMBERS command <see cref="!:http://redis.io/commands/SMEMBERS"/>
+            </summary>
+            <param name="memberName">Name of the member.</param>
+            <returns></returns>
+        </member>
+        <member name="M:StackExchange.Redis.Extensions.Core.StackExchangeRedisCacheClient.SearchKeys(System.String)">
+            <summary>
+            Searches the keys from Redis database
+            </summary>
+            <remarks>
+            Consider this as a command that should only be used in production environments with extreme care. It may ruin performance when it is executed against large databases
+            </remarks>
+            <param name="pattern">The pattern.</param>
+            <example>
+            	if you want to return all keys that start with "myCacheKey" uses "myCacheKey*"
+            	if you want to return all keys that contain with "myCacheKey" uses "*myCacheKey*"
+            	if you want to return all keys that end with "myCacheKey" uses "*myCacheKey"
+            </example>
+            <returns>A list of cache keys retrieved from Redis database</returns>
+        </member>
+        <member name="M:StackExchange.Redis.Extensions.Core.StackExchangeRedisCacheClient.SearchKeysAsync(System.String)">
+            <summary>
+            Searches the keys from Redis database
+            </summary>
+            <remarks>
+            Consider this as a command that should only be used in production environments with extreme care. It may ruin performance when it is executed against large databases
+            </remarks>
+            <param name="pattern">The pattern.</param>
+            <example>
+            	if you want to return all keys that start with "myCacheKey" uses "myCacheKey*"
+            	if you want to return all keys that contain with "myCacheKey" uses "*myCacheKey*"
+            	if you want to return all keys that end with "myCacheKey" uses "*myCacheKey"
+            </example>
+            <returns>A list of cache keys retrieved from Redis database</returns>
+        </member>
+        <member name="P:StackExchange.Redis.Extensions.Core.StackExchangeRedisCacheClient.Database">
+            <summary>
+            Return the instance of <see cref="T:StackExchange.Redis.IDatabase"/> used be ICacheClient implementation
+            </summary>
+        </member>
+        <member name="P:StackExchange.Redis.Extensions.Core.StackExchangeRedisCacheClient.Serializer">
+            <summary>
+            Gets the serializer.
+            </summary>
+            <value>
+            The serializer.
+            </value>
+        </member>
+        <member name="T:StackExchange.Redis.Extensions.Core.Extensions.LinqExtensions">
+            <summary>
+            	Adds behavior to System.Linq.
+            </summary>
+        </member>
+        <member name="M:StackExchange.Redis.Extensions.Core.Extensions.LinqExtensions.ForEach``1(System.Collections.Generic.IEnumerable{``0},System.Action{``0})">
+            <summary>
+            	Eaches the specified enumeration.
+            </summary>
+            <typeparam name = "T"></typeparam>
+            <param name = "source">The enumeration.</param>
+            <param name = "action">The action.</param>
+        </member>
+        <member name="M:StackExchange.Redis.Extensions.Core.Extensions.LinqExtensions.ForEachAsync``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Threading.Tasks.Task})">
+            <summary>
+            Fors the each asynchronous.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="source">The source.</param>
+            <param name="body">The body.</param>
+            <returns></returns>
+        </member>
+        <member name="M:StackExchange.Redis.Extensions.Core.ISerializer.Serialize(System.Object)">
+            <summary>
+            Serializes the specified item.
+            </summary>
+            <param name="item">The item.</param>
+            <returns></returns>
+        </member>
+        <member name="M:StackExchange.Redis.Extensions.Core.ISerializer.SerializeAsync(System.Object)">
+            <summary>
+            Serializes the asynchronous.
+            </summary>
+            <param name="item">The item.</param>
+            <returns></returns>
+        </member>
+        <member name="M:StackExchange.Redis.Extensions.Core.ISerializer.Deserialize(System.Byte[])">
+            <summary>
+            Deserializes the specified bytes.
+            </summary>
+            <param name="serializedObject">The serialized object.</param>
+            <returns>
+            The instance of the specified Item
+            </returns>
+        </member>
+        <member name="M:StackExchange.Redis.Extensions.Core.ISerializer.DeserializeAsync(System.Byte[])">
+            <summary>
+            Deserializes the specified bytes.
+            </summary>
+            <param name="serializedObject">The serialized object.</param>
+            <returns>
+            The instance of the specified Item
+            </returns>
+        </member>
+        <member name="M:StackExchange.Redis.Extensions.Core.ISerializer.Deserialize``1(System.Byte[])">
+            <summary>
+            Deserializes the specified bytes.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="serializedObject">The serialized object.</param>
+            <returns>
+            The instance of the specified Item
+            </returns>
+        </member>
+        <member name="M:StackExchange.Redis.Extensions.Core.ISerializer.DeserializeAsync``1(System.Byte[])">
+            <summary>
+            Deserializes the specified bytes.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="serializedObject">The serialized object.</param>
+            <returns>
+            The instance of the specified Item
+            </returns>
+        </member>
+    </members>
+</doc>

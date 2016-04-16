@@ -1,0 +1,176 @@
+sconnRem.Android.Watch.MainActivity, sconnRem.Android.Watch;md5832caac3d8fc0454aba1035a27ce446b.MainActivity
+sconnRem.Android.Watch.MainActivity, sconnRem.Android.Watch, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md5832caac3d8fc0454aba1035a27ce446b.MainActivity
+sconnRem.Android.Watch.MainActivity;md5832caac3d8fc0454aba1035a27ce446b.MainActivity
+sconnrem.android.watch.MainActivity;md5832caac3d8fc0454aba1035a27ce446b.MainActivity
+Android.Support.V4.App.FragmentManager/IOnBackStackChangedListenerImplementor, Xamarin.Android.Support.v13;mono.android.support.v4.app.FragmentManager_OnBackStackChangedListenerImplementor
+Android.Support.V4.App.FragmentManager+IOnBackStackChangedListenerImplementor, Xamarin.Android.Support.v13, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;mono.android.support.v4.app.FragmentManager_OnBackStackChangedListenerImplementor
+Android.Support.V4.App.FragmentManager.IOnBackStackChangedListenerImplementor;mono.android.support.v4.app.FragmentManager_OnBackStackChangedListenerImplementor
+mono.android.support.v4.app.FragmentManager_OnBackStackChangedListenerImplementor;mono.android.support.v4.app.FragmentManager_OnBackStackChangedListenerImplementor
+Android.Support.V4.Content.Loader/IOnLoadCompleteListenerImplementor, Xamarin.Android.Support.v13;mono.android.support.v4.content.Loader_OnLoadCompleteListenerImplementor
+Android.Support.V4.Content.Loader+IOnLoadCompleteListenerImplementor, Xamarin.Android.Support.v13, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;mono.android.support.v4.content.Loader_OnLoadCompleteListenerImplementor
+Android.Support.V4.Content.Loader.IOnLoadCompleteListenerImplementor;mono.android.support.v4.content.Loader_OnLoadCompleteListenerImplementor
+mono.android.support.v4.content.Loader_OnLoadCompleteListenerImplementor;mono.android.support.v4.content.Loader_OnLoadCompleteListenerImplementor
+Android.Support.V4.View.ActionProvider/ISubUiVisibilityListenerImplementor, Xamarin.Android.Support.v13;mono.android.support.v4.view.ActionProvider_SubUiVisibilityListenerImplementor
+Android.Support.V4.View.ActionProvider+ISubUiVisibilityListenerImplementor, Xamarin.Android.Support.v13, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;mono.android.support.v4.view.ActionProvider_SubUiVisibilityListenerImplementor
+Android.Support.V4.View.ActionProvider.ISubUiVisibilityListenerImplementor;mono.android.support.v4.view.ActionProvider_SubUiVisibilityListenerImplementor
+mono.android.support.v4.view.ActionProvider_SubUiVisibilityListenerImplementor;mono.android.support.v4.view.ActionProvider_SubUiVisibilityListenerImplementor
+Android.Support.V4.View.ActionProvider/IVisibilityListenerImplementor, Xamarin.Android.Support.v13;mono.android.support.v4.view.ActionProvider_VisibilityListenerImplementor
+Android.Support.V4.View.ActionProvider+IVisibilityListenerImplementor, Xamarin.Android.Support.v13, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;mono.android.support.v4.view.ActionProvider_VisibilityListenerImplementor
+Android.Support.V4.View.ActionProvider.IVisibilityListenerImplementor;mono.android.support.v4.view.ActionProvider_VisibilityListenerImplementor
+mono.android.support.v4.view.ActionProvider_VisibilityListenerImplementor;mono.android.support.v4.view.ActionProvider_VisibilityListenerImplementor
+Android.Support.V4.View.IViewPropertyAnimatorListenerImplementor, Xamarin.Android.Support.v13;mono.android.support.v4.view.ViewPropertyAnimatorListenerImplementor
+Android.Support.V4.View.IViewPropertyAnimatorListenerImplementor, Xamarin.Android.Support.v13, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;mono.android.support.v4.view.ViewPropertyAnimatorListenerImplementor
+Android.Support.V4.View.IViewPropertyAnimatorListenerImplementor;mono.android.support.v4.view.ViewPropertyAnimatorListenerImplementor
+mono.android.support.v4.view.ViewPropertyAnimatorListenerImplementor;mono.android.support.v4.view.ViewPropertyAnimatorListenerImplementor
+Android.Support.V4.View.MenuItemCompat/IOnActionExpandListenerImplementor, Xamarin.Android.Support.v13;mono.android.support.v4.view.MenuItemCompat_OnActionExpandListenerImplementor
+Android.Support.V4.View.MenuItemCompat+IOnActionExpandListenerImplementor, Xamarin.Android.Support.v13, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;mono.android.support.v4.view.MenuItemCompat_OnActionExpandListenerImplementor
+Android.Support.V4.View.MenuItemCompat.IOnActionExpandListenerImplementor;mono.android.support.v4.view.MenuItemCompat_OnActionExpandListenerImplementor
+mono.android.support.v4.view.MenuItemCompat_OnActionExpandListenerImplementor;mono.android.support.v4.view.MenuItemCompat_OnActionExpandListenerImplementor
+Android.Support.V4.View.ViewPager/IOnPageChangeListenerImplementor, Xamarin.Android.Support.v13;mono.android.support.v4.view.ViewPager_OnPageChangeListenerImplementor
+Android.Support.V4.View.ViewPager+IOnPageChangeListenerImplementor, Xamarin.Android.Support.v13, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;mono.android.support.v4.view.ViewPager_OnPageChangeListenerImplementor
+Android.Support.V4.View.ViewPager.IOnPageChangeListenerImplementor;mono.android.support.v4.view.ViewPager_OnPageChangeListenerImplementor
+mono.android.support.v4.view.ViewPager_OnPageChangeListenerImplementor;mono.android.support.v4.view.ViewPager_OnPageChangeListenerImplementor
+Android.Support.V4.Widget.DrawerLayout/IDrawerListenerImplementor, Xamarin.Android.Support.v13;mono.android.support.v4.widget.DrawerLayout_DrawerListenerImplementor
+Android.Support.V4.Widget.DrawerLayout+IDrawerListenerImplementor, Xamarin.Android.Support.v13, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;mono.android.support.v4.widget.DrawerLayout_DrawerListenerImplementor
+Android.Support.V4.Widget.DrawerLayout.IDrawerListenerImplementor;mono.android.support.v4.widget.DrawerLayout_DrawerListenerImplementor
+mono.android.support.v4.widget.DrawerLayout_DrawerListenerImplementor;mono.android.support.v4.widget.DrawerLayout_DrawerListenerImplementor
+Android.Support.V4.Widget.SlidingPaneLayout/IPanelSlideListenerImplementor, Xamarin.Android.Support.v13;mono.android.support.v4.widget.SlidingPaneLayout_PanelSlideListenerImplementor
+Android.Support.V4.Widget.SlidingPaneLayout+IPanelSlideListenerImplementor, Xamarin.Android.Support.v13, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;mono.android.support.v4.widget.SlidingPaneLayout_PanelSlideListenerImplementor
+Android.Support.V4.Widget.SlidingPaneLayout.IPanelSlideListenerImplementor;mono.android.support.v4.widget.SlidingPaneLayout_PanelSlideListenerImplementor
+mono.android.support.v4.widget.SlidingPaneLayout_PanelSlideListenerImplementor;mono.android.support.v4.widget.SlidingPaneLayout_PanelSlideListenerImplementor
+Android.Support.V4.Widget.SwipeRefreshLayout/IOnRefreshListenerImplementor, Xamarin.Android.Support.v13;mono.android.support.v4.widget.SwipeRefreshLayout_OnRefreshListenerImplementor
+Android.Support.V4.Widget.SwipeRefreshLayout+IOnRefreshListenerImplementor, Xamarin.Android.Support.v13, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;mono.android.support.v4.widget.SwipeRefreshLayout_OnRefreshListenerImplementor
+Android.Support.V4.Widget.SwipeRefreshLayout.IOnRefreshListenerImplementor;mono.android.support.v4.widget.SwipeRefreshLayout_OnRefreshListenerImplementor
+mono.android.support.v4.widget.SwipeRefreshLayout_OnRefreshListenerImplementor;mono.android.support.v4.widget.SwipeRefreshLayout_OnRefreshListenerImplementor
+Android.Gms.Common.IGooglePlayServicesClientOnConnectionFailedListenerImplementor, Xamarin.Android.Wearable;mono.com.google.android.gms.common.GooglePlayServicesClient_OnConnectionFailedListenerImplementor
+Android.Gms.Common.IGooglePlayServicesClientOnConnectionFailedListenerImplementor, Xamarin.Android.Wearable, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;mono.com.google.android.gms.common.GooglePlayServicesClient_OnConnectionFailedListenerImplementor
+Android.Gms.Common.IGooglePlayServicesClientOnConnectionFailedListenerImplementor;mono.com.google.android.gms.common.GooglePlayServicesClient_OnConnectionFailedListenerImplementor
+mono.com.google.android.gms.common.GooglePlayServicesClient_OnConnectionFailedListenerImplementor;mono.com.google.android.gms.common.GooglePlayServicesClient_OnConnectionFailedListenerImplementor
+Android.Gms.Common.Images.ImageManager/IOnImageLoadedListenerImplementor, Xamarin.Android.Wearable;mono.com.google.android.gms.common.images.ImageManager_OnImageLoadedListenerImplementor
+Android.Gms.Common.Images.ImageManager+IOnImageLoadedListenerImplementor, Xamarin.Android.Wearable, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;mono.com.google.android.gms.common.images.ImageManager_OnImageLoadedListenerImplementor
+Android.Gms.Common.Images.ImageManager.IOnImageLoadedListenerImplementor;mono.com.google.android.gms.common.images.ImageManager_OnImageLoadedListenerImplementor
+mono.com.google.android.gms.common.images.ImageManager_OnImageLoadedListenerImplementor;mono.com.google.android.gms.common.images.ImageManager_OnImageLoadedListenerImplementor
+Android.Gms.Location.ILocationListenerImplementor, Xamarin.Android.Wearable;mono.com.google.android.gms.location.LocationListenerImplementor
+Android.Gms.Location.ILocationListenerImplementor, Xamarin.Android.Wearable, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;mono.com.google.android.gms.location.LocationListenerImplementor
+Android.Gms.Location.ILocationListenerImplementor;mono.com.google.android.gms.location.LocationListenerImplementor
+mono.com.google.android.gms.location.LocationListenerImplementor;mono.com.google.android.gms.location.LocationListenerImplementor
+Android.Gms.Location.LocationClient/IOnAddGeofencesResultListenerImplementor, Xamarin.Android.Wearable;mono.com.google.android.gms.location.LocationClient_OnAddGeofencesResultListenerImplementor
+Android.Gms.Location.LocationClient+IOnAddGeofencesResultListenerImplementor, Xamarin.Android.Wearable, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;mono.com.google.android.gms.location.LocationClient_OnAddGeofencesResultListenerImplementor
+Android.Gms.Location.LocationClient.IOnAddGeofencesResultListenerImplementor;mono.com.google.android.gms.location.LocationClient_OnAddGeofencesResultListenerImplementor
+mono.com.google.android.gms.location.LocationClient_OnAddGeofencesResultListenerImplementor;mono.com.google.android.gms.location.LocationClient_OnAddGeofencesResultListenerImplementor
+Android.Gms.Location.LocationClient/IOnRemoveGeofencesResultListenerImplementor, Xamarin.Android.Wearable;mono.com.google.android.gms.location.LocationClient_OnRemoveGeofencesResultListenerImplementor
+Android.Gms.Location.LocationClient+IOnRemoveGeofencesResultListenerImplementor, Xamarin.Android.Wearable, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;mono.com.google.android.gms.location.LocationClient_OnRemoveGeofencesResultListenerImplementor
+Android.Gms.Location.LocationClient.IOnRemoveGeofencesResultListenerImplementor;mono.com.google.android.gms.location.LocationClient_OnRemoveGeofencesResultListenerImplementor
+mono.com.google.android.gms.location.LocationClient_OnRemoveGeofencesResultListenerImplementor;mono.com.google.android.gms.location.LocationClient_OnRemoveGeofencesResultListenerImplementor
+Android.Gms.Maps.GoogleMap/IOnCameraChangeListenerImplementor, Xamarin.Android.Wearable;mono.com.google.android.gms.maps.GoogleMap_OnCameraChangeListenerImplementor
+Android.Gms.Maps.GoogleMap+IOnCameraChangeListenerImplementor, Xamarin.Android.Wearable, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;mono.com.google.android.gms.maps.GoogleMap_OnCameraChangeListenerImplementor
+Android.Gms.Maps.GoogleMap.IOnCameraChangeListenerImplementor;mono.com.google.android.gms.maps.GoogleMap_OnCameraChangeListenerImplementor
+mono.com.google.android.gms.maps.GoogleMap_OnCameraChangeListenerImplementor;mono.com.google.android.gms.maps.GoogleMap_OnCameraChangeListenerImplementor
+Android.Gms.Maps.GoogleMap/IOnIndoorStateChangeListenerImplementor, Xamarin.Android.Wearable;mono.com.google.android.gms.maps.GoogleMap_OnIndoorStateChangeListenerImplementor
+Android.Gms.Maps.GoogleMap+IOnIndoorStateChangeListenerImplementor, Xamarin.Android.Wearable, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;mono.com.google.android.gms.maps.GoogleMap_OnIndoorStateChangeListenerImplementor
+Android.Gms.Maps.GoogleMap.IOnIndoorStateChangeListenerImplementor;mono.com.google.android.gms.maps.GoogleMap_OnIndoorStateChangeListenerImplementor
+mono.com.google.android.gms.maps.GoogleMap_OnIndoorStateChangeListenerImplementor;mono.com.google.android.gms.maps.GoogleMap_OnIndoorStateChangeListenerImplementor
+Android.Gms.Maps.GoogleMap/IOnInfoWindowClickListenerImplementor, Xamarin.Android.Wearable;mono.com.google.android.gms.maps.GoogleMap_OnInfoWindowClickListenerImplementor
+Android.Gms.Maps.GoogleMap+IOnInfoWindowClickListenerImplementor, Xamarin.Android.Wearable, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;mono.com.google.android.gms.maps.GoogleMap_OnInfoWindowClickListenerImplementor
+Android.Gms.Maps.GoogleMap.IOnInfoWindowClickListenerImplementor;mono.com.google.android.gms.maps.GoogleMap_OnInfoWindowClickListenerImplementor
+mono.com.google.android.gms.maps.GoogleMap_OnInfoWindowClickListenerImplementor;mono.com.google.android.gms.maps.GoogleMap_OnInfoWindowClickListenerImplementor
+Android.Gms.Maps.GoogleMap/IOnMapClickListenerImplementor, Xamarin.Android.Wearable;mono.com.google.android.gms.maps.GoogleMap_OnMapClickListenerImplementor
+Android.Gms.Maps.GoogleMap+IOnMapClickListenerImplementor, Xamarin.Android.Wearable, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;mono.com.google.android.gms.maps.GoogleMap_OnMapClickListenerImplementor
+Android.Gms.Maps.GoogleMap.IOnMapClickListenerImplementor;mono.com.google.android.gms.maps.GoogleMap_OnMapClickListenerImplementor
+mono.com.google.android.gms.maps.GoogleMap_OnMapClickListenerImplementor;mono.com.google.android.gms.maps.GoogleMap_OnMapClickListenerImplementor
+Android.Gms.Maps.GoogleMap/IOnMapLongClickListenerImplementor, Xamarin.Android.Wearable;mono.com.google.android.gms.maps.GoogleMap_OnMapLongClickListenerImplementor
+Android.Gms.Maps.GoogleMap+IOnMapLongClickListenerImplementor, Xamarin.Android.Wearable, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;mono.com.google.android.gms.maps.GoogleMap_OnMapLongClickListenerImplementor
+Android.Gms.Maps.GoogleMap.IOnMapLongClickListenerImplementor;mono.com.google.android.gms.maps.GoogleMap_OnMapLongClickListenerImplementor
+mono.com.google.android.gms.maps.GoogleMap_OnMapLongClickListenerImplementor;mono.com.google.android.gms.maps.GoogleMap_OnMapLongClickListenerImplementor
+Android.Gms.Maps.GoogleMap/IOnMarkerClickListenerImplementor, Xamarin.Android.Wearable;mono.com.google.android.gms.maps.GoogleMap_OnMarkerClickListenerImplementor
+Android.Gms.Maps.GoogleMap+IOnMarkerClickListenerImplementor, Xamarin.Android.Wearable, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;mono.com.google.android.gms.maps.GoogleMap_OnMarkerClickListenerImplementor
+Android.Gms.Maps.GoogleMap.IOnMarkerClickListenerImplementor;mono.com.google.android.gms.maps.GoogleMap_OnMarkerClickListenerImplementor
+mono.com.google.android.gms.maps.GoogleMap_OnMarkerClickListenerImplementor;mono.com.google.android.gms.maps.GoogleMap_OnMarkerClickListenerImplementor
+Android.Gms.Maps.GoogleMap/IOnMarkerDragListenerImplementor, Xamarin.Android.Wearable;mono.com.google.android.gms.maps.GoogleMap_OnMarkerDragListenerImplementor
+Android.Gms.Maps.GoogleMap+IOnMarkerDragListenerImplementor, Xamarin.Android.Wearable, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;mono.com.google.android.gms.maps.GoogleMap_OnMarkerDragListenerImplementor
+Android.Gms.Maps.GoogleMap.IOnMarkerDragListenerImplementor;mono.com.google.android.gms.maps.GoogleMap_OnMarkerDragListenerImplementor
+mono.com.google.android.gms.maps.GoogleMap_OnMarkerDragListenerImplementor;mono.com.google.android.gms.maps.GoogleMap_OnMarkerDragListenerImplementor
+Android.Gms.Maps.GoogleMap/IOnMyLocationButtonClickListenerImplementor, Xamarin.Android.Wearable;mono.com.google.android.gms.maps.GoogleMap_OnMyLocationButtonClickListenerImplementor
+Android.Gms.Maps.GoogleMap+IOnMyLocationButtonClickListenerImplementor, Xamarin.Android.Wearable, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;mono.com.google.android.gms.maps.GoogleMap_OnMyLocationButtonClickListenerImplementor
+Android.Gms.Maps.GoogleMap.IOnMyLocationButtonClickListenerImplementor;mono.com.google.android.gms.maps.GoogleMap_OnMyLocationButtonClickListenerImplementor
+mono.com.google.android.gms.maps.GoogleMap_OnMyLocationButtonClickListenerImplementor;mono.com.google.android.gms.maps.GoogleMap_OnMyLocationButtonClickListenerImplementor
+Android.Gms.Maps.GoogleMap/IOnMyLocationChangeListenerImplementor, Xamarin.Android.Wearable;mono.com.google.android.gms.maps.GoogleMap_OnMyLocationChangeListenerImplementor
+Android.Gms.Maps.GoogleMap+IOnMyLocationChangeListenerImplementor, Xamarin.Android.Wearable, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;mono.com.google.android.gms.maps.GoogleMap_OnMyLocationChangeListenerImplementor
+Android.Gms.Maps.GoogleMap.IOnMyLocationChangeListenerImplementor;mono.com.google.android.gms.maps.GoogleMap_OnMyLocationChangeListenerImplementor
+mono.com.google.android.gms.maps.GoogleMap_OnMyLocationChangeListenerImplementor;mono.com.google.android.gms.maps.GoogleMap_OnMyLocationChangeListenerImplementor
+Android.Gms.Maps.ILocationSourceOnLocationChangedListenerImplementor, Xamarin.Android.Wearable;mono.com.google.android.gms.maps.LocationSource_OnLocationChangedListenerImplementor
+Android.Gms.Maps.ILocationSourceOnLocationChangedListenerImplementor, Xamarin.Android.Wearable, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;mono.com.google.android.gms.maps.LocationSource_OnLocationChangedListenerImplementor
+Android.Gms.Maps.ILocationSourceOnLocationChangedListenerImplementor;mono.com.google.android.gms.maps.LocationSource_OnLocationChangedListenerImplementor
+mono.com.google.android.gms.maps.LocationSource_OnLocationChangedListenerImplementor;mono.com.google.android.gms.maps.LocationSource_OnLocationChangedListenerImplementor
+Android.Gms.Maps.StreetViewPanorama/IOnStreetViewPanoramaCameraChangeListenerImplementor, Xamarin.Android.Wearable;mono.com.google.android.gms.maps.StreetViewPanorama_OnStreetViewPanoramaCameraChangeListenerImplementor
+Android.Gms.Maps.StreetViewPanorama+IOnStreetViewPanoramaCameraChangeListenerImplementor, Xamarin.Android.Wearable, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;mono.com.google.android.gms.maps.StreetViewPanorama_OnStreetViewPanoramaCameraChangeListenerImplementor
+Android.Gms.Maps.StreetViewPanorama.IOnStreetViewPanoramaCameraChangeListenerImplementor;mono.com.google.android.gms.maps.StreetViewPanorama_OnStreetViewPanoramaCameraChangeListenerImplementor
+mono.com.google.android.gms.maps.StreetViewPanorama_OnStreetViewPanoramaCameraChangeListenerImplementor;mono.com.google.android.gms.maps.StreetViewPanorama_OnStreetViewPanoramaCameraChangeListenerImplementor
+Android.Gms.Maps.StreetViewPanorama/IOnStreetViewPanoramaChangeListenerImplementor, Xamarin.Android.Wearable;mono.com.google.android.gms.maps.StreetViewPanorama_OnStreetViewPanoramaChangeListenerImplementor
+Android.Gms.Maps.StreetViewPanorama+IOnStreetViewPanoramaChangeListenerImplementor, Xamarin.Android.Wearable, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;mono.com.google.android.gms.maps.StreetViewPanorama_OnStreetViewPanoramaChangeListenerImplementor
+Android.Gms.Maps.StreetViewPanorama.IOnStreetViewPanoramaChangeListenerImplementor;mono.com.google.android.gms.maps.StreetViewPanorama_OnStreetViewPanoramaChangeListenerImplementor
+mono.com.google.android.gms.maps.StreetViewPanorama_OnStreetViewPanoramaChangeListenerImplementor;mono.com.google.android.gms.maps.StreetViewPanorama_OnStreetViewPanoramaChangeListenerImplementor
+Android.Gms.Maps.StreetViewPanorama/IOnStreetViewPanoramaClickListenerImplementor, Xamarin.Android.Wearable;mono.com.google.android.gms.maps.StreetViewPanorama_OnStreetViewPanoramaClickListenerImplementor
+Android.Gms.Maps.StreetViewPanorama+IOnStreetViewPanoramaClickListenerImplementor, Xamarin.Android.Wearable, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;mono.com.google.android.gms.maps.StreetViewPanorama_OnStreetViewPanoramaClickListenerImplementor
+Android.Gms.Maps.StreetViewPanorama.IOnStreetViewPanoramaClickListenerImplementor;mono.com.google.android.gms.maps.StreetViewPanorama_OnStreetViewPanoramaClickListenerImplementor
+mono.com.google.android.gms.maps.StreetViewPanorama_OnStreetViewPanoramaClickListenerImplementor;mono.com.google.android.gms.maps.StreetViewPanorama_OnStreetViewPanoramaClickListenerImplementor
+Android.Gms.Security.ProviderInstaller/IProviderInstallListenerImplementor, Xamarin.Android.Wearable;mono.com.google.android.gms.security.ProviderInstaller_ProviderInstallListenerImplementor
+Android.Gms.Security.ProviderInstaller+IProviderInstallListenerImplementor, Xamarin.Android.Wearable, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;mono.com.google.android.gms.security.ProviderInstaller_ProviderInstallListenerImplementor
+Android.Gms.Security.ProviderInstaller.IProviderInstallListenerImplementor;mono.com.google.android.gms.security.ProviderInstaller_ProviderInstallListenerImplementor
+mono.com.google.android.gms.security.ProviderInstaller_ProviderInstallListenerImplementor;mono.com.google.android.gms.security.ProviderInstaller_ProviderInstallListenerImplementor
+Android.Gms.Tagmanager.IContainerHolderContainerAvailableListenerImplementor, Xamarin.Android.Wearable;mono.com.google.android.gms.tagmanager.ContainerHolder_ContainerAvailableListenerImplementor
+Android.Gms.Tagmanager.IContainerHolderContainerAvailableListenerImplementor, Xamarin.Android.Wearable, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;mono.com.google.android.gms.tagmanager.ContainerHolder_ContainerAvailableListenerImplementor
+Android.Gms.Tagmanager.IContainerHolderContainerAvailableListenerImplementor;mono.com.google.android.gms.tagmanager.ContainerHolder_ContainerAvailableListenerImplementor
+mono.com.google.android.gms.tagmanager.ContainerHolder_ContainerAvailableListenerImplementor;mono.com.google.android.gms.tagmanager.ContainerHolder_ContainerAvailableListenerImplementor
+Android.Gms.Wearable.IDataApiDataListenerImplementor, Xamarin.Android.Wearable;mono.com.google.android.gms.wearable.DataApi_DataListenerImplementor
+Android.Gms.Wearable.IDataApiDataListenerImplementor, Xamarin.Android.Wearable, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;mono.com.google.android.gms.wearable.DataApi_DataListenerImplementor
+Android.Gms.Wearable.IDataApiDataListenerImplementor;mono.com.google.android.gms.wearable.DataApi_DataListenerImplementor
+mono.com.google.android.gms.wearable.DataApi_DataListenerImplementor;mono.com.google.android.gms.wearable.DataApi_DataListenerImplementor
+Android.Gms.Wearable.IMessageApiMessageListenerImplementor, Xamarin.Android.Wearable;mono.com.google.android.gms.wearable.MessageApi_MessageListenerImplementor
+Android.Gms.Wearable.IMessageApiMessageListenerImplementor, Xamarin.Android.Wearable, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;mono.com.google.android.gms.wearable.MessageApi_MessageListenerImplementor
+Android.Gms.Wearable.IMessageApiMessageListenerImplementor;mono.com.google.android.gms.wearable.MessageApi_MessageListenerImplementor
+mono.com.google.android.gms.wearable.MessageApi_MessageListenerImplementor;mono.com.google.android.gms.wearable.MessageApi_MessageListenerImplementor
+Android.Gms.Wearable.INodeApiNodeListenerImplementor, Xamarin.Android.Wearable;mono.com.google.android.gms.wearable.NodeApi_NodeListenerImplementor
+Android.Gms.Wearable.INodeApiNodeListenerImplementor, Xamarin.Android.Wearable, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;mono.com.google.android.gms.wearable.NodeApi_NodeListenerImplementor
+Android.Gms.Wearable.INodeApiNodeListenerImplementor;mono.com.google.android.gms.wearable.NodeApi_NodeListenerImplementor
+mono.com.google.android.gms.wearable.NodeApi_NodeListenerImplementor;mono.com.google.android.gms.wearable.NodeApi_NodeListenerImplementor
+Android.Support.V7.Widget.RecyclerView/ItemAnimator/IItemAnimatorFinishedListenerImplementor, Xamarin.Android.Wearable;mono.android.support.v7.widget.RecyclerView_ItemAnimator_ItemAnimatorFinishedListenerImplementor
+Android.Support.V7.Widget.RecyclerView+ItemAnimator+IItemAnimatorFinishedListenerImplementor, Xamarin.Android.Wearable, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;mono.android.support.v7.widget.RecyclerView_ItemAnimator_ItemAnimatorFinishedListenerImplementor
+Android.Support.V7.Widget.RecyclerView.ItemAnimator.IItemAnimatorFinishedListenerImplementor;mono.android.support.v7.widget.RecyclerView_ItemAnimator_ItemAnimatorFinishedListenerImplementor
+mono.android.support.v7.widget.RecyclerView_ItemAnimator_ItemAnimatorFinishedListenerImplementor;mono.android.support.v7.widget.RecyclerView_ItemAnimator_ItemAnimatorFinishedListenerImplementor
+Android.Support.V7.Widget.RecyclerView/IOnItemTouchListenerImplementor, Xamarin.Android.Wearable;mono.android.support.v7.widget.RecyclerView_OnItemTouchListenerImplementor
+Android.Support.V7.Widget.RecyclerView+IOnItemTouchListenerImplementor, Xamarin.Android.Wearable, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;mono.android.support.v7.widget.RecyclerView_OnItemTouchListenerImplementor
+Android.Support.V7.Widget.RecyclerView.IOnItemTouchListenerImplementor;mono.android.support.v7.widget.RecyclerView_OnItemTouchListenerImplementor
+mono.android.support.v7.widget.RecyclerView_OnItemTouchListenerImplementor;mono.android.support.v7.widget.RecyclerView_OnItemTouchListenerImplementor
+Android.Support.V7.Widget.RecyclerView/IOnScrollListenerImplementor, Xamarin.Android.Wearable;mono.android.support.v7.widget.RecyclerView_OnScrollListenerImplementor
+Android.Support.V7.Widget.RecyclerView+IOnScrollListenerImplementor, Xamarin.Android.Wearable, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;mono.android.support.v7.widget.RecyclerView_OnScrollListenerImplementor
+Android.Support.V7.Widget.RecyclerView.IOnScrollListenerImplementor;mono.android.support.v7.widget.RecyclerView_OnScrollListenerImplementor
+mono.android.support.v7.widget.RecyclerView_OnScrollListenerImplementor;mono.android.support.v7.widget.RecyclerView_OnScrollListenerImplementor
+Android.Support.V7.Widget.RecyclerView/IRecyclerListenerImplementor, Xamarin.Android.Wearable;mono.android.support.v7.widget.RecyclerView_RecyclerListenerImplementor
+Android.Support.V7.Widget.RecyclerView+IRecyclerListenerImplementor, Xamarin.Android.Wearable, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;mono.android.support.v7.widget.RecyclerView_RecyclerListenerImplementor
+Android.Support.V7.Widget.RecyclerView.IRecyclerListenerImplementor;mono.android.support.v7.widget.RecyclerView_RecyclerListenerImplementor
+mono.android.support.v7.widget.RecyclerView_RecyclerListenerImplementor;mono.android.support.v7.widget.RecyclerView_RecyclerListenerImplementor
+Android.Support.Wearable.Views.DelayedConfirmationView/IDelayedConfirmationListenerImplementor, Xamarin.Android.Wearable;mono.android.support.wearable.view.DelayedConfirmationView_DelayedConfirmationListenerImplementor
+Android.Support.Wearable.Views.DelayedConfirmationView+IDelayedConfirmationListenerImplementor, Xamarin.Android.Wearable, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;mono.android.support.wearable.view.DelayedConfirmationView_DelayedConfirmationListenerImplementor
+Android.Support.Wearable.Views.DelayedConfirmationView.IDelayedConfirmationListenerImplementor;mono.android.support.wearable.view.DelayedConfirmationView_DelayedConfirmationListenerImplementor
+mono.android.support.wearable.view.DelayedConfirmationView_DelayedConfirmationListenerImplementor;mono.android.support.wearable.view.DelayedConfirmationView_DelayedConfirmationListenerImplementor
+Android.Support.Wearable.Views.GridViewPager/IOnAdapterChangeListenerImplementor, Xamarin.Android.Wearable;mono.android.support.wearable.view.GridViewPager_OnAdapterChangeListenerImplementor
+Android.Support.Wearable.Views.GridViewPager+IOnAdapterChangeListenerImplementor, Xamarin.Android.Wearable, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;mono.android.support.wearable.view.GridViewPager_OnAdapterChangeListenerImplementor
+Android.Support.Wearable.Views.GridViewPager.IOnAdapterChangeListenerImplementor;mono.android.support.wearable.view.GridViewPager_OnAdapterChangeListenerImplementor
+mono.android.support.wearable.view.GridViewPager_OnAdapterChangeListenerImplementor;mono.android.support.wearable.view.GridViewPager_OnAdapterChangeListenerImplementor
+Android.Support.Wearable.Views.GridViewPager/IOnPageChangeListenerImplementor, Xamarin.Android.Wearable;mono.android.support.wearable.view.GridViewPager_OnPageChangeListenerImplementor
+Android.Support.Wearable.Views.GridViewPager+IOnPageChangeListenerImplementor, Xamarin.Android.Wearable, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;mono.android.support.wearable.view.GridViewPager_OnPageChangeListenerImplementor
+Android.Support.Wearable.Views.GridViewPager.IOnPageChangeListenerImplementor;mono.android.support.wearable.view.GridViewPager_OnPageChangeListenerImplementor
+mono.android.support.wearable.view.GridViewPager_OnPageChangeListenerImplementor;mono.android.support.wearable.view.GridViewPager_OnPageChangeListenerImplementor
+Android.Support.Wearable.Views.WatchViewStub/IOnLayoutInflatedListenerImplementor, Xamarin.Android.Wearable;mono.android.support.wearable.view.WatchViewStub_OnLayoutInflatedListenerImplementor
+Android.Support.Wearable.Views.WatchViewStub+IOnLayoutInflatedListenerImplementor, Xamarin.Android.Wearable, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;mono.android.support.wearable.view.WatchViewStub_OnLayoutInflatedListenerImplementor
+Android.Support.Wearable.Views.WatchViewStub.IOnLayoutInflatedListenerImplementor;mono.android.support.wearable.view.WatchViewStub_OnLayoutInflatedListenerImplementor
+mono.android.support.wearable.view.WatchViewStub_OnLayoutInflatedListenerImplementor;mono.android.support.wearable.view.WatchViewStub_OnLayoutInflatedListenerImplementor
+Android.Support.Wearable.Views.WearableListView/IClickListenerImplementor, Xamarin.Android.Wearable;mono.android.support.wearable.view.WearableListView_ClickListenerImplementor
+Android.Support.Wearable.Views.WearableListView+IClickListenerImplementor, Xamarin.Android.Wearable, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;mono.android.support.wearable.view.WearableListView_ClickListenerImplementor
+Android.Support.Wearable.Views.WearableListView.IClickListenerImplementor;mono.android.support.wearable.view.WearableListView_ClickListenerImplementor
+mono.android.support.wearable.view.WearableListView_ClickListenerImplementor;mono.android.support.wearable.view.WearableListView_ClickListenerImplementor
+Android.Support.Wearable.Views.WearableListView/IOnScrollListenerImplementor, Xamarin.Android.Wearable;mono.android.support.wearable.view.WearableListView_OnScrollListenerImplementor
+Android.Support.Wearable.Views.WearableListView+IOnScrollListenerImplementor, Xamarin.Android.Wearable, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;mono.android.support.wearable.view.WearableListView_OnScrollListenerImplementor
+Android.Support.Wearable.Views.WearableListView.IOnScrollListenerImplementor;mono.android.support.wearable.view.WearableListView_OnScrollListenerImplementor
+mono.android.support.wearable.view.WearableListView_OnScrollListenerImplementor;mono.android.support.wearable.view.WearableListView_OnScrollListenerImplementor

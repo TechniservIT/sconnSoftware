@@ -1,0 +1,9 @@
+H:\Inf\PZPP\IoT\iotDash\sconnRem.Android.Tests\obj\Debug\assemblies\sconnRem.Android.Tests.dll
+H:\Inf\PZPP\IoT\iotDash\sconnRem.Android.Tests\obj\Debug\assemblies\Mono.Android.dll
+H:\Inf\PZPP\IoT\iotDash\sconnRem.Android.Tests\obj\Debug\assemblies\mscorlib.dll
+H:\Inf\PZPP\IoT\iotDash\sconnRem.Android.Tests\obj\Debug\assemblies\System.Core.dll
+H:\Inf\PZPP\IoT\iotDash\sconnRem.Android.Tests\obj\Debug\assemblies\System.dll
+H:\Inf\PZPP\IoT\iotDash\sconnRem.Android.Tests\obj\Debug\assemblies\System.Xml.dll
+H:\Inf\PZPP\IoT\iotDash\sconnRem.Android.Tests\obj\Debug\assemblies\Xamarin.Android.NUnitLite.dll
+H:\Inf\PZPP\IoT\iotDash\sconnRem.Android.Tests\obj\Debug\assemblies\System.Runtime.Serialization.dll
+H:\Inf\PZPP\IoT\iotDash\sconnRem.Android.Tests\obj\Debug\assemblies\System.ServiceModel.Internals.dll

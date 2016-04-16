@@ -1,0 +1,15 @@
+H:\Inf\PZPP\IoT\iotDash\SiteListService\bin\Debug\NLog.config
+H:\Inf\PZPP\IoT\iotDash\SiteListService\bin\Debug\Raven.Studio.Html5.zip
+H:\Inf\PZPP\IoT\iotDash\SiteListService\bin\Debug\SiteListService.dll
+H:\Inf\PZPP\IoT\iotDash\SiteListService\bin\Debug\SiteListService.pdb
+H:\Inf\PZPP\IoT\iotDash\SiteListService\bin\Debug\IotServiceAbstract.dll
+H:\Inf\PZPP\IoT\iotDash\SiteListService\bin\Debug\sconnConnector.dll
+H:\Inf\PZPP\IoT\iotDash\SiteListService\bin\Debug\NLog.dll
+H:\Inf\PZPP\IoT\iotDash\SiteListService\bin\Debug\iotData.dll
+H:\Inf\PZPP\IoT\iotDash\SiteListService\bin\Debug\IotServiceAbstract.pdb
+H:\Inf\PZPP\IoT\iotDash\SiteListService\bin\Debug\sconnConnector.pdb
+H:\Inf\PZPP\IoT\iotDash\SiteListService\bin\Debug\NLog.xml
+H:\Inf\PZPP\IoT\iotDash\SiteListService\bin\Debug\iotData.pdb
+H:\Inf\PZPP\IoT\iotDash\SiteListService\obj\Debug\SconnSiteService.csprojResolveAssemblyReference.cache
+H:\Inf\PZPP\IoT\iotDash\SiteListService\obj\Debug\SiteListService.dll
+H:\Inf\PZPP\IoT\iotDash\SiteListService\obj\Debug\SiteListService.pdb

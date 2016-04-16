@@ -1,0 +1,6 @@
+H:\Inf\PZPP\IoT\iotDash\sconnRem_Tests_AlarmSystem\bin\Debug\sconnRem_Tests_AlarmSystem.dll
+H:\Inf\PZPP\IoT\iotDash\sconnRem_Tests_AlarmSystem\bin\Debug\sconnRem_Tests_AlarmSystem.pdb
+H:\Inf\PZPP\IoT\iotDash\sconnRem_Tests_AlarmSystem\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+H:\Inf\PZPP\IoT\iotDash\sconnRem_Tests_AlarmSystem\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.xml
+H:\Inf\PZPP\IoT\iotDash\sconnRem_Tests_AlarmSystem\obj\Debug\sconnRem_Tests_AlarmSystem.dll
+H:\Inf\PZPP\IoT\iotDash\sconnRem_Tests_AlarmSystem\obj\Debug\sconnRem_Tests_AlarmSystem.pdb

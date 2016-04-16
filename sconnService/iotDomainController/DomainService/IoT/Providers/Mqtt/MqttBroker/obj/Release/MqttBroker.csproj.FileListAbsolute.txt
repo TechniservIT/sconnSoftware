@@ -1,0 +1,14 @@
+H:\Inf\PZPP\IoT\iotDash\iotDomainController\DomainService\IoT\Providers\Mqtt\MqttBroker\bin\Release\NLog.config
+H:\Inf\PZPP\IoT\iotDash\iotDomainController\DomainService\IoT\Providers\Mqtt\MqttBroker\bin\Release\GnatMQ.dll
+H:\Inf\PZPP\IoT\iotDash\iotDomainController\DomainService\IoT\Providers\Mqtt\MqttBroker\bin\Release\GnatMQ.pdb
+H:\Inf\PZPP\IoT\iotDash\iotDomainController\DomainService\IoT\Providers\Mqtt\MqttBroker\bin\Release\NLog.dll
+H:\Inf\PZPP\IoT\iotDash\iotDomainController\DomainService\IoT\Providers\Mqtt\MqttBroker\bin\Release\NLog.xml
+H:\Inf\PZPP\IoT\iotDash\iotDomainController\DomainService\IoT\Providers\Mqtt\MqttBroker\obj\Release\GnatMQ.dll
+H:\Inf\PZPP\IoT\iotDash\iotDomainController\DomainService\IoT\Providers\Mqtt\MqttBroker\obj\Release\GnatMQ.pdb
+H:\Inf\PZPP\IoT\iotDash\iotDomainController\DomainService\IoT\Providers\Mqtt\MqttBroker\bin\Release\Raven.Studio.Html5.zip
+H:\Inf\PZPP\IoT\iotDash\iotDomainController\DomainService\IoT\Providers\Mqtt\MqttBroker\bin\Release\GnatMQ.dll.config
+H:\Inf\PZPP\IoT\iotDash\iotDomainController\DomainService\IoT\Providers\Mqtt\MqttBroker\bin\Release\EntityFramework.dll
+H:\Inf\PZPP\IoT\iotDash\iotDomainController\DomainService\IoT\Providers\Mqtt\MqttBroker\bin\Release\EntityFramework.SqlServer.dll
+H:\Inf\PZPP\IoT\iotDash\iotDomainController\DomainService\IoT\Providers\Mqtt\MqttBroker\bin\Release\EntityFramework.xml
+H:\Inf\PZPP\IoT\iotDash\iotDomainController\DomainService\IoT\Providers\Mqtt\MqttBroker\bin\Release\EntityFramework.SqlServer.xml
+H:\Inf\PZPP\IoT\iotDash\iotDomainController\DomainService\IoT\Providers\Mqtt\MqttBroker\obj\Release\MqttBroker.csprojResolveAssemblyReference.cache

@@ -1,0 +1,16 @@
+H:\Inf\PZPP\IoT\iotDash\sconnConnector.Tests\bin\Debug\sconnConnector.Tests.dll.config
+H:\Inf\PZPP\IoT\iotDash\sconnConnector.Tests\bin\Debug\sconnConnector.Tests.dll
+H:\Inf\PZPP\IoT\iotDash\sconnConnector.Tests\bin\Debug\sconnConnector.Tests.pdb
+H:\Inf\PZPP\IoT\iotDash\sconnConnector.Tests\bin\Debug\EntityFramework.dll
+H:\Inf\PZPP\IoT\iotDash\sconnConnector.Tests\bin\Debug\EntityFramework.SqlServer.dll
+H:\Inf\PZPP\IoT\iotDash\sconnConnector.Tests\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+H:\Inf\PZPP\IoT\iotDash\sconnConnector.Tests\bin\Debug\Moq.dll
+H:\Inf\PZPP\IoT\iotDash\sconnConnector.Tests\bin\Debug\nunit.framework.dll
+H:\Inf\PZPP\IoT\iotDash\sconnConnector.Tests\bin\Debug\EntityFramework.xml
+H:\Inf\PZPP\IoT\iotDash\sconnConnector.Tests\bin\Debug\EntityFramework.SqlServer.xml
+H:\Inf\PZPP\IoT\iotDash\sconnConnector.Tests\bin\Debug\Moq.xml
+H:\Inf\PZPP\IoT\iotDash\sconnConnector.Tests\bin\Debug\nunit.framework.xml
+H:\Inf\PZPP\IoT\iotDash\sconnConnector.Tests\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.xml
+H:\Inf\PZPP\IoT\iotDash\sconnConnector.Tests\obj\Debug\sconnConnector.Tests.csprojResolveAssemblyReference.cache
+H:\Inf\PZPP\IoT\iotDash\sconnConnector.Tests\obj\Debug\sconnConnector.Tests.dll
+H:\Inf\PZPP\IoT\iotDash\sconnConnector.Tests\obj\Debug\sconnConnector.Tests.pdb

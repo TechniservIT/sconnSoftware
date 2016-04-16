@@ -1,0 +1,4 @@
+sconnRem.Android.MainActivity, sconnRem.Android;md5f8ac1c34a9856660d6aa9d34fdd30c06.MainActivity
+sconnRem.Android.MainActivity, sconnRem.Android, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md5f8ac1c34a9856660d6aa9d34fdd30c06.MainActivity
+sconnRem.Android.MainActivity;md5f8ac1c34a9856660d6aa9d34fdd30c06.MainActivity
+sconnrem.android.MainActivity;md5f8ac1c34a9856660d6aa9d34fdd30c06.MainActivity

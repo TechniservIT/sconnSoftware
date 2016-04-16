@@ -1,0 +1,16 @@
+H:\Inf\PZPP\IoT\iotDash\iotDomainController\bin\Release\NLog.config
+H:\Inf\PZPP\IoT\iotDash\iotDomainController\bin\Release\iotDomainController.exe.config
+H:\Inf\PZPP\IoT\iotDash\iotDomainController\bin\Release\iotDomainController.exe
+H:\Inf\PZPP\IoT\iotDash\iotDomainController\bin\Release\iotDomainController.pdb
+H:\Inf\PZPP\IoT\iotDash\iotDomainController\bin\Release\CoAP.NET.dll
+H:\Inf\PZPP\IoT\iotDash\iotDomainController\bin\Release\GnatMQ.dll
+H:\Inf\PZPP\IoT\iotDash\iotDomainController\bin\Release\NLog.dll
+H:\Inf\PZPP\IoT\iotDash\iotDomainController\bin\Release\GnatMQ.pdb
+H:\Inf\PZPP\IoT\iotDash\iotDomainController\bin\Release\CoAP.NET.pdb
+H:\Inf\PZPP\IoT\iotDash\iotDomainController\bin\Release\CoAP.NET.xml
+H:\Inf\PZPP\IoT\iotDash\iotDomainController\bin\Release\NLog.xml
+H:\Inf\PZPP\IoT\iotDash\iotDomainController\obj\Release\iotDomainController.csprojResolveAssemblyReference.cache
+H:\Inf\PZPP\IoT\iotDash\iotDomainController\obj\Release\iotDomainController.ProjectInstaller.resources
+H:\Inf\PZPP\IoT\iotDash\iotDomainController\obj\Release\iotDomainController.csproj.GenerateResource.Cache
+H:\Inf\PZPP\IoT\iotDash\iotDomainController\obj\Release\iotDomainController.exe
+H:\Inf\PZPP\IoT\iotDash\iotDomainController\obj\Release\iotDomainController.pdb

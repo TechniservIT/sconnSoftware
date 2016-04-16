@@ -1,0 +1,5 @@
+H:\Inf\PZPP\IoT\iotDash\IotServiceAbstract\bin\Release\IotServiceAbstract.dll
+H:\Inf\PZPP\IoT\iotDash\IotServiceAbstract\bin\Release\IotServiceAbstract.pdb
+H:\Inf\PZPP\IoT\iotDash\IotServiceAbstract\obj\Release\IotServiceAbstract.dll
+H:\Inf\PZPP\IoT\iotDash\IotServiceAbstract\obj\Release\IotServiceAbstract.pdb
+H:\Inf\PZPP\IoT\iotDash\IotServiceAbstract\obj\Release\IotServiceAbstract.csprojResolveAssemblyReference.cache

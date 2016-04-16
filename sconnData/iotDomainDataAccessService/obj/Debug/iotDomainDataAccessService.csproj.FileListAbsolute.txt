@@ -1,0 +1,5 @@
+H:\Inf\PZPP\IoT\iotDash\iotDomainDataAccessService\bin\Debug\iotDomainDataAccessService.dll
+H:\Inf\PZPP\IoT\iotDash\iotDomainDataAccessService\bin\Debug\iotDomainDataAccessService.pdb
+H:\Inf\PZPP\IoT\iotDash\iotDomainDataAccessService\obj\Debug\iotDomainDataAccessService.dll
+H:\Inf\PZPP\IoT\iotDash\iotDomainDataAccessService\obj\Debug\iotDomainDataAccessService.pdb
+H:\Inf\PZPP\IoT\iotDash\iotDomainDataAccessService\obj\Debug\iotDomainDataAccessService.csprojResolveAssemblyReference.cache

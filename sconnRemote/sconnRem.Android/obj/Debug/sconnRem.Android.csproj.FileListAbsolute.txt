@@ -1,0 +1,15 @@
+H:\Inf\PZPP\IoT\iotDash\sconnRem.Android\bin\Debug\sconnRem.Android.dll
+H:\Inf\PZPP\IoT\iotDash\sconnRem.Android\bin\Debug\sconnRem.Android.pdb
+H:\Inf\PZPP\IoT\iotDash\sconnRem.Android\bin\Debug\sconnRem.Android.sconnRem.Android.apk
+H:\Inf\PZPP\IoT\iotDash\sconnRem.Android\bin\Debug\sconnRem.Android.sconnRem.Android-Signed.apk
+H:\Inf\PZPP\IoT\iotDash\sconnRem.Android\obj\Debug\sconnRem.Android.dll
+H:\Inf\PZPP\IoT\iotDash\sconnRem.Android\obj\Debug\sconnRem.Android.pdb
+H:\Inf\PZPP\IoT\iotDash\sconnRem.Android\obj\Debug\android\bin\sconnRem.Android.sconnRem.Android.apk
+H:\Inf\PZPP\IoT\iotDash\sconnRem.Android\obj\Debug\res\layout\main.xml
+H:\Inf\PZPP\IoT\iotDash\sconnRem.Android\obj\Debug\res\values\strings.xml
+H:\Inf\PZPP\IoT\iotDash\sconnRem.Android\obj\Debug\res\drawable\icon.png
+H:\Inf\PZPP\IoT\iotDash\sconnRem.Android\obj\Debug\R.cs.flag
+H:\Inf\PZPP\IoT\iotDash\sconnRem.Android\obj\Debug\uploadflags.txt
+H:\Inf\PZPP\IoT\iotDash\sconnRem.Android\obj\Debug\sconnRem.Android.csprojResolveAssemblyReference.cache
+H:\Inf\PZPP\IoT\iotDash\sconnRem.Android\obj\Debug\sconnRem.Android.dll.mdb
+H:\Inf\PZPP\IoT\iotDash\sconnRem.Android\bin\Debug\sconnRem.Android.dll.mdb

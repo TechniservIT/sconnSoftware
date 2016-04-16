@@ -1,0 +1,5 @@
+H:\Inf\PZPP\IoT\iotDash\sconnRemote_Tests\bin\Debug\sconnRemote_Tests.dll
+H:\Inf\PZPP\IoT\iotDash\sconnRemote_Tests\bin\Debug\sconnRemote_Tests.pdb
+H:\Inf\PZPP\IoT\iotDash\sconnRemote_Tests\obj\Debug\sconnRemote_Tests.dll
+H:\Inf\PZPP\IoT\iotDash\sconnRemote_Tests\obj\Debug\sconnRemote_Tests.pdb
+H:\Inf\PZPP\IoT\iotDash\sconnRemote_Tests\obj\Debug\sconnRemote_Tests.csprojResolveAssemblyReference.cache

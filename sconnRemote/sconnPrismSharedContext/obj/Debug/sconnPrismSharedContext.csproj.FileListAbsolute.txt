@@ -1,0 +1,13 @@
+H:\Inf\PZPP\IoT\iotDash\sconnPrismSharedContext\bin\Debug\NLog.config
+H:\Inf\PZPP\IoT\iotDash\sconnPrismSharedContext\bin\Debug\Raven.Studio.Html5.zip
+H:\Inf\PZPP\IoT\iotDash\sconnPrismSharedContext\bin\Debug\sconnPrismSharedContext.dll
+H:\Inf\PZPP\IoT\iotDash\sconnPrismSharedContext\bin\Debug\sconnPrismSharedContext.pdb
+H:\Inf\PZPP\IoT\iotDash\sconnPrismSharedContext\bin\Debug\sconnConnector.dll
+H:\Inf\PZPP\IoT\iotDash\sconnPrismSharedContext\bin\Debug\NLog.dll
+H:\Inf\PZPP\IoT\iotDash\sconnPrismSharedContext\bin\Debug\iotData.dll
+H:\Inf\PZPP\IoT\iotDash\sconnPrismSharedContext\bin\Debug\sconnConnector.pdb
+H:\Inf\PZPP\IoT\iotDash\sconnPrismSharedContext\bin\Debug\NLog.xml
+H:\Inf\PZPP\IoT\iotDash\sconnPrismSharedContext\bin\Debug\iotData.pdb
+H:\Inf\PZPP\IoT\iotDash\sconnPrismSharedContext\obj\Debug\sconnPrismSharedContext.csprojResolveAssemblyReference.cache
+H:\Inf\PZPP\IoT\iotDash\sconnPrismSharedContext\obj\Debug\sconnPrismSharedContext.dll
+H:\Inf\PZPP\IoT\iotDash\sconnPrismSharedContext\obj\Debug\sconnPrismSharedContext.pdb

@@ -1,0 +1,5 @@
+H:\Inf\PZPP\IoT\iotDash\SconnDataProvider\bin\Debug\SconnDataProvider.dll
+H:\Inf\PZPP\IoT\iotDash\SconnDataProvider\bin\Debug\SconnDataProvider.pdb
+H:\Inf\PZPP\IoT\iotDash\SconnDataProvider\obj\Debug\SconnDataProvider.csprojResolveAssemblyReference.cache
+H:\Inf\PZPP\IoT\iotDash\SconnDataProvider\obj\Debug\SconnDataProvider.dll
+H:\Inf\PZPP\IoT\iotDash\SconnDataProvider\obj\Debug\SconnDataProvider.pdb

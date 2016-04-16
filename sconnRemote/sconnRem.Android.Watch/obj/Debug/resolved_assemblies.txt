@@ -1,0 +1,10 @@
+H:\Inf\PZPP\IoT\iotDash\sconnRem.Android.Watch\obj\Debug\assemblies\sconnRem.Android.Watch.dll
+H:\Inf\PZPP\IoT\iotDash\sconnRem.Android.Watch\obj\Debug\assemblies\Mono.Android.dll
+H:\Inf\PZPP\IoT\iotDash\sconnRem.Android.Watch\obj\Debug\assemblies\mscorlib.dll
+H:\Inf\PZPP\IoT\iotDash\sconnRem.Android.Watch\obj\Debug\assemblies\System.Core.dll
+H:\Inf\PZPP\IoT\iotDash\sconnRem.Android.Watch\obj\Debug\assemblies\System.dll
+H:\Inf\PZPP\IoT\iotDash\sconnRem.Android.Watch\obj\Debug\assemblies\System.Xml.dll
+H:\Inf\PZPP\IoT\iotDash\sconnRem.Android.Watch\obj\Debug\assemblies\Xamarin.Android.Support.v13.dll
+H:\Inf\PZPP\IoT\iotDash\sconnRem.Android.Watch\obj\Debug\assemblies\Xamarin.Android.Wearable.dll
+H:\Inf\PZPP\IoT\iotDash\sconnRem.Android.Watch\obj\Debug\assemblies\System.Runtime.Serialization.dll
+H:\Inf\PZPP\IoT\iotDash\sconnRem.Android.Watch\obj\Debug\assemblies\System.ServiceModel.Internals.dll

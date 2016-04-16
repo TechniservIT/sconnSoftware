@@ -1,0 +1,4 @@
+H:\Inf\PZPP\IoT\iotDash\SurveillanceAnalysisController\bin\Debug\SurveillanceAnalysisController.dll
+H:\Inf\PZPP\IoT\iotDash\SurveillanceAnalysisController\bin\Debug\SurveillanceAnalysisController.pdb
+H:\Inf\PZPP\IoT\iotDash\SurveillanceAnalysisController\obj\Debug\SurveillanceAnalysisController.dll
+H:\Inf\PZPP\IoT\iotDash\SurveillanceAnalysisController\obj\Debug\SurveillanceAnalysisController.pdb

@@ -1,0 +1,6 @@
+H:\Inf\PZPP\IoT\iotDash\sconnRem_Tests_Models\bin\Debug\sconnRem_Tests_Models.dll
+H:\Inf\PZPP\IoT\iotDash\sconnRem_Tests_Models\bin\Debug\sconnRem_Tests_Models.pdb
+H:\Inf\PZPP\IoT\iotDash\sconnRem_Tests_Models\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+H:\Inf\PZPP\IoT\iotDash\sconnRem_Tests_Models\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.xml
+H:\Inf\PZPP\IoT\iotDash\sconnRem_Tests_Models\obj\Debug\sconnRem_Tests_Models.dll
+H:\Inf\PZPP\IoT\iotDash\sconnRem_Tests_Models\obj\Debug\sconnRem_Tests_Models.pdb

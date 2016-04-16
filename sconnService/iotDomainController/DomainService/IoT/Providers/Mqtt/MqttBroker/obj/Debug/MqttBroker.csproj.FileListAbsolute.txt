@@ -1,0 +1,14 @@
+H:\Inf\PZPP\IoT\iotDash\iotDomainController\DomainService\IoT\Providers\Mqtt\MqttBroker\bin\Debug\NLog.config
+H:\Inf\PZPP\IoT\iotDash\iotDomainController\DomainService\IoT\Providers\Mqtt\MqttBroker\bin\Debug\Raven.Studio.Html5.zip
+H:\Inf\PZPP\IoT\iotDash\iotDomainController\DomainService\IoT\Providers\Mqtt\MqttBroker\bin\Debug\GnatMQ.dll.config
+H:\Inf\PZPP\IoT\iotDash\iotDomainController\DomainService\IoT\Providers\Mqtt\MqttBroker\bin\Debug\GnatMQ.dll
+H:\Inf\PZPP\IoT\iotDash\iotDomainController\DomainService\IoT\Providers\Mqtt\MqttBroker\bin\Debug\GnatMQ.pdb
+H:\Inf\PZPP\IoT\iotDash\iotDomainController\DomainService\IoT\Providers\Mqtt\MqttBroker\bin\Debug\EntityFramework.dll
+H:\Inf\PZPP\IoT\iotDash\iotDomainController\DomainService\IoT\Providers\Mqtt\MqttBroker\bin\Debug\EntityFramework.SqlServer.dll
+H:\Inf\PZPP\IoT\iotDash\iotDomainController\DomainService\IoT\Providers\Mqtt\MqttBroker\bin\Debug\NLog.dll
+H:\Inf\PZPP\IoT\iotDash\iotDomainController\DomainService\IoT\Providers\Mqtt\MqttBroker\bin\Debug\EntityFramework.xml
+H:\Inf\PZPP\IoT\iotDash\iotDomainController\DomainService\IoT\Providers\Mqtt\MqttBroker\bin\Debug\EntityFramework.SqlServer.xml
+H:\Inf\PZPP\IoT\iotDash\iotDomainController\DomainService\IoT\Providers\Mqtt\MqttBroker\bin\Debug\NLog.xml
+H:\Inf\PZPP\IoT\iotDash\iotDomainController\DomainService\IoT\Providers\Mqtt\MqttBroker\obj\Debug\MqttBroker.csprojResolveAssemblyReference.cache
+H:\Inf\PZPP\IoT\iotDash\iotDomainController\DomainService\IoT\Providers\Mqtt\MqttBroker\obj\Debug\GnatMQ.dll
+H:\Inf\PZPP\IoT\iotDash\iotDomainController\DomainService\IoT\Providers\Mqtt\MqttBroker\obj\Debug\GnatMQ.pdb

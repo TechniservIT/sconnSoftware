@@ -1,0 +1,8 @@
+H:\Inf\PZPP\IoT\iotDash\iotData\bin\Debug\NLog.config
+H:\Inf\PZPP\IoT\iotDash\iotData\bin\Debug\iotData.dll
+H:\Inf\PZPP\IoT\iotDash\iotData\bin\Debug\iotData.pdb
+H:\Inf\PZPP\IoT\iotDash\iotData\bin\Debug\NLog.dll
+H:\Inf\PZPP\IoT\iotDash\iotData\bin\Debug\NLog.xml
+H:\Inf\PZPP\IoT\iotDash\iotData\obj\Debug\iotData.dll
+H:\Inf\PZPP\IoT\iotDash\iotData\obj\Debug\iotData.pdb
+H:\Inf\PZPP\IoT\iotDash\iotData\obj\Debug\iotData.csprojResolveAssemblyReference.cache
