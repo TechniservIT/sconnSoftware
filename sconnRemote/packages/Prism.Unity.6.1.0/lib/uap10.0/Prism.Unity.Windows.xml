@@ -1,0 +1,127 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Prism.Unity.Windows</name>
+    </assembly>
+    <members>
+        <member name="T:Prism.Unity.Windows.PrismUnityApplication">
+            <summary>
+            Provides the base class for the Windows Store Application object which
+            includes the automatic creation and wiring of the Unity container and 
+            the bootstrapping process for Prism services in the container.
+            </summary>
+        </member>
+        <member name="P:Prism.Unity.Windows.PrismUnityApplication.Current">
+            <summary>
+            Allow strongly typed access to the Application as a global
+            </summary>
+        </member>
+        <member name="P:Prism.Unity.Windows.PrismUnityApplication.Container">
+            <summary>
+            Get the IoC Unity Container 
+            </summary>
+        </member>
+        <member name="P:Prism.Unity.Windows.PrismUnityApplication.Logger">
+            <summary>
+            Gets the <see cref="T:Prism.Logging.ILoggerFacade"/> for the application.
+            </summary>
+            <value>A <see cref="T:Prism.Logging.ILoggerFacade"/> instance.</value>
+        </member>
+        <member name="M:Prism.Unity.Windows.PrismUnityApplication.OnInitializeAsync(Windows.ApplicationModel.Activation.IActivatedEventArgs)">
+            <summary>
+            Implements and seals the OnInitialize method to configure the container.
+            </summary>
+            <param name="args">The <see cref="T:Windows.ApplicationModel.Activation.IActivatedEventArgs"/> instance containing the event data.</param>
+        </member>
+        <member name="M:Prism.Unity.Windows.PrismUnityApplication.Resolve(System.Type)">
+            <summary>
+            Implements and seals the Resolves method to be handled by the Unity Container.
+            Use the container to resolve types (e.g. ViewModels and Flyouts)
+            so their dependencies get injected
+            </summary>
+            <param name="type">The type.</param>
+            <returns>A concrete instance of the specified type.</returns>
+        </member>
+        <member name="M:Prism.Unity.Windows.PrismUnityApplication.CreateLogger">
+            <summary>
+            Create the <see cref="T:Prism.Logging.ILoggerFacade" /> used by the bootstrapper.
+            </summary>
+            <remarks>
+            The base implementation returns a new DebugLogger.
+            </remarks>
+        </member>
+        <member name="M:Prism.Unity.Windows.PrismUnityApplication.CreateContainer">
+            <summary>
+            Creates the <see cref="T:Microsoft.Practices.Unity.IUnityContainer"/> that will be used as the default container.
+            </summary>
+            <returns>A new instance of <see cref="T:Microsoft.Practices.Unity.IUnityContainer"/>.</returns>
+        </member>
+        <member name="M:Prism.Unity.Windows.PrismUnityApplication.ConfigureViewModelLocator">
+            <summary>
+            Configures the <see cref="!:ViewModelLocator"/> used by Prism.
+            </summary>
+        </member>
+        <member name="M:Prism.Unity.Windows.PrismUnityApplication.RegisterTypeIfMissing(System.Type,System.Type,System.Boolean)">
+            <summary>
+            Registers a type in the container only if that type was not already registered.
+            </summary>
+            <param name="fromType">The interface type to register.</param>
+            <param name="toType">The type implementing the interface.</param>
+            <param name="registerAsSingleton">Registers the type as a singleton.</param>
+        </member>
+        <member name="T:Prism.Unity.Windows.PrismUnityExtension">
+            <summary>
+            Implements a <see cref="T:Prism.Unity.Windows.PrismUnityExtension"/> that checks if a specific type was registered with the container.
+            </summary>
+        </member>
+        <member name="M:Prism.Unity.Windows.PrismUnityExtension.IsTypeRegistered(Microsoft.Practices.Unity.IUnityContainer,System.Type)">
+            <summary>
+            Evaluates if a specified type was registered in the container.
+            </summary>
+            <param name="container">The container to check if the type was registered in.</param>
+            <param name="type">The type to check if it was registered.</param>
+            <returns><see langword="true" /> if the <paramref name="type"/> was registered with the container.</returns>
+            <remarks>
+            In order to use this extension, you must first call <see cref="!:UnityExtensions.AddNewExtension&lt;TExtension&gt;"/> 
+            and specify <see cref="T:Microsoft.Practices.Unity.UnityContainerExtension"/> as the extension type.
+            </remarks>
+        </member>
+        <member name="M:Prism.Unity.Windows.PrismUnityExtension.Initialize">
+            <summary>
+            Initializes the container with this extension's functionality.
+            </summary>
+        </member>
+        <member name="T:Prism.Unity.Windows.UnityContainerHelper">
+            <summary>
+            Extensions methods to extend and facilitate the usage of <see cref="T:Microsoft.Practices.Unity.IUnityContainer"/>.
+            </summary>
+        </member>
+        <member name="M:Prism.Unity.Windows.UnityContainerHelper.IsTypeRegistered(Microsoft.Practices.Unity.IUnityContainer,System.Type)">
+            <summary>
+            Returns whether a specified type has a type mapping registered in the container.
+            </summary>
+            <param name="container">The <see cref="T:Microsoft.Practices.Unity.IUnityContainer"/> to check for the type mapping.</param>
+            <param name="type">The type to check if there is a type mapping for.</param>
+            <returns><see langword="true"/> if there is a type mapping registered for <paramref name="type"/>.</returns>
+            <remarks>In order to use this extension method, you first need to add the
+            <see cref="T:Microsoft.Practices.Unity.IUnityContainer"/> extension to the <see cref="!:UnityBootstrapperExtension"/>.
+            </remarks>        
+        </member>
+        <member name="M:Prism.Unity.Windows.UnityContainerHelper.TryResolve``1(Microsoft.Practices.Unity.IUnityContainer)">
+            <summary>
+            Utility method to try to resolve a service from the container avoiding an exception if the container cannot build the type.
+            </summary>
+            <param name="container">The cointainer that will be used to resolve the type.</param>
+            <typeparam name="T">The type to resolve.</typeparam>
+            <returns>The instance of <typeparamref name="T"/> built up by the container.</returns>
+        </member>
+        <member name="M:Prism.Unity.Windows.UnityContainerHelper.TryResolve(Microsoft.Practices.Unity.IUnityContainer,System.Type)">
+            <summary>
+            Utility method to try to resolve a service from the container avoiding an exception if the container cannot build the type.
+            </summary>
+            <param name="container">The cointainer that will be used to resolve the type.</param>
+            <param name="typeToResolve">The type to resolve.</param>
+            <returns>The instance of <paramref name="typeToResolve"/> built up by the container.</returns>
+        </member>
+    </members>
+</doc>

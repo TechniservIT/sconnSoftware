@@ -177,7 +177,7 @@
       <Project>{6640ac88-df6b-43a6-bee3-a65b4396119b}</Project>
       <Name>iotServiceLayer</Name>
     </ProjectReference>
-    <ProjectReference Include="..\sconnConnector\sconnConnector.csproj">
+    <ProjectReference Include="..\..\sconnData\sconnConnector\sconnConnector.csproj">
       <Project>{09c8a8f0-f85a-4534-922e-85e14ec32725}</Project>
       <Name>sconnConnector</Name>
     </ProjectReference>

@@ -39,3 +39,4 @@ H:\Inf\PZPP\IoT\iotDash\sconnConnector\bin\Debug\Newtonsoft.Json.xml
 H:\Inf\PZPP\IoT\iotDash\sconnConnector\obj\Debug\sconnConnector.csprojResolveAssemblyReference.cache
 H:\Inf\PZPP\IoT\iotDash\sconnConnector\obj\Debug\sconnConnector.dll
 H:\Inf\PZPP\IoT\iotDash\sconnConnector\obj\Debug\sconnConnector.pdb
+H:\Repo\Bucket\iotdashn\sconnData\sconnConnector\obj\Debug\sconnConnector.csprojResolveAssemblyReference.cache
