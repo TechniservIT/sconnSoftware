@@ -47,3 +47,4 @@ H:\Repo\Bucket\iotdashn\sconnData\sconnConnector\bin\Debug\NLog.dll
 H:\Repo\Bucket\iotdashn\sconnData\sconnConnector\bin\Debug\NLog.xml
 H:\Repo\Bucket\iotdashn\sconnData\sconnConnector\obj\Debug\sconnConnector.dll
 H:\Repo\Bucket\iotdashn\sconnData\sconnConnector\obj\Debug\sconnConnector.pdb
+H:\Repo\Bucket\iotdashn\sconnData\sconnConnector\obj\Debug\sconnConnector.csprojResolveAssemblyReference.cache
