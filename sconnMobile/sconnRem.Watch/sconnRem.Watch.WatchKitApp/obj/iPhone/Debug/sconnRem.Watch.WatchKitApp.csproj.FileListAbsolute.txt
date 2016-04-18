@@ -1,0 +1,8 @@
+H:\Repo\Bucket\iotdashn\sconnMobile\sconnRem.Watch\sconnRem.Watch.WatchKitApp\obj\iPhone\Debug\ibtool\Interface.storyboardc\Interface-glance.plist
+H:\Repo\Bucket\iotdashn\sconnMobile\sconnRem.Watch\sconnRem.Watch.WatchKitApp\obj\iPhone\Debug\ibtool\Interface.storyboardc\Interface-notification.plist
+H:\Repo\Bucket\iotdashn\sconnMobile\sconnRem.Watch\sconnRem.Watch.WatchKitApp\obj\iPhone\Debug\ibtool\Interface.storyboardc\Interface.plist
+H:\Repo\Bucket\iotdashn\sconnMobile\sconnRem.Watch\sconnRem.Watch.WatchKitApp\obj\iPhone\Debug\ibtool\_BundleResourceWithLogicalName.items
+H:\Repo\Bucket\iotdashn\sconnMobile\sconnRem.Watch\sconnRem.Watch.WatchKitApp\obj\iPhone\Debug\optimized\
+H:\Repo\Bucket\iotdashn\sconnMobile\sconnRem.Watch\sconnRem.Watch.WatchKitApp\obj\iPhone\Debug\sconnRem.Watch.WatchKitApp.csprojResolveAssemblyReference.cache
+H:\Repo\Bucket\iotdashn\sconnMobile\sconnRem.Watch\sconnRem.Watch.WatchKitApp\obj\iPhone\Debug\sconnRemWatchWatchKitApp.dll.mdb
+H:\Repo\Bucket\iotdashn\sconnMobile\sconnRem.Watch\sconnRem.Watch.WatchKitApp\bin\iPhone\Debug\sconnRemWatchWatchKitApp.dll.mdb

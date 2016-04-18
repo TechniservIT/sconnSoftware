@@ -1,3 +1,8 @@
 *.nupkg
 *.ps1
 *.baml
+sconnMobile/sconnRem.Android.Watch/obj/Debug/
+sconnMobile/sconnRem.iOS/obj/iPhoneSimulator/Debug/ibtool/Main.storyboardc/8rJ-Kc-sve-view-QS5-Rx-YEW.nib
+sconnMobile/sconnRem.iOS/obj/
+*.mdb
+*.nib
