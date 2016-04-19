@@ -77,63 +77,80 @@ namespace sconnRem.Infrastructure.Navigation
 
         public static void ActivateSiteContext(sconnSite site)
         {
-            if (site != null)
+            try
             {
-                currentContextSconnSite = site;
+                if (site != null)
+                {
+                    currentContextSconnSite = site;
 
-                EndpointInfo info = new EndpointInfo();
-                info.Hostname = currentContextSconnSite.serverIP;
-                info.Port = currentContextSconnSite.serverPort;
-                DeviceCredentials cred = new DeviceCredentials();
-                cred.Password = currentContextSconnSite.authPasswd;
-                cred.Username = "";
+                    EndpointInfo info = new EndpointInfo();
+                    info.Hostname = currentContextSconnSite.serverIP;
+                    info.Port = currentContextSconnSite.serverPort;
+                    DeviceCredentials cred = new DeviceCredentials();
+                    cred.Password = currentContextSconnSite.authPasswd;
+                    cred.Username = "";
+
+                    //ensure container does not maintain old manager
+                    if (alarmSystemConfigManager != null && exportedComposablePart != null && contextContainer != null)
+                    {
+                        var batchrem = new CompositionBatch();
+                        batchrem.RemovePart(exportedComposablePart);
+                        contextContainer.Compose(batchrem);
+                    }
+
+                    alarmSystemConfigManager = new AlarmSystemConfigManager(info, cred);
+                    Device alrmSysDev = new Device();
+                    alrmSysDev.Credentials = cred;
+                    alrmSysDev.EndpInfo = info;
+                    alarmSystemConfigManager.RemoteDevice = alrmSysDev;
+
+                    AlarmSystemContext.SetManager(alarmSystemConfigManager);
+
+                    //register new manager in container
+                    if (contextContainer != null)
+                    {
+                        var batch = new CompositionBatch();
+                        exportedComposablePart = batch.AddExportedValue<IAlarmConfigManager>(alarmSystemConfigManager);
+                        contextContainer.Compose(batch);
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                _nlogger.Error(ex, ex.Message);
+            }
+
+        
+        }
+
+        public static void ActivateDeviceContext(sconnDevice device)
+        {
+            try
+            {
+                alarmDevice = device;
 
                 //ensure container does not maintain old manager
-                if (alarmSystemConfigManager != null && exportedComposablePart != null && contextContainer != null)
+                if (alarmDevice != null && exportedDeviceComposablePart != null && contextContainer != null)
                 {
                     var batchrem = new CompositionBatch();
-                    batchrem.RemovePart(exportedComposablePart);
+                    batchrem.RemovePart(exportedDeviceComposablePart);
                     contextContainer.Compose(batchrem);
                 }
-
-                alarmSystemConfigManager = new AlarmSystemConfigManager(info, cred);
-                Device alrmSysDev = new Device();
-                alrmSysDev.Credentials = cred;
-                alrmSysDev.EndpInfo = info;
-                alarmSystemConfigManager.RemoteDevice = alrmSysDev;
-
-                AlarmSystemContext.SetManager(alarmSystemConfigManager);
 
                 //register new manager in container
                 if (contextContainer != null)
                 {
                     var batch = new CompositionBatch();
-                    exportedComposablePart = batch.AddExportedValue<IAlarmConfigManager>(alarmSystemConfigManager);
+                    exportedDeviceComposablePart = batch.AddExportedValue<sconnDevice>(alarmDevice);
                     contextContainer.Compose(batch);
                 }
-
             }
-        }
-
-        public static void ActivateDeviceContext(sconnDevice device)
-        {
-            alarmDevice = device;
-
-            //ensure container does not maintain old manager
-            if (alarmDevice != null && exportedDeviceComposablePart != null && contextContainer != null)
+            catch (Exception ex)
             {
-                var batchrem = new CompositionBatch();
-                batchrem.RemovePart(exportedDeviceComposablePart);
-                contextContainer.Compose(batchrem);
+                _nlogger.Error(ex, ex.Message);
             }
-
-            //register new manager in container
-            if (contextContainer != null)
-            {
-                var batch = new CompositionBatch();
-                exportedDeviceComposablePart = batch.AddExportedValue<sconnDevice>(alarmDevice);
-                contextContainer.Compose(batch);
-            }
+        
         }
 
 

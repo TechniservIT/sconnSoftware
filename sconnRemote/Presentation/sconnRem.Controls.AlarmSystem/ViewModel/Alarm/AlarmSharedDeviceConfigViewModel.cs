@@ -12,6 +12,7 @@ using Prism.Regions;
 using sconnConnector.Config;
 using sconnConnector.POCO.Config.sconn;
 using System.ComponentModel.Composition.Primitives;
+using AlarmSystemManagmentService.Device;
 using sconnPrismSharedContext;
 
 namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
@@ -62,27 +63,26 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
             _name = "Dev";
             this._provider = new DeviceConfigService(_manager);
         }
-
+        
         //[ImportingConstructor]
-        //public AlarmSharedDeviceConfigViewModel(IAlarmConfigManager manager)
+        //public AlarmSharedDeviceConfigViewModel(IRegionManager regionManager)
         //{
-        //    // _manager = manager;
+        //    Config = new sconnDevice();
         //    this._manager = AlarmSystemContext.GetManager();
-        //    _name = "Dev";
         //    this._provider = new DeviceConfigService(_manager);
-
+        //    this._regionManager = regionManager;
+        //    GetData();
         //}
 
         [ImportingConstructor]
-        public AlarmSharedDeviceConfigViewModel(IRegionManager regionManager)
+        public AlarmSharedDeviceConfigViewModel(sconnDevice device, IAlarmConfigManager manager, IRegionManager regionManager)
         {
-            Config = new sconnDevice();
-            this._manager = AlarmSystemContext.GetManager();
-            this._provider = new DeviceConfigService(_manager);
+          //  SetupCmds();
+            Config = device;
+            this._manager = (AlarmSystemConfigManager)manager;
+            this._provider = new DeviceConfigService(_manager, Config.DeviceId);
             this._regionManager = regionManager;
             GetData();
-
-
         }
 
         public string DisplayedImagePath

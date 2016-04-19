@@ -353,9 +353,22 @@
     <Resource Include="images\tmp.png" />
     <Resource Include="images\water.png" />
     <Resource Include="images\waves.png" />
+    <Resource Include="images\czujka1000x1000.jpg" />
+    <Resource Include="images\dalej500x500.jpg" />
+    <Resource Include="images\dol500x500.jpg" />
+    <Resource Include="images\exp1000x1000.jpg" />
+    <Resource Include="images\gora500x500.jpg" />
+    <Resource Include="images\klawiatura1000x1000.jpg" />
+    <Resource Include="images\przek1000x1000.jpg" />
+    <Resource Include="images\syrena1000x1000.jpg" />
+    <Resource Include="images\wstecz500x500.jpg" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="images\exp1000x1000.psd" />
+    <None Include="images\klawiatura1000x1000.psd" />
+    <None Include="images\przek1000x1000.psd" />
+    <None Include="images\syrena1000x1000.psd" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>

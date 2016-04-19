@@ -5,7 +5,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:prism="http://www.codeplex.com/prism"
     xmlns:controls="clr-namespace:sconnRem.Controls.Common"
-    xmlns:Config="clr-namespace:sconnRem.View.Config;assembly=sconnRem.Controls.AlarmSystem" x:Name="wndMain" x:Class="sconnRem.Wnd.Main.WndGlobalShell"
+    x:Name="wndMain" 
+    x:Class="sconnRem.Wnd.Main.WndGlobalShell"
     mc:Ignorable="d"
     Title="sconnRemote"
     d:DesignHeight="768" d:DesignWidth="1024" Icon="/sconnRem;component/images/cog2.jpg" HorizontalAlignment="Left" VerticalAlignment="Top" Background="#66C6E2FF">
