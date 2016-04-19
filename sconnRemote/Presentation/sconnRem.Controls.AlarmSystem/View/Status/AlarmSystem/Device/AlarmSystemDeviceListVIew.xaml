@@ -18,7 +18,7 @@
 
         <Grid  Grid.Column="0" Grid.Row="0">
 
-            <ListBox ScrollViewer.HorizontalScrollBarVisibility="Disabled" x:Name="OrdersListBox" BorderThickness="0" ItemsSource="{Binding Config}"  IsSynchronizedWithCurrentItem="True" Background="White">
+            <ListBox HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled" x:Name="OrdersListBox" BorderThickness="0" ItemsSource="{Binding Config}"  IsSynchronizedWithCurrentItem="True" Background="White">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         
@@ -128,6 +128,7 @@
                 <ListBox.ItemContainerStyle>
                     <Style TargetType="ListBoxItem">
                         <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                     </Style>
                 </ListBox.ItemContainerStyle>
                 

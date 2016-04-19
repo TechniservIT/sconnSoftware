@@ -6,3 +6,6 @@ sconnMobile/sconnRem.iOS/obj/iPhoneSimulator/Debug/ibtool/Main.storyboardc/8rJ-K
 sconnMobile/sconnRem.iOS/obj/
 *.mdb
 *.nib
+*.class
+*.java
+sconnMobile/sconnRemMobile/sconnRemMobile.Droid/obj/Debug/
