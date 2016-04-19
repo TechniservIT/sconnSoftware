@@ -168,3 +168,5 @@ I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Shells\obj\Debug\
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Shells\obj\Debug\sconnRem.Shells.g.resources
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Shells\obj\Debug\sconnRem.Shells.dll
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Shells\obj\Debug\sconnRem.Shells.pdb
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Shells\bin\Debug\sconnRem.Infrastructure.dll
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Shells\bin\Debug\sconnRem.Infrastructure.pdb

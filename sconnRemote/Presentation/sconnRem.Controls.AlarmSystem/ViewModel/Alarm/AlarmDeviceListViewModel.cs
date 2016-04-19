@@ -1,14 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using AlarmSystemManagmentService;
 using AlarmSystemManagmentService.Device;
 using NLog;
+using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
 using sconnConnector.Config;
+using sconnConnector.POCO.Config;
 using sconnConnector.POCO.Config.sconn;
+using sconnPrismSharedContext;
+using sconnRem.Infrastructure.Navigation;
+using sconnRem.Navigation;
 
 namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
 {
@@ -31,8 +37,109 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
             }
         }
 
-        private ICommand _getDataCommand;
-        private ICommand _saveDataCommand;
+        public ICommand ShowDeviceStatusCommand { get; set; }
+        public ICommand ShowDeviceConfigCommand { get; set; }
+
+
+        private void NavigateToAlarmContract(string contractName)
+        {
+            try
+            {
+                this._regionManager.RequestNavigate(GlobalViewRegionNames.MainGridContentRegion, contractName
+                    ,
+                    (NavigationResult nr) =>
+                    {
+                        var error = nr.Error;
+                        var result = nr.Result;
+                        if (error != null)
+                        {
+                            _nlogger.Error(error);
+                        }
+                    });
+            }
+            catch (Exception ex)
+            {
+                _nlogger.Error(ex, ex.Message);
+
+            }
+        }
+
+        private string GetDeviceTypeStatusViewContractNameForDevice(sconnDevice device)
+        {
+            if (device.Type == sconnDeviceType.Graphical_Keypad)
+            {
+                return AlarmRegionNames.AlarmStatus_Contract_Device_Keypad_View;
+            }
+            else if (device.Type == sconnDeviceType.Gsm_Module)
+            {
+                return AlarmRegionNames.AlarmConfig_Contract_GsmConfigView;
+            }
+            else if (device.Type == sconnDeviceType.Motherboard)
+            {
+                return AlarmRegionNames.AlarmStatus_Contract_Device_Motherboard_View;
+            }
+            else if (device.Type == sconnDeviceType.Pir_Sensor)
+            {
+                return AlarmRegionNames.AlarmStatus_Contract_Device_Sensor_View;
+            }
+            else if (device.Type == sconnDeviceType.Relay_Module)
+            {
+                return AlarmRegionNames.AlarmStatus_Contract_Device_RelayModule_View;
+            }
+            return null;
+        }
+
+
+
+        private string GetDeviceTypeConfigureViewContractNameForDevice(sconnDevice device)
+        {
+            if (device.Type == sconnDeviceType.Graphical_Keypad)
+            {
+                return AlarmRegionNames.AlarmConfig_Contract_Device_Keypad_View;
+            }
+            else if (device.Type == sconnDeviceType.Gsm_Module)
+            {
+                return AlarmRegionNames.AlarmConfig_Contract_Device_Motherboard_View;
+            }
+            else if (device.Type == sconnDeviceType.Motherboard)
+            {
+                return AlarmRegionNames.AlarmConfig_Contract_Device_Motherboard_View;
+            }
+            else if (device.Type == sconnDeviceType.Pir_Sensor)
+            {
+                return AlarmRegionNames.AlarmConfig_Contract_Device_Sensor_View;
+            }
+            else if (device.Type == sconnDeviceType.Relay_Module)
+            {
+                return AlarmRegionNames.AlarmConfig_Contract_Device_RelayModule_View;
+            }
+            return null;
+        }
+
+
+
+        private void ShowDevice(sconnDevice device)
+        {
+            AlarmSystemContext.contextDevice = device;
+            SiteNavigationManager.ActivateDeviceContext(device);
+            NavigateToAlarmContract(GetDeviceTypeStatusViewContractNameForDevice(device));
+        }
+
+        private void ConfigureDevice(sconnDevice device)
+        {
+            AlarmSystemContext.contextDevice = device;
+            SiteNavigationManager.ActivateDeviceContext(device);
+            NavigateToAlarmContract(AlarmRegionNames.AlarmStatus_Contract_InputsView);
+        }
+
+
+        private void SetupCmds()
+        {
+            ShowDeviceStatusCommand = new DelegateCommand<sconnDevice>(ShowDevice);
+            ShowDeviceConfigCommand = new DelegateCommand<sconnDevice>(ConfigureDevice);
+        }
+
+
 
         private void GetData()
         {
@@ -54,15 +161,16 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
 
         public AlarmDeviceListViewModel()
         {
+            SetupCmds();
             _name = "Gcfg";
             this._provider = new AlarmDevicesConfigService(_manager);
         }
 
-
-
+        
         [ImportingConstructor]
         public AlarmDeviceListViewModel(IAlarmConfigManager manager, IRegionManager regionManager)
         {
+            SetupCmds();
             Config = new List<sconnDevice>();
             this._manager = (AlarmSystemConfigManager)manager;
             this._provider = new AlarmDevicesConfigService(_manager);

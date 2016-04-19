@@ -10,10 +10,10 @@ using System.Threading.Tasks;
 using NLog;
 using sconnConnector.Config;
 using sconnConnector.POCO.Config;
+using sconnConnector.POCO.Config.sconn;
 using sconnConnector.POCO.Device;
 using sconnPrismSharedContext;
 using sconnRem.Infrastructure.Content;
-using sconnRem.Shells.Config;
 
 namespace sconnRem.Infrastructure.Navigation
 {
@@ -29,9 +29,14 @@ namespace sconnRem.Infrastructure.Navigation
 
         //alarm syste,
         private static AlarmSystemConfigManager alarmSystemConfigManager;
-        private static ConfigNavBootstrapper alarmBootstrapper;
-        private static CompositionContainer contextContainer;
         private static ComposablePart exportedComposablePart;
+
+        private static CompositionContainer contextContainer;
+
+        private static sconnDevice alarmDevice;
+        private static ComposablePart exportedDeviceComposablePart;
+
+        //private static ConfigNavBootstrapper alarmBootstrapper;
 
         public static void ShowFullScreen()
         {
@@ -52,13 +57,8 @@ namespace sconnRem.Infrastructure.Navigation
             {
                 if (currentContextSconnSite != null)
                 {
-                   // WndConfigureSiteShell wnd = new WndConfigureSiteShell();
-                    ConfigNavBootstrapper bootstrapper = new ConfigNavBootstrapper(alarmSystemConfigManager);
-                    bootstrapper.Run();
-
-                    //ConfigureSiteViewModel context = new ConfigureSiteViewModel(manager);
-                    //wnd.DataContext = context;
-                    //wnd.Show();
+                    //ConfigNavBootstrapper bootstrapper = new ConfigNavBootstrapper(alarmSystemConfigManager);
+                    //bootstrapper.Run();
                 }
 
             }
@@ -112,6 +112,27 @@ namespace sconnRem.Infrastructure.Navigation
                     contextContainer.Compose(batch);
                 }
 
+            }
+        }
+
+        public static void ActivateDeviceContext(sconnDevice device)
+        {
+            alarmDevice = device;
+
+            //ensure container does not maintain old manager
+            if (alarmDevice != null && exportedDeviceComposablePart != null && contextContainer != null)
+            {
+                var batchrem = new CompositionBatch();
+                batchrem.RemovePart(exportedDeviceComposablePart);
+                contextContainer.Compose(batchrem);
+            }
+
+            //register new manager in container
+            if (contextContainer != null)
+            {
+                var batch = new CompositionBatch();
+                exportedDeviceComposablePart = batch.AddExportedValue<sconnDevice>(alarmDevice);
+                contextContainer.Compose(batch);
             }
         }
 

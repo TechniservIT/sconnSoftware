@@ -67,6 +67,7 @@
   <ItemGroup>
     <Compile Include="Content\MainContentViewManager.cs" />
     <Compile Include="Controllers\AlarmSystemContextController.cs" />
+    <Compile Include="Navigation\AlarmSystemContextNavigationManager.cs" />
     <Compile Include="Navigation\SiteNavigationManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -85,10 +86,6 @@
     <ProjectReference Include="..\..\..\sconnData\sconnConnector\sconnConnector.csproj">
       <Project>{09c8a8f0-f85a-4534-922e-85e14ec32725}</Project>
       <Name>sconnConnector</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Presentation\sconnRem.Shells\sconnRem.Shells.csproj">
-      <Project>{687f4d7b-3759-45d4-a8ec-1cb6bc0a8cc3}</Project>
-      <Name>sconnRem.Shells</Name>
     </ProjectReference>
     <ProjectReference Include="..\sconnPrismGenerics\sconnPrismGenerics.csproj">
       <Project>{9c17810c-efc7-4806-8414-6868deabbca0}</Project>

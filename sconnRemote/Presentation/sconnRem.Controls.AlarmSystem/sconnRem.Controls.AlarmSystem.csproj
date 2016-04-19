@@ -460,6 +460,10 @@
       <Project>{541885ad-53c0-41c4-b98f-c97815c5f168}</Project>
       <Name>sconnPrismSharedContext</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Infrastrcture\sconnRem.Infrastructure\sconnRem.Infrastructure.csproj">
+      <Project>{E5740F97-E6A7-4010-B267-79D3AA2F7F48}</Project>
+      <Name>sconnRem.Infrastructure</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Infrastrcture\sconnRem.Navigation\sconnRem.Navigation.csproj">
       <Project>{7a5fad15-614c-4d5d-9daa-4bc9628d479c}</Project>
       <Name>sconnRem.Navigation</Name>

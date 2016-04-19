@@ -442,3 +442,5 @@ I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSys
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\obj\Debug\sconnRem.Controls.AlarmSystem.g.resources
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\obj\Debug\sconnRem.Controls.AlarmSystem.dll
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\obj\Debug\sconnRem.Controls.AlarmSystem.pdb
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\bin\Debug\sconnRem.Infrastructure.dll
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\bin\Debug\sconnRem.Infrastructure.pdb
