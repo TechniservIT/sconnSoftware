@@ -17,7 +17,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sconnRem.Android", "sconnRe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sconnRem.Android.Watch", "sconnRem.Android.Watch\sconnRem.Android.Watch.csproj", "{679EFC9F-4666-4D09-A73B-38C14B6784DA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sconnRem.iOS", "sconnRem.iOS\sconnRem.iOS.csproj", "{74100BA3-1823-4145-98FB-CF0768269F1F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iSconnRem", "sconnRem.iOS\iSconnRem.csproj", "{74100BA3-1823-4145-98FB-CF0768269F1F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sconnRem.Watch.WatchKitApp", "sconnRem.Watch\sconnRem.Watch.WatchKitApp\sconnRem.Watch.WatchKitApp.csproj", "{B7B78E77-20F7-4E14-A7AA-2FCBC1696895}"
 EndProject

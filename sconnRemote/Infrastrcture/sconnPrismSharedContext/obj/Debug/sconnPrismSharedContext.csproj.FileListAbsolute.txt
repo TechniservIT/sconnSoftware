@@ -21,3 +21,13 @@ H:\Repo\Bucket\iotdashn\sconnRemote\Infrastrcture\sconnPrismSharedContext\bin\De
 H:\Repo\Bucket\iotdashn\sconnRemote\Infrastrcture\sconnPrismSharedContext\obj\Debug\sconnPrismSharedContext.csprojResolveAssemblyReference.cache
 H:\Repo\Bucket\iotdashn\sconnRemote\Infrastrcture\sconnPrismSharedContext\obj\Debug\sconnPrismSharedContext.dll
 H:\Repo\Bucket\iotdashn\sconnRemote\Infrastrcture\sconnPrismSharedContext\obj\Debug\sconnPrismSharedContext.pdb
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Infrastrcture\sconnPrismSharedContext\bin\Debug\NLog.config
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Infrastrcture\sconnPrismSharedContext\bin\Debug\sconnPrismSharedContext.dll
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Infrastrcture\sconnPrismSharedContext\bin\Debug\sconnPrismSharedContext.pdb
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Infrastrcture\sconnPrismSharedContext\bin\Debug\sconnConnector.dll
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Infrastrcture\sconnPrismSharedContext\bin\Debug\NLog.dll
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Infrastrcture\sconnPrismSharedContext\bin\Debug\sconnConnector.pdb
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Infrastrcture\sconnPrismSharedContext\bin\Debug\NLog.xml
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Infrastrcture\sconnPrismSharedContext\obj\Debug\sconnPrismSharedContext.csprojResolveAssemblyReference.cache
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Infrastrcture\sconnPrismSharedContext\obj\Debug\sconnPrismSharedContext.dll
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Infrastrcture\sconnPrismSharedContext\obj\Debug\sconnPrismSharedContext.pdb

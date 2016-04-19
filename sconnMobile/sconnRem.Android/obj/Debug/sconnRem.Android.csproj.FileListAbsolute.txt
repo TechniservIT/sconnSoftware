@@ -28,3 +28,17 @@ H:\Repo\Bucket\iotdashn\sconnMobile\sconnRem.Android\obj\Debug\R.cs.flag
 H:\Repo\Bucket\iotdashn\sconnMobile\sconnRem.Android\obj\Debug\uploadflags.txt
 H:\Repo\Bucket\iotdashn\sconnMobile\sconnRem.Android\obj\Debug\sconnRem.Android.dll.mdb
 H:\Repo\Bucket\iotdashn\sconnMobile\sconnRem.Android\bin\Debug\sconnRem.Android.dll.mdb
+I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnRem.Android\bin\Debug\sconnRem.Android.dll
+I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnRem.Android\bin\Debug\sconnRem.Android.pdb
+I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnRem.Android\bin\Debug\sconnRem.Android.sconnRem.Android.apk
+I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnRem.Android\bin\Debug\sconnRem.Android.sconnRem.Android-Signed.apk
+I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnRem.Android\obj\Debug\sconnRem.Android.dll
+I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnRem.Android\obj\Debug\sconnRem.Android.pdb
+I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnRem.Android\obj\Debug\android\bin\sconnRem.Android.sconnRem.Android.apk
+I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnRem.Android\obj\Debug\res\layout\main.xml
+I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnRem.Android\obj\Debug\res\values\strings.xml
+I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnRem.Android\obj\Debug\res\drawable\icon.png
+I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnRem.Android\obj\Debug\R.cs.flag
+I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnRem.Android\obj\Debug\uploadflags.txt
+I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnRem.Android\obj\Debug\sconnRem.Android.dll.mdb
+I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnRem.Android\bin\Debug\sconnRem.Android.dll.mdb

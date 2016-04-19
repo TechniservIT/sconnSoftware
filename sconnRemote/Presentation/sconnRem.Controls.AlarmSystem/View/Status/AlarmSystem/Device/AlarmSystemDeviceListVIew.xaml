@@ -21,6 +21,7 @@
             <ListBox ScrollViewer.HorizontalScrollBarVisibility="Disabled" x:Name="OrdersListBox" BorderThickness="0" ItemsSource="{Binding Config}"  IsSynchronizedWithCurrentItem="True" Background="White">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
+                        
                         <Grid>
 
                             <Grid.ColumnDefinitions>
@@ -28,10 +29,10 @@
                                 <ColumnDefinition Width="70*" />
                                 <ColumnDefinition Width="10*" />
                             </Grid.ColumnDefinitions>
+                            
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="1*"/>
                             </Grid.RowDefinitions>
-
 
                             <Grid Grid.Column="0" Grid.Row="0">
 
@@ -39,7 +40,7 @@
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
 
                                 <Button Grid.Column="0" Grid.Row="0"   Command="{Binding DataContext.ShowDeviceCommand, RelativeSource={RelativeSource AncestorType=ListBox}}"  CommandParameter="{Binding}" VerticalAlignment="Center" Height="Auto" Content="">
@@ -69,35 +70,18 @@
 
                             </Grid>
 
-                            <Grid Grid.Column="1" Grid.Row="0">
-
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*"/>
-                                </Grid.RowDefinitions>
-
-
-                                <Grid Grid.Column="0" Grid.Row="0">
+                            <Grid Grid.Column="1" HorizontalAlignment="Stretch"    Grid.Row="0">
 
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="1*" />
+                                        <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="1*"/>
-                                        <RowDefinition Height="1*"/>
-                                    </Grid.RowDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="1*"/>
+                                    <RowDefinition Height="1*"/>
+                                </Grid.RowDefinitions>
 
-                                    <Grid  Grid.Column="0" Grid.Row="0">
-                                        <Label Content="{Binding Path=Name}" />
-                                    </Grid>
-
-
-                                </Grid>
+                                <Label Grid.Column="0" Grid.Row="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="{Binding Path=Name}" />
                                 
-                                
-
                             </Grid>
 
                             <Grid Grid.Column="2" Grid.Row="0">
@@ -109,7 +93,7 @@
                                     <RowDefinition Height="1*"/>
                                 </Grid.RowDefinitions>
 
-                                <Button Grid.Column="7" Grid.Row="0"   Command="{Binding DataContext.ShowDeviceCommand, RelativeSource={RelativeSource AncestorType=ListBox}}"  CommandParameter="{Binding}" VerticalAlignment="Center" Height="Auto" Content="">
+                                <Button Grid.Column="0" Grid.Row="0"   Command="{Binding DataContext.ShowDeviceCommand, RelativeSource={RelativeSource AncestorType=ListBox}}"  CommandParameter="{Binding}" VerticalAlignment="Center" Height="Auto" Content="">
                                     <Button.Template>
                                         <ControlTemplate TargetType="{x:Type Button}">
                                             <Grid>
@@ -120,7 +104,7 @@
                                                         <Grid.ColumnDefinitions>
                                                             <ColumnDefinition Width="*"/>
                                                         </Grid.ColumnDefinitions>
-                                                        <ContentPresenter HorizontalAlignment="Left"  Grid.Column="0"
+                                                        <ContentPresenter HorizontalAlignment="Right"  Grid.Column="0"
                                                               VerticalAlignment="Center"/>
                                                         <Canvas Background="White" Grid.Column="0" />
 
@@ -133,13 +117,22 @@
                                     </Button.Template>
                                 </Button>
 
+                                
                             </Grid>
 
                         </Grid>
+                        
                     </DataTemplate>
                 </ListBox.ItemTemplate>
 
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+                
             </ListBox>
+            
         </Grid>
     </Grid>
 </UserControl>

@@ -54,6 +54,6 @@ I:\Repo\Bucket\sconnSoftware\sconnData\sconnConnector\bin\Debug\sconnConnector.d
 I:\Repo\Bucket\sconnSoftware\sconnData\sconnConnector\bin\Debug\sconnConnector.pdb
 I:\Repo\Bucket\sconnSoftware\sconnData\sconnConnector\bin\Debug\NLog.dll
 I:\Repo\Bucket\sconnSoftware\sconnData\sconnConnector\bin\Debug\NLog.xml
-I:\Repo\Bucket\sconnSoftware\sconnData\sconnConnector\obj\Debug\sconnConnector.csprojResolveAssemblyReference.cache
 I:\Repo\Bucket\sconnSoftware\sconnData\sconnConnector\obj\Debug\sconnConnector.dll
 I:\Repo\Bucket\sconnSoftware\sconnData\sconnConnector\obj\Debug\sconnConnector.pdb
+I:\Repo\Bucket\sconnSoftware\sconnData\sconnConnector\obj\Debug\sconnConnector.csprojResolveAssemblyReference.cache
