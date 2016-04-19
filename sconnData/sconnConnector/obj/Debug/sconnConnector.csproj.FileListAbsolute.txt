@@ -48,3 +48,12 @@ H:\Repo\Bucket\iotdashn\sconnData\sconnConnector\bin\Debug\NLog.xml
 H:\Repo\Bucket\iotdashn\sconnData\sconnConnector\obj\Debug\sconnConnector.dll
 H:\Repo\Bucket\iotdashn\sconnData\sconnConnector\obj\Debug\sconnConnector.pdb
 H:\Repo\Bucket\iotdashn\sconnData\sconnConnector\obj\Debug\sconnConnector.csprojResolveAssemblyReference.cache
+I:\Repo\Bucket\sconnSoftware\sconnData\sconnConnector\bin\Debug\NLog.config
+I:\Repo\Bucket\sconnSoftware\sconnData\sconnConnector\bin\Debug\sconnConnector.dll.config
+I:\Repo\Bucket\sconnSoftware\sconnData\sconnConnector\bin\Debug\sconnConnector.dll
+I:\Repo\Bucket\sconnSoftware\sconnData\sconnConnector\bin\Debug\sconnConnector.pdb
+I:\Repo\Bucket\sconnSoftware\sconnData\sconnConnector\bin\Debug\NLog.dll
+I:\Repo\Bucket\sconnSoftware\sconnData\sconnConnector\bin\Debug\NLog.xml
+I:\Repo\Bucket\sconnSoftware\sconnData\sconnConnector\obj\Debug\sconnConnector.csprojResolveAssemblyReference.cache
+I:\Repo\Bucket\sconnSoftware\sconnData\sconnConnector\obj\Debug\sconnConnector.dll
+I:\Repo\Bucket\sconnSoftware\sconnData\sconnConnector\obj\Debug\sconnConnector.pdb
