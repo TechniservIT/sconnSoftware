@@ -27,8 +27,8 @@
             <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" x:Name="LayoutNested2">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="20*" />
-                        <ColumnDefinition  Width="70*"/>
+                        <ColumnDefinition Width="15*" />
+                        <ColumnDefinition  Width="75*"/>
                         <ColumnDefinition Width="10*" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>

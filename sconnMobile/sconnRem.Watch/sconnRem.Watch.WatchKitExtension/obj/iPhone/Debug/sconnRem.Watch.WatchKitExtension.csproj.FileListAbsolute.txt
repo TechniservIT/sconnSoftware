@@ -1,0 +1,7 @@
+H:\Repo\Bucket\iotdashn\sconnMobile\sconnRem.Watch\sconnRem.Watch.WatchKitExtension\bin\iPhone\Debug\sconnRemWatchWatchKitExtension.dll
+H:\Repo\Bucket\iotdashn\sconnMobile\sconnRem.Watch\sconnRem.Watch.WatchKitExtension\bin\iPhone\Debug\sconnRemWatchWatchKitExtension.pdb
+H:\Repo\Bucket\iotdashn\sconnMobile\sconnRem.Watch\sconnRem.Watch.WatchKitExtension\obj\iPhone\Debug\optimized\
+H:\Repo\Bucket\iotdashn\sconnMobile\sconnRem.Watch\sconnRem.Watch.WatchKitExtension\obj\iPhone\Debug\sconnRemWatchWatchKitExtension.dll
+H:\Repo\Bucket\iotdashn\sconnMobile\sconnRem.Watch\sconnRem.Watch.WatchKitExtension\obj\iPhone\Debug\sconnRemWatchWatchKitExtension.pdb
+H:\Repo\Bucket\iotdashn\sconnMobile\sconnRem.Watch\sconnRem.Watch.WatchKitExtension\obj\iPhone\Debug\sconnRemWatchWatchKitExtension.dll.mdb
+H:\Repo\Bucket\iotdashn\sconnMobile\sconnRem.Watch\sconnRem.Watch.WatchKitExtension\bin\iPhone\Debug\sconnRemWatchWatchKitExtension.dll.mdb
