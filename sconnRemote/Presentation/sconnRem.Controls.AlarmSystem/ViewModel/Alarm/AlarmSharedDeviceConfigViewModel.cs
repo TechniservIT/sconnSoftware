@@ -13,7 +13,9 @@ using sconnConnector.Config;
 using sconnConnector.POCO.Config.sconn;
 using System.ComponentModel.Composition.Primitives;
 using AlarmSystemManagmentService.Device;
+using Prism.Commands;
 using sconnPrismSharedContext;
+using sconnRem.Navigation;
 
 namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
 {
@@ -36,8 +38,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
             }
         }
 
-        private ICommand _getDataCommand;
-        private ICommand _saveDataCommand;
+        public ICommand NavigateBackCommand { get; set; }
 
         private void GetData()
         {
@@ -63,26 +64,44 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
             _name = "Dev";
             this._provider = new DeviceConfigService(_manager);
         }
-        
-        //[ImportingConstructor]
-        //public AlarmSharedDeviceConfigViewModel(IRegionManager regionManager)
-        //{
-        //    Config = new sconnDevice();
-        //    this._manager = AlarmSystemContext.GetManager();
-        //    this._provider = new DeviceConfigService(_manager);
-        //    this._regionManager = regionManager;
-        //    GetData();
-        //}
+
+        public void NavigateBack()
+        {
+            try
+            {
+                this._regionManager.RequestNavigate(GlobalViewRegionNames.MainGridContentRegion, AlarmRegionNames.AlarmStatus_Contract_Device_List_View
+                    ,
+                    (NavigationResult nr) =>
+                    {
+                        var error = nr.Error;
+                        var result = nr.Result;
+                        if (error != null)
+                        {
+                            _nlogger.Error(error);
+                        }
+                    });
+            }
+            catch (Exception ex)
+            {
+                _nlogger.Error(ex, ex.Message);
+
+            }
+        }
 
         [ImportingConstructor]
         public AlarmSharedDeviceConfigViewModel(sconnDevice device, IAlarmConfigManager manager, IRegionManager regionManager)
         {
-          //  SetupCmds();
+            SetupCmds();
             Config = device;
             this._manager = (AlarmSystemConfigManager)manager;
             this._provider = new DeviceConfigService(_manager, Config.DeviceId);
             this._regionManager = regionManager;
             GetData();
+        }
+
+        private void SetupCmds()
+        {
+            NavigateBackCommand = new DelegateCommand(NavigateBack);
         }
 
         public string DisplayedImagePath

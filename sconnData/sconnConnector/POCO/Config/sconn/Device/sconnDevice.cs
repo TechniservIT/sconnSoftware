@@ -26,7 +26,11 @@ namespace sconnConnector.POCO.Config.sconn
         Motherboard,
         Gsm_Module,
         Pir_Sensor,
-        Relay_Module
+        Relay_Module,
+        InputsModule,
+        Siren,
+        PirSonic_Sensor,
+        KeypadMotherboard
     }
 
 
@@ -97,6 +101,8 @@ namespace sconnConnector.POCO.Config.sconn
         public byte[] Hash;
         public byte[] AuthDevicesCFG { get; set; }
 
+        public string imageIconUri { get; set; }
+        public string imageRealUri { get; set; }
 
         public string Name { get; set; }
 
@@ -119,6 +125,49 @@ namespace sconnConnector.POCO.Config.sconn
             this.Revision = memCFG[ipcDefines.mAdrDevRev];
             this.Type = (sconnDeviceType)memCFG[ipcDefines.mAdrDevType];
 
+        }
+
+        public string GetDeviceTypeImageUriForDevice(sconnDevice device)
+        {
+            if (device.Type == sconnDeviceType.Graphical_Keypad)
+            {
+                return "pack://application:,,,/images/klawiatura1000x1000.jpg";
+            }
+            else if (device.Type == sconnDeviceType.Gsm_Module)
+            {
+                return "pack://application:,,,/images/tel1000.jpg";
+            }
+            else if (device.Type == sconnDeviceType.Motherboard)
+            {
+                return "pack://application:,,,/images/strefa1000.jpg";
+            }
+            else if (device.Type == sconnDeviceType.Pir_Sensor)
+            {
+                return "pack://application:,,,/images/czujka1000x1000.jpg";
+            }
+            else if (device.Type == sconnDeviceType.Relay_Module)
+            {
+                return "pack://application:,,,/images/przek1000x1000.jpg";
+            }
+            else if (device.Type == sconnDeviceType.InputsModule)
+            {
+                return "pack://application:,,,/images/exp1000x1000.jpg";
+            }
+            else if (device.Type == sconnDeviceType.PirSonic_Sensor)
+            {
+                return "pack://application:,,,/images/czujka1000x1000.jpg";
+            }
+            else if (device.Type == sconnDeviceType.Siren)
+            {
+                return "pack://application:,,,/images/syrena1000x1000.jpg";
+            }
+            
+            return null;
+        }
+
+        public void LoadImageTypeUrl()
+        {
+            imageIconUri = GetDeviceTypeImageUriForDevice(this);
         }
 
 
@@ -206,6 +255,8 @@ namespace sconnConnector.POCO.Config.sconn
             LoadSupplyVoltageLevels();
             LoadDeviceStaticInfo();
             LoadDeviceNames();
+
+            LoadImageTypeUrl();
         }
 
         public byte[] NetworkConfig

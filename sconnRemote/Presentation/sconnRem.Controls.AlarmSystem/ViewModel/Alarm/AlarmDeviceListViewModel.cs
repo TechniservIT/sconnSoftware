@@ -116,7 +116,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
             return null;
         }
 
-
+       
 
         private void ShowDevice(sconnDevice device)
         {

@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:sconnRem.Controls.AlarmSystem.View.Status.AlarmSystem.Device.InputsModule"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="600" d:DesignWidth="800">
 
     <Grid>
 
@@ -25,9 +25,9 @@
                         <Grid>
 
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="20*" />
-                                <ColumnDefinition Width="70*" />
                                 <ColumnDefinition Width="10*" />
+                                <ColumnDefinition Width="83*" />
+                                <ColumnDefinition Width="7*" />
                             </Grid.ColumnDefinitions>
                             
                             <Grid.RowDefinitions>
@@ -58,7 +58,7 @@
                                                               VerticalAlignment="Center"/>
                                                         <Canvas Background="White" Grid.Column="0" />
 
-                                                        <Image  x:Name="ImgDispActionGridFullScreen521"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="0,0,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/eye.png"/>
+                                                        <Image  x:Name="ImgDispActionGridFullScreen521"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="0,0,0,0" VerticalAlignment="Center" Width="Auto" Source="{Binding Path=imageIconUri}" />
 
                                                     </Grid>
                                                 </Border>
@@ -108,7 +108,7 @@
                                                               VerticalAlignment="Center"/>
                                                         <Canvas Background="White" Grid.Column="0" />
 
-                                                        <Image  x:Name="ImgDispActionGridFullScreen521"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="0,0,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/eye.png"/>
+                                                        <Image  x:Name="ImgDispActionGridFullScreen521"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="0,0,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/dalej500x500.jpg"/>
 
                                                     </Grid>
                                                 </Border>

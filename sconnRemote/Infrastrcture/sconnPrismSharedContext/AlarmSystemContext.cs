@@ -25,6 +25,8 @@ namespace sconnPrismSharedContext
             return alarmSystemConfigManager;
         }
 
-    }
+        
+
+}
     
 }
