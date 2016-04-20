@@ -53,11 +53,49 @@ namespace sconnConnector.POCO.Config
         public DeviceIoCategory IoCategory { get; set; }
         private static Logger _logger = LogManager.GetCurrentClassLogger();
 
+        public string imageIconUri { get; set; }
+        public string imageRealUri { get; set; }
+
         public sconnInput()
         {
             Name = "Input";
+            LoadImageTypeUrl();
             IoCategory = DeviceIoCategory.CmosInputs;  //TODO - detect
         }
+
+
+        public string GetInputTypeImageUriForInput(sconnInput input)
+        {
+            if (input.Type == sconnInputType.DoubleParametrizedNC )
+            {
+                return "pack://application:,,,/images/czujka1000x1000.jpg";
+            }
+            else if (input.Type == sconnInputType.DoubleParametrizedNO)
+            {
+                return "pack://application:,,,/images/czujka1000x1000.jpg";
+            }
+            else if (input.Type == sconnInputType.NormallyClosed)
+            {
+                return "pack://application:,,,/images/czujka1000x1000.jpg";
+            }
+            else if (input.Type == sconnInputType.NormallyOpen)
+            {
+                return "pack://application:,,,/images/czujka1000x1000.jpg";
+            }
+            else if (input.Type == sconnInputType.SingleParametrizedNC)
+            {
+                return "pack://application:,,,/images/czujka1000x1000.jpg";
+            }
+
+            return null;
+        }
+
+        private void LoadImageTypeUrl()
+        {
+            imageIconUri = GetInputTypeImageUriForInput(this);
+        }
+
+
 
         public sconnInput(byte[] rawBytes) : this()
         {
