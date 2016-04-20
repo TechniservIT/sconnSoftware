@@ -44,6 +44,8 @@ namespace sconnConnector.POCO.Config
             }
         }
 
+        public string UUID { get; set; }
+
         public sconnInputType Type { get; set; }
         public byte Value { get; set; }
         public uint Sensitivity { get; set; }
@@ -59,6 +61,7 @@ namespace sconnConnector.POCO.Config
         public sconnInput()
         {
             Name = "Input";
+            UUID = Guid.NewGuid().ToString();
             LoadImageTypeUrl();
             IoCategory = DeviceIoCategory.CmosInputs;  //TODO - detect
         }
@@ -158,6 +161,20 @@ namespace sconnConnector.POCO.Config
             }
 
         }
+
+        public bool Equals(sconnInput other)
+        {
+            return null != other && UUID == other.UUID;
+        }
+        public override bool Equals(object obj)
+        {
+            return Equals(obj as sconnInput);
+        }
+        public override int GetHashCode()
+        {
+            return Id;
+        }
+
 
     }
 

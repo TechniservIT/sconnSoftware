@@ -38,9 +38,7 @@ namespace sconnConnector.POCO.Config
         AnalogInput,
         Relay
     }
-
-
-
+    
 
 
     public class sconnRelay : IAlarmSystemConfigurationEntity, ISerializableConfiguration, IFakeAbleConfiguration
@@ -54,9 +52,13 @@ namespace sconnConnector.POCO.Config
         public DeviceIoCategory IoCategory { get; set; }
         private static Logger _logger = LogManager.GetCurrentClassLogger();
 
+
+        public string UUID { get; set; }
+
         public sconnRelay()
         {
             Name = "Relay";
+            UUID = Guid.NewGuid().ToString();
             IoCategory = DeviceIoCategory.Relay; 
         }
 
@@ -116,6 +118,20 @@ namespace sconnConnector.POCO.Config
             }
 
         }
+
+        public bool Equals(sconnRelay other)
+        {
+            return null != other && UUID == other.UUID;
+        }
+        public override bool Equals(object obj)
+        {
+            return Equals(obj as sconnRelay);
+        }
+        public override int GetHashCode()
+        {
+            return Id;
+        }
+
     }
 
 

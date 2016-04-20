@@ -40,6 +40,10 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
         public ICommand ShowDeviceStatusCommand { get; set; }
         public ICommand ShowDeviceConfigCommand { get; set; }
 
+        public ICommand ConfigureInputCommand { get; set; }
+
+        
+
 
         private void NavigateToAlarmContract(string contractName)
         {
@@ -125,6 +129,26 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
             NavigateToAlarmContract(GetDeviceTypeStatusViewContractNameForDevice(device));
         }
 
+        private void ShowInputConfigView(sconnInput input)
+        {
+            try
+            {
+                foreach (var device in Config)
+                {
+                    if (device.Inputs.Contains(input))
+                    {
+                        device.ActiveInput = input;
+                        SiteNavigationManager.ActivateDeviceContext(device);
+                        NavigateToAlarmContract(AlarmRegionNames.AlarmConfig_Contract_Input_Config_View);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                    
+            }
+        }
+
         private void ConfigureDevice(sconnDevice device)
         {
             AlarmSystemContext.contextDevice = device;
@@ -137,6 +161,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
         {
             ShowDeviceStatusCommand = new DelegateCommand<sconnDevice>(ShowDevice);
             ShowDeviceConfigCommand = new DelegateCommand<sconnDevice>(ConfigureDevice);
+            ConfigureInputCommand = new DelegateCommand<sconnInput>(ShowInputConfigView);
         }
 
 

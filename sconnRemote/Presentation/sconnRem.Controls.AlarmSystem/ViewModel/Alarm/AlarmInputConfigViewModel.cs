@@ -7,23 +7,22 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using AlarmSystemManagmentService;
 using NLog;
+using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
 using sconnConnector.Config;
+using sconnConnector.POCO.Config;
 using sconnConnector.POCO.Config.sconn;
-using System.ComponentModel.Composition.Primitives;
-using AlarmSystemManagmentService.Device;
-using Prism.Commands;
 using sconnPrismSharedContext;
 using sconnRem.Navigation;
 
 namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
 {
-    
+
     [Export]
-    public class AlarmSharedDeviceConfigViewModel : BindableBase  //ObservableObject, IPageViewModel
+    public class AlarmInputConfigViewModel : BindableBase  //ObservableObject, IPageViewModel
     {
-        public sconnDevice Config { get; set; }
+        public sconnInput Config { get; set; }
         private DeviceConfigService _provider;
         private AlarmSystemConfigManager _manager;
         private readonly IRegionManager _regionManager;
@@ -39,13 +38,11 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
         }
 
         public ICommand NavigateBackCommand { get; set; }
-        public ICommand SaveCommand { get; set; }
-        
+
         private void GetData()
         {
             try
             {
-                Config = _provider.Get();
 
             }
             catch (Exception ex)
@@ -59,9 +56,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
             _provider.Update(Config);
         }
 
-        
-        
-        public AlarmSharedDeviceConfigViewModel()
+        public AlarmInputConfigViewModel()
         {
             this._manager = AlarmSystemContext.GetManager();
             _name = "Dev";
@@ -92,12 +87,11 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
         }
 
         [ImportingConstructor]
-        public AlarmSharedDeviceConfigViewModel(sconnDevice device, IAlarmConfigManager manager, IRegionManager regionManager)
+        public AlarmInputConfigViewModel(sconnInput input, IAlarmConfigManager manager, IRegionManager regionManager)
         {
             SetupCmds();
-            Config = device;
+            Config = input;
             this._manager = (AlarmSystemConfigManager)manager;
-            this._provider = new DeviceConfigService(_manager, Config.DeviceId);
             this._regionManager = regionManager;
             GetData();
         }
@@ -105,7 +99,6 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
         private void SetupCmds()
         {
             NavigateBackCommand = new DelegateCommand(NavigateBack);
-            SaveCommand = new DelegateCommand(SaveData);
         }
 
         public string DisplayedImagePath
@@ -114,5 +107,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
         }
 
     }
+
+
 
 }

@@ -43,6 +43,7 @@ namespace sconnConnector.POCO.Config
 
         private static Logger _logger = LogManager.GetCurrentClassLogger();
 
+        public string UUID { get; set; }
 
         public string imageIconUri { get; set; }
         public string imageRealUri { get; set; }
@@ -97,6 +98,7 @@ namespace sconnConnector.POCO.Config
         public sconnOutput() 
         {
             Name = "Output";
+            UUID = Guid.NewGuid().ToString();
             LoadImageTypeUrl();
             IoCategory = DeviceIoCategory.PowerOutput;  //TODO - detect
         }
@@ -157,6 +159,20 @@ namespace sconnConnector.POCO.Config
                 _logger.Error(e, e.Message);
             }
         }
+
+        public bool Equals(sconnOutput other)
+        {
+            return null != other && UUID == other.UUID;
+        }
+        public override bool Equals(object obj)
+        {
+            return Equals(obj as sconnOutput);
+        }
+        public override int GetHashCode()
+        {
+            return Id;
+        }
+
 
     }
 

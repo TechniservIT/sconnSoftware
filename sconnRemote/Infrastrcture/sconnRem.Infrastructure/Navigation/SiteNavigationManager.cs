@@ -36,6 +36,10 @@ namespace sconnRem.Infrastructure.Navigation
         private static sconnDevice alarmDevice;
         private static ComposablePart exportedDeviceComposablePart;
 
+        private static sconnInput activeInput;
+        private static ComposablePart exportedInputComposablePart;
+
+
         //private static ConfigNavBootstrapper alarmBootstrapper;
 
         public static void ShowFullScreen()
@@ -152,6 +156,37 @@ namespace sconnRem.Infrastructure.Navigation
             }
         
         }
+
+
+        public static void ActivateInputContext(sconnInput input)
+        {
+            try
+            {
+                activeInput = input;
+
+                //ensure container does not maintain old manager
+                if (activeInput != null && exportedInputComposablePart != null && contextContainer != null)
+                {
+                    var batchrem = new CompositionBatch();
+                    batchrem.RemovePart(exportedInputComposablePart);
+                    contextContainer.Compose(batchrem);
+                }
+
+                //register new manager in container
+                if (contextContainer != null)
+                {
+                    var batch = new CompositionBatch();
+                    exportedInputComposablePart = batch.AddExportedValue<sconnInput>(activeInput);
+                    contextContainer.Compose(batch);
+                }
+            }
+            catch (Exception ex)
+            {
+                _nlogger.Error(ex, ex.Message);
+            }
+
+        }
+
 
 
     }

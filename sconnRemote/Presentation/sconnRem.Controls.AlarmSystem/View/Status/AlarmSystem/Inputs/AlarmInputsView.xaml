@@ -106,9 +106,14 @@
                                                         <Grid.RowDefinitions>
                                                             <RowDefinition Height="1*"/>
                                                             <RowDefinition Height="1*"/>
+                                                            <RowDefinition Height="1*"/>
                                                         </Grid.RowDefinitions>
 
                                                         <Label Grid.Column="0" Grid.Row="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="{Binding Path=Name}" />
+
+                                                        <Label Grid.Column="0" Grid.Row="1" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="{Binding Path=Type}" />
+
+                                                        <Label Grid.Column="0" Grid.Row="2" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="{Binding Path=Value}" />
 
                                                     </Grid>
 
