@@ -53,7 +53,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
 
         private void SaveData()
         {
-            _provider.Update(Config);
+          
         }
 
         public AlarmInputConfigViewModel()

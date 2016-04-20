@@ -71,7 +71,7 @@
                                                             <RowDefinition Height="Auto"/>
                                                         </Grid.RowDefinitions>
 
-                                                        <Button Grid.Column="0" Grid.Row="0"   Command="{Binding DataContext.ConfigureInputCommand, RelativeSource={RelativeSource AncestorType=ListBox}}"  CommandParameter="{Binding}" VerticalAlignment="Center" Height="Auto" Content="">
+                                                        <Button Grid.Column="0" Grid.Row="0"   VerticalAlignment="Center" Height="Auto" Content="">
                                                             <Button.Template>
                                                                 <ControlTemplate TargetType="{x:Type Button}">
                                                                     <Grid>
@@ -126,7 +126,7 @@
                                                             <RowDefinition Height="1*"/>
                                                         </Grid.RowDefinitions>
 
-                                                        <Button Grid.Column="0" Grid.Row="0"   Command="{Binding DataContext.ShowDeviceStatusCommand, RelativeSource={RelativeSource AncestorType=ListBox}}"  CommandParameter="{Binding}" VerticalAlignment="Center" Height="Auto" Content="">
+                                                        <Button Grid.Column="0" Grid.Row="0"   Command="{Binding DataContext.ConfigureInputCommand, RelativeSource={RelativeSource  FindAncestor, AncestorLevel=2, AncestorType=ListBox}}"  CommandParameter="{Binding}" VerticalAlignment="Center" Height="Auto" Content="">
                                                             <Button.Template>
                                                                 <ControlTemplate TargetType="{x:Type Button}">
                                                                     <Grid>
