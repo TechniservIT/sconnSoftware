@@ -6,7 +6,8 @@
              xmlns:local="clr-namespace:sconnRem.Controls.AlarmSystem.View.Status.Outputs"
              xmlns:alarm="clr-namespace:sconnRem.Controls.AlarmSystem.ViewModel.Alarm"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="600" d:DesignWidth="700">
+
 
     <Grid>
 
@@ -18,112 +19,184 @@
         </Grid.RowDefinitions>
 
         <Grid  Grid.Column="0" Grid.Row="0">
-            <ListBox ScrollViewer.HorizontalScrollBarVisibility="Disabled" x:Name="OrdersListBox" BorderThickness="0" ItemsSource="{Binding Config.Outputs}"  IsSynchronizedWithCurrentItem="True" Background="White">
-                <ListBox.ItemTemplate>
 
-                    <DataTemplate>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
-                        <Grid>
+            <Grid  Grid.Column="0" Grid.Row="0">
 
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="10*"/>
-                                <RowDefinition Height="30*"/>
-                                <RowDefinition Height="60*"/>
-                            </Grid.RowDefinitions>
+                <ListBox HorizontalContentAlignment="Stretch" 
+                         ScrollViewer.HorizontalScrollBarVisibility="Disabled" x:Name="OrdersListBox" 
+                         BorderThickness="0" ItemsSource="{Binding Config}" 
+                         IsSynchronizedWithCurrentItem="True" Background="White">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
 
-                            <Grid Grid.Column="0" Grid.Row="0">
-
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="1*"/>
-                                </Grid.RowDefinitions>
-
-                                <!--<Button Command="{Binding DataContext.ConfigureInputCommand, RelativeSource={RelativeSource AncestorType=ListBox}}"></Button>-->
-
-                                <Button Grid.Column="7" Grid.Row="0"   Command="{Binding DataContext.ConfigureInputCommand, RelativeSource={RelativeSource AncestorType=ListBox}}"  CommandParameter="{Binding}" VerticalAlignment="Center" Height="Auto" Content="">
-                                    <Button.Template>
-                                        <ControlTemplate TargetType="{x:Type Button}">
-                                            <Grid>
-                                                <Border Background="{TemplateBinding Background}"
-                         BorderBrush="{TemplateBinding BorderBrush}"
-                         BorderThickness="{TemplateBinding BorderThickness}">
-                                                    <Grid>
-                                                        <Grid.ColumnDefinitions>
-                                                            <ColumnDefinition Width="*"/>
-                                                        </Grid.ColumnDefinitions>
-                                                        <ContentPresenter HorizontalAlignment="Left"  Grid.Column="0"
-                                          VerticalAlignment="Center"/>
-                                                        <Canvas Background="White" Grid.Column="0" />
-
-                                                        <Image  x:Name="ImgDispActionGridFullScreen521"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="0,0,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/config1.png"/>
-
-                                                    </Grid>
-                                                </Border>
-                                            </Grid>
-                                        </ControlTemplate>
-                                    </Button.Template>
-                                </Button>
-
-
-
-                            </Grid>
-
-                            <Grid Grid.Column="0" Grid.Row="1">
+                            <Grid>
 
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="1*" />
+                                    <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
+
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="1*"/>
+                                    <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
 
                                 <Grid  Grid.Column="0" Grid.Row="0">
-                                    <Label Content="{Binding Path=Name}" />
+
+                                    <ListBox HorizontalContentAlignment="Stretch" 
+                                             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                             x:Name="OrdersListBox" BorderThickness="0"
+                                             ItemsSource="{Binding Outputs}"
+                                             IsSynchronizedWithCurrentItem="True" Background="White">
+                                        <ListBox.ItemTemplate>
+                                            <DataTemplate>
+
+                                                <Grid>
+
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="5*" />
+                                                        <ColumnDefinition Width="90*" />
+                                                        <ColumnDefinition Width="5*" />
+                                                    </Grid.ColumnDefinitions>
+
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="1*"/>
+                                                    </Grid.RowDefinitions>
+
+                                                    <Grid Grid.Column="0" Grid.Row="0">
+
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="*" />
+                                                        </Grid.ColumnDefinitions>
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="Auto"/>
+                                                        </Grid.RowDefinitions>
+
+                                                        <Button Grid.Column="0" Grid.Row="0"   VerticalAlignment="Center" Height="Auto" Content="">
+                                                            <Button.Template>
+                                                                <ControlTemplate TargetType="{x:Type Button}">
+                                                                    <Grid>
+                                                                        <Border Background="{TemplateBinding Background}"
+                                                     BorderBrush="{TemplateBinding BorderBrush}"
+                                                     BorderThickness="{TemplateBinding BorderThickness}">
+                                                                            <Grid>
+                                                                                <Grid.ColumnDefinitions>
+                                                                                    <ColumnDefinition Width="*"/>
+                                                                                </Grid.ColumnDefinitions>
+                                                                                <ContentPresenter HorizontalAlignment="Left"  Grid.Column="0"
+                                                              VerticalAlignment="Center"/>
+                                                                                <Canvas Background="White" Grid.Column="0" />
+
+                                                                                <Image  x:Name="ImgDispActionGridFullScreen521"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="0,0,0,0" VerticalAlignment="Center" Width="Auto" Source="{Binding Path=imageIconUri}" />
+
+                                                                            </Grid>
+                                                                        </Border>
+                                                                    </Grid>
+                                                                </ControlTemplate>
+                                                            </Button.Template>
+                                                        </Button>
+
+
+                                                    </Grid>
+
+                                                    <Grid Grid.Column="1" HorizontalAlignment="Stretch"    Grid.Row="0">
+
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="*" />
+                                                        </Grid.ColumnDefinitions>
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="1*"/>
+                                                            <RowDefinition Height="1*"/>
+                                                            <RowDefinition Height="1*"/>
+                                                        </Grid.RowDefinitions>
+
+                                                        <Label Grid.Column="0" Grid.Row="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="{Binding Path=Name}" />
+
+                                                        <Label Grid.Column="0" Grid.Row="1" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="{Binding Path=Type}" />
+
+                                                        <Label Grid.Column="0" Grid.Row="2" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="{Binding Path=Value}" />
+
+                                                    </Grid>
+
+                                                    <Grid Grid.Column="2" Grid.Row="0">
+
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="*" />
+                                                        </Grid.ColumnDefinitions>
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="1*"/>
+                                                        </Grid.RowDefinitions>
+
+                                                        <Button Grid.Column="0" Grid.Row="0"   Command="{Binding DataContext.ConfigureOutputCommand, RelativeSource={RelativeSource  FindAncestor, AncestorLevel=2, AncestorType=ListBox}}"  CommandParameter="{Binding}" VerticalAlignment="Center" Height="Auto" Content="">
+                                                            <Button.Template>
+                                                                <ControlTemplate TargetType="{x:Type Button}">
+                                                                    <Grid>
+                                                                        <Border Background="{TemplateBinding Background}"
+                                                     BorderBrush="{TemplateBinding BorderBrush}"
+                                                     BorderThickness="{TemplateBinding BorderThickness}">
+                                                                            <Grid>
+                                                                                <Grid.ColumnDefinitions>
+                                                                                    <ColumnDefinition Width="*"/>
+                                                                                </Grid.ColumnDefinitions>
+                                                                                <ContentPresenter HorizontalAlignment="Right"  Grid.Column="0"
+                                                              VerticalAlignment="Center"/>
+                                                                                <Canvas Background="White" Grid.Column="0" />
+
+                                                                                <Image  x:Name="ImgDispActionGridFullScreen521"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="0,0,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/config1000 (2).jpg"/>
+
+                                                                            </Grid>
+                                                                        </Border>
+                                                                    </Grid>
+                                                                </ControlTemplate>
+                                                            </Button.Template>
+                                                        </Button>
+
+
+                                                    </Grid>
+
+                                                </Grid>
+
+                                            </DataTemplate>
+                                        </ListBox.ItemTemplate>
+
+                                        <ListBox.ItemContainerStyle>
+                                            <Style TargetType="ListBoxItem">
+                                                <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                            </Style>
+                                        </ListBox.ItemContainerStyle>
+
+                                    </ListBox>
+
+
                                 </Grid>
 
                             </Grid>
 
-                            <Grid Grid.Column="0" Grid.Row="2">
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
 
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="0.5*" />
-                                    <ColumnDefinition Width="0.5*" />
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="10*"/>
-                                    <RowDefinition Height="10*"/>
-                                </Grid.RowDefinitions>
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
 
-                            </Grid>
+                </ListBox>
 
-                        </Grid>
-
-                        <!--<ContentControl>
-                        <siteNavSideMenu:SiteNavMenuViewItem DataContext="{Binding}" />
-                    </ContentControl>-->
-
-
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-
-            </ListBox>
-
+            </Grid>
 
         </Grid>
 
+
     </Grid>
+
 
 
 </UserControl>

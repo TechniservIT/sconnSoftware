@@ -53,6 +53,71 @@ namespace sconnConnector.POCO.Config
         private static Logger _logger = LogManager.GetCurrentClassLogger();
 
 
+        public string imageIconUri { get; set; }
+        public string imageRealUri { get; set; }
+
+
+        public string GetRelayTypeImageUriForRelay(sconnRelay input)
+        {
+            if (input.Type == sconnOutputType.AlarmNormallyActive)
+            {
+                return "pack://application:,,,/images/elektro1000.jpg";
+            }
+            else if (input.Type == sconnOutputType.AlarmNormallyInActive)
+            {
+                return "pack://application:,,,/images/elektro1000.jpg";
+            }
+            else if (input.Type == sconnOutputType.OnConfigUpload)
+            {
+                return "pack://application:,,,/images/elektro1000.jpg";
+            }
+            else if (input.Type == sconnOutputType.OnFailure)
+            {
+                return "pack://application:,,,/images/elektro1000.jpg";
+            }
+            else if (input.Type == sconnOutputType.Power)
+            {
+                return "pack://application:,,,/images/elektro1000.jpg";
+            }
+            else if (input.Type == sconnOutputType.OnGsmTransmission)
+            {
+                return "pack://application:,,,/images/elektro1000.jpg";
+            }
+            else if (input.Type == sconnOutputType.OnViolation)
+            {
+                return "pack://application:,,,/images/elektro1000.jpg";
+            }
+            else if (input.Type == sconnOutputType.SignalNormallyActive)
+            {
+                return "pack://application:,,,/images/elektro1000.jpg";
+            }
+            else if (input.Type == sconnOutputType.SignalNormallyInactive)
+            {
+                return "pack://application:,,,/images/elektro1000.jpg";
+            }
+            return null;
+        }
+
+
+        private void LoadImageTypeUrl()
+        {
+            imageIconUri = GetRelayTypeImageUriForRelay(this);
+        }
+
+
+        public void CopyFrom(sconnRelay other)
+        {
+            this.Type = other.Type;
+            this.Value = other.Value;
+            this.Enabled = other.Enabled;
+            this.Name = other.Name;
+            this.IoCategory = other.IoCategory;
+            this.NameId = other.NameId;
+            this.UUID = other.UUID;
+            this.imageIconUri = other.imageIconUri;
+        }
+
+
         public string UUID { get; set; }
 
         public sconnRelay()

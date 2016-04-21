@@ -49,6 +49,19 @@ namespace sconnConnector.POCO.Config
         public string imageRealUri { get; set; }
 
 
+        public void CopyFrom(sconnOutput other)
+        {
+            this.Type = other.Type;
+            this.Value = other.Value;
+            this.Enabled = other.Enabled;
+            this.Name = other.Name;
+            this.IoCategory = other.IoCategory;
+            this.NameId = other.NameId;
+            this.UUID = other.UUID;
+            this.imageIconUri = other.imageIconUri;
+        }
+
+
         public string GetOutputTypeImageUriForOutput(sconnOutput input)
         {
             if (input.Type == sconnOutputType.AlarmNormallyActive)

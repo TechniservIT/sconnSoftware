@@ -27,7 +27,11 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
     public class AlarmSharedDeviceConfigViewModel : BindableBase, IActiveAware   //ObservableObject, IPageViewModel
     {
         public sconnDevice Config { get; set; }
+
         public sconnInput ActiveInput { get; set; }
+        public sconnOutput ActiveOutput { get; set; }
+        public sconnRelay ActiveRelay { get; set; }
+
         private DeviceConfigService _provider;
         private AlarmSystemConfigManager _manager;
         private readonly IRegionManager _regionManager;
@@ -83,11 +87,23 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
                 if (ActiveInput != null)
                 {
                     sconnInput existing = Config.Inputs.First(i => i.Id == ActiveInput.Id);
-                    if (existing != null)
-                    {
-                        existing.CopyFrom(ActiveInput);
-                    }
+                    existing?.CopyFrom(ActiveInput);
                 }
+
+                if (ActiveOutput != null)
+                {
+                    sconnOutput existing = Config.Outputs.First(i => i.Id == ActiveOutput.Id);
+                    existing?.CopyFrom(ActiveOutput);
+                }
+
+
+                if (ActiveRelay != null)
+                {
+                    sconnRelay existing = Config.Relays.First(i => i.Id == ActiveRelay.Id);
+                    existing?.CopyFrom(ActiveRelay);
+                }
+
+
             }
             catch (Exception ex)
             {

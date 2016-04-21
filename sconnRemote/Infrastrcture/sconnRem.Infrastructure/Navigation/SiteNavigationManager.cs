@@ -18,7 +18,7 @@ using sconnRem.Infrastructure.Content;
 namespace sconnRem.Infrastructure.Navigation
 {
 
-    
+
 
 
     public static class SiteNavigationManager
@@ -39,8 +39,11 @@ namespace sconnRem.Infrastructure.Navigation
         private static ComposablePart exportedDeviceComposablePart;
 
         public static sconnInput activeInput;
+        public static sconnOutput activeOutput;
+        public static sconnRelay activeRelay;
+
         private static ComposablePart exportedInputComposablePart;
-        
+
 
         //private static ConfigNavBootstrapper alarmBootstrapper;
 
@@ -72,10 +75,10 @@ namespace sconnRem.Infrastructure.Navigation
             {
                 _nlogger.Error(ex, ex.Message);
             }
- 
-          
+
+
         }
-        
+
         public static void SetNavigationContextContainer(CompositionContainer container)
         {
             contextContainer = container;
@@ -111,15 +114,15 @@ namespace sconnRem.Infrastructure.Navigation
                     alarmSystemConfigManager.RemoteDevice = alrmSysDev;
 
                     AlarmSystemContext.SetManager(alarmSystemConfigManager);
-                    
 
-                   //// register new manager in container
-                   // if (contextContainer != null)
-                   // {
-                   //     var batch = new CompositionBatch();
-                   //     exportedComposablePart = batch.AddExportedValue<IAlarmConfigManager>(alarmSystemConfigManager);
-                   //     contextContainer.Compose(batch);
-                   // }
+
+                    //// register new manager in container
+                    // if (contextContainer != null)
+                    // {
+                    //     var batch = new CompositionBatch();
+                    //     exportedComposablePart = batch.AddExportedValue<IAlarmConfigManager>(alarmSystemConfigManager);
+                    //     contextContainer.Compose(batch);
+                    // }
 
                 }
             }
@@ -128,7 +131,7 @@ namespace sconnRem.Infrastructure.Navigation
                 _nlogger.Error(ex, ex.Message);
             }
 
-        
+
         }
 
         public static void ActivateDeviceContext(sconnDevice device)
@@ -180,7 +183,7 @@ namespace sconnRem.Infrastructure.Navigation
             {
                 _nlogger.Error(ex, ex.Message);
             }
-        
+
         }
 
 
@@ -191,30 +194,38 @@ namespace sconnRem.Infrastructure.Navigation
                 CurrentContextDevice.ActiveInput = input;
                 activeInput = input;
 
-                ////ensure container does not maintain old manager
-                //if (activeInput != null && exportedInputComposablePart != null && contextContainer != null)
-                //{
-                //    var batchrem = new CompositionBatch();
-                //    batchrem.RemovePart(exportedInputComposablePart);
-                //    contextContainer.Compose(batchrem);
-                //}
-
-                ////register new manager in container
-                //if (contextContainer != null)
-                //{
-                //    var batch = new CompositionBatch();
-                //    exportedInputComposablePart = batch.AddExportedValue<sconnInput>(activeInput);
-                //    contextContainer.Compose(batch);
-                //}
-
             }
             catch (Exception ex)
             {
                 _nlogger.Error(ex, ex.Message);
             }
-
         }
-        
+
+        public static void ActivateOutputContext(sconnOutput io)
+        {
+            try
+            {
+                activeOutput = io;
+            }
+
+            catch (Exception ex)
+            {
+                _nlogger.Error(ex, ex.Message);
+            }
+        }
+
+        public static void ActivateRelayContext(sconnRelay io)
+        {
+            try
+            {
+                activeRelay = io;
+            }
+
+            catch (Exception ex)
+            {
+                _nlogger.Error(ex, ex.Message);
+            }
+        }
 
     }
 
