@@ -9,6 +9,8 @@ using sconnConnector.POCO.Config.Abstract.IO;
 
 namespace sconnConnector.POCO.Config.sconn
 {
+
+
     public interface IAlarmSystemConfigurationEntity : ISerializableConfiguration
     {
         
@@ -53,6 +55,8 @@ namespace sconnConnector.POCO.Config.sconn
         public List<sconnRelay> Relays { get; set; }
 
         public sconnInput ActiveInput { get; set; }
+        public string ActiveInputId { get; set; }
+
         public sconnOutput ActiveOutput { get; set; }
         public sconnRelay ActiveRelay { get; set; }
 
@@ -84,6 +88,31 @@ namespace sconnConnector.POCO.Config.sconn
                 }
             }
             
+        }
+
+        public void CopyFrom(sconnDevice other)
+        {
+            this.ActiveInput = other.ActiveInput;
+            this.Inputs = other.Inputs;
+            this.ActiveOutput = other.ActiveOutput;
+            this.ActiveRelay = other.ActiveRelay;
+            this.Armed = other.Armed;
+            this.AuthDevicesCFG = other.AuthDevicesCFG;
+            this.BatteryVoltage = other.BatteryVoltage;
+            this.ComMiWi = other.ComMiWi;
+            this.ComTcpIp = other.ComTcpIp;
+            this.TemperatureModule = other.TemperatureModule;
+            this.DeviceId = other.DeviceId;
+            this.DomainNumber = other.DomainNumber;
+            this.Failure = other.Failure;
+            this.Name = other.Name;
+            this.NamesCFG = other.NamesCFG;
+            this.Outputs = other.Outputs;
+            this.Relays = other.Relays;
+            this.Type = other.Type;
+            this.Revision = other.Revision;
+            this.ActiveInputId = other.ActiveInputId;
+
         }
 
         public float MainVoltage { get; set; }
@@ -278,12 +307,14 @@ namespace sconnConnector.POCO.Config.sconn
         public byte[][] NamesCFG
         {
             get { return _NamesCFG; }
+            set { if (value != null) { _NamesCFG = value; } }
 
         }
 
         public byte[][] ScheduleCFG
         {
             get { return _ScheduleCFG; }
+            set { if (value != null) { _ScheduleCFG = value; } }
         }
 
 
@@ -355,7 +386,7 @@ namespace sconnConnector.POCO.Config.sconn
             {
                 if (this.NamesCFG.GetLength(0) == ipcDefines.RAM_DEV_NAMES_NO)
                 {
-                    string devName = Encoding.UTF8.GetString(this.NamesCFG[0]);
+                    string devName = System.Text.Encoding.BigEndianUnicode.GetString(this.NamesCFG[0]);
                     this.Name = devName;
                     int NameInc = 1;
                     for (int i = 0; i < this.Inputs.Count; i++)

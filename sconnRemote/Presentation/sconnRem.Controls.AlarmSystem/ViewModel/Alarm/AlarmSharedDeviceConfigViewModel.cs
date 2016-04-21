@@ -14,7 +14,9 @@ using sconnConnector.POCO.Config.sconn;
 using System.ComponentModel.Composition.Primitives;
 using AlarmSystemManagmentService.Device;
 using Prism.Commands;
+using sconnConnector.POCO.Config;
 using sconnPrismSharedContext;
+using sconnRem.Infrastructure.Navigation;
 using sconnRem.Navigation;
 
 namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
@@ -24,6 +26,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
     public class AlarmSharedDeviceConfigViewModel : BindableBase  //ObservableObject, IPageViewModel
     {
         public sconnDevice Config { get; set; }
+        public sconnInput ActiveInput { get; set; }
         private DeviceConfigService _provider;
         private AlarmSystemConfigManager _manager;
         private readonly IRegionManager _regionManager;
@@ -56,6 +59,15 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
 
         private void SaveData()
         {
+            //copy back activated IO
+            if (ActiveInput != null)
+            {
+                sconnInput existing = Config.Inputs.Where(i => i.UUID.Equals(ActiveInput.UUID)).FirstOrDefault();
+                if (existing != null)
+                {
+                    existing = ActiveInput;
+                }
+            }
             _provider.Update(Config);
         }
 
@@ -92,11 +104,12 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
         }
 
         [ImportingConstructor]
-        public AlarmSharedDeviceConfigViewModel(sconnDevice device, IAlarmConfigManager manager, IRegionManager regionManager)
+        public AlarmSharedDeviceConfigViewModel(IRegionManager regionManager)  //sconnDevice device, 
         {
             SetupCmds();
-            Config = device;
-            this._manager = (AlarmSystemConfigManager)manager;
+            Config = SiteNavigationManager.CurrentContextDevice;
+            ActiveInput = SiteNavigationManager.activeInput;
+            this._manager = SiteNavigationManager.alarmSystemConfigManager; // (AlarmSystemConfigManager)manager;
             this._provider = new DeviceConfigService(_manager, Config.DeviceId);
             this._regionManager = regionManager;
             GetData();

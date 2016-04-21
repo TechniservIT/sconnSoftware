@@ -3,9 +3,37 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:enumsrc="sconnConnector.POCO.Config"
              xmlns:local="clr-namespace:sconnRem.Controls.AlarmSystem.View.Status.AlarmSystem.Inputs"
+             xmlns:config="clr-namespace:sconnConnector.POCO.Config;assembly=sconnConnector"
+             xmlns:System="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="800">
+
+
+    <UserControl.Resources>
+        <ObjectDataProvider x:Key="inputTypeSrc" MethodName="GetValues"
+                            ObjectType="{x:Type System:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="config:sconnInputType"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+
+        <ObjectDataProvider x:Key="inputAgSource" MethodName="GetValues"
+                            ObjectType="{x:Type System:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="config:sconnActivationGroup"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+
+        <ObjectDataProvider x:Key="inputIoCategorySource" MethodName="GetValues"
+                            ObjectType="{x:Type System:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="config:DeviceIoCategory"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+        
+    </UserControl.Resources>
 
 
     <Grid>
@@ -155,22 +183,30 @@
                 </Grid.RowDefinitions>
 
                 <Label Grid.Column="0" Grid.Row="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="Type" />
-                <Label Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="{Binding Config.ActiveInput.sconnInputType }" />
+                <ComboBox x:Name="cmb12"  
+                            ItemsSource="{Binding Source={StaticResource inputTypeSrc}}"
+                        Grid.Column="1" Grid.Row="0"
+                          HorizontalAlignment="Stretch"
+                          HorizontalContentAlignment="Stretch" 
+                          SelectedValue="{Binding  ActiveInput.sconnInputType}" 
+                           SelectedItem="{Binding  ActiveInput.sconnInputType , Mode=TwoWay}" 
+                          />
+                    
 
                 <Label Grid.Column="0" Grid.Row="1" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="Value" />
-                <Label Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="{Binding Config.ActiveInput.Value }" />
+                <Label Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="{Binding ActiveInput.Value }" />
 
                 <Label Grid.Column="0" Grid.Row="2" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="Sensitivity" />
-                <Label Grid.Column="1" Grid.Row="2" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="{Binding Config.ActiveInput.Sensitivity}" />
+                <Label Grid.Column="1" Grid.Row="2" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="{Binding ActiveInput.Sensitivity}" />
 
                 <Label Grid.Column="0" Grid.Row="3" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="Enabled" />
-                <Label Grid.Column="1" Grid.Row="3" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="{Binding Config.ActiveInput.Enabled}" />
+                <Label Grid.Column="1" Grid.Row="3" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="{Binding ActiveInput.Enabled}" />
 
                 <Label Grid.Column="0" Grid.Row="4" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="Name" />
-                <Label Grid.Column="1" Grid.Row="4" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="{Binding Config.ActiveInput.Name}" />
+                <TextBox Grid.Column="1" Grid.Row="4" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Text="{Binding  ActiveInput.Name}"/>
 
                 <Label Grid.Column="0" Grid.Row="5" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="sconnActivationGroup" />
-                <Label Grid.Column="1" Grid.Row="5" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="{Binding Config.ActiveInput.sconnActivationGroup}" />
+                <Label Grid.Column="1" Grid.Row="5" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="{Binding ActiveInput.sconnActivationGroup , Mode=TwoWay}" />
 
                 <Button Grid.Column="1" Grid.Row="6"  VerticalAlignment="Center"
                     Width="Auto" Content="" 

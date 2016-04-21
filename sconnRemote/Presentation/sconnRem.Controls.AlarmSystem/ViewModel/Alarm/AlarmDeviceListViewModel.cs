@@ -137,8 +137,10 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
                 {
                     if (device.Inputs.Contains(input))
                     {
-                        device.ActiveInput = input;
+                        // device.ActiveInput = input;
+                        //device.ActiveInputId = string.Copy(input.UUID);
                         SiteNavigationManager.ActivateDeviceContext(device);
+                        SiteNavigationManager.ActivateInputContext(input);
                         NavigateToAlarmContract(AlarmRegionNames.AlarmConfig_Contract_Input_Config_View);
                     }
                 }
@@ -187,17 +189,18 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
         public AlarmDeviceListViewModel()
         {
             SetupCmds();
+            Config = new List<sconnDevice>();
             _name = "Gcfg";
             this._provider = new AlarmDevicesConfigService(_manager);
         }
 
         
         [ImportingConstructor]
-        public AlarmDeviceListViewModel(IAlarmConfigManager manager, IRegionManager regionManager)
+        public AlarmDeviceListViewModel(IRegionManager regionManager)
         {
             SetupCmds();
             Config = new List<sconnDevice>();
-            this._manager = (AlarmSystemConfigManager)manager;
+            this._manager = SiteNavigationManager.alarmSystemConfigManager;
             this._provider = new AlarmDevicesConfigService(_manager);
             this._regionManager = regionManager;
             GetData();

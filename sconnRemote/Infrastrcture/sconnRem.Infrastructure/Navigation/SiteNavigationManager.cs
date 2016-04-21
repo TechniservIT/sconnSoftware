@@ -24,29 +24,31 @@ namespace sconnRem.Infrastructure.Navigation
     public static class SiteNavigationManager
     {
         private static Logger _nlogger = LogManager.GetCurrentClassLogger();
-        
-        private static sconnSite currentContextSconnSite;
+
+        public static sconnSite CurrentContextSconnSite;
 
         //alarm syste,
-        private static AlarmSystemConfigManager alarmSystemConfigManager;
+        public static AlarmSystemConfigManager alarmSystemConfigManager;
+        public static event EventHandler ConfigManagerChangedEvent;
         private static ComposablePart exportedComposablePart;
 
         private static CompositionContainer contextContainer;
 
-        private static sconnDevice alarmDevice;
+        public static sconnDevice CurrentContextDevice;
+        public static event EventHandler AlarmDeviceChangedEvent;
         private static ComposablePart exportedDeviceComposablePart;
 
-        private static sconnInput activeInput;
+        public static sconnInput activeInput;
         private static ComposablePart exportedInputComposablePart;
-
+        
 
         //private static ConfigNavBootstrapper alarmBootstrapper;
 
         public static void ShowFullScreen()
         {
-            if (currentContextSconnSite != null)
+            if (CurrentContextSconnSite != null)
             {
-                MainContentViewManager.DisplaySiteInCurrentContext(currentContextSconnSite);
+                MainContentViewManager.DisplaySiteInCurrentContext(CurrentContextSconnSite);
             }
         }
 
@@ -59,7 +61,7 @@ namespace sconnRem.Infrastructure.Navigation
         {
             try
             {
-                if (currentContextSconnSite != null)
+                if (CurrentContextSconnSite != null)
                 {
                     //ConfigNavBootstrapper bootstrapper = new ConfigNavBootstrapper(alarmSystemConfigManager);
                     //bootstrapper.Run();
@@ -85,22 +87,22 @@ namespace sconnRem.Infrastructure.Navigation
             {
                 if (site != null)
                 {
-                    currentContextSconnSite = site;
+                    CurrentContextSconnSite = site;
 
                     EndpointInfo info = new EndpointInfo();
-                    info.Hostname = currentContextSconnSite.serverIP;
-                    info.Port = currentContextSconnSite.serverPort;
+                    info.Hostname = CurrentContextSconnSite.serverIP;
+                    info.Port = CurrentContextSconnSite.serverPort;
                     DeviceCredentials cred = new DeviceCredentials();
-                    cred.Password = currentContextSconnSite.authPasswd;
+                    cred.Password = CurrentContextSconnSite.authPasswd;
                     cred.Username = "";
 
-                    //ensure container does not maintain old manager
-                    if (alarmSystemConfigManager != null && exportedComposablePart != null && contextContainer != null)
-                    {
-                        var batchrem = new CompositionBatch();
-                        batchrem.RemovePart(exportedComposablePart);
-                        contextContainer.Compose(batchrem);
-                    }
+                    ////ensure container does not maintain old manager
+                    //if (alarmSystemConfigManager != null && exportedComposablePart != null && contextContainer != null)
+                    //{
+                    //    var batchrem = new CompositionBatch();
+                    //    batchrem.RemovePart(exportedComposablePart);
+                    //    contextContainer.Compose(batchrem);
+                    //}
 
                     alarmSystemConfigManager = new AlarmSystemConfigManager(info, cred);
                     Device alrmSysDev = new Device();
@@ -109,14 +111,15 @@ namespace sconnRem.Infrastructure.Navigation
                     alarmSystemConfigManager.RemoteDevice = alrmSysDev;
 
                     AlarmSystemContext.SetManager(alarmSystemConfigManager);
+                    
 
-                    //register new manager in container
-                    if (contextContainer != null)
-                    {
-                        var batch = new CompositionBatch();
-                        exportedComposablePart = batch.AddExportedValue<IAlarmConfigManager>(alarmSystemConfigManager);
-                        contextContainer.Compose(batch);
-                    }
+                   //// register new manager in container
+                   // if (contextContainer != null)
+                   // {
+                   //     var batch = new CompositionBatch();
+                   //     exportedComposablePart = batch.AddExportedValue<IAlarmConfigManager>(alarmSystemConfigManager);
+                   //     contextContainer.Compose(batch);
+                   // }
 
                 }
             }
@@ -132,22 +135,45 @@ namespace sconnRem.Infrastructure.Navigation
         {
             try
             {
-                alarmDevice = device;
+
+                //try
+                //{
+                //    sconnDevice existingDevice = contextContainer.GetExportedValue<sconnDevice>();
+                //    if (existingDevice != null)
+                //    {
+                //        existingDevice.CopyFrom(device);
+                //    }
+                //}
+                //catch (Exception ex)
+                //{
+                //    _nlogger.Error(ex, ex.Message);
+                //}
 
                 //ensure container does not maintain old manager
-                if (alarmDevice != null && exportedDeviceComposablePart != null && contextContainer != null)
-                {
-                    var batchrem = new CompositionBatch();
-                    batchrem.RemovePart(exportedDeviceComposablePart);
-                    contextContainer.Compose(batchrem);
-                }
+                //if (alarmDevice != null && exportedDeviceComposablePart != null && contextContainer != null)
+                //{
+                //    var batchrem = new CompositionBatch();
+                //    batchrem.RemovePart(exportedDeviceComposablePart);
+                //    exportedDeviceComposablePart = batchrem.AddExportedValue<sconnDevice>(device);
+                //    contextContainer.Compose(batchrem);
+                //}
 
-                //register new manager in container
-                if (contextContainer != null)
+                ////register new manager in container
+                //else if (contextContainer != null)
+                //{
+                //    var batch = new CompositionBatch();
+                //    exportedDeviceComposablePart = batch.AddExportedValue<sconnDevice>(device);
+                //    contextContainer.Compose(batch);
+                //}
+
+                if (CurrentContextDevice != null)
                 {
-                    var batch = new CompositionBatch();
-                    exportedDeviceComposablePart = batch.AddExportedValue<sconnDevice>(alarmDevice);
-                    contextContainer.Compose(batch);
+
+                    CurrentContextDevice.CopyFrom(device);
+                }
+                else
+                {
+                    CurrentContextDevice = device;
                 }
             }
             catch (Exception ex)
@@ -162,23 +188,25 @@ namespace sconnRem.Infrastructure.Navigation
         {
             try
             {
+                CurrentContextDevice.ActiveInput = input;
                 activeInput = input;
 
-                //ensure container does not maintain old manager
-                if (activeInput != null && exportedInputComposablePart != null && contextContainer != null)
-                {
-                    var batchrem = new CompositionBatch();
-                    batchrem.RemovePart(exportedInputComposablePart);
-                    contextContainer.Compose(batchrem);
-                }
+                ////ensure container does not maintain old manager
+                //if (activeInput != null && exportedInputComposablePart != null && contextContainer != null)
+                //{
+                //    var batchrem = new CompositionBatch();
+                //    batchrem.RemovePart(exportedInputComposablePart);
+                //    contextContainer.Compose(batchrem);
+                //}
 
-                //register new manager in container
-                if (contextContainer != null)
-                {
-                    var batch = new CompositionBatch();
-                    exportedInputComposablePart = batch.AddExportedValue<sconnInput>(activeInput);
-                    contextContainer.Compose(batch);
-                }
+                ////register new manager in container
+                //if (contextContainer != null)
+                //{
+                //    var batch = new CompositionBatch();
+                //    exportedInputComposablePart = batch.AddExportedValue<sconnInput>(activeInput);
+                //    contextContainer.Compose(batch);
+                //}
+
             }
             catch (Exception ex)
             {
@@ -186,8 +214,7 @@ namespace sconnRem.Infrastructure.Navigation
             }
 
         }
-
-
+        
 
     }
 
