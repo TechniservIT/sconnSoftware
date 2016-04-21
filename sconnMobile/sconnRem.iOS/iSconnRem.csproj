@@ -126,5 +126,15 @@
   <ItemGroup>
     <Content Include="Entitlements.plist" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\sconnData\sconnConnector\sconnConnector.csproj">
+      <Project>{09c8a8f0-f85a-4534-922e-85e14ec32725}</Project>
+      <Name>sconnConnector</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\sconnService\AlarmSystemManagmentService\AlarmSystemManagmentService.csproj">
+      <Project>{3d463251-18d3-451b-b06c-c4d655dd8a37}</Project>
+      <Name>AlarmSystemManagmentService</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

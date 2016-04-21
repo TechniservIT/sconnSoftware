@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using NLog;
+using sconnConnector.Annotations;
 using sconnConnector.POCO.Config.Abstract.IO;
 using sconnConnector.POCO.Config.sconn;
 
@@ -29,7 +32,7 @@ namespace sconnConnector.POCO.Config
         ArmedAndDisarmedViolation
     }
 
-    public class sconnInput : IAlarmSystemConfigurationEntity, ISerializableConfiguration, IFakeAbleConfiguration
+    public class sconnInput : IAlarmSystemConfigurationEntity, ISerializableConfiguration, IFakeAbleConfiguration, INotifyPropertyChanged
     {
         public byte NameId { get; set; }
 
@@ -44,6 +47,8 @@ namespace sconnConnector.POCO.Config
             }
         }
 
+        public string UUID { get; set; }
+
         public sconnInputType Type { get; set; }
         public byte Value { get; set; }
         public uint Sensitivity { get; set; }
@@ -53,11 +58,65 @@ namespace sconnConnector.POCO.Config
         public DeviceIoCategory IoCategory { get; set; }
         private static Logger _logger = LogManager.GetCurrentClassLogger();
 
+        public string imageIconUri { get; set; }
+        public string imageRealUri { get; set; }
+
         public sconnInput()
         {
             Name = "Input";
+            UUID = Guid.NewGuid().ToString();
+            LoadImageTypeUrl();
             IoCategory = DeviceIoCategory.CmosInputs;  //TODO - detect
         }
+
+        public void CopyFrom(sconnInput other)
+        {
+            this.Type = other.Type;
+            this.Value = other.Value;
+            this.Sensitivity = other.Sensitivity;
+            this.Enabled = other.Enabled;
+            this.Name = other.Name;
+            this.ActivationGroup = other.ActivationGroup;
+            this.IoCategory = other.IoCategory;
+            this.NameId = other.NameId;
+            this.UUID = other.UUID;
+            this.imageIconUri = other.imageIconUri;
+
+            OnPropertyChanged();
+        }
+
+        public string GetInputTypeImageUriForInput(sconnInput input)
+        {
+            if (input.Type == sconnInputType.DoubleParametrizedNC )
+            {
+                return "pack://application:,,,/images/czujka1000x1000.jpg";
+            }
+            else if (input.Type == sconnInputType.DoubleParametrizedNO)
+            {
+                return "pack://application:,,,/images/czujka1000x1000.jpg";
+            }
+            else if (input.Type == sconnInputType.NormallyClosed)
+            {
+                return "pack://application:,,,/images/czujka1000x1000.jpg";
+            }
+            else if (input.Type == sconnInputType.NormallyOpen)
+            {
+                return "pack://application:,,,/images/czujka1000x1000.jpg";
+            }
+            else if (input.Type == sconnInputType.SingleParametrizedNC)
+            {
+                return "pack://application:,,,/images/czujka1000x1000.jpg";
+            }
+
+            return null;
+        }
+
+        private void LoadImageTypeUrl()
+        {
+            imageIconUri = GetInputTypeImageUriForInput(this);
+        }
+
+
 
         public sconnInput(byte[] rawBytes) : this()
         {
@@ -121,6 +180,27 @@ namespace sconnConnector.POCO.Config
 
         }
 
+        public bool Equals(sconnInput other)
+        {
+            return null != other && UUID == other.UUID;
+        }
+        public override bool Equals(object obj)
+        {
+            return Equals(obj as sconnInput);
+        }
+        public override int GetHashCode()
+        {
+            return Id;
+        }
+
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 
 }

@@ -1,14 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using NLog;
+using sconnConnector.Annotations;
 using sconnConnector.POCO.Config.Abstract.Device;
 using sconnConnector.POCO.Config.Abstract.IO;
 
 namespace sconnConnector.POCO.Config.sconn
 {
+
+
     public interface IAlarmSystemConfigurationEntity : ISerializableConfiguration
     {
         
@@ -26,12 +31,16 @@ namespace sconnConnector.POCO.Config.sconn
         Motherboard,
         Gsm_Module,
         Pir_Sensor,
-        Relay_Module
+        Relay_Module,
+        InputsModule,
+        Siren,
+        PirSonic_Sensor,
+        KeypadMotherboard
     }
 
 
 
-    public class sconnDevice : IAlarmSystemNamedConfigurationEntity, ISerializableConfiguration, IFakeAbleConfiguration
+    public class sconnDevice : IAlarmSystemNamedConfigurationEntity, ISerializableConfiguration, IFakeAbleConfiguration, INotifyPropertyChanged
     {
         public byte Id { get; set; }
         public byte Value { get; set; }
@@ -47,6 +56,12 @@ namespace sconnConnector.POCO.Config.sconn
         public List<sconnOutput> Outputs { get; set; }
         public List<sconnInput> Inputs { get; set; }
         public List<sconnRelay> Relays { get; set; }
+
+        public sconnInput ActiveInput { get; set; }
+        public int ActiveInputId { get; set; }
+
+        public sconnOutput ActiveOutput { get; set; }
+        public sconnRelay ActiveRelay { get; set; }
 
         public List<sconnInput> Sensors
         {
@@ -78,6 +93,33 @@ namespace sconnConnector.POCO.Config.sconn
             
         }
 
+        public void CopyFrom(sconnDevice other)
+        {
+            this.ActiveInput = other.ActiveInput;
+            this.Inputs = other.Inputs;
+            this.ActiveOutput = other.ActiveOutput;
+            this.ActiveRelay = other.ActiveRelay;
+            this.Armed = other.Armed;
+            this.AuthDevicesCFG = other.AuthDevicesCFG;
+            this.BatteryVoltage = other.BatteryVoltage;
+            this.ComMiWi = other.ComMiWi;
+            this.ComTcpIp = other.ComTcpIp;
+            this.TemperatureModule = other.TemperatureModule;
+            this.DeviceId = other.DeviceId;
+            this.DomainNumber = other.DomainNumber;
+            this.Failure = other.Failure;
+            this.Name = other.Name;
+            this.NamesCFG = other.NamesCFG;
+            this.Outputs = other.Outputs;
+            this.Relays = other.Relays;
+            this.Type = other.Type;
+            this.Revision = other.Revision;
+            this.ActiveInputId = other.ActiveInputId;
+
+            OnPropertyChanged();
+
+        }
+
         public float MainVoltage { get; set; }
         public float BatteryVoltage { get; set; }
         public bool KeypadModule { get; set; }
@@ -97,6 +139,8 @@ namespace sconnConnector.POCO.Config.sconn
         public byte[] Hash;
         public byte[] AuthDevicesCFG { get; set; }
 
+        public string imageIconUri { get; set; }
+        public string imageRealUri { get; set; }
 
         public string Name { get; set; }
 
@@ -119,6 +163,49 @@ namespace sconnConnector.POCO.Config.sconn
             this.Revision = memCFG[ipcDefines.mAdrDevRev];
             this.Type = (sconnDeviceType)memCFG[ipcDefines.mAdrDevType];
 
+        }
+
+        public string GetDeviceTypeImageUriForDevice(sconnDevice device)
+        {
+            if (device.Type == sconnDeviceType.Graphical_Keypad)
+            {
+                return "pack://application:,,,/images/klawiatura1000x1000.jpg";
+            }
+            else if (device.Type == sconnDeviceType.Gsm_Module)
+            {
+                return "pack://application:,,,/images/tel1000.jpg";
+            }
+            else if (device.Type == sconnDeviceType.Motherboard)
+            {
+                return "pack://application:,,,/images/strefa1000.jpg";
+            }
+            else if (device.Type == sconnDeviceType.Pir_Sensor)
+            {
+                return "pack://application:,,,/images/czujka1000x1000.jpg";
+            }
+            else if (device.Type == sconnDeviceType.Relay_Module)
+            {
+                return "pack://application:,,,/images/przek1000x1000.jpg";
+            }
+            else if (device.Type == sconnDeviceType.InputsModule)
+            {
+                return "pack://application:,,,/images/exp1000x1000.jpg";
+            }
+            else if (device.Type == sconnDeviceType.PirSonic_Sensor)
+            {
+                return "pack://application:,,,/images/czujka1000x1000.jpg";
+            }
+            else if (device.Type == sconnDeviceType.Siren)
+            {
+                return "pack://application:,,,/images/syrena1000x1000.jpg";
+            }
+            
+            return null;
+        }
+
+        public void LoadImageTypeUrl()
+        {
+            imageIconUri = GetDeviceTypeImageUriForDevice(this);
         }
 
 
@@ -206,6 +293,8 @@ namespace sconnConnector.POCO.Config.sconn
             LoadSupplyVoltageLevels();
             LoadDeviceStaticInfo();
             LoadDeviceNames();
+
+            LoadImageTypeUrl();
         }
 
         public byte[] NetworkConfig
@@ -223,12 +312,14 @@ namespace sconnConnector.POCO.Config.sconn
         public byte[][] NamesCFG
         {
             get { return _NamesCFG; }
+            set { if (value != null) { _NamesCFG = value; } }
 
         }
 
         public byte[][] ScheduleCFG
         {
             get { return _ScheduleCFG; }
+            set { if (value != null) { _ScheduleCFG = value; } }
         }
 
 
@@ -300,7 +391,7 @@ namespace sconnConnector.POCO.Config.sconn
             {
                 if (this.NamesCFG.GetLength(0) == ipcDefines.RAM_DEV_NAMES_NO)
                 {
-                    string devName = Encoding.UTF8.GetString(this.NamesCFG[0]);
+                    string devName = System.Text.Encoding.BigEndianUnicode.GetString(this.NamesCFG[0]);
                     this.Name = devName;
                     int NameInc = 1;
                     for (int i = 0; i < this.Inputs.Count; i++)
@@ -476,6 +567,14 @@ namespace sconnConnector.POCO.Config.sconn
             }
             this._NamesCFG = convNamesCFG;
             LoadDeviceNames();
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

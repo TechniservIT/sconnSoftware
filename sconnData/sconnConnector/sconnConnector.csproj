@@ -110,6 +110,7 @@
     <Compile Include="POCO\IFakeAbleConfiguration.cs" />
     <Compile Include="POCO\ISerializableConfiguration.cs" />
     <Compile Include="POCO\sconnDataShare.cs" />
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="sconnConnector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

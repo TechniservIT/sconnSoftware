@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using AlarmSystemManagmentService;
@@ -22,7 +24,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
     [Export]
     public class AlarmDeviceListViewModel : BindableBase
     {
-        public List<sconnDevice> Config { get; set; }
+        public ObservableCollection<sconnDevice> Config { get; set; }
         private AlarmDevicesConfigService _provider;
         private AlarmSystemConfigManager _manager;
         private readonly IRegionManager _regionManager;
@@ -40,7 +42,10 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
         public ICommand ShowDeviceStatusCommand { get; set; }
         public ICommand ShowDeviceConfigCommand { get; set; }
 
-
+        public ICommand ConfigureInputCommand { get; set; }
+        public ICommand ConfigureOutputCommand { get; set; }
+        public ICommand ConfigureRelayCommand { get; set; }
+        
         private void NavigateToAlarmContract(string contractName)
         {
             try
@@ -116,13 +121,74 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
             return null;
         }
 
-
+       
 
         private void ShowDevice(sconnDevice device)
         {
             AlarmSystemContext.contextDevice = device;
             SiteNavigationManager.ActivateDeviceContext(device);
             NavigateToAlarmContract(GetDeviceTypeStatusViewContractNameForDevice(device));
+        }
+
+        private void ShowOutputConfigView(sconnOutput input)
+        {
+            try
+            {
+                foreach (var device in Config)
+                {
+                    if (device.Outputs.Contains(input))
+                    {
+                        SiteNavigationManager.ActivateDeviceContext(device);
+                        SiteNavigationManager.ActivateOutputContext(input);
+                        NavigateToAlarmContract(AlarmRegionNames.AlarmConfig_Contract_Output_Config_View);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                    
+            }
+        }
+
+        private void ShowRelayConfigView(sconnRelay input)
+        {
+            try
+            {
+                foreach (var device in Config)
+                {
+                    if (device.Relays.Contains(input))
+                    {
+                        SiteNavigationManager.ActivateDeviceContext(device);
+                        SiteNavigationManager.ActivateRelayContext(input);
+                        NavigateToAlarmContract(AlarmRegionNames.AlarmConfig_Contract_Relay_Config_View);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+
+        private void ShowInputConfigView(sconnInput input)
+        {
+            try
+            {
+                foreach (var device in Config)
+                {
+                    if (device.Inputs.Contains(input))
+                    {
+                        SiteNavigationManager.ActivateDeviceContext(device);
+                        SiteNavigationManager.ActivateInputContext(input);
+                        NavigateToAlarmContract(AlarmRegionNames.AlarmConfig_Contract_Input_Config_View);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
 
         private void ConfigureDevice(sconnDevice device)
@@ -137,6 +203,10 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
         {
             ShowDeviceStatusCommand = new DelegateCommand<sconnDevice>(ShowDevice);
             ShowDeviceConfigCommand = new DelegateCommand<sconnDevice>(ConfigureDevice);
+
+            ConfigureInputCommand = new DelegateCommand<sconnInput>(ShowInputConfigView);
+            ConfigureOutputCommand = new DelegateCommand<sconnOutput>(ShowOutputConfigView);
+            ConfigureRelayCommand = new DelegateCommand<sconnRelay>(ShowRelayConfigView);
         }
 
 
@@ -145,7 +215,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
         {
             try
             {
-                Config = _provider.GetAll();
+                Config = new ObservableCollection<sconnDevice>(_provider.GetAll());  //_provider.GetAll().AsQueryable();
 
             }
             catch (Exception ex)
@@ -162,17 +232,18 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
         public AlarmDeviceListViewModel()
         {
             SetupCmds();
+            Config = new ObservableCollection<sconnDevice>(new List<sconnDevice>());
             _name = "Gcfg";
             this._provider = new AlarmDevicesConfigService(_manager);
         }
 
         
         [ImportingConstructor]
-        public AlarmDeviceListViewModel(IAlarmConfigManager manager, IRegionManager regionManager)
+        public AlarmDeviceListViewModel(IRegionManager regionManager)
         {
             SetupCmds();
-            Config = new List<sconnDevice>();
-            this._manager = (AlarmSystemConfigManager)manager;
+            Config = new ObservableCollection<sconnDevice>(new List<sconnDevice>());
+            this._manager = SiteNavigationManager.alarmSystemConfigManager;
             this._provider = new AlarmDevicesConfigService(_manager);
             this._regionManager = regionManager;
             GetData();

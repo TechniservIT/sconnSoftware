@@ -39,7 +39,7 @@ namespace sconnRem.Controls.AlarmSystem.View.Status.Inputs
         //}
 
         [ImportingConstructor]
-        public AlarmInputsView(AlarmSharedDeviceConfigViewModel viewModel)
+        public AlarmInputsView(AlarmDeviceListViewModel viewModel)
         {
             this.DataContext = viewModel;
             InitializeComponent();

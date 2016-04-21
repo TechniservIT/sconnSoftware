@@ -35,8 +35,6 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Shell;
 using sconnRem.Controls.Common;
-using sconnRem.View.Config;
-
 
 namespace sconnRem.Wnd.Main {
     

@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using NLog;
+using sconnConnector.Annotations;
 using sconnConnector.POCO.Config.Abstract.IO;
 using sconnConnector.POCO.Config.sconn;
 
@@ -22,7 +25,7 @@ namespace sconnConnector.POCO.Config
         OnConfigUpload
     }
     
-    public class sconnOutput : IAlarmSystemConfigurationEntity, ISerializableConfiguration, IFakeAbleConfiguration
+    public class sconnOutput : IAlarmSystemConfigurationEntity, ISerializableConfiguration, IFakeAbleConfiguration, INotifyPropertyChanged
     {
         private byte _Id;
         public byte Id
@@ -43,9 +46,78 @@ namespace sconnConnector.POCO.Config
 
         private static Logger _logger = LogManager.GetCurrentClassLogger();
 
+        public string UUID { get; set; }
+
+        public string imageIconUri { get; set; }
+        public string imageRealUri { get; set; }
+
+
+        public void CopyFrom(sconnOutput other)
+        {
+            this.Type = other.Type;
+            this.Value = other.Value;
+            this.Enabled = other.Enabled;
+            this.Name = other.Name;
+            this.IoCategory = other.IoCategory;
+            this.NameId = other.NameId;
+            this.UUID = other.UUID;
+            this.imageIconUri = other.imageIconUri;
+
+            OnPropertyChanged();
+        }
+
+
+        public string GetOutputTypeImageUriForOutput(sconnOutput input)
+        {
+            if (input.Type == sconnOutputType.AlarmNormallyActive)
+            {
+                return "pack://application:,,,/images/elektro1000.jpg";
+            }
+            else if (input.Type == sconnOutputType.AlarmNormallyInActive)
+            {
+                return "pack://application:,,,/images/elektro1000.jpg";
+            }
+            else if (input.Type == sconnOutputType.OnConfigUpload)
+            {
+                return "pack://application:,,,/images/elektro1000.jpg";
+            }
+            else if (input.Type == sconnOutputType.OnFailure)
+            {
+                return "pack://application:,,,/images/elektro1000.jpg";
+            }
+            else if (input.Type == sconnOutputType.Power)
+            {
+                return "pack://application:,,,/images/elektro1000.jpg";
+            }
+            else if (input.Type == sconnOutputType.OnGsmTransmission)
+            {
+                return "pack://application:,,,/images/elektro1000.jpg";
+            }
+            else if (input.Type == sconnOutputType.OnViolation)
+            {
+                return "pack://application:,,,/images/elektro1000.jpg";
+            }
+            else if (input.Type == sconnOutputType.SignalNormallyActive)
+            {
+                return "pack://application:,,,/images/elektro1000.jpg";
+            }
+            else if (input.Type == sconnOutputType.SignalNormallyInactive)
+            {
+                return "pack://application:,,,/images/elektro1000.jpg";
+            }
+            return null;
+        }
+
+        private void LoadImageTypeUrl()
+        {
+            imageIconUri = GetOutputTypeImageUriForOutput(this);
+        }
+
         public sconnOutput() 
         {
             Name = "Output";
+            UUID = Guid.NewGuid().ToString();
+            LoadImageTypeUrl();
             IoCategory = DeviceIoCategory.PowerOutput;  //TODO - detect
         }
          
@@ -106,6 +178,27 @@ namespace sconnConnector.POCO.Config
             }
         }
 
+        public bool Equals(sconnOutput other)
+        {
+            return null != other && UUID == other.UUID;
+        }
+        public override bool Equals(object obj)
+        {
+            return Equals(obj as sconnOutput);
+        }
+        public override int GetHashCode()
+        {
+            return Id;
+        }
+
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 
 }

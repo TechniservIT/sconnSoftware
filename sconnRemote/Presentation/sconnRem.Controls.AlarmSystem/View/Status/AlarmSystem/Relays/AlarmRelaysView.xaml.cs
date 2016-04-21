@@ -32,7 +32,7 @@ namespace sconnRem.Controls.AlarmSystem.View.Status.AlarmSystem.Relays
         public IRegionManager RegionManager;
 
         [ImportingConstructor]
-        public AlarmRelaysView(AlarmSharedDeviceConfigViewModel viewModel)
+        public AlarmRelaysView(AlarmDeviceListViewModel viewModel)
         {
             this.DataContext = viewModel;
             InitializeComponent();

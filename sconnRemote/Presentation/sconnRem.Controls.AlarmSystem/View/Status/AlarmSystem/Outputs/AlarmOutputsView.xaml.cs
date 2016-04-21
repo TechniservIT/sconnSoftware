@@ -33,7 +33,7 @@ namespace sconnRem.Controls.AlarmSystem.View.Status.Outputs
         public IRegionManager RegionManager;
 
         [ImportingConstructor]
-        public AlarmOutputsView(AlarmSharedDeviceConfigViewModel viewModel)
+        public AlarmOutputsView(AlarmDeviceListViewModel viewModel)
         {
             this.DataContext = viewModel;
             InitializeComponent();
