@@ -17,6 +17,7 @@ using NLog;
 using Prism;
 using Prism.Regions;
 using sconnRem.Controls.AlarmSystem.ViewModel.Alarm;
+using sconnRem.Infrastructure.Navigation;
 using sconnRem.Navigation;
 
 namespace sconnRem.Controls.AlarmSystem.View.Status.AlarmSystem.Outputs
@@ -36,9 +37,16 @@ namespace sconnRem.Controls.AlarmSystem.View.Status.AlarmSystem.Outputs
         [ImportingConstructor]
         public AlarmOutputConfigureView(AlarmSharedDeviceConfigViewModel viewModel)
         {
+            viewModel.UpdateActiveIo();
             this.DataContext = viewModel;
             InitializeComponent();
         }
+
+        //public AlarmOutputConfigureView()
+        //{
+        //    this.DataContext = SiteNavigationManager new AlarmSharedDeviceConfigViewModel();
+        //    InitializeComponent();
+        //}
 
 
         void IPartImportsSatisfiedNotification.OnImportsSatisfied()

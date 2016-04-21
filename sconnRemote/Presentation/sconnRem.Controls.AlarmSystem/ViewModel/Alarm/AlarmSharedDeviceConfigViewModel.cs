@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
@@ -24,13 +25,43 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
 {
     
     [Export]
-    public class AlarmSharedDeviceConfigViewModel : BindableBase, IActiveAware, INavigationAware   //ObservableObject, IPageViewModel
+    public class AlarmSharedDeviceConfigViewModel : BindableBase, IActiveAware, INavigationAware, INotifyPropertyChanged   //ObservableObject, IPageViewModel
     {
-        public sconnDevice Config { get; set; }
 
-        public sconnInput ActiveInput { get; set; } = new sconnInput();
-        public sconnOutput ActiveOutput { get; set; } = new sconnOutput();
-        public sconnRelay ActiveRelay { get; set; } = new sconnRelay();
+        private sconnDevice _Config = new sconnDevice();
+        public sconnDevice Config
+        {
+            get { return _Config; }
+            set { SetProperty(ref _Config, value); }
+        }
+
+        private sconnInput _ActiveInput = new sconnInput();
+        public sconnInput ActiveInput
+        {
+            get { return _ActiveInput; }
+            set { SetProperty(ref _ActiveInput, value); }
+        }
+
+        private sconnOutput _ActiveOutput = new sconnOutput();
+        public sconnOutput ActiveOutput
+        {
+            get { return _ActiveOutput; }
+            set { SetProperty(ref _ActiveOutput, value); }
+        }
+
+        private sconnRelay _ActiveRelay = new sconnRelay();
+        public sconnRelay ActiveRelay
+        {
+            get { return _ActiveRelay; }
+            set { SetProperty(ref _ActiveRelay, value); }
+        }
+
+        //public sconnInput ActiveInput { get; set; } = new sconnInput();
+
+        //public sconnOutput ActiveOutput { get; set; } = new sconnOutput();
+
+        //public sconnRelay ActiveRelay { get; set; } = new sconnRelay();
+
 
         public int ChangeTrack { get; set; }
 
@@ -42,12 +73,19 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
         private string _name;
         private bool _isActive;
 
-        private void UpdateActiveIo()
+        public void UpdateActiveIo()
         {
             ChangeTrack++;
+            this.Config.CopyFrom(SiteNavigationManager.CurrentContextDevice);
+
             this.ActiveInput.CopyFrom(SiteNavigationManager.activeInput);
+
             this.ActiveOutput.CopyFrom(SiteNavigationManager.activeOutput);
+
             this.ActiveRelay.CopyFrom(SiteNavigationManager.activeRelay);
+
+
+            OnPropertyChanged();
         }
 
         bool INavigationAware.IsNavigationTarget(NavigationContext navigationContext)
@@ -99,9 +137,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
                 {
                     _isActive = value;
 
-                    ActiveInput = SiteNavigationManager.activeInput;
-                    ActiveOutput = SiteNavigationManager.activeOutput;
-                    ActiveRelay = SiteNavigationManager.activeRelay;
+                    UpdateActiveIo();
 
                     GetData();
                 }
@@ -114,7 +150,8 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
         {
             try
             {
-                Config = _provider.Get();
+               // Config = _provider.Get();
+               Config.CopyFrom(_provider.Get());
 
             }
             catch (Exception ex)
@@ -193,7 +230,6 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
         public AlarmSharedDeviceConfigViewModel(IRegionManager regionManager)  //sconnDevice device, 
         {
             SetupCmds();
-            Config = SiteNavigationManager.CurrentContextDevice;
             UpdateActiveIo();
             this._manager = SiteNavigationManager.alarmSystemConfigManager; // (AlarmSystemConfigManager)manager;
             this._provider = new DeviceConfigService(_manager, Config.DeviceId);
