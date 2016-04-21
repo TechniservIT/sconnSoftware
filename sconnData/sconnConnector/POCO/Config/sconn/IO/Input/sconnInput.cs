@@ -66,6 +66,19 @@ namespace sconnConnector.POCO.Config
             IoCategory = DeviceIoCategory.CmosInputs;  //TODO - detect
         }
 
+        public void CopyFrom(sconnInput other)
+        {
+            this.Type = other.Type;
+            this.Value = other.Value;
+            this.Sensitivity = other.Sensitivity;
+            this.Enabled = other.Enabled;
+            this.Name = other.Name;
+            this.ActivationGroup = other.ActivationGroup;
+            this.IoCategory = other.IoCategory;
+            this.NameId = other.NameId;
+            this.UUID = other.UUID;
+            this.imageIconUri = other.imageIconUri;
+        }
 
         public string GetInputTypeImageUriForInput(sconnInput input)
         {

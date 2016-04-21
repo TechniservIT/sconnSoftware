@@ -139,6 +139,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
                     {
                         // device.ActiveInput = input;
                         //device.ActiveInputId = string.Copy(input.UUID);
+                        device.ActiveInputId = input.Id;
                         SiteNavigationManager.ActivateDeviceContext(device);
                         SiteNavigationManager.ActivateInputContext(input);
                         NavigateToAlarmContract(AlarmRegionNames.AlarmConfig_Contract_Input_Config_View);

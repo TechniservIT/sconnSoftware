@@ -13,6 +13,7 @@ using sconnConnector.Config;
 using sconnConnector.POCO.Config.sconn;
 using System.ComponentModel.Composition.Primitives;
 using AlarmSystemManagmentService.Device;
+using Prism;
 using Prism.Commands;
 using sconnConnector.POCO.Config;
 using sconnPrismSharedContext;
@@ -23,7 +24,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
 {
     
     [Export]
-    public class AlarmSharedDeviceConfigViewModel : BindableBase  //ObservableObject, IPageViewModel
+    public class AlarmSharedDeviceConfigViewModel : BindableBase, IActiveAware   //ObservableObject, IPageViewModel
     {
         public sconnDevice Config { get; set; }
         public sconnInput ActiveInput { get; set; }
@@ -33,6 +34,8 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
         private Logger _nlogger = LogManager.GetCurrentClassLogger();
 
         private string _name;
+        private bool _isActive;
+
         public string Name
         {
             get
@@ -43,7 +46,22 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
 
         public ICommand NavigateBackCommand { get; set; }
         public ICommand SaveCommand { get; set; }
-        
+
+        public bool IsActive
+        {
+            get { return _isActive; }
+            set
+            {
+                if (_isActive != value)
+                {
+                    _isActive = value;
+                    GetData();
+                }
+            }
+        }
+
+        public event EventHandler IsActiveChanged;
+
         private void GetData()
         {
             try
@@ -60,14 +78,22 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
         private void SaveData()
         {
             //copy back activated IO
-            if (ActiveInput != null)
+            try
             {
-                sconnInput existing = Config.Inputs.Where(i => i.UUID.Equals(ActiveInput.UUID)).FirstOrDefault();
-                if (existing != null)
+                if (ActiveInput != null)
                 {
-                    existing = ActiveInput;
+                    sconnInput existing = Config.Inputs.First(i => i.Id == ActiveInput.Id);
+                    if (existing != null)
+                    {
+                        existing.CopyFrom(ActiveInput);
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                _nlogger.Error(ex, ex.Message);
+            }
+          
             _provider.Update(Config);
         }
 

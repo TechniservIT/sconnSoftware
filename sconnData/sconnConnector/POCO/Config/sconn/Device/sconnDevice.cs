@@ -55,7 +55,7 @@ namespace sconnConnector.POCO.Config.sconn
         public List<sconnRelay> Relays { get; set; }
 
         public sconnInput ActiveInput { get; set; }
-        public string ActiveInputId { get; set; }
+        public int ActiveInputId { get; set; }
 
         public sconnOutput ActiveOutput { get; set; }
         public sconnRelay ActiveRelay { get; set; }
