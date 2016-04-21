@@ -14,19 +14,22 @@ using sconnConnector.Config;
 using sconnConnector.POCO.Config;
 using sconnConnector.POCO.Config.sconn;
 using sconnPrismSharedContext;
+using sconnRem.Infrastructure.Navigation;
 using sconnRem.Navigation;
 
 namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
 {
 
     [Export]
-    public class AlarmInputConfigViewModel : BindableBase  //ObservableObject, IPageViewModel
+    [PartCreationPolicy(CreationPolicy.NonShared)]
+    public class AlarmInputConfigViewModel : BindableBase, INavigationAware  //ObservableObject, IPageViewModel
     {
         public sconnInput Config { get; set; }
         private DeviceConfigService _provider;
         private AlarmSystemConfigManager _manager;
         private readonly IRegionManager _regionManager;
         private Logger _nlogger = LogManager.GetCurrentClassLogger();
+        private IRegionNavigationJournal navigationJournal;
 
         private string _name;
         public string Name
@@ -87,10 +90,9 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
         }
 
         [ImportingConstructor]
-        public AlarmInputConfigViewModel(sconnInput input, IAlarmConfigManager manager, IRegionManager regionManager)
+        public AlarmInputConfigViewModel(IAlarmConfigManager manager, IRegionManager regionManager)
         {
             SetupCmds();
-            Config = input;
             this._manager = (AlarmSystemConfigManager)manager;
             this._regionManager = regionManager;
             GetData();
@@ -106,6 +108,32 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
             get { return "pack://application:,,,/images/config1.png"; }
         }
 
+        public void OnNavigatedTo(NavigationContext navigationContext)
+        {
+            string inputId = (string)navigationContext.Parameters[AlarmRegionNames.AlarmConfig_Contract_Input_Config_View_Key_Name];
+            if (inputId != null)
+            {
+               this.Config = SiteNavigationManager.InputForId(inputId);
+            }
+
+            this.navigationJournal = navigationContext.NavigationService.Journal;
+        }
+
+        public bool IsNavigationTarget(NavigationContext navigationContext)
+        {
+            if (this.Config == null)
+            {
+                return true;
+            }
+
+            var inputId = navigationContext.Parameters[AlarmRegionNames.AlarmConfig_Contract_Input_Config_View_Key_Name]; // GetRequestedEmailId(navigationContext);
+            return inputId.Equals(Config.UUID);
+        }
+
+        public void OnNavigatedFrom(NavigationContext navigationContext)
+        {
+
+        }
     }
 
 

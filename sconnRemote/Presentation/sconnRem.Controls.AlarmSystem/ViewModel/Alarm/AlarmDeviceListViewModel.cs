@@ -69,6 +69,30 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
             }
         }
 
+
+        private void NavigateToAlarmContractWithParam(string contractName,NavigationParameters param)
+        {
+            try
+            {
+                this._regionManager.RequestNavigate(GlobalViewRegionNames.MainGridContentRegion, new Uri(contractName + param, UriKind.Relative)
+                    ,
+                    (NavigationResult nr) =>
+                    {
+                        var error = nr.Error;
+                        var result = nr.Result;
+                        if (error != null)
+                        {
+                            _nlogger.Error(error);
+                        }
+                    });
+            }
+            catch (Exception ex)
+            {
+                _nlogger.Error(ex, ex.Message);
+
+            }
+        }
+
         private string GetDeviceTypeStatusViewContractNameForDevice(sconnDevice device)
         {
             if (device.Type == sconnDeviceType.Graphical_Keypad)
@@ -181,7 +205,11 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
                     {
                         SiteNavigationManager.ActivateDeviceContext(device);
                         SiteNavigationManager.ActivateInputContext(input);
-                        NavigateToAlarmContract(AlarmRegionNames.AlarmConfig_Contract_Input_Config_View);
+
+                        NavigationParameters parameters = new NavigationParameters();
+                        parameters.Add(AlarmRegionNames.AlarmConfig_Contract_Input_Config_View_Key_Name, input.UUID);
+                        NavigateToAlarmContractWithParam(AlarmRegionNames.AlarmConfig_Contract_Input_Config_View,parameters);
+                       // NavigateToAlarmContract(AlarmRegionNames.AlarmConfig_Contract_Input_Config_View);
                     }
                 }
             }

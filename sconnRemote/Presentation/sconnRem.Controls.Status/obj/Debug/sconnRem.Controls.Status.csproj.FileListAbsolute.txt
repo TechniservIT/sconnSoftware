@@ -98,10 +98,7 @@ H:\Repo\Bucket\iotdashn\sconnRemote\Presentation\sconnRem.Controls.Status\bin\De
 H:\Repo\Bucket\iotdashn\sconnRemote\Presentation\sconnRem.Controls.Status\bin\Debug\Prism.Mef.Wpf.dll
 H:\Repo\Bucket\iotdashn\sconnRemote\Presentation\sconnRem.Controls.Status\bin\Debug\sconnConnector.dll
 H:\Repo\Bucket\iotdashn\sconnRemote\Presentation\sconnRem.Controls.Status\bin\Debug\sconnPrismGenerics.dll
-H:\Repo\Bucket\iotdashn\sconnRemote\Presentation\sconnRem.Controls.Status\bin\Debug\sconnRem.Shells.dll
 H:\Repo\Bucket\iotdashn\sconnRemote\Presentation\sconnRem.Controls.Status\bin\Debug\sconnPrismSharedContext.dll
-H:\Repo\Bucket\iotdashn\sconnRemote\Presentation\sconnRem.Controls.Status\bin\Debug\sconnRem.Controls.AlarmSystem.dll
-H:\Repo\Bucket\iotdashn\sconnRemote\Presentation\sconnRem.Controls.Status\bin\Debug\AlarmSystemManagmentService.dll
 H:\Repo\Bucket\iotdashn\sconnRemote\Presentation\sconnRem.Controls.Status\bin\Debug\sconnRem.Controls.Navigation.pdb
 H:\Repo\Bucket\iotdashn\sconnRemote\Presentation\sconnRem.Controls.Status\bin\Debug\sconnRem.Infrastructure.pdb
 H:\Repo\Bucket\iotdashn\sconnRemote\Presentation\sconnRem.Controls.Status\bin\Debug\sconnRem.Navigation.pdb
@@ -113,10 +110,7 @@ H:\Repo\Bucket\iotdashn\sconnRemote\Presentation\sconnRem.Controls.Status\bin\De
 H:\Repo\Bucket\iotdashn\sconnRemote\Presentation\sconnRem.Controls.Status\bin\Debug\Prism.Mef.Wpf.xml
 H:\Repo\Bucket\iotdashn\sconnRemote\Presentation\sconnRem.Controls.Status\bin\Debug\sconnConnector.pdb
 H:\Repo\Bucket\iotdashn\sconnRemote\Presentation\sconnRem.Controls.Status\bin\Debug\sconnPrismGenerics.pdb
-H:\Repo\Bucket\iotdashn\sconnRemote\Presentation\sconnRem.Controls.Status\bin\Debug\sconnRem.Shells.pdb
 H:\Repo\Bucket\iotdashn\sconnRemote\Presentation\sconnRem.Controls.Status\bin\Debug\sconnPrismSharedContext.pdb
-H:\Repo\Bucket\iotdashn\sconnRemote\Presentation\sconnRem.Controls.Status\bin\Debug\sconnRem.Controls.AlarmSystem.pdb
-H:\Repo\Bucket\iotdashn\sconnRemote\Presentation\sconnRem.Controls.Status\bin\Debug\AlarmSystemManagmentService.pdb
 H:\Repo\Bucket\iotdashn\sconnRemote\Presentation\sconnRem.Controls.Status\bin\Debug\de\System.Windows.Interactivity.resources.dll
 H:\Repo\Bucket\iotdashn\sconnRemote\Presentation\sconnRem.Controls.Status\bin\Debug\en\System.Windows.Interactivity.resources.dll
 H:\Repo\Bucket\iotdashn\sconnRemote\Presentation\sconnRem.Controls.Status\bin\Debug\es\System.Windows.Interactivity.resources.dll

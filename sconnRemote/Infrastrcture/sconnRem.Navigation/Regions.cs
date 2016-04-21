@@ -43,6 +43,8 @@ namespace sconnRem.Navigation
         #region AlarmSystemEntitiesConfig
 
             public const String AlarmConfig_Contract_Input_Config_View = "AlarmInputConfigureView";
+            public const String AlarmConfig_Contract_Input_Config_View_Key_Name = "InputUuid";
+
             public const String AlarmConfig_Contract_Output_Config_View = "AlarmOutputConfigureView";
             public const String AlarmConfig_Contract_Relay_Config_View = "AlarmRelayConfigureView";
             public const String AlarmConfig_Contract_Zone_Config_View = "AlarmZoneConfigureView";

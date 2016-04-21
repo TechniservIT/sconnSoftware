@@ -112,7 +112,6 @@ H:\Repo\Bucket\iotdashn\sconnRemote\Presentation\sconnRem.Controls.Navigation\bi
 H:\Repo\Bucket\iotdashn\sconnRemote\Presentation\sconnRem.Controls.Navigation\bin\Debug\System.Windows.Interactivity.dll
 H:\Repo\Bucket\iotdashn\sconnRemote\Presentation\sconnRem.Controls.Navigation\bin\Debug\AlarmSystemManagmentService.dll
 H:\Repo\Bucket\iotdashn\sconnRemote\Presentation\sconnRem.Controls.Navigation\bin\Debug\sconnPrismSharedContext.dll
-H:\Repo\Bucket\iotdashn\sconnRemote\Presentation\sconnRem.Controls.Navigation\bin\Debug\sconnRem.Shells.dll
 H:\Repo\Bucket\iotdashn\sconnRemote\Presentation\sconnRem.Controls.Navigation\bin\Debug\sconnConnector.pdb
 H:\Repo\Bucket\iotdashn\sconnRemote\Presentation\sconnRem.Controls.Navigation\bin\Debug\sconnPrismGenerics.pdb
 H:\Repo\Bucket\iotdashn\sconnRemote\Presentation\sconnRem.Controls.Navigation\bin\Debug\sconnRem.Controls.AlarmSystem.pdb
@@ -126,7 +125,6 @@ H:\Repo\Bucket\iotdashn\sconnRemote\Presentation\sconnRem.Controls.Navigation\bi
 H:\Repo\Bucket\iotdashn\sconnRemote\Presentation\sconnRem.Controls.Navigation\bin\Debug\Prism.Wpf.xml
 H:\Repo\Bucket\iotdashn\sconnRemote\Presentation\sconnRem.Controls.Navigation\bin\Debug\AlarmSystemManagmentService.pdb
 H:\Repo\Bucket\iotdashn\sconnRemote\Presentation\sconnRem.Controls.Navigation\bin\Debug\sconnPrismSharedContext.pdb
-H:\Repo\Bucket\iotdashn\sconnRemote\Presentation\sconnRem.Controls.Navigation\bin\Debug\sconnRem.Shells.pdb
 H:\Repo\Bucket\iotdashn\sconnRemote\Presentation\sconnRem.Controls.Navigation\bin\Debug\de\System.Windows.Interactivity.resources.dll
 H:\Repo\Bucket\iotdashn\sconnRemote\Presentation\sconnRem.Controls.Navigation\bin\Debug\en\System.Windows.Interactivity.resources.dll
 H:\Repo\Bucket\iotdashn\sconnRemote\Presentation\sconnRem.Controls.Navigation\bin\Debug\es\System.Windows.Interactivity.resources.dll

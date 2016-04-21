@@ -24,68 +24,66 @@ namespace sconnRem.Controls.AlarmSystem.View.Status.AlarmSystem.Inputs
 
     [Export(AlarmRegionNames.AlarmConfig_Contract_Input_Config_View)]
     [ViewSortHint("01")]
-    public partial class AlarmInputConfigureView : UserControl, IPartImportsSatisfiedNotification, IActiveAware, INavigationAware  
+    [PartCreationPolicy(CreationPolicy.NonShared)]
+    public partial class AlarmInputConfigureView : UserControl, IPartImportsSatisfiedNotification   //, ///IActiveAware, INavigationAware  
     {
         private const string MainContentRegionName = GlobalViewRegionNames.MainGridContentRegion;  
         private Logger _nlogger = LogManager.GetCurrentClassLogger();
         private static Uri configureUri = new Uri("InputsConfig", UriKind.Relative);
 
-        [Import]
-        public IRegionManager RegionManager;
+        //[Import]
+        //public IRegionManager RegionManager;
 
-        [ImportingConstructor]
-        public AlarmInputConfigureView(AlarmSharedDeviceConfigViewModel viewModel)
+        [Import]
+        public AlarmInputConfigViewModel ViewModel
         {
-            this.DataContext = viewModel;
+            set { this.DataContext = value; }
+        }
+
+        public AlarmInputConfigureView()
+        {
             InitializeComponent();
         }
+
+        //[ImportingConstructor]
+        //public AlarmInputConfigureView(AlarmInputConfigViewModel viewModel)
+        //{
+        //    this.DataContext = viewModel;
+        //    InitializeComponent();
+        //}
 
 
         void IPartImportsSatisfiedNotification.OnImportsSatisfied()
         {
-            IRegion mainContentRegion = this.RegionManager.Regions[MainContentRegionName];
-            if (mainContentRegion != null && mainContentRegion.NavigationService != null)
-            {
-                mainContentRegion.NavigationService.Navigated += this.MainContentRegion_Navigated;
-            }
+            //IRegion mainContentRegion = this.RegionManager.Regions[MainContentRegionName];
+            //if (mainContentRegion != null && mainContentRegion.NavigationService != null)
+            //{
+            //    mainContentRegion.NavigationService.Navigated += this.MainContentRegion_Navigated;
+            //}
         }
 
-        public void MainContentRegion_Navigated(object sender, RegionNavigationEventArgs e)
-        {
+        //public void MainContentRegion_Navigated(object sender, RegionNavigationEventArgs e)
+        //{
 
-        }
+        //}
 
-        private void Configure_Button_Click(object sender, RoutedEventArgs e)
-        {
-            this.RegionManager.RequestNavigate(GlobalViewRegionNames.MainGridContentRegion, configureUri
-                ,
-                (NavigationResult nr) =>
-                {
-                    var error = nr.Error;
-                    var result = nr.Result;
-                    if (error != null)
-                    {
-                        _nlogger.Error(error);
-                    }
-                });
-        }
-
-        public bool IsActive { get; set; }
-        public event EventHandler IsActiveChanged;
-        public void OnNavigatedTo(NavigationContext navigationContext)
-        {
+     
+        //public bool IsActive { get; set; }
+        //public event EventHandler IsActiveChanged;
+        //public void OnNavigatedTo(NavigationContext navigationContext)
+        //{
          
-        }
+        //}
 
-        public bool IsNavigationTarget(NavigationContext navigationContext)
-        {
-            return true;
-        }
+        //public bool IsNavigationTarget(NavigationContext navigationContext)
+        //{
+        //    return true;
+        //}
 
-        public void OnNavigatedFrom(NavigationContext navigationContext)
-        {
+        //public void OnNavigatedFrom(NavigationContext navigationContext)
+        //{
 
-        }
+        //}
 
     }
 

@@ -42,6 +42,10 @@ namespace sconnRem.Infrastructure.Navigation
         public static sconnOutput activeOutput = new sconnOutput();
         public static sconnRelay activeRelay = new sconnRelay();
 
+        public static sconnInput InputForId(string uuid)
+        {
+            return new sconnInput();
+        }
 
         private static ComposablePart exportedInputComposablePart;
 
