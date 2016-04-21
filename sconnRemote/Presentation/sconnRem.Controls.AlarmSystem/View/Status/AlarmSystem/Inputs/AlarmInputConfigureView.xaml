@@ -145,10 +145,10 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <Label Grid.Column="0" Grid.Row="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="{Binding Config.Name}" />
-                <Label Grid.Column="0" Grid.Row="1" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="{Binding Config.DeviceId}" />
-                <Label Grid.Column="0" Grid.Row="2" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="{Binding Config.Revision}" />
-                <Label Grid.Column="0" Grid.Row="3" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="{Binding Config.ZoneId}" />
+                <Label Grid.Column="0" Grid.Row="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="{Binding ActiveInput.Name , Mode=TwoWay}" />
+                <Label Grid.Column="0" Grid.Row="1" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="{Binding ActiveInput.Id, Mode=TwoWay}" />
+                <!--<Label Grid.Column="0" Grid.Row="2" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="{Binding ActiveInput.Revision}" />
+                <Label Grid.Column="0" Grid.Row="3" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="{Binding ActiveInput.ZoneId}" />-->
 
 
             </Grid>

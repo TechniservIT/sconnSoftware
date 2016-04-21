@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using AlarmSystemManagmentService;
@@ -22,7 +24,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
     [Export]
     public class AlarmDeviceListViewModel : BindableBase
     {
-        public List<sconnDevice> Config { get; set; }
+        public ObservableCollection<sconnDevice> Config { get; set; }
         private AlarmDevicesConfigService _provider;
         private AlarmSystemConfigManager _manager;
         private readonly IRegionManager _regionManager;
@@ -213,7 +215,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
         {
             try
             {
-                Config = _provider.GetAll();
+                Config = new ObservableCollection<sconnDevice>(_provider.GetAll());  //_provider.GetAll().AsQueryable();
 
             }
             catch (Exception ex)
@@ -230,7 +232,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
         public AlarmDeviceListViewModel()
         {
             SetupCmds();
-            Config = new List<sconnDevice>();
+            Config = new ObservableCollection<sconnDevice>(new List<sconnDevice>());
             _name = "Gcfg";
             this._provider = new AlarmDevicesConfigService(_manager);
         }
@@ -240,7 +242,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
         public AlarmDeviceListViewModel(IRegionManager regionManager)
         {
             SetupCmds();
-            Config = new List<sconnDevice>();
+            Config = new ObservableCollection<sconnDevice>(new List<sconnDevice>());
             this._manager = SiteNavigationManager.alarmSystemConfigManager;
             this._provider = new AlarmDevicesConfigService(_manager);
             this._regionManager = regionManager;

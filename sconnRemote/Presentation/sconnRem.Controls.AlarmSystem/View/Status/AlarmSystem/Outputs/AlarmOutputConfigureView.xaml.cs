@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using NLog;
+using Prism;
 using Prism.Regions;
 using sconnRem.Controls.AlarmSystem.ViewModel.Alarm;
 using sconnRem.Navigation;
@@ -23,7 +24,7 @@ namespace sconnRem.Controls.AlarmSystem.View.Status.AlarmSystem.Outputs
 
     [Export(AlarmRegionNames.AlarmConfig_Contract_Output_Config_View)]
     [ViewSortHint("01")]
-    public partial class AlarmOutputConfigureView : UserControl, IPartImportsSatisfiedNotification
+    public partial class AlarmOutputConfigureView : UserControl, IPartImportsSatisfiedNotification, IActiveAware, INavigationAware
     {
         private const string MainContentRegionName = GlobalViewRegionNames.MainGridContentRegion;
         private Logger _nlogger = LogManager.GetCurrentClassLogger();
@@ -69,6 +70,22 @@ namespace sconnRem.Controls.AlarmSystem.View.Status.AlarmSystem.Outputs
                 });
         }
 
+        public bool IsActive { get; set; }
+        public event EventHandler IsActiveChanged;
+        public void OnNavigatedTo(NavigationContext navigationContext)
+        {
+          
+        }
+
+        public bool IsNavigationTarget(NavigationContext navigationContext)
+        {
+            return true;
+        }
+
+        public void OnNavigatedFrom(NavigationContext navigationContext)
+        {
+           
+        }
     }
 
 

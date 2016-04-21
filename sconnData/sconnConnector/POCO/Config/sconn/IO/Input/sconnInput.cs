@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using NLog;
+using sconnConnector.Annotations;
 using sconnConnector.POCO.Config.Abstract.IO;
 using sconnConnector.POCO.Config.sconn;
 
@@ -29,7 +32,7 @@ namespace sconnConnector.POCO.Config
         ArmedAndDisarmedViolation
     }
 
-    public class sconnInput : IAlarmSystemConfigurationEntity, ISerializableConfiguration, IFakeAbleConfiguration
+    public class sconnInput : IAlarmSystemConfigurationEntity, ISerializableConfiguration, IFakeAbleConfiguration, INotifyPropertyChanged
     {
         public byte NameId { get; set; }
 
@@ -78,6 +81,8 @@ namespace sconnConnector.POCO.Config
             this.NameId = other.NameId;
             this.UUID = other.UUID;
             this.imageIconUri = other.imageIconUri;
+
+            OnPropertyChanged();
         }
 
         public string GetInputTypeImageUriForInput(sconnInput input)
@@ -189,6 +194,13 @@ namespace sconnConnector.POCO.Config
         }
 
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 
 }

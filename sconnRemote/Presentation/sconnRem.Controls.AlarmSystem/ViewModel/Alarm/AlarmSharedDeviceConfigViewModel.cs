@@ -24,13 +24,15 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
 {
     
     [Export]
-    public class AlarmSharedDeviceConfigViewModel : BindableBase, IActiveAware   //ObservableObject, IPageViewModel
+    public class AlarmSharedDeviceConfigViewModel : BindableBase, IActiveAware, INavigationAware   //ObservableObject, IPageViewModel
     {
         public sconnDevice Config { get; set; }
 
-        public sconnInput ActiveInput { get; set; }
-        public sconnOutput ActiveOutput { get; set; }
-        public sconnRelay ActiveRelay { get; set; }
+        public sconnInput ActiveInput { get; set; } = new sconnInput();
+        public sconnOutput ActiveOutput { get; set; } = new sconnOutput();
+        public sconnRelay ActiveRelay { get; set; } = new sconnRelay();
+
+        public int ChangeTrack { get; set; }
 
         private DeviceConfigService _provider;
         private AlarmSystemConfigManager _manager;
@@ -39,6 +41,43 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
 
         private string _name;
         private bool _isActive;
+
+        private void UpdateActiveIo()
+        {
+            ChangeTrack++;
+            this.ActiveInput.CopyFrom(SiteNavigationManager.activeInput);
+            this.ActiveOutput.CopyFrom(SiteNavigationManager.activeOutput);
+            this.ActiveRelay.CopyFrom(SiteNavigationManager.activeRelay);
+        }
+
+        bool INavigationAware.IsNavigationTarget(NavigationContext navigationContext)
+        {
+            UpdateActiveIo();
+
+            return true;
+
+            //if (SiteNavigationManager.CurrentContextDevice != this.Config ||
+            //    SiteNavigationManager.activeInput != this.ActiveInput ||
+            //    SiteNavigationManager.activeOutput != this.ActiveOutput ||
+            //    SiteNavigationManager.activeRelay != this.ActiveRelay
+            //    )
+            //{
+            //    return false;
+            //}
+            //else
+            //{
+            //    return true;
+            //}
+        }
+
+        void INavigationAware.OnNavigatedFrom(NavigationContext navigationContext)
+        {
+        }
+
+        void INavigationAware.OnNavigatedTo(NavigationContext navigationContext)
+        {
+            UpdateActiveIo();
+        }
 
         public string Name
         {
@@ -59,6 +98,11 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
                 if (_isActive != value)
                 {
                     _isActive = value;
+
+                    ActiveInput = SiteNavigationManager.activeInput;
+                    ActiveOutput = SiteNavigationManager.activeOutput;
+                    ActiveRelay = SiteNavigationManager.activeRelay;
+
                     GetData();
                 }
             }
@@ -150,7 +194,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
         {
             SetupCmds();
             Config = SiteNavigationManager.CurrentContextDevice;
-            ActiveInput = SiteNavigationManager.activeInput;
+            UpdateActiveIo();
             this._manager = SiteNavigationManager.alarmSystemConfigManager; // (AlarmSystemConfigManager)manager;
             this._provider = new DeviceConfigService(_manager, Config.DeviceId);
             this._regionManager = regionManager;

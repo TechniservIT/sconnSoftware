@@ -38,9 +38,9 @@ namespace sconnRem.Infrastructure.Navigation
         public static event EventHandler AlarmDeviceChangedEvent;
         private static ComposablePart exportedDeviceComposablePart;
 
-        public static sconnInput activeInput;
-        public static sconnOutput activeOutput;
-        public static sconnRelay activeRelay;
+        public static sconnInput activeInput  = new sconnInput();
+        public static sconnOutput activeOutput = new sconnOutput();
+        public static sconnRelay activeRelay = new sconnRelay();
 
         private static ComposablePart exportedInputComposablePart;
 

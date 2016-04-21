@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using NLog;
+using sconnConnector.Annotations;
 using sconnConnector.POCO.Config.Abstract.Device;
 using sconnConnector.POCO.Config.Abstract.IO;
 
@@ -37,7 +40,7 @@ namespace sconnConnector.POCO.Config.sconn
 
 
 
-    public class sconnDevice : IAlarmSystemNamedConfigurationEntity, ISerializableConfiguration, IFakeAbleConfiguration
+    public class sconnDevice : IAlarmSystemNamedConfigurationEntity, ISerializableConfiguration, IFakeAbleConfiguration, INotifyPropertyChanged
     {
         public byte Id { get; set; }
         public byte Value { get; set; }
@@ -112,6 +115,8 @@ namespace sconnConnector.POCO.Config.sconn
             this.Type = other.Type;
             this.Revision = other.Revision;
             this.ActiveInputId = other.ActiveInputId;
+
+            OnPropertyChanged();
 
         }
 
@@ -562,6 +567,14 @@ namespace sconnConnector.POCO.Config.sconn
             }
             this._NamesCFG = convNamesCFG;
             LoadDeviceNames();
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
