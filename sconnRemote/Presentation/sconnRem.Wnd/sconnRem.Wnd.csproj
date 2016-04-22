@@ -66,88 +66,14 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
-    <Compile Include="Config\ConfigNavBootstrapper.cs" />
-    <Compile Include="Config\ExportAttribute.cs" />
-    <Compile Include="Config\wndConfigureSiteShell.xaml.cs">
-      <DependentUpon>wndConfigureSiteShell.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Help\About.xaml.cs">
-      <DependentUpon>About.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Help\HelpWnd.xaml.cs">
-      <DependentUpon>HelpWnd.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Main\GlobalWndBootstrapper.cs" />
     <Compile Include="Main\wndGlobalShell.xaml.cs">
       <DependentUpon>WndGlobalShell.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Navigation\NavigationWndBootstrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tools\changePasswordWnd.xaml.cs">
-      <DependentUpon>changePasswordWnd.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Tools\MapWindow.xaml.cs">
-      <DependentUpon>MapWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Tools\Page1.xaml.cs">
-      <DependentUpon>Page1.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Tools\sconnSecurityDialog.xaml.cs">
-      <DependentUpon>sconnSecurityDialog.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Tools\sconnSiteManagerWindow.xaml.cs">
-      <DependentUpon>sconnSiteManagerWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Tools\userManager.xaml.cs">
-      <DependentUpon>userManager.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Tools\WndEditScheduleAction.xaml.cs">
-      <DependentUpon>WndEditScheduleAction.xaml</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Config\wndConfigureSiteShell.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Help\About.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Help\HelpWnd.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Main\WndGlobalShell.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Tools\changePasswordWnd.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Tools\MapWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Tools\Page1.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Tools\sconnSecurityDialog.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Tools\sconnSiteManagerWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Tools\userManager.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Tools\WndEditScheduleAction.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -171,6 +97,14 @@
       <Project>{9C17810C-EFC7-4806-8414-6868DEABBCA0}</Project>
       <Name>sconnPrismGenerics</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Infrastrcture\sconnPrismSharedContext\sconnPrismSharedContext.csproj">
+      <Project>{541885ad-53c0-41c4-b98f-c97815c5f168}</Project>
+      <Name>sconnPrismSharedContext</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Infrastrcture\sconnRem.Infrastructure\sconnRem.Infrastructure.csproj">
+      <Project>{e5740f97-e6a7-4010-b267-79d3aa2f7f48}</Project>
+      <Name>sconnRem.Infrastructure</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Infrastrcture\sconnRem.Navigation\sconnRem.Navigation.csproj">
       <Project>{7A5FAD15-614C-4D5D-9DAA-4BC9628D479C}</Project>
       <Name>sconnRem.Navigation</Name>
@@ -179,6 +113,10 @@
       <Project>{9F7BCC3B-DC29-4BFE-8152-F74E1ED1F687}</Project>
       <Name>sconnRem</Name>
     </ProjectReference>
+    <ProjectReference Include="..\sconnRem.Controls.AlarmSystem\sconnRem.Controls.AlarmSystem.csproj">
+      <Project>{c567fe8b-3834-4ad8-aad4-71bdd36dded6}</Project>
+      <Name>sconnRem.Controls.AlarmSystem</Name>
+    </ProjectReference>
     <ProjectReference Include="..\sconnRem.Controls.Navigation\sconnRem.Controls.Navigation.csproj">
       <Project>{97A1614E-9A15-4676-A3E9-9C8182C5B3E4}</Project>
       <Name>sconnRem.Controls.Navigation</Name>
@@ -186,6 +124,10 @@
     <ProjectReference Include="..\sconnRem.Controls.Status\sconnRem.Controls.Status.csproj">
       <Project>{FBEC1121-BBA2-41A9-AA91-64CD67DE68FF}</Project>
       <Name>sconnRem.Controls.Status</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\sconnRem.Shells\sconnRem.Shells.csproj">
+      <Project>{687f4d7b-3759-45d4-a8ec-1cb6bc0a8cc3}</Project>
+      <Name>sconnRem.Shells</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

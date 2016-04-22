@@ -13,6 +13,7 @@ using sconnConnector.Config;
 using sconnConnector.POCO.Config;
 using sconnRem.Infrastructure.Navigation;
 using sconnRem.Navigation;
+using sconnRem.Wnd.Tools;
 
 namespace sconnRem.Controls.Navigation.ViewModel.Navigation
 {
@@ -93,25 +94,29 @@ namespace sconnRem.Controls.Navigation.ViewModel.Navigation
         }
 
 
-
+        // TODO separate shells ?
         private void ShowFileImport()
         {
-            SiteNavigationManager.ShowConfigureScreen();
+            WndImportConfig wnd = new WndImportConfig();
+            wnd.Show();
         }
 
         private void ShowFileExport()
         {
-            SiteNavigationManager.ShowConfigureScreen();
+            WndExportConfig wnd = new WndExportConfig();
+            wnd.Show();
         }
 
         private void ShowGlobalPreferences()
         {
-            SiteNavigationManager.ShowConfigureScreen();
+            WndGlobalPreferences wnd = new WndGlobalPreferences();
+            wnd.Show();
         }
 
         private void ShowSiteWizard()
         {
-            SiteNavigationManager.ShowConfigureScreen();
+            WndSiteWizard wnd = new WndSiteWizard();
+            wnd.Show();
         }
         
         private void SetupCmds()

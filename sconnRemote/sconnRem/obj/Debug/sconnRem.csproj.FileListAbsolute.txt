@@ -377,3 +377,6 @@ I:\Repo\Bucket\sconnSoftware\sconnRemote\sconnRem\obj\Debug\en-US\sconnRem.resou
 I:\Repo\Bucket\sconnSoftware\sconnRemote\sconnRem\obj\Debug\pl-PL\sconnRem.resources.dll
 I:\Repo\Bucket\sconnSoftware\sconnRemote\sconnRem\obj\Debug\sconnRem.exe
 I:\Repo\Bucket\sconnSoftware\sconnRemote\sconnRem\obj\Debug\sconnRem.pdb
+I:\Repo\Bucket\sconnSoftware\sconnRemote\sconnRem\bin\Debug\de-DE\sconnRem.Shells.resources.dll
+I:\Repo\Bucket\sconnSoftware\sconnRemote\sconnRem\bin\Debug\en-US\sconnRem.Shells.resources.dll
+I:\Repo\Bucket\sconnSoftware\sconnRemote\sconnRem\bin\Debug\pl-PL\sconnRem.Shells.resources.dll

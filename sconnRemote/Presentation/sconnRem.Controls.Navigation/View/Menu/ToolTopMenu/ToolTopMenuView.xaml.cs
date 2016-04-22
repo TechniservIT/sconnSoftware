@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using NLog;
 using Prism.Regions;
+using sconnRem.Controls.Navigation.ViewModel.Navigation;
 using sconnRem.Navigation;
 
 namespace sconnRem.View.Menu.ToolTopMenu
@@ -33,8 +34,11 @@ namespace sconnRem.View.Menu.ToolTopMenu
         [Import]
         public IRegionManager RegionManager;
 
-        public ToolTopMenuView()
+
+        [ImportingConstructor]
+        public ToolTopMenuView(ToolTopMenuViewModel viewModel)
         {
+            this.DataContext = viewModel;
             InitializeComponent();
         }
 

@@ -74,6 +74,7 @@
     <Compile Include="ViewModel\AlarmSystem\AlarmSystemToolbarViewModel.cs" />
     <Compile Include="ViewModel\Navigation\SiteNavItemViewModel.cs" />
     <Compile Include="ViewModel\Navigation\SiteNavViewModel.cs" />
+    <Compile Include="ViewModel\Navigation\ToolTopMenuViewModel.cs" />
     <Compile Include="View\Menu\ContextToolbar\AlarmSystem\AlarmSystemToolbarModule.cs" />
     <Compile Include="View\Menu\ContextToolbar\AlarmSystem\AlarmSystemToolbarView.xaml.cs">
       <DependentUpon>AlarmSystemToolbarView.xaml</DependentUpon>
@@ -152,6 +153,10 @@
     <ProjectReference Include="..\..\Infrastrcture\sconnRem.Navigation\sconnRem.Navigation.csproj">
       <Project>{7A5FAD15-614C-4D5D-9DAA-4BC9628D479C}</Project>
       <Name>sconnRem.Navigation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\sconnRem.Shells\sconnRem.Shells.csproj">
+      <Project>{687f4d7b-3759-45d4-a8ec-1cb6bc0a8cc3}</Project>
+      <Name>sconnRem.Shells</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
