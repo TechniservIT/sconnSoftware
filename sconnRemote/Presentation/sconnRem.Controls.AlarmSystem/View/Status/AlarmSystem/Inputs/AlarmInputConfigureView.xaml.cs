@@ -16,16 +16,18 @@ using System.Windows.Shapes;
 using NLog;
 using Prism;
 using Prism.Regions;
+using sconnPrismGenerics.Atrributes;
 using sconnRem.Controls.AlarmSystem.ViewModel.Alarm;
 using sconnRem.Navigation;
 
 namespace sconnRem.Controls.AlarmSystem.View.Status.AlarmSystem.Inputs
 {
 
-    [Export(AlarmRegionNames.AlarmConfig_Contract_Input_Config_View)]
+   // [ViewExport(AlarmRegionNames.AlarmConfig_Contract_Input_Config_View)]
+    [Export("AlarmInputConfigureView")]
     [ViewSortHint("01")]
     [PartCreationPolicy(CreationPolicy.NonShared)]
-    public partial class AlarmInputConfigureView : UserControl, IPartImportsSatisfiedNotification   //, ///IActiveAware, INavigationAware  
+    public partial class AlarmInputConfigureView : UserControl   //, ///IActiveAware, INavigationAware  
     {
         private const string MainContentRegionName = GlobalViewRegionNames.MainGridContentRegion;  
         private Logger _nlogger = LogManager.GetCurrentClassLogger();
@@ -40,10 +42,12 @@ namespace sconnRem.Controls.AlarmSystem.View.Status.AlarmSystem.Inputs
             set { this.DataContext = value; }
         }
 
+
         public AlarmInputConfigureView()
         {
             InitializeComponent();
         }
+
 
         //[ImportingConstructor]
         //public AlarmInputConfigureView(AlarmInputConfigViewModel viewModel)
@@ -53,26 +57,26 @@ namespace sconnRem.Controls.AlarmSystem.View.Status.AlarmSystem.Inputs
         //}
 
 
-        void IPartImportsSatisfiedNotification.OnImportsSatisfied()
-        {
-            //IRegion mainContentRegion = this.RegionManager.Regions[MainContentRegionName];
-            //if (mainContentRegion != null && mainContentRegion.NavigationService != null)
-            //{
-            //    mainContentRegion.NavigationService.Navigated += this.MainContentRegion_Navigated;
-            //}
-        }
+        //void IPartImportsSatisfiedNotification.OnImportsSatisfied()
+        //{
+        //    //IRegion mainContentRegion = this.RegionManager.Regions[MainContentRegionName];
+        //    //if (mainContentRegion != null && mainContentRegion.NavigationService != null)
+        //    //{
+        //    //    mainContentRegion.NavigationService.Navigated += this.MainContentRegion_Navigated;
+        //    //}
+        //}
 
         //public void MainContentRegion_Navigated(object sender, RegionNavigationEventArgs e)
         //{
 
         //}
 
-     
+
         //public bool IsActive { get; set; }
         //public event EventHandler IsActiveChanged;
         //public void OnNavigatedTo(NavigationContext navigationContext)
         //{
-         
+
         //}
 
         //public bool IsNavigationTarget(NavigationContext navigationContext)

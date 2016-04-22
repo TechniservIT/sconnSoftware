@@ -262,10 +262,8 @@ H:\Repo\Bucket\iotdashn\sconnRemote\sconnRem\obj\Debug\en-US\sconnRem.resources.
 H:\Repo\Bucket\iotdashn\sconnRemote\sconnRem\obj\Debug\pl-PL\sconnRem.resources.dll
 H:\Repo\Bucket\iotdashn\sconnRemote\sconnRem\obj\Debug\sconnRem.exe
 H:\Repo\Bucket\iotdashn\sconnRemote\sconnRem\obj\Debug\sconnRem.pdb
-I:\Repo\Bucket\sconnSoftware\sconnRemote\sconnRem\bin\Debug\sconnRem.exe.config
-I:\Repo\Bucket\sconnSoftware\sconnRemote\sconnRem\obj\Debug\sconnRem.exe
-I:\Repo\Bucket\sconnSoftware\sconnRemote\sconnRem\obj\Debug\sconnRem.pdb
 I:\Repo\Bucket\sconnSoftware\sconnRemote\sconnRem\bin\Debug\NLog.config
+I:\Repo\Bucket\sconnSoftware\sconnRemote\sconnRem\bin\Debug\sconnRem.exe.config
 I:\Repo\Bucket\sconnSoftware\sconnRemote\sconnRem\bin\Debug\sconnRem.exe
 I:\Repo\Bucket\sconnSoftware\sconnRemote\sconnRem\bin\Debug\sconnRem.pdb
 I:\Repo\Bucket\sconnSoftware\sconnRemote\sconnRem\bin\Debug\de-DE\sconnRem.resources.dll
@@ -377,3 +375,5 @@ I:\Repo\Bucket\sconnSoftware\sconnRemote\sconnRem\obj\Debug\sconnRem.exe.license
 I:\Repo\Bucket\sconnSoftware\sconnRemote\sconnRem\obj\Debug\de-DE\sconnRem.resources.dll
 I:\Repo\Bucket\sconnSoftware\sconnRemote\sconnRem\obj\Debug\en-US\sconnRem.resources.dll
 I:\Repo\Bucket\sconnSoftware\sconnRemote\sconnRem\obj\Debug\pl-PL\sconnRem.resources.dll
+I:\Repo\Bucket\sconnSoftware\sconnRemote\sconnRem\obj\Debug\sconnRem.exe
+I:\Repo\Bucket\sconnSoftware\sconnRemote\sconnRem\obj\Debug\sconnRem.pdb

@@ -123,6 +123,8 @@ H:\Repo\Bucket\iotdashn\sconnRemote\Presentation\sconnRem.Shells\bin\Debug\zh-Ha
 H:\Repo\Bucket\iotdashn\sconnRemote\Presentation\sconnRem.Shells\bin\Debug\zh-Hant\System.Windows.Interactivity.resources.dll
 H:\Repo\Bucket\iotdashn\sconnRemote\Presentation\sconnRem.Shells\obj\Debug\sconnRem.Shells.dll
 H:\Repo\Bucket\iotdashn\sconnRemote\Presentation\sconnRem.Shells\obj\Debug\sconnRem.Shells.pdb
+H:\Repo\Bucket\iotdashn\sconnRemote\Presentation\sconnRem.Shells\bin\Debug\sconnRem.Infrastructure.dll
+H:\Repo\Bucket\iotdashn\sconnRemote\Presentation\sconnRem.Shells\bin\Debug\sconnRem.Infrastructure.pdb
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Shells\bin\Debug\NLog.config
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Shells\bin\Debug\sconnRem.Shells.dll.config
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Shells\bin\Debug\sconnRem.Shells.dll
@@ -139,6 +141,7 @@ I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Shells\bin\Debug\
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Shells\bin\Debug\sconnRem.Controls.AlarmSystem.dll
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Shells\bin\Debug\sconnRem.Navigation.dll
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Shells\bin\Debug\System.Windows.Interactivity.dll
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Shells\bin\Debug\sconnRem.Infrastructure.dll
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Shells\bin\Debug\AlarmSystemManagmentService.pdb
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Shells\bin\Debug\sconnConnector.pdb
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Shells\bin\Debug\sconnPrismGenerics.pdb
@@ -151,6 +154,7 @@ I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Shells\bin\Debug\
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Shells\bin\Debug\Prism.xml
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Shells\bin\Debug\Prism.Mef.Wpf.xml
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Shells\bin\Debug\Prism.Wpf.xml
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Shells\bin\Debug\sconnRem.Infrastructure.pdb
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Shells\bin\Debug\de\System.Windows.Interactivity.resources.dll
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Shells\bin\Debug\en\System.Windows.Interactivity.resources.dll
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Shells\bin\Debug\es\System.Windows.Interactivity.resources.dll
@@ -168,7 +172,3 @@ I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Shells\obj\Debug\
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Shells\obj\Debug\sconnRem.Shells.g.resources
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Shells\obj\Debug\sconnRem.Shells.dll
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Shells\obj\Debug\sconnRem.Shells.pdb
-I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Shells\bin\Debug\sconnRem.Infrastructure.dll
-I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Shells\bin\Debug\sconnRem.Infrastructure.pdb
-H:\Repo\Bucket\iotdashn\sconnRemote\Presentation\sconnRem.Shells\bin\Debug\sconnRem.Infrastructure.dll
-H:\Repo\Bucket\iotdashn\sconnRemote\Presentation\sconnRem.Shells\bin\Debug\sconnRem.Infrastructure.pdb

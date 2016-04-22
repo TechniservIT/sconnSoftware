@@ -34,8 +34,8 @@ H:\Repo\Bucket\iotdashn\sconnRemote\Infrastrcture\sconnRem.Navigation\bin\Debug\
 H:\Repo\Bucket\iotdashn\sconnRemote\Infrastrcture\sconnRem.Navigation\bin\Debug\sconnRem.Navigation.pdb
 H:\Repo\Bucket\iotdashn\sconnRemote\Infrastrcture\sconnRem.Navigation\obj\Debug\sconnRem.Navigation.dll
 H:\Repo\Bucket\iotdashn\sconnRemote\Infrastrcture\sconnRem.Navigation\obj\Debug\sconnRem.Navigation.pdb
+H:\Repo\Bucket\iotdashn\sconnRemote\Infrastrcture\sconnRem.Navigation\obj\Debug\sconnRem.Navigation.csprojResolveAssemblyReference.cache
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Infrastrcture\sconnRem.Navigation\bin\Debug\sconnRem.Navigation.dll
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Infrastrcture\sconnRem.Navigation\bin\Debug\sconnRem.Navigation.pdb
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Infrastrcture\sconnRem.Navigation\obj\Debug\sconnRem.Navigation.dll
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Infrastrcture\sconnRem.Navigation\obj\Debug\sconnRem.Navigation.pdb
-H:\Repo\Bucket\iotdashn\sconnRemote\Infrastrcture\sconnRem.Navigation\obj\Debug\sconnRem.Navigation.csprojResolveAssemblyReference.cache

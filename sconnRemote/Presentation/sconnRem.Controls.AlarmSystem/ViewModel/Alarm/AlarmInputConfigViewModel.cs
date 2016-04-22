@@ -90,10 +90,10 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
         }
 
         [ImportingConstructor]
-        public AlarmInputConfigViewModel(IAlarmConfigManager manager, IRegionManager regionManager)
+        public AlarmInputConfigViewModel(IRegionManager regionManager)
         {
             SetupCmds();
-            this._manager = (AlarmSystemConfigManager)manager;
+            this._manager = SiteNavigationManager.alarmSystemConfigManager; // (AlarmSystemConfigManager)manager;
             this._regionManager = regionManager;
             GetData();
         }

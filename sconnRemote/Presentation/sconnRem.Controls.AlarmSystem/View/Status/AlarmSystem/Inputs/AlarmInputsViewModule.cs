@@ -12,16 +12,16 @@ using sconnRem.Navigation;
 
 namespace sconnRem.Controls.AlarmSystem.View.Status.Inputs
 {
-    [ModuleExport(typeof(AlarmInputsViewModule))]
-    public class AlarmInputsViewModule : IModule
-    {
-        [Import]
-        public IRegionManager RegionManager;
+    //[ModuleExport(typeof(AlarmInputsViewModule))]
+    //public class AlarmInputsViewModule : IModule
+    //{
+    //    [Import]
+    //    public IRegionManager RegionManager;
 
-        public void Initialize()
-        {
-            this.RegionManager.RegisterViewWithRegion(AlarmRegionNames.MainContentRegion, typeof(AlarmInputsView));
-        }
-    }
+    //    public void Initialize()
+    //    {
+    //        this.RegionManager.RegisterViewWithRegion(AlarmRegionNames.MainContentRegion, typeof(AlarmInputsView));
+    //    }
+    //}
     
 }

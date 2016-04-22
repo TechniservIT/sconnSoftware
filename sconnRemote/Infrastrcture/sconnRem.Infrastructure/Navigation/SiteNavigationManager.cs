@@ -44,6 +44,16 @@ namespace sconnRem.Infrastructure.Navigation
 
         public static sconnInput InputForId(string uuid)
         {
+            if (CurrentContextDevice != null)
+            {
+                foreach (var input in CurrentContextDevice.Inputs)
+                {
+                    if (input.UUID.Equals(uuid))
+                    {
+                        return input;
+                    }
+                }
+            }
             return new sconnInput();
         }
 

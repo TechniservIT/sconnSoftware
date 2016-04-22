@@ -305,6 +305,8 @@ H:\Repo\Bucket\iotdashn\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\o
 H:\Repo\Bucket\iotdashn\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\obj\Debug\sconnRem.Controls.AlarmSystem.g.resources
 H:\Repo\Bucket\iotdashn\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\obj\Debug\sconnRem.Controls.AlarmSystem.dll
 H:\Repo\Bucket\iotdashn\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\obj\Debug\sconnRem.Controls.AlarmSystem.pdb
+H:\Repo\Bucket\iotdashn\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\bin\Debug\sconnRem.Infrastructure.dll
+H:\Repo\Bucket\iotdashn\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\bin\Debug\sconnRem.Infrastructure.pdb
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\bin\Debug\NLog.config
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\bin\Debug\sconnRem.Controls.AlarmSystem.dll.config
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\bin\Debug\sconnRem.Controls.AlarmSystem.dll
@@ -318,12 +320,14 @@ I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSys
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\bin\Debug\sconnConnector.dll
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\bin\Debug\sconnPrismGenerics.dll
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\bin\Debug\sconnPrismSharedContext.dll
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\bin\Debug\sconnRem.Infrastructure.dll
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\bin\Debug\sconnRem.Navigation.dll
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\bin\Debug\System.Windows.Interactivity.dll
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\bin\Debug\AlarmSystemManagmentService.pdb
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\bin\Debug\sconnConnector.pdb
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\bin\Debug\sconnPrismGenerics.pdb
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\bin\Debug\sconnPrismSharedContext.pdb
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\bin\Debug\sconnRem.Infrastructure.pdb
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\bin\Debug\sconnRem.Navigation.pdb
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\bin\Debug\Microsoft.Practices.ServiceLocation.pdb
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\bin\Debug\Microsoft.Practices.ServiceLocation.xml
@@ -442,7 +446,3 @@ I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSys
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\obj\Debug\sconnRem.Controls.AlarmSystem.g.resources
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\obj\Debug\sconnRem.Controls.AlarmSystem.dll
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\obj\Debug\sconnRem.Controls.AlarmSystem.pdb
-I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\bin\Debug\sconnRem.Infrastructure.dll
-I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\bin\Debug\sconnRem.Infrastructure.pdb
-H:\Repo\Bucket\iotdashn\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\bin\Debug\sconnRem.Infrastructure.dll
-H:\Repo\Bucket\iotdashn\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\bin\Debug\sconnRem.Infrastructure.pdb
