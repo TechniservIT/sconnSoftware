@@ -29,7 +29,7 @@
             </Grid.RowDefinitions>
 
             <Grid    Grid.Row="0" Grid.Column="0" Background="White">
-                <Button Width="Auto" Content="">
+                <Button  Command="{Binding Path=ShowFileImportCommand}"  Width="Auto" Content="">
                     <Button.Template>
                         <ControlTemplate TargetType="{x:Type Button}">
                             <Grid>
@@ -55,7 +55,7 @@
 
             </Grid>
             <Grid    Grid.Row="0" Grid.Column="1" Background="White">
-                <Button Height="Auto" Content="">
+                <Button Command="{Binding Path=ShowFileExportCommand}"  Height="Auto" Content="">
                     <Button.Template>
                         <ControlTemplate TargetType="{x:Type Button}">
                             <Grid>
@@ -80,7 +80,7 @@
                 </Button>
             </Grid>
             <Grid    Grid.Row="1" Grid.Column="0" Background="White">
-                <Button Height="Auto" Content="">
+                <Button Command="{Binding Path=ShowSiteWizardCommand}" Height="Auto" Content="">
                     <Button.Template>
                         <ControlTemplate TargetType="{x:Type Button}">
                             <Grid>
@@ -107,7 +107,7 @@
 
             </Grid>
             <Grid    Grid.Row="1" Grid.Column="1" Background="White">
-                <Button x:Name="BtnSh1"  Height="Auto" Content="">
+                <Button Command="{Binding Path=ShowGlobalPreferencesCommand}" x:Name="BtnSh1"  Height="Auto" Content="">
 
                     <Button.Template>
 
