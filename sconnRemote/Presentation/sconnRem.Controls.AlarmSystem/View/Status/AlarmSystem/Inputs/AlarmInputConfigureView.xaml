@@ -210,7 +210,7 @@
 
                 <Button Grid.Column="1" Grid.Row="6"  VerticalAlignment="Center"
                     Width="Auto" Content="" 
-                    Command="{Binding SaveCommand}" >
+                    Command="{Binding SaveConfigCommand}" >
 
                     <Button.Template>
                         <ControlTemplate TargetType="{x:Type Button}">

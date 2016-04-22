@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using AlarmSystemManagmentService;
 using NLog;
 using sconnConnector.Config;
 using sconnConnector.POCO.Config;
@@ -56,6 +57,20 @@ namespace sconnRem.Infrastructure.Navigation
             }
             return new sconnInput();
         }
+
+        public static void SaveInput(sconnInput input)
+        {
+            foreach (var dinput in CurrentContextDevice.Inputs)
+            {
+                if (dinput.UUID.Equals(input.UUID))
+                {
+                    dinput.CopyFrom(input);
+                    DeviceConfigService serv = new DeviceConfigService(alarmSystemConfigManager,dinput.Id);
+                    serv.Update(CurrentContextDevice);
+                }
+            }
+        }
+
 
         private static ComposablePart exportedInputComposablePart;
 

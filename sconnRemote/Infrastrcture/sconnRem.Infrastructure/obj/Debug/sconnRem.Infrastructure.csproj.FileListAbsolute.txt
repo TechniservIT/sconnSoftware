@@ -141,3 +141,5 @@ I:\Repo\Bucket\sconnSoftware\sconnRemote\Infrastrcture\sconnRem.Infrastructure\b
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Infrastrcture\sconnRem.Infrastructure\obj\Debug\sconnRem.Infrastructure.csprojResolveAssemblyReference.cache
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Infrastrcture\sconnRem.Infrastructure\obj\Debug\sconnRem.Infrastructure.dll
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Infrastrcture\sconnRem.Infrastructure\obj\Debug\sconnRem.Infrastructure.pdb
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Infrastrcture\sconnRem.Infrastructure\bin\Debug\AlarmSystemManagmentService.dll
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Infrastrcture\sconnRem.Infrastructure\bin\Debug\AlarmSystemManagmentService.pdb

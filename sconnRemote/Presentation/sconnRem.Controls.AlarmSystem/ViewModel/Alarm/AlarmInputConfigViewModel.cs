@@ -41,6 +41,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
         }
 
         public ICommand NavigateBackCommand { get; set; }
+        public ICommand SaveConfigCommand { get; set; }
 
         private void GetData()
         {
@@ -53,12 +54,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
                 _nlogger.Error(ex, ex.Message);
             }
         }
-
-        private void SaveData()
-        {
-          
-        }
-
+        
         public AlarmInputConfigViewModel()
         {
             this._manager = AlarmSystemContext.GetManager();
@@ -70,23 +66,18 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
         {
             try
             {
-                this._regionManager.RequestNavigate(GlobalViewRegionNames.MainGridContentRegion, AlarmRegionNames.AlarmStatus_Contract_Device_List_View
-                    ,
-                    (NavigationResult nr) =>
-                    {
-                        var error = nr.Error;
-                        var result = nr.Result;
-                        if (error != null)
-                        {
-                            _nlogger.Error(error);
-                        }
-                    });
+                this.navigationJournal?.GoBack();
             }
             catch (Exception ex)
             {
                 _nlogger.Error(ex, ex.Message);
 
             }
+        }
+
+        private void SaveData()
+        {
+            
         }
 
         [ImportingConstructor]
@@ -101,6 +92,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
         private void SetupCmds()
         {
             NavigateBackCommand = new DelegateCommand(NavigateBack);
+            SaveConfigCommand = new DelegateCommand(SaveData);
         }
 
         public string DisplayedImagePath
