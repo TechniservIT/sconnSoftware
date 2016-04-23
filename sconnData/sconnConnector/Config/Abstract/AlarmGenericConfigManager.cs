@@ -12,7 +12,7 @@ using sconnConnector.POCO.Device;
 
 namespace sconnConnector.Config.Abstract
 {
-    public class AlarmGenericConfigManager<T> where T: new()
+    public class AlarmGenericConfigManager<T> where T : new()
     {
         protected IAlarmSystemConfigurationEntity Entity;
         protected static Logger _logger = LogManager.GetCurrentClassLogger();
@@ -24,11 +24,12 @@ namespace sconnConnector.Config.Abstract
         public AlarmGenericConfigManager(IAlarmSystemConfigurationEntity entity, Device device)
         {
             SingleUpload = true;
-            Entity =  entity;
+            Entity = entity;
             client = new SconnClient(device.EndpInfo.Hostname, device.EndpInfo.Port, device.Credentials.Password, true);
         }
-        
-        public AlarmGenericConfigManager(IAlarmSystemConfigurationEntity entity, Device device, int entityParam) :this(entity,device)
+
+        public AlarmGenericConfigManager(IAlarmSystemConfigurationEntity entity, Device device, int entityParam)
+            : this(entity, device)
         {
             EntityId = entityParam;
         }
@@ -37,17 +38,19 @@ namespace sconnConnector.Config.Abstract
         {
             try
             {
+                bool UploadSuccess = false;
                 if (!client.Connect())
                 {
                     client.Disconnect();
                     return false;
                 }
-                
+
                 if (SingleUpload)
                 {
                     byte[] data = this.Entity.Serialize();
-                    byte[] msgHeader = CommandManager.GetHeaderForOperationParametrized(typeof(T), CommandOperation.Set, EntityId);
-                    byte[] messageTail = CommandManager.GetTailForOperation(typeof(T), CommandOperation.Set);
+                    byte[] msgHeader = CommandManager.GetHeaderForOperationParametrized(typeof (T), CommandOperation.Set,
+                        EntityId);
+                    byte[] messageTail = CommandManager.GetTailForOperation(typeof (T), CommandOperation.Set);
                     byte[] uploadMsg = new byte[data.Length + msgHeader.Length + messageTail.Length];
 
                     msgHeader.CopyTo(uploadMsg, 0);
@@ -58,26 +61,27 @@ namespace sconnConnector.Config.Abstract
                     if (IsResultSuccessForOperation(res, CommandOperation.Set))
                     {
                         client.Disconnect();
-                        return true;
+                        UploadSuccess =  true;
                     }
                 }
                 else
                 {
                     if (Upload_Send_Start_Message())
                     {
-                        if (Upload_Send_Config())
+                        if (Upload_Send_Config(this.Entity.Serialize()))
                         {
                             if (Upload_Signal_Finish())
                             {
                                 client.Disconnect();
-                                return true;
+                                UploadSuccess =  true;
                             }
                         }
                     }
                 }
 
+                bool namesUploaded = UploadNames();                 //now send names config
                 client.Disconnect();
-                return false;
+                return UploadSuccess && namesUploaded;
             }
             catch (Exception e)
             {
@@ -85,7 +89,7 @@ namespace sconnConnector.Config.Abstract
                 client.Disconnect();
                 return false;
             }
-            
+
         }
 
 
@@ -99,7 +103,8 @@ namespace sconnConnector.Config.Abstract
         {
             try
             {
-                byte[] header = CommandManager.GetHeaderForOperationParametrized(typeof(T),CommandOperation.Set,EntityId);
+                byte[] header = CommandManager.GetHeaderForOperationParametrized(typeof (T), CommandOperation.Set,
+                    EntityId);
                 var res = this.SendMessage(header);
                 if (IsResultSuccessForOperation(res, CommandOperation.Set))
                 {
@@ -115,19 +120,19 @@ namespace sconnConnector.Config.Abstract
 
         }
 
-        private bool Upload_Send_Config()
+        private bool Upload_Send_Config(byte[] configBody)
         {
             try
             {
-                byte[] configBody = this.Entity.Serialize();
-                int cfgPackets = (configBody.Length / ipcDefines.NET_MAX_PACKET_DATA);
-                int partialPacketBytes = configBody.Length % ipcDefines.NET_MAX_PACKET_DATA;
+                // byte[] configBody = this.Entity.Serialize();
+                int cfgPackets = (configBody.Length/ipcDefines.NET_MAX_PACKET_DATA);
+                int partialPacketBytes = configBody.Length%ipcDefines.NET_MAX_PACKET_DATA;
                 for (int i = 0; i < cfgPackets; i++)
                 {
                     byte[] packetBytes = new byte[ipcDefines.NET_MAX_PACKET_DATA];
                     for (int j = 0; j < ipcDefines.NET_MAX_PACKET_DATA; j++)
                     {
-                        packetBytes[j] = configBody[i * ipcDefines.NET_MAX_PACKET_DATA + j];
+                        packetBytes[j] = configBody[i*ipcDefines.NET_MAX_PACKET_DATA + j];
                     }
                     if (!Upload_Send_Config_Packet(packetBytes))
                     {
@@ -139,7 +144,7 @@ namespace sconnConnector.Config.Abstract
                     byte[] packetBytes = new byte[partialPacketBytes];
                     for (int j = 0; j < partialPacketBytes; j++)
                     {
-                        packetBytes[j] = configBody[cfgPackets * ipcDefines.NET_MAX_PACKET_DATA + j];
+                        packetBytes[j] = configBody[cfgPackets*ipcDefines.NET_MAX_PACKET_DATA + j];
                     }
                     if (!Upload_Send_Config_Packet(packetBytes))
                     {
@@ -157,13 +162,13 @@ namespace sconnConnector.Config.Abstract
 
         }
 
-        private bool Upload_Send_Config_Packet(byte [] data)
+        private bool Upload_Send_Config_Packet(byte[] data)
         {
             try
             {
-                byte[] msgHeader = CommandManager.GetHeaderForOperation(typeof(T),CommandOperation.Push);
-                byte[] messageTail = CommandManager.GetTailForOperation(typeof(T), CommandOperation.Push);
-                byte[] uploadMsg = new byte[data.Length+msgHeader.Length+messageTail.Length];
+                byte[] msgHeader = CommandManager.GetHeaderForOperation(typeof (T), CommandOperation.Push);
+                byte[] messageTail = CommandManager.GetTailForOperation(typeof (T), CommandOperation.Push);
+                byte[] uploadMsg = new byte[data.Length + msgHeader.Length + messageTail.Length];
 
                 msgHeader.CopyTo(uploadMsg, 0);
                 data.CopyTo(uploadMsg, ipcDefines.NET_UPLOAD_HEADER_BYTES);
@@ -187,7 +192,7 @@ namespace sconnConnector.Config.Abstract
         {
             try
             {
-                byte[] header = CommandManager.GetHeaderForOperation(typeof(T), CommandOperation.PushFin);
+                byte[] header = CommandManager.GetHeaderForOperation(typeof (T), CommandOperation.PushFin);
                 var res = this.SendMessage(header);
                 if (IsResultSuccessForOperation(res, CommandOperation.PushFin))
                 {
@@ -218,13 +223,13 @@ namespace sconnConnector.Config.Abstract
                     return false;
                 }
 
-                byte[] header = CommandManager.GetHeaderForOperation(typeof(T), CommandOperation.Get);
+                byte[] header = CommandManager.GetHeaderForOperation(typeof (T), CommandOperation.Get);
                 var res = this.SendMessage(header);
                 if (IsResultSuccessForOperation(res, CommandOperation.Get))
                 {
                     byte[] msgBody = GetResultMessageForOperationResult(res, CommandOperation.Get);
                     Entity.Deserialize(msgBody);
-                    if (CommandManager.IsConfigEntityNamed(typeof(T)))
+                    if (CommandManager.IsConfigEntityNamed(typeof (T)))
                     {
                         this.DownloadNames();
                     }
@@ -289,7 +294,7 @@ namespace sconnConnector.Config.Abstract
                 return new byte[0];
             }
         }
-        
+
 
         public Task DownloadAsync()
         {
@@ -298,28 +303,50 @@ namespace sconnConnector.Config.Abstract
 
         public void Sync()
         {
-            
+
         }
-        
-        private byte[] SendMessage(byte [] Message)
+
+        private byte[] SendMessage(byte[] Message)
         {
-             return  this.client.berkeleySendMsg(Message);
+            return this.client.berkeleySendMsg(Message);
         }
-        
+
+
+        private bool Upload_Send_Start_Message_Names_Config()
+        {
+            try
+            {
+                byte[] header = CommandManager.GetHeaderForOperationRegisterParametrized(CommandOperation.Set,
+                    ipcCMD.setDeviceNamesCfg, 0);
+                var res = this.SendMessage(header);
+                if (IsResultSuccessForOperation(res, CommandOperation.Set))
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e, e.Message);
+                return false;
+            }
+
+        }
 
         private bool DownloadNames()
         {
             try
             {
-                var hostNamedEntity = (IAlarmSystemNamedConfigurationEntity)this.Entity;
+                var hostNamedEntity = (IAlarmSystemNamedConfigurationEntity) this.Entity;
                 if (client.client.Connected)
                 {
-                    int names = CommandManager.GetNamesNumberForEntity(typeof(T));
-                    byte[] namesCfgBuffer = new byte[ipcDefines.RAM_NAME_SIZE * names];
-                    int entityNamesStartPos = CommandManager.GetNameStartPossitionForEntity(typeof(T));
+                    int names = CommandManager.GetNamesNumberForEntity(typeof (T));
+                    byte[] namesCfgBuffer = new byte[ipcDefines.RAM_NAME_SIZE*names];
+                    int entityNamesStartPos = CommandManager.GetNameStartPossitionForEntity(typeof (T));
                     for (int i = 0; i < names; i++)
                     {
-                        byte[] header = CommandManager.GetHeaderForOperationRegisterParametrized(CommandOperation.Get, ipcCMD.getName, entityNamesStartPos + i);
+                        byte[] header = CommandManager.GetHeaderForOperationRegisterParametrized(CommandOperation.Get,
+                            ipcCMD.getName, entityNamesStartPos + i);
                         var res = this.SendMessage(header);
                         if (IsResultSuccessForOperation(res, CommandOperation.Get))
                         {
@@ -329,7 +356,7 @@ namespace sconnConnector.Config.Abstract
                             {
                                 msgBytesName[j] = msgBody[j];
                             }
-                            msgBytesName.CopyTo(namesCfgBuffer, i * ipcDefines.RAM_NAME_SIZE);
+                            msgBytesName.CopyTo(namesCfgBuffer, i*ipcDefines.RAM_NAME_SIZE);
                         }
                     }
                     hostNamedEntity.DeserializeNames(namesCfgBuffer);
@@ -343,7 +370,54 @@ namespace sconnConnector.Config.Abstract
             return false;
         }
 
+        private bool UploadNames()
+        {
+            try
+            {
+                var hostNamedEntity = (IAlarmSystemNamedConfigurationEntity) this.Entity;
+                if (client.client.Connected)
+                {
+                    int names = CommandManager.GetNamesNumberForEntity(typeof (T));
+                    byte[] namesCfgBuffer = hostNamedEntity.SerializeNames();
+                    if (Upload_Send_Start_Message_Names_Config())
+                    {
+                        if (Upload_Send_Config(namesCfgBuffer))
+                        {
+                            if (Upload_Signal_Finish())
+                            {
+                                return true;
+                            }
+                        }
+                    }
 
+                    //int entityNamesStartPos = CommandManager.GetNameStartPossitionForEntity(typeof(T));
+                    //for (int i = 0; i < names; i++)
+                    //{
+                    //    byte[] header = CommandManager.GetHeaderForOperationRegisterParametrized(CommandOperation.Set, ipcCMD.setDeviceNamesCfg, entityNamesStartPos + i);
+                    //    var res = this.SendMessage(header);
+                    //    if (IsResultSuccessForOperation(res, CommandOperation.Get))
+                    //    {
+                    //        byte[] msgBody = GetResultMessageForOperationResult(res, CommandOperation.Get);
+                    //        byte[] msgBytesName = new byte[ipcDefines.RAM_NAME_SIZE];
+                    //        for (int j = 0; j < ipcDefines.RAM_NAME_SIZE; j++)
+                    //        {
+                    //            msgBytesName[j] = msgBody[j];
+                    //        }
+                    //        msgBytesName.CopyTo(namesCfgBuffer, i * ipcDefines.RAM_NAME_SIZE);
+                    //    }
+                    //}
+                    //hostNamedEntity.DeserializeNames(namesCfgBuffer);
+
+                    
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex, ex.Message);
+
+            }
+            return false;
+        }
     }
 
 }

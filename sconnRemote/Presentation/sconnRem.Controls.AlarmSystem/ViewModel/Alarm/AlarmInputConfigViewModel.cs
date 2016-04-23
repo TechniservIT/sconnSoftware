@@ -71,13 +71,12 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
             catch (Exception ex)
             {
                 _nlogger.Error(ex, ex.Message);
-
             }
         }
 
         private void SaveData()
         {
-            
+            SiteNavigationManager.SaveInput(this.Config);
         }
 
         [ImportingConstructor]
@@ -86,6 +85,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
             SetupCmds();
             this._manager = SiteNavigationManager.alarmSystemConfigManager; // (AlarmSystemConfigManager)manager;
             this._regionManager = regionManager;
+            //this._provider = new DeviceConfigService(SiteNavigationManager.alarmSystemConfigManager, SiteNavigationManager.CurrentContextDevice.DeviceId); 
             GetData();
         }
 

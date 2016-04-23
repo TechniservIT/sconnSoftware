@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -8,6 +9,7 @@ using System.Windows.Input;
 using AlarmSystemManagmentService;
 using AlarmSystemManagmentService.Device;
 using NLog;
+using Prism;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
@@ -22,13 +24,26 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
 {
 
     [Export]
-    public class AlarmDeviceListViewModel : BindableBase
+    public class AlarmDeviceListViewModel : BindableBase, IActiveAware, INavigationAware, IChangeTracking, INotifyPropertyChanged
     {
-        public ObservableCollection<sconnDevice> Config { get; set; }
+        private ObservableCollection<sconnDevice> _config; 
+        public ObservableCollection<sconnDevice> Config {
+            get { return _config; }
+            set
+            {
+                _config = value;
+                this.OnPropertyChanged();
+            }
+
+        }
+
         private AlarmDevicesConfigService _provider;
         private AlarmSystemConfigManager _manager;
         private readonly IRegionManager _regionManager;
         private Logger _nlogger = LogManager.GetCurrentClassLogger();
+
+        private int ChangeTrack = 0;
+        public bool IsChanged { get; set; }
 
         private string _name;
         public string Name
@@ -244,7 +259,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
             try
             {
                 Config = new ObservableCollection<sconnDevice>(_provider.GetAll());  //_provider.GetAll().AsQueryable();
-
+                ChangeTrack++;
             }
             catch (Exception ex)
             {
@@ -274,12 +289,45 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
             this._manager = SiteNavigationManager.alarmSystemConfigManager;
             this._provider = new AlarmDevicesConfigService(_manager);
             this._regionManager = regionManager;
+            this.PropertyChanged += new PropertyChangedEventHandler(OnNotifiedOfPropertyChanged);
             GetData();
+        }
+
+        private void OnNotifiedOfPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e != null && !String.Equals(e.PropertyName, "IsChanged", StringComparison.Ordinal))
+            {
+                this.IsChanged = true;
+            }
         }
 
         public string DisplayedImagePath
         {
             get { return "pack://application:,,,/images/config2.png"; }
+        }
+        
+
+        public bool IsActive { get; set; }
+        public event EventHandler IsActiveChanged;
+
+        public void OnNavigatedTo(NavigationContext navigationContext)
+        {
+            GetData(); //update list
+        }
+
+        public bool IsNavigationTarget(NavigationContext navigationContext)
+        {
+            return true;    //singleton
+        }
+
+        public void OnNavigatedFrom(NavigationContext navigationContext)
+        {
+         
+        }
+
+        public void AcceptChanges()
+        {
+           
         }
 
     }

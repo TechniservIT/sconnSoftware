@@ -22,7 +22,7 @@ namespace sconnConnector.POCO.Config.sconn
 
         public sconnDeviceConfig()
         {
-
+            Device = new sconnDevice();
         }
 
         public byte[] Serialize()

@@ -543,13 +543,41 @@ namespace sconnConnector.POCO.Config.sconn
 
         public byte[] SerializeNames()
         {
-            byte[] DeviceNameBf = new byte[ipcDefines.RAM_DEVICE_NAMES_SIZE];
-            for (int i = 0; i < ipcDefines.RAM_DEV_NAMES_NO; i++)
+            try
             {
-                byte[] sName = _NamesCFG[i];
-                sName.CopyTo(DeviceNameBf,i*ipcDefines.RAM_NAME_SIZE);
+                byte[] DeviceNameBf = new byte[ipcDefines.RAM_DEVICE_NAMES_SIZE];
+
+                //get names from all io
+                SetDeviceNameAt(0, Name);
+                int NameInc = 1;
+                for (int i = 0; i < this.Inputs.Count; i++)
+                {
+                    SetDeviceNameAt(NameInc, this.Inputs[i].Name); // = GetDeviceNameAt(i + NameInc);
+                }
+                NameInc += ipcDefines.DeviceMaxInputs;
+                for (int i = 0; i < this.Outputs.Count; i++)
+                {
+                    SetDeviceNameAt(NameInc, this.Outputs[i].Name); // this.Outputs[i].Name = GetDeviceNameAt(i + NameInc);
+                }
+                NameInc += ipcDefines.DeviceMaxOutputs;
+                for (int i = 0; i < this.Relays.Count; i++)
+                {
+                    SetDeviceNameAt(NameInc, this.Relays[i].Name);   //this.Relays[i].Name = GetDeviceNameAt(i + NameInc);
+                }
+
+                for (int d = 0; d < ipcDefines.RAM_DEV_NAMES_NO; d++)
+                {
+                    byte[] sName = _NamesCFG[d];
+                    sName.CopyTo(DeviceNameBf, d * ipcDefines.RAM_NAME_SIZE);
+                }
+
+                return DeviceNameBf;
             }
-            return DeviceNameBf;
+            catch (Exception e)
+            {
+                _logger.Error(e, e.Message);
+                return new byte[0];
+            }
         }
 
         public void DeserializeNames(byte[] buffer)
