@@ -459,7 +459,7 @@ namespace sconnConnector
         public const byte setAuthDevCfg = 0x61;
         public const byte setGlobalNames = 0x62;
         public const byte setZoneName = 0x63;
-
+        public const byte setName = 0x64;
 
         public const byte GET = 0x06; // get following register group value
         public const byte getRegVal = 0x61; //retrieve single register byte value    Param :   Register Address (2b)

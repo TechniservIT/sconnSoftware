@@ -552,17 +552,17 @@ namespace sconnConnector.POCO.Config.sconn
                 int NameInc = 1;
                 for (int i = 0; i < this.Inputs.Count; i++)
                 {
-                    SetDeviceNameAt(NameInc, this.Inputs[i].Name); // = GetDeviceNameAt(i + NameInc);
+                    SetDeviceNameAt(NameInc+i, this.Inputs[i].Name); // = GetDeviceNameAt(i + NameInc);
                 }
                 NameInc += ipcDefines.DeviceMaxInputs;
                 for (int i = 0; i < this.Outputs.Count; i++)
                 {
-                    SetDeviceNameAt(NameInc, this.Outputs[i].Name); // this.Outputs[i].Name = GetDeviceNameAt(i + NameInc);
+                    SetDeviceNameAt(NameInc + i, this.Outputs[i].Name); // this.Outputs[i].Name = GetDeviceNameAt(i + NameInc);
                 }
                 NameInc += ipcDefines.DeviceMaxOutputs;
                 for (int i = 0; i < this.Relays.Count; i++)
                 {
-                    SetDeviceNameAt(NameInc, this.Relays[i].Name);   //this.Relays[i].Name = GetDeviceNameAt(i + NameInc);
+                    SetDeviceNameAt(NameInc + i, this.Relays[i].Name);   //this.Relays[i].Name = GetDeviceNameAt(i + NameInc);
                 }
 
                 for (int d = 0; d < ipcDefines.RAM_DEV_NAMES_NO; d++)

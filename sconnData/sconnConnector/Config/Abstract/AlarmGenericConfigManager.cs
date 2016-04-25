@@ -60,7 +60,6 @@ namespace sconnConnector.Config.Abstract
                     var res = this.SendMessage(uploadMsg);
                     if (IsResultSuccessForOperation(res, CommandOperation.Set))
                     {
-                        client.Disconnect();
                         UploadSuccess =  true;
                     }
                 }
@@ -72,7 +71,6 @@ namespace sconnConnector.Config.Abstract
                         {
                             if (Upload_Signal_Finish())
                             {
-                                client.Disconnect();
                                 UploadSuccess =  true;
                             }
                         }
@@ -310,28 +308,7 @@ namespace sconnConnector.Config.Abstract
         {
             return this.client.berkeleySendMsg(Message);
         }
-
-
-        private bool Upload_Send_Start_Message_Names_Config()
-        {
-            try
-            {
-                byte[] header = CommandManager.GetHeaderForOperationRegisterParametrized(CommandOperation.Set,
-                    ipcCMD.setDeviceNamesCfg, 0);
-                var res = this.SendMessage(header);
-                if (IsResultSuccessForOperation(res, CommandOperation.Set))
-                {
-                    return true;
-                }
-                return false;
-            }
-            catch (Exception e)
-            {
-                _logger.Error(e, e.Message);
-                return false;
-            }
-
-        }
+        
 
         private bool DownloadNames()
         {
@@ -374,41 +351,36 @@ namespace sconnConnector.Config.Abstract
         {
             try
             {
-                var hostNamedEntity = (IAlarmSystemNamedConfigurationEntity) this.Entity;
                 if (client.client.Connected)
                 {
+                    var hostNamedEntity = (IAlarmSystemNamedConfigurationEntity)this.Entity;
                     int names = CommandManager.GetNamesNumberForEntity(typeof (T));
                     byte[] namesCfgBuffer = hostNamedEntity.SerializeNames();
-                    if (Upload_Send_Start_Message_Names_Config())
+                    int entityNamesStartPos = CommandManager.GetNameStartPossitionForEntity(typeof(T));
+                    for (int i = 0; i < names; i++)
                     {
-                        if (Upload_Send_Config(namesCfgBuffer))
+                        byte[] header = CommandManager.GetHeaderForOperationRegisterParametrized(CommandOperation.Set, ipcCMD.setName, entityNamesStartPos + i);
+
+                        //copy message body
+                        byte[] nameconfig = new byte[ipcDefines.RAM_NAME_SIZE];
+                        for (int j = 0; j < ipcDefines.RAM_NAME_SIZE; j++)
                         {
-                            if (Upload_Signal_Finish())
-                            {
-                                return true;
-                            }
+                            nameconfig[j] = namesCfgBuffer[i*ipcDefines.RAM_NAME_SIZE + j];
                         }
+                        byte[] packetdaBytes = new byte[ipcDefines.RAM_NAME_SIZE+header.Length];
+                        header.CopyTo(packetdaBytes,0);
+                        nameconfig.CopyTo(packetdaBytes,header.Length);
+                        var res = this.SendMessage(packetdaBytes);
+                        if ( !IsResultSuccessForOperation(res, CommandOperation.Set))
+                        {
+                            //error during send - stop and log
+                            _logger.Error("Alarm system data TRX error - name send failed.");
+                            return false;
+                        }
+
                     }
+                    return true;
 
-                    //int entityNamesStartPos = CommandManager.GetNameStartPossitionForEntity(typeof(T));
-                    //for (int i = 0; i < names; i++)
-                    //{
-                    //    byte[] header = CommandManager.GetHeaderForOperationRegisterParametrized(CommandOperation.Set, ipcCMD.setDeviceNamesCfg, entityNamesStartPos + i);
-                    //    var res = this.SendMessage(header);
-                    //    if (IsResultSuccessForOperation(res, CommandOperation.Get))
-                    //    {
-                    //        byte[] msgBody = GetResultMessageForOperationResult(res, CommandOperation.Get);
-                    //        byte[] msgBytesName = new byte[ipcDefines.RAM_NAME_SIZE];
-                    //        for (int j = 0; j < ipcDefines.RAM_NAME_SIZE; j++)
-                    //        {
-                    //            msgBytesName[j] = msgBody[j];
-                    //        }
-                    //        msgBytesName.CopyTo(namesCfgBuffer, i * ipcDefines.RAM_NAME_SIZE);
-                    //    }
-                    //}
-                    //hostNamedEntity.DeserializeNames(namesCfgBuffer);
-
-                    
                 }
             }
             catch (Exception ex)
