@@ -68,6 +68,7 @@
   <ItemGroup>
     <Compile Include="ViewModel\Alarm\AlarmDeviceListViewModel.cs" />
     <Compile Include="ViewModel\Alarm\AlarmInputConfigViewModel.cs" />
+    <Compile Include="ViewModel\Alarm\AlarmOutputConfigViewModel.cs" />
     <Compile Include="ViewModel\Alarm\AlarmSharedDeviceConfigViewModel.cs" />
     <Compile Include="View\Config\AlarmSystem\Abstract\AlarmConfigRegions.cs" />
     <Compile Include="View\Config\AlarmSystem\Abstract\IAlarmSystemDataRecordView.cs" />
@@ -221,6 +222,21 @@
       <DependentUpon>AlarmDeviceSirenView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Status\AlarmSystem\Device\Siren\AlarmDeviceSirenViewModule.cs" />
+    <Compile Include="View\Status\AlarmSystem\Environmental\AlarmHumiditySensorsListView.xaml.cs">
+      <DependentUpon>AlarmHumiditySensorsListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Status\AlarmSystem\Environmental\AlarmTemperatureSensorsListView.xaml.cs">
+      <DependentUpon>AlarmTemperatureSensorsListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Status\AlarmSystem\Events\AlarmEventsListView.xaml.cs">
+      <DependentUpon>AlarmEventsListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Status\AlarmSystem\Global\AlarmGlobalConfigView.xaml.cs">
+      <DependentUpon>AlarmGlobalConfigView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Status\AlarmSystem\Gsm\AlarmGsmStatusView.xaml.cs">
+      <DependentUpon>AlarmGsmStatusView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Status\AlarmSystem\Inputs\AlarmInputConfigureView.xaml.cs">
       <DependentUpon>AlarmInputConfigureView.xaml</DependentUpon>
     </Compile>
@@ -237,6 +253,12 @@
       <DependentUpon>AlarmOutputsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Status\AlarmSystem\Outputs\AlarmOutputsViewModule.cs" />
+    <Compile Include="View\Status\AlarmSystem\PowerSupply\AlarmPowerStatusView.xaml.cs">
+      <DependentUpon>AlarmPowerStatusView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Status\AlarmSystem\Relays\AlarmRelayConfigureView.xaml.cs">
+      <DependentUpon>AlarmRelayConfigureView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Status\AlarmSystem\Relays\AlarmRelaysView.xaml.cs">
       <DependentUpon>AlarmRelaysView.xaml</DependentUpon>
     </Compile>
@@ -245,6 +267,9 @@
       <DependentUpon>AlarmSystemSensorsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Status\AlarmSystem\Device\Sensors\AlarmSystemSensorsViewModule.cs" />
+    <Compile Include="View\Status\AlarmSystem\Users\AlarmUsersStatusView.xaml.cs">
+      <DependentUpon>AlarmUsersStatusView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Status\AlarmSystem\Zones\AlarmSystemZonesConfigureView.xaml.cs">
       <DependentUpon>AlarmSystemZonesConfigureView.xaml</DependentUpon>
     </Compile>
@@ -411,6 +436,26 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Status\AlarmSystem\Environmental\AlarmHumiditySensorsListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Status\AlarmSystem\Environmental\AlarmTemperatureSensorsListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Status\AlarmSystem\Events\AlarmEventsListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Status\AlarmSystem\Global\AlarmGlobalConfigView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Status\AlarmSystem\Gsm\AlarmGsmStatusView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Status\AlarmSystem\Inputs\AlarmInputConfigureView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -427,11 +472,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Status\AlarmSystem\PowerSupply\AlarmPowerStatusView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Status\AlarmSystem\Relays\AlarmRelayConfigureView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Status\AlarmSystem\Relays\AlarmRelaysView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Status\AlarmSystem\Device\Sensors\AlarmSystemSensorsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Status\AlarmSystem\Users\AlarmUsersStatusView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -797,9 +854,7 @@
     <Content Include="images\zazb-1000.jpg" />
     <Content Include="images\zegar1000.jpg" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="View\Status\AlarmSystem\Global\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

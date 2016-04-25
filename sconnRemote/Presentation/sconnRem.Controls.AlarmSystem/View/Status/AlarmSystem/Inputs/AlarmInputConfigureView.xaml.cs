@@ -22,20 +22,15 @@ using sconnRem.Navigation;
 
 namespace sconnRem.Controls.AlarmSystem.View.Status.AlarmSystem.Inputs
 {
-
-   // [ViewExport(AlarmRegionNames.AlarmConfig_Contract_Input_Config_View)]
     [Export("AlarmInputConfigureView")]
     [ViewSortHint("01")]
     [PartCreationPolicy(CreationPolicy.NonShared)]
-    public partial class AlarmInputConfigureView : UserControl   //, ///IActiveAware, INavigationAware  
+    public partial class AlarmInputConfigureView : UserControl  
     {
         private const string MainContentRegionName = GlobalViewRegionNames.MainGridContentRegion;  
         private Logger _nlogger = LogManager.GetCurrentClassLogger();
         private static Uri configureUri = new Uri("InputsConfig", UriKind.Relative);
-
-        //[Import]
-        //public IRegionManager RegionManager;
-
+        
         [Import]
         public AlarmInputConfigViewModel ViewModel
         {
@@ -48,46 +43,6 @@ namespace sconnRem.Controls.AlarmSystem.View.Status.AlarmSystem.Inputs
             InitializeComponent();
         }
 
-
-        //[ImportingConstructor]
-        //public AlarmInputConfigureView(AlarmInputConfigViewModel viewModel)
-        //{
-        //    this.DataContext = viewModel;
-        //    InitializeComponent();
-        //}
-
-
-        //void IPartImportsSatisfiedNotification.OnImportsSatisfied()
-        //{
-        //    //IRegion mainContentRegion = this.RegionManager.Regions[MainContentRegionName];
-        //    //if (mainContentRegion != null && mainContentRegion.NavigationService != null)
-        //    //{
-        //    //    mainContentRegion.NavigationService.Navigated += this.MainContentRegion_Navigated;
-        //    //}
-        //}
-
-        //public void MainContentRegion_Navigated(object sender, RegionNavigationEventArgs e)
-        //{
-
-        //}
-
-
-        //public bool IsActive { get; set; }
-        //public event EventHandler IsActiveChanged;
-        //public void OnNavigatedTo(NavigationContext navigationContext)
-        //{
-
-        //}
-
-        //public bool IsNavigationTarget(NavigationContext navigationContext)
-        //{
-        //    return true;
-        //}
-
-        //public void OnNavigatedFrom(NavigationContext navigationContext)
-        //{
-
-        //}
 
     }
 

@@ -16,6 +16,7 @@ using NLog;
 using Prism.Regions;
 using sconnConnector.POCO.Config;
 using sconnConnector.POCO.Config.sconn;
+using sconnRem.Infrastructure.Navigation;
 
 namespace sconnRem.ViewModel.Alarm
 {
@@ -68,17 +69,28 @@ namespace sconnRem.ViewModel.Alarm
             _name = "Users";
             this._provider = new UsersConfigurationService(_manager);
         }
-
+        
 
         [ImportingConstructor]
-        public AlarmUsersConfigViewModel(IAlarmConfigManager manager, IRegionManager regionManager)
+        public AlarmUsersConfigViewModel(IRegionManager regionManager)
         {
             Config = new ObservableCollection<sconnUser>();
-            this._manager = (AlarmSystemConfigManager)manager;
+            this._manager = SiteNavigationManager.alarmSystemConfigManager;
             this._provider = new UsersConfigurationService(_manager);
             this._regionManager = regionManager;
             GetData();
         }
+
+
+        //[ImportingConstructor]
+        //public AlarmUsersConfigViewModel(IAlarmConfigManager manager, IRegionManager regionManager)
+        //{
+        //    Config = new ObservableCollection<sconnUser>();
+        //    this._manager = (AlarmSystemConfigManager)manager;
+        //    this._provider = new UsersConfigurationService(_manager);
+        //    this._regionManager = regionManager;
+        //    GetData();
+        //}
 
 
         public string DisplayedImagePath

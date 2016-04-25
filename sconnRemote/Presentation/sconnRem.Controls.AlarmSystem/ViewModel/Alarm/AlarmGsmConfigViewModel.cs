@@ -15,6 +15,7 @@ using System.ComponentModel.Composition;
 using NLog;
 using Prism.Regions;
 using sconnConnector.POCO.Config.sconn;
+using sconnRem.Infrastructure.Navigation;
 
 namespace sconnRem.ViewModel.Alarm
 {
@@ -67,17 +68,31 @@ namespace sconnRem.ViewModel.Alarm
             this._provider = new GsmConfigurationService(_manager);
         }
 
-       
+                  
+
+            
 
         [ImportingConstructor]
-        public AlarmGsmConfigViewModel(IAlarmConfigManager manager, IRegionManager regionManager)
+        public AlarmGsmConfigViewModel(IRegionManager regionManager)
         {
             Config = new ObservableCollection<sconnGsmRcpt>();
-            this._manager = (AlarmSystemConfigManager)manager;
+            this._manager = SiteNavigationManager.alarmSystemConfigManager;
             this._provider = new GsmConfigurationService(_manager);
             this._regionManager = regionManager;
             GetData();
         }
+
+
+
+        //[ImportingConstructor]
+        //public AlarmGsmConfigViewModel(IAlarmConfigManager manager, IRegionManager regionManager)
+        //{
+        //    Config = new ObservableCollection<sconnGsmRcpt>();
+        //    this._manager = (AlarmSystemConfigManager)manager;
+        //    this._provider = new GsmConfigurationService(_manager);
+        //    this._regionManager = regionManager;
+        //    GetData();
+        //}
 
 
 

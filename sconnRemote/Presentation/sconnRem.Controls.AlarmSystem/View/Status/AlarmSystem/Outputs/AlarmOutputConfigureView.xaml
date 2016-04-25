@@ -137,8 +137,8 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <Label Grid.Column="0" Grid.Row="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="{Binding ActiveOutput.Name, Mode=TwoWay}" />
-                <Label Grid.Column="0" Grid.Row="1" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="{Binding ActiveOutput.Id, Mode=TwoWay}" />
+                <Label Grid.Column="0" Grid.Row="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="{Binding Config.Name, Mode=TwoWay}" />
+                <Label Grid.Column="0" Grid.Row="1" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="{Binding Config.Id, Mode=TwoWay}" />
 
                 <Label Grid.Column="0" Grid.Row="3" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="{Binding ChangeTrack , Mode=TwoWay}" />
                 
@@ -183,20 +183,20 @@
                         Grid.Column="1" Grid.Row="0"
                           HorizontalAlignment="Stretch"
                           HorizontalContentAlignment="Stretch" 
-                          SelectedValue="{Binding  ActiveOutput.sconnOutputType}" 
-                           SelectedItem="{Binding  ActiveOutput.sconnOutputType , Mode=TwoWay}" 
+                          SelectedValue="{Binding  Config.sconnOutputType}" 
+                           SelectedItem="{Binding  Config.sconnOutputType , Mode=TwoWay}" 
                           />
 
 
                 <Label Grid.Column="0" Grid.Row="1" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="Value" />
-                <Label Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="{Binding ActiveOutput.Value }" />
+                <Label Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="{Binding Config.Value }" />
 
                 
                 <Label Grid.Column="0" Grid.Row="3" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="Enabled" />
-                <Label Grid.Column="1" Grid.Row="3" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="{Binding ActiveOutput.Enabled}" />
+                <Label Grid.Column="1" Grid.Row="3" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="{Binding Config.Enabled}" />
 
                 <Label Grid.Column="0" Grid.Row="4" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="Name" />
-                <TextBox Grid.Column="1" Grid.Row="4" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Text="{Binding  ActiveOutput.Name}"/>
+                <TextBox Grid.Column="1" Grid.Row="4" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Text="{Binding  Config.Name}"/>
 
 
                 <Button Grid.Column="1" Grid.Row="6"  VerticalAlignment="Center"

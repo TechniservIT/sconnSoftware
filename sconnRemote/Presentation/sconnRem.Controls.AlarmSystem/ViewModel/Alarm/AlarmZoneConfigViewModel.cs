@@ -14,6 +14,7 @@ using Prism.Mvvm;
 using System.ComponentModel.Composition;
 using NLog;
 using Prism.Regions;
+using sconnRem.Infrastructure.Navigation;
 
 namespace sconnRem.ViewModel.Alarm
 {
@@ -64,17 +65,27 @@ namespace sconnRem.ViewModel.Alarm
             _name = "Zones";
             this._provider = new ZoneConfigurationService(_manager);
         }
-        
+
 
         [ImportingConstructor]
-        public AlarmZoneConfigViewModel(IAlarmConfigManager manager, IRegionManager regionManager)
+        public AlarmZoneConfigViewModel(IRegionManager regionManager)
         {
             Config = new ObservableCollection<sconnAlarmZone>();
-            this._manager = (AlarmSystemConfigManager)manager;
+            this._manager = SiteNavigationManager.alarmSystemConfigManager;
             this._provider = new ZoneConfigurationService(_manager);
             this._regionManager = regionManager;
             GetData();
         }
+
+        //[ImportingConstructor]
+        //public AlarmZoneConfigViewModel(IAlarmConfigManager manager, IRegionManager regionManager)
+        //{
+        //    Config = new ObservableCollection<sconnAlarmZone>();
+        //    this._manager = (AlarmSystemConfigManager)manager;
+        //    this._provider = new ZoneConfigurationService(_manager);
+        //    this._regionManager = regionManager;
+        //    GetData();
+        //}
 
         public string DisplayedImagePath
         {

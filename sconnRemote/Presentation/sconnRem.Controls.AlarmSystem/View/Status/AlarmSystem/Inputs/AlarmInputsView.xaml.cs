@@ -32,12 +32,7 @@ namespace sconnRem.Controls.AlarmSystem.View.Status.Inputs
 
         [Import]
         public IRegionManager RegionManager;
-
-        //public AlarmInputsView()
-        //{
-        //    InitializeComponent();
-        //}
-
+        
         [ImportingConstructor]
         public AlarmInputsView(AlarmDeviceListViewModel viewModel)
         {
@@ -59,22 +54,6 @@ namespace sconnRem.Controls.AlarmSystem.View.Status.Inputs
         {
 
         }
-
-        private void Configure_Button_Click(object sender, RoutedEventArgs e)
-        {
-            this.RegionManager.RequestNavigate(GlobalViewRegionNames.MainGridContentRegion, configureUri
-                ,
-                (NavigationResult nr) =>
-                {
-                    var error = nr.Error;
-                    var result = nr.Result;
-                    if (error != null)
-                    {
-                        _nlogger.Error(error);
-                    }
-                });
-        }
-
     }
 
 

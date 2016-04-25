@@ -72,6 +72,37 @@ namespace sconnRem.Infrastructure.Navigation
         }
 
 
+        public static sconnOutput OutputForId(string uuid)
+        {
+            if (CurrentContextDevice != null)
+            {
+                foreach (var input in CurrentContextDevice.Outputs)
+                {
+                    if (input.UUID.Equals(uuid))
+                    {
+                        return input;
+                    }
+                }
+            }
+            return new sconnOutput();
+        }
+
+
+        public static void SaveOutput(sconnOutput input)
+        {
+            foreach (var dinput in CurrentContextDevice.Outputs)
+            {
+                if (dinput.UUID.Equals(input.UUID))
+                {
+                    dinput.CopyFrom(input);
+                    DeviceConfigService serv = new DeviceConfigService(alarmSystemConfigManager, dinput.Id);
+                    serv.Update(CurrentContextDevice);
+                }
+            }
+        }
+
+
+
         private static ComposablePart exportedInputComposablePart;
 
 

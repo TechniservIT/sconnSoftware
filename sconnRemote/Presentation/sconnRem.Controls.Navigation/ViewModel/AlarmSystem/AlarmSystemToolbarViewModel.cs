@@ -34,9 +34,11 @@ namespace sconnRem.Controls.Navigation.ViewModel.AlarmSystem
         public ICommand Show_Alarm_Inputs_Command { get; set; }
         public ICommand Show_Alarm_Outputs_Command { get; set; }
         public ICommand Show_Alarm_Relay_Command { get; set; }
+
         public ICommand Show_Alarm_Zones_Command { get; set; }
-        public ICommand Show_Alarm_Gsm_Command { get; set; }
+        public ICommand Show_Alarm_AuthConfig_Command { get; set; }
         public ICommand Show_Alarm_Users_Command { get; set; }
+
         public ICommand Show_Alarm_Devices_Command { get; set; }
         
 
@@ -121,10 +123,29 @@ namespace sconnRem.Controls.Navigation.ViewModel.AlarmSystem
             NavigateToAlarmContract(AlarmRegionNames.AlarmStatus_Contract_RelaysView);
         }
 
-        private void ShowDevices()
+        private void ShowDevices(sconnSite site)
         {
             NavigateToAlarmContract(AlarmRegionNames.AlarmStatus_Contract_Device_List_View);
         }
+
+
+        private void ShowZones(sconnSite site)
+        {
+            NavigateToAlarmContract(AlarmRegionNames.AlarmConfig_Contract_ZoneConfigView);
+        }
+
+
+        private void ShowUsers(sconnSite site)
+        {
+            NavigateToAlarmContract(AlarmRegionNames.AlarmConfig_Contract_UsersConfigView);
+        }
+
+
+        private void ShowAuthConfig(sconnSite site)
+        {
+            NavigateToAlarmContract(AlarmRegionNames.AlarmConfig_Contract_AuthConfigView);
+        }
+
 
 
         private void SetupCmds()
@@ -135,10 +156,12 @@ namespace sconnRem.Controls.Navigation.ViewModel.AlarmSystem
             Show_Alarm_Outputs_Command = new DelegateCommand<sconnSite>(ShowOutputs);
             Show_Alarm_Relay_Command = new DelegateCommand<sconnSite>(ShowRelays);
 
-            Show_Alarm_Devices_Command= new DelegateCommand(ShowDevices);
+            Show_Alarm_Devices_Command= new DelegateCommand<sconnSite>(ShowDevices);
 
-            //Show_Alarm_Zones_Command = new DelegateCommand<sconnSite>(ShowConfigure);
-            //Show_Alarm_Users_Command = new DelegateCommand<sconnSite>(ShowConfigure);
+
+            Show_Alarm_Zones_Command = new DelegateCommand<sconnSite>(ShowZones);
+            Show_Alarm_Users_Command = new DelegateCommand<sconnSite>(ShowUsers);
+            Show_Alarm_AuthConfig_Command = new DelegateCommand<sconnSite>(ShowAuthConfig);
 
         }
 

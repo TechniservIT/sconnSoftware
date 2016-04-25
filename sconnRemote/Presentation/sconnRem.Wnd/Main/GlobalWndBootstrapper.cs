@@ -19,7 +19,6 @@ using sconnRem.View.Menu.GridNavSideMenu;
 using sconnRem.View.Menu.SiteNavSideMenu;
 using sconnRem.View.Menu.ToolTopMenu;
 using sconnRem.View.Status;
-using sconnRem.Wnd.Config;
 
 namespace sconnRem.Wnd.Main
 {
