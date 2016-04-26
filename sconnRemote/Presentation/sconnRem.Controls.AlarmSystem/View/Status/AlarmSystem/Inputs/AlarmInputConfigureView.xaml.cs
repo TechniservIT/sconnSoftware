@@ -22,7 +22,7 @@ using sconnRem.Navigation;
 
 namespace sconnRem.Controls.AlarmSystem.View.Status.AlarmSystem.Inputs
 {
-    [Export("AlarmInputConfigureView")]
+    [Export(AlarmRegionNames.AlarmConfig_Contract_Input_Config_View)]
     [ViewSortHint("01")]
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public partial class AlarmInputConfigureView : UserControl  

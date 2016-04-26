@@ -50,8 +50,9 @@ namespace sconnRem.Navigation
             public const String AlarmConfig_Contract_Zone_Config_View = "AlarmZoneConfigureView";
             public const String AlarmConfig_Contract_Sensor_Config_View = "AlarmSensorConfigureView";
             public const String AlarmConfig_Contract_Device_Config_View = "AlarmDeviceConfigureView";
+        
 
-            public static Uri AlarmUri_Config_Input_View = new Uri(AlarmConfig_Contract_Input_Config_View, UriKind.Relative);
+        public static Uri AlarmUri_Config_Input_View = new Uri(AlarmConfig_Contract_Input_Config_View, UriKind.Relative);
             public static Uri AlarmUri_Config_Output_View = new Uri(AlarmConfig_Contract_Output_Config_View, UriKind.Relative);
             public static Uri AlarmUri_Config_Relay_View = new Uri(AlarmConfig_Contract_Relay_Config_View, UriKind.Relative);
             public static Uri AlarmUri_Config_Zone_View = new Uri(AlarmConfig_Contract_Zone_Config_View, UriKind.Relative);
@@ -107,7 +108,10 @@ namespace sconnRem.Navigation
 
             public const String AlarmStatus_Contract_Device_List_View = "AlarmSystemDeviceListView";
             public static Uri AlarmUri_Status_Device_List_View = new Uri(AlarmStatus_Contract_Device_List_View, UriKind.Relative);
-        
+
+        public const String AlarmStatus_Contract_Global_View = "AlarmSystemGlobalView";
+        public static Uri AlarmUri_Status_Device_Global_View = new Uri(AlarmStatus_Contract_Global_View, UriKind.Relative);
+
         #endregion
 
 

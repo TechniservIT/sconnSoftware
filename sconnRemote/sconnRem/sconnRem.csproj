@@ -362,6 +362,7 @@
     <Resource Include="images\przek1000x1000.jpg" />
     <Resource Include="images\syrena1000x1000.jpg" />
     <Resource Include="images\wstecz500x500.jpg" />
+    <Resource Include="images\centrala1000x1000.jpg" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

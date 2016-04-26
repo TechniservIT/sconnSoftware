@@ -224,7 +224,6 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
                         NavigationParameters parameters = new NavigationParameters();
                         parameters.Add(AlarmRegionNames.AlarmConfig_Contract_Input_Config_View_Key_Name, input.UUID);
                         NavigateToAlarmContractWithParam(AlarmRegionNames.AlarmConfig_Contract_Input_Config_View,parameters);
-                     //   NavigateToAlarmContract(AlarmRegionNames.AlarmConfig_Contract_Input_Config_View);
                     }
                 }
             }

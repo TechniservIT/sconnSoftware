@@ -431,6 +431,7 @@
     <Content Include="images\add.jpg" />
     <Content Include="images\alarm.jpg" />
     <Content Include="images\cctv.jpg" />
+    <Content Include="images\centrala1000x1000.jpg" />
     <Content Include="images\edit.jpg" />
     <Content Include="images\open.jpg" />
     <Content Include="images\rem.jpg" />

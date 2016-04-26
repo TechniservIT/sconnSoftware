@@ -231,8 +231,8 @@
     <Compile Include="View\Status\AlarmSystem\Events\AlarmEventsListView.xaml.cs">
       <DependentUpon>AlarmEventsListView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Status\AlarmSystem\Global\AlarmGlobalConfigView.xaml.cs">
-      <DependentUpon>AlarmGlobalConfigView.xaml</DependentUpon>
+    <Compile Include="View\Status\AlarmSystem\Global\AlarmSystemGlobalStatusView.xaml.cs">
+      <DependentUpon>AlarmSystemGlobalStatusView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Status\AlarmSystem\Gsm\AlarmGsmStatusView.xaml.cs">
       <DependentUpon>AlarmGsmStatusView.xaml</DependentUpon>
@@ -448,7 +448,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Status\AlarmSystem\Global\AlarmGlobalConfigView.xaml">
+    <Page Include="View\Status\AlarmSystem\Global\AlarmSystemGlobalStatusView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

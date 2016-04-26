@@ -13,11 +13,12 @@ using System.Windows.Input;
 using NLog;
 using Prism.Regions;
 using sconnConnector.POCO.Config.sconn;
+using sconnRem.Infrastructure.Navigation;
 
 namespace sconnRem.ViewModel.Alarm
 {
     [Export]
-    public class AlarmGlobalConfigViewModel  : BindableBase // ObservableObject, IPageViewModel    //:  ViewModelBase<IGridNavigatedView>  
+    public class AlarmGlobalConfigViewModel  : BindableBase 
     {
         public sconnGlobalConfig Config { get; set; }
         private GlobalConfigService _provider;
@@ -64,10 +65,10 @@ namespace sconnRem.ViewModel.Alarm
       
 
         [ImportingConstructor]
-        public AlarmGlobalConfigViewModel(IAlarmConfigManager manager, IRegionManager regionManager)
+        public AlarmGlobalConfigViewModel(IRegionManager regionManager)
         {
             Config = new sconnGlobalConfig();
-            this._manager = (AlarmSystemConfigManager)manager;
+            this._manager = SiteNavigationManager.alarmSystemConfigManager;
             this._provider = new GlobalConfigService(_manager);
             this._regionManager = regionManager;
             GetData();
