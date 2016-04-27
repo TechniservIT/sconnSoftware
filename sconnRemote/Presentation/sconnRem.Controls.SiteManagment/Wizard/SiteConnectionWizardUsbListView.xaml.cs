@@ -35,6 +35,7 @@ namespace sconnRem.Controls.SiteManagment.Wizard
             this.DataContext = viewModel;
             InitializeComponent();
         }
+
     }
 
 }

@@ -12,9 +12,26 @@ using Prism.Regions;
 using sconnConnector.Config;
 using sconnConnector.POCO.Config;
 using sconnConnector.POCO.Config.sconn;
+using sconnRem.Navigation;
 
 namespace sconnRem.Controls.SiteManagment.Wizard
 {
+    public enum SiteConnectionWizardStage
+    {
+        MethodSelection,
+        Search,
+        UsbList,
+        ManualEntry,
+        Test,
+        Summary
+    }
+
+    public enum SiteAdditionMethod
+    {
+        Manual,
+        Search,
+        UsbList
+    }
 
     [Export]
     public class SiteConnectionWizardViewModel : BindableBase
@@ -22,21 +39,107 @@ namespace sconnRem.Controls.SiteManagment.Wizard
         public sconnSite Config { get; set; }
         private readonly IRegionManager _regionManager;
         private Logger _nlogger = LogManager.GetCurrentClassLogger();
-        
-        private ICommand NavigateBackCommand;
-        private ICommand NavigateForwardCommand;
 
-        private ICommand SaveSiteCommand;
-        private ICommand VerifyConnectionCommand;
+        public SiteConnectionWizardStage Stage { get; set; }
+        public SiteAdditionMethod AdditionMethod { get; set; }
+        
+        public ICommand NavigateBackCommand { get; set; }
+        public ICommand NavigateForwardCommand { get; set; }
+
+        public ICommand OpenSearchViewCommand { get; set; }
+        public ICommand OpenManualEntryViewCommand { get; set; }
+        public ICommand OpenUsbListViewCommand { get; set; }
+
+        public ICommand SaveSiteCommand { get; set; }
+        public ICommand VerifyConnectionCommand { get; set; }
+
+
+        private void NavigateToContract(string contract)
+        {
+            try
+            {
+                this._regionManager.RequestNavigate(SiteManagmentRegionNames.MainContentRegion, contract
+                    ,
+                    (NavigationResult nr) =>
+                    {
+                        var error = nr.Error;
+                        var result = nr.Result;
+                        if (error != null)
+                        {
+                            _nlogger.Error(error);
+                        }
+                    });
+            }
+            catch (Exception ex)
+            {
+                _nlogger.Error(ex, ex.Message);
+
+            }
+        }
 
         private void NavigateBack()
         {
-            
+            if (Stage == SiteConnectionWizardStage.MethodSelection)
+            {
+                //no action - cannot navigate back
+            }
+            else if (Stage == SiteConnectionWizardStage.Search ||
+                Stage == SiteConnectionWizardStage.ManualEntry ||
+                Stage == SiteConnectionWizardStage.UsbList)
+            {
+                NavigateToContract(SiteManagmentRegionNames.SiteConnectionWizard_Contract_MethodSelection_View);
+            }
+            else if (Stage == SiteConnectionWizardStage.Test)
+            {
+                //find out
+                if (AdditionMethod == SiteAdditionMethod.Search)
+                {
+                    this.Stage = SiteConnectionWizardStage.Search;
+                    NavigateToContract(SiteManagmentRegionNames.SiteConnectionWizard_Contract_SearchSitesList_View);
+                }
+                else if (AdditionMethod == SiteAdditionMethod.Manual)
+                {
+                    this.Stage = SiteConnectionWizardStage.ManualEntry;
+                    NavigateToContract(SiteManagmentRegionNames.SiteConnectionWizard_Contract_ManualEntry_View);
+                }
+                else if (AdditionMethod == SiteAdditionMethod.UsbList)
+                {
+                    this.Stage = SiteConnectionWizardStage.UsbList;
+                    NavigateToContract(SiteManagmentRegionNames.SiteConnectionWizard_Contract_UsbList_View);
+                }
+            }
+            else if (Stage == SiteConnectionWizardStage.Summary)
+            {
+                this.Stage = SiteConnectionWizardStage.Test;
+                NavigateToContract(SiteManagmentRegionNames.SiteConnectionWizard_Contract_Test_View);
+            }
         }
 
         private void NavigateForward()
         {
-
+            if (Stage == SiteConnectionWizardStage.MethodSelection)
+            {
+                //no action - cannot navigate forward
+            }
+            else if (Stage == SiteConnectionWizardStage.Search ||
+                Stage == SiteConnectionWizardStage.ManualEntry ||
+                Stage == SiteConnectionWizardStage.UsbList 
+                )
+            {
+                this.Stage = SiteConnectionWizardStage.Test;
+                NavigateToContract(SiteManagmentRegionNames.SiteConnectionWizard_Contract_Test_View);
+            }
+            else if (Stage == SiteConnectionWizardStage.Test)
+            {
+                this.Stage = SiteConnectionWizardStage.Summary;
+                NavigateToContract(SiteManagmentRegionNames.SiteConnectionWizard_Contract_Summary_View);
+                VerifyConnection();
+            }
+            else if (Stage == SiteConnectionWizardStage.Summary)
+            {
+                //end - save and refresh
+                SaveSite();
+            }
         }
 
         private void SaveSite()
@@ -48,18 +151,27 @@ namespace sconnRem.Controls.SiteManagment.Wizard
 
         }
 
-        //[ImportingConstructor]
-        //public SiteConnectionWizardViewModel( IRegionManager regionManager)
-        //{
-        //    Config = new sconnSite();
-        //    this._regionManager = regionManager;
+        private void OpenSearchView()
+        {
+            this.Stage = SiteConnectionWizardStage.Search;
+            AdditionMethod = SiteAdditionMethod.Search;
+            NavigateToContract(SiteManagmentRegionNames.SiteConnectionWizard_Contract_SearchSitesList_View);
+        }
 
-        //    NavigateBackCommand = new DelegateCommand(NavigateBack);
-        //    NavigateForwardCommand = new DelegateCommand(NavigateForward);
-        //    SaveSiteCommand = new DelegateCommand(SaveSite);
-        //    VerifyConnectionCommand = new DelegateCommand(VerifyConnection);
-        //}
+        private void OpenManualEntryView()
+        {
+            this.Stage = SiteConnectionWizardStage.ManualEntry;
+            AdditionMethod = SiteAdditionMethod.Manual;
+            NavigateToContract(SiteManagmentRegionNames.SiteConnectionWizard_Contract_ManualEntry_View);
+        }
 
+        private void OpenUsbListView()
+        {
+            this.Stage = SiteConnectionWizardStage.UsbList;
+            AdditionMethod = SiteAdditionMethod.UsbList;
+            NavigateToContract(SiteManagmentRegionNames.SiteConnectionWizard_Contract_UsbList_View);
+        }
+        
         [ImportingConstructor]
         public SiteConnectionWizardViewModel(sconnSite site, IRegionManager regionManager)
         {
@@ -70,6 +182,10 @@ namespace sconnRem.Controls.SiteManagment.Wizard
             NavigateForwardCommand = new DelegateCommand(NavigateForward);
             SaveSiteCommand = new DelegateCommand(SaveSite);
             VerifyConnectionCommand = new DelegateCommand(VerifyConnection);
+
+            OpenSearchViewCommand = new DelegateCommand(OpenSearchView);
+            OpenManualEntryViewCommand = new DelegateCommand(OpenManualEntryView);
+            OpenUsbListViewCommand = new DelegateCommand(OpenUsbListView);
         }
 
 

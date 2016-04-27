@@ -83,8 +83,8 @@ namespace sconnRem.Shells.Config
             try
             {
                 base.InitializeShell();
-                Application.Current.MainWindow = (Window)this.Shell;
-                Application.Current.MainWindow.Show();
+                var shellWnd = (Window)this.Shell;
+                shellWnd.Show();    //Application.Current.MainWindow
             }
             catch (Exception ex)
             {

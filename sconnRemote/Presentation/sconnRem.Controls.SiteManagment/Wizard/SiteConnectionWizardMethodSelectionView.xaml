@@ -32,7 +32,7 @@
 
             <Grid    Grid.Row="0" Grid.Column="0">
 
-                <Button Command="{Binding Path=ViewSiteCommand}"  VerticalAlignment="Center" Height="Auto" Content="">
+                <Button VerticalAlignment="Center" Height="Auto" Content="">
                     <Button.Template>
                         <ControlTemplate TargetType="{x:Type Button}">
                             <Grid>
@@ -85,13 +85,12 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition  Height="5*"/>
-                        <RowDefinition  Height="5*"/>
+                        <RowDefinition  Height="*"/>
                     </Grid.RowDefinitions>
 
                     <Grid    Grid.Row="0" Grid.Column="0">
 
-                        <Button  Command="{Binding Path=EditSiteCommand}" VerticalAlignment="Center" Height="Auto" Content="">
+                        <Button  Command="{Binding Path=OpenSearchViewCommand}" VerticalAlignment="Center" Height="Auto" Content="">
                             <Button.Template>
                                 <ControlTemplate TargetType="{x:Type Button}">
                                     <Grid>
@@ -106,7 +105,7 @@
                                           VerticalAlignment="Center"/>
                                                 <Canvas Background="AliceBlue" Grid.Column="0" />
 
-                                                <Image  x:Name="ImgDispActionGridFullScreen521"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="0,0,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/edit.jpg"/>
+                                                <Image  x:Name="ImgDispActionGridFullScreen521"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="0,0,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/dalej500x500.jpg"/>
 
                                             </Grid>
                                         </Border>
@@ -116,42 +115,12 @@
                         </Button>
 
                     </Grid>
-
-                    <Grid    Grid.Row="1" Grid.Column="0" Background="#FF6EF2FF">
-
-                        <Button Command="{Binding Path=RemoveSiteCommand}" VerticalAlignment="Center" Height="Auto" Content="">
-                            <Button.Template>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Grid>
-                                        <Border Background="{TemplateBinding Background}"
-                         BorderBrush="{TemplateBinding BorderBrush}"
-                         BorderThickness="{TemplateBinding BorderThickness}">
-                                            <Grid>
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="*"/>
-                                                </Grid.ColumnDefinitions>
-                                                <ContentPresenter HorizontalAlignment="Left"  Grid.Column="0"
-                                          VerticalAlignment="Center"/>
-                                                <Canvas Background="AliceBlue" Grid.Column="0" />
-
-                                                <Image  x:Name="ImgDispActionGridFullScreen521"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="0,0,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/rem.jpg"/>
-
-                                            </Grid>
-                                        </Border>
-                                    </Grid>
-                                </ControlTemplate>
-                            </Button.Template>
-                        </Button>
-
-                    </Grid>
-
 
                 </Grid>
 
             </Grid>
 
         </Grid>
-
 
         <Grid  Grid.Row="1" Grid.Column="0">
             <Grid.ColumnDefinitions>
@@ -165,7 +134,7 @@
 
             <Grid    Grid.Row="0" Grid.Column="0">
 
-                <Button Command="{Binding Path=ViewSiteCommand}"  VerticalAlignment="Center" Height="Auto" Content="">
+                <Button VerticalAlignment="Center" Height="Auto" Content="">
                     <Button.Template>
                         <ControlTemplate TargetType="{x:Type Button}">
                             <Grid>
@@ -218,13 +187,12 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition  Height="5*"/>
-                        <RowDefinition  Height="5*"/>
+                        <RowDefinition  Height="*"/>
                     </Grid.RowDefinitions>
 
                     <Grid    Grid.Row="0" Grid.Column="0">
 
-                        <Button  Command="{Binding Path=EditSiteCommand}" VerticalAlignment="Center" Height="Auto" Content="">
+                        <Button  Command="{Binding Path=OpenManualEntryViewCommand}" VerticalAlignment="Center" Height="Auto" Content="">
                             <Button.Template>
                                 <ControlTemplate TargetType="{x:Type Button}">
                                     <Grid>
@@ -239,7 +207,7 @@
                                           VerticalAlignment="Center"/>
                                                 <Canvas Background="AliceBlue" Grid.Column="0" />
 
-                                                <Image  x:Name="ImgDispActionGridFullScreen521"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="0,0,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/edit.jpg"/>
+                                                <Image  x:Name="ImgDispActionGridFullScreen521"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="0,0,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/dalej500x500.jpg"/>
 
                                             </Grid>
                                         </Border>
@@ -249,41 +217,15 @@
                         </Button>
 
                     </Grid>
-
-                    <Grid    Grid.Row="1" Grid.Column="0" Background="#FF6EF2FF">
-
-                        <Button Command="{Binding Path=RemoveSiteCommand}" VerticalAlignment="Center" Height="Auto" Content="">
-                            <Button.Template>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Grid>
-                                        <Border Background="{TemplateBinding Background}"
-                         BorderBrush="{TemplateBinding BorderBrush}"
-                         BorderThickness="{TemplateBinding BorderThickness}">
-                                            <Grid>
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="*"/>
-                                                </Grid.ColumnDefinitions>
-                                                <ContentPresenter HorizontalAlignment="Left"  Grid.Column="0"
-                                          VerticalAlignment="Center"/>
-                                                <Canvas Background="AliceBlue" Grid.Column="0" />
-
-                                                <Image  x:Name="ImgDispActionGridFullScreen521"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="0,0,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/rem.jpg"/>
-
-                                            </Grid>
-                                        </Border>
-                                    </Grid>
-                                </ControlTemplate>
-                            </Button.Template>
-                        </Button>
-
-                    </Grid>
-
 
                 </Grid>
 
             </Grid>
 
         </Grid>
+
+
+
 
 
         <Grid  Grid.Row="2" Grid.Column="0">
@@ -298,7 +240,7 @@
 
             <Grid    Grid.Row="0" Grid.Column="0">
 
-                <Button Command="{Binding Path=ViewSiteCommand}"  VerticalAlignment="Center" Height="Auto" Content="">
+                <Button VerticalAlignment="Center" Height="Auto" Content="">
                     <Button.Template>
                         <ControlTemplate TargetType="{x:Type Button}">
                             <Grid>
@@ -351,13 +293,12 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition  Height="5*"/>
-                        <RowDefinition  Height="5*"/>
+                        <RowDefinition  Height="*"/>
                     </Grid.RowDefinitions>
 
                     <Grid    Grid.Row="0" Grid.Column="0">
 
-                        <Button  Command="{Binding Path=EditSiteCommand}" VerticalAlignment="Center" Height="Auto" Content="">
+                        <Button  Command="{Binding Path=OpenUsbListViewCommand}" VerticalAlignment="Center" Height="Auto" Content="">
                             <Button.Template>
                                 <ControlTemplate TargetType="{x:Type Button}">
                                     <Grid>
@@ -372,7 +313,7 @@
                                           VerticalAlignment="Center"/>
                                                 <Canvas Background="AliceBlue" Grid.Column="0" />
 
-                                                <Image  x:Name="ImgDispActionGridFullScreen521"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="0,0,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/edit.jpg"/>
+                                                <Image  x:Name="ImgDispActionGridFullScreen521"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="0,0,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/dalej500x500.jpg"/>
 
                                             </Grid>
                                         </Border>
@@ -382,43 +323,12 @@
                         </Button>
 
                     </Grid>
-
-                    <Grid    Grid.Row="1" Grid.Column="0" Background="#FF6EF2FF">
-
-                        <Button Command="{Binding Path=RemoveSiteCommand}" VerticalAlignment="Center" Height="Auto" Content="">
-                            <Button.Template>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Grid>
-                                        <Border Background="{TemplateBinding Background}"
-                         BorderBrush="{TemplateBinding BorderBrush}"
-                         BorderThickness="{TemplateBinding BorderThickness}">
-                                            <Grid>
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="*"/>
-                                                </Grid.ColumnDefinitions>
-                                                <ContentPresenter HorizontalAlignment="Left"  Grid.Column="0"
-                                          VerticalAlignment="Center"/>
-                                                <Canvas Background="AliceBlue" Grid.Column="0" />
-
-                                                <Image  x:Name="ImgDispActionGridFullScreen521"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="0,0,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/rem.jpg"/>
-
-                                            </Grid>
-                                        </Border>
-                                    </Grid>
-                                </ControlTemplate>
-                            </Button.Template>
-                        </Button>
-
-                    </Grid>
-
 
                 </Grid>
 
             </Grid>
 
         </Grid>
-
-        
         
         <!--<ListBox ScrollViewer.HorizontalScrollBarVisibility="Disabled" x:Name="OrdersListBox" BorderThickness="0">
 
