@@ -1,115 +1,118 @@
-﻿using sconnConnector.Config;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using sconnPrismGenerics.Model;
+
+//using sconnConnector.Config;
+//using sconnPrismGenerics.Model;
 
 namespace sconnRem.Shells.Config
 {
-    public class ConfigureSiteViewModel : ObservableObject
-    {
+    //public class ConfigureSiteViewModel : ObservableObject
+    //{
 
-        private AlarmSystemConfigManager _manager;
-
-
-        #region Fields
-
-        private ICommand _changePageCommand;
-
-        private IPageViewModel _currentPageViewModel;
-        private List<IPageViewModel> _pageViewModels;
-
-        #endregion
-
-        private void LoadConfigPages()
-        {
-
-            // Add available pages
-            _pageViewModels = new List<IPageViewModel>();
-
-            // Set starting page
-            if (PageViewModels.Count > 0)
-            {
-
-                CurrentPageViewModel = PageViewModels[0];
-            }
-        }
-
-        public ConfigureSiteViewModel()
-        {
-            LoadConfigPages();
-        }
-
-        public ConfigureSiteViewModel(AlarmSystemConfigManager manager)
-        {
-            _manager = manager;
-            LoadConfigPages();
-        }
+    //    private AlarmSystemConfigManager _manager;
 
 
+    //    #region Fields
 
-        #region Properties / Commands
+    //    private ICommand _changePageCommand;
+
+    //    private IPageViewModel _currentPageViewModel;
+    //    private List<IPageViewModel> _pageViewModels;
+
+    //    #endregion
+
+    //    private void LoadConfigPages()
+    //    {
+
+    //        // Add available pages
+    //        _pageViewModels = new List<IPageViewModel>();
+
+    //        // Set starting page
+    //        if (PageViewModels.Count > 0)
+    //        {
+
+    //            CurrentPageViewModel = PageViewModels[0];
+    //        }
+    //    }
+
+    //    public ConfigureSiteViewModel()
+    //    {
+    //        LoadConfigPages();
+    //    }
+
+    //    public ConfigureSiteViewModel(AlarmSystemConfigManager manager)
+    //    {
+    //        _manager = manager;
+    //        LoadConfigPages();
+    //    }
 
 
-        public ICommand ChangePageCommand
-        {
-            get
-            {
-                if (_changePageCommand == null)
-                {
-                    _changePageCommand = new RelayCommand(
-                        p => ChangeViewModel((IPageViewModel)p),
-                        p => p is IPageViewModel);
-                }
 
-                return _changePageCommand;
-            }
-        }
+    //    #region Properties / Commands
 
-        public List<IPageViewModel> PageViewModels
-        {
-            get
-            {
-                if (_pageViewModels == null)
-                    _pageViewModels = new List<IPageViewModel>();
 
-                return _pageViewModels;
-            }
-        }
+    //    public ICommand ChangePageCommand
+    //    {
+    //        get
+    //        {
+    //            if (_changePageCommand == null)
+    //            {
+    //                _changePageCommand = new RelayCommand(
+    //                    p => ChangeViewModel((IPageViewModel)p),
+    //                    p => p is IPageViewModel);
+    //            }
 
-        public IPageViewModel CurrentPageViewModel
-        {
-            get
-            {
-                return _currentPageViewModel;
-            }
-            set
-            {
-                if (_currentPageViewModel != value)
-                {
-                    _currentPageViewModel = value;
-                    OnPropertyChanged("CurrentPageViewModel");
-                }
-            }
-        }
+    //            return _changePageCommand;
+    //        }
+    //    }
 
-        #endregion
+    //    public List<IPageViewModel> PageViewModels
+    //    {
+    //        get
+    //        {
+    //            if (_pageViewModels == null)
+    //                _pageViewModels = new List<IPageViewModel>();
 
-        #region Methods
+    //            return _pageViewModels;
+    //        }
+    //    }
 
-        private void ChangeViewModel(IPageViewModel viewModel)
-        {
-            if (!PageViewModels.Contains(viewModel))
-                PageViewModels.Add(viewModel);
+    //    public IPageViewModel CurrentPageViewModel
+    //    {
+    //        get
+    //        {
+    //            return _currentPageViewModel;
+    //        }
+    //        set
+    //        {
+    //            if (_currentPageViewModel != value)
+    //            {
+    //                _currentPageViewModel = value;
+    //                OnPropertyChanged("CurrentPageViewModel");
+    //            }
+    //        }
+    //    }
 
-            CurrentPageViewModel = PageViewModels
-                .FirstOrDefault(vm => vm == viewModel);
-        }
+    //    #endregion
 
-        #endregion
+    //    #region Methods
 
-    }
+    //    private void ChangeViewModel(IPageViewModel viewModel)
+    //    {
+    //        if (!PageViewModels.Contains(viewModel))
+    //            PageViewModels.Add(viewModel);
+
+    //        CurrentPageViewModel = PageViewModels
+    //            .FirstOrDefault(vm => vm == viewModel);
+    //    }
+
+    //    #endregion
+
+    //}
+
 }

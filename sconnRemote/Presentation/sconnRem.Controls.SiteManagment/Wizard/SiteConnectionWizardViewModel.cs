@@ -48,18 +48,30 @@ namespace sconnRem.Controls.SiteManagment.Wizard
 
         }
 
+        //[ImportingConstructor]
+        //public SiteConnectionWizardViewModel( IRegionManager regionManager)
+        //{
+        //    Config = new sconnSite();
+        //    this._regionManager = regionManager;
+
+        //    NavigateBackCommand = new DelegateCommand(NavigateBack);
+        //    NavigateForwardCommand = new DelegateCommand(NavigateForward);
+        //    SaveSiteCommand = new DelegateCommand(SaveSite);
+        //    VerifyConnectionCommand = new DelegateCommand(VerifyConnection);
+        //}
+
         [ImportingConstructor]
         public SiteConnectionWizardViewModel(sconnSite site, IRegionManager regionManager)
         {
             Config = site;
             this._regionManager = regionManager;
-            
+
             NavigateBackCommand = new DelegateCommand(NavigateBack);
             NavigateForwardCommand = new DelegateCommand(NavigateForward);
             SaveSiteCommand = new DelegateCommand(SaveSite);
             VerifyConnectionCommand = new DelegateCommand(VerifyConnection);
         }
-        
+
 
     }
 

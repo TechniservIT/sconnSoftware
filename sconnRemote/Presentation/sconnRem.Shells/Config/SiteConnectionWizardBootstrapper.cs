@@ -15,7 +15,7 @@ using sconnConnector.POCO.Config;
 using sconnPrismGenerics.Boostrapper;
 using sconnPrismGenerics.Logging;
 using sconnRem.Controls.SiteManagment.Wizard;
-using sconnRem.View.Config.AlarmSystem.Comm;
+using sconnRem.Navigation;
 
 namespace sconnRem.Shells.Config
 {
@@ -46,7 +46,9 @@ namespace sconnRem.Shells.Config
             try
             {
                 base.ConfigureAggregateCatalog();
+                this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(WndSiteConnectionWizard).Assembly));
                 this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(SiteConnectionWizardModule).Assembly));
+
             }
             catch (Exception ex)
             {
@@ -65,7 +67,7 @@ namespace sconnRem.Shells.Config
             try
             {
                 var batch = new CompositionBatch();
-                var repoPart = batch.AddExportedValue<sconnSite>(RemoteSite);
+                var repoPart = batch.AddExportedValue(RemoteSite);
                 this.Container.Compose(batch);
                 return this.Container.GetExportedValue<WndSiteConnectionWizard>();
             }

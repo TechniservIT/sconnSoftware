@@ -23,12 +23,6 @@ using sconnRem.Navigation;
 
 namespace sconnRem.Wnd.Main
 {
-    /// <summary>
-    /// Interaction logic for wndGlobalShell.xaml
-    /// </summary>
-
-
-
 
     [Export]
     public partial class WndGlobalShell : Window    //, IPartImportsSatisfiedNotification

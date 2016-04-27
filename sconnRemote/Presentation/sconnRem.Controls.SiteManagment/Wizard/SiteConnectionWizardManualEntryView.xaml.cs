@@ -19,7 +19,7 @@ using sconnRem.Navigation;
 
 namespace sconnRem.Controls.SiteManagment.Wizard
 {
-    [Export(SiteManagmentRegionNames.SiteConnectionWizard_Contract_ManualEntry_View)]
+    [Export]    //(SiteManagmentRegionNames.SiteConnectionWizard_Contract_ManualEntry_View)
     [ViewSortHint("01")]
     public partial class SiteConnectionWizardManualEntryView : UserControl
     {
@@ -32,6 +32,11 @@ namespace sconnRem.Controls.SiteManagment.Wizard
         {
             this.DataContext = viewModel;
             InitializeComponent();
+        }
+
+        public SiteConnectionWizardManualEntryView()
+        {
+                    
         }
     }
 

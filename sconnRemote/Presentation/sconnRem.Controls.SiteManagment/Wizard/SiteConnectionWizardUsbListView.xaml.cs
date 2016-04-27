@@ -20,7 +20,7 @@ using sconnRem.Navigation;
 namespace sconnRem.Controls.SiteManagment.Wizard
 {
 
-    [Export(SiteManagmentRegionNames.SiteConnectionWizard_Contract_Test_View)]
+    [Export]    // (SiteManagmentRegionNames.SiteConnectionWizard_Contract_Test_View)
     [ViewSortHint("01")]
     public partial class SiteConnectionWizardUsbListView : UserControl
     {

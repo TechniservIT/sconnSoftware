@@ -120,8 +120,8 @@ namespace sconnRem.Navigation
 
     public static class SiteManagmentRegionNames
     {
-        public const String MainContentRegion = "MainContentRegion";
-        public const String MainNavigationRegion = "MainNavigationRegion";
+        public const String MainContentRegion = "SiteWizardContentRegion";
+        public const String MainNavigationRegion = "SiteWizardNavigationRegion";
 
         public const String SiteConnectionWizard_Contract_ManualEntry_View = "SiteConnectionWizardManualEntryView";
         public static Uri SiteConnectionWizard_Uri_ManualEntry_View = new Uri(SiteConnectionWizard_Contract_ManualEntry_View, UriKind.Relative);

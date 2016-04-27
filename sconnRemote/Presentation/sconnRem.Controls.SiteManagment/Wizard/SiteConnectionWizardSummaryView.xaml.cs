@@ -20,7 +20,7 @@ using sconnRem.Navigation;
 namespace sconnRem.Controls.SiteManagment.Wizard
 {
 
-    [Export(SiteManagmentRegionNames.SiteConnectionWizard_Contract_Summary_View)]
+    [Export]    //(SiteManagmentRegionNames.SiteConnectionWizard_Contract_Summary_View)
     [ViewSortHint("01")]
     public partial class SiteConnectionWizardSummaryView : UserControl
     {

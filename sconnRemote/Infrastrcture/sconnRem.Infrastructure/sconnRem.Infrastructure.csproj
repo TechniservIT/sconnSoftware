@@ -56,6 +56,7 @@
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -68,6 +69,8 @@
     <Compile Include="Content\MainContentViewManager.cs" />
     <Compile Include="Controllers\AlarmSystemContextController.cs" />
     <Compile Include="Navigation\AlarmSystemContextNavigationManager.cs" />
+    <Compile Include="Navigation\GlobalShellService.cs" />
+    <Compile Include="Navigation\IShellService.cs" />
     <Compile Include="Navigation\SiteNavigationManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
