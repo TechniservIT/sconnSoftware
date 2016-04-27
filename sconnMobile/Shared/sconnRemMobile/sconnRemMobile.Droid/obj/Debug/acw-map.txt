@@ -1,0 +1,4 @@
+sconnRemMobile.Droid.MainActivity, sconnRemMobile.Droid;md550fc19e96d7f6f1d7f909b2744ab19e7.MainActivity
+sconnRemMobile.Droid.MainActivity, sconnRemMobile.Droid, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md550fc19e96d7f6f1d7f909b2744ab19e7.MainActivity
+sconnRemMobile.Droid.MainActivity;md550fc19e96d7f6f1d7f909b2744ab19e7.MainActivity
+sconnremmobile.droid.MainActivity;md550fc19e96d7f6f1d7f909b2744ab19e7.MainActivity

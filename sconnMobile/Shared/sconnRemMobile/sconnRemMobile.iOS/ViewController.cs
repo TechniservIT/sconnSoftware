@@ -1,5 +1,6 @@
 ﻿using System;
-
+using sconnConnector;
+using sconnConnector.POCO.Config;
 using UIKit;
 
 namespace sconnRemMobile.iOS
@@ -21,6 +22,11 @@ namespace sconnRemMobile.iOS
 				var title = string.Format ("{0} clicks!", count++);
 				Button.SetTitle (title, UIControlState.Normal);
 			};
+
+            sconnSite site = new sconnSite();
+
+            sconnCfgMngr mngr = new sconnCfgMngr();
+
 		}
 
 		public override void DidReceiveMemoryWarning ()

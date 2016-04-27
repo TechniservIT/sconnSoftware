@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
@@ -9,6 +9,70 @@
     <Import_RootNamespace>sconnRemMobile</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Annotations.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Comm\ETH.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Comm\USB.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Config\Abstract\AlarmGenericConfigManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Config\Abstract\AlarmGenericNamesConfigManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Config\Abstract\CommandManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Config\AlarmSystemConfigManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Config\CfgOper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Config\GlobalSettings.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Config\sconnCfgMngr.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Config\sconnDataSrc.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MyClass.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\Abstract\AlarmSystemConfig.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\Abstract\Device\AlarmSystemAuthorizedDevice.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\Abstract\Device\AlarmSystemAuthorizedDevicesConfig.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\Abstract\Device\AlarmSystemDevice.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\Abstract\Device\AlarmSystemDeviceConfig.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\Abstract\Device\AlarmSystemGlobalConfig.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\Abstract\Event\AlarmSystemEvent.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\Abstract\Event\AlarmSystemEventConfig.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\Abstract\Gsm\AlarmSystemGsmConfig.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\Abstract\Gsm\AlarmSystemGsmRcpt.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\Abstract\IO\AlarmSystemInput.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\Abstract\IO\AlarmSystemOutput.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\Abstract\IO\AlarmSystemRelay.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\Abstract\Zone\AlarmSystemZone.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\Abstract\Zone\AlarmSystemZoneConfig.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\IIndexAbleConfiguration.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\sconn\Auth\sconnAuthorizedDevice.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\sconn\Auth\sconnAuthorizedDevices.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\sconn\Auth\sconnUser.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\sconn\Auth\sconnUserConfig.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\sconn\Device\sconnDevice.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\sconn\Device\sconnDeviceConfig.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\sconn\Device\sconnGlobalConfig.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\sconn\Event\sconnEvent.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\sconn\Event\sconnEventConfig.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\sconn\Gsm\sconnGsmConfig.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\sconn\Gsm\sconnGsmRcpt.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\sconn\IO\Input\sconnInput.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\sconn\IO\Input\sconnInputConfig.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\sconn\IO\Output\sconnOutput.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\sconn\IO\Output\sconnOutputConfig.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\sconn\IO\Relay\sconnRelay.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\sconn\IO\Relay\sconnRelayConfig.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\sconn\Legacy\ipcDataType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\sconn\Legacy\ipcDeviceConfig.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\sconn\Legacy\ipcEvent.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\sconn\Legacy\ipcGlobalConfig.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\sconn\Legacy\ipcRcpt.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\sconn\Legacy\ipcSiteConfig.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\sconn\sconnAlarmSystem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\sconn\sconnSite.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\sconn\Zone\sconnAlarmZone.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\sconn\Zone\sconnAlarmZoneConfig.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Device\Device.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Device\DeviceCredentials.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Device\EndpointInfo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\IFakeAbleConfiguration.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\ISerializableConfiguration.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\sconnDataShare.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)sconnConnector.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Config\Manager\" />
   </ItemGroup>
 </Project>
