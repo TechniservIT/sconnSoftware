@@ -186,3 +186,7 @@ I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.Status\b
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.Status\bin\Debug\pl-PL\sconnRem.Shells.resources.dll
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.Status\bin\Debug\sconnRem.Controls.SiteManagment.dll
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.Status\bin\Debug\sconnRem.Controls.SiteManagment.pdb
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.Status\obj\Debug\View\Status\Connectivity\SiteConnectionErrorView.g.cs
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.Status\obj\Debug\View\Status\Connectivity\SiteConnectionErrorView.baml
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.Status\bin\Debug\sconnNetworkingServices.dll
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.Status\bin\Debug\sconnNetworkingServices.pdb

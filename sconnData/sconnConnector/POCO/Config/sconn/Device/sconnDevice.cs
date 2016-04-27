@@ -28,14 +28,14 @@ namespace sconnConnector.POCO.Config.sconn
     public enum sconnDeviceType
     {
         Graphical_Keypad = 1,
-        Motherboard,
-        Gsm_Module,
-        Pir_Sensor,
-        Relay_Module,
-        InputsModule,
-        Siren,
-        PirSonic_Sensor,
-        KeypadMotherboard
+        Motherboard = 2,
+        Gsm_Module = 3,
+        Pir_Sensor =4,
+        Relay_Module = 5,
+        InputsModule = 6,
+        Siren = 7,
+        PirSonic_Sensor = 8,
+        KeypadMotherboard = 9
     }
 
 

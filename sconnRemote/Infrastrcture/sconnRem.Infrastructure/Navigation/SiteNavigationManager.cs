@@ -13,6 +13,7 @@ using sconnConnector.Config;
 using sconnConnector.POCO.Config;
 using sconnConnector.POCO.Config.sconn;
 using sconnConnector.POCO.Device;
+using sconnNetworkingServices.Abstract;
 using sconnPrismSharedContext;
 using sconnRem.Infrastructure.Content;
 using sconnRem.Shells.Config;
@@ -43,6 +44,17 @@ namespace sconnRem.Infrastructure.Navigation
         public static sconnInput activeInput  = new sconnInput();
         public static sconnOutput activeOutput = new sconnOutput();
         public static sconnRelay activeRelay = new sconnRelay();
+
+
+        static SiteNavigationManager()
+        {
+            NetworkClientStatusUpdateService.ConnectionStateChanged += NetworkClientStatusUpdateService_ConnectionStateChanged;
+        }
+
+        private static void NetworkClientStatusUpdateService_ConnectionStateChanged(object sender, EventArgs e)
+        {
+            //show connection status in view
+        }
 
         public static sconnInput InputForId(string uuid)
         {

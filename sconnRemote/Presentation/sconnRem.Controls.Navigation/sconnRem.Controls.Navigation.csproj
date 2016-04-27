@@ -87,6 +87,9 @@
     <Compile Include="View\Menu\ContextToolbar\Global\GlobalToolbarView.xaml.cs">
       <DependentUpon>GlobalToolbarView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Menu\Footer\FooterCenterToolMenu\FooterSiteConnectivityStatusView.xaml.cs">
+      <DependentUpon>FooterSiteConnectivityStatusView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Menu\GridNavSideMenu\GridNavSideMenuModule.cs" />
     <Compile Include="View\Menu\GridNavSideMenu\GridNavSideMenuView.xaml.cs">
       <DependentUpon>GridNavSideMenuView.xaml</DependentUpon>
@@ -113,6 +116,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Menu\ContextToolbar\Global\GlobalToolbarView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Menu\Footer\FooterCenterToolMenu\FooterSiteConnectivityStatusView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -438,7 +445,6 @@
     <Content Include="images\save.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="View\Menu\Footer\FooterCenterToolMenu\" />
     <Folder Include="View\Menu\Footer\FooterSiteToolMenu\" />
     <Folder Include="View\Menu\Footer\FootRightToolMenu\" />
   </ItemGroup>

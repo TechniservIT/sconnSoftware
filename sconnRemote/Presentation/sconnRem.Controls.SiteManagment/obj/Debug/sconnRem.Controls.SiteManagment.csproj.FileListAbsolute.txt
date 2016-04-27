@@ -45,3 +45,5 @@ I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.SiteMana
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.SiteManagment\obj\Debug\sconnRem.Controls.SiteManagment.g.resources
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.SiteManagment\obj\Debug\sconnRem.Controls.SiteManagment.dll
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.SiteManagment\obj\Debug\sconnRem.Controls.SiteManagment.pdb
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.SiteManagment\bin\Debug\sconnNetworkingServices.dll
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.SiteManagment\bin\Debug\sconnNetworkingServices.pdb

@@ -1,0 +1,5 @@
+I:\Repo\Bucket\sconnSoftware\sconnRemote\sconnNetworkingServices\bin\Debug\sconnNetworkingServices.dll
+I:\Repo\Bucket\sconnSoftware\sconnRemote\sconnNetworkingServices\bin\Debug\sconnNetworkingServices.pdb
+I:\Repo\Bucket\sconnSoftware\sconnRemote\sconnNetworkingServices\obj\Debug\sconnNetworkingServices.csprojResolveAssemblyReference.cache
+I:\Repo\Bucket\sconnSoftware\sconnRemote\sconnNetworkingServices\obj\Debug\sconnNetworkingServices.dll
+I:\Repo\Bucket\sconnSoftware\sconnRemote\sconnNetworkingServices\obj\Debug\sconnNetworkingServices.pdb

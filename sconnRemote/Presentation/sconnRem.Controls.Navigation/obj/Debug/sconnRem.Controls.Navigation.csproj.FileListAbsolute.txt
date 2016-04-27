@@ -213,3 +213,7 @@ I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.Navigati
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.Navigation\bin\Debug\pl-PL\sconnRem.Shells.resources.dll
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.Navigation\bin\Debug\sconnRem.Controls.SiteManagment.dll
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.Navigation\bin\Debug\sconnRem.Controls.SiteManagment.pdb
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.Navigation\bin\Debug\sconnNetworkingServices.dll
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.Navigation\bin\Debug\sconnNetworkingServices.pdb
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.Navigation\obj\Debug\View\Menu\Footer\FooterCenterToolMenu\FooterSiteConnectivityStatusView.g.cs
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.Navigation\obj\Debug\View\Menu\Footer\FooterCenterToolMenu\FooterSiteConnectivityStatusView.baml

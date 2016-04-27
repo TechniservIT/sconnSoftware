@@ -24,6 +24,7 @@ FI:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSy
 FI:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\View\Config\AlarmSystem\Zone\ZoneConfigView.xaml;;
 FI:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\View\Config\AlarmSystem\Zone\ZoneConfigViewNavigationItem.xaml;;
 FI:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\View\Status\AlarmSystem\Comm\AlarmSystemCommStatusView.xaml;;
+FI:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\View\Status\AlarmSystem\Connectivity\AlarmSystemConnectivityStatusView.xaml;;
 FI:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\View\Status\AlarmSystem\Device\AlarmSystemDeviceConfigureView.xaml;;
 FI:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\View\Status\AlarmSystem\Device\AlarmSystemDeviceStatusView.xaml;;
 FI:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\View\Status\AlarmSystem\Device\InputsModule\AlarmDeviceInputsModuleConfigureView.xaml;;

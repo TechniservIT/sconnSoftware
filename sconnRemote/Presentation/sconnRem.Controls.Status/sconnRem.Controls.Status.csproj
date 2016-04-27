@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\SiteConnectionStatusViewModel.cs" />
     <Compile Include="View\Status\AlarmSystem\AlarmSystemStatusFullScreen.xaml.cs">
       <DependentUpon>AlarmSystemStatusFullScreen.xaml</DependentUpon>
     </Compile>
@@ -71,6 +72,9 @@
     </Compile>
     <Compile Include="View\Status\Cctv\CctvStatusStreamingView.xaml.cs">
       <DependentUpon>CctvStatusStreamingView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Status\Connectivity\SiteConnectionErrorView.xaml.cs">
+      <DependentUpon>SiteConnectionErrorView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Status\gridSiteConfigSelect.cs" />
     <Compile Include="View\Status\SiteStatusGridViewModule.cs" />
@@ -88,10 +92,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\Status\Connectivity\SiteConnectionErrorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ViewModel\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\sconnRem.Controls.Navigation\sconnRem.Controls.Navigation.csproj">
       <Project>{97a1614e-9a15-4676-a3e9-9c8182c5b3e4}</Project>

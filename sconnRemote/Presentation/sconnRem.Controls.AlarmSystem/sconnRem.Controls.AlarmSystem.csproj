@@ -162,6 +162,9 @@
       <DependentUpon>AlarmSystemCommStatusView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Status\AlarmSystem\Comm\AlarmSystemCommStatusViewModule.cs" />
+    <Compile Include="View\Status\AlarmSystem\Connectivity\AlarmSystemConnectivityStatusView.xaml.cs">
+      <DependentUpon>AlarmSystemConnectivityStatusView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Status\AlarmSystem\Device\AlarmSystemDeviceConfigureView.xaml.cs">
       <DependentUpon>AlarmSystemDeviceConfigureView.xaml</DependentUpon>
     </Compile>
@@ -373,6 +376,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\Status\AlarmSystem\Comm\AlarmSystemCommStatusView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Status\AlarmSystem\Connectivity\AlarmSystemConnectivityStatusView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

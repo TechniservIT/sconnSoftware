@@ -150,3 +150,5 @@ I:\Repo\Bucket\sconnSoftware\sconnRemote\Infrastrcture\sconnRem.Infrastructure\b
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Infrastrcture\sconnRem.Infrastructure\bin\Debug\de-DE\sconnRem.Shells.resources.dll
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Infrastrcture\sconnRem.Infrastructure\bin\Debug\en-US\sconnRem.Shells.resources.dll
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Infrastrcture\sconnRem.Infrastructure\bin\Debug\pl-PL\sconnRem.Shells.resources.dll
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Infrastrcture\sconnRem.Infrastructure\bin\Debug\sconnNetworkingServices.dll
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Infrastrcture\sconnRem.Infrastructure\bin\Debug\sconnNetworkingServices.pdb

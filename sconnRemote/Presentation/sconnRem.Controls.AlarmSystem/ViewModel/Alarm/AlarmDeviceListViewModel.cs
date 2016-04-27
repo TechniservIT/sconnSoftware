@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Windows;
 using System.Windows.Input;
 using AlarmSystemManagmentService;
 using AlarmSystemManagmentService.Device;
@@ -311,12 +312,39 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
 
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
-            GetData(); //update list
+           // var existingcontract = this._regionManager.Regions[""].ActiveViews.First();
+
+            //BusyIndicatorVisibility = Visibility.Visible;
+
+         //   NavigateToAlarmContract(AlarmRegionNames.AlarmStatus_Contract_Connection_Status_View);
+
+            // Disable here also your UI to not allow the user to do things that are not allowed during login-validation
+            BackgroundWorker bgWorker = new BackgroundWorker();
+            bgWorker.DoWork += (s, e) => {
+                 GetData();
+            };
+            bgWorker.RunWorkerCompleted += (s, e) => {
+
+               // NavigateToAlarmContract(AlarmRegionNames.AlarmStatus_Contract_Device_List_View);
+
+                // BusyIndicatorVisibility = Visibility.Collapsed;
+                // Enable here the UI
+                // You can get the login-result via the e.Result. Make sure to check also the e.Error for errors that happended during the login-operation
+            };
+            bgWorker.RunWorkerAsync();
+
+          
+
+            ///GetData(); //update list
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)
         {
-            return true;    //singleton
+            if (navigationContext.Uri.Equals(AlarmRegionNames.AlarmUri_Status_Device_List_View))
+            {
+                return true;    //singleton
+            }
+            return false;
         }
 
         public void OnNavigatedFrom(NavigationContext navigationContext)

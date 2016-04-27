@@ -127,6 +127,12 @@
   <ItemGroup>
     <Folder Include="Config\Manager\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\sconnRemote\sconnNetworkingServices\sconnNetworkingServices.csproj">
+      <Project>{57036DE8-EA6A-42E1-983D-23F71F87C34C}</Project>
+      <Name>sconnNetworkingServices</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -112,6 +112,9 @@ namespace sconnRem.Navigation
         public const String AlarmStatus_Contract_Global_View = "AlarmSystemGlobalView";
         public static Uri AlarmUri_Status_Device_Global_View = new Uri(AlarmStatus_Contract_Global_View, UriKind.Relative);
 
+        public const String AlarmStatus_Contract_Connection_Status_View = "AlarmSsstemConnectivityStatusView";
+        public static Uri AlarmUri_Contract_Connection_Status_View = new Uri(AlarmStatus_Contract_Connection_Status_View, UriKind.Relative);
+
         #endregion
 
 

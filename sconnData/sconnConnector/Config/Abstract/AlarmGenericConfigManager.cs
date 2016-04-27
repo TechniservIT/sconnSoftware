@@ -18,6 +18,7 @@ namespace sconnConnector.Config.Abstract
         protected static Logger _logger = LogManager.GetCurrentClassLogger();
         protected SconnClient client;
         public bool SingleUpload { get; set; }
+        public bool Parametrized { get; set; }
 
         protected int EntityId;
 
@@ -31,6 +32,7 @@ namespace sconnConnector.Config.Abstract
         public AlarmGenericConfigManager(IAlarmSystemConfigurationEntity entity, Device device, int entityParam)
             : this(entity, device)
         {
+            Parametrized = true;
             EntityId = entityParam;
         }
 
@@ -213,6 +215,50 @@ namespace sconnConnector.Config.Abstract
 
         public bool Download()
         {
+            if (Parametrized)
+            {
+                return this.Download((byte)EntityId);
+            }
+            else
+            {
+                try
+                {
+                    if (!client.Connect())
+                    {
+                        client.Disconnect();
+                        return false;
+                    }
+
+                    byte[] header = CommandManager.GetHeaderForOperation(typeof(T), CommandOperation.Get);
+                    var res = this.SendMessage(header);
+                    if (IsResultSuccessForOperation(res, CommandOperation.Get))
+                    {
+                        byte[] msgBody = GetResultMessageForOperationResult(res, CommandOperation.Get);
+                        Entity.Deserialize(msgBody);
+                        if (CommandManager.IsConfigEntityNamed(typeof(T)))
+                        {
+                            this.DownloadNames();
+                        }
+                        client.Disconnect();
+                        return true;
+                    }
+
+                    client.Disconnect();
+                    return false;
+                }
+                catch (Exception e)
+                {
+                    _logger.Error(e, e.Message);
+                    client.Disconnect();
+                    return false;
+                }
+
+            }
+
+        }
+
+        public bool Download(byte Id)
+        {
             try
             {
                 if (!client.Connect())
@@ -221,13 +267,13 @@ namespace sconnConnector.Config.Abstract
                     return false;
                 }
 
-                byte[] header = CommandManager.GetHeaderForOperation(typeof (T), CommandOperation.Get);
+                byte[] header = CommandManager.GetHeaderForOperationParametrized(typeof(T), CommandOperation.Get,Id);
                 var res = this.SendMessage(header);
                 if (IsResultSuccessForOperation(res, CommandOperation.Get))
                 {
                     byte[] msgBody = GetResultMessageForOperationResult(res, CommandOperation.Get);
                     Entity.Deserialize(msgBody);
-                    if (CommandManager.IsConfigEntityNamed(typeof (T)))
+                    if (CommandManager.IsConfigEntityNamed(typeof(T)))
                     {
                         this.DownloadNames();
                     }
@@ -246,6 +292,7 @@ namespace sconnConnector.Config.Abstract
             }
 
         }
+
 
         private bool IsResultSuccessForOperation(byte[] result, CommandOperation oper)
         {

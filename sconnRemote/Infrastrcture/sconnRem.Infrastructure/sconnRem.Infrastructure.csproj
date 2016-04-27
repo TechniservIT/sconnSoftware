@@ -98,6 +98,10 @@
       <Project>{687f4d7b-3759-45d4-a8ec-1cb6bc0a8cc3}</Project>
       <Name>sconnRem.Shells</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\sconnNetworkingServices\sconnNetworkingServices.csproj">
+      <Project>{57036de8-ea6a-42e1-983d-23f71f87c34c}</Project>
+      <Name>sconnNetworkingServices</Name>
+    </ProjectReference>
     <ProjectReference Include="..\sconnPrismGenerics\sconnPrismGenerics.csproj">
       <Project>{9c17810c-efc7-4806-8414-6868deabbca0}</Project>
       <Name>sconnPrismGenerics</Name>

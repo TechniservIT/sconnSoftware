@@ -14,7 +14,7 @@ using System.Security.Authentication;
 using System.Security.Cryptography.X509Certificates;
 using System.IO;
 using NLog;
-
+using sconnNetworkingServices.Abstract;
 
 
 namespace sconnConnector
@@ -40,6 +40,8 @@ namespace sconnConnector
         public int ConnectionTimeoutMs { get; set; }
         private bool Authenticated = false;
         public bool useSsl { get; set; }
+
+        public INetworkClientStatusUpdateService StatusUpdateService { get; set; }
         
 
 
@@ -55,7 +57,8 @@ namespace sconnConnector
             Hostname = hostname;
             Port = port;
             AuthenticationPassword = password;
-            ConnectionTimeoutMs = 5000; //add more for debug
+            ConnectionTimeoutMs = 500;
+           // StatusUpdateService = statusUpdateService;
             ServicePointManager.ServerCertificateValidationCallback += (s, c, k, e) => true;
         }
 
@@ -64,8 +67,8 @@ namespace sconnConnector
             if (useSsl)
             {
                 client = new TcpClient(Hostname, Port); 
-                client.ReceiveTimeout = 5000;  // this.ConnectionTimeoutMs;
-                client.SendTimeout = 5000; // this.ConnectionTimeoutMs;
+                client.ReceiveTimeout = this.ConnectionTimeoutMs; 
+                client.SendTimeout = this.ConnectionTimeoutMs;
                 EncStream = new SslStream(
                     client.GetStream(),
                     false,
@@ -79,6 +82,7 @@ namespace sconnConnector
                 }
                 catch (Exception e)
                 {
+                   NetworkClientStatusUpdateService.OnConnectionError(e.Message);
                    nlogger.ErrorException(e.Message, e);
                    
                 }
@@ -136,6 +140,7 @@ namespace sconnConnector
             }
             catch (Exception e)
             {
+                NetworkClientStatusUpdateService.OnConnectionError(e.Message);
                 nlogger.ErrorException(e.Message, e);
                 return false;
             }
@@ -182,6 +187,7 @@ namespace sconnConnector
                 }
                 catch (Exception e)
                 {
+                    NetworkClientStatusUpdateService.OnConnectionError(e.Message);
                     nlogger.ErrorException(e.Message, e);
                     client.Close();
                     return false;
@@ -203,6 +209,7 @@ namespace sconnConnector
                     int bytesRec = clientSocket.Receive(rxBF);
                     if (rxBF[0] == ipcCMD.AUTHFAIL)
                     {
+                        NetworkClientStatusUpdateService.OnConnectionClosed();
                         return false;
                     }
                     else if (rxBF[0] == ipcCMD.AUTHOK)
@@ -218,6 +225,7 @@ namespace sconnConnector
 
                 catch (Exception e)
                 {
+                    NetworkClientStatusUpdateService.OnConnectionError(e.Message);
                     nlogger.ErrorException(e.Message, e);
                     clientSocket.Shutdown(SocketShutdown.Both);
                     clientSocket.Close();
@@ -258,6 +266,7 @@ namespace sconnConnector
         public bool Connect()
         {
             VerifyConnection();
+            NetworkClientStatusUpdateService.OnConnectionOpened();
             return this.client.Connected;
         }
 
@@ -279,6 +288,7 @@ namespace sconnConnector
                    clientSocket.Close();
                 }
             }
+            NetworkClientStatusUpdateService.OnConnectionClosed();
             this.client = null;
             this.clientSocket = null;
             return true;
@@ -594,7 +604,7 @@ namespace sconnConnector
         }
 
 
-        int ConnectionTimeoutMs = 5000;
+        int ConnectionTimeoutMs = 500;
 
         // Incoming data from the client.
         public string soxData = null;

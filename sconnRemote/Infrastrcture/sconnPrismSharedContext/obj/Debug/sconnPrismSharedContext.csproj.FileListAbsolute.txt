@@ -31,3 +31,5 @@ I:\Repo\Bucket\sconnSoftware\sconnRemote\Infrastrcture\sconnPrismSharedContext\b
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Infrastrcture\sconnPrismSharedContext\obj\Debug\sconnPrismSharedContext.csprojResolveAssemblyReference.cache
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Infrastrcture\sconnPrismSharedContext\obj\Debug\sconnPrismSharedContext.dll
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Infrastrcture\sconnPrismSharedContext\obj\Debug\sconnPrismSharedContext.pdb
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Infrastrcture\sconnPrismSharedContext\bin\Debug\sconnNetworkingServices.dll
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Infrastrcture\sconnPrismSharedContext\bin\Debug\sconnNetworkingServices.pdb

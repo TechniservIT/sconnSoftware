@@ -57,3 +57,5 @@ I:\Repo\Bucket\sconnSoftware\sconnService\AlarmSystemManagmentService\bin\Debug\
 I:\Repo\Bucket\sconnSoftware\sconnService\AlarmSystemManagmentService\obj\Debug\AlarmSystemManagmentService.csprojResolveAssemblyReference.cache
 I:\Repo\Bucket\sconnSoftware\sconnService\AlarmSystemManagmentService\obj\Debug\AlarmSystemManagmentService.dll
 I:\Repo\Bucket\sconnSoftware\sconnService\AlarmSystemManagmentService\obj\Debug\AlarmSystemManagmentService.pdb
+I:\Repo\Bucket\sconnSoftware\sconnService\AlarmSystemManagmentService\bin\Debug\sconnNetworkingServices.dll
+I:\Repo\Bucket\sconnSoftware\sconnService\AlarmSystemManagmentService\bin\Debug\sconnNetworkingServices.pdb
