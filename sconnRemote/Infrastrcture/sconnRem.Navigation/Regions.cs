@@ -117,6 +117,14 @@ namespace sconnRem.Navigation
 
     }
 
+
+    public static class SiteManagmentRegionNames
+    {
+        public const String MainContentRegion = "MainContentRegion";
+        public const String MainNavigationRegion = "MainNavigationRegion";
+    }
+
+
     public static class NavContextToolbarRegionNames
     {
         public const String ContextToolbar_AlarmSystem_ViewName = "AlarmSystemToolbarView";

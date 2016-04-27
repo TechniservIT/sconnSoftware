@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace sconnRem.Controls.AlarmSystem.View.Status.AlarmSystem.Device
 {
-    class AlarmSystemDeviceConfigureViewModule
+    public class AlarmSystemDeviceConfigureViewModule
     {
     }
 }
