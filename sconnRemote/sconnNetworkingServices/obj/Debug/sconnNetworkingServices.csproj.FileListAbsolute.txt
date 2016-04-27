@@ -3,3 +3,8 @@ I:\Repo\Bucket\sconnSoftware\sconnRemote\sconnNetworkingServices\bin\Debug\sconn
 I:\Repo\Bucket\sconnSoftware\sconnRemote\sconnNetworkingServices\obj\Debug\sconnNetworkingServices.csprojResolveAssemblyReference.cache
 I:\Repo\Bucket\sconnSoftware\sconnRemote\sconnNetworkingServices\obj\Debug\sconnNetworkingServices.dll
 I:\Repo\Bucket\sconnSoftware\sconnRemote\sconnNetworkingServices\obj\Debug\sconnNetworkingServices.pdb
+H:\Repo\Bucket\iotdashn\sconnRemote\sconnNetworkingServices\bin\Debug\sconnNetworkingServices.dll
+H:\Repo\Bucket\iotdashn\sconnRemote\sconnNetworkingServices\bin\Debug\sconnNetworkingServices.pdb
+H:\Repo\Bucket\iotdashn\sconnRemote\sconnNetworkingServices\obj\Debug\sconnNetworkingServices.csprojResolveAssemblyReference.cache
+H:\Repo\Bucket\iotdashn\sconnRemote\sconnNetworkingServices\obj\Debug\sconnNetworkingServices.dll
+H:\Repo\Bucket\iotdashn\sconnRemote\sconnNetworkingServices\obj\Debug\sconnNetworkingServices.pdb

@@ -20,6 +20,7 @@ using sconnConnector.POCO.Config.sconn;
 using sconnPrismSharedContext;
 using sconnRem.Infrastructure.Navigation;
 using sconnRem.Navigation;
+using Xceed.Wpf.Toolkit;
 
 namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
 {
@@ -42,6 +43,18 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
         private AlarmSystemConfigManager _manager;
         private readonly IRegionManager _regionManager;
         private Logger _nlogger = LogManager.GetCurrentClassLogger();
+
+        private bool _loading;
+        public bool Loading
+        {
+
+            get { return _loading; }
+            set
+            {
+                _loading = value;
+                this.OnPropertyChanged();
+            }
+        }
 
         private int ChangeTrack = 0;
         public bool IsChanged { get; set; }
@@ -290,7 +303,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
             this._provider = new AlarmDevicesConfigService(_manager);
             this._regionManager = regionManager;
             this.PropertyChanged += new PropertyChangedEventHandler(OnNotifiedOfPropertyChanged);
-            GetData();
+           // GetData();
         }
 
         private void OnNotifiedOfPropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -312,25 +325,32 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
 
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
-           // var existingcontract = this._regionManager.Regions[""].ActiveViews.First();
+            // var existingcontract = this._regionManager.Regions[""].ActiveViews.First();
 
             //BusyIndicatorVisibility = Visibility.Visible;
 
-         //   NavigateToAlarmContract(AlarmRegionNames.AlarmStatus_Contract_Connection_Status_View);
+            // BusyIndicator
+           
 
-            // Disable here also your UI to not allow the user to do things that are not allowed during login-validation
-            BackgroundWorker bgWorker = new BackgroundWorker();
+             //   NavigateToAlarmContract(AlarmRegionNames.AlarmStatus_Contract_Connection_Status_View);
+
+             // Disable here also your UI to not allow the user to do things that are not allowed during login-validation
+             BackgroundWorker bgWorker = new BackgroundWorker();
             bgWorker.DoWork += (s, e) => {
                  GetData();
             };
-            bgWorker.RunWorkerCompleted += (s, e) => {
+            bgWorker.RunWorkerCompleted += (s, e) =>
+            {
 
-               // NavigateToAlarmContract(AlarmRegionNames.AlarmStatus_Contract_Device_List_View);
+                Loading = false;
+                // NavigateToAlarmContract(AlarmRegionNames.AlarmStatus_Contract_Device_List_View);
 
                 // BusyIndicatorVisibility = Visibility.Collapsed;
                 // Enable here the UI
                 // You can get the login-result via the e.Result. Make sure to check also the e.Error for errors that happended during the login-operation
             };
+
+            Loading = true;
             bgWorker.RunWorkerAsync();
 
           
