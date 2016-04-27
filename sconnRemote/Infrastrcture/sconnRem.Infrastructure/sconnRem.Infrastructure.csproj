@@ -91,6 +91,10 @@
       <Project>{3D463251-18D3-451B-B06C-C4D655DD8A37}</Project>
       <Name>AlarmSystemManagmentService</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Presentation\sconnRem.Shells\sconnRem.Shells.csproj">
+      <Project>{687f4d7b-3759-45d4-a8ec-1cb6bc0a8cc3}</Project>
+      <Name>sconnRem.Shells</Name>
+    </ProjectReference>
     <ProjectReference Include="..\sconnPrismGenerics\sconnPrismGenerics.csproj">
       <Project>{9c17810c-efc7-4806-8414-6868deabbca0}</Project>
       <Name>sconnPrismGenerics</Name>

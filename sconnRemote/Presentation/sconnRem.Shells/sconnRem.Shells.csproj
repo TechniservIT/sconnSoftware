@@ -67,10 +67,12 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Config\ConfigNavBootstrapper.cs" />
-    <Compile Include="Config\ConfigureSiteViewModel.cs" />
+    <Compile Include="Config\SiteConnectionWizardBootstrapper.cs" />
     <Compile Include="Config\wndConfigureSiteShell.xaml.cs">
       <DependentUpon>wndConfigureSiteShell.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Config\WndSiteConnectionWizard.xaml.cs">
+      <DependentUpon>WndSiteConnectionWizard.xaml</DependentUpon>
     </Compile>
     <Compile Include="Help\About.xaml.cs">
       <DependentUpon>About.xaml</DependentUpon>
@@ -120,6 +122,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Config\WndSiteConnectionWizard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Help\About.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -166,13 +172,13 @@
       <Project>{541885ad-53c0-41c4-b98f-c97815c5f168}</Project>
       <Name>sconnPrismSharedContext</Name>
     </ProjectReference>
-    <ProjectReference Include="..\sconnRem.Controls.AlarmSystem\sconnRem.Controls.AlarmSystem.csproj">
-      <Project>{c567fe8b-3834-4ad8-aad4-71bdd36dded6}</Project>
-      <Name>sconnRem.Controls.AlarmSystem</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Infrastrcture\sconnRem.Navigation\sconnRem.Navigation.csproj">
       <Project>{7A5FAD15-614C-4D5D-9DAA-4BC9628D479C}</Project>
       <Name>sconnRem.Navigation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\sconnRem.Controls.SiteManagment\sconnRem.Controls.SiteManagment.csproj">
+      <Project>{dca2d971-c53d-4b07-8d06-8f2382549525}</Project>
+      <Name>sconnRem.Controls.SiteManagment</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

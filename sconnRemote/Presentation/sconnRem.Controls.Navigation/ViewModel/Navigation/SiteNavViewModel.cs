@@ -53,12 +53,12 @@ namespace sconnRem.Controls.Navigation.ViewModel.Navigation
 
         private void RemoveSite(sconnSite site)
         {
-
+            //todo
         }
 
         private void EditSite(sconnSite site)
         {
-
+            SiteNavigationManager.EditSite(site);
         }
 
 

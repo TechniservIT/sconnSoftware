@@ -380,3 +380,5 @@ I:\Repo\Bucket\sconnSoftware\sconnRemote\sconnRem\obj\Debug\sconnRem.pdb
 I:\Repo\Bucket\sconnSoftware\sconnRemote\sconnRem\bin\Debug\de-DE\sconnRem.Shells.resources.dll
 I:\Repo\Bucket\sconnSoftware\sconnRemote\sconnRem\bin\Debug\en-US\sconnRem.Shells.resources.dll
 I:\Repo\Bucket\sconnSoftware\sconnRemote\sconnRem\bin\Debug\pl-PL\sconnRem.Shells.resources.dll
+I:\Repo\Bucket\sconnSoftware\sconnRemote\sconnRem\bin\Debug\sconnRem.Controls.SiteManagment.dll
+I:\Repo\Bucket\sconnSoftware\sconnRemote\sconnRem\bin\Debug\sconnRem.Controls.SiteManagment.pdb

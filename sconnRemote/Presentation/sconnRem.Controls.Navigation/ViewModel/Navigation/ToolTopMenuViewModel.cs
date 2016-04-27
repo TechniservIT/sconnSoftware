@@ -115,8 +115,9 @@ namespace sconnRem.Controls.Navigation.ViewModel.Navigation
 
         private void ShowSiteWizard()
         {
-            WndSiteWizard wnd = new WndSiteWizard();
-            wnd.Show();
+            SiteNavigationManager.OpenSiteWizard();
+            //WndSiteWizard wnd = new WndSiteWizard();
+            //wnd.Show();
         }
         
         private void SetupCmds()

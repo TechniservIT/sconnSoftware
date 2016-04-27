@@ -15,6 +15,7 @@ using sconnConnector.POCO.Config.sconn;
 using sconnConnector.POCO.Device;
 using sconnPrismSharedContext;
 using sconnRem.Infrastructure.Content;
+using sconnRem.Shells.Config;
 
 namespace sconnRem.Infrastructure.Navigation
 {
@@ -287,6 +288,26 @@ namespace sconnRem.Infrastructure.Navigation
                 _nlogger.Error(ex, ex.Message);
             }
         }
+
+
+
+
+        public static void EditSite(sconnSite site)
+        {
+            SiteConnectionWizardBootstrapper boot = new SiteConnectionWizardBootstrapper(site);
+            boot.Run();
+        }
+
+        public static void OpenSiteWizard()
+        {
+            SiteConnectionWizardBootstrapper boot = new SiteConnectionWizardBootstrapper();
+            boot.Run();
+        }
+
+
+
+
+
 
     }
 

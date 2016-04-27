@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace sconnRem.Wnd.Navigation
+namespace sconnRem.Controls.Placeholder
 {
-    class NavigationWndBootstrapper
+    public class Class1
     {
     }
 }

@@ -10,21 +10,65 @@
     
     <Grid>
         
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="0" Grid.Column="0" x:Name="SiteNameLabel" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="Site Name" VerticalAlignment="Stretch" />
+        <TextBox Grid.Row="0" Grid.Column="1" x:Name="SiteNameInput" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Text="{Binding Config.siteName }" TextWrapping="Wrap" />
+
+        <Label Grid.Row="1" Grid.Column="0" x:Name="SiteHostnameLabel" Content="Hostname" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="192"/>
+        <TextBox Grid.Row="1" Grid.Column="1" x:Name="SiteHostnameInput" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Text="{Binding Config.serverIP }"  TextWrapping="Wrap"  />
+
+        <Label Grid.Row="2" Grid.Column="0" x:Name="SitePortLabel" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="Port"  VerticalAlignment="Top" RenderTransformOrigin="0.553,2.346" Width="192"/>
+        <TextBox Grid.Row="2" Grid.Column="1" x:Name="SitePortInput" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Text="{Binding Config.serverPort }"  TextWrapping="Wrap" VerticalAlignment="Top" Width="192" RenderTransformOrigin="0.516,-0.13"/>
+
+        <!--<Label Grid.Row="3" Grid.Column="0" x:Name="SiteIntervalLabel" Content="Interval" HorizontalAlignment="Left"  VerticalAlignment="Top" RenderTransformOrigin="0.553,2.346" Width="192"/>
+        <TextBox Grid.Row="3" Grid.Column="1"  x:Name="SiteIntervalInput" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Text="{Binding Config.Value }"  TextWrapping="Wrap" VerticalAlignment="Top" Width="192"/>-->
+
+        <Label Grid.Row="4" Grid.Column="0" x:Name="SitePasswordLabel" Content="Password" HorizontalAlignment="Left"  VerticalAlignment="Top" RenderTransformOrigin="0.553,2.346" Width="192"/>
+        <TextBox Grid.Row="4" Grid.Column="1" x:Name="SitePasswordInput" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Text="{Binding Config.authPasswd }"  TextWrapping="Wrap" VerticalAlignment="Top" Width="192"/>
+
+        <!--<Button Grid.Row="5" Grid.Column="1" x:Name="SiteEditSaveButton" Content="Save" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="92" RenderTransformOrigin="6.013,10.045" Height="31" Click="siteEditSaveButton_Click"/>-->
+        <Button Grid.Column="1" Grid.Row="5"  VerticalAlignment="Center"
+                    Width="Auto" Content="" 
+                    Command="{Binding SaveConfigCommand}" >
+
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid>
+                        <Border Background="{TemplateBinding Background}"
+                                                     BorderBrush="{TemplateBinding BorderBrush}"
+                                                     BorderThickness="{TemplateBinding BorderThickness}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <ContentPresenter HorizontalAlignment="Left"  Grid.Column="0" VerticalAlignment="Center"/>
+                                <Canvas Background="White" Grid.Column="0" />
+
+                                <Image  x:Name="gdjh254221"  Stretch="Uniform"   HorizontalAlignment="Center" Height="Auto" Margin="0,0,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/save.jpg"/>
+
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
+
         
-        <Button x:Name="SiteEditSaveButton" Content="Save" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="92" RenderTransformOrigin="6.013,10.045" Height="31" Click="siteEditSaveButton_Click"/>
-        <Label x:Name="SiteNameLabel" Content="Site Name" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="192"/>
-        <Label x:Name="SiteHostnameLabel" Content="Hostname" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="192"/>
-        <Label x:Name="SitePortLabel" Content="Port" HorizontalAlignment="Left"  VerticalAlignment="Top" RenderTransformOrigin="0.553,2.346" Width="192"/>
-        <TextBox x:Name="SiteNameInput" HorizontalAlignment="Left" Height="23"  TextWrapping="Wrap" VerticalAlignment="Top" Width="192"/>
-        <TextBox x:Name="SiteHostnameInput" HorizontalAlignment="Left" Height="23"  TextWrapping="Wrap" VerticalAlignment="Top" Width="192"/>
-        <TextBox x:Name="SitePortInput" HorizontalAlignment="Left" Height="23"  TextWrapping="Wrap" VerticalAlignment="Top" Width="192" RenderTransformOrigin="0.516,-0.13"/>
-        <Label x:Name="SiteIntervalLabel" Content="Interval" HorizontalAlignment="Left"  VerticalAlignment="Top" RenderTransformOrigin="0.553,2.346" Width="192"/>
-        <TextBox x:Name="SiteIntervalInput" HorizontalAlignment="Left" Height="23"  TextWrapping="Wrap" VerticalAlignment="Top" Width="192"/>
-        <Label x:Name="SitePasswordLabel" Content="Password" HorizontalAlignment="Left"  VerticalAlignment="Top" RenderTransformOrigin="0.553,2.346" Width="192"/>
-        <TextBox x:Name="SitePasswordInput" HorizontalAlignment="Left" Height="23"  TextWrapping="Wrap" VerticalAlignment="Top" Width="192"/>
-
-
-
     </Grid>
     
     

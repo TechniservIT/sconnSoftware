@@ -196,3 +196,8 @@ I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Shells\obj\Debug\
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Shells\obj\Debug\de-DE\sconnRem.Shells.resources.dll
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Shells\obj\Debug\en-US\sconnRem.Shells.resources.dll
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Shells\obj\Debug\pl-PL\sconnRem.Shells.resources.dll
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Shells\bin\Debug\sconnRem.Controls.SiteManagment.dll
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Shells\bin\Debug\sconnRem.Controls.SiteManagment.pdb
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Shells\obj\Debug\Config\WndSiteConnectionWizard.g.cs
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Shells\obj\Debug\sconnRem.Shells_MarkupCompile.lref
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Shells\obj\Debug\Config\WndSiteConnectionWizard.baml

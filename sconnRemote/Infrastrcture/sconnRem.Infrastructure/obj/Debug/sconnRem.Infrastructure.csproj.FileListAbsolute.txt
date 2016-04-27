@@ -143,3 +143,12 @@ I:\Repo\Bucket\sconnSoftware\sconnRemote\Infrastrcture\sconnRem.Infrastructure\o
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Infrastrcture\sconnRem.Infrastructure\obj\Debug\sconnRem.Infrastructure.pdb
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Infrastrcture\sconnRem.Infrastructure\bin\Debug\AlarmSystemManagmentService.dll
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Infrastrcture\sconnRem.Infrastructure\bin\Debug\AlarmSystemManagmentService.pdb
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Infrastrcture\sconnRem.Infrastructure\bin\Debug\sconnRem.Shells.dll
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Infrastrcture\sconnRem.Infrastructure\bin\Debug\sconnRem.Controls.AlarmSystem.dll
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Infrastrcture\sconnRem.Infrastructure\bin\Debug\sconnRem.Controls.SiteManagment.dll
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Infrastrcture\sconnRem.Infrastructure\bin\Debug\sconnRem.Shells.pdb
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Infrastrcture\sconnRem.Infrastructure\bin\Debug\sconnRem.Controls.AlarmSystem.pdb
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Infrastrcture\sconnRem.Infrastructure\bin\Debug\sconnRem.Controls.SiteManagment.pdb
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Infrastrcture\sconnRem.Infrastructure\bin\Debug\de-DE\sconnRem.Shells.resources.dll
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Infrastrcture\sconnRem.Infrastructure\bin\Debug\en-US\sconnRem.Shells.resources.dll
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Infrastrcture\sconnRem.Infrastructure\bin\Debug\pl-PL\sconnRem.Shells.resources.dll

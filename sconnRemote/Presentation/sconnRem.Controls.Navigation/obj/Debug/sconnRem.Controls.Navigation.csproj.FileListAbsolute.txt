@@ -211,3 +211,5 @@ I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.Navigati
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.Navigation\bin\Debug\de-DE\sconnRem.Shells.resources.dll
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.Navigation\bin\Debug\en-US\sconnRem.Shells.resources.dll
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.Navigation\bin\Debug\pl-PL\sconnRem.Shells.resources.dll
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.Navigation\bin\Debug\sconnRem.Controls.SiteManagment.dll
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.Navigation\bin\Debug\sconnRem.Controls.SiteManagment.pdb

@@ -122,6 +122,27 @@ namespace sconnRem.Navigation
     {
         public const String MainContentRegion = "MainContentRegion";
         public const String MainNavigationRegion = "MainNavigationRegion";
+
+        public const String SiteConnectionWizard_Contract_ManualEntry_View = "SiteConnectionWizardManualEntryView";
+        public static Uri SiteConnectionWizard_Uri_ManualEntry_View = new Uri(SiteConnectionWizard_Contract_ManualEntry_View, UriKind.Relative);
+
+        public const String SiteConnectionWizard_Contract_MethodSelection_View = "SiteConnectionWizardMethodSelectionView";
+        public static Uri SiteConnectionWizard_Uri_MethodSelection_View = new Uri(SiteConnectionWizard_Contract_MethodSelection_View, UriKind.Relative);
+
+        public const String SiteConnectionWizard_Contract_SearchSitesList_View = "SiteConnectionWizardSearchSitesListView";
+        public static Uri SiteConnectionWizard_Uri_SearchSitesList_View = new Uri(SiteConnectionWizard_Contract_SearchSitesList_View, UriKind.Relative);
+
+        public const String SiteConnectionWizard_Contract_Summary_View = "SiteConnectionWizardSummaryView";
+        public static Uri SiteConnectionWizard_Uri_Summary_View = new Uri(SiteConnectionWizard_Contract_Summary_View, UriKind.Relative);
+
+        public const String SiteConnectionWizard_Contract_Test_View = "SiteConnectionWizardTestView";
+        public static Uri SiteConnectionWizard_Uri_Test_View = new Uri(SiteConnectionWizard_Contract_Test_View, UriKind.Relative);
+
+        public const String SiteConnectionWizard_Contract_UsbList_View = "SiteConnectionWizardUsbListView";
+        public static Uri SiteConnectionWizard_Uri_UsbList_View = new Uri(SiteConnectionWizard_Contract_UsbList_View, UriKind.Relative);
+
+
+
     }
 
 

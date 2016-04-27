@@ -194,7 +194,6 @@
     <Compile Include="Wnd\Main\wndGlobalShell.xaml.cs">
       <DependentUpon>WndGlobalShell.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Wnd\Navigation\NavigationWndBootstrapper.cs" />
     <Compile Include="Wnd\Tools\changePasswordWnd.xaml.cs">
       <DependentUpon>changePasswordWnd.xaml</DependentUpon>
     </Compile>
