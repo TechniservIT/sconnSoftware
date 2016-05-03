@@ -59,3 +59,5 @@ I:\Repo\Bucket\sconnSoftware\sconnService\AlarmSystemManagmentService\obj\Debug\
 I:\Repo\Bucket\sconnSoftware\sconnService\AlarmSystemManagmentService\obj\Debug\AlarmSystemManagmentService.pdb
 I:\Repo\Bucket\sconnSoftware\sconnService\AlarmSystemManagmentService\bin\Debug\sconnNetworkingServices.dll
 I:\Repo\Bucket\sconnSoftware\sconnService\AlarmSystemManagmentService\bin\Debug\sconnNetworkingServices.pdb
+H:\Repo\Bucket\iotdashn\sconnService\AlarmSystemManagmentService\bin\Debug\sconnNetworkingServices.dll
+H:\Repo\Bucket\iotdashn\sconnService\AlarmSystemManagmentService\bin\Debug\sconnNetworkingServices.pdb
