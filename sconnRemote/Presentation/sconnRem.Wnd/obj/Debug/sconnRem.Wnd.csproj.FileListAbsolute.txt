@@ -91,3 +91,5 @@ I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Wnd\obj\Debug\sco
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Wnd\obj\Debug\sconnRem.Wnd.pdb
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Wnd\bin\Debug\sconnRem.Controls.SiteManagment.dll
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Wnd\bin\Debug\sconnRem.Controls.SiteManagment.pdb
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Wnd\bin\Debug\sconnNetworkingServices.dll
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Wnd\bin\Debug\sconnNetworkingServices.pdb

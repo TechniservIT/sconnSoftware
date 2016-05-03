@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,7 @@ using NLog;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
+using sconnConnector;
 using sconnConnector.Config;
 using sconnConnector.POCO.Config;
 using sconnConnector.POCO.Config.sconn;
@@ -38,6 +40,8 @@ namespace sconnRem.Controls.SiteManagment.Wizard
     {
         public sconnSite Config { get; set; }
         private readonly IRegionManager _regionManager;
+        private SconnClient _provider;
+
         private Logger _nlogger = LogManager.GetCurrentClassLogger();
 
         public SiteConnectionWizardStage Stage { get; set; }
@@ -53,6 +57,8 @@ namespace sconnRem.Controls.SiteManagment.Wizard
         public ICommand SaveSiteCommand { get; set; }
         public ICommand VerifyConnectionCommand { get; set; }
 
+        public ObservableCollection<sconnSite> NetworkSites { get; set; }
+        public ObservableCollection<sconnSite> UsbSites { get; set; }
 
         private void NavigateToContract(string contract)
         {
@@ -77,6 +83,19 @@ namespace sconnRem.Controls.SiteManagment.Wizard
             }
         }
 
+        private void SearchForSitesInNetwork()
+        {
+            //  NetworkSites
+            this.NetworkSites = new ObservableCollection<sconnSite>();
+            _provider.SearchForSite();
+        }
+
+        private void _provider_SiteDiscovered(object sender, EventArgs e)
+        {
+            SiteDiscoveryEventArgs args = (SiteDiscoveryEventArgs) e;
+            this.NetworkSites.Add(new sconnSite(500,args.hostname,9898, args.hostname));
+        }
+
         private void NavigateBack()
         {
             if (Stage == SiteConnectionWizardStage.MethodSelection)
@@ -95,6 +114,7 @@ namespace sconnRem.Controls.SiteManagment.Wizard
                 if (AdditionMethod == SiteAdditionMethod.Search)
                 {
                     this.Stage = SiteConnectionWizardStage.Search;
+                    SearchForSitesInNetwork(); // start network search
                     NavigateToContract(SiteManagmentRegionNames.SiteConnectionWizard_Contract_SearchSitesList_View);
                 }
                 else if (AdditionMethod == SiteAdditionMethod.Manual)
@@ -177,6 +197,12 @@ namespace sconnRem.Controls.SiteManagment.Wizard
         {
             Config = site;
             this._regionManager = regionManager;
+
+            _provider = new SconnClient("",0,"");
+            _provider.SiteDiscovered += _provider_SiteDiscovered;
+
+            this.NetworkSites = new ObservableCollection<sconnSite>();
+            this.UsbSites = new ObservableCollection<sconnSite>();
 
             NavigateBackCommand = new DelegateCommand(NavigateBack);
             NavigateForwardCommand = new DelegateCommand(NavigateForward);

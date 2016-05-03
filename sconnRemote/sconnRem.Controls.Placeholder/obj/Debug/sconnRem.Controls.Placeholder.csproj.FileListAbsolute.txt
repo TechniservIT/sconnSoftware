@@ -1,0 +1,5 @@
+I:\Repo\Bucket\sconnSoftware\sconnRemote\sconnRem.Controls.Placeholder\bin\Debug\sconnRem.Controls.Placeholder.dll
+I:\Repo\Bucket\sconnSoftware\sconnRemote\sconnRem.Controls.Placeholder\bin\Debug\sconnRem.Controls.Placeholder.pdb
+I:\Repo\Bucket\sconnSoftware\sconnRemote\sconnRem.Controls.Placeholder\obj\Debug\sconnRem.Controls.Placeholder.csprojResolveAssemblyReference.cache
+I:\Repo\Bucket\sconnSoftware\sconnRemote\sconnRem.Controls.Placeholder\obj\Debug\sconnRem.Controls.Placeholder.dll
+I:\Repo\Bucket\sconnSoftware\sconnRemote\sconnRem.Controls.Placeholder\obj\Debug\sconnRem.Controls.Placeholder.pdb

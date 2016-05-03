@@ -57,7 +57,7 @@ namespace sconnConnector
             Hostname = hostname;
             Port = port;
             AuthenticationPassword = password;
-            ConnectionTimeoutMs = 500;
+            ConnectionTimeoutMs = 1500;
            // StatusUpdateService = statusUpdateService;
             ServicePointManager.ServerCertificateValidationCallback += (s, c, k, e) => true;
         }
@@ -425,6 +425,137 @@ namespace sconnConnector
             CloseConnection();
         }
 
+
+
+
+
+        /************** SEARCHING  UDP *************/
+        
+        private UdpState _globalUdp;
+        struct UdpState
+        {
+            public System.Net.IPEndPoint Ep;
+            public System.Net.Sockets.UdpClient UdpClient;
+        }
+
+        
+        public delegate void AsyncCallback(IAsyncResult ar);
+        public event EventHandler SiteDiscovered;
+
+        public  void OnSiteDiscovered(SiteDiscoveryEventArgs args)
+        {
+            EventHandler handler = SiteDiscovered;
+            if (args != null)
+            {
+                handler(this, args);
+            }
+        }
+
+
+
+        public void SearchForSite()
+        {
+            try
+            {
+                // Try to send the discovery request message
+                byte[] discoverMsg = Encoding.ASCII.GetBytes("Discovery: Who is out there?");
+                _globalUdp.UdpClient.Send(discoverMsg, discoverMsg.Length, new System.Net.IPEndPoint(System.Net.IPAddress.Parse("192.168.1.255"), 30303));
+            }
+            catch
+            {
+                return;
+            }
+        }
+        
+        private void ScanInit()
+        {
+            try
+            {
+                _globalUdp.UdpClient = new UdpClient();
+                _globalUdp.Ep = new System.Net.IPEndPoint(System.Net.IPAddress.Parse("255.255.255.255"), 30303);
+                System.Net.IPEndPoint bindEp = new System.Net.IPEndPoint(System.Net.IPAddress.Any, 30303);
+                byte[] discoverMsg = Encoding.ASCII.GetBytes("Discovery: Who is out there?");
+
+                // Set the local UDP port to listen on
+                _globalUdp.UdpClient.Client.Bind(bindEp);
+
+                // Enable the transmission of broadcast packets without having them be received by ourself
+                _globalUdp.UdpClient.EnableBroadcast = true;
+                _globalUdp.UdpClient.MulticastLoopback = false;
+
+                // Configure ourself to receive discovery responses
+                _globalUdp.UdpClient.BeginReceive(ReceiveCallback, _globalUdp);
+
+                // Transmit the discovery request message
+                // GlobalUDP.UDPClient.Send(DiscoverMsg, DiscoverMsg.Length, new System.Net.IPEndPoint(System.Net.IPAddress.Parse("255.255.255.255"), 30303));
+            }
+            catch
+            {
+                //MessageBox.Show("Unable to transmit discovery message.  Check network connectivity and ensure that no other instances of this program are running.", "Error", MessageBoxButtons.OK);
+                return;
+            }
+        }
+        
+        public void ReceiveCallback(IAsyncResult ar)
+        {
+            UdpState myUdp = (UdpState)ar.AsyncState;
+
+            // Obtain the UDP message body and convert it to a string, with remote IP address attached as well
+            string receiveString = Encoding.ASCII.GetString(myUdp.UdpClient.EndReceive(ar, ref myUdp.Ep));
+            receiveString = myUdp.Ep.Address.ToString() + "\n" + receiveString.Replace("\r\n", "\n");
+
+            // Configure the UdpClient class to accept more messages, if they arrive
+            myUdp.UdpClient.BeginReceive(ReceiveCallback, myUdp);
+            
+            string[] ePinfo = receiveString.Split('\n');
+            string remoteIp = ePinfo[0];
+            string remoteHostname = ePinfo[1];
+
+
+            //is not internal address
+            if ((from netif in NetworkInterface.GetAllNetworkInterfaces()
+                 select netif.GetIPProperties() into prop from item in prop.UnicastAddresses
+                 where !(item.Address.IsIPv6LinkLocal || item.Address.IsIPv6SiteLocal) select item)
+                 .Any(item => item.Address.ToString().Equals(remoteIp)))
+            {
+                return;
+            }
+
+
+            this.OnSiteDiscovered(new SiteDiscoveryEventArgs(remoteIp));
+
+
+            //verify client is not already known
+            //sconnSite[] sites = sconnDataShare.getSites();
+            //for (int i = 0; i < sites.Length; i++)
+            //{
+            //    if (remoteIp.Equals(sites[i].serverIP))
+            //    {
+            //        return;
+            //    }
+            //}
+
+      
+            ////add client , invoke        
+            //this.Dispatcher.Invoke(new AddSite(AddSiteToList), DispatcherPriority.Normal, new Object[] { remoteIp, remoteHostname });
+
+
+
+        }
+
+
+
+
+    }
+
+    public class SiteDiscoveryEventArgs : EventArgs
+    {
+        public string hostname;
+
+        public SiteDiscoveryEventArgs(string remote)
+        {
+            hostname = remote;
+        }
     }
 
 
@@ -604,7 +735,7 @@ namespace sconnConnector
         }
 
 
-        int ConnectionTimeoutMs = 500;
+        int ConnectionTimeoutMs = 1500;
 
         // Incoming data from the client.
         public string soxData = null;

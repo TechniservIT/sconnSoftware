@@ -47,7 +47,7 @@
                                           VerticalAlignment="Center"/>
                                         <Canvas Background="White" />
 
-                                        <Image  x:Name="ImgDispActionGridFullScreen141"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="10,10,10,10" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/alarm.jpg"/>
+                                        <Image  x:Name="ImgDispActionGridFullScreen141"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="10,10,10,10" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/add1000x1000.jpg"/>
 
                                     </Grid>
                                 </Border>
@@ -70,7 +70,7 @@
                     </Grid.RowDefinitions>
 
                     <Grid  Grid.Column="0" Grid.Row="0">
-                        <Label Content="{Binding Path=Site.siteName}" />
+                        <Label Content="Network" FontSize="36" FontFamily="Motorwerk" VerticalAlignment="Center" HorizontalAlignment="Center" />
                     </Grid>
 
 
@@ -149,7 +149,7 @@
                                           VerticalAlignment="Center"/>
                                         <Canvas Background="White" />
 
-                                        <Image  x:Name="ImgDispActionGridFullScreen141"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="10,10,10,10" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/alarm.jpg"/>
+                                        <Image  x:Name="ImgDispActionGridFullScreen141"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="10,10,10,10" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/search1000x1000.jpg"/>
 
                                     </Grid>
                                 </Border>
@@ -172,7 +172,7 @@
                     </Grid.RowDefinitions>
 
                     <Grid  Grid.Column="0" Grid.Row="0">
-                        <Label Content="{Binding Path=Site.siteName}" />
+                        <Label Content="Manual entry" FontSize="36" FontFamily="Motorwerk" VerticalAlignment="Center" HorizontalAlignment="Center" />
                     </Grid>
 
 
@@ -255,7 +255,7 @@
                                           VerticalAlignment="Center"/>
                                         <Canvas Background="White" />
 
-                                        <Image  x:Name="ImgDispActionGridFullScreen141"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="10,10,10,10" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/alarm.jpg"/>
+                                        <Image  x:Name="ImgDispActionGridFullScreen141"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="10,10,10,10" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/usb1000x1000.jpg"/>
 
                                     </Grid>
                                 </Border>
@@ -278,7 +278,7 @@
                     </Grid.RowDefinitions>
 
                     <Grid  Grid.Column="0" Grid.Row="0">
-                        <Label Content="{Binding Path=Site.siteName}" />
+                        <Label Content="USB" FontSize="36" FontFamily="Motorwerk" VerticalAlignment="Center" HorizontalAlignment="Center" />
                     </Grid>
 
 

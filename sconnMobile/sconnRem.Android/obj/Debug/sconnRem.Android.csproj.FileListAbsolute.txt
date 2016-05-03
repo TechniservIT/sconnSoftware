@@ -38,7 +38,8 @@ I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnRem.Android\obj\Debug\res\values\s
 I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnRem.Android\obj\Debug\res\drawable\icon.png
 I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnRem.Android\obj\Debug\R.cs.flag
 I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnRem.Android\obj\Debug\uploadflags.txt
-I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnRem.Android\obj\Debug\sconnRem.Android.dll.mdb
-I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnRem.Android\bin\Debug\sconnRem.Android.dll.mdb
 H:\Repo\Bucket\iotdashn\sconnMobile\sconnRem.Android\obj\Debug\sconnRem.Android.dll.mdb
 H:\Repo\Bucket\iotdashn\sconnMobile\sconnRem.Android\bin\Debug\sconnRem.Android.dll.mdb
+I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnRem.Android\obj\Debug\sconnRem.Android.csprojResolveAssemblyReference.cache
+I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnRem.Android\obj\Debug\sconnRem.Android.dll.mdb
+I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnRem.Android\bin\Debug\sconnRem.Android.dll.mdb

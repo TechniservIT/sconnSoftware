@@ -4,6 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:sconnRem.Controls.SiteManagment.Wizard"
+             xmlns:inf="clr-namespace:sconnRem.Navigation;assembly=sconnRem.Navigation"
+             xmlns:regions="http://prismlibrary.com/"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
 
@@ -35,7 +37,8 @@
                                           VerticalAlignment="Center"/>
                                     <Canvas Background="AliceBlue" Grid.Column="0" />
 
-                                    <Image  x:Name="ImgDispActionGridFullScreen521"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="0,0,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/dalej500x500.jpg"/>
+                                    <Image  x:Name="ImgDispActionGridFullScreen521"  Stretch="Uniform"   HorizontalAlignment="Center" Height="Auto" Margin="0,0,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/wstecz500x500.jpg"/>
+
 
                                 </Grid>
                             </Border>
@@ -48,8 +51,168 @@
         </Grid>
 
         <Grid  Grid.Row="0" Grid.Column="1">
+         
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
 
-            <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="118,154,0,0" TextWrapping="Wrap" Text="Search" VerticalAlignment="Top" Width="120" />
+            <ListBox ScrollViewer.HorizontalScrollBarVisibility="Disabled" x:Name="OrdersListBox" BorderThickness="0" ItemsSource="{Binding NetworkSites}"  IsSynchronizedWithCurrentItem="True"  Background="White">
+                    <ListBox.ItemTemplate>
+
+                        <DataTemplate>
+                            <Grid  Background="White">
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="10*" />
+                                    <ColumnDefinition  Width="60*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+
+                                <Grid    Grid.Row="0" Grid.Column="0" Background="White">
+
+                                    <Button VerticalAlignment="Center" Height="Auto" Content="">
+                                        <Button.Template>
+                                            <ControlTemplate TargetType="{x:Type Button}">
+                                                <Grid>
+                                                <Border Background="{TemplateBinding Background}"
+                                                         BorderBrush="{TemplateBinding BorderBrush}"
+                                                         BorderThickness="{TemplateBinding BorderThickness}">           
+                                                    <Grid>
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="*"/>
+                                                            </Grid.ColumnDefinitions>
+                                                            <ContentPresenter HorizontalAlignment="Left"
+                                          VerticalAlignment="Center"/>
+                                                            <Canvas Background="White" />
+
+                                                            <Image  x:Name="ImgDispActionGridFullScreen141"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="10,10,10,10" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/alarm.jpg"/>
+
+                                                        </Grid>
+                                                    </Border>
+                                                </Grid>
+                                            </ControlTemplate>
+                                        </Button.Template>
+                                    </Button>
+                                </Grid>
+
+                                <Grid    Grid.Row="0" Grid.Column="1" Background="White">
+
+                                    <Grid  Background="White">
+
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="1*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="0.5*"/>
+                                            <RowDefinition Height="0.5*"/>
+                                        </Grid.RowDefinitions>
+
+                                        <Grid  Grid.Column="0" Grid.Row="0">
+                                            <Label Content="{Binding _serverIP}" HorizontalAlignment="Center" FontSize="24" FontFamily="Motorwerk" />
+                                        </Grid>
+
+                                        <Grid  Grid.Column="0" Grid.Row="1">
+                                        </Grid>
+
+                                    </Grid>
+                                </Grid>
+
+                                <!--<Grid    Grid.Row="0" Grid.Column="2" Background="White">
+
+                                    <Grid   Background="White">
+
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition  Height="5*"/>
+                                            <RowDefinition  Height="5*"/>
+                                        </Grid.RowDefinitions>
+
+                                        <Grid    Grid.Row="0" Grid.Column="0" Background="White">
+
+                                            <Button  Command="{Binding DataContext.EditSiteCommand, RelativeSource={RelativeSource AncestorType=ListBox}}"  CommandParameter="{Binding}" VerticalAlignment="Center" Height="Auto" Content="">
+                                                <Button.Template>
+                                                    <ControlTemplate TargetType="{x:Type Button}">
+                                                        <Grid>
+                                                            <Border Background="{TemplateBinding Background}"
+                         BorderBrush="{TemplateBinding BorderBrush}"
+                         BorderThickness="{TemplateBinding BorderThickness}">
+                                                                <Grid>
+                                                                    <Grid.ColumnDefinitions>
+                                                                        <ColumnDefinition Width="*"/>
+                                                                    </Grid.ColumnDefinitions>
+                                                                    <ContentPresenter HorizontalAlignment="Left"  Grid.Column="0"
+                                          VerticalAlignment="Center"/>
+                                                                    <Canvas Background="White" Grid.Column="0" />
+
+                                                                    <Image  x:Name="ImgDispActionGridFullScreen521"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="0,0,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/edit.jpg"/>
+
+                                                                </Grid>
+                                                            </Border>
+                                                        </Grid>
+                                                    </ControlTemplate>
+                                                </Button.Template>
+                                            </Button>
+
+                                        </Grid>
+
+                                        <Grid    Grid.Row="1" Grid.Column="0" Background="White">
+
+                                            <Button Command="{Binding DataContext.RemoveSiteCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" 
+                                            CommandParameter="{Binding}"
+                                            VerticalAlignment="Center" Height="Auto" Content="">
+                                                <Button.Template>
+                                                    <ControlTemplate TargetType="{x:Type Button}">
+                                                        <Grid>
+                                                            <Border Background="{TemplateBinding Background}"
+                         BorderBrush="{TemplateBinding BorderBrush}"
+                         BorderThickness="{TemplateBinding BorderThickness}">
+                                                                <Grid>
+                                                                    <Grid.ColumnDefinitions>
+                                                                        <ColumnDefinition Width="*"/>
+                                                                    </Grid.ColumnDefinitions>
+                                                                    <ContentPresenter HorizontalAlignment="Left"  Grid.Column="0"
+                                          VerticalAlignment="Center"/>
+                                                                    <Canvas Background="White" Grid.Column="0" />
+
+                                                                    <Image  x:Name="ImgDispActionGridFullScreen521"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="0,0,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/rem.jpg"/>
+
+                                                                </Grid>
+                                                            </Border>
+                                                        </Grid>
+                                                    </ControlTemplate>
+                                                </Button.Template>
+                                            </Button>
+
+                                        </Grid>
+                                    </Grid>
+                                </Grid>-->
+
+                            </Grid>
+                            <!--<ContentControl>
+                        <siteNavSideMenu:SiteNavMenuViewItem DataContext="{Binding}" />
+                    </ContentControl>-->
+
+
+                        </DataTemplate>
+
+
+                    </ListBox.ItemTemplate>
+
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+
+                </ListBox>
 
         </Grid>
 
@@ -70,7 +233,7 @@
                                           VerticalAlignment="Center"/>
                                     <Canvas Background="AliceBlue" Grid.Column="0" />
 
-                                    <Image  x:Name="ImgDispActionGridFullScreen521"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="0,0,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/dalej500x500.jpg"/>
+                                    <Image  x:Name="ImgDispActionGridFullScreen521"  Stretch="Uniform"   HorizontalAlignment="Center" Height="Auto" Margin="0,0,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/dalej500x500.jpg"/>
 
                                 </Grid>
                             </Border>

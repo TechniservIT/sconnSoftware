@@ -436,12 +436,38 @@
     <Content Include="images\2.jpg" />
     <Content Include="images\4.jpg" />
     <Content Include="images\add.jpg" />
+    <Content Include="images\add1000x1000.jpg" />
+    <Content Include="images\aku1-1000.jpg" />
+    <Content Include="images\aku1000.jpg" />
     <Content Include="images\alarm.jpg" />
+    <Content Include="images\bateria1-1000.jpg" />
+    <Content Include="images\bateria1000.jpg" />
     <Content Include="images\cctv.jpg" />
     <Content Include="images\centrala1000x1000.jpg" />
+    <Content Include="images\config1000 %282%29.jpg" />
+    <Content Include="images\config1000.jpg" />
+    <Content Include="images\czujka1000x1000.jpg" />
     <Content Include="images\edit.jpg" />
+    <Content Include="images\elektro1000.jpg" />
+    <Content Include="images\exp1000x1000.jpg" />
+    <Content Include="images\eye1000.jpg" />
+    <Content Include="images\glob1000.jpg" />
+    <Content Include="images\in1-1000.jpg" />
+    <Content Include="images\in1000.jpg" />
+    <Content Include="images\klawiatura1000x1000.jpg" />
+    <Content Include="images\klucz1000.jpg" />
+    <Content Include="images\lista1-1000.jpg" />
+    <Content Include="images\lista1000.jpg" />
     <Content Include="images\open.jpg" />
+    <Content Include="images\out1-1000.jpg" />
+    <Content Include="images\out1000.jpg" />
+    <Content Include="images\person1-1000.jpg" />
+    <Content Include="images\person1000.jpg" />
+    <Content Include="images\przek1000x1000.jpg" />
+    <Content Include="images\przekaznik1000.jpg" />
     <Content Include="images\rem.jpg" />
+    <Content Include="images\rj1000.jpg" />
+    <Content Include="images\rozb-1000.jpg" />
     <Content Include="images\save.jpg" />
   </ItemGroup>
   <ItemGroup>
@@ -450,9 +476,28 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <Content Include="images\search1000x1000.jpg" />
+    <Content Include="images\strefa1000.jpg" />
+    <Content Include="images\strefy1-1000.jpg" />
+    <Content Include="images\strefy2-1000.jpg" />
+    <Content Include="images\syrena1000x1000.jpg" />
+    <Content Include="images\tel1000.jpg" />
+    <Content Include="images\tmp1000.jpg" />
+    <Content Include="images\usb1000x1000.jpg" />
+    <Content Include="images\wawes1000.jpg" />
+    <Content Include="images\wilgot1000.jpg" />
+    <Content Include="images\wtyczka1-1000.jpg" />
+    <Content Include="images\wtyczka1000.jpg" />
+    <Content Include="images\wykrz-1000.jpg" />
+    <Content Include="images\zazb-1000.jpg" />
+    <Content Include="images\zegar1000.jpg" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="images\exp1000x1000.psd" />
+    <None Include="images\klawiatura1000x1000.psd" />
+    <None Include="images\przek1000x1000.psd" />
+    <None Include="images\syrena1000x1000.psd" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>

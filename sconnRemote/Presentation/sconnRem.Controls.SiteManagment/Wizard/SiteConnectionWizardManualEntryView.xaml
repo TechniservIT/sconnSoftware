@@ -35,7 +35,7 @@
                                           VerticalAlignment="Center"/>
                                     <Canvas Background="AliceBlue" Grid.Column="0" />
 
-                                    <Image  x:Name="ImgDispActionGridFullScreen521"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="0,0,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/dalej500x500.jpg"/>
+                                    <Image  x:Name="ImgDispActionGridFullScreen521"  Stretch="Uniform"   HorizontalAlignment="Center" Height="Auto" Margin="0,0,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/wstecz500x500.jpg"/>
 
                                 </Grid>
                             </Border>
@@ -125,7 +125,7 @@
                                           VerticalAlignment="Center"/>
                                     <Canvas Background="AliceBlue" Grid.Column="0" />
 
-                                    <Image  x:Name="ImgDispActionGridFullScreen521"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="0,0,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/dalej500x500.jpg"/>
+                                    <Image  x:Name="ImgDispActionGridFullScreen521"  Stretch="Uniform"   HorizontalAlignment="Center" Height="Auto" Margin="0,0,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/dalej500x500.jpg"/>
 
                                 </Grid>
                             </Border>
