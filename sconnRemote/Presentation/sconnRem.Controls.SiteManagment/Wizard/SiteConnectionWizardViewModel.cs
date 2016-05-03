@@ -175,6 +175,7 @@ namespace sconnRem.Controls.SiteManagment.Wizard
         {
             this.Stage = SiteConnectionWizardStage.Search;
             AdditionMethod = SiteAdditionMethod.Search;
+            SearchForSitesInNetwork(); // start network search
             NavigateToContract(SiteManagmentRegionNames.SiteConnectionWizard_Contract_SearchSitesList_View);
         }
 

@@ -457,13 +457,14 @@ namespace sconnConnector
         {
             try
             {
+                ScanInit();
                 // Try to send the discovery request message
                 byte[] discoverMsg = Encoding.ASCII.GetBytes("Discovery: Who is out there?");
                 _globalUdp.UdpClient.Send(discoverMsg, discoverMsg.Length, new System.Net.IPEndPoint(System.Net.IPAddress.Parse("192.168.1.255"), 30303));
             }
-            catch
+            catch (Exception ex)
             {
-                return;
+                nlogger.Error(ex, ex.Message);
             }
         }
         
@@ -471,6 +472,7 @@ namespace sconnConnector
         {
             try
             {
+
                 _globalUdp.UdpClient = new UdpClient();
                 _globalUdp.Ep = new System.Net.IPEndPoint(System.Net.IPAddress.Parse("255.255.255.255"), 30303);
                 System.Net.IPEndPoint bindEp = new System.Net.IPEndPoint(System.Net.IPAddress.Any, 30303);
@@ -485,62 +487,50 @@ namespace sconnConnector
 
                 // Configure ourself to receive discovery responses
                 _globalUdp.UdpClient.BeginReceive(ReceiveCallback, _globalUdp);
-
-                // Transmit the discovery request message
-                // GlobalUDP.UDPClient.Send(DiscoverMsg, DiscoverMsg.Length, new System.Net.IPEndPoint(System.Net.IPAddress.Parse("255.255.255.255"), 30303));
             }
-            catch
+            catch (Exception ex)
             {
-                //MessageBox.Show("Unable to transmit discovery message.  Check network connectivity and ensure that no other instances of this program are running.", "Error", MessageBoxButtons.OK);
-                return;
+                nlogger.Error(ex, ex.Message);
             }
         }
         
         public void ReceiveCallback(IAsyncResult ar)
         {
-            UdpState myUdp = (UdpState)ar.AsyncState;
-
-            // Obtain the UDP message body and convert it to a string, with remote IP address attached as well
-            string receiveString = Encoding.ASCII.GetString(myUdp.UdpClient.EndReceive(ar, ref myUdp.Ep));
-            receiveString = myUdp.Ep.Address.ToString() + "\n" + receiveString.Replace("\r\n", "\n");
-
-            // Configure the UdpClient class to accept more messages, if they arrive
-            myUdp.UdpClient.BeginReceive(ReceiveCallback, myUdp);
-            
-            string[] ePinfo = receiveString.Split('\n');
-            string remoteIp = ePinfo[0];
-            string remoteHostname = ePinfo[1];
-
-
-            //is not internal address
-            if ((from netif in NetworkInterface.GetAllNetworkInterfaces()
-                 select netif.GetIPProperties() into prop from item in prop.UnicastAddresses
-                 where !(item.Address.IsIPv6LinkLocal || item.Address.IsIPv6SiteLocal) select item)
-                 .Any(item => item.Address.ToString().Equals(remoteIp)))
+            try
             {
-                return;
+                UdpState myUdp = (UdpState)ar.AsyncState;
+
+                // Obtain the UDP message body and convert it to a string, with remote IP address attached as well
+                string receiveString = Encoding.ASCII.GetString(myUdp.UdpClient.EndReceive(ar, ref myUdp.Ep));
+                receiveString = myUdp.Ep.Address.ToString() + "\n" + receiveString.Replace("\r\n", "\n");
+
+                // Configure the UdpClient class to accept more messages, if they arrive
+                myUdp.UdpClient.BeginReceive(ReceiveCallback, myUdp);
+
+                string[] ePinfo = receiveString.Split('\n');
+                string remoteIp = ePinfo[0];
+                string remoteHostname = ePinfo[1];
+
+
+                //is not internal address
+                if ((from netif in NetworkInterface.GetAllNetworkInterfaces()
+                     select netif.GetIPProperties() into prop
+                     from item in prop.UnicastAddresses
+                     where !(item.Address.IsIPv6LinkLocal || item.Address.IsIPv6SiteLocal)
+                     select item)
+                     .Any(item => item.Address.ToString().Equals(remoteIp)))
+                {
+                    return;
+                }
+
+
+                this.OnSiteDiscovered(new SiteDiscoveryEventArgs(remoteIp));
             }
-
-
-            this.OnSiteDiscovered(new SiteDiscoveryEventArgs(remoteIp));
-
-
-            //verify client is not already known
-            //sconnSite[] sites = sconnDataShare.getSites();
-            //for (int i = 0; i < sites.Length; i++)
-            //{
-            //    if (remoteIp.Equals(sites[i].serverIP))
-            //    {
-            //        return;
-            //    }
-            //}
-
-      
-            ////add client , invoke        
-            //this.Dispatcher.Invoke(new AddSite(AddSiteToList), DispatcherPriority.Normal, new Object[] { remoteIp, remoteHostname });
-
-
-
+            catch (Exception ex)
+            {
+                nlogger.Error(ex, ex.Message);
+            }
+          
         }
 
 
