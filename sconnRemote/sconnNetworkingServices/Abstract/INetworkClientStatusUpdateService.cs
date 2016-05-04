@@ -11,11 +11,13 @@ namespace sconnNetworkingServices.Abstract
         Connecting,
         Negotiating,
         Authentication,
+        Authenticated,
         Connected,
         Transmit,
         Recieve,
         Idle,
-        Closing
+        Closing,
+        Error
 
     }
 

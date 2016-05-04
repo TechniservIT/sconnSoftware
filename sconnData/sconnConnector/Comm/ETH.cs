@@ -42,7 +42,18 @@ namespace sconnConnector
         public bool useSsl { get; set; }
 
         public INetworkClientStatusUpdateService StatusUpdateService { get; set; }
-        
+
+        private UdpState _globalUdp;
+        struct UdpState
+        {
+            public System.Net.IPEndPoint Ep;
+            public System.Net.Sockets.UdpClient UdpClient;
+        }
+
+
+        public delegate void AsyncCallback(IAsyncResult ar);
+        public event EventHandler<SiteDiscoveryEventArgs> SiteDiscovered;
+        public event EventHandler<ConnectionStateEventArgs> ConnectionStateChanged;
 
 
         static bool CertHandler(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors error)
@@ -80,12 +91,19 @@ namespace sconnConnector
                     );
                 try
                 {
+
+                    this.OnConnectionStateChanged(new ConnectionStateEventArgs(NetworkConnectionState.Authentication));
+
                     EncStream.AuthenticateAsClient(Hostname, null,
                         System.Environment.OSVersion.Version.Major > 6 ? SslProtocols.Tls12  : SslProtocols.Ssl3, false);
+                    this.OnConnectionStateChanged(new ConnectionStateEventArgs(NetworkConnectionState.Authenticated));
+
+                    this.OnConnectionStateChanged(new ConnectionStateEventArgs(NetworkConnectionState.Connected));
                 }
                 catch (Exception e)
                 {
-                   NetworkClientStatusUpdateService.OnConnectionError(e.Message);
+                    this.OnConnectionStateChanged(new ConnectionStateEventArgs(NetworkConnectionState.Error));
+                    NetworkClientStatusUpdateService.OnConnectionError(e.Message);
                    nlogger.ErrorException(e.Message, e);
                    
                 }
@@ -143,6 +161,7 @@ namespace sconnConnector
             }
             catch (Exception e)
             {
+                this.OnConnectionStateChanged(new ConnectionStateEventArgs(NetworkConnectionState.Error));
                 NetworkClientStatusUpdateService.OnConnectionError(e.Message);
                 nlogger.ErrorException(e.Message, e);
                 return false;
@@ -239,6 +258,7 @@ namespace sconnConnector
 
         public void VerifyConnection()
         {
+            this.OnConnectionStateChanged(new ConnectionStateEventArgs(NetworkConnectionState.Authentication));
             if (useSsl)
             {
                 if ( client == null)
@@ -363,6 +383,7 @@ namespace sconnConnector
 
             if (Authenticated)
             {
+                this.OnConnectionStateChanged(new ConnectionStateEventArgs(NetworkConnectionState.Authentication));
                 if (useSsl)
                 {
                     try
@@ -374,6 +395,7 @@ namespace sconnConnector
                     }
                     catch (Exception e)
                     {
+                        this.OnConnectionStateChanged(new ConnectionStateEventArgs(NetworkConnectionState.Error));
                         nlogger.Error(e, e.Message);
                         return new byte[1];
                     }
@@ -388,6 +410,7 @@ namespace sconnConnector
                     }
                     catch (Exception e)
                     {
+                        this.OnConnectionStateChanged(new ConnectionStateEventArgs(NetworkConnectionState.Error));
                         nlogger.Error(e, e.Message);
                         return new byte[1];
                     }
@@ -421,7 +444,19 @@ namespace sconnConnector
                     clientSocket.Close();
                 } //berkeley socket
             }
+            this.OnConnectionStateChanged(new ConnectionStateEventArgs(NetworkConnectionState.Closing));
         }
+
+        public void OnConnectionStateChanged(ConnectionStateEventArgs args)
+        {
+            EventHandler<ConnectionStateEventArgs> handler = ConnectionStateChanged;
+            if (args != null)
+            {
+                handler?.Invoke(this, args);
+            }
+        }
+
+
 
         ~SconnClient()
         {
@@ -433,17 +468,7 @@ namespace sconnConnector
 
 
         /************** SEARCHING  UDP *************/
-        
-        private UdpState _globalUdp;
-        struct UdpState
-        {
-            public System.Net.IPEndPoint Ep;
-            public System.Net.Sockets.UdpClient UdpClient;
-        }
-
-        
-        public delegate void AsyncCallback(IAsyncResult ar);
-        public event EventHandler<SiteDiscoveryEventArgs> SiteDiscovered;
+       
 
         public  void OnSiteDiscovered(SiteDiscoveryEventArgs args)
         {
@@ -525,6 +550,7 @@ namespace sconnConnector
                     return;
                 }
 
+             
 
                 this.OnSiteDiscovered(new SiteDiscoveryEventArgs(remoteIp));
             }
@@ -549,6 +575,18 @@ namespace sconnConnector
             hostname = remote;
         }
     }
+
+    public class ConnectionStateEventArgs : EventArgs
+    {
+        public NetworkConnectionState State;
+
+        public ConnectionStateEventArgs(NetworkConnectionState state)
+        {
+            State = state;
+        }
+    }
+
+
 
 
     public class SiteConnectionStat

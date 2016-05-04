@@ -18,6 +18,8 @@ namespace sconnConnector.POCO.Config
         private int _siteID;
         private string _siteName;
         private int SelectedTabId = 0;
+
+        public string Id { get; set; }
         
         public bool UsbCom;
         
@@ -110,6 +112,13 @@ namespace sconnConnector.POCO.Config
             }
         }
 
+        public void CopyFrom(sconnSite otherSite)
+        {
+            this.siteName = otherSite.siteName;
+            this.serverIP = otherSite.serverIP;
+            this.serverPort = otherSite.serverPort;
+            this.siteCfg = otherSite.siteCfg;
+        }
 
         public sconnSite(sconnSite otherSite) :this()
         {
@@ -128,6 +137,7 @@ namespace sconnConnector.POCO.Config
             _siteName = "DefaultSite";
             siteCfg = new ipcSiteConfig();
             siteStat = new SiteConnectionStat();
+            Id = Guid.NewGuid().ToString();
         }
 
         public sconnSite(ipcSiteConfig config, int intervalMs, string siteName)
@@ -140,6 +150,7 @@ namespace sconnConnector.POCO.Config
             serverPort = 37222;
             siteCfg = new ipcSiteConfig();
             siteStat = new SiteConnectionStat();
+            Id = Guid.NewGuid().ToString();
         }
 
 
@@ -153,6 +164,7 @@ namespace sconnConnector.POCO.Config
             lastUpdate = DateTime.Now;
             siteCfg = new ipcSiteConfig();
             siteStat = new SiteConnectionStat();
+            Id = Guid.NewGuid().ToString();
         }
 
         public sconnSite(string siteName, int intervalMs, string server, int port, string password)

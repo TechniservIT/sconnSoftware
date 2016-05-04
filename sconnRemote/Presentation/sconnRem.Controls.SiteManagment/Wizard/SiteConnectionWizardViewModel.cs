@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
@@ -15,7 +16,9 @@ using sconnConnector;
 using sconnConnector.Config;
 using sconnConnector.POCO.Config;
 using sconnConnector.POCO.Config.sconn;
+using sconnNetworkingServices.Abstract;
 using sconnRem.Navigation;
+using SiteManagmentService;
 
 namespace sconnRem.Controls.SiteManagment.Wizard
 {
@@ -36,17 +39,28 @@ namespace sconnRem.Controls.SiteManagment.Wizard
         UsbList
     }
 
+    public enum SiteWizardEditMode
+    {
+        Add,
+        Edit
+    }
+
+
+
     [Export]
     public class SiteConnectionWizardViewModel : BindableBase
     {
         public sconnSite Config { get; set; }
         private readonly IRegionManager _regionManager;
-        private SconnClient _provider;
+        private SconnClient _scanSconnClient;
+        private ISiteRepository _repository;
+        private SconnClient connectionTestClient;
 
         private Logger _nlogger = LogManager.GetCurrentClassLogger();
 
         public SiteConnectionWizardStage Stage { get; set; }
         public SiteAdditionMethod AdditionMethod { get; set; }
+        public SiteWizardEditMode EditMode { get; set; }
         
         public ICommand NavigateBackCommand { get; set; }
         public ICommand NavigateForwardCommand { get; set; }
@@ -58,8 +72,14 @@ namespace sconnRem.Controls.SiteManagment.Wizard
         public ICommand SaveSiteCommand { get; set; }
         public ICommand VerifyConnectionCommand { get; set; }
 
+        public ICommand SelectedSiteChangedCommand { get; set; }
+
         public ObservableCollection<sconnSite> NetworkSites { get; set; }
         public ObservableCollection<sconnSite> UsbSites { get; set; }
+
+        public sconnSite SelectedSite { get; set; }
+        public NetworkConnectionState ConnectionState { get; set; }
+        public int ConnectionProgressPercentage { get; set; }
 
         private void NavigateToContract(string contract)
         {
@@ -88,7 +108,37 @@ namespace sconnRem.Controls.SiteManagment.Wizard
         {
             //  NetworkSites
             this.NetworkSites.Clear();  // = new ObservableCollection<sconnSite>();
-            _provider.SearchForSite();
+            _scanSconnClient.SearchForSite();
+        }
+
+        private void TestConnectionToSite()
+        {
+            if (this.SelectedSite != null)
+            {
+                connectionTestClient = new SconnClient(SelectedSite.serverIP, SelectedSite.serverPort, SelectedSite.authPasswd);
+                connectionTestClient.ConnectionStateChanged += Client_ConnectionStateChanged;
+
+                BackgroundWorker bgWorker = new BackgroundWorker();
+                bgWorker.DoWork += (s, e) => {
+                    connectionTestClient.VerifyConnection();
+                };
+                bgWorker.RunWorkerCompleted += (s, e) =>
+                {
+
+                };
+                bgWorker.RunWorkerAsync();
+
+            }
+        }
+
+        public void OnSelectedItemChanged(sconnSite site)
+        {
+            SelectedSite = site;
+        }
+
+        private void Client_ConnectionStateChanged(object sender, ConnectionStateEventArgs e)
+        {
+            this.ConnectionState = e.State;
         }
 
         private void _provider_SiteDiscovered(object sender, EventArgs e)
@@ -132,6 +182,7 @@ namespace sconnRem.Controls.SiteManagment.Wizard
             else if (Stage == SiteConnectionWizardStage.Summary)
             {
                 this.Stage = SiteConnectionWizardStage.Test;
+                TestConnectionToSite();
                 NavigateToContract(SiteManagmentRegionNames.SiteConnectionWizard_Contract_Test_View);
             }
         }
@@ -148,6 +199,7 @@ namespace sconnRem.Controls.SiteManagment.Wizard
                 )
             {
                 this.Stage = SiteConnectionWizardStage.Test;
+                TestConnectionToSite();
                 NavigateToContract(SiteManagmentRegionNames.SiteConnectionWizard_Contract_Test_View);
             }
             else if (Stage == SiteConnectionWizardStage.Test)
@@ -165,8 +217,9 @@ namespace sconnRem.Controls.SiteManagment.Wizard
 
         private void SaveSite()
         {
-
+            _repository.Update(this.SelectedSite);
         }
+
         private void VerifyConnection()
         {
 
@@ -195,19 +248,20 @@ namespace sconnRem.Controls.SiteManagment.Wizard
         }
         
         [ImportingConstructor]
-        public SiteConnectionWizardViewModel(sconnSite site, IRegionManager regionManager)
+        public SiteConnectionWizardViewModel(sconnSite site, IRegionManager regionManager, ISiteRepository repository)
         {
             Config = site;
             this._regionManager = regionManager;
+            this._repository = repository;
 
-            _provider = new SconnClient("",0,"");
-            _provider.SiteDiscovered += _provider_SiteDiscovered;
+            _scanSconnClient = new SconnClient("",0,"");
+            _scanSconnClient.SiteDiscovered += _provider_SiteDiscovered;
 
             this.NetworkSites = new ObservableCollection<sconnSite>();
             this.UsbSites = new ObservableCollection<sconnSite>();
             BindingOperations.EnableCollectionSynchronization(this.NetworkSites, this);
             BindingOperations.EnableCollectionSynchronization(this.UsbSites, this);
-            _provider.ScanInit();
+            _scanSconnClient.ScanInit();
 
             NavigateBackCommand = new DelegateCommand(NavigateBack);
             NavigateForwardCommand = new DelegateCommand(NavigateForward);
@@ -217,6 +271,8 @@ namespace sconnRem.Controls.SiteManagment.Wizard
             OpenSearchViewCommand = new DelegateCommand(OpenSearchView);
             OpenManualEntryViewCommand = new DelegateCommand(OpenManualEntryView);
             OpenUsbListViewCommand = new DelegateCommand(OpenUsbListView);
+
+            SelectedSiteChangedCommand = new DelegateCommand<sconnSite>(OnSelectedItemChanged);
         }
 
 

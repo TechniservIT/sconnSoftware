@@ -151,6 +151,10 @@
       <Project>{7a5fad15-614c-4d5d-9daa-4bc9628d479c}</Project>
       <Name>sconnRem.Navigation</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\sconnNetworkingServices\sconnNetworkingServices.csproj">
+      <Project>{57036DE8-EA6A-42E1-983D-23F71F87C34C}</Project>
+      <Name>sconnNetworkingServices</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

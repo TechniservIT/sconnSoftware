@@ -10,15 +10,13 @@
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.1*" />
-            <ColumnDefinition Width="0.8*" />
-            <ColumnDefinition Width="0.1*" />
+            <ColumnDefinition Width="0.9*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <Grid  Grid.Row="0" Grid.Column="0">
-
             <Button  Command="{Binding Path=NavigateBackCommand}" VerticalAlignment="Center" Height="Auto" Content="">
                 <Button.Template>
                     <ControlTemplate TargetType="{x:Type Button}">
@@ -43,17 +41,70 @@
                     </ControlTemplate>
                 </Button.Template>
             </Button>
-
-
         </Grid>
 
         <Grid  Grid.Row="0" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.3*"/>
+                <RowDefinition Height="0.2*"/>
+                <RowDefinition Height="0.3*"/>
+                <RowDefinition Height="0.1*"/>
+            </Grid.RowDefinitions>
 
-            <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="118,154,0,0" TextWrapping="Wrap" Text="Test" VerticalAlignment="Top" Width="120" />
 
+            <Grid  Grid.Row="0" Grid.Column="0">
+                <ProgressBar Value="{Binding ConnectionProgressPercentage}" Maximum="100" Minimum="0" />
+            </Grid>
+
+            <Grid  Grid.Row="1" Grid.Column="0">
+                <Label Content="{Binding ConnectionState}" HorizontalAlignment="Center" FontSize="24" FontFamily="Motorwerk" />  
+            </Grid>
+
+
+            <Grid  Grid.Row="2" Grid.Column="0">
+                <!--<Label Content="{Binding ConnectionStatus}" HorizontalAlignment="Center" FontSize="24" FontFamily="Motorwerk" />-->
+            </Grid>
+
+
+            <Grid  Grid.Row="3" Grid.Column="0">
+                <Button  Command="{Binding Path=SaveSiteCommand}" VerticalAlignment="Center" Height="Auto" Content="">
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Grid>
+                                <Border Background="{TemplateBinding Background}"
+                         BorderBrush="{TemplateBinding BorderBrush}"
+                         BorderThickness="{TemplateBinding BorderThickness}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <ContentPresenter HorizontalAlignment="Left"  Grid.Column="0"
+                                          VerticalAlignment="Center"/>
+                                        <Canvas Background="AliceBlue" Grid.Column="0" />
+
+                                        <Image  x:Name="ImgDispActionGridFullScreen521"  Stretch="Uniform"   HorizontalAlignment="Center" Height="Auto" Margin="0,0,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/save.jpg"/>
+
+
+                                    </Grid>
+                                </Border>
+                            </Grid>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
+                
+            </Grid>
+
+
+          
+            
+            
         </Grid>
 
-        <Grid  Grid.Row="0" Grid.Column="2">
+        <!--<Grid  Grid.Row="0" Grid.Column="2">
 
             <Button  Command="{Binding Path=NavigateForwardCommand}" VerticalAlignment="Center" Height="Auto" Content="">
                 <Button.Template>
@@ -82,7 +133,7 @@
 
 
 
-        </Grid>
+        </Grid>-->
 
     </Grid>
 
