@@ -58,7 +58,10 @@ namespace sconnConnector
             Port = port;
             AuthenticationPassword = password;
             ConnectionTimeoutMs = 1500;
-           // StatusUpdateService = statusUpdateService;
+
+            //SiteDiscovered = new EventHandler(OnSiteDiscovered());
+         
+            // StatusUpdateService = statusUpdateService;
             ServicePointManager.ServerCertificateValidationCallback += (s, c, k, e) => true;
         }
 
@@ -440,14 +443,14 @@ namespace sconnConnector
 
         
         public delegate void AsyncCallback(IAsyncResult ar);
-        public event EventHandler SiteDiscovered;
+        public event EventHandler<SiteDiscoveryEventArgs> SiteDiscovered;
 
         public  void OnSiteDiscovered(SiteDiscoveryEventArgs args)
         {
-            EventHandler handler = SiteDiscovered;
+            EventHandler<SiteDiscoveryEventArgs> handler = SiteDiscovered;
             if (args != null)
             {
-                handler(this, args);
+                handler?.Invoke(this, args);
             }
         }
 
@@ -457,7 +460,6 @@ namespace sconnConnector
         {
             try
             {
-                ScanInit();
                 // Try to send the discovery request message
                 byte[] discoverMsg = Encoding.ASCII.GetBytes("Discovery: Who is out there?");
                 _globalUdp.UdpClient.Send(discoverMsg, discoverMsg.Length, new System.Net.IPEndPoint(System.Net.IPAddress.Parse("192.168.1.255"), 30303));
@@ -467,8 +469,8 @@ namespace sconnConnector
                 nlogger.Error(ex, ex.Message);
             }
         }
-        
-        private void ScanInit()
+
+        public void ScanInit()
         {
             try
             {

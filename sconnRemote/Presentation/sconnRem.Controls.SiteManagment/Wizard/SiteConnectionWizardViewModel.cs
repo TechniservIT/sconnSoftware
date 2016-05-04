@@ -5,6 +5,7 @@ using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Data;
 using System.Windows.Input;
 using NLog;
 using Prism.Commands;
@@ -86,7 +87,7 @@ namespace sconnRem.Controls.SiteManagment.Wizard
         private void SearchForSitesInNetwork()
         {
             //  NetworkSites
-            this.NetworkSites = new ObservableCollection<sconnSite>();
+            this.NetworkSites.Clear();  // = new ObservableCollection<sconnSite>();
             _provider.SearchForSite();
         }
 
@@ -204,6 +205,9 @@ namespace sconnRem.Controls.SiteManagment.Wizard
 
             this.NetworkSites = new ObservableCollection<sconnSite>();
             this.UsbSites = new ObservableCollection<sconnSite>();
+            BindingOperations.EnableCollectionSynchronization(this.NetworkSites, this);
+            BindingOperations.EnableCollectionSynchronization(this.UsbSites, this);
+            _provider.ScanInit();
 
             NavigateBackCommand = new DelegateCommand(NavigateBack);
             NavigateForwardCommand = new DelegateCommand(NavigateForward);
