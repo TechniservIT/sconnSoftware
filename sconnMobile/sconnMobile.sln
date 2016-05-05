@@ -28,6 +28,8 @@ EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Shared\sconnRemMobile\sconnRemMobile\sconnRemMobile.projitems*{c96e1b2a-e5ee-42de-87b2-ee55889163e3}*SharedItemsImports = 13
+		Shared\sconnRemMobile\sconnRemMobile\sconnRemMobile.projitems*{35b02f83-bdef-481e-b273-5bc971d80ee6}*SharedItemsImports = 4
+		Shared\sconnRemMobile\sconnRemMobile\sconnRemMobile.projitems*{419fbd42-7176-45ca-a393-09fea1415bce}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Ad-Hoc|Any CPU = Ad-Hoc|Any CPU
