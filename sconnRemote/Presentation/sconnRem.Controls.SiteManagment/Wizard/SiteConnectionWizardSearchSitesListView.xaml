@@ -223,7 +223,7 @@
 
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="SelectionChanged">
-                        <i:InvokeCommandAction Command="{Binding SelectedSiteChanged}"  CommandParameter="{Binding ElementName=SiteListBox, Path=SelectedItem}"/>
+                        <i:InvokeCommandAction Command="{Binding SelectedSiteChangedCommand}"  CommandParameter="{Binding ElementName=SiteListBox, Path=SelectedItem}"/>
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
                 

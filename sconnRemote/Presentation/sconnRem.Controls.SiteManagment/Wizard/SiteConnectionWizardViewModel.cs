@@ -50,7 +50,19 @@ namespace sconnRem.Controls.SiteManagment.Wizard
     [Export]
     public class SiteConnectionWizardViewModel : BindableBase
     {
-        public sconnSite Config { get; set; }
+        private sconnSite _Config;
+        public sconnSite Config
+        {
+            get { return _Config; }
+            set
+            {
+               SetProperty(ref _Config, value); 
+                //_Config = value;
+                //OnPropertyChanged();
+            }
+        }
+
+
         private readonly IRegionManager _regionManager;
         private SconnClient _scanSconnClient;
         private ISiteRepository _repository;
@@ -133,7 +145,11 @@ namespace sconnRem.Controls.SiteManagment.Wizard
 
         public void OnSelectedItemChanged(sconnSite site)
         {
-            SelectedSite = site;
+            //SelectedSite = site;
+            if (site != null)
+            {
+                Config.CopyFrom(site);  //replace default/edited config with selected
+            }
         }
 
         private void Client_ConnectionStateChanged(object sender, ConnectionStateEventArgs e)
@@ -193,14 +209,19 @@ namespace sconnRem.Controls.SiteManagment.Wizard
             {
                 //no action - cannot navigate forward
             }
-            else if (Stage == SiteConnectionWizardStage.Search ||
-                Stage == SiteConnectionWizardStage.ManualEntry ||
-                Stage == SiteConnectionWizardStage.UsbList 
-                )
+            else if (Stage == SiteConnectionWizardStage.ManualEntry )
             {
                 this.Stage = SiteConnectionWizardStage.Test;
                 TestConnectionToSite();
                 NavigateToContract(SiteManagmentRegionNames.SiteConnectionWizard_Contract_Test_View);
+            }
+            else if (
+                Stage == SiteConnectionWizardStage.Search ||
+                Stage == SiteConnectionWizardStage.UsbList
+                    )
+            {
+                this.Stage = SiteConnectionWizardStage.ManualEntry; //After selection, show edit for password/verify
+                NavigateToContract(SiteManagmentRegionNames.SiteConnectionWizard_Contract_ManualEntry_View);
             }
             else if (Stage == SiteConnectionWizardStage.Test)
             {

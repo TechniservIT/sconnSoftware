@@ -166,18 +166,28 @@ namespace sconnConnector
                 nlogger.ErrorException(e.Message, e);
                 return false;
             }
-            
+
 
             //compose auth msg
             byte[] authmsg = new byte[ipcDefines.AUTH_RECORD_SIZE + ipcDefines.NET_DATA_PACKET_CONTROL_BYTES];
-            authmsg[0] = ipcCMD.SOP;
-            for (int i = 0; i < AuthenticationPassword.Length; i++)
+            try
             {
-                authmsg[ipcDefines.AUTH_RECORD_PASSWD_POS + i + 1] = (byte)AuthenticationPassword[i];
+                authmsg[0] = ipcCMD.SOP;
+                for (int i = 0; i < AuthenticationPassword.Length; i++)
+                {
+                    authmsg[ipcDefines.AUTH_RECORD_PASSWD_POS + i + 1] = (byte)AuthenticationPassword[i];
+                }
+                authmsg[ipcDefines.AUTH_RECORD_PASS_LEN_POS + 1] = (byte)AuthenticationPassword.Length;
+                authmsg[ipcDefines.AUTH_RECORD_SIZE + 1] = ipcCMD.EOP;
             }
-            authmsg[ipcDefines.AUTH_RECORD_PASS_LEN_POS + 1] = (byte)AuthenticationPassword.Length;
-            authmsg[ipcDefines.AUTH_RECORD_SIZE + 1] = ipcCMD.EOP;
-
+            catch (Exception e)
+            {
+                this.OnConnectionStateChanged(new ConnectionStateEventArgs(NetworkConnectionState.Error));
+                NetworkClientStatusUpdateService.OnConnectionError(e.Message);
+                nlogger.ErrorException(e.Message, e);
+                return false;
+            }
+            
             int len = authmsg.Length;
             byte[] txBF = new byte[len];
             byte[] rxBF = new byte[ipcDefines.NET_MAX_RX_SIZE];

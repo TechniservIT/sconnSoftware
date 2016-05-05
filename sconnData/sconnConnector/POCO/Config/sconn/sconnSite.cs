@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using sconnConnector.Annotations;
 
 namespace sconnConnector.POCO.Config
 {
 
 
-    public class sconnSite
+    public class sconnSite : INotifyPropertyChanged
     {
         private int _statusCheckInterval;
         private string _authPasswd;
@@ -114,10 +117,17 @@ namespace sconnConnector.POCO.Config
 
         public void CopyFrom(sconnSite otherSite)
         {
-            this.siteName = otherSite.siteName;
-            this.serverIP = otherSite.serverIP;
-            this.serverPort = otherSite.serverPort;
-            this.siteCfg = otherSite.siteCfg;
+            try
+            {
+                this.siteName = otherSite.siteName;
+                this.serverIP = otherSite.serverIP;
+                this.serverPort = otherSite.serverPort;
+                this.siteCfg = otherSite.siteCfg;
+                OnPropertyChanged();
+            }
+            catch (Exception)
+            {
+            }
         }
 
         public sconnSite(sconnSite otherSite) :this()
@@ -173,6 +183,13 @@ namespace sconnConnector.POCO.Config
             _authPasswd = password;
         }
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 
 }

@@ -200,6 +200,14 @@
       <Project>{7A5FAD15-614C-4D5D-9DAA-4BC9628D479C}</Project>
       <Name>sconnRem.Navigation</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\sconnNetworkingServices\sconnNetworkingServices.csproj">
+      <Project>{57036de8-ea6a-42e1-983d-23f71f87c34c}</Project>
+      <Name>sconnNetworkingServices</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\SiteManagmentService\SiteManagmentService.csproj">
+      <Project>{19d29ba0-ee9f-4c6c-9b34-57c9b39e1bcb}</Project>
+      <Name>SiteManagmentService</Name>
+    </ProjectReference>
     <ProjectReference Include="..\sconnRem.Controls.SiteManagment\sconnRem.Controls.SiteManagment.csproj">
       <Project>{dca2d971-c53d-4b07-8d06-8f2382549525}</Project>
       <Name>sconnRem.Controls.SiteManagment</Name>
