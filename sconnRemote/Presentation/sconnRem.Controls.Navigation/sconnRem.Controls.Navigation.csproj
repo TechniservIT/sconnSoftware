@@ -173,6 +173,10 @@
       <Project>{9C17810C-EFC7-4806-8414-6868DEABBCA0}</Project>
       <Name>sconnPrismGenerics</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\SiteManagmentService\SiteManagmentService.csproj">
+      <Project>{19D29BA0-EE9F-4C6C-9B34-57C9B39E1BCB}</Project>
+      <Name>SiteManagmentService</Name>
+    </ProjectReference>
     <ProjectReference Include="..\sconnRem.Controls.AlarmSystem\sconnRem.Controls.AlarmSystem.csproj">
       <Project>{c567fe8b-3834-4ad8-aad4-71bdd36dded6}</Project>
       <Name>sconnRem.Controls.AlarmSystem</Name>

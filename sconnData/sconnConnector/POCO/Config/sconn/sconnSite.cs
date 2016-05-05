@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using sconnConnector.Annotations;
 
 namespace sconnConnector.POCO.Config
 {
 
 
-    public class sconnSite
+    public class sconnSite : INotifyPropertyChanged
     {
         private int _statusCheckInterval;
         private string _authPasswd;
@@ -18,6 +21,8 @@ namespace sconnConnector.POCO.Config
         private int _siteID;
         private string _siteName;
         private int SelectedTabId = 0;
+
+        public string Id { get; set; }
         
         public bool UsbCom;
         
@@ -110,6 +115,20 @@ namespace sconnConnector.POCO.Config
             }
         }
 
+        public void CopyFrom(sconnSite otherSite)
+        {
+            try
+            {
+                this.siteName = otherSite.siteName;
+                this.serverIP = otherSite.serverIP;
+                this.serverPort = otherSite.serverPort;
+                this.siteCfg = otherSite.siteCfg;
+                OnPropertyChanged();
+            }
+            catch (Exception)
+            {
+            }
+        }
 
         public sconnSite(sconnSite otherSite) :this()
         {
@@ -124,22 +143,24 @@ namespace sconnConnector.POCO.Config
             statusCheckInterval = 5000; //5s interval
             lastUpdate = DateTime.Now;
             serverPort = 37222;
-            _siteID = sconnDataShare.GetLastItemID() + 1;
+       //     _siteID = sconnDataShare.GetLastItemID() + 1;
             _siteName = "DefaultSite";
             siteCfg = new ipcSiteConfig();
             siteStat = new SiteConnectionStat();
+            Id = Guid.NewGuid().ToString();
         }
 
         public sconnSite(ipcSiteConfig config, int intervalMs, string siteName)
         {
             statusCheckInterval = intervalMs;
             siteCfg = config;
-            _siteID = sconnDataShare.GetLastItemID() + 1;
+         //   _siteID = sconnDataShare.GetLastItemID() + 1;
             _siteName = siteName;
             lastUpdate = DateTime.Now;
             serverPort = 37222;
             siteCfg = new ipcSiteConfig();
             siteStat = new SiteConnectionStat();
+            Id = Guid.NewGuid().ToString();
         }
 
 
@@ -148,11 +169,12 @@ namespace sconnConnector.POCO.Config
             statusCheckInterval = intervalMs;
             serverIP = server;
             serverPort = port;
-            _siteID = sconnDataShare.GetLastItemID() + 1;
+       //     _siteID = sconnDataShare.GetLastItemID() + 1;
             _siteName = siteName;
             lastUpdate = DateTime.Now;
             siteCfg = new ipcSiteConfig();
             siteStat = new SiteConnectionStat();
+            Id = Guid.NewGuid().ToString();
         }
 
         public sconnSite(string siteName, int intervalMs, string server, int port, string password)
@@ -161,6 +183,13 @@ namespace sconnConnector.POCO.Config
             _authPasswd = password;
         }
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 
 }

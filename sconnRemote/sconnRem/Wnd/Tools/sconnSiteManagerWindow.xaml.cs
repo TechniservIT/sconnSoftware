@@ -138,7 +138,7 @@ namespace sconnRem
             }
 
             //verify client is not already known
-            sconnSite[] sites = sconnDataShare.getSites();
+            sconnSite[] sites = sconnDataShare.sconnSites.ToArray();
             for (int i = 0; i < sites.Length; i++)
             {
                 if (remoteIp.Equals(sites[i].serverIP))
@@ -170,7 +170,7 @@ namespace sconnRem
         private void InitSiteList()
         {
             SiteListPanel.Children.Clear();
-            sconnSite[] sites = sconnDataShare.getSites();
+            sconnSite[] sites = sconnDataShare.sconnSites.ToArray();
             _sitesPanel = new SitePanel(SiteListPanel.Width, SiteListPanel.Height);
             foreach (sconnSite site in sites)
             {
@@ -212,7 +212,7 @@ namespace sconnRem
 
         private void RemoveSiteButton_Click(object sender, RoutedEventArgs e)
         {
-            sconnDataShare.removeSite( _sitesPanel.SelectedItemId);
+            //sconnDataShare.removeSite( _sitesPanel.SelectedItemId);
             _configManager.saveConfig();
             InitSiteList();  //reload gui
             ConfigChanged.Invoke(this, new EventArgs());          

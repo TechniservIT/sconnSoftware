@@ -386,6 +386,9 @@
     <Resource Include="images\syrena1000x1000.jpg" />
     <Resource Include="images\wstecz500x500.jpg" />
     <Resource Include="images\centrala1000x1000.jpg" />
+    <Resource Include="images\add1000x1000.jpg" />
+    <Resource Include="images\search1000x1000.jpg" />
+    <Resource Include="images\usb1000x1000.jpg" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -461,6 +464,10 @@
     <ProjectReference Include="..\Presentation\sconnRem.Shells\sconnRem.Shells.csproj">
       <Project>{687f4d7b-3759-45d4-a8ec-1cb6bc0a8cc3}</Project>
       <Name>sconnRem.Shells</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SiteManagmentService\SiteManagmentService.csproj">
+      <Project>{19D29BA0-EE9F-4C6C-9B34-57C9B39E1BCB}</Project>
+      <Name>SiteManagmentService</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

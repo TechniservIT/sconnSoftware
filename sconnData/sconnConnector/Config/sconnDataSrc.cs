@@ -98,6 +98,25 @@ namespace sconnConnector
             }
         }
 
+        public bool SaveSites(DataSourceType stype, List<sconnSite> sites )
+        {
+            switch (stype)
+            {
+                case DataSourceType.sql:
+                    break;
+                case DataSourceType.xml:
+                    return XmlSource.saveConfig();
+                case DataSourceType.server:
+                    break;
+                case DataSourceType.registry:
+                    break;
+                default:
+                    break;
+            }
+            return false;
+        }
+
+
         public bool SaveConfig(DataSourceType stype)
         {
             switch (stype)
@@ -127,6 +146,25 @@ namespace sconnConnector
                     return XmlSource.GetConfigXDocument();
         }
 
+        
+
+        public List<sconnSite> GetSites(DataSourceType stype)
+        {
+            switch (stype)
+            {
+                case DataSourceType.sql:
+                    break;
+                case DataSourceType.xml:
+                    return XmlSource.GetSites();
+                case DataSourceType.server:
+                    break;
+                case DataSourceType.registry:
+                    break;
+                default:
+                    break;
+            }
+            return null;
+        }
 
         public bool LoadConfig(DataSourceType stype)
         {
@@ -225,6 +263,10 @@ namespace sconnConnector
                 XmlNode statusCheckIntervalNode = doc.CreateNode("element", "statusCheckInterval", "");
                 statusCheckIntervalNode.InnerText = site.statusCheckInterval.ToString();
                 siteNode.AppendChild(statusCheckIntervalNode);
+
+                XmlNode siteId = doc.CreateNode("element", "Id", "");
+                siteId.InnerText = site.Id;
+                siteNode.AppendChild(siteId);
 
                 XmlNode siteName = doc.CreateNode("element", "siteName", "");
                 siteName.InnerText = site.siteName;
@@ -341,6 +383,10 @@ namespace sconnConnector
                     {
                         site.siteName = node.InnerText;
                     }
+                    else if (node.Name == "Id")
+                    {
+                        site.Id = node.InnerText;
+                    }
                     else if (node.Name == "authPasswd")
                     {
                         site.authPasswd = node.InnerText;
@@ -400,7 +446,7 @@ namespace sconnConnector
                 try
                 {
                     XmlNode config = doc.CreateNode("element", configFieldName, "");
-                    sconnSite[] sites = sconnDataShare.getSites();
+                    sconnSite[] sites = sconnDataShare.sconnSites.ToArray();
                     foreach (sconnSite site in sites)
                     {
                         XmlNode siteNode = siteToXML(site, ref doc);
@@ -420,7 +466,7 @@ namespace sconnConnector
                 try
                 {
                     XElement config = new XElement(configFieldName);
-                    sconnSite[] sites = sconnDataShare.getSites();
+                    sconnSite[] sites = sconnDataShare.sconnSites.ToArray();
                     foreach (sconnSite site in sites)
                     {
                         XElement siteNode = siteToXMLlinq(site);
@@ -544,8 +590,9 @@ namespace sconnConnector
                     #endif
                     if (validateConfigFile(doc))
                     {
-                        sconnDataShare.removeSites();
-                        sconnDataShare.addSites(configFromXML(ref doc));
+                        //sconnDataShare.removeSites();
+                        //sconnDataShare.addSites(configFromXML(ref doc));
+
                         return true;
                     }
                     else 
@@ -559,7 +606,42 @@ namespace sconnConnector
                 }
             }
 
-            #if WIN32_ENC
+
+
+            public List<sconnSite> GetSites()
+            {
+
+
+                    #if WIN32_ENC
+                                    if (File.Exists(configFilePath))
+                                    {
+                    #else
+                                        if(true)
+                                        {
+                    #endif
+
+                                        XmlDocument doc = new XmlDocument();
+                                        doc.Load(configFilePath);
+                    #if WIN32_ENC
+                                        decryptXmlConfig(doc);
+                    #endif
+                    if (validateConfigFile(doc))
+                    {
+                        return configFromXML(ref doc).ToList();
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+                else
+                {
+                    return null;
+                }
+            }
+
+
+#if WIN32_ENC
 
 
             private static void EncryptXmlElement(XmlDocument Doc, string ElementName, SymmetricAlgorithm Key)

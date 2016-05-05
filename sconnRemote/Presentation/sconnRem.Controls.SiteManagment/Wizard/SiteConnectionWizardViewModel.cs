@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Data;
 using System.Windows.Input;
 using NLog;
 using Prism.Commands;
@@ -14,7 +16,9 @@ using sconnConnector;
 using sconnConnector.Config;
 using sconnConnector.POCO.Config;
 using sconnConnector.POCO.Config.sconn;
+using sconnNetworkingServices.Abstract;
 using sconnRem.Navigation;
+using SiteManagmentService;
 
 namespace sconnRem.Controls.SiteManagment.Wizard
 {
@@ -35,17 +39,40 @@ namespace sconnRem.Controls.SiteManagment.Wizard
         UsbList
     }
 
+    public enum SiteWizardEditMode
+    {
+        Add,
+        Edit
+    }
+
+
+
     [Export]
     public class SiteConnectionWizardViewModel : BindableBase
     {
-        public sconnSite Config { get; set; }
+        private sconnSite _Config;
+        public sconnSite Config
+        {
+            get { return _Config; }
+            set
+            {
+               SetProperty(ref _Config, value); 
+                //_Config = value;
+                //OnPropertyChanged();
+            }
+        }
+
+
         private readonly IRegionManager _regionManager;
-        private SconnClient _provider;
+        private SconnClient _scanSconnClient;
+        private ISiteRepository _repository;
+        private SconnClient connectionTestClient;
 
         private Logger _nlogger = LogManager.GetCurrentClassLogger();
 
         public SiteConnectionWizardStage Stage { get; set; }
         public SiteAdditionMethod AdditionMethod { get; set; }
+        public SiteWizardEditMode EditMode { get; set; }
         
         public ICommand NavigateBackCommand { get; set; }
         public ICommand NavigateForwardCommand { get; set; }
@@ -57,8 +84,14 @@ namespace sconnRem.Controls.SiteManagment.Wizard
         public ICommand SaveSiteCommand { get; set; }
         public ICommand VerifyConnectionCommand { get; set; }
 
+        public ICommand SelectedSiteChangedCommand { get; set; }
+
         public ObservableCollection<sconnSite> NetworkSites { get; set; }
         public ObservableCollection<sconnSite> UsbSites { get; set; }
+
+     //   public sconnSite SelectedSite { get; set; }
+        public NetworkConnectionState ConnectionState { get; set; }
+        public int ConnectionProgressPercentage { get; set; }
 
         private void NavigateToContract(string contract)
         {
@@ -86,8 +119,42 @@ namespace sconnRem.Controls.SiteManagment.Wizard
         private void SearchForSitesInNetwork()
         {
             //  NetworkSites
-            this.NetworkSites = new ObservableCollection<sconnSite>();
-            _provider.SearchForSite();
+            this.NetworkSites.Clear();  // = new ObservableCollection<sconnSite>();
+            _scanSconnClient.SearchForSite();
+        }
+
+        private void TestConnectionToSite()
+        {
+            if (this.Config != null)
+            {
+                connectionTestClient = new SconnClient(Config.serverIP, Config.serverPort, Config.authPasswd);
+                connectionTestClient.ConnectionStateChanged += Client_ConnectionStateChanged;
+
+                BackgroundWorker bgWorker = new BackgroundWorker();
+                bgWorker.DoWork += (s, e) => {
+                    connectionTestClient.VerifyConnection();
+                };
+                bgWorker.RunWorkerCompleted += (s, e) =>
+                {
+
+                };
+                bgWorker.RunWorkerAsync();
+
+            }
+        }
+
+        public void OnSelectedItemChanged(sconnSite site)
+        {
+            //Config = site;
+            if (site != null)
+            {
+                Config.CopyFrom(site);  //replace default/edited config with selected
+            }
+        }
+
+        private void Client_ConnectionStateChanged(object sender, ConnectionStateEventArgs e)
+        {
+            this.ConnectionState = e.State;
         }
 
         private void _provider_SiteDiscovered(object sender, EventArgs e)
@@ -103,12 +170,11 @@ namespace sconnRem.Controls.SiteManagment.Wizard
                 //no action - cannot navigate back
             }
             else if (Stage == SiteConnectionWizardStage.Search ||
-                Stage == SiteConnectionWizardStage.ManualEntry ||
                 Stage == SiteConnectionWizardStage.UsbList)
             {
                 NavigateToContract(SiteManagmentRegionNames.SiteConnectionWizard_Contract_MethodSelection_View);
             }
-            else if (Stage == SiteConnectionWizardStage.Test)
+            else if (Stage == SiteConnectionWizardStage.ManualEntry)
             {
                 //find out
                 if (AdditionMethod == SiteAdditionMethod.Search)
@@ -117,10 +183,10 @@ namespace sconnRem.Controls.SiteManagment.Wizard
                     SearchForSitesInNetwork(); // start network search
                     NavigateToContract(SiteManagmentRegionNames.SiteConnectionWizard_Contract_SearchSitesList_View);
                 }
-                else if (AdditionMethod == SiteAdditionMethod.Manual)
+                else if (AdditionMethod == SiteAdditionMethod.Manual)   //back to method selection
                 {
-                    this.Stage = SiteConnectionWizardStage.ManualEntry;
-                    NavigateToContract(SiteManagmentRegionNames.SiteConnectionWizard_Contract_ManualEntry_View);
+                    this.Stage = SiteConnectionWizardStage.MethodSelection;
+                    NavigateToContract(SiteManagmentRegionNames.SiteConnectionWizard_Contract_MethodSelection_View);
                 }
                 else if (AdditionMethod == SiteAdditionMethod.UsbList)
                 {
@@ -128,9 +194,15 @@ namespace sconnRem.Controls.SiteManagment.Wizard
                     NavigateToContract(SiteManagmentRegionNames.SiteConnectionWizard_Contract_UsbList_View);
                 }
             }
+            else if (Stage == SiteConnectionWizardStage.Test)
+            {
+                this.Stage = SiteConnectionWizardStage.ManualEntry;
+                NavigateToContract(SiteManagmentRegionNames.SiteConnectionWizard_Contract_ManualEntry_View);
+            }
             else if (Stage == SiteConnectionWizardStage.Summary)
             {
                 this.Stage = SiteConnectionWizardStage.Test;
+                TestConnectionToSite();
                 NavigateToContract(SiteManagmentRegionNames.SiteConnectionWizard_Contract_Test_View);
             }
         }
@@ -139,15 +211,24 @@ namespace sconnRem.Controls.SiteManagment.Wizard
         {
             if (Stage == SiteConnectionWizardStage.MethodSelection)
             {
-                //no action - cannot navigate forward
+                //update stage to site edit - not updated before
+                this.Stage = SiteConnectionWizardStage.Test;
+                TestConnectionToSite();
+                NavigateToContract(SiteManagmentRegionNames.SiteConnectionWizard_Contract_Test_View);
             }
-            else if (Stage == SiteConnectionWizardStage.Search ||
-                Stage == SiteConnectionWizardStage.ManualEntry ||
-                Stage == SiteConnectionWizardStage.UsbList 
-                )
+            else if (Stage == SiteConnectionWizardStage.ManualEntry )
             {
                 this.Stage = SiteConnectionWizardStage.Test;
+                TestConnectionToSite();
                 NavigateToContract(SiteManagmentRegionNames.SiteConnectionWizard_Contract_Test_View);
+            }
+            else if (
+                Stage == SiteConnectionWizardStage.Search ||
+                Stage == SiteConnectionWizardStage.UsbList
+                    )
+            {
+                this.Stage = SiteConnectionWizardStage.ManualEntry; //After selection, show edit for password/verify
+                NavigateToContract(SiteManagmentRegionNames.SiteConnectionWizard_Contract_ManualEntry_View);
             }
             else if (Stage == SiteConnectionWizardStage.Test)
             {
@@ -164,8 +245,13 @@ namespace sconnRem.Controls.SiteManagment.Wizard
 
         private void SaveSite()
         {
-
+            //  Sites = new ObservableCollection<sconnSite>(sconnDataShare.getSites());
+          //  sconnDataShare.getSite()
+            //_repository.Update(this.Config);
+            sconnDataShare.updateSite(this.Config);
+            sconnDataShare.Save();
         }
+
         private void VerifyConnection()
         {
 
@@ -194,16 +280,20 @@ namespace sconnRem.Controls.SiteManagment.Wizard
         }
         
         [ImportingConstructor]
-        public SiteConnectionWizardViewModel(sconnSite site, IRegionManager regionManager)
+        public SiteConnectionWizardViewModel(sconnSite site, IRegionManager regionManager, ISiteRepository repository)
         {
             Config = site;
             this._regionManager = regionManager;
+            this._repository = repository;
 
-            _provider = new SconnClient("",0,"");
-            _provider.SiteDiscovered += _provider_SiteDiscovered;
+            _scanSconnClient = new SconnClient("",0,"");
+            _scanSconnClient.SiteDiscovered += _provider_SiteDiscovered;
 
             this.NetworkSites = new ObservableCollection<sconnSite>();
             this.UsbSites = new ObservableCollection<sconnSite>();
+            BindingOperations.EnableCollectionSynchronization(this.NetworkSites, this);
+            BindingOperations.EnableCollectionSynchronization(this.UsbSites, this);
+            _scanSconnClient.ScanInit();
 
             NavigateBackCommand = new DelegateCommand(NavigateBack);
             NavigateForwardCommand = new DelegateCommand(NavigateForward);
@@ -213,6 +303,8 @@ namespace sconnRem.Controls.SiteManagment.Wizard
             OpenSearchViewCommand = new DelegateCommand(OpenSearchView);
             OpenManualEntryViewCommand = new DelegateCommand(OpenManualEntryView);
             OpenUsbListViewCommand = new DelegateCommand(OpenUsbListView);
+
+            SelectedSiteChangedCommand = new DelegateCommand<sconnSite>(OnSelectedItemChanged);
         }
 
 

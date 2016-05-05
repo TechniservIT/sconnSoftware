@@ -24,6 +24,7 @@ using sconnRem.View.Menu.GridNavSideMenu;
 using sconnRem.View.Menu.SiteNavSideMenu;
 using sconnRem.View.Menu.ToolTopMenu;
 using sconnRem.View.Status;
+using SiteManagmentService;
 
 namespace sconnRem.Wnd.Main
 {
@@ -31,20 +32,22 @@ namespace sconnRem.Wnd.Main
     public class GlobalWndBootstrapper : MefBootstrapper, IVerifiableBootstraper
     {
 
-
-        private sconnDataSrc _configSource = new sconnDataSrc();
+        //private sconnDataSrc _configSource = new sconnDataSrc();
         private Logger _nlogger = LogManager.GetCurrentClassLogger();
         private const string ModuleCatalogUri = "/sconnRem;component/Wnd/Main/WndGlobalShell.xaml";
 
-        //todo - inject from cfg bootstraper
-        private void LoadConfigFromDataStore()
-        {
-            _configSource.LoadConfig(DataSourceType.xml);
-        }
+        //private ISiteRepository _repository;
+
+        ////todo - inject from cfg bootstraper
+        //private void LoadConfigFromDataStore()
+        //{
+        //    _configSource.LoadConfig(DataSourceType.xml);
+        //}
 
         public GlobalWndBootstrapper()
         {
-            LoadConfigFromDataStore();
+            //_repository = new SiteXmlRepository();
+            //LoadConfigFromDataStore();
         }
 
         protected override ILoggerFacade CreateLogger()
@@ -65,6 +68,8 @@ namespace sconnRem.Wnd.Main
                 this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(SiteStatusGridViewModule).Assembly));
 
                 this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(AlarmDeviceListViewModel).Assembly));
+
+                this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(ISiteRepository).Assembly));
             }
             catch (Exception ex)
             {
@@ -91,19 +96,13 @@ namespace sconnRem.Wnd.Main
         protected override DependencyObject CreateShell()
         {
             SiteNavigationManager.SetNavigationContextContainer(this.Container);
+
+            //var batch = new CompositionBatch();
+            //var repoPart = batch.AddExportedValue<ISiteRepository>(this._repository);
+            //this.Container.Compose(batch);
+
             return this.Container.GetExportedValue<WndGlobalShell>();
         }
-
-        //protected override DependencyObject CreateShell()
-        //{
-        //    //model inject - todo - loaded config
-
-        //    //var batch = new CompositionBatch();
-        //    //var repoPart = batch.AddExportedValue<IAlarmConfigManager>(_manager);
-        //    //this.Container.Compose(batch);
-
-        //    return this.Container.GetExportedValue<WndGlobalShell>();
-        //}
 
         protected override void InitializeShell()
         {

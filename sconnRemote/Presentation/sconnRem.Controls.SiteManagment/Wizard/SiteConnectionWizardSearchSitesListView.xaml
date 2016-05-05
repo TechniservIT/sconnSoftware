@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:sconnRem.Controls.SiteManagment.Wizard"
              xmlns:inf="clr-namespace:sconnRem.Navigation;assembly=sconnRem.Navigation"
              xmlns:regions="http://prismlibrary.com/"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
 
@@ -59,8 +60,16 @@
                     <RowDefinition Height="1*"/>
                 </Grid.RowDefinitions>
 
-            <ListBox ScrollViewer.HorizontalScrollBarVisibility="Disabled" x:Name="OrdersListBox" BorderThickness="0" ItemsSource="{Binding NetworkSites}"  IsSynchronizedWithCurrentItem="True"  Background="White">
-                    <ListBox.ItemTemplate>
+            <ListBox ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
+                     x:Name="SiteListBox" 
+                     BorderThickness="0" 
+                     ItemsSource="{Binding NetworkSites}" 
+                     IsSynchronizedWithCurrentItem="True"  
+                     Background="White"
+                  
+                     >
+                <!--SelectionChanged="OnSelectedItemChanged"-->
+                <ListBox.ItemTemplate>
 
                         <DataTemplate>
                             <Grid  Background="White">
@@ -113,7 +122,7 @@
                                         </Grid.RowDefinitions>
 
                                         <Grid  Grid.Column="0" Grid.Row="0">
-                                            <Label Content="{Binding _serverIP}" HorizontalAlignment="Center" FontSize="24" FontFamily="Motorwerk" />
+                                        <Label Content="{Binding serverIP}" HorizontalAlignment="Center" FontSize="24" FontFamily="Motorwerk" />
                                         </Grid>
 
                                         <Grid  Grid.Column="0" Grid.Row="1">
@@ -212,7 +221,13 @@
                         </Style>
                     </ListBox.ItemContainerStyle>
 
-                </ListBox>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding SelectedSiteChangedCommand}"  CommandParameter="{Binding ElementName=SiteListBox, Path=SelectedItem}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                
+            </ListBox>
 
         </Grid>
 

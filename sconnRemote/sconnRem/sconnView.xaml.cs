@@ -179,7 +179,7 @@ namespace sconnRem
         {
             try
             {
-                sconnSite[] sites = sconnDataShare.getSites();
+                sconnSite[] sites = sconnDataShare.sconnSites.ToArray();
                 for (int i = 0; i < sites.GetLength(0); i++)
 			    {
                     int currentSite = i;
@@ -213,7 +213,7 @@ namespace sconnRem
 
         private void UpdateSites()
         {
-            sconnSite[] sites = sconnDataShare.getSites();
+            sconnSite[] sites = sconnDataShare.sconnSites.ToArray();
             for (int i = 0; i < sites.GetLength(0); i++)
 			    {
                     _configManager.updateSiteConfig( sites[i]); //update status for each device ( read IO registers )
@@ -271,7 +271,7 @@ namespace sconnRem
         private void InitSiteList()
         {
             SiteList.Children.Clear();
-            sconnSite[] sites = sconnDataShare.getSites();
+            sconnSite[] sites = sconnDataShare.sconnSites.ToArray();
             _sitesPanel = new SitePanel(SiteList.Width, SiteList.Height); 
             foreach (sconnSite site in sites)
             {
@@ -359,7 +359,7 @@ namespace sconnRem
             sconnDataShare.SiteLiveViewEnabled = true; //start live update
             string siteName = name;
             int index = 0;
-            sconnSite[] sites = sconnDataShare.getSites();
+            sconnSite[] sites = sconnDataShare.sconnSites.ToArray();
             foreach (sconnSite sconnSite in sites)
             {
                 if (sconnSite != null)
@@ -392,7 +392,7 @@ namespace sconnRem
         {
             sconnDataShare.SiteLiveViewEnabled = false; //disable live view during config
             string siteName = name;
-            sconnSite[] sites = sconnDataShare.getSites();
+            sconnSite[] sites = sconnDataShare.sconnSites.ToArray();
             foreach (sconnSite sconnSite in sites)
             {
                 if (sconnSite != null)

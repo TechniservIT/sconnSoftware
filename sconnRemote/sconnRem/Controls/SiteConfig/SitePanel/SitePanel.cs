@@ -60,10 +60,10 @@ namespace sconnRem
         {
             if (itemId > -1)
             {
-                if (sconnDataShare.GetLastItemID() < itemId) //item to set is higher then last item
-                {
-                    _selectedItemId = sconnDataShare.GetLastItemID();
-                }
+                //if (sconnDataShare.GetLastItemID() < itemId) //item to set is higher then last item
+                //{
+                //    _selectedItemId = sconnDataShare.GetLastItemID();
+                //}
                 _selectedItemId = itemId; //getItemIndexByID(siteID);
                 SelectItemChanged.Invoke(this, new EventArgs());
             }
@@ -72,7 +72,7 @@ namespace sconnRem
         public void ReloadSitesFromShare()
         {
             RemoveItems();
-            sconnSite[] sites = sconnDataShare.getSites();
+            sconnSite[] sites = sconnDataShare.sconnSites.ToArray();
             foreach (sconnSite site in sites)
             {
                 SitePanelItem item = new SitePanelItem(site.siteName, this.Width, this.Height * 0.2, site.siteID);
