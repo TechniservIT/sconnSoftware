@@ -256,3 +256,5 @@ I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Shells\bin\Debug\
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Shells\bin\Debug\ru\Xceed.Wpf.AvalonDock.resources.dll
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Shells\bin\Debug\sv\Xceed.Wpf.AvalonDock.resources.dll
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Shells\bin\Debug\zh-Hans\Xceed.Wpf.AvalonDock.resources.dll
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Shells\bin\Debug\SiteManagmentService.dll
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Shells\bin\Debug\SiteManagmentService.pdb

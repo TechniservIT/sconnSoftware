@@ -16,6 +16,7 @@ using sconnPrismGenerics.Boostrapper;
 using sconnPrismGenerics.Logging;
 using sconnRem.Controls.SiteManagment.Wizard;
 using sconnRem.Navigation;
+using SiteManagmentService;
 
 namespace sconnRem.Shells.Config
 {
@@ -48,7 +49,7 @@ namespace sconnRem.Shells.Config
                 base.ConfigureAggregateCatalog();
                 this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(WndSiteConnectionWizard).Assembly));
                 this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(SiteConnectionWizardModule).Assembly));
-
+                this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(ISiteRepository).Assembly));
             }
             catch (Exception ex)
             {

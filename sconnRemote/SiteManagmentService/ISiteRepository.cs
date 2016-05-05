@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,6 +8,8 @@ using sconnConnector.POCO.Config;
 
 namespace SiteManagmentService
 {
+
+
     public interface ISiteRepository
     {
         sconnSite GetSiteById(string Id);
@@ -17,4 +20,5 @@ namespace SiteManagmentService
         void Save();
         void Load();
     }
+
 }

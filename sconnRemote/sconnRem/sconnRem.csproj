@@ -462,6 +462,10 @@
       <Project>{687f4d7b-3759-45d4-a8ec-1cb6bc0a8cc3}</Project>
       <Name>sconnRem.Shells</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SiteManagmentService\SiteManagmentService.csproj">
+      <Project>{19D29BA0-EE9F-4C6C-9B34-57C9B39E1BCB}</Project>
+      <Name>SiteManagmentService</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controls\SiteConfig\Common\" />

@@ -155,6 +155,10 @@
       <Project>{57036DE8-EA6A-42E1-983D-23F71F87C34C}</Project>
       <Name>sconnNetworkingServices</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\SiteManagmentService\SiteManagmentService.csproj">
+      <Project>{19D29BA0-EE9F-4C6C-9B34-57C9B39E1BCB}</Project>
+      <Name>SiteManagmentService</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
