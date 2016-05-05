@@ -24,12 +24,22 @@ namespace sconnRemMobile.iOS
 			};
 
             sconnSite site = new sconnSite();
-
             sconnCfgMngr mngr = new sconnCfgMngr();
+
+            SconnClient client = new SconnClient("",0,"");
+            client.SiteDiscovered += Client_SiteDiscovered;
+            client.SearchForSite();
+            
+
 
 		}
 
-		public override void DidReceiveMemoryWarning ()
+        private void Client_SiteDiscovered(object sender, SiteDiscoveryEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void DidReceiveMemoryWarning ()
 		{
 			base.DidReceiveMemoryWarning ();
 			// Release any cached data, images, etc that aren't in use.

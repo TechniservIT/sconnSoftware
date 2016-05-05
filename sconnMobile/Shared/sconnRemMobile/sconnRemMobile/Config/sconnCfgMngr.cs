@@ -18,6 +18,15 @@ using System.Windows.Input;
 
 namespace sconnConnector
 {
+
+    public class USB
+    {
+        public bool ReadSiteRunningConfigMin(sconnSite site, bool x)
+        {
+            return true;
+        }
+    }
+
 	public class sconnCfgMngr
 	{
 		ETH ethernet;

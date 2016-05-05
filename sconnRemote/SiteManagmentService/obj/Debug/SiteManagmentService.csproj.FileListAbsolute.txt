@@ -26,3 +26,4 @@ I:\Repo\Bucket\sconnSoftware\sconnRemote\SiteManagmentService\bin\Debug\zh-Hans\
 I:\Repo\Bucket\sconnSoftware\sconnRemote\SiteManagmentService\obj\Debug\SiteManagmentService.csprojResolveAssemblyReference.cache
 I:\Repo\Bucket\sconnSoftware\sconnRemote\SiteManagmentService\obj\Debug\SiteManagmentService.dll
 I:\Repo\Bucket\sconnSoftware\sconnRemote\SiteManagmentService\obj\Debug\SiteManagmentService.pdb
+H:\Repo\Bucket\iotdashn\sconnRemote\SiteManagmentService\obj\Debug\SiteManagmentService.csprojResolveAssemblyReference.cache
