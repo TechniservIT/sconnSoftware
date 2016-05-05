@@ -143,7 +143,7 @@ namespace sconnConnector.POCO.Config
             statusCheckInterval = 5000; //5s interval
             lastUpdate = DateTime.Now;
             serverPort = 37222;
-            _siteID = sconnDataShare.GetLastItemID() + 1;
+       //     _siteID = sconnDataShare.GetLastItemID() + 1;
             _siteName = "DefaultSite";
             siteCfg = new ipcSiteConfig();
             siteStat = new SiteConnectionStat();
@@ -154,7 +154,7 @@ namespace sconnConnector.POCO.Config
         {
             statusCheckInterval = intervalMs;
             siteCfg = config;
-            _siteID = sconnDataShare.GetLastItemID() + 1;
+         //   _siteID = sconnDataShare.GetLastItemID() + 1;
             _siteName = siteName;
             lastUpdate = DateTime.Now;
             serverPort = 37222;
@@ -169,7 +169,7 @@ namespace sconnConnector.POCO.Config
             statusCheckInterval = intervalMs;
             serverIP = server;
             serverPort = port;
-            _siteID = sconnDataShare.GetLastItemID() + 1;
+       //     _siteID = sconnDataShare.GetLastItemID() + 1;
             _siteName = siteName;
             lastUpdate = DateTime.Now;
             siteCfg = new ipcSiteConfig();

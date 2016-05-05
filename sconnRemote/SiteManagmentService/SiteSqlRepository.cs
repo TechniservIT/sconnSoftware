@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,11 +10,11 @@ namespace SiteManagmentService
 {
     public class SiteSqlRepository : ISiteRepository
     {
-        private List<sconnSite> Sites;
+        private ObservableCollection<sconnSite> Sites;
 
         public SiteSqlRepository()
         {
-            Sites = new List<sconnSite>();
+            Sites = new ObservableCollection<sconnSite>();
         }
 
         public sconnSite GetSiteById(string Id)
@@ -21,7 +22,7 @@ namespace SiteManagmentService
             return Sites.FirstOrDefault(s => s.Id.Equals(Id));
         }
 
-        public List<sconnSite> GetAll()
+        public ObservableCollection<sconnSite> GetAll()
         {
             return Sites;
         }

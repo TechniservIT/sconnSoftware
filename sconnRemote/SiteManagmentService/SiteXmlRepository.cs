@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
@@ -13,7 +14,7 @@ namespace SiteManagmentService
     [Export(typeof(ISiteRepository))]
     public class SiteXmlRepository : ISiteRepository
     {
-        private List<sconnSite> Sites;
+        private ObservableCollection<sconnSite> Sites;
         private Logger _nlogger = LogManager.GetCurrentClassLogger();
         private sconnDataSrc _configSource = new sconnDataSrc();
 
@@ -22,7 +23,7 @@ namespace SiteManagmentService
         [ImportingConstructor]
         public SiteXmlRepository()
         {
-            Sites = new List<sconnSite>();
+            Sites = new ObservableCollection<sconnSite>();
             Load();
         }
 
@@ -35,7 +36,7 @@ namespace SiteManagmentService
             return Sites.FirstOrDefault(s => s.Id.Equals(Id));
         }
 
-        public List<sconnSite> GetAll()
+        public ObservableCollection<sconnSite> GetAll()
         {
             if (SyncGet)    //reload before query
             {
@@ -82,7 +83,12 @@ namespace SiteManagmentService
 
         public void Load()
         {
-            _configSource.LoadConfig(DataSourceType.xml);
+            this.Sites.Clear();
+            var sites = _configSource.GetSites(DataSourceType.xml);
+            foreach (var site in sites)
+            {
+                this.Sites.Add(site);
+            }
         }
 
     }

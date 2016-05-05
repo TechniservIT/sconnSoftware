@@ -89,7 +89,7 @@ namespace sconnRem.Controls.SiteManagment.Wizard
         public ObservableCollection<sconnSite> NetworkSites { get; set; }
         public ObservableCollection<sconnSite> UsbSites { get; set; }
 
-        public sconnSite SelectedSite { get; set; }
+     //   public sconnSite SelectedSite { get; set; }
         public NetworkConnectionState ConnectionState { get; set; }
         public int ConnectionProgressPercentage { get; set; }
 
@@ -125,9 +125,9 @@ namespace sconnRem.Controls.SiteManagment.Wizard
 
         private void TestConnectionToSite()
         {
-            if (this.SelectedSite != null)
+            if (this.Config != null)
             {
-                connectionTestClient = new SconnClient(SelectedSite.serverIP, SelectedSite.serverPort, SelectedSite.authPasswd);
+                connectionTestClient = new SconnClient(Config.serverIP, Config.serverPort, Config.authPasswd);
                 connectionTestClient.ConnectionStateChanged += Client_ConnectionStateChanged;
 
                 BackgroundWorker bgWorker = new BackgroundWorker();
@@ -145,7 +145,7 @@ namespace sconnRem.Controls.SiteManagment.Wizard
 
         public void OnSelectedItemChanged(sconnSite site)
         {
-            //SelectedSite = site;
+            //Config = site;
             if (site != null)
             {
                 Config.CopyFrom(site);  //replace default/edited config with selected
@@ -170,12 +170,11 @@ namespace sconnRem.Controls.SiteManagment.Wizard
                 //no action - cannot navigate back
             }
             else if (Stage == SiteConnectionWizardStage.Search ||
-                Stage == SiteConnectionWizardStage.ManualEntry ||
                 Stage == SiteConnectionWizardStage.UsbList)
             {
                 NavigateToContract(SiteManagmentRegionNames.SiteConnectionWizard_Contract_MethodSelection_View);
             }
-            else if (Stage == SiteConnectionWizardStage.Test)
+            else if (Stage == SiteConnectionWizardStage.ManualEntry)
             {
                 //find out
                 if (AdditionMethod == SiteAdditionMethod.Search)
@@ -184,16 +183,21 @@ namespace sconnRem.Controls.SiteManagment.Wizard
                     SearchForSitesInNetwork(); // start network search
                     NavigateToContract(SiteManagmentRegionNames.SiteConnectionWizard_Contract_SearchSitesList_View);
                 }
-                else if (AdditionMethod == SiteAdditionMethod.Manual)
+                else if (AdditionMethod == SiteAdditionMethod.Manual)   //back to method selection
                 {
-                    this.Stage = SiteConnectionWizardStage.ManualEntry;
-                    NavigateToContract(SiteManagmentRegionNames.SiteConnectionWizard_Contract_ManualEntry_View);
+                    this.Stage = SiteConnectionWizardStage.MethodSelection;
+                    NavigateToContract(SiteManagmentRegionNames.SiteConnectionWizard_Contract_MethodSelection_View);
                 }
                 else if (AdditionMethod == SiteAdditionMethod.UsbList)
                 {
                     this.Stage = SiteConnectionWizardStage.UsbList;
                     NavigateToContract(SiteManagmentRegionNames.SiteConnectionWizard_Contract_UsbList_View);
                 }
+            }
+            else if (Stage == SiteConnectionWizardStage.Test)
+            {
+                this.Stage = SiteConnectionWizardStage.ManualEntry;
+                NavigateToContract(SiteManagmentRegionNames.SiteConnectionWizard_Contract_ManualEntry_View);
             }
             else if (Stage == SiteConnectionWizardStage.Summary)
             {
@@ -207,7 +211,10 @@ namespace sconnRem.Controls.SiteManagment.Wizard
         {
             if (Stage == SiteConnectionWizardStage.MethodSelection)
             {
-                //no action - cannot navigate forward
+                //update stage to site edit - not updated before
+                this.Stage = SiteConnectionWizardStage.Test;
+                TestConnectionToSite();
+                NavigateToContract(SiteManagmentRegionNames.SiteConnectionWizard_Contract_Test_View);
             }
             else if (Stage == SiteConnectionWizardStage.ManualEntry )
             {
@@ -238,7 +245,11 @@ namespace sconnRem.Controls.SiteManagment.Wizard
 
         private void SaveSite()
         {
-            _repository.Update(this.SelectedSite);
+            //  Sites = new ObservableCollection<sconnSite>(sconnDataShare.getSites());
+          //  sconnDataShare.getSite()
+            //_repository.Update(this.Config);
+            sconnDataShare.updateSite(this.Config);
+            sconnDataShare.Save();
         }
 
         private void VerifyConnection()

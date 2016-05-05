@@ -16,6 +16,7 @@ using sconnConnector.POCO.Config;
 using sconnConnector.POCO.Config.sconn;
 using sconnRem.Infrastructure.Navigation;
 using sconnRem.Navigation;
+using SiteManagmentService;
 
 namespace sconnRem.Controls.Navigation.ViewModel.Navigation
 {
@@ -26,6 +27,7 @@ namespace sconnRem.Controls.Navigation.ViewModel.Navigation
     {
         public ObservableCollection<sconnSite> Sites { get; set; }
         private readonly IRegionManager _regionManager;
+        private ISiteRepository _repository;
         public AlarmSystemConfigManager Manager { get; set; }
 
         private Logger _nlogger = LogManager.GetCurrentClassLogger();
@@ -72,16 +74,19 @@ namespace sconnRem.Controls.Navigation.ViewModel.Navigation
         public SiteNavViewModel()
         {
             SetupCmds();
-            Sites = new ObservableCollection<sconnSite>(sconnDataShare.getSites());
+            Sites = new ObservableCollection<sconnSite>(sconnDataShare.sconnSites.ToArray());
         }
 
 
         [ImportingConstructor]
-        public SiteNavViewModel(IRegionManager regionManager)
+        public SiteNavViewModel(IRegionManager regionManager, ISiteRepository repository)
         {
-            SetupCmds();
-            Sites = new ObservableCollection<sconnSite>(sconnDataShare.getSites());
             this._regionManager = regionManager;
+            this._repository = repository;
+
+            SetupCmds();
+            Sites = sconnDataShare.sconnSites;
+                //new ObservableCollection<sconnSite>(sconnDataShare.sconnSites.ToArray());   //repository.GetAll();   /
         }
 
     }

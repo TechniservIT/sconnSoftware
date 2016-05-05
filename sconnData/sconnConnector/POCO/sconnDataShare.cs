@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,48 +23,89 @@ namespace sconnConnector
 
     public static class sconnDataShare
     {
+        private static sconnDataSrc _dataSrc;
+
+        public static DataSourceType DataSourceType { get; set; }
+
         public static int siteNo 
         {
-            get { return sconnSites.siteNo; }
+            get { return sconnSites.Count; }
         }
-
-        public static int GetLastItemID()
-        {
-            if (sconnSites.siteNo > 0)
-            {
-                return sconnSites.sites[siteNo - 1].siteID;
-            }
-            else
-            { return 0; }
-        }
-
+        
         public static XmlDocument getConfigXML()
         {
             XmlDocument configDoc = new XmlDocument();
-
             return configDoc;
         }
 
-
-
-        public static sconnSite getSite(int siteNo)
+        static sconnDataShare()
         {
-            foreach (sconnSite site in sconnSites)
+            _dataSrc = new sconnDataSrc();
+            DataSourceType = DataSourceType.xml;
+            sconnDataShare.sconnSites = new ObservableCollection<sconnSite>(_dataSrc.GetSites(DataSourceType));
+        }
+
+        public static void Reload()
+        {
+            sconnDataShare.sconnSites = new ObservableCollection<sconnSite>(_dataSrc.GetSites(DataSourceType));
+        }
+
+        public static void Save()
+        {
+            _dataSrc.SaveConfig(DataSourceType);
+        }
+
+        //static sconnDataShare()
+        //{
+        //    _dataSrc = new sconnDataSrc();
+        //}
+        public static sconnSite getSite(int id)
+        {
+            if (id < sconnDataShare.sconnSites.Count)
             {
-                if (site.siteID == siteNo)
+                return sconnDataShare.sconnSites[id];
+            }
+            else
+            {
+                return null;
+            }
+           
+        }
+
+        public static bool updateSite(sconnSite site)
+        {
+            if (site != null)
+            {
+                sconnSite existing = sconnSites.FirstOrDefault(s => s.Id.Equals(site.Id));
+                if (existing != null)
                 {
-                    return  site;
+                    existing.CopyFrom(site);
+                    Save();
+                    return true;
+                }
+                else
+                {
+                    sconnSites.Add(site);
+                    return true;
                 }
             }
-            return new sconnSite();
+            return false;
+            //foreach (sconnSite site in sconnSites)
+            //{
+            //    if (site.Id.Equals(updated.Id))
+            //    {
+            //        site.CopyFrom(updated);
+            //    }
+            //}
+            //return false;
         }
 
-
-        public static sconnSite[] getSites()
+        public static bool addSite(sconnSite site)
         {
-            return sconnSites.sites;
+            sconnDataShare.sconnSites.Add(site);
+            return true;
         }
-
+        
         public static bool addSite(string hostname, int port, string password, string siteName)
         {
             if (hostname == null ||  password == null)
@@ -71,64 +113,19 @@ namespace sconnConnector
                 return false;
             }
             sconnSite site = new sconnSite(siteName,1000, hostname, port, password );
-            sconnSites.Push(site);
-            return true;
-        }
-
-        public static bool addSite(sconnSite addsite)
-        {
-            if (addsite.serverIP == null || addsite.authPasswd == null)
-            {
-                return false;
-            }
-            addsite.siteID = GetLastItemID()+1; //set ID as last device, site was not created by DataShare
-            sconnSites.Push(addsite);
-            return true;
-        }
-
-        public static void removeSites()
-        {
-            for (int i = 0; i < sconnSites.siteNo; i++)
-            {
-                removeSite(sconnSites.sites[i].siteID);
-            }
-        }
-
-        public static bool addSites(sconnSite[] sites)
-        {
-            if (sites == null) { return false; }
-            for (int i = 0; i < sites.GetLength(0); i++)
-            {
-                if (sites[i] != null)
-                {
-                    sites[i].siteID = sconnDataShare.GetLastItemID() + 1; //set ID for new items
-                    sconnSites.Push(sites[i]);
-                }
-            }
+            sconnSites.Add(site);
             return true;
         }
         
-        public static void removeSite(int siteID)
-        {
-            for (int i = 0; i < sconnSites.siteNo; i++)
-            {
-                if (sconnSites.sites[i].siteID == siteID)
-                {
-                     sconnSites.RemoveAt(i);
-                }
-            }
-        }
-
         static private bool _SiteLiveViewEnabled = true;
         public static bool SiteLiveViewEnabled { get { return _SiteLiveViewEnabled; } set { _SiteLiveViewEnabled = value; } }
-
-
+        
         /********  Handles application data between View, Tasker and Mngr/Src , with R/W and R access  ************/
-
         static bool updatePending = false; //signal UI threads update is in progress and status should not be read
-        static private siteStack sconnSites = new siteStack();
-        //static private sconnSite[] sites = new sconnSite[0];
+      //  static public ObservableCollection<sconnSite> sconnSites = new ObservableCollection<sconnSite>();
+        static public ObservableCollection<sconnSite> sconnSites { get; set; }
 
+        #region sitestack
 
         private class siteStack : IEnumerable
         {
@@ -136,7 +133,7 @@ namespace sconnConnector
             private int siteInc = 0;
             private int stackMaxSize = 1000;
 
-            public int siteNo 
+            public int siteNo
             {
                 get { return siteInc; }
             }
@@ -155,13 +152,13 @@ namespace sconnConnector
                 }
                 else
                 {
-                sconnSite[] newSites = new sconnSite[siteInc];
-                if (siteInc > 0)
-                {
-                    sites.CopyTo(newSites, 0);
-                }
-                sites = newSites;
-                sites[siteInc-1] = site;
+                    sconnSite[] newSites = new sconnSite[siteInc];
+                    if (siteInc > 0)
+                    {
+                        sites.CopyTo(newSites, 0);
+                    }
+                    sites = newSites;
+                    sites[siteInc - 1] = site;
 
                 }
             }
@@ -190,7 +187,7 @@ namespace sconnConnector
                 }
                 try
                 {
-                    for (int i = siteIndex; i < siteInc-1; i++)
+                    for (int i = siteIndex; i < siteInc - 1; i++)
                     {
                         sites[i] = sites[i + 1];
                     }
@@ -220,9 +217,7 @@ namespace sconnConnector
             }
 
         }
-
-
-        private class siteStackEnum :  IEnumerator
+        private class siteStackEnum : IEnumerator
         {
             public sconnSite[] sconnSites;
             private int enumPosition = -1;
@@ -252,6 +247,7 @@ namespace sconnConnector
                 return (IEnumerator)this;
             }
         }
+        #endregion
 
     }
     
