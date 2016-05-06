@@ -45,6 +45,13 @@ namespace sconnConnector.POCO.Device
             PasswordExpireDate = DateTime.Now.AddYears(1000).Date;
         }
 
+        public void CopyFrom(DeviceCredentials other)
+        {
+            this.Id = other.Id;
+            this.Password = other.Password;
+            this.Username = other.Username;
+        }
+
 
         public void Fake()
         {

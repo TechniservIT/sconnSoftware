@@ -54,6 +54,14 @@ namespace sconnConnector.POCO.Device
         [DataMember]
         public virtual List<Device> Devices { get; set; }
 
+        public void CopyFrom(EndpointInfo other)
+        {
+            this.Id = other.Id;
+            this.Hostname = other.Hostname;
+            this.Port = other.Port;
+            this.RequiresAuthentication = other.RequiresAuthentication;
+        }
+
         public EndpointInfo()
         {
             Devices = new List<Device>();
