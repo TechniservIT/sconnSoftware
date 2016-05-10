@@ -30,7 +30,9 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
     [Export]
     public class AlarmDeviceListViewModel : GenericAlarmConfigViewModel
     {
-        private ObservableCollection<sconnDevice> _config; 
+        private ObservableCollection<sconnDevice> _config;
+        private AlarmDevicesConfigService _provider;
+
         public ObservableCollection<sconnDevice> Config {
             get { return _config; }
             set

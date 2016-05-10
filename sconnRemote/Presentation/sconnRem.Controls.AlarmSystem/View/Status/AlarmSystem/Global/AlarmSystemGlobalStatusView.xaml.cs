@@ -35,14 +35,9 @@ namespace sconnRem.Controls.AlarmSystem.View.Status.AlarmSystem.Global
             set { this.DataContext = value; }
         }
 
-
         public AlarmSystemGlobalStatusView()
         {
             InitializeComponent();
         }
-
-
-
-
     }
 }

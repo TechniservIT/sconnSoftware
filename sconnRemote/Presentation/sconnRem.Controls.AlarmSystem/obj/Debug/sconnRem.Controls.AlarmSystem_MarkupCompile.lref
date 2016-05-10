@@ -1,4 +1,4 @@
-﻿
+﻿I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\obj\Debug\GeneratedInternalTypeHelper.g.cs
 
 FI:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\View\Config\AlarmSystem\Auth\AlarmAuthRecordView.xaml;;
 FI:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\View\Config\AlarmSystem\Auth\AuthConfigView.xaml;;
@@ -47,9 +47,10 @@ FI:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSy
 FI:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\View\Status\AlarmSystem\Gsm\AlarmGsmStatusView.xaml;;
 FI:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\View\Status\AlarmSystem\Inputs\AlarmInputConfigureView.xaml;;
 FI:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\View\Status\AlarmSystem\Inputs\AlarmInputsView.xaml;;
+FI:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\View\Status\AlarmSystem\Network\AlarmNetworkStatusView.xaml;;
 FI:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\View\Status\AlarmSystem\Outputs\AlarmOutputConfigureView.xaml;;
 FI:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\View\Status\AlarmSystem\Outputs\AlarmOutputsView.xaml;;
-FI:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\View\Status\AlarmSystem\PowerSupply\AlarmPowerStatusView.xaml;;
+FI:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\View\Status\AlarmSystem\PowerSupply\AlarmPowerStatusListView.xaml;;
 FI:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\View\Status\AlarmSystem\Relays\AlarmRelayConfigureView.xaml;;
 FI:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\View\Status\AlarmSystem\Relays\AlarmRelaysView.xaml;;
 FI:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\View\Status\AlarmSystem\Device\Sensors\AlarmSystemSensorsView.xaml;;

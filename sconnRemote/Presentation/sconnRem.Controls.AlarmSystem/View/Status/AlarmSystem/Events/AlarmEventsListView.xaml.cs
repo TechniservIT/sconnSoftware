@@ -23,7 +23,8 @@ namespace sconnRem.Controls.AlarmSystem.View.Status.AlarmSystem.Events
 
     [Export(AlarmRegionNames.AlarmStatus_Contract_EventsView)]
     [ViewSortHint("01")]
-    public partial class AlarmEventsListView : UserControl, IPartImportsSatisfiedNotification
+    [PartCreationPolicy(CreationPolicy.Shared)]
+    public partial class AlarmEventsListView : UserControl
     {
         private const string MainContentRegionName = GlobalViewRegionNames.MainGridContentRegion;
         private Logger _nlogger = LogManager.GetCurrentClassLogger();
@@ -38,21 +39,6 @@ namespace sconnRem.Controls.AlarmSystem.View.Status.AlarmSystem.Events
         {
             this.DataContext = viewModel;
             InitializeComponent();
-        }
-
-
-        void IPartImportsSatisfiedNotification.OnImportsSatisfied()
-        {
-            IRegion mainContentRegion = this.RegionManager.Regions[MainContentRegionName];
-            if (mainContentRegion != null && mainContentRegion.NavigationService != null)
-            {
-                mainContentRegion.NavigationService.Navigated += this.MainContentRegion_Navigated;
-            }
-        }
-
-        public void MainContentRegion_Navigated(object sender, RegionNavigationEventArgs e)
-        {
-
         }
         
     }

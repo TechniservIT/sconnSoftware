@@ -40,7 +40,10 @@ namespace sconnRem.Controls.Navigation.ViewModel.AlarmSystem
         public ICommand Show_Alarm_Users_Command { get; set; }
 
         public ICommand Show_Alarm_Devices_Command { get; set; }
-        
+
+        public ICommand Show_Alarm_Network_Command { get; set; }
+        public ICommand Show_Alarm_Events_Command { get; set; }
+        public ICommand Show_Alarm_Power_Command { get; set; }
 
 
         private void ViewSite(sconnSite site)
@@ -147,6 +150,20 @@ namespace sconnRem.Controls.Navigation.ViewModel.AlarmSystem
             NavigateToAlarmContract(AlarmRegionNames.AlarmConfig_Contract_AuthConfigView);
         }
 
+        private void ShowNetworkConfig(sconnSite site)
+        {
+            NavigateToAlarmContract(AlarmRegionNames.AlarmStatus_Contract_NetworkView);
+        }
+        
+        private void ShowEventsConfig(sconnSite site)
+        {
+            NavigateToAlarmContract(AlarmRegionNames.AlarmStatus_Contract_EventsView);
+        }
+
+        private void ShowPowerConfig(sconnSite site)
+        {
+            NavigateToAlarmContract(AlarmRegionNames.AlarmStatus_Contract_PowerView);
+        }
 
 
         private void SetupCmds()
@@ -163,6 +180,10 @@ namespace sconnRem.Controls.Navigation.ViewModel.AlarmSystem
             Show_Alarm_Zones_Command = new DelegateCommand<sconnSite>(ShowZones);
             Show_Alarm_Users_Command = new DelegateCommand<sconnSite>(ShowUsers);
             Show_Alarm_AuthConfig_Command = new DelegateCommand<sconnSite>(ShowAuthConfig);
+
+            Show_Alarm_Network_Command = new DelegateCommand<sconnSite>(ShowNetworkConfig);
+            Show_Alarm_Events_Command = new DelegateCommand<sconnSite>(ShowEventsConfig);
+            Show_Alarm_Power_Command = new DelegateCommand<sconnSite>(ShowPowerConfig);
 
         }
 

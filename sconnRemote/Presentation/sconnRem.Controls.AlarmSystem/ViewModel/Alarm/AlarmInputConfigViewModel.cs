@@ -64,6 +64,8 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
             }
         }
 
+        public IRegionNavigationJournal navigationJournal { get; set; }
+
         private void SaveData()
         {
             SiteNavigationManager.SaveInput(this.Config);

@@ -50,7 +50,7 @@
                                     <ListBox HorizontalContentAlignment="Stretch" 
                                              ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
                                              x:Name="OrdersListBox" BorderThickness="0"
-                                             ItemsSource="{Binding Inputs, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                             ItemsSource="{Binding Config, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                                              IsSynchronizedWithCurrentItem="True"
                                              Background="White">
                                         <ListBox.ItemTemplate>
@@ -92,7 +92,7 @@
                                                               VerticalAlignment="Center"/>
                                                                                 <Canvas Background="White" Grid.Column="0" />
 
-                                                                                <Image  x:Name="ImgDispActionGridFullScreen521"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="0,0,0,0" VerticalAlignment="Center" Width="Auto" Source="{Binding Path=imageIconUri}" />
+                                                                                <Image  x:Name="ImgDispActionGridFullScreen521"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="0,0,0,0" VerticalAlignment="Center" Width="Auto" />
 
                                                                             </Grid>
                                                                         </Border>
@@ -115,11 +115,11 @@
                                                             <RowDefinition Height="1*"/>
                                                         </Grid.RowDefinitions>
 
-                                                        <Label Grid.Column="0" Grid.Row="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="{Binding Path=Name}" />
+                                                        <Label Grid.Column="0" Grid.Row="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="{Binding Path=Id}" />
 
-                                                        <Label Grid.Column="0" Grid.Row="1" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="{Binding Path=Type}" />
+                                                        <Label Grid.Column="0" Grid.Row="1" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="{Binding Path=Time}" />
 
-                                                        <Label Grid.Column="0" Grid.Row="2" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="{Binding Path=Id}" />
+                                                        <Label Grid.Column="0" Grid.Row="2" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="{Binding Path=Type}" />
 
                                                     </Grid>
 
@@ -132,7 +132,7 @@
                                                             <RowDefinition Height="1*"/>
                                                         </Grid.RowDefinitions>
 
-                                                        <Button Grid.Column="0" Grid.Row="0"   Command="{Binding DataContext.ConfigureInputCommand, RelativeSource={RelativeSource  FindAncestor, AncestorLevel=2, AncestorType=ListBox}}"  CommandParameter="{Binding}" VerticalAlignment="Center" Height="Auto" Content="">
+                                                        <!--<Button Grid.Column="0" Grid.Row="0"   Command="{Binding DataContext.ConfigureInputCommand, RelativeSource={RelativeSource  FindAncestor, AncestorLevel=2, AncestorType=ListBox}}"  CommandParameter="{Binding}" VerticalAlignment="Center" Height="Auto" Content="">
                                                             <Button.Template>
                                                                 <ControlTemplate TargetType="{x:Type Button}">
                                                                     <Grid>
@@ -154,7 +154,7 @@
                                                                     </Grid>
                                                                 </ControlTemplate>
                                                             </Button.Template>
-                                                        </Button>
+                                                        </Button>-->
 
 
                                                     </Grid>

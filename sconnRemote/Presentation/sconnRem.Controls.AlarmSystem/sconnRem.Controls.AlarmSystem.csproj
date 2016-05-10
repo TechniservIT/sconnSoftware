@@ -91,8 +91,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ViewModel\Alarm\AlarmDeviceListViewModel.cs" />
+    <Compile Include="ViewModel\Alarm\AlarmEventsListViewModel.cs" />
     <Compile Include="ViewModel\Alarm\AlarmInputConfigViewModel.cs" />
     <Compile Include="ViewModel\Alarm\AlarmOutputConfigViewModel.cs" />
+    <Compile Include="ViewModel\Alarm\AlarmPsuStatusViewModel.cs" />
     <Compile Include="ViewModel\Alarm\AlarmSharedDeviceConfigViewModel.cs" />
     <Compile Include="ViewModel\Generic\GenericAsyncConfigViewModel.cs" />
     <Compile Include="ViewModel\Generic\IAsyncConfigViewModel.cs" />
@@ -274,6 +276,9 @@
       <DependentUpon>AlarmInputsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Status\AlarmSystem\Inputs\AlarmInputsViewModule.cs" />
+    <Compile Include="View\Status\AlarmSystem\Network\AlarmNetworkStatusView.xaml.cs">
+      <DependentUpon>AlarmNetworkStatusView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Status\AlarmSystem\Outputs\AlarmOutputConfigureView.xaml.cs">
       <DependentUpon>AlarmOutputConfigureView.xaml</DependentUpon>
     </Compile>
@@ -282,8 +287,8 @@
       <DependentUpon>AlarmOutputsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Status\AlarmSystem\Outputs\AlarmOutputsViewModule.cs" />
-    <Compile Include="View\Status\AlarmSystem\PowerSupply\AlarmPowerStatusView.xaml.cs">
-      <DependentUpon>AlarmPowerStatusView.xaml</DependentUpon>
+    <Compile Include="View\Status\AlarmSystem\PowerSupply\AlarmPowerStatusListView.xaml.cs">
+      <DependentUpon>AlarmPowerStatusListView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Status\AlarmSystem\Relays\AlarmRelayConfigureView.xaml.cs">
       <DependentUpon>AlarmRelayConfigureView.xaml</DependentUpon>
@@ -497,6 +502,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Status\AlarmSystem\Network\AlarmNetworkStatusView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Status\AlarmSystem\Outputs\AlarmOutputConfigureView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -505,7 +514,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Status\AlarmSystem\PowerSupply\AlarmPowerStatusView.xaml">
+    <Page Include="View\Status\AlarmSystem\PowerSupply\AlarmPowerStatusListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

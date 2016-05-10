@@ -23,6 +23,7 @@ namespace sconnRem.Controls.AlarmSystem.View.Status.Outputs
 
     [Export(AlarmRegionNames.AlarmStatus_Contract_OutputsView)]
     [ViewSortHint("01")]
+    [PartCreationPolicy(CreationPolicy.Shared)]
     public partial class AlarmOutputsView : UserControl, IPartImportsSatisfiedNotification
     {
         private const string MainContentRegionName = GlobalViewRegionNames.MainGridContentRegion;   //GlobalViewRegionNames.MainGridContentRegion
