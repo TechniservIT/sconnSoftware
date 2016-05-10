@@ -37,9 +37,7 @@ namespace sconnRem.ViewModel.Alarm
                 return _name;
             }
         }
-
-
-
+        
         private ICommand _getDataCommand;
         private ICommand _saveDataCommand;
 
@@ -80,19 +78,7 @@ namespace sconnRem.ViewModel.Alarm
             this._regionManager = regionManager;
             GetData();
         }
-
-
-        //[ImportingConstructor]
-        //public AlarmUsersConfigViewModel(IAlarmConfigManager manager, IRegionManager regionManager)
-        //{
-        //    Config = new ObservableCollection<sconnUser>();
-        //    this._manager = (AlarmSystemConfigManager)manager;
-        //    this._provider = new UsersConfigurationService(_manager);
-        //    this._regionManager = regionManager;
-        //    GetData();
-        //}
-
-
+        
         public string DisplayedImagePath
         {
             get { return "pack://application:,,,/images/user.png"; }

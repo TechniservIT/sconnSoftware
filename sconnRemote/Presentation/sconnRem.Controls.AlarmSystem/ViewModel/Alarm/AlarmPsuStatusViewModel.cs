@@ -1,31 +1,28 @@
-﻿using AlarmSystemManagmentService;
-using Prism.Mvvm;
-using sconnConnector.Config;
-using sconnConnector.POCO.Config.Abstract;
-using sconnRem.ViewModel.Generic;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using NLog;
+using AlarmSystemManagmentService;
 using Prism.Regions;
+using sconnConnector.Config;
 using sconnConnector.POCO.Config.sconn;
 using sconnRem.Controls.AlarmSystem.ViewModel.Generic;
 using sconnRem.Infrastructure.Navigation;
 using sconnRem.Navigation;
 
-namespace sconnRem.ViewModel.Alarm
+namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
 {
+
     [Export]
-    public class AlarmGlobalConfigViewModel : GenericAsyncConfigViewModel
+    public class AlarmPsuStatusViewModel : GenericAsyncConfigViewModel
     {
         public sconnGlobalConfig Config { get; set; }
         private GlobalConfigService _provider;
         private AlarmSystemConfigManager _manager;
-        
+
 
         private ICommand _getDataCommand;
         private ICommand _saveDataCommand;
@@ -48,16 +45,16 @@ namespace sconnRem.ViewModel.Alarm
             _provider.Update(Config);
         }
 
-        public AlarmGlobalConfigViewModel()
+        public AlarmPsuStatusViewModel()
         {
             _name = "Gcfg";
             this._provider = new GlobalConfigService(_manager);
         }
 
-      
+
 
         [ImportingConstructor]
-        public AlarmGlobalConfigViewModel(IRegionManager regionManager)
+        public AlarmPsuStatusViewModel(IRegionManager regionManager)
         {
             Config = new sconnGlobalConfig();
             this._manager = SiteNavigationManager.alarmSystemConfigManager;
@@ -75,7 +72,7 @@ namespace sconnRem.ViewModel.Alarm
             }
             return false;
         }
-        
+
 
         public string DisplayedImagePath
         {
@@ -83,5 +80,7 @@ namespace sconnRem.ViewModel.Alarm
         }
 
     }
+
+
 
 }

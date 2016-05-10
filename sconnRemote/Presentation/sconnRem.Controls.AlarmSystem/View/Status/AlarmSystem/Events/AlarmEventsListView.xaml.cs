@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,17 +13,48 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using NLog;
+using Prism.Regions;
+using sconnRem.Controls.AlarmSystem.ViewModel.Alarm;
+using sconnRem.Navigation;
 
 namespace sconnRem.Controls.AlarmSystem.View.Status.AlarmSystem.Events
 {
-    /// <summary>
-    /// Interaction logic for AlarmEventsListView.xaml
-    /// </summary>
-    public partial class AlarmEventsListView : UserControl
+
+    [Export(AlarmRegionNames.AlarmStatus_Contract_EventsView)]
+    [ViewSortHint("01")]
+    public partial class AlarmEventsListView : UserControl, IPartImportsSatisfiedNotification
     {
-        public AlarmEventsListView()
+        private const string MainContentRegionName = GlobalViewRegionNames.MainGridContentRegion;
+        private Logger _nlogger = LogManager.GetCurrentClassLogger();
+
+        private static Uri configureUri = new Uri(AlarmRegionNames.AlarmStatus_Contract_EventsView,
+            UriKind.Relative);
+
+        [Import] public IRegionManager RegionManager;
+
+        [ImportingConstructor]
+        public AlarmEventsListView(AlarmEventsListViewModel viewModel)
         {
+            this.DataContext = viewModel;
             InitializeComponent();
         }
+
+
+        void IPartImportsSatisfiedNotification.OnImportsSatisfied()
+        {
+            IRegion mainContentRegion = this.RegionManager.Regions[MainContentRegionName];
+            if (mainContentRegion != null && mainContentRegion.NavigationService != null)
+            {
+                mainContentRegion.NavigationService.Navigated += this.MainContentRegion_Navigated;
+            }
+        }
+
+        public void MainContentRegion_Navigated(object sender, RegionNavigationEventArgs e)
+        {
+
+        }
+        
     }
+
 }

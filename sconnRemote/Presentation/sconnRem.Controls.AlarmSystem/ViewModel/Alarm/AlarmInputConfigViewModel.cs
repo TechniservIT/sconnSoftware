@@ -14,6 +14,7 @@ using sconnConnector.Config;
 using sconnConnector.POCO.Config;
 using sconnConnector.POCO.Config.sconn;
 using sconnPrismSharedContext;
+using sconnRem.Controls.AlarmSystem.ViewModel.Generic;
 using sconnRem.Infrastructure.Navigation;
 using sconnRem.Navigation;
 
@@ -22,23 +23,12 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
 
     [Export]
     [PartCreationPolicy(CreationPolicy.NonShared)]
-    public class AlarmInputConfigViewModel : BindableBase, INavigationAware  //ObservableObject, IPageViewModel
+    public class AlarmInputConfigViewModel : GenericAsyncConfigViewModel
     {
         public sconnInput Config { get; set; }
         private DeviceConfigService _provider;
         private AlarmSystemConfigManager _manager;
-        private readonly IRegionManager _regionManager;
-        private Logger _nlogger = LogManager.GetCurrentClassLogger();
-        private IRegionNavigationJournal navigationJournal;
-
-        private string _name;
-        public string Name
-        {
-            get
-            {
-                return _name;
-            }
-        }
+        
 
         public ICommand NavigateBackCommand { get; set; }
         public ICommand SaveConfigCommand { get; set; }

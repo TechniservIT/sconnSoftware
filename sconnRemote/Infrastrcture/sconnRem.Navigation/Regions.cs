@@ -18,23 +18,29 @@ namespace sconnRem.Navigation
         public const String AlarmConfig_Contract_GsmConfigView = "GsmConfigView";
         public const String AlarmConfig_Contract_ZoneConfigView = "ZoneConfigView";
         public const String AlarmConfig_Contract_UsersConfigView = "UserConfigView";
-
+        
 
         #region AlarmSystemEntitiesView
 
-            public const String AlarmStatus_Contract_InputsView = "AlarmInputsView";
+        public const String AlarmStatus_Contract_InputsView = "AlarmInputsView";
             public const String AlarmStatus_Contract_OutputsView = "AlarmOutputsView";
             public const String AlarmStatus_Contract_RelaysView = "AlarmRelaysView";
             public const String AlarmStatus_Contract_ZonesView = "AlarmZonesView";
             public const String AlarmStatus_Contract_SensorsView = "AlarmSensorsView";
             public const String AlarmStatus_Contract_DeviceView = "AlarmDeviceView";
+            public const String AlarmStatus_Contract_EventsView = "AlarmEventsView";
+            public const String AlarmStatus_Contract_PowerView = "AlarmPowerView";
+            public const String AlarmStatus_Contract_NetworkView = "AlarmNetworkView";
 
-            public static Uri AlarmUri_Status_Inputs_View = new Uri(AlarmStatus_Contract_InputsView, UriKind.Relative);
+        public static Uri AlarmUri_Status_Inputs_View = new Uri(AlarmStatus_Contract_InputsView, UriKind.Relative);
             public static Uri AlarmUri_Status_Outputs_View = new Uri(AlarmStatus_Contract_OutputsView, UriKind.Relative);
             public static Uri AlarmUri_Status_Relays_View = new Uri(AlarmStatus_Contract_RelaysView, UriKind.Relative);
             public static Uri AlarmUri_Status_Zones_View = new Uri(AlarmStatus_Contract_ZonesView, UriKind.Relative);
             public static Uri AlarmUri_Status_Sensors_View = new Uri(AlarmStatus_Contract_SensorsView, UriKind.Relative);
             public static Uri AlarmUri_Status_Device_View = new Uri(AlarmStatus_Contract_DeviceView, UriKind.Relative);
+            public static Uri AlarmUri_Status_Events_View = new Uri(AlarmStatus_Contract_EventsView, UriKind.Relative);
+            public static Uri AlarmUri_Status_Power_View = new Uri(AlarmStatus_Contract_PowerView, UriKind.Relative);
+            public static Uri AlarmUri_Status_Network_View = new Uri(AlarmStatus_Contract_NetworkView, UriKind.Relative);
 
         #endregion
 
@@ -42,7 +48,7 @@ namespace sconnRem.Navigation
 
         #region AlarmSystemEntitiesConfig
 
-            public const String AlarmConfig_Contract_Input_Config_View = "AlarmInputConfigureView";
+        public const String AlarmConfig_Contract_Input_Config_View = "AlarmInputConfigureView";
             public const String AlarmConfig_Contract_Input_Config_View_Key_Name = "InputUuid";
 
             public const String AlarmConfig_Contract_Output_Config_View = "AlarmOutputConfigureView";

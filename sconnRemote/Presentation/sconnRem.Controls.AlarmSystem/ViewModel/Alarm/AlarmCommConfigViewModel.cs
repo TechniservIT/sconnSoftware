@@ -6,45 +6,33 @@ using sconnConnector.POCO.Config.sconn;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using NLog;
+using Prism;
+using sconnRem.Controls.AlarmSystem.ViewModel.Generic;
+using sconnRem.Navigation;
 
 namespace sconnRem.ViewModel.Alarm
 {
 
 
     [Export]
-    public class AlarmCommConfigViewModel : BindableBase 
+    public class AlarmCommConfigViewModel : GenericAsyncConfigViewModel
+
     {
         public sconnGlobalConfig CommConfig { get; set; }
-
         private GlobalConfigService _provider;
-        private readonly IRegionManager _regionManager;
-
-        private Logger _nlogger = LogManager.GetCurrentClassLogger();
-
-        
         public AlarmSystemConfigManager Manager { get; set; }
-
-
-        private string _name;
-        public string Name
-        {
-            get
-            {
-                return _name;
-            }
-        }
-
         private ICommand _getDataCommand;
         private ICommand _saveDataCommand;
 
 
-        private void GetData()
+        public override void GetData()
         {
             try
             {
@@ -57,7 +45,7 @@ namespace sconnRem.ViewModel.Alarm
             }
         }
 
-        private void SaveData()
+        public override void SaveData()
         {
             _provider.Update(CommConfig);
         }
@@ -73,7 +61,19 @@ namespace sconnRem.ViewModel.Alarm
             _name = "Auth";
             this._provider = new GlobalConfigService(Manager);
         }
-        
+
+
+
+        public override bool IsNavigationTarget(NavigationContext navigationContext)
+        {
+            if (navigationContext.Uri.Equals(AlarmRegionNames.AlarmUri_Status_Device_List_View))
+            {
+                return true;    //singleton
+            }
+            return false;
+        }
+
+      
 
         [ImportingConstructor]
         public AlarmCommConfigViewModel(IRegionManager regionManager)

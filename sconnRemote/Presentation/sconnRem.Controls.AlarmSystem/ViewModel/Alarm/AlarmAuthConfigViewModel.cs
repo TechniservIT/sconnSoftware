@@ -10,42 +10,37 @@ using sconnConnector.POCO.Config.Abstract;
 using System.Windows.Input;
 using sconnConnector.POCO.Config.sconn;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.ComponentModel.Composition;
 using NLog;
+using Prism;
 using Prism.Mvvm;
 using Prism.Mef.Modularity;
 using Prism.Modularity;
 using Prism.Regions;
+using sconnRem.Controls.AlarmSystem.ViewModel.Generic;
+using sconnRem.Navigation;
 
 namespace sconnRem.ViewModel.Alarm
 {
 
 
     [Export]
-    public class AlarmAuthConfigViewModel : BindableBase    // ObservableObject, IPageViewModel    //  :  ViewModelBase<IGridNavigatedView>
+    public class AlarmAuthConfigViewModel : GenericAsyncConfigViewModel
     {
         public ObservableCollection<sconnAuthorizedDevice> AuthorizedDevices { get; set; }
         private AuthorizedDevicesConfigurationService _provider;
-        private readonly IRegionManager _regionManager;
-        private Logger _nlogger = LogManager.GetCurrentClassLogger();
-
+     
 
         public AlarmSystemConfigManager Manager { get; set; }
         
 
-        private string _name;
-        public string Name
-        {
-            get
-            {
-                return _name;
-            }
-        }
         
         private ICommand _getDataCommand;
         private ICommand _saveDataCommand;
 
-        private void GetData()
+        
+        public override void GetData()
         {
             try
             {
@@ -63,7 +58,7 @@ namespace sconnRem.ViewModel.Alarm
             }
         }
 
-        private void SaveData()
+        public  override  void SaveData()
         {
             _provider.SaveChanges();
         }
@@ -92,5 +87,16 @@ namespace sconnRem.ViewModel.Alarm
             GetData();
         }
         
+
+        public override bool IsNavigationTarget(NavigationContext navigationContext)
+        {
+            if (navigationContext.Uri.Equals(AlarmRegionNames.AlarmUri_Status_Device_List_View))
+            {
+                return true;    //singleton
+            }
+            return false;
+        }
+
+
     }
 }

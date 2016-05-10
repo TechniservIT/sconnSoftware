@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,34 +13,26 @@ using sconnRem.ViewModel.Generic;
 using Prism.Mvvm;
 using System.ComponentModel.Composition;
 using NLog;
+using Prism;
 using Prism.Regions;
 using sconnConnector.POCO.Config.sconn;
+using sconnRem.Controls.AlarmSystem.ViewModel.Generic;
 
 namespace sconnRem.ViewModel.Alarm
 {
 
     [Export]
-    public class AlarmDeviceConfigViewModel : BindableBase  //ObservableObject, IPageViewModel
+    public class AlarmDeviceConfigViewModel : GenericAsyncConfigViewModel
     {
         public sconnDevice Config { get; set; }
         private DeviceConfigService _provider;
         private AlarmSystemConfigManager _manager;
         private readonly IRegionManager _regionManager;
-        private Logger _nlogger = LogManager.GetCurrentClassLogger();
-
-        private string _name;
-        public string Name
-        {
-            get
-            {
-                return _name;
-            }
-        }
-        
+     
         private ICommand _getDataCommand;
         private ICommand _saveDataCommand;
 
-        private void GetData()
+        public override void GetData()
         {
             try
             {
@@ -52,7 +45,7 @@ namespace sconnRem.ViewModel.Alarm
             }
         }
 
-        private void SaveData()
+        public override void SaveData()
         {
             _provider.Update(Config);
         }
@@ -87,5 +80,12 @@ namespace sconnRem.ViewModel.Alarm
             get { return "pack://application:,,,/images/config1.png"; }
         }
 
+
+        public override void OnNavigatedTo(NavigationContext navigationContext)
+        {
+
+        }
+
+       
     }
 }

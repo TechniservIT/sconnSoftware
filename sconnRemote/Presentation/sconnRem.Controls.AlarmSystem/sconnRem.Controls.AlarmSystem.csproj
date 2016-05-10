@@ -94,6 +94,8 @@
     <Compile Include="ViewModel\Alarm\AlarmInputConfigViewModel.cs" />
     <Compile Include="ViewModel\Alarm\AlarmOutputConfigViewModel.cs" />
     <Compile Include="ViewModel\Alarm\AlarmSharedDeviceConfigViewModel.cs" />
+    <Compile Include="ViewModel\Generic\GenericAsyncConfigViewModel.cs" />
+    <Compile Include="ViewModel\Generic\IAsyncConfigViewModel.cs" />
     <Compile Include="View\Config\AlarmSystem\Abstract\AlarmConfigRegions.cs" />
     <Compile Include="View\Config\AlarmSystem\Abstract\IAlarmSystemDataRecordView.cs" />
     <Compile Include="View\Config\AlarmSystem\Auth\AlarmAuthConfigModule.cs" />
