@@ -57,7 +57,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Generic
                 Loading = false;
             };
 
-            Loading = true;
+           // Loading = true;
             bgWorker.RunWorkerAsync();
         }
 

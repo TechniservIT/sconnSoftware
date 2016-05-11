@@ -19,6 +19,7 @@ using Prism.Mef.Modularity;
 using Prism.Modularity;
 using Prism.Regions;
 using sconnRem.Controls.AlarmSystem.ViewModel.Generic;
+using sconnRem.Infrastructure.Navigation;
 using sconnRem.Navigation;
 
 namespace sconnRem.ViewModel.Alarm
@@ -68,10 +69,10 @@ namespace sconnRem.ViewModel.Alarm
         
 
         [ImportingConstructor]
-        public AlarmAuthConfigViewModel(IAlarmConfigManager manager, IRegionManager regionManager)
+        public AlarmAuthConfigViewModel(IRegionManager regionManager)
         {
             Config = new ObservableCollection<sconnAuthorizedDevice>();
-            this.Manager = (AlarmSystemConfigManager) manager;
+            this.Manager = SiteNavigationManager.alarmSystemConfigManager;
             this._provider = new AuthorizedDevicesConfigurationService(this.Manager);
             this._regionManager = regionManager;
             GetData();

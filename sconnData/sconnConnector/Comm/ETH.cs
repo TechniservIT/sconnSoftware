@@ -257,11 +257,22 @@ namespace sconnConnector
 
                 catch (Exception e)
                 {
+                    CloseSocket();
                     NetworkClientStatusUpdateService.OnConnectionError(e.Message);
                     nlogger.ErrorException(e.Message, e);
-                    clientSocket = null;    //.Shutdown(SocketShutdown.Both);
-                    //clientSocket.Close();
                     return false;
+                }
+            }
+        }
+
+        public void CloseSocket()
+        {
+
+            if (clientSocket != null)
+            {
+                if (clientSocket.Connected)
+                {
+                    clientSocket.Shutdown(SocketShutdown.Both);
                 }
             }
         }
