@@ -180,7 +180,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
 
         public override bool IsNavigationTarget(NavigationContext navigationContext)
         {
-            if (navigationContext.Uri.Equals(AlarmRegionNames.AlarmUri_Status_Device_List_View))
+            if (navigationContext.Uri.OriginalString.Equals(AlarmRegionNames.AlarmStatus_Contract_EventsView))
             {
                 return true;    //singleton
             }

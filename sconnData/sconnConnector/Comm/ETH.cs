@@ -259,8 +259,8 @@ namespace sconnConnector
                 {
                     NetworkClientStatusUpdateService.OnConnectionError(e.Message);
                     nlogger.ErrorException(e.Message, e);
-                    clientSocket.Shutdown(SocketShutdown.Both);
-                    clientSocket.Close();
+                    clientSocket = null;    //.Shutdown(SocketShutdown.Both);
+                    //clientSocket.Close();
                     return false;
                 }
             }

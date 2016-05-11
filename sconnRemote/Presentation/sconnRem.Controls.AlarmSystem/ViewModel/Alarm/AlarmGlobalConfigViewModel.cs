@@ -63,13 +63,17 @@ namespace sconnRem.ViewModel.Alarm
             this._manager = SiteNavigationManager.alarmSystemConfigManager;
             this._provider = new GlobalConfigService(_manager);
             this._regionManager = regionManager;
-            GetData();
         }
 
 
         public override bool IsNavigationTarget(NavigationContext navigationContext)
         {
-            if (navigationContext.Uri.Equals(AlarmRegionNames.AlarmStatus_Contract_Global_View))
+            if (
+                navigationContext.Uri.OriginalString.Equals(AlarmRegionNames.AlarmStatus_Contract_Global_View) ||
+                navigationContext.Uri.OriginalString.Equals(AlarmRegionNames.AlarmStatus_Contract_NetworkView) ||
+                navigationContext.Uri.OriginalString.Equals(AlarmRegionNames.AlarmStatus_Contract_PowerView)  
+
+                )
             {
                 return true;    //singleton
             }

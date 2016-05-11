@@ -32,10 +32,10 @@ namespace sconnRem.ViewModel.Alarm
 
         public override bool IsNavigationTarget(NavigationContext navigationContext)
         {
-            if (navigationContext.Uri.Equals(AlarmRegionNames.AlarmUri_Status_Device_List_View))
-            {
-                return true;    //singleton
-            }
+            //if (navigationContext.Uri.OriginalString.Equals(AlarmRegionNames.AlarmConfig_Contract_Device_Sensor_View))
+            //{
+            //    return true;    //singleton
+            //}
             return false;
         }
 

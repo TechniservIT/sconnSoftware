@@ -13,6 +13,7 @@ using Prism.Regions;
 using sconnConnector.Config;
 using sconnConnector.POCO.Config;
 using sconnPrismSharedContext;
+using sconnRem.Controls.AlarmSystem.ViewModel.Generic;
 using sconnRem.Infrastructure.Navigation;
 using sconnRem.Navigation;
 
@@ -20,38 +21,17 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
 {
     [Export]
     [PartCreationPolicy(CreationPolicy.NonShared)]
-    public class AlarmOutputConfigViewModel : BindableBase, INavigationAware 
+    public class AlarmOutputConfigViewModel : GenericAsyncConfigViewModel
     {
         public sconnOutput Config { get; set; }
         private DeviceConfigService _provider;
         private AlarmSystemConfigManager _manager;
-        private readonly IRegionManager _regionManager;
-        private Logger _nlogger = LogManager.GetCurrentClassLogger();
+      
         private IRegionNavigationJournal navigationJournal;
 
-        private string _name;
-        public string Name
-        {
-            get
-            {
-                return _name;
-            }
-        }
 
         public ICommand NavigateBackCommand { get; set; }
         public ICommand SaveConfigCommand { get; set; }
-
-        private void GetData()
-        {
-            try
-            {
-
-            }
-            catch (Exception ex)
-            {
-                _nlogger.Error(ex, ex.Message);
-            }
-        }
 
         public AlarmOutputConfigViewModel()
         {
@@ -72,7 +52,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
             }
         }
 
-        private void SaveData()
+        public override void SaveData()
         {
             SiteNavigationManager.SaveOutput(this.Config);
         }
@@ -97,7 +77,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
             get { return "pack://application:,,,/images/config1.png"; }
         }
 
-        public void OnNavigatedTo(NavigationContext navigationContext)
+        public override  void OnNavigatedTo(NavigationContext navigationContext)
         {
             string inputId = (string)navigationContext.Parameters[AlarmRegionNames.AlarmConfig_Contract_Input_Config_View_Key_Name];
             if (inputId != null)
@@ -108,7 +88,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
             this.navigationJournal = navigationContext.NavigationService.Journal;
         }
 
-        public bool IsNavigationTarget(NavigationContext navigationContext)
+        public override bool IsNavigationTarget(NavigationContext navigationContext)
         {
             if (this.Config == null)
             {
@@ -118,11 +98,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
             var inputId = navigationContext.Parameters[AlarmRegionNames.AlarmConfig_Contract_Input_Config_View_Key_Name]; // GetRequestedEmailId(navigationContext);
             return inputId.Equals(Config.UUID);
         }
-
-        public void OnNavigatedFrom(NavigationContext navigationContext)
-        {
-
-        }
+        
     }
 
 }

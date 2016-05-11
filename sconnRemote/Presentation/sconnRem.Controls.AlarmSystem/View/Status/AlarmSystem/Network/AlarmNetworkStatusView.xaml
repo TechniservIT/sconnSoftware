@@ -4,10 +4,16 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:sconnRem.Controls.AlarmSystem.View.Status.AlarmSystem.Network"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-        <Label x:Name="label" Content="Network" HorizontalAlignment="Left" Margin="61,112,0,0" VerticalAlignment="Top" Height="98" Width="184"/>
 
-    </Grid>
+    <xctk:BusyIndicator  IsBusy="{Binding Loading}">
+        <Grid>
+            <Label x:Name="label" Content="Network" HorizontalAlignment="Left" Margin="61,112,0,0" VerticalAlignment="Top" Height="98" Width="184"/>
+
+        </Grid>
+    </xctk:BusyIndicator>
+    
+
 </UserControl>

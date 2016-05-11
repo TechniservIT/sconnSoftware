@@ -66,7 +66,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
 
         public override bool IsNavigationTarget(NavigationContext navigationContext)
         {
-            if (navigationContext.Uri.Equals(AlarmRegionNames.AlarmStatus_Contract_Global_View))
+            if (navigationContext.Uri.OriginalString.Equals(AlarmRegionNames.AlarmStatus_Contract_PowerView))
             {
                 return true;    //singleton
             }

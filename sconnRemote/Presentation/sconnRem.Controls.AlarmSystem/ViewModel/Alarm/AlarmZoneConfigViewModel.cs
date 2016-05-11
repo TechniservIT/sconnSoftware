@@ -14,32 +14,22 @@ using Prism.Mvvm;
 using System.ComponentModel.Composition;
 using NLog;
 using Prism.Regions;
+using sconnRem.Controls.AlarmSystem.ViewModel.Generic;
 using sconnRem.Infrastructure.Navigation;
 
 namespace sconnRem.ViewModel.Alarm
 {
     [Export]
-    public class AlarmZoneConfigViewModel : BindableBase    // ObservableObject, IPageViewModel
+    public class AlarmZoneConfigViewModel : GenericAsyncConfigViewModel
     {
         public ObservableCollection<sconnAlarmZone> Config { get; set; }
         private ZoneConfigurationService _provider;
         private AlarmSystemConfigManager _manager;
-        private readonly IRegionManager _regionManager;
-        private Logger _nlogger = LogManager.GetCurrentClassLogger();
-
-        private string _name;
-        public string Name
-        {
-            get
-            {
-                return _name;
-            }
-        }
-        
+      
         private ICommand _getDataCommand;
         private ICommand _saveDataCommand;
 
-        private void GetData()
+        public override void GetData()
         {
             try
             {
@@ -52,7 +42,7 @@ namespace sconnRem.ViewModel.Alarm
             }
         }
 
-        private void SaveData()
+        public override void SaveData()
         {
             foreach (var item in Config)
             {
@@ -74,18 +64,7 @@ namespace sconnRem.ViewModel.Alarm
             this._manager = SiteNavigationManager.alarmSystemConfigManager;
             this._provider = new ZoneConfigurationService(_manager);
             this._regionManager = regionManager;
-            GetData();
         }
-
-        //[ImportingConstructor]
-        //public AlarmZoneConfigViewModel(IAlarmConfigManager manager, IRegionManager regionManager)
-        //{
-        //    Config = new ObservableCollection<sconnAlarmZone>();
-        //    this._manager = (AlarmSystemConfigManager)manager;
-        //    this._provider = new ZoneConfigurationService(_manager);
-        //    this._regionManager = regionManager;
-        //    GetData();
-        //}
 
         public string DisplayedImagePath
         {

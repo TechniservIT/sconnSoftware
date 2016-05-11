@@ -18,6 +18,7 @@ using Prism;
 using Prism.Commands;
 using sconnConnector.POCO.Config;
 using sconnPrismSharedContext;
+using sconnRem.Controls.AlarmSystem.ViewModel.Generic;
 using sconnRem.Infrastructure.Navigation;
 using sconnRem.Navigation;
 
@@ -25,7 +26,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
 {
     
     [Export]
-    public class AlarmSharedDeviceConfigViewModel : BindableBase, IActiveAware, INavigationAware, INotifyPropertyChanged   //ObservableObject, IPageViewModel
+    public class AlarmSharedDeviceConfigViewModel : GenericAsyncConfigViewModel
     {
 
         private sconnDevice _Config = new sconnDevice();
@@ -55,22 +56,11 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
             get { return _ActiveRelay; }
             set { SetProperty(ref _ActiveRelay, value); }
         }
-
-        //public sconnInput ActiveInput { get; set; } = new sconnInput();
-
-        //public sconnOutput ActiveOutput { get; set; } = new sconnOutput();
-
-        //public sconnRelay ActiveRelay { get; set; } = new sconnRelay();
-
-
+        
         public int ChangeTrack { get; set; }
 
         private DeviceConfigService _provider;
         private AlarmSystemConfigManager _manager;
-        private readonly IRegionManager _regionManager;
-        private Logger _nlogger = LogManager.GetCurrentClassLogger();
-
-        private string _name;
         private bool _isActive;
 
         public void UpdateActiveIo()
@@ -88,65 +78,23 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
             OnPropertyChanged();
         }
 
-        bool INavigationAware.IsNavigationTarget(NavigationContext navigationContext)
+        public override bool IsNavigationTarget(NavigationContext navigationContext)
         {
             UpdateActiveIo();
 
             return true;
 
-            //if (SiteNavigationManager.CurrentContextDevice != this.Config ||
-            //    SiteNavigationManager.activeInput != this.ActiveInput ||
-            //    SiteNavigationManager.activeOutput != this.ActiveOutput ||
-            //    SiteNavigationManager.activeRelay != this.ActiveRelay
-            //    )
-            //{
-            //    return false;
-            //}
-            //else
-            //{
-            //    return true;
-            //}
         }
-
-        void INavigationAware.OnNavigatedFrom(NavigationContext navigationContext)
-        {
-        }
-
-        void INavigationAware.OnNavigatedTo(NavigationContext navigationContext)
+        
+        public override void OnNavigatedTo(NavigationContext navigationContext)
         {
             UpdateActiveIo();
-        }
-
-        public string Name
-        {
-            get
-            {
-                return _name;
-            }
         }
 
         public ICommand NavigateBackCommand { get; set; }
         public ICommand SaveCommand { get; set; }
 
-        public bool IsActive
-        {
-            get { return _isActive; }
-            set
-            {
-                if (_isActive != value)
-                {
-                    _isActive = value;
-
-                    UpdateActiveIo();
-
-                    GetData();
-                }
-            }
-        }
-
-        public event EventHandler IsActiveChanged;
-
-        private void GetData()
+        public override void GetData()
         {
             try
             {
@@ -160,7 +108,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
             }
         }
 
-        private void SaveData()
+        public override void SaveData()
         {
             //copy back activated IO
             try
