@@ -536,3 +536,9 @@ I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSys
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\obj\Debug\View\Status\AlarmSystem\PowerSupply\AlarmPowerStatusListView.g.cs
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\obj\Debug\View\Status\AlarmSystem\Network\AlarmNetworkStatusView.baml
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\obj\Debug\View\Status\AlarmSystem\PowerSupply\AlarmPowerStatusListView.baml
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\obj\Debug\View\Status\AlarmSystem\Device\AlarmSystemDeviceAuthListView.g.cs
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\obj\Debug\View\Status\AlarmSystem\Gsm\AlarmGsmRcptListView.g.cs
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\obj\Debug\View\Status\AlarmSystem\Users\AlarmUsersListView.g.cs
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\obj\Debug\View\Status\AlarmSystem\Device\AlarmSystemDeviceAuthListView.baml
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\obj\Debug\View\Status\AlarmSystem\Gsm\AlarmGsmRcptListView.baml
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\obj\Debug\View\Status\AlarmSystem\Users\AlarmUsersListView.baml

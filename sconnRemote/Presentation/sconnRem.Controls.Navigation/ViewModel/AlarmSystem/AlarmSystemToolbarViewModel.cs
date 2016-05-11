@@ -45,6 +45,9 @@ namespace sconnRem.Controls.Navigation.ViewModel.AlarmSystem
         public ICommand Show_Alarm_Events_Command { get; set; }
         public ICommand Show_Alarm_Power_Command { get; set; }
 
+        public ICommand Show_Alarm_HumiditySensors_Command { get; set; }
+        public ICommand Show_Alarm_TempratureSensors_Command { get; set; }
+        public ICommand Show_Alarm_GsmRcpts_Command { get; set; }
 
         private void ViewSite(sconnSite site)
         {
@@ -145,6 +148,7 @@ namespace sconnRem.Controls.Navigation.ViewModel.AlarmSystem
         }
 
 
+
         private void ShowAuthConfig(sconnSite site)
         {
             NavigateToAlarmContract(AlarmRegionNames.AlarmConfig_Contract_AuthConfigView);
@@ -163,6 +167,21 @@ namespace sconnRem.Controls.Navigation.ViewModel.AlarmSystem
         private void ShowPowerConfig(sconnSite site)
         {
             NavigateToAlarmContract(AlarmRegionNames.AlarmStatus_Contract_PowerView);
+        }
+
+        private void ShowTemperatureSensorsList(sconnSite site)
+        {
+            NavigateToAlarmContract(AlarmRegionNames.AlarmStatus_Contract_TemperatureSensorsView);
+        }
+        
+        private void ShowHumiditySensorsList(sconnSite site)
+        {
+            NavigateToAlarmContract(AlarmRegionNames.AlarmStatus_Contract_HumiditySensorsView);
+        }
+
+        private void ShowGsmRcptsList(sconnSite site)
+        {
+            NavigateToAlarmContract(AlarmRegionNames.AlarmConfig_Contract_GsmRcptConfigView);
         }
 
 
@@ -185,6 +204,9 @@ namespace sconnRem.Controls.Navigation.ViewModel.AlarmSystem
             Show_Alarm_Events_Command = new DelegateCommand<sconnSite>(ShowEventsConfig);
             Show_Alarm_Power_Command = new DelegateCommand<sconnSite>(ShowPowerConfig);
 
+            Show_Alarm_HumiditySensors_Command = new DelegateCommand<sconnSite>(ShowHumiditySensorsList);
+            Show_Alarm_TempratureSensors_Command = new DelegateCommand<sconnSite>(ShowTemperatureSensorsList);
+            Show_Alarm_GsmRcpts_Command = new DelegateCommand<sconnSite>(ShowGsmRcptsList);
         }
 
         public AlarmSystemToolbarViewModel()
