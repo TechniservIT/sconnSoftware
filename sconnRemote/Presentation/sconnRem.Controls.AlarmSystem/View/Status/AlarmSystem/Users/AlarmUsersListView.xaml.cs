@@ -13,30 +13,37 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using AlarmSystemManagmentService;
 using NLog;
 using Prism.Regions;
-using sconnRem.Controls.AlarmSystem.ViewModel.Alarm;
 using sconnRem.Navigation;
+using sconnRem.ViewModel.Alarm;
 
-namespace sconnRem.Controls.AlarmSystem.View.Status.AlarmSystem.Environmental
+namespace sconnRem.Controls.AlarmSystem.View.Status.AlarmSystem.Users
 {
 
-    [Export(AlarmRegionNames.AlarmStatus_Contract_HumiditySensorsView)]
+    [Export(AlarmRegionNames.AlarmConfig_Contract_UsersConfigView)]
     [ViewSortHint("01")]
     [PartCreationPolicy(CreationPolicy.Shared)]
-    public partial class AlarmHumiditySensorsListView : UserControl
+    public partial class AlarmUsersListView : UserControl
     {
         private const string MainContentRegionName = GlobalViewRegionNames.MainGridContentRegion;
         private Logger _nlogger = LogManager.GetCurrentClassLogger();
 
-        [Import] public IRegionManager RegionManager;
+        private static Uri configureUri = new Uri(AlarmRegionNames.AlarmStatus_Contract_EventsView,
+            UriKind.Relative);
+
+        [Import]
+        public IRegionManager RegionManager;
 
         [ImportingConstructor]
-        public AlarmHumiditySensorsListView(AlarmHumiditySensorsListViewModel viewModel)
+        public AlarmUsersListView(AlarmUsersConfigViewModel viewModel)
         {
             this.DataContext = viewModel;
             InitializeComponent();
         }
+
     }
+
 
 }

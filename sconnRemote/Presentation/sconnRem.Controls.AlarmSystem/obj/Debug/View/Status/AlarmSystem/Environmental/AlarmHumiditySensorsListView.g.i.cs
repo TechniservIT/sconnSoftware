@@ -40,6 +40,14 @@ namespace sconnRem.Controls.AlarmSystem.View.Status.AlarmSystem.Environmental {
     /// </summary>
     public partial class AlarmHumiditySensorsListView : System.Windows.Controls.UserControl, System.Windows.Markup.IComponentConnector {
         
+        
+        #line 31 "..\..\..\..\..\..\View\Status\AlarmSystem\Environmental\AlarmHumiditySensorsListView.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.ListBox OrdersListBox;
+        
+        #line default
+        #line hidden
+        
         private bool _contentLoaded;
         
         /// <summary>
@@ -69,6 +77,12 @@ namespace sconnRem.Controls.AlarmSystem.View.Status.AlarmSystem.Environmental {
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1800:DoNotCastUnnecessarily")]
         void System.Windows.Markup.IComponentConnector.Connect(int connectionId, object target) {
+            switch (connectionId)
+            {
+            case 1:
+            this.OrdersListBox = ((System.Windows.Controls.ListBox)(target));
+            return;
+            }
             this._contentLoaded = true;
         }
     }

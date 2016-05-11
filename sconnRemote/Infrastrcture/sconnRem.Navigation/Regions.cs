@@ -12,12 +12,13 @@ namespace sconnRem.Navigation
         public const String MainContentRegion = "MainContentRegion";
         public const String MainNavigationRegion = "MainNavigationRegion";
 
-        public const String AlarmConfig_Contract_AuthConfigView = "AuthConfigView";
-        public const String AlarmConfig_Contract_GlobalConfigView = "GlobalConfigView";
-        public const String AlarmConfig_Contract_CommConfigView = "CommConfigView";
-        public const String AlarmConfig_Contract_GsmConfigView = "GsmConfigView";
-        public const String AlarmConfig_Contract_ZoneConfigView = "ZoneConfigView";
-        public const String AlarmConfig_Contract_UsersConfigView = "UserConfigView";
+        public const String AlarmConfig_Contract_AuthConfigView = "AuthConfigViewContract";
+        public const String AlarmConfig_Contract_GlobalConfigView = "GlobalConfigViewContract";
+        public const String AlarmConfig_Contract_CommConfigView = "CommConfigViewContract";
+        public const String AlarmConfig_Contract_GsmConfigView = "GsmConfigViewContract";
+        public const String AlarmConfig_Contract_GsmRcptConfigView = "GsmRcptConfigViewContract";
+        public const String AlarmConfig_Contract_ZoneConfigView = "ZoneConfigViewContract";
+        public const String AlarmConfig_Contract_UsersConfigView = "UserConfigViewContract";
         
 
         #region AlarmSystemEntitiesView
@@ -32,6 +33,9 @@ namespace sconnRem.Navigation
             public const String AlarmStatus_Contract_PowerView = "AlarmPowerViewContract";
             public const String AlarmStatus_Contract_NetworkView = "AlarmNetworkViewContract";
 
+            public const String AlarmStatus_Contract_TemperatureSensorsView = "AlarmTemperatureSensorsViewContract";
+            public const String AlarmStatus_Contract_HumiditySensorsView = "AlarmHumiditySensorsViewContract";
+
         public static Uri AlarmUri_Status_Inputs_View = new Uri(AlarmStatus_Contract_InputsView, UriKind.Relative);
             public static Uri AlarmUri_Status_Outputs_View = new Uri(AlarmStatus_Contract_OutputsView, UriKind.Relative);
             public static Uri AlarmUri_Status_Relays_View = new Uri(AlarmStatus_Contract_RelaysView, UriKind.Relative);
@@ -42,6 +46,7 @@ namespace sconnRem.Navigation
             public static Uri AlarmUri_Status_Power_View = new Uri(AlarmStatus_Contract_PowerView, UriKind.Relative);
             public static Uri AlarmUri_Status_Network_View = new Uri(AlarmStatus_Contract_NetworkView, UriKind.Relative);
 
+
         #endregion
 
 
@@ -49,13 +54,14 @@ namespace sconnRem.Navigation
         #region AlarmSystemEntitiesConfig
 
         public const String AlarmConfig_Contract_Input_Config_View = "AlarmInputConfigureView";
-            public const String AlarmConfig_Contract_Input_Config_View_Key_Name = "InputUuid";
 
-            public const String AlarmConfig_Contract_Output_Config_View = "AlarmOutputConfigureView";
-            public const String AlarmConfig_Contract_Relay_Config_View = "AlarmRelayConfigureView";
-            public const String AlarmConfig_Contract_Zone_Config_View = "AlarmZoneConfigureView";
-            public const String AlarmConfig_Contract_Sensor_Config_View = "AlarmSensorConfigureView";
-            public const String AlarmConfig_Contract_Device_Config_View = "AlarmDeviceConfigureView";
+        public const String AlarmConfig_Contract_Input_Config_View_Key_Name = "InputUuid";
+
+            public const String AlarmConfig_Contract_Output_Config_View = "AlarmOutputConfigureViewContract";
+            public const String AlarmConfig_Contract_Relay_Config_View = "AlarmRelayConfigureViewContract";
+            public const String AlarmConfig_Contract_Zone_Config_View = "AlarmZoneConfigureViewContract";
+            public const String AlarmConfig_Contract_Sensor_Config_View = "AlarmSensorConfigureViewContract";
+            public const String AlarmConfig_Contract_Device_Config_View = "AlarmDeviceConfigureViewContract";
         
 
         public static Uri AlarmUri_Config_Input_View = new Uri(AlarmConfig_Contract_Input_Config_View, UriKind.Relative);

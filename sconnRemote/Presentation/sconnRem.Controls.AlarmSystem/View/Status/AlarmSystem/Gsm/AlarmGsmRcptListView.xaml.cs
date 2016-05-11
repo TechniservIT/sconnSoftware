@@ -15,28 +15,29 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using NLog;
 using Prism.Regions;
-using sconnRem.Controls.AlarmSystem.ViewModel.Alarm;
 using sconnRem.Navigation;
+using sconnRem.ViewModel.Alarm;
 
-namespace sconnRem.Controls.AlarmSystem.View.Status.AlarmSystem.Environmental
+namespace sconnRem.Controls.AlarmSystem.View.Status.AlarmSystem.Gsm
 {
-
-    [Export(AlarmRegionNames.AlarmStatus_Contract_HumiditySensorsView)]
+    [Export(AlarmRegionNames.AlarmConfig_Contract_GsmRcptConfigView)]
     [ViewSortHint("01")]
     [PartCreationPolicy(CreationPolicy.Shared)]
-    public partial class AlarmHumiditySensorsListView : UserControl
+    public partial class AlarmGsmRcptListView : UserControl
     {
         private const string MainContentRegionName = GlobalViewRegionNames.MainGridContentRegion;
         private Logger _nlogger = LogManager.GetCurrentClassLogger();
 
-        [Import] public IRegionManager RegionManager;
+        [Import]
+        public IRegionManager RegionManager;
 
         [ImportingConstructor]
-        public AlarmHumiditySensorsListView(AlarmHumiditySensorsListViewModel viewModel)
+        public AlarmGsmRcptListView(AlarmGsmConfigViewModel viewModel)
         {
             this.DataContext = viewModel;
             InitializeComponent();
         }
+
     }
 
 }
