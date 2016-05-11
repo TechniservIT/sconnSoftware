@@ -17,6 +17,7 @@ using Prism.Regions;
 using sconnConnector.POCO.Config.sconn;
 using sconnRem.Controls.AlarmSystem.ViewModel.Generic;
 using sconnRem.Infrastructure.Navigation;
+using sconnRem.Navigation;
 
 namespace sconnRem.ViewModel.Alarm
 {
@@ -59,9 +60,14 @@ namespace sconnRem.ViewModel.Alarm
             this._provider = new GsmConfigurationService(_manager);
         }
 
-                  
-
-            
+        public override bool IsNavigationTarget(NavigationContext navigationContext)
+        {
+            if (navigationContext.Uri.OriginalString.Equals(AlarmRegionNames.AlarmConfig_Contract_GsmRcptConfigView))
+            {
+                return true;    //singleton
+            }
+            return false;
+        }
 
         [ImportingConstructor]
         public AlarmGsmConfigViewModel(IRegionManager regionManager)

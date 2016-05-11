@@ -16,6 +16,7 @@ using NLog;
 using Prism.Regions;
 using sconnRem.Controls.AlarmSystem.ViewModel.Generic;
 using sconnRem.Infrastructure.Navigation;
+using sconnRem.Navigation;
 
 namespace sconnRem.ViewModel.Alarm
 {
@@ -70,6 +71,16 @@ namespace sconnRem.ViewModel.Alarm
         {
             get { return "pack://application:,,,/images/strefy1.png"; }
         }
+
+        public override bool IsNavigationTarget(NavigationContext navigationContext)
+        {
+            if (navigationContext.Uri.OriginalString.Equals(AlarmRegionNames.AlarmConfig_Contract_ZoneConfigView))
+            {
+                return true;    //singleton
+            }
+            return false;
+        }
+
 
     }
 

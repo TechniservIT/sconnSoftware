@@ -249,7 +249,14 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
 
         public override bool IsNavigationTarget(NavigationContext navigationContext)
         {
-            if (navigationContext.Uri.OriginalString.Equals(AlarmRegionNames.AlarmStatus_Contract_Device_List_View))
+            if (
+                navigationContext.Uri.OriginalString.Equals(AlarmRegionNames.AlarmStatus_Contract_Device_List_View) ||
+                navigationContext.Uri.OriginalString.Equals(AlarmRegionNames.AlarmStatus_Contract_InputsView) ||
+                navigationContext.Uri.OriginalString.Equals(AlarmRegionNames.AlarmStatus_Contract_OutputsView) ||
+                navigationContext.Uri.OriginalString.Equals(AlarmRegionNames.AlarmStatus_Contract_RelaysView)    ||
+                 navigationContext.Uri.OriginalString.Equals(AlarmRegionNames.AlarmStatus_Contract_HumiditySensorsView) ||
+                  navigationContext.Uri.OriginalString.Equals(AlarmRegionNames.AlarmStatus_Contract_TemperatureSensorsView)
+                )
             {
                 return true;    //singleton
             }

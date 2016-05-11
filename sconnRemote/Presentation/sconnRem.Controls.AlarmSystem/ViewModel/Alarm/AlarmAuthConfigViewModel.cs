@@ -28,13 +28,9 @@ namespace sconnRem.ViewModel.Alarm
     [Export]
     public class AlarmAuthConfigViewModel : GenericAsyncConfigViewModel
     {
-        public ObservableCollection<sconnAuthorizedDevice> AuthorizedDevices { get; set; }
+        public ObservableCollection<sconnAuthorizedDevice> Config { get; set; }
         private AuthorizedDevicesConfigurationService _provider;
-     
-
         public AlarmSystemConfigManager Manager { get; set; }
-        
-
         
         private ICommand _getDataCommand;
         private ICommand _saveDataCommand;
@@ -44,13 +40,7 @@ namespace sconnRem.ViewModel.Alarm
         {
             try
             {
-
-                AuthorizedDevices.Clear();
-                var retr = _provider.GetAll();
-                foreach (var item in retr)
-                {
-                    AuthorizedDevices.Add(item);
-                }
+                Config = new ObservableCollection<sconnAuthorizedDevice>(_provider.GetAll());
             }
             catch (Exception ex)
             {
@@ -72,7 +62,7 @@ namespace sconnRem.ViewModel.Alarm
         public AlarmAuthConfigViewModel()
         {
             _name = "Auth";
-            AuthorizedDevices = new ObservableCollection<sconnAuthorizedDevice>();
+            Config = new ObservableCollection<sconnAuthorizedDevice>();
             this._provider = new AuthorizedDevicesConfigurationService(Manager);
         }
         
@@ -80,7 +70,7 @@ namespace sconnRem.ViewModel.Alarm
         [ImportingConstructor]
         public AlarmAuthConfigViewModel(IAlarmConfigManager manager, IRegionManager regionManager)
         {
-            AuthorizedDevices = new ObservableCollection<sconnAuthorizedDevice>();
+            Config = new ObservableCollection<sconnAuthorizedDevice>();
             this.Manager = (AlarmSystemConfigManager) manager;
             this._provider = new AuthorizedDevicesConfigurationService(this.Manager);
             this._regionManager = regionManager;

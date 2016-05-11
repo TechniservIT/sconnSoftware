@@ -30,9 +30,6 @@ namespace sconnRem.Controls.AlarmSystem.View.Status.AlarmSystem.Users
         private const string MainContentRegionName = GlobalViewRegionNames.MainGridContentRegion;
         private Logger _nlogger = LogManager.GetCurrentClassLogger();
 
-        private static Uri configureUri = new Uri(AlarmRegionNames.AlarmStatus_Contract_EventsView,
-            UriKind.Relative);
-
         [Import]
         public IRegionManager RegionManager;
 

@@ -18,6 +18,7 @@ using sconnConnector.POCO.Config;
 using sconnConnector.POCO.Config.sconn;
 using sconnRem.Controls.AlarmSystem.ViewModel.Generic;
 using sconnRem.Infrastructure.Navigation;
+using sconnRem.Navigation;
 
 namespace sconnRem.ViewModel.Alarm
 {
@@ -74,6 +75,16 @@ namespace sconnRem.ViewModel.Alarm
         {
             get { return "pack://application:,,,/images/user.png"; }
         }
+
+        public override bool IsNavigationTarget(NavigationContext navigationContext)
+        {
+            if (navigationContext.Uri.OriginalString.Equals(AlarmRegionNames.AlarmConfig_Contract_UsersConfigView))
+            {
+                return true;    //singleton
+            }
+            return false;
+        }
+
 
     }
 
