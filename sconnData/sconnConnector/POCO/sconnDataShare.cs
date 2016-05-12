@@ -984,7 +984,7 @@ namespace sconnConnector
 
 
         /******************   NET   *************/
-        public const int NET_MAX_TX_SIZE = 1024;
+        public const int NET_MAX_TX_SIZE = 2048;
         public const int NET_MAX_RX_SIZE = 2048;
         public const int NET_MAX_SESSION_IDLE_SEC = 100;
         public const int NET_DATA_PACKET_CONTROL_BYTES = 2;

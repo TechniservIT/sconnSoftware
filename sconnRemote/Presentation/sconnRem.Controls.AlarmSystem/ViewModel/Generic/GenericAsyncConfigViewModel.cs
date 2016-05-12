@@ -43,7 +43,6 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Generic
         public bool IsActive { get; set; }
         public event EventHandler IsActiveChanged;
         public bool IsChanged { get; set; }
-        public event PropertyChangedEventHandler PropertyChanged;
         
         public virtual void OnNavigatedTo(NavigationContext navigationContext)
         {
@@ -57,7 +56,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Generic
                 Loading = false;
             };
 
-           // Loading = true;
+            Loading = true;
             bgWorker.RunWorkerAsync();
         }
 

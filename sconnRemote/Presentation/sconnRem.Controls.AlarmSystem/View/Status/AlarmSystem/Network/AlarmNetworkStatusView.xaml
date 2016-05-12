@@ -8,7 +8,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
 
-    <xctk:BusyIndicator  IsBusy="{Binding Loading}">
+    <xctk:BusyIndicator  IsBusy="{Binding Loading, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
         <Grid>
             <Label x:Name="label" Content="Network" HorizontalAlignment="Left" Margin="61,112,0,0" VerticalAlignment="Top" Height="98" Width="184"/>
 

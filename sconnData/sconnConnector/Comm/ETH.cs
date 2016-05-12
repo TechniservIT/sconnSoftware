@@ -68,7 +68,7 @@ namespace sconnConnector
             Hostname = hostname;
             Port = port;
             AuthenticationPassword = password;
-            ConnectionTimeoutMs = 1500;
+            ConnectionTimeoutMs = 2500;
 
             //SiteDiscovered = new EventHandler(OnSiteDiscovered());
          
@@ -786,7 +786,7 @@ namespace sconnConnector
         }
 
 
-        int ConnectionTimeoutMs = 1500;
+        int ConnectionTimeoutMs = 2500;
 
         // Incoming data from the client.
         public string soxData = null;
