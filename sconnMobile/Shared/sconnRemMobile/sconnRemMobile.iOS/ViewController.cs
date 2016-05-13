@@ -1,6 +1,9 @@
 ﻿using System;
+using AlarmSystemManagmentService;
 using sconnConnector;
+using sconnConnector.Config;
 using sconnConnector.POCO.Config;
+using sconnConnector.POCO.Device;
 using UIKit;
 
 namespace sconnRemMobile.iOS
@@ -25,7 +28,19 @@ namespace sconnRemMobile.iOS
 		    site.serverPort = 9898;
 		    site.authPasswd = "testpass";
          
-            
+            EndpointInfo info = new EndpointInfo();
+		    info.Hostname = site.serverIP;
+		    info.Port = site.serverPort;
+
+            DeviceCredentials cred = new DeviceCredentials();
+		    cred.Password = site.authPasswd;
+		    cred.Username = site.authPasswd;
+
+            AlarmSystemConfigManager man = new AlarmSystemConfigManager(info,cred);
+
+		    GlobalConfigService  gs = new GlobalConfigService(man);
+
+		    var dev = gs.Get();
 
             // Perform any additional setup after loading the view, typically from a nib.
             Button.AccessibilityIdentifier = "myButton";

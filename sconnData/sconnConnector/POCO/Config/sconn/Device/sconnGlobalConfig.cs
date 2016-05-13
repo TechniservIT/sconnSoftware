@@ -7,7 +7,7 @@ using sconnConnector.POCO.Config.Abstract;
 
 namespace sconnConnector.POCO.Config.sconn
 {
-    public class sconnGlobalConfig : IAlarmSystemNamedConfigurationEntity, ISerializableConfiguration, IFakeAbleConfiguration
+    public class sconnGlobalConfig : IAlarmSystemNamedEntity, ISerializableConfiguration, IFakeAbleConfiguration
     {
         private byte[] _memCFG;
         public byte[] memCFG
@@ -65,6 +65,10 @@ namespace sconnConnector.POCO.Config.sconn
             memCFG[ipcDefines.mAdrSysFail] = (byte)(Failure ? 1 : 0);
             memCFG[ipcDefines.mAdrDevNO + 1] = (byte)Devices;
             memCFG[ipcDefines.mAdrZoneNo] = (byte)Zones;
+
+            byte[] name = SerializeEntityNames();
+            name.CopyTo(memCFG,ipcDefines.mAddr_NAMES_Global_StartAddr);
+
             return memCFG;
         }
 
@@ -76,6 +80,7 @@ namespace sconnConnector.POCO.Config.sconn
             Failure = memCFG[ipcDefines.mAdrSysFail] > 0 ? true : false;
             Devices = (byte)(memCFG[ipcDefines.mAdrDevNO + 1]);
             Zones = (byte)(memCFG[ipcDefines.mAdrZoneNo]);
+            DeserializeEntityNames();
         }
 
         public void Fake()
@@ -83,15 +88,27 @@ namespace sconnConnector.POCO.Config.sconn
             
         }
 
-        public byte[] SerializeNames()
+        //public byte[] SerializeNames()
+        //{
+          
+        //}
+
+        //public void DeserializeNames(byte[] buffer)
+        //{
+           
+        //}
+
+        public byte[] SerializeEntityNames()
         {
-           return System.Text.Encoding.BigEndianUnicode.GetBytes(this.Name);
+            return System.Text.Encoding.BigEndianUnicode.GetBytes(this.Name);
         }
 
-        public void DeserializeNames(byte[] buffer)
+        public void DeserializeEntityNames()
         {
-            Name = System.Text.Encoding.BigEndianUnicode.GetString(buffer, 0, buffer.GetLength(0));
-        }
+            int zonesst = ipcDefines.mAddr_NAMES_Zone_StartAddr;
+            int ctrlst = ipcDefines.mAddr_NAMES_Global_StartAddr;
+            Name = System.Text.Encoding.BigEndianUnicode.GetString(this.memCFG, ipcDefines.mAddr_NAMES_Global_StartAddr, ipcDefines.RAM_NAME_SIZE);
+        } 
     }
 
 }

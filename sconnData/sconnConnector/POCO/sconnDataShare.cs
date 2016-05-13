@@ -647,7 +647,12 @@ namespace sconnConnector
         public const int GCFG_NAMES_MOD_CTR_POS  =    (GCFG_DEV_MOD_CTR_START_POS+GCFG_DEV_MOD_CTR_TOTAL_LEN);
         public const int GCFG_NAMES_MOD_CTR_LEN = SHA256_DIGEST_SIZE;
 
-        public const int GCFG_END_REG            =    (GCFG_NAMES_MOD_CTR_POS+GCFG_NAMES_MOD_CTR_LEN);
+        public const int mAddr_NAMES_Global_StartAddr = (GCFG_NAMES_MOD_CTR_POS + GCFG_NAMES_MOD_CTR_LEN);
+        public const int mAddr_NAMES_Global_SystemName_Pos = 0;
+        public const int RAM_NAMES_Global_Total_Records   = (mAddr_NAMES_Global_SystemName_Pos+1);
+        public const int RAM_NAMES_Global_Total_Size   =    (RAM_NAMES_Global_Total_Records*RAM_NAME_SIZE);
+
+        public const int GCFG_END_REG            =    (mAddr_NAMES_Global_StartAddr + RAM_NAMES_Global_Total_Size);
 
 
         public const int mAdrDevStart = 0x400; //1024- start address in memory of device configs
@@ -841,14 +846,16 @@ namespace sconnConnector
         public const int mAddr_NAMES_Outputs_Pos = (DeviceMaxInputs + mAddr_NAMES_Inputs_Pos);
         public const int mAddr_NAMES_Relays_Pos = (mAddr_NAMES_Outputs_Pos + DeviceMaxOutputs);
 
-        public const int mAddr_NAMES_Global_StartIndex = (mAddr_NAMES_Device_StartIndex + (RAM_DEV_NAMES_NO* RAM_DEVCFG_NO));
-        public const int mAddr_NAMES_Global_StartAddr = mAddr_NAMES_StartAddr + (RAM_DEV_NAMES_NO * RAM_NAME_SIZE);
-        public const int mAddr_NAMES_Global_SystemName_Pos = 0;
-        public const int RAM_NAMES_Global_Total_Records = (mAddr_NAMES_Global_SystemName_Pos + 1);
-        public const int RAM_NAMES_Global_Total_Size = (RAM_NAMES_Global_Total_Records * RAM_NAME_SIZE);
+        public const int RAM_TOTAL_DEVICE_NAMES_SIZE = (RAM_DEVICE_NAMES_SIZE*RAM_DEVCFG_NO);
 
-        public const int mAddr_NAMES_Zone_StartIndex = (mAddr_NAMES_Global_StartIndex + RAM_NAMES_Global_Total_Records);
-        public const int mAddr_NAMES_Zone_StartAddr = (mAddr_NAMES_Global_StartAddr + RAM_NAMES_Global_Total_Size);
+        //public const int mAddr_NAMES_Global_StartIndex = (mAddr_NAMES_Device_StartIndex + (RAM_DEV_NAMES_NO* RAM_DEVCFG_NO));
+        //public const int mAddr_NAMES_Global_StartAddr = mAddr_NAMES_StartAddr + (RAM_DEV_NAMES_NO * RAM_NAME_SIZE);
+        //public const int mAddr_NAMES_Global_SystemName_Pos = 0;
+        //public const int RAM_NAMES_Global_Total_Records = (mAddr_NAMES_Global_SystemName_Pos + 1);
+        //public const int RAM_NAMES_Global_Total_Size = (RAM_NAMES_Global_Total_Records * RAM_NAME_SIZE);
+
+        public const int mAddr_NAMES_Zone_StartIndex = (mAddr_NAMES_Device_StartIndex + RAM_DEV_NAMES_NO*RAM_DEVCFG_NO);
+        public const int mAddr_NAMES_Zone_StartAddr = (mAddr_NAMES_StartAddr + RAM_TOTAL_DEVICE_NAMES_SIZE);
         public const int RAM_ZONE_NAMES_SIZE = (ZONE_CFG_MAX_ZONES * RAM_NAME_SIZE);
 
 

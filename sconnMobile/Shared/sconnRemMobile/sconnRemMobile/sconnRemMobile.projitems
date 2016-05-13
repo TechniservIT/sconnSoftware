@@ -71,6 +71,22 @@
     <Compile Include="$(MSBuildThisFileDirectory)POCO\ISerializableConfiguration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)POCO\sconnDataShare.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)sconnConnector.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\Abstract\IEntityService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\AuthorizedDevices\AuthorizedDevicesConfigurationService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\AuthorizedDevices\IAuthorizedDevicesConfigurationService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\Device\AlarmDevicesConfigService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\Device\DeviceConfigService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\Device\IDeviceConfigService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\Event\EventsService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\Global\GlobalConfigService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\Global\IGlobalConfigService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\Gsm\GsmConfigurationService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\Gsm\IGsmConfigurationService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\IAlarmSystemConfigurationService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\Users\IUsersConfigurationService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\Users\UsersConfigurationService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\Zone\IZoneConfigurationService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\Zone\ZoneConfigurationService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Config\Manager\" />

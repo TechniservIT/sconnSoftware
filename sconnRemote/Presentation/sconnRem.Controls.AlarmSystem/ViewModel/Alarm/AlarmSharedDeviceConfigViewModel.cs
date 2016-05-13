@@ -114,7 +114,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
             try
             {
                 if (ActiveInput != null)
-                {
+                 {
                     sconnInput existing = Config.Inputs.First(i => i.Id == ActiveInput.Id);
                     existing?.CopyFrom(ActiveInput);
                 }
