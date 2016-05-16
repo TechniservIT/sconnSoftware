@@ -116,7 +116,7 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <Label Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" HorizontalContentAlignment="Stretch" Content="{Binding Config.Name}" FontSize="36" FontFamily="Motorwerk" VerticalAlignment="Center" />
+                    <Label Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" HorizontalContentAlignment="Stretch" Content="{Binding Config.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="36" FontFamily="Motorwerk" VerticalAlignment="Center" />
 
                     <Button Grid.Column="1" Grid.Row="0"  VerticalAlignment="Center" Height="Auto" Content="">
                         <Button.Template>

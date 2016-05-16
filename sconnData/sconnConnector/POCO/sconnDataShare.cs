@@ -637,6 +637,7 @@ namespace sconnConnector
         public const int mAdrGeo_Pos_LEN =  0x06;
 
 
+        /*
         public const int GCFG_HASH_POS  =  (mAdrGeo_Pos+mAdrGeo_Pos_LEN);
         public const int GCFG_HASH_LEN  =  SHA256_DIGEST_SIZE;
 
@@ -646,21 +647,26 @@ namespace sconnConnector
 
         public const int GCFG_NAMES_MOD_CTR_POS  =    (GCFG_DEV_MOD_CTR_START_POS+GCFG_DEV_MOD_CTR_TOTAL_LEN);
         public const int GCFG_NAMES_MOD_CTR_LEN = SHA256_DIGEST_SIZE;
+        */
 
-        public const int mAddr_NAMES_Global_StartAddr = (GCFG_NAMES_MOD_CTR_POS + GCFG_NAMES_MOD_CTR_LEN);
+        //public const int mAddr_NAMES_Global_StartAddr = (GCFG_NAMES_MOD_CTR_POS + GCFG_NAMES_MOD_CTR_LEN);
+
+        public const int mAddr_NAMES_Global_StartAddr = (mAdrGeo_Pos + mAdrGeo_Pos_LEN);
         public const int mAddr_NAMES_Global_SystemName_Pos = 0;
         public const int RAM_NAMES_Global_Total_Records   = (mAddr_NAMES_Global_SystemName_Pos+1);
-        public const int RAM_NAMES_Global_Total_Size   =    (RAM_NAMES_Global_Total_Records*RAM_NAME_SIZE);
+        public const int RAM_NAMES_Global_Total_Size   =   (RAM_NAMES_Global_Total_Records*RAM_NAME_SIZE);
 
-        public const int GCFG_END_REG            =    (mAddr_NAMES_Global_StartAddr + RAM_NAMES_Global_Total_Size);
+        public const int mAddr_Global_Config_Revision_StartAddr = (mAddr_NAMES_Global_StartAddr+RAM_NAMES_Global_Total_Size);
+        public const int  mAddr_Global_Config_Revision_Total_Size = 4;
+
+        public const int GCFG_END_REG =   (mAddr_Global_Config_Revision_StartAddr + mAddr_Global_Config_Revision_Total_Size);
 
 
+       // public const int GCFG_END_REG  =  (mAddr_NAMES_Global_StartAddr + RAM_NAMES_Global_Total_Size);
+        
         public const int mAdrDevStart = 0x400; //1024- start address in memory of device configs
         public const int mAdrGlobalConfig = 0x0000;
-
-
-
-
+        
         public const int mAdrSiteName = 0x0040; //16 char UTF8(4b) site nam
         public const int mAdrSitePasswd = 0x0080; // 32char UTF8 password
         public const int PasswordMaxChars = 32;
