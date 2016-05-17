@@ -108,20 +108,28 @@ namespace sconnConnector.POCO.Config.Abstract.Auth
                     Group = (sconnUserGroup)buffer[ipcDefines.AUTH_RECORD_GROUP_POS];
 
                     byte passLen = buffer[ipcDefines.AUTH_RECORD_PASS_LEN_POS];
-                    byte[] passwdBf = new byte[ipcDefines.AUTH_RECORD_PASSWD_LEN];
-                    for (int i = 0; i < passLen * 2; i++)
+                    if (passLen <= ipcDefines.AUTH_RECORD_PASSWD_LEN)
                     {
-                        passwdBf[i] = buffer[ipcDefines.AUTH_RECORD_PASSWD_POS + i];
+                        byte[] passwdBf = new byte[ipcDefines.AUTH_RECORD_PASSWD_LEN];
+                        for (int i = 0; i < passLen * 2; i++)
+                        {
+                            passwdBf[i] = buffer[ipcDefines.AUTH_RECORD_PASSWD_POS + i];
+                        }
+                        Password = Encoding.UTF8.GetString(passwdBf);
                     }
-                    Password = Encoding.UTF8.GetString(passwdBf);
+                   
 
                     byte logLen = buffer[ipcDefines.AUTH_RECORD_LOGIN_LEN];
-                    byte[] logBf = new byte[ipcDefines.AUTH_PASS_SIZE];
-                    for (int i = 0; i < logLen * 2; i++)
+                    if (logLen <= ipcDefines.AUTH_PASS_SIZE)
                     {
-                        logBf[i] = buffer[ipcDefines.AUTH_RECORD_LOGIN_POS + i];
+                        byte[] logBf = new byte[ipcDefines.AUTH_PASS_SIZE];
+                        for (int i = 0; i < logLen * 2; i++)
+                        {
+                            logBf[i] = buffer[ipcDefines.AUTH_RECORD_LOGIN_POS + i];
+                        }
+                        Login = Encoding.UTF8.GetString(logBf);
                     }
-                    Login = Encoding.UTF8.GetString(logBf);
+
                 } 
             }
             catch (Exception e)

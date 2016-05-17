@@ -21,13 +21,12 @@ using sconnRem.Navigation;
 namespace sconnRem.Controls.AlarmSystem.View.Status.Sensors
 {
 
-    [Export(AlarmRegionNames.AlarmStatus_Contract_RelaysView)]
+    [Export(AlarmRegionNames.AlarmStatus_Contract_SensorsView)]
     [ViewSortHint("01")]
     public partial class AlarmSystemSensorsView : UserControl, IPartImportsSatisfiedNotification
     {
-        private const string MainContentRegionName = GlobalViewRegionNames.MainGridContentRegion;   //GlobalViewRegionNames.MainGridContentRegion
+        private const string MainContentRegionName = GlobalViewRegionNames.MainGridContentRegion;   
         private Logger _nlogger = LogManager.GetCurrentClassLogger();
-        private static Uri configureUri = new Uri(AlarmRegionNames.AlarmStatus_Contract_RelaysView, UriKind.Relative);
 
         [Import]
         public IRegionManager RegionManager;
@@ -53,21 +52,7 @@ namespace sconnRem.Controls.AlarmSystem.View.Status.Sensors
         {
 
         }
-
-        private void Configure_Button_Click(object sender, RoutedEventArgs e)
-        {
-            this.RegionManager.RequestNavigate(GlobalViewRegionNames.MainGridContentRegion, configureUri
-                ,
-                (NavigationResult nr) =>
-                {
-                    var error = nr.Error;
-                    var result = nr.Result;
-                    if (error != null)
-                    {
-                        _nlogger.Error(error);
-                    }
-                });
-        }
+        
 
     }
 

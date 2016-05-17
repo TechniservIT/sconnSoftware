@@ -24,7 +24,7 @@ namespace sconnRem.View.Config
     /// </summary>
     /// 
 
-    [Export(AlarmRegionNames.AlarmConfig_Contract_CommConfigView)]
+ //   [Export(AlarmRegionNames.AlarmConfig_Contract_CommConfigView)]
     public partial class CommConfigView : UserControl
     {
         //[Import]

@@ -1045,39 +1045,42 @@ namespace sconnConnector
 
         /***************    EVENTS      *****************/
 
-        public const byte EVENT_DB_INFO_EVNO_POS =  0x00;
-        public const byte EVENT_DB_INFO_EVNO_LEN = 0x04;
+        public const int EVENT_DB_INFO_EVNO_POS =  0x00;
+        public const int EVENT_DB_INFO_EVNO_LEN = 0x04;
 
-        public const byte EVENT_DB_INFO_LEN =  (EVENT_DB_INFO_EVNO_LEN);
+        public const int EVENT_DB_INFO_LEN =  (EVENT_DB_INFO_EVNO_LEN);
 
-        public const byte EVENT_DB_ID_POS= 0x00;
-        public const byte EVENT_DB_ID_LEN =0x04;
+        public const int EVENT_DB_ID_POS = 0x00;
+        public const int EVENT_DB_ID_LEN =0x04;
 
-        public const byte EVENT_DB_CODE_POS =  (byte)(EVENT_DB_ID_POS+EVENT_DB_ID_LEN);
-        public const byte EVENT_DB_CODE_LEN =  0x02;
+        public const int EVENT_DB_TYPE_POS = (int)(EVENT_DB_ID_POS + EVENT_DB_ID_LEN);
+        public const int EVENT_DB_TYPE_LEN = 0x02;
 
-        public const byte EVENT_DB_DOMAIN_POS = (byte)(EVENT_DB_CODE_POS + EVENT_DB_CODE_LEN);
-        public const byte EVENT_DB_DOMAIN_LEN= 0x02;
+        public const int EVENT_DB_CODE_POS =  (int)(EVENT_DB_TYPE_POS + EVENT_DB_TYPE_LEN);
+        public const int EVENT_DB_CODE_LEN =  0x02;
 
-        public const byte EVENT_DB_DEVICE_POS = (byte)(EVENT_DB_DOMAIN_POS + EVENT_DB_DOMAIN_LEN);
-        public const byte EVENT_DB_DEVICE_LEN= 0x02;
+        public const int EVENT_DB_DOMAIN_POS = (int)(EVENT_DB_CODE_POS + EVENT_DB_CODE_LEN);
+        public const int EVENT_DB_DOMAIN_LEN = 0x02;
 
-        public const byte EVENT_DB_USER_ID_POS = (byte)(EVENT_DB_DEVICE_POS + EVENT_DB_DEVICE_LEN);
-        public const byte EVENT_DB_USER_ID_LEN  =   0x02;
+        public const int EVENT_DB_DEVICE_POS = (int)(EVENT_DB_DOMAIN_POS + EVENT_DB_DOMAIN_LEN);
+        public const int EVENT_DB_DEVICE_LEN = 0x02;
 
-        public const byte EVENT_DB_TIME_POS = (byte)(EVENT_DB_USER_ID_POS + EVENT_DB_USER_ID_LEN);
-        public const byte EVENT_DB_TIME_LEN =  0x04;
+        public const int EVENT_DB_USER_ID_POS = (int)(EVENT_DB_DEVICE_POS + EVENT_DB_DEVICE_LEN);
+        public const int EVENT_DB_USER_ID_LEN  =   0x02;
 
-        public const byte EVENT_DB_DATE_POS = (byte)(EVENT_DB_TIME_POS + EVENT_DB_TIME_LEN);
-        public const byte EVENT_DB_DATE_LEN  = 0x04;
+        public const int EVENT_DB_TIME_POS = (int)(EVENT_DB_USER_ID_POS + EVENT_DB_USER_ID_LEN);
+        public const int EVENT_DB_TIME_LEN =  0x04;
 
-        public const byte EVENT_DB_RECORD_LEN = (byte)(EVENT_DB_CODE_LEN + EVENT_DB_DOMAIN_LEN + EVENT_DB_DEVICE_LEN + EVENT_DB_USER_ID_LEN + EVENT_DB_TIME_LEN + EVENT_DB_DATE_LEN);
+        public const int EVENT_DB_DATE_POS = (int)(EVENT_DB_TIME_POS + EVENT_DB_TIME_LEN);
+        public const int EVENT_DB_DATE_LEN  = 0x04;
+
+        public const int EVENT_DB_RECORD_LEN = (int)(EVENT_DB_CODE_LEN + EVENT_DB_DOMAIN_LEN + EVENT_DB_DEVICE_LEN + EVENT_DB_USER_ID_LEN + EVENT_DB_TIME_LEN + EVENT_DB_DATE_LEN);
 
     
         /**************  NETWORK **************/
-        public const byte NET_UPLOAD_DATA_OFFSET= 0x03;
-        public const byte NET_UPLOAD_DATA_END_OFFSET =0x01;
-        public const byte NET_CFG_SIZE   = 52;
+        public const int NET_UPLOAD_DATA_OFFSET = 0x03;
+        public const int NET_UPLOAD_DATA_END_OFFSET =0x01;
+        public const int NET_CFG_SIZE   = 52;
 
 
         /*************** OTHER *****************/

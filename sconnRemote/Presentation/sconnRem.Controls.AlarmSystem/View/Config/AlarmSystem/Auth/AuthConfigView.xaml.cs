@@ -23,7 +23,7 @@ namespace sconnRem.View.Config
     /// </summary>
     /// 
 
-    [Export(AlarmRegionNames.AlarmConfig_Contract_AuthConfigView)]
+ //   [Export(AlarmRegionNames.AlarmConfig_Contract_AuthConfigView)]
     public partial class AuthConfigView : UserControl
     {
         [ImportingConstructor]
