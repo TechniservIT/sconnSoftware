@@ -25,7 +25,19 @@ namespace sconnRem.ViewModel.Alarm
     [Export]
     public class AlarmUsersConfigViewModel : GenericAsyncConfigViewModel
     {
-        public ObservableCollection<sconnUser> Config { get; set; }
+
+        private ObservableCollection<sconnUser> _config;
+        public ObservableCollection<sconnUser> Config
+        {
+            get { return _config; }
+            set
+            {
+                _config = value;
+                OnPropertyChanged();
+            }
+        }
+
+
         private UsersConfigurationService _provider;
         private AlarmSystemConfigManager _manager;
        

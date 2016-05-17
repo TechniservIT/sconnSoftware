@@ -27,9 +27,6 @@ namespace sconnRem.ViewModel.Alarm
         private AlarmSystemConfigManager _manager;
         
 
-        private ICommand _getDataCommand;
-        private ICommand _saveDataCommand;
-
         public override void GetData()
         {
             try

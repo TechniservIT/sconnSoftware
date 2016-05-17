@@ -13,7 +13,9 @@ using sconnConnector.POCO.Config.sconn;
 using Prism.Mvvm;
 using System.ComponentModel.Composition;
 using NLog;
+using Prism.Commands;
 using Prism.Regions;
+using sconnConnector.POCO.Config;
 using sconnRem.Controls.AlarmSystem.ViewModel.Generic;
 using sconnRem.Infrastructure.Navigation;
 using sconnRem.Navigation;
@@ -23,12 +25,22 @@ namespace sconnRem.ViewModel.Alarm
     [Export]
     public class AlarmZoneConfigViewModel : GenericAsyncConfigViewModel
     {
-        public ObservableCollection<sconnAlarmZone> Config { get; set; }
+
+        private ObservableCollection<sconnAlarmZone> _config;
+        public ObservableCollection<sconnAlarmZone> Config
+        {
+            get { return _config; }
+            set
+            {
+                _config = value;
+                OnPropertyChanged();
+            }
+        }
+
         private ZoneConfigurationService _provider;
         private AlarmSystemConfigManager _manager;
-      
-        private ICommand _getDataCommand;
-        private ICommand _saveDataCommand;
+
+        public ICommand ConfigureZoneCommand { get; set; }
 
         public override void GetData()
         {
@@ -51,12 +63,22 @@ namespace sconnRem.ViewModel.Alarm
             }
         }
 
+        public void EditZone(sconnAlarmZone zone)
+        {
+            
+        }
+
         public AlarmZoneConfigViewModel()
         {
             _name = "Zones";
             this._provider = new ZoneConfigurationService(_manager);
         }
 
+
+        public void SetupCmd()
+        {
+            ConfigureZoneCommand =   new DelegateCommand<sconnAlarmZone>(EditZone);
+        }
 
         [ImportingConstructor]
         public AlarmZoneConfigViewModel(IRegionManager regionManager)

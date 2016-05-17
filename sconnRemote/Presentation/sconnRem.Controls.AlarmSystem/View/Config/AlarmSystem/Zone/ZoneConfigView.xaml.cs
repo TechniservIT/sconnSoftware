@@ -22,7 +22,7 @@ namespace sconnRem.View.Config
     /// Interaction logic for ZoneConfig.xaml
     /// </summary>
 
-    [Export(AlarmRegionNames.AlarmConfig_Contract_ZoneConfigView)]
+  //  [Export(AlarmRegionNames.AlarmConfig_Contract_ZoneConfigView)]
     public partial class ZoneConfigView : UserControl
     {
         [ImportingConstructor]
