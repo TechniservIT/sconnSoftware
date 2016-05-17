@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using NLog;
 using Prism.Regions;
+using sconnRem.Controls.AlarmSystem.ViewModel.Alarm;
 using sconnRem.Navigation;
 using sconnRem.ViewModel.Alarm;
 
@@ -28,7 +29,7 @@ namespace sconnRem.Controls.AlarmSystem.View.Status.AlarmSystem.Network
         private Logger _nlogger = LogManager.GetCurrentClassLogger();
 
         [Import]
-        public AlarmGlobalConfigViewModel ViewModel
+        public AlarmNetworkStatusViewModel ViewModel
         {
             set { this.DataContext = value; }
         }
@@ -38,6 +39,5 @@ namespace sconnRem.Controls.AlarmSystem.View.Status.AlarmSystem.Network
             InitializeComponent();
         }
     }
-
-
+    
 }

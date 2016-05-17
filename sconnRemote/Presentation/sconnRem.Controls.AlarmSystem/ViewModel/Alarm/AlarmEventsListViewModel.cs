@@ -25,10 +25,10 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
     [Export]
     public class AlarmEventsListViewModel : GenericAlarmConfigViewModel
     {
-        protected EventsService _provider;
+        private ObservableCollection<sconnDevice> _config;
+        private AlarmDevicesConfigService _provider;
 
-        private ObservableCollection<sconnEvent> _config;
-        public ObservableCollection<sconnEvent> Config
+        public ObservableCollection<sconnDevice> Config
         {
             get { return _config; }
             set
@@ -37,101 +37,15 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
                 OnPropertyChanged();
             }
         }
-
-
+        
         public ICommand ShowDeviceStatusCommand { get; set; }
-        public ICommand ShowDeviceConfigCommand { get; set; }
-
-        public ICommand ConfigureInputCommand { get; set; }
-        public ICommand ConfigureOutputCommand { get; set; }
-        public ICommand ConfigureRelayCommand { get; set; }
-
-
-
-        private string GetDeviceTypeStatusViewContractNameForDevice(sconnDevice device)
-        {
-            if (device.Type == sconnDeviceType.Graphical_Keypad)
-            {
-                return AlarmRegionNames.AlarmStatus_Contract_Device_Keypad_View;
-            }
-            else if (device.Type == sconnDeviceType.Gsm_Module)
-            {
-                return AlarmRegionNames.AlarmConfig_Contract_GsmConfigView;
-            }
-            else if (device.Type == sconnDeviceType.Motherboard)
-            {
-                return AlarmRegionNames.AlarmStatus_Contract_Device_Motherboard_View;
-            }
-            else if (device.Type == sconnDeviceType.Pir_Sensor)
-            {
-                return AlarmRegionNames.AlarmStatus_Contract_Device_Sensor_View;
-            }
-            else if (device.Type == sconnDeviceType.Relay_Module)
-            {
-                return AlarmRegionNames.AlarmStatus_Contract_Device_RelayModule_View;
-            }
-            return null;
-        }
-
-
-
-        private string GetDeviceTypeConfigureViewContractNameForDevice(sconnDevice device)
-        {
-            if (device.Type == sconnDeviceType.Graphical_Keypad)
-            {
-                return AlarmRegionNames.AlarmConfig_Contract_Device_Keypad_View;
-            }
-            else if (device.Type == sconnDeviceType.Gsm_Module)
-            {
-                return AlarmRegionNames.AlarmConfig_Contract_Device_Motherboard_View;
-            }
-            else if (device.Type == sconnDeviceType.Motherboard)
-            {
-                return AlarmRegionNames.AlarmConfig_Contract_Device_Motherboard_View;
-            }
-            else if (device.Type == sconnDeviceType.Pir_Sensor)
-            {
-                return AlarmRegionNames.AlarmConfig_Contract_Device_Sensor_View;
-            }
-            else if (device.Type == sconnDeviceType.Relay_Module)
-            {
-                return AlarmRegionNames.AlarmConfig_Contract_Device_RelayModule_View;
-            }
-            return null;
-        }
-
-
-
-        private void ShowDevice(sconnDevice device)
-        {
-            AlarmSystemContext.contextDevice = device;
-            SiteNavigationManager.ActivateDeviceContext(device);
-            NavigateToAlarmContract(GetDeviceTypeStatusViewContractNameForDevice(device));
-        }
-
-      
-
-        private void ConfigureDevice(sconnDevice device)
-        {
-            AlarmSystemContext.contextDevice = device;
-            SiteNavigationManager.ActivateDeviceContext(device);
-            NavigateToAlarmContract(AlarmRegionNames.AlarmStatus_Contract_InputsView);
-        }
-
-
-        private void SetupCmds()
-        {
-            ShowDeviceStatusCommand = new DelegateCommand<sconnDevice>(ShowDevice);
-            ShowDeviceConfigCommand = new DelegateCommand<sconnDevice>(ConfigureDevice);
-            
-        }
-
+        
 
         public override void GetData()
         {
             try
             {
-                Config = new ObservableCollection<sconnEvent>(_provider.GetAll());  //_provider.GetAll().AsQueryable();
+                Config = new ObservableCollection<sconnDevice>(_provider.GetAll());  
             }
             catch (Exception ex)
             {
@@ -146,20 +60,18 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
 
         public AlarmEventsListViewModel()
         {
-            SetupCmds();
-            Config = new ObservableCollection<sconnEvent>(new List<sconnEvent>());
+            Config = new ObservableCollection<sconnDevice>(new List<sconnDevice>());
             _name = "Gcfg";
-            this._provider = new EventsService();
+            this._provider = new AlarmDevicesConfigService(_manager);
         }
 
 
         [ImportingConstructor]
         public AlarmEventsListViewModel(IRegionManager regionManager)
         {
-            SetupCmds();
-            Config = new ObservableCollection<sconnEvent>(new List<sconnEvent>());
+            Config = new ObservableCollection<sconnDevice>(new List<sconnDevice>());
             this._manager = SiteNavigationManager.alarmSystemConfigManager;
-            this._provider = new EventsService(_manager);
+            this._provider = new AlarmDevicesConfigService(_manager);
             _regionManager = regionManager;
             this.PropertyChanged += new PropertyChangedEventHandler(OnNotifiedOfPropertyChanged);
         }
@@ -180,7 +92,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
 
         public override bool IsNavigationTarget(NavigationContext navigationContext)
         {
-            if (navigationContext.Uri.OriginalString.Equals(AlarmRegionNames.AlarmStatus_Contract_EventsView))
+            if ( navigationContext.Uri.OriginalString.Equals(AlarmRegionNames.AlarmStatus_Contract_NetworkView) )
             {
                 return true;    //singleton
             }

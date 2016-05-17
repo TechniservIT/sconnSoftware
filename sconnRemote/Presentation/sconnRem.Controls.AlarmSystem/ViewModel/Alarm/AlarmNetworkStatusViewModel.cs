@@ -20,9 +20,8 @@ using sconnRem.ViewModel.Generic;
 namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
 {
     
-
         [Export]
-        public class AlarmPsuStatusViewModel : GenericAlarmConfigViewModel
+        public class AlarmNetworkStatusViewModel : GenericAlarmConfigViewModel
         {
             private ObservableCollection<sconnDevice> _config;
             private AlarmDevicesConfigService _provider;
@@ -57,7 +56,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
 
             }
 
-            public AlarmPsuStatusViewModel()
+            public AlarmNetworkStatusViewModel()
             {
                 Config = new ObservableCollection<sconnDevice>(new List<sconnDevice>());
                 this._provider = new AlarmDevicesConfigService(_manager);
@@ -65,7 +64,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
 
 
             [ImportingConstructor]
-            public AlarmPsuStatusViewModel(IRegionManager regionManager)
+            public AlarmNetworkStatusViewModel(IRegionManager regionManager)
             {
                 Config = new ObservableCollection<sconnDevice>(new List<sconnDevice>());
                 this._manager = SiteNavigationManager.alarmSystemConfigManager;
@@ -97,8 +96,6 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
                 return false;
             }
 
-        }
-
-
-
     }
+
+}

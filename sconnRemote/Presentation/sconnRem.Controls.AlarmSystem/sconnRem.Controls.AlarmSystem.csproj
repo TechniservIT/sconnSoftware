@@ -94,6 +94,7 @@
     <Compile Include="ViewModel\Alarm\AlarmEventsListViewModel.cs" />
     <Compile Include="ViewModel\Alarm\AlarmHumiditySensorsListViewModel.cs" />
     <Compile Include="ViewModel\Alarm\AlarmInputConfigViewModel.cs" />
+    <Compile Include="ViewModel\Alarm\AlarmNetworkStatusViewModel.cs" />
     <Compile Include="ViewModel\Alarm\AlarmOutputConfigViewModel.cs" />
     <Compile Include="ViewModel\Alarm\AlarmPsuStatusViewModel.cs" />
     <Compile Include="ViewModel\Alarm\AlarmSharedDeviceConfigViewModel.cs" />
