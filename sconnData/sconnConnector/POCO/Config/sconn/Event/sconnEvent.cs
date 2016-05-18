@@ -128,9 +128,44 @@ namespace sconnConnector.POCO.Config.sconn
         public int UserId { get; set; }
         private static Logger _logger = LogManager.GetCurrentClassLogger();
 
+        public string imageIconUri { get; set; }
+        public string imageRealUri { get; set; }
+
+
+        public string GetDeviceTypeImageUriForDevice(sconnEvent ev)
+        {
+            if (ev.Type == sconnEventType.EVENT_TYPE_HW)
+            {
+                return "pack://application:,,,/images/klawiatura1000x1000.jpg";
+            }
+            else if (ev.Type == sconnEventType.EVENT_TYPE_ALRM_SYS)
+            {
+                return "pack://application:,,,/images/tel1000.jpg";
+            }
+            else if (ev.Type == sconnEventType.EVENT_TYPE_IOT)
+            {
+                return "pack://application:,,,/images/tel1000.jpg";
+            }
+            else if (ev.Type == sconnEventType.EVENT_TYPE_OS)
+            {
+                return "pack://application:,,,/images/tel1000.jpg";
+            }
+            else if (ev.Type == sconnEventType.EVENT_TYPE_USER_ACTION)
+            {
+                return "pack://application:,,,/images/tel1000.jpg";
+            }
+
+            return null;
+        }
+
+        public void LoadImageTypeUrl()
+        {
+            imageIconUri = GetDeviceTypeImageUriForDevice(this);
+        }
+
         public sconnEvent()
         {
-
+           
         }
 
         public sconnEvent(byte[] EventBytes) : this()
@@ -185,6 +220,10 @@ namespace sconnConnector.POCO.Config.sconn
                     UserId = buffer[ipcDefines.EVENT_DB_USER_ID_POS + 1];
 
                 }
+
+
+                LoadImageTypeUrl();
+
             }
             catch (Exception e)
             {

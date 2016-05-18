@@ -25,10 +25,10 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
     [Export]
     public class AlarmEventsListViewModel : GenericAlarmConfigViewModel
     {
-        private ObservableCollection<sconnDevice> _config;
-        private AlarmDevicesConfigService _provider;
+        private ObservableCollection<sconnEvent> _config;
+        private EventsService _provider;
 
-        public ObservableCollection<sconnDevice> Config
+        public ObservableCollection<sconnEvent> Config
         {
             get { return _config; }
             set
@@ -45,7 +45,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
         {
             try
             {
-                Config = new ObservableCollection<sconnDevice>(_provider.GetAll());  
+                Config = new ObservableCollection<sconnEvent>(_provider.GetAll());  
             }
             catch (Exception ex)
             {
@@ -60,18 +60,18 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
 
         public AlarmEventsListViewModel()
         {
-            Config = new ObservableCollection<sconnDevice>(new List<sconnDevice>());
+            Config = new ObservableCollection<sconnEvent>(new List<sconnEvent>());
             _name = "Gcfg";
-            this._provider = new AlarmDevicesConfigService(_manager);
+            this._provider = new EventsService(_manager);
         }
 
 
         [ImportingConstructor]
         public AlarmEventsListViewModel(IRegionManager regionManager)
         {
-            Config = new ObservableCollection<sconnDevice>(new List<sconnDevice>());
+            Config = new ObservableCollection<sconnEvent>(new List<sconnEvent>());
             this._manager = SiteNavigationManager.alarmSystemConfigManager;
-            this._provider = new AlarmDevicesConfigService(_manager);
+            this._provider = new EventsService(_manager);
             _regionManager = regionManager;
             this.PropertyChanged += new PropertyChangedEventHandler(OnNotifiedOfPropertyChanged);
         }
@@ -92,7 +92,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
 
         public override bool IsNavigationTarget(NavigationContext navigationContext)
         {
-            if ( navigationContext.Uri.OriginalString.Equals(AlarmRegionNames.AlarmStatus_Contract_NetworkView) )
+            if ( navigationContext.Uri.OriginalString.Equals(AlarmRegionNames.AlarmStatus_Contract_EventsView) )
             {
                 return true;    //singleton
             }

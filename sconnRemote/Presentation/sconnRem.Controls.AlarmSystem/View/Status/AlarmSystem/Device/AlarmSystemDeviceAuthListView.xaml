@@ -7,6 +7,7 @@
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
+    
     <xctk:BusyIndicator  IsBusy="{Binding Loading}">
 
         <Grid  Grid.Column="0" Grid.Row="0">
@@ -66,7 +67,7 @@
                                                               VerticalAlignment="Center"/>
                                                             <Canvas Background="White" Grid.Column="0" />
 
-                                                            <Image  x:Name="ImgDispActionGridFullScreen521"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="0,0,0,0" VerticalAlignment="Center" Width="Auto" Source="{Binding Path=imageIconUri}" />
+                                                            <Image  x:Name="ImgDispActionGridFullScreen521"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="0,0,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/config2.png" />
 
                                                         </Grid>
                                                     </Border>

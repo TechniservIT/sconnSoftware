@@ -67,7 +67,7 @@
                                                               VerticalAlignment="Center"/>
                                                             <Canvas Background="White" Grid.Column="0" />
 
-                                                            <Image  x:Name="ImgDispActionGridFullScreen521"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="0,0,0,0" VerticalAlignment="Center" Width="Auto" Source="{Binding Path=imageIconUri}" />
+                                                            <Image  x:Name="ImgDispActionGridFullScreen521"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="0,0,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/wtyczka1-1000.jpg" />
 
                                                         </Grid>
                                                     </Border>
