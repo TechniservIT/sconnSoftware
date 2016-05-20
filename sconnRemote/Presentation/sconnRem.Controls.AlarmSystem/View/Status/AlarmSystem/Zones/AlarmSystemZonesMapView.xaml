@@ -10,17 +10,14 @@
             xmlns:zoom="clr-namespace:WPFExtensions.Controls;assembly=WPFExtensions"
             xmlns:tree="clr-namespace:GraphSharp.Algorithms.Layout.Simple.Tree;assembly=GraphSharp"
              d:DesignHeight="300" d:DesignWidth="300">
-    
-    <xctk:BusyIndicator  IsBusy="{Binding Loading, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
 
+    <xctk:BusyIndicator  IsBusy="{Binding Loading, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
         <zoom:ZoomControl>
             <graphsharp:GraphLayout x:Name="graphLayout"
                                     Graph="{Binding ElementName=root,Path=GraphToVisualize}"
                                     LayoutAlgorithmType="Tree"
                                     OverlapRemovalAlgorithmType="FSA"
                                     HighlightAlgorithmType="Simple" Margin="0,0,-1,0" />
-        </zoom:ZoomControl>
-
+        </zoom:ZoomControl>                                                                                                
     </xctk:BusyIndicator>
-
 </UserControl>
