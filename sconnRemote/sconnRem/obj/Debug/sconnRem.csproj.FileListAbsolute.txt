@@ -425,3 +425,7 @@ I:\Repo\Bucket\sconnSoftware\sconnRemote\sconnRem\bin\Debug\sv\Xceed.Wpf.AvalonD
 I:\Repo\Bucket\sconnSoftware\sconnRemote\sconnRem\bin\Debug\zh-Hans\Xceed.Wpf.AvalonDock.resources.dll
 I:\Repo\Bucket\sconnSoftware\sconnRemote\sconnRem\bin\Debug\SiteManagmentService.dll
 I:\Repo\Bucket\sconnSoftware\sconnRemote\sconnRem\bin\Debug\SiteManagmentService.pdb
+I:\Repo\Bucket\sconnSoftware\sconnRemote\sconnRem\bin\Debug\GraphSharp.Controls.dll
+I:\Repo\Bucket\sconnSoftware\sconnRemote\sconnRem\bin\Debug\QuickGraph.dll
+I:\Repo\Bucket\sconnSoftware\sconnRemote\sconnRem\bin\Debug\GraphSharp.dll
+I:\Repo\Bucket\sconnSoftware\sconnRemote\sconnRem\bin\Debug\QuickGraph.xml

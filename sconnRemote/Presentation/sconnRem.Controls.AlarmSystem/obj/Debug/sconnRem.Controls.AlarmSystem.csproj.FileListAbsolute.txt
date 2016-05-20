@@ -544,3 +544,16 @@ I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSys
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\obj\Debug\View\Status\AlarmSystem\Users\AlarmUsersListView.baml
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\obj\Debug\View\Status\AlarmSystem\Zones\AlarmSystemZonesMapView.g.cs
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\obj\Debug\View\Status\AlarmSystem\Zones\AlarmSystemZonesMapView.baml
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\bin\Debug\GraphSharp.Controls.dll
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\bin\Debug\GraphSharp.dll
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\bin\Debug\QuickGraph.Data.dll
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\bin\Debug\QuickGraph.dll
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\bin\Debug\QuickGraph.Graphviz.dll
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\bin\Debug\QuickGraph.Serialization.dll
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\bin\Debug\WPFExtensions.dll
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\bin\Debug\QuickGraph.xml
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\bin\Debug\QuickGraph.Data.xml
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\bin\Debug\QuickGraph.Graphviz.xml
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\bin\Debug\QuickGraph.Serialization.xml
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\obj\Debug\View\Status\AlarmSystem\Zones\AlarmSystemGraphEntityItem.g.cs
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\obj\Debug\View\Status\AlarmSystem\Zones\AlarmSystemGraphEntityItem.baml
