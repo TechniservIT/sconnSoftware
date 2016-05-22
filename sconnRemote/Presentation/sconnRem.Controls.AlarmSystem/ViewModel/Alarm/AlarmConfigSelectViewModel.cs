@@ -1,16 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using sconnRem.ViewModel.Generic;
 using Prism.Mvvm;
 using System.ComponentModel.Composition;
+using Prism;
+using Prism.Regions;
+using sconnRem.Controls.AlarmSystem.ViewModel.Generic;
+using sconnRem.Navigation;
 
 namespace sconnRem.ViewModel.Alarm
 {
     [Export]
-    public class AlarmConfigSelectViewModel : BindableBase   
+    public class AlarmConfigSelectViewModel : GenericAsyncConfigViewModel
     {
       
         public string DisplayedImagePath
@@ -18,19 +23,23 @@ namespace sconnRem.ViewModel.Alarm
             get { return "pack://application:,,,/images/config1.png"; }
         }
 
-        private string _name;
-        public string Name
+
+
+        public override void GetData()
         {
-            get
-            {
-                return _name;
-            }
+           
         }
 
-        public AlarmConfigSelectViewModel()
+        public override bool IsNavigationTarget(NavigationContext navigationContext)
         {
-                
+            //if (navigationContext.Uri.OriginalString.Equals(AlarmRegionNames.AlarmConfig_Contract_Device_Sensor_View))
+            //{
+            //    return true;    //singleton
+            //}
+            return false;
         }
+
+      
     }
 
 }

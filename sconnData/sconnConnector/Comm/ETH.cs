@@ -68,7 +68,7 @@ namespace sconnConnector
             Hostname = hostname;
             Port = port;
             AuthenticationPassword = password;
-            ConnectionTimeoutMs = 1500;
+            ConnectionTimeoutMs = 2500;
 
             //SiteDiscovered = new EventHandler(OnSiteDiscovered());
          
@@ -257,11 +257,22 @@ namespace sconnConnector
 
                 catch (Exception e)
                 {
+                    CloseSocket();
                     NetworkClientStatusUpdateService.OnConnectionError(e.Message);
                     nlogger.ErrorException(e.Message, e);
-                    clientSocket.Shutdown(SocketShutdown.Both);
-                    clientSocket.Close();
                     return false;
+                }
+            }
+        }
+
+        public void CloseSocket()
+        {
+
+            if (clientSocket != null)
+            {
+                if (clientSocket.Connected)
+                {
+                    clientSocket.Shutdown(SocketShutdown.Both);
                 }
             }
         }
@@ -775,7 +786,7 @@ namespace sconnConnector
         }
 
 
-        int ConnectionTimeoutMs = 1500;
+        int ConnectionTimeoutMs = 2500;
 
         // Incoming data from the client.
         public string soxData = null;

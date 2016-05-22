@@ -23,7 +23,7 @@ namespace sconnRem.View.Config
     /// </summary>
 
 
-    [Export(AlarmRegionNames.AlarmConfig_Contract_UsersConfigView)]
+    //  [Export(AlarmRegionNames.AlarmConfig_Contract_UsersConfigView)]
     public partial class UserConfigView : UserControl
     {
         [ImportingConstructor]

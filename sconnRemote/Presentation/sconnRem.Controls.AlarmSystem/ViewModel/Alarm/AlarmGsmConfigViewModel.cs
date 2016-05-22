@@ -15,33 +15,25 @@ using System.ComponentModel.Composition;
 using NLog;
 using Prism.Regions;
 using sconnConnector.POCO.Config.sconn;
+using sconnRem.Controls.AlarmSystem.ViewModel.Generic;
 using sconnRem.Infrastructure.Navigation;
+using sconnRem.Navigation;
 
 namespace sconnRem.ViewModel.Alarm
 {
 
     [Export]
-    public class AlarmGsmConfigViewModel : BindableBase     // ObservableObject, IPageViewModel
+    public class AlarmGsmConfigViewModel : GenericAsyncConfigViewModel
     {
         public ObservableCollection<sconnGsmRcpt> Config { get; set; }
         private GsmConfigurationService _provider;
         private AlarmSystemConfigManager _manager;
-        private readonly IRegionManager _regionManager;
-        private Logger _nlogger = LogManager.GetCurrentClassLogger();
-
-        private string _name;
-        public string Name
-        {
-            get
-            {
-                return _name;
-            }
-        }
+      
 
         private ICommand _getDataCommand;
         private ICommand _saveDataCommand;
 
-        private void GetData()
+        public override void GetData()
         {
             try
             {
@@ -54,7 +46,7 @@ namespace sconnRem.ViewModel.Alarm
             }
         }
 
-        private void SaveData()
+        public override void SaveData()
         {
             foreach (var item in Config)
             {
@@ -68,9 +60,14 @@ namespace sconnRem.ViewModel.Alarm
             this._provider = new GsmConfigurationService(_manager);
         }
 
-                  
-
-            
+        public override bool IsNavigationTarget(NavigationContext navigationContext)
+        {
+            if (navigationContext.Uri.OriginalString.Equals(AlarmRegionNames.AlarmConfig_Contract_GsmRcptConfigView))
+            {
+                return true;    //singleton
+            }
+            return false;
+        }
 
         [ImportingConstructor]
         public AlarmGsmConfigViewModel(IRegionManager regionManager)
@@ -81,21 +78,7 @@ namespace sconnRem.ViewModel.Alarm
             this._regionManager = regionManager;
             GetData();
         }
-
-
-
-        //[ImportingConstructor]
-        //public AlarmGsmConfigViewModel(IAlarmConfigManager manager, IRegionManager regionManager)
-        //{
-        //    Config = new ObservableCollection<sconnGsmRcpt>();
-        //    this._manager = (AlarmSystemConfigManager)manager;
-        //    this._provider = new GsmConfigurationService(_manager);
-        //    this._regionManager = regionManager;
-        //    GetData();
-        //}
-
-
-
+        
         public string DisplayedImagePath
         {
             get { return "pack://application:,,,/images/tel.png"; }

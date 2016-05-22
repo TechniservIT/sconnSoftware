@@ -18,55 +18,30 @@ using sconnConnector.Config;
 using sconnConnector.POCO.Config;
 using sconnConnector.POCO.Config.sconn;
 using sconnPrismSharedContext;
+using sconnRem.Controls.AlarmSystem.ViewModel.Generic;
 using sconnRem.Infrastructure.Navigation;
 using sconnRem.Navigation;
+using sconnRem.ViewModel.Generic;
 using Xceed.Wpf.Toolkit;
 
 namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
 {
 
     [Export]
-    public class AlarmDeviceListViewModel : BindableBase, IActiveAware, INavigationAware, IChangeTracking, INotifyPropertyChanged
+    public class AlarmDeviceListViewModel : GenericAlarmConfigViewModel
     {
-        private ObservableCollection<sconnDevice> _config; 
+        private ObservableCollection<sconnDevice> _config;
+        private AlarmDevicesConfigService _provider;
+
         public ObservableCollection<sconnDevice> Config {
             get { return _config; }
             set
             {
                 _config = value;
-                this.OnPropertyChanged();
-            }
-
-        }
-
-        private AlarmDevicesConfigService _provider;
-        private AlarmSystemConfigManager _manager;
-        private readonly IRegionManager _regionManager;
-        private Logger _nlogger = LogManager.GetCurrentClassLogger();
-
-        private bool _loading;
-        public bool Loading
-        {
-
-            get { return _loading; }
-            set
-            {
-                _loading = value;
-                this.OnPropertyChanged();
+                OnPropertyChanged();
             }
         }
 
-        private int ChangeTrack = 0;
-        public bool IsChanged { get; set; }
-
-        private string _name;
-        public string Name
-        {
-            get
-            {
-                return _name;
-            }
-        }
 
         public ICommand ShowDeviceStatusCommand { get; set; }
         public ICommand ShowDeviceConfigCommand { get; set; }
@@ -75,52 +50,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
         public ICommand ConfigureOutputCommand { get; set; }
         public ICommand ConfigureRelayCommand { get; set; }
         
-        private void NavigateToAlarmContract(string contractName)
-        {
-            try
-            {
-                this._regionManager.RequestNavigate(GlobalViewRegionNames.MainGridContentRegion, contractName
-                    ,
-                    (NavigationResult nr) =>
-                    {
-                        var error = nr.Error;
-                        var result = nr.Result;
-                        if (error != null)
-                        {
-                            _nlogger.Error(error);
-                        }
-                    });
-            }
-            catch (Exception ex)
-            {
-                _nlogger.Error(ex, ex.Message);
 
-            }
-        }
-
-
-        private void NavigateToAlarmContractWithParam(string contractName,NavigationParameters param)
-        {
-            try
-            {
-                this._regionManager.RequestNavigate(GlobalViewRegionNames.MainGridContentRegion, new Uri(contractName + param, UriKind.Relative)
-                    ,
-                    (NavigationResult nr) =>
-                    {
-                        var error = nr.Error;
-                        var result = nr.Result;
-                        if (error != null)
-                        {
-                            _nlogger.Error(error);
-                        }
-                    });
-            }
-            catch (Exception ex)
-            {
-                _nlogger.Error(ex, ex.Message);
-
-            }
-        }
 
         private string GetDeviceTypeStatusViewContractNameForDevice(sconnDevice device)
         {
@@ -266,13 +196,11 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
         }
 
 
-
-        private void GetData()
+        public override void GetData()
         {
             try
             {
                 Config = new ObservableCollection<sconnDevice>(_provider.GetAll());  //_provider.GetAll().AsQueryable();
-                ChangeTrack++;
             }
             catch (Exception ex)
             {
@@ -280,9 +208,9 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
             }
         }
 
-        private void SaveData()
+        public override void SaveData()
         {
-          //  _provider.Update(Config);
+         
         }
 
         public AlarmDeviceListViewModel()
@@ -301,9 +229,8 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
             Config = new ObservableCollection<sconnDevice>(new List<sconnDevice>());
             this._manager = SiteNavigationManager.alarmSystemConfigManager;
             this._provider = new AlarmDevicesConfigService(_manager);
-            this._regionManager = regionManager;
+            _regionManager = regionManager;
             this.PropertyChanged += new PropertyChangedEventHandler(OnNotifiedOfPropertyChanged);
-           // GetData();
         }
 
         private void OnNotifiedOfPropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -320,61 +247,20 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
         }
         
 
-        public bool IsActive { get; set; }
-        public event EventHandler IsActiveChanged;
-
-        public void OnNavigatedTo(NavigationContext navigationContext)
+        public override bool IsNavigationTarget(NavigationContext navigationContext)
         {
-            // var existingcontract = this._regionManager.Regions[""].ActiveViews.First();
-
-            //BusyIndicatorVisibility = Visibility.Visible;
-
-            // BusyIndicator
-           
-
-             //   NavigateToAlarmContract(AlarmRegionNames.AlarmStatus_Contract_Connection_Status_View);
-
-             // Disable here also your UI to not allow the user to do things that are not allowed during login-validation
-             BackgroundWorker bgWorker = new BackgroundWorker();
-            bgWorker.DoWork += (s, e) => {
-                 GetData();
-            };
-            bgWorker.RunWorkerCompleted += (s, e) =>
-            {
-
-                Loading = false;
-                // NavigateToAlarmContract(AlarmRegionNames.AlarmStatus_Contract_Device_List_View);
-
-                // BusyIndicatorVisibility = Visibility.Collapsed;
-                // Enable here the UI
-                // You can get the login-result via the e.Result. Make sure to check also the e.Error for errors that happended during the login-operation
-            };
-
-            Loading = true;
-            bgWorker.RunWorkerAsync();
-
-          
-
-            ///GetData(); //update list
-        }
-
-        public bool IsNavigationTarget(NavigationContext navigationContext)
-        {
-            if (navigationContext.Uri.Equals(AlarmRegionNames.AlarmUri_Status_Device_List_View))
+            if (
+                navigationContext.Uri.OriginalString.Equals(AlarmRegionNames.AlarmStatus_Contract_Device_List_View) ||
+                navigationContext.Uri.OriginalString.Equals(AlarmRegionNames.AlarmStatus_Contract_InputsView) ||
+                navigationContext.Uri.OriginalString.Equals(AlarmRegionNames.AlarmStatus_Contract_OutputsView) ||
+                navigationContext.Uri.OriginalString.Equals(AlarmRegionNames.AlarmStatus_Contract_RelaysView)    ||
+                 navigationContext.Uri.OriginalString.Equals(AlarmRegionNames.AlarmStatus_Contract_HumiditySensorsView) ||
+                  navigationContext.Uri.OriginalString.Equals(AlarmRegionNames.AlarmStatus_Contract_TemperatureSensorsView)
+                )
             {
                 return true;    //singleton
             }
             return false;
-        }
-
-        public void OnNavigatedFrom(NavigationContext navigationContext)
-        {
-         
-        }
-
-        public void AcceptChanges()
-        {
-           
         }
 
     }

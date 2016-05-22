@@ -2655,19 +2655,26 @@ namespace sconnConnector
                             {
 
                                 //find out which configs changed by gcfg registers
+                                /*
                                 byte[] devhashrx = new byte[ipcDefines.SHA256_DIGEST_SIZE];
                                 for (int j = 0; j < ipcDefines.SHA256_DIGEST_SIZE; j++)
                                 {
                                     devhashrx[j] = gcfgRx[ipcDefines.GCFG_DEV_MOD_CTR_START_POS + (i * ipcDefines.GCFG_DEV_MOD_CTR_LEN) + j + rxOffset];
                                 }
-                                DeviceChanged = !(devhashrx.SequenceEqual(site.siteCfg.deviceConfigs[i].Hash));
+                                */
+
+                                //DeviceChanged = !(devhashrx.SequenceEqual(site.siteCfg.deviceConfigs[i].Hash));
+                                DeviceChanged = true;
 
                                 if (DeviceChanged)
                                 {
+                                    /*
                                     for (int h = 0; h < ipcDefines.SHA256_DIGEST_SIZE; h++)
                                     {
                                         site.siteCfg.deviceConfigs[i].Hash[h] = gcfgRx[ipcDefines.GCFG_DEV_MOD_CTR_START_POS + (i * ipcDefines.GCFG_DEV_MOD_CTR_LEN) + h + rxOffset];
                                     }
+                                    */
+
                                     /*******  Get Device Config  ****/
 
                                     cmd[0] = ipcCMD.GET;
@@ -2744,28 +2751,31 @@ namespace sconnConnector
 
                                     }
                                 }
-
-
-                                //cfgIncBefore = CfgOper.GetLongFromBufferAtPos(site.siteCfg.globalConfig.memCFG,ipcDefines.GCFG_NAMES_MOD_CTR_POS);
-                                //cfgIncNow = CfgOper.GetLongFromBufferAtPos(gcfgRx, ipcDefines.GCFG_NAMES_MOD_CTR_POS + rxOffset);
-                                //NamesChanged = cfgIncBefore < cfgIncNow;
-
+                                
                                 if (ReadSpecialRegs)
                                 {
+                                    /*
                                     byte[] nameshashrx = new byte[ipcDefines.SHA256_DIGEST_SIZE];
                                     for (int j = 0; j < ipcDefines.SHA256_DIGEST_SIZE; j++)
                                     {
                                         nameshashrx[j] = gcfgRx[ipcDefines.GCFG_NAMES_MOD_CTR_POS + j + rxOffset];
                                     }
                                     NamesChanged = !(nameshashrx.SequenceEqual(site.siteCfg.NamesHash));
+                                    */
 
+                                    NamesChanged = true;
 
                                     if (NamesChanged)
                                     {
+
+                                        /*
                                         for (int h = 0; h < ipcDefines.SHA256_DIGEST_SIZE; h++)
                                         {
                                             site.siteCfg.NamesHash[h] = gcfgRx[ipcDefines.GCFG_NAMES_MOD_CTR_POS + h + rxOffset];
                                         }
+                                        */
+
+
                                         ///*****  Get Device Names ******/
                                         cmd[1] = ipcCMD.getDeviceName;
                                         for (int n = 0; n < ipcDefines.RAM_DEV_NAMES_NO; n++)

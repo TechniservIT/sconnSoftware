@@ -23,6 +23,7 @@ namespace sconnRem.Controls.AlarmSystem.View.Status.AlarmSystem.Device.InputsMod
 
     [Export(AlarmRegionNames.AlarmStatus_Contract_Device_List_View)]
     [ViewSortHint("01")]
+    [PartCreationPolicy(CreationPolicy.Shared)]
     public partial class AlarmSystemDeviceListView : UserControl, IPartImportsSatisfiedNotification
     {
         private const string MainContentRegionName = GlobalViewRegionNames.MainGridContentRegion;

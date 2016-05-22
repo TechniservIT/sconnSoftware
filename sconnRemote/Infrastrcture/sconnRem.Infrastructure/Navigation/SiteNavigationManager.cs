@@ -31,7 +31,7 @@ namespace sconnRem.Infrastructure.Navigation
         public static sconnSite CurrentContextSconnSite;
 
         //alarm syste,
-        public static AlarmSystemConfigManager alarmSystemConfigManager;
+        public static AlarmSystemConfigManager alarmSystemConfigManager = new AlarmSystemConfigManager();
         public static event EventHandler ConfigManagerChangedEvent;
         private static ComposablePart exportedComposablePart;
 
@@ -166,37 +166,25 @@ namespace sconnRem.Infrastructure.Navigation
                 {
                     CurrentContextSconnSite = site;
 
-                    EndpointInfo info = new EndpointInfo();
-                    info.Hostname = CurrentContextSconnSite.serverIP;
-                    info.Port = CurrentContextSconnSite.serverPort;
-                    DeviceCredentials cred = new DeviceCredentials();
-                    cred.Password = CurrentContextSconnSite.authPasswd;
-                    cred.Username = "";
+                    EndpointInfo info = new EndpointInfo
+                    {
+                        Hostname = CurrentContextSconnSite.serverIP,
+                        Port = CurrentContextSconnSite.serverPort
+                    };
+                    DeviceCredentials cred = new DeviceCredentials
+                    {
+                        Password = CurrentContextSconnSite.authPasswd,
+                        Username = ""
+                    };
 
-                    ////ensure container does not maintain old manager
-                    //if (alarmSystemConfigManager != null && exportedComposablePart != null && contextContainer != null)
-                    //{
-                    //    var batchrem = new CompositionBatch();
-                    //    batchrem.RemovePart(exportedComposablePart);
-                    //    contextContainer.Compose(batchrem);
-                    //}
-
-                    alarmSystemConfigManager = new AlarmSystemConfigManager(info, cred);
-                    Device alrmSysDev = new Device();
-                    alrmSysDev.Credentials = cred;
-                    alrmSysDev.EndpInfo = info;
-                    alarmSystemConfigManager.RemoteDevice = alrmSysDev;
-
+                    Device alrmSysDev = new Device
+                    {
+                        Credentials = cred,
+                        EndpInfo = info
+                    };
+                    AlarmSystemConfigManager nman = new AlarmSystemConfigManager(info, cred) {RemoteDevice = alrmSysDev};
+                    alarmSystemConfigManager.CopyFrom(nman);
                     AlarmSystemContext.SetManager(alarmSystemConfigManager);
-
-
-                    //// register new manager in container
-                    // if (contextContainer != null)
-                    // {
-                    //     var batch = new CompositionBatch();
-                    //     exportedComposablePart = batch.AddExportedValue<IAlarmConfigManager>(alarmSystemConfigManager);
-                    //     contextContainer.Compose(batch);
-                    // }
 
                 }
             }

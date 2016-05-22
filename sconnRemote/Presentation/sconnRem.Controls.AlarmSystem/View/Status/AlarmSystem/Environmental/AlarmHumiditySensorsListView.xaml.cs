@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,17 +13,30 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using NLog;
+using Prism.Regions;
+using sconnRem.Controls.AlarmSystem.ViewModel.Alarm;
+using sconnRem.Navigation;
 
 namespace sconnRem.Controls.AlarmSystem.View.Status.AlarmSystem.Environmental
 {
-    /// <summary>
-    /// Interaction logic for AlarmHumiditySensorsListView.xaml
-    /// </summary>
+
+    [Export(AlarmRegionNames.AlarmStatus_Contract_HumiditySensorsView)]
+    [ViewSortHint("01")]
+    [PartCreationPolicy(CreationPolicy.Shared)]
     public partial class AlarmHumiditySensorsListView : UserControl
     {
-        public AlarmHumiditySensorsListView()
+        private const string MainContentRegionName = GlobalViewRegionNames.MainGridContentRegion;
+        private Logger _nlogger = LogManager.GetCurrentClassLogger();
+
+        [Import] public IRegionManager RegionManager;
+
+        [ImportingConstructor]
+        public AlarmHumiditySensorsListView(AlarmHumiditySensorsListViewModel viewModel)
         {
+            this.DataContext = viewModel;
             InitializeComponent();
         }
     }
+
 }

@@ -25,6 +25,12 @@ namespace sconnConnector.POCO.Config.sconn
         void DeserializeNames(byte[] buffer);
     }
 
+    public interface IAlarmSystemNamedEntity : IAlarmSystemConfigurationEntity
+    {
+        byte[] SerializeEntityNames();
+        void DeserializeEntityNames();
+    }
+
     public enum sconnDeviceType
     {
         Graphical_Keypad = 1,
@@ -40,7 +46,7 @@ namespace sconnConnector.POCO.Config.sconn
 
 
 
-    public class sconnDevice : IAlarmSystemNamedConfigurationEntity, ISerializableConfiguration, IFakeAbleConfiguration, INotifyPropertyChanged
+    public class sconnDevice : IAlarmSystemNamedConfigurationEntity, IAlarmSystemNamedEntity, ISerializableConfiguration, IFakeAbleConfiguration, INotifyPropertyChanged
     {
         public byte Id { get; set; }
         public byte Value { get; set; }
@@ -603,6 +609,16 @@ namespace sconnConnector.POCO.Config.sconn
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public byte[] SerializeEntityNames()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeserializeEntityNames()
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -24,6 +24,42 @@ namespace sconnConnector.POCO.Config.sconn
         public bool Enabled { get; set; }
         public int NameId { get; set; }
 
+        public string imageIconUri { get; set; }
+        public string imageRealUri { get; set; }
+
+
+        public string GetDeviceTypeImageUriForDevice(sconnAlarmZone ev)
+        {
+            if (ev.Type == AlarmZoneType.General)
+            {
+                return "pack://application:,,,/images/klawiatura1000x1000.jpg";
+            }
+            else if (ev.Type == AlarmZoneType.IoControl)
+            {
+                return "pack://application:,,,/images/tel1000.jpg";
+            }
+            else if (ev.Type == AlarmZoneType.Nightly)
+            {
+                return "pack://application:,,,/images/tel1000.jpg";
+            }
+            else if (ev.Type == AlarmZoneType.General)
+            {
+                return "pack://application:,,,/images/tel1000.jpg";
+            }
+            else if (ev.Type == AlarmZoneType.Time_Guarded)
+            {
+                return "pack://application:,,,/images/tel1000.jpg";
+            }
+
+
+            return null;
+        }
+
+        public void LoadImageTypeUrl()
+        {
+            imageIconUri = GetDeviceTypeImageUriForDevice(this);
+        }
+
         private static Logger _logger = LogManager.GetCurrentClassLogger();
 
         public sconnAlarmZone()
@@ -60,6 +96,8 @@ namespace sconnConnector.POCO.Config.sconn
                 //todo - load name
                 Type = (AlarmZoneType)buffer[ipcDefines.ZONE_CFG_TYPE_POS];
                 Enabled = buffer[ipcDefines.ZONE_CFG_ENABLED_POS] > 0 ? true : false;
+
+                LoadImageTypeUrl();
             }
             catch (Exception e)
             {

@@ -20,7 +20,7 @@
 
             <Grid  Grid.Column="0" Grid.Row="0">
 
-                <ListBox HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled" x:Name="OrdersListBox" BorderThickness="0" ItemsSource="{Binding Config}"  IsSynchronizedWithCurrentItem="True" Background="White">
+                <ListBox HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled" x:Name="OrdersListBox" BorderThickness="0" ItemsSource="{Binding Config, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  IsSynchronizedWithCurrentItem="True" Background="White">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
 

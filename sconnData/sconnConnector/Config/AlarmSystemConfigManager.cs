@@ -36,9 +36,19 @@ namespace sconnConnector.Config
         /****** Configuration of remote alarm system after processing  ********/
         public sconnAlarmSystem Config { get; set; }
 
+        public void CopyFrom(AlarmSystemConfigManager other)
+        {
+            this.info.CopyFrom(other.info);
+            this.creds.CopyFrom(other.creds);
+            this.RemoteDevice.CopyFrom(other.RemoteDevice);
+        }
+
         public AlarmSystemConfigManager()
         {
             Config = new sconnAlarmSystem();
+            info = new EndpointInfo();
+            creds = new DeviceCredentials();
+            RemoteDevice = new Device();
             MinUpdatePeriod = 500;
         }
 

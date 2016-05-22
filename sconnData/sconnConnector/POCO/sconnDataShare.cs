@@ -637,6 +637,7 @@ namespace sconnConnector
         public const int mAdrGeo_Pos_LEN =  0x06;
 
 
+        /*
         public const int GCFG_HASH_POS  =  (mAdrGeo_Pos+mAdrGeo_Pos_LEN);
         public const int GCFG_HASH_LEN  =  SHA256_DIGEST_SIZE;
 
@@ -646,16 +647,26 @@ namespace sconnConnector
 
         public const int GCFG_NAMES_MOD_CTR_POS  =    (GCFG_DEV_MOD_CTR_START_POS+GCFG_DEV_MOD_CTR_TOTAL_LEN);
         public const int GCFG_NAMES_MOD_CTR_LEN = SHA256_DIGEST_SIZE;
+        */
 
-        public const int GCFG_END_REG            =    (GCFG_NAMES_MOD_CTR_POS+GCFG_NAMES_MOD_CTR_LEN);
+        //public const int mAddr_NAMES_Global_StartAddr = (GCFG_NAMES_MOD_CTR_POS + GCFG_NAMES_MOD_CTR_LEN);
+
+        public const int mAddr_NAMES_Global_StartAddr = (mAdrGeo_Pos + mAdrGeo_Pos_LEN);
+        public const int mAddr_NAMES_Global_SystemName_Pos = 0;
+        public const int RAM_NAMES_Global_Total_Records   = (mAddr_NAMES_Global_SystemName_Pos+1);
+        public const int RAM_NAMES_Global_Total_Size   =   (RAM_NAMES_Global_Total_Records*RAM_NAME_SIZE);
+
+        public const int mAddr_Global_Config_Revision_StartAddr = (mAddr_NAMES_Global_StartAddr+RAM_NAMES_Global_Total_Size);
+        public const int  mAddr_Global_Config_Revision_Total_Size = 4;
+
+        public const int GCFG_END_REG =   (mAddr_Global_Config_Revision_StartAddr + mAddr_Global_Config_Revision_Total_Size);
 
 
+       // public const int GCFG_END_REG  =  (mAddr_NAMES_Global_StartAddr + RAM_NAMES_Global_Total_Size);
+        
         public const int mAdrDevStart = 0x400; //1024- start address in memory of device configs
         public const int mAdrGlobalConfig = 0x0000;
-
-
-
-
+        
         public const int mAdrSiteName = 0x0040; //16 char UTF8(4b) site nam
         public const int mAdrSitePasswd = 0x0080; // 32char UTF8 password
         public const int PasswordMaxChars = 32;
@@ -841,14 +852,16 @@ namespace sconnConnector
         public const int mAddr_NAMES_Outputs_Pos = (DeviceMaxInputs + mAddr_NAMES_Inputs_Pos);
         public const int mAddr_NAMES_Relays_Pos = (mAddr_NAMES_Outputs_Pos + DeviceMaxOutputs);
 
-        public const int mAddr_NAMES_Global_StartIndex = (mAddr_NAMES_Device_StartIndex + (RAM_DEV_NAMES_NO* RAM_DEVCFG_NO));
-        public const int mAddr_NAMES_Global_StartAddr = mAddr_NAMES_StartAddr + (RAM_DEV_NAMES_NO * RAM_NAME_SIZE);
-        public const int mAddr_NAMES_Global_SystemName_Pos = 0;
-        public const int RAM_NAMES_Global_Total_Records = (mAddr_NAMES_Global_SystemName_Pos + 1);
-        public const int RAM_NAMES_Global_Total_Size = (RAM_NAMES_Global_Total_Records * RAM_NAME_SIZE);
+        public const int RAM_TOTAL_DEVICE_NAMES_SIZE = (RAM_DEVICE_NAMES_SIZE*RAM_DEVCFG_NO);
 
-        public const int mAddr_NAMES_Zone_StartIndex = (mAddr_NAMES_Global_StartIndex + RAM_NAMES_Global_Total_Records);
-        public const int mAddr_NAMES_Zone_StartAddr = (mAddr_NAMES_Global_StartAddr + RAM_NAMES_Global_Total_Size);
+        //public const int mAddr_NAMES_Global_StartIndex = (mAddr_NAMES_Device_StartIndex + (RAM_DEV_NAMES_NO* RAM_DEVCFG_NO));
+        //public const int mAddr_NAMES_Global_StartAddr = mAddr_NAMES_StartAddr + (RAM_DEV_NAMES_NO * RAM_NAME_SIZE);
+        //public const int mAddr_NAMES_Global_SystemName_Pos = 0;
+        //public const int RAM_NAMES_Global_Total_Records = (mAddr_NAMES_Global_SystemName_Pos + 1);
+        //public const int RAM_NAMES_Global_Total_Size = (RAM_NAMES_Global_Total_Records * RAM_NAME_SIZE);
+
+        public const int mAddr_NAMES_Zone_StartIndex = (mAddr_NAMES_Device_StartIndex + RAM_DEV_NAMES_NO*RAM_DEVCFG_NO);
+        public const int mAddr_NAMES_Zone_StartAddr = (mAddr_NAMES_StartAddr + RAM_TOTAL_DEVICE_NAMES_SIZE);
         public const int RAM_ZONE_NAMES_SIZE = (ZONE_CFG_MAX_ZONES * RAM_NAME_SIZE);
 
 
@@ -984,7 +997,7 @@ namespace sconnConnector
 
 
         /******************   NET   *************/
-        public const int NET_MAX_TX_SIZE = 1024;
+        public const int NET_MAX_TX_SIZE = 2048;
         public const int NET_MAX_RX_SIZE = 2048;
         public const int NET_MAX_SESSION_IDLE_SEC = 100;
         public const int NET_DATA_PACKET_CONTROL_BYTES = 2;
@@ -1032,39 +1045,42 @@ namespace sconnConnector
 
         /***************    EVENTS      *****************/
 
-        public const byte EVENT_DB_INFO_EVNO_POS =  0x00;
-        public const byte EVENT_DB_INFO_EVNO_LEN = 0x04;
+        public const int EVENT_DB_INFO_EVNO_POS =  0x00;
+        public const int EVENT_DB_INFO_EVNO_LEN = 0x04;
 
-        public const byte EVENT_DB_INFO_LEN =  (EVENT_DB_INFO_EVNO_LEN);
+        public const int EVENT_DB_INFO_LEN =  (EVENT_DB_INFO_EVNO_LEN);
 
-        public const byte EVENT_DB_ID_POS= 0x00;
-        public const byte EVENT_DB_ID_LEN =0x04;
+        public const int EVENT_DB_ID_POS = 0x00;
+        public const int EVENT_DB_ID_LEN =0x04;
 
-        public const byte EVENT_DB_CODE_POS =  (byte)(EVENT_DB_ID_POS+EVENT_DB_ID_LEN);
-        public const byte EVENT_DB_CODE_LEN =  0x02;
+        public const int EVENT_DB_TYPE_POS = (int)(EVENT_DB_ID_POS + EVENT_DB_ID_LEN);
+        public const int EVENT_DB_TYPE_LEN = 0x02;
 
-        public const byte EVENT_DB_DOMAIN_POS = (byte)(EVENT_DB_CODE_POS + EVENT_DB_CODE_LEN);
-        public const byte EVENT_DB_DOMAIN_LEN= 0x02;
+        public const int EVENT_DB_CODE_POS =  (int)(EVENT_DB_TYPE_POS + EVENT_DB_TYPE_LEN);
+        public const int EVENT_DB_CODE_LEN =  0x02;
 
-        public const byte EVENT_DB_DEVICE_POS = (byte)(EVENT_DB_DOMAIN_POS + EVENT_DB_DOMAIN_LEN);
-        public const byte EVENT_DB_DEVICE_LEN= 0x02;
+        public const int EVENT_DB_DOMAIN_POS = (int)(EVENT_DB_CODE_POS + EVENT_DB_CODE_LEN);
+        public const int EVENT_DB_DOMAIN_LEN = 0x02;
 
-        public const byte EVENT_DB_USER_ID_POS = (byte)(EVENT_DB_DEVICE_POS + EVENT_DB_DEVICE_LEN);
-        public const byte EVENT_DB_USER_ID_LEN  =   0x02;
+        public const int EVENT_DB_DEVICE_POS = (int)(EVENT_DB_DOMAIN_POS + EVENT_DB_DOMAIN_LEN);
+        public const int EVENT_DB_DEVICE_LEN = 0x02;
 
-        public const byte EVENT_DB_TIME_POS = (byte)(EVENT_DB_USER_ID_POS + EVENT_DB_USER_ID_LEN);
-        public const byte EVENT_DB_TIME_LEN =  0x04;
+        public const int EVENT_DB_USER_ID_POS = (int)(EVENT_DB_DEVICE_POS + EVENT_DB_DEVICE_LEN);
+        public const int EVENT_DB_USER_ID_LEN  =   0x02;
 
-        public const byte EVENT_DB_DATE_POS = (byte)(EVENT_DB_TIME_POS + EVENT_DB_TIME_LEN);
-        public const byte EVENT_DB_DATE_LEN  = 0x04;
+        public const int EVENT_DB_TIME_POS = (int)(EVENT_DB_USER_ID_POS + EVENT_DB_USER_ID_LEN);
+        public const int EVENT_DB_TIME_LEN =  0x04;
 
-        public const byte EVENT_DB_RECORD_LEN = (byte)(EVENT_DB_CODE_LEN + EVENT_DB_DOMAIN_LEN + EVENT_DB_DEVICE_LEN + EVENT_DB_USER_ID_LEN + EVENT_DB_TIME_LEN + EVENT_DB_DATE_LEN);
+        public const int EVENT_DB_DATE_POS = (int)(EVENT_DB_TIME_POS + EVENT_DB_TIME_LEN);
+        public const int EVENT_DB_DATE_LEN  = 0x04;
+
+        public const int EVENT_DB_RECORD_LEN = (int)(EVENT_DB_CODE_LEN + EVENT_DB_DOMAIN_LEN + EVENT_DB_DEVICE_LEN + EVENT_DB_USER_ID_LEN + EVENT_DB_TIME_LEN + EVENT_DB_DATE_LEN);
 
     
         /**************  NETWORK **************/
-        public const byte NET_UPLOAD_DATA_OFFSET= 0x03;
-        public const byte NET_UPLOAD_DATA_END_OFFSET =0x01;
-        public const byte NET_CFG_SIZE   = 52;
+        public const int NET_UPLOAD_DATA_OFFSET = 0x03;
+        public const int NET_UPLOAD_DATA_END_OFFSET =0x01;
+        public const int NET_CFG_SIZE   = 52;
 
 
         /*************** OTHER *****************/

@@ -16,34 +16,36 @@ using NLog;
 using Prism.Regions;
 using sconnConnector.POCO.Config;
 using sconnConnector.POCO.Config.sconn;
+using sconnRem.Controls.AlarmSystem.ViewModel.Generic;
 using sconnRem.Infrastructure.Navigation;
+using sconnRem.Navigation;
 
 namespace sconnRem.ViewModel.Alarm
 {
     [Export]
-    public class AlarmUsersConfigViewModel : BindableBase   // ObservableObject, IPageViewModel
+    public class AlarmUsersConfigViewModel : GenericAsyncConfigViewModel
     {
-        public ObservableCollection<sconnUser> Config { get; set; }
-        private UsersConfigurationService _provider;
-        private AlarmSystemConfigManager _manager;
-        private readonly IRegionManager _regionManager;
-        private Logger _nlogger = LogManager.GetCurrentClassLogger();
 
-        private string _name;
-        public string Name
+        private ObservableCollection<sconnUser> _config;
+        public ObservableCollection<sconnUser> Config
         {
-            get
+            get { return _config; }
+            set
             {
-                return _name;
+                _config = value;
+                OnPropertyChanged();
             }
         }
 
 
-
+        private UsersConfigurationService _provider;
+        private AlarmSystemConfigManager _manager;
+       
+        
         private ICommand _getDataCommand;
         private ICommand _saveDataCommand;
 
-        private void GetData()
+        public override void GetData()
         {
             try
             {
@@ -56,7 +58,7 @@ namespace sconnRem.ViewModel.Alarm
             }
         }
 
-        private void SaveData()
+        public override void SaveData()
         {
             foreach (var item in Config)
             {
@@ -80,23 +82,21 @@ namespace sconnRem.ViewModel.Alarm
             this._regionManager = regionManager;
             GetData();
         }
-
-
-        //[ImportingConstructor]
-        //public AlarmUsersConfigViewModel(IAlarmConfigManager manager, IRegionManager regionManager)
-        //{
-        //    Config = new ObservableCollection<sconnUser>();
-        //    this._manager = (AlarmSystemConfigManager)manager;
-        //    this._provider = new UsersConfigurationService(_manager);
-        //    this._regionManager = regionManager;
-        //    GetData();
-        //}
-
-
+        
         public string DisplayedImagePath
         {
             get { return "pack://application:,,,/images/user.png"; }
         }
+
+        public override bool IsNavigationTarget(NavigationContext navigationContext)
+        {
+            if (navigationContext.Uri.OriginalString.Equals(AlarmRegionNames.AlarmConfig_Contract_UsersConfigView))
+            {
+                return true;    //singleton
+            }
+            return false;
+        }
+
 
     }
 

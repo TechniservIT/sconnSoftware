@@ -13,32 +13,21 @@ using System.Windows.Input;
 using NLog;
 using Prism.Regions;
 using sconnConnector.POCO.Config.sconn;
+using sconnRem.Controls.AlarmSystem.ViewModel.Generic;
 using sconnRem.Infrastructure.Navigation;
+using sconnRem.Navigation;
 
 namespace sconnRem.ViewModel.Alarm
 {
     [Export]
-    public class AlarmGlobalConfigViewModel  : BindableBase 
+    public class AlarmGlobalConfigViewModel : GenericAsyncConfigViewModel
     {
         public sconnGlobalConfig Config { get; set; }
         private GlobalConfigService _provider;
         private AlarmSystemConfigManager _manager;
-        private readonly IRegionManager _regionManager;
-        private Logger _nlogger = LogManager.GetCurrentClassLogger();
+        
 
-        private string _name;
-        public string Name
-        {
-            get
-            {
-                return _name;
-            }
-        }
-
-        private ICommand _getDataCommand;
-        private ICommand _saveDataCommand;
-
-        private void GetData()
+        public override void GetData()
         {
             try
             {
@@ -51,7 +40,7 @@ namespace sconnRem.ViewModel.Alarm
             }
         }
 
-        private void SaveData()
+        public override void SaveData()
         {
             _provider.Update(Config);
         }
@@ -71,8 +60,23 @@ namespace sconnRem.ViewModel.Alarm
             this._manager = SiteNavigationManager.alarmSystemConfigManager;
             this._provider = new GlobalConfigService(_manager);
             this._regionManager = regionManager;
-            GetData();
         }
+
+
+        public override bool IsNavigationTarget(NavigationContext navigationContext)
+        {
+            if (
+                navigationContext.Uri.OriginalString.Equals(AlarmRegionNames.AlarmStatus_Contract_Global_View) ||
+                navigationContext.Uri.OriginalString.Equals(AlarmRegionNames.AlarmStatus_Contract_NetworkView) ||
+                navigationContext.Uri.OriginalString.Equals(AlarmRegionNames.AlarmStatus_Contract_PowerView)  
+
+                )
+            {
+                return true;    //singleton
+            }
+            return false;
+        }
+        
 
         public string DisplayedImagePath
         {

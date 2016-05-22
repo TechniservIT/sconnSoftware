@@ -53,6 +53,20 @@ namespace sconnConnector.POCO.Device
         public bool IsVirtual { get; set; }
 
 
+        public Device()
+        {
+                EndpInfo = new EndpointInfo();
+                Credentials = new DeviceCredentials();
+        }
+
+        public void CopyFrom(Device other)
+        {
+            this.Id = other.Id;
+            this.DeviceName = other.DeviceName;
+            this.Credentials.CopyFrom(other.Credentials);
+            this.EndpInfo.CopyFrom(other.EndpInfo);
+        }
+
         public void Fake()
         {
             DeviceName = Guid.NewGuid().ToString();

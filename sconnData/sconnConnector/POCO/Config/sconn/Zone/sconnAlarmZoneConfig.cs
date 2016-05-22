@@ -61,6 +61,7 @@ namespace sconnConnector.POCO.Config.sconn
         {
             try
             {
+                Zones.Clear();
                 int zones = ipcDefines.ZONE_CFG_MAX_ZONES;  //buffer[ipcDefines.mAdrZoneNo_Pos];  //ipcDefines.ZONE_CFG_MAX_ZONES;  
                 for (int i = 0; i < zones; i++)
                 {

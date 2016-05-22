@@ -288,10 +288,6 @@ namespace sconnConnector.Config.Abstract
             {
                 return ipcDefines.mAddr_NAMES_Device_StartIndex;
             }
-            else if (type == typeof(sconnGlobalConfig))
-            {
-                return ipcDefines.mAddr_NAMES_Global_StartIndex;
-            }
             return 0;
         }
 

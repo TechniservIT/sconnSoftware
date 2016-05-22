@@ -186,7 +186,7 @@
             </Grid>
 
             <Grid    Grid.Row="0" Grid.Column="3" Background="White">
-                <Button Width="Auto" Content="">
+                <Button  Command="{Binding Path=Show_Alarm_Power_Command}" Width="Auto" Content="">
                     <Button.Template>
                         <ControlTemplate TargetType="{x:Type Button}">
                             <Grid>
@@ -213,7 +213,7 @@
             </Grid>
 
             <Grid    Grid.Row="0" Grid.Column="4" Background="White">
-                <Button Width="Auto" Content="">
+                <Button  Command="{Binding Path=Show_Alarm_TempratureSensors_Command}"  Width="Auto" Content="">
                     <Button.Template>
                         <ControlTemplate TargetType="{x:Type Button}">
                             <Grid>
@@ -240,7 +240,7 @@
             </Grid>
 
             <Grid    Grid.Row="0" Grid.Column="5" Background="White">
-                <Button Width="Auto" Content="">
+                <Button  Command="{Binding Path=Show_Alarm_HumiditySensors_Command}" Width="Auto" Content="">
                     <Button.Template>
                         <ControlTemplate TargetType="{x:Type Button}">
                             <Grid>
@@ -294,7 +294,7 @@
             </Grid>
 
             <Grid    Grid.Row="1" Grid.Column="1" Background="White">
-                <Button Width="Auto" Content="">
+                <Button Command="{Binding Path=Show_Alarm_Network_Command}"  Width="Auto" Content="">
                     <Button.Template>
                         <ControlTemplate TargetType="{x:Type Button}">
                             <Grid>
@@ -375,7 +375,7 @@
             </Grid>
 
             <Grid    Grid.Row="1" Grid.Column="4" Background="White">
-                <Button Width="Auto" Content="">
+                <Button Command="{Binding Path=Show_Alarm_Events_Command}" Width="Auto" Content="">
                     <Button.Template>
                         <ControlTemplate TargetType="{x:Type Button}">
                             <Grid>
