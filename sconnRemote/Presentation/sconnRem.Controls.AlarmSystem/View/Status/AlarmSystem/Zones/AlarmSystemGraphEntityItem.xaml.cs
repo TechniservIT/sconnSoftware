@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,25 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using sconnRem.Controls.AlarmSystem.ViewModel.Alarm;
-using sconnRem.Navigation;
-using sconnRem.ViewModel.Alarm;
 
 namespace sconnRem.Controls.AlarmSystem.View.Status.AlarmSystem.Zones
 {
-
-    [Export(AlarmRegionNames.AlarmConfig_Contract_ZoneMapConfigView)]
-    public partial class AlarmSystemZonesMapView : UserControl
+    /// <summary>
+    /// Interaction logic for AlarmSystemGraphEntityItem.xaml
+    /// </summary>
+    public partial class AlarmSystemGraphEntityItem : UserControl
     {
-        [ImportingConstructor]
-        public AlarmSystemZonesMapView(AlarmZoneMapViewModel viewModel)
+        public AlarmSystemGraphEntityItem()
         {
             InitializeComponent();
-            this.DataContext = viewModel;
         }
-
-
-
-
     }
 }

@@ -16,7 +16,13 @@ namespace sconnConnector.POCO.Config.sconn
         Time_Guarded
     }
 
-    public class sconnAlarmZone : IAlarmSystemNamedConfigurationEntity, ISerializableConfiguration, IFakeAbleConfiguration
+    public interface IAlarmSystemNamedEntityWithType
+    {
+        string Name { get; set; }
+        string imageIconUri { get; set; }
+    }
+
+    public class sconnAlarmZone : IAlarmSystemNamedConfigurationEntity, ISerializableConfiguration, IFakeAbleConfiguration, IAlarmSystemNamedEntityWithType
     {
         public int Id { get; set; }
         public string Name { get; set; }
