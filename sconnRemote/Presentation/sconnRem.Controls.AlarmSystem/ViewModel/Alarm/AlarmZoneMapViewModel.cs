@@ -25,6 +25,38 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
     public class AlarmZoneMapViewModel : GenericAsyncConfigViewModel
     {
 
+
+
+        #region Private Methods
+
+        private AlarmSystemGraphEdge AddNewGraphEdge(AlarmSystemGraphVertex from, AlarmSystemGraphVertex to)
+        {
+            string edgeString = string.Format("{0}-{1} Connected", from.ID, to.ID);
+
+            AlarmSystemGraphEdge newEdge = new AlarmSystemGraphEdge(edgeString, from, to);
+            Graph.AddEdge(newEdge);
+            return newEdge;
+        }
+
+
+        #endregion
+
+        #region Public Properties
+        
+        public AlarmSystemGraph Graph
+        {
+            get { return graph; }
+            set { SetProperty(ref graph, value); }
+            //set
+            //{
+            //    graph = value;
+            //    OnPropertyChanged();
+            //}
+        }
+
+        #endregion
+        
+
         private ObservableCollection<sconnAlarmZone> _config;
         public ObservableCollection<sconnAlarmZone> Config
         {
@@ -36,49 +68,33 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
             }
         }
 
-        private IBidirectionalGraph<object, IEdge<object>> _graphToVisualize;
-        public IBidirectionalGraph<object, IEdge<object>> GraphToVisualize
-        {
-            get { return _graphToVisualize; }
-            set
-            {
-                _graphToVisualize = value;
-                OnPropertyChanged();
-            }
-        }
-
-
         private ZoneConfigurationService _provider;
         private AlarmSystemConfigManager _manager;
-
-        public ICommand ConfigureZoneCommand { get; set; }
-        
+        public ICommand ConfigureZoneCommand { get; set; }   
         private AlarmSystemGraph graph;
-
         private int count;
 
         private void CreateGraph()
         {
             try
             {
-                var g = new BidirectionalGraph<object, IEdge<object>>();
+                var g = new AlarmSystemGraph();
                 string[] vertices = new string[Config.Count + 1];
 
                 vertices[0] = Config.FirstOrDefault().Name;    //create root node
-                g.AddVertex(vertices[0]);
+                AlarmSystemGraphVertex v1 = new AlarmSystemGraphVertex(vertices[0], false);
+                g.AddVertex(v1);
 
                 for (int i = 0; i < Config.Count; i++)
                 {
                     int CurrentVertIndex = i + 1;
                     vertices[CurrentVertIndex] = Config[i].Name;
-                    g.AddVertex(vertices[CurrentVertIndex]);
-                    g.AddEdge(new Edge<object>(vertices[0], vertices[CurrentVertIndex]));    //connect child to parent
+                    AlarmSystemGraphVertex v = new AlarmSystemGraphVertex(vertices[CurrentVertIndex], false);
+                    g.AddVertex(v);
+                    g.AddEdge(new AlarmSystemGraphEdge(v1.ID, v1, v));    //connect child to parent
                 }
 
-                _graphToVisualize = g;
-
-                NotifyPropertyChanged("Graph");
-
+                Graph = g;
             }
             catch (Exception ex)
             {
@@ -118,7 +134,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
             _name = "Zones";
             this._provider = new ZoneConfigurationService(_manager);
         }
-
+          
 
         public void SetupCmd()
         {
@@ -128,6 +144,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
         [ImportingConstructor]
         public AlarmZoneMapViewModel(IRegionManager regionManager)
         {
+            Graph = new AlarmSystemGraph();
             Config = new ObservableCollection<sconnAlarmZone>();
             this._manager = SiteNavigationManager.alarmSystemConfigManager;
             this._provider = new ZoneConfigurationService(_manager);
@@ -141,7 +158,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
 
         public override bool IsNavigationTarget(NavigationContext navigationContext)
         {
-            if (navigationContext.Uri.OriginalString.Equals(AlarmRegionNames.AlarmConfig_Contract_ZoneConfigView))
+            if (navigationContext.Uri.OriginalString.Equals(AlarmRegionNames.AlarmConfig_Contract_ZoneMapConfigView))
             {
                 return true;    //singleton
             }
@@ -151,50 +168,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
 
 
 
-        #region Private Methods
 
-        private AlarmSystemGraphEdge AddNewGraphEdge(AlarmSystemGraphVertex from, AlarmSystemGraphVertex to)
-        {
-            string edgeString = string.Format("{0}-{1} Connected", from.ID, to.ID);
-
-            AlarmSystemGraphEdge newEdge = new AlarmSystemGraphEdge(edgeString, from, to);
-            Graph.AddEdge(newEdge);
-            return newEdge;
-        }
-
-
-        #endregion
-
-        #region Public Properties
-
-
-        public AlarmSystemGraph Graph
-        {
-            get { return graph; }
-            set
-            {
-                graph = value;
-                NotifyPropertyChanged("Graph");
-            }
-        }
-        #endregion
-
-
-
-
-        #region INotifyPropertyChanged Implementation
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void NotifyPropertyChanged(String info)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(info));
-            }
-        }
-
-        #endregion
 
 
 

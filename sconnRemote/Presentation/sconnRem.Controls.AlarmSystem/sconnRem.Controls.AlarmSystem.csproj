@@ -301,6 +301,10 @@
     <Compile Include="View\Status\AlarmSystem\Global\AlarmSystemGlobalStatusView.xaml.cs">
       <DependentUpon>AlarmSystemGlobalStatusView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Status\AlarmSystem\Graph\AlarmSystemGraph.cs" />
+    <Compile Include="View\Status\AlarmSystem\Graph\AlarmSystemGraphEdge.cs" />
+    <Compile Include="View\Status\AlarmSystem\Graph\AlarmSystemGraphEntity.cs" />
+    <Compile Include="View\Status\AlarmSystem\Graph\AlarmSystemGraphVertex.cs" />
     <Compile Include="View\Status\AlarmSystem\Gsm\AlarmGsmRcptListView.xaml.cs">
       <DependentUpon>AlarmGsmRcptListView.xaml</DependentUpon>
     </Compile>

@@ -7,6 +7,7 @@ using QuickGraph;
 
 namespace sconnRem.Controls.AlarmSystem.View.Status.AlarmSystem.Graph
 {
+
     public class AlarmSystemGraph : BidirectionalGraph<AlarmSystemGraphVertex, AlarmSystemGraphEdge>
     {
 

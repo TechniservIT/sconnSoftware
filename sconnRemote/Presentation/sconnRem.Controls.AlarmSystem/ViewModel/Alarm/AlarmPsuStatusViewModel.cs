@@ -30,11 +30,12 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
             public ObservableCollection<sconnDevice> Config
             {
                 get { return _config; }
-                set
-                {
-                    _config = value;
-                    OnPropertyChanged();
-                }
+             set { SetProperty(ref _config, value); }
+            //set
+            //    {
+            //        _config = value;
+            //        OnPropertyChanged();
+            //    }
             }
 
             public ICommand ShowDeviceStatusCommand { get; set; }

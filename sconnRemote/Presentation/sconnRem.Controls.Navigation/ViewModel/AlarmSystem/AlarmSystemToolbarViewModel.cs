@@ -138,7 +138,7 @@ namespace sconnRem.Controls.Navigation.ViewModel.AlarmSystem
 
         private void ShowZones(sconnSite site)
         {
-            NavigateToAlarmContract(AlarmRegionNames.AlarmConfig_Contract_ZoneConfigView);
+            NavigateToAlarmContract(AlarmRegionNames.AlarmConfig_Contract_ZoneMapConfigView);   //AlarmConfig_Contract_ZoneConfigView
         }
 
 

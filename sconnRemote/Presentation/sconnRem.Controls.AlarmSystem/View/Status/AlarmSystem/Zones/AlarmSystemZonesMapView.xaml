@@ -17,13 +17,13 @@
 
         <DataTemplate x:Key="demoTemplate" DataType="{x:Type graph:AlarmSystemGraphVertex}">
             <StackPanel Orientation="Horizontal" Margin="5">
-                <Image x:Name="img" Source="" Width="20" Height="20" />
+                <Image x:Name="img" Source="/images/klawiatura1000x1000.jpg" Width="20" Height="20" />
                 <TextBlock Text="{Binding Path=ID, Mode=OneWay}" Foreground="White" />
             </StackPanel>
             <DataTemplate.Triggers>
                 <DataTrigger Binding="{Binding IsMale}" Value="false">
                     <Setter TargetName="img" Property="Source"
-                                Value="" />
+                                Value="/images/klawiatura1000x1000.jpg" />
                 </DataTrigger>
             </DataTemplate.Triggers>
         </DataTemplate>
@@ -88,7 +88,7 @@
     <xctk:BusyIndicator  IsBusy="{Binding Loading, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
         <zoom:ZoomControl>
             <graphsharp:GraphLayout x:Name="graphLayout"
-                                    Graph="{Binding ElementName=root,Path=GraphToVisualize}"
+                                    Graph="{Binding Graph, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                     LayoutAlgorithmType="Tree"
                                     OverlapRemovalAlgorithmType="FSA"
                                     HighlightAlgorithmType="Simple"

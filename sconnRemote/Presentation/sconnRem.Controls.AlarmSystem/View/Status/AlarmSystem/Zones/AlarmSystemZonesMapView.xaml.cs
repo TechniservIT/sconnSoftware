@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Prism.Regions;
 using sconnRem.Controls.AlarmSystem.ViewModel.Alarm;
 using sconnRem.Navigation;
 using sconnRem.ViewModel.Alarm;
@@ -21,6 +22,8 @@ namespace sconnRem.Controls.AlarmSystem.View.Status.AlarmSystem.Zones
 {
 
     [Export(AlarmRegionNames.AlarmConfig_Contract_ZoneMapConfigView)]
+    [ViewSortHint("01")]
+    [PartCreationPolicy(CreationPolicy.Shared)]
     public partial class AlarmSystemZonesMapView : UserControl
     {
         [ImportingConstructor]
