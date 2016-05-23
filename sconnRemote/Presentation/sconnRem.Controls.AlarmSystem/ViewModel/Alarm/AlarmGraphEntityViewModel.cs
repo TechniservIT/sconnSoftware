@@ -27,6 +27,9 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
         public IAlarmSystemNamedEntityWithType Entity { get; set; }
         public string PreviousUrl { get; set; }
         public string NextUrl { get; set; }
+        public bool IsActive { get; set; }
+        public event EventHandler IsActiveChanged;
+        public bool IsChanged { get; }
 
         public AlarmGraphEntityViewModel()
         {
@@ -66,15 +69,12 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
          
         }
 
-
-        public bool IsActive { get; set; }
-        public event EventHandler IsActiveChanged;
         public void AcceptChanges()
         {
           
         }
 
-        public bool IsChanged { get; }
+        
     }
 
 

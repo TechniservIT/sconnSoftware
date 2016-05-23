@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,7 @@ using Prism.Regions;
 using QuickGraph;
 using sconnConnector.Config;
 using sconnConnector.POCO.Config.sconn;
+using sconnRem.Controls.AlarmSystem.View.Status.AlarmSystem.Graph;
 using sconnRem.Controls.AlarmSystem.ViewModel.Generic;
 using sconnRem.Infrastructure.Navigation;
 using sconnRem.Navigation;
@@ -50,7 +52,10 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
         private AlarmSystemConfigManager _manager;
 
         public ICommand ConfigureZoneCommand { get; set; }
+        
+        private AlarmSystemGraph graph;
 
+        private int count;
 
         private void CreateGraph()
         {
@@ -71,6 +76,9 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
                 }
 
                 _graphToVisualize = g;
+
+                NotifyPropertyChanged("Graph");
+
             }
             catch (Exception ex)
             {
@@ -139,6 +147,55 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
             }
             return false;
         }
+
+
+
+
+        #region Private Methods
+
+        private AlarmSystemGraphEdge AddNewGraphEdge(AlarmSystemGraphVertex from, AlarmSystemGraphVertex to)
+        {
+            string edgeString = string.Format("{0}-{1} Connected", from.ID, to.ID);
+
+            AlarmSystemGraphEdge newEdge = new AlarmSystemGraphEdge(edgeString, from, to);
+            Graph.AddEdge(newEdge);
+            return newEdge;
+        }
+
+
+        #endregion
+
+        #region Public Properties
+
+
+        public AlarmSystemGraph Graph
+        {
+            get { return graph; }
+            set
+            {
+                graph = value;
+                NotifyPropertyChanged("Graph");
+            }
+        }
+        #endregion
+
+
+
+
+        #region INotifyPropertyChanged Implementation
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void NotifyPropertyChanged(String info)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(info));
+            }
+        }
+
+        #endregion
+
 
 
     }

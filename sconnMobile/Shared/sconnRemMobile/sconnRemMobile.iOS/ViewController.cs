@@ -14,6 +14,7 @@ namespace sconnRemMobile.iOS
 
 		public ViewController (IntPtr handle) : base (handle)
 		{
+
 		}
 
 		public override void ViewDidLoad ()
@@ -36,9 +37,11 @@ namespace sconnRemMobile.iOS
 		    cred.Password = site.authPasswd;
 		    cred.Username = site.authPasswd;
 
+
+
             AlarmSystemConfigManager man = new AlarmSystemConfigManager(info,cred);
 
-		    GlobalConfigService  gs = new GlobalConfigService(man);
+            GlobalConfigService  gs = new GlobalConfigService(man);
 
 		    var dev = gs.Get();
 
@@ -48,9 +51,6 @@ namespace sconnRemMobile.iOS
 				var title = string.Format ("{0} clicks!", count++);
 				Button.SetTitle (title, UIControlState.Normal);
 			};
-
-
-
 
 		}
 

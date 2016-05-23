@@ -9,15 +9,92 @@
             xmlns:graphsharp="clr-namespace:GraphSharp.Controls;assembly=GraphSharp.Controls"
             xmlns:zoom="clr-namespace:WPFExtensions.Controls;assembly=WPFExtensions"
             xmlns:tree="clr-namespace:GraphSharp.Algorithms.Layout.Simple.Tree;assembly=GraphSharp"
-             d:DesignHeight="300" d:DesignWidth="300">
+            xmlns:graph="clr-namespace:sconnRem.Controls.AlarmSystem.View.Status.AlarmSystem.Graph"
+            d:DesignHeight="300" d:DesignWidth="300">
 
+    <UserControl.Resources>
+
+
+        <DataTemplate x:Key="demoTemplate" DataType="{x:Type graph:AlarmSystemGraphVertex}">
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <Image x:Name="img" Source="" Width="20" Height="20" />
+                <TextBlock Text="{Binding Path=ID, Mode=OneWay}" Foreground="White" />
+            </StackPanel>
+            <DataTemplate.Triggers>
+                <DataTrigger Binding="{Binding IsMale}" Value="false">
+                    <Setter TargetName="img" Property="Source"
+                                Value="" />
+                </DataTrigger>
+            </DataTemplate.Triggers>
+        </DataTemplate>
+
+        <Style TargetType="{x:Type graphsharp:VertexControl}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type graphsharp:VertexControl}">
+                        <Border BorderBrush="White" 
+                                    Background="Black"
+							        BorderThickness="2"
+							        CornerRadius="10,10,10,10"
+							        Padding="{TemplateBinding Padding}">
+
+                            <StackPanel Orientation="Vertical">
+
+                                <Expander IsExpanded="True">
+                                    <ContentPresenter Content="{TemplateBinding Vertex}" 
+                                            ContentTemplate="{StaticResource demoTemplate}"/>
+                                </Expander>
+                                <Expander IsExpanded="True">
+                                    <ContentPresenter Content="{TemplateBinding Vertex}" 
+                                            ContentTemplate="{StaticResource demoTemplate}"/>
+                                </Expander>
+                                <Expander IsExpanded="True">
+                                    <ContentPresenter Content="{TemplateBinding Vertex}" 
+                                            ContentTemplate="{StaticResource demoTemplate}"/>
+                                </Expander>
+                                <Expander IsExpanded="True">
+                                    <ContentPresenter Content="{TemplateBinding Vertex}" 
+                                            ContentTemplate="{StaticResource demoTemplate}"/>
+                                </Expander>
+
+                            </StackPanel>
+
+                            <Border.Effect>
+                                <DropShadowEffect BlurRadius="2" Color="LightGray" 
+                                    Opacity="0.3" Direction="315"/>
+                            </Border.Effect>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
+        <Style TargetType="{x:Type graphsharp:EdgeControl}">
+            <Style.Resources>
+                <ToolTip x:Key="ToolTipContent">
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="Edge Information"/>
+                        <TextBlock Text="{Binding ID}"/>
+                    </StackPanel>
+                </ToolTip>
+            </Style.Resources>
+            <Setter Property="ToolTip" Value="{StaticResource ToolTipContent}"/>
+        </Style>
+        
+    </UserControl.Resources>
+
+    
     <xctk:BusyIndicator  IsBusy="{Binding Loading, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
         <zoom:ZoomControl>
             <graphsharp:GraphLayout x:Name="graphLayout"
                                     Graph="{Binding ElementName=root,Path=GraphToVisualize}"
                                     LayoutAlgorithmType="Tree"
                                     OverlapRemovalAlgorithmType="FSA"
-                                    HighlightAlgorithmType="Simple" Margin="0,0,-1,0" />
+                                    HighlightAlgorithmType="Simple"
+                                    />
         </zoom:ZoomControl>                                                                                                
     </xctk:BusyIndicator>
+    
+    
 </UserControl>

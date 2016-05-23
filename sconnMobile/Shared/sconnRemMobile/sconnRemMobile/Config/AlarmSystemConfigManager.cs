@@ -46,6 +46,10 @@ namespace sconnConnector.Config
         {
             info = endp;
             creds = cred;
+            Device remote = new Device();
+            remote.Credentials = cred;
+            remote.EndpInfo = info;
+            RemoteDevice = remote;
         }
 
         public AlarmSystemConfigManager(Device dev) : this(dev.EndpInfo,dev.Credentials)

@@ -8,8 +8,8 @@ I:\Repo\Bucket\sconnSoftware\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.iO
 I:\Repo\Bucket\sconnSoftware\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.iOS\obj\iPhoneSimulator\Debug\actool\_PartialAppManifest.items
 I:\Repo\Bucket\sconnSoftware\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.iOS\obj\iPhoneSimulator\Debug\actool\_BundleResourceWithLogicalName.items
 I:\Repo\Bucket\sconnSoftware\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.iOS\obj\iPhoneSimulator\Debug\optimized\
-I:\Repo\Bucket\sconnSoftware\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.iOS\obj\iPhoneSimulator\Debug\sconnRemMobile.iOS.csprojResolveAssemblyReference.cache
 I:\Repo\Bucket\sconnSoftware\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.iOS\obj\iPhoneSimulator\Debug\sconnRemMobileiOS.exe
 I:\Repo\Bucket\sconnSoftware\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.iOS\obj\iPhoneSimulator\Debug\sconnRemMobileiOS.pdb
+I:\Repo\Bucket\sconnSoftware\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.iOS\obj\iPhoneSimulator\Debug\sconnRemMobile.iOS.csprojResolveAssemblyReference.cache
 I:\Repo\Bucket\sconnSoftware\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.iOS\obj\iPhoneSimulator\Debug\sconnRemMobileiOS.exe.mdb
 I:\Repo\Bucket\sconnSoftware\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.iOS\bin\iPhoneSimulator\Debug\sconnRemMobileiOS.exe.mdb
