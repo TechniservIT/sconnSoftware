@@ -9,7 +9,6 @@
     <Import_RootNamespace>sconnRemMobile</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)Annotations.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Comm\ETH.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Comm\USB.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Config\Abstract\AlarmGenericConfigManager.cs" />
@@ -17,10 +16,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)Config\Abstract\CommandManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Config\AlarmSystemConfigManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Config\CfgOper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Config\ConfigHelpers.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Config\GlobalSettings.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Config\sconnCfgMngr.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Config\sconnDataSrc.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)MyClass.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\Abstract\AlarmSystemConfig.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\Abstract\Device\AlarmSystemAuthorizedDevice.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\Abstract\Device\AlarmSystemAuthorizedDevicesConfig.cs" />
@@ -70,6 +69,20 @@
     <Compile Include="$(MSBuildThisFileDirectory)POCO\IFakeAbleConfiguration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)POCO\ISerializableConfiguration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)POCO\sconnDataShare.cs" />
+<<<<<<< HEAD
+    <Compile Include="$(MSBuildThisFileDirectory)Properties\Annotations.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\EncXmlStorage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\IEntityStorage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\INetworkClientStatusUpdateService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\ISiteManagmentService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\ISiteRepository.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\NetworkClientStatusUpdateService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\SiteManagmentService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\SiteSqlRepository.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\SiteXmlRepository.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\SqlEntityStorage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\XmlEntityStorage.cs" />
+=======
     <Compile Include="$(MSBuildThisFileDirectory)sconnConnector.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\Abstract\IEntityService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\AuthorizedDevices\AuthorizedDevicesConfigurationService.cs" />
@@ -87,8 +100,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Service\Users\UsersConfigurationService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\Zone\IZoneConfigurationService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\Zone\ZoneConfigurationService.cs" />
+>>>>>>> b9a642a027641cca87c639ae9007ad1caba9ec0d
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)Config\Manager\" />
+    <None Include="$(MSBuildThisFileDirectory)Service\packages.config" />
   </ItemGroup>
 </Project>

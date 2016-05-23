@@ -1,4 +1,3 @@
-H:\Repo\Bucket\iotdashn\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.Droid\obj\Debug\sconnRemMobile.Droid.csprojResolveAssemblyReference.cache
 H:\Repo\Bucket\iotdashn\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.Droid\bin\Debug\NLog.config
 H:\Repo\Bucket\iotdashn\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.Droid\bin\Debug\sconnRemMobile.Droid.dll
 H:\Repo\Bucket\iotdashn\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.Droid\bin\Debug\sconnRemMobile.Droid.pdb

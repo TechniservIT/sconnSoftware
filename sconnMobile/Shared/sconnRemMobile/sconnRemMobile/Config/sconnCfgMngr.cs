@@ -18,13 +18,19 @@ using System.Windows.Input;
 
 namespace sconnConnector
 {
+
+    public class USB
+    {
+        public bool ReadSiteRunningConfigMin(sconnSite site, bool x)
+        {
+            return true;
+        }
+    }
+
 	public class sconnCfgMngr
 	{
 		ETH ethernet;
-
-          #if WIN32_ENC
         USB usbClient;
-            #endif
 
         private bool Trx_Com_Usb;
 
@@ -37,9 +43,7 @@ namespace sconnConnector
 
 		public sconnCfgMngr()
 		{
-#if WIN32_ENC
             usbClient = new USB();
-#endif
 			ethernet = new ETH();
 		}
 
@@ -1747,12 +1751,7 @@ namespace sconnConnector
 	   {
             if (site.UsbCom)
             {
-                #if WIN32_ENC
-                            return usbClient.ReadSiteRunningConfigMin(site, true);
-                #else
-                                return false;
-                #endif
-                
+                return usbClient.ReadSiteRunningConfigMin(site, true);
             }
             else
             {
@@ -1765,12 +1764,7 @@ namespace sconnConnector
 			{
             if (site.UsbCom)
             {
-                #if WIN32_ENC 
-                                return usbClient.ReadSiteRunningConfigMin(site, true);
-                #else
-                            return false;
-                 #endif
-               
+                return usbClient.ReadSiteRunningConfigMin(site, true);
             }
             else
             {
