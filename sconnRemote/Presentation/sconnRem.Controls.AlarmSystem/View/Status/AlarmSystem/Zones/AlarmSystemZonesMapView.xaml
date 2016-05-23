@@ -87,7 +87,7 @@
     
     <xctk:BusyIndicator  IsBusy="{Binding Loading, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
         <zoom:ZoomControl>
-            <graphsharp:GraphLayout x:Name="graphLayout"
+            <graph:AlarmSystemGraphLayout x:Name="GraphLayout"
                                     Graph="{Binding Graph, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                     LayoutAlgorithmType="Tree"
                                     OverlapRemovalAlgorithmType="FSA"

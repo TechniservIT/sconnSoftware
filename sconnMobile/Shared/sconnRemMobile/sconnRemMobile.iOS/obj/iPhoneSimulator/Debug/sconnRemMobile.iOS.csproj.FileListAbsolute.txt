@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 H:\Repo\Bucket\iotdashn\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.iOS\obj\iPhoneSimulator\Debug\ibtool\_BundleResourceWithLogicalName.items
 H:\Repo\Bucket\iotdashn\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.iOS\obj\iPhoneSimulator\Debug\actool\_PartialAppManifest.items
 H:\Repo\Bucket\iotdashn\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.iOS\obj\iPhoneSimulator\Debug\actool\_BundleResourceWithLogicalName.items
@@ -13,7 +12,6 @@ H:\Repo\Bucket\iotdashn\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.iOS\obj
 H:\Repo\Bucket\iotdashn\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.iOS\obj\iPhoneSimulator\Debug\sconnRemMobileiOS.pdb
 H:\Repo\Bucket\iotdashn\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.iOS\obj\iPhoneSimulator\Debug\sconnRemMobileiOS.exe.mdb
 H:\Repo\Bucket\iotdashn\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.iOS\bin\iPhoneSimulator\Debug\sconnRemMobileiOS.exe.mdb
-=======
 I:\Repo\Bucket\sconnSoftware\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.iOS\bin\iPhoneSimulator\Debug\NLog.config
 I:\Repo\Bucket\sconnSoftware\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.iOS\bin\iPhoneSimulator\Debug\sconnRemMobileiOS.exe
 I:\Repo\Bucket\sconnSoftware\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.iOS\bin\iPhoneSimulator\Debug\sconnRemMobileiOS.pdb
@@ -26,7 +24,40 @@ I:\Repo\Bucket\sconnSoftware\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.iO
 I:\Repo\Bucket\sconnSoftware\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.iOS\obj\iPhoneSimulator\Debug\optimized\
 I:\Repo\Bucket\sconnSoftware\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.iOS\obj\iPhoneSimulator\Debug\sconnRemMobileiOS.exe
 I:\Repo\Bucket\sconnSoftware\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.iOS\obj\iPhoneSimulator\Debug\sconnRemMobileiOS.pdb
-I:\Repo\Bucket\sconnSoftware\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.iOS\obj\iPhoneSimulator\Debug\sconnRemMobile.iOS.csprojResolveAssemblyReference.cache
+I:\Repo\Bucket\sconnSoftware\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.iOS\obj\iPhoneSimulator\Debug\ibtool\LaunchScreen.storyboardc\Info.plist
+I:\Repo\Bucket\sconnSoftware\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.iOS\obj\iPhoneSimulator\Debug\ibtool\LaunchScreen.storyboardc\UIViewController-X5k-f2-b5h.nib
+I:\Repo\Bucket\sconnSoftware\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.iOS\obj\iPhoneSimulator\Debug\ibtool\LaunchScreen.storyboardc\X5k-f2-b5h-view-yd7-JS-zBw.nib
+I:\Repo\Bucket\sconnSoftware\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.iOS\obj\iPhoneSimulator\Debug\ibtool\Main.storyboardc\BYZ-38-t0r-view-8bC-Xf-vdC.nib
+I:\Repo\Bucket\sconnSoftware\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.iOS\obj\iPhoneSimulator\Debug\ibtool\Main.storyboardc\Info.plist
+I:\Repo\Bucket\sconnSoftware\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.iOS\obj\iPhoneSimulator\Debug\ibtool\Main.storyboardc\UIViewController-BYZ-38-t0r.nib
+I:\Repo\Bucket\sconnSoftware\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.iOS\obj\iPhoneSimulator\Debug\actool\partial-info.plist
+I:\Repo\Bucket\sconnSoftware\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.iOS\obj\iPhoneSimulator\Debug\actool\asset-manifest.plist
+I:\Repo\Bucket\sconnSoftware\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.iOS\obj\iPhoneSimulator\Debug\actool\bundle\AppIcons29x29.png
+I:\Repo\Bucket\sconnSoftware\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.iOS\obj\iPhoneSimulator\Debug\actool\bundle\AppIcons29x29@2x.png
+I:\Repo\Bucket\sconnSoftware\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.iOS\obj\iPhoneSimulator\Debug\actool\bundle\AppIcons29x29@3x.png
+I:\Repo\Bucket\sconnSoftware\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.iOS\obj\iPhoneSimulator\Debug\actool\bundle\AppIcons40x40@2x.png
+I:\Repo\Bucket\sconnSoftware\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.iOS\obj\iPhoneSimulator\Debug\actool\bundle\AppIcons40x40@3x.png
+I:\Repo\Bucket\sconnSoftware\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.iOS\obj\iPhoneSimulator\Debug\actool\bundle\AppIcons60x60@2x.png
+I:\Repo\Bucket\sconnSoftware\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.iOS\obj\iPhoneSimulator\Debug\actool\bundle\AppIcons60x60@3x.png
+I:\Repo\Bucket\sconnSoftware\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.iOS\obj\iPhoneSimulator\Debug\actool\bundle\AppIcons29x29~ipad.png
+I:\Repo\Bucket\sconnSoftware\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.iOS\obj\iPhoneSimulator\Debug\actool\bundle\AppIcons29x29@2x~ipad.png
+I:\Repo\Bucket\sconnSoftware\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.iOS\obj\iPhoneSimulator\Debug\actool\bundle\AppIcons40x40~ipad.png
+I:\Repo\Bucket\sconnSoftware\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.iOS\obj\iPhoneSimulator\Debug\actool\bundle\AppIcons40x40@2x~ipad.png
+I:\Repo\Bucket\sconnSoftware\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.iOS\obj\iPhoneSimulator\Debug\actool\bundle\AppIcons76x76~ipad.png
+I:\Repo\Bucket\sconnSoftware\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.iOS\obj\iPhoneSimulator\Debug\actool\bundle\AppIcons76x76@2x~ipad.png
+I:\Repo\Bucket\sconnSoftware\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.iOS\obj\iPhoneSimulator\Debug\actool\bundle\LaunchImage.png
+I:\Repo\Bucket\sconnSoftware\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.iOS\obj\iPhoneSimulator\Debug\actool\bundle\LaunchImage@2x.png
+I:\Repo\Bucket\sconnSoftware\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.iOS\obj\iPhoneSimulator\Debug\actool\bundle\LaunchImage-568h@2x.png
 I:\Repo\Bucket\sconnSoftware\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.iOS\obj\iPhoneSimulator\Debug\sconnRemMobileiOS.exe.mdb
 I:\Repo\Bucket\sconnSoftware\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.iOS\bin\iPhoneSimulator\Debug\sconnRemMobileiOS.exe.mdb
->>>>>>> b9a642a027641cca87c639ae9007ad1caba9ec0d
+I:\Repo\Bucket\sconnSoftware\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.iOS\obj\iPhoneSimulator\Debug\sconnRemMobile.iOS.csprojResolveAssemblyReference.cache
+I:\Repo\Bucket\sconnSoftware\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.iOS\obj\iPhoneSimulator\Debug\sconnRemMobile.iOS.Storage.Migrations.201507201602094_initial.resources
+I:\Repo\Bucket\sconnSoftware\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.iOS\obj\iPhoneSimulator\Debug\sconnRemMobile.iOS.Storage.Migrations.201512080856548_Device category enum.resources
+I:\Repo\Bucket\sconnSoftware\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.iOS\obj\iPhoneSimulator\Debug\sconnRemMobile.iOS.Storage.Migrations.201601081643290_Map definitions.resources
+I:\Repo\Bucket\sconnSoftware\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.iOS\obj\iPhoneSimulator\Debug\sconnRemMobile.iOS.Storage.Migrations.201601141453304_map def lat lng .resources
+I:\Repo\Bucket\sconnSoftware\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.iOS\obj\iPhoneSimulator\Debug\sconnRemMobile.iOS.Storage.Migrations.201601181338388_relay value as bool.resources
+I:\Repo\Bucket\sconnSoftware\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.iOS\obj\iPhoneSimulator\Debug\sconnRemMobile.iOS.Storage.Migrations.201601231231386_map io def standalone, image map opt.resources
+I:\Repo\Bucket\sconnSoftware\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.iOS\obj\iPhoneSimulator\Debug\sconnRemMobile.iOS.Storage.Migrations.201601231413273_generic device with map defition, map def with io map defs.resources
+I:\Repo\Bucket\sconnSoftware\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.iOS\obj\iPhoneSimulator\Debug\sconnRemMobile.iOS.Storage.Migrations.201603290957059_cctv & image procesing models.resources
+I:\Repo\Bucket\sconnSoftware\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.iOS\obj\iPhoneSimulator\Debug\sconnRemMobile.iOS.Storage.Migrations.201603291031585_cctv & image procesing models migrate .resources
+I:\Repo\Bucket\sconnSoftware\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.iOS\obj\iPhoneSimulator\Debug\sconnRemMobile.iOS.csproj.GenerateResource.Cache

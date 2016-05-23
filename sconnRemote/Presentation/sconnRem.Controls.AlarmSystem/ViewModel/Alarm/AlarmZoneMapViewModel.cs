@@ -46,12 +46,12 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
         public AlarmSystemGraph Graph
         {
             get { return graph; }
-            set { SetProperty(ref graph, value); }
-            //set
-            //{
-            //    graph = value;
-            //    OnPropertyChanged();
-            //}
+            //set { SetProperty(ref graph, value); }
+            set
+            {
+                graph = value;
+                OnPropertyChanged();
+            }
         }
 
         #endregion
