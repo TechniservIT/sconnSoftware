@@ -97,25 +97,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Service\Users\UsersConfigurationService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\Zone\IZoneConfigurationService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\Zone\ZoneConfigurationService.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Storage\DAL\Repository\Connector\Entity\IIotContextBase.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Storage\DAL\Repository\Connector\Entity\iotContext.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Storage\DAL\Repository\Connector\Entity\iotDomainContext.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Storage\DAL\Repository\Connector\Entity\iotInMemoryContext.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Storage\DAL\Repository\Connector\iotDbConnector.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Storage\DAL\Repository\Connector\iotRepository.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Storage\DAL\Repository\IiotRepository.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Storage\DAL\Repository\iotDataContext.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Storage\DAL\Repository\IotFakeRepository.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Storage\DAL\Repository\IotRepositoryUnit.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Storage\DAL\Repository\NoSql\INoSqlDataSource.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Storage\DAL\Repository\NoSql\MongoNoSqlDataSource.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Storage\DAL\Repository\NoSql\RavenNoSqlDataSource.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Storage\DAL\Repository\NoSql\RedisNoSqlDataSource.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Storage\DAL\Repository\Runtime\InMemoryContext.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Storage\DAL\Repository\Runtime\iotSharedContext.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Storage\Entities\Auth\AuthDB.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Storage\Entities\Auth\authDbConnector.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Storage\Entities\Auth\AuthenticationManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Storage\Entities\Auth\Credential\AppAuthLevel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Storage\Entities\Auth\Credential\AppUserCredentials.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Storage\Entities\Auth\Credential\AuthDatabaseContext.cs" />
@@ -149,42 +131,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Storage\Entities\User\UserPermission.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Storage\Entities\User\UserSiteAdminPermission.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Storage\Entities\User\UserSitePermission.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Storage\Migrations\201507201602094_initial.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Storage\Migrations\201507201602094_initial.Designer.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Storage\Migrations\201512080856548_Device category enum.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Storage\Migrations\201512080856548_Device category enum.Designer.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Storage\Migrations\201601081643290_Map definitions.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Storage\Migrations\201601081643290_Map definitions.Designer.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Storage\Migrations\201601141453304_map def lat lng .cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Storage\Migrations\201601141453304_map def lat lng .Designer.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Storage\Migrations\201601181338388_relay value as bool.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Storage\Migrations\201601181338388_relay value as bool.Designer.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Storage\Migrations\201601231231386_map io def standalone, image map opt.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Storage\Migrations\201601231231386_map io def standalone, image map opt.Designer.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Storage\Migrations\201601231413273_generic device with map defition, map def with io map defs.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Storage\Migrations\201601231413273_generic device with map defition, map def with io map defs.Designer.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Storage\Migrations\201603290957059_cctv &amp; image procesing models.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Storage\Migrations\201603290957059_cctv &amp; image procesing models.Designer.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Storage\Migrations\201603291031585_cctv &amp; image procesing models migrate .cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Storage\Migrations\201603291031585_cctv &amp; image procesing models migrate .Designer.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Storage\Migrations\Configuration.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Storage\Notify\ParameterChangeManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)Service\packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Storage\Migrations\201507201602094_initial.resx" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Storage\Migrations\201512080856548_Device category enum.resx" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Storage\Migrations\201601081643290_Map definitions.resx" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Storage\Migrations\201601141453304_map def lat lng .resx" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Storage\Migrations\201601181338388_relay value as bool.resx" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Storage\Migrations\201601231231386_map io def standalone, image map opt.resx" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Storage\Migrations\201601231413273_generic device with map defition, map def with io map defs.resx" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Storage\Migrations\201603290957059_cctv &amp; image procesing models.resx" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Storage\Migrations\201603291031585_cctv &amp; image procesing models migrate .resx" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)Storage\Entities\AlarmSystem\" />
   </ItemGroup>
 </Project>
