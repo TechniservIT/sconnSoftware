@@ -40,16 +40,8 @@ I:\Repo\Bucket\sconnSoftware\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.Dr
 I:\Repo\Bucket\sconnSoftware\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.Droid\obj\Debug\res\drawable-xxxhdpi\icon.png
 I:\Repo\Bucket\sconnSoftware\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.Droid\obj\Debug\R.cs.flag
 I:\Repo\Bucket\sconnSoftware\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.Droid\obj\Debug\uploadflags.txt
+I:\Repo\Bucket\sconnSoftware\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.Droid\bin\Debug\sconnRemMobile.Droid.dll.config
+I:\Repo\Bucket\sconnSoftware\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.Droid\bin\Debug\SQLite.Net.dll
+I:\Repo\Bucket\sconnSoftware\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.Droid\bin\Debug\SQLite.Net.Platform.XamarinAndroid.dll
 I:\Repo\Bucket\sconnSoftware\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.Droid\obj\Debug\sconnRemMobile.Droid.dll.mdb
 I:\Repo\Bucket\sconnSoftware\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.Droid\bin\Debug\sconnRemMobile.Droid.dll.mdb
-I:\Repo\Bucket\sconnSoftware\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.Droid\obj\Debug\sconnRemMobile.Droid.csprojResolveAssemblyReference.cache
-I:\Repo\Bucket\sconnSoftware\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.Droid\obj\Debug\sconnRemMobile.Droid.Storage.Migrations.201507201602094_initial.resources
-I:\Repo\Bucket\sconnSoftware\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.Droid\obj\Debug\sconnRemMobile.Droid.Storage.Migrations.201512080856548_Device category enum.resources
-I:\Repo\Bucket\sconnSoftware\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.Droid\obj\Debug\sconnRemMobile.Droid.Storage.Migrations.201601081643290_Map definitions.resources
-I:\Repo\Bucket\sconnSoftware\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.Droid\obj\Debug\sconnRemMobile.Droid.Storage.Migrations.201601141453304_map def lat lng .resources
-I:\Repo\Bucket\sconnSoftware\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.Droid\obj\Debug\sconnRemMobile.Droid.Storage.Migrations.201601181338388_relay value as bool.resources
-I:\Repo\Bucket\sconnSoftware\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.Droid\obj\Debug\sconnRemMobile.Droid.Storage.Migrations.201601231231386_map io def standalone, image map opt.resources
-I:\Repo\Bucket\sconnSoftware\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.Droid\obj\Debug\sconnRemMobile.Droid.Storage.Migrations.201601231413273_generic device with map defition, map def with io map defs.resources
-I:\Repo\Bucket\sconnSoftware\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.Droid\obj\Debug\sconnRemMobile.Droid.Storage.Migrations.201603290957059_cctv & image procesing models.resources
-I:\Repo\Bucket\sconnSoftware\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.Droid\obj\Debug\sconnRemMobile.Droid.Storage.Migrations.201603291031585_cctv & image procesing models migrate .resources
-I:\Repo\Bucket\sconnSoftware\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.Droid\obj\Debug\sconnRemMobile.Droid.csproj.GenerateResource.Cache
