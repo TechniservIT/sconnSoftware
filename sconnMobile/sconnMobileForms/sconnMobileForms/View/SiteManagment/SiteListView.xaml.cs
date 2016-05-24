@@ -23,36 +23,36 @@ namespace sconnMobileForms.View.SiteManagment
 
         public SiteListView()
         {
+            InitializeComponent();
 
+            NavigationPage.SetHasNavigationBar(this, true);
+            
             Repository = new SiteSqlRepository();
             Sites = new List<sconnSite>();
-            List = new ListView();
 
             List = new ListView
             {
                 RowHeight = 40,
+                BackgroundColor = Color.Aqua,
                 ItemTemplate = new DataTemplate(typeof(SiteListCell))
             };
 
 
+            LoadList();
+
+            
             List.ItemSelected += (sender, e) => {
-                var todoItem = (sconnSite	)e.SelectedItem;
-                var todoPage = new TodoItemPage();
-                todoPage.BindingContext = todoItem;
-                Navigation.PushAsync(todoPage);
+                var site = (sconnSite)e.SelectedItem;
+                var editPage = new SiteListPage {BindingContext = site };
+                Navigation.PushModalAsync(editPage);
+
             };
 
+            List.ItemsSource = Sites;
+
             var layout = new StackLayout();
-            if (Device.OS == TargetPlatform.WinPhone)
-            { // WinPhone doesn't have the title showing
-                layout.Children.Add(new Label
-                {
-                    Text = "Todo",
-                    FontSize = Device.GetNamedSize(NamedSize.Large, typeof(Label)),
-                    FontAttributes = FontAttributes.Bold
-                });
-            }
-            layout.Children.Add(listView);
+
+            layout.Children.Add(List);
             layout.VerticalOptions = LayoutOptions.FillAndExpand;
             Content = layout;
 
@@ -61,8 +61,8 @@ namespace sconnMobileForms.View.SiteManagment
             if (Device.OS == TargetPlatform.iOS)
             {
                 tbi = new ToolbarItem("+", null, () => {
-                    var todoItem = new TodoItem();
-                    var todoPage = new TodoItemPage();
+                    var todoItem = new sconnSite();
+                    var todoPage = new SiteListPage();
                     todoPage.BindingContext = todoItem;
                     Navigation.PushAsync(todoPage);
                 }, 0, 0);
@@ -70,8 +70,8 @@ namespace sconnMobileForms.View.SiteManagment
             if (Device.OS == TargetPlatform.Android)
             { // BUG: Android doesn't support the icon being null
                 tbi = new ToolbarItem("+", "plus", () => {
-                    var todoItem = new TodoItem();
-                    var todoPage = new TodoItemPage();
+                    var todoItem = new sconnSite();
+                    var todoPage = new SiteListPage();
                     todoPage.BindingContext = todoItem;
                     Navigation.PushAsync(todoPage);
                 }, 0, 0);
@@ -80,34 +80,16 @@ namespace sconnMobileForms.View.SiteManagment
             if (Device.OS == TargetPlatform.WinPhone)
             {
                 tbi = new ToolbarItem("Add", "add.png", () => {
-                    var todoItem = new TodoItem();
-                    var todoPage = new TodoItemPage();
+                    var todoItem = new sconnSite();
+                    var todoPage = new SiteListPage();
                     todoPage.BindingContext = todoItem;
                     Navigation.PushAsync(todoPage);
                 }, 0, 0);
             }
 
-            ToolbarItems.Add(tbi);
+            if (tbi != null) ToolbarItems.Add(tbi);
+            
 
-            if (Device.OS == TargetPlatform.iOS)
-            {
-                var tbi2 = new ToolbarItem("?", null, () => {
-                    var todos = App.Database.GetItemsNotDone();
-                    var tospeak = "";
-                    foreach (var t in todos)
-                        tospeak += t.Name + " ";
-                    if (tospeak == "")
-                        tospeak = "there are no tasks to do";
-
-                    DependencyService.Get<ITextToSpeech>().Speak(tospeak);
-                }, 0, 0);
-                ToolbarItems.Add(tbi2);
-            }
-
-
-            LoadList();
-
-            InitializeComponent();
 
         }
     }
