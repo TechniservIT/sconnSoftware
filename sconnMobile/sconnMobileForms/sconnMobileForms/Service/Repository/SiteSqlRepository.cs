@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,14 +20,25 @@ namespace SiteManagmentService
         public string DatabasePath { get; set; }
 
 
+        private void Fake()
+        {
+            sconnSite site1 = new sconnSite();
+            site1.authPasswd = Guid.NewGuid().ToString();
+            site1.serverIP = Guid.NewGuid().ToString();
+            this.Add(site1);
+        }
+
         public void Database_Init()
         {
             try
             {
+                DatabasePath = Path.Combine(  Environment.GetFolderPath(Environment.SpecialFolder.Personal), "sconnSites.db3");
                 _connection = new SQLiteConnection(DatabasePath);
                 _connection.CreateTable<sconnSite>(CreateFlags.AutoIncPK);
                 var table = _connection.Table<sconnSite>();
-               // Sites = new ObservableCollection<sconnSite>(table.ToList());
+
+                Fake();
+                // Sites = new ObservableCollection<sconnSite>(table.ToList());
 
             }
             catch (Exception ex)
