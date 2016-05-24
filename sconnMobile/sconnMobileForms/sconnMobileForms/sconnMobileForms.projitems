@@ -97,6 +97,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Service\Repository\SiteSqlRepository.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\Repository\SiteXmlRepository.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\Repository\SqlEntityStorage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\Repository\Sqlite\SQLite.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\Repository\XmlEntityStorage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Storage\DAL\Device\ActionParameter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Storage\DAL\Device\Device.cs" />

@@ -6,58 +6,38 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using sconnConnector.Annotations;
+using SQLite;
 
 namespace sconnConnector.POCO.Config
 {
 
 
+    [Table("Sites")]
     public class sconnSite : INotifyPropertyChanged
     {
-        private int _statusCheckInterval;
         private string _authPasswd;
-        private string _serverIP;
-        private int _serverPort;
-        private bool _ViewEnabled;
         private int _siteID;
-        private string _siteName;
         private int SelectedTabId = 0;
 
-        public string Id { get; set; }
+        [PrimaryKey, AutoIncrement, Column("_id")]
+        public int Id { get; set; }
         
-        public bool UsbCom;
-        
+        public string UniqueId { get; set; }
+        public DateTime LastWrite { get; }
+        public bool UsbCom { get; set; }
+       
         public SiteConnectionStat siteStat;
-
         public ipcSiteConfig siteCfg;
 
-        public string siteName
-        {
-            get { return _siteName; }
-            set { _siteName = value; }
-        }
-        public string serverIP
-        {
-            get { return _serverIP; }
-            set { _serverIP = value; }
-        }
+        public string siteName { get; set; }
 
-        public int serverPort
-        {
-            get { return _serverPort; }
-            set { _serverPort = value; }
-        }
+        public string serverIP { get; set; }
 
-        public bool ViewEnable
-        {
-            get { return _ViewEnabled; }
-            set { _ViewEnabled = value; }
-        }
+        public int serverPort { get; set; }
 
-        public int statusCheckInterval
-        {
-            get { return _statusCheckInterval; }
-            set { _statusCheckInterval = value; }
-        }
+        public bool ViewEnable { get; set; }
+
+        public int statusCheckInterval { get; set; }
 
         public string authPasswd
         {
@@ -73,7 +53,6 @@ namespace sconnConnector.POCO.Config
         }
 
         private DateTime lastUpdate;
-        private DateTime lastWrite;
 
         public DateTime LastUpdate
         {
@@ -86,7 +65,7 @@ namespace sconnConnector.POCO.Config
                 }
             }
         }
-        public DateTime LastWrite { get { return lastWrite; } }
+      
 
 
         private bool passwordFormatComplies(string password)
@@ -144,10 +123,10 @@ namespace sconnConnector.POCO.Config
             lastUpdate = DateTime.Now;
             serverPort = 37222;
        //     _siteID = sconnDataShare.GetLastItemID() + 1;
-            _siteName = "DefaultSite";
+            siteName = "DefaultSite";
             siteCfg = new ipcSiteConfig();
             siteStat = new SiteConnectionStat();
-            Id = Guid.NewGuid().ToString();
+            UniqueId = Guid.NewGuid().ToString();
         }
 
         public sconnSite(ipcSiteConfig config, int intervalMs, string siteName)
@@ -155,12 +134,12 @@ namespace sconnConnector.POCO.Config
             statusCheckInterval = intervalMs;
             siteCfg = config;
          //   _siteID = sconnDataShare.GetLastItemID() + 1;
-            _siteName = siteName;
+            this.siteName = siteName;
             lastUpdate = DateTime.Now;
             serverPort = 37222;
             siteCfg = new ipcSiteConfig();
             siteStat = new SiteConnectionStat();
-            Id = Guid.NewGuid().ToString();
+            UniqueId = Guid.NewGuid().ToString();
         }
 
 
@@ -170,11 +149,11 @@ namespace sconnConnector.POCO.Config
             serverIP = server;
             serverPort = port;
        //     _siteID = sconnDataShare.GetLastItemID() + 1;
-            _siteName = siteName;
+            this.siteName = siteName;
             lastUpdate = DateTime.Now;
             siteCfg = new ipcSiteConfig();
             siteStat = new SiteConnectionStat();
-            Id = Guid.NewGuid().ToString();
+            UniqueId = Guid.NewGuid().ToString();
         }
 
         public sconnSite(string siteName, int intervalMs, string server, int port, string password)

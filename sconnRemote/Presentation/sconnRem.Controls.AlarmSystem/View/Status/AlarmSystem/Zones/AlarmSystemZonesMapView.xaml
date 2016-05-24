@@ -13,8 +13,7 @@
             d:DesignHeight="300" d:DesignWidth="300">
 
     <UserControl.Resources>
-
-
+        
         <DataTemplate x:Key="demoTemplate" DataType="{x:Type graph:AlarmSystemGraphVertex}">
             <StackPanel Orientation="Horizontal" Margin="5">
                 <Image x:Name="img" Source="/images/klawiatura1000x1000.jpg" Width="20" Height="20" />

@@ -265,7 +265,7 @@ namespace sconnConnector
                 siteNode.AppendChild(statusCheckIntervalNode);
 
                 XmlNode siteId = doc.CreateNode("element", "Id", "");
-                siteId.InnerText = site.Id;
+                siteId.InnerText = site.UniqueId;
                 siteNode.AppendChild(siteId);
 
                 XmlNode siteName = doc.CreateNode("element", "siteName", "");
@@ -385,7 +385,7 @@ namespace sconnConnector
                     }
                     else if (node.Name == "Id")
                     {
-                        site.Id = node.InnerText;
+                        site.UniqueId = node.InnerText;
                     }
                     else if (node.Name == "authPasswd")
                     {

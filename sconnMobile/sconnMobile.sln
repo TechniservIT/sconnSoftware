@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sconnMobileForms.iOS", "sco
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "sconnMobileForms", "sconnMobileForms\sconnMobileForms\sconnMobileForms.shproj", "{F881A8A1-E603-4F2B-9546-080690515298}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{FCAE508C-F869-42C8-9345-67B1567F799B}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		sconnMobileForms\sconnMobileForms\sconnMobileForms.projitems*{2a4e7a4f-4113-4489-bb5b-cd3cc1d020ff}*SharedItemsImports = 4
