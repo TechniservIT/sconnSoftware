@@ -174,14 +174,19 @@
     <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\AlarmZoneStatusView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)View\SiteManagment\SiteListView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)GettingStarted.Xamarin" />
     <None Include="$(MSBuildThisFileDirectory)Service\packages.config" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)View\SiteManagment\SiteListView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)ViewModel\AlarmSystem\" />
-    <Folder Include="$(MSBuildThisFileDirectory)View\SiteManagment\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)View\AlarmSystem\AlarmDeviceListView.xaml">
