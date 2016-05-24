@@ -1,0 +1,210 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>f881a8a1-e603-4f2b-9546-080690515298</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>sconnMobileForms</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)App.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Comm\ETH.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Comm\USB.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Config\Abstract\AlarmGenericConfigManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Config\Abstract\AlarmGenericNamesConfigManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Config\Abstract\CommandManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Config\AlarmSystemConfigManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Config\CfgOper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Config\ConfigHelpers.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Config\GlobalSettings.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Config\sconnCfgMngr.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Config\sconnDataSrc.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\Abstract\AlarmSystemConfig.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\Abstract\Device\AlarmSystemAuthorizedDevice.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\Abstract\Device\AlarmSystemAuthorizedDevicesConfig.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\Abstract\Device\AlarmSystemDevice.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\Abstract\Device\AlarmSystemDeviceConfig.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\Abstract\Device\AlarmSystemGlobalConfig.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\Abstract\Event\AlarmSystemEvent.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\Abstract\Event\AlarmSystemEventConfig.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\Abstract\Gsm\AlarmSystemGsmConfig.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\Abstract\Gsm\AlarmSystemGsmRcpt.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\Abstract\IO\AlarmSystemInput.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\Abstract\IO\AlarmSystemOutput.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\Abstract\IO\AlarmSystemRelay.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\Abstract\Zone\AlarmSystemZone.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\Abstract\Zone\AlarmSystemZoneConfig.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\IIndexAbleConfiguration.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\sconn\Auth\sconnAuthorizedDevice.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\sconn\Auth\sconnAuthorizedDevices.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\sconn\Auth\sconnUser.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\sconn\Auth\sconnUserConfig.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\sconn\Device\sconnDevice.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\sconn\Device\sconnDeviceConfig.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\sconn\Device\sconnGlobalConfig.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\sconn\Event\sconnEvent.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\sconn\Event\sconnEventConfig.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\sconn\Gsm\sconnGsmConfig.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\sconn\Gsm\sconnGsmRcpt.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\sconn\IO\Input\sconnInput.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\sconn\IO\Input\sconnInputConfig.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\sconn\IO\Output\sconnOutput.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\sconn\IO\Output\sconnOutputConfig.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\sconn\IO\Relay\sconnRelay.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\sconn\IO\Relay\sconnRelayConfig.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\sconn\Legacy\ipcDataType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\sconn\Legacy\ipcDeviceConfig.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\sconn\Legacy\ipcEvent.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\sconn\Legacy\ipcGlobalConfig.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\sconn\Legacy\ipcRcpt.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\sconn\Legacy\ipcSiteConfig.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\sconn\sconnAlarmSystem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\sconn\sconnSite.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\sconn\Zone\sconnAlarmZone.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Config\sconn\Zone\sconnAlarmZoneConfig.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Device\Device.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Device\DeviceCredentials.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\Device\EndpointInfo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\IFakeAbleConfiguration.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\ISerializableConfiguration.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCO\sconnDataShare.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\Abstract\IEntityService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\AlarmSystem\AuthorizedDevices\AuthorizedDevicesConfigurationService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\AlarmSystem\AuthorizedDevices\IAuthorizedDevicesConfigurationService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\AlarmSystem\Device\AlarmDevicesConfigService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\AlarmSystem\Device\DeviceConfigService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\AlarmSystem\Device\IDeviceConfigService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\AlarmSystem\Event\EventsService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\AlarmSystem\Global\GlobalConfigService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\AlarmSystem\Global\IGlobalConfigService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\AlarmSystem\Gsm\GsmConfigurationService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\AlarmSystem\Gsm\IGsmConfigurationService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\AlarmSystem\Users\IUsersConfigurationService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\AlarmSystem\Users\UsersConfigurationService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\AlarmSystem\Zone\IZoneConfigurationService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\AlarmSystem\Zone\ZoneConfigurationService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\Repository\EncXmlStorage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\Repository\IAlarmSystemConfigurationService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\Repository\IEntityStorage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\Repository\INetworkClientStatusUpdateService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\Repository\ISiteManagmentService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\Repository\ISiteRepository.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\Repository\NetworkClientStatusUpdateService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\Repository\SiteManagmentService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\Repository\SiteSqlRepository.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\Repository\SiteXmlRepository.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\Repository\SqlEntityStorage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\Repository\XmlEntityStorage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Storage\DAL\Device\ActionParameter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Storage\DAL\Device\Device.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Storage\DAL\Device\DeviceAction.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Storage\DAL\Device\DeviceActionResult.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Storage\DAL\Device\DeviceParameter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Storage\DAL\Device\DeviceProperty.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Storage\DAL\Device\DeviceType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Storage\DAL\Device\EndpointInfo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Storage\DAL\Device\Location.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Storage\DAL\Device\Notify\ActionChangeHistory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Storage\DAL\Device\Notify\ParameterChangeHistory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Storage\DAL\Device\ParameterType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Storage\DAL\Device\Proprietary\sconnActionMapper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Storage\DAL\Device\Proprietary\sconnActionResultMapper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Storage\DAL\Device\Proprietary\sconnConfigMapper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Storage\DAL\Device\Proprietary\sconnPropertyMapper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Storage\DAL\Device\Site.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Storage\DAL\Repository\IiotRepository.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Storage\Entities\Auth\Credential\AppAuthLevel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Storage\Entities\Auth\Credential\AppUserCredentials.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Storage\Entities\Auth\Credential\AuthDatabaseContext.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Storage\Entities\Auth\Credential\DeviceCredentials.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Storage\Entities\Auth\Credential\IAuthCredentials.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Storage\Entities\Auth\Credential\RemoteSystemAccessRule.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Storage\Entities\Domain\iotDomain.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Storage\Entities\Domain\iotDomainSettings.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Storage\Entities\Generics\AIList.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Storage\Entities\Maps\DeviceMapDefinition.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Storage\Entities\Maps\IoMapDefinition.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Storage\Entities\Maps\MapDefinition.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Storage\Entities\Surveillance\Analysis\ISurveiilanceClassifierConfig.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Storage\Entities\Surveillance\Analysis\ISurveillanceAnalysisConfig.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Storage\Entities\Surveillance\Analysis\SurveillanceAnalysisDetectionFeature.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Storage\Entities\Surveillance\Analysis\SurveillanceAnalysisMotionDetectionConfig.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Storage\Entities\Surveillance\Analysis\SurveillanceAnalysisObjectDetectionConfig.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Storage\Entities\Surveillance\Events\ISurveillanceEvent.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Storage\Entities\Surveillance\Events\SurveillanceConnectionLossEvent.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Storage\Entities\Surveillance\Events\SurveillanceMotionDetectionEvent.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Storage\Entities\Surveillance\Events\SurveillanceObjectDetectionEvent.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Storage\Entities\Surveillance\Events\SurveillanceVideoLossEvent.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Storage\Entities\Surveillance\IpCamera.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Storage\Entities\Surveillance\Recording\ISurveillanceRecordingSetup.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Storage\Entities\Surveillance\Recording\SurveillanceLocalRecodingSetup.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Storage\Entities\Surveillance\Recording\SurveillanceRecording.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Storage\Entities\User\IUserPermission.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Storage\Entities\User\User.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Storage\Entities\User\UserDatabaseAdminPermission.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Storage\Entities\User\UserDevicePermission.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Storage\Entities\User\UserPermission.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Storage\Entities\User\UserSiteAdminPermission.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Storage\Entities\User\UserSitePermission.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\AlarmDeviceListView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\AlarmDeviceStatusView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\AlarmGlobalStatusView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\AlarmGsmRcptListView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\AlarmPowerStatusListView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\AlarmSensorStatusListView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\AlarmZonesListView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\AlarmZoneStatusView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)GettingStarted.Xamarin" />
+    <None Include="$(MSBuildThisFileDirectory)Service\packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)ViewModel\AlarmSystem\" />
+    <Folder Include="$(MSBuildThisFileDirectory)View\SiteManagment\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)View\AlarmSystem\AlarmDeviceListView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)View\AlarmSystem\AlarmDeviceStatusView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)View\AlarmSystem\AlarmGlobalStatusView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)View\AlarmSystem\AlarmGsmRcptListView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)View\AlarmSystem\AlarmPowerStatusListView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)View\AlarmSystem\AlarmSensorStatusListView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)View\AlarmSystem\AlarmZonesListView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)View\AlarmSystem\AlarmZoneStatusView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+</Project>
