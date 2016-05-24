@@ -9,9 +9,7 @@ namespace sconnConnector.POCO.Device
     public class Device
     {
         private int _Id;
-
-
-        [DataMember]
+        
         [Required]
         [Key]
         public int Id
@@ -33,22 +31,22 @@ namespace sconnConnector.POCO.Device
             this.EndpInfo = dev.EndpInfo;
         }
 
-        [DataMember]
+         
         [Required]
         [DisplayName("Name")]
         public string DeviceName { get; set; }
 
-        [DataMember]
+         
         [Required]
         [DisplayName("Endpoint")]
         public virtual EndpointInfo EndpInfo { get; set; }
 
-        [DataMember]
+         
         [DisplayName("Credentials")]
         public virtual DeviceCredentials Credentials { get; set; }
         
 
-        [DataMember]
+         
         [DisplayName("Virtual")]
         public bool IsVirtual { get; set; }
 

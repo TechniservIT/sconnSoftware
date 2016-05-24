@@ -39,38 +39,38 @@ namespace iotDbConnector.DAL
         AnalogInput,
         Relay
     }
+    
 
-    [DataContract(IsReference = true)]
     public class DeviceType
     {
-        [DataMember]
+         
         [Key]
         [Required]
         public int Id { get; set; }
 
-        [DataMember]
+         
         [Required]
         [DisplayName("Name")]
         public string TypeName { get; set; }
 
-        [DataMember]
+         
         [DisplayName("Description")]
         public string TypeDescription { get; set; }
 
-        [DataMember]
+         
         [DisplayName("Image URL")]
         public string VisualRepresentationURL { get; set; }
 
-        [DataMember]
+         
         public virtual List<Device> Devices { get; set; }
 
-         [DataMember]
+          
          [DisplayName("Category")]
         public DeviceCategory Category { get; set; }
         
 
         [Required]
-        [DataMember]
+         
         public virtual iotDomain Domain { get; set; }
 
         public DeviceType()

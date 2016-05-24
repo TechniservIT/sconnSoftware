@@ -8,25 +8,25 @@ using System.Runtime.Serialization;
 
 namespace iotDbConnector.DAL
 {
-    [DataContract(IsReference = true)]
+     
     public class ParameterType
     {
-        [DataMember]
+         
         [Key]
         [Required]
         public int Id { get; set; }
 
-        [DataMember]
+         
         [Required]
         public string Name { get; set; }
 
-        [DataMember]
+         
         public string Description { get; set; }
 
-        [DataMember]
+         
         public string DocumentationURL { get; set; }
 
-        [DataMember]
+         
         public virtual List<DeviceParameter> Parameters { get; set; }
 
         public ParameterType()

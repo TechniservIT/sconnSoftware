@@ -10,12 +10,12 @@ using System.Threading.Tasks;
 
 namespace iotDbConnector.DAL
 {
-    [DataContract(IsReference = true)]
+     
     public class DeviceActionResult
     {
 
 
-        [DataMember]
+         
         [Key]
         [Required]
         public int Id { get; set; }
@@ -23,7 +23,7 @@ namespace iotDbConnector.DAL
 
         private string _Value;
 
-        [DataMember]
+         
         [Required]
         public string Value
         {
@@ -40,23 +40,23 @@ namespace iotDbConnector.DAL
             }
         }
 
-        [DataMember]
+         
         public virtual ParameterType Type { get; set; }
 
-        [DataMember]
+         
         public string ParamDescription { get; set; }
 
-        [DataMember]
+         
         public string VisualRepresentationUrl { get; set; }
 
-        [DataMember]
+         
         [Required]
         public virtual DeviceAction Action { get; set; }
 
-        [DataMember]
+         
         public virtual List<sconnActionResultMapper> sconnMappers { get; set; }
 
-        [DataMember]
+         
         public virtual List<ActionChangeHistory> Changes { get; set; }
 
         public DeviceActionResult()

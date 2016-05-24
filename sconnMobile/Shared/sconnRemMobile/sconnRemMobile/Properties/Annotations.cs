@@ -156,6 +156,9 @@ namespace sconnConnector.Annotations
   /// <item><c>SetProperty(ref myField, value, "Property")</c></item>
   /// </list>
   /// </example>
+  /// 
+  /// 
+  /// 
   [AttributeUsage(AttributeTargets.Method)]
   public sealed class NotifyPropertyChangedInvocatorAttribute : Attribute
   {

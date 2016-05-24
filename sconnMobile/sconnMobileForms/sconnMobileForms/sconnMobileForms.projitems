@@ -70,6 +70,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)POCO\IFakeAbleConfiguration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)POCO\ISerializableConfiguration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)POCO\sconnDataShare.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Properties\Annotations.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\Abstract\IEntityService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\AlarmSystem\AuthorizedDevices\AuthorizedDevicesConfigurationService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\AlarmSystem\AuthorizedDevices\IAuthorizedDevicesConfigurationService.cs" />

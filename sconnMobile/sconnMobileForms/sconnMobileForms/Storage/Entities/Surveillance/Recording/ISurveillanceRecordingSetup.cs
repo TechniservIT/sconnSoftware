@@ -27,21 +27,21 @@ namespace iotData.POCO.Surveillance.Recording
 
     public class SurveillanceRecordingSetup
     {
-        [DataMember]
+         
         [Key]
         [Required]
         public int Id { get; set; }
 
-        [DataMember]
+         
         public DateTime From { get; set; }
 
-        [DataMember]
+         
         public DateTime Until { get; set; }
 
-        [DataMember]
+         
         public SurveillanceRecordingType Type { get; set; }
 
-        [DataMember]
+         
         public virtual IpCamera Source { get; set; }
     }
 

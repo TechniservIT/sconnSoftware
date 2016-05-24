@@ -23,8 +23,10 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "sconnMobileForms", "sconnMo
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		sconnMobileForms\sconnMobileForms\sconnMobileForms.projitems*{2a4e7a4f-4113-4489-bb5b-cd3cc1d020ff}*SharedItemsImports = 4
 		Shared\sconnRemMobile\sconnRemMobile\sconnRemMobile.projitems*{c96e1b2a-e5ee-42de-87b2-ee55889163e3}*SharedItemsImports = 13
 		Shared\sconnRemMobile\sconnRemMobile\sconnRemMobile.projitems*{35b02f83-bdef-481e-b273-5bc971d80ee6}*SharedItemsImports = 4
+		sconnMobileForms\sconnMobileForms\sconnMobileForms.projitems*{8f58e1c2-6cfc-431f-a094-e1b796ff766a}*SharedItemsImports = 4
 		sconnMobileForms\sconnMobileForms\sconnMobileForms.projitems*{f881a8a1-e603-4f2b-9546-080690515298}*SharedItemsImports = 13
 		Shared\sconnRemMobile\sconnRemMobile\sconnRemMobile.projitems*{419fbd42-7176-45ca-a393-09fea1415bce}*SharedItemsImports = 4
 	EndGlobalSection

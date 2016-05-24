@@ -26,24 +26,24 @@ namespace iotData.POCO.Surveillance.Analysis
 
     public class SurveillanceAnalysisConfig
     {
-        [DataMember]
+         
         [Key]
         [Required]
         public int Id { get; set; }
 
-        [DataMember]
+         
         bool Enabled { get; set; }
 
-        [DataMember]
+         
         public DateTime From { get; set; }
 
-        [DataMember]
+         
         public DateTime Until { get; set; }
 
-        [DataMember]
+         
         public SurveillanceAnalysisType Type { get; set; }
 
-        [DataMember]
+         
         public virtual IpCamera Source { get; set; }
     }
 

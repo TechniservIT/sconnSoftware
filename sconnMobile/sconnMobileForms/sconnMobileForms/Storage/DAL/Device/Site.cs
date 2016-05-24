@@ -8,25 +8,25 @@ using System.Runtime.Serialization;
 
 namespace iotDbConnector.DAL
 {
-    [DataContract(IsReference = true)] 
+      
     public class Site : IFakeAbleEntity
     {
-        [DataMember]
+         
         [Key]
         [Required]
         public int Id { get; set; }
 
-        [DataMember]
+         
         [Required]
         public string SiteName { get; set; }
 
-        [DataMember]
+         
         public virtual Location siteLocation { get; set; }
 
-        [DataMember]
+         
         public virtual List<Device> Devices { get; set; }
 
-        [DataMember]
+         
         [Required]
         public virtual iotDomain Domain { get; set; }
 

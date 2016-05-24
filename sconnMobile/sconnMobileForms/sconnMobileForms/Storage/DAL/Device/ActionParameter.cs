@@ -7,32 +7,32 @@ using System.Runtime.Serialization;
 
 namespace iotDbConnector.DAL
 {
-   [DataContract(IsReference = true)]
+    
     public class ActionParameter
     {
-        [DataMember]
+         
         [Key]
         [Required]
         public int Id { get; set; }
 
-        [DataMember]
+         
         [Required]
         public string Value { get; set; }
 
-        [DataMember]
+         
         public virtual ParameterType Type { get; set; }
 
-        [DataMember]
+         
         public string ParamDescription { get; set; }
 
-        [DataMember]
+         
         public string VisualRepresentationUrl { get; set; }
 
-        [DataMember]
+         
         [Required]
         public virtual DeviceAction Action { get; set; }
 
-        [DataMember]
+         
         public virtual List<sconnActionMapper> sconnMappers { get; set; }
 
 

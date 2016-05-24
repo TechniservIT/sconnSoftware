@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Prism.Unity.Forms</name>
+    </assembly>
+    <members>
+        <member name="M:Prism.Unity.Extensions.DependencyServiceStrategy.CallToDependencyService(System.Type)">
+            <summary>
+            This is horrendous, but Xamarin did not provide a non-generic version of the DependencyService.Get method call.
+            </summary>
+            <param name="targetType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Prism.Unity.UnityExtensions.RegisterTypeForNavigation``1(Microsoft.Practices.Unity.IUnityContainer)">
+            <summary>
+            Registers a Page for navigation using a convention based approach, which uses the name of the Type being passed in as the unique name.
+            </summary>
+            <typeparam name="T">The Type of Page to register</typeparam>
+        </member>
+        <member name="M:Prism.Unity.UnityExtensions.RegisterTypeForNavigation``1(Microsoft.Practices.Unity.IUnityContainer,System.String)">
+            <summary>
+            Registers a Page for navigation.
+            </summary>
+            <typeparam name="T">The Type of Page to register</typeparam>
+            <param name="name">The unique name to register with the Page</param>
+        </member>
+        <member name="M:Prism.Unity.UnityExtensions.RegisterTypeForNavigation``2(Microsoft.Practices.Unity.IUnityContainer)">
+            <summary>
+            Registers a Page for navigation.
+            </summary>
+            <typeparam name="T">The Type of Page to register</typeparam>
+            <typeparam name="C">The Class to use as the unique name for the Page</typeparam>
+            <param name="container"></param>
+        </member>
+    </members>
+</doc>

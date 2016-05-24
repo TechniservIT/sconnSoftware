@@ -7,7 +7,7 @@ using System.Runtime.Serialization;
 namespace iotDbConnector.DAL
 {
 
-    [DataContract(IsReference = true)]
+     
     public class IUserPermission
     {
       

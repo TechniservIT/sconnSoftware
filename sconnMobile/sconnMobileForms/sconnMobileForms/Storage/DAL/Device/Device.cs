@@ -9,13 +9,13 @@ using System.Runtime.Serialization;
 
 namespace iotDbConnector.DAL
 {
-    [DataContract(IsReference = true)]
+     
     public class Device : IFakeAbleEntity
     {
         private int _Id;
 
 
-        [DataMember]
+         
         [Required]
         [Key]
         public int Id
@@ -43,46 +43,46 @@ namespace iotDbConnector.DAL
             this.Type = dev.Type;
         }
 
-        [DataMember]
+         
         [Required]
         [DisplayName("Name")]
         public string DeviceName { get; set; }
 
-        [DataMember]
+         
         [Required]
         [DisplayName("Endpoint")]
         public virtual EndpointInfo EndpInfo { get; set; }
 
-        [DataMember]
+         
         [DisplayName("Credentials")]
         public virtual DeviceCredentials Credentials { get; set; }
 
-        [DataMember]
+         
         [DisplayName("Actions")]
         public virtual List<DeviceAction> Actions { get; set; }
 
-        [DataMember]
+         
         [DisplayName("Properties")]
         public virtual List<DeviceProperty> Properties { get; set; }
 
-        [DataMember]
+         
         [Required]
         public virtual Location DeviceLocation { get; set; }
 
-        [DataMember]
+         
         [Required]
         public virtual DeviceType Type { get; set; }
 
-        [DataMember]
+         
         [Required]
         [DisplayName("Site")]
         public virtual Site Site { get; set; }
 
-        [DataMember]
+         
         [DisplayName("Virtual")]
         public bool IsVirtual { get; set; }
 
-        [DataMember]
+         
         public virtual List<DeviceMapDefinition> DeviceMaps { get; set; }
 
         public Device()

@@ -12,20 +12,20 @@ namespace iotDbConnector.DAL
 {
     public class MapDefinition
     {
-        [DataMember]
+         
         [Required]
         [Key]
         public int Id { get; set; }
+        
 
-        [DataMember]
         [Required]
         public string Url { get; set; }
 
-        [DataMember]
+         
         [Required]
         public virtual Device Device { get; set; }
 
-        [DataMember]
+         
         public virtual List<DeviceMapDefinition> DeviceMaps { get; set; }
 
         public MapDefinition()

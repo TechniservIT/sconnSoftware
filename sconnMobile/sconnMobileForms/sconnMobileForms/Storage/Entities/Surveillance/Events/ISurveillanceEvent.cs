@@ -25,18 +25,18 @@ namespace iotData.POCO.Surveillance.Events
 
     public class SurveillanceEvent
     {
-        [DataMember]
+         
         [Key]
         [Required]
         public int Id { get; set; }
+        
 
-        [DataMember]
         public SurveillanceEventType Type { get; set; }
 
-        [DataMember]
+         
         public DateTime Time { get; set; }
 
-        [DataMember]
+         
         public virtual IpCamera Source { get; set; }
     }
 

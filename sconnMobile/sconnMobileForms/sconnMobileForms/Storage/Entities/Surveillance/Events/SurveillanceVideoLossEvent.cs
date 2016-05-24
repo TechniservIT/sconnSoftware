@@ -12,10 +12,9 @@ namespace iotData.POCO.Surveillance.Events
     {
         [Key]
         [Required]
-        [DataMember]
         public int Id { get; set; }
+        
 
-        [DataMember]
         public virtual IpCamera Source
         {
             get
@@ -28,8 +27,8 @@ namespace iotData.POCO.Surveillance.Events
                 throw new NotImplementedException();
             }
         }
+        
 
-        [DataMember]
         public DateTime Time
         {
             get

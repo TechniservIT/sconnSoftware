@@ -11,15 +11,14 @@ namespace iotDbConnector.DAL
     {
         [Key]
         [Required]
-        [DataMember]
          int MapperId { get; set; }
 
-        [DataMember]
+         
         [Required]
          int ConfigType { get; set; }
 
 
-        [DataMember]
+         
         [Required]
          int SeqNumber { get; set; }
 

@@ -7,22 +7,22 @@ using System.Runtime.Serialization;
 
 namespace iotDbConnector.DAL
 {
+   
 
-    [DataContract(IsReference = true)]
     public class User
     {
         [Key]
         [Required]
-        [DataMember]
+         
         public string Name { get; set; }
 
         [Required]
-        [DataMember]
+         
         public string Surname { get; set; }
 
 
         [Required]
-        [DataMember]
+         
         public string EmailAddress { get; set; }
 
 

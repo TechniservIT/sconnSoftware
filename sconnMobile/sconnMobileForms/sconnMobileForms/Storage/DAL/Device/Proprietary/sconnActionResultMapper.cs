@@ -10,24 +10,24 @@ using System.Threading.Tasks;
 namespace iotDbConnector.DAL
 {
 
-    [DataContract(IsReference = true)]
+     
     public class sconnActionResultMapper : sconnConfigMapper
     {
         [Key]
         [Required]
-        [DataMember]
+         
         public int MapperId { get; set; }
 
-        [DataMember]
+         
         [Required]
         public int ConfigType { get; set; }
 
 
-        [DataMember]
+         
         [Required]
         public int SeqNumber { get; set; }
 
-        [DataMember]
+         
         public virtual DeviceActionResult ActionParam { get; set; }
 
 
