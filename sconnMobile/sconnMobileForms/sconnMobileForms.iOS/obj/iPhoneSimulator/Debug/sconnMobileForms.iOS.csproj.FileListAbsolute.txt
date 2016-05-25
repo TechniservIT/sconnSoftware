@@ -153,5 +153,6 @@ I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\o
 I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\optimized\Assets\Images\zasilanie2.png
 I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\optimized\Assets\Images\zegar1.png
 I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\optimized\Assets\Images\zegar2.png
+I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\optimized\add44.png
 I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\sconnMobileFormsiOS.exe.mdb
 I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\bin\iPhoneSimulator\Debug\sconnMobileFormsiOS.exe.mdb

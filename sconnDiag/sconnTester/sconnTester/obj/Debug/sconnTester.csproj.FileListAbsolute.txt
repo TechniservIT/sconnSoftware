@@ -1,0 +1,2 @@
+c:\users\rzazo_000\documents\visual studio 2015\Projects\sconnTester\sconnTester\bin\Debug\sconnTester.exe.config
+I:\Repo\Bucket\sconnSoftware\sconnDiag\sconnTester\sconnTester\bin\Debug\sconnTester.exe.config

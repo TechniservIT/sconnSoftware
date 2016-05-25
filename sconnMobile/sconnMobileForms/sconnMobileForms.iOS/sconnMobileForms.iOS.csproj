@@ -91,6 +91,8 @@
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <BundleResource Include="Resources\add.jpg" />
+    <BundleResource Include="Resources\add32.jpg" />
+    <BundleResource Include="Resources\add44.png" />
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
