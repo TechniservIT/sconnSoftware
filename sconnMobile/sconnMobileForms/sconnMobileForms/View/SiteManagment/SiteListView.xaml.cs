@@ -21,6 +21,11 @@ namespace sconnMobileForms.View.SiteManagment
             Sites = Repository.GetAll().ToList();
         }
 
+        public void AddSite_Clicked()
+        {
+            
+        }
+
         public SiteListView()
         {
             InitializeComponent();
@@ -36,16 +41,13 @@ namespace sconnMobileForms.View.SiteManagment
                 BackgroundColor = Color.Aqua,
                 ItemTemplate = new DataTemplate(typeof(SiteListCell))
             };
-
-
+                 
             LoadList();
-
             
             List.ItemSelected += (sender, e) => {
                 var site = (sconnSite)e.SelectedItem;
                 var editPage = new SiteListPage {BindingContext = site };
                 Navigation.PushModalAsync(editPage);
-
             };
 
             List.ItemsSource = Sites;
@@ -77,19 +79,27 @@ namespace sconnMobileForms.View.SiteManagment
                 }, 0, 0);
             }
 
-            if (Device.OS == TargetPlatform.WinPhone)
-            {
-                tbi = new ToolbarItem("Add", "add.png", () => {
-                    var todoItem = new sconnSite();
-                    var todoPage = new SiteListPage();
-                    todoPage.BindingContext = todoItem;
-                    Navigation.PushAsync(todoPage);
-                }, 0, 0);
-            }
+            //if (Device.OS == TargetPlatform.WinPhone)
+            //{
+            //    tbi = new ToolbarItem("Add", "add.png", () => {
+            //        var todoItem = new sconnSite();
+            //        var todoPage = new SiteListPage();
+            //        todoPage.BindingContext = todoItem;
+            //        Navigation.PushAsync(todoPage);
+            //    }, 0, 0);
+            //}
 
-            if (tbi != null) ToolbarItems.Add(tbi);
-            
+            //if (tbi != null) ToolbarItems.Add(tbi);
 
+            //var embeddedImage = new Image { Aspect = Aspect.AspectFit };
+            //embeddedImage.Source = ImageSource.FromResource("add.jpg");
+
+            ToolbarItems.Add(new ToolbarItem {
+	            Name = "Launch",
+                Icon = "add.jpg",
+                Order = ToolbarItemOrder.Primary,
+	            Command = new Command( AddSite_Clicked)    // Navigation.PushAsync(new LaunchPage())
+            });
 
         }
     }

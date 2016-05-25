@@ -10,3 +10,6 @@ sconnMobile/sconnRem.iOS/obj/
 *.java
 sconnMobile/sconnRemMobile/sconnRemMobile.Droid/obj/Debug/
 sconnMobile/sconnMobileForms/sconnMobileForms.Droid/obj/
+sconnMobile/sconnMobileForms/sconnMobileForms.iOS/obj/iPhoneSimulator/Debug/optimized/Assets/Images/electro.png
+sconnMobile/sconnMobileForms/sconnMobileForms.iOS/bin/
+sconnMobile/sconnMobileForms/sconnMobileForms.iOS/obj/
