@@ -232,3 +232,16 @@ I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\o
 I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\sconnMobileFormsiOS.pdb
 I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\sconnMobileFormsiOS.exe.mdb
 I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\bin\iPhoneSimulator\Debug\sconnMobileFormsiOS.exe.mdb
+H:\Repo\Bucket\iotdashn\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\ibtool\_BundleResourceWithLogicalName.items
+H:\Repo\Bucket\iotdashn\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\optimized\
+H:\Repo\Bucket\iotdashn\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\sconnMobileForms.iOS.csprojResolveAssemblyReference.cache
+H:\Repo\Bucket\iotdashn\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\sconnMobileForms.iOS.View.SiteManagment.SiteListView.xaml.g.cs
+H:\Repo\Bucket\iotdashn\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\sconnMobileForms.iOS.View.SiteManagment.SiteListCellXaml.xaml.g.cs
+H:\Repo\Bucket\iotdashn\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\sconnMobileForms.iOS.View.AlarmSystem.AlarmDeviceListView.xaml.g.cs
+H:\Repo\Bucket\iotdashn\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\sconnMobileForms.iOS.View.AlarmSystem.AlarmDeviceStatusView.xaml.g.cs
+H:\Repo\Bucket\iotdashn\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\sconnMobileForms.iOS.View.AlarmSystem.AlarmGlobalStatusView.xaml.g.cs
+H:\Repo\Bucket\iotdashn\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\sconnMobileForms.iOS.View.AlarmSystem.AlarmGsmRcptListView.xaml.g.cs
+H:\Repo\Bucket\iotdashn\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\sconnMobileForms.iOS.View.AlarmSystem.AlarmPowerStatusListView.xaml.g.cs
+H:\Repo\Bucket\iotdashn\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\sconnMobileForms.iOS.View.AlarmSystem.AlarmSensorStatusListView.xaml.g.cs
+H:\Repo\Bucket\iotdashn\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\sconnMobileForms.iOS.View.AlarmSystem.AlarmZonesListView.xaml.g.cs
+H:\Repo\Bucket\iotdashn\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\sconnMobileForms.iOS.View.AlarmSystem.AlarmZoneStatusView.xaml.g.cs

@@ -1,0 +1,1 @@
+H:\Repo\Bucket\iotdashn\sconnDiag\sconnJTAG\sconnJTAG\sconnJTAG.UWP\sconnJTAG.UWP.csproj;x86
