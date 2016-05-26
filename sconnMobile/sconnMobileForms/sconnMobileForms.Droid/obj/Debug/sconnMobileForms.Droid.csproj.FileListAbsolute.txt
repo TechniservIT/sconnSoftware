@@ -47,3 +47,4 @@ I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.Droid
 I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.Droid\obj\Debug\res\drawable\icon.png
 I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.Droid\obj\Debug\R.cs.flag
 I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.Droid\obj\Debug\uploadflags.txt
+H:\Repo\Bucket\iotdashn\sconnMobile\sconnMobileForms\sconnMobileForms.Droid\obj\Debug\sconnMobileForms.Droid.csprojResolveAssemblyReference.cache

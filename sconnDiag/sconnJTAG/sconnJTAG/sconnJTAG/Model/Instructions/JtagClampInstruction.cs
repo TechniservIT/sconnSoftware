@@ -4,7 +4,7 @@ using System.Text;
 
 namespace sconnJTAG.Model.Instructions
 {
-    class JtagClampInstruction
+    public class JtagClampInstruction
     {
     }
 }

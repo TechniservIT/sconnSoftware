@@ -46,3 +46,4 @@ I:\Repo\Bucket\sconnSoftware\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.Dr
 I:\Repo\Bucket\sconnSoftware\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.Droid\obj\Debug\sconnRemMobile.Droid.csprojResolveAssemblyReference.cache
 I:\Repo\Bucket\sconnSoftware\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.Droid\obj\Debug\sconnRemMobile.Droid.dll.mdb
 I:\Repo\Bucket\sconnSoftware\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.Droid\bin\Debug\sconnRemMobile.Droid.dll.mdb
+H:\Repo\Bucket\iotdashn\sconnMobile\Shared\sconnRemMobile\sconnRemMobile.Droid\obj\Debug\sconnRemMobile.Droid.csprojResolveAssemblyReference.cache
