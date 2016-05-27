@@ -94,10 +94,12 @@ namespace sconnMobileForms.View.SiteManagment
             //var embeddedImage = new Image { Aspect = Aspect.AspectFit };
             //embeddedImage.Source = ImageSource.FromResource("add.jpg");
             
+           
+
 
             ToolbarItems.Add(new ToolbarItem {
-	            Text = "Add",
-                Icon = "Icon-76.png",
+	            Text = "",
+                Icon = "Add File-50.png",
                 Order = ToolbarItemOrder.Primary,
 	            Command = new Command( AddSite_Clicked)    // Navigation.PushAsync(new LaunchPage())
             });
