@@ -11,17 +11,10 @@ namespace sconnMobileForms.View.AlarmSystem
 
     public class AlarmSiteConfigurationEntityListItem : ViewCell
     {
-        public sconnSite Site { get; set; }
+       
 
         public AlarmSiteConfigurationEntityListItem()
         {
-                
-        }
-
-        public AlarmSiteConfigurationEntityListItem(sconnSite site)
-        {
-            Site = site;
-         
              var label = new Label
             {
                 HorizontalOptions = LayoutOptions.StartAndExpand,

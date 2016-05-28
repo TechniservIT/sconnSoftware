@@ -3,6 +3,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using sconnConnector.POCO.Config;
+using sconnMobileForms.Service.AlarmSystem.Context;
 using SiteManagmentService;
 using Xamarin.Forms;
 
@@ -46,7 +47,8 @@ namespace sconnMobileForms.View.SiteManagment
             
             List.ItemSelected += (sender, e) => {
                 var site = (sconnSite)e.SelectedItem;
-                var editPage = new SiteListPage {BindingContext = site };
+                AlarmSystemConfigurationContext.Site = site;
+               var editPage = new SiteListPage {BindingContext = site };
                 Navigation.PushModalAsync(editPage);
             };
 

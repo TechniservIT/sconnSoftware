@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using sconnConnector.Config.Abstract;
 using sconnConnector.POCO.Config;
+using sconnMobileForms.Service.AlarmSystem.Context;
 using sconnMobileForms.View.SiteManagment;
 using SiteManagmentService;
 using Xamarin.Forms;
@@ -22,16 +23,16 @@ namespace sconnMobileForms.View.AlarmSystem
 
         }
 
-	    public AlarmSiteConfigSelectListView()
-	    {
+	    //public AlarmSiteConfigSelectListView()
+	    //{
 	            
-	    }
+	    //}
 
-	    public AlarmSiteConfigSelectListView(sconnSite site)
+	    public AlarmSiteConfigSelectListView()  //(sconnSite site)
 	    {
 	        InitializeComponent();
 
-	        Site = site;
+	        Site = AlarmSystemConfigurationContext.Site;
 
 	        NavigationPage.SetHasNavigationBar(this, true);
 

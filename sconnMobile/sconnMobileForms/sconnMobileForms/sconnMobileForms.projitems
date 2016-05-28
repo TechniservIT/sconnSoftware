@@ -74,6 +74,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Service\Abstract\IEntityService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\AlarmSystem\AuthorizedDevices\AuthorizedDevicesConfigurationService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\AlarmSystem\AuthorizedDevices\IAuthorizedDevicesConfigurationService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\AlarmSystem\Context\AlarmSystemConfigurationContext.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\AlarmSystem\Device\AlarmDevicesConfigService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\AlarmSystem\Device\DeviceConfigService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\AlarmSystem\Device\IDeviceConfigService.cs" />

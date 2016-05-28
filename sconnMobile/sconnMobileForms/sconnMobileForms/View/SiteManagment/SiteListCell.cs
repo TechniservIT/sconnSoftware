@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using iotDbConnector.DAL;
 using sconnConnector.POCO.Config;
+using sconnMobileForms.Service.AlarmSystem.Context;
 using sconnMobileForms.View.AlarmSystem;
 using Xamarin.Forms;
 
@@ -10,16 +12,17 @@ namespace sconnMobileForms.View.SiteManagment
 
     public class SiteListCell : ViewCell
     {
-        public sconnSite Site { get; set; }
+        //public sconnSite Site { get; set; }
 
-        public SiteListCell() : this(new sconnSite())
-        {
+        //public SiteListCell() : this(new sconnSite())
+        //{
            
-        }
+        //}
 
-        public SiteListCell(sconnSite site)
+
+        public SiteListCell()
         {
-            Site = site;
+            //Site = site;
 
             var label = new Label
             {
@@ -38,7 +41,7 @@ namespace sconnMobileForms.View.SiteManagment
 
             saveButton.Clicked += (sender, e) =>
             {
-                var editPage = new AlarmSiteConfigSelectListView(Site) { BindingContext = Site };
+                var editPage = new AlarmSiteConfigSelectListView() { BindingContext = AlarmSystemConfigurationContext.Site };
              //   Navigation.PushModalAsync(editPage);
                 App.Navigation.PushModalAsync(new NavigationPage(editPage));
             };
