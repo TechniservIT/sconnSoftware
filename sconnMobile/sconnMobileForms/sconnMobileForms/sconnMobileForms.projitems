@@ -168,6 +168,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\AlarmSensorStatusListView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\AlarmSiteConfigSelectListView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\AlarmZonesListView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -187,6 +190,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)View\SiteManagment\SiteListCellXaml.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)View\AlarmSystem\AlarmSiteConfigSelectListView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

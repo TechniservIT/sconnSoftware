@@ -59,25 +59,26 @@ namespace sconnMobileForms.View.SiteManagment
             Content = layout;
 
 
-            ToolbarItem tbi = null;
-            if (Device.OS == TargetPlatform.iOS)
-            {
-                tbi = new ToolbarItem("+", null, () => {
-                    var todoItem = new sconnSite();
-                    var todoPage = new SiteListPage();
-                    todoPage.BindingContext = todoItem;
-                    Navigation.PushAsync(todoPage);
-                }, 0, 0);
-            }
-            if (Device.OS == TargetPlatform.Android)
-            { // BUG: Android doesn't support the icon being null
-                tbi = new ToolbarItem("+", "plus", () => {
-                    var todoItem = new sconnSite();
-                    var todoPage = new SiteListPage();
-                    todoPage.BindingContext = todoItem;
-                    Navigation.PushAsync(todoPage);
-                }, 0, 0);
-            }
+            //ToolbarItem tbi = null;
+            //if (Device.OS == TargetPlatform.iOS)
+            //{
+            //    tbi = new ToolbarItem("+", null, () => {
+            //        var todoItem = new sconnSite();
+            //        var todoPage = new SiteListPage();
+            //        todoPage.BindingContext = todoItem;
+            //        Navigation.PushAsync(todoPage);
+            //    }, 0, 0);
+            //}
+
+            //if (Device.OS == TargetPlatform.Android)
+            //{ // BUG: Android doesn't support the icon being null
+            //    tbi = new ToolbarItem("+", "plus", () => {
+            //        var todoItem = new sconnSite();
+            //        var todoPage = new SiteListPage();
+            //        todoPage.BindingContext = todoItem;
+            //        Navigation.PushAsync(todoPage);
+            //    }, 0, 0);
+            //}
 
             //if (Device.OS == TargetPlatform.WinPhone)
             //{
@@ -95,14 +96,23 @@ namespace sconnMobileForms.View.SiteManagment
             //embeddedImage.Source = ImageSource.FromResource("add.jpg");
             
            
-
-
             ToolbarItems.Add(new ToolbarItem {
 	            Text = "",
-                Icon = "Add File-50.png",
+                Icon = "Plus Math-50.png",      // "Add File-50.png",
                 Order = ToolbarItemOrder.Primary,
+                Priority = 2,
 	            Command = new Command( AddSite_Clicked)    // Navigation.PushAsync(new LaunchPage())
             });
+
+            ToolbarItems.Add(new ToolbarItem
+            {
+                Text = "",
+                Icon = "Settings-50.png",      // "Add File-50.png",
+                Order = ToolbarItemOrder.Primary,
+                Priority = 1,
+                Command = new Command(AddSite_Clicked)    // Navigation.PushAsync(new LaunchPage())
+            });
+
 
         }
     }

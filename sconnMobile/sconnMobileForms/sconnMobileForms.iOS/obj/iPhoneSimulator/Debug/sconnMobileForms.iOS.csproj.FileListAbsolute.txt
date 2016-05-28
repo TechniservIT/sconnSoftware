@@ -230,5 +230,6 @@ I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\o
 I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\optimized\Search-50.png
 I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\optimized\Services-50.png
 I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\optimized\Settings-50.png
+I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\sconnMobileForms.iOS.View.AlarmSystem.AlarmSiteConfigSelectListView.xaml.g.cs
 I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\sconnMobileFormsiOS.exe.mdb
 I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\bin\iPhoneSimulator\Debug\sconnMobileFormsiOS.exe.mdb

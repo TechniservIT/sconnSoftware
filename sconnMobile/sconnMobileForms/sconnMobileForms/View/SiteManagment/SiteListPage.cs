@@ -14,6 +14,7 @@ namespace sconnMobileForms.View.SiteManagment
             this.SetBinding(ContentPage.TitleProperty, "siteName");
 
             NavigationPage.SetHasNavigationBar(this, true);
+
          //   NavigationPage.BarBackgroundColorProperty	
 
             //   NavigationPage.BackgroundColorProperty. //= new BindableProperty(); Color.Aqua;
