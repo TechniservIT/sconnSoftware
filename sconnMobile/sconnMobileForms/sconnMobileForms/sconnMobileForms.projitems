@@ -171,6 +171,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\AlarmSiteConfigSelectListView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\AlarmSiteConfigurationEntity.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\AlarmSiteConfigurationEntityListItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\AlarmZonesListView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

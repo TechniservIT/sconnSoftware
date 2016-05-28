@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using sconnConnector.Config.Abstract;
 using sconnConnector.POCO.Config;
 using sconnMobileForms.View.SiteManagment;
 using SiteManagmentService;
@@ -13,6 +14,7 @@ namespace sconnMobileForms.View.AlarmSystem
 	public partial class AlarmSiteConfigSelectListView : ContentPage
     { 
         public sconnSite Site { get; set; }
+	    public List<AlarmSiteConfigurationEntity> Entities { get; set; }
         public ListView List { get; set; }
         
         public void AddSite_Clicked()
@@ -20,30 +22,44 @@ namespace sconnMobileForms.View.AlarmSystem
 
         }
 
+	    public AlarmSiteConfigSelectListView()
+	    {
+	            
+	    }
+
 	    public AlarmSiteConfigSelectListView(sconnSite site)
 	    {
 	        InitializeComponent();
 
-	        NavigationPage.SetHasNavigationBar(this, true);
-
 	        Site = site;
+
+	        NavigationPage.SetHasNavigationBar(this, true);
 
 	        List = new ListView
 	        {
 	            RowHeight = 40,
-	            ItemTemplate = new DataTemplate(typeof (SiteListCell))
+	            ItemTemplate = new DataTemplate(typeof (AlarmSiteConfigurationEntityListItem))
 	        };
 
-	        LoadList();
 
-	        List.ItemSelected += (sender, e) =>
-	        {
-	            var site = (sconnSite) e.SelectedItem;
-	            var editPage = new SiteListPage {BindingContext = site};
-	            Navigation.PushModalAsync(editPage);
-	        };
+            //List.ItemSelected += (sender, e) =>
+            //{
+            //    var site = (sconnSite) e.SelectedItem;
+            //    var editPage = new SiteListPage {BindingContext = site};
+            //    Navigation.PushModalAsync(editPage);
+            //};
 
-	        List.ItemsSource = Sites;
+            Entities = new List<AlarmSiteConfigurationEntity>()
+            {
+                new AlarmSiteConfigurationEntity("test","aku1000.jpg",CommandConfigType.NET_PACKET_TYPE_AUTH),
+                new AlarmSiteConfigurationEntity("test1","aku1000.jpg",CommandConfigType.NET_PACKET_TYPE_AUTH),
+                new AlarmSiteConfigurationEntity("test2","aku1000.jpg",CommandConfigType.NET_PACKET_TYPE_AUTH),
+                new AlarmSiteConfigurationEntity("testgdsgfd14","aku1000.jpg",CommandConfigType.NET_PACKET_TYPE_AUTH)
+            };
+
+
+
+            List.ItemsSource = Entities;
 
 	        var layout = new StackLayout();
 

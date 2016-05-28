@@ -9,7 +9,9 @@ namespace sconnMobileForms
 {
 	public class App : Application
 	{
-		public App ()
+        public static INavigation Navigation { get; set; }
+
+        public App ()
 		{
             // The root page of your application
 
@@ -19,6 +21,9 @@ namespace sconnMobileForms
             };
             nav.BarTextColor = Color.White;
             MainPage = nav;
+
+
+            Navigation = nav.Navigation;
 
             //         MainPage = new SiteListView() {
             //	                //Content = new StackLayout {
