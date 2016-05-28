@@ -232,6 +232,7 @@
     <BundleResource Include="Resources\Search-50.png" />
     <BundleResource Include="Resources\Services-50.png" />
     <BundleResource Include="Resources\Settings-50.png" />
+    <BundleResource Include="Resources\Plus Math-40.png" />
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />

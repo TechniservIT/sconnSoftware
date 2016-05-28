@@ -11,51 +11,45 @@ namespace sconnMobileForms.View.SiteManagment
     {
         public SiteListCell()
         {
+
+
             var label = new Label
             {
-                //VerticalTextAlignment = TextAlignment.Center,
                 HorizontalOptions = LayoutOptions.StartAndExpand,
-                   YAlign = TextAlignment.Center
+                YAlign = TextAlignment.Center
             };
-            
+
             label.SetBinding(Label.TextProperty, "siteName");
 
-            //var saveButton = new Button
-            //{
-            //    Image = "add44.png",
-            //    // VerticalOptions.Alignment = LayoutAlignment.End
-            //    HorizontalOptions = LayoutOptions.EndAndExpand
-            //};
-            //saveButton.Clicked += (sender, e) => {
 
-            //};
-
-            var saveButton = new Image
+            var saveButton = new Button
             {
-                Source = FileImageSource.FromFile("add44.png"),
-                HorizontalOptions = LayoutOptions.EndAndExpand     // AndExpand
+                Image = "config2.png",
+                HorizontalOptions = LayoutOptions.End
             };
-            saveButton.SetBinding(Image.IsVisibleProperty, "Done");
 
-
-
-            //  saveButton.ContentLayout.Position = Button.ButtonContentLayout.ImagePosition.Right;
-
-            // saveButton.VerticalOptions.Alignment = LayoutAlignment.End;
-
-
-            var layout = new StackLayout
+            saveButton.Clicked += (sender, e) =>
             {
-                Padding = new Thickness(20, 0, 20, 0),
-                Orientation = StackOrientation.Horizontal,
-                HorizontalOptions = LayoutOptions.StartAndExpand,
-                Children = { label, saveButton }
+
             };
 
 
-            View = layout;
+            var grid = new Grid
+                {
+                    VerticalOptions = LayoutOptions.FillAndExpand,
+                    HorizontalOptions = LayoutOptions.FillAndExpand,
+                    Padding = new Thickness(0, 6, 8, 6)
+                };
+
+                grid.ColumnDefinitions.Add(new ColumnDefinition {Width = new GridLength(0.8, GridUnitType.Star)});
+            grid.ColumnDefinitions.Add(new ColumnDefinition {Width = new GridLength(0.2, GridUnitType.Star)});  //GridLength.Auto});
+
+                grid.Children.Add(label);
+                grid.Children.Add(saveButton, 1, 0);
+            
+                View = grid;
+
+            }
         }
-    }
-
 
 }

@@ -186,6 +186,21 @@ I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\o
 I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\optimized\zasilanie2.png
 I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\optimized\zegar1.png
 I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\optimized\zegar2.png
+I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\optimized\Add File-50.png
+I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\optimized\Add Row-50.png
+I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\optimized\Cancel-50.png
+I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\optimized\Delete-50 (1).png
+I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\optimized\Delete-50.png
+I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\optimized\Key-50.png
+I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\optimized\Ok-50.png
+I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\optimized\Plugin-50.png
+I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\optimized\Plus Math-50.png
+I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\optimized\Plus-50.png
+I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\optimized\Refresh-50.png
+I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\optimized\Save-50.png
+I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\optimized\Search-50.png
+I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\optimized\Services-50.png
+I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\optimized\Settings-50.png
 I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\optimized\Default-568h@2x.png
 I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\optimized\Default-Portrait.png
 I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\optimized\Default-Portrait@2x.png
@@ -204,6 +219,7 @@ I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\o
 I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\optimized\
 I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\sconnMobileForms.iOS.View.SiteManagment.SiteListView.xaml.g.cs
 I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\sconnMobileForms.iOS.View.SiteManagment.SiteListCellXaml.xaml.g.cs
+I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\sconnMobileForms.iOS.View.AlarmSystem.AlarmSiteConfigSelectListView.xaml.g.cs
 I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\sconnMobileForms.iOS.View.AlarmSystem.AlarmDeviceListView.xaml.g.cs
 I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\sconnMobileForms.iOS.View.AlarmSystem.AlarmDeviceStatusView.xaml.g.cs
 I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\sconnMobileForms.iOS.View.AlarmSystem.AlarmGlobalStatusView.xaml.g.cs
@@ -215,21 +231,7 @@ I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\o
 I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\sconnMobileFormsiOS.exe
 I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\sconnMobileFormsiOS.pdb
 I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\sconnMobileForms.iOS.csprojResolveAssemblyReference.cache
-I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\optimized\Add File-50.png
-I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\optimized\Add Row-50.png
-I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\optimized\Cancel-50.png
-I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\optimized\Delete-50 (1).png
-I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\optimized\Delete-50.png
-I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\optimized\Key-50.png
-I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\optimized\Ok-50.png
-I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\optimized\Plugin-50.png
-I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\optimized\Plus Math-50.png
-I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\optimized\Plus-50.png
-I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\optimized\Refresh-50.png
-I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\optimized\Save-50.png
-I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\optimized\Search-50.png
-I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\optimized\Services-50.png
-I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\optimized\Settings-50.png
-I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\sconnMobileForms.iOS.View.AlarmSystem.AlarmSiteConfigSelectListView.xaml.g.cs
+I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\optimized\Assets\Images\Plus Math-40.png
+I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\optimized\Plus Math-40.png
 I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\sconnMobileFormsiOS.exe.mdb
 I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\bin\iPhoneSimulator\Debug\sconnMobileFormsiOS.exe.mdb

@@ -226,6 +226,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Plus Math-40.png" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Assets\Images\1.jpg" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Assets\Images\16.jpg" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Assets\Images\2.jpg" />

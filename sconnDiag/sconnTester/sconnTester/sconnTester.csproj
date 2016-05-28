@@ -54,6 +54,26 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Service\Measurement\Drivers\Abstract\IMeasurementInterfaceDriver.cs" />
+    <Compile Include="Service\Measurement\Drivers\Abstract\INetworkInterfaceDriver.cs" />
+    <Compile Include="Service\Measurement\Drivers\Abstract\ISerialInterfaceDriver.cs" />
+    <Compile Include="Service\Measurement\Drivers\Abstract\IUsbInterfaceDriver.cs" />
+    <Compile Include="Service\Measurement\Drivers\Driver\Gwinstek\GwinstekPowerSupplyDriver.cs" />
+    <Compile Include="Service\Measurement\Drivers\Driver\Picotech\PicotechOscilloscopeDriver.cs" />
+    <Compile Include="Service\Measurement\Drivers\Driver\Rigol\RigolOscilloscopeDriver.cs" />
+    <Compile Include="Service\Measurement\Drivers\Driver\Rigol\RigolSpectrumAnalyzerDriver.cs" />
+    <Compile Include="Service\Measurement\Drivers\Driver\Tenma\TenmaMultimiterDriver.cs" />
+    <Compile Include="Service\Measurement\IMeasurementService.cs" />
+    <Compile Include="Service\Output\ITestOutputService.cs" />
+    <Compile Include="View\Test\DutConnectionStatusView.xaml.cs">
+      <DependentUpon>DutConnectionStatusView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Test\DutMeasurementReportView.xaml.cs">
+      <DependentUpon>DutMeasurementReportView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Test\DutMeasurementsListView.xaml.cs">
+      <DependentUpon>DutMeasurementsListView.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -66,8 +86,39 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\Test\DutConnectionStatusView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Test\DutMeasurementReportView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Test\DutMeasurementsListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\Abstract\IMeasurementTest.cs" />
+    <Compile Include="Model\Abstract\IMeasurementTestParameter.cs" />
+    <Compile Include="Model\Abstract\IMeasurementTestRecord.cs" />
+    <Compile Include="Model\Abstract\IMeasurementTestResult.cs" />
+    <Compile Include="Model\Configuration\ITestDataRepository.cs" />
+    <Compile Include="Model\Configuration\TestCsvRepository.cs" />
+    <Compile Include="Model\Configuration\TestSqlRepository.cs" />
+    <Compile Include="Model\Test\Measurements\MeasurementAmplitude.cs" />
+    <Compile Include="Model\Test\Measurements\MeasurementAverage.cs" />
+    <Compile Include="Model\Test\Measurements\MeasurementCurrent.cs" />
+    <Compile Include="Model\Test\Measurements\MeasurementDuty.cs" />
+    <Compile Include="Model\Test\Measurements\MeasurementFallTime.cs" />
+    <Compile Include="Model\Test\Measurements\MeasurementFrequency.cs" />
+    <Compile Include="Model\Test\Measurements\MeasurementOvershot.cs" />
+    <Compile Include="Model\Test\Measurements\MeasurementRiseTime.cs" />
+    <Compile Include="Model\Test\Measurements\MeasurementUndershot.cs" />
+    <Compile Include="Model\Test\Measurements\MeasurementVoltageDc.cs" />
+    <Compile Include="Model\Test\Result\ITestResultSummary.cs" />
+    <Compile Include="Model\Test\Tests\BoardTestPointTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -93,6 +144,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ViewModel\" />
+    <Folder Include="View\Configuration\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
