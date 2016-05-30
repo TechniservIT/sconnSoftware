@@ -13,30 +13,15 @@ namespace sconnMobileForms
 
         public App ()
 		{
-            // The root page of your application
-
             var nav = new NavigationPage(new SiteListView())
             {
-                BarBackgroundColor = Color.Aqua,
-                BarTextColor = Color.White,
+               // BarBackgroundColor = Color.Aqua,
+                BarTextColor = Color.Black,
             };
             MainPage = nav;
 
 
             Navigation = nav.Navigation;
-
-            //         MainPage = new SiteListView() {
-            //	                //Content = new StackLayout {
-            //	                //	VerticalOptions = LayoutOptions.Center,
-            //	                //	Children = {
-            //                 //                    new Label {
-            //                 //                        XAlign = TextAlignment.Center,
-            //                 //                        Text = "Welcome to Xamarin Forms!"
-            //                 //                    }
-
-            //                 //                }
-            //	                //}
-            //};
         }
 
 		protected override void OnStart ()

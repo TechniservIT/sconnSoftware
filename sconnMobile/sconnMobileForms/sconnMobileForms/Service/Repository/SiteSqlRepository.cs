@@ -19,9 +19,18 @@ namespace SiteManagmentService
 
         public string DatabasePath { get; set; }
 
+        private void Clear()
+        {
+            var sites = this.GetAll();
+            foreach (var site in sites)
+            {
+                this.Delete(site);
+            }
+        }
 
         private void Fake()
         {
+            this.Clear();
             sconnSite site1 = new sconnSite();
             site1.authPasswd = Guid.NewGuid().ToString();
             site1.serverIP = Guid.NewGuid().ToString();
