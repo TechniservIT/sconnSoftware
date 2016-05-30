@@ -25,7 +25,10 @@ namespace sconnMobileForms.View.SiteManagment
 
         public void AddSite_Clicked()
         {
-            
+            sconnSite site  = new sconnSite();
+            AlarmSystemConfigurationContext.Site = site;
+            var editPage = new SiteListPage { BindingContext = AlarmSystemConfigurationContext.Site };
+            Navigation.PushAsync(editPage);
         }
 
         public SiteListView()

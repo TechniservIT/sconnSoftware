@@ -51,7 +51,7 @@ namespace sconnMobileForms.View.SiteManagment
             saveButton.Clicked += (sender, e) =>
             {
                 var editPage = new SiteListPage { BindingContext = AlarmSystemConfigurationContext.Site };
-                App.Navigation.PushModalAsync(editPage);
+                App.Navigation.PushAsync(editPage);
             };
 
 

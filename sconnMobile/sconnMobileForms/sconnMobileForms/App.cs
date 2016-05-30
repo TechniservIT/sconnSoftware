@@ -23,7 +23,7 @@ namespace sconnMobileForms
             MainPage = nav;
 
 
-           // Navigation = nav.Navigation;
+            Navigation = nav.Navigation;
 
             //         MainPage = new SiteListView() {
             //	                //Content = new StackLayout {
