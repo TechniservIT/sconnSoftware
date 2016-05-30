@@ -4,6 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using sconnConnector.POCO.Config;
 using sconnMobileForms.Service.AlarmSystem.Context;
+using sconnMobileForms.View.AlarmSystem;
 using SiteManagmentService;
 using Xamarin.Forms;
 
@@ -45,11 +46,15 @@ namespace sconnMobileForms.View.SiteManagment
                  
             LoadList();
             
-            List.ItemSelected += (sender, e) => {
-                var site = (sconnSite)e.SelectedItem;
+            List.ItemTapped += (sender, e) => {
+                var site = (sconnSite)e.Item;
                 AlarmSystemConfigurationContext.Site = site;
-               var editPage = new SiteListPage {BindingContext = site };
-                Navigation.PushModalAsync(editPage);
+                //var editPage = new SiteListPage {BindingContext = site };
+                // Navigation.PushModalAsync(editPage);
+
+                var editPage = new AlarmSiteConfigSelectListView() { BindingContext = AlarmSystemConfigurationContext.Site };
+                Navigation.PushAsync(editPage);
+                //App.Navigation.PushModalAsync(new NavigationPage(editPage));
             };
 
             List.ItemsSource = Sites;

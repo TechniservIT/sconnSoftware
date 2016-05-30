@@ -10,14 +10,23 @@ using Xamarin.Forms;
 namespace sconnMobileForms.View.SiteManagment
 {
 
+    public class SiteCellDisclousureClickedArgs : EventArgs
+    {
+        public sconnSite Site { get; set; }
+    }
+
+
     public class SiteListCell : ViewCell
     {
         //public sconnSite Site { get; set; }
 
         //public SiteListCell() : this(new sconnSite())
         //{
-           
+
         //}
+
+
+        public event EventHandler<SiteCellDisclousureClickedArgs> ThresholdReached;
 
 
         public SiteListCell()
@@ -41,9 +50,8 @@ namespace sconnMobileForms.View.SiteManagment
 
             saveButton.Clicked += (sender, e) =>
             {
-                var editPage = new AlarmSiteConfigSelectListView() { BindingContext = AlarmSystemConfigurationContext.Site };
-             //   Navigation.PushModalAsync(editPage);
-                App.Navigation.PushModalAsync(new NavigationPage(editPage));
+                var editPage = new SiteListPage { BindingContext = AlarmSystemConfigurationContext.Site };
+                App.Navigation.PushModalAsync(editPage);
             };
 
 

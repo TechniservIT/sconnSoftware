@@ -15,15 +15,15 @@ namespace sconnMobileForms
 		{
             // The root page of your application
 
-            var nav = new NavigationPage( new SiteListView() )
+            var nav = new NavigationPage(new SiteListView())
             {
                 BarBackgroundColor = Color.Aqua,
+                BarTextColor = Color.White,
             };
-            nav.BarTextColor = Color.White;
             MainPage = nav;
 
 
-            Navigation = nav.Navigation;
+           // Navigation = nav.Navigation;
 
             //         MainPage = new SiteListView() {
             //	                //Content = new StackLayout {

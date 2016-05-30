@@ -7,6 +7,7 @@ using sconnConnector.Config.Abstract;
 using sconnConnector.POCO.Config;
 using sconnMobileForms.Service.AlarmSystem.Context;
 using sconnMobileForms.View.SiteManagment;
+using sconnRemMobile.View.AlarmSystem;
 using SiteManagmentService;
 using Xamarin.Forms;
 
@@ -17,24 +18,54 @@ namespace sconnMobileForms.View.AlarmSystem
         public sconnSite Site { get; set; }
 	    public List<AlarmSiteConfigurationEntity> Entities { get; set; }
         public ListView List { get; set; }
-        
-        public void AddSite_Clicked()
-        {
 
+
+	    private void ShowEntityConfigView(AlarmSiteConfigurationEntity entity)
+	    {
+            ContentPage configView = null;
+            if (entity.Type == CommandConfigType.NET_PACKET_TYPE_AUTH)
+            {
+
+            }
+            else if (entity.Type == CommandConfigType.NET_PACKET_TYPE_DEVAUTHCFG)
+            {
+
+            }
+            else if (entity.Type == CommandConfigType.NET_PACKET_TYPE_DEVCFG)
+            {
+
+            }
+            else if (entity.Type == CommandConfigType.NET_PACKET_TYPE_AUTH)
+            {
+
+            }
+            else if (entity.Type == CommandConfigType.NET_PACKET_TYPE_DEVNAMECFG)
+            {
+
+            }
+            else if (entity.Type == CommandConfigType.NET_PACKET_TYPE_GCFG)
+            {
+                configView = new AlarmGlobalStatusView();
+            }
+            else if (entity.Type == CommandConfigType.NET_PACKET_TYPE_DEVNETCFG)
+            {
+
+            }
+
+	        if (configView != null)
+	        {
+                Navigation.PushAsync(configView);
+            }
+           
         }
 
-	    //public AlarmSiteConfigSelectListView()
-	    //{
-	            
-	    //}
-
-	    public AlarmSiteConfigSelectListView()  //(sconnSite site)
+	    public AlarmSiteConfigSelectListView()
 	    {
 	        InitializeComponent();
 
-	        Site = AlarmSystemConfigurationContext.Site;
+            NavigationPage.SetHasNavigationBar(this, true);
 
-	        NavigationPage.SetHasNavigationBar(this, true);
+            Site = AlarmSystemConfigurationContext.Site;
 
 	        List = new ListView
 	        {
@@ -43,25 +74,21 @@ namespace sconnMobileForms.View.AlarmSystem
 	        };
 
 
-            //List.ItemSelected += (sender, e) =>
-            //{
-            //    var site = (sconnSite) e.SelectedItem;
-            //    var editPage = new SiteListPage {BindingContext = site};
-            //    Navigation.PushModalAsync(editPage);
-            //};
+            List.ItemTapped += (sender, e) =>
+            {
+                AlarmSiteConfigurationEntity entity = (AlarmSiteConfigurationEntity)e.Item;
+                ShowEntityConfigView(entity);
+            };
 
             Entities = new List<AlarmSiteConfigurationEntity>()
             {
-                new AlarmSiteConfigurationEntity("test","aku1000.jpg",CommandConfigType.NET_PACKET_TYPE_AUTH),
-                new AlarmSiteConfigurationEntity("test1","aku1000.jpg",CommandConfigType.NET_PACKET_TYPE_AUTH),
-                new AlarmSiteConfigurationEntity("test2","aku1000.jpg",CommandConfigType.NET_PACKET_TYPE_AUTH),
-                new AlarmSiteConfigurationEntity("testgdsgfd14","aku1000.jpg",CommandConfigType.NET_PACKET_TYPE_AUTH)
+                new AlarmSiteConfigurationEntity("Global","glob1000.jpg",CommandConfigType.NET_PACKET_TYPE_GCFG),
+                new AlarmSiteConfigurationEntity("Zones","strefy2-1000.jpg",CommandConfigType.NET_PACKET_TYPE_ZONECFG),
+                new AlarmSiteConfigurationEntity("Inputs","cctv.jpg",CommandConfigType.NET_PACKET_TYPE_DEVCFG),
+                new AlarmSiteConfigurationEntity("Outputs","elektro1000.jpg",CommandConfigType.NET_PACKET_TYPE_DEVCFG)
             };
-
-
-
+            
             List.ItemsSource = Entities;
-
 	        var layout = new StackLayout();
 
 	        layout.Children.Add(List);

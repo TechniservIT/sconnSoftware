@@ -45,11 +45,12 @@ namespace sconnMobileForms.View.AlarmSystem
             };
 
 
-            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(0.2, GridUnitType.Star) });  //GridLength.Auto});
-            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(0.8, GridUnitType.Star) });
-         
-            grid.Children.Add(label);
-            grid.Children.Add(saveButton, 1, 0);
+            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(0.1, GridUnitType.Star) });  //GridLength.Auto});
+            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(0.9, GridUnitType.Star) });
+
+            grid.Children.Add(saveButton, 0, 0);
+            grid.Children.Add(label, 1, 0);
+            
 
             View = grid;
 
