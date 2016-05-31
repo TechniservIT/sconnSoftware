@@ -19,7 +19,9 @@ namespace sconnMobileForms.View.SiteManagment
             //load data - binding
             //AlarmSystemConfigurationContext.Site.authPasswd = passwordEntry.
 
+
             //validate
+
 
             //save
             Repository?.Update(AlarmSystemConfigurationContext.Site);
@@ -38,8 +40,7 @@ namespace sconnMobileForms.View.SiteManagment
 
             NavigationPage.SetHasNavigationBar(this, true);
 
-         //   NavigationPage.BarBackgroundColorProperty	
-
+             //   NavigationPage.BarBackgroundColorProperty	
             //   NavigationPage.BackgroundColorProperty. //= new BindableProperty(); Color.Aqua;
             //   NavigationPage.OpacityProperty = 0.5;
 

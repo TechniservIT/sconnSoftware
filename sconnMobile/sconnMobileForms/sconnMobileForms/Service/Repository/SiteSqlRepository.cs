@@ -32,8 +32,9 @@ namespace SiteManagmentService
         {
             this.Clear();
             sconnSite site1 = new sconnSite();
-            site1.authPasswd = Guid.NewGuid().ToString();
-            site1.serverIP = Guid.NewGuid().ToString();
+            site1.authPasswd = "testpass";  // Guid.NewGuid().ToString();
+            site1.serverIP = "192.168.1.108";   // Guid.NewGuid().ToString();
+            site1.serverPort = 9898;
             this.Add(site1);
         }
 
