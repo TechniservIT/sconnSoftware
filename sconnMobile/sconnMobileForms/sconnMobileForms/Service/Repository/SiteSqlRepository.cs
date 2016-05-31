@@ -69,7 +69,7 @@ namespace SiteManagmentService
             {
                 var table = _connection.Table<sconnSite>();
                 var sites = new ObservableCollection<sconnSite>(table.ToList());
-                return sites.FirstOrDefault(s => s.Id.Equals(Id));
+                return sites.FirstOrDefault(s => s.UniqueId.Equals(Id));
             }
             catch (Exception ex)
             {
@@ -105,7 +105,11 @@ namespace SiteManagmentService
                     if (existing != null)
                     {
                         existing.CopyFrom(site);
-                        Save();
+                        _connection.Update(existing);
+                    }
+                    else
+                    {
+                        _connection.Insert(site);
                     }
                 }
             }

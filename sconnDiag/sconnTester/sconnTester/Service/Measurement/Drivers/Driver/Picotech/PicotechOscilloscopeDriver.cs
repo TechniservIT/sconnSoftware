@@ -110,7 +110,7 @@ namespace sconnTester.Service.Measurement.Drivers.Driver.Picotech
          * used by data streaming collection calls, on receipt of data.
          * used to set global flags etc checked by user routines
          ****************************************************************************/
-        unsafe void StreamingCallback(short** overviewBuffers,
+       void StreamingCallback(short overviewBuffers,
                                           short overFlow,
                                           uint triggeredAt,
                                           short triggered,
@@ -133,7 +133,7 @@ namespace sconnTester.Service.Measurement.Drivers.Driver.Picotech
                     {
                         for (int channel = 0; channel < _channelCount; channel++)
                         {
-                            _appBuffer[channel][i] = overviewBuffers[channel * 2][i - _totalSampleCount]; //Only copying max data from 
+                           // _appBuffer[channel][i] = overviewBuffers[channel * 2][i - _totalSampleCount]; //Only copying max data from 
                         }
                     }
                 }
@@ -437,10 +437,10 @@ namespace sconnTester.Service.Measurement.Drivers.Driver.Picotech
            // writer.Close(); //close writer
         }
 
-        private void StreamingCallback(short overviewbuffers, short overflow, uint triggeredat, short triggered, short auto_stop, uint nvalues)
-        {
-            throw new NotImplementedException();
-        }
+        //private void StreamingCallback(short overviewbuffers, short overflow, uint triggeredat, short triggered, short auto_stop, uint nvalues)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         /****************************************************************************
         *  WaitForKey

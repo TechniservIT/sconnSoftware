@@ -5,6 +5,7 @@ using iotDbConnector.DAL;
 using sconnConnector.POCO.Config;
 using sconnMobileForms.Service.AlarmSystem.Context;
 using sconnMobileForms.View.AlarmSystem;
+using SiteManagmentService;
 using Xamarin.Forms;
 
 namespace sconnMobileForms.View.SiteManagment
@@ -18,15 +19,9 @@ namespace sconnMobileForms.View.SiteManagment
 
     public class SiteListCell : ViewCell
     {
-        //public sconnSite Site { get; set; }
-
-        //public SiteListCell() : this(new sconnSite())
-        //{
-
-        //}
-
 
         public event EventHandler<SiteCellDisclousureClickedArgs> ThresholdReached;
+
 
 
         public SiteListCell()
@@ -50,7 +45,10 @@ namespace sconnMobileForms.View.SiteManagment
 
             saveButton.Clicked += (sender, e) =>
             {
-                var editPage = new SiteListPage { BindingContext = AlarmSystemConfigurationContext.Site };
+             //   var data = this.Parent.BindingContex//.BindingContext;
+                sconnSite data = (sconnSite)BindingContext;
+                AlarmSystemConfigurationContext.Site = data;
+                var editPage = new SiteListPage { BindingContext = data };
                 App.Navigation.PushAsync(editPage);
             };
 

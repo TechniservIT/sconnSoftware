@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,13 +15,15 @@ namespace sconnMobileForms.View.SiteManagment
     {
 
         public ISiteRepository Repository { get; set; }
-        public List<sconnSite> Sites { get; set; }
+        public ObservableCollection<sconnSite> Sites { get; set; }
 
         public ListView List { get; set; }
 
         private void LoadList()
         {
-            Sites = Repository.GetAll().ToList();
+            List.ItemsSource = null;
+            Sites = Repository.GetAll(); // new ObservableCollection<sconnSite>);
+            List.ItemsSource = Sites;
         }
 
         public void AddSite_Clicked()
@@ -31,14 +34,22 @@ namespace sconnMobileForms.View.SiteManagment
             Navigation.PushAsync(editPage);
         }
 
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            LoadList();
+        }
+
         public SiteListView()
         {
             InitializeComponent();
 
             NavigationPage.SetHasNavigationBar(this, true);
-            
-            Repository = new SiteSqlRepository();
-            Sites = new List<sconnSite>();
+            AlarmSystemConfigurationContext.Repository = new SiteSqlRepository();
+            Repository = AlarmSystemConfigurationContext.Repository;
+
+            Sites = new ObservableCollection<sconnSite>();  // new List<sconnSite>();
 
             List = new ListView
             {
@@ -52,12 +63,10 @@ namespace sconnMobileForms.View.SiteManagment
             List.ItemTapped += (sender, e) => {
                 var site = (sconnSite)e.Item;
                 AlarmSystemConfigurationContext.Site = site;
-                //var editPage = new SiteListPage {BindingContext = site };
-                // Navigation.PushModalAsync(editPage);
 
                 var editPage = new AlarmSiteConfigSelectListView() { BindingContext = AlarmSystemConfigurationContext.Site };
                 Navigation.PushAsync(editPage);
-                //App.Navigation.PushModalAsync(new NavigationPage(editPage));
+              
             };
 
             List.ItemsSource = Sites;
@@ -76,16 +85,7 @@ namespace sconnMobileForms.View.SiteManagment
               //  Priority = 2,
 	            Command = new Command( AddSite_Clicked)    // Navigation.PushAsync(new LaunchPage())
             });
-
-            //ToolbarItems.Add(new ToolbarItem
-            //{
-            //    Text = "",
-            //    Icon = "Settings-50.png",      // "Add File-50.png",
-            //    Order = ToolbarItemOrder.Primary,
-            //    Priority = 1,
-            //    Command = new Command(AddSite_Clicked)    // Navigation.PushAsync(new LaunchPage())
-            //});
-
+            
 
         }
     }

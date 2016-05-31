@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace sconnTester.Service.Measurement.Drivers
 {
-    class INetworkInterfaceDriver
+    public interface INetworkInterfaceDriver
     {
+
     }
+
 }

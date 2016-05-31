@@ -1,2 +1,21 @@
 c:\users\rzazo_000\documents\visual studio 2015\Projects\sconnTester\sconnTester\bin\Debug\sconnTester.exe.config
 I:\Repo\Bucket\sconnSoftware\sconnDiag\sconnTester\sconnTester\bin\Debug\sconnTester.exe.config
+I:\Repo\Bucket\sconnSoftware\sconnDiag\sconnTester\sconnTester\obj\Debug\sconnTester.csprojResolveAssemblyReference.cache
+I:\Repo\Bucket\sconnSoftware\sconnDiag\sconnTester\sconnTester\obj\Debug\MainWindow.g.cs
+I:\Repo\Bucket\sconnSoftware\sconnDiag\sconnTester\sconnTester\obj\Debug\View\Test\DutConnectionStatusView.g.cs
+I:\Repo\Bucket\sconnSoftware\sconnDiag\sconnTester\sconnTester\obj\Debug\View\Test\DutMeasurementReportView.g.cs
+I:\Repo\Bucket\sconnSoftware\sconnDiag\sconnTester\sconnTester\obj\Debug\View\Test\DutMeasurementsListView.g.cs
+I:\Repo\Bucket\sconnSoftware\sconnDiag\sconnTester\sconnTester\obj\Debug\App.g.cs
+I:\Repo\Bucket\sconnSoftware\sconnDiag\sconnTester\sconnTester\obj\Debug\sconnTester_MarkupCompile.cache
+I:\Repo\Bucket\sconnSoftware\sconnDiag\sconnTester\sconnTester\obj\Debug\sconnTester_MarkupCompile.lref
+I:\Repo\Bucket\sconnSoftware\sconnDiag\sconnTester\sconnTester\bin\Debug\sconnTester.exe
+I:\Repo\Bucket\sconnSoftware\sconnDiag\sconnTester\sconnTester\bin\Debug\sconnTester.pdb
+I:\Repo\Bucket\sconnSoftware\sconnDiag\sconnTester\sconnTester\obj\Debug\MainWindow.baml
+I:\Repo\Bucket\sconnSoftware\sconnDiag\sconnTester\sconnTester\obj\Debug\View\Test\DutConnectionStatusView.baml
+I:\Repo\Bucket\sconnSoftware\sconnDiag\sconnTester\sconnTester\obj\Debug\View\Test\DutMeasurementReportView.baml
+I:\Repo\Bucket\sconnSoftware\sconnDiag\sconnTester\sconnTester\obj\Debug\View\Test\DutMeasurementsListView.baml
+I:\Repo\Bucket\sconnSoftware\sconnDiag\sconnTester\sconnTester\obj\Debug\sconnTester.g.resources
+I:\Repo\Bucket\sconnSoftware\sconnDiag\sconnTester\sconnTester\obj\Debug\sconnTester.Properties.Resources.resources
+I:\Repo\Bucket\sconnSoftware\sconnDiag\sconnTester\sconnTester\obj\Debug\sconnTester.csproj.GenerateResource.Cache
+I:\Repo\Bucket\sconnSoftware\sconnDiag\sconnTester\sconnTester\obj\Debug\sconnTester.exe
+I:\Repo\Bucket\sconnSoftware\sconnDiag\sconnTester\sconnTester\obj\Debug\sconnTester.pdb

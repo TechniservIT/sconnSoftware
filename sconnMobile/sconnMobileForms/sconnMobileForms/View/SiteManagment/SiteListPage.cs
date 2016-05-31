@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using sconnConnector.POCO.Config;
+using sconnMobileForms.Service.AlarmSystem.Context;
+using SiteManagmentService;
 using Xamarin.Forms;
 
 namespace sconnMobileForms.View.SiteManagment
@@ -9,9 +11,30 @@ namespace sconnMobileForms.View.SiteManagment
 
     public class SiteListPage : ContentPage
     {
+        public ISiteRepository Repository { get; set; }
+        
+
+        private void SaveSite()
+        {
+            //load data - binding
+            //AlarmSystemConfigurationContext.Site.authPasswd = passwordEntry.
+
+            //validate
+
+            //save
+            Repository?.Update(AlarmSystemConfigurationContext.Site);
+        }
+
+        private void RemoveSite()
+        {
+            Repository?.Delete(AlarmSystemConfigurationContext.Site);
+        }
+
         public SiteListPage()
         {
             this.SetBinding(ContentPage.TitleProperty, "siteName");
+
+            Repository = AlarmSystemConfigurationContext.Repository;
 
             NavigationPage.SetHasNavigationBar(this, true);
 
@@ -42,15 +65,17 @@ namespace sconnMobileForms.View.SiteManagment
 
 
             var deleteButton = new Button { Text = "Remove" };
-            deleteButton.Clicked += (sender, e) => {
-                var todoItem = (sconnSite)BindingContext;
-                Navigation.PopModalAsync();
+            deleteButton.Clicked += (sender, e) =>
+            {
+                RemoveSite();
+                Navigation.PopAsync();
             };
 
             var saveButton = new Button { Text = "Save" };
             saveButton.Clicked += (sender, e) => {
-                var todoItem = (sconnSite)BindingContext;
-                Navigation.PopModalAsync();
+
+                SaveSite();
+                Navigation.PopAsync();
             };
 
 
