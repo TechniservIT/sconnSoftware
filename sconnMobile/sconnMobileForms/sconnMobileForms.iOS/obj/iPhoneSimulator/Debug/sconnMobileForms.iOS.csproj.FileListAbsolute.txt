@@ -7,7 +7,6 @@ I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\b
 I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\bin\iPhoneSimulator\Debug\Microsoft.Practices.Unity.dll
 I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\bin\iPhoneSimulator\Debug\NLog.dll
 I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\bin\iPhoneSimulator\Debug\Prism.dll
-I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\bin\iPhoneSimulator\Debug\Prism.Forms.dll
 I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\bin\iPhoneSimulator\Debug\Prism.Unity.Forms.dll
 I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\bin\iPhoneSimulator\Debug\System.ComponentModel.dll
 I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\bin\iPhoneSimulator\Debug\Xamarin.Forms.Core.dll
@@ -23,7 +22,6 @@ I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\b
 I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\bin\iPhoneSimulator\Debug\Microsoft.Practices.Unity.xml
 I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\bin\iPhoneSimulator\Debug\NLog.xml
 I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\bin\iPhoneSimulator\Debug\Prism.xml
-I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\bin\iPhoneSimulator\Debug\Prism.Forms.xml
 I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\bin\iPhoneSimulator\Debug\Prism.Unity.Forms.xml
 I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\bin\iPhoneSimulator\Debug\Xamarin.Forms.Core.pdb
 I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\bin\iPhoneSimulator\Debug\Xamarin.Forms.Core.xml

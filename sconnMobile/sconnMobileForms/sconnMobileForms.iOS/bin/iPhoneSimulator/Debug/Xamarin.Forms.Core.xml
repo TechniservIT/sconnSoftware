@@ -656,11 +656,6 @@ var indicator = new ActivityIndicator {
             <summary>Initializes a new <see cref="T:Xamarin.Forms.Application" /> instance.</summary>
             <remarks>To be added.</remarks>
         </member>
-        <member name="P:Xamarin.Forms.Application.AppLinks">
-            <summary>To be added.</summary>
-            <value>To be added.</value>
-            <remarks>To be added.</remarks>
-        </member>
         <member name="P:Xamarin.Forms.Application.Current">
             <summary>Gets the current application.</summary>
             <value>To be added.</value>
@@ -685,11 +680,6 @@ var indicator = new ActivityIndicator {
         </member>
         <member name="E:Xamarin.Forms.Application.ModalPushing">
             <summary>Event that is raised when a view is modally pushed.</summary>
-            <remarks>To be added.</remarks>
-        </member>
-        <member name="M:Xamarin.Forms.Application.OnAppLinkRequestReceived(System.Uri)">
-            <param name="uri">To be added.</param>
-            <summary>To be added.</summary>
             <remarks>To be added.</remarks>
         </member>
         <member name="M:Xamarin.Forms.Application.OnParentSet">
@@ -723,80 +713,6 @@ var indicator = new ActivityIndicator {
             <returns>To be added.</returns>
             <remarks>To be added.</remarks>
         </member>
-        <member name="M:Xamarin.Forms.Application.Xamarin#Forms#IApplicationController#SetAppIndexingProvider(Xamarin.Forms.IAppIndexingProvider)">
-            <param name="provider">To be added.</param>
-            <summary>To be added.</summary>
-            <remarks>To be added.</remarks>
-        </member>
-        <member name="T:Xamarin.Forms.AppLinkEntry">
-            <summary>To be added.</summary>
-            <remarks>To be added.</remarks>
-        </member>
-        <member name="C:Xamarin.Forms.AppLinkEntry">
-            <summary>To be added.</summary>
-            <remarks>To be added.</remarks>
-        </member>
-        <member name="P:Xamarin.Forms.AppLinkEntry.AppLinkUri">
-            <summary>To be added.</summary>
-            <value>To be added.</value>
-            <remarks>To be added.</remarks>
-        </member>
-        <member name="F:Xamarin.Forms.AppLinkEntry.AppLinkUriProperty">
-            <summary>To be added.</summary>
-            <remarks>To be added.</remarks>
-        </member>
-        <member name="P:Xamarin.Forms.AppLinkEntry.Description">
-            <summary>To be added.</summary>
-            <value>To be added.</value>
-            <remarks>To be added.</remarks>
-        </member>
-        <member name="F:Xamarin.Forms.AppLinkEntry.DescriptionProperty">
-            <summary>To be added.</summary>
-            <remarks>To be added.</remarks>
-        </member>
-        <member name="M:Xamarin.Forms.AppLinkEntry.FromUri(System.Uri)">
-            <param name="uri">To be added.</param>
-            <summary>To be added.</summary>
-            <returns>To be added.</returns>
-            <remarks>To be added.</remarks>
-        </member>
-        <member name="P:Xamarin.Forms.AppLinkEntry.IsLinkActive">
-            <summary>To be added.</summary>
-            <value>To be added.</value>
-            <remarks>To be added.</remarks>
-        </member>
-        <member name="F:Xamarin.Forms.AppLinkEntry.IsLinkActiveProperty">
-            <summary>To be added.</summary>
-            <remarks>To be added.</remarks>
-        </member>
-        <member name="P:Xamarin.Forms.AppLinkEntry.KeyValues">
-            <summary>To be added.</summary>
-            <value>To be added.</value>
-            <remarks>To be added.</remarks>
-        </member>
-        <member name="P:Xamarin.Forms.AppLinkEntry.Thumbnail">
-            <summary>To be added.</summary>
-            <value>To be added.</value>
-            <remarks>To be added.</remarks>
-        </member>
-        <member name="F:Xamarin.Forms.AppLinkEntry.ThumbnailProperty">
-            <summary>To be added.</summary>
-            <remarks>To be added.</remarks>
-        </member>
-        <member name="P:Xamarin.Forms.AppLinkEntry.Title">
-            <summary>To be added.</summary>
-            <value>To be added.</value>
-            <remarks>To be added.</remarks>
-        </member>
-        <member name="F:Xamarin.Forms.AppLinkEntry.TitleProperty">
-            <summary>To be added.</summary>
-            <remarks>To be added.</remarks>
-        </member>
-        <member name="M:Xamarin.Forms.AppLinkEntry.ToString">
-            <summary>To be added.</summary>
-            <returns>To be added.</returns>
-            <remarks>To be added.</remarks>
-        </member>
         <member name="T:Xamarin.Forms.Aspect">
             <summary>Defines how an image is displayed.</summary>
             <remarks />
@@ -809,7 +725,7 @@ var indicator = new ActivityIndicator {
             <summary>Scale the image to fit the view. Some parts may be left empty (letter boxing).</summary>
         </member>
         <member name="F:Xamarin.Forms.Aspect.Fill">
-            <summary>Scale the image so it exactly fills the view. Scaling may not be uniform in X and Y.</summary>
+            <summary>Scale the image so it exactly fill the view. Scaling may not be uniform in X and Y.</summary>
         </member>
         <member name="T:Xamarin.Forms.BackButtonPressedEventArgs">
             <summary>Internal use only. Contains arguments for the event that is raised when a back button is pressed.</summary>
@@ -3851,15 +3767,6 @@ DatePicker datePicker = new DatePicker
             <summary>Identifies the MinimumDate bindable property.</summary>
             <remarks />
         </member>
-        <member name="P:Xamarin.Forms.DatePicker.TextColor">
-            <summary>To be added.</summary>
-            <value>To be added.</value>
-            <remarks>To be added.</remarks>
-        </member>
-        <member name="F:Xamarin.Forms.DatePicker.TextColorProperty">
-            <summary>To be added.</summary>
-            <remarks>To be added.</remarks>
-        </member>
         <member name="T:Xamarin.Forms.DefinitionCollection`1">
             <typeparam name="T">To be added.</typeparam>
             <summary>A collection parameterized by an <see cref="T:Xamarin.Forms.IDefinition" />. Base class for <see cref="T:Xamarin.Forms.ColumnDefinitionCollection" /> and <see cref="T:Xamarin.Forms.RowDefinitionCollection" />.</summary>
@@ -6313,74 +6220,7 @@ namespace FormsGallery
             <summary>Implement this method to commit a batch of animations so that they can be run with the <see cref="M:Xamarin.Forms.IAnimatable.BatchBegin" /> method.</summary>
             <remarks>To be added.</remarks>
         </member>
-        <member name="T:Xamarin.Forms.IAppIndexingProvider">
-            <summary>To be added.</summary>
-            <remarks>To be added.</remarks>
-        </member>
-        <member name="P:Xamarin.Forms.IAppIndexingProvider.AppLinks">
-            <summary>To be added.</summary>
-            <value>To be added.</value>
-            <remarks>To be added.</remarks>
-        </member>
         <member name="T:Xamarin.Forms.IApplicationController">
-            <summary>To be added.</summary>
-            <remarks>To be added.</remarks>
-        </member>
-        <member name="M:Xamarin.Forms.IApplicationController.SetAppIndexingProvider(Xamarin.Forms.IAppIndexingProvider)">
-            <param name="appIndexing">To be added.</param>
-            <summary>To be added.</summary>
-            <remarks>To be added.</remarks>
-        </member>
-        <member name="T:Xamarin.Forms.IAppLinkEntry">
-            <summary>To be added.</summary>
-            <remarks>To be added.</remarks>
-        </member>
-        <member name="P:Xamarin.Forms.IAppLinkEntry.AppLinkUri">
-            <summary>To be added.</summary>
-            <value>To be added.</value>
-            <remarks>To be added.</remarks>
-        </member>
-        <member name="P:Xamarin.Forms.IAppLinkEntry.Description">
-            <summary>To be added.</summary>
-            <value>To be added.</value>
-            <remarks>To be added.</remarks>
-        </member>
-        <member name="P:Xamarin.Forms.IAppLinkEntry.IsLinkActive">
-            <summary>To be added.</summary>
-            <value>To be added.</value>
-            <remarks>To be added.</remarks>
-        </member>
-        <member name="P:Xamarin.Forms.IAppLinkEntry.KeyValues">
-            <summary>To be added.</summary>
-            <value>To be added.</value>
-            <remarks>To be added.</remarks>
-        </member>
-        <member name="P:Xamarin.Forms.IAppLinkEntry.Thumbnail">
-            <summary>To be added.</summary>
-            <value>To be added.</value>
-            <remarks>To be added.</remarks>
-        </member>
-        <member name="P:Xamarin.Forms.IAppLinkEntry.Title">
-            <summary>To be added.</summary>
-            <value>To be added.</value>
-            <remarks>To be added.</remarks>
-        </member>
-        <member name="T:Xamarin.Forms.IAppLinks">
-            <summary>To be added.</summary>
-            <remarks>To be added.</remarks>
-        </member>
-        <member name="M:Xamarin.Forms.IAppLinks.DeregisterLink(System.Uri)">
-            <param name="appLinkUri">To be added.</param>
-            <summary>To be added.</summary>
-            <remarks>To be added.</remarks>
-        </member>
-        <member name="M:Xamarin.Forms.IAppLinks.DeregisterLink(Xamarin.Forms.IAppLinkEntry)">
-            <param name="appLink">To be added.</param>
-            <summary>To be added.</summary>
-            <remarks>To be added.</remarks>
-        </member>
-        <member name="M:Xamarin.Forms.IAppLinks.RegisterLink(Xamarin.Forms.IAppLinkEntry)">
-            <param name="appLink">To be added.</param>
             <summary>To be added.</summary>
             <remarks>To be added.</remarks>
         </member>
@@ -7979,20 +7819,6 @@ public class App : Application
         </member>
         <member name="F:Xamarin.Forms.LineBreakMode.WordWrap">
             <summary>Wrap at word boundaries.</summary>
-        </member>
-        <member name="T:Xamarin.Forms.ListStringTypeConverter">
-            <summary>To be added.</summary>
-            <remarks>To be added.</remarks>
-        </member>
-        <member name="C:Xamarin.Forms.ListStringTypeConverter">
-            <summary>To be added.</summary>
-            <remarks>To be added.</remarks>
-        </member>
-        <member name="M:Xamarin.Forms.ListStringTypeConverter.ConvertFromInvariantString(System.String)">
-            <param name="value">To be added.</param>
-            <summary>To be added.</summary>
-            <returns>To be added.</returns>
-            <remarks>To be added.</remarks>
         </member>
         <member name="T:Xamarin.Forms.ListView">
             <summary>An <see cref="T:Xamarin.Forms.ItemsView" /> that displays a collection of data as a vertical list.</summary>
@@ -10216,15 +10042,6 @@ namespace FormsGallery
             <summary>Identifies the SelectedIndex bindable property.</summary>
             <remarks />
         </member>
-        <member name="P:Xamarin.Forms.Picker.TextColor">
-            <summary>To be added.</summary>
-            <value>To be added.</value>
-            <remarks>To be added.</remarks>
-        </member>
-        <member name="F:Xamarin.Forms.Picker.TextColorProperty">
-            <summary>To be added.</summary>
-            <remarks>To be added.</remarks>
-        </member>
         <member name="P:Xamarin.Forms.Picker.Title">
             <summary>Gets or sets the title for the Picker. This is a bindable property.</summary>
             <value>A string.</value>
@@ -11134,11 +10951,6 @@ button.Effects.Add (Effect.Resolve ("com.YourCompany.ShadowEffect"));]]></code>
         </member>
         <member name="P:Xamarin.Forms.ResourceDictionary.Keys">
             <summary>The collection of identifier <see langword="string" />s that are keys in the <see cref="T:Xamarin.Forms.ResourceDictionary" />.</summary>
-            <value>To be added.</value>
-            <remarks>To be added.</remarks>
-        </member>
-        <member name="P:Xamarin.Forms.ResourceDictionary.MergedWith">
-            <summary>To be added.</summary>
             <value>To be added.</value>
             <remarks>To be added.</remarks>
         </member>
@@ -12926,24 +12738,6 @@ class TabbedPageDemoPage2 : TabbedPage
             <summary>Creates a new <see cref="T:Xamarin.Forms.TabbedPage" /> element with default values.</summary>
             <remarks>To be added.</remarks>
         </member>
-        <member name="P:Xamarin.Forms.TabbedPage.BarBackgroundColor">
-            <summary>To be added.</summary>
-            <value>To be added.</value>
-            <remarks>To be added.</remarks>
-        </member>
-        <member name="F:Xamarin.Forms.TabbedPage.BarBackgroundColorProperty">
-            <summary>To be added.</summary>
-            <remarks>To be added.</remarks>
-        </member>
-        <member name="P:Xamarin.Forms.TabbedPage.BarTextColor">
-            <summary>To be added.</summary>
-            <value>To be added.</value>
-            <remarks>To be added.</remarks>
-        </member>
-        <member name="F:Xamarin.Forms.TabbedPage.BarTextColorProperty">
-            <summary>To be added.</summary>
-            <remarks>To be added.</remarks>
-        </member>
         <member name="M:Xamarin.Forms.TabbedPage.CreateDefault(System.Object)">
             <param name="item">An object for which to create a default page.</param>
             <summary>Creates a default page, suitable for display in <c>this</c><see cref="T:Xamarin.Forms.TabbedPage" /> page, for an object.</summary>
@@ -13812,15 +13606,6 @@ var beeroclock = new TimePicker () { Time = new TimeSpan (17,0,0) };
         <member name="F:Xamarin.Forms.TimePicker.FormatProperty">
             <summary>Identifies the Format bindable property.</summary>
             <remarks />
-        </member>
-        <member name="P:Xamarin.Forms.TimePicker.TextColor">
-            <summary>To be added.</summary>
-            <value>To be added.</value>
-            <remarks>To be added.</remarks>
-        </member>
-        <member name="F:Xamarin.Forms.TimePicker.TextColorProperty">
-            <summary>To be added.</summary>
-            <remarks>To be added.</remarks>
         </member>
         <member name="P:Xamarin.Forms.TimePicker.Time">
             <summary>Gets or sets the displayed time. This is a bindable property.</summary>
