@@ -8,7 +8,7 @@ namespace sconnMobileForms.View.AlarmSystem
     public class AlarmSiteConfigurationEntity
     {
 
-        public AlarmSiteConfigurationEntity(string name, string uri, CommandConfigType type)
+        public AlarmSiteConfigurationEntity(string name, string uri, AlarmSystemConfigurationViewType type)
         {
             Name = name;
             Uri = uri;
@@ -17,6 +17,6 @@ namespace sconnMobileForms.View.AlarmSystem
 
         public string Name { get; set; }
         public string Uri { get; set; }
-        public CommandConfigType Type { get; set; }
+        public AlarmSystemConfigurationViewType Type { get; set; }
     }
 }

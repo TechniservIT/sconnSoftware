@@ -32,6 +32,13 @@ namespace sconnConnector.POCO.Config
         ArmedAndDisarmedViolation
     }
 
+    public enum AlarmSystemIoType
+    {
+        Input,
+        Output,
+        Relay
+    }
+
     public class sconnInput : IAlarmSystemConfigurationEntity, ISerializableConfiguration, IFakeAbleConfiguration, INotifyPropertyChanged
     {
         public byte NameId { get; set; }

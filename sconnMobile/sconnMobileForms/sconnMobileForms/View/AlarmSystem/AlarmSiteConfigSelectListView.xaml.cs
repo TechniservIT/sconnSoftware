@@ -13,6 +13,15 @@ using Xamarin.Forms;
 
 namespace sconnMobileForms.View.AlarmSystem
 {
+    public enum AlarmSystemConfigurationViewType
+    {
+        Global,
+        Zones,
+        Inputs,
+        Outputs,
+        Power
+    }
+
 	public partial class AlarmSiteConfigSelectListView : ContentPage
     { 
         public sconnSite Site { get; set; }
@@ -23,31 +32,23 @@ namespace sconnMobileForms.View.AlarmSystem
 	    private void ShowEntityConfigView(AlarmSiteConfigurationEntity entity)
 	    {
             ContentPage configView = null;
-            if (entity.Type == CommandConfigType.NET_PACKET_TYPE_AUTH)
+            if (entity.Type == AlarmSystemConfigurationViewType.Zones)
             {
 
             }
-            else if (entity.Type == CommandConfigType.NET_PACKET_TYPE_DEVAUTHCFG)
+            else if (entity.Type == AlarmSystemConfigurationViewType.Inputs)
+            {
+                configView = new AlarmInputsListView();
+            }
+            else if (entity.Type == AlarmSystemConfigurationViewType.Outputs)
             {
 
             }
-            else if (entity.Type == CommandConfigType.NET_PACKET_TYPE_DEVCFG)
-            {
-
-            }
-            else if (entity.Type == CommandConfigType.NET_PACKET_TYPE_AUTH)
-            {
-
-            }
-            else if (entity.Type == CommandConfigType.NET_PACKET_TYPE_DEVNAMECFG)
-            {
-
-            }
-            else if (entity.Type == CommandConfigType.NET_PACKET_TYPE_GCFG)
+            else if (entity.Type == AlarmSystemConfigurationViewType.Global)
             {
                 configView = new AlarmGlobalStatusView();
             }
-            else if (entity.Type == CommandConfigType.NET_PACKET_TYPE_DEVNETCFG)
+            else if (entity.Type == AlarmSystemConfigurationViewType.Power)
             {
 
             }
@@ -82,10 +83,11 @@ namespace sconnMobileForms.View.AlarmSystem
 
             Entities = new List<AlarmSiteConfigurationEntity>()
             {
-                new AlarmSiteConfigurationEntity("Global","glob1000.jpg",CommandConfigType.NET_PACKET_TYPE_GCFG),
-                new AlarmSiteConfigurationEntity("Zones","strefy2-1000.jpg",CommandConfigType.NET_PACKET_TYPE_ZONECFG),
-                new AlarmSiteConfigurationEntity("Inputs","cctv.jpg",CommandConfigType.NET_PACKET_TYPE_DEVCFG),
-                new AlarmSiteConfigurationEntity("Outputs","elektro1000.jpg",CommandConfigType.NET_PACKET_TYPE_DEVCFG)
+                new AlarmSiteConfigurationEntity("Global","glob1000.jpg",AlarmSystemConfigurationViewType.Global),
+                new AlarmSiteConfigurationEntity("Zones","strefy2-1000.jpg",AlarmSystemConfigurationViewType.Zones),
+                new AlarmSiteConfigurationEntity("Inputs","cctv.jpg",AlarmSystemConfigurationViewType.Inputs),
+                new AlarmSiteConfigurationEntity("Outputs","elektro1000.jpg",AlarmSystemConfigurationViewType.Outputs),
+                new AlarmSiteConfigurationEntity("Power","aku1000.jpg",AlarmSystemConfigurationViewType.Power)
             };
             
             List.ItemsSource = Entities;

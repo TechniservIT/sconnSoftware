@@ -151,7 +151,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Storage\Entities\User\UserPermission.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Storage\Entities\User\UserSiteAdminPermission.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Storage\Entities\User\UserSitePermission.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\AlarmConfigurationListEntityGridItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\AlarmDeviceListView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -164,7 +163,16 @@
     <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\AlarmGsmRcptListView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\AlarmInputsListView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\AlarmOutputsListView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\AlarmPowerStatusListView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\AlarmRelaysListView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\AlarmSensorStatusListView.xaml.cs">
@@ -181,6 +189,12 @@
     <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\AlarmZoneStatusView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\Controls\AlarmConfigurationListEntityGridItem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\Controls\AlarmIoEntityGrid.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\Controls\AlarmIoEntityGridItem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\Controls\AlarmIoInputEntityGridItem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\Controls\AlarmIoOutputEntityGridItem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\Controls\AlarmIoRelayEntityGridItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)View\SiteManagment\SiteListCell.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)View\SiteManagment\SiteListPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)View\SiteManagment\SiteListView.xaml.cs">
@@ -197,6 +211,15 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)View\AlarmSystem\AlarmSiteConfigSelectListView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)View\AlarmSystem\AlarmInputsListView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)View\AlarmSystem\AlarmOutputsListView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)View\AlarmSystem\AlarmRelaysListView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
