@@ -151,6 +151,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Storage\Entities\User\UserPermission.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Storage\Entities\User\UserSiteAdminPermission.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Storage\Entities\User\UserSitePermission.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\AlarmConfigurationListEntityGridItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\AlarmDeviceListView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

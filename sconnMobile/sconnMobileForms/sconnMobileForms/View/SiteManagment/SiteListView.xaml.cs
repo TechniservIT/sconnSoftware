@@ -13,7 +13,6 @@ namespace sconnMobileForms.View.SiteManagment
 {
     public partial class SiteListView : ContentPage
     {
-
         public ISiteRepository Repository { get; set; }
         public ObservableCollection<sconnSite> Sites { get; set; }
 
@@ -22,7 +21,7 @@ namespace sconnMobileForms.View.SiteManagment
         private void LoadList()
         {
             List.ItemsSource = null;
-            Sites = Repository.GetAll(); // new ObservableCollection<sconnSite>);
+            Sites = Repository.GetAll();
             List.ItemsSource = Sites;
         }
 
