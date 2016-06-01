@@ -120,7 +120,7 @@
                                           VerticalAlignment="Center"/>
                                         <Canvas Background="White" Grid.Column="0" />
 
-                                        <Image  Grid.Column="0" Grid.Row="0" x:Name="imgTopNav1"  Stretch="Uniform"   HorizontalAlignment="Center" Height="Auto" Margin="5,5,5,5" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/in1000.jpg"/>
+                                        <Image  Grid.Column="0" Grid.Row="0" x:Name="imgTopNav1"  Stretch="Uniform"   HorizontalAlignment="Center" Height="Auto" Margin="5,5,5,5" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/eye1000.jpg"/>
 
                                     </Grid>
                                 </Border>

@@ -62,7 +62,8 @@
 
                                                         <Grid.ColumnDefinitions>
                                                             <ColumnDefinition Width="5*" />
-                                                            <ColumnDefinition Width="90*" />
+                                                            <ColumnDefinition Width="50*" />
+                                                            <ColumnDefinition Width="40*" />
                                                             <ColumnDefinition Width="5*" />
                                                         </Grid.ColumnDefinitions>
 
@@ -117,15 +118,100 @@
                                                                 <RowDefinition Height="1*"/>
                                                             </Grid.RowDefinitions>
 
-                                                            <Label Grid.Column="0" Grid.Row="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="{Binding Path=Name}" />
+                                                            <Grid Grid.Column="0" HorizontalAlignment="Stretch"    Grid.Row="0">
 
-                                                            <Label Grid.Column="0" Grid.Row="1" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="{Binding Path=Type}" />
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="0.5*" />
+                                                                    <ColumnDefinition Width="0.5*" />
+                                                                </Grid.ColumnDefinitions>
+                                                                <Grid.RowDefinitions>
+                                                                    <RowDefinition Height="1*"/>
+                                                                </Grid.RowDefinitions>
 
-                                                            <Label Grid.Column="0" Grid.Row="2" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="{Binding Path=Value}" />
+                                                                <Label Grid.Column="0" Grid.Row="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="Name : " />
+
+                                                                <Label Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="{Binding Path=Name}" />
+
+                                                            </Grid>
+
+                                                            <Grid Grid.Column="0" HorizontalAlignment="Stretch"    Grid.Row="1">
+
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="0.5*" />
+                                                                    <ColumnDefinition Width="0.5*" />
+                                                                </Grid.ColumnDefinitions>
+                                                                <Grid.RowDefinitions>
+                                                                    <RowDefinition Height="1*"/>
+                                                                </Grid.RowDefinitions>
+
+                                                                <Label Grid.Column="0" Grid.Row="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="Type : " />
+
+                                                                <Label Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="{Binding Path=Type}" />
+
+                                                            </Grid>
+
+                                                            <Grid Grid.Column="0" HorizontalAlignment="Stretch"    Grid.Row="2">
+
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="0.5*" />
+                                                                    <ColumnDefinition Width="0.5*" />
+                                                                </Grid.ColumnDefinitions>
+                                                                <Grid.RowDefinitions>
+                                                                    <RowDefinition Height="1*"/>
+                                                                </Grid.RowDefinitions>
+
+                                                                <Label Grid.Column="0" Grid.Row="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="Value : " />
+
+                                                                <Label Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="{Binding Path=Value}" />
+
+                                                            </Grid>
+
+
 
                                                         </Grid>
 
                                                         <Grid Grid.Column="2" Grid.Row="0">
+
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="0.3*" />
+                                                                <ColumnDefinition Width="0.4*" />
+                                                                <ColumnDefinition Width="0.3*" />
+                                                            </Grid.ColumnDefinitions>
+                                                            <Grid.RowDefinitions>
+                                                                <RowDefinition Height="1*"/>
+                                                            </Grid.RowDefinitions>
+
+                                                            <!--<ToggleButton Height="37" HorizontalAlignment="Left" Margin="485.738,254.419,0,0"     VerticalAlignment="Top" Width="109" IsEnabled="True" Click="ToggleButton_Click">Timeout</ToggleButton>-->
+
+                                                            <ToggleButton DataContext="{Binding Path=Value}"  Command="{Binding DataContext.ToggleOutputCommand, RelativeSource={RelativeSource  FindAncestor, AncestorLevel=2, AncestorType=ListBox}}"  CommandParameter="{Binding}" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" Height="Auto" Content="">
+                                                                <!--<ToggleButton.Template>
+                                                                    <ControlTemplate TargetType="{x:Type ToggleButton}">
+                                                                        <Grid>
+                                                                            <Border Background="{TemplateBinding Background}"
+                                                     BorderBrush="{TemplateBinding BorderBrush}"
+                                                     BorderThickness="{TemplateBinding BorderThickness}">
+                                                                                <Grid>
+                                                                                    <Grid.ColumnDefinitions>
+                                                                                        <ColumnDefinition Width="*"/>
+                                                                                    </Grid.ColumnDefinitions>
+                                                                                    <ContentPresenter HorizontalAlignment="Right"  Grid.Column="0"
+                                                              VerticalAlignment="Center"/>
+                                                                                    <Canvas Background="White" Grid.Column="0" />
+
+                                                                                    <Image  x:Name="ImgDispActionGridFullScreen521"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="0,0,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/config1000 (2).jpg"/>
+
+                                                                                </Grid>
+                                                                            </Border>
+                                                                        </Grid>
+                                                                    </ControlTemplate>
+                                                                </ToggleButton.Template>-->
+                                                                
+                                                            </ToggleButton>
+
+
+                                                        </Grid>
+
+                                                        <Grid Grid.Column="3" Grid.Row="0">
 
                                                             <Grid.ColumnDefinitions>
                                                                 <ColumnDefinition Width="*" />
@@ -162,7 +248,7 @@
                                                         </Grid>
 
                                                     </Grid>
-
+                                                    
                                                 </DataTemplate>
                                             </ListBox.ItemTemplate>
 

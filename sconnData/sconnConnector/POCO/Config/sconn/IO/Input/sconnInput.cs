@@ -89,23 +89,23 @@ namespace sconnConnector.POCO.Config
         {
             if (input.Type == sconnInputType.DoubleParametrizedNC )
             {
-                return "pack://application:,,,/images/czujka1000x1000.jpg";
+                return "pack://application:,,,/images/eye1000.jpg";
             }
             else if (input.Type == sconnInputType.DoubleParametrizedNO)
             {
-                return "pack://application:,,,/images/czujka1000x1000.jpg";
+                return "pack://application:,,,/images/eye1000.jpg";
             }
             else if (input.Type == sconnInputType.NormallyClosed)
             {
-                return "pack://application:,,,/images/czujka1000x1000.jpg";
+                return "pack://application:,,,/images/eye1000.jpg";
             }
             else if (input.Type == sconnInputType.NormallyOpen)
             {
-                return "pack://application:,,,/images/czujka1000x1000.jpg";
+                return "pack://application:,,,/images/eye1000.jpg";
             }
             else if (input.Type == sconnInputType.SingleParametrizedNC)
             {
-                return "pack://application:,,,/images/czujka1000x1000.jpg";
+                return "pack://application:,,,/images/eye1000.jpg";
             }
 
             return null;

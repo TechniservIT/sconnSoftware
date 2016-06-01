@@ -112,7 +112,7 @@ namespace sconnMobileForms.View.AlarmSystem.Controls
             ReloadGrid();
         }
 
-        public AlarmIoEntityGrid(sconnDevice dev, AlarmSystemIoType type)
+        public AlarmIoEntityGrid(sconnDevice dev, AlarmSystemIoType type) : this()
         {
             if (type == AlarmSystemIoType.Input)
             {

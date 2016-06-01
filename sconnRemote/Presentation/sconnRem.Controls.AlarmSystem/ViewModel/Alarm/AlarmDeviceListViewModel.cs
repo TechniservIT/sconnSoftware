@@ -41,15 +41,16 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
                 OnPropertyChanged();
             }
         }
-
-
+        
         public ICommand ShowDeviceStatusCommand { get; set; }
         public ICommand ShowDeviceConfigCommand { get; set; }
-
         public ICommand ConfigureInputCommand { get; set; }
         public ICommand ConfigureOutputCommand { get; set; }
         public ICommand ConfigureRelayCommand { get; set; }
-        
+
+        public ICommand ToggleOutputCommand { get; set; }
+
+
 
 
         private string GetDeviceTypeStatusViewContractNameForDevice(sconnDevice device)
@@ -193,8 +194,14 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
             ConfigureInputCommand = new DelegateCommand<sconnInput>(ShowInputConfigView);
             ConfigureOutputCommand = new DelegateCommand<sconnOutput>(ShowOutputConfigView);
             ConfigureRelayCommand = new DelegateCommand<sconnRelay>(ShowRelayConfigView);
+
+            ToggleOutputCommand = new DelegateCommand<sconnOutput>(ToggleOutput);
         }
 
+        private void ToggleOutput(sconnOutput output)
+        {
+
+        }
 
         public override void GetData()
         {

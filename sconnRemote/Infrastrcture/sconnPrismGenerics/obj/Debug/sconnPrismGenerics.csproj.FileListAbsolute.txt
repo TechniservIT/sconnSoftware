@@ -103,3 +103,4 @@ I:\Repo\Bucket\sconnSoftware\sconnRemote\Infrastrcture\sconnPrismGenerics\bin\De
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Infrastrcture\sconnPrismGenerics\bin\Debug\ru\Xceed.Wpf.AvalonDock.resources.dll
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Infrastrcture\sconnPrismGenerics\bin\Debug\sv\Xceed.Wpf.AvalonDock.resources.dll
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Infrastrcture\sconnPrismGenerics\bin\Debug\zh-Hans\Xceed.Wpf.AvalonDock.resources.dll
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Infrastrcture\sconnPrismGenerics\obj\Debug\sconnPrismGenerics.csprojResolveAssemblyReference.cache
