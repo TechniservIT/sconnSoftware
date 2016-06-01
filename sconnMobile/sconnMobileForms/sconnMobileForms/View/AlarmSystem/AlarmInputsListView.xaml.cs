@@ -48,12 +48,11 @@ namespace sconnMobileForms.View.AlarmSystem
             for (int i = 0; i < Configs.Count; i++)
             {
                 grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
-                AlarmIoEntityGrid devGrid = new AlarmIoEntityGrid(Configs[i].Inputs);
+                AlarmIoEntityGrid devGrid = new AlarmIoEntityGrid(Configs[i], AlarmSystemIoType.Input);
+                devGrid.SetTitle(Configs[i].Name);
                 grid.Children.Add(devGrid, 0,i);
             }
             Content = grid;
-
-
         }
     }
 }

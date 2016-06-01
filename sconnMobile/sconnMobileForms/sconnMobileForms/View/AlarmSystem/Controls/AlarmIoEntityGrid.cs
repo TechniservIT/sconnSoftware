@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 using sconnConnector.POCO.Config;
+using sconnConnector.POCO.Config.sconn;
+using sconnMobileForms.Service.AlarmSystem.Context;
+using sconnMobileForms.Service.AlarmSystem.Io;
 using Xamarin.Forms;
 
 namespace sconnMobileForms.View.AlarmSystem.Controls
@@ -37,7 +40,7 @@ namespace sconnMobileForms.View.AlarmSystem.Controls
                 Items=new List<AlarmIoEntityGridItem>();
                 VerticalOptions = LayoutOptions.FillAndExpand;
                 HorizontalOptions = LayoutOptions.FillAndExpand;
-            Padding = new Thickness(5, 5, 5, 5);
+            Padding = new Thickness(1, 1, 1, 1);
          
             ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(0.5, GridUnitType.Star) });  
             ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(0.5, GridUnitType.Star) });
@@ -57,9 +60,14 @@ namespace sconnMobileForms.View.AlarmSystem.Controls
             Children.Add(label, 0, 0);
         }
 
+        public void SetTitle(string title)
+        {
+            Title = title;
+            ReloadGrid();
+        }
+
         private void ReloadGrid()
         {
-            RowDefinitions = null;
             RowDefinitions = new RowDefinitionCollection();
             AddDescriptionRow();
 
@@ -70,7 +78,7 @@ namespace sconnMobileForms.View.AlarmSystem.Controls
                     RowDefinitions.Add(new RowDefinition { Height = new GridLength(0.2, GridUnitType.Star) });
                 }
                 
-                Children.Add(Items[i], i%2 == 0 ? 0 : 1, i/2);
+                Children.Add(Items[i], i%2 == 0 ? 0 : 1, i/2 + 1);  // t
             }
         }
 
@@ -78,7 +86,7 @@ namespace sconnMobileForms.View.AlarmSystem.Controls
         {
             foreach (var input in inputs)
             {
-                AlarmIoInputEntityGridItem item = new AlarmIoInputEntityGridItem();
+                AlarmIoInputEntityGridItem item = new AlarmIoInputEntityGridItem(input);
                 Items.Add(item);
             }
             ReloadGrid();
@@ -88,7 +96,7 @@ namespace sconnMobileForms.View.AlarmSystem.Controls
         {
             foreach (var output in outputs)
             {
-               AlarmIoOutputEntityGridItem item = new AlarmIoOutputEntityGridItem();
+                AlarmIoOutputEntityGridItem item = new AlarmIoOutputEntityGridItem();
                 Items.Add(item); 
             }
             ReloadGrid();
@@ -104,6 +112,36 @@ namespace sconnMobileForms.View.AlarmSystem.Controls
             ReloadGrid();
         }
 
+        public AlarmIoEntityGrid(sconnDevice dev, AlarmSystemIoType type)
+        {
+            if (type == AlarmSystemIoType.Input)
+            {
+                foreach (var input in dev.Inputs)
+                {
+                    AlarmIoInputEntityGridItem item = new AlarmIoInputEntityGridItem(input);
+                    Items.Add(item);
+                }
+            }
+            else if (type == AlarmSystemIoType.Output)
+            {
+                foreach (var output in dev.Outputs)
+                {
+                    IAlarmIoConfigService service =  new AlarmIoOutputConfigService(AlarmSystemConfigurationContext.AlarmConfigManager, dev, output);
+                    AlarmIoOutputEntityGridItem item = new AlarmIoOutputEntityGridItem(service, output);
+                    Items.Add(item);
+                }
+            }
+            else if (type == AlarmSystemIoType.Relay)
+            {
+                foreach (var relay in dev.Relays)
+                {
+                    IAlarmIoConfigService service = new AlarmIoRelayConfigService(AlarmSystemConfigurationContext.AlarmConfigManager, dev, relay);
+                    AlarmIoRelayEntityGridItem item = new AlarmIoRelayEntityGridItem(service, relay);
+                    Items.Add(item);
+                }
+            }
+            ReloadGrid();
+        }
 
     }
 

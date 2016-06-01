@@ -83,6 +83,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)Service\AlarmSystem\Global\IGlobalConfigService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\AlarmSystem\Gsm\GsmConfigurationService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\AlarmSystem\Gsm\IGsmConfigurationService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\AlarmSystem\Io\AlarmIoInputConfigService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\AlarmSystem\Io\AlarmIoOutputConfigService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\AlarmSystem\Io\AlarmIoRelayConfigService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Service\AlarmSystem\Io\IAlarmIoConfigService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\AlarmSystem\Users\IUsersConfigurationService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\AlarmSystem\Users\UsersConfigurationService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Service\AlarmSystem\Zone\IZoneConfigurationService.cs" />

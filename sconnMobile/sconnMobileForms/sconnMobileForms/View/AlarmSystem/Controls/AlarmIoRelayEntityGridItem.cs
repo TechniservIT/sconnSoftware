@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using sconnConnector.POCO.Config;
+using sconnMobileForms.Service.AlarmSystem.Io;
 using Xamarin.Forms;
 
 namespace sconnMobileForms.View.AlarmSystem.Controls
@@ -12,13 +13,14 @@ namespace sconnMobileForms.View.AlarmSystem.Controls
      
         public sconnRelay Relay { get; set; }
         public Button IconButton { get; set; }
+        public IAlarmIoConfigService Service { get; set; }
 
         public AlarmIoRelayEntityGridItem()
         {
 
         }
 
-        public AlarmIoRelayEntityGridItem(sconnRelay relay) : this()
+        public AlarmIoRelayEntityGridItem(IAlarmIoConfigService service, sconnRelay relay) : this()
         {
             Relay = relay;
             Type = AlarmSystemIoType.Relay;
@@ -35,7 +37,7 @@ namespace sconnMobileForms.View.AlarmSystem.Controls
 
             IconButton.Clicked += (sender, e) =>
             {
-
+                Service.Toggle();
             };
             Children.Add(IconButton, 0, 0);
         }

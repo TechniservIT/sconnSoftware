@@ -8,6 +8,7 @@ using sconnConnector.Config;
 using sconnConnector.POCO.Config;
 using sconnConnector.POCO.Config.sconn;
 using sconnConnector.POCO.Device;
+using sconnMobileForms.Service.AlarmSystem.Io;
 using SiteManagmentService;
 
 namespace sconnMobileForms.Service.AlarmSystem.Context
@@ -37,6 +38,7 @@ namespace sconnMobileForms.Service.AlarmSystem.Context
 
         static public EndpointInfo EndpointInfo;
         static public DeviceCredentials Credentials;
+        static public AlarmSystemConfigManager AlarmConfigManager;
 
         static private void ReloadServices()
         {
@@ -52,9 +54,9 @@ namespace sconnMobileForms.Service.AlarmSystem.Context
                 Username = Site.authPasswd
             };
 
-            AlarmSystemConfigManager man = new AlarmSystemConfigManager(EndpointInfo, Credentials);
-            GlobalService = new GlobalConfigService(man);
-            DevicesService = new AlarmDevicesConfigService(man);
+            AlarmConfigManager = new AlarmSystemConfigManager(EndpointInfo, Credentials);
+            GlobalService = new GlobalConfigService(AlarmConfigManager);
+            DevicesService = new AlarmDevicesConfigService(AlarmConfigManager);
         }
 
         static public GlobalConfigService GetGlobalConfigService()
@@ -65,6 +67,11 @@ namespace sconnMobileForms.Service.AlarmSystem.Context
         static public AlarmDevicesConfigService GetDevicesConfigService()
         {
             return DevicesService;
+        }
+
+        static public IAlarmIoConfigService GetIoServiceForDeviceOutput(sconnDevice device, sconnOutput output)
+        {
+            return new AlarmIoOutputConfigService();
         }
 
     }

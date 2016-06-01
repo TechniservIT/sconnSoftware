@@ -19,6 +19,7 @@ namespace sconnMobileForms.View.AlarmSystem
         Zones,
         Inputs,
         Outputs,
+        Relays,
         Power
     }
 
@@ -42,7 +43,11 @@ namespace sconnMobileForms.View.AlarmSystem
             }
             else if (entity.Type == AlarmSystemConfigurationViewType.Outputs)
             {
-
+                configView = new AlarmOutputsListView();
+            }
+            else if (entity.Type == AlarmSystemConfigurationViewType.Relays)
+            {
+                configView = new AlarmRelaysListView();
             }
             else if (entity.Type == AlarmSystemConfigurationViewType.Global)
             {
@@ -87,6 +92,7 @@ namespace sconnMobileForms.View.AlarmSystem
                 new AlarmSiteConfigurationEntity("Zones","strefy2-1000.jpg",AlarmSystemConfigurationViewType.Zones),
                 new AlarmSiteConfigurationEntity("Inputs","cctv.jpg",AlarmSystemConfigurationViewType.Inputs),
                 new AlarmSiteConfigurationEntity("Outputs","elektro1000.jpg",AlarmSystemConfigurationViewType.Outputs),
+                 new AlarmSiteConfigurationEntity("Relays","przekaznik1000.jpg",AlarmSystemConfigurationViewType.Relays),
                 new AlarmSiteConfigurationEntity("Power","aku1000.jpg",AlarmSystemConfigurationViewType.Power)
             };
             
