@@ -8,6 +8,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using AlarmSystemManagmentService;
+using AlarmSystemManagmentService.Device;
 using NLog;
 using sconnConnector.Config;
 using sconnConnector.POCO.Config;
@@ -38,6 +39,10 @@ namespace sconnRem.Infrastructure.Navigation
         private static CompositionContainer contextContainer;
 
         public static sconnDevice CurrentContextDevice;
+
+        public static AlarmDevicesConfigService _devicesConfigService;
+        public static List<sconnDevice> DeviceConfigs;
+         
         public static event EventHandler AlarmDeviceChangedEvent;
         private static ComposablePart exportedDeviceComposablePart;
 
@@ -46,9 +51,35 @@ namespace sconnRem.Infrastructure.Navigation
         public static sconnRelay activeRelay = new sconnRelay();
 
 
+
         static SiteNavigationManager()
         {
             NetworkClientStatusUpdateService.ConnectionStateChanged += NetworkClientStatusUpdateService_ConnectionStateChanged;
+            DeviceConfigs = new List<sconnDevice>();
+        }
+
+        public static List<sconnDevice> GetDevices()
+        {
+            _devicesConfigService = new AlarmDevicesConfigService(alarmSystemConfigManager);
+            DeviceConfigs = _devicesConfigService.GetAll();
+            return DeviceConfigs;
+        }
+
+        public static void SaveOutputGeneric(sconnOutput output)
+        {
+            foreach (var dev in DeviceConfigs)
+            {
+                foreach (var dinput in dev.Outputs)
+                {
+                    if (dinput.UUID.Equals(output.UUID))
+                    {
+                        dinput.CopyFrom(output);
+                        DeviceConfigService serv = new DeviceConfigService(alarmSystemConfigManager, dinput.Id);
+                        serv.Update(dev);
+                    }
+                }
+            }
+
         }
 
         private static void NetworkClientStatusUpdateService_ConnectionStateChanged(object sender, EventArgs e)
@@ -101,13 +132,13 @@ namespace sconnRem.Infrastructure.Navigation
         }
 
 
-        public static void SaveOutput(sconnOutput input)
+        public static void SaveOutput(sconnOutput output)
         {
             foreach (var dinput in CurrentContextDevice.Outputs)
             {
-                if (dinput.UUID.Equals(input.UUID))
+                if (dinput.UUID.Equals(output.UUID))
                 {
-                    dinput.CopyFrom(input);
+                    dinput.CopyFrom(output);
                     DeviceConfigService serv = new DeviceConfigService(alarmSystemConfigManager, dinput.Id);
                     serv.Update(CurrentContextDevice);
                 }

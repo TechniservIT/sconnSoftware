@@ -4,6 +4,7 @@ using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Prism.Mvvm;
 using sconnConnector.POCO.Config;
 using sconnConnector.POCO.Config.sconn;
 using sconnConnector.POCO.Device;
@@ -19,10 +20,10 @@ namespace sconnConnector.Config
         DeviceCredentials creds { get; set; }
         DateTime LastUpDateTime { get; set; }
     }
-
+    
 
     [Export(typeof(IAlarmConfigManager))]
-    public class AlarmSystemConfigManager : IAlarmConfigManager
+    public class AlarmSystemConfigManager : BindableBase, IAlarmConfigManager
     {
         public EndpointInfo info { get; set; }
         public DeviceCredentials creds { get; set; }
@@ -34,7 +35,21 @@ namespace sconnConnector.Config
         public DateTime LastUpDateTime { get; set; }
 
         /****** Configuration of remote alarm system after processing  ********/
-        public sconnAlarmSystem Config { get; set; }
+        private sconnAlarmSystem _config;
+        public sconnAlarmSystem Config
+        {
+            get { return _config; }
+            set
+            {
+                _config = value;
+                OnPropertyChanged();
+            } 
+            
+        }
+
+
+        public List<sconnDevice> Type { get; set; }
+
 
         public void CopyFrom(AlarmSystemConfigManager other)
         {

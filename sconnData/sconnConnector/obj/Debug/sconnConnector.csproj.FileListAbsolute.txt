@@ -61,3 +61,5 @@ I:\Repo\Bucket\sconnSoftware\sconnData\sconnConnector\bin\Debug\sconnNetworkingS
 H:\Repo\Bucket\iotdashn\sconnData\sconnConnector\bin\Debug\sconnNetworkingServices.dll
 H:\Repo\Bucket\iotdashn\sconnData\sconnConnector\bin\Debug\sconnNetworkingServices.pdb
 H:\Repo\Bucket\iotdashn\sconnData\sconnConnector\obj\Debug\sconnConnector.csprojResolveAssemblyReference.cache
+I:\Repo\Bucket\sconnSoftware\sconnData\sconnConnector\bin\Debug\Prism.dll
+I:\Repo\Bucket\sconnSoftware\sconnData\sconnConnector\bin\Debug\Prism.xml

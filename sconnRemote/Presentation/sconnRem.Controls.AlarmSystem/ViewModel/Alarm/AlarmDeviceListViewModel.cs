@@ -200,14 +200,16 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
 
         private void ToggleOutput(sconnOutput output)
         {
-
+            SiteNavigationManager.SaveOutputGeneric(output);
+            GetData();
         }
 
         public override void GetData()
         {
             try
             {
-                Config = new ObservableCollection<sconnDevice>(_provider.GetAll());  //_provider.GetAll().AsQueryable();
+                Config = new ObservableCollection<sconnDevice>( SiteNavigationManager.GetDevices());    
+                    //new ObservableCollection<sconnDevice>(_provider.GetAll());  //_provider.GetAll().AsQueryable();
             }
             catch (Exception ex)
             {
