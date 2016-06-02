@@ -507,7 +507,12 @@ namespace sconnConnector.POCO.Config.sconn
             memCFG[ipcDefines.mAdrDevRev] = (byte)(Revision);
             memCFG[ipcDefines.mAdrDevType] = (byte)(Type);
             memCFG[ipcDefines.mAdrDomain] = (byte)(DomainNumber);
-            
+
+
+            memCFG[ipcDefines.mAdrInputsNO] = (byte)(Inputs.Count);
+            memCFG[ipcDefines.mAdrOutputsNO] = (byte)(Outputs.Count);
+            memCFG[ipcDefines.mAdrRelayNO] = (byte)(Relays.Count);
+
             byte [] voltBackupBytes = System.BitConverter.GetBytes(BatteryVoltage);
             voltBackupBytes.CopyTo(memCFG, ipcDefines.mAdrBackupVolt_Start_Pos);
 
