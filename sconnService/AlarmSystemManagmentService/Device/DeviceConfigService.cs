@@ -82,11 +82,7 @@ namespace AlarmSystemManagmentService
         {
             try
             {
-                ConfigManager.Config.DeviceConfig.Device.Inputs = rcpt.Inputs;
-                ConfigManager.Config.DeviceConfig.Device.Outputs = rcpt.Outputs;
-                ConfigManager.Config.DeviceConfig.Device.Relays = rcpt.Relays;
-                ConfigManager.Config.DeviceConfig.Device.Name = rcpt.Name;
-                ConfigManager.Config.DeviceConfig.Device.NetworkConfig = rcpt.NetworkConfig;
+                ConfigManager.Config.DeviceConfig.Device.CopyFrom(rcpt);
                 return SaveChanges();
             }
             catch (Exception e)

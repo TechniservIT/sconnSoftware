@@ -102,7 +102,6 @@ namespace sconnConnector.POCO.Config.sconn
         public void CopyFrom(sconnDevice other)
         {
             this.ActiveInput = other.ActiveInput;
-            this.Inputs = other.Inputs;
             this.ActiveOutput = other.ActiveOutput;
             this.ActiveRelay = other.ActiveRelay;
             this.Armed = other.Armed;
@@ -116,8 +115,11 @@ namespace sconnConnector.POCO.Config.sconn
             this.Failure = other.Failure;
             this.Name = other.Name;
             this.NamesCFG = other.NamesCFG;
+            
+            this.Inputs = other.Inputs;
             this.Outputs = other.Outputs;
             this.Relays = other.Relays;
+
             this.Type = other.Type;
             this.Revision = other.Revision;
             this.ActiveInputId = other.ActiveInputId;
@@ -513,7 +515,11 @@ namespace sconnConnector.POCO.Config.sconn
             memCFG[ipcDefines.mAdrDevRev] = (byte)(Revision);
             memCFG[ipcDefines.mAdrDevType] = (byte)(Type);
             memCFG[ipcDefines.mAdrDomain] = (byte)(DomainNumber);
-            
+
+            memCFG[ipcDefines.mAdrInputsNO] = (byte)(Inputs.Count);
+            memCFG[ipcDefines.mAdrOutputsNO] = (byte)(Outputs.Count);
+            memCFG[ipcDefines.mAdrRelayNO] = (byte)(Relays.Count);
+
             byte [] voltBackupBytes = System.BitConverter.GetBytes(BatteryVoltage);
             voltBackupBytes.CopyTo(memCFG, ipcDefines.mAdrBackupVolt_Start_Pos);
 
