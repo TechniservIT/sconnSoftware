@@ -17,6 +17,7 @@ namespace sconnMobileForms.View.AlarmSystem
     {
         Global,
         Zones,
+        Devices,
         Inputs,
         Outputs,
         Relays,
@@ -67,7 +68,10 @@ namespace sconnMobileForms.View.AlarmSystem
             {
 
             }
-
+            else if (entity.Type == AlarmSystemConfigurationViewType.Devices)
+            {
+                configView = new AlarmDeviceListView();
+            }
 
             if (configView != null)
 	        {
@@ -101,11 +105,12 @@ namespace sconnMobileForms.View.AlarmSystem
             {
                 new AlarmSiteConfigurationEntity("Global","glob1000.jpg",AlarmSystemConfigurationViewType.Global),
                 new AlarmSiteConfigurationEntity("Zones","strefy2-1000.jpg",AlarmSystemConfigurationViewType.Zones),
-                new AlarmSiteConfigurationEntity("Inputs","cctv.jpg",AlarmSystemConfigurationViewType.Inputs),
+                new AlarmSiteConfigurationEntity("Devices","strefa1000.jpg",AlarmSystemConfigurationViewType.Devices),
+                new AlarmSiteConfigurationEntity("Inputs","eye1000.jpg",AlarmSystemConfigurationViewType.Inputs),
                 new AlarmSiteConfigurationEntity("Outputs","elektro1000.jpg",AlarmSystemConfigurationViewType.Outputs),
-                 new AlarmSiteConfigurationEntity("Relays","przekaznik1000.jpg",AlarmSystemConfigurationViewType.Relays),
+                new AlarmSiteConfigurationEntity("Relays","przekaznik1000.jpg",AlarmSystemConfigurationViewType.Relays),
                 new AlarmSiteConfigurationEntity("Power","aku1000.jpg",AlarmSystemConfigurationViewType.Power),
-                 new AlarmSiteConfigurationEntity("Gsm","tel1000.jpg",AlarmSystemConfigurationViewType.Gsm)
+                new AlarmSiteConfigurationEntity("Gsm","tel1000.jpg",AlarmSystemConfigurationViewType.Gsm)
             };
             
             List.ItemsSource = Entities;

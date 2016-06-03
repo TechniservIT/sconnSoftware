@@ -35,7 +35,8 @@ namespace sconnMobileForms.View.AlarmSystem
             DescriptionLabel = new Label
             {
                 HorizontalOptions = LayoutOptions.StartAndExpand,
-                VerticalTextAlignment = TextAlignment.Start,
+                VerticalTextAlignment = TextAlignment.Center,
+                HorizontalTextAlignment = TextAlignment.End,
                 Text = desc
             };
             Children.Add(DescriptionLabel, 1, 0);
@@ -43,7 +44,8 @@ namespace sconnMobileForms.View.AlarmSystem
             ContentLabel = new Label
             {
                 HorizontalOptions = LayoutOptions.StartAndExpand,
-                VerticalTextAlignment = TextAlignment.Start,
+                VerticalTextAlignment = TextAlignment.Center,
+                HorizontalTextAlignment = TextAlignment.Start,
                 Text = content
             };
             Children.Add(ContentLabel, 2, 0);

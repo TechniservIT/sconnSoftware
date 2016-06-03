@@ -51,14 +51,11 @@ namespace sconnRemMobile.View.AlarmSystem
         {
             SyncConfig();
             ArmControlButton.Image = GetImagePathForArmStatus();
-
         }
 
 		public AlarmGlobalStatusView ()
 		{
             InitializeComponent();
-
-
             NavigationPage.SetHasNavigationBar(this, true);
             Site = AlarmSystemConfigurationContext.Site;
             Service = AlarmSystemConfigurationContext.GetGlobalConfigService();
@@ -70,36 +67,24 @@ namespace sconnRemMobile.View.AlarmSystem
             {
                 HorizontalOptions = LayoutOptions.StartAndExpand,
                 VerticalTextAlignment = TextAlignment.Center,
+                HorizontalTextAlignment = TextAlignment.Center,
                 Text = Config.Name,
-                //FontSize = 2.0,
                 FontFamily = "Copperplate"
             };
-
-
-
+            
             /* Arm Grid */
-            var ArmGrid = new Grid
+            var armGrid = new Grid
             {
                 VerticalOptions = LayoutOptions.FillAndExpand,
                 HorizontalOptions = LayoutOptions.FillAndExpand
             };
-            ArmGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
+            armGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
 
-            ArmGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(0.5, GridUnitType.Star) });
-            ArmGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(0.5, GridUnitType.Star) });
+            armGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(0.5, GridUnitType.Star) });
+            armGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(0.5, GridUnitType.Star) });
+            
 
-
-            /* Arm icon */
-            //var armImgButton = new Button
-            //{
-            //    Image = "eye1000.jpg",
-            //    HorizontalOptions = LayoutOptions.FillAndExpand
-            //};
-
-            //        .MoveToRegion(
-            //MapSpan.FromCenterAndRadius(
-            //    new Position(37, -122), Distance.FromMiles(1)));
-
+            //map item grid
             var siteMap = new Map(
                MapSpan.FromCenterAndRadius(
                        new Position(49.6628,18.8528), Distance.FromMeters(500)))
@@ -117,7 +102,16 @@ namespace sconnRemMobile.View.AlarmSystem
             });
 
 
-            /* Arm button */
+            /* Arm item grid */
+            var armControlGrid = new Grid
+            {
+                VerticalOptions = LayoutOptions.FillAndExpand,
+                HorizontalOptions = LayoutOptions.FillAndExpand
+            };
+            armControlGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+            armControlGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(0.7, GridUnitType.Star) });
+            armControlGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(0.3, GridUnitType.Star) });
+
             ArmControlButton = new Button
             {
                 Image = GetImagePathForArmStatus(),
@@ -131,8 +125,28 @@ namespace sconnRemMobile.View.AlarmSystem
                 UpdateArmStatus();
             };
 
-            ArmGrid.Children.Add(siteMap, 0, 0);
-            ArmGrid.Children.Add(ArmControlButton, 1, 0);
+            var armControlSwitch = new Switch()
+            {
+                Margin = new Thickness(2,0,0,0),
+                VerticalOptions = LayoutOptions.Center,
+                HorizontalOptions =  LayoutOptions.Center
+            };
+            armControlSwitch.SetBinding(Switch.IsEnabledProperty, "Armed");
+            armControlSwitch.Toggled += (sender, e) =>
+            {
+                Config.Armed = !Config.Armed;
+                Service.Update(Config);
+                UpdateArmStatus();
+            };
+
+            armControlGrid.Children.Add(ArmControlButton, 0, 0);
+            armControlGrid.Children.Add(armControlSwitch, 0, 1);
+
+
+            //arm items to grid
+            armGrid.Children.Add(siteMap, 0, 0);
+            armGrid.Children.Add(armControlGrid, 1, 0);
+            
 
 
 
@@ -155,30 +169,29 @@ namespace sconnRemMobile.View.AlarmSystem
 
             /* Info labels */
 
-            var armedItem = new AlarmConfigurationListEntityGridItem("klucz1000.jpg", "Armed", Config.Armed.ToString());
+            var armedItem = new AlarmConfigurationListEntityGridItem("klucz1000.jpg", "Armed : ", Config.Armed.ToString());
             PropGrid.Children.Add(armedItem, 0, 0);
 
-            var violationItem = new AlarmConfigurationListEntityGridItem("cctv.jpg", "Violation", Config.Violation.ToString());
+            var violationItem = new AlarmConfigurationListEntityGridItem("cctv.jpg", "Violation : ", Config.Violation.ToString());
             PropGrid.Children.Add(violationItem, 0, 1);
             
-            var devicesItem = new AlarmConfigurationListEntityGridItem("strefa1000.jpg", "Devices", Config.Devices.ToString());
+            var devicesItem = new AlarmConfigurationListEntityGridItem("strefa1000.jpg", "Devices : ", Config.Devices.ToString());
             PropGrid.Children.Add(devicesItem, 0, 2);
 
-            var zonesItem = new AlarmConfigurationListEntityGridItem("strefy1-1000.jpg", "Zones", Config.Zones.ToString());
+            var zonesItem = new AlarmConfigurationListEntityGridItem("strefy1-1000.jpg", "Zones : ", Config.Zones.ToString());
             PropGrid.Children.Add(zonesItem, 0, 3);
 
-            var busComItem = new AlarmConfigurationListEntityGridItem("wtyczka1-1000.jpg", "RS485", Config.BusComEnabled.ToString());
+            var busComItem = new AlarmConfigurationListEntityGridItem("wtyczka1-1000.jpg", "RS485 : ", Config.BusComEnabled.ToString());
             PropGrid.Children.Add(busComItem, 0, 4);
 
-            var ethComItem = new AlarmConfigurationListEntityGridItem("rj1000.jpg", "TcpIp", Config.TcpIpComEnabled.ToString());
+            var ethComItem = new AlarmConfigurationListEntityGridItem("rj1000.jpg", "TcpIp : ", Config.TcpIpComEnabled.ToString());
             PropGrid.Children.Add(ethComItem, 0, 5);
-
-          
-
+            
             var grid = new Grid
             {
                 VerticalOptions = LayoutOptions.FillAndExpand,
-                HorizontalOptions = LayoutOptions.FillAndExpand
+                HorizontalOptions = LayoutOptions.FillAndExpand,
+                Padding = new Thickness(4, 4, 4, 4)
             };
 
             grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
@@ -188,7 +201,7 @@ namespace sconnRemMobile.View.AlarmSystem
             grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(0.6, GridUnitType.Star) });
 
             grid.Children.Add(label,0,0);
-            grid.Children.Add(ArmGrid,0,1);
+            grid.Children.Add(armGrid,0,1);
             grid.Children.Add(PropGrid, 0, 2);
 
             Content = grid;

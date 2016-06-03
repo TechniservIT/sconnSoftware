@@ -63,6 +63,30 @@ namespace sconnConnector.POCO.Config.sconn
         public sconnOutput ActiveOutput { get; set; }
         public sconnRelay ActiveRelay { get; set; }
 
+        public float MainVoltage { get; set; }
+        public float BatteryVoltage { get; set; }
+        public bool KeypadModule { get; set; }
+        public bool TemperatureModule { get; set; }
+        public bool HumidityModule { get; set; }
+        public bool ComMiWi { get; set; }
+        public bool ComTcpIp { get; set; }
+        public byte DomainNumber { get; set; }
+        public byte Revision { get; set; }
+        public sconnDeviceType Type { get; set; }
+
+
+        private byte[] _memCFG;
+        private byte[][] _NamesCFG;
+        private byte[][] _ScheduleCFG;
+        private byte[] _NetworkConfig;
+        public byte[] Hash;
+        public byte[] AuthDevicesCFG { get; set; }
+
+        public string imageIconUri { get; set; }
+        public string imageRealUri { get; set; }
+
+        public string Name { get; set; }
+
         public List<sconnInput> Sensors
         {
             get
@@ -120,29 +144,7 @@ namespace sconnConnector.POCO.Config.sconn
 
         }
 
-        public float MainVoltage { get; set; }
-        public float BatteryVoltage { get; set; }
-        public bool KeypadModule { get; set; }
-        public bool TemperatureModule { get; set; }
-        public bool HumidityModule { get; set; }
-        public bool ComMiWi { get; set; }
-        public bool ComTcpIp { get; set; }
-        public byte DomainNumber { get; set; }
-        public byte Revision { get; set; }
-        public sconnDeviceType Type { get; set; }
 
-
-        private byte[] _memCFG;
-        private byte[][] _NamesCFG;
-        private byte[][] _ScheduleCFG;
-        private byte[] _NetworkConfig;
-        public byte[] Hash;
-        public byte[] AuthDevicesCFG { get; set; }
-
-        public string imageIconUri { get; set; }
-        public string imageRealUri { get; set; }
-
-        public string Name { get; set; }
 
         private static Logger _logger = LogManager.GetCurrentClassLogger();
 
@@ -169,35 +171,35 @@ namespace sconnConnector.POCO.Config.sconn
         {
             if (device.Type == sconnDeviceType.Graphical_Keypad)
             {
-                return "pack://application:,,,/images/klawiatura1000x1000.jpg";
+                return "klawiatura1000x1000.jpg";
             }
             else if (device.Type == sconnDeviceType.Gsm_Module)
             {
-                return "pack://application:,,,/images/tel1000.jpg";
+                return "tel1000.jpg";
             }
             else if (device.Type == sconnDeviceType.Motherboard)
             {
-                return "pack://application:,,,/images/strefa1000.jpg";
+                return "strefa1000.jpg";
             }
             else if (device.Type == sconnDeviceType.Pir_Sensor)
             {
-                return "pack://application:,,,/images/czujka1000x1000.jpg";
+                return "czujka1000x1000.jpg";
             }
             else if (device.Type == sconnDeviceType.Relay_Module)
             {
-                return "pack://application:,,,/images/przek1000x1000.jpg";
+                return "przek1000x1000.jpg";
             }
             else if (device.Type == sconnDeviceType.InputsModule)
             {
-                return "pack://application:,,,/images/exp1000x1000.jpg";
+                return "exp1000x1000.jpg";
             }
             else if (device.Type == sconnDeviceType.PirSonic_Sensor)
             {
-                return "pack://application:,,,/images/czujka1000x1000.jpg";
+                return "czujka1000x1000.jpg";
             }
             else if (device.Type == sconnDeviceType.Siren)
             {
-                return "pack://application:,,,/images/syrena1000x1000.jpg";
+                return "syrena1000x1000.jpg";
             }
             
             return null;

@@ -31,7 +31,7 @@ namespace sconnMobileForms.Service.AlarmSystem.Context
         static public ISiteRepository Repository;
 
         static public sconnGlobalConfig GlobalConfig;
-        static public List<sconnDeviceConfig> DeviceConfigs;
+        static public List<sconnDevice> DeviceConfigs;
         static public List<sconnAlarmZone> Zones;
 
         static public GlobalConfigService GlobalService;
@@ -61,7 +61,7 @@ namespace sconnMobileForms.Service.AlarmSystem.Context
 
             AlarmConfigManager = new AlarmSystemConfigManager(EndpointInfo, Credentials);
             GlobalService = new GlobalConfigService(AlarmConfigManager);
-            DevicesService = new AlarmDevicesConfigService(AlarmConfigManager);
+           DevicesService      = new AlarmDevicesConfigService(AlarmConfigManager);
             ZoneService = new ZoneConfigurationService(AlarmConfigManager);
             GsmService = new GsmConfigurationService(AlarmConfigManager);
             UsersService = new UsersConfigurationService(AlarmConfigManager);
@@ -80,6 +80,46 @@ namespace sconnMobileForms.Service.AlarmSystem.Context
         static public IAlarmIoConfigService GetIoServiceForDeviceOutput(sconnDevice device, sconnOutput output)
         {
             return new AlarmIoOutputConfigService();
+        }
+
+        public static List<sconnDevice> GetDevices()
+        {
+            DeviceConfigs = DevicesService.GetAll();
+            return DeviceConfigs;
+        }
+
+        public static void SaveOutputGeneric(sconnOutput output)
+        {
+            foreach (var dev in DeviceConfigs)
+            {
+                foreach (var dinput in dev.Outputs)
+                {
+                    if (dinput.UUID.Equals(output.UUID))
+                    {
+                        dinput.CopyFrom(output);
+                        DeviceConfigService serv = new DeviceConfigService(AlarmConfigManager, dinput.Id);
+                        serv.Update(dev);
+                    }
+                }
+            }
+
+        }
+
+        public static void SaveRelayGeneric(sconnRelay output)
+        {
+            foreach (var dev in DeviceConfigs)
+            {
+                foreach (var dinput in dev.Relays)
+                {
+                    if (dinput.UUID.Equals(output.UUID))
+                    {
+                        dinput.CopyFrom(output);
+                        DeviceConfigService serv = new DeviceConfigService(AlarmConfigManager, dinput.Id);
+                        serv.Update(dev);
+                    }
+                }
+            }
+
         }
 
     }

@@ -166,9 +166,11 @@
     <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\Controls\AlarmIoInputEntityGridItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\Controls\AlarmIoOutputEntityGridItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\Controls\AlarmIoRelayEntityGridItem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\Controls\RoundedBoxView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\Device\AlarmDeviceEditView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\Device\AlarmDeviceListItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\Device\AlarmDeviceListView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

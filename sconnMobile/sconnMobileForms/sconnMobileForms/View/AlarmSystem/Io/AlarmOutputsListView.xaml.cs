@@ -21,7 +21,7 @@ namespace sconnMobileForms.View.AlarmSystem
 
         private void SyncConfig()
         {
-            Configs = AlarmSystemConfigurationContext.DevicesService.GetAll();
+            Configs = AlarmSystemConfigurationContext.GetDevices();
         }
 
         public AlarmOutputsListView()
