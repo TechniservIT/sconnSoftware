@@ -242,7 +242,7 @@ I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\o
 I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\sconnMobileForms.iOS.View.AlarmSystem.Wizard.AlarmSiteWizardSummaryView.xaml.g.cs
 I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\sconnMobileForms.iOS.View.AlarmSystem.Device.AlarmDeviceEditView.xaml.g.cs
 I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\sconnMobileForms.iOS.View.AlarmSystem.Zone.ZoneListCell.xaml.g.cs
-I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\sconnMobileFormsiOS.exe.mdb
-I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\bin\iPhoneSimulator\Debug\sconnMobileFormsiOS.exe.mdb
 I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\sconnMobileForms.iOS.View.AlarmSystem.Gsm.GsmRcptListItem.xaml.g.cs
 I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\sconnMobileForms.iOS.View.AlarmSystem.Gsm.GsmRcptEditView.xaml.g.cs
+I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\sconnMobileFormsiOS.exe.mdb
+I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\bin\iPhoneSimulator\Debug\sconnMobileFormsiOS.exe.mdb

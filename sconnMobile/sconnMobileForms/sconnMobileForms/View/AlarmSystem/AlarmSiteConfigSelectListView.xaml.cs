@@ -20,7 +20,9 @@ namespace sconnMobileForms.View.AlarmSystem
         Inputs,
         Outputs,
         Relays,
-        Power
+        Power,
+        Gsm,
+        Users
     }
 
 	public partial class AlarmSiteConfigSelectListView : ContentPage
@@ -57,8 +59,17 @@ namespace sconnMobileForms.View.AlarmSystem
             {
 
             }
+            else if (entity.Type == AlarmSystemConfigurationViewType.Gsm)
+            {
+                configView = new AlarmGsmRcptListView();
+            }
+            else if (entity.Type == AlarmSystemConfigurationViewType.Users)
+            {
 
-	        if (configView != null)
+            }
+
+
+            if (configView != null)
 	        {
                 Navigation.PushAsync(configView);
             }
@@ -93,7 +104,8 @@ namespace sconnMobileForms.View.AlarmSystem
                 new AlarmSiteConfigurationEntity("Inputs","cctv.jpg",AlarmSystemConfigurationViewType.Inputs),
                 new AlarmSiteConfigurationEntity("Outputs","elektro1000.jpg",AlarmSystemConfigurationViewType.Outputs),
                  new AlarmSiteConfigurationEntity("Relays","przekaznik1000.jpg",AlarmSystemConfigurationViewType.Relays),
-                new AlarmSiteConfigurationEntity("Power","aku1000.jpg",AlarmSystemConfigurationViewType.Power)
+                new AlarmSiteConfigurationEntity("Power","aku1000.jpg",AlarmSystemConfigurationViewType.Power),
+                 new AlarmSiteConfigurationEntity("Gsm","tel1000.jpg",AlarmSystemConfigurationViewType.Gsm)
             };
             
             List.ItemsSource = Entities;
