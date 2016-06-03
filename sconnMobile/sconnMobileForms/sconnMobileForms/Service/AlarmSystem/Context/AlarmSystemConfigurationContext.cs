@@ -63,6 +63,8 @@ namespace sconnMobileForms.Service.AlarmSystem.Context
             GlobalService = new GlobalConfigService(AlarmConfigManager);
             DevicesService = new AlarmDevicesConfigService(AlarmConfigManager);
             ZoneService = new ZoneConfigurationService(AlarmConfigManager);
+            GsmService = new GsmConfigurationService(AlarmConfigManager);
+            UsersService = new UsersConfigurationService(AlarmConfigManager);
         }
 
         static public GlobalConfigService GetGlobalConfigService()
