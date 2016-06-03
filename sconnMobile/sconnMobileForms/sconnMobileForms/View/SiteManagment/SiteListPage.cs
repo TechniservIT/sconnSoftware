@@ -39,11 +39,7 @@ namespace sconnMobileForms.View.SiteManagment
             Repository = AlarmSystemConfigurationContext.Repository;
 
             NavigationPage.SetHasNavigationBar(this, true);
-
-             //   NavigationPage.BarBackgroundColorProperty	
-            //   NavigationPage.BackgroundColorProperty. //= new BindableProperty(); Color.Aqua;
-            //   NavigationPage.OpacityProperty = 0.5;
-
+            
             var nameLabel = new Label { Text = "Name" };
             var nameEntry = new Entry();
             nameEntry.SetBinding(Entry.TextProperty, "siteName");

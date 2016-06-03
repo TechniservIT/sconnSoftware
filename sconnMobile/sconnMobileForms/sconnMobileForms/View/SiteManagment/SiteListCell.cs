@@ -69,6 +69,7 @@ namespace sconnMobileForms.View.SiteManagment
                 View = grid;
 
             }
+
         }
 
 }

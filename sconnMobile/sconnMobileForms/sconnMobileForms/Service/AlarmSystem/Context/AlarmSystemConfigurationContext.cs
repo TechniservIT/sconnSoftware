@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using AlarmSystemManagmentService;
 using AlarmSystemManagmentService.Device;
+using AlarmSystemManagmentService.Event;
 using sconnConnector;
 using sconnConnector.Config;
 using sconnConnector.POCO.Config;
@@ -34,8 +35,12 @@ namespace sconnMobileForms.Service.AlarmSystem.Context
         static public List<sconnAlarmZone> Zones;
 
         static public GlobalConfigService GlobalService;
+        static public GsmConfigurationService GsmService;
+        static public ZoneConfigurationService ZoneService;
+        static public UsersConfigurationService UsersService;
+        static public EventsService EventsService;
         static public AlarmDevicesConfigService DevicesService;
-
+    
         static public EndpointInfo EndpointInfo;
         static public DeviceCredentials Credentials;
         static public AlarmSystemConfigManager AlarmConfigManager;
@@ -57,6 +62,7 @@ namespace sconnMobileForms.Service.AlarmSystem.Context
             AlarmConfigManager = new AlarmSystemConfigManager(EndpointInfo, Credentials);
             GlobalService = new GlobalConfigService(AlarmConfigManager);
             DevicesService = new AlarmDevicesConfigService(AlarmConfigManager);
+            ZoneService = new ZoneConfigurationService(AlarmConfigManager);
         }
 
         static public GlobalConfigService GetGlobalConfigService()

@@ -155,50 +155,80 @@
     <Compile Include="$(MSBuildThisFileDirectory)Storage\Entities\User\UserPermission.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Storage\Entities\User\UserSiteAdminPermission.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Storage\Entities\User\UserSitePermission.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\AlarmDeviceListView.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\AlarmDeviceStatusView.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\AlarmGlobalStatusView.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\AlarmGsmRcptListView.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\AlarmInputsListView.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\AlarmOutputsListView.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\AlarmPowerStatusListView.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\AlarmRelaysListView.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\AlarmSensorStatusListView.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\AlarmSiteConfigSelectListView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\AlarmSiteConfigurationEntity.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\AlarmSiteConfigurationEntityListItem.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\AlarmZonesListView.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\AlarmZoneStatusView.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\Controls\AlarmConfigurationListEntityGridItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\Controls\AlarmIoEntityGrid.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\Controls\AlarmIoEntityGridItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\Controls\AlarmIoInputEntityGridItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\Controls\AlarmIoOutputEntityGridItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\Controls\AlarmIoRelayEntityGridItem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\Device\AlarmDeviceEditView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\Device\AlarmDeviceListView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\Device\AlarmDeviceStatusView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\Global\AlarmGlobalStatusView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\Gsm\AlarmGsmRcptListView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\Gsm\GsmRcptEditView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\Gsm\GsmRcptListItem.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\Io\AlarmInputsListView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\Io\AlarmOutputsListView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\Io\AlarmRelaysListView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\Power\AlarmPowerStatusListView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\Sensor\AlarmSensorStatusListView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\Wizard\AlarmSiteWizardDataEntryView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\Wizard\AlarmSiteWizardNetworkSearchView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\Wizard\AlarmSiteWizardSummaryView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\Wizard\AlarmSiteWizardTypeSelectView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\Wizard\AlarmSiteWizardUsbSearch.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\Zone\AlarmZoneEditView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\Zone\AlarmZonesListView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\Zone\AlarmZoneStatusView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\Zone\ZoneListCell.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)View\SiteManagment\SiteListCell.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)View\SiteManagment\SiteListPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)View\SiteManagment\SiteListView.xaml.cs">
@@ -206,6 +236,45 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)View\AlarmSystem\AlarmSiteConfigSelectListView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)View\AlarmSystem\Device\AlarmDeviceListView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)View\AlarmSystem\Device\AlarmDeviceStatusView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)View\AlarmSystem\Global\AlarmGlobalStatusView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)View\AlarmSystem\Gsm\AlarmGsmRcptListView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)View\AlarmSystem\Io\AlarmInputsListView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)View\AlarmSystem\Io\AlarmOutputsListView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)View\AlarmSystem\Io\AlarmRelaysListView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)View\AlarmSystem\Power\AlarmPowerStatusListView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)View\AlarmSystem\Sensor\AlarmSensorStatusListView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)View\AlarmSystem\Zone\AlarmZoneEditView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)View\AlarmSystem\Zone\AlarmZonesListView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)View\AlarmSystem\Zone\AlarmZoneStatusView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <None Include="$(MSBuildThisFileDirectory)GettingStarted.Xamarin" />
     <None Include="$(MSBuildThisFileDirectory)Service\packages.config" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)View\SiteManagment\SiteListView.xaml">
@@ -214,47 +283,37 @@
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)View\SiteManagment\SiteListCellXaml.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)View\AlarmSystem\AlarmSiteConfigSelectListView.xaml">
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)View\AlarmSystem\Wizard\AlarmSiteWizardTypeSelectView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)View\AlarmSystem\AlarmInputsListView.xaml">
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)View\AlarmSystem\Wizard\AlarmSiteWizardNetworkSearchView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)View\AlarmSystem\AlarmOutputsListView.xaml">
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)View\AlarmSystem\Wizard\AlarmSiteWizardUsbSearchView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)View\AlarmSystem\AlarmRelaysListView.xaml">
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)View\AlarmSystem\Wizard\AlarmSiteWizardDataEntryView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)View\AlarmSystem\Wizard\AlarmSiteWizardSummaryView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)View\AlarmSystem\Device\AlarmDeviceEditView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)View\AlarmSystem\Zone\ZoneListCell.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)View\AlarmSystem\Gsm\GsmRcptListItem.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)View\AlarmSystem\Gsm\GsmRcptEditView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)ViewModel\AlarmSystem\" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)View\AlarmSystem\AlarmDeviceListView.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)View\AlarmSystem\AlarmDeviceStatusView.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)View\AlarmSystem\AlarmGlobalStatusView.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)View\AlarmSystem\AlarmGsmRcptListView.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)View\AlarmSystem\AlarmPowerStatusListView.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)View\AlarmSystem\AlarmSensorStatusListView.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)View\AlarmSystem\AlarmZonesListView.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)View\AlarmSystem\AlarmZoneStatusView.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
+    <Folder Include="$(MSBuildThisFileDirectory)View\AlarmSystem\Camera\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\Plus Math-40.png" />

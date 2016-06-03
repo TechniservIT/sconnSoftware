@@ -35,7 +35,7 @@ namespace sconnMobileForms.View.AlarmSystem
             ContentPage configView = null;
             if (entity.Type == AlarmSystemConfigurationViewType.Zones)
             {
-
+                configView = new AlarmZonesListView();
             }
             else if (entity.Type == AlarmSystemConfigurationViewType.Inputs)
             {

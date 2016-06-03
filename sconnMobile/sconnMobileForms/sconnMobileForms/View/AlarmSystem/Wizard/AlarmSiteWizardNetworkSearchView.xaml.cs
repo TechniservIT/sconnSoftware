@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 
-namespace sconnRemMobile.View.AlarmSystem
+namespace sconnMobileForms.View.AlarmSystem.Wizard
 {
-	public partial class AlarmZonesListView : ContentPage
+	public partial class AlarmSiteWizardNetworkSearchView : ContentPage
 	{
-		public AlarmZonesListView ()
+		public AlarmSiteWizardNetworkSearchView()
 		{
 			InitializeComponent ();
 		}
