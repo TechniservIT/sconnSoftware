@@ -34,7 +34,14 @@ namespace sconnRem.Controls.AlarmSystem.View.Status.AlarmSystem.Zones
         }
 
 
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+         
+        }
 
-
+        private void UIElement_OnMouseDown(object sender, MouseButtonEventArgs e)
+        {
+       
+        }
     }
 }

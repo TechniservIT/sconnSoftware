@@ -132,7 +132,7 @@
                                                               VerticalAlignment="Center"/>
                                             <Canvas Background="White" Grid.Column="0" />
 
-                                            <Image  x:Name="gdjh254221"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="0,0,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/zazb-1000.jpg"/>
+                                            <Image  x:Name="gdjh254221"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="0,0,0,0" VerticalAlignment="Center" Width="Auto" Source="{Binding ArmStateIconPath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
                                         </Grid>
                                     </Border>

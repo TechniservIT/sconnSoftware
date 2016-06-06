@@ -25,22 +25,6 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
     public class AlarmZoneMapViewModel : GenericAsyncConfigViewModel
     {
 
-
-
-        #region Private Methods
-
-        private AlarmSystemGraphEdge AddNewGraphEdge(AlarmSystemGraphVertex from, AlarmSystemGraphVertex to)
-        {
-            string edgeString = string.Format("{0}-{1} Connected", from.ID, to.ID);
-
-            AlarmSystemGraphEdge newEdge = new AlarmSystemGraphEdge(edgeString, from, to);
-            Graph.AddEdge(newEdge);
-            return newEdge;
-        }
-
-
-        #endregion
-
         #region Public Properties
         
         public AlarmSystemGraph Graph
@@ -71,10 +55,16 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
         private ZoneConfigurationService _provider;
         private AlarmSystemConfigManager _manager;
         public ICommand ConfigureZoneCommand { get; set; }   
+        public ICommand GraphEntitySelectedCommand { get; set; }
         private AlarmSystemGraph graph;
         private int count;
 
-        private void CreateGraph()
+        public void CreateGraph()
+        {
+            LoadZoneGraph();
+        }
+
+        public void LoadZoneGraph()
         {
             try
             {
@@ -82,16 +72,17 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
                 string[] vertices = new string[Config.Count + 1];
 
                 vertices[0] = Config.FirstOrDefault().Name;    //create root node
-                AlarmSystemGraphVertex v1 = new AlarmSystemGraphVertex(vertices[0], false);
+                AlarmSystemGraphVertex v1 = new AlarmSystemGraphVertex(vertices[0], Config.FirstOrDefault().imageIconUri);
                 g.AddVertex(v1);
-
+                
                 for (int i = 0; i < Config.Count; i++)
                 {
-                    int CurrentVertIndex = i + 1;
-                    vertices[CurrentVertIndex] = Config[i].Name;
-                    AlarmSystemGraphVertex v = new AlarmSystemGraphVertex(vertices[CurrentVertIndex], false);
+                    int currentVertIndex = i + 1;
+                    vertices[currentVertIndex] = Config[i].Name;
+                    AlarmSystemGraphVertex v = new AlarmSystemGraphVertex(vertices[currentVertIndex], Config[i].imageIconUri);
+                    v.VertexClicked += V_VertexClicked;
                     g.AddVertex(v);
-                    g.AddEdge(new AlarmSystemGraphEdge(v1.ID, v1, v));    //connect child to parent
+                    g.AddEdge(new AlarmSystemGraphEdge(v1.Name, v1, v));    //connect child to parent
                 }
 
                 Graph = g;
@@ -100,6 +91,16 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
             {
                 _nlogger.Error(ex, ex.Message);
             }
+        }
+
+        private void V_VertexClicked(object sender, VertexEventArgs e)
+        {
+           
+        }
+
+        public void LoadDevicesGraph()
+        {
+            
         }
 
 
@@ -139,6 +140,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
         public void SetupCmd()
         {
             ConfigureZoneCommand = new DelegateCommand<sconnAlarmZone>(EditZone);
+           // GraphEntitySelectedCommand = new DelegateCommand<sconnAlarmZone>();
         }
 
         [ImportingConstructor]
@@ -150,6 +152,17 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
             this._provider = new ZoneConfigurationService(_manager);
             this._regionManager = regionManager;
         }
+
+
+        private AlarmSystemGraphEdge AddNewGraphEdge(AlarmSystemGraphVertex from, AlarmSystemGraphVertex to)
+        {
+            string edgeString = string.Format("{0}-{1} Connected", from.Name, to.Name);
+
+            AlarmSystemGraphEdge newEdge = new AlarmSystemGraphEdge(edgeString, from, to);
+            Graph.AddEdge(newEdge);
+            return newEdge;
+        }
+
 
         public string DisplayedImagePath
         {

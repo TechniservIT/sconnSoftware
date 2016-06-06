@@ -15,15 +15,81 @@
     <UserControl.Resources>
         
         <DataTemplate x:Key="demoTemplate" DataType="{x:Type graph:AlarmSystemGraphVertex}">
-            <StackPanel Orientation="Horizontal" Margin="5">
-                <Image x:Name="img" Source="/images/klawiatura1000x1000.jpg" Width="20" Height="20" />
-                <TextBlock Text="{Binding Path=ID, Mode=OneWay}" Foreground="White" />
+
+            <StackPanel Orientation="Horizontal" Margin="5" MouseDown="UIElement_OnMouseDown">
+
+                <Grid>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.5*"/>
+                        <RowDefinition Height="0.5*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Column="0" Grid.Row="0">
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.3" />
+                            <ColumnDefinition Width="0.7" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Button Grid.Column="0" Grid.Row="0"  Command="{Binding ShowDeviceStatusCommand, RelativeSource={RelativeSource  AncestorType=graph:AlarmSystemGraphVertex}}"   VerticalAlignment="Center" Height="Auto" Content="">
+                            <Button.Template>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Grid>
+                                        <Border Background="{TemplateBinding Background}"
+                                                     BorderBrush="{TemplateBinding BorderBrush}"
+                                                     BorderThickness="{TemplateBinding BorderThickness}">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <ContentPresenter HorizontalAlignment="Left"  Grid.Column="0"
+                                                              VerticalAlignment="Center"/>
+                                                <Canvas Background="White" Grid.Column="0" />
+
+                                                <Image  x:Name="ImgDispActionGridFullScreen521"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="0,0,0,0" VerticalAlignment="Center" Width="Auto" Source="{Binding Path=IconUri}" />
+
+                                            </Grid>
+                                        </Border>
+                                    </Grid>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+
+
+                    </Grid>
+
+                    <Grid Grid.Column="0" HorizontalAlignment="Stretch"    Grid.Row="1">
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Column="0" Grid.Row="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="{Binding Path=Name, Mode=OneWay}" />
+
+                    </Grid>
+
+                </Grid>
+
+
             </StackPanel>
+            
+          
             <DataTemplate.Triggers>
-                <DataTrigger Binding="{Binding IsMale}" Value="false">
+                <!--<DataTrigger Binding="{Binding IsMale}" Value="false">
                     <Setter TargetName="img" Property="Source"
                                 Value="/images/klawiatura1000x1000.jpg" />
-                </DataTrigger>
+                </DataTrigger>-->
             </DataTemplate.Triggers>
         </DataTemplate>
 
@@ -32,34 +98,18 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type graphsharp:VertexControl}">
                         <Border BorderBrush="White" 
-                                    Background="Black"
-							        BorderThickness="2"
+                                    Background="White"
+							        BorderThickness="4"
 							        CornerRadius="10,10,10,10"
 							        Padding="{TemplateBinding Padding}">
 
                             <StackPanel Orientation="Vertical">
-
-                                <Expander IsExpanded="True">
-                                    <ContentPresenter Content="{TemplateBinding Vertex}" 
+                                <ContentPresenter Content="{TemplateBinding Vertex}" 
                                             ContentTemplate="{StaticResource demoTemplate}"/>
-                                </Expander>
-                                <Expander IsExpanded="True">
-                                    <ContentPresenter Content="{TemplateBinding Vertex}" 
-                                            ContentTemplate="{StaticResource demoTemplate}"/>
-                                </Expander>
-                                <Expander IsExpanded="True">
-                                    <ContentPresenter Content="{TemplateBinding Vertex}" 
-                                            ContentTemplate="{StaticResource demoTemplate}"/>
-                                </Expander>
-                                <Expander IsExpanded="True">
-                                    <ContentPresenter Content="{TemplateBinding Vertex}" 
-                                            ContentTemplate="{StaticResource demoTemplate}"/>
-                                </Expander>
-
                             </StackPanel>
 
                             <Border.Effect>
-                                <DropShadowEffect BlurRadius="2" Color="LightGray" 
+                                <DropShadowEffect BlurRadius="2" Color="DarkGray" 
                                     Opacity="0.3" Direction="315"/>
                             </Border.Effect>
                         </Border>

@@ -177,6 +177,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\Device\AlarmDeviceStatusView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\Global\AlarmEntryStatusView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\Global\AlarmGlobalStatusView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -310,6 +313,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)View\AlarmSystem\Gsm\GsmRcptEditView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)View\AlarmSystem\Global\AlarmEntryStatusView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using sconnConnector.POCO.Config;
 using sconnMobileForms.Service.AlarmSystem.Context;
 using sconnMobileForms.View.AlarmSystem;
+using sconnMobileForms.View.AlarmSystem.Global;
+using sconnRemMobile.View.AlarmSystem;
 using SiteManagmentService;
 using Xamarin.Forms;
 
@@ -62,10 +64,8 @@ namespace sconnMobileForms.View.SiteManagment
             List.ItemTapped += (sender, e) => {
                 var site = (sconnSite)e.Item;
                 AlarmSystemConfigurationContext.Site = site;
-
-                var editPage = new AlarmSiteConfigSelectListView() { BindingContext = AlarmSystemConfigurationContext.Site };
-                Navigation.PushAsync(editPage);
-              
+                var editPage = new AlarmEntryStatusView{ BindingContext = AlarmSystemConfigurationContext.Site };
+                Navigation.PushAsync(editPage);     
             };
 
             List.ItemsSource = Sites;

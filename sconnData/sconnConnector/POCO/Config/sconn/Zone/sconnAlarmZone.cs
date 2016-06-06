@@ -56,9 +56,11 @@ namespace sconnConnector.POCO.Config.sconn
             {
                 return "pack://application:,,,/images/tel1000.jpg";
             }
-
-
-            return null;
+            else
+            {
+                return "pack://application:,,,/images/strefy2-1000.jpg";
+            }
+            
         }
 
         public void LoadImageTypeUrl()
