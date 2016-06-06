@@ -63,6 +63,22 @@ I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\b
 I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\bin\iPhoneSimulator\Debug\zh-Hans\Xamarin.Forms.Platform.iOS.resources.dll
 I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\bin\iPhoneSimulator\Debug\zh-Hant\Xamarin.Forms.Platform.iOS.resources.dll
 I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\bin\iPhoneSimulator\Debug\zh-HK\Xamarin.Forms.Platform.iOS.resources.dll
+I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\ibtool\LaunchScreen.storyboardc\UIViewController-X5k-f2-b5h~ipad.nib\objects-8.0+.nib
+I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\ibtool\LaunchScreen.storyboardc\UIViewController-X5k-f2-b5h~ipad.nib\objects.nib
+I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\ibtool\LaunchScreen.storyboardc\UIViewController-X5k-f2-b5h~ipad.nib\runtime.nib
+I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\ibtool\LaunchScreen.storyboardc\UIViewController-X5k-f2-b5h~iphone.nib\objects-8.0+.nib
+I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\ibtool\LaunchScreen.storyboardc\UIViewController-X5k-f2-b5h~iphone.nib\objects.nib
+I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\ibtool\LaunchScreen.storyboardc\UIViewController-X5k-f2-b5h~iphone.nib\runtime.nib
+I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\ibtool\LaunchScreen.storyboardc\X5k-f2-b5h-view-yd7-JS-zBw~ipad.nib\objects-8.0+.nib
+I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\ibtool\LaunchScreen.storyboardc\X5k-f2-b5h-view-yd7-JS-zBw~ipad.nib\objects.nib
+I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\ibtool\LaunchScreen.storyboardc\X5k-f2-b5h-view-yd7-JS-zBw~ipad.nib\runtime.nib
+I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\ibtool\LaunchScreen.storyboardc\X5k-f2-b5h-view-yd7-JS-zBw~iphone.nib\objects-8.0+.nib
+I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\ibtool\LaunchScreen.storyboardc\X5k-f2-b5h-view-yd7-JS-zBw~iphone.nib\objects.nib
+I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\ibtool\LaunchScreen.storyboardc\X5k-f2-b5h-view-yd7-JS-zBw~iphone.nib\runtime.nib
+I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\ibtool\LaunchScreen~ipad.storyboardc\Info-8.0+.plist
+I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\ibtool\LaunchScreen~ipad.storyboardc\Info.plist
+I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\ibtool\LaunchScreen~iphone.storyboardc\Info-8.0+.plist
+I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\ibtool\LaunchScreen~iphone.storyboardc\Info.plist
 I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\ibtool\_BundleResourceWithLogicalName.items
 I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\optimized\Assets\Images\Plus Math-40.png
 I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\optimized\Assets\Images\config2.png
@@ -218,11 +234,7 @@ I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\o
 I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\optimized\Icon-Small@3x.png
 I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\optimized\
 I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\sconnMobileForms.iOS.csprojResolveAssemblyReference.cache
-I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\sconnMobileForms.iOS.View.SiteManagment.SiteListView.xaml.g.cs
-I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\sconnMobileForms.iOS.View.SiteManagment.SiteListCellXaml.xaml.g.cs
 I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\sconnMobileForms.iOS.View.AlarmSystem.AlarmSiteConfigSelectListView.xaml.g.cs
-I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\sconnMobileFormsiOS.exe
-I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\sconnMobileFormsiOS.pdb
 I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\sconnMobileForms.iOS.View.AlarmSystem.Device.AlarmDeviceListView.xaml.g.cs
 I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\sconnMobileForms.iOS.View.AlarmSystem.Device.AlarmDeviceStatusView.xaml.g.cs
 I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\sconnMobileForms.iOS.View.AlarmSystem.Global.AlarmGlobalStatusView.xaml.g.cs
@@ -235,6 +247,8 @@ I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\o
 I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\sconnMobileForms.iOS.View.AlarmSystem.Zone.AlarmZoneEditView.xaml.g.cs
 I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\sconnMobileForms.iOS.View.AlarmSystem.Zone.AlarmZonesListView.xaml.g.cs
 I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\sconnMobileForms.iOS.View.AlarmSystem.Zone.AlarmZoneStatusView.xaml.g.cs
+I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\sconnMobileForms.iOS.View.SiteManagment.SiteListView.xaml.g.cs
+I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\sconnMobileForms.iOS.View.SiteManagment.SiteListCellXaml.xaml.g.cs
 I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\sconnMobileForms.iOS.View.AlarmSystem.Wizard.AlarmSiteWizardTypeSelectView.xaml.g.cs
 I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\sconnMobileForms.iOS.View.AlarmSystem.Wizard.AlarmSiteWizardNetworkSearchView.xaml.g.cs
 I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\sconnMobileForms.iOS.View.AlarmSystem.Wizard.AlarmSiteWizardUsbSearchView.xaml.g.cs
@@ -244,5 +258,7 @@ I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\o
 I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\sconnMobileForms.iOS.View.AlarmSystem.Zone.ZoneListCell.xaml.g.cs
 I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\sconnMobileForms.iOS.View.AlarmSystem.Gsm.GsmRcptListItem.xaml.g.cs
 I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\sconnMobileForms.iOS.View.AlarmSystem.Gsm.GsmRcptEditView.xaml.g.cs
+I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\sconnMobileFormsiOS.exe
+I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\sconnMobileFormsiOS.pdb
 I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\obj\iPhoneSimulator\Debug\sconnMobileFormsiOS.exe.mdb
 I:\Repo\Bucket\sconnSoftware\sconnMobile\sconnMobileForms\sconnMobileForms.iOS\bin\iPhoneSimulator\Debug\sconnMobileFormsiOS.exe.mdb

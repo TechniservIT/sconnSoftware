@@ -8,6 +8,7 @@
              xmlns:inf="clr-namespace:sconnRem.Navigation;assembly=sconnRem.Navigation"
              xmlns:siteNavSideMenu="clr-namespace:sconnRem.Controls.Navigation.View.Menu.SiteNavSideMenu"
              xmlns:siteNavItemModel="clr-namespace:sconnRem.Controls.Navigation.ViewModel.Navigation"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="250">
 
@@ -63,8 +64,14 @@
                             </Button>
                         </Grid>
 
-                        <Grid    Grid.Row="0" Grid.Column="1" Background="White">
+                        <Grid  Grid.Row="0" Grid.Column="1" Background="White">
 
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseDown">
+                                    <i:InvokeCommandAction Command="{Binding DataContext.ViewSiteCommand, RelativeSource={RelativeSource AncestorType=ListBox}}"  CommandParameter="{Binding}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                            
                             <Grid  Background="White">
 
                                 <Grid.ColumnDefinitions>
@@ -76,7 +83,7 @@
                                 </Grid.RowDefinitions>
 
                                 <Grid  Grid.Column="0" Grid.Row="0">
-                                    <Label Content="{Binding siteName}" />
+                                    <Label  Content="{Binding siteName}" />
                                 </Grid>
 
                                 <Grid  Grid.Column="0" Grid.Row="1">

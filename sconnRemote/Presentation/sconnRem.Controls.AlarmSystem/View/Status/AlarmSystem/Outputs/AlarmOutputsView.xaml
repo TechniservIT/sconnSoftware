@@ -241,31 +241,8 @@
                                                                 <RowDefinition Height="1*"/>
                                                             </Grid.RowDefinitions>
 
-                                                            <!--<ToggleButton Height="37" HorizontalAlignment="Left" Margin="485.738,254.419,0,0"     VerticalAlignment="Top" Width="109" IsEnabled="True" Click="ToggleButton_Click">Timeout</ToggleButton>-->
-
                                                             <ToggleButton Grid.Column="1" Grid.Row="1"  Style="{StaticResource AnimatedSwitch}"  IsChecked="{Binding Path=Value}"  Command="{Binding DataContext.ToggleOutputCommand, RelativeSource={RelativeSource  FindAncestor, AncestorLevel=2, AncestorType=ListBox}}"  CommandParameter="{Binding}" VerticalAlignment="Center" Height="Auto" Content="">
-                                                                <!--<ToggleButton.Template>
-                                                                    <ControlTemplate TargetType="{x:Type ToggleButton}">
-                                                                        <Grid>
-                                                                            <Border Background="{TemplateBinding Background}"
-                                                     BorderBrush="{TemplateBinding BorderBrush}"
-                                                     BorderThickness="{TemplateBinding BorderThickness}">
-                                                                                <Grid>
-                                                                                    <Grid.ColumnDefinitions>
-                                                                                        <ColumnDefinition Width="*"/>
-                                                                                    </Grid.ColumnDefinitions>
-                                                                                    <ContentPresenter HorizontalAlignment="Right"  Grid.Column="0"
-                                                              VerticalAlignment="Center"/>
-                                                                                    <Canvas Background="White" Grid.Column="0" />
 
-                                                                                    <Image  x:Name="ImgDispActionGridFullScreen521"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="0,0,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/config1000 (2).jpg"/>
-
-                                                                                </Grid>
-                                                                            </Border>
-                                                                        </Grid>
-                                                                    </ControlTemplate>
-                                                                </ToggleButton.Template>-->
-                                                                
                                                             </ToggleButton>
 
 

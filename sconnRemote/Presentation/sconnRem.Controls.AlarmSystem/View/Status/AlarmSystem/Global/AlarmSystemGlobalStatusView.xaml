@@ -8,6 +8,67 @@
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="800">
 
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <Style x:Key="AnimatedSwitch" TargetType="{x:Type ToggleButton}">
+                <Setter Property="Foreground" Value="Black" />
+                <Setter Property="Background" Value="#FAFAFB" />
+                <Setter Property="BorderBrush" Value="#EAEAEB" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ToggleButton">
+                            <Viewbox Stretch="Uniform">
+                                <Canvas Name="Layer_1" Width="20" Height="20" Canvas.Left="10" Canvas.Top="0">
+                                    <Ellipse  Canvas.Left="0" Width="20" Height="20" Fill="{TemplateBinding Background}" Stroke="{TemplateBinding BorderBrush}" StrokeThickness="0.5"/>
+                                    <Ellipse  Canvas.Left="15" Width="20" Height="20" Fill="{TemplateBinding Background}" Stroke="{TemplateBinding BorderBrush}" StrokeThickness="0.5"/>
+                                    <Border Canvas.Left="10" Width="15" Height="20" Name="rect416927" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0,0.5,0,0.5"/>
+                                    <Ellipse x:Name="ellipse"  Canvas.Left="0" Width="20" Height="20" Fill="White" Stroke="{TemplateBinding BorderBrush}" StrokeThickness="0.3">
+                                        <Ellipse.RenderTransform>
+                                            <TranslateTransform X="0" Y="0" />
+                                        </Ellipse.RenderTransform>
+                                        <Ellipse.BitmapEffect>
+                                            <DropShadowBitmapEffect Softness="0.1" ShadowDepth="0.7" Direction="270" Color="#BBBBBB"/>
+                                        </Ellipse.BitmapEffect>
+                                    </Ellipse>
+                                </Canvas>
+                            </Viewbox>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsChecked" Value="True" >
+                                    <Trigger.EnterActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <ColorAnimation Storyboard.TargetProperty="Background.Color" To="#52D468" Duration="0:0:0.2" />
+                                                <ColorAnimation Storyboard.TargetProperty="BorderBrush.Color" To="#41C955" Duration="0:0:0.2" />
+                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Ellipse.RenderTransform).(TranslateTransform.X)" Storyboard.TargetName="ellipse">
+                                                    <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                                                    <SplineDoubleKeyFrame KeyTime="0:0:0.4" Value="15" KeySpline="0, 1, 0.6, 1"/>
+                                                </DoubleAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </Trigger.EnterActions>
+                                    <Trigger.ExitActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <ColorAnimation Storyboard.TargetProperty="Background.Color" To="#FAFAFB" Duration="0:0:0.2" />
+                                                <ColorAnimation Storyboard.TargetProperty="BorderBrush.Color" To="#EAEAEB" Duration="0:0:0.2" />
+                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Ellipse.RenderTransform).(TranslateTransform.X)" Storyboard.TargetName="ellipse">
+                                                    <SplineDoubleKeyFrame KeyTime="0" Value="15"/>
+                                                    <SplineDoubleKeyFrame KeyTime="0:0:0.3" Value="0" KeySpline="0, 0.5, 0.5, 1"/>
+                                                </DoubleAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </Trigger.ExitActions>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    
     <xctk:BusyIndicator  IsBusy="{Binding Loading, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
 
         <Grid>
@@ -20,55 +81,17 @@
                 <RowDefinition Height="75*"/>
             </Grid.RowDefinitions>
 
-
-
-            <!--<Grid  Grid.Column="0" Grid.Row="1" >
-
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-
-            <Button Grid.Column="0" Grid.Row="0"  VerticalAlignment="Center"
-                    Width="Auto" Content="" 
-                    Command="{Binding NavigateBackCommand}" >
-
-                <Button.Template>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Grid>
-                            <Border Background="{TemplateBinding Background}"
-                                                     BorderBrush="{TemplateBinding BorderBrush}"
-                                                     BorderThickness="{TemplateBinding BorderThickness}">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <ContentPresenter HorizontalAlignment="Left"  Grid.Column="0" VerticalAlignment="Center"/>
-                                    <Canvas Background="White" Grid.Column="0" />
-
-                                    <Image  x:Name="gdjh254221"  Stretch="Uniform"   HorizontalAlignment="Center" Height="Auto" Margin="0,0,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/wstecz500x500.jpg"/>
-
-                                </Grid>
-                            </Border>
-                        </Grid>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
-
-
-        </Grid>-->
-
-            <Grid  Grid.Column="1" Grid.Row="0" >
+            <Grid  Grid.Column="0" Grid.Row="0" >
 
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50*" />
                     <ColumnDefinition Width="25*" />
-                    <ColumnDefinition Width="75*" />
+                    <ColumnDefinition Width="25*" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
+
 
                 <Grid  Grid.Column="0" Grid.Row="0" >
 
@@ -79,46 +102,22 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <Button Grid.Column="0" Grid.Row="0"  VerticalAlignment="Center" Height="Auto" Content="">
-                        <Button.Template>
-                            <ControlTemplate TargetType="{x:Type Button}">
-                                <Grid>
-                                    <Border Background="{TemplateBinding Background}"
-                                                     BorderBrush="{TemplateBinding BorderBrush}"
-                                                     BorderThickness="{TemplateBinding BorderThickness}">
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*"/>
-                                            </Grid.ColumnDefinitions>
-                                            <ContentPresenter HorizontalAlignment="Left"  Grid.Column="0"
-                                                              VerticalAlignment="Center"/>
-                                            <Canvas Background="White" Grid.Column="0" />
-
-                                            <Image  x:Name="gdjh254221"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="0,0,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/glob1000.jpg"/>
-
-                                        </Grid>
-                                    </Border>
-                                </Grid>
-                            </ControlTemplate>
-                        </Button.Template>
-                    </Button>
-
+                    <Label Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" HorizontalContentAlignment="Stretch" Content="{Binding Config.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="36" FontFamily="Motorwerk" VerticalAlignment="Center" />
 
                 </Grid>
+
 
                 <Grid  Grid.Column="1" Grid.Row="0" >
 
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.7*" />
-                        <ColumnDefinition Width="0.3*" />
+                        <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <Label Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" HorizontalContentAlignment="Stretch" Content="{Binding Config.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="36" FontFamily="Motorwerk" VerticalAlignment="Center" />
 
-                    <Button Grid.Column="1" Grid.Row="0"  VerticalAlignment="Center" Height="Auto" Content="">
+                    <Button Grid.Column="0" Grid.Row="0"  VerticalAlignment="Center" Height="Auto" Content="">
                         <Button.Template>
                             <ControlTemplate TargetType="{x:Type Button}">
                                 <Grid>
@@ -141,15 +140,32 @@
                             </ControlTemplate>
                         </Button.Template>
                     </Button>
-
-
+                    
                 </Grid>
 
+                <Grid  Grid.Column="2" Grid.Row="0" >
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.25*"/>
+                        <RowDefinition Height="0.4*"/>
+                        <RowDefinition Height="0.25*"/>
+                    </Grid.RowDefinitions>
+
+
+                    <ToggleButton Grid.Column="0" Grid.Row="1"  Style="{StaticResource AnimatedSwitch}"  IsChecked="{Binding Config.Armed}"  Command="{Binding ToggleArmedCommand}"  VerticalAlignment="Center" Height="Auto" Content="">
+
+                    </ToggleButton>
+
+                </Grid>
+                
 
             </Grid>
 
 
-            <Grid  Grid.Column="1" Grid.Row="1" >
+            <Grid  Grid.Column="0" Grid.Row="1" >
 
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />

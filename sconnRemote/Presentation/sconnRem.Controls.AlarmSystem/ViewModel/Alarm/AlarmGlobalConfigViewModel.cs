@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using NLog;
+using Prism.Commands;
 using Prism.Regions;
 using sconnConnector.POCO.Config.sconn;
 using sconnRem.Controls.AlarmSystem.ViewModel.Generic;
@@ -25,7 +26,9 @@ namespace sconnRem.ViewModel.Alarm
         public sconnGlobalConfig Config { get; set; }
         private GlobalConfigService _provider;
         private AlarmSystemConfigManager _manager;
-        
+
+
+        public ICommand ToggleArmedCommand { get; set; }
 
         public override void GetData()
         {
@@ -40,6 +43,14 @@ namespace sconnRem.ViewModel.Alarm
             }
         }
 
+        public void ToggleArmed()
+        {
+            SaveData(); //Upload toggled arm state
+            GetData();
+        }
+
+
+
         public override void SaveData()
         {
             _provider.Update(Config);
@@ -51,12 +62,17 @@ namespace sconnRem.ViewModel.Alarm
             this._provider = new GlobalConfigService(_manager);
         }
 
+        public void SetupCmds()
+        {
+            ToggleArmedCommand = new DelegateCommand(ToggleArmed);
+        }
       
 
         [ImportingConstructor]
         public AlarmGlobalConfigViewModel(IRegionManager regionManager)
         {
             Config = new sconnGlobalConfig();
+            SetupCmds();
             this._manager = SiteNavigationManager.alarmSystemConfigManager;
             this._provider = new GlobalConfigService(_manager);
             this._regionManager = regionManager;
