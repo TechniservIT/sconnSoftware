@@ -16,6 +16,7 @@ namespace sconnConnector.POCO.Config.sconn
         public sconnAlarmZoneConfig()
         {
                 Zones = new List<sconnAlarmZone>();
+            UUID = Guid.NewGuid().ToString();
         }
 
         public byte[] Serialize()
@@ -125,6 +126,8 @@ namespace sconnConnector.POCO.Config.sconn
                 this.Zones[i].DeserializeNames(zName);
             }
         }
+
+        public string UUID { get; set; }
     }
 
 }

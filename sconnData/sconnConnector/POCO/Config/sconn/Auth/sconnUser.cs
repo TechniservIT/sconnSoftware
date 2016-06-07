@@ -59,10 +59,10 @@ namespace sconnConnector.POCO.Config.Abstract.Auth
 
         public sconnUser()
         {
-           
+            UUID = Guid.NewGuid().ToString();
         }
 
-        public sconnUser(byte[] serialized)
+        public sconnUser(byte[] serialized) : this()
         {
             this.Deserialize(serialized);
         }
@@ -158,5 +158,6 @@ namespace sconnConnector.POCO.Config.Abstract.Auth
 
         }
 
+        public string UUID { get; set; }
     }
 }

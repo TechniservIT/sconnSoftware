@@ -15,7 +15,8 @@ namespace sconnConnector.POCO.Config.Abstract.Auth
 
         public sconnUserConfig()
         {
-                Users = new List<sconnUser>();
+            UUID = Guid.NewGuid().ToString();
+            Users = new List<sconnUser>();
         }
 
         public sconnUserConfig(ipcSiteConfig cfg) :this()
@@ -82,5 +83,6 @@ namespace sconnConnector.POCO.Config.Abstract.Auth
         }
 
 
+        public string UUID { get; set; }
     }
 }

@@ -41,7 +41,9 @@ namespace sconnRem.Controls.AlarmSystem.View.Status.AlarmSystem.Zones
 
         private void UIElement_OnMouseDown(object sender, MouseButtonEventArgs e)
         {
-       
+            string id = (string)((StackPanel)sender).Tag;
+            AlarmZoneMapViewModel model = (AlarmZoneMapViewModel) DataContext;
+            model?.VertexWithIdSelected(id);
         }
     }
 }

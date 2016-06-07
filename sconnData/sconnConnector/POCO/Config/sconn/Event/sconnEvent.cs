@@ -165,7 +165,7 @@ namespace sconnConnector.POCO.Config.sconn
 
         public sconnEvent()
         {
-           
+            UUID = Guid.NewGuid().ToString();
         }
 
         public sconnEvent(byte[] EventBytes) : this()
@@ -250,6 +250,7 @@ namespace sconnConnector.POCO.Config.sconn
         }
 
 
+        public string UUID { get; set; }
     }
 
 }

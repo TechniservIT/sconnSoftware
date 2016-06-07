@@ -72,14 +72,14 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
                 string[] vertices = new string[Config.Count + 1];
 
                 vertices[0] = Config.FirstOrDefault().Name;    //create root node
-                AlarmSystemGraphVertex v1 = new AlarmSystemGraphVertex(vertices[0], Config.FirstOrDefault().imageIconUri);
+                AlarmSystemGraphVertex v1 = new AlarmSystemGraphVertex(vertices[0], Config.FirstOrDefault().imageIconUri,Config.FirstOrDefault().UUID);
                 g.AddVertex(v1);
                 
                 for (int i = 0; i < Config.Count; i++)
                 {
                     int currentVertIndex = i + 1;
                     vertices[currentVertIndex] = Config[i].Name;
-                    AlarmSystemGraphVertex v = new AlarmSystemGraphVertex(vertices[currentVertIndex], Config[i].imageIconUri);
+                    AlarmSystemGraphVertex v = new AlarmSystemGraphVertex(vertices[currentVertIndex], Config[i].imageIconUri,Config[i].UUID);
                     v.VertexClicked += V_VertexClicked;
                     g.AddVertex(v);
                     g.AddEdge(new AlarmSystemGraphEdge(v1.Name, v1, v));    //connect child to parent
@@ -93,7 +93,22 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
             }
         }
 
-        private void V_VertexClicked(object sender, VertexEventArgs e)
+        public void OpenZoneContextForZone(sconnAlarmZone zone)
+        {
+            
+        }
+
+        public void VertexWithIdSelected(string Id)
+        {
+            //find out the model data corresponding with id
+            var zone = Config.FirstOrDefault(z => z.UUID.Equals(Id));
+            if (zone != null)
+            {
+                OpenZoneContextForZone(zone);
+            }
+        }
+
+        public void V_VertexClicked(object sender, VertexEventArgs e)
         {
            
         }

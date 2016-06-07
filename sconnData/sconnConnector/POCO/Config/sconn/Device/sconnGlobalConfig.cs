@@ -50,6 +50,7 @@ namespace sconnConnector.POCO.Config.sconn
         public sconnGlobalConfig()
         {
             _memCFG = new byte[ipcDefines.ipcGlobalConfigSize];
+            UUID = Guid.NewGuid().ToString();
         }
 
         public sconnGlobalConfig(ipcSiteConfig cfg) :this()
@@ -87,16 +88,7 @@ namespace sconnConnector.POCO.Config.sconn
         {
             
         }
-
-        //public byte[] SerializeNames()
-        //{
-          
-        //}
-
-        //public void DeserializeNames(byte[] buffer)
-        //{
-           
-        //}
+        
 
         public byte[] SerializeEntityNames()
         {
@@ -108,7 +100,9 @@ namespace sconnConnector.POCO.Config.sconn
             int zonesst = ipcDefines.mAddr_NAMES_Zone_StartAddr;
             int ctrlst = ipcDefines.mAddr_NAMES_Global_StartAddr;
             Name = System.Text.Encoding.BigEndianUnicode.GetString(this.memCFG, ipcDefines.mAddr_NAMES_Global_StartAddr, ipcDefines.RAM_NAME_SIZE);
-        } 
+        }
+
+        public string UUID { get; set; }
     }
 
 }

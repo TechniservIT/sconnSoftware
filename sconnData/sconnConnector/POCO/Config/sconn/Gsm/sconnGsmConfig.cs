@@ -22,6 +22,7 @@ namespace sconnConnector.POCO.Config
         public sconnGsmConfig()
         {
             Rcpts = new List<sconnGsmRcpt>();
+            UUID = Guid.NewGuid().ToString();
         }
 
         public sconnGsmConfig(ipcSiteConfig cfg) :this()
@@ -88,6 +89,7 @@ namespace sconnConnector.POCO.Config
 
         }
 
+        public string UUID { get; set; }
     }
 
 }

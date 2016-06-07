@@ -23,6 +23,7 @@ namespace sconnConnector.POCO.Config.sconn
         public sconnDeviceConfig()
         {
             Device = new sconnDevice();
+            UUID = Guid.NewGuid().ToString();
         }
 
         public byte[] Serialize()
@@ -95,6 +96,7 @@ namespace sconnConnector.POCO.Config.sconn
             }
         }
 
+        public string UUID { get; set; }
     }
 
 }

@@ -17,6 +17,7 @@ namespace sconnConnector.POCO.Config
         public sconnAuthorizedDevices()
         {
             Devices = new List<sconnAuthorizedDevice>();
+            UUID = Guid.NewGuid().ToString();
         }
 
         public byte[] Serialize()
@@ -79,6 +80,7 @@ namespace sconnConnector.POCO.Config
         {
             this.Deserialize(cfg.AuthDevices);
         }
-        
+
+        public string UUID { get; set; }
     }
 }

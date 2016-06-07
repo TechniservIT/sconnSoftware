@@ -40,6 +40,7 @@ namespace sconnRem.Controls.AlarmSystem.View.Status.AlarmSystem.Graph
 
     public  class AlarmSystemGraphVertex
     {
+        public string Id { get; set; }
         public string Name { get; set; }
         public string IconUri { get; set; }
         public event EventHandler<VertexEventArgs> VertexClicked;
@@ -54,6 +55,14 @@ namespace sconnRem.Controls.AlarmSystem.View.Status.AlarmSystem.Graph
 
         public AlarmSystemGraphVertex(string name, string uri) : this()
         {
+            Id = Guid.NewGuid().ToString();
+            Name = name;
+            IconUri = uri;
+        }
+
+        public AlarmSystemGraphVertex(string name, string uri, string id) : this()
+        {
+            Id = id;
             Name = name;
             IconUri = uri;
         }

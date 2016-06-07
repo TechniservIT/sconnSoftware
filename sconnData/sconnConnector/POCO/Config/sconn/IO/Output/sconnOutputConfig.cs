@@ -15,6 +15,7 @@ namespace sconnConnector.POCO.Config.sconn.IO.Output
         public sconnOutputConfig()
         {
             Outputs = new List<sconnOutput>();
+            UUID = Guid.NewGuid().ToString();
         }
 
 
@@ -83,5 +84,6 @@ namespace sconnConnector.POCO.Config.sconn.IO.Output
 
         }
 
+        public string UUID { get; set; }
     }
 }

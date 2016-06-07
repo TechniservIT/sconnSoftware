@@ -16,13 +16,14 @@ namespace sconnConnector.POCO.Config.sconn
 
     public interface IAlarmSystemConfigurationEntity : ISerializableConfiguration
     {
-        
+        string UUID { get; set; }
     }
 
     public interface IAlarmSystemNamedConfigurationEntity : IAlarmSystemConfigurationEntity
     {
         byte[] SerializeNames();
         void DeserializeNames(byte[] buffer);
+        
     }
 
     public interface IAlarmSystemNamedEntity : IAlarmSystemConfigurationEntity
@@ -376,7 +377,9 @@ namespace sconnConnector.POCO.Config.sconn
             }
         }
 
-        public sconnDevice(ipcDeviceConfig cfg)
+    
+
+        public sconnDevice(ipcDeviceConfig cfg) :this()
         {
             this.Inputs = cfg.Inputs;
             this.Outputs = cfg.Outputs;
@@ -427,6 +430,8 @@ namespace sconnConnector.POCO.Config.sconn
 
         public sconnDevice()
         {
+
+            UUID = Guid.NewGuid().ToString();
             _memCFG = new byte[ipcDefines.deviceConfigSize];
             _NamesCFG = new byte[ipcDefines.RAM_DEV_NAMES_NO][];
             _NetworkConfig = new byte[ipcDefines.NET_CFG_SIZE];
@@ -626,5 +631,7 @@ namespace sconnConnector.POCO.Config.sconn
         {
             throw new NotImplementedException();
         }
+
+        public string UUID { get; set; }
     }
 }

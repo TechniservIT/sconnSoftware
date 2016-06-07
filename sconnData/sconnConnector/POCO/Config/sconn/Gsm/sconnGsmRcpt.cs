@@ -30,7 +30,7 @@ namespace sconnConnector.POCO.Config.sconn
 
         public sconnGsmRcpt()
         {
-
+            UUID = Guid.NewGuid().ToString();
         }
 
         public sconnGsmRcpt(ipcRcpt rcpt) : this()
@@ -108,5 +108,7 @@ namespace sconnConnector.POCO.Config.sconn
                 _logger.Error(e, e.Message);
             }
         }
+
+        public string UUID { get; set; }
     }
 }

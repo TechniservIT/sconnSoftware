@@ -16,7 +16,7 @@
         
         <DataTemplate x:Key="demoTemplate" DataType="{x:Type graph:AlarmSystemGraphVertex}">
 
-            <StackPanel Orientation="Horizontal" Margin="5" MouseDown="UIElement_OnMouseDown">
+            <StackPanel Orientation="Horizontal" Margin="5" Tag="{Binding Id}" MouseDown="UIElement_OnMouseDown">
 
                 <Grid>
 
@@ -38,8 +38,8 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-
-                        <Button Grid.Column="0" Grid.Row="0"  Command="{Binding ShowDeviceStatusCommand, RelativeSource={RelativeSource  AncestorType=graph:AlarmSystemGraphVertex}}"   VerticalAlignment="Center" Height="Auto" Content="">
+                        
+                        <Button Grid.Column="0" Grid.Row="0"   VerticalAlignment="Center" Height="Auto" Content="">
                             <Button.Template>
                                 <ControlTemplate TargetType="{x:Type Button}">
                                     <Grid>

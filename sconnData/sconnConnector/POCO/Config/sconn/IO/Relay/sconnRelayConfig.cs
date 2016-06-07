@@ -15,6 +15,7 @@ namespace sconnConnector.POCO.Config.sconn.IO.Relay
         public sconnRelayConfig()
         {
             Relays = new List<sconnRelay>();
+            UUID = Guid.NewGuid().ToString();
         }
 
         public sconnRelayConfig(ipcSiteConfig cfg) : this()
@@ -80,5 +81,7 @@ namespace sconnConnector.POCO.Config.sconn.IO.Relay
             }
 
         }
+
+        public string UUID { get; set; }
     }
 }

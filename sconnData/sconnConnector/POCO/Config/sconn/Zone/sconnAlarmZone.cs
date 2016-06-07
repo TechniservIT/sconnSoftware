@@ -62,7 +62,7 @@ namespace sconnConnector.POCO.Config.sconn
             }
             
         }
-
+        
         public void LoadImageTypeUrl()
         {
             imageIconUri = GetDeviceTypeImageUriForDevice(this);
@@ -72,7 +72,7 @@ namespace sconnConnector.POCO.Config.sconn
 
         public sconnAlarmZone()
         {
-                
+            UUID = Guid.NewGuid().ToString();
         }
 
         public sconnAlarmZone(byte[] serialized) : this()
@@ -121,6 +121,7 @@ namespace sconnConnector.POCO.Config.sconn
                 this.Id = 0;
                 this.Enabled = true;
                 this.Name = Guid.NewGuid().ToString();
+                UUID = Guid.NewGuid().ToString();
                 this.NameId = 0;
                 this.Type = AlarmZoneType.General;
             }
@@ -140,6 +141,8 @@ namespace sconnConnector.POCO.Config.sconn
         {
             Name = System.Text.Encoding.BigEndianUnicode.GetString(buffer, 0, buffer.GetLength(0));
         }
+
+        public string UUID { get; set; }
     }
 
 }

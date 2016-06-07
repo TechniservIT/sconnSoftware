@@ -16,6 +16,7 @@ namespace sconnConnector.POCO.Config.sconn.IO
         public sconnInputConfig()
         {
             Inputs = new List<sconnInput>();
+            UUID = Guid.NewGuid().ToString();
         }
 
         public sconnInputConfig(ipcSiteConfig cfg) : this()
@@ -83,5 +84,6 @@ namespace sconnConnector.POCO.Config.sconn.IO
 
         }
 
+        public string UUID { get; set; }
     }
 }

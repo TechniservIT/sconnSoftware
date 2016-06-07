@@ -15,9 +15,10 @@ namespace sconnConnector.POCO.Config.sconn
         public sconnEventConfig()
         {
                 Events = new List<sconnEvent>();
+            UUID = Guid.NewGuid().ToString();
         }
 
-        public sconnEventConfig(ipcSiteConfig cfg)
+        public sconnEventConfig(ipcSiteConfig cfg) : this()
         {
             try
             {
@@ -97,5 +98,6 @@ namespace sconnConnector.POCO.Config.sconn
         }
 
 
+        public string UUID { get; set; }
     }
 }
