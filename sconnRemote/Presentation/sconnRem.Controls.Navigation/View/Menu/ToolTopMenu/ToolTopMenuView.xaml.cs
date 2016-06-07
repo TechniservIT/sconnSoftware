@@ -24,6 +24,7 @@ namespace sconnRem.View.Menu.ToolTopMenu
 
     //[ViewExport(RegionName = GlobalViewRegionNames.RopNavigationRegion)]
     //[PartCreationPolicy(CreationPolicy.NonShared)]
+
     [Export]
     [ViewSortHint("01")]
     public partial class ToolTopMenuView : UserControl, IPartImportsSatisfiedNotification

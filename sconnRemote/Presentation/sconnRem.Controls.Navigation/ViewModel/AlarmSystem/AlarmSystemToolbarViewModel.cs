@@ -13,6 +13,7 @@ using Prism.Regions;
 using sconnConnector;
 using sconnConnector.Config;
 using sconnConnector.POCO.Config;
+using sconnPrismGenerics.View.Interface;
 using sconnRem.Infrastructure.Navigation;
 using sconnRem.Navigation;
 
@@ -20,13 +21,16 @@ namespace sconnRem.Controls.Navigation.ViewModel.AlarmSystem
 {
 
     [Export]
-    public class AlarmSystemToolbarViewModel : BindableBase
+    [PartCreationPolicy(CreationPolicy.NonShared)]
+    public class AlarmSystemToolbarViewModel : BindableBase, INavigableView
     {
         public sconnSite Site { get; set; }
         private readonly IRegionManager _regionManager;
         public AlarmSystemConfigManager Manager { get; set; }
 
         private Logger _nlogger = LogManager.GetCurrentClassLogger();
+        private IRegionNavigationJournal navigationJournal;
+        public string siteUUID { get; set; }
 
         public ICommand Show_Status_Command { get; set; }
         public ICommand Show_Configure_Command { get; set; }
@@ -236,6 +240,56 @@ namespace sconnRem.Controls.Navigation.ViewModel.AlarmSystem
             this._regionManager = regionManager;
         }
 
+        public bool IsActive { get; set; }
+        public event EventHandler IsActiveChanged;
+
+        public void NavigateBack()
+        {
+            try
+            {
+                this.navigationJournal?.GoBack();
+            }
+            catch (Exception ex)
+            {
+                _nlogger.Error(ex, ex.Message);
+            }
+        }
+        
+        public  void OnNavigatedTo(NavigationContext navigationContext)
+        {
+            siteUUID = (string)navigationContext.Parameters[GlobalViewContractNames.Global_Contract_Nav_Site_Context__Key_Name];
+            if (siteUUID != null)
+            {
+                this.Site = SiteNavigationManager.CurrentContextSconnSite;
+            }
+            else
+            {
+                siteUUID = Guid.NewGuid().ToString();
+            }
+            this.navigationJournal = navigationContext.NavigationService.Journal;
+        }
+
+        public  bool IsNavigationTarget(NavigationContext navigationContext)
+        {
+            var targetsiteUuid = (string)navigationContext.Parameters[GlobalViewContractNames.Global_Contract_Nav_Site_Context__Key_Name];
+            if (targetsiteUuid != siteUUID)
+            {
+                return true;
+            }
+            return false;
+        }
+        
+        public void OnNavigatedFrom(NavigationContext navigationContext)
+        {
+         
+        }
+
+        public void AcceptChanges()
+        {
+         
+        }
+
+        public bool IsChanged { get; }
     }
 
 

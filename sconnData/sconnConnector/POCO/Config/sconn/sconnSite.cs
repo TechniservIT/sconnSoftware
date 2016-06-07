@@ -11,7 +11,7 @@ namespace sconnConnector.POCO.Config
 {
 
 
-    public class sconnSite : INotifyPropertyChanged
+    public class sconnSite : INotifyPropertyChanged 
     {
         private int _statusCheckInterval;
         private string _authPasswd;
@@ -21,6 +21,8 @@ namespace sconnConnector.POCO.Config
         private int _siteID;
         private string _siteName;
         private int SelectedTabId = 0;
+
+        public string UUID { get; set; }
 
         public string Id { get; set; }
         
@@ -140,6 +142,8 @@ namespace sconnConnector.POCO.Config
 
         public sconnSite()
         {
+            UUID = new Guid().ToString();
+
             statusCheckInterval = 5000; //5s interval
             lastUpdate = DateTime.Now;
             serverPort = 37222;
@@ -152,6 +156,9 @@ namespace sconnConnector.POCO.Config
 
         public sconnSite(ipcSiteConfig config, int intervalMs, string siteName)
         {
+
+            UUID = new Guid().ToString();
+
             statusCheckInterval = intervalMs;
             siteCfg = config;
          //   _siteID = sconnDataShare.GetLastItemID() + 1;
@@ -166,6 +173,9 @@ namespace sconnConnector.POCO.Config
 
         public sconnSite(int intervalMs, string server, int port, string siteName)
         {
+
+            UUID = new Guid().ToString();
+
             statusCheckInterval = intervalMs;
             serverIP = server;
             serverPort = port;

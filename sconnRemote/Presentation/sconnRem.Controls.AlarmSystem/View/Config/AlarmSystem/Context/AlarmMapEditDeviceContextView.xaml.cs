@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,21 +12,15 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Prism.Regions;
-using sconnRem.Navigation;
 
-namespace sconnRem.Controls.Navigation.View.Menu.ContextToolbar.CCTV
+namespace sconnRem.Controls.AlarmSystem.View.Config.AlarmSystem.Context
 {
     /// <summary>
-    /// Interaction logic for CctvToolbarView.xaml
+    /// Interaction logic for AlarmMapEditDeviceContextView.xaml
     /// </summary>
-
-    [Export(GlobalViewContractNames.Global_Contract_Menu_Top_CctvContext)]
-    [ViewSortHint("01")]
-    [PartCreationPolicy(CreationPolicy.Any)]
-    public partial class CctvToolbarView : UserControl
+    public partial class AlarmMapEditDeviceContextView : UserControl
     {
-        public CctvToolbarView()
+        public AlarmMapEditDeviceContextView()
         {
             InitializeComponent();
         }

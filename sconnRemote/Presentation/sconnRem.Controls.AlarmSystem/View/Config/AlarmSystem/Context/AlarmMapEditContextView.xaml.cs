@@ -14,20 +14,18 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Prism.Regions;
-using sconnRem.Navigation;
 
-namespace sconnRem.Controls.Navigation.View.Menu.ContextToolbar.CCTV
+namespace sconnRem.Controls.AlarmSystem.View.Config.AlarmSystem.Context
 {
     /// <summary>
-    /// Interaction logic for CctvToolbarView.xaml
+    /// Interaction logic for AlarmMapEditContextView.xaml
     /// </summary>
 
-    [Export(GlobalViewContractNames.Global_Contract_Menu_Top_CctvContext)]
+    [Export]
     [ViewSortHint("01")]
-    [PartCreationPolicy(CreationPolicy.Any)]
-    public partial class CctvToolbarView : UserControl
+    public partial class AlarmMapEditContextView : UserControl
     {
-        public CctvToolbarView()
+        public AlarmMapEditContextView()
         {
             InitializeComponent();
         }

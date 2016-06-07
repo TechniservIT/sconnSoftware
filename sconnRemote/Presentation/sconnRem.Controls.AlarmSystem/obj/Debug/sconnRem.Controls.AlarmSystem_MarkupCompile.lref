@@ -6,6 +6,9 @@ FI:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSy
 FI:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\View\Config\AlarmSystem\Comm\CommConfigView.xaml;;
 FI:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\View\Config\AlarmSystem\Comm\CommConfigViewNavigationItem.xaml;;
 FI:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\View\Config\AlarmSystem\ConfigSelectView.xaml;;
+FI:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\View\Config\AlarmSystem\Context\AlarmMapEditContextView.xaml;;
+FI:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\View\Config\AlarmSystem\Context\AlarmMapEditDeviceContextView.xaml;;
+FI:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\View\Config\AlarmSystem\Context\AlarmMapEditZoneContextView.xaml;;
 FI:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\View\Config\AlarmSystem\Device\DeviceConfigView.xaml;;
 FI:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\View\Config\AlarmSystem\Device\DeviceConfigViewNavigationItem.xaml;;
 FI:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\View\Config\AlarmSystem\Device\DeviceSelectView.xaml;;

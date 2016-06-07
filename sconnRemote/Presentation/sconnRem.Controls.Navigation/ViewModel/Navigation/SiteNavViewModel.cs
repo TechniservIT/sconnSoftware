@@ -39,19 +39,17 @@ namespace sconnRem.Controls.Navigation.ViewModel.Navigation
 
         private void ViewSite(sconnSite site)
         {
-            //navigate context toolbar
             SiteNavigationManager.ActivateSiteContext(site);
-            this._regionManager.RequestNavigate(GlobalViewRegionNames.TopContextToolbarRegion, NavContextToolbarRegionNames.ContextToolbar_AlarmSystem_ViewUri
-                ,
-                (NavigationResult nr) =>
-                {
-                    var error = nr.Error;
-                    var result = nr.Result;
-                    if (error != null)
-                    {
-                        _nlogger.Error(error);
-                    }
-                });
+
+            //navigate context toolbar
+            NavigationParameters parameters = new NavigationParameters();
+            parameters.Add(GlobalViewContractNames.Global_Contract_Nav_Site_Context__Key_Name, site.UUID);
+
+            GlobalNavigationContext.NavigateRegionToContractWithParam(
+                GlobalViewRegionNames.MainGridContentRegion,
+                AlarmRegionNames.AlarmStatus_Contract_Global_View,
+                parameters
+                );
 
             //navigate to global config at start
             this._regionManager.RequestNavigate(GlobalViewRegionNames.MainGridContentRegion, AlarmRegionNames.AlarmStatus_Contract_Global_View

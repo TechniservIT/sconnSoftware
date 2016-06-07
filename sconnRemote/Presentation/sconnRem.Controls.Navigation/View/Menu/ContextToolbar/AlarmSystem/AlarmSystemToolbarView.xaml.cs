@@ -23,13 +23,13 @@ namespace sconnRem.Controls.Navigation.View.Menu.ContextToolbar.AlarmSystem
 {
 
 
-    [Export]
-    [ViewSortHint("02")]
-    public partial class AlarmSystemToolbarView : UserControl, IPartImportsSatisfiedNotification
+    [Export(GlobalViewContractNames.Global_Contract_Menu_Top_AlarmSystemContext)]
+    [ViewSortHint("01")]
+    [PartCreationPolicy(CreationPolicy.NonShared)]
+    public partial class AlarmSystemToolbarView : UserControl
     {
-        private Logger _nlogger = LogManager.GetCurrentClassLogger();
-        //private static Uri _TargetNavUri = new Uri("AuthConfigView", UriKind.Relative);
-
+        private readonly Logger _nlogger = LogManager.GetCurrentClassLogger();
+      
         [Import]
         public IRegionManager RegionManager;
 
@@ -45,54 +45,8 @@ namespace sconnRem.Controls.Navigation.View.Menu.ContextToolbar.AlarmSystem
             this.DataContext = viewModel;
             InitializeComponent();
         }
-
-        void IPartImportsSatisfiedNotification.OnImportsSatisfied()
-        {
-            try
-            {
-                IRegion mainContentRegion = this.RegionManager.Regions[GlobalViewRegionNames.TopContextToolbarRegion];
-                if (mainContentRegion != null && mainContentRegion.NavigationService != null)
-                {
-                    mainContentRegion.NavigationService.Navigated += this.MainContentRegion_Navigated;
-                }
-            }
-            catch (Exception ex)
-            {
-                _nlogger.Error(ex, ex.Message);
-            }
-
-        }
-
-        public void MainContentRegion_Navigated(object sender, RegionNavigationEventArgs e)
-        {
-
-        }
-
-        private void Nav_Button_Click(object sender, RoutedEventArgs e)
-        {
-            //try
-            //{
-            //    this.RegionManager.RequestNavigate(GlobalViewRegionNames.RNavigationRegion, _TargetNavUri
-            //        ,
-            //        (NavigationResult nr) =>
-            //        {
-            //            var error = nr.Error;
-            //            var result = nr.Result;
-            //            if (error != null)
-            //            {
-            //                _nlogger.Error(error);
-            //            }
-            //        });
-            //}
-            //catch (Exception ex)
-            //{
-            //    _nlogger.Error(ex, ex.Message);
-            //}
-
-        }
-
-
-
+        
+        
     }
 
 

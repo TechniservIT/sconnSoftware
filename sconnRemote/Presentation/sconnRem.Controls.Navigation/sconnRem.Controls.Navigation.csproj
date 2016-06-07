@@ -98,6 +98,7 @@
     <Compile Include="ViewModel\AlarmSystem\AlarmSystemToolbarViewModel.cs" />
     <Compile Include="ViewModel\Navigation\SiteNavItemViewModel.cs" />
     <Compile Include="ViewModel\Navigation\SiteNavViewModel.cs" />
+    <Compile Include="ViewModel\Navigation\ToolSiteMenuViewModel.cs" />
     <Compile Include="ViewModel\Navigation\ToolTopMenuViewModel.cs" />
     <Compile Include="View\Menu\ContextToolbar\AlarmSystem\AlarmSystemToolbarModule.cs" />
     <Compile Include="View\Menu\ContextToolbar\AlarmSystem\AlarmSystemToolbarView.xaml.cs">

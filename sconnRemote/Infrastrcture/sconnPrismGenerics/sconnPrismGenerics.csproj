@@ -94,6 +94,7 @@
     <Compile Include="View\Atrributes\AutoPopulateExportedViewsBehavior.cs" />
     <Compile Include="Model\ViewModelBase.cs" />
     <Compile Include="View\Interface\IAlarmSystemStatusView.cs" />
+    <Compile Include="View\Interface\INavigableView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

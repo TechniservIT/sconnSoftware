@@ -128,6 +128,9 @@ namespace sconnRem.Navigation
         public const String AlarmStatus_Contract_Connection_Status_View = "AlarmSsstemConnectivityStatusViewContract";
         public static Uri AlarmUri_Contract_Connection_Status_View = new Uri(AlarmStatus_Contract_Connection_Status_View, UriKind.Relative);
 
+        public const String AlarmMap_Contract_Zone_Context_Edit_View = "AlarmSytemZoneEditContextView";
+        public const String AlarmMap_Contract_Device_Context_Edit_View = "AlarmSytemDeviceEditContextView";
+
         #endregion
 
 
@@ -156,11 +159,23 @@ namespace sconnRem.Navigation
 
         public const String SiteConnectionWizard_Contract_UsbList_View = "SiteConnectionWizardUsbListView";
         public static Uri SiteConnectionWizard_Uri_UsbList_View = new Uri(SiteConnectionWizard_Contract_UsbList_View, UriKind.Relative);
-
-
-
+        
     }
 
+
+    public static class GlobalViewContractNames
+    {
+        public const String Global_Contract_Menu_RightSide_AlarmMapContext = "GlobalContractMenuRightSideAlarmMapContext";
+        public const String Global_Contract_Menu_RightSide_Grid_Nav = "GlobalContractMenuRightSideGridNav";
+
+        public const String Global_Contract_Menu_Top_AlarmSystemContext = "GlobalContractMenuTopAlarmSystemContext";
+        public const String Global_Contract_Menu_Top_CctvContext = "GlobalContractMenuTopCctvContext";
+
+        public const String Global_Contract_Menu_Left_SiteList = "GlobalContractMenuLeftSiteList";
+
+   
+        public const String Global_Contract_Nav_Site_Context__Key_Name = "SiteUUID";
+    }
 
     public static class NavContextToolbarRegionNames
     {

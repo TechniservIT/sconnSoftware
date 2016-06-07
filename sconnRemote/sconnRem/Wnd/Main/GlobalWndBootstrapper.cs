@@ -20,6 +20,7 @@ using sconnPrismGenerics.Logging;
 using sconnRem.Controls.AlarmSystem.View.Status.Inputs;
 using sconnRem.Controls.AlarmSystem.ViewModel.Alarm;
 using sconnRem.Infrastructure.Navigation;
+using sconnRem.Navigation;
 using sconnRem.View.Menu.GridNavSideMenu;
 using sconnRem.View.Menu.SiteNavSideMenu;
 using sconnRem.View.Menu.ToolTopMenu;
@@ -96,6 +97,7 @@ namespace sconnRem.Wnd.Main
         protected override DependencyObject CreateShell()
         {
             SiteNavigationManager.SetNavigationContextContainer(this.Container);
+          //  GlobalNavigationContext.Manager = this.Shell
 
             //var batch = new CompositionBatch();
             //var repoPart = batch.AddExportedValue<ISiteRepository>(this._repository);

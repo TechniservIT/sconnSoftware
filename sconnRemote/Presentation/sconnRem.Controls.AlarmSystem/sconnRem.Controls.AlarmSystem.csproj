@@ -153,6 +153,15 @@
     <Compile Include="View\Config\AlarmSystem\ConfigSelectView.xaml.cs">
       <DependentUpon>ConfigSelectView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Config\AlarmSystem\Context\AlarmMapEditContextView.xaml.cs">
+      <DependentUpon>AlarmMapEditContextView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Config\AlarmSystem\Context\AlarmMapEditDeviceContextView.xaml.cs">
+      <DependentUpon>AlarmMapEditDeviceContextView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Config\AlarmSystem\Context\AlarmMapEditZoneContextView.xaml.cs">
+      <DependentUpon>AlarmMapEditZoneContextView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Config\AlarmSystem\Device\DeviceConfigView.xaml.cs">
       <DependentUpon>DeviceConfigView.xaml</DependentUpon>
     </Compile>
@@ -389,6 +398,18 @@
     <Page Include="View\Config\AlarmSystem\ConfigSelectView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Config\AlarmSystem\Context\AlarmMapEditContextView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Config\AlarmSystem\Context\AlarmMapEditDeviceContextView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Config\AlarmSystem\Context\AlarmMapEditZoneContextView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Config\AlarmSystem\Device\DeviceConfigView.xaml">
       <Generator>MSBuild:Compile</Generator>
