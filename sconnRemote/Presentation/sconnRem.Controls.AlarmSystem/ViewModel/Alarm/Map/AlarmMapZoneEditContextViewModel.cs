@@ -1,35 +1,29 @@
-﻿using AlarmSystemManagmentService;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using sconnConnector.Config;
-using sconnConnector.POCO.Config.Abstract;
-using sconnRem.ViewModel.Generic;
-using sconnConnector.POCO.Config.sconn;
-using Prism.Mvvm;
-using System.ComponentModel.Composition;
-using NLog;
+using AlarmSystemManagmentService;
 using Prism.Commands;
 using Prism.Regions;
-using sconnConnector.POCO.Config;
+using sconnConnector.Config;
+using sconnConnector.POCO.Config.sconn;
 using sconnRem.Controls.AlarmSystem.ViewModel.Generic;
 using sconnRem.Infrastructure.Navigation;
 using sconnRem.Navigation;
 
-namespace sconnRem.ViewModel.Alarm
+namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm.Map
 {
 
     [Export]
     [PartCreationPolicy(CreationPolicy.NonShared)]
-    public class AlarmZoneConfigViewModel : GenericAsyncConfigViewModel
+    public class AlarmMapZoneEditContextViewModel : AlarmMapEntityEditContextViewModel
     {
 
-        private ObservableCollection<sconnAlarmZone> _config;
-        public ObservableCollection<sconnAlarmZone> Config
+        private sconnAlarmZone _config;
+        public sconnAlarmZone Config
         {
             get { return _config; }
             set
@@ -39,8 +33,10 @@ namespace sconnRem.ViewModel.Alarm
             }
         }
 
-        private ZoneConfigurationService _provider;
-        private AlarmSystemConfigManager _manager;
+        public int ZoneId { get; set; }
+
+        private readonly ZoneConfigurationService _provider;
+        private readonly AlarmSystemConfigManager _manager;
 
         public ICommand ConfigureZoneCommand { get; set; }
 
@@ -48,7 +44,7 @@ namespace sconnRem.ViewModel.Alarm
         {
             try
             {
-                Config = new ObservableCollection<sconnAlarmZone>(_provider.GetAll());
+                Config = (_provider.GetById(ZoneId));
 
             }
             catch (Exception ex)
@@ -59,42 +55,36 @@ namespace sconnRem.ViewModel.Alarm
 
         public override void SaveData()
         {
-            foreach (var item in Config)
-            {
-                _provider.Update(item);
-            }
+            _provider.Update(Config);
         }
 
         public void EditZone(sconnAlarmZone zone)
         {
-            
+
         }
 
-        public AlarmZoneConfigViewModel()
+        public AlarmMapZoneEditContextViewModel()
         {
             _name = "Zones";
             this._provider = new ZoneConfigurationService(_manager);
         }
 
 
-        public void SetupCmd()
+        public override void SetupCmd()
         {
-            ConfigureZoneCommand =   new DelegateCommand<sconnAlarmZone>(EditZone);
+            ConfigureZoneCommand = new DelegateCommand<sconnAlarmZone>(EditZone);
         }
 
         [ImportingConstructor]
-        public AlarmZoneConfigViewModel(IRegionManager regionManager)
+        public AlarmMapZoneEditContextViewModel(IRegionManager regionManager)
         {
-            Config = new ObservableCollection<sconnAlarmZone>();
+            Config = new sconnAlarmZone();
             this._manager = SiteNavigationManager.alarmSystemConfigManager;
             this._provider = new ZoneConfigurationService(_manager);
             this._regionManager = regionManager;
         }
 
-        public string DisplayedImagePath
-        {
-            get { return "pack://application:,,,/images/strefy1.png"; }
-        }
+        public string DisplayedImagePath => "pack://application:,,,/images/strefy1.png";
 
         public override bool IsNavigationTarget(NavigationContext navigationContext)
         {
@@ -107,5 +97,6 @@ namespace sconnRem.ViewModel.Alarm
 
 
     }
+
 
 }

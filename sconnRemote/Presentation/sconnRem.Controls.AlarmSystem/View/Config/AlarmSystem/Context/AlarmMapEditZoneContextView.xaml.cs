@@ -20,6 +20,8 @@ namespace sconnRem.Controls.AlarmSystem.View.Config.AlarmSystem.Context
     /// </summary>
     public partial class AlarmMapEditZoneContextView : UserControl
     {
+
+        [ImportingConstructor]
         public AlarmMapEditZoneContextView()
         {
             InitializeComponent();

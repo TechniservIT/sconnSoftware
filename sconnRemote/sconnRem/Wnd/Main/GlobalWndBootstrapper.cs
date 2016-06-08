@@ -97,7 +97,7 @@ namespace sconnRem.Wnd.Main
         protected override DependencyObject CreateShell()
         {
             SiteNavigationManager.SetNavigationContextContainer(this.Container);
-          //  GlobalNavigationContext.Manager = this.Shell
+            GlobalNavigationContext.Manager =  Container.GetExport<IRegionManager>().Value;
 
             //var batch = new CompositionBatch();
             //var repoPart = batch.AddExportedValue<ISiteRepository>(this._repository);

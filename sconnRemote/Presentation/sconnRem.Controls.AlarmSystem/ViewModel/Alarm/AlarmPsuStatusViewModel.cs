@@ -19,10 +19,10 @@ using sconnRem.ViewModel.Generic;
 
 namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
 {
-    
 
-        [Export]
-        public class AlarmPsuStatusViewModel : GenericAlarmConfigViewModel
+    [Export]
+    [PartCreationPolicy(CreationPolicy.NonShared)]
+    public class AlarmPsuStatusViewModel : GenericAlarmConfigViewModel
         {
             private ObservableCollection<sconnDevice> _config;
             private AlarmDevicesConfigService _provider;

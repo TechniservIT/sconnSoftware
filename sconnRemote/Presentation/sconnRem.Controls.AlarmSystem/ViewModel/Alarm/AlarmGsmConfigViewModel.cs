@@ -23,6 +23,7 @@ namespace sconnRem.ViewModel.Alarm
 {
 
     [Export]
+    [PartCreationPolicy(CreationPolicy.NonShared)]
     public class AlarmGsmConfigViewModel : GenericAsyncConfigViewModel
     {
         public ObservableCollection<sconnGsmRcpt> Config { get; set; }

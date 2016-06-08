@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,16 +13,22 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using sconnRem.Controls.AlarmSystem.ViewModel.Alarm.Map;
 
 namespace sconnRem.Controls.AlarmSystem.View.Config.AlarmSystem.Context
 {
     /// <summary>
     /// Interaction logic for AlarmMapEditDeviceContextView.xaml
     /// </summary>
+
+
     public partial class AlarmMapEditDeviceContextView : UserControl
     {
-        public AlarmMapEditDeviceContextView()
+
+        [ImportingConstructor]
+        public AlarmMapEditDeviceContextView(AlarmMapZoneEditContextViewModel model)
         {
+            DataContext = model;
             InitializeComponent();
         }
     }

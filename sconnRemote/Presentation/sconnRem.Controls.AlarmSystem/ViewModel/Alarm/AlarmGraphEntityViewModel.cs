@@ -20,8 +20,9 @@ using sconnRem.Navigation;
 
 namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
 {
-    
+
     [Export]
+    [PartCreationPolicy(CreationPolicy.NonShared)]
     public class AlarmGraphEntityViewModel : BindableBase, IActiveAware, INavigationAware, IChangeTracking, INotifyPropertyChanged
     {
         public IAlarmSystemNamedEntityWithType Entity { get; set; }

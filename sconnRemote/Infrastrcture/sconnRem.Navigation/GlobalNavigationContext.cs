@@ -10,7 +10,7 @@ namespace sconnRem.Navigation
 {
     public static class GlobalNavigationContext
     {
-        public static RegionManager Manager;
+        public static IRegionManager Manager;
         public static Logger _nlogger = LogManager.GetCurrentClassLogger();
 
         public  static  void NavigateDefaults()

@@ -21,8 +21,8 @@ using sconnRem.ViewModel.Generic;
 namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
 {
 
-
     [Export]
+    [PartCreationPolicy(CreationPolicy.NonShared)]
     public class AlarmEventsListViewModel : GenericAlarmConfigViewModel
     {
         private ObservableCollection<sconnEvent> _config;

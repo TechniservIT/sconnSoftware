@@ -46,8 +46,8 @@ namespace sconnRem.Controls.Navigation.ViewModel.Navigation
             parameters.Add(GlobalViewContractNames.Global_Contract_Nav_Site_Context__Key_Name, site.UUID);
 
             GlobalNavigationContext.NavigateRegionToContractWithParam(
-                GlobalViewRegionNames.MainGridContentRegion,
-                AlarmRegionNames.AlarmStatus_Contract_Global_View,
+                GlobalViewRegionNames.TopContextToolbarRegion,
+                GlobalViewContractNames.Global_Contract_Menu_Top_AlarmSystemContext,
                 parameters
                 );
 

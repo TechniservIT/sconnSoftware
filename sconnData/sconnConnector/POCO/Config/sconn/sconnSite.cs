@@ -142,7 +142,7 @@ namespace sconnConnector.POCO.Config
 
         public sconnSite()
         {
-            UUID = new Guid().ToString();
+            UUID = Guid.NewGuid().ToString();
 
             statusCheckInterval = 5000; //5s interval
             lastUpdate = DateTime.Now;

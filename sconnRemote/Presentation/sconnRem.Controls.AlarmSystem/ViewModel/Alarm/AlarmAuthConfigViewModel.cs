@@ -25,8 +25,8 @@ using sconnRem.Navigation;
 namespace sconnRem.ViewModel.Alarm
 {
 
-
     [Export]
+    [PartCreationPolicy(CreationPolicy.NonShared)]
     public class AlarmAuthConfigViewModel : GenericAsyncConfigViewModel
     {
         public ObservableCollection<sconnAuthorizedDevice> Config { get; set; }

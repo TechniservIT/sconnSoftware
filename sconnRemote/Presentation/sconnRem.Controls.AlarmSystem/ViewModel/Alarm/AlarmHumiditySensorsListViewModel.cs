@@ -17,6 +17,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
 {
 
     [Export]
+    [PartCreationPolicy(CreationPolicy.NonShared)]
     public class AlarmHumiditySensorsListViewModel : GenericAlarmConfigViewModel
     {
         private ObservableCollection<sconnDevice> _config;

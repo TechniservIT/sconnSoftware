@@ -15,6 +15,7 @@ using sconnRem.Navigation;
 namespace sconnRem.ViewModel.Alarm
 {
     [Export]
+    [PartCreationPolicy(CreationPolicy.NonShared)]
     public class AlarmConfigSelectViewModel : GenericAsyncConfigViewModel
     {
       

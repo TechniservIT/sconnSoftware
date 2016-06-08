@@ -22,6 +22,7 @@ namespace sconnRem.ViewModel.Alarm
 {
 
     [Export]
+    [PartCreationPolicy(CreationPolicy.NonShared)]
     public class AlarmDeviceConfigViewModel : GenericAsyncConfigViewModel
     {
         public sconnDevice Config { get; set; }
