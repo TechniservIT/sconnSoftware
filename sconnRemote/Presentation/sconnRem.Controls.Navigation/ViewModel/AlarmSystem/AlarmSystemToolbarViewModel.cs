@@ -78,17 +78,14 @@ namespace sconnRem.Controls.Navigation.ViewModel.AlarmSystem
         {
             try
             {
-                this._regionManager.RequestNavigate(GlobalViewRegionNames.MainGridContentRegion, contractName
-                    ,
-                    (NavigationResult nr) =>
-                    {
-                        var error = nr.Error;
-                        var result = nr.Result;
-                        if (error != null)
-                        {
-                            _nlogger.Error(error);
-                        }
-                    });
+                NavigationParameters parameters = new NavigationParameters();
+                parameters.Add(GlobalViewContractNames.Global_Contract_Nav_Site_Context__Key_Name, siteUUID);
+
+                GlobalNavigationContext.NavigateRegionToContractWithParam(
+                   GlobalViewRegionNames.MainGridContentRegion,
+                    contractName,
+                    parameters
+                    );
             }
             catch (Exception ex)
             {
@@ -101,17 +98,14 @@ namespace sconnRem.Controls.Navigation.ViewModel.AlarmSystem
         {
             try
             {
-                this._regionManager.RequestNavigate(GlobalViewRegionNames.MainGridContentRegion, uri
-                    ,
-                    (NavigationResult nr) =>
-                    {
-                        var error = nr.Error;
-                        var result = nr.Result;
-                        if (error != null)
-                        {
-                            _nlogger.Error(error);
-                        }
-                    });
+                NavigationParameters parameters = new NavigationParameters();
+                parameters.Add(GlobalViewContractNames.Global_Contract_Nav_Site_Context__Key_Name, siteUUID);
+
+                this._regionManager.RequestNavigate(
+                   GlobalViewRegionNames.MainGridContentRegion,
+                    uri,
+                    parameters
+                    );
             }
             catch (Exception ex)
             {

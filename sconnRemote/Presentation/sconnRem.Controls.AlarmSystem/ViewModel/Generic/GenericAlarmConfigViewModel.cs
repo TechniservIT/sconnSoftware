@@ -19,6 +19,7 @@ namespace sconnRem.ViewModel.Generic
         {
             try
             {
+           
                 this._regionManager.RequestNavigate(GlobalViewRegionNames.MainGridContentRegion, contractName
                     ,
                     (NavigationResult nr) =>

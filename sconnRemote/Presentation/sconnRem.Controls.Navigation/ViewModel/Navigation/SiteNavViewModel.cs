@@ -27,7 +27,7 @@ namespace sconnRem.Controls.Navigation.ViewModel.Navigation
     {
         public ObservableCollection<sconnSite> Sites { get; set; }
         private readonly IRegionManager _regionManager;
-        private ISiteRepository _repository;
+        private ISiteRepository _repository; 
         public AlarmSystemConfigManager Manager { get; set; }
 
         private Logger _nlogger = LogManager.GetCurrentClassLogger();

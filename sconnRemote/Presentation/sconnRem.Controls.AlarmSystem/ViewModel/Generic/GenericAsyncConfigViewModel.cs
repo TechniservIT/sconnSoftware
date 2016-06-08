@@ -37,6 +37,9 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Generic
             }
         }
 
+        protected string siteUUID;
+        protected IRegionNavigationJournal navigationJournal;
+
         protected IRegionManager _regionManager;
         protected Logger _nlogger = LogManager.GetCurrentClassLogger();
 
@@ -46,6 +49,9 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Generic
         
         public virtual void OnNavigatedTo(NavigationContext navigationContext)
         {
+            siteUUID = (string)navigationContext.Parameters[GlobalViewContractNames.Global_Contract_Nav_Site_Context__Key_Name];
+            this.navigationJournal = navigationContext.NavigationService.Journal;
+            
             BackgroundWorker bgWorker = new BackgroundWorker();
             bgWorker.DoWork += (s, e) => {
                 GetData();
@@ -72,6 +78,11 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Generic
 
         public virtual bool IsNavigationTarget(NavigationContext navigationContext)
         {
+            var targetsiteUuid = (string)navigationContext.Parameters[GlobalViewContractNames.Global_Contract_Nav_Site_Context__Key_Name];
+            if (targetsiteUuid != siteUUID)
+            {
+                return true;
+            }
             return false;
         }
 
