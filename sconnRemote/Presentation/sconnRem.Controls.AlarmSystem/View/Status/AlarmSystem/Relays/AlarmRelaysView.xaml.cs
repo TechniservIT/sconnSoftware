@@ -22,6 +22,7 @@ namespace sconnRem.Controls.AlarmSystem.View.Status.AlarmSystem.Relays
 {
     [Export(AlarmRegionNames.AlarmStatus_Contract_RelaysView)]
     [ViewSortHint("01")]
+    [PartCreationPolicy(CreationPolicy.NonShared)]
     public partial class AlarmRelaysView : UserControl, IPartImportsSatisfiedNotification
     {
         private const string MainContentRegionName = GlobalViewRegionNames.MainGridContentRegion;   //GlobalViewRegionNames.MainGridContentRegion

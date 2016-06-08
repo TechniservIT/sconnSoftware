@@ -23,6 +23,7 @@ namespace sconnRem.Controls.AlarmSystem.View.Status.AlarmSystem.Device.Siren
 
     [Export(AlarmRegionNames.AlarmConfig_Contract_Device_Siren_View)]
     [ViewSortHint("01")]
+    [PartCreationPolicy(CreationPolicy.NonShared)]
     public partial class AlarmDeviceSirenConfigureView : UserControl, IPartImportsSatisfiedNotification
     {
         private const string MainContentRegionName = GlobalViewRegionNames.MainGridContentRegion;

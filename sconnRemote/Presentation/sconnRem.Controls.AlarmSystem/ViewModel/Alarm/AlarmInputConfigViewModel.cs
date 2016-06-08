@@ -92,8 +92,9 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
             get { return "pack://application:,,,/images/config1.png"; }
         }
 
-        public void OnNavigatedTo(NavigationContext navigationContext)
+        public override void OnNavigatedTo(NavigationContext navigationContext)
         {
+            siteUUID = (string)navigationContext.Parameters[GlobalViewContractNames.Global_Contract_Nav_Site_Context__Key_Name];
             string inputId = (string)navigationContext.Parameters[AlarmRegionNames.AlarmConfig_Contract_Input_Config_View_Key_Name];
             if (inputId != null)
             {
@@ -103,15 +104,19 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
             this.navigationJournal = navigationContext.NavigationService.Journal;
         }
 
-        public bool IsNavigationTarget(NavigationContext navigationContext)
+        public override bool IsNavigationTarget(NavigationContext navigationContext)
         {
             if (this.Config == null)
             {
                 return true;
             }
-
-            var inputId = navigationContext.Parameters[AlarmRegionNames.AlarmConfig_Contract_Input_Config_View_Key_Name]; // GetRequestedEmailId(navigationContext);
-            return inputId.Equals(Config.UUID);
+            var targetsiteUuid = (string)navigationContext.Parameters[GlobalViewContractNames.Global_Contract_Nav_Site_Context__Key_Name];
+            if (targetsiteUuid != siteUUID)
+            {
+                var inputId = navigationContext.Parameters[AlarmRegionNames.AlarmConfig_Contract_Input_Config_View_Key_Name]; // GetRequestedEmailId(navigationContext);
+                return inputId.Equals(Config.UUID);
+            }
+            return false;
         }
 
         public void OnNavigatedFrom(NavigationContext navigationContext)

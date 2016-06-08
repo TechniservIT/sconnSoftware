@@ -22,7 +22,7 @@ namespace sconnRem.Controls.AlarmSystem.View.Status.AlarmSystem.Gsm
 {
     [Export(AlarmRegionNames.AlarmConfig_Contract_GsmRcptConfigView)]
     [ViewSortHint("01")]
-    [PartCreationPolicy(CreationPolicy.Shared)]
+    [PartCreationPolicy(CreationPolicy.NonShared)]
     public partial class AlarmGsmRcptListView : UserControl
     {
         private const string MainContentRegionName = GlobalViewRegionNames.MainGridContentRegion;

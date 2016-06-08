@@ -53,24 +53,9 @@ namespace sconnRem.Controls.Navigation.ViewModel.AlarmSystem
         public ICommand Show_Alarm_TempratureSensors_Command { get; set; }
         public ICommand Show_Alarm_GsmRcpts_Command { get; set; }
 
-        private void ViewSite(sconnSite site)
-        {
-            this._regionManager.RequestNavigate(GlobalViewRegionNames.TopContextToolbarRegion, NavContextToolbarRegionNames.ContextToolbar_AlarmSystem_ViewUri
-                ,
-                (NavigationResult nr) =>
-                {
-                    var error = nr.Error;
-                    var result = nr.Result;
-                    if (error != null)
-                    {
-                        _nlogger.Error(error);
-                    }
-                });
-        }
 
         private void ShowConfigure(sconnSite site)
         {
-            //  SiteNavigationManager.ShowConfigureScreen();
             NavigateToAlarmContract(AlarmRegionNames.AlarmStatus_Contract_Global_View);  
         }
 
@@ -93,26 +78,7 @@ namespace sconnRem.Controls.Navigation.ViewModel.AlarmSystem
 
             }
         }
-
-        private void NavigateToAlarmUri(Uri uri)
-        {
-            try
-            {
-                NavigationParameters parameters = new NavigationParameters();
-                parameters.Add(GlobalViewContractNames.Global_Contract_Nav_Site_Context__Key_Name, siteUUID);
-
-                this._regionManager.RequestNavigate(
-                   GlobalViewRegionNames.MainGridContentRegion,
-                    uri,
-                    parameters
-                    );
-            }
-            catch (Exception ex)
-            {
-                _nlogger.Error(ex, ex.Message);
-            }
-        }
-
+        
         private void ShowInputs(sconnSite site)
         {
             NavigateToAlarmContract(AlarmRegionNames.AlarmStatus_Contract_InputsView);
@@ -144,9 +110,7 @@ namespace sconnRem.Controls.Navigation.ViewModel.AlarmSystem
         {
             NavigateToAlarmContract(AlarmRegionNames.AlarmConfig_Contract_UsersConfigView);
         }
-
-
-
+        
         private void ShowAuthConfig(sconnSite site)
         {
             NavigateToAlarmContract(AlarmRegionNames.AlarmConfig_Contract_AuthConfigView);

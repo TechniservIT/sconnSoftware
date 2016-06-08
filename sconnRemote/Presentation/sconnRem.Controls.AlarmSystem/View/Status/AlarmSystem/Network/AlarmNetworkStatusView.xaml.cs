@@ -23,7 +23,7 @@ namespace sconnRem.Controls.AlarmSystem.View.Status.AlarmSystem.Network
 {
     [Export(AlarmRegionNames.AlarmStatus_Contract_NetworkView)]
     [ViewSortHint("01")]
-    [PartCreationPolicy(CreationPolicy.Shared)]
+    [PartCreationPolicy(CreationPolicy.NonShared)]
     public partial class AlarmNetworkStatusView : UserControl
     {
         private Logger _nlogger = LogManager.GetCurrentClassLogger();

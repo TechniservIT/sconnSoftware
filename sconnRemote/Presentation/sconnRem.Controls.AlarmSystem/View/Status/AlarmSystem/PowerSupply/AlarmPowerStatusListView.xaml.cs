@@ -24,7 +24,7 @@ namespace sconnRem.Controls.AlarmSystem.View.Status.AlarmSystem.PowerSupply
 
     [Export(AlarmRegionNames.AlarmStatus_Contract_PowerView)]
     [ViewSortHint("01")]
-    [PartCreationPolicy(CreationPolicy.Shared)]
+    [PartCreationPolicy(CreationPolicy.NonShared)]
     public partial class AlarmPowerStatusView : UserControl
     {
         private Logger _nlogger = LogManager.GetCurrentClassLogger();

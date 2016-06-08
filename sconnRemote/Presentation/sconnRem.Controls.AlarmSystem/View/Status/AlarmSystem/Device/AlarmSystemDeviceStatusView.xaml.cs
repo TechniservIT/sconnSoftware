@@ -22,6 +22,7 @@ namespace sconnRem.Controls.AlarmSystem.View.Status.Device
 
     [Export]
     [ViewSortHint("01")]
+    [PartCreationPolicy(CreationPolicy.NonShared)]
     public partial class AlarmSystemDeviceStatusView : UserControl, IPartImportsSatisfiedNotification
     {
         private const string MainContentRegionName = "MainContentRegion";

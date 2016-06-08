@@ -22,7 +22,7 @@ namespace sconnRem.Controls.AlarmSystem.View.Status.AlarmSystem.Environmental
 {
     [Export(AlarmRegionNames.AlarmStatus_Contract_TemperatureSensorsView)]
     [ViewSortHint("01")]
-    [PartCreationPolicy(CreationPolicy.Shared)]
+    [PartCreationPolicy(CreationPolicy.NonShared)]
     public partial class AlarmTemperatureSensorsListView : UserControl
     {
         private const string MainContentRegionName = GlobalViewRegionNames.MainGridContentRegion;

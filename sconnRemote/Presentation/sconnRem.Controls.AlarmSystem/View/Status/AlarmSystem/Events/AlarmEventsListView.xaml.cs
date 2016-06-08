@@ -23,7 +23,7 @@ namespace sconnRem.Controls.AlarmSystem.View.Status.AlarmSystem.Events
 
     [Export(AlarmRegionNames.AlarmStatus_Contract_EventsView)]
     [ViewSortHint("01")]
-    [PartCreationPolicy(CreationPolicy.Shared)]
+    [PartCreationPolicy(CreationPolicy.NonShared)]
     public partial class AlarmEventsListView : UserControl
     {
         private const string MainContentRegionName = GlobalViewRegionNames.MainGridContentRegion;

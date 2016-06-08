@@ -259,6 +259,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
 
         public override bool IsNavigationTarget(NavigationContext navigationContext)
         {
+            var targetsiteUuid = (string)navigationContext.Parameters[GlobalViewContractNames.Global_Contract_Nav_Site_Context__Key_Name];
             if (
                     (
                     navigationContext.Uri.OriginalString.Equals(AlarmRegionNames.AlarmStatus_Contract_Device_List_View) ||
@@ -269,7 +270,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
                       navigationContext.Uri.OriginalString.Equals(AlarmRegionNames.AlarmStatus_Contract_TemperatureSensorsView)
                       )
                       &&
-
+                      (targetsiteUuid != siteUUID)
                 )
             {
                 return true;    //singleton

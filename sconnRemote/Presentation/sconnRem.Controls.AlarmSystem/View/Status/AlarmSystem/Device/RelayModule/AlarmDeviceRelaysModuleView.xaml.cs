@@ -23,6 +23,7 @@ namespace sconnRem.Controls.AlarmSystem.View.Status.AlarmSystem.Device.RelayModu
 
     [Export(AlarmRegionNames.AlarmStatus_Contract_Device_RelayModule_View)]
     [ViewSortHint("01")]
+    [PartCreationPolicy(CreationPolicy.NonShared)]
     public partial class AlarmDeviceRelaysModuleView : UserControl, IPartImportsSatisfiedNotification
     {
         private const string MainContentRegionName = GlobalViewRegionNames.MainGridContentRegion;

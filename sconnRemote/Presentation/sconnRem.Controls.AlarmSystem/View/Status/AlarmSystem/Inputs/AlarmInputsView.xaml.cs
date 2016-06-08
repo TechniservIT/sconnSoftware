@@ -24,7 +24,7 @@ namespace sconnRem.Controls.AlarmSystem.View.Status.Inputs
 
     [Export(AlarmRegionNames.AlarmStatus_Contract_InputsView)]
     [ViewSortHint("01")]
-    [PartCreationPolicy(CreationPolicy.Shared)]
+    [PartCreationPolicy(CreationPolicy.NonShared)]
     public partial class AlarmInputsView : UserControl, IPartImportsSatisfiedNotification
     {
         private const string MainContentRegionName = GlobalViewRegionNames.MainGridContentRegion;   //GlobalViewRegionNames.MainGridContentRegion

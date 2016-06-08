@@ -80,6 +80,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
         public override  void OnNavigatedTo(NavigationContext navigationContext)
         {
             string inputId = (string)navigationContext.Parameters[AlarmRegionNames.AlarmConfig_Contract_Input_Config_View_Key_Name];
+            siteUUID = (string)navigationContext.Parameters[GlobalViewContractNames.Global_Contract_Nav_Site_Context__Key_Name];
             if (inputId != null)
             {
                 this.Config = SiteNavigationManager.OutputForId(inputId);
@@ -94,9 +95,14 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
             {
                 return true;
             }
+            var targetsiteUuid = (string)navigationContext.Parameters[GlobalViewContractNames.Global_Contract_Nav_Site_Context__Key_Name];
+            if (targetsiteUuid != siteUUID)
+            {
+                var inputId = navigationContext.Parameters[AlarmRegionNames.AlarmConfig_Contract_Input_Config_View_Key_Name]; 
+                return inputId.Equals(Config.UUID);
+            }
+            return false;
 
-            var inputId = navigationContext.Parameters[AlarmRegionNames.AlarmConfig_Contract_Input_Config_View_Key_Name]; // GetRequestedEmailId(navigationContext);
-            return inputId.Equals(Config.UUID);
         }
         
     }

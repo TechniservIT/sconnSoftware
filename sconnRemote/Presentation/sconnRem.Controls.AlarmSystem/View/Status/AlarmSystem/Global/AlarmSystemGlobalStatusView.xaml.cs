@@ -24,7 +24,7 @@ namespace sconnRem.Controls.AlarmSystem.View.Status.AlarmSystem.Global
 
     [Export(AlarmRegionNames.AlarmStatus_Contract_Global_View)]
     [ViewSortHint("01")]
-    [PartCreationPolicy(CreationPolicy.Shared)]
+    [PartCreationPolicy(CreationPolicy.NonShared)]
     public partial class AlarmSystemGlobalStatusView : UserControl
     {
         private Logger _nlogger = LogManager.GetCurrentClassLogger();

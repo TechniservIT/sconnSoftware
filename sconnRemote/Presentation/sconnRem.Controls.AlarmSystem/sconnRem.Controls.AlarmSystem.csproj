@@ -129,6 +129,9 @@
     <Compile Include="ViewModel\Alarm\AlarmSharedDeviceConfigViewModel.cs" />
     <Compile Include="ViewModel\Alarm\AlarmTemperatureSensorsListViewModel.cs" />
     <Compile Include="ViewModel\Alarm\AlarmZoneMapViewModel.cs" />
+    <Compile Include="ViewModel\Alarm\Map\AlarmMapDeviceEditContextViewModel.cs" />
+    <Compile Include="ViewModel\Alarm\Map\AlarmMapEntityEditContextViewModel.cs" />
+    <Compile Include="ViewModel\Alarm\Map\AlarmMapZoneEditContextViewModel.cs" />
     <Compile Include="ViewModel\Generic\GenericAsyncConfigViewModel.cs" />
     <Compile Include="ViewModel\Generic\IAsyncConfigViewModel.cs" />
     <Compile Include="View\Config\AlarmSystem\Abstract\AlarmConfigRegions.cs" />

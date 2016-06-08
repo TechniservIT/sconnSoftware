@@ -23,6 +23,7 @@ namespace sconnRem.Controls.AlarmSystem.View.Status.AlarmSystem.Device.Keypad
 
     [Export(AlarmRegionNames.AlarmStatus_Contract_Device_Keypad_View)]
     [ViewSortHint("01")]
+    [PartCreationPolicy(CreationPolicy.NonShared)]
     public partial class AlarmDeviceKeypadView : UserControl, IPartImportsSatisfiedNotification
     {
         private const string MainContentRegionName = GlobalViewRegionNames.MainGridContentRegion;

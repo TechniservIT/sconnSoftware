@@ -24,7 +24,7 @@ namespace sconnRem.Controls.AlarmSystem.View.Status.AlarmSystem.Device
 
     [Export(AlarmRegionNames.AlarmConfig_Contract_AuthConfigView)]
     [ViewSortHint("01")]
-    [PartCreationPolicy(CreationPolicy.Shared)]
+    [PartCreationPolicy(CreationPolicy.NonShared)]
     public partial class AlarmSystemDeviceAuthListView : UserControl
     {
         private const string MainContentRegionName = GlobalViewRegionNames.MainGridContentRegion;

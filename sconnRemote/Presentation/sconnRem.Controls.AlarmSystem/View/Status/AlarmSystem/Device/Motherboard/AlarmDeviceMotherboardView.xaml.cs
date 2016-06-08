@@ -23,6 +23,7 @@ namespace sconnRem.Controls.AlarmSystem.View.Status.AlarmSystem.Device.Motherboa
 
     [Export(AlarmRegionNames.AlarmStatus_Contract_Device_Motherboard_View)]
     [ViewSortHint("01")]
+    [PartCreationPolicy(CreationPolicy.NonShared)]
     public partial class AlarmDeviceMotherboardView : UserControl, IPartImportsSatisfiedNotification
     {
         private const string MainContentRegionName = GlobalViewRegionNames.MainGridContentRegion;

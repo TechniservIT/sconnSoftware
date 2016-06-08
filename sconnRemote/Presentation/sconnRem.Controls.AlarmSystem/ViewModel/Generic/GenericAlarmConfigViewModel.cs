@@ -19,18 +19,14 @@ namespace sconnRem.ViewModel.Generic
         {
             try
             {
-           
-                this._regionManager.RequestNavigate(GlobalViewRegionNames.MainGridContentRegion, contractName
-                    ,
-                    (NavigationResult nr) =>
-                    {
-                        var error = nr.Error;
-                        var result = nr.Result;
-                        if (error != null)
-                        {
-                            _nlogger.Error(error);
-                        }
-                    });
+                NavigationParameters parameters = new NavigationParameters();
+                parameters.Add(GlobalViewContractNames.Global_Contract_Nav_Site_Context__Key_Name, siteUUID);
+
+                GlobalNavigationContext.NavigateRegionToContractWithParam(
+                   GlobalViewRegionNames.MainGridContentRegion,
+                    contractName,
+                    parameters
+                    );
             }
             catch (Exception ex)
             {
@@ -44,17 +40,12 @@ namespace sconnRem.ViewModel.Generic
         {
             try
             {
-                this._regionManager.RequestNavigate(GlobalViewRegionNames.MainGridContentRegion, new Uri(contractName + param, UriKind.Relative)
-                    ,
-                    (NavigationResult nr) =>
-                    {
-                        var error = nr.Error;
-                        var result = nr.Result;
-                        if (error != null)
-                        {
-                            _nlogger.Error(error);
-                        }
-                    });
+                param.Add(GlobalViewContractNames.Global_Contract_Nav_Site_Context__Key_Name, siteUUID);
+                GlobalNavigationContext.NavigateRegionToContractWithParam(
+                   GlobalViewRegionNames.MainGridContentRegion,
+                    contractName,
+                    param
+                    );
             }
             catch (Exception ex)
             {

@@ -24,7 +24,7 @@ namespace sconnRem.Controls.AlarmSystem.View.Status.AlarmSystem.Users
 
     [Export(AlarmRegionNames.AlarmConfig_Contract_UsersConfigView)]
     [ViewSortHint("01")]
-    [PartCreationPolicy(CreationPolicy.Shared)]
+    [PartCreationPolicy(CreationPolicy.NonShared)]
     public partial class AlarmUsersListView : UserControl
     {
         private const string MainContentRegionName = GlobalViewRegionNames.MainGridContentRegion;

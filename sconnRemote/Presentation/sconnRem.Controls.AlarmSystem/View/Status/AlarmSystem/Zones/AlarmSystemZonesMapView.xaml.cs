@@ -23,7 +23,7 @@ namespace sconnRem.Controls.AlarmSystem.View.Status.AlarmSystem.Zones
 
     [Export(AlarmRegionNames.AlarmConfig_Contract_ZoneMapConfigView)]
     [ViewSortHint("01")]
-    [PartCreationPolicy(CreationPolicy.Shared)]
+    [PartCreationPolicy(CreationPolicy.NonShared)]
     public partial class AlarmSystemZonesMapView : UserControl
     {
         [ImportingConstructor]

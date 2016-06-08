@@ -23,6 +23,7 @@ namespace sconnRem.Controls.AlarmSystem.View.Status.AlarmSystem.Device.Sensors
 
     [Export(AlarmRegionNames.AlarmConfig_Contract_Device_Sensor_View)]
     [ViewSortHint("01")]
+    [PartCreationPolicy(CreationPolicy.NonShared)]
     public partial class AlarmDeviceSensorConfigureView : UserControl, IPartImportsSatisfiedNotification
     {
         private const string MainContentRegionName = GlobalViewRegionNames.MainGridContentRegion;

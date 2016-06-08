@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,6 +19,8 @@ namespace sconnRem.Controls.AlarmSystem.View.Status.AlarmSystem.Zones
     /// <summary>
     /// Interaction logic for AlarmSystemZonesConfigureView.xaml
     /// </summary>
+    [Export]
+    [PartCreationPolicy(CreationPolicy.NonShared)]
     public partial class AlarmSystemZonesConfigureView : UserControl
     {
         public AlarmSystemZonesConfigureView()
