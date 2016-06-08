@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using sconnRem.Controls.AlarmSystem.ViewModel.Alarm.Map;
+using sconnRem.Navigation;
 
 namespace sconnRem.Controls.AlarmSystem.View.Config.AlarmSystem.Context
 {
@@ -21,12 +22,13 @@ namespace sconnRem.Controls.AlarmSystem.View.Config.AlarmSystem.Context
     /// Interaction logic for AlarmMapEditDeviceContextView.xaml
     /// </summary>
 
-
+    [Export(GlobalViewContractNames.Global_Contract_Menu_RightSide_AlarmDeviceEditMapContext)]
+    [PartCreationPolicy(CreationPolicy.NonShared)]
     public partial class AlarmMapEditDeviceContextView : UserControl
     {
 
         [ImportingConstructor]
-        public AlarmMapEditDeviceContextView(AlarmMapZoneEditContextViewModel model)
+        public AlarmMapEditDeviceContextView(AlarmMapDeviceEditContextViewModel model)
         {
             DataContext = model;
             InitializeComponent();

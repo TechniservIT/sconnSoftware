@@ -25,7 +25,7 @@ namespace sconnRem.ViewModel.Alarm
 
     [Export]
     [PartCreationPolicy(CreationPolicy.NonShared)]
-    public class AlarmUsersConfigViewModel : GenericAsyncConfigViewModel
+    public class AlarmUsersConfigViewModel : GenericAlarmConfigViewModel
     {
 
         private ObservableCollection<sconnUser> _config;

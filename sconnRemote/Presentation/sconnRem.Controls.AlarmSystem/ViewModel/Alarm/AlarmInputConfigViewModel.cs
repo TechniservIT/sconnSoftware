@@ -17,13 +17,14 @@ using sconnPrismSharedContext;
 using sconnRem.Controls.AlarmSystem.ViewModel.Generic;
 using sconnRem.Infrastructure.Navigation;
 using sconnRem.Navigation;
+using sconnRem.ViewModel.Generic;
 
 namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
 {
 
     [Export]
     [PartCreationPolicy(CreationPolicy.NonShared)]
-    public class AlarmInputConfigViewModel : GenericAsyncConfigViewModel
+    public class AlarmInputConfigViewModel : GenericAlarmConfigViewModel
     {
         public sconnInput Config { get; set; }
         private DeviceConfigService _provider;

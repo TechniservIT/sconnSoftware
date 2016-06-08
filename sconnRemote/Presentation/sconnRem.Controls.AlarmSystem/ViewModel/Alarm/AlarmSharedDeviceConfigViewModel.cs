@@ -21,13 +21,14 @@ using sconnPrismSharedContext;
 using sconnRem.Controls.AlarmSystem.ViewModel.Generic;
 using sconnRem.Infrastructure.Navigation;
 using sconnRem.Navigation;
+using sconnRem.ViewModel.Generic;
 
 namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
 {
 
     [Export]
     [PartCreationPolicy(CreationPolicy.NonShared)]
-    public class AlarmSharedDeviceConfigViewModel : GenericAsyncConfigViewModel
+    public class AlarmSharedDeviceConfigViewModel : GenericAlarmConfigViewModel
     {
 
         private sconnDevice _Config = new sconnDevice();

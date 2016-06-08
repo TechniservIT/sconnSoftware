@@ -83,12 +83,39 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm.Map
         }
 
         public string DisplayedImagePath => "pack://application:,,,/images/strefy1.png";
+        
+
+        public override void OnNavigatedTo(NavigationContext navigationContext)
+        {
+            try
+            {
+                siteUUID = (string)navigationContext.Parameters[GlobalViewContractNames.Global_Contract_Nav_Site_Context__Key_Name];
+                this.navigationJournal = navigationContext.NavigationService.Journal;
+
+                //navigate context  
+                NavigationParameters parameters = new NavigationParameters();
+                parameters.Add(GlobalViewContractNames.Global_Contract_Nav_Site_Context__Key_Name, siteUUID);
+
+                GlobalNavigationContext.NavigateRegionToContractWithParam(
+                   GlobalViewRegionNames.RNavigationRegion,
+                    GlobalViewContractNames.Global_Contract_Menu_RightSide_AlarmDeviceEditMapContext,
+                    parameters
+                    );
+            }
+            catch (Exception ex)
+            {
+                _nlogger.Error(ex, ex.Message);
+            }
+
+
+        }
 
         public override bool IsNavigationTarget(NavigationContext navigationContext)
         {
-            if (navigationContext.Uri.OriginalString.Equals(AlarmRegionNames.AlarmConfig_Contract_ZoneConfigView))
+            var targetsiteUuid = (string)navigationContext.Parameters[GlobalViewContractNames.Global_Contract_Nav_Site_Context__Key_Name];
+            if (targetsiteUuid != siteUUID)
             {
-                return true;    //singleton
+                return true;
             }
             return false;
         }

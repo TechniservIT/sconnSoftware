@@ -13,18 +13,24 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using sconnRem.Controls.AlarmSystem.ViewModel.Alarm.Map;
+using sconnRem.Navigation;
 
 namespace sconnRem.Controls.AlarmSystem.View.Config.AlarmSystem.Context
 {
     /// <summary>
     /// Interaction logic for AlarmMapEditZoneContextView.xaml
     /// </summary>
+
+    [Export(GlobalViewContractNames.Global_Contract_Menu_RightSide_AlarmZoneEditMapContext)]
+    [PartCreationPolicy(CreationPolicy.NonShared)]
     public partial class AlarmMapEditZoneContextView : UserControl
     {
 
         [ImportingConstructor]
-        public AlarmMapEditZoneContextView()
+        public AlarmMapEditZoneContextView(AlarmMapZoneEditContextViewModel model)
         {
+            DataContext = model;
             InitializeComponent();
         }
     }

@@ -25,7 +25,7 @@ namespace sconnRem.ViewModel.Alarm
 
     [Export]
     [PartCreationPolicy(CreationPolicy.NonShared)]
-    public class AlarmZoneConfigViewModel : GenericAsyncConfigViewModel
+    public class AlarmZoneConfigViewModel : GenericAlarmConfigViewModel
     {
 
         private ObservableCollection<sconnAlarmZone> _config;

@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Prism.Regions;
 using sconnRem.Controls.AlarmSystem.ViewModel.Alarm.Map;
+using sconnRem.Navigation;
 
 namespace sconnRem.Controls.AlarmSystem.View.Config.AlarmSystem.Context
 {
@@ -22,8 +23,8 @@ namespace sconnRem.Controls.AlarmSystem.View.Config.AlarmSystem.Context
     /// Interaction logic for AlarmMapEditContextView.xaml
     /// </summary>
 
-    [Export]
-    [ViewSortHint("01")]
+    [Export(GlobalViewContractNames.Global_Contract_Menu_RightSide_AlarmMapContext)]
+    [PartCreationPolicy(CreationPolicy.NonShared)]
     public partial class AlarmMapEditContextView : UserControl
     {
         [ImportingConstructor]

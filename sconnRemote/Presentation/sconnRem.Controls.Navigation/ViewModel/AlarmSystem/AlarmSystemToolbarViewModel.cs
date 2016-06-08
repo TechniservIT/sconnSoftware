@@ -66,10 +66,11 @@ namespace sconnRem.Controls.Navigation.ViewModel.AlarmSystem
                 NavigationParameters parameters = new NavigationParameters();
                 parameters.Add(GlobalViewContractNames.Global_Contract_Nav_Site_Context__Key_Name, siteUUID);
 
-                GlobalNavigationContext.NavigateRegionToContractWithParam(
-                   GlobalViewRegionNames.MainGridContentRegion,
-                    contractName,
-                    parameters
+                GlobalNavigationContext.NavigateRegionToContractWithParam
+                    (
+                       GlobalViewRegionNames.MainGridContentRegion,
+                        contractName,
+                        parameters
                     );
             }
             catch (Exception ex)

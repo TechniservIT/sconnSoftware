@@ -166,6 +166,9 @@ namespace sconnRem.Navigation
     public static class GlobalViewContractNames
     {
         public const String Global_Contract_Menu_RightSide_AlarmMapContext = "GlobalContractMenuRightSideAlarmMapContext";
+        public const String Global_Contract_Menu_RightSide_AlarmZoneEditMapContext = "GlobalContractMenuRightSideAlarmMapContext";
+        public const String Global_Contract_Menu_RightSide_AlarmDeviceEditMapContext = "GlobalContractMenuRightSideAlarmMapContext";
+
         public const String Global_Contract_Menu_RightSide_Grid_Nav = "GlobalContractMenuRightSideGridNav";
 
         public const String Global_Contract_Menu_Top_AlarmSystemContext = "GlobalContractMenuTopAlarmSystemContext";
