@@ -21,6 +21,7 @@ namespace sconnMobileForms.View.AlarmSystem.Global
         public sconnGlobalConfig Config { get; set; }
 
         public Button ArmControlButton { get; set; }
+        public Switch ArmControlSwitch { get; set; }
 
         private void SyncConfig()
         {
@@ -50,6 +51,7 @@ namespace sconnMobileForms.View.AlarmSystem.Global
         {
             SyncConfig();
             ArmControlButton.Image = GetImagePathForArmStatus();
+            ArmControlSwitch.IsToggled = Config.Armed;
         }
 
         public AlarmEntryStatusView()
@@ -123,22 +125,24 @@ namespace sconnMobileForms.View.AlarmSystem.Global
                 UpdateArmStatus();
             };
 
-            var armControlSwitch = new Switch()
+            ArmControlSwitch = new Switch()
             {
                 Margin = new Thickness(2, 0, 0, 0),
                 VerticalOptions = LayoutOptions.Center,
                 HorizontalOptions = LayoutOptions.Center
             };
-            armControlSwitch.SetBinding(Switch.IsToggledProperty, "Armed", BindingMode.TwoWay);
+            ArmControlSwitch.SetBinding(Switch.IsToggledProperty, "Armed", BindingMode.TwoWay);
+            ArmControlSwitch.IsToggled = Config.Armed;
 
-            armControlSwitch.Toggled += (sender, e) =>
+            ArmControlSwitch.Toggled += (sender, e) =>
             {
+                Config.Armed = ArmControlSwitch.IsToggled;
                 Service.Update(Config);
                 UpdateArmStatus();
             };
 
             armControlGrid.Children.Add(ArmControlButton, 0, 0);
-            armControlGrid.Children.Add(armControlSwitch, 0, 1);
+            armControlGrid.Children.Add(ArmControlSwitch, 0, 1);
 
 
             //arm items to grid
