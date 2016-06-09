@@ -114,7 +114,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm.Map
             try
             {
                 siteUUID = (string)navigationContext.Parameters[GlobalViewContractNames.Global_Contract_Nav_Site_Context__Key_Name];
-                ZoneId = (int)navigationContext.Parameters[AlarmSystemMapContractNames.Alarm_Contract_Map_Zone_Edit_Context_Key_Name];
+                ZoneId = int.Parse((string)navigationContext.Parameters[AlarmSystemMapContractNames.Alarm_Contract_Map_Zone_Edit_Context_Key_Name]);
                 this.navigationJournal = navigationContext.NavigationService.Journal;
 
                 BackgroundWorker bgWorker = new BackgroundWorker();

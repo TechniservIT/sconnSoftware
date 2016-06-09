@@ -129,7 +129,8 @@ namespace sconnMobileForms.View.AlarmSystem.Global
                 VerticalOptions = LayoutOptions.Center,
                 HorizontalOptions = LayoutOptions.Center
             };
-            armControlSwitch.SetBinding(Switch.IsEnabledProperty, "Armed");
+            armControlSwitch.SetBinding(Switch.IsToggledProperty, "Armed", BindingMode.TwoWay);
+
             armControlSwitch.Toggled += (sender, e) =>
             {
                 Service.Update(Config);

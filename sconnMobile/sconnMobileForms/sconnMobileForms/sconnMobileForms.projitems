@@ -160,6 +160,9 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\AlarmSiteConfigurationEntity.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\AlarmSiteConfigurationEntityListItem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\Context\AlarmMapViewEditContext.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\Controls\AlarmConfigurationListEntityGridItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\Controls\AlarmIoEntityGrid.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)View\AlarmSystem\Controls\AlarmIoEntityGridItem.cs" />
@@ -316,6 +319,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)View\AlarmSystem\Global\AlarmEntryStatusView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)View\AlarmSystem\Context\AlarmMapViewEditContext.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

@@ -128,7 +128,8 @@
     <Compile Include="ViewModel\Alarm\AlarmPsuStatusViewModel.cs" />
     <Compile Include="ViewModel\Alarm\AlarmSharedDeviceConfigViewModel.cs" />
     <Compile Include="ViewModel\Alarm\AlarmTemperatureSensorsListViewModel.cs" />
-    <Compile Include="ViewModel\Alarm\AlarmZoneMapViewModel.cs" />
+    <Compile Include="ViewModel\Alarm\Map\AlarmDeviceMapViewModel.cs" />
+    <Compile Include="ViewModel\Alarm\Map\AlarmZoneMapViewModel.cs" />
     <Compile Include="ViewModel\Alarm\Map\AlarmMapDeviceEditContextViewModel.cs" />
     <Compile Include="ViewModel\Alarm\Map\AlarmMapEntityEditContextViewModel.cs" />
     <Compile Include="ViewModel\Alarm\Map\AlarmMapZoneEditContextViewModel.cs" />

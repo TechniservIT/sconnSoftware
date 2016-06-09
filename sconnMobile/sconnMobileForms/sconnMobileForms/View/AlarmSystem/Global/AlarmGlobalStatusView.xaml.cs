@@ -131,7 +131,7 @@ namespace sconnRemMobile.View.AlarmSystem
                 VerticalOptions = LayoutOptions.Center,
                 HorizontalOptions =  LayoutOptions.Center
             };
-            armControlSwitch.SetBinding(Switch.IsEnabledProperty, "Armed");
+            armControlSwitch.SetBinding(Switch.IsToggledProperty, "Armed");
             armControlSwitch.Toggled += (sender, e) =>
             {
                 Config.Armed = !Config.Armed;
