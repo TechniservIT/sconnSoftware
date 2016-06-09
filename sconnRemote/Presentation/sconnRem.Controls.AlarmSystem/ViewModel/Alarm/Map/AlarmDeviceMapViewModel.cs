@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using AlarmSystemManagmentService;
+using AlarmSystemManagmentService.Device;
 using Prism.Commands;
 using Prism.Regions;
 using sconnConnector.Config;
@@ -40,8 +41,8 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm.Map
         #endregion
 
 
-        private ObservableCollection<sconnAlarmZone> _config;
-        public ObservableCollection<sconnAlarmZone> Config
+        private ObservableCollection<sconnDevice> _config;
+        public ObservableCollection<sconnDevice> Config
         {
             get { return _config; }
             set
@@ -51,7 +52,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm.Map
             }
         }
 
-        private ZoneConfigurationService _provider;
+        private AlarmDevicesConfigService _provider;
         private AlarmSystemConfigManager _manager;
         public ICommand ConfigureZoneCommand { get; set; }
         public ICommand GraphEntitySelectedCommand { get; set; }
@@ -92,19 +93,19 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm.Map
             }
         }
 
-        public void OpenZoneContextForZone(sconnAlarmZone zone)
+        public void OpenDeviceContextForDevice(sconnDevice device)
         {
-            if (zone != null && Config.Count > 0)
+            if (device != null && Config.Count > 0)
             {
                 //navigate context  
 
                 NavigationParameters parameters = new NavigationParameters();
                 parameters.Add(GlobalViewContractNames.Global_Contract_Nav_Site_Context__Key_Name, siteUUID);
-                parameters.Add(AlarmSystemMapContractNames.Alarm_Contract_Map_Zone_Edit_Context_Key_Name, zone.Id);
+                parameters.Add(AlarmSystemMapContractNames.Alarm_Contract_Map_Device_Edit_Context_Key_Name, device.Id);
 
                 GlobalNavigationContext.NavigateRegionToContractWithParam(
                    GlobalViewRegionNames.RNavigationRegion,
-                    GlobalViewContractNames.Global_Contract_Menu_RightSide_AlarmZoneEditMapContext,
+                    GlobalViewContractNames.Global_Contract_Menu_RightSide_AlarmDeviceEditMapContext,
                     parameters
                     );
             }
@@ -117,7 +118,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm.Map
             var zone = Config.FirstOrDefault(z => z.UUID.Equals(Id));
             if (zone != null)
             {
-                OpenZoneContextForZone(zone);
+                OpenDeviceContextForDevice(zone);
             }
         }
 
@@ -136,7 +137,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm.Map
         {
             try
             {
-                Config = new ObservableCollection<sconnAlarmZone>(_provider.GetAll());
+                Config = new ObservableCollection<sconnDevice>(_provider.GetAll());
                 CreateGraph();
             }
             catch (Exception ex)
@@ -161,7 +162,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm.Map
         public AlarmDeviceMapViewModel()
         {
             _name = "Zones";
-            this._provider = new ZoneConfigurationService(_manager);
+            this._provider = new AlarmDevicesConfigService(_manager);
         }
 
 
@@ -175,9 +176,9 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm.Map
         public AlarmDeviceMapViewModel(IRegionManager regionManager)
         {
             Graph = new AlarmSystemGraph();
-            Config = new ObservableCollection<sconnAlarmZone>();
+            Config = new ObservableCollection<sconnDevice>();
             this._manager = SiteNavigationManager.alarmSystemConfigManager;
-            this._provider = new ZoneConfigurationService(_manager);
+            this._provider = new AlarmDevicesConfigService(_manager);
             this._regionManager = regionManager;
         }
 
@@ -213,7 +214,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm.Map
                 {
 
                     Loading = false;
-                    OpenZoneContextForZone(Config.FirstOrDefault());
+                    OpenDeviceContextForDevice(Config.FirstOrDefault());
                 };
 
                 Loading = true;

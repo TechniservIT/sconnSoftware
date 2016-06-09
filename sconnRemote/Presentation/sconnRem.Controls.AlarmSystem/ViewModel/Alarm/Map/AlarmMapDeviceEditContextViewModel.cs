@@ -70,19 +70,51 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm.Map
 
         }
 
+
         public void ShowZonesMap()
         {
+            try
+            {
+                NavigationParameters parameters = new NavigationParameters();
+                parameters.Add(GlobalViewContractNames.Global_Contract_Nav_Site_Context__Key_Name, siteUUID);
+
+                GlobalNavigationContext.NavigateRegionToContractWithParam(
+                   GlobalViewRegionNames.MainGridContentRegion,
+                   AlarmRegionNames.AlarmConfig_Contract_ZoneMapConfigView,
+                    parameters
+                    );
+            }
+            catch (Exception ex)
+            {
+                _nlogger.Error(ex, ex.Message);
+            }
 
         }
 
         public void ShowDevicesMap()
         {
+            try
+            {
+                NavigationParameters parameters = new NavigationParameters();
+                parameters.Add(GlobalViewContractNames.Global_Contract_Nav_Site_Context__Key_Name, siteUUID);
 
+                GlobalNavigationContext.NavigateRegionToContractWithParam(
+                   GlobalViewRegionNames.MainGridContentRegion,
+                   AlarmRegionNames.AlarmConfig_Contract_DeviceMapConfigView,
+                    parameters
+                    );
+            }
+            catch (Exception ex)
+            {
+                _nlogger.Error(ex, ex.Message);
+            }
 
         }
+
         public AlarmMapDeviceEditContextViewModel()
         {
             _name = "Zones";
+            SetupCmd();
             this._provider = new DeviceConfigService(_manager,DeviceId);
         }
 
@@ -99,6 +131,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm.Map
         public AlarmMapDeviceEditContextViewModel(IRegionManager regionManager)
         {
             Config = new sconnDevice();
+            SetupCmd();
             this._manager = SiteNavigationManager.alarmSystemConfigManager;
             this._provider = new DeviceConfigService(_manager,DeviceId);
             this._regionManager = regionManager;
@@ -127,17 +160,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm.Map
 
                 Loading = true;
                 bgWorker.RunWorkerAsync();
-
-                //navigate context  
-
-                //NavigationParameters parameters = new NavigationParameters();
-                //parameters.Add(GlobalViewContractNames.Global_Contract_Nav_Site_Context__Key_Name, siteUUID);
-
-                //GlobalNavigationContext.NavigateRegionToContractWithParam(
-                //   GlobalViewRegionNames.RNavigationRegion,
-                //    GlobalViewContractNames.Global_Contract_Menu_RightSide_AlarmDeviceEditMapContext,
-                //    parameters
-                //    );
+                
 
             }
             catch (Exception ex)

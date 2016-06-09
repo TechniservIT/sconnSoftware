@@ -19,6 +19,7 @@ namespace sconnRem.Navigation
         public const String AlarmConfig_Contract_GsmRcptConfigView = "GsmRcptConfigViewContract";
         public const String AlarmConfig_Contract_ZoneConfigView = "ZoneConfigViewContract";
         public const String AlarmConfig_Contract_ZoneMapConfigView = "ZoneMapConfigViewContract";
+        public const String AlarmConfig_Contract_DeviceMapConfigView = "DeviceMapConfigViewContract";
         public const String AlarmConfig_Contract_UsersConfigView = "UserConfigViewContract";
         
 

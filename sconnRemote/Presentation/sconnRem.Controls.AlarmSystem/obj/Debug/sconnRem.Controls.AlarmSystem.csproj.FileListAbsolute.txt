@@ -563,3 +563,5 @@ I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSys
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\obj\Debug\View\Config\AlarmSystem\Context\AlarmMapEditContextView.baml
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\obj\Debug\View\Config\AlarmSystem\Context\AlarmMapEditDeviceContextView.baml
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\obj\Debug\View\Config\AlarmSystem\Context\AlarmMapEditZoneContextView.baml
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\obj\Debug\View\Status\AlarmSystem\Device\AlarmSystemDevicesMapView.g.cs
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\obj\Debug\View\Status\AlarmSystem\Device\AlarmSystemDevicesMapView.baml

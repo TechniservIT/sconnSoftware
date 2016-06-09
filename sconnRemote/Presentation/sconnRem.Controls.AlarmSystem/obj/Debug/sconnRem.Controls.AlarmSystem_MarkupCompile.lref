@@ -30,6 +30,7 @@ FI:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSy
 FI:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\View\Status\AlarmSystem\Connectivity\AlarmSystemConnectivityStatusView.xaml;;
 FI:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\View\Status\AlarmSystem\Device\AlarmSystemDeviceAuthListView.xaml;;
 FI:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\View\Status\AlarmSystem\Device\AlarmSystemDeviceConfigureView.xaml;;
+FI:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\View\Status\AlarmSystem\Device\AlarmSystemDevicesMapView.xaml;;
 FI:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\View\Status\AlarmSystem\Device\AlarmSystemDeviceStatusView.xaml;;
 FI:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\View\Status\AlarmSystem\Device\InputsModule\AlarmDeviceInputsModuleConfigureView.xaml;;
 FI:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\View\Status\AlarmSystem\Device\InputsModule\AlarmDeviceInputsModuleView.xaml;;

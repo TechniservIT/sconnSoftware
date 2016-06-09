@@ -79,6 +79,8 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
@@ -247,6 +249,9 @@
     </Compile>
     <Compile Include="View\Status\AlarmSystem\Device\AlarmSystemDeviceConfigureViewModule.cs" />
     <Compile Include="View\Status\AlarmSystem\Device\AlarmSystemDeviceListViewModule.cs" />
+    <Compile Include="View\Status\AlarmSystem\Device\AlarmSystemDevicesMapView.xaml.cs">
+      <DependentUpon>AlarmSystemDevicesMapView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Status\AlarmSystem\Device\AlarmSystemDeviceStatusView.xaml.cs">
       <DependentUpon>AlarmSystemDeviceStatusView.xaml</DependentUpon>
     </Compile>
@@ -496,6 +501,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Status\AlarmSystem\Device\AlarmSystemDeviceConfigureView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Status\AlarmSystem\Device\AlarmSystemDevicesMapView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

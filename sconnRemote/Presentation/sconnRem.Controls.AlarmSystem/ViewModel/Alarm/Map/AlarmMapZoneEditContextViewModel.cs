@@ -52,7 +52,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm.Map
             try
             {
                 Config = (_provider.GetById(ZoneId));
-
+                
             }
             catch (Exception ex)
             {
@@ -73,17 +73,49 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm.Map
         public AlarmMapZoneEditContextViewModel()
         {
             _name = "Zones";
+            SetupCmd();
             this._provider = new ZoneConfigurationService(_manager);
         }
 
 
         public void ShowZonesMap()
         {
+            try
+            {
+
+                NavigationParameters parameters = new NavigationParameters();
+                parameters.Add(GlobalViewContractNames.Global_Contract_Nav_Site_Context__Key_Name, siteUUID);
+
+                GlobalNavigationContext.NavigateRegionToContractWithParam(
+                   GlobalViewRegionNames.MainGridContentRegion,
+                   AlarmRegionNames.AlarmConfig_Contract_ZoneMapConfigView,
+                    parameters
+                    );
+            }
+            catch (Exception ex)
+            {
+                _nlogger.Error(ex, ex.Message);
+            }
 
         }
 
         public void ShowDevicesMap()
         {
+            try
+            {
+                NavigationParameters parameters = new NavigationParameters();
+                parameters.Add(GlobalViewContractNames.Global_Contract_Nav_Site_Context__Key_Name, siteUUID);
+
+                GlobalNavigationContext.NavigateRegionToContractWithParam(
+                   GlobalViewRegionNames.MainGridContentRegion,
+                   AlarmRegionNames.AlarmConfig_Contract_DeviceMapConfigView,
+                    parameters
+                    );
+            }
+            catch (Exception ex)
+            {
+                _nlogger.Error(ex, ex.Message);
+            }
 
         }
 
@@ -97,9 +129,10 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm.Map
         }
 
         [ImportingConstructor]
-        public AlarmMapZoneEditContextViewModel(IRegionManager regionManager)
+        public AlarmMapZoneEditContextViewModel(IRegionManager regionManager) 
         {
             Config = new sconnAlarmZone();
+            SetupCmd();
             this._manager = SiteNavigationManager.alarmSystemConfigManager;
             this._provider = new ZoneConfigurationService(_manager);
             this._regionManager = regionManager;
@@ -130,18 +163,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm.Map
                 Loading = true;
 
                 bgWorker.RunWorkerAsync();
-
-                //navigate context  
-
-                //NavigationParameters parameters = new NavigationParameters();
-                //parameters.Add(GlobalViewContractNames.Global_Contract_Nav_Site_Context__Key_Name, siteUUID);
-
-                //GlobalNavigationContext.NavigateRegionToContractWithParam(
-                //   GlobalViewRegionNames.RNavigationRegion,
-                //    GlobalViewContractNames.Global_Contract_Menu_RightSide_AlarmZoneEditMapContext,
-                //    parameters
-                //    );
-
+                
             }
             catch (Exception ex)
             {

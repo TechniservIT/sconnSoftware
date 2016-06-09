@@ -5,8 +5,23 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:sconnRem.Controls.AlarmSystem.View.Config.AlarmSystem.Context"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:config="clr-namespace:sconnConnector.POCO.Config;assembly=sconnConnector"
+             xmlns:System="clr-namespace:System;assembly=mscorlib"
+             xmlns:sconn="clr-namespace:sconnConnector.POCO.Config.sconn;assembly=sconnConnector"
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="200">
+
+
+    <UserControl.Resources>
+        <ObjectDataProvider x:Key="InputTypeSrc" MethodName="GetValues"
+                            ObjectType="{x:Type System:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="sconn:AlarmZoneType"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+
+    </UserControl.Resources>
+    
     <xctk:BusyIndicator  IsBusy="{Binding Loading}">
 
         <Grid>
@@ -46,7 +61,7 @@
                                                               VerticalAlignment="Center"/>
                                         <Canvas Background="White" Grid.Column="0" />
 
-                                        <Image  x:Name="ImgDispActionGridFullScreen521"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="0,0,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/strefy1-1000.jpg" />
+                                        <Image  x:Name="ImgDispActionGridFullScreen521"  Stretch="Uniform"   HorizontalAlignment="Center" Height="Auto" Margin="0,0,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/strefy1-1000.jpg" />
 
                                     </Grid>
                                 </Border>
@@ -70,7 +85,7 @@
                                                               VerticalAlignment="Center"/>
                                         <Canvas Background="White" Grid.Column="0" />
 
-                                        <Image  x:Name="ImgDispActionGridFullScreen521"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="0,0,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/strefa1000.jpg" />
+                                        <Image  x:Name="ImgDispActionGridFullScreen521"  Stretch="Uniform"   HorizontalAlignment="Center" Height="Auto" Margin="0,0,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/strefa1000.jpg" />
 
                                     </Grid>
                                 </Border>
@@ -82,8 +97,53 @@
 
             </Grid>
 
-            <Grid  Grid.Column="0" Grid.Row="1">
+            <Grid  Margin="5,15,5,15"  Grid.Column="0" Grid.Row="1">
 
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid  Grid.Column="0" Grid.Row="0" >
+
+                        <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0.1*"/>
+                            <RowDefinition Height="0.4*"/>
+                            <RowDefinition Height="0.1*"/>
+                            <RowDefinition Height="0.2*"/>
+                            <RowDefinition Height="0.1*"/>
+                            <RowDefinition Height="0.2*"/>
+                    </Grid.RowDefinitions>
+
+
+                    <Label Grid.Column="0" Grid.Row="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="Name" />
+                    <TextBox Grid.Column="0" Grid.Row="1" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Text="{Binding  Config.Name}"/>
+                        
+                        
+                    <Label Grid.Column="0" Grid.Row="2" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="Type" />
+                        <ComboBox x:Name="cmb12"  
+                            ItemsSource="{Binding Source={StaticResource InputTypeSrc}}"
+                        Grid.Column="0" Grid.Row="3"
+                          HorizontalAlignment="Stretch"
+                          HorizontalContentAlignment="Stretch" 
+                          SelectedValue="{Binding  ActiveInput.sconnInputType}" 
+                           SelectedItem="{Binding  ActiveInput.sconnInputType , Mode=TwoWay}" 
+                          />
+
+                        <Label Grid.Column="0" Grid.Row="4" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="Enabled" />
+                        <Label Grid.Column="0" Grid.Row="5" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="{Binding Config.Enabled}" />
+
+
+
+                    </Grid>
+
+
+                
             </Grid>
 
             <Grid  Grid.Column="0" Grid.Row="2">
@@ -110,7 +170,7 @@
                                                               VerticalAlignment="Center"/>
                                         <Canvas Background="White" Grid.Column="0" />
 
-                                        <Image  x:Name="ImgDispActionGridFullScreen521"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="0,0,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/save.jpg" />
+                                        <Image  x:Name="ImgDispActionGridFullScreen521"  Stretch="Uniform"   HorizontalAlignment="Center" Height="Auto" Margin="5,0,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/save.jpg" />
 
                                     </Grid>
                                 </Border>
