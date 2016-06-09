@@ -5,8 +5,22 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:sconnRem.Controls.AlarmSystem.View.Config.AlarmSystem.Context"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:sconn="clr-namespace:sconnConnector.POCO.Config.sconn;assembly=sconnConnector"
+             xmlns:System="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="200">
+
+
+    <UserControl.Resources>
+        <ObjectDataProvider x:Key="InputTypeSrc" MethodName="GetValues"
+                            ObjectType="{x:Type System:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="sconn:sconnDeviceType"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+    </UserControl.Resources>
+    
+    
     <xctk:BusyIndicator  IsBusy="{Binding Loading}">
 
         <Grid>
@@ -82,9 +96,64 @@
 
             </Grid>
 
-            <Grid  Grid.Column="0" Grid.Row="1">
+            <Grid  Margin="5,15,5,15"  Grid.Column="0" Grid.Row="1">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Grid  Grid.Column="0" Grid.Row="0" >
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.05*"/>
+                        <RowDefinition Height="0.2*"/>
+                        <RowDefinition Height="0.05*"/>
+                        <RowDefinition Height="0.2*"/>
+                        <RowDefinition Height="0.05*"/>
+                        <RowDefinition Height="0.1*"/>
+                        <RowDefinition Height="0.05*"/>
+                        <RowDefinition Height="0.2*"/>
+                    </Grid.RowDefinitions>
+
+
+                    <Label Grid.Column="0" Grid.Row="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="Name" />
+                    <TextBox Grid.Column="0" Grid.Row="1" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Text="{Binding  Config.Name}"/>
+
+
+                    <Label Grid.Column="0" Grid.Row="2" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="Type" />
+                    <ComboBox x:Name="cmb12"  
+                            ItemsSource="{Binding Source={StaticResource InputTypeSrc}}"
+                        Grid.Column="0" Grid.Row="3"
+                          HorizontalAlignment="Stretch"
+                          HorizontalContentAlignment="Stretch" 
+                          SelectedValue="{Binding  Type}" 
+                           SelectedItem="{Binding  Type , Mode=TwoWay}" 
+                          />
+
+                    <Label Grid.Column="0" Grid.Row="4" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="Enabled" />
+                    <Label Grid.Column="0" Grid.Row="5" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="{Binding Config.Enabled}" />
+
+
+                    <Label Grid.Column="0" Grid.Row="2" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="Type" />
+                    <ComboBox x:Name="SelZone"  
+                            ItemsSource="{Binding Zones}"
+                        Grid.Column="0" Grid.Row="3"
+                          HorizontalAlignment="Stretch"
+                          HorizontalContentAlignment="Stretch" 
+                          SelectedValuePath="{Binding  Device.ZoneId, Mode=TwoWay}" 
+                              DisplayMemberPath="Name"
+                          />
+                    
+                </Grid>
 
             </Grid>
+
 
             <Grid  Grid.Column="0" Grid.Row="2">
 

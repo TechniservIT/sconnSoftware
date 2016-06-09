@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.Linq;
@@ -37,11 +38,30 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm.Map
             }
         }
 
+
+
         public int DeviceId { get; set; }
         public string DeviceUuid { get; set; }
 
         private readonly DeviceConfigService _provider;
         private readonly AlarmSystemConfigManager _manager;
+
+
+        /***** Zone select *********/
+
+        private ObservableCollection<sconnAlarmZone> _zones;
+        public ObservableCollection<sconnAlarmZone> Zones
+        {
+            get { return _zones; }
+            set
+            {
+                _zones = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private ZoneConfigurationService ZoneProvider;
+
 
       
 
@@ -52,6 +72,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm.Map
             try
             {
                 Config = (_provider.Get());
+                Zones = new ObservableCollection<sconnAlarmZone>(ZoneProvider.GetAll());
 
             }
             catch (Exception ex)
@@ -116,6 +137,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm.Map
             _name = "Zones";
             SetupCmd();
             this._provider = new DeviceConfigService(_manager,DeviceId);
+            ZoneProvider = new ZoneConfigurationService(_manager);
         }
 
 
@@ -134,6 +156,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm.Map
             SetupCmd();
             this._manager = SiteNavigationManager.alarmSystemConfigManager;
             this._provider = new DeviceConfigService(_manager,DeviceId);
+            ZoneProvider = new ZoneConfigurationService(_manager);
             this._regionManager = regionManager;
         }
 
