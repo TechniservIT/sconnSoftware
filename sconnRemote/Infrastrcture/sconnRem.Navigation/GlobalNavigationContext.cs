@@ -12,6 +12,7 @@ namespace sconnRem.Navigation
     {
         public static IRegionManager Manager;
         public static Logger _nlogger = LogManager.GetCurrentClassLogger();
+        private static object syncRoot = new Object();
 
         public  static  void NavigateDefaults()
         {
@@ -22,17 +23,21 @@ namespace sconnRem.Navigation
         {
             try
             {
-                Manager.RequestNavigate(regionName, contractName
-                    ,
-                    (NavigationResult nr) =>
-                    {
-                        var error = nr.Error;
-                        var result = nr.Result;
-                        if (error != null)
-                        {
-                            _nlogger.Error(error);
-                        }
-                    });
+                lock (syncRoot)
+                {
+                    Manager.RequestNavigate(regionName, contractName
+                       ,
+                       (NavigationResult nr) =>
+                       {
+                           var error = nr.Error;
+                           var result = nr.Result;
+                           if (error != null)
+                           {
+                               _nlogger.Error(error);
+                           }
+                       });
+                }
+    
             }
             catch (Exception ex)
             {
@@ -46,17 +51,21 @@ namespace sconnRem.Navigation
         {
             try
             {
-                Manager.RequestNavigate(regionName, new Uri(contractName + param, UriKind.Relative)
-                    ,
-                    (NavigationResult nr) =>
-                    {
-                        var error = nr.Error;
-                        var result = nr.Result;
-                        if (error != null)
-                        {
-                            _nlogger.Error(error);
-                        }
-                    });
+                lock (syncRoot)
+                {
+                    Manager.RequestNavigate(regionName, new Uri(contractName + param, UriKind.Relative)
+                     ,
+                     (NavigationResult nr) =>
+                     {
+                         var error = nr.Error;
+                         var result = nr.Result;
+                         if (error != null)
+                         {
+                             _nlogger.Error(error);
+                         }
+                     });
+                }
+ 
             }
             catch (Exception ex)
             {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
@@ -12,16 +13,21 @@ using sconnConnector.Config;
 using sconnConnector.POCO.Config.sconn;
 using sconnRem.Infrastructure.Navigation;
 using sconnRem.Navigation;
+using sconnRem.ViewModel.Generic;
 
 namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm.Map
 {
     [Export]
     [PartCreationPolicy(CreationPolicy.NonShared)]
-    public class AlarmMapDeviceEditContextViewModel : AlarmMapEntityEditContextViewModel
+    public class AlarmMapDeviceEditContextViewModel : GenericAlarmConfigViewModel   // : AlarmMapEntityEditContextViewModel
     {
 
-        private sconnAlarmZone _config;
-        public sconnAlarmZone Config
+        public ICommand MapContextZonesSelectedCommand { get; set; }
+        public ICommand MapContextDevicesSelectedCommand { get; set; }
+        public ICommand MapContextEntityEditSaveCommand { get; set; }
+
+        private sconnDevice _config;
+        public sconnDevice Config
         {
             get { return _config; }
             set
@@ -31,10 +37,13 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm.Map
             }
         }
 
-        public int ZoneId { get; set; }
+        public int DeviceId { get; set; }
+        public string DeviceUuid { get; set; }
 
-        private readonly ZoneConfigurationService _provider;
+        private readonly DeviceConfigService _provider;
         private readonly AlarmSystemConfigManager _manager;
+
+      
 
         public ICommand ConfigureZoneCommand { get; set; }
 
@@ -42,7 +51,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm.Map
         {
             try
             {
-                Config = (_provider.GetById(ZoneId));
+                Config = (_provider.Get());
 
             }
             catch (Exception ex)
@@ -61,24 +70,37 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm.Map
 
         }
 
+        public void ShowZonesMap()
+        {
+
+        }
+
+        public void ShowDevicesMap()
+        {
+
+
+        }
         public AlarmMapDeviceEditContextViewModel()
         {
             _name = "Zones";
-            this._provider = new ZoneConfigurationService(_manager);
+            this._provider = new DeviceConfigService(_manager,DeviceId);
         }
 
 
-        public override void SetupCmd()
+        public  void SetupCmd()
         {
+            MapContextZonesSelectedCommand = new DelegateCommand(ShowZonesMap);
+            MapContextDevicesSelectedCommand = new DelegateCommand(ShowDevicesMap);
+            MapContextEntityEditSaveCommand = new DelegateCommand(SaveData);
             ConfigureZoneCommand = new DelegateCommand<sconnAlarmZone>(EditZone);
         }
 
         [ImportingConstructor]
         public AlarmMapDeviceEditContextViewModel(IRegionManager regionManager)
         {
-            Config = new sconnAlarmZone();
+            Config = new sconnDevice();
             this._manager = SiteNavigationManager.alarmSystemConfigManager;
-            this._provider = new ZoneConfigurationService(_manager);
+            this._provider = new DeviceConfigService(_manager,DeviceId);
             this._regionManager = regionManager;
         }
 
@@ -90,17 +112,33 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm.Map
             try
             {
                 siteUUID = (string)navigationContext.Parameters[GlobalViewContractNames.Global_Contract_Nav_Site_Context__Key_Name];
+                DeviceId = (int)navigationContext.Parameters[AlarmSystemMapContractNames.Alarm_Contract_Map_Device_Edit_Context_Key_Name];
                 this.navigationJournal = navigationContext.NavigationService.Journal;
 
-                //navigate context  
-                NavigationParameters parameters = new NavigationParameters();
-                parameters.Add(GlobalViewContractNames.Global_Contract_Nav_Site_Context__Key_Name, siteUUID);
+                BackgroundWorker bgWorker = new BackgroundWorker();
+                bgWorker.DoWork += (s, e) => {
+                    GetData();
+                };
+                bgWorker.RunWorkerCompleted += (s, e) =>
+                {
 
-                GlobalNavigationContext.NavigateRegionToContractWithParam(
-                   GlobalViewRegionNames.RNavigationRegion,
-                    GlobalViewContractNames.Global_Contract_Menu_RightSide_AlarmDeviceEditMapContext,
-                    parameters
-                    );
+                    Loading = false;
+                };
+
+                Loading = true;
+                bgWorker.RunWorkerAsync();
+
+                //navigate context  
+
+                //NavigationParameters parameters = new NavigationParameters();
+                //parameters.Add(GlobalViewContractNames.Global_Contract_Nav_Site_Context__Key_Name, siteUUID);
+
+                //GlobalNavigationContext.NavigateRegionToContractWithParam(
+                //   GlobalViewRegionNames.RNavigationRegion,
+                //    GlobalViewContractNames.Global_Contract_Menu_RightSide_AlarmDeviceEditMapContext,
+                //    parameters
+                //    );
+
             }
             catch (Exception ex)
             {

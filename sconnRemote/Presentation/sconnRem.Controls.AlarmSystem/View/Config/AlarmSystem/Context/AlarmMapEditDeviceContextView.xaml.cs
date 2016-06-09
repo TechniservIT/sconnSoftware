@@ -34,4 +34,6 @@ namespace sconnRem.Controls.AlarmSystem.View.Config.AlarmSystem.Context
             InitializeComponent();
         }
     }
+
+
 }

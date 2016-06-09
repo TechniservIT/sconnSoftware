@@ -194,15 +194,31 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
                 siteUUID = (string)navigationContext.Parameters[GlobalViewContractNames.Global_Contract_Nav_Site_Context__Key_Name];
                 this.navigationJournal = navigationContext.NavigationService.Journal;
 
-                //navigate context  
-                NavigationParameters parameters = new NavigationParameters();
-                parameters.Add(GlobalViewContractNames.Global_Contract_Nav_Site_Context__Key_Name, siteUUID);
+                BackgroundWorker bgWorker = new BackgroundWorker();
+                bgWorker.DoWork += (s, e) => {
+                    GetData();
+                };
+                bgWorker.RunWorkerCompleted += (s, e) =>
+                {
 
-                GlobalNavigationContext.NavigateRegionToContractWithParam(
-                   GlobalViewRegionNames.RNavigationRegion,
-                    GlobalViewContractNames.Global_Contract_Menu_RightSide_AlarmZoneEditMapContext,
-                    parameters
-                    );
+                    Loading = false;
+                };
+
+                Loading = true;
+                bgWorker.RunWorkerAsync();
+
+                //navigate context  
+
+                //NavigationParameters parameters = new NavigationParameters();
+                //parameters.Add(GlobalViewContractNames.Global_Contract_Nav_Site_Context__Key_Name, siteUUID);
+
+                //GlobalNavigationContext.NavigateRegionToContractWithParam(
+                //   GlobalViewRegionNames.RNavigationRegion,
+                //    GlobalViewContractNames.Global_Contract_Menu_RightSide_AlarmZoneEditMapContext,
+                //    parameters
+                //    );
+
+
             }
             catch (Exception ex)
             {
