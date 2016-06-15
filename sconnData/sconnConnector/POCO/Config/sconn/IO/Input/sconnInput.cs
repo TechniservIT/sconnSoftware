@@ -19,18 +19,25 @@ namespace sconnConnector.POCO.Config
         NormallyClosed,
         DoubleParametrizedNC,
         SingleParametrizedNC,
-        DoubleParametrizedNO
+        DoubleParametrizedNO,
+        ParametrizedSensor    
+    }
+
+    public enum sconnInputTypeMaskValues
+    {
+        InputDelayedMask = 128
     }
 
     public enum sconnActivationGroup
     {
         Arm = 0,
         Disarm,
-        ActivateOutput,
         ArmedViolation,
         DisarmedViolation,
         ArmedAndDisarmedViolation
     }
+
+
 
     public class sconnInput : IAlarmSystemConfigurationEntity, ISerializableConfiguration, IFakeAbleConfiguration, INotifyPropertyChanged
     {
@@ -53,6 +60,7 @@ namespace sconnConnector.POCO.Config
         public byte Value { get; set; }
         public uint Sensitivity { get; set; }
         public bool Enabled { get; set; }
+        public bool Delayed { get; set; }
         public string Name { get; set; }
         public sconnActivationGroup ActivationGroup { get; set; }
         public DeviceIoCategory IoCategory { get; set; }
@@ -128,7 +136,16 @@ namespace sconnConnector.POCO.Config
             try
             {
                 byte[] buffer = new byte[ipcDefines.mAdrInputMemSize];
-                buffer[ipcDefines.mAdrInputType] = (byte)Type;
+                if (Delayed)
+                {
+
+                    buffer[ipcDefines.mAdrInputType] = (byte)((byte)Type | (byte)sconnInputTypeMaskValues.InputDelayedMask);
+                }
+                else
+                {
+                    buffer[ipcDefines.mAdrInputType] = (byte)Type;
+                }
+              
                 buffer[ipcDefines.mAdrInputEnabled] = (byte)(Enabled ? 1 : 0);
                 buffer[ipcDefines.mAdrInputVal] = (byte)Value;
                 buffer[ipcDefines.mAdrInputNameAddr] = (byte)NameId;
@@ -148,7 +165,13 @@ namespace sconnConnector.POCO.Config
         {
             try
             {
-                Type = (sconnInputType)buffer[ipcDefines.mAdrInputType];
+                byte typeVal = buffer[ipcDefines.mAdrInputType];
+                if ((typeVal & (byte)sconnInputTypeMaskValues.InputDelayedMask) > 0)
+                {
+                    Delayed = true;
+                    typeVal = (byte) (typeVal - (byte)sconnInputTypeMaskValues.InputDelayedMask);
+                }
+                Type = (sconnInputType)typeVal;
                 Value = buffer[ipcDefines.mAdrInputVal];
                 NameId = buffer[ipcDefines.mAdrInputNameAddr];
                 Enabled = buffer[ipcDefines.mAdrInputEnabled] > 0 ? true : false;
