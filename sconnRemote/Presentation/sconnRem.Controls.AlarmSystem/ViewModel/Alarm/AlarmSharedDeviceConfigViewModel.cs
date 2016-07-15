@@ -61,9 +61,10 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
         
         public int ChangeTrack { get; set; }
 
-        private DeviceConfigService _provider;
+        private AlarmDevicesConfigService _provider;
         private AlarmSystemConfigManager _manager;
         private bool _isActive;
+        public int DeviceId { get; set; }
 
         public void UpdateActiveIo()
         {
@@ -101,7 +102,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
             try
             {
                // Config = _provider.Get();
-               Config.CopyFrom(_provider.Get());
+               Config.CopyFrom(_provider.GetById(DeviceId));
 
             }
             catch (Exception ex)
@@ -150,7 +151,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
         {
             this._manager = AlarmSystemContext.GetManager();
             _name = "Dev";
-            this._provider = new DeviceConfigService(_manager);
+            this._provider = new AlarmDevicesConfigService(_manager);
         }
 
         public void NavigateBack()
@@ -182,7 +183,8 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
             SetupCmds();
             UpdateActiveIo();
             this._manager = SiteNavigationManager.alarmSystemConfigManager; // (AlarmSystemConfigManager)manager;
-            this._provider = new DeviceConfigService(_manager, Config.DeviceId);
+            DeviceId = Config.DeviceId;
+            this._provider = new AlarmDevicesConfigService(_manager);
             this._regionManager = regionManager;
             GetData();
         }

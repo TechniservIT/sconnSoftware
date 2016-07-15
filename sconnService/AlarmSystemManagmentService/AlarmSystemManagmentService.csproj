@@ -90,7 +90,6 @@
     <Compile Include="AuthorizedDevices\AuthorizedDevicesConfigurationService.cs" />
     <Compile Include="AuthorizedDevices\IAuthorizedDevicesConfigurationService.cs" />
     <Compile Include="Device\AlarmDevicesConfigService.cs" />
-    <Compile Include="Device\DeviceConfigService.cs" />
     <Compile Include="Device\IDeviceConfigService.cs" />
     <Compile Include="Event\EventsService.cs" />
     <Compile Include="Global\GlobalConfigService.cs" />

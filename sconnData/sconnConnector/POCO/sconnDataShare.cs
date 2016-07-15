@@ -433,7 +433,7 @@ namespace sconnConnector
 
     public struct ipcCMD
     {
-
+       
         //ASCII proprietary CMDs
         public const byte STX = 0x02; //start text
         public const byte ETX = 0x03; //end text
@@ -517,8 +517,27 @@ namespace sconnConnector
 
     }
 
+     public enum AlarmSystemConfigType
+    {
+        AlarmSystemConfig_Global = 1,
+        AlarmSystemConfig_Device,
+        AlarmSystemConfig_Zone,
+        AlarmSystemConfig_DeviceAuthorization,
+        AlarmSystemConfig_Gsm,
+        AlarmSystemConfig_Schedule,
+        AlarmSystemConfig_Name,
+        AlarmSystemConfig_Users,
+        AlarmSystemConfig_RemoteAccess,
+        AlarmSystemConfig_Events,
+    }
+
+
     public struct ipcDefines
     {
+        public static int RoundUpNumber(int number, int to)
+        {
+            return (((number) + (to) - 1) / (to)) * (to);
+        }
 
         public const int SHA256_DIGEST_SIZE = 32;
 
@@ -528,6 +547,7 @@ namespace sconnConnector
         public const byte comUSB = 0x04;
         public const byte comETH = 0x05;
 
+        public const byte RAM_ZONES_MAX_NO = 64;
 
         public const byte mAdrCfgSingleLen = 0x01;
 
@@ -549,8 +569,8 @@ namespace sconnConnector
          *
          * 
          */
-        public const int ipcAbsMaxDevices = 16;
-        public const int RAM_DEVCFG_NO = 16;
+        public const int ipcAbsMaxDevices = 64;
+        public const int RAM_DEVCFG_NO = 64;
         public const int RAM_DEVCFG_SIZE = 512;
         public const int RAM_GCFG_SIZE = 1024;
 
@@ -595,31 +615,11 @@ namespace sconnConnector
 
         public const int mAdrSysFail = (mAdrHostDeviceServerPasswd+mAdrHostDeviceServerPasswd_LEN);
         public const int mAdrSysFail_LEN  = 0x01;
-      
+
         public const int mAdrZoneNo = (mAdrSysFail + mAdrSysFail_LEN);
         public const int mAdrZoneNo_LEN = 0x01;
-
-        public const int mAdrZoneNo_Pos = (0x00);
-
-        public const int mAdrZoneCfgStartAddr = (mAdrZoneNo + mAdrZoneNo_LEN);
-
-        public const int ZONE_CFG_ENABLED_POS = (mAdrZoneNo_LEN);
-        public const int ZONE_CFG_ENABLED_LEN = 0x01;
-
-        public const int ZONE_CFG_TYPE_POS = (ZONE_CFG_ENABLED_POS + ZONE_CFG_ENABLED_LEN);
-        public const int ZONE_CFG_TYPE_LEN = 0x01;
-
-        public const int ZONE_CFG_NAME_ID_POS = (ZONE_CFG_TYPE_POS + ZONE_CFG_TYPE_LEN);
-        public const int ZONE_CFG_NAME_ID_LEN = 0x02;
-
-        public const int ZONE_CFG_LEN = (ZONE_CFG_NAME_ID_POS + ZONE_CFG_NAME_ID_LEN);
-
-        public const int ZONE_CFG_MAX_ZONES = 32;
-
-        public const int ZONE_CFG_TOTAL_LEN = (ZONE_CFG_MAX_ZONES*ZONE_CFG_LEN);
-       
-
-        public const int GSM_GCFG_LOG_LVL_START_ADDR = (mAdrZoneCfgStartAddr+ZONE_CFG_MAX_ZONES*ZONE_CFG_LEN);
+        
+        public const int GSM_GCFG_LOG_LVL_START_ADDR = (mAdrZoneNo + mAdrZoneNo_LEN);
         public const int GSM_GCFG_LOG_LVL_LEN = 0x04;
 
         public const int GSM_GCFG_LOG_LVL_EN_ARM_CHANGE_MASK   =   0x01;
@@ -636,21 +636,6 @@ namespace sconnConnector
         public const int mAdrLNGs_Pos      =     0x05; //seconds
         public const int mAdrGeo_Pos_LEN =  0x06;
 
-
-        /*
-        public const int GCFG_HASH_POS  =  (mAdrGeo_Pos+mAdrGeo_Pos_LEN);
-        public const int GCFG_HASH_LEN  =  SHA256_DIGEST_SIZE;
-
-        public const int GCFG_DEV_MOD_CTR_START_POS = (GCFG_HASH_POS+GCFG_HASH_LEN);
-        public const int GCFG_DEV_MOD_CTR_LEN = 4;  //integer value on config revision
-        public const int GCFG_DEV_MOD_CTR_TOTAL_LEN = (GCFG_DEV_MOD_CTR_LEN * ipcAbsMaxDevices);
-
-        public const int GCFG_NAMES_MOD_CTR_POS  =    (GCFG_DEV_MOD_CTR_START_POS+GCFG_DEV_MOD_CTR_TOTAL_LEN);
-        public const int GCFG_NAMES_MOD_CTR_LEN = SHA256_DIGEST_SIZE;
-        */
-
-        //public const int mAddr_NAMES_Global_StartAddr = (GCFG_NAMES_MOD_CTR_POS + GCFG_NAMES_MOD_CTR_LEN);
-
         public const int mAddr_NAMES_Global_StartAddr = (mAdrGeo_Pos + mAdrGeo_Pos_LEN);
         public const int mAddr_NAMES_Global_SystemName_Pos = 0;
         public const int RAM_NAMES_Global_Total_Records   = (mAddr_NAMES_Global_SystemName_Pos+1);
@@ -660,9 +645,6 @@ namespace sconnConnector
         public const int  mAddr_Global_Config_Revision_Total_Size = 4;
 
         public const int GCFG_END_REG =   (mAddr_Global_Config_Revision_StartAddr + mAddr_Global_Config_Revision_Total_Size);
-
-
-       // public const int GCFG_END_REG  =  (mAddr_NAMES_Global_StartAddr + RAM_NAMES_Global_Total_Size);
         
         public const int mAdrDevStart = 0x400; //1024- start address in memory of device configs
         public const int mAdrGlobalConfig = 0x0000;
@@ -760,8 +742,10 @@ namespace sconnConnector
 
        // public const int deviceTotalNames = ();
         public const int deviceConfigSize = 512;   //  mAdrRelay + (RelayMemSize * DeviceMaxRelays);
+    
+        //     public const int mAdrDeviceConfigSize (RAM_DEVCFG_NO*deviceConfigSize)
 
-  
+
 
         /******* Device types ***********/
 
@@ -835,7 +819,24 @@ namespace sconnConnector
         public const byte OUT_STATE_ACTIVE    =0x01;
         public const byte OUT_STATE_INACTIVE  = 0x00;
 
+        public const int ALRM_SYS_MEM_CONFIG_MIN_SECTOR = 32;
 
+
+
+        /**************************************************     Zones Config   ***************************************************/
+        public const int ZONE_CFG_ID_POS = 0x0000;
+        public const int ZONE_CFG_ID_LEN = 0x0002;
+
+        public const int ZONE_CFG_ENABLED_POS = (ZONE_CFG_ID_POS+ ZONE_CFG_ID_LEN);
+        public const int ZONE_CFG_ENABLED_LEN = 0x01;
+
+        public const int ZONE_CFG_TYPE_POS = (ZONE_CFG_ENABLED_POS + ZONE_CFG_ENABLED_LEN);
+        public const int ZONE_CFG_TYPE_LEN = 0x01;
+
+        public const int ZONE_CFG_NAME_POS = (ZONE_CFG_TYPE_POS + ZONE_CFG_TYPE_LEN);
+        public const int ZONE_CFG_NAME_LEN = RAM_NAME_SIZE;
+
+        public static int ZONE_CFG_LEN = (ZONE_CFG_NAME_POS + ZONE_CFG_NAME_LEN);   //RoundUpNumber(, ALRM_SYS_MEM_CONFIG_MIN_SECTOR);  //ROUND_UP((ZONE_CFG_NAME_POS+ZONE_CFG_NAME_LEN), ALRM_SYS_MEM_CONFIG_MIN_SECTOR );
 
 
 
@@ -853,37 +854,20 @@ namespace sconnConnector
         public const int mAddr_NAMES_Relays_Pos = (mAddr_NAMES_Outputs_Pos + DeviceMaxOutputs);
 
         public const int RAM_TOTAL_DEVICE_NAMES_SIZE = (RAM_DEVICE_NAMES_SIZE*RAM_DEVCFG_NO);
-
-        //public const int mAddr_NAMES_Global_StartIndex = (mAddr_NAMES_Device_StartIndex + (RAM_DEV_NAMES_NO* RAM_DEVCFG_NO));
-        //public const int mAddr_NAMES_Global_StartAddr = mAddr_NAMES_StartAddr + (RAM_DEV_NAMES_NO * RAM_NAME_SIZE);
-        //public const int mAddr_NAMES_Global_SystemName_Pos = 0;
-        //public const int RAM_NAMES_Global_Total_Records = (mAddr_NAMES_Global_SystemName_Pos + 1);
-        //public const int RAM_NAMES_Global_Total_Size = (RAM_NAMES_Global_Total_Records * RAM_NAME_SIZE);
-
         public const int mAddr_NAMES_Zone_StartIndex = (mAddr_NAMES_Device_StartIndex + RAM_DEV_NAMES_NO*RAM_DEVCFG_NO);
         public const int mAddr_NAMES_Zone_StartAddr = (mAddr_NAMES_StartAddr + RAM_TOTAL_DEVICE_NAMES_SIZE);
-        public const int RAM_ZONE_NAMES_SIZE = (ZONE_CFG_MAX_ZONES * RAM_NAME_SIZE);
 
-
-        public const int RAM_NAMES_SIZE = ((RAM_DEV_NAMES_NO * RAM_NAME_SIZE) + (RAM_NAMES_Global_Total_Size) + (RAM_ZONE_NAMES_SIZE));
+      //  public static int ZONE_CFG_LEN = RoundUpNumber((ZONE_CFG_NAME_POS + ZONE_CFG_NAME_LEN), ALRM_SYS_MEM_CONFIG_MIN_SECTOR);  //ROUND_UP((ZONE_CFG_NAME_POS+ZONE_CFG_NAME_LEN), ALRM_SYS_MEM_CONFIG_MIN_SECTOR );
+    //    public const int RAM_NAMES_SIZE = RoundUpNumber((RAM_DEV_NAMES_NO * RAM_NAME_SIZE) + (RAM_NAMES_Global_Total_Size), ALRM_SYS_MEM_CONFIG_MIN_SECTOR); 
         
 
         
 
         /************  SCHEDULE ***************/
-        public const int mAddr_SCHED_StartAddr =0x4000; //16384 - after Names CFG
-        public const int RAM_SCHED_SIZE  = 8192;         //32 devices * 8sched/dev *  32B sched size
         public const int RAM_DEV_SCHED_SIZE = 256;
-      //  public const int RAM_SMS_RECP_MEM_SIZE = 256;
         public const int RAM_DEV_SCHED_NO    =0x08;     //32 schedules
         public const int RAM_DEV_SCHED_MEM_SIZE  =0x20;  //32B  
         public const int RAM_DEV_SCHED_DATETIME_SIZE = 0x08;
-
-        
-        /****************    Schedule  *****************/
-        //4b date, from 4b date to , 4b hr from, 4b hr to  = 16b/time
-        public const int SCHED_MEM_SIZE  =0x2000;
-
 
         /*************  Schdule Types ***************/
         public const int SCHED_TYPE_POS =0x00;
@@ -948,10 +932,6 @@ namespace sconnConnector
 
 
         /*****************  SMS ***********************/
-        public const int mAddr_SMS_StartAddr     =0x6000;  //24576 - after Schedule
-        public const int mAddr_RECP_StartAddr =0x6000;
-        public const int mAddr_SMS_MSG_StartAddr =0x6100;
-
         public const byte RAM_SMS_RECP_ADDR_POS = (byte)0x0000;
         public const byte RAM_SMS_RECP_ADDR_LEN = 15;
         public const byte RAM_SMS_RECP_COUNTRY_CODE_POS = (byte)(RAM_SMS_RECP_ADDR_POS + RAM_SMS_RECP_ADDR_LEN);
@@ -989,11 +969,7 @@ namespace sconnConnector
         public const int AUTH_RECORD_LOGIN_LEN = AUTH_PASS_SIZE;
         public const int AUTH_RECORD_PASSWD_POS = (AUTH_RECORD_LOGIN_POS + AUTH_RECORD_LOGIN_LEN);
         public const int AUTH_RECORD_PASSWD_LEN = AUTH_PASS_SIZE;
-        public const int AUTH_RECORD_SIZE = (AUTH_RECORD_PASSWD_POS + AUTH_RECORD_PASSWD_LEN);
-
-        public const int AUTH_CRED_SIZE   =   AUTH_RECORD_SIZE; 
-        public const int AUTH_MAX_USERS = 16;
-        public const int AUTH_RECORDS_SIZE = (AUTH_RECORD_SIZE * AUTH_MAX_USERS);
+        public static int AUTH_RECORD_SIZE = (AUTH_RECORD_PASSWD_POS + AUTH_RECORD_PASSWD_LEN); //RoundUpNumber(, ALRM_SYS_MEM_CONFIG_MIN_SECTOR);
 
 
         /******************   NET   *************/

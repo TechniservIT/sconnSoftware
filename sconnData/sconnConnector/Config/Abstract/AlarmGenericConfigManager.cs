@@ -14,7 +14,7 @@ namespace sconnConnector.Config.Abstract
 {
     public class AlarmGenericConfigManager<T> where T : new()
     {
-        protected IAlarmSystemConfigurationEntity Entity;
+        protected IAlarmSystemEntityConfig Entity;
         protected static Logger _logger = LogManager.GetCurrentClassLogger();
         protected SconnClient client;
         public bool SingleUpload { get; set; }
@@ -22,18 +22,23 @@ namespace sconnConnector.Config.Abstract
 
         protected int EntityId;
 
-        public AlarmGenericConfigManager(IAlarmSystemConfigurationEntity entity, Device device)
+        public AlarmGenericConfigManager(IAlarmSystemEntityConfig entity, Device device)
         {
             SingleUpload = true;
             Entity = entity;
             client = new SconnClient(device.EndpInfo.Hostname, device.EndpInfo.Port, device.Credentials.Password, true);
         }
 
-        public AlarmGenericConfigManager(IAlarmSystemConfigurationEntity entity, Device device, int entityParam)
+        public AlarmGenericConfigManager(IAlarmSystemEntityConfig entity, Device device, int entityParam)
             : this(entity, device)
         {
             Parametrized = true;
             EntityId = entityParam;
+        }
+
+        public int AlarmGenericConfigManager_GetRemoteEntityCount()
+        {
+            return 0; //TODO
         }
 
         public bool Upload()
@@ -47,12 +52,14 @@ namespace sconnConnector.Config.Abstract
                     return false;
                 }
 
-                if (SingleUpload)
+                int entities = AlarmGenericConfigManager_GetRemoteEntityCount();
+                for (int i = 0; i < entities; i++)
                 {
-                    byte[] data = this.Entity.Serialize();
-                    byte[] msgHeader = CommandManager.GetHeaderForOperationParametrized(typeof (T), CommandOperation.Set,
+
+                    byte[] data = this.Entity.SerializeEntityWithId(i);
+                    byte[] msgHeader = CommandManager.GetHeaderForOperationParametrized(typeof(T), CommandOperation.Set,
                         EntityId);
-                    byte[] messageTail = CommandManager.GetTailForOperation(typeof (T), CommandOperation.Set);
+                    byte[] messageTail = CommandManager.GetTailForOperation(typeof(T), CommandOperation.Set);
                     byte[] uploadMsg = new byte[data.Length + msgHeader.Length + messageTail.Length];
 
                     msgHeader.CopyTo(uploadMsg, 0);
@@ -62,23 +69,10 @@ namespace sconnConnector.Config.Abstract
                     var res = this.SendMessage(uploadMsg);
                     if (IsResultSuccessForOperation(res, CommandOperation.Set))
                     {
-                        UploadSuccess =  true;
+                        UploadSuccess = true;
                     }
                 }
-                else
-                {
-                    if (Upload_Send_Start_Message())
-                    {
-                        if (Upload_Send_Config(this.Entity.Serialize()))
-                        {
-                            if (Upload_Signal_Finish())
-                            {
-                                UploadSuccess =  true;
-                            }
-                        }
-                    }
-                }
-
+                
                 bool namesUploaded = UploadNames();                 //now send names config
                 client.Disconnect();
                 return UploadSuccess && namesUploaded;
@@ -215,26 +209,17 @@ namespace sconnConnector.Config.Abstract
 
         public bool Download()
         {
-            if (Parametrized)
+            try
             {
-                return this.Download((byte)EntityId);
-            }
-            else
-            {
-                try
+                int entities = AlarmGenericConfigManager_GetRemoteEntityCount();
+                for (int i = 0; i < entities; i++)
                 {
-                    if (!client.Connect())
-                    {
-                        client.Disconnect();
-                        return false;
-                    }
-
-                    byte[] header = CommandManager.GetHeaderForOperation(typeof(T), CommandOperation.Get);
+                    byte[] header = CommandManager.GetHeaderForOperationParametrized(typeof(T), CommandOperation.Get, i);
                     var res = this.SendMessage(header);
                     if (IsResultSuccessForOperation(res, CommandOperation.Get))
                     {
                         byte[] msgBody = GetResultMessageForOperationResult(res, CommandOperation.Get);
-                        Entity.Deserialize(msgBody);
+                        Entity.DeserializeEntityWithId(msgBody);
                         if (CommandManager.IsConfigEntityNamed(typeof(T)))
                         {
                             this.DownloadNames();
@@ -242,46 +227,9 @@ namespace sconnConnector.Config.Abstract
                         client.Disconnect();
                         return true;
                     }
-
                     client.Disconnect();
-                    return false;
-                }
-                catch (Exception e)
-                {
-                    _logger.Error(e, e.Message);
-                    client.Disconnect();
-                    return false;
                 }
 
-            }
-
-        }
-
-        public bool Download(byte Id)
-        {
-            try
-            {
-                if (!client.Connect())
-                {
-                    client.Disconnect();
-                    return false;
-                }
-
-                byte[] header = CommandManager.GetHeaderForOperationParametrized(typeof(T), CommandOperation.Get,Id);
-                var res = this.SendMessage(header);
-                if (IsResultSuccessForOperation(res, CommandOperation.Get))
-                {
-                    byte[] msgBody = GetResultMessageForOperationResult(res, CommandOperation.Get);
-                    Entity.Deserialize(msgBody);
-                    if (CommandManager.IsConfigEntityNamed(typeof(T)))
-                    {
-                        this.DownloadNames();
-                    }
-                    client.Disconnect();
-                    return true;
-                }
-
-                client.Disconnect();
                 return false;
             }
             catch (Exception e)
@@ -290,8 +238,43 @@ namespace sconnConnector.Config.Abstract
                 client.Disconnect();
                 return false;
             }
-
         }
+
+        //public bool Download(byte Id)
+        //{
+        //    try
+        //    {
+        //        if (!client.Connect())
+        //        {
+        //            client.Disconnect();
+        //            return false;
+        //        }
+
+        //        byte[] header = CommandManager.GetHeaderForOperationParametrized(typeof(T), CommandOperation.Get,Id);
+        //        var res = this.SendMessage(header);
+        //        if (IsResultSuccessForOperation(res, CommandOperation.Get))
+        //        {
+        //            byte[] msgBody = GetResultMessageForOperationResult(res, CommandOperation.Get);
+        //            Entity.Deserialize(msgBody);
+        //            if (CommandManager.IsConfigEntityNamed(typeof(T)))
+        //            {
+        //                this.DownloadNames();
+        //            }
+        //            client.Disconnect();
+        //            return true;
+        //        }
+
+        //        client.Disconnect();
+        //        return false;
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        _logger.Error(e, e.Message);
+        //        client.Disconnect();
+        //        return false;
+        //    }
+
+        //}
 
 
         private bool IsResultSuccessForOperation(byte[] result, CommandOperation oper)

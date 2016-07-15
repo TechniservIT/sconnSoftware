@@ -1531,18 +1531,7 @@ namespace sconnConnector
 
                                 if (ReadSpecialRegs)
                                 {
-                                    /*****  Get Device AUTH CFG ******/
-
-                                    cmd[1] = ipcCMD.getAuthDevices;
-                                    devAuthBF = client.berkeleySendMsg(cmd);
-                                    if (devAuthBF[0] == ipcCMD.SVAL)
-                                    {
-                                        site.siteCfg.AuthDevices = new byte[ipcDefines.AUTH_RECORDS_SIZE];
-                                        for (int j = 0; j < ipcDefines.AUTH_RECORDS_SIZE; j++)
-                                        {
-                                            site.siteCfg.AuthDevices[j] = devAuthBF[j + 1];
-                                        }
-                                    }
+                                   
 
 
                                     /*****  Get GSM RCPT ******/
@@ -1640,30 +1629,6 @@ namespace sconnConnector
                                             }
                                         }
 
-                                        //Get Zone Names
-                                        cmd[1] = ipcCMD.getZoneName;
-                                        site.siteCfg.ZoneNames = new byte[ipcDefines.ZONE_CFG_MAX_ZONES][];
-                                        for (int n = 0; n < ipcDefines.ZONE_CFG_MAX_ZONES; n++)
-                                        {
-                                            try
-                                            {
-                                                site.siteCfg.ZoneNames[n] = new byte[ipcDefines.RAM_NAME_SIZE];
-                                                cmd[2] = (byte)n;
-                                                byte[] narr = client.berkeleySendMsg(cmd);
-                                                if (narr[0] == ipcCMD.SVAL)
-                                                {
-                                                    for (int txtbyte = MsgByteOffset; txtbyte < ipcDefines.RAM_NAME_SIZE + MsgByteOffset; txtbyte++)
-                                                    {
-                                                        site.siteCfg.ZoneNames[n][txtbyte - MsgByteOffset] = narr[txtbyte];
-                                                    }
-                                                }
-                                            }
-                                            catch (Exception e)
-                                            {
-
-                                            }
-
-                                        }
 
                                     }
 
@@ -1686,17 +1651,7 @@ namespace sconnConnector
                                         }
                                         site.siteCfg.events[j] = new ipcEvent(evBF);
                                     }
-
-                                    //Auth cfg
-                                    cmd[0] = ipcCMD.GET;
-                                    cmd[1] = ipcCMD.getPasswdCfg;
-                                    rxBF = client.berkeleySendMsg(cmd);
-                                    byte[] AuthBf = new byte[ipcDefines.AUTH_MAX_USERS * ipcDefines.AUTH_RECORD_SIZE];
-                                    for (int j = 0; j < ipcDefines.AUTH_MAX_USERS * ipcDefines.AUTH_RECORD_SIZE; j++)
-                                    {
-                                        AuthBf[j] = rxBF[j + 1];
-                                    }
-                                    site.siteCfg.UserConfig = AuthBf;
+                                    
                                 }
                             }
 

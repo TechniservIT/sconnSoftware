@@ -26,6 +26,14 @@ namespace sconnConnector.POCO.Config.sconn
         
     }
 
+    public interface IAlarmSystemEntityConfig 
+    {
+        int GetEntityCount();
+        void Clear();
+        byte[] SerializeEntityWithId(int id);
+        void DeserializeEntityWithId(byte[] buffer);
+    }
+
     public interface IAlarmSystemNamedEntity : IAlarmSystemConfigurationEntity
     {
         byte[] SerializeEntityNames();

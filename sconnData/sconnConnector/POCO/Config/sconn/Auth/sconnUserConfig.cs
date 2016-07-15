@@ -8,7 +8,7 @@ using sconnConnector.POCO.Config.sconn;
 
 namespace sconnConnector.POCO.Config.Abstract.Auth
 {
-    public class sconnUserConfig : IAlarmSystemConfigurationEntity, ISerializableConfiguration, IFakeAbleConfiguration
+    public class sconnUserConfig : IAlarmSystemEntityConfig, IFakeAbleConfiguration
     {
         public List<sconnUser> Users { get; set; }
         private static Logger _logger = LogManager.GetCurrentClassLogger();
@@ -19,52 +19,38 @@ namespace sconnConnector.POCO.Config.Abstract.Auth
             Users = new List<sconnUser>();
         }
 
-        public sconnUserConfig(ipcSiteConfig cfg) :this()
+        public int GetEntityCount()
         {
-            this.Deserialize(cfg.UserConfig);
+            return Users.Count;
         }
-        
-        public byte[] Serialize()
+
+        public void Clear()
+        {
+            this.Users = new List<sconnUser>();
+        }
+
+        public byte[] SerializeEntityWithId(int id)
         {
             try
             {
-                byte[] Serialized = new byte[ipcDefines.AUTH_RECORDS_SIZE];
-                for (int i = 0; i < Users.Count; i++)
-                {
-                    byte[] partial = Users[i].Serialize();
-                    partial.CopyTo(Serialized, i * ipcDefines.AUTH_RECORD_SIZE);
-                }
-                return Serialized;
+                return Users[id].Serialize();
             }
             catch (Exception e)
             {
                 _logger.Error(e, e.Message);
-                return new byte[0];
+                return null;
             }
-
         }
-
-        public void Deserialize(byte[] buffer)
+        public void DeserializeEntityWithId(byte[] buffer)
         {
             try
             {
-                for (int i = 0; i < ipcDefines.AUTH_MAX_USERS; i++)
-                {
-                    byte[] relayCfg = new byte[ipcDefines.AUTH_RECORD_SIZE];
-                    for (int j = 0; j < ipcDefines.AUTH_RECORD_SIZE; j++)
-                    {
-                        relayCfg[j] = buffer[i * ipcDefines.AUTH_RECORD_SIZE + j];
-                    }
-                    sconnUser relay = new sconnUser(relayCfg);
-                    relay.Id = i;
-                    Users.Add(relay);
-                }
+                Users.Add(new sconnUser(buffer));
             }
             catch (Exception e)
             {
                 _logger.Error(e, e.Message);
             }
-
         }
 
         public void Fake()
@@ -79,9 +65,7 @@ namespace sconnConnector.POCO.Config.Abstract.Auth
             {
                 _logger.Error(e, e.Message);
             }
-
         }
-
 
         public string UUID { get; set; }
     }

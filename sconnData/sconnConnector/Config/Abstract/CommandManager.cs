@@ -57,7 +57,7 @@ namespace sconnConnector.Config.Abstract
             {
                 return ipcCMD.setGlobalCfg;
             }
-            else if (type == typeof(sconnAuthorizedDevices))
+            else if (type == typeof(sconnAuthorizedDevicesConfig))
             {
                 return ipcCMD.setAuthDevCfg;
             }
@@ -86,7 +86,7 @@ namespace sconnConnector.Config.Abstract
             {
                 return (byte)CommandConfigType.NET_PACKET_TYPE_GCFG;
             }
-            else if (type == typeof(sconnAuthorizedDevices))
+            else if (type == typeof(sconnAuthorizedDevicesConfig))
             {
                 return (byte)CommandConfigType.NET_PACKET_TYPE_DEVAUTHCFG;
             }
@@ -115,7 +115,7 @@ namespace sconnConnector.Config.Abstract
             {
                 return ipcCMD.getGlobCfg;
             }
-            else if (type == typeof(sconnAuthorizedDevices))
+            else if (type == typeof(sconnAuthorizedDevicesConfig))
             {
                 return ipcCMD.getAuthDevices;
             }
@@ -246,15 +246,7 @@ namespace sconnConnector.Config.Abstract
 
         public static bool IsConfigEntityNamed(Type type)
         {
-            if (type == typeof(sconnAlarmZoneConfig))
-            {
-                return true;
-            }
-            else if (type == typeof(sconnDeviceConfig))
-            {
-                return true;
-            }
-            else if (type == typeof(sconnGlobalConfig))
+            if (type == typeof(sconnDeviceConfig))
             {
                 return true;
             }
@@ -265,7 +257,7 @@ namespace sconnConnector.Config.Abstract
         {
             if (type == typeof(sconnAlarmZoneConfig))
             {
-                return ipcDefines.ZONE_CFG_MAX_ZONES;
+                return 0;
             }
             else if (type == typeof(sconnDeviceConfig))
             {

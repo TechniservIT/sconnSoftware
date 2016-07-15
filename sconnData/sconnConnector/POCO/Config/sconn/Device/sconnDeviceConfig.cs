@@ -9,28 +9,38 @@ using sconnConnector.POCO.Config.Abstract.Device;
 
 namespace sconnConnector.POCO.Config.sconn
 {
-    public class sconnDeviceConfig : IAlarmSystemNamedConfigurationEntity, ISerializableConfiguration,
-        IFakeAbleConfiguration, IIndexAbleConfiguration
+
+    public class sconnDeviceConfig : IAlarmSystemEntityConfig, IFakeAbleConfiguration, IIndexAbleConfiguration
     {
-        public sconnDevice Device { get; set; }
+        public List<sconnDevice> Devices { get; set; }
         private static Logger _logger = LogManager.GetCurrentClassLogger();
 
         public sconnDeviceConfig(byte Id)
         {
-            Device = new sconnDevice {Id = Id};
+            Devices = new List<sconnDevice>();
         }
 
         public sconnDeviceConfig()
         {
-            Device = new sconnDevice();
+            Devices = new List<sconnDevice>();
             UUID = Guid.NewGuid().ToString();
         }
 
-        public byte[] Serialize()
+        public void Clear()
+        {
+            this.Devices = new List<sconnDevice>();
+        }
+
+        public int GetEntityCount()
+        {
+            return Devices.Count;
+        }
+        
+        public byte[] SerializeEntityWithId(int id)
         {
             try
             {
-                return Device.Serialize();
+                return Devices[id].Serialize();
             }
             catch (Exception e)
             {
@@ -38,12 +48,11 @@ namespace sconnConnector.POCO.Config.sconn
                 return null;
             }
         }
-
-        public void Deserialize(byte[] buffer)
+        public void DeserializeEntityWithId(byte[] buffer)
         {
             try
             {
-                this.Device = new sconnDevice(buffer);
+                Devices.Add(new sconnDevice(buffer));
             }
             catch (Exception e)
             {
@@ -57,7 +66,7 @@ namespace sconnConnector.POCO.Config.sconn
             {
                 sconnDevice zone = new sconnDevice();
                 zone.Fake();
-                this.Device = zone;
+                this.Devices = new List<sconnDevice>();
             }
             catch (Exception e)
             {
@@ -67,35 +76,10 @@ namespace sconnConnector.POCO.Config.sconn
 
         public int GetIndex()
         {
-            return Device.Id;
+            return 0;
         }
 
-        public byte[] SerializeNames()
-        {
-            try
-            {
-                return Device.SerializeNames();
-            }
-            catch (Exception e)
-            {
-                _logger.Error(e, e.Message);
-                return null;
-            }
-        }
-
-        public void DeserializeNames(byte[] buffer)
-        {
-            try
-            {
-                this.Device.DeserializeNames(buffer);
-            }
-            catch (Exception e)
-            {
-                _logger.Error(e, e.Message);
-
-            }
-        }
-
+        
         public string UUID { get; set; }
     }
 

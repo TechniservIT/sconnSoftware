@@ -11,4 +11,11 @@ namespace sconnConnector.POCO
         byte[] Serialize();
         void Deserialize(byte[] buffer);
     }
+
+    public interface ISerializableEntityConfiguration
+    {
+        byte[] SerializeEntityWithId(int id);
+        void DeserializeEntityWithId(byte[] buffer);
+    }
+
 }

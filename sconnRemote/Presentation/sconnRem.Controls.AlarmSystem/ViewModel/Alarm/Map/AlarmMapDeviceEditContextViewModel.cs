@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using AlarmSystemManagmentService;
+using AlarmSystemManagmentService.Device;
 using Prism.Commands;
 using Prism.Regions;
 using sconnConnector.Config;
@@ -37,13 +38,11 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm.Map
                 OnPropertyChanged();
             }
         }
-
-
-
+        
         public int DeviceId { get; set; }
         public string DeviceUuid { get; set; }
 
-        private readonly DeviceConfigService _provider;
+        private readonly AlarmDevicesConfigService _provider;
         private readonly AlarmSystemConfigManager _manager;
 
 
@@ -61,17 +60,13 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm.Map
         }
 
         private ZoneConfigurationService ZoneProvider;
-
-
-      
-
         public ICommand ConfigureZoneCommand { get; set; }
 
         public override void GetData()
         {
             try
             {
-                Config = (_provider.Get());
+                Config = (_provider.GetById(DeviceId));
                 Zones = new ObservableCollection<sconnAlarmZone>(ZoneProvider.GetAll());
 
             }
@@ -136,7 +131,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm.Map
         {
             _name = "Zones";
             SetupCmd();
-            this._provider = new DeviceConfigService(_manager,DeviceId);
+            this._provider = new AlarmDevicesConfigService(_manager);
             ZoneProvider = new ZoneConfigurationService(_manager);
         }
 
@@ -155,7 +150,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm.Map
             Config = new sconnDevice();
             SetupCmd();
             this._manager = SiteNavigationManager.alarmSystemConfigManager;
-            this._provider = new DeviceConfigService(_manager,DeviceId);
+            this._provider = new AlarmDevicesConfigService(_manager);
             ZoneProvider = new ZoneConfigurationService(_manager);
             this._regionManager = regionManager;
         }

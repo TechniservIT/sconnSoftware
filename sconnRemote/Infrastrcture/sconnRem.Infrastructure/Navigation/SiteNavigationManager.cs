@@ -74,8 +74,8 @@ namespace sconnRem.Infrastructure.Navigation
                     if (dinput.UUID.Equals(output.UUID))
                     {
                         dinput.CopyFrom(output);
-                        DeviceConfigService serv = new DeviceConfigService(alarmSystemConfigManager, dinput.Id);
-                        serv.Update(dev);
+                        AlarmDevicesConfigService serv = new AlarmDevicesConfigService(alarmSystemConfigManager);
+                        serv.Update(dev);   //, dinput.Id
                     }
                 }
             }
@@ -109,7 +109,7 @@ namespace sconnRem.Infrastructure.Navigation
                 if (dinput.UUID.Equals(input.UUID))
                 {
                     dinput.CopyFrom(input);
-                    DeviceConfigService serv = new DeviceConfigService(alarmSystemConfigManager,dinput.Id);
+                    AlarmDevicesConfigService serv = new AlarmDevicesConfigService(alarmSystemConfigManager);
                     serv.Update(CurrentContextDevice);
                 }
             }
@@ -139,18 +139,13 @@ namespace sconnRem.Infrastructure.Navigation
                 if (dinput.UUID.Equals(output.UUID))
                 {
                     dinput.CopyFrom(output);
-                    DeviceConfigService serv = new DeviceConfigService(alarmSystemConfigManager, dinput.Id);
+                    AlarmDevicesConfigService serv = new AlarmDevicesConfigService(alarmSystemConfigManager);
                     serv.Update(CurrentContextDevice);
                 }
             }
         }
 
-
-
         private static ComposablePart exportedInputComposablePart;
-
-
-        //private static ConfigNavBootstrapper alarmBootstrapper;
 
         public static void ShowFullScreen()
         {

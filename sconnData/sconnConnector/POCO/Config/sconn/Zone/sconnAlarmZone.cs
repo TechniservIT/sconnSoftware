@@ -101,10 +101,9 @@ namespace sconnConnector.POCO.Config.sconn
         {
             try
             {
-                //todo - load name
                 Type = (AlarmZoneType)buffer[ipcDefines.ZONE_CFG_TYPE_POS];
                 Enabled = buffer[ipcDefines.ZONE_CFG_ENABLED_POS] > 0 ? true : false;
-
+                Name = System.Text.Encoding.BigEndianUnicode.GetString(buffer, ipcDefines.ZONE_CFG_NAME_POS, ipcDefines.RAM_NAME_SIZE);
                 LoadImageTypeUrl();
             }
             catch (Exception e)

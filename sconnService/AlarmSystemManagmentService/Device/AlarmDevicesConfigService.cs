@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Threading.Tasks;
 using NLog;
@@ -45,30 +46,13 @@ namespace AlarmSystemManagmentService.Device
             }
         }
 
-        private void LoadDeviceConfigs()
-        {
-            sconnGlobalConfig glob = new sconnGlobalConfig();
-            AlarmGenericConfigManager<sconnGlobalConfig> gbman = new AlarmGenericConfigManager<sconnGlobalConfig>(glob, ConfigManager.RemoteDevice);
-            gbman.Download();
-            DeviceNo = glob.Devices;
-
-            DeviceConfigs = new List<sconnDevice>();
-            for (int i = 0; i < DeviceNo; i++)
-            {
-                sconnDeviceConfig dev = new sconnDeviceConfig();
-                AlarmGenericConfigManager<sconnDeviceConfig> dman = new AlarmGenericConfigManager<sconnDeviceConfig>(dev, ConfigManager.RemoteDevice, i);
-                dman.Download();
-                DeviceConfigs.Add(dev.Device);
-            }
-        }
-
         public List<sconnDevice> GetAll()
         {
-            LoadDeviceConfigs();
+            this.EntityManager.Download();
             return DeviceConfigs;
         }
 
-
+        
         public sconnDevice GetById(int Id)
         {
             if (Id <= DeviceConfigs.Count)
@@ -95,11 +79,23 @@ namespace AlarmSystemManagmentService.Device
         {
             try
             {
-                ConfigManager.Config.DeviceConfig.Device.Inputs = rcpt.Inputs;
-                ConfigManager.Config.DeviceConfig.Device.Outputs = rcpt.Outputs;
-                ConfigManager.Config.DeviceConfig.Device.Relays = rcpt.Relays;
-                ConfigManager.Config.DeviceConfig.Device.Name = rcpt.Name;
-                ConfigManager.Config.DeviceConfig.Device.NetworkConfig = rcpt.NetworkConfig;
+                sconnDevice dev = null;
+                foreach (var sdev in ConfigManager.Config.DeviceConfig.Devices)
+                {
+                    if (sdev.Id == rcpt.Id)
+                    {
+                        dev = sdev;
+                    }
+                }
+                if (dev != null)
+                {
+                    dev.Inputs = rcpt.Inputs;
+                    dev.Outputs = rcpt.Outputs;
+                    dev.Relays = rcpt.Relays;
+                    dev.Name = rcpt.Name;
+                    dev.NetworkConfig = rcpt.NetworkConfig;
+                }
+
                 return SaveChanges();
             }
             catch (Exception e)

@@ -17,7 +17,7 @@ namespace AlarmSystemManagmentService
     {
         public bool Online { get; set; }
         private static Logger _logger = LogManager.GetCurrentClassLogger();
-        private AlarmGenericConfigManager<sconnAuthorizedDevices> EntityManager;
+        private AlarmGenericConfigManager<sconnAuthorizedDevicesConfig> EntityManager;
         private AlarmSystemConfigManager ConfigManager;
 
         public AuthorizedDevicesConfigurationService()
@@ -30,7 +30,7 @@ namespace AlarmSystemManagmentService
             if(man != null)
             {
                 ConfigManager = man;
-                EntityManager = new AlarmGenericConfigManager<sconnAuthorizedDevices>(ConfigManager.Config.AuthorizedDevices, man.RemoteDevice);
+                EntityManager = new AlarmGenericConfigManager<sconnAuthorizedDevicesConfig>(ConfigManager.Config.AuthorizedDevicesConfig, man.RemoteDevice);
             }
 
         }
@@ -53,7 +53,7 @@ namespace AlarmSystemManagmentService
             {
                 EntityManager.Download();
             }
-            return ConfigManager.Config.AuthorizedDevices.Devices.ToList();
+            return ConfigManager.Config.AuthorizedDevicesConfig.Devices.ToList();
         }
 
         public bool RemoveById(int Id)
@@ -83,7 +83,7 @@ namespace AlarmSystemManagmentService
                 {
                     EntityManager.Download();
                 }
-                sconnAuthorizedDevice dev = ConfigManager.Config.AuthorizedDevices.Devices.FirstOrDefault(d => d.Id == Id);
+                sconnAuthorizedDevice dev = ConfigManager.Config.AuthorizedDevicesConfig.Devices.FirstOrDefault(d => d.Id == Id);
                 return dev;
             }
             catch (Exception e)
@@ -97,7 +97,7 @@ namespace AlarmSystemManagmentService
         {
             try
             {
-                ConfigManager.Config.AuthorizedDevices.Devices.Add(device);
+                ConfigManager.Config.AuthorizedDevicesConfig.Devices.Add(device);
                 return true;    //no adding -  filled with empty objects
             }
             catch (Exception e )
@@ -112,7 +112,7 @@ namespace AlarmSystemManagmentService
         {
             try
             {
-                ConfigManager.Config.AuthorizedDevices.Devices
+                ConfigManager.Config.AuthorizedDevicesConfig.Devices
                    .Where(z => z.Id == device.Id)
                    .ToList()
                    .ForEach(x =>
@@ -147,7 +147,7 @@ namespace AlarmSystemManagmentService
                 }
                 else
                 {
-                    this.ConfigManager.Config.AuthorizedDevices.Devices.Remove(device);
+                    this.ConfigManager.Config.AuthorizedDevicesConfig.Devices.Remove(device);
                     return true;
                 }
 

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,36 +9,39 @@ using sconnConnector.POCO.Config.sconn;
 
 namespace sconnConnector.POCO.Config
 {
-    public class sconnGsmConfig : IAlarmSystemEntityConfig, IFakeAbleConfiguration
+    public class sconnAuthorizedDevicesConfig : IAlarmSystemEntityConfig, IFakeAbleConfiguration
     {
-        public int RcptNo { get; set; }
-        
-        [MaxLength(ipcDefines.RAM_SMS_RECP_NO)]
-        public List<sconnGsmRcpt> Rcpts { get; set; }
-
+        public List<sconnAuthorizedDevice>  Devices { get; set; }
         private static Logger _logger = LogManager.GetCurrentClassLogger();
 
-        public sconnGsmConfig()
+        public sconnAuthorizedDevicesConfig()
         {
-            Rcpts = new List<sconnGsmRcpt>();
+            Devices = new List<sconnAuthorizedDevice>();
             UUID = Guid.NewGuid().ToString();
+        }
+        
+        public void Fake()
+        {
+            sconnAuthorizedDevice zone = new sconnAuthorizedDevice();
+            zone.Fake();
+            Devices.Add(zone);
         }
 
         public void Clear()
         {
-            this.Rcpts = new List<sconnGsmRcpt>();
+            this.Devices = new List<sconnAuthorizedDevice>();
         }
 
         public int GetEntityCount()
         {
-            return Rcpts.Count;
+            return Devices.Count;
         }
 
         public byte[] SerializeEntityWithId(int id)
         {
             try
             {
-                return Rcpts[id].Serialize();
+                return Devices[id].Serialize();
             }
             catch (Exception e)
             {
@@ -51,30 +53,15 @@ namespace sconnConnector.POCO.Config
         {
             try
             {
-                Rcpts.Add(new sconnGsmRcpt(buffer));
+                Devices.Add(new sconnAuthorizedDevice(buffer));
             }
             catch (Exception e)
             {
                 _logger.Error(e, e.Message);
             }
         }
-
-        public void Fake()
-        {
-            try
-            {
-                sconnGsmRcpt zone = new sconnGsmRcpt();
-                zone.Fake();
-                Rcpts.Add(zone);
-            }
-            catch (Exception e)
-            {
-                _logger.Error(e, e.Message);
-            }
-
-        }
+        
 
         public string UUID { get; set; }
     }
-
 }

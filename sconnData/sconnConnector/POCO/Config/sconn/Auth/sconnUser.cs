@@ -101,7 +101,7 @@ namespace sconnConnector.POCO.Config.Abstract.Auth
         {
             try
             {
-                if (buffer.Length >= ipcDefines.AUTH_CRED_SIZE)
+                if (buffer.Length >= ipcDefines.AUTH_RECORD_SIZE)
                 {
                     Permissions = buffer[ipcDefines.AUTH_RECORD_PERM_POS];
                     Enabled = buffer[ipcDefines.AUTH_RECORD_ENABLED_POS] > 0 ? true : false;

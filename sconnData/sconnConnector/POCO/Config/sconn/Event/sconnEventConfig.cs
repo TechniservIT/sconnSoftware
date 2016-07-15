@@ -7,7 +7,7 @@ using NLog;
 
 namespace sconnConnector.POCO.Config.sconn
 {
-    public class sconnEventConfig : IAlarmSystemConfigurationEntity, ISerializableConfiguration, IFakeAbleConfiguration
+    public class sconnEventConfig : IAlarmSystemEntityConfig, IFakeAbleConfiguration
     {
         public List<sconnEvent> Events { get; set; }
         private static Logger _logger = LogManager.GetCurrentClassLogger();
@@ -39,43 +39,34 @@ namespace sconnConnector.POCO.Config.sconn
 
         }
 
-        public byte[] Serialize()
-        {
 
+        public void Clear()
+        {
+            this.Events = new List<sconnEvent>();
+        }
+
+        public int GetEntityCount()
+        {
+            return Events.Count;
+        }
+
+        public byte[] SerializeEntityWithId(int id)
+        {
             try
             {
-                byte[] Serialized = new byte[ipcDefines.EVENT_DB_RECORD_LEN];
-                for (int i = 0; i < Events.Count; i++)
-                {
-                    byte[] partial = Events[i].Serialize();
-                    partial.CopyTo(Serialized, i * ipcDefines.EVENT_DB_RECORD_LEN);
-                }
-                return Serialized;
+                return Events[id].Serialize();
             }
             catch (Exception e)
             {
                 _logger.Error(e, e.Message);
                 return null;
             }
-
         }
-
-        public void Deserialize(byte[] buffer)
+        public void DeserializeEntityWithId(byte[] buffer)
         {
             try
             {
-                int relays = buffer[ipcDefines.EVENT_DB_INFO_EVNO_POS];
-                for (int i = 0; i < relays; i++)
-                {
-                    byte[] relayCfg = new byte[ipcDefines.EVENT_DB_RECORD_LEN];
-                    for (int j = 0; j < ipcDefines.EVENT_DB_RECORD_LEN; j++)
-                    {
-                        relayCfg[j] = buffer[i * ipcDefines.EVENT_DB_RECORD_LEN + j+1]; //offset for ev no - todo - defines
-                    }
-                    sconnEvent relay = new sconnEvent(relayCfg);
-                    relay.Id = i;
-                    Events.Add(relay);
-                }
+                Events.Add(new sconnEvent(buffer));
             }
             catch (Exception e)
             {

@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NLog;
 using sconnConnector.POCO.Config.Abstract;
 
 namespace sconnConnector.POCO.Config.sconn
 {
-    public class sconnGlobalConfig : IAlarmSystemNamedEntity, ISerializableConfiguration, IFakeAbleConfiguration
+    public class sconnGlobalConfig : IAlarmSystemEntityConfig, IFakeAbleConfiguration
     {
         private byte[] _memCFG;
         public byte[] memCFG
@@ -45,7 +46,7 @@ namespace sconnConnector.POCO.Config.sconn
 
         public byte BusMaxFailedMessagesPerSecond { get; set; }
 
-
+        private static Logger _logger = LogManager.GetCurrentClassLogger();
 
         public sconnGlobalConfig()
         {
@@ -56,6 +57,40 @@ namespace sconnConnector.POCO.Config.sconn
         public sconnGlobalConfig(ipcSiteConfig cfg) :this()
         {
             this.memCFG = cfg.globalConfig.memCFG;
+        }
+        
+        public int GetEntityCount()
+        {
+            return 1;
+        }
+
+        public void Clear()
+        {
+          
+        }
+
+        public byte[] SerializeEntityWithId(int id)
+        {
+            try
+            {
+                return Serialize();
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e, e.Message);
+                return null;
+            }
+        }
+        public void DeserializeEntityWithId(byte[] buffer)
+        {
+            try
+            {
+             Deserialize(buffer);
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e, e.Message);
+            }
         }
 
 

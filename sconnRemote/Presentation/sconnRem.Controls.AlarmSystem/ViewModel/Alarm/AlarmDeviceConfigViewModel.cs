@@ -12,6 +12,7 @@ using sconnConnector.POCO.Config.Abstract;
 using sconnRem.ViewModel.Generic;
 using Prism.Mvvm;
 using System.ComponentModel.Composition;
+using AlarmSystemManagmentService.Device;
 using NLog;
 using Prism;
 using Prism.Regions;
@@ -26,7 +27,7 @@ namespace sconnRem.ViewModel.Alarm
     public class AlarmDeviceConfigViewModel : GenericAsyncConfigViewModel
     {
         public sconnDevice Config { get; set; }
-        private DeviceConfigService _provider;
+        private AlarmDevicesConfigService _provider;
         private AlarmSystemConfigManager _manager;
         private readonly IRegionManager _regionManager;
      
@@ -37,7 +38,7 @@ namespace sconnRem.ViewModel.Alarm
         {
             try
             {
-                Config = _provider.Get();
+                Config = _provider.GetAll().FirstOrDefault(); //TODO - by ID
 
             }
             catch (Exception ex)
@@ -54,7 +55,7 @@ namespace sconnRem.ViewModel.Alarm
         public AlarmDeviceConfigViewModel()
         {
             _name = "Dev";
-            this._provider = new DeviceConfigService(_manager);
+            this._provider = new AlarmDevicesConfigService(_manager);
         }
 
         [ImportingConstructor]
@@ -62,7 +63,7 @@ namespace sconnRem.ViewModel.Alarm
         {
             _manager = manager;
             _name = "Dev";
-            this._provider = new DeviceConfigService(_manager);
+            this._provider = new AlarmDevicesConfigService(_manager);
 
         }
 
@@ -71,7 +72,7 @@ namespace sconnRem.ViewModel.Alarm
         {
             Config = new sconnDevice();
             this._manager = (AlarmSystemConfigManager)manager;
-            this._provider = new DeviceConfigService(_manager);
+            this._provider = new AlarmDevicesConfigService(_manager);
             this._regionManager = regionManager;
             GetData();
         }

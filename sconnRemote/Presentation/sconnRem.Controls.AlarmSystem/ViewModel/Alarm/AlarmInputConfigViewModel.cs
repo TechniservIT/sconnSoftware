@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using AlarmSystemManagmentService;
+using AlarmSystemManagmentService.Device;
 using NLog;
 using Prism.Commands;
 using Prism.Mvvm;
@@ -27,7 +28,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
     public class AlarmInputConfigViewModel : GenericAlarmConfigViewModel
     {
         public sconnInput Config { get; set; }
-        private DeviceConfigService _provider;
+        private AlarmDevicesConfigService _provider;
         private AlarmSystemConfigManager _manager;
         
 
@@ -50,7 +51,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
         {
             this._manager = AlarmSystemContext.GetManager();
             _name = "Dev";
-            this._provider = new DeviceConfigService(_manager);
+            this._provider = new AlarmDevicesConfigService(_manager);
         }
 
         public void NavigateBack()

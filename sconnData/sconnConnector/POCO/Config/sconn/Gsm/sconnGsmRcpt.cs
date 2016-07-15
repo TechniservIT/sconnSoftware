@@ -9,7 +9,7 @@ using sconnConnector.POCO.Config.Abstract;
 
 namespace sconnConnector.POCO.Config.sconn
 {
-    public class sconnGsmRcpt : IAlarmSystemConfigurationEntity, ISerializableConfiguration, IFakeAbleConfiguration
+    public class sconnGsmRcpt : ISerializableConfiguration,  IFakeAbleConfiguration
     {
         public int Id { get; set; }
 
@@ -31,11 +31,6 @@ namespace sconnConnector.POCO.Config.sconn
         public sconnGsmRcpt()
         {
             UUID = Guid.NewGuid().ToString();
-        }
-
-        public sconnGsmRcpt(ipcRcpt rcpt) : this()
-        {
-            this.Deserialize(rcpt.RawBytes);
         }
 
         public sconnGsmRcpt(byte[] Bytes): this()
