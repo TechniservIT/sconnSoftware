@@ -38,14 +38,29 @@ namespace sconnConnector.Config.Abstract
 
         public int AlarmGenericConfigManager_GetRemoteEntityCount()
         {
-            return 0; //TODO
+            byte[] data = new byte[1];
+            data[0] = (byte)CommandManager.CommandManager_GetConfigTypeForEntity(typeof(T));   //ipcCMD.EINFO;
+            byte[] msgHeader = CommandManager.GetHeaderForOperationSingleQuery(CommandOperation.Einfo);
+            byte[] messageTail = CommandManager.GetTailForOperation(typeof(T), CommandOperation.Einfo);
+            byte[] uploadMsg = new byte[data.Length + msgHeader.Length + messageTail.Length];
+
+            msgHeader.CopyTo(uploadMsg, 0);
+            data.CopyTo(uploadMsg, msgHeader.Length);
+            messageTail.CopyTo(uploadMsg, msgHeader.Length + data.Length);
+
+            var res = this.SendMessage(uploadMsg);
+            if (!IsResultSuccessForOperation(res, CommandOperation.Einfo)) //change to fail on any upload fail
+            {
+                return 0;
+            }
+            return res[1];
         }
 
         public bool Upload()
         {
             try
             {
-                bool UploadSuccess = false;
+                bool UploadSuccess = true;
                 if (!client.Connect())
                 {
                     client.Disconnect();
@@ -63,13 +78,13 @@ namespace sconnConnector.Config.Abstract
                     byte[] uploadMsg = new byte[data.Length + msgHeader.Length + messageTail.Length];
 
                     msgHeader.CopyTo(uploadMsg, 0);
-                    data.CopyTo(uploadMsg, ipcDefines.NET_UPLOAD_HEADER_BYTES);
-                    messageTail.CopyTo(uploadMsg, ipcDefines.NET_UPLOAD_HEADER_BYTES + data.Length);
+                    data.CopyTo(uploadMsg, msgHeader.Length);
+                    messageTail.CopyTo(uploadMsg, msgHeader.Length + data.Length);
 
                     var res = this.SendMessage(uploadMsg);
-                    if (IsResultSuccessForOperation(res, CommandOperation.Set))
+                    if (!IsResultSuccessForOperation(res, CommandOperation.Set))    //change to fail on any upload fail
                     {
-                        UploadSuccess = true;
+                        UploadSuccess = false;
                     }
                 }
                 
@@ -212,6 +227,7 @@ namespace sconnConnector.Config.Abstract
             try
             {
                 int entities = AlarmGenericConfigManager_GetRemoteEntityCount();
+                Entity.Clear();
                 for (int i = 0; i < entities; i++)
                 {
                     byte[] header = CommandManager.GetHeaderForOperationParametrized(typeof(T), CommandOperation.Get, i);
@@ -222,7 +238,7 @@ namespace sconnConnector.Config.Abstract
                         Entity.DeserializeEntityWithId(msgBody);
                         if (CommandManager.IsConfigEntityNamed(typeof(T)))
                         {
-                            this.DownloadNames();
+                           // this.DownloadNames();
                         }
                         client.Disconnect();
                         return true;
@@ -294,6 +310,10 @@ namespace sconnConnector.Config.Abstract
             else if (oper == CommandOperation.PushFin)
             {
                 return result.Contains(ipcCMD.ACKFIN);
+            }
+            else if (oper == CommandOperation.Einfo)
+            {
+                return result.Contains(ipcCMD.SVAL);
             }
             return false;
         }

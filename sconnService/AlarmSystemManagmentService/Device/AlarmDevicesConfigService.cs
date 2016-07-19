@@ -17,9 +17,6 @@ namespace AlarmSystemManagmentService.Device
         private static Logger _logger = LogManager.GetCurrentClassLogger();
         private AlarmGenericConfigManager<sconnDeviceConfig> EntityManager;
 
-        private int DeviceNo;
-        private List<sconnDevice> DeviceConfigs; 
-
         public AlarmSystemConfigManager ConfigManager;
 
         public AlarmDevicesConfigService()
@@ -49,15 +46,15 @@ namespace AlarmSystemManagmentService.Device
         public List<sconnDevice> GetAll()
         {
             this.EntityManager.Download();
-            return DeviceConfigs;
+            return ConfigManager.Config.DeviceConfig.Devices;
         }
 
         
         public sconnDevice GetById(int Id)
         {
-            if (Id <= DeviceConfigs.Count)
+            if (Id <= ConfigManager.Config.DeviceConfig.Devices.Count)
             {
-                return DeviceConfigs[Id];
+                return ConfigManager.Config.DeviceConfig.Devices[Id];
             }
             else
             {

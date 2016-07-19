@@ -442,6 +442,10 @@ namespace sconnConnector
         public const byte SVAL = 0x07; //start of value bytes
         public const byte EVAL = 0x08; //end value
 
+        public const byte EINFO = 0x02;
+        public const byte DEL  = 0x03;
+        public const byte ADD = 0x04 ;
+
         //Custom CMDs replacing ASCII
         public const byte SET = 0x05; // set following register group value
         public const byte setRegVal = 0x51;
@@ -980,6 +984,7 @@ namespace sconnConnector
         public const int NET_CMD_PACKET_LEN = 3;
         public const int NET_UPLOAD_HEADER_BYTES = 4;
         public const int NET_UPLOAD_TAIL_BYTES = 1;
+        public const int NET_UPLOAD_HEADER_SINGLE_QUERY_BYTES = 1;
         public const int NET_UPLOAD_PACKET_CONTROL_BYTES = (NET_UPLOAD_TAIL_BYTES+ NET_UPLOAD_HEADER_BYTES);
         public const int NET_UPLOAD_PACKET_DATA_OFFSET = 4;
         public const int NET_MAX_PACKET_DATA = (NET_MAX_TX_SIZE - NET_UPLOAD_PACKET_CONTROL_BYTES);

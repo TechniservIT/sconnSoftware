@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using sconnConnector.POCO.Config;
 using sconnConnector.POCO.Config.Abstract.Auth;
 using sconnConnector.POCO.Config.sconn;
+using sconnConnector.POCO.Config.sconn.Name;
+using sconnConnector.POCO.Config.sconn.Schedule;
 
 namespace sconnConnector.Config.Abstract
 {
@@ -16,7 +18,8 @@ namespace sconnConnector.Config.Abstract
         Push = ipcCMD.PSH,
         PushFin = ipcCMD.PSHFIN,
         Fin = ipcCMD.EOT,
-        Ack = ipcCMD.ACK
+        Ack = ipcCMD.ACK,
+        Einfo = ipcCMD.EINFO
 
     }
 
@@ -130,9 +133,10 @@ namespace sconnConnector.Config.Abstract
             return ipcCMD.ERRCMD;
         }
 
+
         private static byte GetCommandOperationType(Type type, CommandOperation oper)
         {
-            if (oper == CommandOperation.Set)
+            if (type == typeof(sconnAlarmZoneConfig))
             {
                 return SetCommandForConfigType(type);
             }
@@ -149,6 +153,48 @@ namespace sconnConnector.Config.Abstract
                 return GetConfigUploadTypeCode(type);
             }
             return ipcCMD.ERRCMD;
+        }
+
+
+        public static AlarmSystemConfigType CommandManager_GetConfigTypeForEntity(Type type)
+        {
+            if (type == typeof(sconnAlarmZoneConfig))
+            {
+                return AlarmSystemConfigType.AlarmSystemConfig_Zone;
+            }
+            else if (type == typeof(sconnGsmConfig))
+            {
+                return AlarmSystemConfigType.AlarmSystemConfig_Gsm;
+            }
+            else if (type == typeof(sconnDeviceConfig))
+            {
+                return AlarmSystemConfigType.AlarmSystemConfig_Device;
+            }
+            else if (type == typeof(sconnGlobalConfig))
+            {
+                return AlarmSystemConfigType.AlarmSystemConfig_Global;
+            }
+            else if (type == typeof(sconnAuthorizedDevicesConfig))
+            {
+                return AlarmSystemConfigType.AlarmSystemConfig_DeviceAuthorization;
+            }
+            else if (type == typeof(sconnUserConfig))
+            {
+                return AlarmSystemConfigType.AlarmSystemConfig_Users;
+            }
+            else if (type == typeof(sconnEvent))
+            {
+                return AlarmSystemConfigType.AlarmSystemConfig_Events;
+            }
+            else if (type == typeof(sconnName))
+            {
+                return AlarmSystemConfigType.AlarmSystemConfig_Name;
+            }
+            else if (type == typeof(sconnSchedule))
+            {
+                return AlarmSystemConfigType.AlarmSystemConfig_Schedule;
+            }
+            return 0;
         }
 
 
@@ -195,6 +241,10 @@ namespace sconnConnector.Config.Abstract
             {
                 return ipcCMD.EVAL;
             }
+            else if (oper == CommandOperation.Einfo)
+            {
+                return 0;
+            }
             return ipcCMD.EVAL;
         }
 
@@ -211,8 +261,15 @@ namespace sconnConnector.Config.Abstract
         {
             byte[] Header = new byte[ipcDefines.NET_UPLOAD_HEADER_BYTES];
             Header[ipcDefines.MessageHeader_Command_Pos] = (byte)oper;
-            Header[ipcDefines.MessageHeader_CommandType_Pos] = (byte)GetCommandOperationType(type, oper);
+            Header[ipcDefines.MessageHeader_CommandType_Pos] = (byte)CommandManager_GetConfigTypeForEntity(type);
             Header[ipcDefines.MessageHeader_CommandParam_Pos] = GetCommandValueParam(type,oper,(byte)EntityId);
+            return Header; 
+        }
+
+        public static byte[] GetHeaderForOperationSingleQuery(CommandOperation oper)
+        {
+            byte[] Header = new byte[ipcDefines.NET_UPLOAD_HEADER_SINGLE_QUERY_BYTES];
+            Header[ipcDefines.MessageHeader_Command_Pos] = (byte)oper;
             return Header;
         }
 

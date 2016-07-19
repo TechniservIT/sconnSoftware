@@ -66,7 +66,7 @@
     <Compile Include="Config\sconnCfgMngr.cs" />
     <Compile Include="Config\sconnDataSrc.cs" />
     <Compile Include="POCO\Config\IIndexAbleConfiguration.cs" />
-    <Compile Include="POCO\Config\sconn\sconnInput.cs" />
+    <Compile Include="POCO\Config\sconn\IO\sconnInput.cs" />
     <Compile Include="POCO\Config\sconn\Auth\sconnUser.cs" />
     <Compile Include="POCO\Config\sconn\Auth\sconnUserConfig.cs" />
     <Compile Include="POCO\Config\Abstract\Device\AlarmSystemAuthorizedDevicesConfig.cs" />
@@ -90,9 +90,11 @@
     <Compile Include="POCO\Config\sconn\Legacy\ipcGlobalConfig.cs" />
     <Compile Include="POCO\Config\sconn\Legacy\ipcRcpt.cs" />
     <Compile Include="POCO\Config\sconn\Legacy\ipcSiteConfig.cs" />
+    <Compile Include="POCO\Config\sconn\Name\sconnName.cs" />
+    <Compile Include="POCO\Config\sconn\Schedule\sconnSchedule.cs" />
     <Compile Include="POCO\Config\sconn\sconnAlarmSystem.cs" />
-    <Compile Include="POCO\Config\sconn\sconnOutput.cs" />
-    <Compile Include="POCO\Config\sconn\sconnRelay.cs" />
+    <Compile Include="POCO\Config\sconn\IO\sconnOutput.cs" />
+    <Compile Include="POCO\Config\sconn\IO\sconnRelay.cs" />
     <Compile Include="POCO\Config\sconn\Zone\sconnAlarmZone.cs" />
     <Compile Include="POCO\Config\sconn\Auth\sconnAuthorizedDevice.cs" />
     <Compile Include="POCO\Config\sconn\Auth\sconnAuthorizedDevicesConfig.cs" />
