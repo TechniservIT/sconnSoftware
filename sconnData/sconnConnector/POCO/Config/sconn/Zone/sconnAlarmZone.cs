@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NLog;
 
 namespace sconnConnector.POCO.Config.sconn
@@ -22,7 +18,7 @@ namespace sconnConnector.POCO.Config.sconn
         string imageIconUri { get; set; }
     }
 
-    public class sconnAlarmZone : IAlarmSystemNamedConfigurationEntity, ISerializableConfiguration, IFakeAbleConfiguration, IAlarmSystemNamedEntityWithType
+    public class sconnAlarmZone : IAlarmSystemNamedEntity, ISerializableConfiguration, IFakeAbleConfiguration, IAlarmSystemNamedEntityWithType
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -87,6 +83,11 @@ namespace sconnConnector.POCO.Config.sconn
                 byte[] buffer = new byte[ipcDefines.ZONE_CFG_LEN];
                 buffer[ipcDefines.ZONE_CFG_TYPE_POS] = (byte)Type;
                 buffer[ipcDefines.ZONE_CFG_ENABLED_POS] = (byte)(Enabled ? 1 : 0);
+                byte[] nameBytes = System.Text.Encoding.BigEndianUnicode.GetBytes(Name);
+                for (int i = 0; i < nameBytes.Length; i++)
+                {
+                    buffer[ipcDefines.ZONE_CFG_NAME_POS + i] = nameBytes[i];
+                }
                 return buffer;
             }
             catch (Exception e)
@@ -97,13 +98,18 @@ namespace sconnConnector.POCO.Config.sconn
 
         }
 
+
+
         public void Deserialize(byte[] buffer)
         {
             try
             {
                 Type = (AlarmZoneType)buffer[ipcDefines.ZONE_CFG_TYPE_POS];
                 Enabled = buffer[ipcDefines.ZONE_CFG_ENABLED_POS] > 0 ? true : false;
-                Name = System.Text.Encoding.BigEndianUnicode.GetString(buffer, ipcDefines.ZONE_CFG_NAME_POS, ipcDefines.RAM_NAME_SIZE);
+                Name = System.Text.Encoding.BigEndianUnicode.GetString(
+                    buffer, 
+                    ipcDefines.ZONE_CFG_NAME_POS, 
+                    AlarmSystemConfig_Helpers.GetUtf8StringLengthFromBufferAtPossition(buffer, ipcDefines.ZONE_CFG_NAME_POS));
                 LoadImageTypeUrl();
             }
             catch (Exception e)
@@ -131,12 +137,12 @@ namespace sconnConnector.POCO.Config.sconn
 
         }
 
-        public byte[] SerializeNames()
+        public byte[] SerializeEntityNames()
         {
             return  System.Text.Encoding.BigEndianUnicode.GetBytes(Name);
         }
 
-        public void DeserializeNames(byte[] buffer)
+        public void DeserializeEntityNames(byte[] buffer)
         {
             Name = System.Text.Encoding.BigEndianUnicode.GetString(buffer, 0, buffer.GetLength(0));
         }

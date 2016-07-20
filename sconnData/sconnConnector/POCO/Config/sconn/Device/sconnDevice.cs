@@ -19,11 +19,10 @@ namespace sconnConnector.POCO.Config.sconn
         string UUID { get; set; }
     }
 
-    public interface IAlarmSystemNamedConfigurationEntity : IAlarmSystemConfigurationEntity
+    public interface IAlarmSystemNamedEntityConfig : IAlarmSystemEntityConfig
     {
-        byte[] SerializeNames();
-        void DeserializeNames(byte[] buffer);
-        
+        byte[] SerializeEntityNames(int id);
+        void DeserializeEntityNames(int id, byte[] buffer); 
     }
 
     public interface IAlarmSystemEntityConfig 
@@ -37,7 +36,7 @@ namespace sconnConnector.POCO.Config.sconn
     public interface IAlarmSystemNamedEntity : IAlarmSystemConfigurationEntity
     {
         byte[] SerializeEntityNames();
-        void DeserializeEntityNames();
+        void DeserializeEntityNames(byte[] buffer);
     }
 
     public enum sconnDeviceType
@@ -55,7 +54,7 @@ namespace sconnConnector.POCO.Config.sconn
 
 
 
-    public class sconnDevice : IAlarmSystemNamedConfigurationEntity, IAlarmSystemNamedEntity, ISerializableConfiguration, IFakeAbleConfiguration, INotifyPropertyChanged
+    public class sconnDevice :  IAlarmSystemNamedEntity, ISerializableConfiguration, IFakeAbleConfiguration, INotifyPropertyChanged
     {
         public byte Id { get; set; }
         public byte Value { get; set; }
@@ -605,7 +604,9 @@ namespace sconnConnector.POCO.Config.sconn
             }
         }
 
-        public void DeserializeNames(byte[] buffer)
+
+
+        public void DeserializeEntityNames(byte[] buffer)
         {
             //convert to legacy 2dim
             byte[][] convNamesCFG = new byte[ipcDefines.RAM_DEV_NAMES_NO][];
@@ -632,13 +633,9 @@ namespace sconnConnector.POCO.Config.sconn
 
         public byte[] SerializeEntityNames()
         {
-            throw new NotImplementedException();
+            return this.SerializeNames();
         }
 
-        public void DeserializeEntityNames()
-        {
-            throw new NotImplementedException();
-        }
 
         public string UUID { get; set; }
     }

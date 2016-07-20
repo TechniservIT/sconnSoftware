@@ -72,8 +72,7 @@ namespace sconnConnector.Config.Abstract
                 {
 
                     byte[] data = this.Entity.SerializeEntityWithId(i);
-                    byte[] msgHeader = CommandManager.GetHeaderForOperationParametrized(typeof(T), CommandOperation.Set,
-                        EntityId);
+                    byte[] msgHeader = CommandManager.GetHeaderForOperationParametrized(typeof(T), CommandOperation.Set,  EntityId);
                     byte[] messageTail = CommandManager.GetTailForOperation(typeof(T), CommandOperation.Set);
                     byte[] uploadMsg = new byte[data.Length + msgHeader.Length + messageTail.Length];
 
@@ -238,7 +237,7 @@ namespace sconnConnector.Config.Abstract
                         Entity.DeserializeEntityWithId(msgBody);
                         if (CommandManager.IsConfigEntityNamed(typeof(T)))
                         {
-                           // this.DownloadNames();
+                            this.DownloadNames();
                         }
                         client.Disconnect();
                         return true;
@@ -297,19 +296,11 @@ namespace sconnConnector.Config.Abstract
         {
             if (oper == CommandOperation.Set)
             {
-                return result.Contains(ipcCMD.ACK);
+                return result.Contains(ipcCMD.TRUE);
             }
             else if (oper == CommandOperation.Get)
             {
                 return result.Contains(ipcCMD.SVAL);
-            }
-            else if (oper == CommandOperation.Push)
-            {
-                return result.Contains(ipcCMD.ACKNXT);
-            }
-            else if (oper == CommandOperation.PushFin)
-            {
-                return result.Contains(ipcCMD.ACKFIN);
             }
             else if (oper == CommandOperation.Einfo)
             {
@@ -364,30 +355,38 @@ namespace sconnConnector.Config.Abstract
         {
             try
             {
-                var hostNamedEntity = (IAlarmSystemNamedConfigurationEntity) this.Entity;
+                var hostNamedEntity = (IAlarmSystemNamedEntityConfig) this.Entity;
+
                 if (client.client.Connected)
                 {
-                    int names = CommandManager.GetNamesNumberForEntity(typeof (T));
-                    byte[] namesCfgBuffer = new byte[ipcDefines.RAM_NAME_SIZE*names];
-                    int entityNamesStartPos = CommandManager.GetNameStartPossitionForEntity(typeof (T));
-                    for (int i = 0; i < names; i++)
+                    int entities = hostNamedEntity.GetEntityCount();
+                    int names = CommandManager.GetNamesNumberForEntity(typeof(T));
+                    for (int l = 0; l < entities; l++)
                     {
-                        byte[] header = CommandManager.GetHeaderForOperationRegisterParametrized(CommandOperation.Get,
-                            ipcCMD.getName, entityNamesStartPos + i);
-                        var res = this.SendMessage(header);
-                        if (IsResultSuccessForOperation(res, CommandOperation.Get))
+                        byte[] namesCfgBuffer = new byte[ipcDefines.RAM_NAME_SIZE * names];
+                        int entityNamesStartPos = CommandManager.GetNameStartPossitionForEntity(typeof(T));
+                        for (int i = 0; i < names; i++)
                         {
-                            byte[] msgBody = GetResultMessageForOperationResult(res, CommandOperation.Get);
-                            byte[] msgBytesName = new byte[ipcDefines.RAM_NAME_SIZE];
-                            for (int j = 0; j < ipcDefines.RAM_NAME_SIZE; j++)
+                            byte[] header = CommandManager.GetHeaderForOperationParametrized(
+                                typeof(T),
+                                CommandOperation.Get,
+                                entityNamesStartPos + (l* names) +i );
+                            var res = this.SendMessage(header);
+                            if (IsResultSuccessForOperation(res, CommandOperation.Get))
                             {
-                                msgBytesName[j] = msgBody[j];
+                                byte[] msgBody = GetResultMessageForOperationResult(res, CommandOperation.Get);
+                                byte[] msgBytesName = new byte[ipcDefines.RAM_NAME_SIZE];
+                                for (int j = 0; j < ipcDefines.RAM_NAME_SIZE; j++)
+                                {
+                                    msgBytesName[j] = msgBody[j];
+                                }
+                                msgBytesName.CopyTo(namesCfgBuffer, i * ipcDefines.RAM_NAME_SIZE);
                             }
-                            msgBytesName.CopyTo(namesCfgBuffer, i*ipcDefines.RAM_NAME_SIZE);
                         }
+
+                        hostNamedEntity.DeserializeEntityNames(l,namesCfgBuffer);
+                        return true;
                     }
-                    hostNamedEntity.DeserializeNames(namesCfgBuffer);
-                    return true;
                 }
             }
             catch (Exception e)
@@ -403,34 +402,41 @@ namespace sconnConnector.Config.Abstract
             {
                 if (client.client.Connected)
                 {
-                    var hostNamedEntity = (IAlarmSystemNamedConfigurationEntity)this.Entity;
-                    int names = CommandManager.GetNamesNumberForEntity(typeof (T));
-                    byte[] namesCfgBuffer = hostNamedEntity.SerializeNames();
-                    int entityNamesStartPos = CommandManager.GetNameStartPossitionForEntity(typeof(T));
-                    for (int i = 0; i < names; i++)
+                    var hostNamedEntity = (IAlarmSystemNamedEntityConfig)this.Entity;
+                    int entities = hostNamedEntity.GetEntityCount();
+                    int names = CommandManager.GetNamesNumberForEntity(typeof(T));
+                    for (int l = 0; l < entities; l++)
                     {
-                        byte[] header = CommandManager.GetHeaderForOperationRegisterParametrized(CommandOperation.Set, ipcCMD.setName, entityNamesStartPos + i);
+                        byte[] namesCfgBuffer = hostNamedEntity.SerializeEntityNames(l);
+                        int entityNamesStartPos = CommandManager.GetNameStartPossitionForEntity(typeof(T));
+                        for (int i = 0; i < names; i++)
+                        {
+                            byte[] header = CommandManager.GetHeaderForOperationParametrized(
+                                typeof(T),
+                                CommandOperation.Set,
+                                entityNamesStartPos + (l*names+i));
 
-                        //copy message body
-                        byte[] nameconfig = new byte[ipcDefines.RAM_NAME_SIZE];
-                        for (int j = 0; j < ipcDefines.RAM_NAME_SIZE; j++)
-                        {
-                            nameconfig[j] = namesCfgBuffer[i*ipcDefines.RAM_NAME_SIZE + j];
+                            //copy message body
+                            byte[] nameconfig = new byte[ipcDefines.RAM_NAME_SIZE];
+                            for (int j = 0; j < ipcDefines.RAM_NAME_SIZE; j++)
+                            {
+                                nameconfig[j] = namesCfgBuffer[i * ipcDefines.RAM_NAME_SIZE + j];
+                            }
+                            byte[] packetdaBytes = new byte[ipcDefines.RAM_NAME_SIZE + header.Length];
+                            header.CopyTo(packetdaBytes, 0);
+                            nameconfig.CopyTo(packetdaBytes, header.Length);
+                            var res = this.SendMessage(packetdaBytes);
+                            if (!IsResultSuccessForOperation(res, CommandOperation.Set))
+                            {
+                                //error during send - stop and log
+                                _logger.Error("Alarm system data TRX error - name send failed.");
+                                return false;
+                            }
                         }
-                        byte[] packetdaBytes = new byte[ipcDefines.RAM_NAME_SIZE+header.Length];
-                        header.CopyTo(packetdaBytes,0);
-                        nameconfig.CopyTo(packetdaBytes,header.Length);
-                        var res = this.SendMessage(packetdaBytes);
-                        if ( !IsResultSuccessForOperation(res, CommandOperation.Set))
-                        {
-                            //error during send - stop and log
-                            _logger.Error("Alarm system data TRX error - name send failed.");
-                            return false;
-                        }
+                        return true;
 
                     }
-                    return true;
-
+                   
                 }
             }
             catch (Exception ex)

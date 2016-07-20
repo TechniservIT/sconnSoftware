@@ -10,7 +10,7 @@ using sconnConnector.POCO.Config.Abstract.Device;
 namespace sconnConnector.POCO.Config.sconn
 {
 
-    public class sconnDeviceConfig : IAlarmSystemEntityConfig, IFakeAbleConfiguration, IIndexAbleConfiguration
+    public class sconnDeviceConfig : IAlarmSystemNamedEntityConfig, IFakeAbleConfiguration, IIndexAbleConfiguration
     {
         public List<sconnDevice> Devices { get; set; }
         private static Logger _logger = LogManager.GetCurrentClassLogger();
@@ -78,9 +78,18 @@ namespace sconnConnector.POCO.Config.sconn
         {
             return 0;
         }
-
         
         public string UUID { get; set; }
+
+        public byte[] SerializeEntityNames(int id)
+        {
+            return Devices[id].SerializeNames();
+        }
+
+        public void DeserializeEntityNames(int id, byte[] buffer)
+        {
+           Devices[id].DeserializeEntityNames(buffer);
+        }
     }
 
 }

@@ -21,7 +21,58 @@ using sconnConnector.Config;
 namespace sconnConnector
 {
 
-    public static class sconnDataShare
+    
+    public static class AlarmSystemConfig_Helpers
+    {
+    
+                 public static int GetUtf8StringLengthFromBuffer(byte[] buffer)
+        {
+            try
+            {
+                for (int i = 0; i < buffer.Length / 2; i++)
+                {
+                    byte current = (byte)buffer[i * 2];
+                    byte next = (byte)buffer[i * 2 + 1];
+                    if (current == 0 && next == 0)
+                    {
+                        return i * 2;
+                    }
+                }
+                return buffer.Length;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+
+
+        public static int GetUtf8StringLengthFromBufferAtPossition(byte[] buffer, int possition)
+        {
+            try
+            {
+                int strBufflen = buffer.Length - possition;
+                for (int i = 0; i < strBufflen / 2; i++)
+                {
+                    byte current = (byte)buffer[possition + i * 2];
+                    byte next = (byte)buffer[possition + i * 2 + 1];
+                    if (current == 0 && next == 0)
+                    {
+                        return i * 2;
+                    }
+                }
+                return buffer.Length;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+
+    }
+
+
+public static class sconnDataShare
     {
         private static sconnDataSrc _dataSrc;
 
@@ -433,7 +484,10 @@ namespace sconnConnector
 
     public struct ipcCMD
     {
-       
+
+        public const byte TRUE = 0x01;
+        public const byte FALSE = 0x00;
+
         //ASCII proprietary CMDs
         public const byte STX = 0x02; //start text
         public const byte ETX = 0x03; //end text
@@ -534,6 +588,7 @@ namespace sconnConnector
         AlarmSystemConfig_RemoteAccess,
         AlarmSystemConfig_Events,
     }
+
 
 
     public struct ipcDefines
