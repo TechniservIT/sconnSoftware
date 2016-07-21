@@ -100,13 +100,15 @@ namespace sconnConnector.Config.Abstract
                     var res = this.SendMessage(uploadMsg);
                     if (!IsResultSuccessForOperation(res, CommandOperation.Set))    //change to fail on any upload fail
                     {
-                        UploadSuccess = false;
+                        return false;
                     }
                 }
-                
-                bool namesUploaded = UploadNames();                 //now send names config
+                if (CommandManager.IsConfigEntityNamed(typeof(T)))
+                {
+                    UploadSuccess = UploadNames();                 //now send names config
+                }
                 client.Disconnect();
-                return UploadSuccess && namesUploaded;
+                return UploadSuccess;
             }
             catch (Exception e)
             {
@@ -252,17 +254,18 @@ namespace sconnConnector.Config.Abstract
                     {
                         byte[] msgBody = GetResultMessageForOperationResult(res, CommandOperation.Get);
                         Entity.DeserializeEntityWithId(msgBody);
-                        if (CommandManager.IsConfigEntityNamed(typeof(T)))
+                        if (CommandManager.IsConfigEntityNamed(typeof (T)))
                         {
                             this.DownloadNames();
                         }
-                        client.Disconnect();
-                        return true;
                     }
-                    client.Disconnect();
+                    else
+                    {
+                        return false;
+                    }
                 }
-
-                return false;
+                client.Disconnect();
+                return true;
             }
             catch (Exception e)
             {

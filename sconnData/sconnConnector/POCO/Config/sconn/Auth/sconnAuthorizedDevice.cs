@@ -34,8 +34,11 @@ namespace sconnConnector.POCO.Config.sconn
             try
             {
                 byte[] bytes = new byte[ipcDefines.SYS_ALRM_DEV_AUTH_LEN];
-                char[] uuidBytes = _Serial.ToString().ToCharArray();
-                for (int j = 0; j < uuidBytes.Length; j++)
+                char[] uuidBytes = _Serial.ToCharArray();
+                int uuidStrLen = uuidBytes.Length > ipcDefines.SYS_ALRM_DEV_UUID_LEN
+                    ? ipcDefines.SYS_ALRM_DEV_UUID_LEN
+                    : uuidBytes.Length;
+                for (int j = 0; j < uuidStrLen; j++)
                 {
                     bytes[j] = (byte)uuidBytes[j];
                 }

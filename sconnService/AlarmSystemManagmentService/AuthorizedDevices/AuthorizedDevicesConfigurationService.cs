@@ -60,7 +60,7 @@ namespace AlarmSystemManagmentService
         {
             try
             {
-                sconnAuthorizedDevice dev = this.GetById(Id);
+                sconnAuthorizedDevice dev = ConfigManager.Config.AuthorizedDevicesConfig.Devices.FirstOrDefault(d => d.Id == Id);
                 if (dev != null)
                 {
                     return this.Remove(dev);
@@ -139,10 +139,7 @@ namespace AlarmSystemManagmentService
             {
                 if (Online)
                 {
-                    // 'Remove' clears static record instead - replace with new empty record with the same Id
-                    sconnAuthorizedDevice stub = new sconnAuthorizedDevice();
-                    stub.Id = device.Id;
-                    this.Update(stub);
+                    ConfigManager.Config.AuthorizedDevicesConfig.Devices.Remove(device);
                     return SaveChanges();
                 }
                 else
