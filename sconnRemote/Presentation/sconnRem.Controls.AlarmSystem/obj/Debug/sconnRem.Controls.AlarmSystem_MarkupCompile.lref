@@ -1,4 +1,4 @@
-﻿I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\obj\Debug\GeneratedInternalTypeHelper.g.cs
+﻿
 
 FI:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\View\Config\AlarmSystem\Auth\AlarmAuthRecordView.xaml;;
 FI:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\View\Config\AlarmSystem\Auth\AuthConfigView.xaml;;
@@ -6,6 +6,11 @@ FI:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSy
 FI:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\View\Config\AlarmSystem\Comm\CommConfigView.xaml;;
 FI:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\View\Config\AlarmSystem\Comm\CommConfigViewNavigationItem.xaml;;
 FI:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\View\Config\AlarmSystem\ConfigSelectView.xaml;;
+FI:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\View\Config\AlarmSystem\Context\AlarmEntityDeviceAuthorizationListItemEditContext.xaml;;
+FI:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\View\Config\AlarmSystem\Context\AlarmEntityListItemContext.xaml;;
+FI:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\View\Config\AlarmSystem\Context\AlarmEntityRemoteAccountListItemEditContext.xaml;;
+FI:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\View\Config\AlarmSystem\Context\AlarmEntitySystemUserListItemEditContext.xaml;;
+FI:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\View\Config\AlarmSystem\Context\AlarmEntityZoneListItemEditContext.xaml;;
 FI:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\View\Config\AlarmSystem\Context\AlarmMapEditContextView.xaml;;
 FI:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\View\Config\AlarmSystem\Context\AlarmMapEditDeviceContextView.xaml;;
 FI:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\View\Config\AlarmSystem\Context\AlarmMapEditZoneContextView.xaml;;

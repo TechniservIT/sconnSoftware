@@ -97,21 +97,18 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
 
         public void OpenZoneContextForZone(sconnAlarmZone zone)
         {
-            if (zone != null && Config.Count > 0)
+            if (zone == null || Config.Count <= 0) return;
+            NavigationParameters parameters = new NavigationParameters
             {
-                //navigate context  
+                {GlobalViewContractNames.Global_Contract_Nav_Site_Context__Key_Name, siteUUID},
+                {AlarmSystemMapContractNames.Alarm_Contract_Map_Zone_Edit_Context_Key_Name, zone.Id}
+            };
 
-                NavigationParameters parameters = new NavigationParameters();
-                parameters.Add(GlobalViewContractNames.Global_Contract_Nav_Site_Context__Key_Name, siteUUID);
-                parameters.Add(AlarmSystemMapContractNames.Alarm_Contract_Map_Zone_Edit_Context_Key_Name, zone.Id);
-
-                GlobalNavigationContext.NavigateRegionToContractWithParam(
-                   GlobalViewRegionNames.RNavigationRegion,
-                    GlobalViewContractNames.Global_Contract_Menu_RightSide_AlarmZoneEditMapContext,
-                    parameters
-                    );
-            }
-
+            GlobalNavigationContext.NavigateRegionToContractWithParam(
+                GlobalViewRegionNames.RNavigationRegion,
+                GlobalViewContractNames.Global_Contract_Menu_RightSide_AlarmZoneEditMapContext,
+                parameters
+                );
         }
 
         public void VertexWithIdSelected(string Id)

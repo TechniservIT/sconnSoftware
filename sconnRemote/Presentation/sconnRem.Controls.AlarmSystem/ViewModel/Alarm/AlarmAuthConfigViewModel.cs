@@ -14,6 +14,7 @@ using System.ComponentModel;
 using System.ComponentModel.Composition;
 using NLog;
 using Prism;
+using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Mef.Modularity;
 using Prism.Modularity;
@@ -33,10 +34,40 @@ namespace sconnRem.ViewModel.Alarm
         private AuthorizedDevicesConfigurationService _provider;
         public AlarmSystemConfigManager Manager { get; set; }
         
-        private ICommand _getDataCommand;
-        private ICommand _saveDataCommand;
+        private int _selectedIndex;
+        public int SelectedIndex
+        {
+            get { return _selectedIndex; }
+            set
+            {
+                _selectedIndex = value;
+                OnPropertyChanged();
+                if (_selectedIndex <= Config.Count)
+                {
+                    OpenEntityEditContext(Config[_selectedIndex]);
+                }
+            }
+        }
 
-        
+
+        public ICommand EntitySelected;
+
+        public void OpenEntityEditContext(sconnAuthorizedDevice device)
+        {
+            if (device == null || Config.Count <= 0) return;
+            NavigationParameters parameters = new NavigationParameters
+            {
+                {GlobalViewContractNames.Global_Contract_Nav_Site_Context__Key_Name, siteUUID},
+                {AlarmSystemEntityListContractNames.Alarm_Contract_Entity_AuthorizedDevice_Edit_Context_Key_Name, device.Id}
+            };
+
+            GlobalNavigationContext.NavigateRegionToContractWithParam(
+                GlobalViewRegionNames.RNavigationRegion,
+                GlobalViewContractNames.Global_Contract_Menu_RightSide_AlarmAuthorizedDeviceEditListItemContext,
+                parameters
+                );
+        }
+
         public override void GetData()
         {
             try
@@ -59,10 +90,15 @@ namespace sconnRem.ViewModel.Alarm
             get { return "pack://application:,,,/images/lista2.png"; }
         }
 
-        
+        private void SetupCmds()
+        {
+            EntitySelected = new DelegateCommand<sconnAuthorizedDevice>(OpenEntityEditContext);
+        }
+
         public AlarmAuthConfigViewModel()
         {
             _name = "Auth";
+            SetupCmds();
             Config = new ObservableCollection<sconnAuthorizedDevice>();
             this._provider = new AuthorizedDevicesConfigurationService(Manager);
         }
@@ -72,6 +108,7 @@ namespace sconnRem.ViewModel.Alarm
         public AlarmAuthConfigViewModel(IRegionManager regionManager)
         {
             Config = new ObservableCollection<sconnAuthorizedDevice>();
+            SetupCmds();
             this.Manager = SiteNavigationManager.alarmSystemConfigManager;
             this._provider = new AuthorizedDevicesConfigurationService(this.Manager);
             this._regionManager = regionManager;

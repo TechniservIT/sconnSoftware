@@ -1,0 +1,168 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.Composition;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Input;
+using AlarmSystemManagmentService;
+using Prism.Commands;
+using Prism.Regions;
+using sconnConnector.POCO.Config.sconn;
+using sconnRem.Infrastructure.Navigation;
+using sconnRem.Navigation;
+using sconnRem.ViewModel.Generic;
+
+namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm.EntityList
+{
+
+    [Export]
+    [PartCreationPolicy(CreationPolicy.NonShared)]
+    public class AlarmEntityAuthorizedDeviceEditContextViewModel : GenericAlarmConfigViewModel
+    {
+
+        public ICommand EntityAddCommand { get; set; }
+        public ICommand EntityRemoveCommand { get; set; }
+        public ICommand EntitySaveCommand { get; set; }
+
+        private sconnAuthorizedDevice _config;
+        public sconnAuthorizedDevice Config
+        {
+            get { return _config; }
+            set
+            {
+                _config = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public int EntityId { get; set; }
+        private readonly AuthorizedDevicesConfigurationService _provider;
+        public string DisplayedImagePath => "pack://application:,,,/images/strefy1.png";
+
+        public override void GetData()
+        {
+            try
+            {
+                Config = (_provider.GetById(EntityId));
+
+            }
+            catch (Exception ex)
+            {
+                _nlogger.Error(ex, ex.Message);
+            }
+        }
+
+        public override void SaveData()
+        {
+            _provider.Update(Config);
+        }
+        
+        public AlarmEntityAuthorizedDeviceEditContextViewModel()
+        {
+            _name = "AuthDev";
+            SetupCmd();
+            this._provider = new AuthorizedDevicesConfigurationService(_manager);
+        }
+
+
+        public void AddEntity()
+        {
+            try
+            {
+
+
+            }
+            catch (Exception ex)
+            {
+                _nlogger.Error(ex, ex.Message);
+            }
+
+        }
+
+        public void RemoveEntity()
+        {
+            try
+            {
+
+
+            }
+            catch (Exception ex)
+            {
+                _nlogger.Error(ex, ex.Message);
+            }
+
+        }
+        
+
+        public void SetupCmd()
+        {
+            EntityAddCommand = new DelegateCommand(AddEntity);
+            EntityRemoveCommand = new DelegateCommand(RemoveEntity);
+            EntitySaveCommand = new DelegateCommand(SaveData);
+        }
+
+        [ImportingConstructor]
+        public AlarmEntityAuthorizedDeviceEditContextViewModel(IRegionManager regionManager)
+        {
+            Config = new sconnAuthorizedDevice();
+            SetupCmd();
+            this._manager = SiteNavigationManager.alarmSystemConfigManager;
+            this._provider = new AuthorizedDevicesConfigurationService(_manager);
+            this._regionManager = regionManager;
+        }
+
+        public override void OnNavigatedTo(NavigationContext navigationContext)
+        {
+            try
+            {
+                siteUUID = (string)navigationContext.Parameters[GlobalViewContractNames.Global_Contract_Nav_Site_Context__Key_Name];
+                EntityId = int.Parse((string)navigationContext.Parameters[AlarmSystemEntityListContractNames.Alarm_Contract_Entity_AuthorizedDevice_Edit_Context_Key_Name]);
+                this.navigationJournal = navigationContext.NavigationService.Journal;
+
+                BackgroundWorker bgWorker = new BackgroundWorker();
+                bgWorker.DoWork += (s, e) => {
+                    GetData();
+                };
+                bgWorker.RunWorkerCompleted += (s, e) =>
+                {
+
+                    Loading = false;
+                };
+
+                Loading = true;
+
+                bgWorker.RunWorkerAsync();
+
+            }
+            catch (Exception ex)
+            {
+                _nlogger.Error(ex, ex.Message);
+            }
+
+
+        }
+
+        public override bool IsNavigationTarget(NavigationContext navigationContext)
+        {
+            try
+            {
+                var targetsiteUuid = (string)navigationContext.Parameters[GlobalViewContractNames.Global_Contract_Nav_Site_Context__Key_Name];
+                var targetEntityId = int.Parse((string)navigationContext.Parameters[AlarmSystemEntityListContractNames.Alarm_Contract_Entity_AuthorizedDevice_Edit_Context_Key_Name]);
+                if (targetsiteUuid != siteUUID)
+                {
+                    if(targetEntityId == this.EntityId)
+                        return true;
+                }
+                return false;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+        }
+    }
+
+}

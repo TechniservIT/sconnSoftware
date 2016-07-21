@@ -167,8 +167,10 @@ namespace sconnRem.Navigation
     public static class GlobalViewContractNames
     {
         public const String Global_Contract_Menu_RightSide_AlarmMapContext = "GlobalContractMenuRightSideAlarmMapContext";
-        public const String Global_Contract_Menu_RightSide_AlarmZoneEditMapContext = "GlobalContractMenuRightSideDeviceEditMapContext";
-        public const String Global_Contract_Menu_RightSide_AlarmDeviceEditMapContext = "GlobalContractMenuRightSideZoneEditMapContext";
+        public const String Global_Contract_Menu_RightSide_AlarmZoneEditMapContext = "GlobalContractMenuRightSideZoneEditMapContext";
+        public const String Global_Contract_Menu_RightSide_AlarmDeviceEditMapContext = "GlobalContractMenuRightSideDeviceEditMapContext";
+        public const String Global_Contract_Menu_RightSide_AlarmZoneEditListItemContext = "GlobalContractMenuRightSideZoneEditListItemContext";
+        public const String Global_Contract_Menu_RightSide_AlarmAuthorizedDeviceEditListItemContext = "GlobalContractMenuRightSideAuthorizedDeviceEditListItemContext";
 
         public const String Global_Contract_Menu_RightSide_Grid_Nav = "GlobalContractMenuRightSideGridNav";
 
@@ -186,6 +188,12 @@ namespace sconnRem.Navigation
     {
         public const String Alarm_Contract_Map_Zone_Edit_Context_Key_Name = "ZoneUUID";
         public const String Alarm_Contract_Map_Device_Edit_Context_Key_Name = "DeviceUUID";
+    }
+
+    public static class AlarmSystemEntityListContractNames
+    {
+        public const String Alarm_Contract_Entity_Zone_Edit_Context_Key_Name = "ZoneUUID";
+        public const String Alarm_Contract_Entity_AuthorizedDevice_Edit_Context_Key_Name = "DeviceUUID";
     }
 
     public static class NavContextToolbarRegionNames

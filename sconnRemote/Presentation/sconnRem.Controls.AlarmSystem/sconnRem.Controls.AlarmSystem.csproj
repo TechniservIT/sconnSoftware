@@ -121,6 +121,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ViewModel\Alarm\AlarmDeviceListViewModel.cs" />
+    <Compile Include="ViewModel\Alarm\EntityList\AlarmEntityZoneListItemEditViewModel.cs" />
     <Compile Include="ViewModel\Alarm\AlarmEventsListViewModel.cs" />
     <Compile Include="ViewModel\Alarm\AlarmGraphEntityViewModel.cs" />
     <Compile Include="ViewModel\Alarm\AlarmHumiditySensorsListViewModel.cs" />
@@ -130,6 +131,10 @@
     <Compile Include="ViewModel\Alarm\AlarmPsuStatusViewModel.cs" />
     <Compile Include="ViewModel\Alarm\AlarmSharedDeviceConfigViewModel.cs" />
     <Compile Include="ViewModel\Alarm\AlarmTemperatureSensorsListViewModel.cs" />
+    <Compile Include="ViewModel\Alarm\EntityList\AlarmEntityAuthorizedDeviceEditContextViewModel.cs" />
+    <Compile Include="ViewModel\Alarm\EntityList\AlarmEntityGsmRcptEditContextViewModel.cs" />
+    <Compile Include="ViewModel\Alarm\EntityList\AlarmEntityRemoteUserEditContextViewModel.cs" />
+    <Compile Include="ViewModel\Alarm\EntityList\AlarmEntitySystemUserEditContextViewModel.cs" />
     <Compile Include="ViewModel\Alarm\Map\AlarmDeviceMapViewModel.cs" />
     <Compile Include="ViewModel\Alarm\Map\AlarmZoneMapViewModel.cs" />
     <Compile Include="ViewModel\Alarm\Map\AlarmMapDeviceEditContextViewModel.cs" />
@@ -158,6 +163,21 @@
     </Compile>
     <Compile Include="View\Config\AlarmSystem\ConfigSelectView.xaml.cs">
       <DependentUpon>ConfigSelectView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Config\AlarmSystem\Context\AlarmEntityDeviceAuthorizationListItemEditContext.xaml.cs">
+      <DependentUpon>AlarmEntityDeviceAuthorizationListItemEditContext.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Config\AlarmSystem\Context\AlarmEntityListItemContext.xaml.cs">
+      <DependentUpon>AlarmEntityListItemContext.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Config\AlarmSystem\Context\AlarmEntityRemoteAccountListItemEditContext.xaml.cs">
+      <DependentUpon>AlarmEntityRemoteAccountListItemEditContext.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Config\AlarmSystem\Context\AlarmEntitySystemUserListItemEditContext.xaml.cs">
+      <DependentUpon>AlarmEntitySystemUserListItemEditContext.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Config\AlarmSystem\Context\AlarmEntityZoneListItemEditContext.xaml.cs">
+      <DependentUpon>AlarmEntityZoneListItemEditContext.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Config\AlarmSystem\Context\AlarmMapEditContextView.xaml.cs">
       <DependentUpon>AlarmMapEditContextView.xaml</DependentUpon>
@@ -407,6 +427,26 @@
     <Page Include="View\Config\AlarmSystem\ConfigSelectView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Config\AlarmSystem\Context\AlarmEntityDeviceAuthorizationListItemEditContext.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Config\AlarmSystem\Context\AlarmEntityListItemContext.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Config\AlarmSystem\Context\AlarmEntityRemoteAccountListItemEditContext.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Config\AlarmSystem\Context\AlarmEntitySystemUserListItemEditContext.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Config\AlarmSystem\Context\AlarmEntityZoneListItemEditContext.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Config\AlarmSystem\Context\AlarmMapEditContextView.xaml">
       <SubType>Designer</SubType>
