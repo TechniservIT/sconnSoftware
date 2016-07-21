@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.Linq;
@@ -65,13 +66,42 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm.EntityList
             SetupCmd();
             this._provider = new AuthorizedDevicesConfigurationService(_manager);
         }
-
+        
 
         public void AddEntity()
         {
             try
             {
+                var entities  = new ObservableCollection<sconnAuthorizedDevice>(_provider.GetAll());
+                sconnAuthorizedDevice d = new sconnAuthorizedDevice();
+                d.UUID = Guid.NewGuid().ToString();
+                d.Id = entities.Count;
+                d._Enabled = false;
+                d._Serial = Guid.NewGuid().ToString();
+                bool added = false;
+                BackgroundWorker bgWorker = new BackgroundWorker();
+                bgWorker.DoWork += (s, e) => {
+                     added = _provider.Add(d);
+                };
+                bgWorker.RunWorkerCompleted += (s, e) =>
+                {
+                    if (added)
+                    {
+                        //reload list
+                        NavigationParameters parameters = new NavigationParameters
+                        {
+                            {GlobalViewContractNames.Global_Contract_Nav_Site_Context__Key_Name, siteUUID}
+                        };
+                        GlobalNavigationContext.NavigateRegionToContractWithParam(
+                           GlobalViewRegionNames.MainGridContentRegion,
+                           AlarmRegionNames.AlarmConfig_Contract_AuthConfigView,
+                            parameters
+                            );
+                    }
+                };
 
+                Loading = true;
+                bgWorker.RunWorkerAsync();
 
             }
             catch (Exception ex)
@@ -85,7 +115,36 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm.EntityList
         {
             try
             {
+                var entities = new ObservableCollection<sconnAuthorizedDevice>(_provider.GetAll());
+                var toRemove = entities.FirstOrDefault(d => d.Id == EntityId);
+                if (toRemove != null)
+                {
+                    bool removed = false;
+                    BackgroundWorker bgWorker = new BackgroundWorker();
+                    bgWorker.DoWork += (s, e) => {
+                        removed = _provider.Remove(toRemove);
+                    };
+                    bgWorker.RunWorkerCompleted += (s, e) =>
+                    {
+                        if (removed)
+                        {
+                            //reload list
+                            NavigationParameters parameters = new NavigationParameters
+                        {
+                            {GlobalViewContractNames.Global_Contract_Nav_Site_Context__Key_Name, siteUUID}
+                        };
+                            GlobalNavigationContext.NavigateRegionToContractWithParam(
+                               GlobalViewRegionNames.MainGridContentRegion,
+                               AlarmRegionNames.AlarmConfig_Contract_AuthConfigView,
+                                parameters
+                                );
+                        }
+                    };
 
+                    Loading = true;
+                    bgWorker.RunWorkerAsync();
+                }
+                
 
             }
             catch (Exception ex)

@@ -12,6 +12,7 @@ using sconnConnector.POCO.Config.sconn;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
+using System.Windows;
 using NLog;
 using Prism;
 using Prism.Commands;
@@ -30,7 +31,17 @@ namespace sconnRem.ViewModel.Alarm
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public class AlarmAuthConfigViewModel : GenericAsyncConfigViewModel
     {
-        public ObservableCollection<sconnAuthorizedDevice> Config { get; set; }
+        public ObservableCollection<sconnAuthorizedDevice> _config { get; set; }
+        public ObservableCollection<sconnAuthorizedDevice> Config
+        {
+            get { return _config; }
+            set
+            {
+                _config = value;
+                OnPropertyChanged();
+            }
+        }
+
         private AuthorizedDevicesConfigurationService _provider;
         public AlarmSystemConfigManager Manager { get; set; }
         
@@ -42,15 +53,16 @@ namespace sconnRem.ViewModel.Alarm
             {
                 _selectedIndex = value;
                 OnPropertyChanged();
-                if (_selectedIndex <= Config.Count)
+                if (_selectedIndex < Config.Count)
                 {
-                    OpenEntityEditContext(Config[_selectedIndex]);
+                    Application.Current.Dispatcher.Invoke(() => { OpenEntityEditContext(Config[_selectedIndex]); });
                 }
             }
         }
 
 
         public ICommand EntitySelected;
+        public ICommand ConfigureEntityCommand;
 
         public void OpenEntityEditContext(sconnAuthorizedDevice device)
         {
@@ -73,6 +85,7 @@ namespace sconnRem.ViewModel.Alarm
             try
             {
                 Config = new ObservableCollection<sconnAuthorizedDevice>(_provider.GetAll());
+                SelectedIndex = 0; //reset on refresh
             }
             catch (Exception ex)
             {
@@ -90,9 +103,15 @@ namespace sconnRem.ViewModel.Alarm
             get { return "pack://application:,,,/images/lista2.png"; }
         }
 
+        public void ConfigureEntitySelected(sconnAuthorizedDevice entity)
+        {
+            
+        }
+
         private void SetupCmds()
         {
             EntitySelected = new DelegateCommand<sconnAuthorizedDevice>(OpenEntityEditContext);
+            ConfigureEntityCommand = new DelegateCommand<sconnAuthorizedDevice>(ConfigureEntitySelected);
         }
 
         public AlarmAuthConfigViewModel()
@@ -112,9 +131,39 @@ namespace sconnRem.ViewModel.Alarm
             this.Manager = SiteNavigationManager.alarmSystemConfigManager;
             this._provider = new AuthorizedDevicesConfigurationService(this.Manager);
             this._regionManager = regionManager;
-            GetData();
         }
-        
+
+
+
+        public override void OnNavigatedTo(NavigationContext navigationContext)
+        {
+            try
+            {
+                siteUUID = (string)navigationContext.Parameters[GlobalViewContractNames.Global_Contract_Nav_Site_Context__Key_Name];
+                this.navigationJournal = navigationContext.NavigationService.Journal;
+
+                BackgroundWorker bgWorker = new BackgroundWorker();
+                bgWorker.DoWork += (s, e) => {
+                    GetData();
+                };
+                bgWorker.RunWorkerCompleted += (s, e) =>
+                {
+
+                    Loading = false;
+                };
+
+                Loading = true;
+
+                bgWorker.RunWorkerAsync();
+
+            }
+            catch (Exception ex)
+            {
+                _nlogger.Error(ex, ex.Message);
+            }
+
+
+        }
 
         public override bool IsNavigationTarget(NavigationContext navigationContext)
         {

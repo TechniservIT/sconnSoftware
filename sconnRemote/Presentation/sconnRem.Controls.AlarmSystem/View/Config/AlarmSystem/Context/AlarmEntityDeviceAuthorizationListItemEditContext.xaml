@@ -11,17 +11,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="200">
 
-
-    <UserControl.Resources>
-        <ObjectDataProvider x:Key="InputTypeSrc" MethodName="GetValues"
-                            ObjectType="{x:Type System:Enum}">
-            <ObjectDataProvider.MethodParameters>
-                <x:Type TypeName="sconn:AlarmZoneType"/>
-            </ObjectDataProvider.MethodParameters>
-        </ObjectDataProvider>
-
-    </UserControl.Resources>
-
     <xctk:BusyIndicator  IsBusy="{Binding Loading}">
 
         <Grid>
@@ -119,24 +108,6 @@
                         <RowDefinition Height="0.1*"/>
                         <RowDefinition Height="0.2*"/>
                     </Grid.RowDefinitions>
-
-
-                    <Label Grid.Column="0" Grid.Row="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="Name" />
-                    <TextBox Grid.Column="0" Grid.Row="1" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Text="{Binding  Config.Name}"/>
-
-
-                    <Label Grid.Column="0" Grid.Row="2" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="Type" />
-                    <ComboBox x:Name="cmb12"  
-                            ItemsSource="{Binding Source={StaticResource InputTypeSrc}}"
-                        Grid.Column="0" Grid.Row="3"
-                          HorizontalAlignment="Stretch"
-                          HorizontalContentAlignment="Stretch" 
-                          SelectedValue="{Binding  ActiveInput.sconnInputType}" 
-                           SelectedItem="{Binding  ActiveInput.sconnInputType , Mode=TwoWay}" 
-                          />
-
-                    <Label Grid.Column="0" Grid.Row="4" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="Enabled" />
-                    <Label Grid.Column="0" Grid.Row="5" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="{Binding Config.Enabled}" />
 
 
 
