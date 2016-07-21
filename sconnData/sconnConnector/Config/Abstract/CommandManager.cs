@@ -15,11 +15,11 @@ namespace sconnConnector.Config.Abstract
     {
         Get = ipcCMD.GET,
         Set = ipcCMD.SET,
-        Push = ipcCMD.PSH,
-        PushFin = ipcCMD.PSHFIN,
-        Fin = ipcCMD.EOT,
         Ack = ipcCMD.ACK,
-        Einfo = ipcCMD.EINFO
+        Einfo = ipcCMD.EINFO,
+        SetInfo = ipcCMD.SETINFO,
+        PushFin = ipcCMD.PSHFIN,
+        Push = ipcCMD.PSH
 
     }
 
@@ -144,14 +144,6 @@ namespace sconnConnector.Config.Abstract
             {
                 return GetCommandForConfigType(type);
             }
-            else if (oper == CommandOperation.Push)
-            {
-                return ipcCMD.PSHNXT;
-            }
-            else if (oper == CommandOperation.PushFin)
-            {
-                return GetConfigUploadTypeCode(type);
-            }
             return ipcCMD.ERRCMD;
         }
 
@@ -217,17 +209,9 @@ namespace sconnConnector.Config.Abstract
             {
                 return ipcCMD.EVAL;
             }
-            else if (oper == CommandOperation.Push)
-            {
-                return ipcCMD.EVAL;
-            }
             else if (oper == CommandOperation.Get)
             {
                 return 0;
-            }
-            else if (oper == CommandOperation.PushFin)
-            {
-                return ipcCMD.EVAL;
             }
             else if (oper == CommandOperation.Einfo)
             {
@@ -250,7 +234,7 @@ namespace sconnConnector.Config.Abstract
             byte[] Header = new byte[ipcDefines.NET_UPLOAD_HEADER_BYTES];
             Header[ipcDefines.MessageHeader_Command_Pos] = (byte)oper;
             Header[ipcDefines.MessageHeader_CommandType_Pos] = (byte)CommandManager_GetConfigTypeForEntity(type);
-            Header[ipcDefines.MessageHeader_Command_Reg_Low_Pos] = (byte)(EntityId >> 8);
+            Header[ipcDefines.MessageHeader_Command_Reg_Low_Pos] = (byte)(EntityId >> 8);   //Big endian
             Header[ipcDefines.MessageHeader_Command_Reg_High_Pos] = (byte)(EntityId);
           //  Header[ipcDefines.MessageHeader_CommandParam_Pos] = GetCommandValueParam(type,oper,(byte)EntityId);
             return Header; 

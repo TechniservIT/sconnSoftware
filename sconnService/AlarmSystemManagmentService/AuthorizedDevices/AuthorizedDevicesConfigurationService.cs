@@ -98,7 +98,7 @@ namespace AlarmSystemManagmentService
             try
             {
                 ConfigManager.Config.AuthorizedDevicesConfig.Devices.Add(device);
-                return true;    //no adding -  filled with empty objects
+                return SaveChanges();
             }
             catch (Exception e )
             {

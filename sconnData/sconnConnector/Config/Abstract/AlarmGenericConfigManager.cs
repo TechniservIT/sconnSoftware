@@ -67,7 +67,24 @@ namespace sconnConnector.Config.Abstract
                     return false;
                 }
 
-                int entities = AlarmGenericConfigManager_GetRemoteEntityCount();
+                int entities = Entity.GetEntityCount();
+                int remoteEntityCount = AlarmGenericConfigManager_GetRemoteEntityCount();
+                //set remote entity info to match 
+                if (entities != remoteEntityCount)
+                {
+                    byte[] msgHeader = CommandManager.GetHeaderForOperationParametrized(typeof(T), CommandOperation.SetInfo, entities);
+                    byte[] messageTail = CommandManager.GetTailForOperation(typeof(T), CommandOperation.SetInfo);
+                    byte[] uploadMsg = new byte[ msgHeader.Length + messageTail.Length];
+                    msgHeader.CopyTo(uploadMsg, 0);
+                    messageTail.CopyTo(uploadMsg, msgHeader.Length);
+                    var res = this.SendMessage(uploadMsg);
+                    if (!IsResultSuccessForOperation(res, CommandOperation.SetInfo))    //change to fail on any upload fail
+                    {
+                        return false;
+                    }
+                }
+
+                //update remote entities
                 for (int i = 0; i < entities; i++)
                 {
 
@@ -303,6 +320,10 @@ namespace sconnConnector.Config.Abstract
                 return result.Contains(ipcCMD.SVAL);
             }
             else if (oper == CommandOperation.Einfo)
+            {
+                return result.Contains(ipcCMD.SVAL);
+            }
+            else if (oper == CommandOperation.SetInfo)
             {
                 return result.Contains(ipcCMD.SVAL);
             }

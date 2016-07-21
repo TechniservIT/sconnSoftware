@@ -497,6 +497,7 @@ public static class sconnDataShare
         public const byte EVAL = 0x08; //end value
 
         public const byte EINFO = 0x02;
+        public const byte SETINFO = 0x01;
         public const byte DEL  = 0x03;
         public const byte ADD = 0x04 ;
 
