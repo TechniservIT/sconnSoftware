@@ -39,7 +39,7 @@ namespace sconnConnector.Config.Abstract
         public int AlarmGenericConfigManager_GetRemoteEntityCount()
         {
             byte[] data = new byte[1];
-            data[0] = (byte)CommandManager.CommandManager_GetConfigTypeForEntity(typeof(T));   //ipcCMD.EINFO;
+            data[0] = (byte)CommandManager.CommandManager_GetConfigTypeForEntity(typeof(T));  
             byte[] msgHeader = CommandManager.GetHeaderForOperationSingleQuery(CommandOperation.Einfo);
             byte[] messageTail = CommandManager.GetTailForOperation(typeof(T), CommandOperation.Einfo);
             byte[] uploadMsg = new byte[data.Length + msgHeader.Length + messageTail.Length];

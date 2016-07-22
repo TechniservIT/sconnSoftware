@@ -8,6 +8,7 @@ using sconnConnector.POCO.Config.Abstract.Auth;
 using sconnConnector.POCO.Config.sconn;
 using sconnConnector.POCO.Config.sconn.Name;
 using sconnConnector.POCO.Config.sconn.Schedule;
+using sconnConnector.POCO.Config.sconn.User;
 
 namespace sconnConnector.Config.Abstract
 {
@@ -171,6 +172,10 @@ namespace sconnConnector.Config.Abstract
                 return AlarmSystemConfigType.AlarmSystemConfig_DeviceAuthorization;
             }
             else if (type == typeof(sconnRemoteUserConfig))
+            {
+                return AlarmSystemConfigType.AlarmSystemConfig_RemoteAccess;
+            }
+            else if (type == typeof(sconnAlarmSystemUser))
             {
                 return AlarmSystemConfigType.AlarmSystemConfig_Users;
             }

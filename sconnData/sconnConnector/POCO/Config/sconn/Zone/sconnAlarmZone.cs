@@ -104,7 +104,7 @@ namespace sconnConnector.POCO.Config.sconn
         {
             try
             {
-                if (Enum.IsDefined(typeof(AlarmZoneType), buffer[ipcDefines.ZONE_CFG_TYPE_POS]))
+                if (Enum.IsDefined(typeof(AlarmZoneType), (int)buffer[ipcDefines.ZONE_CFG_TYPE_POS]))
                 {
                     Type = (AlarmZoneType)buffer[ipcDefines.ZONE_CFG_TYPE_POS];
                 }
