@@ -9,6 +9,7 @@ using sconnConnector.Config.Abstract;
 using sconnConnector.POCO.Config.Abstract;
 using sconnConnector.POCO.Config.Abstract.Auth;
 using sconnConnector.POCO.Config.Abstract.Event;
+using sconnConnector.POCO.Config.sconn.User;
 
 namespace sconnConnector.POCO.Config.sconn
 {
@@ -44,7 +45,9 @@ namespace sconnConnector.POCO.Config.sconn
 
         public sconnAlarmZoneConfig ZoneConfig { get; set; }
 
-        public sconnUserConfig UserConfig { get; set; }
+        public sconnRemoteUserConfig RemoteUserConfig { get; set; }
+
+        public sconnAlarmSystemUserConfig AlarmUserConfig { get; set; }
 
 
         public sconnAlarmSystem()
@@ -55,8 +58,8 @@ namespace sconnConnector.POCO.Config.sconn
             GlobalConfig = new sconnGlobalConfig();
             GsmConfig = new sconnGsmConfig();
             ZoneConfig = new sconnAlarmZoneConfig();
-            UserConfig = new sconnUserConfig();
-
+            RemoteUserConfig = new sconnRemoteUserConfig();
+            AlarmUserConfig = new sconnAlarmSystemUserConfig();
             
         }
         
@@ -68,7 +71,8 @@ namespace sconnConnector.POCO.Config.sconn
             EventConfig.Fake();
             GsmConfig.Fake();
             ZoneConfig.Fake();
-            UserConfig.Fake();
+            RemoteUserConfig.Fake();
+            AlarmUserConfig.Fake();
         }
 
 

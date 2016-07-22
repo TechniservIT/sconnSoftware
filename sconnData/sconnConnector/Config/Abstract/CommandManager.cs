@@ -64,7 +64,7 @@ namespace sconnConnector.Config.Abstract
             {
                 return ipcCMD.setAuthDevCfg;
             }
-            else if (type == typeof(sconnUserConfig))
+            else if (type == typeof(sconnRemoteUserConfig))
             {
                 return ipcCMD.setPasswdCfg;
             }
@@ -93,7 +93,7 @@ namespace sconnConnector.Config.Abstract
             {
                 return (byte)CommandConfigType.NET_PACKET_TYPE_DEVAUTHCFG;
             }
-            else if (type == typeof(sconnUserConfig))
+            else if (type == typeof(sconnRemoteUserConfig))
             {
                 return (byte)CommandConfigType.NET_PACKET_TYPE_PASSWDCFG;
             }
@@ -122,7 +122,7 @@ namespace sconnConnector.Config.Abstract
             {
                 return ipcCMD.getAuthDevices;
             }
-            else if (type == typeof(sconnUserConfig))
+            else if (type == typeof(sconnRemoteUserConfig))
             {
                 return ipcCMD.getPasswdCfg;
             }
@@ -170,7 +170,7 @@ namespace sconnConnector.Config.Abstract
             {
                 return AlarmSystemConfigType.AlarmSystemConfig_DeviceAuthorization;
             }
-            else if (type == typeof(sconnUserConfig))
+            else if (type == typeof(sconnRemoteUserConfig))
             {
                 return AlarmSystemConfigType.AlarmSystemConfig_Users;
             }

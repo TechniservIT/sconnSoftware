@@ -95,6 +95,8 @@
     <Compile Include="POCO\Config\sconn\sconnAlarmSystem.cs" />
     <Compile Include="POCO\Config\sconn\IO\sconnOutput.cs" />
     <Compile Include="POCO\Config\sconn\IO\sconnRelay.cs" />
+    <Compile Include="POCO\Config\sconn\User\sconnAlarmSystemUser.cs" />
+    <Compile Include="POCO\Config\sconn\User\sconnAlarmSystemUserConfig.cs" />
     <Compile Include="POCO\Config\sconn\Zone\sconnAlarmZone.cs" />
     <Compile Include="POCO\Config\sconn\Auth\sconnAuthorizedDevice.cs" />
     <Compile Include="POCO\Config\sconn\Auth\sconnAuthorizedDevicesConfig.cs" />

@@ -1012,7 +1012,7 @@ public static class sconnDataShare
         public const int RAM_SMS_RECP_MEM_SIZE = (RAM_SMS_RECP_SIZE*RAM_SMS_RECP_NO);
 
         /**********************  AUTH *********************/
-        public const int AUTH_PASS_SIZE = 30;       // pass  15 x 2b UTF8
+        public const int AUTH_PASS_SIZE = RAM_NAME_SIZE;       // pass  15 x 2b UTF8
         public const int AUTH_RECORD_PASS_LEN_POS = 0x00;
         public const int AUTH_RECORD_PASS_LEN_LEN = 0x01;
         public const int AUTH_RECORD_ENABLED_POS = (AUTH_RECORD_PASS_LEN_POS + AUTH_RECORD_PASS_LEN_LEN);
@@ -1078,7 +1078,39 @@ public static class sconnDataShare
         public const int SYS_ALARM_DEV_AUTH_MAX_RECORDS = 32;
         public const int SYS_ALARM_DEV_AUTH_MEM_SIZE = SYS_ALARM_DEV_AUTH_MAX_RECORDS * SYS_ALRM_UUID_LEN;
 
+
+
+        /**********  SYSTEM USERS ******************************/
+
+        public const int USER_DB_INFO_USER_NO_POS = 0x0000;
+        public const int USER_DB_INFO_USER_NO_LEN = 0x02;
         
+        public const int USER_DB_UID_POS = 0x00;
+        public const int USER_DB_UID_LEN = 0x02;
+
+        public const int USER_DB_DOMAIN_POS =(USER_DB_UID_POS+USER_DB_UID_LEN);
+        public const int USER_DB_DOMAIN_LEN = 0x02;
+
+        public const int USER_DB_ENABLED_POS = (USER_DB_DOMAIN_POS + USER_DB_DOMAIN_LEN);
+        public const int USER_DB_ENABLED_LEN = 0x01;
+
+
+        public const int USER_DB_UPERM_POS = (USER_DB_ENABLED_POS + USER_DB_ENABLED_LEN);
+        public const int USER_DB_UPERM_LEN = 0x02;
+
+        public const int USER_DB_CODESIZE_POS = (USER_DB_UPERM_POS + USER_DB_UPERM_LEN);     //current password length
+        public const int USER_DB_CODESIZE_LEN = 0x01;
+
+        public const int USER_DB_CODE_POS = (USER_DB_CODESIZE_POS + USER_DB_CODESIZE_LEN);
+        public const int USER_DB_CODE_LEN = 0x07;
+
+        public const int USER_DB_CARD_POS = (USER_DB_CODE_POS + USER_DB_CODE_LEN);     //current password length
+        public const int USER_DB_CARD_LEN = 0x0A;
+
+        public const int USER_DB_PERM_UNTIL_POS = (USER_DB_CARD_POS + USER_DB_CARD_LEN);
+        public const int USER_DB_PERM_UNTIL_LEN = 0x02;
+
+        public const int USER_DB_USER_RECORD_LEN = (USER_DB_PERM_UNTIL_POS + USER_DB_PERM_UNTIL_LEN); //   ROUND_UP(  , ALRM_SYS_MEM_CONFIG_MIN_SECTOR )
 
         /***************    EVENTS      *****************/
 

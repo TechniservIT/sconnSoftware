@@ -97,7 +97,7 @@ namespace AlarmSystemManagmentService
             try
             {
                 ConfigManager.Config.ZoneConfig.Zones.Add(device);
-                return true;    //no adding -  filled with empty objects
+                return SaveChanges();
             }
             catch (Exception e)
             {
@@ -137,17 +137,11 @@ namespace AlarmSystemManagmentService
             {
                 if (Online)
                 {
-
-                    // 'Remove' clears static record instead - replace with new empty record with the same Id
-                    sconnAlarmZone stub = new sconnAlarmZone { Id = device.Id };
-                    this.Update(stub);
+                    ConfigManager.Config.ZoneConfig.Zones.Remove(device);
                     return SaveChanges();
                 }
-                else
-                {
-                    this.ConfigManager.Config.ZoneConfig.Zones.Remove(device);
-                    return true;
-                }
+                this.ConfigManager.Config.ZoneConfig.Zones.Remove(device);
+                return true;
 
             }
             catch (Exception e)

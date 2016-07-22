@@ -77,14 +77,27 @@ namespace sconnConnector.POCO.Config.Abstract.Auth
                 buffer[ipcDefines.AUTH_RECORD_GROUP_POS] = (byte)Group;
                 buffer[ipcDefines.AUTH_RECORD_PASS_LEN_POS] = (byte)this.Password.Length;
                 char[] passB = this.Password.ToCharArray();
-                for (int i = 0; i < passB.Length; i++)
+                int passwdBytes = passB.Length > ipcDefines.AUTH_PASS_SIZE ? ipcDefines.AUTH_PASS_SIZE : passB.Length;
+                for (int i = 0; i < passwdBytes; i++)
                 {
                     buffer[ipcDefines.AUTH_RECORD_PASSWD_POS + i] = (byte)passB[i];
                 }
+                for (int i = passwdBytes; i < ipcDefines.AUTH_PASS_SIZE- passwdBytes; i++)
+                {
+                    buffer[ipcDefines.AUTH_RECORD_PASSWD_POS + i] = 0x00;    //clear remaning bytes
+
+                }
+
                 char[] logB = this.Login.ToCharArray();
-                for (int i = 0; i < logB.Length; i++)
+                int loginBytes = logB.Length > ipcDefines.AUTH_PASS_SIZE ? ipcDefines.AUTH_PASS_SIZE : logB.Length;
+                for (int i = 0; i < loginBytes; i++)
                 {
                     buffer[ipcDefines.AUTH_RECORD_LOGIN_POS + i] = (byte)logB[i];
+                }
+                for (int i = loginBytes; i < ipcDefines.AUTH_PASS_SIZE - loginBytes; i++)
+                {
+                    buffer[ipcDefines.AUTH_RECORD_LOGIN_POS + i]  = 0x00;    //clear remaning bytes
+
                 }
 
                 return buffer;

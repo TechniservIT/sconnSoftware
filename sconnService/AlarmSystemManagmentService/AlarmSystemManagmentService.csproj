@@ -87,6 +87,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstract\IEntityService.cs" />
+    <Compile Include="AlarmSystemUsers\AlarmSystemUsersConfigurationService.cs" />
+    <Compile Include="AlarmSystemUsers\IAlarmSystemUsersConfigurationService.cs" />
     <Compile Include="AuthorizedDevices\AuthorizedDevicesConfigurationService.cs" />
     <Compile Include="AuthorizedDevices\IAuthorizedDevicesConfigurationService.cs" />
     <Compile Include="Device\AlarmDevicesConfigService.cs" />

@@ -17,7 +17,7 @@ namespace AlarmSystemManagmentService
 
         public bool Online { get; set; }
         private static Logger _logger = LogManager.GetCurrentClassLogger();
-        private AlarmGenericConfigManager<sconnUserConfig> EntityManager;
+        private AlarmGenericConfigManager<sconnRemoteUserConfig> EntityManager;
         private AlarmSystemConfigManager ConfigManager;
 
         public UsersConfigurationService()
@@ -30,7 +30,7 @@ namespace AlarmSystemManagmentService
             if(man != null)
             {
                 ConfigManager = man;
-                EntityManager = new AlarmGenericConfigManager<sconnUserConfig>(ConfigManager.Config.UserConfig, man.RemoteDevice);
+                EntityManager = new AlarmGenericConfigManager<sconnRemoteUserConfig>(ConfigManager.Config.RemoteUserConfig, man.RemoteDevice);
             }
 
         }
@@ -53,7 +53,7 @@ namespace AlarmSystemManagmentService
             {
                 EntityManager.Download();
             }
-            return ConfigManager.Config.UserConfig.Users.ToList();
+            return ConfigManager.Config.RemoteUserConfig.Users.ToList();
         }
 
         public bool RemoveById(int Id)
@@ -83,7 +83,7 @@ namespace AlarmSystemManagmentService
                 {
                     EntityManager.Download();
                 }
-                sconnUser dev = ConfigManager.Config.UserConfig.Users.FirstOrDefault(d => d.Id == Id);
+                sconnUser dev = ConfigManager.Config.RemoteUserConfig.Users.FirstOrDefault(d => d.Id == Id);
                 return dev;
             }
             catch (Exception e)
@@ -97,8 +97,8 @@ namespace AlarmSystemManagmentService
         {
             try
             {
-                ConfigManager.Config.UserConfig.Users.Add(device);
-                return true;    //no adding -  filled with empty objects
+                ConfigManager.Config.RemoteUserConfig.Users.Add(device);
+                return SaveChanges();
             }
             catch (Exception e)
             {
@@ -112,7 +112,7 @@ namespace AlarmSystemManagmentService
         {
             try
             {
-                ConfigManager.Config.UserConfig.Users
+                ConfigManager.Config.RemoteUserConfig.Users
                    .Where(z => z.Id == rcpt.Id)
                    .ToList()
                    .ForEach(x =>
@@ -142,17 +142,11 @@ namespace AlarmSystemManagmentService
             {
                 if (Online)
                 {
-                    // 'Remove' clears static record instead - replace with new empty record with the same Id
-                    sconnUser stub = new sconnUser { Id = device.Id };
-                    this.Update(stub);
+                    ConfigManager.Config.RemoteUserConfig.Users.Remove(device);
                     return SaveChanges();
                 }
-                else
-                {
-                    this.ConfigManager.Config.UserConfig.Users.Remove(device);
-                    return true;
-                }
-
+                this.ConfigManager.Config.RemoteUserConfig.Users.Remove(device);
+                return true;
             }
             catch (Exception e)
             {

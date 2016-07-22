@@ -219,10 +219,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm.Map
 
                 Loading = true;
                 bgWorker.RunWorkerAsync();
-
-
-
-
+                
             }
             catch (Exception ex)
             {

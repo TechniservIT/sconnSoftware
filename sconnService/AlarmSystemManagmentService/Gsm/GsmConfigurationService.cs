@@ -95,7 +95,8 @@ namespace AlarmSystemManagmentService
         {
             try
             {
-                return true;    //no adding -  filled with empty objects
+                ConfigManager.Config.GsmConfig.Rcpts.Add(device);
+                return SaveChanges();
             }
             catch (Exception e)
             {
@@ -133,13 +134,9 @@ namespace AlarmSystemManagmentService
         {
             try
             {
-
                 if (Online)
                 {
-
-                    // 'Remove' clears static record instead - replace with new empty record with the same Id
-                    sconnGsmRcpt stub = new sconnGsmRcpt { Id = device.Id };
-                    this.Update(stub);
+                    ConfigManager.Config.GsmConfig.Rcpts.Remove(device);
                     return SaveChanges();
                 }
                 else
