@@ -986,13 +986,10 @@ public static class sconnDataShare
             public const int SCHED_STAT_INACTIVE =0x00;
 
 
-        /*****************  Mail ***********************/
-
-
-
-
         /*****************  SMS ***********************/
-        public const byte RAM_SMS_RECP_ADDR_POS = (byte)0x0000;
+        public const byte RAM_SMS_RECP_ID_POS = 0x0000;
+        public const byte RAM_SMS_RECP_ID_LEN = 0x0002;
+        public const byte RAM_SMS_RECP_ADDR_POS = (byte) (RAM_SMS_RECP_ID_POS + RAM_SMS_RECP_ID_LEN);
         public const byte RAM_SMS_RECP_ADDR_LEN = 15;
         public const byte RAM_SMS_RECP_COUNTRY_CODE_POS = (byte)(RAM_SMS_RECP_ADDR_POS + RAM_SMS_RECP_ADDR_LEN);
         public const byte RAM_SMS_RECP_COUNTRY_CODE_LEN = 0x02;

@@ -46,7 +46,7 @@ namespace sconnConnector.POCO.Config.sconn
                 byte[] Bytes = new byte[ipcDefines.RAM_SMS_RECP_SIZE];
                 Bytes[ipcDefines.RAM_SMS_RECP_COUNTRY_CODE_POS] = (byte)(CountryCode << 8);
                 Bytes[ipcDefines.RAM_SMS_RECP_COUNTRY_CODE_POS + 1] = (byte)CountryCode;
-
+                Bytes[ipcDefines.RAM_SMS_RECP_MESSAGE_LEVEL_POS] = (byte) MessageLevel;
                 byte[] numbytes = (System.Text.Encoding.ASCII.GetBytes(NumberE164));
                 for (int i = 0; i < numbytes.Length; i++)
                 {
@@ -70,7 +70,10 @@ namespace sconnConnector.POCO.Config.sconn
                 //decode
                 CountryCode = buffer[ipcDefines.RAM_SMS_RECP_COUNTRY_CODE_POS] << 8;
                 CountryCode |= buffer[ipcDefines.RAM_SMS_RECP_COUNTRY_CODE_POS + 1];
-
+                if (Enum.IsDefined(typeof (GsmMessagingLevel), (int)buffer[ipcDefines.RAM_SMS_RECP_MESSAGE_LEVEL_POS]))
+                {
+                    MessageLevel = (GsmMessagingLevel)buffer[ipcDefines.RAM_SMS_RECP_MESSAGE_LEVEL_POS];
+                }
                 byte[] NumberBytes = new byte[ipcDefines.RAM_SMS_RECP_ADDR_LEN];
                 for (int i = 0; i < ipcDefines.RAM_SMS_RECP_ADDR_LEN; i++)
                 {

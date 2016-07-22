@@ -104,7 +104,10 @@ namespace sconnConnector.POCO.Config.sconn
         {
             try
             {
-                Type = (AlarmZoneType)buffer[ipcDefines.ZONE_CFG_TYPE_POS];
+                if (Enum.IsDefined(typeof(AlarmZoneType), buffer[ipcDefines.ZONE_CFG_TYPE_POS]))
+                {
+                    Type = (AlarmZoneType)buffer[ipcDefines.ZONE_CFG_TYPE_POS];
+                }
                 Enabled = buffer[ipcDefines.ZONE_CFG_ENABLED_POS] > 0 ? true : false;
                 Name = System.Text.Encoding.BigEndianUnicode.GetString(
                     buffer, 

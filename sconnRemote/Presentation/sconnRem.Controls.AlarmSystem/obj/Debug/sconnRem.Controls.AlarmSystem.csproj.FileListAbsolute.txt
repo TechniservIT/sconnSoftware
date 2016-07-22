@@ -451,13 +451,11 @@ I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSys
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\obj\Debug\View\Status\AlarmSystem\Events\AlarmEventsListView.g.cs
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\obj\Debug\View\Status\AlarmSystem\Gsm\AlarmGsmStatusView.g.cs
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\obj\Debug\View\Status\AlarmSystem\Relays\AlarmRelayConfigureView.g.cs
-I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\obj\Debug\View\Status\AlarmSystem\Users\AlarmUsersStatusView.g.cs
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\obj\Debug\View\Status\AlarmSystem\Environmental\AlarmHumiditySensorsListView.baml
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\obj\Debug\View\Status\AlarmSystem\Environmental\AlarmTemperatureSensorsListView.baml
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\obj\Debug\View\Status\AlarmSystem\Events\AlarmEventsListView.baml
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\obj\Debug\View\Status\AlarmSystem\Gsm\AlarmGsmStatusView.baml
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\obj\Debug\View\Status\AlarmSystem\Relays\AlarmRelayConfigureView.baml
-I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\obj\Debug\View\Status\AlarmSystem\Users\AlarmUsersStatusView.baml
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\obj\Debug\View\Status\AlarmSystem\Global\AlarmSystemGlobalStatusView.g.cs
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\obj\Debug\View\Status\AlarmSystem\Global\AlarmSystemGlobalStatusView.baml
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\bin\Debug\sconnRem.Shells.dll
@@ -538,10 +536,8 @@ I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSys
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\obj\Debug\View\Status\AlarmSystem\PowerSupply\AlarmPowerStatusListView.baml
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\obj\Debug\View\Status\AlarmSystem\Device\AlarmSystemDeviceAuthListView.g.cs
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\obj\Debug\View\Status\AlarmSystem\Gsm\AlarmGsmRcptListView.g.cs
-I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\obj\Debug\View\Status\AlarmSystem\Users\AlarmUsersListView.g.cs
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\obj\Debug\View\Status\AlarmSystem\Device\AlarmSystemDeviceAuthListView.baml
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\obj\Debug\View\Status\AlarmSystem\Gsm\AlarmGsmRcptListView.baml
-I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\obj\Debug\View\Status\AlarmSystem\Users\AlarmUsersListView.baml
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\obj\Debug\View\Status\AlarmSystem\Zones\AlarmSystemZonesMapView.g.cs
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\obj\Debug\View\Status\AlarmSystem\Zones\AlarmSystemZonesMapView.baml
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\bin\Debug\GraphSharp.Controls.dll
@@ -580,3 +576,6 @@ I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSys
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\obj\Debug\View\Status\AlarmSystem\RemoteUsers\AlarmUsersListView.g.cs
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\obj\Debug\View\Status\AlarmSystem\RemoteUsers\AlarmUsersStatusView.g.cs
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\obj\Debug\View\Status\AlarmSystem\SystemUsers\AlarmSystemUsersListView.g.cs
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\obj\Debug\View\Status\AlarmSystem\SystemUsers\AlarmSystemUsersListView.baml
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\obj\Debug\View\Status\AlarmSystem\RemoteUsers\AlarmUsersListView.baml
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\obj\Debug\View\Status\AlarmSystem\RemoteUsers\AlarmUsersStatusView.baml

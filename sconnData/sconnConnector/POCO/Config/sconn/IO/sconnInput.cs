@@ -171,12 +171,21 @@ namespace sconnConnector.POCO.Config
                     Delayed = true;
                     typeVal = (byte) (typeVal - (byte)sconnInputTypeMaskValues.InputDelayedMask);
                 }
-                Type = (sconnInputType)typeVal;
+
+                if (Enum.IsDefined(typeof(sconnInputType), (int)typeVal))
+                {
+                    Type = (sconnInputType)typeVal;
+                }
+
                 Value = buffer[ipcDefines.mAdrInputVal];
                 NameId = buffer[ipcDefines.mAdrInputNameAddr];
                 Enabled = buffer[ipcDefines.mAdrInputEnabled] > 0 ? true : false;
                 Sensitivity = (uint) (buffer[ipcDefines.mAdrInputSensitivity] * ipcDefines.InputSensitivityStep);
-                ActivationGroup = (sconnActivationGroup)buffer[ipcDefines.mAdrInputAG];
+
+                if (Enum.IsDefined(typeof(sconnActivationGroup), (int)buffer[ipcDefines.mAdrInputAG]))
+                {
+                    ActivationGroup = (sconnActivationGroup)buffer[ipcDefines.mAdrInputAG];
+                }
             }
             catch (Exception e)
             {

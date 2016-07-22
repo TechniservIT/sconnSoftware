@@ -118,7 +118,10 @@ namespace sconnConnector.POCO.Config.Abstract.Auth
                 {
                     Permissions = buffer[ipcDefines.AUTH_RECORD_PERM_POS];
                     Enabled = buffer[ipcDefines.AUTH_RECORD_ENABLED_POS] > 0 ? true : false;
-                    Group = (sconnRemoteUserGroup)buffer[ipcDefines.AUTH_RECORD_GROUP_POS];
+                    if (Enum.IsDefined(typeof(sconnRemoteUserGroup), (int)buffer[ipcDefines.AUTH_RECORD_GROUP_POS]))
+                    {
+                        Group = (sconnRemoteUserGroup)buffer[ipcDefines.AUTH_RECORD_GROUP_POS];
+                    }
 
                     byte passLen = buffer[ipcDefines.AUTH_RECORD_PASS_LEN_POS];
                     if (passLen <= ipcDefines.AUTH_RECORD_PASSWD_LEN)

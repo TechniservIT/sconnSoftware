@@ -177,8 +177,11 @@ namespace sconnConnector.POCO.Config.sconn
             this.ComTcpIp = memCFG[ipcDefines.comETH] > 0 ? true : false;
             this.DomainNumber = memCFG[ipcDefines.mAdrDomain];
             this.Revision = memCFG[ipcDefines.mAdrDevRev];
-            this.Type = (sconnDeviceType)memCFG[ipcDefines.mAdrDevType];
 
+            if (Enum.IsDefined(typeof(sconnDeviceType), (int)memCFG[ipcDefines.mAdrDevType]))
+            {
+                Type = (sconnDeviceType)memCFG[ipcDefines.mAdrDevType];
+            }
         }
 
         public string GetDeviceTypeImageUriForDevice(sconnDevice device)

@@ -160,7 +160,10 @@ namespace sconnConnector.POCO.Config
         {
             try
             {
-                Type = (sconnOutputType)buffer[ipcDefines.mAdrRelayType];
+                if (Enum.IsDefined(typeof(sconnOutputType), (int)buffer[ipcDefines.mAdrRelayType]))
+                {
+                    Type = (sconnOutputType)buffer[ipcDefines.mAdrRelayType];
+                }
                 Value = buffer[ipcDefines.mAdrRelayVal] > 0 ? true : false;
                 NameId = buffer[ipcDefines.mAdrRelayNameAddr];
                 Enabled = buffer[ipcDefines.mAdrRelayEnabled] > 0 ? true : false;

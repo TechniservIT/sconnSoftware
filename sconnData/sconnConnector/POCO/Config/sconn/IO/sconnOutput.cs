@@ -150,7 +150,10 @@ namespace sconnConnector.POCO.Config
         {
             try
             {
-                Type = (sconnOutputType)buffer[ipcDefines.mAdrOutputType];
+                if (Enum.IsDefined(typeof(sconnOutputType), (int)buffer[ipcDefines.mAdrOutputType]))
+                {
+                    Type = (sconnOutputType)buffer[ipcDefines.mAdrOutputType];
+                }
                 Value = (buffer[ipcDefines.mAdrOutputVal] > 0 ? true : false);
                 NameId = buffer[ipcDefines.mAdrOutputNameAddr];
                 Enabled = buffer[ipcDefines.mAdrOutputEnabled] > 0 ? true : false;
