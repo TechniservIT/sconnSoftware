@@ -27,7 +27,7 @@ namespace sconnRem.View.Config
     public partial class UserConfigView : UserControl
     {
         [ImportingConstructor]
-        public UserConfigView(AlarmUsersConfigViewModel viewModel)
+        public UserConfigView(AlarmRemoteUsersConfigViewModel viewModel)
         {
             InitializeComponent();
             this.DataContext = viewModel;

@@ -12,6 +12,7 @@ using sconnRem.ViewModel.Generic;
 using sconnConnector.POCO.Config.sconn;
 using Prism.Mvvm;
 using System.ComponentModel.Composition;
+using System.Windows;
 using NLog;
 using Prism.Commands;
 using Prism.Regions;
@@ -39,10 +40,43 @@ namespace sconnRem.ViewModel.Alarm
             }
         }
 
+        private int _selectedIndex;
+        public int SelectedIndex
+        {
+            get { return _selectedIndex; }
+            set
+            {
+                _selectedIndex = value;
+                OnPropertyChanged();
+                if (_selectedIndex < Config.Count)
+                {
+                    Application.Current.Dispatcher.Invoke(() => { OpenEntityEditContext(Config[_selectedIndex]); });
+                }
+            }
+        }
+
         private ZoneConfigurationService _provider;
         private AlarmSystemConfigManager _manager;
 
         public ICommand ConfigureZoneCommand { get; set; }
+        public ICommand EntitySelected;
+        public ICommand ConfigureEntityCommand;
+
+        public void OpenEntityEditContext(sconnAlarmZone device)
+        {
+            if (device == null || Config.Count <= 0) return;
+            NavigationParameters parameters = new NavigationParameters
+            {
+                {GlobalViewContractNames.Global_Contract_Nav_Site_Context__Key_Name, siteUUID},
+                {AlarmSystemEntityListContractNames.Alarm_Contract_Entity_Zone_Edit_Context_Key_Name, device.Id}
+            };
+
+            GlobalNavigationContext.NavigateRegionToContractWithParam(
+                GlobalViewRegionNames.RNavigationRegion,
+                GlobalViewContractNames.Global_Contract_Menu_RightSide_AlarmZoneEditListItemContext,
+                parameters
+                );
+        }
 
         public override void GetData()
         {

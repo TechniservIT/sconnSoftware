@@ -9,7 +9,7 @@
              d:DesignHeight="300" d:DesignWidth="300">
 
     <UserControl.DataContext>
-        <datapath:AlarmUsersConfigViewModel />
+        <datapath:AlarmRemoteUsersConfigViewModel />
     </UserControl.DataContext>
     <Grid>
         <DataGrid MinWidth="200" MinHeight="250"

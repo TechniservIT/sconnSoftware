@@ -19,16 +19,14 @@ using sconnRem.Navigation;
 namespace sconnRem.Controls.AlarmSystem.View.Config.AlarmSystem.Context
 {
     /// <summary>
-    /// Interaction logic for AlarmEntitySystemUserListItemEditContext.xaml
+    /// Interaction logic for AlarmEntityGsmRcptListItemEditContext.xaml
     /// </summary>
-
-
     [Export(GlobalViewContractNames.Global_Contract_Menu_RightSide_AlarmRemoteUserEditListItemContext)]
     [PartCreationPolicy(CreationPolicy.NonShared)]
-    public partial class AlarmEntitySystemUserListItemEditContext : UserControl
+    public partial class AlarmEntityGsmRcptListItemEditContext : UserControl
     {
         [ImportingConstructor]
-        public AlarmEntitySystemUserListItemEditContext(AlarmEntitySystemUserEditContextViewModel model)
+        public AlarmEntityGsmRcptListItemEditContext(AlarmEntityGsmRcptEditContextViewModel model)
         {
             DataContext = model;
             InitializeComponent();

@@ -12,6 +12,7 @@ using sconnRem.ViewModel.Generic;
 using sconnConnector.POCO.Config.Abstract.Auth;
 using Prism.Mvvm;
 using System.ComponentModel.Composition;
+using System.Windows;
 using NLog;
 using Prism.Regions;
 using sconnConnector.POCO.Config;
@@ -25,11 +26,11 @@ namespace sconnRem.ViewModel.Alarm
 
     [Export]
     [PartCreationPolicy(CreationPolicy.NonShared)]
-    public class AlarmUsersConfigViewModel : GenericAlarmConfigViewModel
+    public class AlarmRemoteUsersConfigViewModel : GenericAlarmConfigViewModel
     {
 
-        private ObservableCollection<sconnUser> _config;
-        public ObservableCollection<sconnUser> Config
+        private ObservableCollection<sconnRemoteUser> _config;
+        public ObservableCollection<sconnRemoteUser> Config
         {
             get { return _config; }
             set
@@ -39,19 +40,47 @@ namespace sconnRem.ViewModel.Alarm
             }
         }
 
+        private int _selectedIndex;
+        public int SelectedIndex
+        {
+            get { return _selectedIndex; }
+            set
+            {
+                _selectedIndex = value;
+                OnPropertyChanged();
+                if (_selectedIndex < Config.Count)
+                {
+                    Application.Current.Dispatcher.Invoke(() => { OpenEntityEditContext(Config[_selectedIndex]); });
+                }
+            }
+        }
 
         private UsersConfigurationService _provider;
         private AlarmSystemConfigManager _manager;
-       
-        
-        private ICommand _getDataCommand;
-        private ICommand _saveDataCommand;
+        public ICommand EntitySelected;
+        public ICommand ConfigureEntityCommand;
+
+        public void OpenEntityEditContext(sconnRemoteUser device)
+        {
+            if (device == null || Config.Count <= 0) return;
+            NavigationParameters parameters = new NavigationParameters
+            {
+                {GlobalViewContractNames.Global_Contract_Nav_Site_Context__Key_Name, siteUUID},
+                {AlarmSystemEntityListContractNames.Alarm_Contract_Entity_RemoteUser_Edit_Context_Key_Name, device.Id}
+            };
+
+            GlobalNavigationContext.NavigateRegionToContractWithParam(
+                GlobalViewRegionNames.RNavigationRegion,
+                GlobalViewContractNames.Global_Contract_Menu_RightSide_AlarmRemoteUserEditListItemContext,
+                parameters
+                );
+        }
 
         public override void GetData()
         {
             try
             {
-                Config = new ObservableCollection<sconnUser>(_provider.GetAll());
+                Config = new ObservableCollection<sconnRemoteUser>(_provider.GetAll());
 
             }
             catch (Exception ex)
@@ -68,7 +97,7 @@ namespace sconnRem.ViewModel.Alarm
             }
         }
 
-        public AlarmUsersConfigViewModel()
+        public AlarmRemoteUsersConfigViewModel()
         {
             _name = "Users";
             this._provider = new UsersConfigurationService(_manager);
@@ -76,9 +105,9 @@ namespace sconnRem.ViewModel.Alarm
         
 
         [ImportingConstructor]
-        public AlarmUsersConfigViewModel(IRegionManager regionManager)
+        public AlarmRemoteUsersConfigViewModel(IRegionManager regionManager)
         {
-            Config = new ObservableCollection<sconnUser>();
+            Config = new ObservableCollection<sconnRemoteUser>();
             this._manager = SiteNavigationManager.alarmSystemConfigManager;
             this._provider = new UsersConfigurationService(_manager);
             this._regionManager = regionManager;

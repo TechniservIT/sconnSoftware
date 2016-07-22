@@ -47,7 +47,7 @@ namespace AlarmSystemManagmentService
             }
         }
 
-        public List<sconnUser> GetAll()
+        public List<sconnRemoteUser> GetAll()
         {
             if (Online)
             {
@@ -60,7 +60,7 @@ namespace AlarmSystemManagmentService
         {
             try
             {
-                sconnUser dev = this.GetById(Id);
+                sconnRemoteUser dev = this.GetById(Id);
                 if (dev != null)
                 {
                     return this.Remove(dev);
@@ -75,7 +75,7 @@ namespace AlarmSystemManagmentService
 
         }
 
-        public sconnUser GetById(int Id)
+        public sconnRemoteUser GetById(int Id)
         {
             try
             {
@@ -83,7 +83,7 @@ namespace AlarmSystemManagmentService
                 {
                     EntityManager.Download();
                 }
-                sconnUser dev = ConfigManager.Config.RemoteUserConfig.Users.FirstOrDefault(d => d.Id == Id);
+                sconnRemoteUser dev = ConfigManager.Config.RemoteUserConfig.Users.FirstOrDefault(d => d.Id == Id);
                 return dev;
             }
             catch (Exception e)
@@ -93,7 +93,7 @@ namespace AlarmSystemManagmentService
             }
         }
 
-        public bool Add(sconnUser device)
+        public bool Add(sconnRemoteUser device)
         {
             try
             {
@@ -108,7 +108,7 @@ namespace AlarmSystemManagmentService
 
         }
 
-        public bool Update(sconnUser rcpt)
+        public bool Update(sconnRemoteUser rcpt)
         {
             try
             {
@@ -136,7 +136,7 @@ namespace AlarmSystemManagmentService
 
         }
 
-        public bool Remove(sconnUser device)
+        public bool Remove(sconnRemoteUser device)
         {
             try
             {

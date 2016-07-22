@@ -11,7 +11,7 @@ using sconnConnector.POCO.Config.sconn;
 namespace sconnConnector.POCO.Config.Abstract.Auth
 {
 
-    public enum sconnUserGroup
+    public enum sconnRemoteUserGroup
     {
         Admin = 1,
         ZoneAdmin,
@@ -20,7 +20,7 @@ namespace sconnConnector.POCO.Config.Abstract.Auth
     }
 
 
-    public class sconnUser : IAlarmSystemConfigurationEntity, ISerializableConfiguration, IFakeAbleConfiguration
+    public class sconnRemoteUser : IAlarmSystemConfigurationEntity, ISerializableConfiguration, IFakeAbleConfiguration
     {
 
         public int Id { get; set; }
@@ -39,7 +39,7 @@ namespace sconnConnector.POCO.Config.Abstract.Auth
 
         [Required]
         [DisplayName("Group")]
-        public sconnUserGroup Group { get; set; }
+        public sconnRemoteUserGroup Group { get; set; }
 
         [Required]
         [DisplayName("Enabled")]
@@ -57,12 +57,12 @@ namespace sconnConnector.POCO.Config.Abstract.Auth
 
         private static Logger _logger = LogManager.GetCurrentClassLogger();
 
-        public sconnUser()
+        public sconnRemoteUser()
         {
             UUID = Guid.NewGuid().ToString();
         }
 
-        public sconnUser(byte[] serialized) : this()
+        public sconnRemoteUser(byte[] serialized) : this()
         {
             this.Deserialize(serialized);
         }
@@ -118,7 +118,7 @@ namespace sconnConnector.POCO.Config.Abstract.Auth
                 {
                     Permissions = buffer[ipcDefines.AUTH_RECORD_PERM_POS];
                     Enabled = buffer[ipcDefines.AUTH_RECORD_ENABLED_POS] > 0 ? true : false;
-                    Group = (sconnUserGroup)buffer[ipcDefines.AUTH_RECORD_GROUP_POS];
+                    Group = (sconnRemoteUserGroup)buffer[ipcDefines.AUTH_RECORD_GROUP_POS];
 
                     byte passLen = buffer[ipcDefines.AUTH_RECORD_PASS_LEN_POS];
                     if (passLen <= ipcDefines.AUTH_RECORD_PASSWD_LEN)
@@ -161,7 +161,7 @@ namespace sconnConnector.POCO.Config.Abstract.Auth
                 this.Password = Guid.NewGuid().ToString();
                 this.AllowedFrom = DateTime.MinValue;
                 this.AllowedUntil = DateTime.MaxValue;
-                this.Group = sconnUserGroup.Admin;
+                this.Group = sconnRemoteUserGroup.Admin;
             }
             catch (Exception e)
             {

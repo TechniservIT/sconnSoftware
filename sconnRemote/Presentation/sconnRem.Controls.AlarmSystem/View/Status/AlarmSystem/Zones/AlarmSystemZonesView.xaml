@@ -27,6 +27,7 @@
                                              x:Name="OrdersListBox" BorderThickness="0"
                                              ItemsSource="{Binding Config, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                                              IsSynchronizedWithCurrentItem="True"
+                                                SelectedIndex="{Binding SelectedIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                              Background="White">
                     <ListBox.ItemTemplate>
                         <DataTemplate>

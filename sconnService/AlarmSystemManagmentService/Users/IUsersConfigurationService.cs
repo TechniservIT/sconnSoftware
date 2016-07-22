@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AlarmSystemManagmentService
 {
-    public interface IUsersConfigurationService : IAlarmSystemConfigurationService<sconnUser>
+    public interface IUsersConfigurationService : IAlarmSystemConfigurationService<sconnRemoteUser>
     {
     }
 }

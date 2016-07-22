@@ -33,16 +33,12 @@ namespace sconnRem.Controls.Navigation.ViewModel.AlarmSystem
         public string siteUUID { get; set; }
 
         public ICommand Show_Status_Command { get; set; }
-        public ICommand Show_Configure_Command { get; set; }
-
+        public ICommand Show_GlobalStatus_Command { get; set; }
+        public ICommand Show_Alarm_Map_Command { get; set; }
+         
         public ICommand Show_Alarm_Inputs_Command { get; set; }
         public ICommand Show_Alarm_Outputs_Command { get; set; }
         public ICommand Show_Alarm_Relay_Command { get; set; }
-
-        public ICommand Show_Alarm_Zones_Command { get; set; }
-        public ICommand Show_Alarm_AuthConfig_Command { get; set; }
-        public ICommand Show_Alarm_Users_Command { get; set; }
-
         public ICommand Show_Alarm_Devices_Command { get; set; }
 
         public ICommand Show_Alarm_Network_Command { get; set; }
@@ -51,9 +47,15 @@ namespace sconnRem.Controls.Navigation.ViewModel.AlarmSystem
 
         public ICommand Show_Alarm_HumiditySensors_Command { get; set; }
         public ICommand Show_Alarm_TempratureSensors_Command { get; set; }
+
+        //Full CRUD entities
+        public ICommand Show_Alarm_AuthConfig_Command { get; set; }
         public ICommand Show_Alarm_GsmRcpts_Command { get; set; }
+        public ICommand Show_Alarm_SystemUsers_Command { get; set; }
+        public ICommand Show_Alarm_Zones_Command { get; set; }
+        public ICommand Show_Alarm_Users_Command { get; set; }
 
-
+        
         private void ShowConfigure(sconnSite site)
         {
             NavigateToAlarmContract(AlarmRegionNames.AlarmStatus_Contract_Global_View);  
@@ -103,7 +105,7 @@ namespace sconnRem.Controls.Navigation.ViewModel.AlarmSystem
 
         private void ShowZones(sconnSite site)
         {
-            NavigateToAlarmContract(AlarmRegionNames.AlarmConfig_Contract_ZoneMapConfigView);   //AlarmConfig_Contract_ZoneConfigView
+            NavigateToAlarmContract(AlarmRegionNames.AlarmStatus_Contract_ZonesView);  
         }
 
 
@@ -147,18 +149,27 @@ namespace sconnRem.Controls.Navigation.ViewModel.AlarmSystem
             NavigateToAlarmContract(AlarmRegionNames.AlarmConfig_Contract_GsmRcptConfigView);
         }
 
+        private void ShowSystemUsers(sconnSite site)
+        {
+            NavigateToAlarmContract(AlarmRegionNames.AlarmConfig_Contract_SystemUsersConfigView);
+        }
 
+        private void ShowSystemMap(sconnSite site)
+        {
+            NavigateToAlarmContract(AlarmRegionNames.AlarmConfig_Contract_ZoneMapConfigView);
+        }
+        
         private void SetupCmds()
         {
-            Show_Configure_Command = new DelegateCommand<sconnSite>(ShowConfigure);
+            Show_GlobalStatus_Command = new DelegateCommand<sconnSite>(ShowConfigure);
+            Show_Alarm_Map_Command = new DelegateCommand<sconnSite>(ShowSystemMap);
 
             Show_Alarm_Inputs_Command = new DelegateCommand<sconnSite>(ShowInputs);
             Show_Alarm_Outputs_Command = new DelegateCommand<sconnSite>(ShowOutputs);
             Show_Alarm_Relay_Command = new DelegateCommand<sconnSite>(ShowRelays);
 
             Show_Alarm_Devices_Command= new DelegateCommand<sconnSite>(ShowDevices);
-
-
+            
             Show_Alarm_Zones_Command = new DelegateCommand<sconnSite>(ShowZones);
             Show_Alarm_Users_Command = new DelegateCommand<sconnSite>(ShowUsers);
             Show_Alarm_AuthConfig_Command = new DelegateCommand<sconnSite>(ShowAuthConfig);
@@ -169,8 +180,10 @@ namespace sconnRem.Controls.Navigation.ViewModel.AlarmSystem
 
             Show_Alarm_HumiditySensors_Command = new DelegateCommand<sconnSite>(ShowHumiditySensorsList);
             Show_Alarm_TempratureSensors_Command = new DelegateCommand<sconnSite>(ShowTemperatureSensorsList);
+
             Show_Alarm_GsmRcpts_Command = new DelegateCommand<sconnSite>(ShowGsmRcptsList);
-        }
+            Show_Alarm_SystemUsers_Command = new DelegateCommand<sconnSite>(ShowSystemUsers);
+    }
 
         public AlarmSystemToolbarViewModel()
         {

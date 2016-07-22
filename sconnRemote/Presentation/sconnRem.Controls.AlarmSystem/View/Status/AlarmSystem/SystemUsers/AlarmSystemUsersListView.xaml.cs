@@ -13,19 +13,22 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using AlarmSystemManagmentService;
 using NLog;
 using Prism.Regions;
+using sconnRem.Controls.AlarmSystem.ViewModel.Alarm;
 using sconnRem.Navigation;
 using sconnRem.ViewModel.Alarm;
 
-namespace sconnRem.Controls.AlarmSystem.View.Status.AlarmSystem.Users
+namespace sconnRem.Controls.AlarmSystem.View.Status.AlarmSystem.SystemUsers
 {
+    /// <summary>
+    /// Interaction logic for AlarmSystemUsersListView.xaml
+    /// </summary>
 
-    [Export(AlarmRegionNames.AlarmConfig_Contract_UsersConfigView)]
+    [Export(AlarmRegionNames.AlarmConfig_Contract_SystemUsersConfigView)]
     [ViewSortHint("01")]
     [PartCreationPolicy(CreationPolicy.NonShared)]
-    public partial class AlarmUsersListView : UserControl
+    public partial class AlarmSystemUsersListView : UserControl
     {
         private const string MainContentRegionName = GlobalViewRegionNames.MainGridContentRegion;
         private Logger _nlogger = LogManager.GetCurrentClassLogger();
@@ -34,13 +37,12 @@ namespace sconnRem.Controls.AlarmSystem.View.Status.AlarmSystem.Users
         public IRegionManager RegionManager;
 
         [ImportingConstructor]
-        public AlarmUsersListView(AlarmUsersConfigViewModel viewModel)
+        public AlarmSystemUsersListView(AlarmSystemUsersConfigViewModel viewModel)
         {
             this.DataContext = viewModel;
             InitializeComponent();
         }
 
     }
-
 
 }

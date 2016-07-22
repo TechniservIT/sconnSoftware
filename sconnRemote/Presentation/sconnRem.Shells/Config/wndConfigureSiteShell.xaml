@@ -81,7 +81,7 @@
         </DataTemplate>
 
 
-        <DataTemplate DataType="{x:Type modelsrc:AlarmUsersConfigViewModel}">
+        <DataTemplate DataType="{x:Type modelsrc:AlarmRemoteUsersConfigViewModel}">
             <viewsrc:UserConfigView/>
             --><!-- This is a UserControl --><!--
         </DataTemplate>

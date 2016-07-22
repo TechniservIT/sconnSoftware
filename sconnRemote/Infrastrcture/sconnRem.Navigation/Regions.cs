@@ -21,7 +21,8 @@ namespace sconnRem.Navigation
         public const String AlarmConfig_Contract_ZoneMapConfigView = "ZoneMapConfigViewContract";
         public const String AlarmConfig_Contract_DeviceMapConfigView = "DeviceMapConfigViewContract";
         public const String AlarmConfig_Contract_UsersConfigView = "UserConfigViewContract";
-        
+        public const String AlarmConfig_Contract_SystemUsersConfigView = "SystemUserConfigViewContract";
+
 
         #region AlarmSystemEntitiesView
 
@@ -171,6 +172,9 @@ namespace sconnRem.Navigation
         public const String Global_Contract_Menu_RightSide_AlarmDeviceEditMapContext = "GlobalContractMenuRightSideDeviceEditMapContext";
         public const String Global_Contract_Menu_RightSide_AlarmZoneEditListItemContext = "GlobalContractMenuRightSideZoneEditListItemContext";
         public const String Global_Contract_Menu_RightSide_AlarmAuthorizedDeviceEditListItemContext = "GlobalContractMenuRightSideAuthorizedDeviceEditListItemContext";
+        public const String Global_Contract_Menu_RightSide_AlarmRemoteUserEditListItemContext = "GlobalContractMenuRightSideRemoteUserEditListItemContext";
+        public const String Global_Contract_Menu_RightSide_AlarmSystemUserEditListItemContext = "GlobalContractMenuRightSideSystemUserEditListItemContext";
+        public const String Global_Contract_Menu_RightSide_AlarmGsmRcptEditListItemContext = "GlobalContractMenuRightSideGsmRcptEditListItemContext";
 
         public const String Global_Contract_Menu_RightSide_Grid_Nav = "GlobalContractMenuRightSideGridNav";
 
@@ -194,6 +198,10 @@ namespace sconnRem.Navigation
     {
         public const String Alarm_Contract_Entity_Zone_Edit_Context_Key_Name = "ZoneUUID";
         public const String Alarm_Contract_Entity_AuthorizedDevice_Edit_Context_Key_Name = "DeviceUUID";
+        public const String Alarm_Contract_Entity_SystemUser_Edit_Context_Key_Name = "UserUUID";
+        public const String Alarm_Contract_Entity_RemoteUser_Edit_Context_Key_Name = "RemoteUserUUID";
+        public const String Alarm_Contract_Entity_GsmRcpt_Edit_Context_Key_Name = "GsmRcptUUID";
+
     }
 
     public static class NavContextToolbarRegionNames

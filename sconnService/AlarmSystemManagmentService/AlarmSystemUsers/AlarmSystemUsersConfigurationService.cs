@@ -12,7 +12,7 @@ using sconnConnector.POCO.Config.sconn.User;
 
 namespace AlarmSystemManagmentService.AlarmSystemUsers
 {
-    class AlarmSystemUsersConfigurationService : IAlarmSystemUsersConfigurationService
+    public class AlarmSystemUsersConfigurationService : IAlarmSystemUsersConfigurationService
     {
         public bool Online { get; set; }
         private static Logger _logger = LogManager.GetCurrentClassLogger();

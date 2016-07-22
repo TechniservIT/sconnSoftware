@@ -10,13 +10,13 @@ namespace sconnConnector.POCO.Config.Abstract.Auth
 {
     public class sconnRemoteUserConfig : IAlarmSystemEntityConfig, IFakeAbleConfiguration
     {
-        public List<sconnUser> Users { get; set; }
+        public List<sconnRemoteUser> Users { get; set; }
         private static Logger _logger = LogManager.GetCurrentClassLogger();
 
         public sconnRemoteUserConfig()
         {
             UUID = Guid.NewGuid().ToString();
-            Users = new List<sconnUser>();
+            Users = new List<sconnRemoteUser>();
         }
 
         public int GetEntityCount()
@@ -26,7 +26,7 @@ namespace sconnConnector.POCO.Config.Abstract.Auth
 
         public void Clear()
         {
-            this.Users = new List<sconnUser>();
+            this.Users = new List<sconnRemoteUser>();
         }
 
         public byte[] SerializeEntityWithId(int id)
@@ -45,7 +45,7 @@ namespace sconnConnector.POCO.Config.Abstract.Auth
         {
             try
             {
-                Users.Add(new sconnUser(buffer));
+                Users.Add(new sconnRemoteUser(buffer));
             }
             catch (Exception e)
             {
@@ -57,7 +57,7 @@ namespace sconnConnector.POCO.Config.Abstract.Auth
         {
             try
             {
-                sconnUser zone = new sconnUser();
+                sconnRemoteUser zone = new sconnRemoteUser();
                 zone.Fake();
                 Users.Add(zone);
             }

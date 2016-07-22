@@ -1,35 +1,32 @@
-﻿using AlarmSystemManagmentService;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Input;
-using sconnConnector.Config;
-using sconnConnector.POCO.Config.Abstract;
-using sconnRem.ViewModel.Generic;
-using sconnConnector.POCO.Config;
-using Prism.Mvvm;
-using System.ComponentModel.Composition;
 using System.Windows;
-using NLog;
+using System.Windows.Input;
+using AlarmSystemManagmentService;
+using AlarmSystemManagmentService.AlarmSystemUsers;
 using Prism.Regions;
-using sconnConnector.POCO.Config.sconn;
-using sconnRem.Controls.AlarmSystem.ViewModel.Generic;
+using sconnConnector.Config;
+using sconnConnector.POCO.Config.Abstract.Auth;
+using sconnConnector.POCO.Config.sconn.User;
 using sconnRem.Infrastructure.Navigation;
 using sconnRem.Navigation;
+using sconnRem.ViewModel.Generic;
 
-namespace sconnRem.ViewModel.Alarm
+namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
 {
-
+    
     [Export]
     [PartCreationPolicy(CreationPolicy.NonShared)]
-    public class AlarmGsmConfigViewModel : GenericAlarmConfigViewModel
+    public class AlarmSystemUsersConfigViewModel : GenericAlarmConfigViewModel
     {
 
-        public ObservableCollection<sconnGsmRcpt> _config { get; set; }
-        public ObservableCollection<sconnGsmRcpt> Config
+        private ObservableCollection<sconnAlarmSystemUser> _config;
+        public ObservableCollection<sconnAlarmSystemUser> Config
         {
             get { return _config; }
             set
@@ -38,9 +35,6 @@ namespace sconnRem.ViewModel.Alarm
                 OnPropertyChanged();
             }
         }
-
-        private GsmConfigurationService _provider;
-        private AlarmSystemConfigManager _manager;
 
         private int _selectedIndex;
         public int SelectedIndex
@@ -57,21 +51,24 @@ namespace sconnRem.ViewModel.Alarm
             }
         }
 
+        private AlarmSystemUsersConfigurationService _provider;
+        private AlarmSystemConfigManager _manager;
+
         public ICommand EntitySelected;
         public ICommand ConfigureEntityCommand;
 
-        public void OpenEntityEditContext(sconnGsmRcpt device)
+        public void OpenEntityEditContext(sconnAlarmSystemUser device)
         {
             if (device == null || Config.Count <= 0) return;
             NavigationParameters parameters = new NavigationParameters
             {
                 {GlobalViewContractNames.Global_Contract_Nav_Site_Context__Key_Name, siteUUID},
-                {AlarmSystemEntityListContractNames.Alarm_Contract_Entity_GsmRcpt_Edit_Context_Key_Name, device.Id}
+                {AlarmSystemEntityListContractNames.Alarm_Contract_Entity_SystemUser_Edit_Context_Key_Name, device.Id}
             };
 
             GlobalNavigationContext.NavigateRegionToContractWithParam(
                 GlobalViewRegionNames.RNavigationRegion,
-                GlobalViewContractNames.Global_Contract_Menu_RightSide_AlarmGsmRcptEditListItemContext,
+                GlobalViewContractNames.Global_Contract_Menu_RightSide_AlarmSystemUserEditListItemContext,
                 parameters
                 );
         }
@@ -80,7 +77,7 @@ namespace sconnRem.ViewModel.Alarm
         {
             try
             {
-                Config = new ObservableCollection<sconnGsmRcpt>(_provider.GetAll());
+                Config = new ObservableCollection<sconnAlarmSystemUser>(_provider.GetAll());
 
             }
             catch (Exception ex)
@@ -97,35 +94,38 @@ namespace sconnRem.ViewModel.Alarm
             }
         }
 
-        public AlarmGsmConfigViewModel()
+        public AlarmSystemUsersConfigViewModel()
         {
-            _name = "Gsm";
-            this._provider = new GsmConfigurationService(_manager);
+            _name = "Users";
+            this._provider = new AlarmSystemUsersConfigurationService(_manager);
+        }
+
+
+        [ImportingConstructor]
+        public AlarmSystemUsersConfigViewModel(IRegionManager regionManager)
+        {
+            Config = new ObservableCollection<sconnAlarmSystemUser>();
+            this._manager = SiteNavigationManager.alarmSystemConfigManager;
+            this._provider = new AlarmSystemUsersConfigurationService(_manager);
+            this._regionManager = regionManager;
+            GetData();
+        }
+
+        public string DisplayedImagePath
+        {
+            get { return "pack://application:,,,/images/user.png"; }
         }
 
         public override bool IsNavigationTarget(NavigationContext navigationContext)
         {
-            if (navigationContext.Uri.OriginalString.Equals(AlarmRegionNames.AlarmConfig_Contract_GsmRcptConfigView))
+            if (navigationContext.Uri.OriginalString.Equals(AlarmRegionNames.AlarmConfig_Contract_UsersConfigView))
             {
                 return true;    //singleton
             }
             return false;
         }
 
-        [ImportingConstructor]
-        public AlarmGsmConfigViewModel(IRegionManager regionManager)
-        {
-            Config = new ObservableCollection<sconnGsmRcpt>();
-            this._manager = SiteNavigationManager.alarmSystemConfigManager;
-            this._provider = new GsmConfigurationService(_manager);
-            this._regionManager = regionManager;
-            GetData();
-        }
-        
-        public string DisplayedImagePath
-        {
-            get { return "pack://application:,,,/images/tel.png"; }
-        }
+
 
     }
 }
