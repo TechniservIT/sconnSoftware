@@ -21,7 +21,7 @@ namespace sconnRem.Controls.AlarmSystem.View.Config.AlarmSystem.Context
     /// <summary>
     /// Interaction logic for AlarmEntityGsmRcptListItemEditContext.xaml
     /// </summary>
-    [Export(GlobalViewContractNames.Global_Contract_Menu_RightSide_AlarmRemoteUserEditListItemContext)]
+    [Export(GlobalViewContractNames.Global_Contract_Menu_RightSide_AlarmGsmRcptEditListItemContext)]
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public partial class AlarmEntityGsmRcptListItemEditContext : UserControl
     {

@@ -186,7 +186,6 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
             DeviceId = Config.DeviceId;
             this._provider = new AlarmDevicesConfigService(_manager);
             this._regionManager = regionManager;
-            GetData();
         }
 
         private void SetupCmds()

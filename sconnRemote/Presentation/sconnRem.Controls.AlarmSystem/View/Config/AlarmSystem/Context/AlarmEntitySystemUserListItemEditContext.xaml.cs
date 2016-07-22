@@ -23,7 +23,7 @@ namespace sconnRem.Controls.AlarmSystem.View.Config.AlarmSystem.Context
     /// </summary>
 
 
-    [Export(GlobalViewContractNames.Global_Contract_Menu_RightSide_AlarmRemoteUserEditListItemContext)]
+    [Export(GlobalViewContractNames.Global_Contract_Menu_RightSide_AlarmSystemUserEditListItemContext)]
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public partial class AlarmEntitySystemUserListItemEditContext : UserControl
     {

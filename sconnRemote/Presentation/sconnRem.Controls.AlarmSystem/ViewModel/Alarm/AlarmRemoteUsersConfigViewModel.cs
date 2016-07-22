@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -81,7 +82,7 @@ namespace sconnRem.ViewModel.Alarm
             try
             {
                 Config = new ObservableCollection<sconnRemoteUser>(_provider.GetAll());
-
+                SelectedIndex = 0; //reset on refresh
             }
             catch (Exception ex)
             {
@@ -111,13 +112,44 @@ namespace sconnRem.ViewModel.Alarm
             this._manager = SiteNavigationManager.alarmSystemConfigManager;
             this._provider = new UsersConfigurationService(_manager);
             this._regionManager = regionManager;
-            GetData();
         }
         
         public string DisplayedImagePath
         {
             get { return "pack://application:,,,/images/user.png"; }
         }
+
+
+        public override void OnNavigatedTo(NavigationContext navigationContext)
+        {
+            try
+            {
+                siteUUID = (string)navigationContext.Parameters[GlobalViewContractNames.Global_Contract_Nav_Site_Context__Key_Name];
+                this.navigationJournal = navigationContext.NavigationService.Journal;
+
+                BackgroundWorker bgWorker = new BackgroundWorker();
+                bgWorker.DoWork += (s, e) => {
+                    GetData();
+                };
+                bgWorker.RunWorkerCompleted += (s, e) =>
+                {
+
+                    Loading = false;
+                };
+
+                Loading = true;
+
+                bgWorker.RunWorkerAsync();
+
+            }
+            catch (Exception ex)
+            {
+                _nlogger.Error(ex, ex.Message);
+            }
+
+
+        }
+
 
         public override bool IsNavigationTarget(NavigationContext navigationContext)
         {
