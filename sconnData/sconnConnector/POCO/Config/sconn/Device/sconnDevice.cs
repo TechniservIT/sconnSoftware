@@ -15,7 +15,7 @@ namespace sconnConnector.POCO.Config.sconn
 
     public interface IAlarmSystemZonedIo
     {
-        int ZoneId { get; set; }
+        ushort ZoneId { get; set; }
 
     }
 
@@ -61,11 +61,11 @@ namespace sconnConnector.POCO.Config.sconn
 
     public class sconnDevice :  IAlarmSystemNamedEntity, ISerializableConfiguration, IFakeAbleConfiguration, INotifyPropertyChanged
     {
-        public byte Id { get; set; }
+        public ushort Id { get; set; }
         public byte Value { get; set; }
 
         public bool Armed { get; set; }
-        public byte ZoneId { get; set; }
+        public ushort ZoneId { get; set; }
         public bool Violation { get; set; }
         public bool Failure { get; set; }
         public byte DeviceId { get; set; }
@@ -366,9 +366,9 @@ namespace sconnConnector.POCO.Config.sconn
         {
             try
             {
-                if (Name.GetLength(0) < 32)
+                if (Name.GetLength(0) < ipcDefines.RAM_NAME_SIZE)
                 {
-                    byte[] resized = new byte[32];
+                    byte[] resized = new byte[ipcDefines.RAM_NAME_SIZE];
                     Name.CopyTo(resized, 0);
                     _NamesCFG[NameNo] = resized;
                 }

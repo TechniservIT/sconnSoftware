@@ -20,7 +20,7 @@ using sconnRem.ViewModel.Alarm;
 
 namespace sconnRem.Controls.AlarmSystem.View.Status.AlarmSystem.Gsm
 {
-    [Export(AlarmRegionNames.AlarmConfig_Contract_GsmRcptConfigView)]
+    [Export(AlarmRegionNames.AlarmStatus_Contract_GsmRcpts)]
     [ViewSortHint("01")]
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public partial class AlarmGsmRcptListView : UserControl

@@ -13,12 +13,14 @@
 
 
     <UserControl.Resources>
-        <ObjectDataProvider x:Key="InputTypeSrc" MethodName="GetValues"
+        
+        <ObjectDataProvider x:Key="ZoneTypeSrc" MethodName="GetValues"
                             ObjectType="{x:Type System:Enum}">
             <ObjectDataProvider.MethodParameters>
                 <x:Type TypeName="sconn:AlarmZoneType"/>
             </ObjectDataProvider.MethodParameters>
         </ObjectDataProvider>
+
 
     </UserControl.Resources>
 
@@ -127,12 +129,11 @@
 
                     <Label Grid.Column="0" Grid.Row="2" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="Type" />
                     <ComboBox x:Name="cmb12"  
-                            ItemsSource="{Binding Source={StaticResource InputTypeSrc}}"
+                            ItemsSource="{Binding Source={StaticResource ZoneTypeSrc}}"
                         Grid.Column="0" Grid.Row="3"
                           HorizontalAlignment="Stretch"
                           HorizontalContentAlignment="Stretch" 
-                          SelectedValue="{Binding  ActiveInput.sconnInputType}" 
-                           SelectedItem="{Binding  ActiveInput.sconnInputType , Mode=TwoWay}" 
+                           SelectedItem="{Binding  Config.Type , Mode=TwoWay}" 
                           />
 
                     <Label Grid.Column="0" Grid.Row="4" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="Enabled" />

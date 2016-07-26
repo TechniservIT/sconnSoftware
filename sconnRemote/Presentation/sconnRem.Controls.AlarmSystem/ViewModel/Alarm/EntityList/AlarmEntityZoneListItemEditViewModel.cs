@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.Linq;
@@ -77,8 +78,39 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
                 try
                 {
 
-                   
-                }
+                var entities = new ObservableCollection<sconnAlarmZone>(_provider.GetAll());
+                sconnAlarmZone d = new sconnAlarmZone();
+                    d.Name = Guid.NewGuid().ToString();
+                d.UUID = Guid.NewGuid().ToString();
+                d.Id = (ushort)entities.Count;
+                d.Enabled = false;
+                d.Type = AlarmZoneType.General;
+                bool added = false;
+                BackgroundWorker bgWorker = new BackgroundWorker();
+                bgWorker.DoWork += (s, e) => {
+                    added = _provider.Add(d);
+                };
+                bgWorker.RunWorkerCompleted += (s, e) =>
+                {
+                    if (added)
+                    {
+                        //reload list
+                        NavigationParameters parameters = new NavigationParameters
+                        {
+                            {GlobalViewContractNames.Global_Contract_Nav_Site_Context__Key_Name, siteUUID}
+                        };
+                        GlobalNavigationContext.NavigateRegionToContractWithParam(
+                           GlobalViewRegionNames.MainGridContentRegion,
+                           AlarmRegionNames.AlarmStatus_Contract_ZonesView,
+                            parameters
+                            );
+                    }
+                };
+
+                Loading = true;
+                bgWorker.RunWorkerAsync();
+
+            }
                 catch (Exception ex)
                 {
                     _nlogger.Error(ex, ex.Message);
@@ -90,10 +122,41 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
             {
                 try
                 {
+                var entities = new ObservableCollection<sconnAlarmZone>(_provider.GetAll());
+                var toRemove = entities.FirstOrDefault(d => d.Id == ZoneId);
+                if (toRemove != null)
+                {
+                    bool removed = false;
+                    BackgroundWorker bgWorker = new BackgroundWorker();
+                    bgWorker.DoWork += (s, e) => {
+                        removed = _provider.Remove(toRemove);
+                    };
+                    bgWorker.RunWorkerCompleted += (s, e) =>
+                    {
+                        if (removed)
+                        {
+                            //reload list
+                            NavigationParameters parameters = new NavigationParameters
+                        {
+                            {GlobalViewContractNames.Global_Contract_Nav_Site_Context__Key_Name, siteUUID}
+                        };
+                            GlobalNavigationContext.NavigateRegionToContractWithParam(
+                               GlobalViewRegionNames.MainGridContentRegion,
+                               AlarmRegionNames.AlarmStatus_Contract_ZonesView,
+                                parameters
+                                );
+                        }
+                    };
 
-
+                    Loading = true;
+                    bgWorker.RunWorkerAsync();
                 }
-                catch (Exception ex)
+
+
+
+
+            }
+            catch (Exception ex)
                 {
                     _nlogger.Error(ex, ex.Message);
                 }
@@ -141,7 +204,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
                 try
                 {
                     siteUUID = (string)navigationContext.Parameters[GlobalViewContractNames.Global_Contract_Nav_Site_Context__Key_Name];
-                    ZoneId = int.Parse((string)navigationContext.Parameters[AlarmSystemMapContractNames.Alarm_Contract_Map_Zone_Edit_Context_Key_Name]);
+                    ZoneId = int.Parse((string)navigationContext.Parameters[AlarmSystemEntityListContractNames.Alarm_Contract_Entity_Zone_Edit_Context_Key_Name]);
                     this.navigationJournal = navigationContext.NavigationService.Journal;
 
                     BackgroundWorker bgWorker = new BackgroundWorker();

@@ -29,7 +29,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public class AlarmInputConfigViewModel : GenericAlarmConfigViewModel
     {
-        public sconnInput Config { get; set; }
+
         private ZoneConfigurationService _provider;
         private AlarmSystemConfigManager _manager;
         public ICommand NavigateBackCommand { get; set; }
@@ -45,6 +45,20 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
                 OnPropertyChanged();
             }
         }
+
+
+
+        private sconnInput _config;
+        public sconnInput Config
+        {
+            get { return _config; }
+            set
+            {
+                _config = value;
+                OnPropertyChanged();
+            }
+        }
+
 
         private int _selectedIndex;
         public int SelectedIndex

@@ -10,12 +10,12 @@ namespace sconnConnector.POCO.Config.sconn
 {
     public class sconnAuthorizedDevice : IAlarmSystemConfigurationEntity, ISerializableConfiguration, IFakeAbleConfiguration
     {
-        public int Id { get; set; }
+        public ushort Id { get; set; }
         public string _Serial { get; set; }
         public bool _Enabled { get; set; }
         public DateTime _AllowedFrom { get; set; }
         public DateTime _AllowedUntil { get; set; }
-        public int Value { get; set; }
+        public ushort Value { get; set; }
 
         private static Logger _logger = LogManager.GetCurrentClassLogger();
 

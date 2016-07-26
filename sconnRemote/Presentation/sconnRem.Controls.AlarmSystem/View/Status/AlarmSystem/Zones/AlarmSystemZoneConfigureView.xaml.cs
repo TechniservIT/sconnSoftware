@@ -13,24 +13,21 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Prism.Regions;
+using sconnRem.Controls.AlarmSystem.ViewModel.Alarm.Map;
 using sconnRem.Navigation;
-using sconnRem.ViewModel.Alarm;
 
-namespace sconnRem.Controls.AlarmSystem.View.Status.Zones
+namespace sconnRem.Controls.AlarmSystem.View.Status.AlarmSystem.Zones
 {
-    [Export(AlarmRegionNames.AlarmStatus_Contract_ZonesView)]
-    [ViewSortHint("01")]
+    [Export(AlarmRegionNames.AlarmConfig_Contract_ZoneConfigView)]
     [PartCreationPolicy(CreationPolicy.NonShared)]
-    public partial class AlarmSystemZonesView : UserControl
+    public partial class AlarmSystemZoneConfigureView : UserControl
     {
+
         [ImportingConstructor]
-        public AlarmSystemZonesView(AlarmZoneConfigViewModel viewModel)
+        public AlarmSystemZoneConfigureView(AlarmMapZoneEditContextViewModel model)
         {
+            DataContext = model;
             InitializeComponent();
-            this.DataContext = viewModel;
         }
-
-
     }
 }

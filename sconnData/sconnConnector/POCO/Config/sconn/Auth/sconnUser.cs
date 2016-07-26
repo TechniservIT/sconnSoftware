@@ -23,7 +23,7 @@ namespace sconnConnector.POCO.Config.Abstract.Auth
     public class sconnRemoteUser : IAlarmSystemConfigurationEntity, ISerializableConfiguration, IFakeAbleConfiguration
     {
 
-        public int Id { get; set; }
+        public ushort Id { get; set; }
 
         [Required]
         [DisplayName("Login")]
@@ -53,7 +53,7 @@ namespace sconnConnector.POCO.Config.Abstract.Auth
         [DisplayName("Allowed Until")]
         public DateTime AllowedUntil { get; set; }
 
-        public int Value { get; set; }
+        public ushort Value { get; set; }
 
         private static Logger _logger = LogManager.GetCurrentClassLogger();
 

@@ -22,14 +22,15 @@ using sconnRem.Navigation;
 
 namespace sconnRem.Controls.AlarmSystem.View.Status.AlarmSystem.Outputs
 {
-    [Export("AlarmOutputConfigureView")]
+
+
+    [Export(AlarmRegionNames.AlarmConfig_Contract_Output_Config_View)]
     [ViewSortHint("02")]
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public partial class AlarmOutputConfigureView : UserControl
     {
         private const string MainContentRegionName = GlobalViewRegionNames.MainGridContentRegion;
         private Logger _nlogger = LogManager.GetCurrentClassLogger();
-        private static Uri configureUri = new Uri("InputsConfig", UriKind.Relative);
 
         [Import]
         public AlarmOutputConfigViewModel ViewModel

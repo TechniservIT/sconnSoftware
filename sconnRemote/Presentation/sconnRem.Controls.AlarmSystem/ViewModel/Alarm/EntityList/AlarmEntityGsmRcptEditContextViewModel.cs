@@ -77,7 +77,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm.EntityList
                 var entities = new ObservableCollection<sconnGsmRcpt>(_provider.GetAll());
                 sconnGsmRcpt d = new sconnGsmRcpt();
                 d.UUID = Guid.NewGuid().ToString();
-                d.Id = entities.Count;
+                d.Id = (ushort)entities.Count;
                 d.Enabled = false;
                 d.NumberE164 = Guid.NewGuid().ToString();
                 d.Name = Guid.NewGuid().ToString();

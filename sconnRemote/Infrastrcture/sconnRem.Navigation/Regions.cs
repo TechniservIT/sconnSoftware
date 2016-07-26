@@ -12,21 +12,10 @@ namespace sconnRem.Navigation
         public const String MainContentRegion = "MainContentRegion";
         public const String MainNavigationRegion = "MainNavigationRegion";
 
-        public const String AlarmConfig_Contract_AuthConfigView = "AuthConfigViewContract";
-        public const String AlarmConfig_Contract_GlobalConfigView = "GlobalConfigViewContract";
-        public const String AlarmConfig_Contract_CommConfigView = "CommConfigViewContract";
-        public const String AlarmConfig_Contract_GsmConfigView = "GsmConfigViewContract";
-        public const String AlarmConfig_Contract_GsmRcptConfigView = "GsmRcptConfigViewContract";
-        public const String AlarmConfig_Contract_ZoneConfigView = "ZoneConfigViewContract";
-        public const String AlarmConfig_Contract_ZoneMapConfigView = "ZoneMapConfigViewContract";
-        public const String AlarmConfig_Contract_DeviceMapConfigView = "DeviceMapConfigViewContract";
-        public const String AlarmConfig_Contract_UsersConfigView = "UserConfigViewContract";
-        public const String AlarmConfig_Contract_SystemUsersConfigView = "SystemUserConfigViewContract";
-
 
         #region AlarmSystemEntitiesView
 
-        public const String AlarmStatus_Contract_InputsView = "AlarmInputsViewContract";
+            public const String AlarmStatus_Contract_InputsView = "AlarmInputsViewContract";
             public const String AlarmStatus_Contract_OutputsView = "AlarmOutputsViewContract";
             public const String AlarmStatus_Contract_RelaysView = "AlarmRelaysViewContract";
             public const String AlarmStatus_Contract_ZonesView = "AlarmZonesViewContract";
@@ -35,8 +24,11 @@ namespace sconnRem.Navigation
             public const String AlarmStatus_Contract_EventsView = "AlarmEventsViewContract";
             public const String AlarmStatus_Contract_PowerView = "AlarmPowerViewContract";
             public const String AlarmStatus_Contract_NetworkView = "AlarmNetworkViewContract";
+            public const String AlarmStatus_Contract_GsmRcpts = "AlarmGsmRcptsViewContract";
+            public const String AlarmStatus_Contract_RemoteUsers = "AlarmRemoteUsersViewContract";
+            public const String AlarmStatus_Contract_SystemUsers = "AlarmSystemusersViewContract";
 
-            public const String AlarmStatus_Contract_TemperatureSensorsView = "AlarmTemperatureSensorsViewContract";
+          public const String AlarmStatus_Contract_TemperatureSensorsView = "AlarmTemperatureSensorsViewContract";
             public const String AlarmStatus_Contract_HumiditySensorsView = "AlarmHumiditySensorsViewContract";
 
         public static Uri AlarmUri_Status_Inputs_View = new Uri(AlarmStatus_Contract_InputsView, UriKind.Relative);
@@ -56,11 +48,22 @@ namespace sconnRem.Navigation
 
         #region AlarmSystemEntitiesConfig
 
+
+        public const String AlarmConfig_Contract_AuthConfigView = "AuthConfigViewContract";
+        public const String AlarmConfig_Contract_GlobalConfigView = "GlobalConfigViewContract";
+        public const String AlarmConfig_Contract_CommConfigView = "CommConfigViewContract";
+        public const String AlarmConfig_Contract_GsmConfigView = "GsmConfigViewContract";
+        public const String AlarmConfig_Contract_GsmRcptConfigView = "GsmRcptConfigViewContract";
+        public const String AlarmConfig_Contract_ZoneConfigView = "ZoneConfigViewContract";
+        public const String AlarmConfig_Contract_ZoneMapConfigView = "ZoneMapConfigViewContract";
+        public const String AlarmConfig_Contract_DeviceMapConfigView = "DeviceMapConfigViewContract";
+        public const String AlarmConfig_Contract_UsersConfigView = "UserConfigViewContract";
+        public const String AlarmConfig_Contract_SystemUsersConfigView = "SystemUserConfigViewContract";
         public const String AlarmConfig_Contract_Input_Config_View = "AlarmInputConfigureView";
-
         public const String AlarmConfig_Contract_Input_Config_View_Key_Name = "InputUuid";
+        public const String AlarmConfig_Contract_Zone_Config_View_Key_Name = "ZoneId";
 
-            public const String AlarmConfig_Contract_Output_Config_View = "AlarmOutputConfigureViewContract";
+        public const String AlarmConfig_Contract_Output_Config_View = "AlarmOutputConfigureViewContract";
             public const String AlarmConfig_Contract_Relay_Config_View = "AlarmRelayConfigureViewContract";
             public const String AlarmConfig_Contract_Zone_Config_View = "AlarmZoneConfigureViewContract";
             public const String AlarmConfig_Contract_Sensor_Config_View = "AlarmSensorConfigureViewContract";

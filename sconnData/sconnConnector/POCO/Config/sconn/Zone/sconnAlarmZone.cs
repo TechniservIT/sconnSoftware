@@ -20,11 +20,11 @@ namespace sconnConnector.POCO.Config.sconn
 
     public class sconnAlarmZone : IAlarmSystemNamedEntity, ISerializableConfiguration, IFakeAbleConfiguration, IAlarmSystemNamedEntityWithType
     {
-        public int Id { get; set; }
+        public ushort Id { get; set; }
         public string Name { get; set; }
         public AlarmZoneType Type { get; set; }
         public bool Enabled { get; set; }
-        public int NameId { get; set; }
+        public ushort NameId { get; set; }
 
         public string imageIconUri { get; set; }
         public string imageRealUri { get; set; }
@@ -83,8 +83,12 @@ namespace sconnConnector.POCO.Config.sconn
                 byte[] buffer = new byte[ipcDefines.ZONE_CFG_LEN];
                 buffer[ipcDefines.ZONE_CFG_TYPE_POS] = (byte)Type;
                 buffer[ipcDefines.ZONE_CFG_ENABLED_POS] = (byte)(Enabled ? 1 : 0);
+                AlarmSystemConfig_Helpers.WriteWordToBufferAtPossition(Id,buffer,ipcDefines.ZONE_CFG_ID_POS);
                 byte[] nameBytes = System.Text.Encoding.BigEndianUnicode.GetBytes(Name);
-                for (int i = 0; i < nameBytes.Length; i++)
+                int fullNameMaxLen = nameBytes.Length > ipcDefines.RAM_NAME_SIZE
+                    ? ipcDefines.RAM_NAME_SIZE
+                    : nameBytes.Length;
+                for (int i = 0; i < fullNameMaxLen; i++)
                 {
                     buffer[ipcDefines.ZONE_CFG_NAME_POS + i] = nameBytes[i];
                 }
@@ -108,6 +112,7 @@ namespace sconnConnector.POCO.Config.sconn
                 {
                     Type = (AlarmZoneType)buffer[ipcDefines.ZONE_CFG_TYPE_POS];
                 }
+                Id = (ushort)AlarmSystemConfig_Helpers.GetWordFromBufferAtPossition(buffer, ipcDefines.ZONE_CFG_ID_POS);
                 Enabled = buffer[ipcDefines.ZONE_CFG_ENABLED_POS] > 0 ? true : false;
                 Name = System.Text.Encoding.BigEndianUnicode.GetString(
                     buffer, 

@@ -75,7 +75,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm.EntityList
                 var entities  = new ObservableCollection<sconnAuthorizedDevice>(_provider.GetAll());
                 sconnAuthorizedDevice d = new sconnAuthorizedDevice();
                 d.UUID = Guid.NewGuid().ToString();
-                d.Id = entities.Count;
+                d.Id = (ushort)entities.Count;
                 d._Enabled = false;
                 d._Serial = Guid.NewGuid().ToString();
                 bool added = false;

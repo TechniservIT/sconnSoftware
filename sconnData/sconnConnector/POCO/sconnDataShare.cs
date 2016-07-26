@@ -24,8 +24,9 @@ namespace sconnConnector
     
     public static class AlarmSystemConfig_Helpers
     {
-    
-                 public static int GetUtf8StringLengthFromBuffer(byte[] buffer)
+
+
+        public static int GetUtf8StringLengthFromBuffer(byte[] buffer)
         {
             try
             {
@@ -67,6 +68,42 @@ namespace sconnConnector
             {
                 return 0;
             }
+        }
+
+        public static ushort GetWordFromBufferAtPossition(byte[] buffer, int possition)
+        {
+            try
+            {
+                //Big endian
+                ushort val = 0;
+                val = buffer[possition + 1];
+                byte b2val = buffer[possition];
+                val |= (ushort)(b2val << 8);
+                return val;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+
+        }
+
+        public static ushort WriteWordToBufferAtPossition(ushort word, byte[] buffer, int possition)
+        {
+            try
+            {
+                //Big endian
+                ushort val = 0;
+                buffer[possition + 1] = (byte)(word);
+                buffer[possition] = (byte)(word>>8);
+                return val;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+
+
         }
 
     }

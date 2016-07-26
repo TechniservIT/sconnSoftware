@@ -52,7 +52,7 @@ namespace sconnConnector.POCO.Config
         public byte NameId { get; set; }
         public bool Enabled { get; set; }
         public string Name { get; set; }
-        public int ZoneId { get; set; }
+        public ushort ZoneId { get; set; }
         public DeviceIoCategory IoCategory { get; set; }
         private static Logger _logger = LogManager.GetCurrentClassLogger();
 

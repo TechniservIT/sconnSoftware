@@ -58,7 +58,7 @@ namespace sconnConnector.POCO.Config
         public sconnInputType Type { get; set; }
         public byte Value { get; set; }
         public uint Sensitivity { get; set; }
-        public int ZoneId { get; set; }
+        public ushort ZoneId { get; set; }
         public bool Enabled { get; set; }
         public bool Delayed { get; set; }
         public string Name { get; set; }

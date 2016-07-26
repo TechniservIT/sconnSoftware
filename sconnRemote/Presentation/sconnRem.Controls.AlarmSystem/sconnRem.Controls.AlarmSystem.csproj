@@ -398,6 +398,9 @@
     <Compile Include="View\Status\AlarmSystem\Zones\AlarmSystemGraphEntityItem.xaml.cs">
       <DependentUpon>AlarmSystemGraphEntityItem.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Status\AlarmSystem\Zones\AlarmSystemZoneConfigureView.xaml.cs">
+      <DependentUpon>AlarmSystemZoneConfigureView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Status\AlarmSystem\Zones\AlarmSystemZonesConfigureView.xaml.cs">
       <DependentUpon>AlarmSystemZonesConfigureView.xaml</DependentUpon>
     </Compile>
@@ -688,6 +691,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Status\AlarmSystem\Zones\AlarmSystemGraphEntityItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Status\AlarmSystem\Zones\AlarmSystemZoneConfigureView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

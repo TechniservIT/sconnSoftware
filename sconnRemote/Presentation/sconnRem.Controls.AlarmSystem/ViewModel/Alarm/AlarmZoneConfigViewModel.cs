@@ -79,6 +79,13 @@ namespace sconnRem.ViewModel.Alarm
                 );
         }
 
+        public void GoToEntityEditView()
+        {
+            NavigationParameters parameters = new NavigationParameters();
+            parameters.Add(AlarmRegionNames.AlarmConfig_Contract_Zone_Config_View_Key_Name, SelectedIndex);
+            NavigateToAlarmContractWithParam(AlarmRegionNames.AlarmConfig_Contract_ZoneConfigView, parameters);
+        }
+
         public override void GetData()
         {
             try

@@ -1,0 +1,217 @@
+﻿<UserControl x:Class="sconnRem.Controls.AlarmSystem.View.Status.AlarmSystem.Zones.AlarmSystemZoneConfigureView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:enumsrc="sconnConnector.POCO.Config"
+             xmlns:local="clr-namespace:sconnRem.Controls.AlarmSystem.View.Status.AlarmSystem.Inputs"
+             xmlns:config="clr-namespace:sconnConnector.POCO.Config;assembly=sconnConnector"
+             xmlns:System="clr-namespace:System;assembly=mscorlib"
+             xmlns:sconn="clr-namespace:sconnConnector.POCO.Config.sconn;assembly=sconnConnector"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="800">
+
+
+    <UserControl.Resources>
+        
+        <ObjectDataProvider x:Key="ZoneTypeSrc" MethodName="GetValues"
+                            ObjectType="{x:Type System:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="sconn:AlarmZoneType"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+
+    </UserControl.Resources>
+
+
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="7*" />
+            <ColumnDefinition Width="93*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25*"/>
+            <RowDefinition Height="75*"/>
+        </Grid.RowDefinitions>
+
+
+
+        <Grid  Grid.Column="0" Grid.Row="1" >
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Button Grid.Column="0" Grid.Row="0"  VerticalAlignment="Center"
+                    Width="Auto" Content="" 
+                    Command="{Binding NavigateBackCommand}" >
+
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Border Background="{TemplateBinding Background}"
+                                                     BorderBrush="{TemplateBinding BorderBrush}"
+                                                     BorderThickness="{TemplateBinding BorderThickness}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <ContentPresenter HorizontalAlignment="Left"  Grid.Column="0" VerticalAlignment="Center"/>
+                                    <Canvas Background="White" Grid.Column="0" />
+
+                                    <Image  x:Name="gdjh254221"  Stretch="Uniform"   HorizontalAlignment="Center" Height="Auto" Margin="0,0,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/wstecz500x500.jpg"/>
+
+                                </Grid>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+
+
+        </Grid>
+
+        <Grid  Grid.Column="1" Grid.Row="0" >
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="25*" />
+                <ColumnDefinition Width="75*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid  Grid.Column="0" Grid.Row="0" >
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Button Grid.Column="0" Grid.Row="0"  VerticalAlignment="Center" Height="Auto" Content="">
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Grid>
+                                <Border Background="{TemplateBinding Background}"
+                                                     BorderBrush="{TemplateBinding BorderBrush}"
+                                                     BorderThickness="{TemplateBinding BorderThickness}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <ContentPresenter HorizontalAlignment="Left"  Grid.Column="0"
+                                                              VerticalAlignment="Center"/>
+                                        <Canvas Background="White" Grid.Column="0" />
+
+                                        <Image  x:Name="gdjh254221"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="0,0,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/strefy1-1000.jpg"/>
+
+                                    </Grid>
+                                </Border>
+                            </Grid>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
+
+            </Grid>
+
+            <Grid  Grid.Column="1" Grid.Row="0" >
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Label Grid.Column="0" Grid.Row="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="{Binding Config.Name , Mode=TwoWay}" />
+                <Label Grid.Column="0" Grid.Row="1" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="{Binding Config.Id, Mode=TwoWay}" />
+                <!--<Label Grid.Column="0" Grid.Row="2" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="{Binding ActiveInput.Revision}" />
+                <Label Grid.Column="0" Grid.Row="3" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="{Binding ActiveInput.ZoneId}" />-->
+
+
+            </Grid>
+
+
+        </Grid>
+
+
+        <Grid  Grid.Column="1" Grid.Row="1" >
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid  Grid.Column="0" Grid.Row="0" >
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="20*" />
+                    <ColumnDefinition Width="80*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Label Grid.Column="0" Grid.Row="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="Type" />
+                <ComboBox x:Name="cmb12"  
+                            ItemsSource="{Binding Source={StaticResource ZoneTypeSrc}}"
+                        Grid.Column="1" Grid.Row="0"
+                          HorizontalAlignment="Stretch"
+                          HorizontalContentAlignment="Stretch" 
+                          SelectedValue="{Binding  ActiveInput.sconnInputType}" 
+                           SelectedItem="{Binding  ActiveInput.sconnInputType , Mode=TwoWay}" 
+                          />
+
+                <Label Grid.Column="0" Grid.Row="1" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="Enabled" />
+                <Label Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="{Binding Config.Enabled}" />
+
+                <Label Grid.Column="0" Grid.Row="2" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="Name" />
+                <TextBox Grid.Column="1" Grid.Row="2" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Text="{Binding  Config.Name}"/>
+
+                <Button Grid.Column="1" Grid.Row="3"  VerticalAlignment="Center"
+                    Width="Auto" Content="" 
+                    Command="{Binding SaveConfigCommand}" >
+
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Grid>
+                                <Border Background="{TemplateBinding Background}"
+                                                     BorderBrush="{TemplateBinding BorderBrush}"
+                                                     BorderThickness="{TemplateBinding BorderThickness}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <ContentPresenter HorizontalAlignment="Left"  Grid.Column="0" VerticalAlignment="Center"/>
+                                        <Canvas Background="White" Grid.Column="0" />
+
+                                        <Image  x:Name="gdjh254221"  Stretch="Uniform"   HorizontalAlignment="Center" Height="Auto" Margin="0,0,0,0" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/save.jpg"/>
+
+                                    </Grid>
+                                </Border>
+                            </Grid>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
+            </Grid>
+        </Grid>
+    </Grid>
+
+</UserControl>
+

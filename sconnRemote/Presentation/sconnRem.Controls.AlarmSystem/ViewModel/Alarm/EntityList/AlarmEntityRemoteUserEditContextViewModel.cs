@@ -76,7 +76,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm.EntityList
                 var entities = new ObservableCollection<sconnRemoteUser>(_provider.GetAll());
                 sconnRemoteUser d = new sconnRemoteUser();
                 d.UUID = Guid.NewGuid().ToString();
-                d.Id = entities.Count;
+                d.Id = (ushort)entities.Count;
                 d.Enabled = false;
                 d.Login = Guid.NewGuid().ToString();
                 d.Password = Guid.NewGuid().ToString();
