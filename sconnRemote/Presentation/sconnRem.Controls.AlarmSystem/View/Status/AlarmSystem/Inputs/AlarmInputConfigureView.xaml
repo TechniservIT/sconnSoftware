@@ -180,6 +180,8 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    
                 </Grid.RowDefinitions>
 
                 <Label Grid.Column="0" Grid.Row="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="Type" />
@@ -191,24 +193,37 @@
                           SelectedValue="{Binding  ActiveInput.sconnInputType}" 
                            SelectedItem="{Binding  ActiveInput.sconnInputType , Mode=TwoWay}" 
                           />
-                    
 
-                <Label Grid.Column="0" Grid.Row="1" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="Value" />
-                <Label Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="{Binding Config.Value }" />
 
-                <Label Grid.Column="0" Grid.Row="2" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="Sensitivity" />
-                <Label Grid.Column="1" Grid.Row="2" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="{Binding Config.Sensitivity}" />
 
-                <Label Grid.Column="0" Grid.Row="3" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="Enabled" />
-                <Label Grid.Column="1" Grid.Row="3" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="{Binding Config.Enabled}" />
 
-                <Label Grid.Column="0" Grid.Row="4" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="Name" />
-                <TextBox Grid.Column="1" Grid.Row="4" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Text="{Binding  Config.Name}"/>
+                <Label Grid.Column="0" Grid.Row="1" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="Zone" />
+                <ComboBox x:Name="cmb123"  
+                          ItemsSource="{Binding Zones, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                          Grid.Column="1" Grid.Row="1"
+                          HorizontalAlignment="Stretch"
+                          HorizontalContentAlignment="Stretch" 
+                             DisplayMemberPath="Name" 
+                             SelectedValuePath="Config.ZoneId"
+                          />
+                
+                
+                <Label Grid.Column="0" Grid.Row="2" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="Value" />
+                <Label Grid.Column="1" Grid.Row="2" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="{Binding Config.Value }" />
 
-                <Label Grid.Column="0" Grid.Row="5" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="sconnActivationGroup" />
-                <Label Grid.Column="1" Grid.Row="5" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="{Binding Config.sconnActivationGroup , Mode=TwoWay}" />
+                <Label Grid.Column="0" Grid.Row="3" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="Sensitivity" />
+                <Label Grid.Column="1" Grid.Row="3" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="{Binding Config.Sensitivity}" />
 
-                <Button Grid.Column="1" Grid.Row="6"  VerticalAlignment="Center"
+                <Label Grid.Column="0" Grid.Row="4" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="Enabled" />
+                <Label Grid.Column="1" Grid.Row="4" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="{Binding Config.Enabled}" />
+
+                <Label Grid.Column="0" Grid.Row="5" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="Name" />
+                <TextBox Grid.Column="1" Grid.Row="5" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Text="{Binding  Config.Name}"/>
+
+                <Label Grid.Column="0" Grid.Row="6" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="sconnActivationGroup" />
+                <Label Grid.Column="1" Grid.Row="6" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="{Binding Config.sconnActivationGroup , Mode=TwoWay}" />
+
+                <Button Grid.Column="1" Grid.Row="7"  VerticalAlignment="Center"
                     Width="Auto" Content="" 
                     Command="{Binding SaveConfigCommand}" >
 

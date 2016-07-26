@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using AlarmSystemManagmentService;
 using AlarmSystemManagmentService.Device;
@@ -28,18 +30,43 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
     public class AlarmInputConfigViewModel : GenericAlarmConfigViewModel
     {
         public sconnInput Config { get; set; }
-        private AlarmDevicesConfigService _provider;
+        private ZoneConfigurationService _provider;
         private AlarmSystemConfigManager _manager;
-        
-
         public ICommand NavigateBackCommand { get; set; }
         public ICommand SaveConfigCommand { get; set; }
+
+        private ObservableCollection<sconnAlarmZone> _zones;
+        public ObservableCollection<sconnAlarmZone> Zones
+        {
+            get { return _zones; }
+            set
+            {
+                _zones = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private int _selectedIndex;
+        public int SelectedIndex
+        {
+            get { return _selectedIndex; }
+            set
+            {
+                _selectedIndex = value;
+                OnPropertyChanged();
+                if (_selectedIndex < Zones.Count)
+                {
+                  //  Application.Current.Dispatcher.Invoke(() => { OpenEntityEditContext(Config[_selectedIndex]); });
+                }
+            }
+        }
+
 
         private void GetData()
         {
             try
             {
-
+                Zones = new ObservableCollection<sconnAlarmZone>(_provider.GetAll());
             }
             catch (Exception ex)
             {
@@ -51,7 +78,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
         {
             this._manager = AlarmSystemContext.GetManager();
             _name = "Dev";
-            this._provider = new AlarmDevicesConfigService(_manager);
+            this._provider = new ZoneConfigurationService(_manager);
         }
 
         public void NavigateBack()
@@ -79,7 +106,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
             SetupCmds();
             this._manager = SiteNavigationManager.alarmSystemConfigManager; // (AlarmSystemConfigManager)manager;
             this._regionManager = regionManager;
-            //this._provider = new DeviceConfigService(SiteNavigationManager.alarmSystemConfigManager, SiteNavigationManager.CurrentContextDevice.DeviceId); 
+            this._provider = new ZoneConfigurationService(SiteNavigationManager.alarmSystemConfigManager); 
             GetData();
         }
 

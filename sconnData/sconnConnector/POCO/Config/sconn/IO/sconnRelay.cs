@@ -44,7 +44,7 @@ namespace sconnConnector.POCO.Config
     
 
 
-    public class sconnRelay : IAlarmSystemConfigurationEntity, ISerializableConfiguration, IFakeAbleConfiguration, INotifyPropertyChanged
+    public class sconnRelay : IAlarmSystemConfigurationEntity, ISerializableConfiguration, IFakeAbleConfiguration, INotifyPropertyChanged, IAlarmSystemZonedIo
     {
         public byte Id { get; set; }
         public sconnOutputType Type { get; set; }
@@ -52,6 +52,7 @@ namespace sconnConnector.POCO.Config
         public byte NameId { get; set; }
         public bool Enabled { get; set; }
         public string Name { get; set; }
+        public int ZoneId { get; set; }
         public DeviceIoCategory IoCategory { get; set; }
         private static Logger _logger = LogManager.GetCurrentClassLogger();
 

@@ -39,7 +39,7 @@ namespace sconnConnector.POCO.Config
 
 
 
-    public class sconnInput : IAlarmSystemConfigurationEntity, ISerializableConfiguration, IFakeAbleConfiguration, INotifyPropertyChanged
+    public class sconnInput : IAlarmSystemConfigurationEntity, ISerializableConfiguration, IFakeAbleConfiguration, INotifyPropertyChanged, IAlarmSystemZonedIo
     {
         public byte NameId { get; set; }
 
@@ -55,10 +55,10 @@ namespace sconnConnector.POCO.Config
         }
 
         public string UUID { get; set; }
-
         public sconnInputType Type { get; set; }
         public byte Value { get; set; }
         public uint Sensitivity { get; set; }
+        public int ZoneId { get; set; }
         public bool Enabled { get; set; }
         public bool Delayed { get; set; }
         public string Name { get; set; }

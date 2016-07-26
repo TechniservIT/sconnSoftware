@@ -106,7 +106,7 @@ namespace sconnConnector.POCO.Config.sconn.User
                         if (passLen <= ipcDefines.USER_DB_CODE_LEN)
                         {
                             byte[] passwdBf = new byte[ipcDefines.USER_DB_CODE_LEN];
-                            for (int i = 0; i < passLen * 2; i++)
+                            for (int i = 0; i < passLen; i++)
                             {
                                 passwdBf[i] = buffer[ipcDefines.USER_DB_CODE_POS + i];
                             }
@@ -118,7 +118,7 @@ namespace sconnConnector.POCO.Config.sconn.User
                         if (logLen <= ipcDefines.USER_DB_CARD_LEN)
                         {
                             byte[] logBf = new byte[ipcDefines.USER_DB_CARD_LEN];
-                            for (int i = 0; i < logLen * 2; i++)
+                            for (int i = 0; i < logLen; i++)
                             {
                                 logBf[i] = buffer[ipcDefines.USER_DB_CARD_POS + i];
                             }

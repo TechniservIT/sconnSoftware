@@ -175,11 +175,11 @@ namespace sconnConnector.Config.Abstract
             {
                 return AlarmSystemConfigType.AlarmSystemConfig_RemoteAccess;
             }
-            else if (type == typeof(sconnAlarmSystemUser))
+            else if (type == typeof(sconnAlarmSystemUserConfig))
             {
                 return AlarmSystemConfigType.AlarmSystemConfig_Users;
             }
-            else if (type == typeof(sconnEvent))
+            else if (type == typeof(sconnEventConfig))
             {
                 return AlarmSystemConfigType.AlarmSystemConfig_Events;
             }

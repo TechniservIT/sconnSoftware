@@ -29,7 +29,7 @@ namespace AlarmSystemManagmentService.AlarmSystemUsers
             if (man != null)
             {
                 ConfigManager = man;
-                EntityManager = new AlarmGenericConfigManager<sconnAlarmSystemUserConfig>(ConfigManager.Config.AuthorizedDevicesConfig, man.RemoteDevice);
+                EntityManager = new AlarmGenericConfigManager<sconnAlarmSystemUserConfig>(ConfigManager.Config.AlarmUserConfig, man.RemoteDevice);
             }
 
         }

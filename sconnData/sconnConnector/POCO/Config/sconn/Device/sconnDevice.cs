@@ -13,6 +13,11 @@ using sconnConnector.POCO.Config.Abstract.IO;
 namespace sconnConnector.POCO.Config.sconn
 {
 
+    public interface IAlarmSystemZonedIo
+    {
+        int ZoneId { get; set; }
+
+    }
 
     public interface IAlarmSystemConfigurationEntity : ISerializableConfiguration
     {
