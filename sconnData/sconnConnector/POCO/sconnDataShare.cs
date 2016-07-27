@@ -832,11 +832,15 @@ public static class sconnDataShare
 
         public const int RelayTotalMemSize = (RelayMemSize*DeviceMaxRelays);
 
+        public const int mAdrDeviceNameStartPos = (mAdrRelay + RelayTotalMemSize);
+        public const int mAdrDeviceNameLen = (RAM_NAME_SIZE);
+        public const int mAdrDeviceConfigEnd = (mAdrDeviceNameStartPos + mAdrDeviceNameLen);
+
         public const int mAdrSuppVolt_Start_Pos = (mAdrRelay + RelayTotalMemSize);
         public const int mAdrSuppVolt_Start_Len = (4);
         public const int mAdrBackupVolt_Start_Pos = (mAdrSuppVolt_Start_Pos + mAdrSuppVolt_Start_Len);
         public const int mAdrBackupVolt_Start_Len = (4);
-
+   
        // public const int deviceTotalNames = ();
         public const int deviceConfigSize = 512;   //  mAdrRelay + (RelayMemSize * DeviceMaxRelays);
     
@@ -944,10 +948,18 @@ public static class sconnDataShare
         
         public const int mAddr_NAMES_Device_StartIndex = 0x0000; 
         public const int RAM_DEVICE_NAMES_SIZE = (RAM_DEV_NAMES_NO*RAM_NAME_SIZE);
-        public const int RAM_DEV_NAMES_NO = (DeviceMaxRelays + DeviceMaxOutputs + DeviceMaxInputs + 1); //device name + IOs
-        public const int mAddr_NAMES_Board_Pos = 0x00;
-        public const int mAddr_NAMES_Inputs_Pos = 0x01;
-        public const int mAddr_NAMES_Outputs_Pos = (DeviceMaxInputs + mAddr_NAMES_Inputs_Pos);
+        public const int RAM_DEV_NAMES_NO = (DeviceMaxRelays + DeviceMaxOutputs + DeviceMaxInputs);
+
+        public const int mAddr_NAMES_Device_Input_Names_Start_Pos = mAddr_NAMES_StartAddr;
+
+        public const int mAddr_NAMES_Device_Output_Names_Start_Pos =
+            (mAddr_NAMES_Device_Input_Names_Start_Pos + DeviceMaxInputs);
+
+        public const int mAddr_NAMES_Device_Relay_Names_Start_Pos =
+            (mAddr_NAMES_Device_Output_Names_Start_Pos + DeviceMaxOutputs);
+        
+        public const int mAddr_NAMES_Inputs_Pos = mAddr_NAMES_Device_Input_Names_Start_Pos;
+        public const int mAddr_NAMES_Outputs_Pos = mAddr_NAMES_Device_Output_Names_Start_Pos;
         public const int mAddr_NAMES_Relays_Pos = (mAddr_NAMES_Outputs_Pos + DeviceMaxOutputs);
 
         public const int RAM_TOTAL_DEVICE_NAMES_SIZE = (RAM_DEVICE_NAMES_SIZE*RAM_DEVCFG_NO);

@@ -306,11 +306,7 @@ namespace sconnConnector.Config.Abstract
 
         public static int GetNameStartPossitionForEntity(Type type)
         {
-            if (type == typeof(sconnAlarmZoneConfig))
-            {
-                return ipcDefines.mAddr_NAMES_Zone_StartIndex;
-            }
-            else if (type == typeof(sconnDeviceConfig))
+            if (type == typeof(sconnDeviceConfig))
             {
                 return ipcDefines.mAddr_NAMES_Device_StartIndex;
             }

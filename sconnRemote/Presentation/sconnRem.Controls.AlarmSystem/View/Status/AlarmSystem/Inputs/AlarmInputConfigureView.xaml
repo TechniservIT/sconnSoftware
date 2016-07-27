@@ -186,12 +186,11 @@
 
                 <Label Grid.Column="0" Grid.Row="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="Type" />
                 <ComboBox x:Name="cmb12"  
-                            ItemsSource="{Binding Source={StaticResource inputTypeSrc}}"
-                        Grid.Column="1" Grid.Row="0"
+                          ItemsSource="{Binding Source={StaticResource inputTypeSrc}}"
+                          Grid.Column="1" Grid.Row="0"
                           HorizontalAlignment="Stretch"
                           HorizontalContentAlignment="Stretch" 
-                          SelectedValue="{Binding  ActiveInput.sconnInputType}" 
-                           SelectedItem="{Binding  ActiveInput.sconnInputType , Mode=TwoWay}" 
+                          SelectedValue="{Binding  Config.sconnInputType, Mode=TwoWay}"
                           />
 
 
@@ -203,8 +202,9 @@
                           Grid.Column="1" Grid.Row="1"
                           HorizontalAlignment="Stretch"
                           HorizontalContentAlignment="Stretch" 
-                             DisplayMemberPath="Name" 
-                             SelectedValuePath="Config.ZoneId"
+                          DisplayMemberPath="Name" 
+                          SelectedValue="{Binding Config.ZoneId, Mode=TwoWay}"
+                          SelectedValuePath="Id"
                           />
                 
                 

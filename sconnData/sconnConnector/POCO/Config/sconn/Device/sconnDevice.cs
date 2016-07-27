@@ -317,7 +317,6 @@ namespace sconnConnector.POCO.Config.sconn
             LoadSupplyVoltageLevels();
             LoadDeviceStaticInfo();
             LoadDeviceNames();
-
             LoadImageTypeUrl();
         }
 
@@ -417,9 +416,9 @@ namespace sconnConnector.POCO.Config.sconn
             {
                 if (this.NamesCFG.GetLength(0) == ipcDefines.RAM_DEV_NAMES_NO)
                 {
-                    string devName = System.Text.Encoding.BigEndianUnicode.GetString(this.NamesCFG[0]);
-                    this.Name = devName;
-                    int NameInc = 1;
+                    //string devName = System.Text.Encoding.BigEndianUnicode.GetString(this.NamesCFG[0]);
+                    //this.Name = devName;
+                    int NameInc = 0;
                     for (int i = 0; i < this.Inputs.Count; i++)
                     {
                         this.Inputs[i].Name = GetDeviceNameAt(i + NameInc);
@@ -435,6 +434,8 @@ namespace sconnConnector.POCO.Config.sconn
                         this.Relays[i].Name = GetDeviceNameAt(i + NameInc);
                     }
                 }
+
+                
             }
             catch (Exception e)
             {
@@ -484,7 +485,8 @@ namespace sconnConnector.POCO.Config.sconn
                     _memCFG[baseaddr + ipcDefines.mAdrInputSensitivity] = (byte)(item.Sensitivity / ipcDefines.InputSensitivityStep);
                     _memCFG[baseaddr + ipcDefines.mAdrInputEnabled] = (byte)(item.Enabled == false ? 0 : 1);
 
-                    SetDeviceNameAt(ipcDefines.mAddr_NAMES_Inputs_Pos + item.Id, item.Name);
+
+                    //SetDeviceNameAt(ipcDefines.mAddr_NAMES_Inputs_Pos + item.Id, item.Name);
                 }
 
                 _memCFG[ipcDefines.mAdrOutputsNO] =  (byte)OutputNo;
@@ -552,20 +554,42 @@ namespace sconnConnector.POCO.Config.sconn
             memCFG[ipcDefines.mAdrCOMeth] = (byte)(ComTcpIp ? 1 : 0);
             memCFG[ipcDefines.mAdrCOMmiwi] = (byte)(ComMiWi ? 1 : 0);
 
+            byte[] nameBytes = System.Text.Encoding.BigEndianUnicode.GetBytes(Name);
+            int fullNameMaxLen = nameBytes.Length > ipcDefines.RAM_NAME_SIZE
+                ? ipcDefines.RAM_NAME_SIZE
+                : nameBytes.Length;
+            for (int i = 0; i < fullNameMaxLen; i++)
+            {
+                memCFG[ipcDefines.mAdrDeviceNameStartPos + i] = nameBytes[i];
+            }
 
             return this.memCFG;
         }
 
         public void Deserialize(byte[] buffer)
         {
-            if (buffer.Length >= ipcDefines.deviceConfigSize)
+            try
             {
-                for (int i = 0; i < ipcDefines.deviceConfigSize; i++)
+                if (buffer.Length >= ipcDefines.deviceConfigSize)
                 {
-                    this.memCFG[i] = buffer[i];
+                    for (int i = 0; i < ipcDefines.deviceConfigSize; i++)
+                    {
+                        this.memCFG[i] = buffer[i];
+                    }
+                    LoadPropertiesFromConfig();
+
+                    Name = System.Text.Encoding.BigEndianUnicode.GetString(
+                       buffer,
+                       ipcDefines.mAdrDeviceNameStartPos,
+                       AlarmSystemConfig_Helpers.GetUtf8StringLengthFromBufferAtPossition(buffer, ipcDefines.mAdrDeviceNameStartPos));
+
                 }
-                LoadPropertiesFromConfig();
             }
+            catch (Exception ex)
+            {
+                _logger.Error(ex, ex.Message);
+            }
+
         }
 
         public void Fake()
@@ -580,8 +604,8 @@ namespace sconnConnector.POCO.Config.sconn
                 byte[] DeviceNameBf = new byte[ipcDefines.RAM_DEVICE_NAMES_SIZE];
 
                 //get names from all io
-                SetDeviceNameAt(0, Name);
-                int NameInc = 1;
+               // SetDeviceNameAt(0, Name);
+                int NameInc = 0;
                 for (int i = 0; i < this.Inputs.Count; i++)
                 {
                     SetDeviceNameAt(NameInc+i, this.Inputs[i].Name); // = GetDeviceNameAt(i + NameInc);

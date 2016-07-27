@@ -8,6 +8,7 @@ using NLog;
 using sconnConnector.POCO.Config;
 using sconnConnector.POCO.Config.Abstract.Auth;
 using sconnConnector.POCO.Config.sconn;
+using sconnConnector.POCO.Config.sconn.Name;
 using sconnConnector.POCO.Device;
 
 namespace sconnConnector.Config.Abstract
@@ -385,16 +386,16 @@ namespace sconnConnector.Config.Abstract
                 {
                     int entities = hostNamedEntity.GetEntityCount();
                     int names = CommandManager.GetNamesNumberForEntity(typeof(T));
-                    for (int l = 0; l < entities; l++)
+                    for (int entityCount = 0; entityCount < entities; entityCount++)
                     {
                         byte[] namesCfgBuffer = new byte[ipcDefines.RAM_NAME_SIZE * names];
                         int entityNamesStartPos = CommandManager.GetNameStartPossitionForEntity(typeof(T));
-                        for (int i = 0; i < names; i++)
+                        for (int nameCount  = 0; nameCount < names; nameCount++)
                         {
                             byte[] header = CommandManager.GetHeaderForOperationParametrized(
-                                typeof(T),
+                                typeof(sconnName),
                                 CommandOperation.Get,
-                                entityNamesStartPos + (l* names) +i );
+                                entityNamesStartPos + (entityCount * names) + nameCount);
                             var res = this.SendMessage(header);
                             if (IsResultSuccessForOperation(res, CommandOperation.Get))
                             {
@@ -404,11 +405,11 @@ namespace sconnConnector.Config.Abstract
                                 {
                                     msgBytesName[j] = msgBody[j];
                                 }
-                                msgBytesName.CopyTo(namesCfgBuffer, i * ipcDefines.RAM_NAME_SIZE);
+                                msgBytesName.CopyTo(namesCfgBuffer, nameCount * ipcDefines.RAM_NAME_SIZE);
                             }
                         }
 
-                        hostNamedEntity.DeserializeEntityNames(l,namesCfgBuffer);
+                        hostNamedEntity.DeserializeEntityNames(entityCount, namesCfgBuffer);
                         return true;
                     }
                 }
@@ -429,22 +430,23 @@ namespace sconnConnector.Config.Abstract
                     var hostNamedEntity = (IAlarmSystemNamedEntityConfig)this.Entity;
                     int entities = hostNamedEntity.GetEntityCount();
                     int names = CommandManager.GetNamesNumberForEntity(typeof(T));
-                    for (int l = 0; l < entities; l++)
+                    int entityCount = 0;
+                    for ( entityCount = 0; entityCount < entities; entityCount++)
                     {
-                        byte[] namesCfgBuffer = hostNamedEntity.SerializeEntityNames(l);
+                        byte[] namesCfgBuffer = hostNamedEntity.SerializeEntityNames(entityCount);
                         int entityNamesStartPos = CommandManager.GetNameStartPossitionForEntity(typeof(T));
-                        for (int i = 0; i < names; i++)
+                        for (int nameCount = 0; nameCount < names; nameCount++)
                         {
                             byte[] header = CommandManager.GetHeaderForOperationParametrized(
-                                typeof(T),
+                                typeof(sconnName),
                                 CommandOperation.Set,
-                                entityNamesStartPos + (l*names+i));
+                                entityNamesStartPos + (entityCount * names+ nameCount));
 
                             //copy message body
                             byte[] nameconfig = new byte[ipcDefines.RAM_NAME_SIZE];
                             for (int j = 0; j < ipcDefines.RAM_NAME_SIZE; j++)
                             {
-                                nameconfig[j] = namesCfgBuffer[i * ipcDefines.RAM_NAME_SIZE + j];
+                                nameconfig[j] = namesCfgBuffer[nameCount  * ipcDefines.RAM_NAME_SIZE + j];
                             }
                             byte[] packetdaBytes = new byte[ipcDefines.RAM_NAME_SIZE + header.Length];
                             header.CopyTo(packetdaBytes, 0);
