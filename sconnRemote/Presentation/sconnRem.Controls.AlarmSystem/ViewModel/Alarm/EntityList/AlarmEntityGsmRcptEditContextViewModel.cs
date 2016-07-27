@@ -81,7 +81,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm.EntityList
                 d.Enabled = false;
                 d.NumberE164 = Guid.NewGuid().ToString();
                 d.Name = Guid.NewGuid().ToString();
-                d.CountryCode = 0;
+                d.CountryCode =1;
                 d.MessageLevel = GsmMessagingLevel.All;
                 
                 bool added = false;

@@ -22,7 +22,7 @@ using sconnRem.ViewModel.Alarm;
 namespace sconnRem.Controls.AlarmSystem.View.Status.AlarmSystem.Users
 {
 
-    [Export(AlarmRegionNames.AlarmConfig_Contract_UsersConfigView)]
+    [Export(AlarmRegionNames.AlarmStatus_Contract_RemoteUsers)]
     [ViewSortHint("01")]
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public partial class AlarmUsersListView : UserControl

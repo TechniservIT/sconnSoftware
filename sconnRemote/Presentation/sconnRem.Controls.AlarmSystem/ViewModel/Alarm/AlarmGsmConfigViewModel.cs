@@ -63,12 +63,16 @@ namespace sconnRem.ViewModel.Alarm
 
         public void OpenEntityEditContext(sconnGsmRcpt device)
         {
-            if (device == null || Config.Count <= 0) return;
-            NavigationParameters parameters = new NavigationParameters
+            NavigationParameters parameters = new NavigationParameters();
+            if (device != null)
             {
-                {GlobalViewContractNames.Global_Contract_Nav_Site_Context__Key_Name, siteUUID},
-                {AlarmSystemEntityListContractNames.Alarm_Contract_Entity_GsmRcpt_Edit_Context_Key_Name, device.Id}
-            };
+                parameters.Add(GlobalViewContractNames.Global_Contract_Nav_Site_Context__Key_Name, siteUUID);
+                parameters.Add(AlarmSystemEntityListContractNames.Alarm_Contract_Entity_GsmRcpt_Edit_Context_Key_Name, device.Id);
+            }
+            else
+            {
+                parameters.Add(GlobalViewContractNames.Global_Contract_Nav_Site_Context__Key_Name, siteUUID);
+            }
 
             GlobalNavigationContext.NavigateRegionToContractWithParam(
                 GlobalViewRegionNames.RNavigationRegion,

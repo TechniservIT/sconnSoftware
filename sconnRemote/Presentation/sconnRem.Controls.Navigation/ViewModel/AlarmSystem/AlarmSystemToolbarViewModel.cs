@@ -111,12 +111,12 @@ namespace sconnRem.Controls.Navigation.ViewModel.AlarmSystem
 
         private void ShowUsers(sconnSite site)
         {
-            NavigateToAlarmContract(AlarmRegionNames.AlarmConfig_Contract_UsersConfigView);
+            NavigateToAlarmContract(AlarmRegionNames.AlarmStatus_Contract_RemoteUsers);
         }
         
         private void ShowAuthConfig(sconnSite site)
         {
-            NavigateToAlarmContract(AlarmRegionNames.AlarmConfig_Contract_AuthConfigView);
+            NavigateToAlarmContract(AlarmRegionNames.AlarmStatus_Contract_AuthorizedDevices);
         }
 
         private void ShowNetworkConfig(sconnSite site)
@@ -146,12 +146,12 @@ namespace sconnRem.Controls.Navigation.ViewModel.AlarmSystem
 
         private void ShowGsmRcptsList(sconnSite site)
         {
-            NavigateToAlarmContract(AlarmRegionNames.AlarmConfig_Contract_GsmRcptConfigView);
+            NavigateToAlarmContract(AlarmRegionNames.AlarmStatus_Contract_GsmRcpts);
         }
 
         private void ShowSystemUsers(sconnSite site)
         {
-            NavigateToAlarmContract(AlarmRegionNames.AlarmConfig_Contract_SystemUsersConfigView);
+            NavigateToAlarmContract(AlarmRegionNames.AlarmStatus_Contract_SystemUsers);
         }
 
         private void ShowSystemMap(sconnSite site)

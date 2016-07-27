@@ -27,11 +27,11 @@ namespace sconnRem.Navigation
             public const String AlarmStatus_Contract_GsmRcpts = "AlarmGsmRcptsViewContract";
             public const String AlarmStatus_Contract_RemoteUsers = "AlarmRemoteUsersViewContract";
             public const String AlarmStatus_Contract_SystemUsers = "AlarmSystemusersViewContract";
-
-          public const String AlarmStatus_Contract_TemperatureSensorsView = "AlarmTemperatureSensorsViewContract";
+            public const String AlarmStatus_Contract_AuthorizedDevices = "AlarmSystemAuthorizedDevicesViewContract";
+            public const String AlarmStatus_Contract_TemperatureSensorsView = "AlarmTemperatureSensorsViewContract";
             public const String AlarmStatus_Contract_HumiditySensorsView = "AlarmHumiditySensorsViewContract";
 
-        public static Uri AlarmUri_Status_Inputs_View = new Uri(AlarmStatus_Contract_InputsView, UriKind.Relative);
+            public static Uri AlarmUri_Status_Inputs_View = new Uri(AlarmStatus_Contract_InputsView, UriKind.Relative);
             public static Uri AlarmUri_Status_Outputs_View = new Uri(AlarmStatus_Contract_OutputsView, UriKind.Relative);
             public static Uri AlarmUri_Status_Relays_View = new Uri(AlarmStatus_Contract_RelaysView, UriKind.Relative);
             public static Uri AlarmUri_Status_Zones_View = new Uri(AlarmStatus_Contract_ZonesView, UriKind.Relative);

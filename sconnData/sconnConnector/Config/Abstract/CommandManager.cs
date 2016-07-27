@@ -239,10 +239,8 @@ namespace sconnConnector.Config.Abstract
             byte[] Header = new byte[ipcDefines.NET_UPLOAD_HEADER_BYTES];
             Header[ipcDefines.MessageHeader_Command_Pos] = (byte)oper;
             Header[ipcDefines.MessageHeader_CommandType_Pos] = (byte)CommandManager_GetConfigTypeForEntity(type);
-            Header[ipcDefines.MessageHeader_Command_Reg_Low_Pos] = (byte)(EntityId >> 8);   //Big endian
-            Header[ipcDefines.MessageHeader_Command_Reg_High_Pos] = (byte)(EntityId);
-          //  Header[ipcDefines.MessageHeader_CommandParam_Pos] = GetCommandValueParam(type,oper,(byte)EntityId);
-            return Header; 
+            AlarmSystemConfig_Helpers.WriteWordToBufferAtPossition((ushort)EntityId, Header, ipcDefines.MessageHeader_Command_Reg_Low_Pos);
+             return Header; 
         }
 
         public static byte[] GetHeaderForOperationSingleQuery(CommandOperation oper)

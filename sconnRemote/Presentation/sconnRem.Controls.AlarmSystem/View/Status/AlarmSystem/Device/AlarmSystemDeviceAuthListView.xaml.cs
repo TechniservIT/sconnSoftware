@@ -22,7 +22,7 @@ using sconnRem.ViewModel.Alarm;
 namespace sconnRem.Controls.AlarmSystem.View.Status.AlarmSystem.Device
 {
 
-    [Export(AlarmRegionNames.AlarmConfig_Contract_AuthConfigView)]
+    [Export(AlarmRegionNames.AlarmStatus_Contract_AuthorizedDevices)]
     [ViewSortHint("01")]
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public partial class AlarmSystemDeviceAuthListView : UserControl

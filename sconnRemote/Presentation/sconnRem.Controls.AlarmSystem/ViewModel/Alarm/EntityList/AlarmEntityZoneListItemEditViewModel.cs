@@ -80,7 +80,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
 
                 var entities = new ObservableCollection<sconnAlarmZone>(_provider.GetAll());
                 sconnAlarmZone d = new sconnAlarmZone();
-                    d.Name = Guid.NewGuid().ToString();
+                d.Name = Guid.NewGuid().ToString();
                 d.UUID = Guid.NewGuid().ToString();
                 d.Id = (ushort)entities.Count;
                 d.Enabled = false;
@@ -204,23 +204,26 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
                 try
                 {
                     siteUUID = (string)navigationContext.Parameters[GlobalViewContractNames.Global_Contract_Nav_Site_Context__Key_Name];
-                    ZoneId = int.Parse((string)navigationContext.Parameters[AlarmSystemEntityListContractNames.Alarm_Contract_Entity_Zone_Edit_Context_Key_Name]);
+                    int sentId = 0;
+                    bool gotId = int.TryParse((string)navigationContext.Parameters[AlarmSystemEntityListContractNames.Alarm_Contract_Entity_Zone_Edit_Context_Key_Name], out sentId);
                     this.navigationJournal = navigationContext.NavigationService.Journal;
-
-                    BackgroundWorker bgWorker = new BackgroundWorker();
-                    bgWorker.DoWork += (s, e) => {
-                        GetData();
-                    };
-                    bgWorker.RunWorkerCompleted += (s, e) =>
+                    if (gotId)
                     {
+                        ZoneId = sentId;
+                        BackgroundWorker bgWorker = new BackgroundWorker();
+                        bgWorker.DoWork += (s, e) => {
+                            GetData();
+                        };
+                        bgWorker.RunWorkerCompleted += (s, e) =>
+                        {
 
-                        Loading = false;
-                    };
+                            Loading = false;
+                        };
 
-                    Loading = true;
+                        Loading = true;
 
-                    bgWorker.RunWorkerAsync();
-
+                        bgWorker.RunWorkerAsync();
+                    }
                 }
                 catch (Exception ex)
                 {

@@ -25,7 +25,7 @@ namespace sconnRem.Controls.AlarmSystem.View.Status.AlarmSystem.SystemUsers
     /// Interaction logic for AlarmSystemUsersListView.xaml
     /// </summary>
 
-    [Export(AlarmRegionNames.AlarmConfig_Contract_SystemUsersConfigView)]
+    [Export(AlarmRegionNames.AlarmStatus_Contract_SystemUsers)]
     [ViewSortHint("01")]
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public partial class AlarmSystemUsersListView : UserControl

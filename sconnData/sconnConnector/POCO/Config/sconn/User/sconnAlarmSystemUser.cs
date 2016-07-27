@@ -67,7 +67,7 @@ namespace sconnConnector.POCO.Config.sconn.User
                     {
                         buffer[ipcDefines.USER_DB_CODE_POS + i] = (byte)passB[i];
                     }
-                    for (int i = passwdBytes; i < ipcDefines.AUTH_PASS_SIZE - passwdBytes; i++)
+                    for (int i = passwdBytes; i < ipcDefines.USER_DB_CODE_LEN; i++)
                     {
                         buffer[ipcDefines.USER_DB_CODE_POS + i] = 0x00;    //clear remaning bytes
                     }
@@ -78,7 +78,7 @@ namespace sconnConnector.POCO.Config.sconn.User
                     {
                         buffer[ipcDefines.USER_DB_CARD_POS + i] = (byte)logB[i];
                     }
-                    for (int i = loginBytes; i < ipcDefines.AUTH_PASS_SIZE - loginBytes; i++)
+                    for (int i = loginBytes; i < ipcDefines.USER_DB_CARD_LEN; i++)
                     {
                         buffer[ipcDefines.USER_DB_CARD_POS + i] = 0x00;    //clear remaning bytes
                     }

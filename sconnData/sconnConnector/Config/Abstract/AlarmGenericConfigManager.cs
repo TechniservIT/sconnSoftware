@@ -89,7 +89,7 @@ namespace sconnConnector.Config.Abstract
                 {
 
                     byte[] data = this.Entity.SerializeEntityWithId(i);
-                    byte[] msgHeader = CommandManager.GetHeaderForOperationParametrized(typeof(T), CommandOperation.Set,  EntityId);
+                    byte[] msgHeader = CommandManager.GetHeaderForOperationParametrized(typeof(T), CommandOperation.Set,  i);
                     byte[] messageTail = CommandManager.GetTailForOperation(typeof(T), CommandOperation.Set);
                     byte[] uploadMsg = new byte[data.Length + msgHeader.Length + messageTail.Length];
 

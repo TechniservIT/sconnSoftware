@@ -65,18 +65,30 @@ namespace sconnRem.ViewModel.Alarm
 
         public void OpenEntityEditContext(sconnAlarmZone device)
         {
-            if (device == null || Config.Count <= 0) return;
-            NavigationParameters parameters = new NavigationParameters
+            try
             {
-                {GlobalViewContractNames.Global_Contract_Nav_Site_Context__Key_Name, siteUUID},
-                {AlarmSystemEntityListContractNames.Alarm_Contract_Entity_Zone_Edit_Context_Key_Name, device.Id}
-            };
+                NavigationParameters parameters = new NavigationParameters();
+                if (device != null)
+                {
+                    parameters.Add(GlobalViewContractNames.Global_Contract_Nav_Site_Context__Key_Name, siteUUID);
+                    parameters.Add(AlarmSystemEntityListContractNames.Alarm_Contract_Entity_Zone_Edit_Context_Key_Name, device.Id);
+                }
+                else
+                {
+                    parameters.Add(GlobalViewContractNames.Global_Contract_Nav_Site_Context__Key_Name, siteUUID);
+                }
 
-            GlobalNavigationContext.NavigateRegionToContractWithParam(
-                GlobalViewRegionNames.RNavigationRegion,
-                GlobalViewContractNames.Global_Contract_Menu_RightSide_AlarmZoneEditListItemContext,
-                parameters
-                );
+                GlobalNavigationContext.NavigateRegionToContractWithParam(
+                    GlobalViewRegionNames.RNavigationRegion,
+                    GlobalViewContractNames.Global_Contract_Menu_RightSide_AlarmZoneEditListItemContext,
+                    parameters
+                    );
+            }
+            catch (Exception ex)
+            {
+                _nlogger.Error(ex, ex.Message);
+            }
+            
         }
 
         public void GoToEntityEditView()
@@ -92,6 +104,10 @@ namespace sconnRem.ViewModel.Alarm
             {
                 Config = new ObservableCollection<sconnAlarmZone>(_provider.GetAll());
                 SelectedIndex = 0; //reset on refresh
+                if (Config.Count == 0)
+                {
+                    Application.Current.Dispatcher.Invoke(() => { OpenEntityEditContext(null); }); //open empty edit context
+                }
             }
             catch (Exception ex)
             {
