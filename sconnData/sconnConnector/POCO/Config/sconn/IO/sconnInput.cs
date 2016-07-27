@@ -136,21 +136,13 @@ namespace sconnConnector.POCO.Config
             try
             {
                 byte[] buffer = new byte[ipcDefines.mAdrInputMemSize];
-                if (Delayed)
-                {
-
-                    buffer[ipcDefines.mAdrInputType] = (byte)((byte)Type | (byte)sconnInputTypeMaskValues.InputDelayedMask);
-                }
-                else
-                {
-                    buffer[ipcDefines.mAdrInputType] = (byte)Type;
-                }
-              
+                buffer[ipcDefines.mAdrInputType] = (byte)Type;
                 buffer[ipcDefines.mAdrInputEnabled] = (byte)(Enabled ? 1 : 0);
                 buffer[ipcDefines.mAdrInputVal] = (byte)Value;
                 buffer[ipcDefines.mAdrInputNameAddr] = (byte)NameId;
                 buffer[ipcDefines.mAdrInputSensitivity] = (byte)(Sensitivity / ipcDefines.InputSensitivityStep);
                 buffer[ipcDefines.mAdrInputAG] = (byte)ActivationGroup;
+                buffer[ipcDefines.mAdrInputZoneId] = (byte) ZoneId;
                 return buffer;
             }
             catch (Exception e)
@@ -166,22 +158,15 @@ namespace sconnConnector.POCO.Config
             try
             {
                 byte typeVal = buffer[ipcDefines.mAdrInputType];
-                if ((typeVal & (byte)sconnInputTypeMaskValues.InputDelayedMask) > 0)
-                {
-                    Delayed = true;
-                    typeVal = (byte) (typeVal - (byte)sconnInputTypeMaskValues.InputDelayedMask);
-                }
-
                 if (Enum.IsDefined(typeof(sconnInputType), (int)typeVal))
                 {
                     Type = (sconnInputType)typeVal;
                 }
-
                 Value = buffer[ipcDefines.mAdrInputVal];
                 NameId = buffer[ipcDefines.mAdrInputNameAddr];
                 Enabled = buffer[ipcDefines.mAdrInputEnabled] > 0 ? true : false;
                 Sensitivity = (uint) (buffer[ipcDefines.mAdrInputSensitivity] * ipcDefines.InputSensitivityStep);
-
+                ZoneId = (ushort) buffer[ipcDefines.mAdrInputZoneId];
                 if (Enum.IsDefined(typeof(sconnActivationGroup), (int)buffer[ipcDefines.mAdrInputAG]))
                 {
                     ActivationGroup = (sconnActivationGroup)buffer[ipcDefines.mAdrInputAG];

@@ -950,7 +950,7 @@ public static class sconnDataShare
         public const int RAM_DEVICE_NAMES_SIZE = (RAM_DEV_NAMES_NO*RAM_NAME_SIZE);
         public const int RAM_DEV_NAMES_NO = (DeviceMaxRelays + DeviceMaxOutputs + DeviceMaxInputs);
 
-        public const int mAddr_NAMES_Device_Input_Names_Start_Pos = mAddr_NAMES_StartAddr;
+        public const int mAddr_NAMES_Device_Input_Names_Start_Pos = mAddr_NAMES_Device_StartIndex;
 
         public const int mAddr_NAMES_Device_Output_Names_Start_Pos =
             (mAddr_NAMES_Device_Input_Names_Start_Pos + DeviceMaxInputs);

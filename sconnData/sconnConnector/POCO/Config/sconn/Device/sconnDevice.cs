@@ -484,9 +484,9 @@ namespace sconnConnector.POCO.Config.sconn
                     _memCFG[baseaddr + ipcDefines.mAdrInputAG] = (byte)item.ActivationGroup;
                     _memCFG[baseaddr + ipcDefines.mAdrInputSensitivity] = (byte)(item.Sensitivity / ipcDefines.InputSensitivityStep);
                     _memCFG[baseaddr + ipcDefines.mAdrInputEnabled] = (byte)(item.Enabled == false ? 0 : 1);
+                    _memCFG[baseaddr + ipcDefines.mAdrInputZoneId] = (byte) item.ZoneId;
 
-
-                    //SetDeviceNameAt(ipcDefines.mAddr_NAMES_Inputs_Pos + item.Id, item.Name);
+                    SetDeviceNameAt(ipcDefines.mAddr_NAMES_Inputs_Pos + item.Id, item.Name);
                 }
 
                 _memCFG[ipcDefines.mAdrOutputsNO] =  (byte)OutputNo;
@@ -497,6 +497,7 @@ namespace sconnConnector.POCO.Config.sconn
                     _memCFG[baseaddr + ipcDefines.mAdrOutputVal] = (byte)(item.Value ? 1 : 0);
                     _memCFG[baseaddr + ipcDefines.mAdrOutputNameAddr] = (byte)item.NameId;
                     _memCFG[baseaddr + ipcDefines.mAdrOutputEnabled] = (byte)(item.Enabled == false ? 0 : 1);
+                    _memCFG[baseaddr + ipcDefines.mAdrInputZoneId] = (byte)item.ZoneId;
 
                     SetDeviceNameAt(ipcDefines.mAddr_NAMES_Outputs_Pos + item.Id, item.Name);
                 }
@@ -509,6 +510,7 @@ namespace sconnConnector.POCO.Config.sconn
                     _memCFG[baseaddr + ipcDefines.mAdrRelayVal] = (byte)(item.Value ? 1 : 0);
                     _memCFG[baseaddr + ipcDefines.mAdrRelayNameAddr] = (byte)item.NameId;
                     _memCFG[baseaddr + ipcDefines.mAdrRelayEnabled] = (byte)(item.Enabled == false ? 0 : 1);
+                    _memCFG[baseaddr + ipcDefines.mAdrInputZoneId] = (byte)item.ZoneId;
 
                     SetDeviceNameAt(ipcDefines.mAddr_NAMES_Relays_Pos + item.Id, item.Name);
                 }
