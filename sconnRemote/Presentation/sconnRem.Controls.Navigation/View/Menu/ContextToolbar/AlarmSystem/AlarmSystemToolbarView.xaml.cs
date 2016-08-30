@@ -29,16 +29,7 @@ namespace sconnRem.Controls.Navigation.View.Menu.ContextToolbar.AlarmSystem
     public partial class AlarmSystemToolbarView : UserControl
     {
         private readonly Logger _nlogger = LogManager.GetCurrentClassLogger();
-      
-        [Import]
-        public IRegionManager RegionManager;
-
-        public AlarmSystemToolbarView()
-        {
-            InitializeComponent();
-        }
-
-
+     
         [ImportingConstructor]
         public AlarmSystemToolbarView(AlarmSystemToolbarViewModel viewModel)
         {
