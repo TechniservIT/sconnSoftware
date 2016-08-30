@@ -71,22 +71,24 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
             try
             {
                 var g = new AlarmSystemGraph();
-                string[] vertices = new string[Config.Count + 1];
-
-                vertices[0] = Config.FirstOrDefault().Name;    //create root node
-                AlarmSystemGraphVertex v1 = new AlarmSystemGraphVertex(vertices[0], Config.FirstOrDefault().imageIconUri,Config.FirstOrDefault().UUID);
-                g.AddVertex(v1);
+                string[] vertices = new string[Config.Count];
                 
                 for (int i = 0; i < Config.Count; i++)
                 {
-                    int currentVertIndex = i + 1;
+                    int currentVertIndex = i;
                     vertices[currentVertIndex] = Config[i].Name;
-                    AlarmSystemGraphVertex v = new AlarmSystemGraphVertex(vertices[currentVertIndex], Config[i].imageIconUri,Config[i].UUID);
+                    AlarmSystemGraphVertex v = new AlarmSystemGraphVertex(vertices[currentVertIndex], Config[i].imageIconUri, Config[i].UUID);
                     v.VertexClicked += V_VertexClicked;
                     g.AddVertex(v);
-                    g.AddEdge(new AlarmSystemGraphEdge(v1.Name, v1, v));    //connect child to parent
+
+                    //todo - connect to master verticle - find by id
+                    //g.AddEdge(new AlarmSystemGraphEdge(v1.Name, v1, v));    //connect child to parent
                 }
 
+                //vertices[0] = Config.FirstOrDefault().Name;    //create root node
+                //AlarmSystemGraphVertex v1 = new AlarmSystemGraphVertex(vertices[0], Config.FirstOrDefault().imageIconUri,Config.FirstOrDefault().UUID);
+                //g.AddVertex(v1);
+                
                 Graph = g;
             }
             catch (Exception ex)

@@ -61,28 +61,40 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm.Map
 
         public void CreateGraph()
         {
-            LoadZoneGraph();
+            LoadDeviceGraph();
         }
 
-        public void LoadZoneGraph()
+        public void LoadDeviceGraph()
         {
             try
             {
                 var g = new AlarmSystemGraph();
-                string[] vertices = new string[Config.Count + 1];
+                string[] vertices = new string[Config.Count];
 
-                vertices[0] = Config.FirstOrDefault().Name;    //create root node
-                AlarmSystemGraphVertex v1 = new AlarmSystemGraphVertex(vertices[0], Config.FirstOrDefault().imageIconUri, Config.FirstOrDefault().UUID);
-                g.AddVertex(v1);
+                //vertices[0] = Config.FirstOrDefault().Name;    //create root node
+                //AlarmSystemGraphVertex v1 = new AlarmSystemGraphVertex(vertices[0], Config.FirstOrDefault().imageIconUri, Config.FirstOrDefault().UUID);
+                //g.AddVertex(v1);
+                bool masterVertexAdded = false;
+                AlarmSystemGraphVertex masterVertex = new AlarmSystemGraphVertex();
 
                 for (int i = 0; i < Config.Count; i++)
                 {
-                    int currentVertIndex = i + 1;
+                    int currentVertIndex = i;
                     vertices[currentVertIndex] = Config[i].Name;
                     AlarmSystemGraphVertex v = new AlarmSystemGraphVertex(vertices[currentVertIndex], Config[i].imageIconUri, Config[i].UUID);
                     v.VertexClicked += V_VertexClicked;
                     g.AddVertex(v);
-                    g.AddEdge(new AlarmSystemGraphEdge(v1.Name, v1, v));    //connect child to parent
+
+                    //todo - connect all to MB
+                    if (Config[i].Type == sconnDeviceType.Motherboard)
+                    {
+                        masterVertexAdded = true;
+                        masterVertex = v;
+                    }
+                    else if (masterVertexAdded)
+                    {
+                        g.AddEdge(new AlarmSystemGraphEdge(v.Name, v, masterVertex));    //connect  to MB
+                    }
                 }
 
                 Graph = g;
