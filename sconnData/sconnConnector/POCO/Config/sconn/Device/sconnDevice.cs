@@ -175,6 +175,7 @@ namespace sconnConnector.POCO.Config.sconn
 
         private void LoadDeviceStaticInfo()
         {
+            this.Id = System.BitConverter.ToUInt16(_memCFG, ipcDefines.mAdrDevID);
             this.KeypadModule = memCFG[ipcDefines.mAdrKeypadMod] > 0 ? true : false;
             this.TemperatureModule = memCFG[ipcDefines.mAdrTempMod] > 0 ? true : false;
             this.HumidityModule = memCFG[ipcDefines.mAdrHumMod] > 0 ? true : false;

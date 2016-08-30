@@ -140,16 +140,18 @@
                     <Label Grid.Column="0" Grid.Row="5" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="{Binding Config.Enabled}" />
 
 
-                    <Label Grid.Column="0" Grid.Row="2" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="Type" />
+                    <Label Grid.Column="0" Grid.Row="6" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="Zone" />
                     <ComboBox x:Name="SelZone"  
                             ItemsSource="{Binding Zones}"
-                        Grid.Column="0" Grid.Row="3"
+                        Grid.Column="0" Grid.Row="7"
                           HorizontalAlignment="Stretch"
                           HorizontalContentAlignment="Stretch" 
                           SelectedValuePath="{Binding  Device.ZoneId, Mode=TwoWay}" 
                               DisplayMemberPath="Name"
                           />
-                    
+
+                   
+                
                 </Grid>
 
             </Grid>

@@ -16,7 +16,7 @@
 
             <StackPanel Orientation="Horizontal" Margin="5" Tag="{Binding Id}" MouseDown="UIElement_OnMouseDown">
 
-                <Grid>
+                <Grid MaxHeight="120" MaxWidth="350">
 
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
@@ -30,14 +30,15 @@
                     <Grid Grid.Column="0" Grid.Row="0">
 
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.3" />
-                            <ColumnDefinition Width="0.7" />
+                            <ColumnDefinition Width="0.4*" />
+                            <ColumnDefinition Width="0.2*" />
+                            <ColumnDefinition Width="0.4*" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
-                        <Button Grid.Column="0" Grid.Row="0"   VerticalAlignment="Center" Height="Auto" Content="">
+                        <Button Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" Height="Auto" Content="">
                             <Button.Template>
                                 <ControlTemplate TargetType="{x:Type Button}">
                                     <Grid>
@@ -52,15 +53,17 @@
                                                               VerticalAlignment="Center"/>
                                                 <Canvas Background="White" Grid.Column="0" />
 
-                                                <Image  x:Name="ImgDispActionGridFullScreen521"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="0,0,0,0" VerticalAlignment="Center" Width="Auto" Source="{Binding Path=IconUri}" />
+                                                <Image   x:Name="ImgDispActionGridFullScreen521"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="0,0,0,0" VerticalAlignment="Center" Width="Auto" Source="{Binding Path=IconUri}" />
 
+                                                
                                             </Grid>
                                         </Border>
                                     </Grid>
                                 </ControlTemplate>
                             </Button.Template>
                         </Button>
-
+                        
+                        
 
                     </Grid>
 
@@ -82,13 +85,6 @@
 
             </StackPanel>
 
-
-            <DataTemplate.Triggers>
-                <!--<DataTrigger Binding="{Binding IsMale}" Value="false">
-                    <Setter TargetName="img" Property="Source"
-                                Value="/images/klawiatura1000x1000.jpg" />
-                </DataTrigger>-->
-            </DataTemplate.Triggers>
         </DataTemplate>
 
         <Style TargetType="{x:Type graphsharp:VertexControl}">
