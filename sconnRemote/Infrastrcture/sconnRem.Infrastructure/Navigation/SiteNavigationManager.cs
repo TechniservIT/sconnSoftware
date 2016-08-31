@@ -51,6 +51,7 @@ namespace sconnRem.Infrastructure.Navigation
         public static sconnRelay activeRelay = new sconnRelay();
 
 
+        public static bool Online { get; set; }
 
         static SiteNavigationManager()
         {

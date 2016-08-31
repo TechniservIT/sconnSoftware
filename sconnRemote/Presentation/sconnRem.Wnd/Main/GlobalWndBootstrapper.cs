@@ -15,6 +15,8 @@ using Prism.Regions;
 using sconnConnector;
 using sconnConnector.Config;
 using sconnPrismGenerics.Logging;
+using sconnRem.Controls.Navigation.View.Menu.Footer.FooterSiteToolMenu;
+using sconnRem.Navigation;
 using sconnRem.View.Menu.GridNavSideMenu;
 using sconnRem.View.Menu.SiteNavSideMenu;
 using sconnRem.View.Menu.ToolTopMenu;
@@ -55,16 +57,22 @@ namespace sconnRem.Wnd.Main
 
         }
 
+        private void NavigateStaticViews()
+        {
+            GlobalNavigationContext.NavigateRegionToContract(
+                GlobalViewRegionNames.FooterLeftNavigationRegion,
+                GlobalViewContractNames.Global_Contract_Footer_ConnectivityModeContext
+                );
+
+        }
+
         protected override void ConfigureAggregateCatalog()
         {
             try
             {
                 base.ConfigureAggregateCatalog();
                 this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(GlobalWndBootstrapper).Assembly));
-
                 this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(GridNavSideMenuModule).Assembly));
-                //this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(SiteNavSideMenuModule).Assembly));
-                //this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(ToolTopMenuModule).Assembly));
                 this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(SiteStatusGridViewModule).Assembly));
             }
             catch (Exception ex)
@@ -76,41 +84,23 @@ namespace sconnRem.Wnd.Main
 
         protected override IModuleCatalog CreateModuleCatalog()
         {
-            return new ConfigurationModuleCatalog();
+            var ncat = new ConfigurationModuleCatalog();
+            ncat.AddModule(typeof(FooterConnectivityModeModule));
+            return ncat;
         }
-
-
-        //protected override Prism.Regions.IRegionBehaviorFactory ConfigureDefaultRegionBehaviors()
-        //{
-        //    var factory = base.ConfigureDefaultRegionBehaviors();
-
-        //    factory.AddIfMissing("AutoPopulateExportedViewsBehavior", typeof(AutoPopulateExportedViewsBehavior));
-
-        //    return factory;
-        //}
-
+        
         protected override DependencyObject CreateShell()
         {
             return this.Container.GetExportedValue<WndGlobalShell>();
         }
-
-        //protected override DependencyObject CreateShell()
-        //{
-        //    //model inject - todo - loaded config
-
-        //    //var batch = new CompositionBatch();
-        //    //var repoPart = batch.AddExportedValue<IAlarmConfigManager>(_manager);
-        //    //this.Container.Compose(batch);
-
-        //    return this.Container.GetExportedValue<WndGlobalShell>();
-        //}
-
+        
         protected override void InitializeShell()
         {
             try
             {
                 base.InitializeShell();
                 Application.Current.MainWindow = (Window)this.Shell;
+                NavigateStaticViews();
                 Application.Current.MainWindow.Show();
             }
             catch (Exception ex)

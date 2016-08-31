@@ -184,6 +184,8 @@ namespace sconnRem.Navigation
         public const String Global_Contract_Menu_Top_AlarmSystemContext = "GlobalContractMenuTopAlarmSystemContext";
         public const String Global_Contract_Menu_Top_CctvContext = "GlobalContractMenuTopCctvContext";
 
+        public const String Global_Contract_Footer_ConnectivityModeContext= "GlobalContractFooterConnectivityModeContext";
+
         public const String Global_Contract_Menu_Left_SiteList = "GlobalContractMenuLeftSiteList";
 
    
@@ -220,7 +222,7 @@ namespace sconnRem.Navigation
         public const String RNavigationRegion = "RightSideToolbarRegion";
         public const String LNavigationRegion = "LeftSideMenuRegion";
         public const String RopNavigationRegion = "TopToolbarRegion";
-
+        public const String FooterLeftNavigationRegion = "FooterLeftNavigationRegion";
         public const String TopContextToolbarRegion = "TopContextToolbarRegion";
     }
     

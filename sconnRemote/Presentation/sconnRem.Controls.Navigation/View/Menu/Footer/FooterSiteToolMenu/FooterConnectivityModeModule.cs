@@ -7,21 +7,21 @@ using System.Threading.Tasks;
 using Prism.Mef.Modularity;
 using Prism.Modularity;
 using Prism.Regions;
-using sconnRem.Controls.Navigation.View.Menu.Footer.FooterSiteToolMenu;
 using sconnRem.Navigation;
+using sconnRem.View.Menu.ToolTopMenu;
 
-namespace sconnRem.View.Menu.SiteNavSideMenu
+namespace sconnRem.Controls.Navigation.View.Menu.Footer.FooterSiteToolMenu
 {
-    [ModuleExport(typeof(SiteNavSideMenuModule))]
-    public class SiteNavSideMenuModule : IModule
+    [ModuleExport(typeof(FooterConnectivityModeModule))]
+    public class FooterConnectivityModeModule : IModule
     {
         [Import]
         public IRegionManager RegionManager;
 
         public void Initialize()
         {
-            this.RegionManager.RegisterViewWithRegion(GlobalViewRegionNames.LNavigationRegion, typeof(SiteNavSideMenuView));
+            this.RegionManager.RegisterViewWithRegion(GlobalViewRegionNames.FooterLeftNavigationRegion, typeof(FooterConnectivityModeView));
         }
+
     }
-    
 }

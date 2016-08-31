@@ -96,6 +96,8 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\AlarmSystem\AlarmSystemToolbarViewModel.cs" />
+    <Compile Include="ViewModel\Navigation\ConnectivityModeFooterViewModel.cs" />
+    <Compile Include="ViewModel\Navigation\ConnectivityStatusFooterViewModel.cs" />
     <Compile Include="ViewModel\Navigation\SiteNavItemViewModel.cs" />
     <Compile Include="ViewModel\Navigation\SiteNavViewModel.cs" />
     <Compile Include="ViewModel\Navigation\ToolSiteMenuViewModel.cs" />
@@ -114,6 +116,13 @@
     </Compile>
     <Compile Include="View\Menu\Footer\FooterCenterToolMenu\FooterSiteConnectivityStatusView.xaml.cs">
       <DependentUpon>FooterSiteConnectivityStatusView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Menu\Footer\FooterSiteToolMenu\FooterConnectivityModeModule.cs" />
+    <Compile Include="View\Menu\Footer\FooterSiteToolMenu\FooterConnectivityModeView.xaml.cs">
+      <DependentUpon>FooterConnectivityModeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Menu\Footer\FootRightToolMenu\FooterConnectivityStatusView.xaml.cs">
+      <DependentUpon>FooterConnectivityStatusView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Menu\GridNavSideMenu\GridNavSideMenuModule.cs" />
     <Compile Include="View\Menu\GridNavSideMenu\GridNavSideMenuView.xaml.cs">
@@ -145,6 +154,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Menu\Footer\FooterCenterToolMenu\FooterSiteConnectivityStatusView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Menu\Footer\FooterSiteToolMenu\FooterConnectivityModeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Menu\Footer\FootRightToolMenu\FooterConnectivityStatusView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -499,10 +516,7 @@
     <Content Include="images\rozb-1000.jpg" />
     <Content Include="images\save.jpg" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="View\Menu\Footer\FooterSiteToolMenu\" />
-    <Folder Include="View\Menu\Footer\FootRightToolMenu\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="app.config" />
     <Content Include="images\search1000x1000.jpg" />

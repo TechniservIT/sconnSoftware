@@ -44,7 +44,7 @@ namespace sconnConnector.Config.Storage
         {
             try
             {
-                if (File.Exists(uri))
+                if (Directory.Exists(Path.GetDirectoryName(uri)))
                 {
                     return true;
                 }
