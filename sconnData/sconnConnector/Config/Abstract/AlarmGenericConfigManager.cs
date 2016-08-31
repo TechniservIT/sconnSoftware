@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Linq;
 using System.Runtime.Remoting.Messaging;
 using System.Text;
@@ -13,6 +14,8 @@ using sconnConnector.POCO.Device;
 
 namespace sconnConnector.Config.Abstract
 {
+
+    [Export]
     public class AlarmGenericConfigManager<T> where T : new()
     {
         protected IAlarmSystemEntityConfig Entity;
@@ -275,43 +278,7 @@ namespace sconnConnector.Config.Abstract
                 return false;
             }
         }
-
-        //public bool Download(byte Id)
-        //{
-        //    try
-        //    {
-        //        if (!client.Connect())
-        //        {
-        //            client.Disconnect();
-        //            return false;
-        //        }
-
-        //        byte[] header = CommandManager.GetHeaderForOperationParametrized(typeof(T), CommandOperation.Get,Id);
-        //        var res = this.SendMessage(header);
-        //        if (IsResultSuccessForOperation(res, CommandOperation.Get))
-        //        {
-        //            byte[] msgBody = GetResultMessageForOperationResult(res, CommandOperation.Get);
-        //            Entity.Deserialize(msgBody);
-        //            if (CommandManager.IsConfigEntityNamed(typeof(T)))
-        //            {
-        //                this.DownloadNames();
-        //            }
-        //            client.Disconnect();
-        //            return true;
-        //        }
-
-        //        client.Disconnect();
-        //        return false;
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        _logger.Error(e, e.Message);
-        //        client.Disconnect();
-        //        return false;
-        //    }
-
-        //}
-
+       
 
         private bool IsResultSuccessForOperation(byte[] result, CommandOperation oper)
         {

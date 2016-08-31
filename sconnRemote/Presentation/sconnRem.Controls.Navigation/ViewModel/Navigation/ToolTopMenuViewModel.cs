@@ -10,6 +10,7 @@ using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
 using sconnConnector.Config;
+using sconnConnector.Config.Storage;
 using sconnConnector.POCO.Config;
 using sconnRem.Infrastructure.Navigation;
 using sconnRem.Navigation;
@@ -103,8 +104,43 @@ namespace sconnRem.Controls.Navigation.ViewModel.Navigation
 
         private void ShowFileExport()
         {
-            WndExportConfig wnd = new WndExportConfig();
-            wnd.Show();
+            try
+            {
+                //WndExportConfig wnd = new WndExportConfig();
+                //  wnd.Show();
+
+                //Load write to file window
+                string fileUri = "";
+                Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
+                dlg.FileName = SiteNavigationManager.CurrentContextSconnSite.siteName; // Default file name
+                dlg.DefaultExt = ".json"; // Default file extension
+                dlg.Filter = "sconnConfig (.json)|*.json"; // Filter files by extension
+
+                // Show save file dialog box
+                bool? result = dlg.ShowDialog();
+
+                // Process save file dialog box results
+                if (result == true)
+                {
+                    // Save document
+                    fileUri = dlg.FileName;
+                    
+                    //Serialize site config
+                    IAlarmSystemConfigurationStorage storage = new AlarmSystemConfigurationFileStorage();
+                    if (storage.IsConfigUriCorrect(fileUri))
+                    {
+                        storage.StorageConfigAtUri(SiteNavigationManager.alarmSystemConfigManager, fileUri);
+                    }
+
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                _nlogger.Error(ex, ex.Message);
+            }
+
+
         }
 
         private void ShowGlobalPreferences()

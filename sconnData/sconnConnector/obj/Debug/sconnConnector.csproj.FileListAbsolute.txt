@@ -63,3 +63,5 @@ H:\Repo\Bucket\iotdashn\sconnData\sconnConnector\bin\Debug\sconnNetworkingServic
 H:\Repo\Bucket\iotdashn\sconnData\sconnConnector\obj\Debug\sconnConnector.csprojResolveAssemblyReference.cache
 I:\Repo\Bucket\sconnSoftware\sconnData\sconnConnector\bin\Debug\Prism.dll
 I:\Repo\Bucket\sconnSoftware\sconnData\sconnConnector\bin\Debug\Prism.xml
+I:\Repo\Bucket\sconnSoftware\sconnData\sconnConnector\bin\Debug\Newtonsoft.Json.dll
+I:\Repo\Bucket\sconnSoftware\sconnData\sconnConnector\bin\Debug\Newtonsoft.Json.xml

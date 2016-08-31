@@ -197,3 +197,5 @@ I:\Repo\Bucket\sconnSoftware\sconnRemote\Infrastrcture\sconnRem.Infrastructure\b
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Infrastrcture\sconnRem.Infrastructure\bin\Debug\zh-Hans\Xceed.Wpf.AvalonDock.resources.dll
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Infrastrcture\sconnRem.Infrastructure\bin\Debug\SiteManagmentService.dll
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Infrastrcture\sconnRem.Infrastructure\bin\Debug\SiteManagmentService.pdb
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Infrastrcture\sconnRem.Infrastructure\bin\Debug\Newtonsoft.Json.dll
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Infrastrcture\sconnRem.Infrastructure\bin\Debug\Newtonsoft.Json.xml

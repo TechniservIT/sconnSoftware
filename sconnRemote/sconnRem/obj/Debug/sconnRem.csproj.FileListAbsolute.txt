@@ -436,3 +436,5 @@ I:\Repo\Bucket\sconnSoftware\sconnRemote\sconnRem\bin\Debug\WPFExtensions.dll
 I:\Repo\Bucket\sconnSoftware\sconnRemote\sconnRem\bin\Debug\QuickGraph.Data.xml
 I:\Repo\Bucket\sconnSoftware\sconnRemote\sconnRem\bin\Debug\QuickGraph.Graphviz.xml
 I:\Repo\Bucket\sconnSoftware\sconnRemote\sconnRem\bin\Debug\QuickGraph.Serialization.xml
+I:\Repo\Bucket\sconnSoftware\sconnRemote\sconnRem\bin\Debug\Newtonsoft.Json.dll
+I:\Repo\Bucket\sconnSoftware\sconnRemote\sconnRem\bin\Debug\Newtonsoft.Json.xml

@@ -91,3 +91,5 @@ I:\Repo\Bucket\sconnSoftware\sconnService\AlarmSystemManagmentService\bin\Debug\
 I:\Repo\Bucket\sconnSoftware\sconnService\AlarmSystemManagmentService\bin\Debug\ru\System.Windows.Interactivity.resources.dll
 I:\Repo\Bucket\sconnSoftware\sconnService\AlarmSystemManagmentService\bin\Debug\zh-Hans\System.Windows.Interactivity.resources.dll
 I:\Repo\Bucket\sconnSoftware\sconnService\AlarmSystemManagmentService\bin\Debug\zh-Hant\System.Windows.Interactivity.resources.dll
+I:\Repo\Bucket\sconnSoftware\sconnService\AlarmSystemManagmentService\bin\Debug\Newtonsoft.Json.dll
+I:\Repo\Bucket\sconnSoftware\sconnService\AlarmSystemManagmentService\bin\Debug\Newtonsoft.Json.xml

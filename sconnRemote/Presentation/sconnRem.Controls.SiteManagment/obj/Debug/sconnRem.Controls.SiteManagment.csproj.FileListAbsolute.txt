@@ -114,3 +114,5 @@ I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.SiteMana
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.SiteManagment\bin\Debug\zh-Hans\Xceed.Wpf.AvalonDock.resources.dll
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.SiteManagment\bin\Debug\SiteManagmentService.dll
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.SiteManagment\bin\Debug\SiteManagmentService.pdb
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.SiteManagment\bin\Debug\Newtonsoft.Json.dll
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.SiteManagment\bin\Debug\Newtonsoft.Json.xml

@@ -29,3 +29,5 @@ I:\Repo\Bucket\sconnSoftware\sconnRemote\SiteManagmentService\obj\Debug\SiteMana
 H:\Repo\Bucket\iotdashn\sconnRemote\SiteManagmentService\obj\Debug\SiteManagmentService.csprojResolveAssemblyReference.cache
 I:\Repo\Bucket\sconnSoftware\sconnRemote\SiteManagmentService\bin\Debug\Prism.dll
 I:\Repo\Bucket\sconnSoftware\sconnRemote\SiteManagmentService\bin\Debug\Prism.xml
+I:\Repo\Bucket\sconnSoftware\sconnRemote\SiteManagmentService\bin\Debug\Newtonsoft.Json.dll
+I:\Repo\Bucket\sconnSoftware\sconnRemote\SiteManagmentService\bin\Debug\Newtonsoft.Json.xml

@@ -69,3 +69,5 @@ I:\Repo\Bucket\sconnSoftware\sconnRemote\Infrastrcture\sconnPrismSharedContext\b
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Infrastrcture\sconnPrismSharedContext\bin\Debug\zh-Hans\Xceed.Wpf.AvalonDock.resources.dll
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Infrastrcture\sconnPrismSharedContext\bin\Debug\Prism.dll
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Infrastrcture\sconnPrismSharedContext\bin\Debug\Prism.xml
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Infrastrcture\sconnPrismSharedContext\bin\Debug\Newtonsoft.Json.dll
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Infrastrcture\sconnPrismSharedContext\bin\Debug\Newtonsoft.Json.xml

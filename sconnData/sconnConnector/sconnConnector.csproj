@@ -34,6 +34,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\sconnRemote\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
       <HintPath>..\..\sconnRemote\packages\NLog.4.3.0\lib\net45\NLog.dll</HintPath>
       <Private>True</Private>
@@ -57,14 +61,23 @@
   <ItemGroup>
     <Compile Include="Comm\ETH.cs" />
     <Compile Include="Comm\USB.cs" />
+    <Compile Include="Config\Abstract\AlarmSystemSiteConfiguration.cs" />
     <Compile Include="Config\Abstract\CommandManager.cs" />
     <Compile Include="Config\Abstract\AlarmGenericConfigManager.cs" />
-    <Compile Include="Config\AlarmSystemConfigManager.cs" />
+    <Compile Include="Config\Manager\AlarmSystemConfigManager.cs" />
     <Compile Include="Config\CfgOper.cs" />
     <Compile Include="Config\GlobalSettings.cs" />
     <Compile Include="Config\Abstract\AlarmGenericNamesConfigManager.cs" />
     <Compile Include="Config\sconnCfgMngr.cs" />
     <Compile Include="Config\sconnDataSrc.cs" />
+    <Compile Include="Config\Storage\AlarmSystemConfigurationCloudStorage.cs" />
+    <Compile Include="Config\Storage\AlarmSystemConfigurationDatabaseStorage.cs" />
+    <Compile Include="Config\Storage\AlarmSystemConfigurationFileStorage.cs" />
+    <Compile Include="Config\Storage\IAlarmSystemConfigurationStorage.cs" />
+    <Compile Include="Config\Storage\JSON\IJsonObjectStorage.cs" />
+    <Compile Include="Config\Storage\JSON\JsonObjectFileStorage.cs" />
+    <Compile Include="Config\Storage\XML\IXmlObjectDecoder.cs" />
+    <Compile Include="Config\Storage\XML\IXmlObjectEncoder.cs" />
     <Compile Include="POCO\Config\IIndexAbleConfiguration.cs" />
     <Compile Include="POCO\Config\sconn\IO\sconnInput.cs" />
     <Compile Include="POCO\Config\sconn\Auth\sconnUser.cs" />
@@ -129,9 +142,7 @@
     </None>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Config\Manager\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\..\sconnRemote\sconnNetworkingServices\sconnNetworkingServices.csproj">
       <Project>{57036DE8-EA6A-42E1-983D-23F71F87C34C}</Project>
