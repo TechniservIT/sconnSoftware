@@ -931,9 +931,9 @@ namespace sconnRem
                                                     Properties.Resources.lblAvRespTimeDesc,
                                                 };
                 string[] configFieldValues = {
-                                                   site.siteStat.ConnectionElapsed.ToString(),
-                                                   site.siteStat.FailedConnectionsText,
-                                                   site.siteStat.AverageResponseTimeMsText,
+                                                   site.SiteStat.ConnectionElapsed.ToString(),
+                                                   site.SiteStat.FailedConnectionsText,
+                                                   site.SiteStat.AverageResponseTimeMsText,
                                                 };
 
                 for (int v = 0; v < configSummaryFieldNames.GetLength(0); v++)

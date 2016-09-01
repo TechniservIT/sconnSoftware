@@ -58,7 +58,7 @@ namespace sconnRem.Controls.SiteManagment.Wizard
             {
                SetProperty(ref _Config, value); 
                 //_Config = value;
-                //OnPropertyChanged();
+                //OnPropertyChanged(); 
             }
         }
 

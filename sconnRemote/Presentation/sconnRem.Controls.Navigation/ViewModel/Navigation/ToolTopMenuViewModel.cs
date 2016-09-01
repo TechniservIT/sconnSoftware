@@ -94,21 +94,48 @@ namespace sconnRem.Controls.Navigation.ViewModel.Navigation
             }
         }
 
-
-        // TODO separate shells ?
+        
         private void ShowFileImport()
         {
-            WndImportConfig wnd = new WndImportConfig();
-            wnd.Show();
+            try
+            {
+                string fileUri = "";
+                Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+                dlg.DefaultExt = ".json"; // Default file extension
+                dlg.Filter = "sconnConfig (.json)|*.json"; // Filter files by extension
+
+                // Show save file dialog box
+                bool? result = dlg.ShowDialog();
+
+                // Process save file dialog box results
+                if (result == true)
+                {
+                    // Save document
+                    fileUri = dlg.FileName;
+
+                    //Serialize site config
+                    IAlarmSystemConfigurationStorage storage = new AlarmSystemConfigurationFileStorage();
+                    if (storage.IsConfigUriCorrect(fileUri))
+                    {
+                        // storage.StorageConfigAtUri(SiteNavigationManager.alarmSystemConfigManager, fileUri);
+                        SiteNavigationManager.alarmSystemConfigManager = storage.GetConfigFromUri(fileUri);
+                        SiteNavigationManager.Online = false; //set offline by default when loading from file
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                _nlogger.Error(ex, ex.Message);
+            }
+
+
         }
 
         private void ShowFileExport()
         {
             try
             {
-                //WndExportConfig wnd = new WndExportConfig();
-                //  wnd.Show();
-
                 //Load write to file window
                 string fileUri = "";
                 Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();

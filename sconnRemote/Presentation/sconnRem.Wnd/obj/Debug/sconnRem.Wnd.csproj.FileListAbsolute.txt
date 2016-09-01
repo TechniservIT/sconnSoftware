@@ -115,3 +115,5 @@ I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Wnd\bin\Debug\Gra
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Wnd\bin\Debug\QuickGraph.dll
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Wnd\bin\Debug\GraphSharp.dll
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Wnd\bin\Debug\QuickGraph.xml
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Wnd\bin\Debug\Newtonsoft.Json.dll
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Wnd\bin\Debug\Newtonsoft.Json.xml

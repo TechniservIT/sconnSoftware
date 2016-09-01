@@ -1284,7 +1284,7 @@ namespace sconnConnector
                 if (site.siteCfg == null) { return false; }
                 SconnClient client = new SconnClient(site.serverIP, site.serverPort, site.authPasswd, true);
 
-                site.siteStat.StartConnectionTimer();
+                site.SiteStat.StartConnectionTimer();
                 try
                 {
                     int bfSize = ipcDefines.NET_MAX_TX_SIZE;
@@ -1320,8 +1320,8 @@ namespace sconnConnector
                             rxBF = berkeleySendMsg(txBF, bfSize);
                             if (rxBF[0] != ipcCMD.ACKNXT)
                             {
-                                site.siteStat.StopConnectionTimer();
-                                site.siteStat.FailedConnections++;
+                                site.SiteStat.StopConnectionTimer();
+                                site.SiteStat.FailedConnections++;
                                 return false;
                             }
                         }
@@ -1336,8 +1336,8 @@ namespace sconnConnector
 
                             if (rxBF[0] != ipcCMD.ACKNXT)
                             {
-                                site.siteStat.StopConnectionTimer();
-                                site.siteStat.FailedConnections++;
+                                site.SiteStat.StopConnectionTimer();
+                                site.SiteStat.FailedConnections++;
                                 return false;
                             }
                         }
@@ -1348,23 +1348,23 @@ namespace sconnConnector
                         rxBF = berkeleySendMsg(txBF, ipcDefines.NET_CMD_PACKET_LEN);
                         if (rxBF[0] != ipcCMD.ACKFIN)
                         {
-                            site.siteStat.StopConnectionTimer();
-                            site.siteStat.FailedConnections++;
+                            site.SiteStat.StopConnectionTimer();
+                            site.SiteStat.FailedConnections++;
                             return false;
                         }
                     }
                     else
                     {
-                        site.siteStat.StopConnectionTimer();
-                        site.siteStat.FailedConnections++;
+                        site.SiteStat.StopConnectionTimer();
+                        site.SiteStat.FailedConnections++;
                         return false;
                     }
                 }
                 catch (Exception e)
                 {
                     _logger.Error(e, e.Message);
-                    site.siteStat.StopConnectionTimer();
-                    site.siteStat.FailedConnections++;
+                    site.SiteStat.StopConnectionTimer();
+                    site.SiteStat.FailedConnections++;
                     return false;
                 }
 
@@ -1393,7 +1393,7 @@ namespace sconnConnector
                 if (site.siteCfg == null) { return false; }
                 SconnClient client = new SconnClient(site.serverIP, site.serverPort, site.authPasswd, true);
 
-                site.siteStat.StartConnectionTimer();
+                site.SiteStat.StartConnectionTimer();
                 try
                 {
                     int bfSize = ipcDefines.NET_MAX_TX_SIZE;
@@ -1429,8 +1429,8 @@ namespace sconnConnector
                             rxBF = berkeleySendMsg(txBF, bfSize);
                             if (rxBF[0] != ipcCMD.ACKNXT)
                             {
-                                site.siteStat.StopConnectionTimer();
-                                site.siteStat.FailedConnections++;
+                                site.SiteStat.StopConnectionTimer();
+                                site.SiteStat.FailedConnections++;
                                 return false;
                             }
                         }
@@ -1446,8 +1446,8 @@ namespace sconnConnector
 
                             if (rxBF[0] != ipcCMD.ACKNXT)
                             {
-                                site.siteStat.StopConnectionTimer();
-                                site.siteStat.FailedConnections++;
+                                site.SiteStat.StopConnectionTimer();
+                                site.SiteStat.FailedConnections++;
                                 return false;
                             }
                         }
@@ -1458,8 +1458,8 @@ namespace sconnConnector
                         rxBF = berkeleySendMsg(txBF, ipcDefines.NET_CMD_PACKET_LEN);
                         if (rxBF[0] != ipcCMD.ACKFIN)
                         {
-                            site.siteStat.StopConnectionTimer();
-                            site.siteStat.FailedConnections++;
+                            site.SiteStat.StopConnectionTimer();
+                            site.SiteStat.FailedConnections++;
                             return false;
                         }
 
@@ -1468,16 +1468,16 @@ namespace sconnConnector
                     }
                     else
                     {
-                        site.siteStat.StopConnectionTimer();
-                        site.siteStat.FailedConnections++;
+                        site.SiteStat.StopConnectionTimer();
+                        site.SiteStat.FailedConnections++;
                         return false;
                     }
                 }
                 catch (Exception e)
                 {
                     _logger.Error(e, e.Message);
-                    site.siteStat.StopConnectionTimer();
-                    site.siteStat.FailedConnections++;
+                    site.SiteStat.StopConnectionTimer();
+                    site.SiteStat.FailedConnections++;
                     return false;
                 }
             }
@@ -1496,7 +1496,7 @@ namespace sconnConnector
             {
                 SconnClient client = new SconnClient(site.serverIP, site.serverPort, site.authPasswd, true);
                 client.ConnectionTimeoutMs = 4000; //long timeout
-                site.siteStat.StartConnectionTimer();
+                site.SiteStat.StartConnectionTimer();
 
                 int bfSize = ipcDefines.NET_MAX_TX_SIZE;
 
@@ -1543,7 +1543,7 @@ namespace sconnConnector
                     return false;
                 }
                 SconnClient client = new SconnClient(site.serverIP, site.serverPort, site.authPasswd, true);
-                site.siteStat.StartConnectionTimer();
+                site.SiteStat.StartConnectionTimer();
                 try
                 {
                     int bfSize = ipcDefines.NET_MAX_TX_SIZE;
@@ -1580,8 +1580,8 @@ namespace sconnConnector
                             rxBF = berkeleySendMsg(txBF, bfSize);
                             if (rxBF[0] != ipcCMD.ACKNXT)
                             {
-                                site.siteStat.StopConnectionTimer();
-                                site.siteStat.FailedConnections++;
+                                site.SiteStat.StopConnectionTimer();
+                                site.SiteStat.FailedConnections++;
                                 return false;
                             }
                         }
@@ -1597,8 +1597,8 @@ namespace sconnConnector
 
                             if (rxBF[0] != ipcCMD.ACKNXT)
                             {
-                                site.siteStat.StopConnectionTimer();
-                                site.siteStat.FailedConnections++;
+                                site.SiteStat.StopConnectionTimer();
+                                site.SiteStat.FailedConnections++;
                                 return false;
                             }
                         }
@@ -1609,26 +1609,26 @@ namespace sconnConnector
                         rxBF = berkeleySendMsg(txBF, ipcDefines.NET_CMD_PACKET_LEN);
                         if (rxBF[0] != ipcCMD.ACKFIN)
                         {
-                            site.siteStat.StopConnectionTimer();
-                            site.siteStat.FailedConnections++;
+                            site.SiteStat.StopConnectionTimer();
+                            site.SiteStat.FailedConnections++;
                             return false;
                         }
                     }
                     else
                     {
-                        site.siteStat.StopConnectionTimer();
-                        site.siteStat.FailedConnections++;
+                        site.SiteStat.StopConnectionTimer();
+                        site.SiteStat.FailedConnections++;
                         return false;
                     }
                 }
                 catch (Exception e)
                 {
                     _logger.Error(e, e.Message);
-                    site.siteStat.StopConnectionTimer();
-                    site.siteStat.FailedConnections++;
+                    site.SiteStat.StopConnectionTimer();
+                    site.SiteStat.FailedConnections++;
                     return false;
                 }
-                site.siteStat.StopConnectionTimer();
+                site.SiteStat.StopConnectionTimer();
                 return true;
             }
             catch (Exception e)
@@ -1660,7 +1660,7 @@ namespace sconnConnector
             try
             {
                 SconnClient client = new SconnClient(site.serverIP, site.serverPort, site.authPasswd, true);
-                site.siteStat.StartConnectionTimer();
+                site.SiteStat.StartConnectionTimer();
                 if (site.siteCfg == null)
                 {
                     return false;
@@ -1700,8 +1700,8 @@ namespace sconnConnector
                         rxBF = berkeleySendMsg(txBF, bfSize);
                         if (rxBF[0] != ipcCMD.ACKNXT)
                         {
-                            site.siteStat.StopConnectionTimer();
-                            site.siteStat.FailedConnections++;
+                            site.SiteStat.StopConnectionTimer();
+                            site.SiteStat.FailedConnections++;
                             return false;
                         }
                     }
@@ -1715,8 +1715,8 @@ namespace sconnConnector
                         rxBF = berkeleySendMsg(txBF, signleBytes + ipcDefines.NET_UPLOAD_PACKET_CONTROL_BYTES);
                         if (rxBF[0] != ipcCMD.ACKNXT)
                         {
-                            site.siteStat.StopConnectionTimer();
-                            site.siteStat.FailedConnections++;
+                            site.SiteStat.StopConnectionTimer();
+                            site.SiteStat.FailedConnections++;
                             return false;
                         }
                     }
@@ -1727,8 +1727,8 @@ namespace sconnConnector
                     rxBF = berkeleySendMsg(txBF, ipcDefines.NET_CMD_PACKET_LEN);
                     if (rxBF[0] != ipcCMD.ACKFIN)
                     {
-                        site.siteStat.StopConnectionTimer();
-                        site.siteStat.FailedConnections++;
+                        site.SiteStat.StopConnectionTimer();
+                        site.SiteStat.FailedConnections++;
                         client.CloseConnection();
                         return false;
                     }
@@ -1736,8 +1736,8 @@ namespace sconnConnector
                 }
                 else
                 {
-                    site.siteStat.StopConnectionTimer();
-                    site.siteStat.FailedConnections++;
+                    site.SiteStat.StopConnectionTimer();
+                    site.SiteStat.FailedConnections++;
                     client.CloseConnection();
                     return false;
                 }
@@ -1761,7 +1761,7 @@ namespace sconnConnector
                 }
 
                 SconnClient client = new SconnClient(site.serverIP, site.serverPort, site.authPasswd, true);
-                site.siteStat.StartConnectionTimer();
+                site.SiteStat.StartConnectionTimer();
                 ushort siteMemAddr = (ushort)(ipcDefines.mAdrDevStart + (ipcDefines.deviceConfigSize * DevId));
                 try
                 {
@@ -1799,8 +1799,8 @@ namespace sconnConnector
                             rxBF = berkeleySendMsg(txBF, bfSize);
                             if (rxBF[0] != ipcCMD.ACKNXT)
                             {
-                                site.siteStat.StopConnectionTimer();
-                                site.siteStat.FailedConnections++;
+                                site.SiteStat.StopConnectionTimer();
+                                site.SiteStat.FailedConnections++;
                                 return false;
                             }
                         }
@@ -1814,8 +1814,8 @@ namespace sconnConnector
                             rxBF = berkeleySendMsg(txBF, signleBytes + ipcDefines.NET_UPLOAD_PACKET_CONTROL_BYTES);
                             if (rxBF[0] != ipcCMD.ACKNXT)
                             {
-                                site.siteStat.StopConnectionTimer();
-                                site.siteStat.FailedConnections++;
+                                site.SiteStat.StopConnectionTimer();
+                                site.SiteStat.FailedConnections++;
                                 return false;
                             }
                         }
@@ -1826,8 +1826,8 @@ namespace sconnConnector
                         rxBF = berkeleySendMsg(txBF, ipcDefines.NET_CMD_PACKET_LEN);
                         if (rxBF[0] != ipcCMD.ACKFIN)
                         {
-                            site.siteStat.StopConnectionTimer();
-                            site.siteStat.FailedConnections++;
+                            site.SiteStat.StopConnectionTimer();
+                            site.SiteStat.FailedConnections++;
                             client.CloseConnection();
                             return false;
                         }
@@ -1836,8 +1836,8 @@ namespace sconnConnector
                     else
                     {
                         client.CloseConnection();
-                        site.siteStat.StopConnectionTimer();
-                        site.siteStat.FailedConnections++;
+                        site.SiteStat.StopConnectionTimer();
+                        site.SiteStat.FailedConnections++;
                         return false;
                     }
                 }
@@ -1845,11 +1845,11 @@ namespace sconnConnector
                 {
                     client.CloseConnection();
                     _logger.Error(e, e.Message);
-                    site.siteStat.StopConnectionTimer();
-                    site.siteStat.FailedConnections++;
+                    site.SiteStat.StopConnectionTimer();
+                    site.SiteStat.FailedConnections++;
                     return false;
                 }
-                site.siteStat.StopConnectionTimer();
+                site.SiteStat.StopConnectionTimer();
                 return true;
             }
             catch (Exception e)
@@ -1878,7 +1878,7 @@ namespace sconnConnector
             }
 
             SconnClient client = new SconnClient(site.serverIP, site.serverPort, site.authPasswd, true);
-            site.siteStat.StartConnectionTimer();
+            site.SiteStat.StartConnectionTimer();
             try
             {
                 int bfSize = ipcDefines.NET_MAX_TX_SIZE;
@@ -1916,8 +1916,8 @@ namespace sconnConnector
                         // ethernet.berkeleySendMsg(site.serverIP, txBF, site.serverPort, ipcDefines.deviceConfigSize + ipcDefines.NET_DATA_PACKET_CONTROL_BYTES);
                         if (rxBF[0] != ipcCMD.ACKNXT)
                         {
-                            site.siteStat.StopConnectionTimer();
-                            site.siteStat.FailedConnections++;
+                            site.SiteStat.StopConnectionTimer();
+                            site.SiteStat.FailedConnections++;
                             return false;
                         }
                     }
@@ -1933,8 +1933,8 @@ namespace sconnConnector
 
                         if (rxBF[0] != ipcCMD.ACKNXT)
                         {
-                            site.siteStat.StopConnectionTimer();
-                            site.siteStat.FailedConnections++;
+                            site.SiteStat.StopConnectionTimer();
+                            site.SiteStat.FailedConnections++;
                             return false;
                         }
                     }
@@ -1945,25 +1945,25 @@ namespace sconnConnector
                     rxBF = berkeleySendMsg(txBF, ipcDefines.NET_CMD_PACKET_LEN);
                     if (rxBF[0] != ipcCMD.ACKFIN)
                     {
-                        site.siteStat.StopConnectionTimer();
-                        site.siteStat.FailedConnections++;
+                        site.SiteStat.StopConnectionTimer();
+                        site.SiteStat.FailedConnections++;
                         return false;
                     }
                 }
                 else
                 {
-                    site.siteStat.StopConnectionTimer();
-                    site.siteStat.FailedConnections++;
+                    site.SiteStat.StopConnectionTimer();
+                    site.SiteStat.FailedConnections++;
                     return false;
                 }
             }
             catch (Exception e)
             {
-                site.siteStat.StopConnectionTimer();
-                site.siteStat.FailedConnections++;
+                site.SiteStat.StopConnectionTimer();
+                site.SiteStat.FailedConnections++;
                 return false;
             }
-            site.siteStat.StopConnectionTimer();
+            site.SiteStat.StopConnectionTimer();
             return true;
         }
 
@@ -1978,7 +1978,7 @@ namespace sconnConnector
                 }
                 SconnClient client = new SconnClient(site.serverIP, site.serverPort, site.authPasswd, true);
 
-                site.siteStat.StartConnectionTimer();
+                site.SiteStat.StartConnectionTimer();
                 ushort siteMemAddr = (ushort)(ipcDefines.mAdrDevStart + (ipcDefines.deviceConfigSize * DevId));
                 try
                 {
@@ -2021,8 +2021,8 @@ namespace sconnConnector
                             rxBF = berkeleySendMsg(txBF, bfSize);
                             if (rxBF[0] != ipcCMD.ACKNXT)
                             {
-                                site.siteStat.StopConnectionTimer();
-                                site.siteStat.FailedConnections++;
+                                site.SiteStat.StopConnectionTimer();
+                                site.SiteStat.FailedConnections++;
                                 return false;
                             }
                         }
@@ -2041,8 +2041,8 @@ namespace sconnConnector
 
                             if (rxBF[0] != ipcCMD.ACKNXT)
                             {
-                                site.siteStat.StopConnectionTimer();
-                                site.siteStat.FailedConnections++;
+                                site.SiteStat.StopConnectionTimer();
+                                site.SiteStat.FailedConnections++;
                                 return false;
                             }
                         }
@@ -2053,15 +2053,15 @@ namespace sconnConnector
                         rxBF = berkeleySendMsg(txBF, ipcDefines.NET_CMD_PACKET_LEN);
                         if (rxBF[0] != ipcCMD.ACKFIN)
                         {
-                            site.siteStat.StopConnectionTimer();
-                            site.siteStat.FailedConnections++;
+                            site.SiteStat.StopConnectionTimer();
+                            site.SiteStat.FailedConnections++;
                             return false;
                         }
                     }
                     else
                     {
-                        site.siteStat.StopConnectionTimer();
-                        site.siteStat.FailedConnections++;
+                        site.SiteStat.StopConnectionTimer();
+                        site.SiteStat.FailedConnections++;
                         return false;
                     }
                 }
@@ -2069,11 +2069,11 @@ namespace sconnConnector
                 {
 
                     _logger.Error(e, e.Message);
-                    site.siteStat.StopConnectionTimer();
-                    site.siteStat.FailedConnections++;
+                    site.SiteStat.StopConnectionTimer();
+                    site.SiteStat.FailedConnections++;
                     return false;
                 }
-                site.siteStat.StopConnectionTimer();
+                site.SiteStat.StopConnectionTimer();
                 return true;
             }
             catch (Exception e)
@@ -2095,7 +2095,7 @@ namespace sconnConnector
                 }
                 SconnClient client = new SconnClient(site.serverIP, site.serverPort, site.authPasswd, true);
 
-                site.siteStat.StartConnectionTimer();
+                site.SiteStat.StartConnectionTimer();
                 ushort siteMemAddr = (ushort)(ipcDefines.mAdrDevStart + (ipcDefines.deviceConfigSize * DevId));
                 try
                 {
@@ -2139,8 +2139,8 @@ namespace sconnConnector
                             rxBF = berkeleySendMsg(txBF, bfSize);
                             if (rxBF[0] != ipcCMD.ACKNXT)
                             {
-                                site.siteStat.StopConnectionTimer();
-                                site.siteStat.FailedConnections++;
+                                site.SiteStat.StopConnectionTimer();
+                                site.SiteStat.FailedConnections++;
                                 return false;
                             }
                         }
@@ -2159,8 +2159,8 @@ namespace sconnConnector
 
                             if (rxBF[0] != ipcCMD.ACKNXT)
                             {
-                                site.siteStat.StopConnectionTimer();
-                                site.siteStat.FailedConnections++;
+                                site.SiteStat.StopConnectionTimer();
+                                site.SiteStat.FailedConnections++;
                                 return false;
                             }
                         }
@@ -2171,26 +2171,26 @@ namespace sconnConnector
                         rxBF = berkeleySendMsg(txBF, ipcDefines.NET_CMD_PACKET_LEN);
                         if (rxBF[0] != ipcCMD.ACKFIN)
                         {
-                            site.siteStat.StopConnectionTimer();
-                            site.siteStat.FailedConnections++;
+                            site.SiteStat.StopConnectionTimer();
+                            site.SiteStat.FailedConnections++;
                             return false;
                         }
                     }
                     else
                     {
-                        site.siteStat.StopConnectionTimer();
-                        site.siteStat.FailedConnections++;
+                        site.SiteStat.StopConnectionTimer();
+                        site.SiteStat.FailedConnections++;
                         return false;
                     }
                 }
                 catch (Exception e)
                 {
                     _logger.Error(e, e.Message);
-                    site.siteStat.StopConnectionTimer();
-                    site.siteStat.FailedConnections++;
+                    site.SiteStat.StopConnectionTimer();
+                    site.SiteStat.FailedConnections++;
                     return false;
                 }
-                site.siteStat.StopConnectionTimer();
+                site.SiteStat.StopConnectionTimer();
                 return true;
             }
             catch (Exception e)
@@ -2216,7 +2216,7 @@ namespace sconnConnector
                 }
                 SconnClient client = new SconnClient(site.serverIP, site.serverPort, site.authPasswd, true);
 
-                site.siteStat.StartConnectionTimer();
+                site.SiteStat.StartConnectionTimer();
                 ushort siteMemAddr = (ushort)(ipcDefines.mAdrDevStart + (ipcDefines.deviceConfigSize * DevId));
                 try
                 {
@@ -2255,8 +2255,8 @@ namespace sconnConnector
                             rxBF = berkeleySendMsg(txBF, bfSize);
                             if (rxBF[0] != ipcCMD.ACKNXT)
                             {
-                                site.siteStat.StopConnectionTimer();
-                                site.siteStat.FailedConnections++;
+                                site.SiteStat.StopConnectionTimer();
+                                site.SiteStat.FailedConnections++;
                                 return false;
                             }
                         }
@@ -2272,8 +2272,8 @@ namespace sconnConnector
 
                             if (rxBF[0] != ipcCMD.ACKNXT)
                             {
-                                site.siteStat.StopConnectionTimer();
-                                site.siteStat.FailedConnections++;
+                                site.SiteStat.StopConnectionTimer();
+                                site.SiteStat.FailedConnections++;
                                 return false;
                             }
                         }
@@ -2284,26 +2284,26 @@ namespace sconnConnector
                         rxBF = berkeleySendMsg(txBF, ipcDefines.NET_CMD_PACKET_LEN);
                         if (rxBF[0] != ipcCMD.ACKFIN)
                         {
-                            site.siteStat.StopConnectionTimer();
-                            site.siteStat.FailedConnections++;
+                            site.SiteStat.StopConnectionTimer();
+                            site.SiteStat.FailedConnections++;
                             return false;
                         }
                     }
                     else
                     {
-                        site.siteStat.StopConnectionTimer();
-                        site.siteStat.FailedConnections++;
+                        site.SiteStat.StopConnectionTimer();
+                        site.SiteStat.FailedConnections++;
                         return false;
                     }
                 }
                 catch (Exception e)
                 {
                     _logger.Error(e, e.Message);
-                    site.siteStat.StopConnectionTimer();
-                    site.siteStat.FailedConnections++;
+                    site.SiteStat.StopConnectionTimer();
+                    site.SiteStat.FailedConnections++;
                     return false;
                 }
-                site.siteStat.StopConnectionTimer();
+                site.SiteStat.StopConnectionTimer();
                 return true;
             }
             catch (Exception e)
@@ -2370,7 +2370,7 @@ namespace sconnConnector
             try
             {
 
-                site.siteStat.StartConnectionTimer();
+                site.SiteStat.StartConnectionTimer();
                 bool globalUploadStat = false;
                 bool deviceUploadStat = false;
                 int devices = 0;
@@ -2439,15 +2439,15 @@ namespace sconnConnector
                                 deviceUploadStat = false;
                             }
                         }
-                        site.siteStat.StopConnectionTimer();
+                        site.SiteStat.StopConnectionTimer();
                         return (bool)(deviceUploadStat & globalUploadStat);
 
                     }
                     catch (Exception e)
                     {
                         _logger.Error(e, e.Message);
-                        site.siteStat.StopConnectionTimer();
-                        site.siteStat.FailedConnections++;
+                        site.SiteStat.StopConnectionTimer();
+                        site.SiteStat.FailedConnections++;
                         return (bool)(deviceUploadStat & globalUploadStat);
                         throw;
                     }
@@ -2455,8 +2455,8 @@ namespace sconnConnector
                 }
                 else
                 {
-                    site.siteStat.StopConnectionTimer();
-                    site.siteStat.FailedConnections++;
+                    site.SiteStat.StopConnectionTimer();
+                    site.SiteStat.FailedConnections++;
                     //MessageBoxResult result = MessageBox.Show("MCU Auth Fail");
                     return (bool)(deviceUploadStat & globalUploadStat);
                 }
@@ -2474,7 +2474,7 @@ namespace sconnConnector
         public bool ReadSiteRunningDeviceConfigs(sconnSite site)
         {
             /**********  Get device configs **********/
-            site.siteStat.StartConnectionTimer();
+            site.SiteStat.StartConnectionTimer();
             bool globalUploadStat = false;
             bool deviceUploadStat = false;
             int devices = 0;
@@ -2529,13 +2529,13 @@ namespace sconnConnector
                 cmd[2] = (byte)1; //test event id 1
                 rxBF = berkeleySendMsg(cmd, 2);
 
-                site.siteStat.StopConnectionTimer();
+                site.SiteStat.StopConnectionTimer();
 
             }
             catch (Exception e)
             {
-                site.siteStat.StopConnectionTimer();
-                site.siteStat.FailedConnections++;
+                site.SiteStat.StopConnectionTimer();
+                site.SiteStat.FailedConnections++;
                 client.CloseConnection();
                 return (bool)(deviceUploadStat & globalUploadStat);
                 throw;

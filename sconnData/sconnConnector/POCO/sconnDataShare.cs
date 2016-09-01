@@ -178,14 +178,26 @@ public static class sconnDataShare
                 }
             }
             return false;
-            //foreach (sconnSite site in sconnSites)
-            //{
-            //    if (site.Id.Equals(updated.Id))
-            //    {
-            //        site.CopyFrom(updated);
-            //    }
-            //}
-            //return false;
+        }
+
+        public static bool removeSite(sconnSite site)
+        {
+            if (site != null)
+            {
+                sconnSite existing = sconnSites.FirstOrDefault(s => s.Id.Equals(site.Id));
+                if (existing != null)
+                {
+                    sconnSites.Remove(existing);
+                    Save();
+                    return true;
+                }
+                else
+                {
+                    sconnSites.Add(site);
+                    return true;
+                }
+            }
+            return false;
         }
 
         public static bool addSite(sconnSite site)

@@ -23,11 +23,7 @@ namespace sconnRem.Controls.Navigation.ViewModel.Navigation
         public sconnSite Site { get; set; }
         private readonly IRegionManager _regionManager;
         public AlarmSystemConfigManager Manager { get; set; }
-
-        //private ICommand _getDataCommand;
-        //private ICommand _saveDataCommand;
-
-
+        
         public ICommand EditSiteCommand { get; set; }
         public ICommand RemoveSiteCommand { get; set; }
         public ICommand ViewSiteCommand { get; set; }

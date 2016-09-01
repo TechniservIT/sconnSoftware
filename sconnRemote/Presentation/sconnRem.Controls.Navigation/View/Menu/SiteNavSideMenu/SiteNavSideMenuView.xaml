@@ -22,7 +22,7 @@
         </Grid.RowDefinitions>
 
         <ListBox ScrollViewer.HorizontalScrollBarVisibility="Disabled" x:Name="OrdersListBox" BorderThickness="0" ItemsSource="{Binding Sites}"  IsSynchronizedWithCurrentItem="True" 
-                     regions:RegionManager.RegionName="{x:Static inf:GlobalViewRegionNames.LNavigationRegion}" Background="White" SelectionChanged="OrdersListBox_SelectionChanged">
+                     regions:RegionManager.RegionName="{x:Static inf:GlobalViewRegionNames.LNavigationRegion}" Background="White">
             <ListBox.ItemTemplate>
                 
                 <DataTemplate>
@@ -37,32 +37,71 @@
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
 
-                        <Grid    Grid.Row="0" Grid.Column="0" Background="White">
+                      
+                        <Grid    Grid.Row="0" Grid.Column="0" Background="#FF6EF2FF">
 
-                            <Button Command="{Binding DataContext.ViewSiteCommand, RelativeSource={RelativeSource AncestorType=ListBox}}"  CommandParameter="{Binding}"  VerticalAlignment="Center" Height="Auto" Content="">
-                                <Button.Template>
-                                    <ControlTemplate TargetType="{x:Type Button}">
-                                        <Grid>
-                                            <Border Background="{TemplateBinding Background}"
+                            <Grid  Background="#4C71D9E4">
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="0.5*"/>
+                                    <RowDefinition Height="0.5*"/>
+                                </Grid.RowDefinitions>
+
+                                <Button  Grid.Row="0" Grid.Column="0"  Command="{Binding DataContext.ViewSiteCommand, RelativeSource={RelativeSource AncestorType=ListBox}}"  CommandParameter="{Binding}"  VerticalAlignment="Center" Height="Auto" Content="">
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Grid>
+                                                <Border Background="{TemplateBinding Background}"
                          BorderBrush="{TemplateBinding BorderBrush}"
                          BorderThickness="{TemplateBinding BorderThickness}">
-                                                <Grid>
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="*"/>
-                                                    </Grid.ColumnDefinitions>
-                                                    <ContentPresenter HorizontalAlignment="Left"
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="*"/>
+                                                        </Grid.ColumnDefinitions>
+                                                        <ContentPresenter HorizontalAlignment="Left"
                                           VerticalAlignment="Center"/>
-                                                    <Canvas Background="White" />
+                                                        <Canvas Background="White" />
 
-                                                    <Image  x:Name="ImgDispActionGridFullScreen141"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="10,10,10,10" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/alarm.jpg"/>
+                                                        <Image  x:Name="ImgDispActionGridFullScreen141"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="10,10,10,10" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/alarm.jpg"/>
 
-                                                </Grid>
-                                            </Border>
-                                        </Grid>
-                                    </ControlTemplate>
-                                </Button.Template>
-                            </Button>
+                                                    </Grid>
+                                                </Border>
+                                            </Grid>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+
+                                <Rectangle  Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center"
+                                  Height="25"
+                                  Margin="0,0,0,0"
+                                  Stroke="Black"
+                                  VerticalAlignment="Center"
+                                  Width="25" 
+                                  >     
+                                    <Rectangle.Style>
+                                        <Style TargetType="Rectangle">
+                                            <Setter Property="Fill" Value="Red"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding SiteStat.Authenticated,UpdateSourceTrigger=PropertyChanged}"
+                             Value="True">
+                                                    <Setter Property="Fill"
+                            Value="#FF29CB29" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Rectangle.Style>
+                                </Rectangle>
+
+
+                            </Grid>
+
+
                         </Grid>
+
+                        
 
                         <Grid  Grid.Row="0" Grid.Column="1" Background="White">
 

@@ -10,10 +10,13 @@ using System.Diagnostics;
 
 using System.Net.Security;
 using System.Collections;
+using System.ComponentModel;
 using System.Security.Authentication;
 using System.Security.Cryptography.X509Certificates;
 using System.IO;
+using System.Runtime.CompilerServices;
 using NLog;
+using sconnConnector.Annotations;
 using sconnNetworkingServices.Abstract;
 
 
@@ -38,7 +41,7 @@ namespace sconnConnector
         public IPAddress Adress { get; set; }
         public IPEndPoint EndPoint { get; set; }
         public int ConnectionTimeoutMs { get; set; }
-        private bool Authenticated = false;
+        public bool Authenticated = false;
         public bool useSsl { get; set; }
 
         public INetworkClientStatusUpdateService StatusUpdateService { get; set; }
@@ -610,11 +613,25 @@ namespace sconnConnector
 
 
 
-    public class SiteConnectionStat
+    public class SiteConnectionStat : INotifyPropertyChanged
     {
         /*
          Connection statistics - session variable
          */
+        private bool _Authenticated;
+
+        public bool Authenticated
+        {
+            get { return _Authenticated; }
+            set
+            {
+                _Authenticated = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool Connected { get; set; }
+
         private int _FailedConnections;
         private int _AverageResponseTimeMs;
         private int _ConnectionElapsed;
@@ -640,7 +657,7 @@ namespace sconnConnector
                 }
             }
         }
-        public string FailedConnectionsText { get { return _FailedConnections.ToString(); } }
+        public string FailedConnectionsText => _FailedConnections.ToString();
 
         public int AverageResponseTimeMs
         {
@@ -656,7 +673,7 @@ namespace sconnConnector
                 }
             }
         }
-        public string AverageResponseTimeMsText { get { return _AverageResponseTimeMs.ToString(); } }
+        public string AverageResponseTimeMsText => _AverageResponseTimeMs.ToString();
 
 
         public int ConnectionElapsed
@@ -750,7 +767,14 @@ namespace sconnConnector
                 throw;
             }                   
         }
-    
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 
 

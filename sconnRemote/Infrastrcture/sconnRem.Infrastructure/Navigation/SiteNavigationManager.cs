@@ -7,9 +7,11 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using AlarmSystemManagmentService;
 using AlarmSystemManagmentService.Device;
 using NLog;
+using sconnConnector;
 using sconnConnector.Config;
 using sconnConnector.POCO.Config;
 using sconnConnector.POCO.Config.sconn;
@@ -51,7 +53,7 @@ namespace sconnRem.Infrastructure.Navigation
         public static sconnRelay activeRelay = new sconnRelay();
 
 
-        public static bool Online { get; set; }
+        public static bool Online { get; set; } = true;
 
         static SiteNavigationManager()
         {
@@ -61,9 +63,13 @@ namespace sconnRem.Infrastructure.Navigation
 
         public static List<sconnDevice> GetDevices()
         {
-            _devicesConfigService = new AlarmDevicesConfigService(alarmSystemConfigManager);
-            DeviceConfigs = _devicesConfigService.GetAll();
+            if (Online)
+            {
+                _devicesConfigService = new AlarmDevicesConfigService(alarmSystemConfigManager);
+                DeviceConfigs = _devicesConfigService.GetAll();
+            }
             return DeviceConfigs;
+
         }
 
         public static void SaveOutputGeneric(sconnOutput output)
@@ -75,8 +81,12 @@ namespace sconnRem.Infrastructure.Navigation
                     if (dinput.UUID.Equals(output.UUID))
                     {
                         dinput.CopyFrom(output);
-                        AlarmDevicesConfigService serv = new AlarmDevicesConfigService(alarmSystemConfigManager);
-                        serv.Update(dev);   //, dinput.Id
+                        if (Online)
+                        {
+                            AlarmDevicesConfigService serv = new AlarmDevicesConfigService(alarmSystemConfigManager);
+                            serv.Update(dev);   //, dinput.Id   
+                        }
+                           
                     }
                 }
             }
@@ -110,8 +120,11 @@ namespace sconnRem.Infrastructure.Navigation
                 if (dinput.UUID.Equals(input.UUID))
                 {
                     dinput.CopyFrom(input);
-                    AlarmDevicesConfigService serv = new AlarmDevicesConfigService(alarmSystemConfigManager);
-                    serv.Update(CurrentContextDevice);
+                    if (Online)
+                    {
+                        AlarmDevicesConfigService serv = new AlarmDevicesConfigService(alarmSystemConfigManager);
+                        serv.Update(CurrentContextDevice);
+                    }
                 }
             }
         }
@@ -140,8 +153,11 @@ namespace sconnRem.Infrastructure.Navigation
                 if (dinput.UUID.Equals(output.UUID))
                 {
                     dinput.CopyFrom(output);
-                    AlarmDevicesConfigService serv = new AlarmDevicesConfigService(alarmSystemConfigManager);
-                    serv.Update(CurrentContextDevice);
+                    if (Online)
+                    {
+                        AlarmDevicesConfigService serv = new AlarmDevicesConfigService(alarmSystemConfigManager);
+                        serv.Update(CurrentContextDevice);
+                    }
                 }
             }
         }
@@ -176,8 +192,6 @@ namespace sconnRem.Infrastructure.Navigation
             {
                 _nlogger.Error(ex, ex.Message);
             }
-
-
         }
 
         public static void SetNavigationContextContainer(CompositionContainer container)
@@ -324,6 +338,21 @@ namespace sconnRem.Infrastructure.Navigation
             SiteConnectionWizardBootstrapper boot = new SiteConnectionWizardBootstrapper(site);
             boot.Run();
         }
+
+        public static void RemoveSite(sconnSite site)
+        {
+            //prompt
+            MessageBoxResult messageBoxResult = System.Windows.MessageBox.Show("Please confirm deleting follow site : " +Environment.NewLine + site.siteName, "Delete Confirmation", System.Windows.MessageBoxButton.YesNo);
+            if (messageBoxResult == MessageBoxResult.Yes)
+            {
+                sconnDataShare.removeSite(site);
+                //force list reload
+            }
+
+           // SiteConnectionWizardBootstrapper boot = new SiteConnectionWizardBootstrapper(site);
+           // boot.Run();
+        }
+        
 
         public static void OpenSiteWizard()
         {

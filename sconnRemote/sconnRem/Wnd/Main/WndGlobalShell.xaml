@@ -51,7 +51,7 @@
 
 
                     <Grid  Background="White"  Grid.Row="1" Grid.Column="0">
-                      
+                        <UserControl prism:RegionManager.RegionName="FooterLeftNavigationRegion"/>
                     </Grid>
 
                     <Grid  Background="White"  Grid.Row="1" Grid.Column="1">

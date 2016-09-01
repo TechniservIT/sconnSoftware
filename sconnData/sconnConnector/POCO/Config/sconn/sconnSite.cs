@@ -27,8 +27,17 @@ namespace sconnConnector.POCO.Config
         public string Id { get; set; }
         
         public bool UsbCom;
-        
-        public SiteConnectionStat siteStat;
+
+        private SiteConnectionStat _siteStat;
+        public SiteConnectionStat SiteStat
+        {
+            get { return _siteStat; }
+            set
+            {
+                _siteStat = value;
+                OnPropertyChanged();
+            }
+        }
 
         public ipcSiteConfig siteCfg;
 
@@ -150,7 +159,7 @@ namespace sconnConnector.POCO.Config
        //     _siteID = sconnDataShare.GetLastItemID() + 1;
             _siteName = "DefaultSite";
             siteCfg = new ipcSiteConfig();
-            siteStat = new SiteConnectionStat();
+            _siteStat = new SiteConnectionStat();
             Id = Guid.NewGuid().ToString();
         }
 
@@ -166,7 +175,7 @@ namespace sconnConnector.POCO.Config
             lastUpdate = DateTime.Now;
             serverPort = 37222;
             siteCfg = new ipcSiteConfig();
-            siteStat = new SiteConnectionStat();
+            _siteStat = new SiteConnectionStat();
             Id = Guid.NewGuid().ToString();
         }
 
@@ -179,11 +188,10 @@ namespace sconnConnector.POCO.Config
             statusCheckInterval = intervalMs;
             serverIP = server;
             serverPort = port;
-       //     _siteID = sconnDataShare.GetLastItemID() + 1;
             _siteName = siteName;
             lastUpdate = DateTime.Now;
             siteCfg = new ipcSiteConfig();
-            siteStat = new SiteConnectionStat();
+            _siteStat = new SiteConnectionStat();
             Id = Guid.NewGuid().ToString();
         }
 

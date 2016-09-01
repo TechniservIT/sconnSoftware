@@ -70,7 +70,6 @@ I:\Repo\Bucket\sconnSoftware\sconnRemote\Infrastrcture\sconnRem.Navigation\bin\D
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Infrastrcture\sconnRem.Navigation\bin\Debug\ru\Xceed.Wpf.AvalonDock.resources.dll
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Infrastrcture\sconnRem.Navigation\bin\Debug\sv\Xceed.Wpf.AvalonDock.resources.dll
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Infrastrcture\sconnRem.Navigation\bin\Debug\zh-Hans\Xceed.Wpf.AvalonDock.resources.dll
-I:\Repo\Bucket\sconnSoftware\sconnRemote\Infrastrcture\sconnRem.Navigation\obj\Debug\sconnRem.Navigation.csprojResolveAssemblyReference.cache
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Infrastrcture\sconnRem.Navigation\bin\Debug\Microsoft.Practices.ServiceLocation.dll
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Infrastrcture\sconnRem.Navigation\bin\Debug\NLog.dll
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Infrastrcture\sconnRem.Navigation\bin\Debug\Prism.dll

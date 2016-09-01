@@ -7,4 +7,3 @@ H:\Repo\Bucket\iotdashn\sconnRemote\sconnNetworkingServices\bin\Debug\sconnNetwo
 H:\Repo\Bucket\iotdashn\sconnRemote\sconnNetworkingServices\obj\Debug\sconnNetworkingServices.csprojResolveAssemblyReference.cache
 H:\Repo\Bucket\iotdashn\sconnRemote\sconnNetworkingServices\obj\Debug\sconnNetworkingServices.dll
 H:\Repo\Bucket\iotdashn\sconnRemote\sconnNetworkingServices\obj\Debug\sconnNetworkingServices.pdb
-I:\Repo\Bucket\sconnSoftware\sconnRemote\sconnNetworkingServices\obj\Debug\sconnNetworkingServices.csprojResolveAssemblyReference.cache
