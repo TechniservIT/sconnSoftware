@@ -31,19 +31,19 @@ namespace sconnRem.ViewModel.Alarm
         public AlarmSystemConfigManager Manager { get; set; }
         private ICommand _getDataCommand;
         private ICommand _saveDataCommand;
-
+        private IAlarmSystemNavigationService AlarmNavService { get; set; }
 
         public override void GetData()
         {
             try
             {
-                if (SiteNavigationManager.Online)
+                if (AlarmNavService.Online)
                 {
                     CommConfig = _provider.Get();
                 }
                 else
                 {
-                    CommConfig = SiteNavigationManager.alarmSystemConfigManager.Config.GlobalConfig;
+                    CommConfig = AlarmNavService.alarmSystemConfigManager.Config.GlobalConfig;
                 }
                
                 
@@ -92,9 +92,10 @@ namespace sconnRem.ViewModel.Alarm
         }
 
         [ImportingConstructor]
-        public AlarmCommConfigViewModel(IAlarmConfigManager manager, IRegionManager regionManager)
+        public AlarmCommConfigViewModel(IAlarmConfigManager manager, IRegionManager regionManager, IAlarmSystemNavigationService NavService)
         {
             CommConfig = new sconnGlobalConfig();
+            AlarmNavService = NavService;
             this.Manager = (AlarmSystemConfigManager)manager;
             this._provider = new GlobalConfigService(this.Manager);
             this._regionManager = regionManager;

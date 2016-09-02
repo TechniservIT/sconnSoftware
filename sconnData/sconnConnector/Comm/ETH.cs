@@ -84,6 +84,7 @@ namespace sconnConnector
             if (useSsl)
             {
                 client = new TcpClient(Hostname, Port); 
+               
                 client.ReceiveTimeout = this.ConnectionTimeoutMs; 
                 client.SendTimeout = this.ConnectionTimeoutMs;
                 EncStream = new SslStream(
@@ -312,9 +313,17 @@ namespace sconnConnector
 
         public bool Connect()
         {
-            VerifyConnection();
-            NetworkClientStatusUpdateService.OnConnectionOpened();
-            return this.client.Connected;
+            try
+            {
+                VerifyConnection();
+                NetworkClientStatusUpdateService.OnConnectionOpened();
+                return this.client.Connected;
+            }
+            catch (Exception ex)
+            {
+                nlogger.Error(ex, ex.Message);
+                return false;
+            }
         }
 
         public bool Disconnect()

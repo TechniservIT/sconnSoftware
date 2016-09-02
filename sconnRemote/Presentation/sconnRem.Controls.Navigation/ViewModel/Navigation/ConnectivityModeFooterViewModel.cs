@@ -28,16 +28,18 @@ namespace sconnRem.Controls.Navigation.ViewModel.Navigation
         private Logger _nlogger = LogManager.GetCurrentClassLogger();
         public ICommand ToggleConnectivityModeCommand { get; set; }
 
+        private IAlarmSystemNavigationService AlarmNavService { get; set; }
+
         public bool Online
         {
             get
             {
-                return SiteNavigationManager.Online;
+                return AlarmNavService.Online;
             }
 
             set
             {
-                SiteNavigationManager.Online = value;
+                AlarmNavService.Online = value;
                 OnPropertyChanged();
             }
         }
@@ -51,19 +53,21 @@ namespace sconnRem.Controls.Navigation.ViewModel.Navigation
         {
             ToggleConnectivityModeCommand = new DelegateCommand(ToggleConnectivityMode);
         }
-
-        public ConnectivityModeFooterViewModel()
-        {
-            SetupCmds();
-        }
+        
 
         [ImportingConstructor]
-        public ConnectivityModeFooterViewModel(IRegionManager regionManager)
+        public ConnectivityModeFooterViewModel(IRegionManager regionManager, IAlarmSystemNavigationService NavService)
         {
+            AlarmNavService = NavService;
             SetupCmds();
             this._regionManager = regionManager;
+            AlarmNavService.PropertyChanged += AlarmNavService_PropertyChanged;
         }
-        
+
+        private void AlarmNavService_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            OnPropertyChanged("Online");
+        }
     }
 
 

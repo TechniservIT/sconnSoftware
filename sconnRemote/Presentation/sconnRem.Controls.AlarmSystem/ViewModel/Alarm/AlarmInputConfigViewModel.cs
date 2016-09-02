@@ -16,7 +16,6 @@ using Prism.Regions;
 using sconnConnector.Config;
 using sconnConnector.POCO.Config;
 using sconnConnector.POCO.Config.sconn;
-using sconnPrismSharedContext;
 using sconnRem.Controls.AlarmSystem.ViewModel.Generic;
 using sconnRem.Infrastructure.Navigation;
 using sconnRem.Navigation;
@@ -34,6 +33,8 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
         private AlarmSystemConfigManager _manager;
         public ICommand NavigateBackCommand { get; set; }
         public ICommand SaveConfigCommand { get; set; }
+
+        private IAlarmSystemNavigationService AlarmNavService { get; set; }
 
         private ObservableCollection<sconnAlarmZone> _zones;
         public ObservableCollection<sconnAlarmZone> Zones
@@ -78,13 +79,13 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
         {
             try
             {
-                if (SiteNavigationManager.Online)
+                if (AlarmNavService.Online)
                 {
                     Zones = new ObservableCollection<sconnAlarmZone>(_provider.GetAll());
                 }
                 else
                 {
-                    Zones = new ObservableCollection<sconnAlarmZone>(SiteNavigationManager.alarmSystemConfigManager.Config.ZoneConfig.Zones);
+                    Zones = new ObservableCollection<sconnAlarmZone>(AlarmNavService.alarmSystemConfigManager.Config.ZoneConfig.Zones);
                 }
                
             }
@@ -96,7 +97,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
         
         public AlarmInputConfigViewModel()
         {
-            this._manager = AlarmSystemContext.GetManager();
+            this._manager = AlarmNavService.alarmSystemConfigManager;
             _name = "Dev";
             this._provider = new ZoneConfigurationService(_manager);
         }
@@ -117,16 +118,17 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
 
         private void SaveData()
         {
-            SiteNavigationManager.SaveInput(this.Config);
+            AlarmNavService.SaveInput(this.Config);
         }
 
         [ImportingConstructor]
-        public AlarmInputConfigViewModel(IRegionManager regionManager)
+        public AlarmInputConfigViewModel(IRegionManager regionManager, IAlarmSystemNavigationService NavService)
         {
             SetupCmds();
-            this._manager = SiteNavigationManager.alarmSystemConfigManager; // (AlarmSystemConfigManager)manager;
+            this._manager = AlarmNavService.alarmSystemConfigManager;
+            AlarmNavService = NavService;
             this._regionManager = regionManager;
-            this._provider = new ZoneConfigurationService(SiteNavigationManager.alarmSystemConfigManager); 
+            this._provider = new ZoneConfigurationService(AlarmNavService.alarmSystemConfigManager); 
             GetData();
         }
 
@@ -147,7 +149,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
             string inputId = (string)navigationContext.Parameters[AlarmRegionNames.AlarmConfig_Contract_Input_Config_View_Key_Name];
             if (inputId != null)
             {
-               this.Config = SiteNavigationManager.InputForId(inputId);
+               this.Config = AlarmNavService.InputForId(inputId);
             }
 
             this.navigationJournal = navigationContext.NavigationService.Journal;

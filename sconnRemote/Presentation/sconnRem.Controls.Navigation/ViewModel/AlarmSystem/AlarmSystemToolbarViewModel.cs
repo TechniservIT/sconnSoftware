@@ -55,7 +55,8 @@ namespace sconnRem.Controls.Navigation.ViewModel.AlarmSystem
         public ICommand Show_Alarm_Zones_Command { get; set; }
         public ICommand Show_Alarm_Users_Command { get; set; }
 
-        
+        private IAlarmSystemNavigationService AlarmNavService { get; set; }
+
         private void ShowConfigure(sconnSite site)
         {
             NavigateToAlarmContract(AlarmRegionNames.AlarmStatus_Contract_Global_View);  
@@ -198,16 +199,18 @@ namespace sconnRem.Controls.Navigation.ViewModel.AlarmSystem
 
 
         [ImportingConstructor]
-        public AlarmSystemToolbarViewModel(IRegionManager regionManager)
+        public AlarmSystemToolbarViewModel(IRegionManager regionManager, IAlarmSystemNavigationService NavService)
         {
             SetupCmds();
+            AlarmNavService = NavService;
             this._regionManager = regionManager;
         }
 
         
-        public AlarmSystemToolbarViewModel(IRegionManager regionManager, sconnSite site)
+        public AlarmSystemToolbarViewModel(IRegionManager regionManager, sconnSite site, IAlarmSystemNavigationService NavService)
         {
             this.Site = site;
+            AlarmNavService = NavService;
             SetupCmds();
             this._regionManager = regionManager;
         }
@@ -232,7 +235,7 @@ namespace sconnRem.Controls.Navigation.ViewModel.AlarmSystem
             siteUUID = (string)navigationContext.Parameters[GlobalViewContractNames.Global_Contract_Nav_Site_Context__Key_Name];
             if (siteUUID != null)
             {
-                this.Site = SiteNavigationManager.CurrentContextSconnSite;
+                this.Site = AlarmNavService.CurrentContextSconnSite;
             }
             else
             {

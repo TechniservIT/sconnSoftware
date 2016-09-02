@@ -22,7 +22,9 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
     public class AlarmEntityZoneListItemEditViewModel : GenericAlarmConfigViewModel
     {
 
-            public ICommand EntityAddCommand { get; set; }
+        private IAlarmSystemNavigationService AlarmNavService { get; set; }
+
+        public ICommand EntityAddCommand { get; set; }
             public ICommand EntityRemoveCommand { get; set; }
             public ICommand EntitySaveCommand { get; set; }
 
@@ -47,13 +49,13 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
                 try
                 {
 
-                    if (SiteNavigationManager.Online)
+                    if (AlarmNavService.Online)
                     {
                         Config = (_provider.GetById(ZoneId));
                     }
                     else
                     {
-                        Config = (SiteNavigationManager.alarmSystemConfigManager.Config.ZoneConfig.Zones.FirstOrDefault(z=>z.Id == ZoneId));
+                        Config = (AlarmNavService.alarmSystemConfigManager.Config.ZoneConfig.Zones.FirstOrDefault(z=>z.Id == ZoneId));
                     }
 
                 }
@@ -198,11 +200,12 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
             }
 
             [ImportingConstructor]
-            public AlarmEntityZoneListItemEditViewModel(IRegionManager regionManager)
+            public AlarmEntityZoneListItemEditViewModel(IRegionManager regionManager, IAlarmSystemNavigationService NavService)
             {
+                AlarmNavService = NavService;
                 Config = new sconnAlarmZone();
                 SetupCmd();
-                this._manager = SiteNavigationManager.alarmSystemConfigManager;
+                this._manager = AlarmNavService.alarmSystemConfigManager;
                 this._provider = new ZoneConfigurationService(_manager);
                 this._regionManager = regionManager;
             }

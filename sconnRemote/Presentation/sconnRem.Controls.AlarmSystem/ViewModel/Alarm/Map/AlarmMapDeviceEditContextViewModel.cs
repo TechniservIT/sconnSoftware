@@ -21,8 +21,9 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm.Map
 {
     [Export]
     [PartCreationPolicy(CreationPolicy.NonShared)]
-    public class AlarmMapDeviceEditContextViewModel : GenericAlarmConfigViewModel   // : AlarmMapEntityEditContextViewModel
+    public class AlarmMapDeviceEditContextViewModel : GenericAlarmConfigViewModel
     {
+        private IAlarmSystemNavigationService AlarmNavService { get; set; }
 
         public ICommand MapContextZonesSelectedCommand { get; set; }
         public ICommand MapContextDevicesSelectedCommand { get; set; }
@@ -145,11 +146,11 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm.Map
         }
 
         [ImportingConstructor]
-        public AlarmMapDeviceEditContextViewModel(IRegionManager regionManager)
+        public AlarmMapDeviceEditContextViewModel(IRegionManager regionManager, IAlarmSystemNavigationService NavService)
         {
             Config = new sconnDevice();
             SetupCmd();
-            this._manager = SiteNavigationManager.alarmSystemConfigManager;
+            this._manager = AlarmNavService.alarmSystemConfigManager;
             this._provider = new AlarmDevicesConfigService(_manager);
             ZoneProvider = new ZoneConfigurationService(_manager);
             this._regionManager = regionManager;

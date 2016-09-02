@@ -43,6 +43,7 @@ namespace sconnRem.ViewModel.Alarm
         }
 
         private AuthorizedDevicesConfigurationService _provider;
+        private IAlarmSystemNavigationService AlarmNavService { get; set; }
         public AlarmSystemConfigManager Manager { get; set; }
         
         private int _selectedIndex;
@@ -85,13 +86,13 @@ namespace sconnRem.ViewModel.Alarm
             try
             {
               
-                if (SiteNavigationManager.Online)
+                if (AlarmNavService.Online)
                 {
                     Config = new ObservableCollection<sconnAuthorizedDevice>(_provider.GetAll());
                 }
                 else
                 {
-                    Config = new ObservableCollection<sconnAuthorizedDevice>(SiteNavigationManager.alarmSystemConfigManager.Config.AuthorizedDevicesConfig.Devices);
+                    Config = new ObservableCollection<sconnAuthorizedDevice>(AlarmNavService.alarmSystemConfigManager.Config.AuthorizedDevicesConfig.Devices);
                 }
                 SelectedIndex = 0; //reset on refresh
             }
@@ -132,11 +133,12 @@ namespace sconnRem.ViewModel.Alarm
         
 
         [ImportingConstructor]
-        public AlarmAuthConfigViewModel(IRegionManager regionManager)
+        public AlarmAuthConfigViewModel(IRegionManager regionManager, IAlarmSystemNavigationService NavService)
         {
             Config = new ObservableCollection<sconnAuthorizedDevice>();
+            AlarmNavService = NavService;
             SetupCmds();
-            this.Manager = SiteNavigationManager.alarmSystemConfigManager;
+            this.Manager = NavService.alarmSystemConfigManager;
             this._provider = new AuthorizedDevicesConfigurationService(this.Manager);
             this._regionManager = regionManager;
         }

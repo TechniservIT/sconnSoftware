@@ -25,6 +25,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public class AlarmSystemUsersConfigViewModel : GenericAlarmConfigViewModel
     {
+        private IAlarmSystemNavigationService AlarmNavService { get; set; }
 
         private ObservableCollection<sconnAlarmSystemUser> _config;
         public ObservableCollection<sconnAlarmSystemUser> Config
@@ -81,13 +82,13 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
         {
             try
             {
-                if (SiteNavigationManager.Online)
+                if (AlarmNavService.Online)
                 {
                     Config = new ObservableCollection<sconnAlarmSystemUser>(_provider.GetAll());
                 }
                 else
                 {
-                    Config = new ObservableCollection<sconnAlarmSystemUser>(SiteNavigationManager.alarmSystemConfigManager.Config.AlarmUserConfig.Users);
+                    Config = new ObservableCollection<sconnAlarmSystemUser>(AlarmNavService.alarmSystemConfigManager.Config.AlarmUserConfig.Users);
                 }
                 SelectedIndex = 0; //reset on refresh
             }
@@ -113,10 +114,11 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
 
 
         [ImportingConstructor]
-        public AlarmSystemUsersConfigViewModel(IRegionManager regionManager)
+        public AlarmSystemUsersConfigViewModel(IRegionManager regionManager, IAlarmSystemNavigationService NavService)
         {
+            AlarmNavService = NavService;
             Config = new ObservableCollection<sconnAlarmSystemUser>();
-            this._manager = SiteNavigationManager.alarmSystemConfigManager;
+            this._manager = AlarmNavService.alarmSystemConfigManager;
             this._provider = new AlarmSystemUsersConfigurationService(_manager);
             this._regionManager = regionManager;
         }

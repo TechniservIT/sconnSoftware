@@ -13,7 +13,6 @@ using Prism.Mvvm;
 using Prism.Regions;
 using sconnConnector.Config;
 using sconnConnector.POCO.Config;
-using sconnPrismSharedContext;
 using sconnRem.Controls.AlarmSystem.ViewModel.Generic;
 using sconnRem.Infrastructure.Navigation;
 using sconnRem.Navigation;
@@ -28,7 +27,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
         public sconnOutput Config { get; set; }
         private AlarmDevicesConfigService _provider;
         private AlarmSystemConfigManager _manager;
-      
+        private IAlarmSystemNavigationService AlarmNavService { get; set; }
         private IRegionNavigationJournal navigationJournal;
 
 
@@ -37,7 +36,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
 
         public AlarmOutputConfigViewModel()
         {
-            this._manager = AlarmSystemContext.GetManager();
+            this._manager = AlarmNavService.alarmSystemConfigManager;
             _name = "Dev";
             this._provider = new AlarmDevicesConfigService(_manager);
         }
@@ -56,14 +55,15 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
 
         public override void SaveData()
         {
-            SiteNavigationManager.SaveOutput(this.Config);
+            AlarmNavService.SaveOutput(this.Config);
         }
 
         [ImportingConstructor]
-        public AlarmOutputConfigViewModel(IRegionManager regionManager)
+        public AlarmOutputConfigViewModel(IRegionManager regionManager, IAlarmSystemNavigationService NavService)
         {
             SetupCmds();
-            this._manager = SiteNavigationManager.alarmSystemConfigManager; 
+            AlarmNavService = NavService;
+            this._manager = AlarmNavService.alarmSystemConfigManager; 
             this._regionManager = regionManager;
             GetData();
         }
@@ -85,7 +85,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
             siteUUID = (string)navigationContext.Parameters[GlobalViewContractNames.Global_Contract_Nav_Site_Context__Key_Name];
             if (inputId != null)
             {
-                this.Config = SiteNavigationManager.OutputForId(inputId);
+                this.Config = AlarmNavService.OutputForId(inputId);
             }
 
             this.navigationJournal = navigationContext.NavigationService.Journal;

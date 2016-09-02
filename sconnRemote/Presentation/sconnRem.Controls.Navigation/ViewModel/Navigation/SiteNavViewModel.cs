@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using NLog;
 using Prism.Commands;
@@ -26,9 +27,11 @@ namespace sconnRem.Controls.Navigation.ViewModel.Navigation
     [Export]
     public class SiteNavViewModel : BindableBase  
     {
+
         public ObservableCollection<sconnSite> Sites { get; set; }
+        private IAlarmSystemNavigationService AlarmNavService { get; set; }
+
         private readonly IRegionManager _regionManager;
-        private ISiteRepository _repository; 
         public AlarmSystemConfigManager Manager { get; set; }
 
         private Logger _nlogger = LogManager.GetCurrentClassLogger();
@@ -40,40 +43,48 @@ namespace sconnRem.Controls.Navigation.ViewModel.Navigation
 
         private void ViewSite(sconnSite site)
         {
-            SiteNavigationManager.ActivateSiteContext(site);
+            try
+            {
+                AlarmNavService.ActivateSiteContext(site);
 
-            //navigate context toolbar
-            NavigationParameters parameters = new NavigationParameters();
-            parameters.Add(GlobalViewContractNames.Global_Contract_Nav_Site_Context__Key_Name, site.UUID);
+                //navigate context toolbar
+                NavigationParameters parameters = new NavigationParameters();
+                parameters.Add(GlobalViewContractNames.Global_Contract_Nav_Site_Context__Key_Name, site.UUID);
 
-            GlobalNavigationContext.NavigateRegionToContractWithParam(
-                GlobalViewRegionNames.TopContextToolbarRegion,
-                GlobalViewContractNames.Global_Contract_Menu_Top_AlarmSystemContext,
-                parameters
-                );
+                GlobalNavigationContext.NavigateRegionToContractWithParam(
+                    GlobalViewRegionNames.TopContextToolbarRegion,
+                    GlobalViewContractNames.Global_Contract_Menu_Top_AlarmSystemContext,
+                    parameters
+                    );
 
-            //navigate to global config at start
-            this._regionManager.RequestNavigate(GlobalViewRegionNames.MainGridContentRegion, AlarmRegionNames.AlarmStatus_Contract_Global_View
-                ,
-                (NavigationResult nr) =>
-                {
-                    var error = nr.Error;
-                    var result = nr.Result;
-                    if (error != null)
+                //navigate to global config at start
+                this._regionManager.RequestNavigate(GlobalViewRegionNames.MainGridContentRegion, AlarmRegionNames.AlarmStatus_Contract_Global_View
+                    ,
+                    (NavigationResult nr) =>
                     {
-                        _nlogger.Error(error);
-                    }
-                });
+                        var error = nr.Error;
+                        var result = nr.Result;
+                        if (error != null)
+                        {
+                            _nlogger.Error(error);
+                        }
+                    });
+            }
+            catch (Exception ex)
+            {
+                _nlogger.Error(ex,ex.Message);
+            }
+          
         }
 
         private void RemoveSite(sconnSite site)
         {
-            SiteNavigationManager.RemoveSite(site);
+            AlarmNavService.RemoveSite(site);
         }
 
         private void EditSite(sconnSite site)
         {
-            SiteNavigationManager.EditSite(site);
+            AlarmNavService.EditSite(site);
         }
 
 
@@ -83,25 +94,24 @@ namespace sconnRem.Controls.Navigation.ViewModel.Navigation
             RemoveSiteCommand = new DelegateCommand<sconnSite>(RemoveSite);
             ViewSiteCommand = new DelegateCommand<sconnSite>(ViewSite);
         }
-
-        public SiteNavViewModel()
-        {
-            SetupCmds();
-            Sites = new ObservableCollection<sconnSite>();
-            Sites.CollectionChanged += Sites_CollectionChanged;
-            Sites = new ObservableCollection<sconnSite>(sconnDataShare.sconnSites.ToArray());
-        }
-
+        
 
         [ImportingConstructor]
-        public SiteNavViewModel(IRegionManager regionManager, ISiteRepository repository)
+        public SiteNavViewModel(IRegionManager regionManager, ISiteRepository repository, IAlarmSystemNavigationService NavService)
         {
-            this._regionManager = regionManager;
-            this._repository = repository;
-            Sites = new ObservableCollection<sconnSite>();
-            SetupCmds();
-            Sites.CollectionChanged += Sites_CollectionChanged;
-            Sites = sconnDataShare.sconnSites;
+            try
+            {
+                this._regionManager = regionManager;
+                AlarmNavService = NavService;
+                SetupCmds();
+                Sites = sconnDataShare.sconnSites;
+                Sites.CollectionChanged += Sites_CollectionChanged;
+            }
+            catch (Exception ex)
+            {
+                _nlogger.Error(ex, ex.Message);
+            }
+
         }
 
         private void Sites_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
@@ -149,9 +159,16 @@ namespace sconnRem.Controls.Navigation.ViewModel.Navigation
                 {
                     foreach (var checkedSite in Sites)
                     {
-                        await PerformSiteConnectivityBackgroundCheck(checkedSite, cancelToken);
+                        try
+                        {
+                            await PerformSiteConnectivityBackgroundCheck(checkedSite, cancelToken);
+                        }
+                        catch (Exception ex)
+                        {
+                            _nlogger.Error(ex, ex.Message);
+                        }
                     }
-                    await Task.Delay(seconds, cancelToken);
+                    await Task.Delay(seconds*1000, cancelToken);
                 }
             }
             catch (Exception ex)
@@ -172,11 +189,10 @@ namespace sconnRem.Controls.Navigation.ViewModel.Navigation
                     SconnClient cl = new SconnClient(site.serverIP, site.serverPort, site.authPasswd, true);
                     if (cl.Connect())
                     {
-                        cl.VerifyConnection();
                         if (cl.Authenticated)
                         {
                             //update site stat in main thread
-                            site.SiteStat.Authenticated = true;
+                            Application.Current.Dispatcher.Invoke(() => { site.SiteStat.Authenticated = true; });
                         }
                     }
                     cl.Disconnect();
@@ -188,10 +204,10 @@ namespace sconnRem.Controls.Navigation.ViewModel.Navigation
                 _nlogger.Error(ex, ex.Message);
                 return null;
             }
-           
+
         }
-        
+
 
     }
-    
+
 }

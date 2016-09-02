@@ -30,6 +30,7 @@ namespace sconnRem.ViewModel.Alarm
     public class AlarmRemoteUsersConfigViewModel : GenericAlarmConfigViewModel
     {
 
+        private IAlarmSystemNavigationService AlarmNavService { get; set; }
         private ObservableCollection<sconnRemoteUser> _config;
         public ObservableCollection<sconnRemoteUser> Config
         {
@@ -85,13 +86,13 @@ namespace sconnRem.ViewModel.Alarm
         {
             try
             {
-                if (SiteNavigationManager.Online)
+                if (AlarmNavService.Online)
                 {
                     Config = new ObservableCollection<sconnRemoteUser>(_provider.GetAll());
                 }
                 else
                 {
-                    Config = new ObservableCollection<sconnRemoteUser>(SiteNavigationManager.alarmSystemConfigManager.Config.RemoteUserConfig.Users);
+                    Config = new ObservableCollection<sconnRemoteUser>(AlarmNavService.alarmSystemConfigManager.Config.RemoteUserConfig.Users);
                 }
                 SelectedIndex = 0; //reset on refresh
             }
@@ -117,10 +118,11 @@ namespace sconnRem.ViewModel.Alarm
         
 
         [ImportingConstructor]
-        public AlarmRemoteUsersConfigViewModel(IRegionManager regionManager)
+        public AlarmRemoteUsersConfigViewModel(IRegionManager regionManager, IAlarmSystemNavigationService NavService)
         {
             Config = new ObservableCollection<sconnRemoteUser>();
-            this._manager = SiteNavigationManager.alarmSystemConfigManager;
+            AlarmNavService = NavService;
+            this._manager = AlarmNavService.alarmSystemConfigManager;
             this._provider = new UsersConfigurationService(_manager);
             this._regionManager = regionManager;
         }
@@ -157,8 +159,6 @@ namespace sconnRem.ViewModel.Alarm
             {
                 _nlogger.Error(ex, ex.Message);
             }
-
-
         }
 
 

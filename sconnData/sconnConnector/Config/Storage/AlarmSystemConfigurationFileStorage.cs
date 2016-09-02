@@ -19,7 +19,7 @@ namespace sconnConnector.Config.Storage
             try
             {
                 StreamReader fileReader;
-                if (Directory.Exists(uri))
+                if (File.Exists(uri))
                 {
                     fileReader = new StreamReader(uri);
                 }

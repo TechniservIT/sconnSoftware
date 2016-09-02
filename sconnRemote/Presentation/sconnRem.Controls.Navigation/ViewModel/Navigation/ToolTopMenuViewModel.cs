@@ -18,13 +18,14 @@ using sconnRem.Wnd.Tools;
 
 namespace sconnRem.Controls.Navigation.ViewModel.Navigation
 {
+
     [Export]
     public class ToolTopMenuViewModel : BindableBase
     {
         public sconnSite Site { get; set; }
         private readonly IRegionManager _regionManager;
         public AlarmSystemConfigManager Manager { get; set; }
-
+        private IAlarmSystemNavigationService AlarmNavService { get; set; }
         private Logger _nlogger = LogManager.GetCurrentClassLogger();
 
         public ICommand ShowFileImportCommand { get; set; }
@@ -55,8 +56,8 @@ namespace sconnRem.Controls.Navigation.ViewModel.Navigation
                     if (storage.IsConfigUriCorrect(fileUri))
                     {
                         // storage.StorageConfigAtUri(SiteNavigationManager.alarmSystemConfigManager, fileUri);
-                        SiteNavigationManager.alarmSystemConfigManager = storage.GetConfigFromUri(fileUri);
-                        SiteNavigationManager.Online = false; //set offline by default when loading from file
+                        AlarmNavService.alarmSystemConfigManager = storage.GetConfigFromUri(fileUri);
+                        AlarmNavService.Online = false; //set offline by default when loading from file
                     }
 
                 }
@@ -76,7 +77,7 @@ namespace sconnRem.Controls.Navigation.ViewModel.Navigation
                 //Load write to file window
                 string fileUri = "";
                 Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
-                dlg.FileName = SiteNavigationManager.CurrentContextSconnSite.siteName; // Default file name
+                dlg.FileName = AlarmNavService.CurrentContextSconnSite.siteName; // Default file name
                 dlg.DefaultExt = ".json"; // Default file extension
                 dlg.Filter = "sconnConfig (.json)|*.json"; // Filter files by extension
 
@@ -93,7 +94,7 @@ namespace sconnRem.Controls.Navigation.ViewModel.Navigation
                     IAlarmSystemConfigurationStorage storage = new AlarmSystemConfigurationFileStorage();
                     if (storage.IsConfigUriCorrect(fileUri))
                     {
-                        storage.StorageConfigAtUri(SiteNavigationManager.alarmSystemConfigManager, fileUri);
+                        storage.StorageConfigAtUri(AlarmNavService.alarmSystemConfigManager, fileUri);
                     }
 
                 }
@@ -115,7 +116,7 @@ namespace sconnRem.Controls.Navigation.ViewModel.Navigation
 
         private void ShowSiteWizard()
         {
-            SiteNavigationManager.OpenSiteWizard();
+            AlarmNavService.OpenSiteWizard();
         }
         
         private void SetupCmds()
@@ -132,9 +133,10 @@ namespace sconnRem.Controls.Navigation.ViewModel.Navigation
         }
 
         [ImportingConstructor]
-        public ToolTopMenuViewModel(IRegionManager regionManager)
+        public ToolTopMenuViewModel(IRegionManager regionManager, IAlarmSystemNavigationService NavService)
         {
             SetupCmds();
+            AlarmNavService = NavService;
             this._regionManager = regionManager;
         }
 

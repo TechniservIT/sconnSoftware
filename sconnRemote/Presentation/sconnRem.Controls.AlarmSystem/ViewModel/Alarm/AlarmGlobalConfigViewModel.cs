@@ -42,6 +42,7 @@ namespace sconnRem.ViewModel.Alarm
 
         private GlobalConfigService _provider;
         private AlarmSystemConfigManager _manager;
+        private IAlarmSystemNavigationService AlarmNavService { get; set; }
 
         private string _armedIconPath;
         public string ArmStateIconPath
@@ -67,13 +68,13 @@ namespace sconnRem.ViewModel.Alarm
         {
             try
             {
-                if (SiteNavigationManager.Online)
+                if (AlarmNavService.Online)
                 {
                     Config = _provider.Get();
                 }
                 else
                 {
-                    Config = SiteNavigationManager.alarmSystemConfigManager.Config.GlobalConfig;
+                    Config = AlarmNavService.alarmSystemConfigManager.Config.GlobalConfig;
                 }
                 
                 ArmStateIconPath = new Guid().ToString();
@@ -110,11 +111,12 @@ namespace sconnRem.ViewModel.Alarm
       
 
         [ImportingConstructor]
-        public AlarmGlobalConfigViewModel(IRegionManager regionManager)
+        public AlarmGlobalConfigViewModel(IRegionManager regionManager, IAlarmSystemNavigationService NavService)
         {
             Config = new sconnGlobalConfig();
             SetupCmds();
-            this._manager = SiteNavigationManager.alarmSystemConfigManager;
+            AlarmNavService = NavService;
+            this._manager = AlarmNavService.alarmSystemConfigManager;
             this._provider = new GlobalConfigService(_manager);
             this._regionManager = regionManager;
         }

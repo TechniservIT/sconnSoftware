@@ -102,7 +102,6 @@
     <Compile Include="ViewModel\Navigation\SiteNavViewModel.cs" />
     <Compile Include="ViewModel\Navigation\ToolSiteMenuViewModel.cs" />
     <Compile Include="ViewModel\Navigation\ToolTopMenuViewModel.cs" />
-    <Compile Include="View\Menu\ContextToolbar\AlarmSystem\AlarmSystemToolbarModule.cs" />
     <Compile Include="View\Menu\ContextToolbar\AlarmSystem\AlarmSystemToolbarView.xaml.cs">
       <DependentUpon>AlarmSystemToolbarView.xaml</DependentUpon>
     </Compile>
@@ -127,9 +126,6 @@
     <Compile Include="View\Menu\GridNavSideMenu\GridNavSideMenuModule.cs" />
     <Compile Include="View\Menu\GridNavSideMenu\GridNavSideMenuView.xaml.cs">
       <DependentUpon>GridNavSideMenuView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Menu\SiteNavSideMenu\SiteNavMenuViewItem.xaml.cs">
-      <DependentUpon>SiteNavMenuViewItem.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Menu\SiteNavSideMenu\SiteNavSideMenuModule.cs" />
     <Compile Include="View\Menu\SiteNavSideMenu\SiteNavSideMenuView.xaml.cs">
@@ -168,10 +164,6 @@
     <Page Include="View\Menu\GridNavSideMenu\GridNavSideMenuView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\Menu\SiteNavSideMenu\SiteNavMenuViewItem.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Menu\SiteNavSideMenu\SiteNavSideMenuView.xaml">
       <Generator>MSBuild:Compile</Generator>

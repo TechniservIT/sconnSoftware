@@ -13,7 +13,6 @@ using Prism.Commands;
 using Prism.Regions;
 using sconnConnector.POCO.Config;
 using sconnConnector.POCO.Config.sconn;
-using sconnPrismSharedContext;
 using sconnRem.Infrastructure.Navigation;
 using sconnRem.Navigation;
 using sconnRem.ViewModel.Generic;
@@ -27,6 +26,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
     {
         private ObservableCollection<sconnEvent> _config;
         private EventsService _provider;
+        private IAlarmSystemNavigationService AlarmNavService { get; set; }
 
         public ObservableCollection<sconnEvent> Config
         {
@@ -45,13 +45,13 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
         {
             try
             {
-                if (SiteNavigationManager.Online)
+                if (AlarmNavService.Online)
                 {
                     Config = new ObservableCollection<sconnEvent>(_provider.GetAll());
                 }
                 else
                 {
-                    Config = new ObservableCollection<sconnEvent>(SiteNavigationManager.alarmSystemConfigManager.Config.EventConfig.Events);
+                    Config = new ObservableCollection<sconnEvent>(AlarmNavService.alarmSystemConfigManager.Config.EventConfig.Events);
                 }
              
             }
@@ -78,7 +78,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
         public AlarmEventsListViewModel(IRegionManager regionManager)
         {
             Config = new ObservableCollection<sconnEvent>(new List<sconnEvent>());
-            this._manager = SiteNavigationManager.alarmSystemConfigManager;
+            this._manager = AlarmNavService.alarmSystemConfigManager;
             this._provider = new EventsService(_manager);
             _regionManager = regionManager;
             this.PropertyChanged += new PropertyChangedEventHandler(OnNotifiedOfPropertyChanged);

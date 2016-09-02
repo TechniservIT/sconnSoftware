@@ -11,7 +11,6 @@ using Prism.Regions;
 using sconnConnector.Config;
 using sconnConnector.POCO.Config;
 using sconnConnector.POCO.Device;
-using sconnPrismSharedContext;
 using sconnRem.Infrastructure.Content;
 
 

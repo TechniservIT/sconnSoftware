@@ -117,31 +117,7 @@
                 
             </Grid>
            
-            
-            <!--<Button  Command="{Binding Path=ToggleConnectivityModeCommand}"  Width="Auto" Content="">
-                <Button.Template>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Grid>
-                            <Border Background="{TemplateBinding Background}"
-                                         BorderBrush="{TemplateBinding BorderBrush}"
-                                         BorderThickness="{TemplateBinding BorderThickness}">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <ContentPresenter HorizontalAlignment="Left"  Grid.Column="0"
-                                          VerticalAlignment="Center"/>
-                                    <Canvas Background="White" Grid.Column="0" />
-
-                                    <Image  Grid.Column="0" Grid.Row="0" x:Name="imgTopNav1"  Stretch="Uniform"   HorizontalAlignment="Center" Height="Auto" Margin="5,5,5,5" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/wtyczka1000.jpg"/>
-
-                                </Grid>
-                            </Border>
-                        </Grid>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>-->
-
+           
         </Grid>
 
     </Grid>

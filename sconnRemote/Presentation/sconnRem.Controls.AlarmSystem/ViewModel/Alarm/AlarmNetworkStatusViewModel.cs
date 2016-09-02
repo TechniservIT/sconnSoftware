@@ -26,8 +26,9 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
         {
             private ObservableCollection<sconnDevice> _config;
             private AlarmDevicesConfigService _provider;
+            private IAlarmSystemNavigationService AlarmNavService { get; set; }
 
-            public ObservableCollection<sconnDevice> Config
+        public ObservableCollection<sconnDevice> Config
             {
                 get { return _config; }
                 set
@@ -44,13 +45,13 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
             {
                 try
                 {
-                    if (SiteNavigationManager.Online)
+                    if (AlarmNavService.Online)
                     {
                         Config = new ObservableCollection<sconnDevice>(_provider.GetAll());
                     }
                     else
                     {
-                        Config = new ObservableCollection<sconnDevice>(SiteNavigationManager.alarmSystemConfigManager.Config.DeviceConfig.Devices);
+                        Config = new ObservableCollection<sconnDevice>(AlarmNavService.alarmSystemConfigManager.Config.DeviceConfig.Devices);
                     }
            
                 }
@@ -73,10 +74,11 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
 
 
             [ImportingConstructor]
-            public AlarmNetworkStatusViewModel(IRegionManager regionManager)
+            public AlarmNetworkStatusViewModel(IRegionManager regionManager, IAlarmSystemNavigationService NavService)
             {
+                AlarmNavService = NavService;
                 Config = new ObservableCollection<sconnDevice>(new List<sconnDevice>());
-                this._manager = SiteNavigationManager.alarmSystemConfigManager;
+                this._manager = AlarmNavService.alarmSystemConfigManager;
                 this._provider = new AlarmDevicesConfigService(_manager);
                 _regionManager = regionManager;
                 this.PropertyChanged += new PropertyChangedEventHandler(OnNotifiedOfPropertyChanged);

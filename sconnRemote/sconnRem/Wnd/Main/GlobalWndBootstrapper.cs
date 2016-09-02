@@ -32,29 +32,17 @@ namespace sconnRem.Wnd.Main
     
     public class GlobalWndBootstrapper : MefBootstrapper, IVerifiableBootstraper
     {
-
-        //private sconnDataSrc _configSource = new sconnDataSrc();
         private Logger _nlogger = LogManager.GetCurrentClassLogger();
         private const string ModuleCatalogUri = "/sconnRem;component/Wnd/Main/WndGlobalShell.xaml";
-
-        //private ISiteRepository _repository;
-
-        ////todo - inject from cfg bootstraper
-        //private void LoadConfigFromDataStore()
-        //{
-        //    _configSource.LoadConfig(DataSourceType.xml);
-        //}
-
-        public GlobalWndBootstrapper()
-        {
-            //_repository = new SiteXmlRepository();
-            //LoadConfigFromDataStore();
-        }
-
+        
         protected override ILoggerFacade CreateLogger()
         {
             return new MvvmLogger();
+        }
 
+        public GlobalWndBootstrapper()
+        {
+                
         }
 
         protected override void ConfigureAggregateCatalog()
@@ -71,6 +59,8 @@ namespace sconnRem.Wnd.Main
                 this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(AlarmDeviceListViewModel).Assembly));
 
                 this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(ISiteRepository).Assembly));
+
+                this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(IAlarmSystemNavigationService).Assembly));
             }
             catch (Exception ex)
             {
@@ -83,26 +73,10 @@ namespace sconnRem.Wnd.Main
         {
             return new ConfigurationModuleCatalog();
         }
-
-
-        //protected override Prism.Regions.IRegionBehaviorFactory ConfigureDefaultRegionBehaviors()
-        //{
-        //    var factory = base.ConfigureDefaultRegionBehaviors();
-
-        //    factory.AddIfMissing("AutoPopulateExportedViewsBehavior", typeof(AutoPopulateExportedViewsBehavior));
-
-        //    return factory;
-        //}
-
+        
         protected override DependencyObject CreateShell()
         {
-            SiteNavigationManager.SetNavigationContextContainer(this.Container);
             GlobalNavigationContext.Manager =  Container.GetExport<IRegionManager>().Value;
-
-            //var batch = new CompositionBatch();
-            //var repoPart = batch.AddExportedValue<ISiteRepository>(this._repository);
-            //this.Container.Compose(batch);
-
             return this.Container.GetExportedValue<WndGlobalShell>();
         }
 

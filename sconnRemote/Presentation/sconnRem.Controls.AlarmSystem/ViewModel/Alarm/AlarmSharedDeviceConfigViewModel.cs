@@ -17,7 +17,6 @@ using AlarmSystemManagmentService.Device;
 using Prism;
 using Prism.Commands;
 using sconnConnector.POCO.Config;
-using sconnPrismSharedContext;
 using sconnRem.Controls.AlarmSystem.ViewModel.Generic;
 using sconnRem.Infrastructure.Navigation;
 using sconnRem.Navigation;
@@ -30,7 +29,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public class AlarmSharedDeviceConfigViewModel : GenericAlarmConfigViewModel
     {
-
+        private IAlarmSystemNavigationService AlarmNavService { get; set; }
         private sconnDevice _Config = new sconnDevice();
         public sconnDevice Config
         {
@@ -69,13 +68,13 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
         public void UpdateActiveIo()
         {
             ChangeTrack++;
-            this.Config.CopyFrom(SiteNavigationManager.CurrentContextDevice);
+            this.Config.CopyFrom(AlarmNavService.CurrentContextDevice);
 
-            this.ActiveInput.CopyFrom(SiteNavigationManager.activeInput);
+            this.ActiveInput.CopyFrom(AlarmNavService.activeInput);
 
-            this.ActiveOutput.CopyFrom(SiteNavigationManager.activeOutput);
+            this.ActiveOutput.CopyFrom(AlarmNavService.activeOutput);
 
-            this.ActiveRelay.CopyFrom(SiteNavigationManager.activeRelay);
+            this.ActiveRelay.CopyFrom(AlarmNavService.activeRelay);
 
 
             OnPropertyChanged();
@@ -101,9 +100,9 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
         {
             try
             {
-                Config.CopyFrom(SiteNavigationManager.Online
+                Config.CopyFrom(AlarmNavService.Online
                     ? _provider.GetById(DeviceId)
-                    : SiteNavigationManager.alarmSystemConfigManager.Config.DeviceConfig.Devices.FirstOrDefault(
+                    : AlarmNavService.alarmSystemConfigManager.Config.DeviceConfig.Devices.FirstOrDefault(
                         d => d.Id.Equals(DeviceId)));
             }
             catch (Exception ex)
@@ -150,7 +149,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
         
         public AlarmSharedDeviceConfigViewModel()
         {
-            this._manager = AlarmSystemContext.GetManager();
+            this._manager = AlarmNavService.alarmSystemConfigManager;
             _name = "Dev";
             this._provider = new AlarmDevicesConfigService(_manager);
         }
@@ -179,11 +178,12 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
         }
 
         [ImportingConstructor]
-        public AlarmSharedDeviceConfigViewModel(IRegionManager regionManager)  //sconnDevice device, 
+        public AlarmSharedDeviceConfigViewModel(IRegionManager regionManager, IAlarmSystemNavigationService NavService)  //sconnDevice device, 
         {
             SetupCmds();
             UpdateActiveIo();
-            this._manager = SiteNavigationManager.alarmSystemConfigManager; // (AlarmSystemConfigManager)manager;
+            AlarmNavService = NavService;
+            this._manager = AlarmNavService.alarmSystemConfigManager; // (AlarmSystemConfigManager)manager;
             DeviceId = Config.DeviceId;
             this._provider = new AlarmDevicesConfigService(_manager);
             this._regionManager = regionManager;

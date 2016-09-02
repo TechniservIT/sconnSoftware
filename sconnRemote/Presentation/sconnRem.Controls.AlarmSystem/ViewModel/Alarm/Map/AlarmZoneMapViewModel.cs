@@ -41,7 +41,9 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
         }
 
         #endregion
-        
+
+
+        private IAlarmSystemNavigationService AlarmNavService { get; set; }
 
         private ObservableCollection<sconnAlarmZone> _config;
         public ObservableCollection<sconnAlarmZone> Config
@@ -174,11 +176,12 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
         }
 
         [ImportingConstructor]
-        public AlarmZoneMapViewModel(IRegionManager regionManager)
+        public AlarmZoneMapViewModel(IRegionManager regionManager, IAlarmSystemNavigationService NavService )
         {
+            AlarmNavService = NavService;
             Graph = new AlarmSystemGraph();
             Config = new ObservableCollection<sconnAlarmZone>();
-            this._manager = SiteNavigationManager.alarmSystemConfigManager;
+            this._manager = AlarmNavService.alarmSystemConfigManager;
             this._provider = new ZoneConfigurationService(_manager);
             this._regionManager = regionManager;
         }

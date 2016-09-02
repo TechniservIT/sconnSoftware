@@ -26,6 +26,9 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm.Map
     public class AlarmDeviceMapViewModel : GenericAlarmConfigViewModel
     {
 
+
+        private IAlarmSystemNavigationService AlarmNavService { get; set; }
+
         #region Public Properties
 
         public AlarmSystemGraph Graph
@@ -185,11 +188,12 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm.Map
         }
 
         [ImportingConstructor]
-        public AlarmDeviceMapViewModel(IRegionManager regionManager)
+        public AlarmDeviceMapViewModel(IRegionManager regionManager, IAlarmSystemNavigationService NavService)
         {
+            AlarmNavService = NavService;
             Graph = new AlarmSystemGraph();
             Config = new ObservableCollection<sconnDevice>();
-            this._manager = SiteNavigationManager.alarmSystemConfigManager;
+            this._manager = AlarmNavService.alarmSystemConfigManager;
             this._provider = new AlarmDevicesConfigService(_manager);
             this._regionManager = regionManager;
         }

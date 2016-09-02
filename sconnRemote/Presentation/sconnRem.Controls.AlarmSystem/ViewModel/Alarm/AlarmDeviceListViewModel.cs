@@ -17,7 +17,6 @@ using Prism.Regions;
 using sconnConnector.Config;
 using sconnConnector.POCO.Config;
 using sconnConnector.POCO.Config.sconn;
-using sconnPrismSharedContext;
 using sconnRem.Controls.AlarmSystem.ViewModel.Generic;
 using sconnRem.Infrastructure.Navigation;
 using sconnRem.Navigation;
@@ -33,6 +32,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
     {
         private ObservableCollection<sconnDevice> _config;
         private AlarmDevicesConfigService _provider;
+        private IAlarmSystemNavigationService AlarmNavService { get; set; }
 
         public ObservableCollection<sconnDevice> Config {
             get { return _config; }
@@ -110,8 +110,8 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
 
         private void ShowDevice(sconnDevice device)
         {
-            AlarmSystemContext.contextDevice = device;
-            SiteNavigationManager.ActivateDeviceContext(device);
+            AlarmNavService.CurrentContextDevice = device;
+            AlarmNavService.ActivateDeviceContext(device);
             NavigateToAlarmContract(GetDeviceTypeStatusViewContractNameForDevice(device));
         }
 
@@ -123,8 +123,8 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
                 {
                     if (device.Outputs.Contains(input))
                     {
-                        SiteNavigationManager.ActivateDeviceContext(device);
-                        SiteNavigationManager.ActivateOutputContext(input);
+                        AlarmNavService.ActivateDeviceContext(device);
+                        AlarmNavService.ActivateOutputContext(input);
                         NavigateToAlarmContract(AlarmRegionNames.AlarmConfig_Contract_Output_Config_View);
                     }
                 }
@@ -143,8 +143,8 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
                 {
                     if (device.Relays.Contains(input))
                     {
-                        SiteNavigationManager.ActivateDeviceContext(device);
-                        SiteNavigationManager.ActivateRelayContext(input);
+                        AlarmNavService.ActivateDeviceContext(device);
+                        AlarmNavService.ActivateRelayContext(input);
                         NavigateToAlarmContract(AlarmRegionNames.AlarmConfig_Contract_Relay_Config_View);
                     }
                 }
@@ -164,8 +164,8 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
                 {
                     if (device.Inputs.Contains(input))
                     {
-                        SiteNavigationManager.ActivateDeviceContext(device);
-                        SiteNavigationManager.ActivateInputContext(input);
+                        AlarmNavService.ActivateDeviceContext(device);
+                        AlarmNavService.ActivateInputContext(input);
 
                         NavigationParameters parameters = new NavigationParameters();
                         parameters.Add(AlarmRegionNames.AlarmConfig_Contract_Input_Config_View_Key_Name, input.UUID);
@@ -181,8 +181,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
 
         private void ConfigureDevice(sconnDevice device)
         {
-            AlarmSystemContext.contextDevice = device;
-            SiteNavigationManager.ActivateDeviceContext(device);
+            AlarmNavService.CurrentContextDevice = device;
             NavigateToAlarmContract(AlarmRegionNames.AlarmStatus_Contract_InputsView);
         }
 
@@ -201,7 +200,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
 
         private void ToggleOutput(sconnOutput output)
         {
-            SiteNavigationManager.SaveOutputGeneric(output);
+            AlarmNavService.SaveOutputGeneric(output);
             GetData();
         }
 
@@ -209,13 +208,13 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
         {
             try
             {
-                if (SiteNavigationManager.Online)
+                if (AlarmNavService.Online)
                 {
-                    Config = new ObservableCollection<sconnDevice>(SiteNavigationManager.GetDevices());
+                    Config = new ObservableCollection<sconnDevice>(AlarmNavService.GetDevices());
                 }
                 else
                 {
-                    Config = new ObservableCollection<sconnDevice>(SiteNavigationManager.alarmSystemConfigManager.Config.DeviceConfig.Devices);
+                    Config = new ObservableCollection<sconnDevice>(AlarmNavService.alarmSystemConfigManager.Config.DeviceConfig.Devices);
                 }
             }
             catch (Exception ex)
@@ -239,11 +238,12 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
 
         
         [ImportingConstructor]
-        public AlarmDeviceListViewModel(IRegionManager regionManager)
+        public AlarmDeviceListViewModel(IRegionManager regionManager, IAlarmSystemNavigationService NavService)
         {
             SetupCmds();
+            AlarmNavService = NavService;
             Config = new ObservableCollection<sconnDevice>(new List<sconnDevice>());
-            this._manager = SiteNavigationManager.alarmSystemConfigManager;
+            this._manager = AlarmNavService.alarmSystemConfigManager;
             this._provider = new AlarmDevicesConfigService(_manager);
             _regionManager = regionManager;
             this.PropertyChanged += new PropertyChangedEventHandler(OnNotifiedOfPropertyChanged);

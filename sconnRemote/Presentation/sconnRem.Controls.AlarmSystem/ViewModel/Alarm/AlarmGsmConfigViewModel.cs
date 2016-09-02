@@ -42,6 +42,7 @@ namespace sconnRem.ViewModel.Alarm
 
         private GsmConfigurationService _provider;
         private AlarmSystemConfigManager _manager;
+        private IAlarmSystemNavigationService AlarmNavService { get; set; }
 
         private int _selectedIndex;
         public int SelectedIndex
@@ -86,14 +87,14 @@ namespace sconnRem.ViewModel.Alarm
             try
             {
 
-                if (SiteNavigationManager.Online)
+                if (AlarmNavService.Online)
                 {
 
                     Config = new ObservableCollection<sconnGsmRcpt>(_provider.GetAll());
                 }
                 else
                 {
-                    Config = new ObservableCollection<sconnGsmRcpt>(SiteNavigationManager.alarmSystemConfigManager.Config.GsmConfig.Rcpts);
+                    Config = new ObservableCollection<sconnGsmRcpt>(AlarmNavService.alarmSystemConfigManager.Config.GsmConfig.Rcpts);
                 }
                 SelectedIndex = 0; //reset on refresh
             }
@@ -159,10 +160,11 @@ namespace sconnRem.ViewModel.Alarm
         }
 
         [ImportingConstructor]
-        public AlarmGsmConfigViewModel(IRegionManager regionManager)
+        public AlarmGsmConfigViewModel(IRegionManager regionManager, IAlarmSystemNavigationService NavService)
         {
             Config = new ObservableCollection<sconnGsmRcpt>();
-            this._manager = SiteNavigationManager.alarmSystemConfigManager;
+            AlarmNavService = NavService;
+            this._manager = AlarmNavService.alarmSystemConfigManager;
             this._provider = new GsmConfigurationService(_manager);
             this._regionManager = regionManager;
         }

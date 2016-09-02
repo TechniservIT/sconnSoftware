@@ -23,6 +23,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm.EntityList
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public class AlarmEntityRemoteUserEditContextViewModel : GenericAlarmConfigViewModel
     {
+        private IAlarmSystemNavigationService AlarmNavService { get; set; }
 
         public ICommand EntityAddCommand { get; set; }
         public ICommand EntityRemoveCommand { get; set; }
@@ -47,14 +48,14 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm.EntityList
         {
             try
             {
-                if (SiteNavigationManager.Online)
+                if (AlarmNavService.Online)
                 {
 
                     Config = (_provider.GetById(EntityId));
                 }
                 else
                 {
-                    Config = (SiteNavigationManager.alarmSystemConfigManager.Config.RemoteUserConfig.Users.FirstOrDefault(z => z.Id == EntityId));
+                    Config = (AlarmNavService.alarmSystemConfigManager.Config.RemoteUserConfig.Users.FirstOrDefault(z => z.Id == EntityId));
                 }
             }
             catch (Exception ex)
@@ -175,11 +176,12 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm.EntityList
         }
 
         [ImportingConstructor]
-        public AlarmEntityRemoteUserEditContextViewModel(IRegionManager regionManager)
+        public AlarmEntityRemoteUserEditContextViewModel(IRegionManager regionManager, IAlarmSystemNavigationService NavService)
         {
             Config = new sconnRemoteUser();
             SetupCmd();
-            this._manager = SiteNavigationManager.alarmSystemConfigManager;
+            AlarmNavService = NavService;
+            this._manager = AlarmNavService.alarmSystemConfigManager;
             this._provider = new UsersConfigurationService(_manager);
             this._regionManager = regionManager;
         }

@@ -41,6 +41,8 @@ namespace sconnRem.ViewModel.Alarm
             }
         }
 
+        private IAlarmSystemNavigationService AlarmNavService { get; set; }
+
         private int _selectedIndex;
         public int SelectedIndex
         {
@@ -102,7 +104,7 @@ namespace sconnRem.ViewModel.Alarm
         {
             try
             {
-                if (SiteNavigationManager.Online)
+                if (AlarmNavService.Online)
                 {
                     Config = new ObservableCollection<sconnAlarmZone>(_provider.GetAll());
                     SelectedIndex = 0; //reset on refresh
@@ -114,7 +116,7 @@ namespace sconnRem.ViewModel.Alarm
                 }
                 else
                 {
-                    Config = new ObservableCollection<sconnAlarmZone>(SiteNavigationManager.alarmSystemConfigManager.Config.ZoneConfig.Zones);
+                    Config = new ObservableCollection<sconnAlarmZone>(AlarmNavService.alarmSystemConfigManager.Config.ZoneConfig.Zones);
                 }
 
             }
@@ -150,10 +152,11 @@ namespace sconnRem.ViewModel.Alarm
         }
 
         [ImportingConstructor]
-        public AlarmZoneConfigViewModel(IRegionManager regionManager)
+        public AlarmZoneConfigViewModel(IRegionManager regionManager, IAlarmSystemNavigationService NavService)
         {
             Config = new ObservableCollection<sconnAlarmZone>();
-            this._manager = SiteNavigationManager.alarmSystemConfigManager;
+            AlarmNavService = NavService;
+            this._manager = AlarmNavService.alarmSystemConfigManager;
             this._provider = new ZoneConfigurationService(_manager);
             this._regionManager = regionManager;
         }

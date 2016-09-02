@@ -25,6 +25,8 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm.EntityList
     public class AlarmEntityGsmRcptEditContextViewModel : GenericAlarmConfigViewModel
     {
 
+        private IAlarmSystemNavigationService AlarmNavService { get; set; }
+
         public ICommand EntityAddCommand { get; set; }
         public ICommand EntityRemoveCommand { get; set; }
         public ICommand EntitySaveCommand { get; set; }
@@ -48,15 +50,13 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm.EntityList
         {
             try
             {
-               
-                if (SiteNavigationManager.Online)
+                if (AlarmNavService.Online)
                 {
-
                     Config = (_provider.GetById(EntityId));
                 }
                 else
                 {
-                    Config = (SiteNavigationManager.alarmSystemConfigManager.Config.GsmConfig.Rcpts.FirstOrDefault(z => z.Id == EntityId));
+                    Config = (AlarmNavService.alarmSystemConfigManager.Config.GsmConfig.Rcpts.FirstOrDefault(z => z.Id == EntityId));
                 }
             }
             catch (Exception ex)
@@ -177,11 +177,12 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm.EntityList
         }
 
         [ImportingConstructor]
-        public AlarmEntityGsmRcptEditContextViewModel(IRegionManager regionManager)
+        public AlarmEntityGsmRcptEditContextViewModel(IRegionManager regionManager, IAlarmSystemNavigationService NavService)
         {
             Config = new sconnGsmRcpt();
             SetupCmd();
-            this._manager = SiteNavigationManager.alarmSystemConfigManager;
+            AlarmNavService = NavService;
+            this._manager = AlarmNavService.alarmSystemConfigManager;
             this._provider = new GsmConfigurationService(_manager);
             this._regionManager = regionManager;
         }

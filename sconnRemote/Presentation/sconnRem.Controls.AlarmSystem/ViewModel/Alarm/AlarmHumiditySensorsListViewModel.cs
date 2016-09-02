@@ -22,6 +22,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
     {
         private ObservableCollection<sconnDevice> _config;
         private AlarmDevicesConfigService _provider;
+        private IAlarmSystemNavigationService AlarmNavService { get; set; }
 
         public ObservableCollection<sconnDevice> Config
         {
@@ -42,13 +43,13 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
         {
             try
             {
-                if (SiteNavigationManager.Online)
+                if (AlarmNavService.Online)
                 {
                     Config = new ObservableCollection<sconnDevice>(_provider.GetAll().Where(d => d.TemperatureModule));
                 }
                 else
                 {
-                    Config = new ObservableCollection<sconnDevice>(SiteNavigationManager.alarmSystemConfigManager.Config.DeviceConfig.Devices.Where(d => d.TemperatureModule));
+                    Config = new ObservableCollection<sconnDevice>(AlarmNavService.alarmSystemConfigManager.Config.DeviceConfig.Devices.Where(d => d.TemperatureModule));
                 }
               
             }
@@ -73,11 +74,12 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
 
 
         [ImportingConstructor]
-        public AlarmHumiditySensorsListViewModel(IRegionManager regionManager)
+        public AlarmHumiditySensorsListViewModel(IRegionManager regionManager, IAlarmSystemNavigationService NavService)
         {
             SetupCmds();
             Config = new ObservableCollection<sconnDevice>(new List<sconnDevice>());
-            this._manager = SiteNavigationManager.alarmSystemConfigManager;
+            AlarmNavService = NavService;
+            this._manager = AlarmNavService.alarmSystemConfigManager;
             this._provider = new AlarmDevicesConfigService(_manager);
             _regionManager = regionManager;
             this.PropertyChanged += new PropertyChangedEventHandler(OnNotifiedOfPropertyChanged);
