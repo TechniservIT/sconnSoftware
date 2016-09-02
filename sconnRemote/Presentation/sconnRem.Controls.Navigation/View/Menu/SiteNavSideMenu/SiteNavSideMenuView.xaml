@@ -6,7 +6,6 @@
              xmlns:local="clr-namespace:sconnRem.View.Menu.SiteNavSideMenu"
              xmlns:regions="http://prismlibrary.com/"
              xmlns:inf="clr-namespace:sconnRem.Navigation;assembly=sconnRem.Navigation"
-             xmlns:siteNavSideMenu="clr-namespace:sconnRem.Controls.Navigation.View.Menu.SiteNavSideMenu"
              xmlns:siteNavItemModel="clr-namespace:sconnRem.Controls.Navigation.ViewModel.Navigation"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d" 
@@ -21,11 +20,12 @@
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
 
-        <ListBox ScrollViewer.HorizontalScrollBarVisibility="Disabled" x:Name="OrdersListBox" BorderThickness="0" ItemsSource="{Binding Sites}"  IsSynchronizedWithCurrentItem="True" 
-                     regions:RegionManager.RegionName="{x:Static inf:GlobalViewRegionNames.LNavigationRegion}" Background="White">
+        <ListBox ScrollViewer.HorizontalScrollBarVisibility="Disabled" x:Name="OrdersListBox" BorderThickness="0" ItemsSource="{Binding  Sites}"  IsSynchronizedWithCurrentItem="True"    Background="White">
+          
             <ListBox.ItemTemplate>
                 
                 <DataTemplate>
+
                     <Grid  Background="White">
 
                         <Grid.ColumnDefinitions>
@@ -37,7 +37,7 @@
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
 
-                      
+
                         <Grid    Grid.Row="0" Grid.Column="0" Background="#FF6EF2FF">
 
                             <Grid  Background="#4C71D9E4">
@@ -80,7 +80,7 @@
                                   Stroke="Black"
                                   VerticalAlignment="Center"
                                   Width="25" 
-                                  >     
+                                  >
                                     <Rectangle.Style>
                                         <Style TargetType="Rectangle">
                                             <Setter Property="Fill" Value="Red"/>
@@ -101,7 +101,7 @@
 
                         </Grid>
 
-                        
+
 
                         <Grid  Grid.Row="0" Grid.Column="1" Background="White">
 
@@ -110,7 +110,7 @@
                                     <i:InvokeCommandAction Command="{Binding DataContext.ViewSiteCommand, RelativeSource={RelativeSource AncestorType=ListBox}}"  CommandParameter="{Binding}" />
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
-                            
+
                             <Grid  Background="White">
 
                                 <Grid.ColumnDefinitions>
@@ -204,11 +204,7 @@
                         </Grid>
 
                     </Grid>
-                    <!--<ContentControl>
-                        <siteNavSideMenu:SiteNavMenuViewItem DataContext="{Binding}" />
-                    </ContentControl>-->
-           
-                   
+
                 </DataTemplate>
                 
                 
@@ -224,8 +220,6 @@
 
         </ListBox>
 
-        <!--<ScrollViewer HorizontalContentAlignment="Left" VerticalScrollBarVisibility="Auto" VerticalContentAlignment="Top" BorderThickness="0,0,0,0" Grid.RowSpan="1" Grid.Column="0" Grid.Row="0">
-        </ScrollViewer>-->
 
     </Grid>
     

@@ -47,19 +47,6 @@
                 </Button.Template>
             </Button>
 
-            <!--<Button Height="50" Width="50">
-                <Button.Template>
-                    <ControlTemplate>
-                        <Image  x:Name="ImgDispActionGridFullScreen"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="10,10,10,10" VerticalAlignment="Center" Width="Auto" Source="../../../images/4.jpg"/>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>-->
-
-            <!--<Button Margin="10,10,10,00" Click="Nav_Button_Click"   HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Height="Auto"  Width="Auto"  >
-                <Image  x:Name="ImgDispActionGridFullScreen"  Stretch="UniformToFill"   HorizontalAlignment="Center" Height="Auto" Margin="10,10,10,10" VerticalAlignment="Center" Width="Auto" Source="../../../images/4.jpg"/>
-            </Button>-->
-            <!--<Label HorizontalContentAlignment="Center" Grid.Row="1" Grid.Column="0" Content="Authentication" FontSize="14.667" FontFamily="Motorwerk">
-            </Label>-->
         </StackPanel>
 
         <StackPanel   Grid.Row="0" Grid.Column="1">

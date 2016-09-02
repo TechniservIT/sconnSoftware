@@ -190,17 +190,14 @@ I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.Navigati
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.Navigation\obj\Debug\View\Menu\ContextToolbar\CCTV\CctvToolbarView.g.cs
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.Navigation\obj\Debug\View\Menu\ContextToolbar\Global\GlobalToolbarView.g.cs
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.Navigation\obj\Debug\View\Menu\GridNavSideMenu\GridNavSideMenuView.g.cs
-I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.Navigation\obj\Debug\View\Menu\SiteNavSideMenu\SiteNavMenuViewItem.g.cs
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.Navigation\obj\Debug\View\Menu\SiteNavSideMenu\SiteNavSideMenuView.g.cs
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.Navigation\obj\Debug\View\Menu\ToolTopMenu\ToolTopMenuView.g.cs
-I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.Navigation\obj\Debug\GeneratedInternalTypeHelper.g.cs
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.Navigation\obj\Debug\sconnRem.Controls.Navigation_MarkupCompile.cache
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.Navigation\obj\Debug\sconnRem.Controls.Navigation_MarkupCompile.lref
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.Navigation\obj\Debug\View\Menu\ContextToolbar\AlarmSystem\AlarmSystemToolbarView.baml
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.Navigation\obj\Debug\View\Menu\ContextToolbar\CCTV\CctvToolbarView.baml
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.Navigation\obj\Debug\View\Menu\ContextToolbar\Global\GlobalToolbarView.baml
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.Navigation\obj\Debug\View\Menu\GridNavSideMenu\GridNavSideMenuView.baml
-I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.Navigation\obj\Debug\View\Menu\SiteNavSideMenu\SiteNavMenuViewItem.baml
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.Navigation\obj\Debug\View\Menu\SiteNavSideMenu\SiteNavSideMenuView.baml
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.Navigation\obj\Debug\View\Menu\ToolTopMenu\ToolTopMenuView.baml
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.Navigation\obj\Debug\sconnRem.Controls.Navigation.g.resources

@@ -100,7 +100,6 @@ namespace sconnRem.Wnd.Main
             {
                 base.InitializeShell();
                 Application.Current.MainWindow = (Window)this.Shell;
-                NavigateStaticViews();
                 Application.Current.MainWindow.Show();
             }
             catch (Exception ex)

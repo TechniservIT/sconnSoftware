@@ -20,14 +20,9 @@ using sconnRem.Navigation;
 
 namespace sconnRem.View.Menu.ToolTopMenu
 {
-
-
-    //[ViewExport(RegionName = GlobalViewRegionNames.RopNavigationRegion)]
-    //[PartCreationPolicy(CreationPolicy.NonShared)]
-
     [Export]
     [ViewSortHint("01")]
-    public partial class ToolTopMenuView : UserControl, IPartImportsSatisfiedNotification
+    public partial class ToolTopMenuView : UserControl
     {
         private Logger _nlogger = LogManager.GetCurrentClassLogger();
         private static Uri _TargetNavUri = new Uri("AuthConfigView", UriKind.Relative);
@@ -42,54 +37,7 @@ namespace sconnRem.View.Menu.ToolTopMenu
             this.DataContext = viewModel;
             InitializeComponent();
         }
-
-        void IPartImportsSatisfiedNotification.OnImportsSatisfied()
-        {
-            try
-            {
-                IRegion mainContentRegion = this.RegionManager.Regions[GlobalViewRegionNames.RopNavigationRegion];
-                if (mainContentRegion != null && mainContentRegion.NavigationService != null)
-                {
-                    mainContentRegion.NavigationService.Navigated += this.MainContentRegion_Navigated;
-                }
-            }
-            catch (Exception ex)
-            {
-                _nlogger.Error(ex, ex.Message);
-            }
-
-        }
-
-        public void MainContentRegion_Navigated(object sender, RegionNavigationEventArgs e)
-        {
-
-        }
-
-        private void Nav_Button_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                this.RegionManager.RequestNavigate(GlobalViewRegionNames.MainGridContentRegion, _TargetNavUri
-                    ,
-                    (NavigationResult nr) =>
-                    {
-                        var error = nr.Error;
-                        var result = nr.Result;
-                        if (error != null)
-                        {
-                            _nlogger.Error(error);
-                        }
-                    });
-            }
-            catch (Exception ex)
-            {
-                _nlogger.Error(ex, ex.Message);
-            }
-
-        }
-
-
-
+        
     }
 
 }

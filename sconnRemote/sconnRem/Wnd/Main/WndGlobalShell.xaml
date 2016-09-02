@@ -38,7 +38,7 @@
                     </Grid.RowDefinitions>
 
                     <Grid   Grid.Row="0" Grid.Column="0" Background="White">
-                        <UserControl   prism:RegionManager.RegionName="LeftSideMenuRegion"  />
+                      <UserControl   prism:RegionManager.RegionName="LeftSideMenuRegion"  />
                     </Grid>
 
                     <Grid    Grid.Row="0" Grid.Column="1" Background="White">

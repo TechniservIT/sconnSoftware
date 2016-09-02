@@ -32,69 +32,6 @@ namespace sconnRem.Controls.Navigation.ViewModel.Navigation
         public ICommand ShowGlobalPreferencesCommand { get; set; }
         public ICommand ShowSiteWizardCommand { get; set; }
         
-
-        private void ViewSite(sconnSite site)
-        {
-            this._regionManager.RequestNavigate(GlobalViewRegionNames.TopContextToolbarRegion, NavContextToolbarRegionNames.ContextToolbar_AlarmSystem_ViewUri
-                ,
-                (NavigationResult nr) =>
-                {
-                    var error = nr.Error;
-                    var result = nr.Result;
-                    if (error != null)
-                    {
-                        _nlogger.Error(error);
-                    }
-                });
-        }
-
-        
-        private void NavigateToAlarmContract(string contractName)
-        {
-            try
-            {
-                this._regionManager.RequestNavigate(GlobalViewRegionNames.MainGridContentRegion, contractName
-                    ,
-                    (NavigationResult nr) =>
-                    {
-                        var error = nr.Error;
-                        var result = nr.Result;
-                        if (error != null)
-                        {
-                            _nlogger.Error(error);
-                        }
-                    });
-            }
-            catch (Exception ex)
-            {
-                _nlogger.Error(ex, ex.Message);
-
-            }
-        }
-
-        private void NavigateToAlarmUri(Uri uri)
-        {
-            try
-            {
-                this._regionManager.RequestNavigate(GlobalViewRegionNames.MainGridContentRegion, uri
-                    ,
-                    (NavigationResult nr) =>
-                    {
-                        var error = nr.Error;
-                        var result = nr.Result;
-                        if (error != null)
-                        {
-                            _nlogger.Error(error);
-                        }
-                    });
-            }
-            catch (Exception ex)
-            {
-                _nlogger.Error(ex, ex.Message);
-            }
-        }
-
-        
         private void ShowFileImport()
         {
             try
@@ -179,8 +116,6 @@ namespace sconnRem.Controls.Navigation.ViewModel.Navigation
         private void ShowSiteWizard()
         {
             SiteNavigationManager.OpenSiteWizard();
-            //WndSiteWizard wnd = new WndSiteWizard();
-            //wnd.Show();
         }
         
         private void SetupCmds()

@@ -8,6 +8,9 @@
              mc:Ignorable="d" 
              d:DesignHeight="150" d:DesignWidth="800">
 
+    <!--<UserControl.DataContext>
+        <alarmNavModel:AlarmSystemToolbarViewModel/>
+    </UserControl.DataContext>-->
 
     <Grid>
         <Grid.ColumnDefinitions>
