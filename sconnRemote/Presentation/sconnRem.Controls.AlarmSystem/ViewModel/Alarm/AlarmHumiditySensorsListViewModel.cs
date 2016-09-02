@@ -42,7 +42,15 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
         {
             try
             {
-                Config = new ObservableCollection<sconnDevice>(_provider.GetAll().Where(d => d.TemperatureModule));
+                if (SiteNavigationManager.Online)
+                {
+                    Config = new ObservableCollection<sconnDevice>(_provider.GetAll().Where(d => d.TemperatureModule));
+                }
+                else
+                {
+                    Config = new ObservableCollection<sconnDevice>(SiteNavigationManager.alarmSystemConfigManager.Config.DeviceConfig.Devices.Where(d => d.TemperatureModule));
+                }
+              
             }
             catch (Exception ex)
             {

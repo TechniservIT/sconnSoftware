@@ -85,7 +85,14 @@ namespace sconnRem.ViewModel.Alarm
         {
             try
             {
-                Config = new ObservableCollection<sconnRemoteUser>(_provider.GetAll());
+                if (SiteNavigationManager.Online)
+                {
+                    Config = new ObservableCollection<sconnRemoteUser>(_provider.GetAll());
+                }
+                else
+                {
+                    Config = new ObservableCollection<sconnRemoteUser>(SiteNavigationManager.alarmSystemConfigManager.Config.RemoteUserConfig.Users);
+                }
                 SelectedIndex = 0; //reset on refresh
             }
             catch (Exception ex)

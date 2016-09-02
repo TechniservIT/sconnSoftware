@@ -85,7 +85,16 @@ namespace sconnRem.ViewModel.Alarm
         {
             try
             {
-                Config = new ObservableCollection<sconnGsmRcpt>(_provider.GetAll());
+
+                if (SiteNavigationManager.Online)
+                {
+
+                    Config = new ObservableCollection<sconnGsmRcpt>(_provider.GetAll());
+                }
+                else
+                {
+                    Config = new ObservableCollection<sconnGsmRcpt>(SiteNavigationManager.alarmSystemConfigManager.Config.GsmConfig.Rcpts);
+                }
                 SelectedIndex = 0; //reset on refresh
             }
             catch (Exception ex)

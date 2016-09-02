@@ -15,6 +15,7 @@ using System.Windows.Input;
 using NLog;
 using Prism;
 using sconnRem.Controls.AlarmSystem.ViewModel.Generic;
+using sconnRem.Infrastructure.Navigation;
 using sconnRem.Navigation;
 
 namespace sconnRem.ViewModel.Alarm
@@ -36,7 +37,15 @@ namespace sconnRem.ViewModel.Alarm
         {
             try
             {
-                CommConfig = _provider.Get();
+                if (SiteNavigationManager.Online)
+                {
+                    CommConfig = _provider.Get();
+                }
+                else
+                {
+                    CommConfig = SiteNavigationManager.alarmSystemConfigManager.Config.GlobalConfig;
+                }
+               
                 
             }
             catch (Exception ex)

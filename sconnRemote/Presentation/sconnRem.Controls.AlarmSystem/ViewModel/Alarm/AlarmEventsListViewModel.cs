@@ -45,7 +45,15 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
         {
             try
             {
-                Config = new ObservableCollection<sconnEvent>(_provider.GetAll());  
+                if (SiteNavigationManager.Online)
+                {
+                    Config = new ObservableCollection<sconnEvent>(_provider.GetAll());
+                }
+                else
+                {
+                    Config = new ObservableCollection<sconnEvent>(SiteNavigationManager.alarmSystemConfigManager.Config.EventConfig.Events);
+                }
+             
             }
             catch (Exception ex)
             {

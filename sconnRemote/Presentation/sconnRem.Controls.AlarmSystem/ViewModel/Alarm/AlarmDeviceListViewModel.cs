@@ -209,8 +209,14 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
         {
             try
             {
-                Config = new ObservableCollection<sconnDevice>( SiteNavigationManager.GetDevices());    
-                    //new ObservableCollection<sconnDevice>(_provider.GetAll());  //_provider.GetAll().AsQueryable();
+                if (SiteNavigationManager.Online)
+                {
+                    Config = new ObservableCollection<sconnDevice>(SiteNavigationManager.GetDevices());
+                }
+                else
+                {
+                    Config = new ObservableCollection<sconnDevice>(SiteNavigationManager.alarmSystemConfigManager.Config.DeviceConfig.Devices);
+                }
             }
             catch (Exception ex)
             {

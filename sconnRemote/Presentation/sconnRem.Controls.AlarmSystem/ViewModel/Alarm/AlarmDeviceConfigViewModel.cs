@@ -38,6 +38,7 @@ namespace sconnRem.ViewModel.Alarm
         {
             try
             {
+
                 Config = _provider.GetAll().FirstOrDefault(); //TODO - by ID
 
             }

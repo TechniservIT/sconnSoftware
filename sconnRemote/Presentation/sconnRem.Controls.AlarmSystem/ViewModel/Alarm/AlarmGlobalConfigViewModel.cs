@@ -67,7 +67,15 @@ namespace sconnRem.ViewModel.Alarm
         {
             try
             {
-                Config = _provider.Get();
+                if (SiteNavigationManager.Online)
+                {
+                    Config = _provider.Get();
+                }
+                else
+                {
+                    Config = SiteNavigationManager.alarmSystemConfigManager.Config.GlobalConfig;
+                }
+                
                 ArmStateIconPath = new Guid().ToString();
             }
             catch (Exception ex)

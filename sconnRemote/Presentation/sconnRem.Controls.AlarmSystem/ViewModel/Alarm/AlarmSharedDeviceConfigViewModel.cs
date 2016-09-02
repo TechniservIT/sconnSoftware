@@ -101,9 +101,10 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
         {
             try
             {
-               // Config = _provider.Get();
-               Config.CopyFrom(_provider.GetById(DeviceId));
-
+                Config.CopyFrom(SiteNavigationManager.Online
+                    ? _provider.GetById(DeviceId)
+                    : SiteNavigationManager.alarmSystemConfigManager.Config.DeviceConfig.Devices.FirstOrDefault(
+                        d => d.Id.Equals(DeviceId)));
             }
             catch (Exception ex)
             {

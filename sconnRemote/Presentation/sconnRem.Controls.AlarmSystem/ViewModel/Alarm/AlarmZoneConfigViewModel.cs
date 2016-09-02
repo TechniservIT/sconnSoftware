@@ -102,12 +102,21 @@ namespace sconnRem.ViewModel.Alarm
         {
             try
             {
-                Config = new ObservableCollection<sconnAlarmZone>(_provider.GetAll());
-                SelectedIndex = 0; //reset on refresh
-                if (Config.Count == 0)
+                if (SiteNavigationManager.Online)
                 {
-                    Application.Current.Dispatcher.Invoke(() => { OpenEntityEditContext(null); }); //open empty edit context
+                    Config = new ObservableCollection<sconnAlarmZone>(_provider.GetAll());
+                    SelectedIndex = 0; //reset on refresh
+                    if (Config.Count == 0)
+                    {
+                        Application.Current.Dispatcher.Invoke(() => { OpenEntityEditContext(null); });
+                            //open empty edit context
+                    }
                 }
+                else
+                {
+                    Config = new ObservableCollection<sconnAlarmZone>(SiteNavigationManager.alarmSystemConfigManager.Config.ZoneConfig.Zones);
+                }
+
             }
             catch (Exception ex)
             {

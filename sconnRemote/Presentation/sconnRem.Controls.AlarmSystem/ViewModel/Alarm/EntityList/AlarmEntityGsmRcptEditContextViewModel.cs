@@ -48,8 +48,16 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm.EntityList
         {
             try
             {
-                Config = (_provider.GetById(EntityId));
+               
+                if (SiteNavigationManager.Online)
+                {
 
+                    Config = (_provider.GetById(EntityId));
+                }
+                else
+                {
+                    Config = (SiteNavigationManager.alarmSystemConfigManager.Config.GsmConfig.Rcpts.FirstOrDefault(z => z.Id == EntityId));
+                }
             }
             catch (Exception ex)
             {

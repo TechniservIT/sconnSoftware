@@ -46,7 +46,15 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
             {
                 try
                 {
-                    Config = (_provider.GetById(ZoneId));
+
+                    if (SiteNavigationManager.Online)
+                    {
+                        Config = (_provider.GetById(ZoneId));
+                    }
+                    else
+                    {
+                        Config = (SiteNavigationManager.alarmSystemConfigManager.Config.ZoneConfig.Zones.FirstOrDefault(z=>z.Id == ZoneId));
+                    }
 
                 }
                 catch (Exception ex)

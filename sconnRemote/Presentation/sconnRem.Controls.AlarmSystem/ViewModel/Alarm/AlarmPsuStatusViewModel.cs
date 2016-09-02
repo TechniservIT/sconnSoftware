@@ -31,11 +31,6 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
             {
                 get { return _config; }
              set { SetProperty(ref _config, value); }
-            //set
-            //    {
-            //        _config = value;
-            //        OnPropertyChanged();
-            //    }
             }
 
             public ICommand ShowDeviceStatusCommand { get; set; }
@@ -45,7 +40,8 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
             {
                 try
                 {
-                    Config = new ObservableCollection<sconnDevice>(_provider.GetAll());
+                    Config = SiteNavigationManager.Online ? new ObservableCollection<sconnDevice>(_provider.GetAll()) : new ObservableCollection<sconnDevice>(SiteNavigationManager.alarmSystemConfigManager.Config.DeviceConfig.Devices);
+              
                 }
                 catch (Exception ex)
                 {

@@ -44,7 +44,7 @@ namespace sconnRem.Controls.Navigation.ViewModel.Navigation
 
         private void ToggleConnectivityMode()
         {
-            SiteNavigationManager.OpenSiteWizard();
+        //    SiteNavigationManager.OpenSiteWizard();
         }
 
         private void SetupCmds()

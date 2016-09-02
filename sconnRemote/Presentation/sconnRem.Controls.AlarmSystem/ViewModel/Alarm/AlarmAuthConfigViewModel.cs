@@ -84,7 +84,15 @@ namespace sconnRem.ViewModel.Alarm
         {
             try
             {
-                Config = new ObservableCollection<sconnAuthorizedDevice>(_provider.GetAll());
+              
+                if (SiteNavigationManager.Online)
+                {
+                    Config = new ObservableCollection<sconnAuthorizedDevice>(_provider.GetAll());
+                }
+                else
+                {
+                    Config = new ObservableCollection<sconnAuthorizedDevice>(SiteNavigationManager.alarmSystemConfigManager.Config.AuthorizedDevicesConfig.Devices);
+                }
                 SelectedIndex = 0; //reset on refresh
             }
             catch (Exception ex)

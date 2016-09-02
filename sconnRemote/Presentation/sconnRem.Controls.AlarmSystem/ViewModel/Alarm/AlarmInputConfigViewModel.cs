@@ -45,9 +45,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
                 OnPropertyChanged();
             }
         }
-
-
-
+        
         private sconnInput _config;
         public sconnInput Config
         {
@@ -80,7 +78,15 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
         {
             try
             {
-                Zones = new ObservableCollection<sconnAlarmZone>(_provider.GetAll());
+                if (SiteNavigationManager.Online)
+                {
+                    Zones = new ObservableCollection<sconnAlarmZone>(_provider.GetAll());
+                }
+                else
+                {
+                    Zones = new ObservableCollection<sconnAlarmZone>(SiteNavigationManager.alarmSystemConfigManager.Config.ZoneConfig.Zones);
+                }
+               
             }
             catch (Exception ex)
             {
