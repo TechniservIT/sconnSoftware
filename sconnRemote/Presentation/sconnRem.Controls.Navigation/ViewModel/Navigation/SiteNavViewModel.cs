@@ -16,6 +16,7 @@ using sconnConnector;
 using sconnConnector.Config;
 using sconnConnector.POCO.Config;
 using sconnConnector.POCO.Config.sconn;
+using sconnRem.Controls.SiteManagment.Wizard;
 using sconnRem.Infrastructure.Navigation;
 using sconnRem.Navigation;
 using SiteManagmentService;
@@ -40,7 +41,8 @@ namespace sconnRem.Controls.Navigation.ViewModel.Navigation
         public ICommand RemoveSiteCommand { get; set; }
         public ICommand ViewSiteCommand { get; set; }
 
-
+        public ICommand SearchSitesCommand { get; set; }
+        
         private void ViewSite(sconnSite site)
         {
             try
@@ -87,12 +89,18 @@ namespace sconnRem.Controls.Navigation.ViewModel.Navigation
             AlarmNavService.EditSite(site);
         }
 
+        private void SearchSites()
+        {
+            AlarmNavService.Stage = SiteConnectionWizardStage.Search;
+            AlarmNavService.OpenSiteWizard();
+        }
 
         private void SetupCmds()
         {
             EditSiteCommand = new DelegateCommand<sconnSite>(EditSite);
             RemoveSiteCommand = new DelegateCommand<sconnSite>(RemoveSite);
             ViewSiteCommand = new DelegateCommand<sconnSite>(ViewSite);
+            SearchSitesCommand = new DelegateCommand(SearchSites);
         }
         
 

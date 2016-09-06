@@ -17,34 +17,13 @@ using sconnConnector.Config;
 using sconnConnector.POCO.Config;
 using sconnConnector.POCO.Config.sconn;
 using sconnNetworkingServices.Abstract;
+using sconnRem.IPC;
 using sconnRem.Navigation;
 using SiteManagmentService;
 
 namespace sconnRem.Controls.SiteManagment.Wizard
 {
-    public enum SiteConnectionWizardStage
-    {
-        MethodSelection,
-        Search,
-        UsbList,
-        ManualEntry,
-        Test,
-        Summary
-    }
-
-    public enum SiteAdditionMethod
-    {
-        Manual,
-        Search,
-        UsbList
-    }
-
-    public enum SiteWizardEditMode
-    {
-        Add,
-        Edit
-    }
-
+  
 
 
     [Export]
@@ -61,6 +40,7 @@ namespace sconnRem.Controls.SiteManagment.Wizard
                 //OnPropertyChanged(); 
             }
         }
+
 
 
         private readonly IRegionManager _regionManager;
@@ -280,7 +260,7 @@ namespace sconnRem.Controls.SiteManagment.Wizard
         }
         
         [ImportingConstructor]
-        public SiteConnectionWizardViewModel(sconnSite site, IRegionManager regionManager, ISiteRepository repository)
+        public SiteConnectionWizardViewModel(sconnSite site, IRegionManager regionManager, ISiteRepository repository, ISiteWizardViewModelConfig viewModelConfig)
         {
             Config = site;
             this._regionManager = regionManager;
@@ -305,6 +285,20 @@ namespace sconnRem.Controls.SiteManagment.Wizard
             OpenUsbListViewCommand = new DelegateCommand(OpenUsbListView);
 
             SelectedSiteChangedCommand = new DelegateCommand<sconnSite>(OnSelectedItemChanged);
+
+           
+            if (viewModelConfig.Stage == SiteConnectionWizardStage.Search) //starts at search
+            {
+                this.Stage = SiteConnectionWizardStage.Search;
+                SearchForSitesInNetwork(); // start network search
+                NavigateToContract(SiteManagmentRegionNames.SiteConnectionWizard_Contract_SearchSitesList_View);
+            }
+            else if (Stage == SiteConnectionWizardStage.ManualEntry)
+            {
+                
+            }
+
+
         }
 
 

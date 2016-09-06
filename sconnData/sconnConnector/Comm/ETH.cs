@@ -17,6 +17,7 @@ using System.IO;
 using System.Runtime.CompilerServices;
 using NLog;
 using sconnConnector.Annotations;
+using sconnConnector.POCO.Config.sconn;
 using sconnNetworkingServices.Abstract;
 
 
@@ -570,8 +571,7 @@ namespace sconnConnector
                 string[] ePinfo = receiveString.Split('\n');
                 string remoteIp = ePinfo[0];
                 string remoteHostname = ePinfo[1];
-
-
+                
                 //is not internal address
                 if ((from netif in NetworkInterface.GetAllNetworkInterfaces()
                      select netif.GetIPProperties() into prop
@@ -582,9 +582,7 @@ namespace sconnConnector
                 {
                     return;
                 }
-
-             
-
+                
                 this.OnSiteDiscovered(new SiteDiscoveryEventArgs(remoteIp));
             }
             catch (Exception ex)
@@ -602,6 +600,12 @@ namespace sconnConnector
     public class SiteDiscoveryEventArgs : EventArgs
     {
         public string hostname;
+
+        public sconnDeviceType Type { get; set; }
+
+        public string FirmwareVersion { get; set; }
+         
+        public string HardwareVersion { get; set; }      
 
         public SiteDiscoveryEventArgs(string remote)
         {

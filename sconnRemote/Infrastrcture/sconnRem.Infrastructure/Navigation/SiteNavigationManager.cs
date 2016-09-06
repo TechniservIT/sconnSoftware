@@ -39,6 +39,7 @@ namespace sconnRem.Infrastructure.Navigation
         sconnOutput activeOutput { get; set; }
         sconnRelay activeRelay { get; set; }
         bool Online { get; set; }
+        SiteConnectionWizardStage Stage { get; set; }
         
         List<sconnDevice> GetDevices();
         void SaveOutputGeneric(sconnOutput output);
@@ -171,6 +172,17 @@ namespace sconnRem.Infrastructure.Navigation
             set
             {
                 _online = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private SiteConnectionWizardStage _Stage;
+        public SiteConnectionWizardStage Stage
+        {
+            get { return _Stage; }
+            set
+            {
+                _Stage = value;
                 OnPropertyChanged();
             }
         }
