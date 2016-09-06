@@ -260,3 +260,5 @@ I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Shells\bin\Debug\
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Shells\bin\Debug\SiteManagmentService.pdb
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Shells\bin\Debug\Newtonsoft.Json.dll
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Shells\bin\Debug\Newtonsoft.Json.xml
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Shells\bin\Debug\sconnRem.IPC.dll
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Shells\bin\Debug\sconnRem.IPC.pdb

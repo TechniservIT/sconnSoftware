@@ -29,8 +29,7 @@ namespace sconnRem.IPC
         Add,
         Edit
     }
-
-
+    
     public interface ISiteWizardViewModelConfig
     {
          SiteConnectionWizardStage Stage { get; set; }

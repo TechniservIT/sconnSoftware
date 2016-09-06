@@ -96,6 +96,7 @@
     <Compile Include="Navigation\GlobalShellService.cs" />
     <Compile Include="Navigation\IShellService.cs" />
     <Compile Include="Navigation\SiteNavigationManager.cs" />
+    <Compile Include="Navigation\SiteWizard.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

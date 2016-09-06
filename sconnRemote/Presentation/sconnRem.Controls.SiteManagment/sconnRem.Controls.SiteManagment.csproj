@@ -305,6 +305,10 @@
       <Project>{57036DE8-EA6A-42E1-983D-23F71F87C34C}</Project>
       <Name>sconnNetworkingServices</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\sconnRem.IPC\sconnRem.IPC.csproj">
+      <Project>{AD975EAE-1975-4E9D-A536-ED0177A6BB2F}</Project>
+      <Name>sconnRem.IPC</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\SiteManagmentService\SiteManagmentService.csproj">
       <Project>{19D29BA0-EE9F-4C6C-9B34-57C9B39E1BCB}</Project>
       <Name>SiteManagmentService</Name>

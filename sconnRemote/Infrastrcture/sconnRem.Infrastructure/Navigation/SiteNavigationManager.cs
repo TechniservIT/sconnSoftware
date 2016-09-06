@@ -39,7 +39,6 @@ namespace sconnRem.Infrastructure.Navigation
         sconnOutput activeOutput { get; set; }
         sconnRelay activeRelay { get; set; }
         bool Online { get; set; }
-        SiteConnectionWizardStage Stage { get; set; }
         
         List<sconnDevice> GetDevices();
         void SaveOutputGeneric(sconnOutput output);
@@ -176,17 +175,7 @@ namespace sconnRem.Infrastructure.Navigation
             }
         }
 
-        private SiteConnectionWizardStage _Stage;
-        public SiteConnectionWizardStage Stage
-        {
-            get { return _Stage; }
-            set
-            {
-                _Stage = value;
-                OnPropertyChanged();
-            }
-        }
-
+    
         public AlarmSystemNavigationService()
         {
             NetworkClientStatusUpdateService.ConnectionStateChanged += NetworkClientStatusUpdateService_ConnectionStateChanged;
@@ -452,6 +441,8 @@ namespace sconnRem.Infrastructure.Navigation
         {
             SiteConnectionWizardBootstrapper boot = new SiteConnectionWizardBootstrapper();
             boot.Run();
+          
+            //navigate contract
         }
 
 

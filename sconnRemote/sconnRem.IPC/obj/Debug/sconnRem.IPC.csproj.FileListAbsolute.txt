@@ -1,0 +1,5 @@
+I:\Repo\Bucket\sconnSoftware\sconnRemote\sconnRem.IPC\bin\Debug\sconnRem.IPC.dll
+I:\Repo\Bucket\sconnSoftware\sconnRemote\sconnRem.IPC\bin\Debug\sconnRem.IPC.pdb
+I:\Repo\Bucket\sconnSoftware\sconnRemote\sconnRem.IPC\obj\Debug\sconnRem.IPC.csprojResolveAssemblyReference.cache
+I:\Repo\Bucket\sconnSoftware\sconnRemote\sconnRem.IPC\obj\Debug\sconnRem.IPC.dll
+I:\Repo\Bucket\sconnSoftware\sconnRemote\sconnRem.IPC\obj\Debug\sconnRem.IPC.pdb

@@ -35,9 +35,9 @@ namespace sconnRem.Controls.SiteManagment.Wizard
             get { return _Config; }
             set
             {
-               SetProperty(ref _Config, value); 
-                //_Config = value;
-                //OnPropertyChanged(); 
+              // SetProperty(ref _Config, value); 
+                _Config = value;
+                OnPropertyChanged();
             }
         }
 
@@ -68,8 +68,7 @@ namespace sconnRem.Controls.SiteManagment.Wizard
 
         public ObservableCollection<sconnSite> NetworkSites { get; set; }
         public ObservableCollection<sconnSite> UsbSites { get; set; }
-
-     //   public sconnSite SelectedSite { get; set; }
+        
         public NetworkConnectionState ConnectionState { get; set; }
         public int ConnectionProgressPercentage { get; set; }
 
@@ -98,8 +97,7 @@ namespace sconnRem.Controls.SiteManagment.Wizard
 
         private void SearchForSitesInNetwork()
         {
-            //  NetworkSites
-            this.NetworkSites.Clear();  // = new ObservableCollection<sconnSite>();
+            this.NetworkSites.Clear(); 
             _scanSconnClient.SearchForSite();
         }
 
@@ -125,10 +123,10 @@ namespace sconnRem.Controls.SiteManagment.Wizard
 
         public void OnSelectedItemChanged(sconnSite site)
         {
-            //Config = site;
             if (site != null)
             {
-                Config.CopyFrom(site);  //replace default/edited config with selected
+                // Config.CopyFrom(site); 
+                Config = site;
             }
         }
 
@@ -140,7 +138,11 @@ namespace sconnRem.Controls.SiteManagment.Wizard
         private void _provider_SiteDiscovered(object sender, EventArgs e)
         {
             SiteDiscoveryEventArgs args = (SiteDiscoveryEventArgs) e;
-            this.NetworkSites.Add(new sconnSite(500,args.hostname,9898, args.hostname));
+            sconnSite nsite = new sconnSite(500, args.Hostname, 9898, args.Hostname);
+            nsite.DeviceType = args.Type;
+            nsite.HardwareRevision = args.HardwareVersion;
+            nsite.FirmwareVersion = args.FirmwareVersion;
+            this.NetworkSites.Add(nsite);
         }
 
         private void NavigateBack()
@@ -208,6 +210,8 @@ namespace sconnRem.Controls.SiteManagment.Wizard
                     )
             {
                 this.Stage = SiteConnectionWizardStage.ManualEntry; //After selection, show edit for password/verify
+                //load selected item
+
                 NavigateToContract(SiteManagmentRegionNames.SiteConnectionWizard_Contract_ManualEntry_View);
             }
             else if (Stage == SiteConnectionWizardStage.Test)
@@ -260,7 +264,7 @@ namespace sconnRem.Controls.SiteManagment.Wizard
         }
         
         [ImportingConstructor]
-        public SiteConnectionWizardViewModel(sconnSite site, IRegionManager regionManager, ISiteRepository repository, ISiteWizardViewModelConfig viewModelConfig)
+        public SiteConnectionWizardViewModel(sconnSite site, IRegionManager regionManager, ISiteRepository repository )
         {
             Config = site;
             this._regionManager = regionManager;
@@ -287,16 +291,16 @@ namespace sconnRem.Controls.SiteManagment.Wizard
             SelectedSiteChangedCommand = new DelegateCommand<sconnSite>(OnSelectedItemChanged);
 
            
-            if (viewModelConfig.Stage == SiteConnectionWizardStage.Search) //starts at search
-            {
-                this.Stage = SiteConnectionWizardStage.Search;
-                SearchForSitesInNetwork(); // start network search
-                NavigateToContract(SiteManagmentRegionNames.SiteConnectionWizard_Contract_SearchSitesList_View);
-            }
-            else if (Stage == SiteConnectionWizardStage.ManualEntry)
-            {
+            //if (viewModelConfig.Stage == SiteConnectionWizardStage.Search) //starts at search
+            //{
+            //    this.Stage = SiteConnectionWizardStage.Search;
+            //    SearchForSitesInNetwork(); // start network search
+            //    NavigateToContract(SiteManagmentRegionNames.SiteConnectionWizard_Contract_SearchSitesList_View);
+            //}
+            //else if (Stage == SiteConnectionWizardStage.ManualEntry)
+            //{
                 
-            }
+            //}
 
 
         }

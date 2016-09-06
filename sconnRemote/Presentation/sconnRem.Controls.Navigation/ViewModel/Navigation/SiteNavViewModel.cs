@@ -91,7 +91,7 @@ namespace sconnRem.Controls.Navigation.ViewModel.Navigation
 
         private void SearchSites()
         {
-            AlarmNavService.Stage = SiteConnectionWizardStage.Search;
+            //AlarmNavService.Stage = SiteConnectionWizardStage.Search;
             AlarmNavService.OpenSiteWizard();
         }
 

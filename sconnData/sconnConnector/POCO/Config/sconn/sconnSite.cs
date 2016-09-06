@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using sconnConnector.Annotations;
+using sconnConnector.POCO.Config.sconn;
 
 namespace sconnConnector.POCO.Config
 {
@@ -21,6 +22,15 @@ namespace sconnConnector.POCO.Config
         private int _siteID;
         private string _siteName;
         private int SelectedTabId = 0;
+
+        public sconnDeviceHardwareRevision HardwareRevision { get; set; }
+        public sconnFirmwareVersion FirmwareVersion { get; set; }
+        public sconnDeviceType DeviceType { get; set; }
+
+        public string imageIconUri
+        {
+            get { return sconnDevice.GetDeviceTypeImageUriForDeviceType(DeviceType); }
+        }
 
         public string UUID { get; set; }
 
@@ -155,8 +165,7 @@ namespace sconnConnector.POCO.Config
 
             statusCheckInterval = 5000; //5s interval
             lastUpdate = DateTime.Now;
-            serverPort = 37222;
-       //     _siteID = sconnDataShare.GetLastItemID() + 1;
+            serverPort = 9898;
             _siteName = "DefaultSite";
             siteCfg = new ipcSiteConfig();
             _siteStat = new SiteConnectionStat();

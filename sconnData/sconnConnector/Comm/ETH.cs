@@ -495,6 +495,11 @@ namespace sconnConnector
         ~SconnClient()
         {
             CloseConnection();
+            if (_globalUdp.UdpClient != null)
+            {
+                _globalUdp.UdpClient.Close();
+            }
+          
         }
 
 
@@ -521,7 +526,7 @@ namespace sconnConnector
             {
                 // Try to send the discovery request message
                 byte[] discoverMsg = Encoding.ASCII.GetBytes("Discovery: Who is out there?");
-                _globalUdp.UdpClient.Send(discoverMsg, discoverMsg.Length, new System.Net.IPEndPoint(System.Net.IPAddress.Parse("192.168.1.255"), 30303));
+                _globalUdp.UdpClient.Send(discoverMsg, discoverMsg.Length, new System.Net.IPEndPoint(System.Net.IPAddress.Broadcast, 30303));
             }
             catch (Exception ex)
             {
@@ -575,17 +580,30 @@ namespace sconnConnector
                 {
                     myUdp.UdpClient.BeginReceive(ReceiveCallback, myUdp);    //Keep recieving
                 }
+                
+                //is not broadcast address loopback
+                if (Equals(myUdp.Ep.Address, IPAddress.Broadcast))
+                {
+                    myUdp.UdpClient.BeginReceive(ReceiveCallback, myUdp);    //Keep recieving
+                }
 
 
                 //read info fields 
-                if (packetData.Length >= 6)
+                if (packetData.Length == 6)
                 {
-                    sconnDeviceType deviceTypeName = sconnDeviceType.Motherboard;;
-                    deviceTypeName = (sconnDeviceType)packetData[0];
-                    sconnFirmwareVersion deviceFirmwareVer = new sconnFirmwareVersion();
-                    sconnDeviceHardwareRevision deviceHardwareVer = (sconnDeviceHardwareRevision)packetData[2];
-                    
-                    this.OnSiteDiscovered(new SiteDiscoveryEventArgs(remoteIp, deviceTypeName,deviceFirmwareVer,deviceHardwareVer));
+                    try
+                    {
+                        sconnDeviceType deviceTypeName = sconnDeviceType.Motherboard; ;
+                        deviceTypeName = (sconnDeviceType)packetData[0];
+                        sconnDeviceHardwareRevision deviceHardwareVer = (sconnDeviceHardwareRevision)packetData[1];
+                        sconnFirmwareVersion deviceFirmwareVer = new sconnFirmwareVersion(packetData[2], packetData[3], packetData[4], packetData[5]);
+
+                        this.OnSiteDiscovered(new SiteDiscoveryEventArgs(remoteIp, deviceTypeName, deviceFirmwareVer, deviceHardwareVer));
+                    }
+                    catch (Exception ex)
+                    {
+                        nlogger.Error(ex, ex.Message);
+                    }
                 }
 
                 //Keep recieving
@@ -598,9 +616,7 @@ namespace sconnConnector
             }
           
         }
-
-
-
+        
 
     }
 

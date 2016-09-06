@@ -438,3 +438,5 @@ I:\Repo\Bucket\sconnSoftware\sconnRemote\sconnRem\bin\Debug\QuickGraph.Graphviz.
 I:\Repo\Bucket\sconnSoftware\sconnRemote\sconnRem\bin\Debug\QuickGraph.Serialization.xml
 I:\Repo\Bucket\sconnSoftware\sconnRemote\sconnRem\bin\Debug\Newtonsoft.Json.dll
 I:\Repo\Bucket\sconnSoftware\sconnRemote\sconnRem\bin\Debug\Newtonsoft.Json.xml
+I:\Repo\Bucket\sconnSoftware\sconnRemote\sconnRem\bin\Debug\sconnRem.IPC.dll
+I:\Repo\Bucket\sconnSoftware\sconnRemote\sconnRem\bin\Debug\sconnRem.IPC.pdb

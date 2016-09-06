@@ -63,20 +63,24 @@ namespace sconnConnector.POCO.Config.sconn
         {
                 
         }
+
+        public override string ToString()
+        {
+            return Major.ToString() + "." + Minor.ToString() + "." + Locale.ToString() + "." + Build.ToString();
+        }
+
     }
 
 
     public enum sconnDeviceHardwareRevision
     {
-        Graphical_Keypad = 1,
-        Motherboard = 2,
-        Gsm_Module = 3,
-        Pir_Sensor = 4,
-        Relay_Module = 5,
-        InputsModule = 6,
-        Siren = 7,
-        PirSonic_Sensor = 8,
-        KeypadMotherboard = 9
+        v0 = 0,
+        v1 = 1,
+        v2 = 2,
+        v3 = 3,
+        v4 = 4,
+        v5 = 5,
+        v6 = 6
     }
 
     public enum sconnDeviceType
@@ -225,42 +229,47 @@ namespace sconnConnector.POCO.Config.sconn
             }
         }
 
-        public string GetDeviceTypeImageUriForDevice(sconnDevice device)
+        public static string GetDeviceTypeImageUriForDeviceType(sconnDeviceType Type)
         {
-            if (device.Type == sconnDeviceType.Graphical_Keypad)
+            if (Type == sconnDeviceType.Graphical_Keypad)
             {
                 return "pack://application:,,,/images/klawiatura1000x1000.jpg";
             }
-            else if (device.Type == sconnDeviceType.Gsm_Module)
+            else if (Type == sconnDeviceType.Gsm_Module)
             {
                 return "pack://application:,,,/images/tel1000.jpg";
             }
-            else if (device.Type == sconnDeviceType.Motherboard)
+            else if (Type == sconnDeviceType.Motherboard)
             {
                 return "pack://application:,,,/images/strefa1000.jpg";
             }
-            else if (device.Type == sconnDeviceType.Pir_Sensor)
+            else if (Type == sconnDeviceType.Pir_Sensor)
             {
                 return "pack://application:,,,/images/czujka1000x1000.jpg";
             }
-            else if (device.Type == sconnDeviceType.Relay_Module)
+            else if (Type == sconnDeviceType.Relay_Module)
             {
                 return "pack://application:,,,/images/przek1000x1000.jpg";
             }
-            else if (device.Type == sconnDeviceType.InputsModule)
+            else if (Type == sconnDeviceType.InputsModule)
             {
                 return "pack://application:,,,/images/exp1000x1000.jpg";
             }
-            else if (device.Type == sconnDeviceType.PirSonic_Sensor)
+            else if (Type == sconnDeviceType.PirSonic_Sensor)
             {
                 return "pack://application:,,,/images/czujka1000x1000.jpg";
             }
-            else if (device.Type == sconnDeviceType.Siren)
+            else if (Type == sconnDeviceType.Siren)
             {
                 return "pack://application:,,,/images/syrena1000x1000.jpg";
             }
-            
+
             return null;
+        }
+
+        public string GetDeviceTypeImageUriForDevice(sconnDevice device)
+        {
+            return sconnDevice.GetDeviceTypeImageUriForDeviceType(device.Type);
         }
 
         public void LoadImageTypeUrl()
