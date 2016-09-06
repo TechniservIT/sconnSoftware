@@ -560,18 +560,11 @@ namespace sconnConnector
             try
             {
                 UdpState myUdp = (UdpState)ar.AsyncState;
-
-                // Obtain the UDP message body and convert it to a string, with remote IP address attached as well
-                string receiveString = Encoding.ASCII.GetString(myUdp.UdpClient.EndReceive(ar, ref myUdp.Ep));
-                receiveString = myUdp.Ep.Address.ToString() + "\n" + receiveString.Replace("\r\n", "\n");
-
-                // Configure the UdpClient class to accept more messages, if they arrive
-                myUdp.UdpClient.BeginReceive(ReceiveCallback, myUdp);
-
-                string[] ePinfo = receiveString.Split('\n');
-                string remoteIp = ePinfo[0];
-                string remoteHostname = ePinfo[1];
+                string remoteIp = myUdp.Ep.Address.ToString(); 
                 
+                //recieve info packet
+                byte[] packetData = (myUdp.UdpClient.EndReceive(ar, ref myUdp.Ep));   //Encoding.ASCII.GetString;
+
                 //is not internal address
                 if ((from netif in NetworkInterface.GetAllNetworkInterfaces()
                      select netif.GetIPProperties() into prop
@@ -580,10 +573,24 @@ namespace sconnConnector
                      select item)
                      .Any(item => item.Address.ToString().Equals(remoteIp)))
                 {
-                    return;
+                    myUdp.UdpClient.BeginReceive(ReceiveCallback, myUdp);    //Keep recieving
                 }
-                
-                this.OnSiteDiscovered(new SiteDiscoveryEventArgs(remoteIp));
+
+
+                //read info fields 
+                if (packetData.Length >= 6)
+                {
+                    sconnDeviceType deviceTypeName = sconnDeviceType.Motherboard;;
+                    deviceTypeName = (sconnDeviceType)packetData[0];
+                    sconnFirmwareVersion deviceFirmwareVer = new sconnFirmwareVersion();
+                    sconnDeviceHardwareRevision deviceHardwareVer = (sconnDeviceHardwareRevision)packetData[2];
+                    
+                    this.OnSiteDiscovered(new SiteDiscoveryEventArgs(remoteIp, deviceTypeName,deviceFirmwareVer,deviceHardwareVer));
+                }
+
+                //Keep recieving
+                myUdp.UdpClient.BeginReceive(ReceiveCallback, myUdp);
+
             }
             catch (Exception ex)
             {
@@ -599,17 +606,25 @@ namespace sconnConnector
 
     public class SiteDiscoveryEventArgs : EventArgs
     {
-        public string hostname;
+        public string Hostname { get; set; }
 
         public sconnDeviceType Type { get; set; }
 
-        public string FirmwareVersion { get; set; }
+        public sconnFirmwareVersion FirmwareVersion { get; set; }
          
-        public string HardwareVersion { get; set; }      
+        public sconnDeviceHardwareRevision HardwareVersion { get; set; }
+
+        public SiteDiscoveryEventArgs(string hostname , sconnDeviceType type, sconnFirmwareVersion FirmwareVer, sconnDeviceHardwareRevision HardwareVer)
+        {
+            Hostname = hostname;
+            Type = type;
+            FirmwareVersion = FirmwareVer;
+            HardwareVersion = HardwareVer;
+        }
 
         public SiteDiscoveryEventArgs(string remote)
         {
-            hostname = remote;
+            Hostname = remote;
         }
     }
 

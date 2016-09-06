@@ -44,6 +44,41 @@ namespace sconnConnector.POCO.Config.sconn
         void DeserializeEntityNames(byte[] buffer);
     }
 
+    public class sconnFirmwareVersion
+    {
+        public byte Major { get; set; }
+        public byte Minor { get; set; }
+        public byte Locale { get; set; }
+        public byte Build { get; set; }
+
+        public sconnFirmwareVersion(byte major, byte minor, byte locale, byte build)
+        {
+            Major = major;
+            Minor = minor;
+            Locale = locale;
+            Build = build;
+        }
+
+        public sconnFirmwareVersion()
+        {
+                
+        }
+    }
+
+
+    public enum sconnDeviceHardwareRevision
+    {
+        Graphical_Keypad = 1,
+        Motherboard = 2,
+        Gsm_Module = 3,
+        Pir_Sensor = 4,
+        Relay_Module = 5,
+        InputsModule = 6,
+        Siren = 7,
+        PirSonic_Sensor = 8,
+        KeypadMotherboard = 9
+    }
+
     public enum sconnDeviceType
     {
         Graphical_Keypad = 1,
