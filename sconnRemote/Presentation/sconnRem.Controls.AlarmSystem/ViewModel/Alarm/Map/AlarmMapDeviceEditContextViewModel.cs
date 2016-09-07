@@ -150,6 +150,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm.Map
         {
             Config = new sconnDevice();
             SetupCmd();
+            this.AlarmNavService = NavService;
             this._manager = AlarmNavService.alarmSystemConfigManager;
             this._provider = new AlarmDevicesConfigService(_manager);
             ZoneProvider = new ZoneConfigurationService(_manager);

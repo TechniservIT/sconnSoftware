@@ -21,12 +21,12 @@ namespace sconnRem.Controls.SiteManagment.Wizard
 
         public void Initialize()
         {
-            this.RegionManager.RegisterViewWithRegion(SiteManagmentRegionNames.MainContentRegion, typeof(SiteConnectionWizardMethodSelectionView));
-            this.RegionManager.RegisterViewWithRegion(SiteManagmentRegionNames.MainContentRegion, typeof(SiteConnectionWizardManualEntryView));
-            this.RegionManager.RegisterViewWithRegion(SiteManagmentRegionNames.MainContentRegion, typeof(SiteConnectionWizardSearchSitesListView));
-            this.RegionManager.RegisterViewWithRegion(SiteManagmentRegionNames.MainContentRegion, typeof(SiteConnectionWizardSummaryView));
-            this.RegionManager.RegisterViewWithRegion(SiteManagmentRegionNames.MainContentRegion, typeof(SiteConnectionWizardTestView));
-            this.RegionManager.RegisterViewWithRegion(SiteManagmentRegionNames.MainContentRegion, typeof(SiteConnectionWizardUsbListView));
+            //this.RegionManager.RegisterViewWithRegion(SiteManagmentRegionNames.MainContentRegion, typeof(SiteConnectionWizardMethodSelectionView));
+            //this.RegionManager.RegisterViewWithRegion(SiteManagmentRegionNames.MainContentRegion, typeof(SiteConnectionWizardManualEntryView));
+            //this.RegionManager.RegisterViewWithRegion(SiteManagmentRegionNames.MainContentRegion, typeof(SiteConnectionWizardSearchSitesListView));
+            //this.RegionManager.RegisterViewWithRegion(SiteManagmentRegionNames.MainContentRegion, typeof(SiteConnectionWizardSummaryView));
+            //this.RegionManager.RegisterViewWithRegion(SiteManagmentRegionNames.MainContentRegion, typeof());
+            //this.RegionManager.RegisterViewWithRegion(SiteManagmentRegionNames.MainContentRegion, typeof(SiteConnectionWizardUsbListView));
 
   
         }

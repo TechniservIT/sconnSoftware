@@ -6,9 +6,11 @@ using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
 using NLog;
+using Prism;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
@@ -27,7 +29,7 @@ namespace sconnRem.Controls.SiteManagment.Wizard
 
 
     [Export]
-    public class SiteConnectionWizardViewModel : BindableBase
+    public class SiteConnectionWizardViewModel : BindableBase, INavigationAware
     {
         private sconnSite _Config;
         public sconnSite Config
@@ -35,7 +37,6 @@ namespace sconnRem.Controls.SiteManagment.Wizard
             get { return _Config; }
             set
             {
-              // SetProperty(ref _Config, value); 
                 _Config = value;
                 OnPropertyChanged();
             }
@@ -72,11 +73,13 @@ namespace sconnRem.Controls.SiteManagment.Wizard
         public NetworkConnectionState ConnectionState { get; set; }
         public int ConnectionProgressPercentage { get; set; }
 
+        public bool Searching { get; set; }
+
         private void NavigateToContract(string contract)
         {
             try
             {
-                this._regionManager.RequestNavigate(SiteManagmentRegionNames.MainContentRegion, contract
+                this._regionManager.RequestNavigate(GlobalViewRegionNames.MainGridContentRegion, contract   //SiteManagmentRegionNames.MainContentRegion
                     ,
                     (NavigationResult nr) =>
                     {
@@ -101,24 +104,26 @@ namespace sconnRem.Controls.SiteManagment.Wizard
             _scanSconnClient.SearchForSite();
         }
 
+
+
         private void TestConnectionToSite()
         {
-            if (this.Config != null)
-            {
-                connectionTestClient = new SconnClient(Config.serverIP, Config.serverPort, Config.authPasswd);
-                connectionTestClient.ConnectionStateChanged += Client_ConnectionStateChanged;
+            //if (this.Config != null)
+            //{
+            //    connectionTestClient = new SconnClient(Config.serverIP, Config.serverPort, Config.authPasswd);
+            //    connectionTestClient.ConnectionStateChanged += Client_ConnectionStateChanged;
 
-                BackgroundWorker bgWorker = new BackgroundWorker();
-                bgWorker.DoWork += (s, e) => {
-                    connectionTestClient.VerifyConnection();
-                };
-                bgWorker.RunWorkerCompleted += (s, e) =>
-                {
+            //    BackgroundWorker bgWorker = new BackgroundWorker();
+            //    bgWorker.DoWork += (s, e) => {
+            //        connectionTestClient.VerifyConnection();
+            //    };
+            //    bgWorker.RunWorkerCompleted += (s, e) =>
+            //    {
 
-                };
-                bgWorker.RunWorkerAsync();
+            //    };
+            //    bgWorker.RunWorkerAsync();
 
-            }
+            //}
         }
 
         public void OnSelectedItemChanged(sconnSite site)
@@ -142,7 +147,7 @@ namespace sconnRem.Controls.SiteManagment.Wizard
             nsite.DeviceType = args.Type;
             nsite.HardwareRevision = args.HardwareVersion;
             nsite.FirmwareVersion = args.FirmwareVersion;
-            this.NetworkSites.Add(nsite);
+            Application.Current.Dispatcher.Invoke(() => { this.NetworkSites.Add(nsite);  });      //Handle addition in main thread - this could be called from background
         }
 
         private void NavigateBack()
@@ -229,9 +234,6 @@ namespace sconnRem.Controls.SiteManagment.Wizard
 
         private void SaveSite()
         {
-            //  Sites = new ObservableCollection<sconnSite>(sconnDataShare.getSites());
-          //  sconnDataShare.getSite()
-            //_repository.Update(this.Config);
             sconnDataShare.updateSite(this.Config);
             sconnDataShare.Save();
         }
@@ -264,9 +266,11 @@ namespace sconnRem.Controls.SiteManagment.Wizard
         }
         
         [ImportingConstructor]
-        public SiteConnectionWizardViewModel(sconnSite site, IRegionManager regionManager, ISiteRepository repository )
+        public SiteConnectionWizardViewModel(IRegionManager regionManager, ISiteRepository repository )
         {
-            Config = site;
+            //Config = site;
+            Config = repository.GetCurrentSite();
+
             this._regionManager = regionManager;
             this._repository = repository;
 
@@ -289,22 +293,89 @@ namespace sconnRem.Controls.SiteManagment.Wizard
             OpenUsbListViewCommand = new DelegateCommand(OpenUsbListView);
 
             SelectedSiteChangedCommand = new DelegateCommand<sconnSite>(OnSelectedItemChanged);
+            
+        }
 
-           
-            //if (viewModelConfig.Stage == SiteConnectionWizardStage.Search) //starts at search
-            //{
-            //    this.Stage = SiteConnectionWizardStage.Search;
-            //    SearchForSitesInNetwork(); // start network search
-            //    NavigateToContract(SiteManagmentRegionNames.SiteConnectionWizard_Contract_SearchSitesList_View);
-            //}
-            //else if (Stage == SiteConnectionWizardStage.ManualEntry)
-            //{
-                
-            //}
+
+        public void OnNavigatedTo(NavigationContext navigationContext)
+        {
+            try
+            {
+                if (this.Stage == SiteConnectionWizardStage.Search)
+                {
+                    BackgroundWorker bgWorker = new BackgroundWorker();
+                    bgWorker.DoWork += (s, e) => {
+                        SearchForSitesInNetwork(); // start network search
+                    };
+                    bgWorker.RunWorkerCompleted += (s, e) =>
+                    {
+
+                        Searching = false;
+                    };
+                    Searching = true;
+                    bgWorker.RunWorkerAsync();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                _nlogger.Error(ex, ex.Message);
+            }
 
 
         }
+        
+        public bool IsNavigationTarget(NavigationContext navigationContext)
+        {
+            if (navigationContext.Uri.OriginalString.Equals(SiteManagmentRegionNames.SiteConnectionWizard_Contract_ManualEntry_View) ||
+                navigationContext.Uri.OriginalString.Equals(SiteManagmentRegionNames.SiteConnectionWizard_Contract_MethodSelection_View) ||
+                navigationContext.Uri.OriginalString.Equals(SiteManagmentRegionNames.SiteConnectionWizard_Contract_SearchSitesList_View) ||
+                navigationContext.Uri.OriginalString.Equals(SiteManagmentRegionNames.SiteConnectionWizard_Contract_Summary_View) ||
+                navigationContext.Uri.OriginalString.Equals(SiteManagmentRegionNames.SiteConnectionWizard_Contract_Test_View) ||
+                navigationContext.Uri.OriginalString.Equals(SiteManagmentRegionNames.SiteConnectionWizard_Contract_UsbList_View)
+                )
+            {
+                //set correct stage for navigated view to ensure sync
+                if (
+                    navigationContext.Uri.OriginalString.Equals(
+                        SiteManagmentRegionNames.SiteConnectionWizard_Contract_SearchSitesList_View))
+                {
+                    Stage = SiteConnectionWizardStage.Search;
+                }
+                else if (
+                    navigationContext.Uri.OriginalString.Equals(
+                        SiteManagmentRegionNames.SiteConnectionWizard_Contract_Summary_View))
+                {
+                    Stage = SiteConnectionWizardStage.Summary;
+                }
+                else if (
+                    navigationContext.Uri.OriginalString.Equals(
+                        SiteManagmentRegionNames.SiteConnectionWizard_Contract_ManualEntry_View))
+                {
+                    Stage = SiteConnectionWizardStage.ManualEntry;
+                }
+                else if (
+                    navigationContext.Uri.OriginalString.Equals(
+                        SiteManagmentRegionNames.SiteConnectionWizard_Contract_MethodSelection_View))
+                {
+                    Stage = SiteConnectionWizardStage.MethodSelection;
+                }
+                else if (
+                    navigationContext.Uri.OriginalString.Equals(
+                        SiteManagmentRegionNames.SiteConnectionWizard_Contract_Test_View))
+                {
+                    Stage = SiteConnectionWizardStage.Test;
+                }
+                return true;    //singleton
+            }
+            return false;
+        }
 
+        public void OnNavigatedFrom(NavigationContext navigationContext)
+        {
+         
+        }
+        
 
     }
 

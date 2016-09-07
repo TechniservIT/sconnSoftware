@@ -15,6 +15,7 @@ using sconnConnector.POCO.Config;
 using sconnRem.Infrastructure.Navigation;
 using sconnRem.Navigation;
 using sconnRem.Wnd.Tools;
+using SiteManagmentService;
 
 namespace sconnRem.Controls.Navigation.ViewModel.Navigation
 {
@@ -26,13 +27,38 @@ namespace sconnRem.Controls.Navigation.ViewModel.Navigation
         private readonly IRegionManager _regionManager;
         public AlarmSystemConfigManager Manager { get; set; }
         private IAlarmSystemNavigationService AlarmNavService { get; set; }
-        private Logger _nlogger = LogManager.GetCurrentClassLogger();
+        private ISiteRepository SiteRepository { get; set; }
 
+        private Logger _nlogger = LogManager.GetCurrentClassLogger();
+        
         public ICommand ShowFileImportCommand { get; set; }
         public ICommand ShowFileExportCommand { get; set; }
         public ICommand ShowGlobalPreferencesCommand { get; set; }
         public ICommand ShowSiteWizardCommand { get; set; }
-        
+
+        private void NavigateMainViewToContract(string contract)
+        {
+            try
+            {
+                this._regionManager.RequestNavigate(GlobalViewRegionNames.MainGridContentRegion, contract
+                    ,
+                    (NavigationResult nr) =>
+                    {
+                        var error = nr.Error;
+                        var result = nr.Result;
+                        if (error != null)
+                        {
+                            _nlogger.Error(error);
+                        }
+                    });
+            }
+            catch (Exception ex)
+            {
+                _nlogger.Error(ex, ex.Message);
+
+            }
+
+        }
         private void ShowFileImport()
         {
             try
@@ -116,7 +142,9 @@ namespace sconnRem.Controls.Navigation.ViewModel.Navigation
 
         private void ShowSiteWizard()
         {
-            AlarmNavService.OpenSiteWizard();
+            // AlarmNavService.OpenSiteWizard();
+            SiteRepository.SetCurrentSite(new sconnSite());
+            NavigateMainViewToContract(SiteManagmentRegionNames.SiteConnectionWizard_Contract_ManualEntry_View);
         }
         
         private void SetupCmds()
@@ -133,8 +161,9 @@ namespace sconnRem.Controls.Navigation.ViewModel.Navigation
         }
 
         [ImportingConstructor]
-        public ToolTopMenuViewModel(IRegionManager regionManager, IAlarmSystemNavigationService NavService)
+        public ToolTopMenuViewModel(IRegionManager regionManager, IAlarmSystemNavigationService NavService, ISiteRepository repo)
         {
+            SiteRepository = repo;
             SetupCmds();
             AlarmNavService = NavService;
             this._regionManager = regionManager;

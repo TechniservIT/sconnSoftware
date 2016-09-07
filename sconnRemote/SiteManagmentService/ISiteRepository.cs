@@ -20,6 +20,9 @@ namespace SiteManagmentService
         void Add(sconnSite site);
         void Save();
         void Load();
+
+        sconnSite GetCurrentSite();
+        void SetCurrentSite(sconnSite site);
     }
 
 }

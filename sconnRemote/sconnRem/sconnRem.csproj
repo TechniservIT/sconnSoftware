@@ -477,6 +477,10 @@
       <Project>{97a1614e-9a15-4676-a3e9-9c8182c5b3e4}</Project>
       <Name>sconnRem.Controls.Navigation</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Presentation\sconnRem.Controls.SiteManagment\sconnRem.Controls.SiteManagment.csproj">
+      <Project>{DCA2D971-C53D-4B07-8D06-8F2382549525}</Project>
+      <Name>sconnRem.Controls.SiteManagment</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Presentation\sconnRem.Controls.Status\sconnRem.Controls.Status.csproj">
       <Project>{fbec1121-bba2-41a9-aa91-64cd67de68ff}</Project>
       <Name>sconnRem.Controls.Status</Name>

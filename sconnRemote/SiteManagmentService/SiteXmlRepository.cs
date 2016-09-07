@@ -17,6 +17,7 @@ namespace SiteManagmentService
         private ObservableCollection<sconnSite> Sites;
         private Logger _nlogger = LogManager.GetCurrentClassLogger();
         private sconnDataSrc _configSource = new sconnDataSrc();
+        private sconnSite CurrentSite;
 
         public bool SyncGet { get; set; }
 
@@ -26,6 +27,17 @@ namespace SiteManagmentService
             Sites = new ObservableCollection<sconnSite>();
             Load();
         }
+
+        public sconnSite GetCurrentSite()
+        {
+            return CurrentSite;
+        }
+
+        public void SetCurrentSite(sconnSite site)
+        {
+            CurrentSite = site;
+        }
+
 
         public sconnSite GetSiteById(string Id)
         {

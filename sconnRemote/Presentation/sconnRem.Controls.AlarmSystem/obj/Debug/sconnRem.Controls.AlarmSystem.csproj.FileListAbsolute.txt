@@ -458,13 +458,6 @@ I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSys
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\obj\Debug\View\Status\AlarmSystem\Relays\AlarmRelayConfigureView.baml
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\obj\Debug\View\Status\AlarmSystem\Global\AlarmSystemGlobalStatusView.g.cs
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\obj\Debug\View\Status\AlarmSystem\Global\AlarmSystemGlobalStatusView.baml
-I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\bin\Debug\sconnRem.Shells.dll
-I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\bin\Debug\sconnRem.Controls.SiteManagment.dll
-I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\bin\Debug\sconnRem.Shells.pdb
-I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\bin\Debug\sconnRem.Controls.SiteManagment.pdb
-I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\bin\Debug\de-DE\sconnRem.Shells.resources.dll
-I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\bin\Debug\en-US\sconnRem.Shells.resources.dll
-I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\bin\Debug\pl-PL\sconnRem.Shells.resources.dll
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\bin\Debug\sconnNetworkingServices.dll
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\bin\Debug\sconnNetworkingServices.pdb
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\obj\Debug\View\Status\AlarmSystem\Connectivity\AlarmSystemConnectivityStatusView.g.cs
@@ -528,8 +521,6 @@ I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSys
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\bin\Debug\ru\Xceed.Wpf.AvalonDock.resources.dll
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\bin\Debug\sv\Xceed.Wpf.AvalonDock.resources.dll
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\bin\Debug\zh-Hans\Xceed.Wpf.AvalonDock.resources.dll
-I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\bin\Debug\SiteManagmentService.dll
-I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\bin\Debug\SiteManagmentService.pdb
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\obj\Debug\View\Status\AlarmSystem\Network\AlarmNetworkStatusView.g.cs
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\obj\Debug\View\Status\AlarmSystem\PowerSupply\AlarmPowerStatusListView.g.cs
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\obj\Debug\View\Status\AlarmSystem\Network\AlarmNetworkStatusView.baml
@@ -583,5 +574,3 @@ I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSys
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\obj\Debug\View\Status\AlarmSystem\Zones\AlarmSystemZoneConfigureView.baml
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\bin\Debug\Newtonsoft.Json.dll
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\bin\Debug\Newtonsoft.Json.xml
-I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\bin\Debug\sconnRem.IPC.dll
-I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\bin\Debug\sconnRem.IPC.pdb

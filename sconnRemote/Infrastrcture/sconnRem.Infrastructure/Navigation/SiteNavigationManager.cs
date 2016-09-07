@@ -21,6 +21,7 @@ using sconnConnector.POCO.Config.sconn;
 using sconnConnector.POCO.Device;
 using sconnNetworkingServices.Abstract;
 using sconnRem.Infrastructure.Content;
+using sconnRem.Navigation;
 using sconnRem.Shells.Config;
 
 namespace sconnRem.Infrastructure.Navigation
@@ -421,8 +422,9 @@ namespace sconnRem.Infrastructure.Navigation
 
         public void EditSite(sconnSite site)
         {
-            SiteConnectionWizardBootstrapper boot = new SiteConnectionWizardBootstrapper(site);
-            boot.Run();
+           // SiteConnectionWizardBootstrapper boot = new SiteConnectionWizardBootstrapper(site);
+           // boot.Run();
+
         }
 
         public  void RemoveSite(sconnSite site)
@@ -437,12 +439,13 @@ namespace sconnRem.Infrastructure.Navigation
         }
 
 
+
         public void OpenSiteWizard()
         {
-            SiteConnectionWizardBootstrapper boot = new SiteConnectionWizardBootstrapper();
-            boot.Run();
-          
-            //navigate contract
+            //  SiteConnectionWizardBootstrapper boot = new SiteConnectionWizardBootstrapper();
+            //   boot.Run();
+
+
         }
 
 

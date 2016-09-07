@@ -19,7 +19,8 @@ using sconnRem.Navigation;
 
 namespace sconnRem.Controls.SiteManagment.Wizard
 {
-    [Export]    //(SiteManagmentRegionNames.SiteConnectionWizard_Contract_MethodSelection_View)
+    [Export(SiteManagmentRegionNames.SiteConnectionWizard_Contract_MethodSelection_View)]    //
+    [PartCreationPolicy(CreationPolicy.NonShared)]
     [ViewSortHint("01")]
     public partial class SiteConnectionWizardMethodSelectionView : UserControl
     {

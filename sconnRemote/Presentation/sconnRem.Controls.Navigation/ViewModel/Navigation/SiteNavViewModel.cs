@@ -31,6 +31,7 @@ namespace sconnRem.Controls.Navigation.ViewModel.Navigation
 
         public ObservableCollection<sconnSite> Sites { get; set; }
         private IAlarmSystemNavigationService AlarmNavService { get; set; }
+        private ISiteRepository SiteRepository { get; set; }
 
         private readonly IRegionManager _regionManager;
         public AlarmSystemConfigManager Manager { get; set; }
@@ -42,7 +43,31 @@ namespace sconnRem.Controls.Navigation.ViewModel.Navigation
         public ICommand ViewSiteCommand { get; set; }
 
         public ICommand SearchSitesCommand { get; set; }
-        
+
+        private void NavigateMainViewToContract(string contract)
+        {
+            try
+            {
+                this._regionManager.RequestNavigate(GlobalViewRegionNames.MainGridContentRegion, contract
+                    ,
+                    (NavigationResult nr) =>
+                    {
+                        var error = nr.Error;
+                        var result = nr.Result;
+                        if (error != null)
+                        {
+                            _nlogger.Error(error);
+                        }
+                    });
+            }
+            catch (Exception ex)
+            {
+                _nlogger.Error(ex, ex.Message);
+
+            }
+        }
+
+
         private void ViewSite(sconnSite site)
         {
             try
@@ -86,13 +111,18 @@ namespace sconnRem.Controls.Navigation.ViewModel.Navigation
 
         private void EditSite(sconnSite site)
         {
-            AlarmNavService.EditSite(site);
+            SiteRepository.SetCurrentSite(site);
+            NavigateMainViewToContract(SiteManagmentRegionNames.SiteConnectionWizard_Contract_ManualEntry_View);
+            //AlarmNavService.EditSite(site);
         }
 
         private void SearchSites()
         {
             //AlarmNavService.Stage = SiteConnectionWizardStage.Search;
-            AlarmNavService.OpenSiteWizard();
+
+            //AlarmNavService.OpenSiteWizard();
+
+              NavigateMainViewToContract(SiteManagmentRegionNames.SiteConnectionWizard_Contract_SearchSitesList_View);
         }
 
         private void SetupCmds()
@@ -111,6 +141,7 @@ namespace sconnRem.Controls.Navigation.ViewModel.Navigation
             {
                 this._regionManager = regionManager;
                 AlarmNavService = NavService;
+                SiteRepository = repository;
                 SetupCmds();
                 Sites = sconnDataShare.sconnSites;
                 Sites.CollectionChanged += Sites_CollectionChanged;

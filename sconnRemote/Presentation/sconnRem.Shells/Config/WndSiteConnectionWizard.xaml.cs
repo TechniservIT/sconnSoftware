@@ -41,7 +41,7 @@ namespace sconnRem.Shells.Config
             this.RegionManager.RequestNavigate(SiteManagmentRegionNames.MainContentRegion,
                (((SiteConnectionWizardViewModel)this.DataContext).Config.serverIP != null
                  ? SiteManagmentRegionNames.SiteConnectionWizard_Contract_ManualEntry_View
-                 : SiteManagmentRegionNames.SiteConnectionWizard_Contract_MethodSelection_View));
+                 : SiteManagmentRegionNames.SiteConnectionWizard_Contract_SearchSitesList_View));
 
         }
 

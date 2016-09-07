@@ -117,3 +117,5 @@ I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Wnd\bin\Debug\Gra
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Wnd\bin\Debug\QuickGraph.xml
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Wnd\bin\Debug\Newtonsoft.Json.dll
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Wnd\bin\Debug\Newtonsoft.Json.xml
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Wnd\bin\Debug\sconnRem.IPC.dll
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Wnd\bin\Debug\sconnRem.IPC.pdb

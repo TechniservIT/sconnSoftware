@@ -12,6 +12,8 @@ namespace SiteManagmentService
     {
         private ObservableCollection<sconnSite> Sites;
 
+        private sconnSite CurrentSite;
+
         public SiteSqlRepository()
         {
             Sites = new ObservableCollection<sconnSite>();
@@ -60,6 +62,14 @@ namespace SiteManagmentService
 
         }
 
+        public sconnSite GetCurrentSite()
+        {
+            return CurrentSite;
+        }
 
+        public void SetCurrentSite(sconnSite site)
+        {
+            CurrentSite = site;
+        }
     }
 }

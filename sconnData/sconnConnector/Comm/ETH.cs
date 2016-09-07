@@ -27,7 +27,7 @@ namespace sconnConnector
 
 /***** Ethernet ******/
 
-    public class SconnClient
+    public class SconnClient :IDisposable
     {
 
         public Socket clientSocket { get; set; }
@@ -502,8 +502,14 @@ namespace sconnConnector
           
         }
 
-
-
+        public void Dispose()
+        {
+            CloseConnection();
+            if (_globalUdp.UdpClient != null)
+            {
+                _globalUdp.UdpClient.Close();
+            }
+        }
 
 
         /************** SEARCHING  UDP *************/
@@ -538,6 +544,11 @@ namespace sconnConnector
         {
             try
             {
+                //close previous first
+                if (_globalUdp.UdpClient != null)
+                {
+                    _globalUdp.UdpClient.Close();
+                }
 
                 _globalUdp.UdpClient = new UdpClient();
                 _globalUdp.Ep = new System.Net.IPEndPoint(System.Net.IPAddress.Parse("255.255.255.255"), 30303);
