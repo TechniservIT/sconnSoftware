@@ -85,8 +85,8 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm.EntityList
                 sconnAuthorizedDevice d = new sconnAuthorizedDevice();
                 d.UUID = Guid.NewGuid().ToString();
                 d.Id = (ushort)entities.Count;
-                d._Enabled = false;
-                d._Serial = Guid.NewGuid().ToString();
+                d.Enabled = false;
+                d.Serial = Guid.NewGuid().ToString();
                 bool added = false;
                 BackgroundWorker bgWorker = new BackgroundWorker();
                 bgWorker.DoWork += (s, e) => {

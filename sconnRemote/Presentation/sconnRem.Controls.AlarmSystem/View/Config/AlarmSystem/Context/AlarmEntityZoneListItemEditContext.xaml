@@ -124,7 +124,7 @@
 
 
                     <Label Grid.Column="0" Grid.Row="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="Name" />
-                    <TextBox Grid.Column="0" Grid.Row="1" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Text="{Binding  Config.Name}"/>
+                    <TextBox Grid.Column="0" Grid.Row="1" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Text="{Binding  Config.Name, Mode=TwoWay}"/>
 
 
                     <Label Grid.Column="0" Grid.Row="2" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="Type" />
@@ -137,7 +137,7 @@
                           />
 
                     <Label Grid.Column="0" Grid.Row="4" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="Enabled" />
-                    <Label Grid.Column="0" Grid.Row="5" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="{Binding Config.Enabled}" />
+                    <Label Grid.Column="0" Grid.Row="5" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="{Binding Config.Enabled, Mode=TwoWay}" />
 
 
 

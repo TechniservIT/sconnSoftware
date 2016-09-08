@@ -11,10 +11,12 @@ namespace sconnConnector.POCO.Config.sconn
     public class sconnAuthorizedDevice : IAlarmSystemConfigurationEntity, ISerializableConfiguration, IFakeAbleConfiguration
     {
         public ushort Id { get; set; }
-        public string _Serial { get; set; }
-        public bool _Enabled { get; set; }
-        public DateTime _AllowedFrom { get; set; }
-        public DateTime _AllowedUntil { get; set; }
+
+        public string Serial { get; set; }
+        public bool Enabled { get; set; }
+        public DateTime AllowedFrom { get; set; }
+        public DateTime AllowedUntil { get; set; }
+
         public ushort Value { get; set; }
 
         private static Logger _logger = LogManager.GetCurrentClassLogger();
@@ -34,7 +36,7 @@ namespace sconnConnector.POCO.Config.sconn
             try
             {
                 byte[] bytes = new byte[ipcDefines.SYS_ALRM_DEV_AUTH_LEN];
-                char[] uuidBytes = _Serial.ToCharArray();
+                char[] uuidBytes = Serial.ToCharArray();
                 int uuidStrLen = uuidBytes.Length > ipcDefines.SYS_ALRM_DEV_UUID_LEN
                     ? ipcDefines.SYS_ALRM_DEV_UUID_LEN
                     : uuidBytes.Length;
@@ -42,7 +44,7 @@ namespace sconnConnector.POCO.Config.sconn
                 {
                     bytes[j] = (byte)uuidBytes[j];
                 }
-                bytes[ipcDefines.SYS_ALRM_DEV_ENABLED_POS] = (byte)(_Enabled ? 1 : 0);
+                bytes[ipcDefines.SYS_ALRM_DEV_ENABLED_POS] = (byte)(Enabled ? 1 : 0);
                 //TODO date range serialize/deserialize
                 return bytes;
             }
@@ -89,9 +91,9 @@ namespace sconnConnector.POCO.Config.sconn
                 uuid = ByteArrayToHexViaLookupAndShift(uuidBytes); //  Encoding.BigEndianUnicode.GetString(uuidBytes);
                 if (uuid.Length != 0)
                 {
-                    _Serial = uuid;
+                    Serial = uuid;
                 }
-                this._Enabled = buffer[ipcDefines.SYS_ALRM_DEV_ENABLED_POS] > 0 ? true : false;
+                this.Enabled = buffer[ipcDefines.SYS_ALRM_DEV_ENABLED_POS] > 0 ? true : false;
             }
             catch (Exception e)
             {
@@ -105,8 +107,8 @@ namespace sconnConnector.POCO.Config.sconn
             try
             {
                 this.Id = 0;
-                this._Enabled = true;
-                this._Serial = Guid.NewGuid().ToString();
+                this.Enabled = true;
+                this.Serial = Guid.NewGuid().ToString();
             }
             catch (Exception e)
             {

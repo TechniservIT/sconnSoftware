@@ -102,30 +102,32 @@
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="0.1*"/>
-                        <RowDefinition Height="0.4*"/>
                         <RowDefinition Height="0.1*"/>
-                        <RowDefinition Height="0.2*"/>
                         <RowDefinition Height="0.1*"/>
-                        <RowDefinition Height="0.2*"/>
+                        <RowDefinition Height="0.1*"/>
+                        <RowDefinition Height="0.1*"/>
+                        <RowDefinition Height="0.3*"/>
+                        <RowDefinition Height="0.1*"/>
+                        <RowDefinition Height="0.1*"/>
                     </Grid.RowDefinitions>
  
                     <Label Grid.Column="0" Grid.Row="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="Code" />
-                    <TextBox Grid.Column="0" Grid.Row="1" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Text="{Binding  Config.Code}"/>
+                    <TextBox Grid.Column="0" Grid.Row="1" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Text="{Binding  Config.Code, Mode=TwoWay}"/>
 
                     <Label Grid.Column="0" Grid.Row="2" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="Card" />
-                    <TextBox Grid.Column="0" Grid.Row="3" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Text="{Binding  Config.Card}"/>
+                    <TextBox Grid.Column="0" Grid.Row="3" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Text="{Binding  Config.Card, Mode=TwoWay}"/>
 
                     <Label Grid.Column="0" Grid.Row="4" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="Permissions" />
                     <ListBox  Grid.Column="0" Grid.Row="5" ItemsSource="{Binding Config.Permissions}" >
                         <ListBox.ItemTemplate>
                             <HierarchicalDataTemplate>
-                                <CheckBox Content="{Binding Name}" IsChecked="{Binding Enabled}"/>
+                                <CheckBox Content="{Binding Name}" IsChecked="{Binding Enabled, Mode=TwoWay}"/>
                             </HierarchicalDataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
 
-                    <Label Grid.Column="0" Grid.Row="4" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="Enabled" />
-                    <Label Grid.Column="0" Grid.Row="5" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="{Binding Config.Enabled}" />
+                    <Label Grid.Column="0" Grid.Row="6" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="Enabled" />
+                    <Label Grid.Column="0" Grid.Row="7" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="{Binding Config.Enabled, Mode=TwoWay}" />
 
 
                 </Grid>

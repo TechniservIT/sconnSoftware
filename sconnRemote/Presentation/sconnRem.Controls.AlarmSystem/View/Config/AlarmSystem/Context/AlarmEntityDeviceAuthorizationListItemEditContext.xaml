@@ -102,18 +102,21 @@
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="0.1*"/>
-                        <RowDefinition Height="0.4*"/>
                         <RowDefinition Height="0.1*"/>
-                        <RowDefinition Height="0.2*"/>
                         <RowDefinition Height="0.1*"/>
-                        <RowDefinition Height="0.2*"/>
+                        <RowDefinition Height="0.1*"/>
+                        <RowDefinition Height="0.3*"/>
+                        <RowDefinition Height="0.3*"/>
                     </Grid.RowDefinitions>
 
+                    <Label Grid.Column="0" Grid.Row="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="Serial code" />
+                    <TextBox Grid.Column="0" Grid.Row="1" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Text="{Binding  Config.Serial, Mode=TwoWay}"/>
+
+                    <Label Grid.Column="0" Grid.Row="2" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="Enabled" />
+                    <Label Grid.Column="0" Grid.Row="3" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="{Binding Config.Enabled, Mode=TwoWay}" />
 
 
                 </Grid>
-
-
 
             </Grid>
 

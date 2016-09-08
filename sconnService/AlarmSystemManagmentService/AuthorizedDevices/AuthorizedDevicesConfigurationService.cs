@@ -117,10 +117,10 @@ namespace AlarmSystemManagmentService
                    .ToList()
                    .ForEach(x =>
                    {
-                       x._Serial = device._Serial;
-                       x._Enabled = device._Enabled;
-                       x._AllowedFrom = device._AllowedFrom;
-                       x._AllowedUntil = device._AllowedUntil;
+                       x.Serial = device.Serial;
+                       x.Enabled = device.Enabled;
+                       x.AllowedFrom = device.AllowedFrom;
+                       x.AllowedUntil = device.AllowedUntil;
                    }
                    );
                 return SaveChanges();

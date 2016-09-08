@@ -8,9 +8,21 @@
              xmlns:config="clr-namespace:sconnConnector.POCO.Config;assembly=sconnConnector"
              xmlns:System="clr-namespace:System;assembly=mscorlib"
              xmlns:sconn="clr-namespace:sconnConnector.POCO.Config.sconn;assembly=sconnConnector"
+             xmlns:auth="clr-namespace:sconnConnector.POCO.Config.Abstract;assembly=sconnConnector"
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="200">
 
+    <UserControl.Resources>
+        <ObjectDataProvider x:Key="GsmMessagingLevelType" MethodName="GetValues"
+                            ObjectType="{x:Type System:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="auth:GsmMessagingLevel"/>
+            </ObjectDataProvider.MethodParameters>
+
+        </ObjectDataProvider>
+        
+        </UserControl.Resources>
+        
     <xctk:BusyIndicator  IsBusy="{Binding Loading}">
 
         <Grid>
@@ -102,18 +114,37 @@
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="0.1*"/>
-                        <RowDefinition Height="0.4*"/>
                         <RowDefinition Height="0.1*"/>
-                        <RowDefinition Height="0.2*"/>
                         <RowDefinition Height="0.1*"/>
-                        <RowDefinition Height="0.2*"/>
+                        <RowDefinition Height="0.1*"/>
+                        <RowDefinition Height="0.1*"/>
+                        <RowDefinition Height="0.3*"/>
+                        <RowDefinition Height="0.1*"/>
+                        <RowDefinition Height="0.1*"/>
                     </Grid.RowDefinitions>
 
+                    <Label Grid.Column="0" Grid.Row="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="Name" />
+                    <TextBox Grid.Column="0" Grid.Row="1" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Text="{Binding  Config.Name, Mode=TwoWay}"/>
 
+                    <Label Grid.Column="0" Grid.Row="2" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="Phone Number" />
+                    <TextBox Grid.Column="0" Grid.Row="3" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Text="{Binding  Config.NumberE164, Mode=TwoWay}"/>
+                    
+                    <Label Grid.Column="0" Grid.Row="4" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="Type" />
+                    <ComboBox x:Name="cmb12"  
+                            ItemsSource="{Binding Source={StaticResource GsmMessagingLevelType}}"
+                        Grid.Column="0" Grid.Row="5"
+                          HorizontalAlignment="Stretch"
+                          HorizontalContentAlignment="Stretch" 
+                          SelectedValue="{Binding  Config.MessageLevel}" 
+                           SelectedItem="{Binding  Config.MessageLevel, Mode=TwoWay}" 
+                          />
+
+                    <Label Grid.Column="0" Grid.Row="6" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="Enabled" />
+                    <Label Grid.Column="0" Grid.Row="7" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="{Binding Config.Enabled, Mode=TwoWay}" />
+
+                    
 
                 </Grid>
-
-
 
             </Grid>
 

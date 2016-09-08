@@ -89,7 +89,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm.EntityList
                 d.Enabled = false;
                 d.Card = Guid.NewGuid().ToString();
                 d.Code = Guid.NewGuid().ToString();
-                d.Permissions = 0;
+                d.Permissions = new ObservableCollection<sconnAlarmUserPermission>();
                 d.DomainId = 0;
                 d.AllowedUntil = DateTime.MaxValue;
 

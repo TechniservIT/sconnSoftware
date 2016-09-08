@@ -55,6 +55,8 @@ namespace sconnConnector.POCO.Config.sconn.User
 
             public sconnAlarmSystemUser()
             {
+                Permissions = new ObservableCollection<sconnAlarmUserPermission>();
+
                 UUID = Guid.NewGuid().ToString();
             }
 
@@ -75,18 +77,26 @@ namespace sconnConnector.POCO.Config.sconn.User
 
             private void DeserializePermissions(byte[] config)
             {
-                BitArray b = new BitArray(config);
-                for (int i = ipcDefines.USER_DB_UPERM_POS; i < (ipcDefines.USER_DB_UPERM_POS + ipcDefines.USER_DB_UPERM_LEN*8); i++)
+                try
                 {
-                    sconnAlarmUserPermission perm = new sconnAlarmUserPermission {Name = GetPermissionNameForIndex(i)};
-                    if (b.Get(i))
+                    BitArray b = new BitArray(config);
+                    for (int i = ipcDefines.USER_DB_UPERM_POS; i < (ipcDefines.USER_DB_UPERM_POS + ipcDefines.USER_DB_UPERM_LEN * 8); i++)
                     {
-                        perm.Enabled = true;
-                    }
-                    perm.Id = i;
+                        sconnAlarmUserPermission perm = new sconnAlarmUserPermission { Name = GetPermissionNameForIndex(i) };
+                        if (b.Get(i))
+                        {
+                            perm.Enabled = true;
+                        }
+                        perm.Id = i;
 
-                    this.Permissions.Add(perm);
+                        this.Permissions.Add(perm);
+                    }
                 }
+                catch (Exception ex)
+                {
+                 _logger.Error(ex, ex.Message);
+            }
+
         }
 
             public byte[] Serialize()
