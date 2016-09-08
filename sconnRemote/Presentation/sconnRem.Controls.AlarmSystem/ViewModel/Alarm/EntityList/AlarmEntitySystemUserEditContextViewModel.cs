@@ -85,7 +85,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm.EntityList
                 var entities = new ObservableCollection<sconnAlarmSystemUser>(_provider.GetAll());
                 sconnAlarmSystemUser d = new sconnAlarmSystemUser();
                 d.UUID = Guid.NewGuid().ToString();
-                d.Id = entities.Count;
+                d.Id = (ushort)entities.Count;
                 d.Enabled = false;
                 d.Card = Guid.NewGuid().ToString();
                 d.Code = Guid.NewGuid().ToString();

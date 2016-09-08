@@ -44,6 +44,7 @@ namespace sconnConnector.POCO.Config.sconn
             {
                 //serialize
                 byte[] Bytes = new byte[ipcDefines.RAM_SMS_RECP_SIZE];
+                AlarmSystemConfig_Helpers.WriteWordToBufferAtPossition(Id, Bytes, ipcDefines.RAM_SMS_RECP_ID_POS);
                 Bytes[ipcDefines.RAM_SMS_RECP_COUNTRY_CODE_POS] = (byte)(CountryCode << 8);
                 Bytes[ipcDefines.RAM_SMS_RECP_COUNTRY_CODE_POS + 1] = (byte)CountryCode;
                 Bytes[ipcDefines.RAM_SMS_RECP_MESSAGE_LEVEL_POS] = (byte) MessageLevel;
@@ -70,7 +71,9 @@ namespace sconnConnector.POCO.Config.sconn
         {
             try
             {
-                //decode
+                // this.Id = System.BitConverter.ToUInt16(buffer, ipcDefines.RAM_SMS_RECP_ID_POS);
+                Id = (ushort)AlarmSystemConfig_Helpers.GetWordFromBufferAtPossition(buffer, ipcDefines.RAM_SMS_RECP_ID_POS);
+
                 CountryCode = buffer[ipcDefines.RAM_SMS_RECP_COUNTRY_CODE_POS] << 8;
                 CountryCode |= buffer[ipcDefines.RAM_SMS_RECP_COUNTRY_CODE_POS + 1];
                 if (Enum.IsDefined(typeof (GsmMessagingLevel), (int)buffer[ipcDefines.RAM_SMS_RECP_MESSAGE_LEVEL_POS]))

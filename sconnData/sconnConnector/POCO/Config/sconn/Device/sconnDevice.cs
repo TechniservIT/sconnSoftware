@@ -214,7 +214,8 @@ namespace sconnConnector.POCO.Config.sconn
 
         private void LoadDeviceStaticInfo()
         {
-            this.Id = System.BitConverter.ToUInt16(_memCFG, ipcDefines.mAdrDevID);
+           // this.Id = System.BitConverter.ToUInt16(_memCFG, ipcDefines.mAdrDevID);
+            Id = (ushort)AlarmSystemConfig_Helpers.GetWordFromBufferAtPossition(_memCFG, ipcDefines.mAdrDevID);
             this.KeypadModule = memCFG[ipcDefines.mAdrKeypadMod] > 0 ? true : false;
             this.TemperatureModule = memCFG[ipcDefines.mAdrTempMod] > 0 ? true : false;
             this.HumidityModule = memCFG[ipcDefines.mAdrHumMod] > 0 ? true : false;
@@ -228,6 +229,25 @@ namespace sconnConnector.POCO.Config.sconn
                 Type = (sconnDeviceType)memCFG[ipcDefines.mAdrDevType];
             }
         }
+
+        private void StoreDeviceStaticInfo()
+        {
+            
+            AlarmSystemConfig_Helpers.WriteWordToBufferAtPossition(Id, memCFG, ipcDefines.mAdrDevID);
+            memCFG[ipcDefines.mAdrKeypadMod] = (byte) (this.KeypadModule ? 1 : 0);
+            memCFG[ipcDefines.mAdrTempMod] = (byte)(this.TemperatureModule ? 1 : 0);
+            memCFG[ipcDefines.mAdrHumMod] = (byte)(this.HumidityModule ? 1 : 0);
+            memCFG[ipcDefines.comMiWi] = (byte)(this.ComMiWi ? 1 : 0);
+            memCFG[ipcDefines.comETH] = (byte)(this.ComTcpIp ? 1 : 0);
+            memCFG[ipcDefines.mAdrDomain] = (byte)this.DomainNumber;
+            memCFG[ipcDefines.mAdrDevRev] = (byte)this.Revision;
+
+            if (Enum.IsDefined(typeof(sconnDeviceType), (int)memCFG[ipcDefines.mAdrDevType]))
+            {
+                Type = (sconnDeviceType)memCFG[ipcDefines.mAdrDevType];
+            }
+        }
+
 
         public static string GetDeviceTypeImageUriForDeviceType(sconnDeviceType Type)
         {
@@ -517,7 +537,15 @@ namespace sconnConnector.POCO.Config.sconn
         {
             try
             {
+                //LoadInputsFromConfig();
+                //LoadOutputsFromConfig();
+                //LoadRelayFromConfig();
+                //LoadSupplyVoltageLevels();
+                //LoadDeviceStaticInfo();
+                //LoadDeviceNames();
+                //LoadImageTypeUrl();
 
+                StoreDeviceStaticInfo();
 
                 _memCFG[ipcDefines.mAdrInputsNO]  = (byte) InputNo;
                 foreach (var item in Inputs)

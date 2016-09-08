@@ -23,7 +23,7 @@ namespace sconnConnector.POCO.Config.sconn.User
     public class sconnAlarmSystemUser : IAlarmSystemConfigurationEntity, ISerializableConfiguration, IFakeAbleConfiguration
     {
             [Required]
-            public int Id { get; set; }
+            public ushort Id { get; set; }
 
             [Required]
             public int DomainId { get; set; }
@@ -104,9 +104,7 @@ namespace sconnConnector.POCO.Config.sconn.User
                 try
                 {
                     byte[] buffer = new byte[ipcDefines.USER_DB_USER_RECORD_LEN];
-
-                    SerializePermissions(buffer); //buffer[ipcDefines.USER_DB_UPERM_POS+1] = (byte)Permissions;
-
+                    AlarmSystemConfig_Helpers.WriteWordToBufferAtPossition(Id, buffer, ipcDefines.USER_DB_UID_POS);
                     buffer[ipcDefines.USER_DB_ENABLED_POS] = (byte)(Enabled ? 1 : 0);
                     byte[] passB = Encoding.ASCII.GetBytes(Code);   //only numeric ascii code
                     int passwdBytes = passB.Length > ipcDefines.USER_DB_CODE_LEN ? ipcDefines.USER_DB_CODE_LEN : passB.Length;
@@ -146,10 +144,12 @@ namespace sconnConnector.POCO.Config.sconn.User
                 try
                 {
                     if (buffer.Length >= ipcDefines.USER_DB_USER_RECORD_LEN)
-                {
-                        DeserializePermissions(buffer);   // Permissions = buffer[ipcDefines.USER_DB_UPERM_POS+1];
+                    {
+                        DeserializePermissions(buffer);
+                     //   this.Id = System.BitConverter.ToUInt16(buffer, ipcDefines.USER_DB_UID_POS);
+                        Id = (ushort)AlarmSystemConfig_Helpers.GetWordFromBufferAtPossition(buffer, ipcDefines.USER_DB_UID_POS);
 
-                        Enabled = buffer[ipcDefines.USER_DB_ENABLED_POS] > 0;
+                    Enabled = buffer[ipcDefines.USER_DB_ENABLED_POS] > 0;
 
                         byte passLen = buffer[ipcDefines.USER_DB_CODESIZE_POS];
                         if (passLen <= ipcDefines.USER_DB_CODE_LEN)

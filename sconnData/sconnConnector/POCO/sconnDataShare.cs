@@ -1071,7 +1071,9 @@ public static class sconnDataShare
 
         /**********************  AUTH *********************/
         public const int AUTH_PASS_SIZE = RAM_NAME_SIZE;       // pass  15 x 2b UTF8
-        public const int AUTH_RECORD_PASS_LEN_POS = 0x00;
+        public const int AUTH_RECORD_ID_POS = 0x00;
+        public const int AUTH_RECORD_ID_LEN = 0x02;
+        public const int AUTH_RECORD_PASS_LEN_POS = (AUTH_RECORD_ID_POS+ AUTH_RECORD_ID_POS);
         public const int AUTH_RECORD_PASS_LEN_LEN = 0x01;
         public const int AUTH_RECORD_ENABLED_POS = (AUTH_RECORD_PASS_LEN_POS + AUTH_RECORD_PASS_LEN_LEN);
         public const int AUTH_RECORD_ENABLED_LEN = 0x01;
@@ -1121,7 +1123,11 @@ public static class sconnDataShare
         public const byte NET_PACKET_TYPE_DEVAUTHCFG = 0x0009;
         public const byte NET_PACKET_TYPE_GLOBNAMECFG = 0x000A;
 
-        public const int SYS_ALRM_DEV_UUID_POS = 0x00;
+        public const int SYS_ALRM_DEV_AUTH_ID_POS = 0x00;
+        public const int SYS_ALRM_DEV_AUTH_ID_LEN = 2;
+        public const int SYS_ALRM_DEV_DOMAIN_POS = (SYS_ALRM_DEV_AUTH_ID_POS + SYS_ALRM_DEV_AUTH_ID_LEN);
+        public const int SYS_ALRM_DEV_DOMAIN_LEN = 0x01;
+        public const int SYS_ALRM_DEV_UUID_POS = (SYS_ALRM_DEV_AUTH_ID_POS+ SYS_ALRM_DEV_AUTH_ID_LEN);
         public const int SYS_ALRM_DEV_UUID_LEN = 16;
         public const int SYS_ALRM_DEV_ENABLED_POS = (SYS_ALRM_DEV_UUID_POS + SYS_ALRM_DEV_UUID_LEN);
         public const int SYS_ALRM_DEV_ENABLED_LEN = 0x01;

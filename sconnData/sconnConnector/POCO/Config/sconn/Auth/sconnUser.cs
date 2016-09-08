@@ -72,6 +72,7 @@ namespace sconnConnector.POCO.Config.Abstract.Auth
             try
             {
                 byte[] buffer = new byte[ipcDefines.AUTH_RECORD_SIZE];
+                AlarmSystemConfig_Helpers.WriteWordToBufferAtPossition(Id, buffer, ipcDefines.AUTH_RECORD_ID_POS);
                 buffer[ipcDefines.AUTH_RECORD_PERM_POS] = (byte)Permissions;
                 buffer[ipcDefines.AUTH_RECORD_ENABLED_POS] = (byte)(Enabled ? 1 : 0);
                 buffer[ipcDefines.AUTH_RECORD_GROUP_POS] = (byte)Group;
@@ -116,6 +117,8 @@ namespace sconnConnector.POCO.Config.Abstract.Auth
             {
                 if (buffer.Length >= ipcDefines.AUTH_RECORD_SIZE)
                 {
+                    //this.Id = System.BitConverter.ToUInt16(buffer, ipcDefines.AUTH_RECORD_ID_POS);
+                    Id = (ushort)AlarmSystemConfig_Helpers.GetWordFromBufferAtPossition(buffer, ipcDefines.AUTH_RECORD_ID_POS);
                     Permissions = buffer[ipcDefines.AUTH_RECORD_PERM_POS];
                     Enabled = buffer[ipcDefines.AUTH_RECORD_ENABLED_POS] > 0 ? true : false;
                     if (Enum.IsDefined(typeof(sconnRemoteUserGroup), (int)buffer[ipcDefines.AUTH_RECORD_GROUP_POS]))

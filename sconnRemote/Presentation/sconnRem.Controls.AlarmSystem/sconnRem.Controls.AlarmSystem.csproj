@@ -179,8 +179,14 @@
     <Compile Include="View\Config\AlarmSystem\Context\AlarmEntityGsmRcptListItemEditContext.xaml.cs">
       <DependentUpon>AlarmEntityGsmRcptListItemEditContext.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Config\AlarmSystem\Context\AlarmEntityInputListItemEditContext.xaml.cs">
+      <DependentUpon>AlarmEntityInputListItemEditContext.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Config\AlarmSystem\Context\AlarmEntityListItemContext.xaml.cs">
       <DependentUpon>AlarmEntityListItemContext.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Config\AlarmSystem\Context\AlarmEntityOutputListItemEditContext.xaml.cs">
+      <DependentUpon>AlarmEntityOutputListItemEditContext.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Config\AlarmSystem\Context\AlarmEntityRemoteAccountListItemEditContext.xaml.cs">
       <DependentUpon>AlarmEntityRemoteAccountListItemEditContext.xaml</DependentUpon>
@@ -454,7 +460,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Config\AlarmSystem\Context\AlarmEntityInputListItemEditContext.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Config\AlarmSystem\Context\AlarmEntityListItemContext.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Config\AlarmSystem\Context\AlarmEntityOutputListItemEditContext.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

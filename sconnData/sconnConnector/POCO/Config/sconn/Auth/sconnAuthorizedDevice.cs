@@ -36,6 +36,7 @@ namespace sconnConnector.POCO.Config.sconn
             try
             {
                 byte[] bytes = new byte[ipcDefines.SYS_ALRM_DEV_AUTH_LEN];
+                AlarmSystemConfig_Helpers.WriteWordToBufferAtPossition(Id, bytes, ipcDefines.SYS_ALRM_DEV_AUTH_ID_POS);
                 char[] uuidBytes = Serial.ToCharArray();
                 int uuidStrLen = uuidBytes.Length > ipcDefines.SYS_ALRM_DEV_UUID_LEN
                     ? ipcDefines.SYS_ALRM_DEV_UUID_LEN
@@ -82,6 +83,10 @@ namespace sconnConnector.POCO.Config.sconn
             try
             {
                 // TODO date range
+
+               // this.Id = System.BitConverter.ToUInt16(buffer, ipcDefines.SYS_ALRM_DEV_AUTH_ID_POS);
+                Id = (ushort)AlarmSystemConfig_Helpers.GetWordFromBufferAtPossition(buffer, ipcDefines.SYS_ALRM_DEV_AUTH_ID_POS);
+
                 string uuid;
                 byte[] uuidBytes = new byte[ipcDefines.SYS_ALRM_UUID_LEN];
                 for (int j = 0; j < ipcDefines.SYS_ALRM_UUID_LEN; j++)

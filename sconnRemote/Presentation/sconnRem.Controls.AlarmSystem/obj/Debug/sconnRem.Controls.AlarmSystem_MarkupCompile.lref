@@ -1,4 +1,4 @@
-﻿
+﻿I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\obj\Debug\GeneratedInternalTypeHelper.g.cs
 
 FI:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\View\Config\AlarmSystem\Auth\AlarmAuthRecordView.xaml;;
 FI:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\View\Config\AlarmSystem\Auth\AuthConfigView.xaml;;
@@ -8,7 +8,9 @@ FI:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSy
 FI:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\View\Config\AlarmSystem\ConfigSelectView.xaml;;
 FI:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\View\Config\AlarmSystem\Context\AlarmEntityDeviceAuthorizationListItemEditContext.xaml;;
 FI:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\View\Config\AlarmSystem\Context\AlarmEntityGsmRcptListItemEditContext.xaml;;
+FI:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\View\Config\AlarmSystem\Context\AlarmEntityInputListItemEditContext.xaml;;
 FI:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\View\Config\AlarmSystem\Context\AlarmEntityListItemContext.xaml;;
+FI:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\View\Config\AlarmSystem\Context\AlarmEntityOutputListItemEditContext.xaml;;
 FI:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\View\Config\AlarmSystem\Context\AlarmEntityRemoteAccountListItemEditContext.xaml;;
 FI:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\View\Config\AlarmSystem\Context\AlarmEntitySystemUserListItemEditContext.xaml;;
 FI:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\View\Config\AlarmSystem\Context\AlarmEntityZoneListItemEditContext.xaml;;
