@@ -5,6 +5,7 @@ using sconnConnector.POCO.Config.Abstract;
 using sconnRem.ViewModel.Generic;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
@@ -40,9 +41,25 @@ namespace sconnRem.ViewModel.Alarm
             
         }
 
+        private ObservableCollection<sconnAlarmZone> _zones;
+        public ObservableCollection<sconnAlarmZone> Zones
+        {
+            get { return _zones; }
+            set
+            {
+                _zones = value;
+                OnPropertyChanged();
+            }
+        }
+
+
         private GlobalConfigService _provider;
+        private ZoneConfigurationService zoneConfigurationService;
         private AlarmSystemConfigManager _manager;
         private IAlarmSystemNavigationService AlarmNavService { get; set; }
+
+        public ICommand ToggleArmAllCommand { get; set; }
+        public ICommand ToggleZoneArmCommand { get; set; }
 
         private string _armedIconPath;
         public string ArmStateIconPath
@@ -71,6 +88,7 @@ namespace sconnRem.ViewModel.Alarm
                 if (AlarmNavService.Online)
                 {
                     Config = _provider.Get();
+                    Zones = new ObservableCollection<sconnAlarmZone>(zoneConfigurationService.GetAll());
                 }
                 else
                 {
@@ -85,13 +103,19 @@ namespace sconnRem.ViewModel.Alarm
             }
         }
 
-        public void ToggleArmed()
+        public void ToggleArmAll()
         {
             SaveData(); //Upload toggled arm state
             GetData();
         }
 
-
+        public void ToggleZoneArm(sconnAlarmZone zone)
+        {
+            zone.Armed = !zone.Armed;
+            zoneConfigurationService.Update(zone);
+            this.GetData();
+        }
+        
 
         public override void SaveData()
         {
@@ -102,11 +126,13 @@ namespace sconnRem.ViewModel.Alarm
         {
             _name = "Gcfg";
             this._provider = new GlobalConfigService(_manager);
+            zoneConfigurationService = new ZoneConfigurationService(_manager);
         }
 
         public void SetupCmds()
         {
-            ToggleArmedCommand = new DelegateCommand(ToggleArmed);
+            ToggleArmAllCommand = new DelegateCommand(ToggleArmAll);
+            ToggleZoneArmCommand = new DelegateCommand<sconnAlarmZone>(ToggleZoneArm);
         }
       
 
@@ -118,6 +144,7 @@ namespace sconnRem.ViewModel.Alarm
             AlarmNavService = NavService;
             this._manager = AlarmNavService.alarmSystemConfigManager;
             this._provider = new GlobalConfigService(_manager);
+            zoneConfigurationService = new ZoneConfigurationService(_manager);
             this._regionManager = regionManager;
         }
 

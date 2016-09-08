@@ -25,6 +25,7 @@ namespace sconnConnector.POCO.Config.sconn
         public AlarmZoneType Type { get; set; }
         public bool Enabled { get; set; }
         public ushort NameId { get; set; }
+        public bool Armed { get; set; }
 
         public string imageIconUri { get; set; }
         public string imageRealUri { get; set; }
