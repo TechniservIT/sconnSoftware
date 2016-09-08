@@ -125,6 +125,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
         public AlarmInputConfigViewModel(IRegionManager regionManager, IAlarmSystemNavigationService NavService)
         {
             SetupCmds();
+            AlarmNavService = NavService;
             this._manager = AlarmNavService.alarmSystemConfigManager;
             AlarmNavService = NavService;
             this._regionManager = regionManager;

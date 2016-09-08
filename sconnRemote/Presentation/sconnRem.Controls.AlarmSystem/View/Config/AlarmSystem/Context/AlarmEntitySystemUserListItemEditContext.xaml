@@ -108,12 +108,27 @@
                         <RowDefinition Height="0.1*"/>
                         <RowDefinition Height="0.2*"/>
                     </Grid.RowDefinitions>
+ 
+                    <Label Grid.Column="0" Grid.Row="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="Code" />
+                    <TextBox Grid.Column="0" Grid.Row="1" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Text="{Binding  Config.Code}"/>
 
+                    <Label Grid.Column="0" Grid.Row="2" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="Card" />
+                    <TextBox Grid.Column="0" Grid.Row="3" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Text="{Binding  Config.Card}"/>
+
+                    <Label Grid.Column="0" Grid.Row="4" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="Permissions" />
+                    <ListBox  Grid.Column="0" Grid.Row="5" ItemsSource="{Binding Config.Permissions}" >
+                        <ListBox.ItemTemplate>
+                            <HierarchicalDataTemplate>
+                                <CheckBox Content="{Binding Name}" IsChecked="{Binding Enabled}"/>
+                            </HierarchicalDataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+
+                    <Label Grid.Column="0" Grid.Row="4" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="Enabled" />
+                    <Label Grid.Column="0" Grid.Row="5" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="{Binding Config.Enabled}" />
 
 
                 </Grid>
-
-
 
             </Grid>
 
