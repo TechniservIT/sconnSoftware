@@ -32,6 +32,7 @@
                 <ColumnDefinition Width="1*" />
                 <ColumnDefinition Width="1*" />
                 <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.5*" />
@@ -39,7 +40,90 @@
             </Grid.RowDefinitions>
 
             <Grid    Grid.Row="0" Grid.Column="0" Background="White">
+                <Button Command="{Binding Path=Show_GlobalStatus_Command}"  Width="Auto" Content="">
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Grid>
+                                <Border Background="{TemplateBinding Background}"
+                         BorderBrush="{TemplateBinding BorderBrush}"
+                         BorderThickness="{TemplateBinding BorderThickness}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <ContentPresenter HorizontalAlignment="Left"  Grid.Column="0"
+                                          VerticalAlignment="Center"/>
+                                        <Canvas Background="White" Grid.Column="0" />
+
+                                        <Image  Grid.Column="0" Grid.Row="0" x:Name="imgTopNav1"  Stretch="Uniform"   HorizontalAlignment="Center" Height="Auto" Margin="5,5,5,5" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/glob1000.jpg"/>
+
+                                    </Grid>
+                                </Border>
+                            </Grid>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
+
+            </Grid>
+            
+            <Grid    Grid.Row="1" Grid.Column="0" Background="White">
+                <Button Command="{Binding Path=Show_Alarm_Map_Zones_Command}" Width="Auto" Content="" FontFamily="Motorwerk">
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Grid>
+                                <Border Background="{TemplateBinding Background}"
+                         BorderBrush="{TemplateBinding BorderBrush}"
+                         BorderThickness="{TemplateBinding BorderThickness}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <ContentPresenter HorizontalAlignment="Left"  Grid.Column="0"
+                                          VerticalAlignment="Center"/>
+                                        <Canvas Background="White" Grid.Column="0" />
+
+                                        <Image  Grid.Column="0" Grid.Row="0" x:Name="imgTopNav1"  Stretch="Uniform"   HorizontalAlignment="Center" Height="Auto" Margin="5,5,5,5" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/strefy1-1000.jpg"/>
+
+                                    </Grid>
+                                </Border>
+                            </Grid>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
+            </Grid>
+
+            
+            <Grid    Grid.Row="0" Grid.Column="1" Background="White">
                 <Button Command="{Binding Path=Show_Alarm_Devices_Command}" Width="Auto" Content="" FontFamily="Motorwerk">
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Grid>
+                                <Border Background="{TemplateBinding Background}"
+                         BorderBrush="{TemplateBinding BorderBrush}"
+                         BorderThickness="{TemplateBinding BorderThickness}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <ContentPresenter HorizontalAlignment="Left"  Grid.Column="0"
+                                          VerticalAlignment="Center"/>
+                                        <Canvas Background="White" Grid.Column="0" />
+
+                                        <Image  Grid.Column="0" Grid.Row="0" x:Name="imgTopNav1"  Stretch="Uniform"   HorizontalAlignment="Center" Height="Auto" Margin="5,5,5,5" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/lista1000.jpg"/>
+
+                                    </Grid>
+                                </Border>
+                            </Grid>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
+            </Grid>
+
+            <Grid    Grid.Row="1" Grid.Column="1" Background="White">
+                <Button Command="{Binding Path=Show_Alarm_Map_Devices_Command}"  Width="Auto" Content="">
                     <Button.Template>
                         <ControlTemplate TargetType="{x:Type Button}">
                             <Grid>
@@ -65,35 +149,8 @@
 
             </Grid>
 
-            <Grid    Grid.Row="1" Grid.Column="0" Background="White">
-                <Button Command="{Binding Path=Show_Alarm_Map_Command}"  Width="Auto" Content="">
-                    <Button.Template>
-                        <ControlTemplate TargetType="{x:Type Button}">
-                            <Grid>
-                                <Border Background="{TemplateBinding Background}"
-                         BorderBrush="{TemplateBinding BorderBrush}"
-                         BorderThickness="{TemplateBinding BorderThickness}">
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*"/>
-                                        </Grid.ColumnDefinitions>
-                                        <ContentPresenter HorizontalAlignment="Left"  Grid.Column="0"
-                                          VerticalAlignment="Center"/>
-                                        <Canvas Background="White" Grid.Column="0" />
-
-                                        <Image  Grid.Column="0" Grid.Row="0" x:Name="imgTopNav1"  Stretch="Uniform"   HorizontalAlignment="Center" Height="Auto" Margin="5,5,5,5" VerticalAlignment="Center" Width="Auto" Source="pack://application:,,,/images/glob1000.jpg"/>
-
-                                    </Grid>
-                                </Border>
-                            </Grid>
-                        </ControlTemplate>
-                    </Button.Template>
-                </Button>
-
-            </Grid>
-
             
-            <Grid    Grid.Row="0" Grid.Column="1" Background="White">
+            <Grid    Grid.Row="0" Grid.Column="2" Background="White">
                 <Button  Command="{Binding Path=Show_Alarm_Inputs_Command}"  Width="Auto" Content="">
                     <Button.Template>
                         <ControlTemplate TargetType="{x:Type Button}">
@@ -120,7 +177,7 @@
 
             </Grid>
 
-            <Grid    Grid.Row="1" Grid.Column="1" Background="White">
+            <Grid    Grid.Row="1" Grid.Column="2" Background="White">
                 <Button  Command="{Binding Path=Show_Alarm_Outputs_Command}"   Width="Auto" Content="">
                     <Button.Template>
                         <ControlTemplate TargetType="{x:Type Button}">
@@ -147,7 +204,7 @@
 
             </Grid>
 
-            <Grid    Grid.Row="0" Grid.Column="2" Background="White">
+            <Grid    Grid.Row="0" Grid.Column="3" Background="White">
                 <Button  Command="{Binding Path=Show_Alarm_Relay_Command}"  Width="Auto" Content="">
                     <Button.Template>
                         <ControlTemplate TargetType="{x:Type Button}">
@@ -174,7 +231,7 @@
 
             </Grid>
 
-            <Grid    Grid.Row="1" Grid.Column="2" Background="White">
+            <Grid    Grid.Row="1" Grid.Column="3" Background="White">
                 <Button  Command="{Binding Path=Show_Alarm_Power_Command}" Width="Auto" Content="">
                     <Button.Template>
                         <ControlTemplate TargetType="{x:Type Button}">
@@ -201,7 +258,7 @@
 
             </Grid>
 
-            <Grid    Grid.Row="0" Grid.Column="3" Background="White">
+            <Grid    Grid.Row="0" Grid.Column="4" Background="White">
                 <Button  Command="{Binding Path=Show_Alarm_TempratureSensors_Command}"  Width="Auto" Content="">
                     <Button.Template>
                         <ControlTemplate TargetType="{x:Type Button}">
@@ -228,7 +285,7 @@
 
             </Grid>
 
-            <Grid    Grid.Row="1" Grid.Column="3" Background="White">
+            <Grid    Grid.Row="1" Grid.Column="4" Background="White">
                 <Button  Command="{Binding Path=Show_Alarm_HumiditySensors_Command}" Width="Auto" Content="">
                     <Button.Template>
                         <ControlTemplate TargetType="{x:Type Button}">
@@ -255,7 +312,7 @@
 
             </Grid>
 
-            <Grid    Grid.Row="0" Grid.Column="4" Background="White">
+            <Grid    Grid.Row="0" Grid.Column="5" Background="White">
                 <Button Command="{Binding Path=Show_Alarm_Zones_Command}"  Width="Auto" Content="">
                     <Button.Template>
                         <ControlTemplate TargetType="{x:Type Button}">
@@ -282,7 +339,7 @@
 
             </Grid>
 
-            <Grid    Grid.Row="1" Grid.Column="4" Background="White">
+            <Grid    Grid.Row="1" Grid.Column="5" Background="White">
                 <Button Command="{Binding Path=Show_Alarm_Network_Command}"  Width="Auto" Content="">
                     <Button.Template>
                         <ControlTemplate TargetType="{x:Type Button}">
@@ -309,7 +366,7 @@
 
             </Grid>
 
-            <Grid    Grid.Row="0" Grid.Column="5" Background="White">
+            <Grid    Grid.Row="0" Grid.Column="6" Background="White">
                 <Button Command="{Binding Path=Show_Alarm_Users_Command}"  Width="Auto" Content="">
                     <Button.Template>
                         <ControlTemplate TargetType="{x:Type Button}">
@@ -336,7 +393,7 @@
 
             </Grid>
           
-            <Grid    Grid.Row="1" Grid.Column="5" Background="White">
+            <Grid    Grid.Row="1" Grid.Column="6" Background="White">
                 <Button Command="{Binding Path=Show_Alarm_AuthConfig_Command}"  Width="Auto" Content="">
                     <Button.Template>
                         <ControlTemplate TargetType="{x:Type Button}">
@@ -363,7 +420,7 @@
 
             </Grid>
 
-            <Grid    Grid.Row="0" Grid.Column="6" Background="White">
+            <Grid    Grid.Row="0" Grid.Column="7" Background="White">
                 <Button Command="{Binding Path=Show_Alarm_Events_Command}" Width="Auto" Content="">
                     <Button.Template>
                         <ControlTemplate TargetType="{x:Type Button}">
@@ -390,7 +447,7 @@
 
             </Grid>
 
-            <Grid    Grid.Row="1" Grid.Column="6" Background="White">
+            <Grid    Grid.Row="1" Grid.Column="7" Background="White">
                 <Button Width="Auto" Content="">
                     <Button.Template>
                         <ControlTemplate TargetType="{x:Type Button}">
@@ -417,7 +474,7 @@
 
             </Grid>
 
-            <Grid    Grid.Row="0" Grid.Column="7" Background="White">
+            <Grid    Grid.Row="0" Grid.Column="8" Background="White">
                 <Button Command="{Binding Path=Show_Alarm_GsmRcpts_Command}" Width="Auto" Content="">
                     <Button.Template>
                         <ControlTemplate TargetType="{x:Type Button}">
@@ -444,7 +501,7 @@
 
             </Grid>
 
-            <Grid    Grid.Row="1" Grid.Column="7" Background="White">
+            <Grid    Grid.Row="1" Grid.Column="8" Background="White">
                 <Button Command="{Binding Path=Show_Alarm_SystemUsers_Command}" Width="Auto" Content="">
                     <Button.Template>
                         <ControlTemplate TargetType="{x:Type Button}">

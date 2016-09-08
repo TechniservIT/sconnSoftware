@@ -34,8 +34,11 @@ namespace sconnRem.Controls.Navigation.ViewModel.AlarmSystem
 
         public ICommand Show_Status_Command { get; set; }
         public ICommand Show_GlobalStatus_Command { get; set; }
+
         public ICommand Show_Alarm_Map_Command { get; set; }
-         
+        public ICommand Show_Alarm_Map_Zones_Command { get; set; }
+        public ICommand Show_Alarm_Map_Devices_Command { get; set; }
+
         public ICommand Show_Alarm_Inputs_Command { get; set; }
         public ICommand Show_Alarm_Outputs_Command { get; set; }
         public ICommand Show_Alarm_Relay_Command { get; set; }
@@ -159,7 +162,17 @@ namespace sconnRem.Controls.Navigation.ViewModel.AlarmSystem
         {
             NavigateToAlarmContract(AlarmRegionNames.AlarmConfig_Contract_ZoneMapConfigView);
         }
-        
+
+        private void ShowSystemZonesMap(sconnSite site)
+        {
+            NavigateToAlarmContract(AlarmRegionNames.AlarmConfig_Contract_ZoneMapConfigView);
+        }
+
+        private void ShowSystemDevicesMap(sconnSite site)
+        {
+            NavigateToAlarmContract(AlarmRegionNames.AlarmConfig_Contract_DeviceMapConfigView);
+        }
+
         private void SetupCmds()
         {
             Show_GlobalStatus_Command = new DelegateCommand<sconnSite>(ShowConfigure);
@@ -184,7 +197,10 @@ namespace sconnRem.Controls.Navigation.ViewModel.AlarmSystem
 
             Show_Alarm_GsmRcpts_Command = new DelegateCommand<sconnSite>(ShowGsmRcptsList);
             Show_Alarm_SystemUsers_Command = new DelegateCommand<sconnSite>(ShowSystemUsers);
-    }
+
+            Show_Alarm_Map_Zones_Command= new DelegateCommand<sconnSite>(ShowSystemZonesMap);
+            Show_Alarm_Map_Devices_Command =new DelegateCommand<sconnSite>(ShowSystemDevicesMap);
+        }
 
         public AlarmSystemToolbarViewModel()
         {
