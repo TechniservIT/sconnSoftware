@@ -180,7 +180,7 @@
                     <ListBox  Grid.Column="0" Grid.Row="5" ItemsSource="{Binding Config.Permissions}" >
                         <ListBox.ItemTemplate>
                             <HierarchicalDataTemplate>
-                                <CheckBox Content="{Binding Name}" IsChecked="{Binding Enabled, Mode=TwoWay}"/>
+                                <CheckBox Content="{Binding Type}" IsChecked="{Binding Enabled, Mode=TwoWay}"/>
                             </HierarchicalDataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>

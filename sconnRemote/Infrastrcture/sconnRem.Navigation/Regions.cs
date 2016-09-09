@@ -179,7 +179,9 @@ namespace sconnRem.Navigation
         public const String Global_Contract_Menu_RightSide_AlarmRemoteUserEditListItemContext = "GlobalContractMenuRightSideRemoteUserEditListItemContext";
         public const String Global_Contract_Menu_RightSide_AlarmSystemUserEditListItemContext = "GlobalContractMenuRightSideSystemUserEditListItemContext";
         public const String Global_Contract_Menu_RightSide_AlarmGsmRcptEditListItemContext = "GlobalContractMenuRightSideGsmRcptEditListItemContext";
-
+        public const String Global_Contract_Menu_RightSide_AlarmInputEditListItemContext = "GlobalContractMenuRightSideInputEditListItemContext";
+        public const String Global_Contract_Menu_RightSide_AlarmOutputEditListItemContext = "GlobalContractMenuRightSideOutputEditListItemContext";
+        
         public const String Global_Contract_Menu_RightSide_Grid_Nav = "GlobalContractMenuRightSideGridNav";
 
         public const String Global_Contract_Menu_Top_AlarmSystemContext = "GlobalContractMenuTopAlarmSystemContext";
@@ -207,6 +209,9 @@ namespace sconnRem.Navigation
         public const String Alarm_Contract_Entity_SystemUser_Edit_Context_Key_Name = "UserUUID";
         public const String Alarm_Contract_Entity_RemoteUser_Edit_Context_Key_Name = "RemoteUserUUID";
         public const String Alarm_Contract_Entity_GsmRcpt_Edit_Context_Key_Name = "GsmRcptUUID";
+
+        public const String Alarm_Contract_Entity_Input_Edit_Context_Key_Name = "InputUUID";
+        public const String Alarm_Contract_Entity_Input_Device__Edit_Context_Key_Name = "DeviceUUID";
 
     }
 

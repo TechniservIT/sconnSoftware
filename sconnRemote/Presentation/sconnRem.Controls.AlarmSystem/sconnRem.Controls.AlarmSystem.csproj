@@ -130,6 +130,8 @@
   <ItemGroup>
     <Compile Include="ViewModel\Alarm\AlarmDeviceListViewModel.cs" />
     <Compile Include="ViewModel\Alarm\AlarmSystemUsersConfigViewModel.cs" />
+    <Compile Include="ViewModel\Alarm\EntityList\AlarmEntityInputListItemEditViewModel.cs" />
+    <Compile Include="ViewModel\Alarm\EntityList\AlarmEntityOutputListItemEditViewModel.cs" />
     <Compile Include="ViewModel\Alarm\EntityList\AlarmEntityZoneListItemEditViewModel.cs" />
     <Compile Include="ViewModel\Alarm\AlarmEventsListViewModel.cs" />
     <Compile Include="ViewModel\Alarm\AlarmGraphEntityViewModel.cs" />

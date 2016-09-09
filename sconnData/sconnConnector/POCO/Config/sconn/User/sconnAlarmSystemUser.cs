@@ -18,7 +18,30 @@ namespace sconnConnector.POCO.Config.sconn.User
         public int Id { get; set; }  
         public string Name { get; set; }
         public bool Enabled { get; set; }
+        public sconnAlarmUserPermissionType Type { get; set; }
     }
+
+    public enum sconnAlarmUserPermissionType
+    {
+        ArmSystem = 0,
+        DisarmSystem,
+        ViewStatus,
+        ControlOutputs,
+        BrowseEvents,
+        OpenDoor,
+        SetSchedules,
+        ArmSelectiveZones,
+        DisarmViolation,
+        AddDevices,
+        AddGsmRecipients,
+        AddZones,
+        AddUsers,
+        RemoteControl,
+        GlobalSettings,
+        Mapping,
+        IoConfiguration
+    }
+
 
     public class sconnAlarmSystemUser : IAlarmSystemConfigurationEntity, ISerializableConfiguration, IFakeAbleConfiguration
     {
@@ -72,24 +95,30 @@ namespace sconnConnector.POCO.Config.sconn.User
 
             private string GetPermissionNameForIndex(int index)
             {
-                return "";  //TODO
+                return ""; 
             }
 
             private void DeserializePermissions(byte[] config)
             {
                 try
                 {
+                    this.Permissions = new ObservableCollection<sconnAlarmUserPermission>();
                     BitArray b = new BitArray(config);
-                    for (int i = ipcDefines.USER_DB_UPERM_POS; i < (ipcDefines.USER_DB_UPERM_POS + ipcDefines.USER_DB_UPERM_LEN * 8); i++)
+                    for (int i = ipcDefines.USER_DB_UPERM_POS; i < (ipcDefines.USER_DB_UPERM_POS + ipcDefines.USER_DB_UPERM_LEN * 8)-1; i++)
                     {
-                        sconnAlarmUserPermission perm = new sconnAlarmUserPermission { Name = GetPermissionNameForIndex(i) };
-                        if (b.Get(i))
+                        if (i < Enum.GetNames(typeof (sconnAlarmUserPermissionType)).Length)
                         {
-                            perm.Enabled = true;
-                        }
-                        perm.Id = i;
+                                sconnAlarmUserPermission perm = new sconnAlarmUserPermission { Name = GetPermissionNameForIndex(i) };
+                                perm.Type = (sconnAlarmUserPermissionType)i;
+                                if (b.Get(i))
+                                {
+                                    perm.Enabled = true;
+                                }
+                                perm.Id = i;
 
-                        this.Permissions.Add(perm);
+                                this.Permissions.Add(perm);
+                    }
+               
                     }
                 }
                 catch (Exception ex)
