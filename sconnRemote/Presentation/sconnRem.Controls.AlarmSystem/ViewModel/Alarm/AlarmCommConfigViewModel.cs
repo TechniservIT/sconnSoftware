@@ -58,7 +58,7 @@ namespace sconnRem.ViewModel.Alarm
         {
             _provider.Update(CommConfig);
         }
-
+          
         public string DisplayedImagePath
         {
             get { return "pack://application:,,,/images/lista2.png"; }

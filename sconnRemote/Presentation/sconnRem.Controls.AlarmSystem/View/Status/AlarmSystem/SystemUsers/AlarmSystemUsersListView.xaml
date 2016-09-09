@@ -109,11 +109,11 @@
                                                 <RowDefinition Height="1*"/>
                                             </Grid.RowDefinitions>
 
-                                            <Label Grid.Column="0" Grid.Row="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="{Binding Path=Code}" />
+                                            <Label Grid.Column="0" Grid.Row="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="{Binding Code}" />
 
-                                            <Label Grid.Column="0" Grid.Row="1" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="{Binding Path=Card}" />
+                                            <Label Grid.Column="0" Grid.Row="1" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="{Binding Card}" />
 
-                                            <Label Grid.Column="0" Grid.Row="2" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="{Binding Path=Enabled}" />
+                                            <Label Grid.Column="0" Grid.Row="2" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Content="{Binding Enabled}" />
 
                                         </Grid>
 

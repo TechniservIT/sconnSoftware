@@ -380,32 +380,11 @@
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="1*"/>
                                         </Grid.RowDefinitions>
+                                        
+                                        
+                                        <ToggleButton  Style="{StaticResource AnimatedSwitch}"  IsChecked="{Binding Path=Armed}"  Command="{Binding ToggleZoneArmCommand}"  VerticalAlignment="Center" Height="Auto" Content="">
 
-                                        <Button Grid.Column="0" Grid.Row="0"   VerticalAlignment="Center" Height="Auto" Content="">
-                                            <Button.Template>
-                                                <ControlTemplate TargetType="{x:Type Button}">
-                                                    <Grid>
-                                                        <Border Background="{TemplateBinding Background}"
-                                                     BorderBrush="{TemplateBinding BorderBrush}"
-                                                     BorderThickness="{TemplateBinding BorderThickness}">
-                                                            <Grid>
-                                                                <Grid.ColumnDefinitions>
-                                                                    <ColumnDefinition Width="*"/>
-                                                                </Grid.ColumnDefinitions>
-                                                                <ContentPresenter HorizontalAlignment="Left"  Grid.Column="0"
-                                                              VerticalAlignment="Center"/>
-                                                                <Canvas Background="White" Grid.Column="0" />
-
-                                                                <ToggleButton  Style="{StaticResource AnimatedSwitch}"  IsChecked="{Binding Path=Armed}"  Command="{Binding ToggleZoneArmCommand}"  VerticalAlignment="Center" Height="Auto" Content="">
-
-                                                                </ToggleButton>
-
-                                                            </Grid>
-                                                        </Border>
-                                                    </Grid>
-                                                </ControlTemplate>
-                                            </Button.Template>
-                                        </Button>
+                                        </ToggleButton>
 
 
                                     </Grid>

@@ -75,9 +75,10 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
 
 
         [ImportingConstructor]
-        public AlarmEventsListViewModel(IRegionManager regionManager)
+        public AlarmEventsListViewModel(IRegionManager regionManager, IAlarmSystemNavigationService NavService)
         {
             Config = new ObservableCollection<sconnEvent>(new List<sconnEvent>());
+            AlarmNavService = NavService;
             this._manager = AlarmNavService.alarmSystemConfigManager;
             this._provider = new EventsService(_manager);
             _regionManager = regionManager;

@@ -193,7 +193,7 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm.EntityList
             try
             {
                 siteUUID = (string)navigationContext.Parameters[GlobalViewContractNames.Global_Contract_Nav_Site_Context__Key_Name];
-                EntityId = int.Parse((string)navigationContext.Parameters[AlarmSystemEntityListContractNames.Alarm_Contract_Entity_GsmRcpt_Edit_Context_Key_Name]);
+                EntityId = int.Parse((string)navigationContext.Parameters[AlarmSystemEntityListContractNames.Alarm_Contract_Entity_SystemUser_Edit_Context_Key_Name]);
                 this.navigationJournal = navigationContext.NavigationService.Journal;
 
                 BackgroundWorker bgWorker = new BackgroundWorker();
