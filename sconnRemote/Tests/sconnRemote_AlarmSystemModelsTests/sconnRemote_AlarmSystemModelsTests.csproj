@@ -3,11 +3,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{CAC645DB-B5A6-4528-9DB7-FE3E289BB9B2}</ProjectGuid>
+    <ProjectGuid>{3CDC636B-F028-4B18-A538-848D816853D4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>sconnRem.Navigation.Tests</RootNamespace>
-    <AssemblyName>sconnRem.Navigation.Tests</AssemblyName>
+    <RootNamespace>sconnRemote_AlarmSystemModelsTests</RootNamespace>
+    <AssemblyName>sconnRemote_AlarmSystemModelsTests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -50,25 +50,8 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="AlarmSystemConfigurationTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\iotDatabaseConnector\iotDatabaseConnector.csproj">
-      <Project>{7df5e6fa-5839-456f-959b-af4a7a742775}</Project>
-      <Name>iotDatabaseConnector</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\iotData\iotData.csproj">
-      <Project>{e94b0a02-089e-483a-aaef-3bfa49039598}</Project>
-      <Name>iotData</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Presentation\sconnRem.Controls.Navigation\sconnRem.Controls.Navigation.csproj">
-      <Project>{97a1614e-9a15-4676-a3e9-9c8182c5b3e4}</Project>
-      <Name>sconnRem.Controls.Navigation</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

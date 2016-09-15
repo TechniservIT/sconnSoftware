@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace sconnRemote_AlarmSystemModelsTests
+namespace sconnRem_Tests_AlarmSystem_Services
 {
     [TestClass]
     public class UnitTest1
