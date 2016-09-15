@@ -49,10 +49,11 @@ namespace sconnRemote_AlarmSystemModelsTests
         {
             SetUp();
             IAlarmSystemGenericConfigurationEntity before = new T();
-            before.Clone(_entity);
+            before = _entity.DeepClone();
             byte[] serialized = _entity.Serialize();
             IAlarmSystemGenericConfigurationEntity after = new T();
             after.Deserialize(serialized);
+            after.UUID = before.UUID;
             Assert.IsTrue(before.Equals(after));
         }
         

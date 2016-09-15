@@ -706,7 +706,11 @@ namespace sconnConnector.POCO.Config.sconn
 
         public void Fake()
         {
-            this.memCFG = new byte[ipcDefines.deviceConfigSize];
+            //this.memCFG = new byte[ipcDefines.deviceConfigSize];
+            this.Armed = true;
+            this.BatteryVoltage = 11.22F;
+            this.Name = Guid.NewGuid().ToString().Substring(0, ipcDefines.RAM_NAME_SIZE-1);
+           //TODO
         }
 
         public byte[] SerializeNames()

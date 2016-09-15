@@ -96,6 +96,7 @@
   <ItemGroup>
     <Compile Include="AlarmConfigTrxTests.cs" />
     <Compile Include="AlarmOperationTests.cs" />
+    <Compile Include="Configuration\AlarmSystemConfigHelpersTests.cs" />
     <Compile Include="Configuration\AlarmSystemConfigurationTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service_Configuration_Tests.cs" />

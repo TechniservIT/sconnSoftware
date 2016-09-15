@@ -53,3 +53,5 @@ I:\Repo\Bucket\sconnSoftware\sconnRemote\Tests\sconnRemote_NavigationTests\bin\D
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Tests\sconnRemote_NavigationTests\bin\Debug\Prism.Mef.Wpf.xml
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Tests\sconnRemote_NavigationTests\bin\Debug\QuickGraph.xml
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Tests\sconnRemote_NavigationTests\bin\Debug\sconnRem.Navigation.pdb
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Tests\sconnRemote_NavigationTests\bin\Debug\KellermanSoftware.Compare-NET-Objects.dll
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Tests\sconnRemote_NavigationTests\bin\Debug\KellermanSoftware.Compare-NET-Objects.xml

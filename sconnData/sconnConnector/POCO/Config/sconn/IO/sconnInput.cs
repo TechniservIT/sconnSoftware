@@ -184,7 +184,7 @@ namespace sconnConnector.POCO.Config
             {
                 this.Id = 0;
                 this.Enabled = true;
-                this.Name = Guid.NewGuid().ToString();
+                this.Name = Guid.NewGuid().ToString().Substring(0, ipcDefines.RAM_NAME_SIZE-1); ;
                 this.NameId = 0;
                 this.Value = 1;
                 this.Type = sconnInputType.NormallyClosed;

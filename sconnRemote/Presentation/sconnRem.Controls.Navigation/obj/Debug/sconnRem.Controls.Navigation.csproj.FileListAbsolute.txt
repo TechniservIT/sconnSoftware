@@ -269,3 +269,5 @@ I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.Navigati
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.Navigation\obj\Debug\View\Menu\Footer\FootRightToolMenu\FooterConnectivityStatusView.baml
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.Navigation\bin\Debug\sconnRem.IPC.dll
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.Navigation\bin\Debug\sconnRem.IPC.pdb
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.Navigation\bin\Debug\KellermanSoftware.Compare-NET-Objects.dll
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.Navigation\bin\Debug\KellermanSoftware.Compare-NET-Objects.xml

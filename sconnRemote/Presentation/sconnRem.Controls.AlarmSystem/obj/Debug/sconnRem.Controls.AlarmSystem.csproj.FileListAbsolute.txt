@@ -581,3 +581,5 @@ I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSys
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\obj\Debug\View\Config\AlarmSystem\Context\AlarmEntityOutputListItemEditContext.g.cs
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\obj\Debug\View\Config\AlarmSystem\Context\AlarmEntityInputListItemEditContext.baml
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\obj\Debug\View\Config\AlarmSystem\Context\AlarmEntityOutputListItemEditContext.baml
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\bin\Debug\KellermanSoftware.Compare-NET-Objects.dll
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Presentation\sconnRem.Controls.AlarmSystem\bin\Debug\KellermanSoftware.Compare-NET-Objects.xml

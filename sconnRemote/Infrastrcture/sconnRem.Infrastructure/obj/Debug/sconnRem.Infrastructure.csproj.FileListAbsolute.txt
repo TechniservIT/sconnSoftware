@@ -201,3 +201,5 @@ I:\Repo\Bucket\sconnSoftware\sconnRemote\Infrastrcture\sconnRem.Infrastructure\b
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Infrastrcture\sconnRem.Infrastructure\bin\Debug\Newtonsoft.Json.xml
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Infrastrcture\sconnRem.Infrastructure\bin\Debug\sconnRem.IPC.dll
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Infrastrcture\sconnRem.Infrastructure\bin\Debug\sconnRem.IPC.pdb
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Infrastrcture\sconnRem.Infrastructure\bin\Debug\KellermanSoftware.Compare-NET-Objects.dll
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Infrastrcture\sconnRem.Infrastructure\bin\Debug\KellermanSoftware.Compare-NET-Objects.xml

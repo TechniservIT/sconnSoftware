@@ -55,3 +55,5 @@ I:\Repo\Bucket\sconnSoftware\sconnRemote\Tests\sconnRem_Tests_AlarmSystem\bin\De
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Tests\sconnRem_Tests_AlarmSystem\bin\Debug\ru\System.Windows.Interactivity.resources.dll
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Tests\sconnRem_Tests_AlarmSystem\bin\Debug\zh-Hans\System.Windows.Interactivity.resources.dll
 I:\Repo\Bucket\sconnSoftware\sconnRemote\Tests\sconnRem_Tests_AlarmSystem\bin\Debug\zh-Hant\System.Windows.Interactivity.resources.dll
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Tests\sconnRem_Tests_AlarmSystem\bin\Debug\KellermanSoftware.Compare-NET-Objects.dll
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Tests\sconnRem_Tests_AlarmSystem\bin\Debug\KellermanSoftware.Compare-NET-Objects.xml

@@ -166,8 +166,8 @@ namespace sconnConnector.POCO.Config.Abstract.Auth
             {
                 this.Id = 0;
                 this.Enabled = true;
-                this.Login = Guid.NewGuid().ToString();
-                this.Password = Guid.NewGuid().ToString();
+                this.Login = Guid.NewGuid().ToString().Substring(0, ipcDefines.AUTH_RECORD_LOGIN_LEN-1); ;
+                this.Password = Guid.NewGuid().ToString().Substring(0, ipcDefines.AUTH_PASS_SIZE-1);
                 this.AllowedFrom = DateTime.MinValue;
                 this.AllowedUntil = DateTime.MaxValue;
                 this.Group = sconnRemoteUserGroup.Admin;

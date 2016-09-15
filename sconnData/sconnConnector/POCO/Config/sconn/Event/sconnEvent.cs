@@ -182,7 +182,7 @@ namespace sconnConnector.POCO.Config.sconn
 
                 byte[] buffer = new byte[ipcDefines.EVENT_DB_RECORD_LEN];
                 buffer[ipcDefines.EVENT_DB_ID_POS + 3] = (byte) Id;
-                buffer[ipcDefines.EVENT_DB_CODE_POS + 1] = (byte) Type;
+                buffer[ipcDefines.EVENT_DB_TYPE_POS + 1] = (byte) Type;
                 buffer[ipcDefines.EVENT_DB_DOMAIN_POS + 1] = (byte) Domain;
                 buffer[ipcDefines.EVENT_DB_DEVICE_POS + 1] = (byte) (DeviceId);
                 buffer[ipcDefines.EVENT_DB_USER_ID_POS + 1] = (byte) UserId;

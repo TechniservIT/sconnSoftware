@@ -31,3 +31,5 @@ I:\Repo\Bucket\sconnSoftware\sconnRemote\SiteManagmentService\bin\Debug\Prism.dl
 I:\Repo\Bucket\sconnSoftware\sconnRemote\SiteManagmentService\bin\Debug\Prism.xml
 I:\Repo\Bucket\sconnSoftware\sconnRemote\SiteManagmentService\bin\Debug\Newtonsoft.Json.dll
 I:\Repo\Bucket\sconnSoftware\sconnRemote\SiteManagmentService\bin\Debug\Newtonsoft.Json.xml
+I:\Repo\Bucket\sconnSoftware\sconnRemote\SiteManagmentService\bin\Debug\KellermanSoftware.Compare-NET-Objects.dll
+I:\Repo\Bucket\sconnSoftware\sconnRemote\SiteManagmentService\bin\Debug\KellermanSoftware.Compare-NET-Objects.xml

@@ -65,3 +65,5 @@ I:\Repo\Bucket\sconnSoftware\sconnData\sconnConnector\bin\Debug\Prism.dll
 I:\Repo\Bucket\sconnSoftware\sconnData\sconnConnector\bin\Debug\Prism.xml
 I:\Repo\Bucket\sconnSoftware\sconnData\sconnConnector\bin\Debug\Newtonsoft.Json.dll
 I:\Repo\Bucket\sconnSoftware\sconnData\sconnConnector\bin\Debug\Newtonsoft.Json.xml
+I:\Repo\Bucket\sconnSoftware\sconnData\sconnConnector\bin\Debug\KellermanSoftware.Compare-NET-Objects.dll
+I:\Repo\Bucket\sconnSoftware\sconnData\sconnConnector\bin\Debug\KellermanSoftware.Compare-NET-Objects.xml

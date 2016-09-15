@@ -137,7 +137,6 @@ namespace sconnConnector.POCO.Config.sconn
             {
                 this.Id = 0;
                 this.Enabled = true;
-                this.Name = Guid.NewGuid().ToString();
                 UUID = Guid.NewGuid().ToString();
                 this.NameId = 0;
                 this.Type = AlarmZoneType.General;

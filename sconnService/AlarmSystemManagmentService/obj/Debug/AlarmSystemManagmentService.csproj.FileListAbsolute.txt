@@ -93,3 +93,5 @@ I:\Repo\Bucket\sconnSoftware\sconnService\AlarmSystemManagmentService\bin\Debug\
 I:\Repo\Bucket\sconnSoftware\sconnService\AlarmSystemManagmentService\bin\Debug\zh-Hant\System.Windows.Interactivity.resources.dll
 I:\Repo\Bucket\sconnSoftware\sconnService\AlarmSystemManagmentService\bin\Debug\Newtonsoft.Json.dll
 I:\Repo\Bucket\sconnSoftware\sconnService\AlarmSystemManagmentService\bin\Debug\Newtonsoft.Json.xml
+I:\Repo\Bucket\sconnSoftware\sconnService\AlarmSystemManagmentService\bin\Debug\KellermanSoftware.Compare-NET-Objects.dll
+I:\Repo\Bucket\sconnSoftware\sconnService\AlarmSystemManagmentService\bin\Debug\KellermanSoftware.Compare-NET-Objects.xml
