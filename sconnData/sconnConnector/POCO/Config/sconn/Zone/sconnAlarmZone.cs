@@ -1,4 +1,5 @@
 ﻿using System;
+using KellermanSoftware.CompareNetObjects;
 using NLog;
 
 namespace sconnConnector.POCO.Config.sconn
@@ -18,7 +19,8 @@ namespace sconnConnector.POCO.Config.sconn
         string imageIconUri { get; set; }
     }
 
-    public class sconnAlarmZone : IAlarmSystemNamedEntity, ISerializableConfiguration, IFakeAbleConfiguration, IAlarmSystemNamedEntityWithType
+    [Serializable]
+    public class sconnAlarmZone : IAlarmSystemGenericConfigurationEntity, IAlarmSystemNamedEntityWithType
     {
         public ushort Id { get; set; }
         public string Name { get; set; }
@@ -26,6 +28,7 @@ namespace sconnConnector.POCO.Config.sconn
         public bool Enabled { get; set; }
         public ushort NameId { get; set; }
         public bool Armed { get; set; }
+        public ushort Value { get; set; }
 
         public string imageIconUri { get; set; }
         public string imageRealUri { get; set; }
@@ -157,6 +160,26 @@ namespace sconnConnector.POCO.Config.sconn
         }
 
         public string UUID { get; set; }
+
+        public void CopyFrom(sconnAlarmZone other)
+        {
+            this.UUID = other.UUID;
+            this.Armed = other.Armed;
+            this.Enabled = other.Enabled;
+            this.Id = other.Id;
+            this.Name = other.Name;
+            this.NameId = other.NameId;
+            this.Type = other.Type;
+        }
+
+        public override bool Equals(object source)
+        {
+            CompareLogic compareLogic = new CompareLogic();
+            ComparisonResult result = compareLogic.Compare(this, source);
+            return result.AreEqual;
+        }
+
+
     }
 
 }

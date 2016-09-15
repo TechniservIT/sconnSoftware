@@ -1,0 +1,1 @@
+I:\Repo\Bucket\sconnSoftware\sconnRemote\Tests\sconnRem_Tests_Models\obj\Debug\sconnRem_Tests_Functional.csprojResolveAssemblyReference.cache

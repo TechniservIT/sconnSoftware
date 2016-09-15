@@ -7,6 +7,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using KellermanSoftware.CompareNetObjects;
 using NLog;
 
 namespace sconnConnector.POCO.Config.sconn.User
@@ -42,8 +43,8 @@ namespace sconnConnector.POCO.Config.sconn.User
         IoConfiguration
     }
 
-
-    public class sconnAlarmSystemUser : IAlarmSystemConfigurationEntity, ISerializableConfiguration, IFakeAbleConfiguration
+    [Serializable]
+    public class sconnAlarmSystemUser : IAlarmSystemGenericConfigurationEntity
     {
             [Required]
             public ushort Id { get; set; }
@@ -71,8 +72,7 @@ namespace sconnConnector.POCO.Config.sconn.User
             [DisplayName("Permissions")]
             public ObservableCollection<sconnAlarmUserPermission> Permissions { get; set; }
 
-
-            public int Value { get; set; }
+            public ushort Value { get; set; }
 
             private static Logger _logger = LogManager.GetCurrentClassLogger();
 
@@ -229,6 +229,37 @@ namespace sconnConnector.POCO.Config.sconn.User
 
             public string UUID { get; set; }
 
+        public byte[] SerializeEntityNames()
+        {
+            return new byte[0]; //direct storage
         }
+
+        public void DeserializeEntityNames(byte[] buffer)
+        {
+            
+        }
+
+        public void CopyFrom(sconnAlarmSystemUser other)
+        {
+            this.UUID = other.UUID;
+            this.AllowedUntil = other.AllowedUntil;
+            this.Enabled = other.Enabled;
+            this.Card = other.Card;
+            this.Code = other.Code;
+            this.DomainId = other.DomainId;
+            this.Id = other.Id;
+            this.Permissions = other.Permissions;
+            this.Value = other.Value;
+
+        }
+
+        public override bool Equals(object source)
+        {
+            CompareLogic compareLogic = new CompareLogic();
+            ComparisonResult result = compareLogic.Compare(this, source);
+            return result.AreEqual;
+        }
+        
+    }
     
 }

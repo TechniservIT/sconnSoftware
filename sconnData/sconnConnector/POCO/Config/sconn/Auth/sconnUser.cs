@@ -5,8 +5,10 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using KellermanSoftware.CompareNetObjects;
 using NLog;
 using sconnConnector.POCO.Config.sconn;
+using sconnConnector.POCO.Config.sconn.User;
 
 namespace sconnConnector.POCO.Config.Abstract.Auth
 {
@@ -19,11 +21,12 @@ namespace sconnConnector.POCO.Config.Abstract.Auth
         TA
     }
 
-
-    public class sconnRemoteUser : IAlarmSystemConfigurationEntity, ISerializableConfiguration, IFakeAbleConfiguration
+    [Serializable]
+    public class sconnRemoteUser : IAlarmSystemGenericConfigurationEntity
     {
 
         public ushort Id { get; set; }
+
 
         [Required]
         [DisplayName("Login")]
@@ -178,5 +181,36 @@ namespace sconnConnector.POCO.Config.Abstract.Auth
         }
 
         public string UUID { get; set; }
+        public byte[] SerializeEntityNames()
+        {
+          return new byte[0];
+        }
+
+        public void DeserializeEntityNames(byte[] buffer)
+        {
+          
+        }
+
+        public void CopyFrom(sconnRemoteUser other)
+        {
+            this.UUID = other.UUID;
+            this.AllowedFrom = other.AllowedUntil;
+            this.AllowedUntil = other.AllowedUntil;
+            this.Enabled = other.Enabled;
+            this.Group = other.Group;
+            this.Id = other.Id;
+            this.Login = other.Login;
+            this.Password = other.Password;
+            this.Permissions = other.Permissions;
+        }
+
+
+        public override bool Equals(object source)
+        {
+            CompareLogic compareLogic = new CompareLogic();
+            ComparisonResult result = compareLogic.Compare(this, source);
+            return result.AreEqual;
+        }
+
     }
 }

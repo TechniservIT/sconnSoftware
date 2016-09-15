@@ -9,14 +9,14 @@ using sconnConnector.POCO.Config.Abstract;
 
 namespace sconnConnector.POCO.Config.sconn
 {
-    public class sconnGsmRcpt : ISerializableConfiguration,  IFakeAbleConfiguration
+    public class sconnGsmRcpt : IAlarmSystemGenericConfigurationEntity
     {
         public ushort Id { get; set; }
 
         public string Name { get; set; }
 
         public bool Enabled { get; set; }
-
+         
         public int CountryCode { get; set; }
 
         [MaxLength(ipcDefines.RAM_SMS_RECP_ADDR_LEN)]
@@ -24,7 +24,7 @@ namespace sconnConnector.POCO.Config.sconn
 
         public GsmMessagingLevel MessageLevel { get; set; }
 
-        public int Value { get; set; }
+        public ushort Value { get; set; }
 
         private static Logger _logger = LogManager.GetCurrentClassLogger();
 
@@ -114,5 +114,32 @@ namespace sconnConnector.POCO.Config.sconn
         }
 
         public string UUID { get; set; }
+        public byte[] SerializeEntityNames()
+        {
+            return new byte[0];
+        }
+
+        public void DeserializeEntityNames(byte[] buffer)
+        {
+            
+        }
+
+        public void CopyFrom(sconnGsmRcpt other)
+        {
+            this.UUID = other.UUID;
+            this.CountryCode = other.CountryCode;
+            this.Enabled = other.Enabled;
+            this.Id = other.Id;
+            this.MessageLevel = other.MessageLevel;
+            this.Name = other.Name;
+            this.NumberE164 = other.NumberE164;
+            this.Value = other.Value;
+        }
+
+        public void Clone(IAlarmSystemConfigurationEntity other)
+        {
+            sconnGsmRcpt otherEntity = (sconnGsmRcpt)other;
+            this.CopyFrom(otherEntity);
+        }
     }
 }

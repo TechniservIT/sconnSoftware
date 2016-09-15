@@ -5,11 +5,16 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using AlarmSystemManagmentService;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using AlarmSystemManagmentService.AlarmSystemUsers;
+using AlarmSystemManagmentService.Device;
+using AlarmSystemManagmentService.Event;
+using NUnit.Framework;
 using sconnConnector.Config;
 using sconnConnector.POCO;
 using sconnConnector.POCO.Config;
+using sconnConnector.POCO.Config.Abstract.Auth;
 using sconnConnector.POCO.Config.sconn;
+using sconnConnector.POCO.Config.sconn.User;
 using sconnConnector.POCO.Device;
 
 namespace sconnRem_Tests_AlarmSystem
@@ -69,15 +74,15 @@ namespace sconnRem_Tests_AlarmSystem
             IAlarmSystemConfigurationService<T> service;
             if (typeof(T) == typeof(sconnDevice))
             {
-                service = new DevicesConfigService(man) as IAlarmSystemConfigurationService<T>;
+                service = new AlarmDevicesConfigService(man) as IAlarmSystemConfigurationService<T>;
             }
             else if (typeof(T) == typeof(sconnAlarmZone))
             {
                 service = new ZoneConfigurationService(man) as IAlarmSystemConfigurationService<T>;
             }
-            else if (typeof(T) == typeof(sconnUser))
+            else if (typeof(T) == typeof(sconnAlarmSystemUser))
             {
-                service = new UsersConfigurationService(man) as IAlarmSystemConfigurationService<T>;
+                service = new AlarmSystemUsersConfigurationService(man) as IAlarmSystemConfigurationService<T>;
             }
             else if (typeof(T) == typeof(sconnGsmRcpt))
             {
@@ -86,6 +91,14 @@ namespace sconnRem_Tests_AlarmSystem
             else if (typeof(T) == typeof(sconnAuthorizedDevice))
             {
                 service = new AuthorizedDevicesConfigurationService(man) as IAlarmSystemConfigurationService<T>;
+            }
+            else if (typeof(T) == typeof(sconnEvent))
+            {
+                service = new EventsService(man) as IAlarmSystemConfigurationService<T>;
+            }
+            else if (typeof(T) == typeof(sconnRemoteUser))
+            {
+                service = new UsersConfigurationService(man) as IAlarmSystemConfigurationService<T>;
             }
             else
             {
@@ -110,6 +123,8 @@ namespace sconnRem_Tests_AlarmSystem
         [Test]
         public void Test_AlarmService_GetAll()
         {
+            SetUp();
+            _service.Add(new T());
             var res = _service.GetAll();
             Assert.IsTrue(res != null);
         }
@@ -117,6 +132,8 @@ namespace sconnRem_Tests_AlarmSystem
         [Test]
         public void Test_AlarmService_GetById()
         {
+            SetUp();
+            _service.Add(new T());
             var res = _service.GetById(0);
             Assert.IsTrue(res != null);
         }
@@ -124,8 +141,10 @@ namespace sconnRem_Tests_AlarmSystem
         [Test]
         public void Test_AlarmService_Add()
         {
+            SetUp();
+            //TODO - only selected entities
             var res = _service.Add(new T());
-            Assert.IsTrue(res);
+           Assert.IsTrue(res);
         }
 
         [Test]
@@ -137,6 +156,7 @@ namespace sconnRem_Tests_AlarmSystem
         [Test]
         public void Test_AlarmService_Remove()
         {
+            SetUp();
             T proto = new T();
             _service.Add(proto);
             var res = _service.Remove(proto);
@@ -147,8 +167,10 @@ namespace sconnRem_Tests_AlarmSystem
         [Test]
         public void Test_AlarmService_RemoveById()
         {
+            SetUp();
             T proto = new T();
-            int RandomId = 156164831;
+            Random r = new Random();
+            ushort RandomId = (ushort)r.Next(ushort.MaxValue);
             PropertyInfo prop = proto.GetType().GetProperty("Id");
             if ((prop) != null)
             {
@@ -168,10 +190,12 @@ namespace sconnRem_Tests_AlarmSystem
         [Test]
         public void Test_AlarmService_Update()
         {
+            SetUp();
             T proto = new T();
-            int RandomId = 156164831;   //Test updating by Id property
-            int Val1 = 64234123;
-            int Val2 = 7512356;
+            Random r = new Random();
+            ushort RandomId = (ushort)r.Next(ushort.MaxValue);
+            ushort Val1 = (ushort)r.Next(ushort.MaxValue);
+            ushort Val2 = (ushort)r.Next(ushort.MaxValue);
             PropertyInfo idInfo = proto.GetType().GetProperty("Id");
             idInfo.SetValue(proto, RandomId);
             PropertyInfo prop = proto.GetType().GetProperty("Value");
@@ -182,7 +206,7 @@ namespace sconnRem_Tests_AlarmSystem
                 prop.SetValue(proto, Val2);
                 var res = _service.Update(proto);
                 var Updated = _service.GetById(RandomId);
-                var UpdatedValue = (int)prop.GetValue(Updated);
+                ushort UpdatedValue = (ushort)prop.GetValue(Updated);
                 Assert.IsTrue(res && (UpdatedValue == Val2));
             }
             else
@@ -193,17 +217,17 @@ namespace sconnRem_Tests_AlarmSystem
 
     }
 
-    public class AlarmServiceDeviceTests_Device_Tests : AlarmServiceDeviceTests<sconnDevice> { }
+
+    //TODO - readonly
+    // public class AlarmServiceDeviceTests_Events_Tests : AlarmServiceDeviceTests<sconnEvent> { }
+    //   public class AlarmServiceDeviceTests_Device_Tests : AlarmServiceDeviceTests<sconnDevice> { }
+    
     public class AlarmServiceDeviceTests_Zone_Tests : AlarmServiceDeviceTests<sconnAlarmZone> { }
-    public class AlarmServiceDeviceTests_User_Tests : AlarmServiceDeviceTests<sconnUser> { }
+    public class AlarmServiceDeviceTests_SystemUser_Tests : AlarmServiceDeviceTests<sconnAlarmSystemUser> { }
+    public class AlarmServiceDeviceTests_RemoteUser_Tests : AlarmServiceDeviceTests<sconnRemoteUser> { }
     public class AlarmServiceDeviceTests_AuthD_Tests : AlarmServiceDeviceTests<sconnAuthorizedDevice> { }
     public class AlarmServiceDeviceTests_GSM_Tests : AlarmServiceDeviceTests<sconnGsmRcpt> { }
-    public class AlarmServiceDeviceTests_Input_Tests : AlarmServiceDeviceTests<sconnInput> { }
-    public class AlarmServiceDeviceTests_Output_Tests : AlarmServiceDeviceTests<sconnOutput> { }
-    public class AlarmServiceDeviceTests_Relay_Tests : AlarmServiceDeviceTests<sconnRelay> { }
-
-
-
+    
     public class Service_Configuration_Tests
     {
 

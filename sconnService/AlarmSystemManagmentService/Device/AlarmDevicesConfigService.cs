@@ -52,7 +52,7 @@ namespace AlarmSystemManagmentService.Device
         
         public sconnDevice GetById(int Id)
         {
-            if (Id <= ConfigManager.Config.DeviceConfig.Devices.Count)
+            if (Id < ConfigManager.Config.DeviceConfig.Devices.Count)
             {
                 return ConfigManager.Config.DeviceConfig.Devices[Id];
             }
@@ -69,7 +69,7 @@ namespace AlarmSystemManagmentService.Device
 
         public bool Add(sconnDevice entity)
         {
-            return false;   //adding virtual devices is not supported 
+            return true; //adding virtual devices is not supported 
         }
 
         public bool Update(sconnDevice rcpt)

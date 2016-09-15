@@ -1,17 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using NLog;
 using sconnConnector.Annotations;
 using sconnConnector.POCO.Config.Abstract.Device;
 using sconnConnector.POCO.Config.Abstract.IO;
+using KellermanSoftware.CompareNetObjects;
 
 namespace sconnConnector.POCO.Config.sconn
 {
+    
+
+    public interface IAlarmSystemNamedSerializableFakeableConfigurationEntity : IAlarmSystemConfigurationEntity, IAlarmSystemNamedEntity, IFakeAbleConfiguration, IAlarmSystemCopyableConfigurationEntity
+    {
+        
+    }
+
+    public interface IAlarmSystemGenericConfigurationEntity : IAlarmSystemNamedSerializableFakeableConfigurationEntity
+    {
+        
+    }
+
+    public interface IAlarmSystemCopyableConfigurationEntity
+    {
+        //void Clone(IAlarmSystemConfigurationEntity other);
+    }
 
     public interface IAlarmSystemZonedIo
     {
@@ -43,6 +63,22 @@ namespace sconnConnector.POCO.Config.sconn
         byte[] SerializeEntityNames();
         void DeserializeEntityNames(byte[] buffer);
     }
+
+    public static class ExtensionMethods
+    {
+        // Deep clone
+        public static T DeepClone<T>(this T a)
+        {
+            using (MemoryStream stream = new MemoryStream())
+            {
+                BinaryFormatter formatter = new BinaryFormatter();
+                formatter.Serialize(stream, a);
+                stream.Position = 0;
+                return (T)formatter.Deserialize(stream);
+            }
+        }
+    }
+
 
     public class sconnFirmwareVersion
     {
@@ -97,8 +133,8 @@ namespace sconnConnector.POCO.Config.sconn
     }
 
 
-
-    public class sconnDevice :  IAlarmSystemNamedEntity, ISerializableConfiguration, IFakeAbleConfiguration, INotifyPropertyChanged
+    [Serializable]
+    public class sconnDevice : IAlarmSystemGenericConfigurationEntity, INotifyPropertyChanged
     {
         public ushort Id { get; set; }
         public byte Value { get; set; }
@@ -153,6 +189,7 @@ namespace sconnConnector.POCO.Config.sconn
 
         public void CopyFrom(sconnDevice other)
         {
+
             this.ActiveInput = other.ActiveInput;
             this.ActiveOutput = other.ActiveOutput;
             this.ActiveRelay = other.ActiveRelay;
@@ -745,5 +782,41 @@ namespace sconnConnector.POCO.Config.sconn
 
 
         public string UUID { get; set; }
+
+
+        public override bool Equals(object source)
+        {
+            CompareLogic compareLogic = new CompareLogic();
+            ComparisonResult result = compareLogic.Compare(this, source);
+            return result.AreEqual;
+        }
     }
+
+
+    public static class ObjectCopier
+    {
+        /// <summary>
+        /// Perform a deep Copy of the object.
+        /// </summary>
+        /// <typeparam name="T">The type of object being copied.</typeparam>
+        /// <param name="source">The object instance to copy.</param>
+        /// <returns>The copied object.</returns>
+        public static T CloneJson<T>(this T source)
+        {
+            // Don't serialize a null object, simply return the default for that object
+            if (Object.ReferenceEquals(source, null))
+            {
+                return default(T);
+            }
+
+            // initialize inner objects individually
+            // for example in default constructor some list property initialized with some values,
+            // but in 'source' these items are cleaned -
+            // without ObjectCreationHandling.Replace default constructor values will be added to result
+            var deserializeSettings = new JsonSerializerSettings { ObjectCreationHandling = ObjectCreationHandling.Replace };
+
+            return JsonConvert.DeserializeObject<T>(JsonConvert.SerializeObject(source), deserializeSettings);
+        }
+    }
+
 }

@@ -8,7 +8,7 @@ using sconnConnector.POCO.Config.Abstract;
 
 namespace sconnConnector.POCO.Config.sconn
 {
-    public class sconnAuthorizedDevice : IAlarmSystemConfigurationEntity, ISerializableConfiguration, IFakeAbleConfiguration
+    public class sconnAuthorizedDevice : IAlarmSystemGenericConfigurationEntity
     {
         public ushort Id { get; set; }
 
@@ -123,5 +123,44 @@ namespace sconnConnector.POCO.Config.sconn
         }
 
         public string UUID { get; set; }
+        public byte[] SerializeEntityNames()
+        {
+            return new byte[0];
+        }
+
+        public void DeserializeEntityNames(byte[] buffer)
+        {
+           
+        }
+
+        public void CopyFrom(sconnAuthorizedDevice other)
+        {
+            this.UUID = other.UUID;
+            this.AllowedFrom = other.AllowedFrom;
+            this.AllowedUntil = other.AllowedUntil;
+            this.Enabled = other.Enabled;
+            this.Id = other.Id;
+            this.Serial = other.Serial;
+        }
+
+        public override bool Equals(object source)
+        {
+            sconnAuthorizedDevice other  = (sconnAuthorizedDevice) source;
+            return (
+                this.AllowedFrom == other.AllowedFrom &&
+                this.AllowedUntil == other.AllowedUntil &&
+                this.Enabled == other.Enabled &&
+                this.Id == other.Id &&
+                this.Serial == other.Serial
+                );
+        }
+
+
+        public void Clone(IAlarmSystemConfigurationEntity other)
+        {
+            sconnAuthorizedDevice otherEntity = (sconnAuthorizedDevice) other;
+            this.CopyFrom(otherEntity);
+        }
+
     }
 }

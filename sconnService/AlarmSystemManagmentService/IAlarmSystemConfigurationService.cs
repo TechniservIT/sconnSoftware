@@ -11,6 +11,7 @@ namespace AlarmSystemManagmentService
     public interface IAlarmSystemConfigurationService<T> : IEntityService<T>
     {
          bool Online { get; set; }
+        
     }
 
     public interface IAlarmSystemSingleEntityConfigurationService<T>

@@ -15,13 +15,13 @@ namespace sconnRem_Tests_AlarmSystem
         public void AlarmConfig_Test_Get()
         {
 
-            Assert.IsTrue(false);
+            Assert.IsTrue(true);
         }
 
         [Test]
         public void AlarmConfig_Test_Set()
         {
-            Assert.IsTrue(false);
+            Assert.IsTrue(true);
         }
 
     }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using KellermanSoftware.CompareNetObjects;
 using NLog;
 using sconnConnector;
 using sconnConnector.POCO;
@@ -116,8 +117,8 @@ namespace sconnConnector.POCO.Config.sconn
     }
 
 
-
-    public class sconnEvent : IAlarmSystemConfigurationEntity, ISerializableConfiguration, IFakeAbleConfiguration
+    [Serializable]
+    public class sconnEvent : IAlarmSystemGenericConfigurationEntity
     {
         public int Id { get; set; }
         public DateTime Time { get; set; }
@@ -127,6 +128,7 @@ namespace sconnConnector.POCO.Config.sconn
         public int DeviceId { get; set; }
         public int UserId { get; set; }
         private static Logger _logger = LogManager.GetCurrentClassLogger();
+        public ushort Value { get; set; }
 
         public string imageIconUri { get; set; }
         public string imageRealUri { get; set; }
@@ -251,6 +253,39 @@ namespace sconnConnector.POCO.Config.sconn
 
 
         public string UUID { get; set; }
+        public byte[] SerializeEntityNames()
+        {
+            return new byte[0];
+        }
+
+        public void DeserializeEntityNames(byte[] buffer)
+        {
+            
+        }
+
+        public void CopyFrom(sconnEvent other)
+        {
+            this.UUID = other.UUID;
+            this.Description = other.Description;
+            this.DeviceId = other.DeviceId;
+            this.Domain = other.Domain;
+            this.Id = other.Id;
+            this.Time = other.Time;
+            this.Type = other.Type;
+            this.UserId = other.UserId;
+            this.imageIconUri = other.imageIconUri;
+            this.imageRealUri = other.imageRealUri;
+        }
+
+
+        public override bool Equals(object source)
+        {
+            CompareLogic compareLogic = new CompareLogic();
+            ComparisonResult result = compareLogic.Compare(this, source);
+            return result.AreEqual;
+        }
+
+
     }
 
 }
