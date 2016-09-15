@@ -167,6 +167,8 @@ namespace sconnRem.Controls.AlarmSystem.ViewModel.Alarm
 
                         NavigationParameters parameters = new NavigationParameters();
                         parameters.Add(GlobalViewContractNames.Global_Contract_Nav_Site_Context__Key_Name, siteUUID);
+                        parameters.Add(AlarmSystemEntityListContractNames.Alarm_Contract_Entity_Input_Device__Edit_Context_Key_Name, device.Id);
+                        parameters.Add(AlarmSystemEntityListContractNames.Alarm_Contract_Entity_Input_Edit_Context_Key_Name, input.Id);
 
                         GlobalNavigationContext.NavigateRegionToContractWithParam(
                             GlobalViewRegionNames.RNavigationRegion,
