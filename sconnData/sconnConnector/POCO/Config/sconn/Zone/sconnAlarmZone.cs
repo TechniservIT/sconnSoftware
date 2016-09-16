@@ -88,6 +88,7 @@ namespace sconnConnector.POCO.Config.sconn
                 buffer[ipcDefines.ZONE_CFG_TYPE_POS] = (byte)Type;
                 buffer[ipcDefines.ZONE_CFG_ENABLED_POS] = (byte)(Enabled ? 1 : 0);
                 AlarmSystemConfig_Helpers.WriteWordToBufferAtPossition(Id,buffer,ipcDefines.ZONE_CFG_ID_POS);
+
                 byte[] nameBytes = System.Text.Encoding.BigEndianUnicode.GetBytes(Name);
                 int fullNameMaxLen = nameBytes.Length > ipcDefines.RAM_NAME_SIZE
                     ? ipcDefines.RAM_NAME_SIZE
@@ -118,10 +119,12 @@ namespace sconnConnector.POCO.Config.sconn
                 }
                 Id = (ushort)AlarmSystemConfig_Helpers.GetWordFromBufferAtPossition(buffer, ipcDefines.ZONE_CFG_ID_POS);
                 Enabled = buffer[ipcDefines.ZONE_CFG_ENABLED_POS] > 0 ? true : false;
+
                 Name = System.Text.Encoding.BigEndianUnicode.GetString(
                     buffer, 
                     ipcDefines.ZONE_CFG_NAME_POS, 
-                    AlarmSystemConfig_Helpers.GetUtf8StringLengthFromBufferAtPossition(buffer, ipcDefines.ZONE_CFG_NAME_POS));
+                    AlarmSystemConfig_Helpers.GetUtf8StringLengthFromBufferAtPossition(buffer, ipcDefines.ZONE_CFG_NAME_POS)*2
+                    );
                 LoadImageTypeUrl();
             }
             catch (Exception e)
@@ -137,6 +140,7 @@ namespace sconnConnector.POCO.Config.sconn
             {
                 this.Id = 0;
                 this.Enabled = true;
+                this.Name = Guid.NewGuid().ToString().Substring(0, ipcDefines.RAM_NAME_SIZE_SIGNS);
                 UUID = Guid.NewGuid().ToString();
                 this.NameId = 0;
                 this.Type = AlarmZoneType.General;

@@ -70,6 +70,29 @@ namespace sconnConnector
             }
         }
 
+        public static int GetAsciiStringLengthFromBufferAtPossition(byte[] buffer, int possition)
+        {
+            try
+            { 
+                int strBufflen = buffer.Length - possition;
+                for (int i = 0; i < strBufflen; i++)
+                {
+                    byte current = (byte)buffer[possition + i];
+                    byte next = (byte)buffer[possition + i + 1];
+                    if (next == 0)
+                    {
+                        return i;
+                    }
+                }
+                return buffer.Length;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+
+        }
+
         public static ushort GetWordFromBufferAtPossition(byte[] buffer, int possition)
         {
             try
@@ -77,8 +100,8 @@ namespace sconnConnector
                 //Big endian
                 ushort val = 0;
                 val = buffer[possition + 1];
-                byte b2val = buffer[possition];
-                val |= (ushort)(b2val << 8);
+                byte b2Val = buffer[possition];
+                val |= (ushort)(b2Val << 8);
                 return val;
             }
             catch (Exception)
@@ -105,6 +128,58 @@ namespace sconnConnector
 
 
         }
+
+        public static void WriteDateTimeToBufferAtPossition(DateTime date, byte[] buffer, int possition)
+        {
+            try
+            {
+                //Big endian
+                byte[] convBytes = BitConverter.GetBytes(date.Ticks);
+                byte[] sourceBuffer;
+                if (BitConverter.IsLittleEndian)
+                {
+                    //revert first
+                    sourceBuffer = convBytes.Take(8).Reverse().ToArray();
+                }
+                else
+                {
+                    sourceBuffer = convBytes;
+                }
+                sourceBuffer.CopyTo(buffer,possition);
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
+        public static DateTime GetDateTimeFromBufferAtPossition(byte[] buffer, int possition)
+        {
+            try
+            {
+                //Big endian
+                DateTime date;
+                byte[] sourceBuffer = new byte[8];
+                for (int i = 0; i < 8; i++)
+                {
+                    sourceBuffer[i] = buffer[possition + i];
+                }
+                if (BitConverter.IsLittleEndian)
+                {
+                    //revert first
+                    sourceBuffer = sourceBuffer.Reverse().ToArray();
+                }
+                long longVar = BitConverter.ToInt64(sourceBuffer, 0);
+                date = new DateTime(1980, 1, 1).AddMilliseconds(longVar);
+                return date;
+            }
+            catch (Exception)
+            {
+                return new DateTime();
+            }
+
+        }
+
 
     }
 
@@ -782,11 +857,8 @@ public static class sconnDataShare
         public const byte mAdrCOMi2c = 0xC;  //device has I2C COM , bool
         public const byte mAdrCOMeth = 0xD;  //device has ETH COM
         public const byte mAdrCOMmiwi = 0xE;  //device has MiWi COM
-        public const byte mAdrI2CAddr = 0xF; //i2c bus address
-
-        public const byte mAdrSensorBattLvl = 0xF;
-
-        public const byte mAdrDevArmState = (mAdrI2CAddr + mAdrCfgSingleLen);
+        public const byte mAdrSensorBattLvl = (mAdrCOMmiwi+1);
+        public const byte mAdrDevArmState = (mAdrSensorBattLvl + mAdrCfgSingleLen);
         public const byte mAdrDevViolationState = (mAdrDevArmState + mAdrCfgSingleLen);
         public const byte mAdrDevFailureState = (mAdrDevViolationState + mAdrCfgSingleLen);
         public const byte mAdrDeviceZone = (mAdrDevFailureState + mAdrCfgSingleLen);
@@ -848,7 +920,7 @@ public static class sconnDataShare
         public const int mAdrDeviceNameLen = (RAM_NAME_SIZE);
         public const int mAdrDeviceConfigEnd = (mAdrDeviceNameStartPos + mAdrDeviceNameLen);
 
-        public const int mAdrSuppVolt_Start_Pos = (mAdrRelay + RelayTotalMemSize);
+        public const int mAdrSuppVolt_Start_Pos = (mAdrDeviceNameStartPos + mAdrDeviceNameLen);
         public const int mAdrSuppVolt_Start_Len = (4);
         public const int mAdrBackupVolt_Start_Pos = (mAdrSuppVolt_Start_Pos + mAdrSuppVolt_Start_Len);
         public const int mAdrBackupVolt_Start_Len = (4);
@@ -956,6 +1028,7 @@ public static class sconnDataShare
         /************  NAMES *****************/
 
         public const int RAM_NAME_SIZE = 32;  //  16x 2byte unicode
+        public const int RAM_NAME_SIZE_SIGNS = RAM_NAME_SIZE/2;
         public const int mAddr_NAMES_StartAddr = (RAM_GCFG_SIZE+(RAM_DEVCFG_SIZE*RAM_DEVCFG_NO));
         
         public const int mAddr_NAMES_Device_StartIndex = 0x0000; 
@@ -1058,15 +1131,12 @@ public static class sconnDataShare
         public const  byte RAM_SMS_RECP_MESSAGE_LEVEL_LEN = 0x01;
         public const  byte RAM_SMS_RECP_ENABLED_POS = (byte)(RAM_SMS_RECP_MESSAGE_LEVEL_POS + RAM_SMS_RECP_MESSAGE_LEVEL_LEN);
         public const  byte RAM_SMS_RECP_ENABLED_LEN = 0x01;
-
-
-        public const  byte RAM_SMS_RECP_SIZE = 32;    // E.164 ITU-T max 15 digit 
-        public const  byte RAM_SMS_RECP_NO = 16;    //16 recpients
+        public const  byte RAM_SMS_RECP_SIZE = (RAM_SMS_RECP_ENABLED_POS+ RAM_SMS_RECP_ENABLED_LEN);    // E.164 ITU-T max 15 digit 
+        public const  byte RAM_SMS_RECP_NO = 32; 
 
         public const  int RAM_SMS_MSG_SIZE  = 64;    //64 ASCII chars
         public const  int RAM_SMS_MSG_NO    = 16;
-
-
+        
         public const int RAM_SMS_RECP_MEM_SIZE = (RAM_SMS_RECP_SIZE*RAM_SMS_RECP_NO);
 
         /**********************  AUTH *********************/
@@ -1137,10 +1207,10 @@ public static class sconnDataShare
         public const int SYS_ALRM_DEV_END_DATE_LEN = 0x04;
 
         public const int SYS_ALRM_DEV_AUTH_LEN = (SYS_ALRM_DEV_END_DATE_POS + SYS_ALRM_DEV_END_DATE_LEN);
-        public const int SYS_ALRM_UUID_LEN = SYS_ALRM_DEV_AUTH_LEN;
+        //public const int SYS_ALRM_UUID_LEN = SYS_ALRM_DEV_AUTH_LEN;
 
         public const int SYS_ALARM_DEV_AUTH_MAX_RECORDS = 32;
-        public const int SYS_ALARM_DEV_AUTH_MEM_SIZE = SYS_ALARM_DEV_AUTH_MAX_RECORDS * SYS_ALRM_UUID_LEN;
+        public const int SYS_ALARM_DEV_AUTH_MEM_SIZE = SYS_ALARM_DEV_AUTH_MAX_RECORDS * SYS_ALRM_DEV_AUTH_LEN;
 
 
 
@@ -1207,7 +1277,7 @@ public static class sconnDataShare
         public const int EVENT_DB_DATE_POS = (int)(EVENT_DB_TIME_POS + EVENT_DB_TIME_LEN);
         public const int EVENT_DB_DATE_LEN  = 0x04;
 
-        public const int EVENT_DB_RECORD_LEN = (int)(EVENT_DB_CODE_LEN + EVENT_DB_DOMAIN_LEN + EVENT_DB_DEVICE_LEN + EVENT_DB_USER_ID_LEN + EVENT_DB_TIME_LEN + EVENT_DB_DATE_LEN);
+        public const int EVENT_DB_RECORD_LEN = (int)(EVENT_DB_DATE_POS + EVENT_DB_DATE_LEN);
 
     
         /**************  NETWORK **************/

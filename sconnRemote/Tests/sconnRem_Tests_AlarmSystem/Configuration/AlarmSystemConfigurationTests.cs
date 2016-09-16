@@ -13,26 +13,8 @@ using sconnRem_Tests_AlarmSystem;
 
 namespace sconnRemote_AlarmSystemModelsTests
 {
-
-
+   
     [TestFixture]
-    public class AlarmSystemConfigurationTests
-    {
-
-        /*************** INIT ****************/
-
-     
-
-        [Test]
-        public void Test_AlarmConfiguration_Serialization()
-        {
-        }
-        
-        
-    }
-
-
-
     public abstract class AlarmEntitySerializationTests<T> where T : IAlarmSystemGenericConfigurationEntity, new()
     {
         private IAlarmSystemGenericConfigurationEntity _entity;
@@ -58,10 +40,17 @@ namespace sconnRemote_AlarmSystemModelsTests
         }
         
     }
-    
+
+    [TestFixture]
     public class AlarmEntitySerializationTests_Device_Tests : AlarmEntitySerializationTests<sconnDevice> { }
+
+    [TestFixture]
     public class AlarmEntitySerializationTests_Zone_Tests : AlarmEntitySerializationTests<sconnAlarmZone> { }
+
+    [TestFixture]
     public class AlarmEntitySerializationTests_SystemUser_Tests : AlarmEntitySerializationTests<sconnAlarmSystemUser> { }
+
+    [TestFixture]
     public class AlarmEntitySerializationTests_RemoteUser_Tests : AlarmEntitySerializationTests<sconnRemoteUser> { }
     public class AlarmEntitySerializationTests_Events_Tests : AlarmEntitySerializationTests<sconnEvent> { }
     public class AlarmEntitySerializationTests_AuthD_Tests : AlarmEntitySerializationTests<sconnAuthorizedDevice> { }

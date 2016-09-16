@@ -186,6 +186,9 @@ namespace sconnConnector.POCO.Config.sconn
                 buffer[ipcDefines.EVENT_DB_DOMAIN_POS + 1] = (byte) Domain;
                 buffer[ipcDefines.EVENT_DB_DEVICE_POS + 1] = (byte) (DeviceId);
                 buffer[ipcDefines.EVENT_DB_USER_ID_POS + 1] = (byte) UserId;
+
+                AlarmSystemConfig_Helpers.WriteDateTimeToBufferAtPossition(Time, buffer, ipcDefines.EVENT_DB_TIME_POS);
+
                 return buffer;
             }
             catch (Exception e)
@@ -220,7 +223,7 @@ namespace sconnConnector.POCO.Config.sconn
                     Domain = buffer[ipcDefines.EVENT_DB_DOMAIN_POS + 1];
                     DeviceId = buffer[ipcDefines.EVENT_DB_DEVICE_POS + 1];
                     UserId = buffer[ipcDefines.EVENT_DB_USER_ID_POS + 1];
-
+                    Time = AlarmSystemConfig_Helpers.GetDateTimeFromBufferAtPossition(buffer, ipcDefines.EVENT_DB_TIME_POS);
                 }
 
 

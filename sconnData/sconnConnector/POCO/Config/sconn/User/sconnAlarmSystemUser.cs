@@ -14,12 +14,27 @@ namespace sconnConnector.POCO.Config.sconn.User
 {
 
 
+    [Serializable]
     public class sconnAlarmUserPermission
     {
         public int Id { get; set; }  
         public string Name { get; set; }
         public bool Enabled { get; set; }
         public sconnAlarmUserPermissionType Type { get; set; }
+
+        public sconnAlarmUserPermission()
+        {
+                
+        }
+
+        public sconnAlarmUserPermission(int id, string name, bool enabled, sconnAlarmUserPermissionType type)
+        {
+            Id = id;
+            Name = name;
+            Enabled = enabled;
+            Type = type;
+        }
+
     }
 
     public enum sconnAlarmUserPermissionType
@@ -175,7 +190,6 @@ namespace sconnConnector.POCO.Config.sconn.User
                     if (buffer.Length >= ipcDefines.USER_DB_USER_RECORD_LEN)
                     {
                         DeserializePermissions(buffer);
-                     //   this.Id = System.BitConverter.ToUInt16(buffer, ipcDefines.USER_DB_UID_POS);
                         Id = (ushort)AlarmSystemConfig_Helpers.GetWordFromBufferAtPossition(buffer, ipcDefines.USER_DB_UID_POS);
 
                     Enabled = buffer[ipcDefines.USER_DB_ENABLED_POS] > 0;
@@ -218,7 +232,11 @@ namespace sconnConnector.POCO.Config.sconn.User
                     this.Id = 0;
                     this.Enabled = true;
                     this.AllowedUntil = DateTime.MaxValue;
-                }
+                    this.Code = Guid.NewGuid().ToString().Substring(0, ipcDefines.USER_DB_CODE_LEN);
+                    this.Card = Guid.NewGuid().ToString().Substring(0, ipcDefines.USER_DB_CARD_LEN);
+                    this.Permissions = new ObservableCollection<sconnAlarmUserPermission>();
+                    Permissions.Add(new sconnAlarmUserPermission(0,"perm1",true, sconnAlarmUserPermissionType.AddDevices));
+            }
                 catch (Exception e)
                 {
                     _logger.Error(e, e.Message);

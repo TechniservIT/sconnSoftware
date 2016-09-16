@@ -80,13 +80,13 @@ namespace sconnConnector.POCO.Config.Abstract.Auth
                 buffer[ipcDefines.AUTH_RECORD_ENABLED_POS] = (byte)(Enabled ? 1 : 0);
                 buffer[ipcDefines.AUTH_RECORD_GROUP_POS] = (byte)Group;
                 buffer[ipcDefines.AUTH_RECORD_PASS_LEN_POS] = (byte)this.Password.Length;
-                char[] passB = this.Password.ToCharArray();
+                char[] passB = Encoding.ASCII.GetChars(Encoding.ASCII.GetBytes(Password));  //.Password.ToCharArray();
                 int passwdBytes = passB.Length > ipcDefines.AUTH_PASS_SIZE ? ipcDefines.AUTH_PASS_SIZE : passB.Length;
                 for (int i = 0; i < passwdBytes; i++)
                 {
                     buffer[ipcDefines.AUTH_RECORD_PASSWD_POS + i] = (byte)passB[i];
                 }
-                for (int i = passwdBytes; i < ipcDefines.AUTH_PASS_SIZE- passwdBytes; i++)
+                for (int i = passwdBytes; i < ipcDefines.AUTH_PASS_SIZE; i++)
                 {
                     buffer[ipcDefines.AUTH_RECORD_PASSWD_POS + i] = 0x00;    //clear remaning bytes
 
@@ -98,7 +98,7 @@ namespace sconnConnector.POCO.Config.Abstract.Auth
                 {
                     buffer[ipcDefines.AUTH_RECORD_LOGIN_POS + i] = (byte)logB[i];
                 }
-                for (int i = loginBytes; i < ipcDefines.AUTH_PASS_SIZE - loginBytes; i++)
+                for (int i = loginBytes; i < ipcDefines.AUTH_PASS_SIZE; i++)
                 {
                     buffer[ipcDefines.AUTH_RECORD_LOGIN_POS + i]  = 0x00;    //clear remaning bytes
 
@@ -166,8 +166,8 @@ namespace sconnConnector.POCO.Config.Abstract.Auth
             {
                 this.Id = 0;
                 this.Enabled = true;
-                this.Login = Guid.NewGuid().ToString().Substring(0, ipcDefines.AUTH_RECORD_LOGIN_LEN-1); ;
-                this.Password = Guid.NewGuid().ToString().Substring(0, ipcDefines.AUTH_PASS_SIZE-1);
+                this.Login = Guid.NewGuid().ToString().Substring(0, ipcDefines.AUTH_RECORD_LOGIN_LEN/2);
+                this.Password = Guid.NewGuid().ToString().Substring(0, ipcDefines.AUTH_RECORD_PASSWD_LEN/2);
                 this.AllowedFrom = DateTime.MinValue;
                 this.AllowedUntil = DateTime.MaxValue;
                 this.Group = sconnRemoteUserGroup.Admin;

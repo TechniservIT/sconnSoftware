@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using KellermanSoftware.CompareNetObjects;
 using NLog;
 using sconnConnector.POCO.Config.Abstract;
 
 namespace sconnConnector.POCO.Config.sconn
 {
+
+    [Serializable]
     public class sconnAuthorizedDevice : IAlarmSystemGenericConfigurationEntity
     {
         public ushort Id { get; set; }
@@ -37,13 +40,13 @@ namespace sconnConnector.POCO.Config.sconn
             {
                 byte[] bytes = new byte[ipcDefines.SYS_ALRM_DEV_AUTH_LEN];
                 AlarmSystemConfig_Helpers.WriteWordToBufferAtPossition(Id, bytes, ipcDefines.SYS_ALRM_DEV_AUTH_ID_POS);
-                char[] uuidBytes = Serial.ToCharArray();
+                char[] uuidBytes = Encoding.ASCII.GetChars(Encoding.ASCII.GetBytes(Serial));
                 int uuidStrLen = uuidBytes.Length > ipcDefines.SYS_ALRM_DEV_UUID_LEN
                     ? ipcDefines.SYS_ALRM_DEV_UUID_LEN
                     : uuidBytes.Length;
                 for (int j = 0; j < uuidStrLen; j++)
                 {
-                    bytes[j] = (byte)uuidBytes[j];
+                    bytes[ipcDefines.SYS_ALRM_DEV_UUID_POS+j] = (byte)uuidBytes[j];
                 }
                 bytes[ipcDefines.SYS_ALRM_DEV_ENABLED_POS] = (byte)(Enabled ? 1 : 0);
                 //TODO date range serialize/deserialize
@@ -82,18 +85,13 @@ namespace sconnConnector.POCO.Config.sconn
         {
             try
             {
-                // TODO date range
-
-               // this.Id = System.BitConverter.ToUInt16(buffer, ipcDefines.SYS_ALRM_DEV_AUTH_ID_POS);
                 Id = (ushort)AlarmSystemConfig_Helpers.GetWordFromBufferAtPossition(buffer, ipcDefines.SYS_ALRM_DEV_AUTH_ID_POS);
-
-                string uuid;
-                byte[] uuidBytes = new byte[ipcDefines.SYS_ALRM_UUID_LEN];
-                for (int j = 0; j < ipcDefines.SYS_ALRM_UUID_LEN; j++)
+                byte[] uuidBytes = new byte[ipcDefines.SYS_ALRM_DEV_UUID_LEN];
+                for (int j = 0; j < ipcDefines.SYS_ALRM_DEV_UUID_LEN; j++)
                 {
-                    uuidBytes[j] = (byte)buffer[j];
+                    uuidBytes[j] = (byte)buffer[ipcDefines.SYS_ALRM_DEV_UUID_POS+j];
                 }
-                uuid = ByteArrayToHexViaLookupAndShift(uuidBytes); //  Encoding.BigEndianUnicode.GetString(uuidBytes);
+                var uuid = Encoding.ASCII.GetString(uuidBytes,0, ipcDefines.SYS_ALRM_DEV_UUID_LEN);
                 if (uuid.Length != 0)
                 {
                     Serial = uuid;
@@ -113,7 +111,7 @@ namespace sconnConnector.POCO.Config.sconn
             {
                 this.Id = 0;
                 this.Enabled = true;
-                this.Serial = Guid.NewGuid().ToString();
+                this.Serial = Guid.NewGuid().ToString().Substring(0, ipcDefines.SYS_ALRM_DEV_UUID_LEN);
             }
             catch (Exception e)
             {
@@ -145,22 +143,11 @@ namespace sconnConnector.POCO.Config.sconn
 
         public override bool Equals(object source)
         {
-            sconnAuthorizedDevice other  = (sconnAuthorizedDevice) source;
-            return (
-                this.AllowedFrom == other.AllowedFrom &&
-                this.AllowedUntil == other.AllowedUntil &&
-                this.Enabled == other.Enabled &&
-                this.Id == other.Id &&
-                this.Serial == other.Serial
-                );
+            CompareLogic compareLogic = new CompareLogic();
+            ComparisonResult result = compareLogic.Compare(this, source);
+            return result.AreEqual;
         }
 
-
-        public void Clone(IAlarmSystemConfigurationEntity other)
-        {
-            sconnAuthorizedDevice otherEntity = (sconnAuthorizedDevice) other;
-            this.CopyFrom(otherEntity);
-        }
 
     }
 }

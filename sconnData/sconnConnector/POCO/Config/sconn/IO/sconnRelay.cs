@@ -41,9 +41,9 @@ namespace sconnConnector.POCO.Config
         AnalogInput,
         Relay
     }
+
     
-
-
+    [Serializable]
     public class sconnRelay : IAlarmSystemConfigurationEntity, ISerializableConfiguration, IFakeAbleConfiguration, INotifyPropertyChanged, IAlarmSystemZonedIo
     {
         public byte Id { get; set; }

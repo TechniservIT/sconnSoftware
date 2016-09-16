@@ -260,6 +260,7 @@ namespace sconnConnector.POCO.Config.sconn
             this.ComTcpIp = memCFG[ipcDefines.comETH] > 0 ? true : false;
             this.DomainNumber = memCFG[ipcDefines.mAdrDomain];
             this.Revision = memCFG[ipcDefines.mAdrDevRev];
+            this.Armed = memCFG[ipcDefines.mAdrDevArmState] == 1 ? true : false;
 
             if (Enum.IsDefined(typeof(sconnDeviceType), (int)memCFG[ipcDefines.mAdrDevType]))
             {
@@ -655,7 +656,7 @@ namespace sconnConnector.POCO.Config.sconn
             memCFG[ipcDefines.mAdrRelayNO] = (byte)(Relays.Count);
 
             byte [] voltBackupBytes = System.BitConverter.GetBytes(BatteryVoltage);
-            voltBackupBytes.CopyTo(memCFG, ipcDefines.mAdrBackupVolt_Start_Pos);
+             voltBackupBytes.CopyTo(memCFG, ipcDefines.mAdrBackupVolt_Start_Pos);
 
             byte[] voltMainBytes = System.BitConverter.GetBytes(MainVoltage);
             voltMainBytes.CopyTo(memCFG, ipcDefines.mAdrSuppVolt_Start_Pos);
@@ -709,7 +710,8 @@ namespace sconnConnector.POCO.Config.sconn
             //this.memCFG = new byte[ipcDefines.deviceConfigSize];
             this.Armed = true;
             this.BatteryVoltage = 11.22F;
-            this.Name = Guid.NewGuid().ToString().Substring(0, ipcDefines.RAM_NAME_SIZE-1);
+            this.MainVoltage = 17.00F;
+            this.Name = Guid.NewGuid().ToString().Substring(0, ipcDefines.RAM_NAME_SIZE_SIGNS);
            //TODO
         }
 
@@ -790,9 +792,15 @@ namespace sconnConnector.POCO.Config.sconn
 
         public override bool Equals(object source)
         {
-            CompareLogic compareLogic = new CompareLogic();
-            ComparisonResult result = compareLogic.Compare(this, source);
-            return result.AreEqual;
+            sconnDevice dev = (sconnDevice)source;
+            return (
+                        this.Name.Equals(dev.Name) &&
+                        this.Armed == dev.Armed   &&
+                        this.Id == dev.Id
+                );
+            //CompareLogic compareLogic = new CompareLogic();
+            //ComparisonResult result = compareLogic.Compare(this, source);
+            //return result.AreEqual;
         }
     }
 

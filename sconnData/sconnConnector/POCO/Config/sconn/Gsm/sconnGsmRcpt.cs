@@ -4,11 +4,14 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using KellermanSoftware.CompareNetObjects;
 using NLog;
 using sconnConnector.POCO.Config.Abstract;
 
 namespace sconnConnector.POCO.Config.sconn
 {
+
+    [Serializable]
     public class sconnGsmRcpt : IAlarmSystemGenericConfigurationEntity
     {
         public ushort Id { get; set; }
@@ -56,6 +59,13 @@ namespace sconnConnector.POCO.Config.sconn
                 {
                     Bytes[ipcDefines.RAM_SMS_RECP_ADDR_POS + i] = numbytes[i];
                 }
+                if (fullNumberLen < ipcDefines.RAM_SMS_RECP_ADDR_LEN)
+                {
+                    for (int i = fullNumberLen; i < ipcDefines.RAM_SMS_RECP_ADDR_LEN; i++)
+                    {
+                        Bytes[ipcDefines.RAM_SMS_RECP_ADDR_POS + i] =0;
+                    }
+                }
                 Bytes[ipcDefines.RAM_SMS_RECP_ENABLED_POS] = (byte)(Enabled == true ? 1 : 0);
                 return Bytes;
             }
@@ -85,7 +95,8 @@ namespace sconnConnector.POCO.Config.sconn
                 {
                     NumberBytes[i] = buffer[ipcDefines.RAM_SMS_RECP_ADDR_POS + i];
                 }
-                NumberE164 = (System.Text.Encoding.ASCII.GetString(NumberBytes));
+                int ascLen = AlarmSystemConfig_Helpers.GetAsciiStringLengthFromBufferAtPossition(NumberBytes,0);
+                NumberE164 = (System.Text.Encoding.ASCII.GetString(NumberBytes,0, ascLen));
                 Enabled = buffer[ipcDefines.RAM_SMS_RECP_ENABLED_POS] == 1 ? true : false;
             }
             catch (Exception e)
@@ -102,10 +113,11 @@ namespace sconnConnector.POCO.Config.sconn
             {
 
                 this.Id = 0;
+                this.NumberE164 = "0123456789";
                 this.CountryCode = 48;
                 this.Enabled = true;
                 this.MessageLevel = GsmMessagingLevel.All;
-                this.Name = Guid.NewGuid().ToString();
+                //this.Name = Guid.NewGuid().ToString().Substring(0, ipcDefines.RAM_NAME_SIZE_SIGNS); ;
             }
             catch (Exception e)
             {
@@ -136,10 +148,11 @@ namespace sconnConnector.POCO.Config.sconn
             this.Value = other.Value;
         }
 
-        public void Clone(IAlarmSystemConfigurationEntity other)
+        public override bool Equals(object source)
         {
-            sconnGsmRcpt otherEntity = (sconnGsmRcpt)other;
-            this.CopyFrom(otherEntity);
+            CompareLogic compareLogic = new CompareLogic();
+            ComparisonResult result = compareLogic.Compare(this, source);
+            return result.AreEqual;
         }
     }
 }

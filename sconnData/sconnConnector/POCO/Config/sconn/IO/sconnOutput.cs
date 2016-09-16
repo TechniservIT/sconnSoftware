@@ -24,7 +24,9 @@ namespace sconnConnector.POCO.Config
         OnGsmTransmission,
         OnConfigUpload
     }
-    
+
+
+    [Serializable]
     public class sconnOutput : IAlarmSystemConfigurationEntity, ISerializableConfiguration, IFakeAbleConfiguration, INotifyPropertyChanged, IAlarmSystemZonedIo
     {
         private byte _Id;

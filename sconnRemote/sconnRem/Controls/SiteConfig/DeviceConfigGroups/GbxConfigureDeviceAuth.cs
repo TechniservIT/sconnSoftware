@@ -47,7 +47,7 @@ namespace sconnRem.Controls
                 char[] uuidBytes = item.Content.ToString().ToCharArray();
                 for (int j = 0; j < uuidBytes.Length; j++)
                 {
-                    bytes[i*ipcDefines.SYS_ALRM_UUID_LEN+j]=(byte)uuidBytes[j];
+                    bytes[i*ipcDefines.SYS_ALRM_DEV_UUID_LEN+j]=(byte)uuidBytes[j];
                 }
 
             }
