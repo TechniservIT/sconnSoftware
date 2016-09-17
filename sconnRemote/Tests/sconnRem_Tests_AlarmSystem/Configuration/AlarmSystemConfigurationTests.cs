@@ -10,6 +10,7 @@ using sconnConnector.POCO.Config.Abstract.Auth;
 using sconnConnector.POCO.Config.sconn;
 using sconnConnector.POCO.Config.sconn.User;
 using sconnRem_Tests_AlarmSystem;
+using sconnConnector.Tools.Extensions;
 
 namespace sconnRemote_AlarmSystemModelsTests
 {

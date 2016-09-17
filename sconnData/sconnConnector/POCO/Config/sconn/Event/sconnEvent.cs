@@ -9,9 +9,12 @@ using sconnConnector;
 using sconnConnector.POCO;
 using sconnConnector.POCO.Config.Abstract.Event;
 using sconnConnector.POCO.Config.sconn;
+using sconnConnector.Tools.Extensions;
 
 namespace sconnConnector.POCO.Config.sconn
 {
+
+   
 
     public enum sconnEventType
     {
@@ -122,7 +125,20 @@ namespace sconnConnector.POCO.Config.sconn
     {
         public int Id { get; set; }
         public DateTime Time { get; set; }
-        public sconnEventType Type { get; set; }
+
+        private sconnEventType _type;
+
+        public sconnEventType Type
+        {
+            get { return _type; }
+            set
+            {
+                _type = value;
+
+                LoadImageTypeUrl();
+            }
+        }
+
         public string  Description { get; set; }
         public int Domain { get; set; }
         public int DeviceId { get; set; }
@@ -134,27 +150,27 @@ namespace sconnConnector.POCO.Config.sconn
         public string imageRealUri { get; set; }
 
 
-        public string GetDeviceTypeImageUriForDevice(sconnEvent ev)
+        public string GetEventTypeImageUriForDevice(sconnEvent ev)
         {
             if (ev.Type == sconnEventType.EVENT_TYPE_HW)
             {
-                return "pack://application:,,,/images/klawiatura1000x1000.jpg";
+                return "pack://application:,,,/images/config1000.jpg";
             }
             else if (ev.Type == sconnEventType.EVENT_TYPE_ALRM_SYS)
             {
-                return "pack://application:,,,/images/tel1000.jpg";
+                return "pack://application:,,,/images/czujka1000x1000.jpg";
             }
             else if (ev.Type == sconnEventType.EVENT_TYPE_IOT)
             {
-                return "pack://application:,,,/images/tel1000.jpg";
+                return "pack://application:,,,/images/glob1000.jpg";
             }
             else if (ev.Type == sconnEventType.EVENT_TYPE_OS)
             {
-                return "pack://application:,,,/images/tel1000.jpg";
+                return "pack://application:,,,/images/strefa1000.jpg";
             }
             else if (ev.Type == sconnEventType.EVENT_TYPE_USER_ACTION)
             {
-                return "pack://application:,,,/images/tel1000.jpg";
+                return "pack://application:,,,/images/person1000.jpg";
             }
 
             return null;
@@ -162,7 +178,7 @@ namespace sconnConnector.POCO.Config.sconn
 
         public void LoadImageTypeUrl()
         {
-            imageIconUri = GetDeviceTypeImageUriForDevice(this);
+            imageIconUri = GetEventTypeImageUriForDevice(this);
         }
 
         public sconnEvent()
@@ -209,25 +225,25 @@ namespace sconnConnector.POCO.Config.sconn
                     Id = buffer[ipcDefines.EVENT_DB_ID_POS + 3];
                     Type = (sconnEventType) buffer[ipcDefines.EVENT_DB_TYPE_POS + 1];
 
-                    //decode sub-type
-                    if (Type == sconnEventType.EVENT_TYPE_ALRM_SYS)
-                    {
-                        var sub = (sconnEvent_AlarmSystem_Type) buffer[ipcDefines.EVENT_DB_CODE_POS + 1];
-                        Description = sub.ToString();
-                    }
-                    else if (Type == sconnEventType.EVENT_TYPE_HW)
-                    {
-                        var sub = (sconnEvent_Hardware_Type)buffer[ipcDefines.EVENT_DB_CODE_POS + 1];
-                        Description = sub.ToString();
-                    }
+                    //decode sub-type TODO
+                    //if (Type == sconnEventType.EVENT_TYPE_ALRM_SYS)
+                    //{
+                    //    var sub = (sconnEvent_AlarmSystem_Type) buffer[ipcDefines.EVENT_DB_CODE_POS + 1];
+                    //    Description = sub.ToString();
+                    //}
+                    //else if (Type == sconnEventType.EVENT_TYPE_HW)
+                    //{
+                    //    var sub = (sconnEvent_Hardware_Type)buffer[ipcDefines.EVENT_DB_CODE_POS + 1];
+                    //    Description = sub.ToString();
+                    //}
+
+
                     Domain = buffer[ipcDefines.EVENT_DB_DOMAIN_POS + 1];
                     DeviceId = buffer[ipcDefines.EVENT_DB_DEVICE_POS + 1];
                     UserId = buffer[ipcDefines.EVENT_DB_USER_ID_POS + 1];
                     Time = AlarmSystemConfig_Helpers.GetDateTimeFromBufferAtPossition(buffer, ipcDefines.EVENT_DB_TIME_POS);
                 }
-
-
-                LoadImageTypeUrl();
+                
 
             }
             catch (Exception e)
@@ -242,10 +258,11 @@ namespace sconnConnector.POCO.Config.sconn
             try
             {
                 this.Id = 0;
-                this.Time = DateTime.Now;
+                this.Time = DateTime.Now.Truncate(TimeSpan.FromSeconds(1));
                 this.Domain = 0;
                 this.UserId = 1;
                 this.Type = sconnEventType.EVENT_TYPE_ALRM_SYS;
+
             }
             catch (Exception e)
             {
@@ -286,6 +303,14 @@ namespace sconnConnector.POCO.Config.sconn
             CompareLogic compareLogic = new CompareLogic();
             ComparisonResult result = compareLogic.Compare(this, source);
             return result.AreEqual;
+            //sconnEvent other = (sconnEvent) source;
+            //return (
+            //            this.Id == other.Id &&
+            //            this.DeviceId == other.DeviceId &&
+            //            this.Domain == other.Domain &&
+            //            this.Time.Equals(other.Time) &&
+            //            this.Type == other.Type
+            //    );
         }
 
 

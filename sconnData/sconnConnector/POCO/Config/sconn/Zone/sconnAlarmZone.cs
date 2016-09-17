@@ -24,7 +24,22 @@ namespace sconnConnector.POCO.Config.sconn
     {
         public ushort Id { get; set; }
         public string Name { get; set; }
-        public AlarmZoneType Type { get; set; }
+
+        private AlarmZoneType _type;
+
+        public AlarmZoneType Type
+        {
+            get
+            {
+                return _type;
+            }
+            set
+            {
+                _type = value;
+                LoadImageTypeUrl();
+            }
+        }
+
         public bool Enabled { get; set; }
         public ushort NameId { get; set; }
         public bool Armed { get; set; }
@@ -123,9 +138,9 @@ namespace sconnConnector.POCO.Config.sconn
                 Name = System.Text.Encoding.BigEndianUnicode.GetString(
                     buffer, 
                     ipcDefines.ZONE_CFG_NAME_POS, 
-                    AlarmSystemConfig_Helpers.GetUtf8StringLengthFromBufferAtPossition(buffer, ipcDefines.ZONE_CFG_NAME_POS)*2
+                    AlarmSystemConfig_Helpers.GetUtf8StringLengthFromBufferAtPossition(buffer, ipcDefines.ZONE_CFG_NAME_POS)
                     );
-                LoadImageTypeUrl();
+             
             }
             catch (Exception e)
             {

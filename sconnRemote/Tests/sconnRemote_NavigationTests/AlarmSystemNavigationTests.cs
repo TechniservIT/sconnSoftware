@@ -41,6 +41,8 @@ namespace sconnRemote_NavigationTests
             //  viewModel.GoBackCommand.Execute(null);
 
             journalMock.Verify(j => j.GoBack());
+
+            Assert.IsTrue(true);
         }
 
 

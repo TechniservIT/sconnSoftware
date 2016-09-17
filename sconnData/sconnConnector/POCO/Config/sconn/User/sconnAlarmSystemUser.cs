@@ -202,7 +202,8 @@ namespace sconnConnector.POCO.Config.sconn.User
                             {
                                 passwdBf[i] = buffer[ipcDefines.USER_DB_CODE_POS + i];
                             }
-                            Code = Encoding.ASCII.GetString(passwdBf);
+                        int ascLen = AlarmSystemConfig_Helpers.GetAsciiStringLengthFromBufferAtPossition(passwdBf, 0);
+                        Code = Encoding.ASCII.GetString(passwdBf,0, ascLen);
                         }
 
 
@@ -214,7 +215,8 @@ namespace sconnConnector.POCO.Config.sconn.User
                             {
                                 logBf[i] = buffer[ipcDefines.USER_DB_CARD_POS + i];
                             }
-                            Card = Encoding.ASCII.GetString(logBf);
+                        int ascLen = AlarmSystemConfig_Helpers.GetAsciiStringLengthFromBufferAtPossition(logBf, 0);
+                        Card = Encoding.ASCII.GetString(logBf,0,ascLen);
                         }
 
                     }

@@ -135,6 +135,7 @@
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="sconnConnector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tools\Extensions\Extensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

@@ -21,7 +21,7 @@ using sconnConnector.Config;
 namespace sconnConnector
 {
 
-    
+
     public static class AlarmSystemConfig_Helpers
     {
 
@@ -30,13 +30,13 @@ namespace sconnConnector
         {
             try
             {
-                for (int i = 0; i < buffer.Length / 2; i++)
+                for (int i = 0; i < buffer.Length/2; i++)
                 {
-                    byte current = (byte)buffer[i * 2];
-                    byte next = (byte)buffer[i * 2 + 1];
+                    byte current = (byte) buffer[i*2];
+                    byte next = (byte) buffer[i*2 + 1];
                     if (current == 0 && next == 0)
                     {
-                        return i * 2;
+                        return i*2;
                     }
                 }
                 return buffer.Length;
@@ -53,16 +53,16 @@ namespace sconnConnector
             try
             {
                 int strBufflen = buffer.Length - possition;
-                for (int i = 0; i < strBufflen / 2; i++)
+                for (int i = 0; i < strBufflen/2; i++)
                 {
-                    byte current = (byte)buffer[possition + i * 2];
-                    byte next = (byte)buffer[possition + i * 2 + 1];
+                    byte current = (byte) buffer[possition + i*2];
+                    byte next = (byte) buffer[possition + i*2 + 1];
                     if (current == 0 && next == 0)
                     {
-                        return i * 2;
+                        return i*2;
                     }
                 }
-                return buffer.Length;
+                return strBufflen;
             }
             catch (Exception)
             {
@@ -73,15 +73,15 @@ namespace sconnConnector
         public static int GetAsciiStringLengthFromBufferAtPossition(byte[] buffer, int possition)
         {
             try
-            { 
+            {
                 int strBufflen = buffer.Length - possition;
                 for (int i = 0; i < strBufflen; i++)
                 {
-                    byte current = (byte)buffer[possition + i];
-                    byte next = (byte)buffer[possition + i + 1];
+                    byte current = (byte) buffer[possition + i];
+                    byte next = (byte) buffer[possition + i + 1];
                     if (next == 0)
                     {
-                        return i;
+                        return ++i;
                     }
                 }
                 return buffer.Length;
@@ -101,7 +101,7 @@ namespace sconnConnector
                 ushort val = 0;
                 val = buffer[possition + 1];
                 byte b2Val = buffer[possition];
-                val |= (ushort)(b2Val << 8);
+                val |= (ushort) (b2Val << 8);
                 return val;
             }
             catch (Exception)
@@ -117,8 +117,8 @@ namespace sconnConnector
             {
                 //Big endian
                 ushort val = 0;
-                buffer[possition + 1] = (byte)(word);
-                buffer[possition] = (byte)(word>>8);
+                buffer[possition + 1] = (byte) (word);
+                buffer[possition] = (byte) (word >> 8);
                 return val;
             }
             catch (Exception)
@@ -129,12 +129,37 @@ namespace sconnConnector
 
         }
 
+
+        public static DateTime UnixTimeStampToDateTime(double unixTimeStamp)
+        {
+            // Unix timestamp is seconds past epoch
+            System.DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0);
+            dtDateTime = dtDateTime.AddSeconds(unixTimeStamp).ToLocalTime(); //convert back to local on restore
+            return dtDateTime;
+        }
+
+
+
+        public static double ConvertToTimestamp(DateTime value)
+        {
+            //create Timespan by subtracting the value provided from
+            //the Unix Epoch
+            TimeSpan span = (value.ToUniversalTime() - new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc));
+                //convert to UTC for storage
+
+            //return the total seconds (which is a UNIX timestamp)
+            return (double) span.TotalSeconds;
+        }
+
+
+
         public static void WriteDateTimeToBufferAtPossition(DateTime date, byte[] buffer, int possition)
         {
             try
             {
                 //Big endian
-                byte[] convBytes = BitConverter.GetBytes(date.Ticks);
+                double convertedUnixStamp = ConvertToTimestamp(date);
+                byte[] convBytes = BitConverter.GetBytes(convertedUnixStamp);
                 byte[] sourceBuffer;
                 if (BitConverter.IsLittleEndian)
                 {
@@ -145,7 +170,7 @@ namespace sconnConnector
                 {
                     sourceBuffer = convBytes;
                 }
-                sourceBuffer.CopyTo(buffer,possition);
+                sourceBuffer.CopyTo(buffer, possition);
             }
             catch (Exception)
             {
@@ -169,11 +194,11 @@ namespace sconnConnector
                     //revert first
                     sourceBuffer = sourceBuffer.Reverse().ToArray();
                 }
-                long longVar = BitConverter.ToInt64(sourceBuffer, 0);
-                date = new DateTime(1980, 1, 1).AddMilliseconds(longVar);
+                double recUnixStamp = BitConverter.ToDouble(sourceBuffer, 0);
+                date = UnixTimeStampToDateTime(recUnixStamp);
                 return date;
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return new DateTime();
             }
@@ -181,10 +206,31 @@ namespace sconnConnector
         }
 
 
+        public static void WriteAsciiStringToBufferAtPossition(string asciiString, byte[] buffer, int possition)
+        {
+            byte[] strBytes = Encoding.ASCII.GetBytes(asciiString);
+            int asciiStrLen = GetAsciiStringLengthFromBufferAtPossition(strBytes, 0);
+            if (asciiStrLen <= buffer.Length - possition)
+            {
+                for (int i = 0; i < asciiStrLen; i++)
+                {
+                    buffer[possition + i] = strBytes[i];
+                }
+                //   strBytes.CopyTo(buffer,possition);
+            }
+        }
+
+        public static string GetAsciiStringFromBufferAtPossition(byte[] buffer, int possition)
+        {
+            string result = "";
+            int asciiStrLen = GetAsciiStringLengthFromBufferAtPossition(buffer, possition);
+            result = Encoding.ASCII.GetString(buffer, possition, asciiStrLen);
+            return result;
+        }
     }
 
 
-public static class sconnDataShare
+    public static class sconnDataShare
     {
         private static sconnDataSrc _dataSrc;
 
