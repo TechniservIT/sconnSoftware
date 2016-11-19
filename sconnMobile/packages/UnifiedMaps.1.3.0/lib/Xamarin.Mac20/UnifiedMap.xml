@@ -1,0 +1,782 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>UnifiedMap</name>
+    </assembly>
+    <members>
+        <member name="T:fivenine.UnifiedMaps.MapRegion">
+             <summary>
+             Defines a map region.
+             </summary>
+            </member>
+        <member name="M:fivenine.UnifiedMaps.MapRegion.FromPositions(System.Collections.Generic.IEnumerable{fivenine.UnifiedMaps.Position})">
+             <summary>
+             Creates a new map region that includes the specified positons.
+             </summary>
+             <param name="positions">The positions.</param>
+             <returns>A new MapRegion instance.</returns>
+            </member>
+        <member name="M:fivenine.UnifiedMaps.MapRegion.Empty">
+             <summary>
+             Returns an empty map region.
+             </summary>
+             <returns>The smallest possible map region.</returns>
+            </member>
+        <member name="M:fivenine.UnifiedMaps.MapRegion.World">
+             <summary>
+             Creates a map region that includes the whole world.
+             </summary>
+             <returns>The largest possible map region.</returns>
+            </member>
+        <member name="M:fivenine.UnifiedMaps.MapRegion.#ctor(fivenine.UnifiedMaps.Position,fivenine.UnifiedMaps.Position)">
+             <summary>
+             Discribes a rectangular region. This region usually encloses a set of geometries or represents a area of view.
+             </summary>
+             <param name="topLeft">The top left coordinates of the bounding box.</param>
+             <param name="bottomRight">The bottom right coordinate of the bounding box.</param>
+            </member>
+        <member name="M:fivenine.UnifiedMaps.MapRegion.#ctor(fivenine.UnifiedMaps.Position,System.Double,System.Double)">
+             <summary>
+             Discribes a rectangular region. This region usually encloses a set of geometries or represents a area of view.
+             </summary>
+             <param name="center">Center of the bounding box</param>
+             <param name="width">Width of bounding box in degress</param>
+             <param name="height">Height of bounding box in degress</param>
+            </member>
+        <member name="M:fivenine.UnifiedMaps.MapRegion.#ctor(System.Double,System.Double,System.Double,System.Double)">
+             <summary>
+             Discribes a rectangular region. This region usually encloses a set of geometries or represents a area of view.
+             </summary>
+             <param name="minX">Mininium X value (longitude), left most coordinate.</param>
+             <param name="maxY">Maximium Y value (laitude), northern most coordinate.</param>
+             <param name="maxX">Maximium X value (longitude), right most coordinate.</param>
+             <param name="minY">Minimium Y value (latitude), southern most coordinate.</param>
+            </member>
+        <member name="P:fivenine.UnifiedMaps.MapRegion.Center">
+             <summary>
+             The Center Coordinate.
+             </summary>
+            </member>
+        <member name="P:fivenine.UnifiedMaps.MapRegion.MaxY">
+             <summary>
+             North Latitude Coordinate
+             </summary>
+            </member>
+        <member name="P:fivenine.UnifiedMaps.MapRegion.MinY">
+             <summary>
+             South Latitude Coordinate
+             </summary>
+            </member>
+        <member name="P:fivenine.UnifiedMaps.MapRegion.MaxX">
+             <summary>
+             Most Easterly Longitude Coordinate (right side of bounding box)
+             </summary>
+            </member>
+        <member name="P:fivenine.UnifiedMaps.MapRegion.MinX">
+             <summary>
+             Most Westerly Longitude Coordinate (left side of bounding box)
+             </summary>
+            </member>
+        <member name="P:fivenine.UnifiedMaps.MapRegion.TopLeft">
+             <summary>
+             Gets the top left coordinate of the bounding box
+             </summary>
+            </member>
+        <member name="P:fivenine.UnifiedMaps.MapRegion.BottomRight">
+             <summary>
+             Gets the bottom right coordinate of the bounding box
+             </summary>
+            </member>
+        <member name="M:fivenine.UnifiedMaps.MapRegion.Inflate(System.Single,System.Single)">
+             <summary>
+             Inflates the current region with the given dimensions.
+             </summary>
+             <param name="height">The height.</param>
+             <param name="width">The width.</param>
+             <returns>The new <see cref="T:fivenine.UnifiedMaps.MapRegion" /> instance.</returns>
+            </member>
+        <member name="M:fivenine.UnifiedMaps.MapRegion.Clone">
+             <summary>
+             Makes a copy of the current instance.
+             </summary>
+             <returns>The copyied instance.</returns>
+            </member>
+        <member name="M:fivenine.UnifiedMaps.MapRegion.Equals(System.Object)">
+             <summary>
+             Determines whether the specified object is equal to the current object.
+             </summary>
+             <returns>
+             true if the specified object  is equal to the current object; otherwise, false.
+             </returns>
+             <param name="obj">The object to compare with the current object. </param><filterpriority>2</filterpriority>
+            </member>
+        <member name="M:fivenine.UnifiedMaps.MapRegion.GetHashCode">
+             <summary>
+             Serves as the default hash function. 
+             </summary>
+             <returns>
+             A hash code for the current object.
+             </returns>
+             <filterpriority>2</filterpriority>
+            </member>
+        <member name="M:fivenine.UnifiedMaps.MapRegion.ToString">
+             <summary>
+             Returns a string that represents the current object.
+             </summary>
+             <returns>
+             A string that represents the current object.
+             </returns>
+             <filterpriority>2</filterpriority>
+            </member>
+        <member name="M:fivenine.UnifiedMaps.MapRegion.Equals(fivenine.UnifiedMaps.MapRegion)">
+             <summary>
+             Determines whether the specified <see cref="T:fivenine.UnifiedMaps.MapRegion" /> is equal to the current.
+             </summary>
+             <returns>
+             True if the specified MapRegion is equal to the current object; otherwise, false.
+             </returns>
+             <param name="other">The object to compare with the current object. </param><filterpriority>2</filterpriority>
+            </member>
+        <member name="T:fivenine.UnifiedMaps.MapType">
+             <summary>
+             Enumeration that specifies the display style of the map.
+             </summary>
+            </member>
+        <member name="F:fivenine.UnifiedMaps.MapType.Street">
+             <summary>
+             The street map.
+             </summary>
+             <remarks>Available on all platformss.</remarks>
+            </member>
+        <member name="F:fivenine.UnifiedMaps.MapType.Satellite">
+             <summary>
+             The satellite map.
+             </summary>
+             <remarks>Available on all platformss.</remarks>
+            </member>
+        <member name="F:fivenine.UnifiedMaps.MapType.Hybrid">
+             <summary>
+             The combined satellite and street map.
+             </summary>
+             <remarks>Available on all platformss.</remarks>
+            </member>
+        <member name="T:fivenine.UnifiedMaps.Position">
+             <summary>
+             A struct that has a latitude and longitude, stored as doubles.
+             </summary>
+            </member>
+        <member name="M:fivenine.UnifiedMaps.Position.ClampLatitude(System.Double)">
+             <summary>
+             Clamps the latitude to the valid range.
+             </summary>
+             <param name="latitude">The latitude.</param>
+             <returns>A valid latitude value.</returns>
+            </member>
+        <member name="M:fivenine.UnifiedMaps.Position.ClampLongitude(System.Double)">
+             <summary>
+             Clamps the longitude to the valid range.
+             </summary>
+             <param name="longitude">The longitude.</param>
+             <returns>A valid longitude value.</returns>
+            </member>
+        <member name="M:fivenine.UnifiedMaps.Position.#ctor(System.Double,System.Double)">
+             <summary>
+             Initializes a new instance of the <see cref="T:fivenine.UnifiedMaps.Position" /> struct.
+             </summary>
+             <param name="latitude">The latitude degrees (y).</param>
+             <param name="longitude">The longitude degrees (x).</param>
+            </member>
+        <member name="P:fivenine.UnifiedMaps.Position.Latitude">
+             <summary>
+             Gets the latitude of this position in decimal degrees (y).
+             </summary>
+            </member>
+        <member name="P:fivenine.UnifiedMaps.Position.Longitude">
+             <summary>
+             Gets the longitude of this position in decimal degrees (x).
+             </summary>
+            </member>
+        <member name="M:fivenine.UnifiedMaps.Position.op_Equality(fivenine.UnifiedMaps.Position,fivenine.UnifiedMaps.Position)">
+             <summary>
+             Implements the operator ==.
+             </summary>
+             <param name="left">The left.</param>
+             <param name="right">The right.</param>
+             <returns>
+             The result of the operator.
+             </returns>
+            </member>
+        <member name="M:fivenine.UnifiedMaps.Position.op_Inequality(fivenine.UnifiedMaps.Position,fivenine.UnifiedMaps.Position)">
+             <summary>
+             Implements the operator !=.
+             </summary>
+             <param name="left">The left.</param>
+             <param name="right">The right.</param>
+             <returns>
+             The result of the operator.
+             </returns>
+            </member>
+        <member name="M:fivenine.UnifiedMaps.Position.Equals(System.Object)">
+             <summary>
+             Indicates whether this instance and a specified object are equal.
+             </summary>
+             <returns>
+             true if <paramref name="obj" /> and this instance are the same type and represent the same value; otherwise, false. 
+             </returns>
+             <param name="obj">The object to compare with the current instance. </param><filterpriority>2</filterpriority>
+            </member>
+        <member name="M:fivenine.UnifiedMaps.Position.GetHashCode">
+             <summary>
+             Returns the hash code for this instance.
+             </summary>
+             <returns>
+             A 32-bit signed integer that is the hash code for this instance.
+             </returns>
+             <filterpriority>2</filterpriority>
+            </member>
+        <member name="M:fivenine.UnifiedMaps.Position.ToString">
+             <summary>
+             Returns the fully qualified type name of this instance.
+             </summary>
+             <returns>
+             A <see cref="T:System.String" /> containing a fully qualified type name.
+             </returns>
+             <filterpriority>2</filterpriority>
+            </member>
+        <member name="T:fivenine.UnifiedMaps.UnifiedMap">
+             <summary>
+             A map control for Xamarin.Froms applications that supports all major platforms.
+             </summary>
+            </member>
+        <member name="F:fivenine.UnifiedMaps.UnifiedMap.MapTypeProperty">
+             <summary>
+             Identifies the <see cref="T:fivenine.UnifiedMaps.MapType" /> bindable property.
+             </summary>
+            </member>
+        <member name="F:fivenine.UnifiedMaps.UnifiedMap.PinsProperty">
+             <summary>
+             The bindable pins property.
+             </summary>
+            </member>
+        <member name="F:fivenine.UnifiedMaps.UnifiedMap.OverlaysProperty">
+             <summary>
+             The bindable polylines property.
+             </summary>
+            </member>
+        <member name="F:fivenine.UnifiedMaps.UnifiedMap.PinCalloutTappedCommandProperty">
+             <summary>
+             The bindable pin callout tapped command property.
+             </summary>
+            </member>
+        <member name="F:fivenine.UnifiedMaps.UnifiedMap.AutoFitAllAnnotationsProperty">
+             <summary>
+             The autofitallannotations property.
+             </summary>
+            </member>
+        <member name="F:fivenine.UnifiedMaps.UnifiedMap.IsShowingUserProperty">
+             <summary>
+             The is showing user property.
+             </summary>
+            </member>
+        <member name="F:fivenine.UnifiedMaps.UnifiedMap.HasScrollEnabledProperty">
+             <summary>
+             The has scroll enabled property
+             </summary>
+            </member>
+        <member name="F:fivenine.UnifiedMaps.UnifiedMap.HasZoomEnabledProperty">
+             <summary>
+             The has zoom enabled property
+             </summary>
+            </member>
+        <member name="F:fivenine.UnifiedMaps.UnifiedMap.SelectedItemProperty">
+             <summary>
+             The selected item property.
+             </summary>
+            </member>
+        <member name="F:fivenine.UnifiedMaps.UnifiedMap.SelectionChangedCommandProperty">
+             <summary>
+             The selection changed command property.
+             </summary>
+            </member>
+        <member name="E:fivenine.UnifiedMaps.UnifiedMap.SelectionChanged">
+             <summary>
+             Occurs when the selected annotation changes.
+             </summary>
+            </member>
+        <member name="M:fivenine.UnifiedMaps.UnifiedMap.#ctor">
+             <summary>
+             Initializes a new instance of the <see cref="T:fivenine.UnifiedMaps.UnifiedMap" /> class.
+             </summary>
+            </member>
+        <member name="P:fivenine.UnifiedMaps.UnifiedMap.MapType">
+             <summary>
+             The <see cref="T:fivenine.UnifiedMaps.MapType" /> display style of this <see cref="T:fivenine.UnifiedMaps.UnifiedMap" />.
+             </summary>
+            </member>
+        <member name="P:fivenine.UnifiedMaps.UnifiedMap.Pins">
+             <summary>
+             Gets or sets the pins.
+             </summary>
+             <value>
+             The pins.
+             </value>
+            </member>
+        <member name="P:fivenine.UnifiedMaps.UnifiedMap.Overlays">
+             <summary>
+             Gets or sets the overlays.
+             </summary>
+             <value>
+             The overlays.
+             </value>
+            </member>
+        <member name="P:fivenine.UnifiedMaps.UnifiedMap.PinCalloutTappedCommand">
+             <summary>
+             Gets or sets the pin callout tapped command.
+             </summary>
+             <value>
+             The pin callout tapped command.
+             </value>
+            </member>
+        <member name="P:fivenine.UnifiedMaps.UnifiedMap.AutoFitAllAnnotations">
+             <summary>
+             Gets or sets whether to automatically fit the view to display all annotations.
+             </summary>
+             <value>
+             <c>true</c> if auto fitting should be enabled; otherwise, <c>false</c>.
+             </value>
+            </member>
+        <member name="P:fivenine.UnifiedMaps.UnifiedMap.IsShowingUser">
+             <summary>
+             Gets or sets whether to display the current location of the user on the map.
+             </summary>
+             <value>
+             <c>true</c> if the user location should be show; otherwise, <c>false</c>.
+             </value>
+            </member>
+        <member name="P:fivenine.UnifiedMaps.UnifiedMap.HasScrollEnabled">
+             <summary>
+             Gets or sets if scrolling is enabled.
+             </summary>
+             <value>
+             <c>true</c> if this instance has scroll enabled; otherwise, <c>false</c>.
+             </value>
+            </member>
+        <member name="P:fivenine.UnifiedMaps.UnifiedMap.HasZoomEnabled">
+             <summary>
+             Gets or sets a value indicating whether this instance has zoom enabled.
+             </summary>
+             <value>
+             <c>true</c> if this instance has zoom enabled; otherwise, <c>false</c>.
+             </value>
+            </member>
+        <member name="P:fivenine.UnifiedMaps.UnifiedMap.VisibleRegion">
+             <summary>
+             Gets the visible region.
+             </summary>
+             <value>
+             The visible region.
+             </value>
+             <exception cref="T:System.ArgumentNullException"></exception>
+            </member>
+        <member name="P:fivenine.UnifiedMaps.UnifiedMap.SelectedItem">
+             <summary>
+             Gets or sets the selected item.
+             </summary>
+             <value>The selected item.</value>
+            </member>
+        <member name="P:fivenine.UnifiedMaps.UnifiedMap.SelectionChangedCommand">
+             <summary>
+             Gets or sets the selection changed command.
+             </summary>
+             <value>The selection changed command.</value>
+            </member>
+        <member name="P:fivenine.UnifiedMaps.UnifiedMap.VisibleRegionChangedCommand">
+             <summary>
+             Gets or sets the visible region changed command.
+             </summary>
+             <value>The visible region changed command.</value>
+            </member>
+        <member name="M:fivenine.UnifiedMaps.UnifiedMap.MoveToRegion(fivenine.UnifiedMaps.MapRegion,System.Boolean)">
+             <summary>
+             Makes the map move to the new region. If no region is specified the map will be moved
+             to fit all annotations that are currently displayed.
+             </summary>
+             <param name="region">The region to display.</param>
+             <param name="animated">Wether to animate the move.</param>
+             <exception cref="T:System.ArgumentNullException"></exception>
+            </member>
+        <member name="T:fivenine.UnifiedMaps.Util">
+             <summary>
+             Utility extension methods.
+             </summary>
+            </member>
+        <member name="M:fivenine.UnifiedMaps.Util.Clamp``1(``0,``0,``0)">
+             <summary>
+             Clamps the given value to the specified range.
+             </summary>
+             <typeparam name="T">The value type.</typeparam>
+             <param name="value">The value.</param>
+             <param name="min">The minimum.</param>
+             <param name="max">The maximum.</param>
+             <returns>The clamped value.</returns>
+            </member>
+        <member name="T:fivenine.UnifiedMaps.IMapPin">
+             <summary>
+             A definition of a map pin annotation.
+             </summary>
+            </member>
+        <member name="P:fivenine.UnifiedMaps.IMapPin.Title">
+             <summary>
+             Gets the title of the pin.
+             </summary>
+             <value>
+             The title of the pin.
+             </value>
+            </member>
+        <member name="P:fivenine.UnifiedMaps.IMapPin.Snippet">
+             <summary>
+             Gets the snippet (sub-title) of the map pin callout window.
+             </summary>
+             <value>
+             The snippet text.
+             </value>
+            </member>
+        <member name="P:fivenine.UnifiedMaps.IMapPin.Location">
+             <summary>
+             Gets the location of the pin.
+             </summary>
+             <value>
+             The location.
+             </value>
+            </member>
+        <member name="P:fivenine.UnifiedMaps.IMapPin.Color">
+             <summary>
+             Gets the color of the map pin.
+             </summary>
+             <value>
+             The color.
+             </value>
+            </member>
+        <member name="P:fivenine.UnifiedMaps.IMapPin.SelectedColor">
+             <summary>
+             Gets the color for the selected state.
+             </summary>
+             <value>
+             The color of a selected map pin.
+             </value>
+            </member>
+        <member name="P:fivenine.UnifiedMaps.IMapPin.Image">
+             <summary>
+             Gets the pin annotation image or <c>null</c> if not used.
+             </summary>
+             <value>The image source.</value>
+            </member>
+        <member name="P:fivenine.UnifiedMaps.IMapPin.SelectedImage">
+             <summary>
+             Gets the pin annotation image for the selected state; or <c>null</c> if not used.
+             </summary>
+             <value>The image source for the selected state.</value>
+            </member>
+        <member name="P:fivenine.UnifiedMaps.IMapPin.Anchor">
+             <summary>
+             Gets the anchor point of the map pin.
+             </summary>
+             <value>The anchor point.</value>
+            </member>
+        <member name="T:fivenine.UnifiedMaps.MapPin">
+             <summary>
+             A map pin annotation.
+             </summary>
+            </member>
+        <member name="M:fivenine.UnifiedMaps.MapPin.#ctor">
+             <summary>
+             Initializes a new instance of the <see cref="T:fivenine.UnifiedMaps.MapPin" /> class.
+             </summary>
+            </member>
+        <member name="P:fivenine.UnifiedMaps.MapPin.Title">
+             <summary>
+             Gets the title of the pin.
+             </summary>
+             <value>
+             The title of the pin.
+             </value>
+            </member>
+        <member name="P:fivenine.UnifiedMaps.MapPin.Snippet">
+             <summary>
+             Gets the snippet (sub-title) of the map pin callout window.
+             </summary>
+             <value>
+             The snippet text.
+             </value>
+            </member>
+        <member name="P:fivenine.UnifiedMaps.MapPin.Location">
+             <summary>
+             Gets the location of the pin.
+             </summary>
+             <value>
+             The location.
+             </value>
+            </member>
+        <member name="P:fivenine.UnifiedMaps.MapPin.Color">
+             <summary>
+             Gets the color of the map pin.
+             </summary>
+             <value>
+             The color.
+             </value>
+            </member>
+        <member name="P:fivenine.UnifiedMaps.MapPin.SelectedColor">
+             <summary>
+             Gets the color for the selected state.
+             </summary>
+             <value>
+             The color of a selected map pin.
+             </value>
+            </member>
+        <member name="P:fivenine.UnifiedMaps.MapPin.Image">
+             <summary>
+             Gets the pin annotation image or <c>null</c> if not used.
+             </summary>
+             <value>The image source.</value>
+            </member>
+        <member name="P:fivenine.UnifiedMaps.MapPin.SelectedImage">
+             <summary>
+             Gets the pin annotation image for the selected state; or <c>null</c> if not used.
+             </summary>
+             <value>The image source for the selected state.</value>
+            </member>
+        <member name="P:fivenine.UnifiedMaps.MapPin.Anchor">
+             <summary>
+             Gets or sets the anchor point of the map pin.
+             </summary>
+             <value>The anchor point.</value>
+            </member>
+        <member name="M:fivenine.UnifiedMaps.MapPin.Equals(fivenine.UnifiedMaps.IMapAnnotation)">
+             <summary>
+             Determines whether the specified <see cref="T:fivenine.UnifiedMaps.IMapAnnotation" /> is equal to the current <see cref="T:fivenine.UnifiedMaps.MapPin" />.
+             </summary>
+             <param name="other">The <see cref="T:fivenine.UnifiedMaps.IMapAnnotation" /> to compare with the current <see cref="T:fivenine.UnifiedMaps.MapPin" />.</param>
+             <returns><c>true</c> if the specified <see cref="T:fivenine.UnifiedMaps.IMapAnnotation" /> is equal to the current
+             <see cref="T:fivenine.UnifiedMaps.MapPin" />; otherwise, <c>false</c>.</returns>
+            </member>
+        <member name="T:fivenine.UnifiedMaps.IMapAnnotation">
+             <summary>
+             A map annotation, eg. a pin, polyline.
+             </summary>
+            </member>
+        <member name="T:fivenine.UnifiedMaps.PolylineOverlay">
+             <summary>
+             A map polyline annotation.
+             </summary>
+            </member>
+        <member name="M:fivenine.UnifiedMaps.PolylineOverlay.#ctor">
+             <summary>
+             Initializes a new instance of the <see cref="T:fivenine.UnifiedMaps.PolylineOverlay" /> class.
+             </summary>
+            </member>
+        <member name="P:fivenine.UnifiedMaps.PolylineOverlay.BoundingBox">
+             <summary>
+             Gets the bounding box of the current <see cref="T:fivenine.UnifiedMaps.PolylineOverlay" />.
+             </summary>
+             <value>
+             The bounding box of the current <see cref="T:fivenine.UnifiedMaps.PolylineOverlay" />.
+             </value>
+            </member>
+        <member name="P:fivenine.UnifiedMaps.PolylineOverlay.StrokeColor">
+             <summary>
+             Gets or sets the color of the stroke.
+             </summary>
+             <value>
+             The color of the stroke.
+             </value>
+            </member>
+        <member name="P:fivenine.UnifiedMaps.PolylineOverlay.LineWidth">
+             <summary>
+             Gets or sets the stroke thickness.
+             </summary>
+             <value>
+             The stroke thickness.
+             </value>
+            </member>
+        <member name="M:fivenine.UnifiedMaps.PolylineOverlay.Add(fivenine.UnifiedMaps.Position)">
+             <summary>
+             Adds the specified position to the polyline.
+             </summary>
+             <param name="item">The position to add.</param>
+            </member>
+        <member name="M:fivenine.UnifiedMaps.PolylineOverlay.GetEnumerator">
+             <summary>
+             Returns an enumerator that iterates through the collection.
+             </summary>
+             <returns>
+             An enumerator that can be used to iterate through the collection.
+             </returns>
+            </member>
+        <member name="M:fivenine.UnifiedMaps.PolylineOverlay.System#Collections#IEnumerable#GetEnumerator">
+             <summary>
+             Returns an enumerator that iterates through a collection.
+             </summary>
+             <returns>
+             An <see cref="T:System.Collections.IEnumerator" /> object that can be used to iterate through the collection.
+             </returns>
+             <filterpriority>2</filterpriority>
+            </member>
+        <member name="M:fivenine.UnifiedMaps.PolylineOverlay.Equals(fivenine.UnifiedMaps.IMapAnnotation)">
+             <summary>
+             Determines whether the specified <see cref="T:fivenine.UnifiedMaps.IMapAnnotation" /> is equal to the current <see cref="T:fivenine.UnifiedMaps.MapPolyline" />.
+             </summary>
+             <param name="other">The <see cref="T:fivenine.UnifiedMaps.IMapAnnotation" /> to compare with the current <see cref="T:fivenine.UnifiedMaps.MapPolyline" />.</param>
+             <returns><c>true</c> if the specified <see cref="T:fivenine.UnifiedMaps.IMapAnnotation" /> is equal to the current
+             <see cref="T:fivenine.UnifiedMaps.MapPolyline" />; otherwise, <c>false</c>.</returns>
+            </member>
+        <member name="T:fivenine.UnifiedMaps.MapEventArgs`1">
+             <summary>
+             An <see cref="T:System.EventArgs" /> providing a generic playload.
+             </summary>
+            </member>
+        <member name="P:fivenine.UnifiedMaps.MapEventArgs`1.Value">
+             <summary>
+             Gets the value of the <see cref="T:MapEventArgs`1" />.
+             </summary>
+            </member>
+        <member name="M:fivenine.UnifiedMaps.MapEventArgs`1.#ctor(`0)">
+             <summary>
+             Initializes a new instance of the <see cref="T:MapEventArgs`1" /> class.
+             </summary>
+             <param name="value">Value.</param>
+            </member>
+        <member name="P:fivenine.UnifiedMaps.IPolylineOverlay.BoundingBox">
+             <summary>
+             Gets the bounding box of the current <see cref="T:fivenine.UnifiedMaps.PolylineOverlay" />.
+             </summary>
+             <value>
+             The bounding box of the current <see cref="T:fivenine.UnifiedMaps.PolylineOverlay" />.
+             </value>
+            </member>
+        <member name="P:fivenine.UnifiedMaps.IPolylineOverlay.StrokeColor">
+             <summary>
+             Gets or sets the color of the stroke.
+             </summary>
+             <value>
+             The color of the stroke.
+             </value>
+            </member>
+        <member name="P:fivenine.UnifiedMaps.IPolylineOverlay.LineWidth">
+             <summary>
+             Gets or sets the stroke thickness.
+             </summary>
+             <value>
+             The stroke thickness.
+             </value>
+            </member>
+        <member name="M:fivenine.UnifiedMaps.IPolylineOverlay.Add(fivenine.UnifiedMaps.Position)">
+             <summary>
+             Adds the specified position to the polyline.
+             </summary>
+             <param name="item">The position to add.</param>
+            </member>
+        <member name="M:fivenine.UnifiedMaps.CircleOverlay.#ctor">
+             <summary>
+             Initializes a new instance of the <see cref="T:fivenine.UnifiedMaps.CircleOverlay" /> class.
+             </summary>
+            </member>
+        <member name="P:fivenine.UnifiedMaps.CircleOverlay.Location">
+             <summary>
+             Gets the location of the circle.
+             </summary>
+             <value>
+             The location.
+             </value>
+            </member>
+        <member name="P:fivenine.UnifiedMaps.CircleOverlay.Color">
+             <summary>
+             Gets the color of the circle.
+             </summary>
+             <value>
+             The color.
+             </value>
+            </member>
+        <member name="P:fivenine.UnifiedMaps.CircleOverlay.FillColor">
+             <summary>
+             Gets the fill color of the circle.
+             </summary>
+             <value>
+             The fill color.
+             </value>
+            </member>
+        <member name="P:fivenine.UnifiedMaps.CircleOverlay.Radius">
+             <summary>
+             Gets or sets the radius.
+             </summary>
+             <value>The radius.</value>
+            </member>
+        <member name="P:fivenine.UnifiedMaps.CircleOverlay.StrokeColor">
+             <summary>
+             Gets or sets the color of the stroke.
+             </summary>
+             <value>
+             The color of the stroke.
+             </value>
+            </member>
+        <member name="P:fivenine.UnifiedMaps.CircleOverlay.LineWidth">
+             <summary>
+             Gets or sets the stroke thickness.
+             </summary>
+             <value>
+             The stroke thickness.
+             </value>
+            </member>
+        <member name="M:fivenine.UnifiedMaps.CircleOverlay.Equals(fivenine.UnifiedMaps.IMapAnnotation)">
+             <summary>
+             Determines whether the specified <see cref="T:fivenine.UnifiedMaps.IMapAnnotation" /> is equal to the current <see cref="T:fivenine.UnifiedMaps.CircleOverlay" />.
+             </summary>
+             <param name="other">The <see cref="T:fivenine.UnifiedMaps.IMapAnnotation" /> to compare with the current <see cref="T:fivenine.UnifiedMaps.CircleOverlay" />.</param>
+             <returns><c>true</c> if the specified <see cref="T:fivenine.UnifiedMaps.IMapAnnotation" /> is equal to the current
+             <see cref="T:fivenine.UnifiedMaps.CircleOverlay" />; otherwise, <c>false</c>.</returns>
+            </member>
+        <member name="P:fivenine.UnifiedMaps.ICircleOverlay.Location">
+             <summary>
+             Gets the location of the pin.
+             </summary>
+             <value>
+             The location.
+             </value>
+            </member>
+        <member name="P:fivenine.UnifiedMaps.ICircleOverlay.Color">
+             <summary>
+             Gets the color of the map pin.
+             </summary>
+             <value>
+             The color.
+             </value>
+            </member>
+        <member name="P:fivenine.UnifiedMaps.ICircleOverlay.FillColor">
+             <summary>
+             Gets the fill color of the circle.
+             </summary>
+             <value>The fill color.</value>
+            </member>
+        <member name="P:fivenine.UnifiedMaps.ICircleOverlay.Radius">
+             <summary>
+             Gets the radius.
+             </summary>
+             <value>The radius.</value>
+            </member>
+        <member name="P:fivenine.UnifiedMaps.ICircleOverlay.StrokeColor">
+             <summary>
+             Gets or sets the color of the stroke.
+             </summary>
+             <value>
+             The color of the stroke.
+             </value>
+            </member>
+        <member name="P:fivenine.UnifiedMaps.ICircleOverlay.LineWidth">
+             <summary>
+             Gets or sets the stroke thickness.
+             </summary>
+             <value>
+             The stroke thickness.
+             </value>
+            </member>
+    </members>
+</doc>

@@ -11,7 +11,7 @@ using sconnMobileForms.Service.AlarmSystem.Context;
 using sconnMobileForms.View.AlarmSystem.Controls;
 using sconnRemMobile.View.AlarmSystem;
 using Xamarin.Forms;
-using Xamarin.Forms.Maps;
+
 
 namespace sconnMobileForms.View.AlarmSystem
 {

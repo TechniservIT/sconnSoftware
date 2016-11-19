@@ -1,0 +1,18 @@
+﻿<Properties StartupConfiguration="{8F58E1C2-6CFC-431F-A094-E1B796FF766A}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="sconnMobileForms/sconnMobileForms/View/AlarmSystem/Controls/AlarmIoEntityGrid.cs">
+    <Files>
+      <File FileName="sconnMobileForms/sconnMobileForms/View/AlarmSystem/Controls/AlarmIoEntityGrid.cs" Line="93" Column="6" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|iPhoneSimulator" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="/Users/dominikguz/Documents/Repo/Git/sconnSoftware/sconnMobile/Shared/sconnRemMobile/sconnRemMobile/Config/AlarmSystemConfigManager.cs" relfile="Shared/sconnRemMobile/sconnRemMobile/Config/AlarmSystemConfigManager.cs" line="24" column="42" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.App.sconnRemMobile.Droid PreferredExecutionTarget="Android.Android_Accelerated_x86" />
+  <MonoDevelop.Ide.ItemProperties.Portable.sconnMobileForms.iOS PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.D4628F84-9AD1-4E42-8211-8ECE4708D541" />
+  <MonoDevelop.Ide.ItemProperties.App.sconnRemMobile.iOS PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneDeviceTarget" />
+  <MultiItemStartupConfigurations />
+</Properties>

@@ -10,7 +10,7 @@ using sconnConnector.POCO.Config.sconn;
 using sconnMobileForms.Service.AlarmSystem.Context;
 using sconnMobileForms.View.AlarmSystem;
 using Xamarin.Forms;
-using Xamarin.Forms.Maps;
+
 
 namespace sconnRemMobile.View.AlarmSystem
 {
@@ -85,6 +85,8 @@ namespace sconnRemMobile.View.AlarmSystem
             
 
             //map item grid
+
+			/*
             var siteMap = new Map(
                MapSpan.FromCenterAndRadius(
                        new Position(49.6628,18.8528), Distance.FromMeters(500)))
@@ -100,6 +102,8 @@ namespace sconnRemMobile.View.AlarmSystem
                 Label = "Techniserv",
                 Position = new Position(49.662846,18.852836)
             });
+*/
+
 
 
             /* Arm item grid */
@@ -144,7 +148,7 @@ namespace sconnRemMobile.View.AlarmSystem
 
 
             //arm items to grid
-            armGrid.Children.Add(siteMap, 0, 0);
+         ///   armGrid.Children.Add(siteMap, 0, 0);
             armGrid.Children.Add(armControlGrid, 1, 0);
             
 
